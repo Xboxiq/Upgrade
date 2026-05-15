@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-15T11:15:00Z",
+  "last_updated": "2026-05-15T11:30:00Z",
   "current": {
-    "worker": "05",
-    "worker_name": "PROGRAMMER",
-    "phase": 5,
+    "worker": "06",
+    "worker_name": "SOCIAL_MARKETING",
+    "phase": 1,
     "phases_total": 5,
-    "branch": "worker-05-complete",
-    "status": "completed"
+    "branch": "worker-06-complete",
+    "status": "in-progress"
   },
   "completed_phases": [
     { "worker": "01", "phase": 1, "title": "Foundation Tokens & Aurora Mesh",                    "branch": "worker-01-phase-1-v2", "lines_added": 121 },
@@ -32,8 +32,9 @@
     { "worker": "05", "phase": 2, "title": "FE + BE 12-week Roadmaps + Git Survival Kit",            "branch": "worker-05-complete", "lines_added": 714 },
     { "worker": "05", "phase": 3, "title": "Clean Code Pillars + Code Review Etiquette + Soft Skills","branch": "worker-05-complete", "lines_added": 482 },
     { "worker": "05", "phase": 4, "title": "5 Interactive Labs — Trace, Big-O, Git Sandbox, Interview Sim, Portfolio Gen", "branch": "worker-05-complete", "lines_added": 1353 },
-    { "worker": "05", "phase": 5, "title": "Iraq Salary + Companies + First-Job Strategy + Cheat Sheet + 12 Citations", "branch": "worker-05-complete", "lines_added": 445 }
+    { "worker": "05", "phase": 5, "title": "Iraq Salary + Companies + First-Job Strategy + Cheat Sheet + 12 Citations", "branch": "worker-05-complete", "lines_added": 445 },
+    { "worker": "06", "phase": 1, "title": "Attention Psychology (6 axes) + Algo Anatomy (7 platforms)", "branch": "worker-06-complete", "lines_added": 660 }
   ],
-  "next_action": "Worker 05 COMPLETE. Begin Worker 06 — Social Marketing on next session.",
-  "notes": "Worker 05 (Junior Programmer) COMPLETE. Total 3,868 lines across 5 phases on linear branch worker-05-complete (Method A). Single consolidated PR ready for review."
+  "next_action": "Continue Worker 06 Phase 2 — Content Pillars + 15 Hook Frameworks + Calendar Builder",
+  "notes": "Worker 06 Phase 1 done on branch worker-06-complete (Method A linear). Ready for Phase 2."
 }

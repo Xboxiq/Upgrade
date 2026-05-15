@@ -1,0 +1,26 @@
+{
+  "worker": "06",
+  "worker_name": "SOCIAL_MARKETING",
+  "phase": 1,
+  "phase_title": "Attention Psychology + Algo Anatomy (7 platforms)",
+  "branch": "worker-06-complete",
+  "files_modified": [
+    "platform/index.html",
+    "platform/assets/app.js",
+    "platform/assets/style.css"
+  ],
+  "lines_added_total": 660,
+  "sections_added": [
+    "BLOCK W6-A · 6 محاور علم نفس الانتباه",
+    "BLOCK W6-B · 7 منصات (IG, TikTok, X, LinkedIn, YT, Snap, Threads) + جدول مقارن"
+  ],
+  "localStorage_keys": [],
+  "citations_count": 5,
+  "open_threads": [
+    "Phase 2: Content Pillars + 15 Hook Frameworks + Calendar Builder",
+    "Phase 3: Marketing Funnel + Performance Math + A/B Tester",
+    "Phase 4: Email + WhatsApp + Influencer Vetting",
+    "Phase 5: Iraq/MENA + Salary + Cheat Sheet + Citations"
+  ],
+  "next_action": "Continue Worker 06 Phase 2 — Content Pillars, 15 Hook Frameworks, 30-day Calendar Builder"
+}
