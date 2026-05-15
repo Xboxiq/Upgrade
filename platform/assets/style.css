@@ -4691,3 +4691,102 @@ html.v13 #topbar-icon {
 html.v13 .stat-card { border-color: color-mix(in oklab, var(--current-tint, var(--accent)) 18%, var(--border)); }
 
 /* color-mix fallback: if not supported, the rules above do nothing harmful (CSS skips them) */
+
+
+
+/* ============================================================
+   QUANTUM LEAP v13 · Phase 4/4
+   Polish: full reduced-motion coverage, print mode, view-transitions
+============================================================ */
+
+/* ── 1) Reduced motion — kill every v13 animation surface ── */
+@media (prefers-reduced-motion: reduce) {
+  html.v13 body::after,
+  html.v13 .ql-grain,
+  html.v13 .page.active .page-header::after,
+  html.v13 .ql-glass:hover::after,
+  html.v13 .module-card:hover::after,
+  html.v13 .stat-card:hover::after,
+  html.v13 .skill-card:hover::after,
+  html.v13 .call-card:hover::after,
+  .ql-halo::before {
+    animation: none !important;
+    transition: none !important;
+  }
+  html.v13 #cursor-aura { transition: none !important; }
+  /* still keep aurora visible, just frozen */
+}
+
+/* ── 2) View Transitions API — soft cross-fade on theme switch ── */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+::view-transition-old(root) { animation-name: qlVTFadeOut; }
+::view-transition-new(root) { animation-name: qlVTFadeIn; }
+@keyframes qlVTFadeOut { to   { opacity: 0; } }
+@keyframes qlVTFadeIn  { from { opacity: 0; } }
+
+/* ── 3) Print mode — clean, paper-friendly output ── */
+@media print {
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    overflow: visible !important;
+    height: auto !important;
+  }
+  /* Remove every ambient layer */
+  body::before, body::after, .ql-grain, #cursor-aura, #ql-svg-defs {
+    display: none !important;
+  }
+  /* Hide chrome */
+  #sidebar, #topbar, #sidebar-overlay, #smart-footer,
+  .theme-toggle, .nav-badge, .topbar-search, .topbar-actions {
+    display: none !important;
+  }
+  /* Expand main content full-width */
+  #app { display: block !important; }
+  #main {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+  .page { display: block !important; padding: 0 !important; }
+  .page:not(.active) { display: none !important; }
+  .ql-glass, .module-card, .stat-card, .skill-card, .call-card,
+  .psych-acc-item, .v12-disc-card {
+    background: #fff !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    page-break-inside: avoid;
+  }
+  /* Larger body text for print */
+  body { font-size: 12pt !important; line-height: 1.5 !important; }
+  h1 { font-size: 22pt !important; }
+  h2 { font-size: 18pt !important; }
+  /* Force tints to neutral on paper */
+  .page-header::after { background: #000 !important; opacity: 0.5 !important; }
+  a { color: #0645ad !important; text-decoration: underline !important; }
+  /* Hint URL after links for paper context (skip internal anchors) */
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 9pt; color: #666; }
+}
+
+/* ── 4) Contrast safeguards — ensure tinted text stays ≥ 4.5:1 on dark surface ── */
+html.v13 body[data-active-section="accounting"]   .page-header::after,
+html.v13 body[data-active-section="negotiation"]  .page-header::after,
+html.v13 body[data-active-section="lab"]          .page-header::after {
+  /* warm tints: lift opacity slightly to compensate for perceptual dimness */
+  opacity: 0.95;
+}
+
+/* ── 5) Defensive: pause all v13 animations when tab is hidden (battery friendly) ── */
+html.v13 body.is-hidden::after,
+html.v13 body.is-hidden .ql-grain,
+html.v13 body.is-hidden #cursor-aura {
+  animation-play-state: paused !important;
+}
