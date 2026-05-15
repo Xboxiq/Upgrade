@@ -12800,3 +12800,355 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
     border:1px solid #999 !important; page-break-inside:avoid;
   }
 }
+
+
+
+/* ===========================================================
+   WORKER 08 — HR MASTERY (Phase 4)
+   Scenarios player + Job Ad Decoder + 12 Red Flags
+   =========================================================== */
+
+/* Scenarios player */
+#page-hrmastery .hrm-scn-shell{
+  background: linear-gradient(135deg, rgba(168,85,247,.06), rgba(59,130,246,.04));
+  border:1px solid rgba(168,85,247,.25);
+  border-radius: var(--radius-lg);
+  padding:18px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-scn-header{
+  display:grid; grid-template-columns: auto 1fr auto;
+  gap:14px; align-items:center; margin-bottom:14px;
+}
+#page-hrmastery .hrm-scn-counter{
+  font-size:14px; font-weight:900; color:var(--text);
+  background: rgba(168,85,247,.10);
+  padding:6px 12px; border-radius:8px;
+  border:1px solid rgba(168,85,247,.30);
+}
+#page-hrmastery .hrm-scn-counter span:first-child{ color:#A855F7; }
+#page-hrmastery .hrm-scn-progress{
+  height:8px; background: rgba(255,255,255,.05);
+  border-radius:99px; overflow:hidden;
+}
+#page-hrmastery .hrm-scn-progress-fill{
+  height:100%; width:0%;
+  background: linear-gradient(90deg, #A855F7, #EC4899);
+  border-radius:99px; transition: width .4s ease;
+}
+#page-hrmastery .hrm-scn-score{
+  font-size:13px; color: var(--text-muted);
+  display:flex; align-items:center; gap:5px;
+  background: rgba(255,255,255,.03);
+  padding:6px 12px; border-radius:8px;
+  border:1px solid var(--border);
+}
+#page-hrmastery .hrm-scn-score-label{ color: var(--text-faint); font-size:11px; }
+#page-hrmastery .hrm-scn-score-val{
+  font-size:16px; font-weight:900; color:#22C55E;
+}
+
+#page-hrmastery .hrm-scn-body{ min-height:340px; }
+#page-hrmastery .hrm-scn-title{
+  font-size:15px; font-weight:800; color:var(--text);
+  margin-bottom:6px;
+}
+#page-hrmastery .hrm-scn-context{
+  font-size:12.5px; color: var(--text-muted); line-height:1.85;
+  background: rgba(255,255,255,.02);
+  border-right: 3px solid #A855F7;
+  border-radius: 8px;
+  padding: 10px 14px; margin-bottom:8px;
+}
+#page-hrmastery .hrm-scn-offer{
+  font-size:12.5px; color: var(--text); line-height:1.8;
+  background: rgba(245,158,11,.05);
+  border:1px solid rgba(245,158,11,.20);
+  border-radius:8px;
+  padding:10px 14px; margin-bottom:14px;
+  font-weight:600;
+}
+#page-hrmastery .hrm-scn-offer b{ color:#F59E0B; }
+
+#page-hrmastery .hrm-scn-options{
+  display:grid; grid-template-columns: 1fr 1fr;
+  gap:10px; margin-bottom:14px;
+}
+@media (max-width: 720px){
+  #page-hrmastery .hrm-scn-options{ grid-template-columns: 1fr; }
+  #page-hrmastery .hrm-scn-header{ grid-template-columns: 1fr; }
+}
+#page-hrmastery .hrm-scn-option{
+  background: rgba(255,255,255,.02);
+  border:1px solid var(--border);
+  border-radius:10px; padding:12px 14px;
+  cursor:pointer; transition: var(--transition);
+  text-align:right;
+  font-family: inherit;
+  color: var(--text-muted);
+  font-size:12.5px; line-height:1.7;
+}
+#page-hrmastery .hrm-scn-option:hover{
+  border-color: var(--border-hover);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+#page-hrmastery .hrm-scn-option.picked{ pointer-events: none; }
+#page-hrmastery .hrm-scn-option.picked.weak{
+  border-color: rgba(239,68,68,.5);
+  background: rgba(239,68,68,.08);
+  color: var(--text);
+}
+#page-hrmastery .hrm-scn-option.picked.med{
+  border-color: rgba(245,158,11,.5);
+  background: rgba(245,158,11,.08);
+  color: var(--text);
+}
+#page-hrmastery .hrm-scn-option.picked.strong{
+  border-color: rgba(34,197,94,.5);
+  background: rgba(34,197,94,.10);
+  color: var(--text);
+  box-shadow: 0 0 20px rgba(34,197,94,.20);
+}
+#page-hrmastery .hrm-scn-result{
+  background: rgba(0,0,0,.18);
+  border-radius:10px; padding:14px;
+  margin-top:8px;
+  border:1px solid var(--border);
+}
+#page-hrmastery .hrm-scn-result.weak{ border-color: rgba(239,68,68,.30); }
+#page-hrmastery .hrm-scn-result.med{ border-color: rgba(245,158,11,.30); }
+#page-hrmastery .hrm-scn-result.strong{ border-color: rgba(34,197,94,.40); }
+#page-hrmastery .hrm-scn-result-tag{
+  display:inline-block;
+  font-size:10.5px; font-weight:800;
+  padding:3px 10px; border-radius:99px; margin-bottom:6px;
+  text-transform:uppercase; letter-spacing:1px;
+}
+#page-hrmastery .hrm-scn-result.weak .hrm-scn-result-tag{ background: rgba(239,68,68,.12); color:#EF4444; }
+#page-hrmastery .hrm-scn-result.med .hrm-scn-result-tag{ background: rgba(245,158,11,.12); color:#F59E0B; }
+#page-hrmastery .hrm-scn-result.strong .hrm-scn-result-tag{ background: rgba(34,197,94,.15); color:#22C55E; }
+#page-hrmastery .hrm-scn-result-out{
+  font-size:12.5px; color: var(--text-muted); line-height:1.8;
+  margin-bottom:8px;
+}
+#page-hrmastery .hrm-scn-result-out b{ color: var(--text); }
+#page-hrmastery .hrm-scn-result-lesson{
+  font-size:11.5px; color: #A855F7;
+  background: rgba(168,85,247,.06);
+  border-right: 3px solid #A855F7;
+  padding:8px 12px; border-radius:8px;
+}
+#page-hrmastery .hrm-scn-result-lesson b{ color: #fff; }
+
+#page-hrmastery .hrm-scn-controls{
+  display:flex; gap:10px; justify-content:space-between;
+  flex-wrap:wrap;
+  border-top:1px dashed rgba(255,255,255,.06);
+  padding-top:14px;
+}
+#page-hrmastery .hrm-scn-btn{
+  background: transparent; color: var(--text-muted);
+  border:1px solid var(--border);
+  padding:9px 18px; border-radius:8px;
+  font-size:12px; font-weight:700;
+  cursor:pointer; font-family: inherit;
+  transition: var(--transition);
+}
+#page-hrmastery .hrm-scn-btn:hover{
+  color: var(--text); border-color: var(--border-hover);
+}
+#page-hrmastery .hrm-scn-btn.primary{
+  background: linear-gradient(135deg, #A855F7, #EC4899);
+  color:#fff; border-color: transparent;
+}
+#page-hrmastery .hrm-scn-btn.primary:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(168,85,247,.30);
+}
+#page-hrmastery .hrm-scn-btn:disabled{
+  opacity:.4; cursor: not-allowed; transform: none;
+}
+
+/* Final scoreboard */
+#page-hrmastery .hrm-scn-final{
+  text-align:center; padding:20px 16px;
+}
+#page-hrmastery .hrm-scn-final-icon{ font-size:48px; margin-bottom:8px; }
+#page-hrmastery .hrm-scn-final-score{
+  font-size:32px; font-weight:900; color:#22C55E; margin-bottom:6px;
+}
+#page-hrmastery .hrm-scn-final-msg{
+  font-size:13px; color: var(--text-muted); line-height:1.7;
+  max-width: 480px; margin: 0 auto 12px;
+}
+
+/* Job Ad Decoder */
+#page-hrmastery .hrm-decoder{
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding:18px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-decoder-grid{
+  display:grid; grid-template-columns: 1fr 1fr;
+  gap:16px; margin-bottom:14px;
+}
+@media (max-width: 920px){
+  #page-hrmastery .hrm-decoder-grid{ grid-template-columns: 1fr; }
+}
+#page-hrmastery .hrm-decoder-input-wrap{
+  display:flex; flex-direction:column; gap:10px;
+}
+#page-hrmastery .hrm-decoder-label{
+  font-size:12px; font-weight:700; color: var(--text);
+}
+#page-hrmastery .hrm-decoder-text{
+  width:100%; min-height:200px;
+  background: rgba(0,0,0,.20);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:12px;
+  color: var(--text); font-size:12.5px;
+  font-family: inherit; line-height:1.7;
+  outline:none; resize:vertical;
+  direction:rtl; text-align:right;
+}
+#page-hrmastery .hrm-decoder-text:focus{
+  border-color: rgba(168,85,247,.5);
+  box-shadow: 0 0 0 3px rgba(168,85,247,.15);
+}
+#page-hrmastery .hrm-decoder-actions{
+  display:flex; gap:8px; flex-wrap:wrap;
+}
+#page-hrmastery .hrm-decoder-btn{
+  background: transparent; color: var(--text-muted);
+  border:1px solid var(--border);
+  padding:8px 14px; border-radius:8px;
+  font-size:12px; font-weight:700;
+  cursor:pointer; font-family:inherit;
+  transition: var(--transition);
+}
+#page-hrmastery .hrm-decoder-btn:hover{ color: var(--text); border-color: var(--border-hover); }
+#page-hrmastery .hrm-decoder-btn.primary{
+  background: linear-gradient(135deg, #A855F7, #EC4899);
+  color:#fff; border-color: transparent;
+}
+#page-hrmastery .hrm-decoder-btn.primary:hover{
+  transform: translateY(-1px);
+}
+
+#page-hrmastery .hrm-decoder-output{
+  background: rgba(0,0,0,.20);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:16px; min-height: 200px;
+  display:flex; flex-direction:column; gap:10px;
+}
+#page-hrmastery .hrm-decoder-score{
+  display:flex; align-items:center; gap:10px;
+  padding:10px 12px; border-radius:8px;
+  font-size:13px;
+}
+#page-hrmastery .hrm-decoder-score.healthy{
+  background: rgba(34,197,94,.10);
+  color:#22C55E;
+  border:1px solid rgba(34,197,94,.30);
+}
+#page-hrmastery .hrm-decoder-score.caution{
+  background: rgba(245,158,11,.10);
+  color:#F59E0B;
+  border:1px solid rgba(245,158,11,.30);
+}
+#page-hrmastery .hrm-decoder-score.toxic{
+  background: rgba(239,68,68,.10);
+  color:#EF4444;
+  border:1px solid rgba(239,68,68,.30);
+}
+#page-hrmastery .hrm-decoder-score b{ font-size:18px; }
+#page-hrmastery .hrm-decoder-flags{
+  display:flex; flex-direction:column; gap:6px;
+  font-size:12px;
+}
+#page-hrmastery .hrm-decoder-flag{
+  padding:7px 11px; border-radius:8px;
+  display:flex; gap:8px; align-items:flex-start;
+  line-height:1.6;
+}
+#page-hrmastery .hrm-decoder-flag.green{ background: rgba(34,197,94,.06); border:1px solid rgba(34,197,94,.20); color: var(--text); }
+#page-hrmastery .hrm-decoder-flag.yellow{ background: rgba(245,158,11,.06); border:1px solid rgba(245,158,11,.20); color: var(--text); }
+#page-hrmastery .hrm-decoder-flag.red{ background: rgba(239,68,68,.06); border:1px solid rgba(239,68,68,.25); color: var(--text); }
+#page-hrmastery .hrm-decoder-flag-icon{ flex-shrink:0; font-size:14px; }
+#page-hrmastery .hrm-decoder-flag b{ color: var(--text); }
+#page-hrmastery .hrm-decoder-flag-meta{
+  font-size:10.5px; color: var(--text-faint);
+  margin-right:auto;
+  flex-shrink:0;
+}
+
+#page-hrmastery .hrm-decoder-ref{
+  margin-top:14px;
+  border-top:1px dashed rgba(255,255,255,.06);
+  padding-top:14px;
+}
+#page-hrmastery .hrm-decoder-ref-title{
+  font-size:13px; font-weight:800; color: var(--text);
+  margin-bottom:10px;
+}
+#page-hrmastery .hrm-flag-grid{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:10px;
+}
+#page-hrmastery .hrm-flag-card{
+  background: rgba(255,255,255,.02);
+  border:1px solid var(--border);
+  border-radius:10px; padding:12px;
+}
+#page-hrmastery .hrm-flag-card.good{ border-color: rgba(34,197,94,.25); }
+#page-hrmastery .hrm-flag-card.warn{ border-color: rgba(245,158,11,.25); }
+#page-hrmastery .hrm-flag-card.bad{ border-color: rgba(239,68,68,.25); }
+#page-hrmastery .hrm-flag-h{
+  font-size:13px; font-weight:800; color: var(--text);
+  margin-bottom:8px;
+}
+
+/* 12 Red Flags grid */
+#page-hrmastery .hrm-redflag-grid{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap:12px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-redflag-card{
+  background: var(--surface); border:1px solid var(--border);
+  border-right: 4px solid rgba(239,68,68,.4);
+  border-radius: var(--radius-lg); padding:14px;
+  transition: var(--transition);
+}
+#page-hrmastery .hrm-redflag-card:hover{
+  border-color: var(--border-hover);
+  border-right-color: #EF4444;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+#page-hrmastery .hrm-redflag-num{
+  font-size:11px; font-weight:800; color:#EF4444;
+  background: rgba(239,68,68,.08);
+  width:28px; height:28px; border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:8px;
+}
+#page-hrmastery .hrm-redflag-title{
+  font-size:13.5px; font-weight:800; color: var(--text);
+  margin-bottom:6px;
+}
+#page-hrmastery .hrm-redflag-text{
+  font-size:11.5px; color: var(--text-muted); line-height:1.75;
+}
+#page-hrmastery .hrm-redflag-text b{ color: var(--text); }
+
+@media print{
+  #page-hrmastery .hrm-scn-shell,
+  #page-hrmastery .hrm-decoder,
+  #page-hrmastery .hrm-redflag-card,
+  #page-hrmastery .hrm-flag-card{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}

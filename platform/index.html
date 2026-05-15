@@ -15414,6 +15414,182 @@ const bird = { ...canMove(), ...canFly() };
       <!-- Phase 3 marker -->
       <div id="hrm-phase-3-end" style="display:none;"></div>
 
+      <!-- ========== PHASE 4 START ========== -->
+
+      <!-- Section J — 15 Scenarios Player (Lab) -->
+      <div class="hrm-section-title-wrap" style="margin-top:32px;">
+        <div class="hrm-section-eyebrow">J · المختبر التفاعلي #2</div>
+        <h2 class="hrm-section-title">15 سيناريو تفاوض راتب — حقيقي عراقي/خليجي</h2>
+        <p class="hrm-section-sub">كل سيناريو: الموقف + 4 ردود (ضعيف، متوسطان، قوي) + النتيجة + الدرس. اختر إجابتك ثم رَ ماذا يحدث.</p>
+      </div>
+
+      <div class="hrm-scn-shell" id="hrmScnShell">
+        <div class="hrm-scn-header">
+          <div class="hrm-scn-counter">
+            <span id="hrmScnIdx">1</span> <span style="color:var(--text-faint);">/</span> <span>15</span>
+          </div>
+          <div class="hrm-scn-progress">
+            <div class="hrm-scn-progress-fill" id="hrmScnPg"></div>
+          </div>
+          <div class="hrm-scn-score">
+            <span class="hrm-scn-score-label">الدرجة:</span>
+            <span class="hrm-scn-score-val" id="hrmScnScore">0</span>
+            <span style="color:var(--text-faint);">/ 15</span>
+          </div>
+        </div>
+
+        <div class="hrm-scn-body" id="hrmScnBody">
+          <!-- populated by JS -->
+        </div>
+
+        <div class="hrm-scn-controls">
+          <button class="hrm-scn-btn ghost" id="hrmScnPrev">◀ السابق</button>
+          <button class="hrm-scn-btn ghost" id="hrmScnReset">إعادة تشغيل</button>
+          <button class="hrm-scn-btn primary" id="hrmScnNext">التالي ▶</button>
+        </div>
+      </div>
+
+      <!-- Section K — Job Ad Decoder (Lab 3) -->
+      <div class="hrm-section-title-wrap" style="margin-top:32px;">
+        <div class="hrm-section-eyebrow">K · المختبر التفاعلي #3</div>
+        <h2 class="hrm-section-title">Job Ad Decoder — اقرأ بين السطور</h2>
+        <p class="hrm-section-sub">انسخ نص الإعلان → الأداة تكشف Green/Yellow/Red flags + كلمات تعكس ثقافة سامة + كلمات صحية.</p>
+      </div>
+
+      <div class="hrm-decoder">
+        <div class="hrm-decoder-grid">
+          <div class="hrm-decoder-input-wrap">
+            <label class="hrm-decoder-label" for="hrmDecoderText">الصق نص الوظيفة هنا:</label>
+            <textarea class="hrm-decoder-text" id="hrmDecoderText" rows="10" placeholder="مثال:&#10;مطلوب موظف rockstar للعمل في عائلتنا. ساعات العمل من 9 صباحاً حتى... المهام متعددة جداً. لا نذكر الراتب — يحدد بعد المقابلة. مطلوب فترة تجريبية 3 أشهر بدون راتب."></textarea>
+            <div class="hrm-decoder-actions">
+              <button class="hrm-decoder-btn primary" id="hrmDecoderGo">🔍 حلل الإعلان</button>
+              <button class="hrm-decoder-btn ghost" id="hrmDecoderSample">جرّب نص نموذجي</button>
+              <button class="hrm-decoder-btn ghost" id="hrmDecoderClear">مسح</button>
+            </div>
+          </div>
+          <div class="hrm-decoder-output" id="hrmDecoderOut">
+            <div class="hrm-calc-empty">
+              <div class="hrm-calc-empty-icon">🔬</div>
+              <div>الصق نصاً + اضغط <b>حلل</b> لرؤية Flags</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reference: Flag dictionary -->
+        <div class="hrm-decoder-ref">
+          <div class="hrm-decoder-ref-title">📚 معجم الـ Flags المرجعي</div>
+          <div class="hrm-flag-grid">
+            <div class="hrm-flag-card good">
+              <div class="hrm-flag-h">✅ Green Flags</div>
+              <ul class="hrm-pre-list">
+                <li>راتب مذكور كـ <b>range</b> واضح</li>
+                <li>مهام محددة (3-7 نقاط بليست)</li>
+                <li>ذكر الفريق + المدير المباشر</li>
+                <li>مسار النمو (career path) مذكور</li>
+                <li>سياسة الإجازات + remote/hybrid مذكورة</li>
+                <li>"learning budget" أو "training" مذكور</li>
+              </ul>
+            </div>
+            <div class="hrm-flag-card warn">
+              <div class="hrm-flag-h">⚠ Yellow Flags</div>
+              <ul class="hrm-pre-list">
+                <li>"work hard play hard" — ساعات طويلة</li>
+                <li>"rockstar / ninja / wizard" — توقعات غير واقعية</li>
+                <li>"family / عائلتنا" — حدود ضعيفة</li>
+                <li>"fast-paced environment" — فوضى</li>
+                <li>"wear many hats" — لا توصيف دور واضح</li>
+                <li>"passionate" مكررة كثيراً — استغلال عاطفي</li>
+              </ul>
+            </div>
+            <div class="hrm-flag-card bad">
+              <div class="hrm-flag-h">🚨 Red Flags</div>
+              <ul class="hrm-pre-list">
+                <li>"24/7" أو "available anytime"</li>
+                <li>"unpaid trial" / فترة تجريبية بدون راتب</li>
+                <li>لا salary range + إعلان قديم متكرر</li>
+                <li>"متعدد المهام للغاية / 50 مسؤولية"</li>
+                <li>"OT بدون أجر" أو "extra hours"</li>
+                <li>طلب deposit أو رسوم</li>
+                <li>عنوان غامض / لا اسم شركة</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section L — HR Red Flags 12 -->
+      <div class="hrm-section-title-wrap" style="margin-top:32px;">
+        <div class="hrm-section-eyebrow">L · إنذارات أثناء العملية</div>
+        <h2 class="hrm-section-title">12 إشارة الشركة سامة — اكتشفها قبل توقيع العقد</h2>
+        <p class="hrm-section-sub">حتى لو الإعلان كان نظيفاً، عملية التوظيف نفسها تكشف الكثير. هذه الـ 12 إشارة تساوي ذهباً.</p>
+      </div>
+
+      <div class="hrm-redflag-grid">
+        <div class="hrm-redflag-card">
+          <div class="hrm-redflag-num">01</div>
+          <div class="hrm-redflag-title">إعادة جدولة متكررة</div>
+          <div class="hrm-redflag-text">ألغوا 2-3 مقابلات بحجج عامة. <b>المعنى:</b> فوضى داخلية أو عدم احترام وقت المرشحين. ستعمل في نفس الفوضى يومياً.</div>
+        </div>
+        <div class="hrm-redflag-card">
+          <div class="hrm-redflag-num">02</div>
+          <div class="hrm-redflag-title">الـ Interviewer ينتقد موظفين سابقين</div>
+          <div class="hrm-redflag-text">"الموظف اللي قبلك كان كسول..." <b>المعنى:</b> غداً سيقول هذا عنك. ثقافة الذم = ثقافة تحطيم.</div>
+        </div>
+        <div class="hrm-redflag-card">
+          <div class="hrm-redflag-num">03</div>
+          <div class="hrm-redflag-title">"ليش تركت شغلك؟" بنبرة هجومية</div>
+          <div class="hrm-redflag-text">يضغط لتعترف بضعف. <b>المعنى:</b> بيئة تستخدم نقاط ضعفك ضدك. يبحث عن مرشح خاضع، لا متعاون.</div>
+        </div>
+        <div class="hrm-redflag-card">
+          <div class="hrm-redflag-num">04</div>
+          <div class="hrm-redflag-title">تجنّب سؤال turnover</div>
+          <div class="hrm-redflag-text">تسأل: "كم سنة آخر شخص في الدور؟" → "ما متذكر..." <b>المعنى:</b> الدوران مرتفع، ويحاولون إخفاءه.</div>
+        </div>
+        <div class="hrm-redflag-card">
+          <div class="hrm-redflag-num">05</div>
+          <div class="hrm-redflag-title">النطاق المالي بعد القبول</div>
+          <div class="hrm-redflag-text">"الراتب نقاشه بعد ما تقبل المنصب." <b>المعنى:</b> فخ Anchor — بعد قبولك يصبح walking away أصعب نفسياً. <b>اطلب النطاق قبل أي قبول.</b></div>
+        </div>
+        <div class="hrm-redflag-card">
+          <div class="hrm-redflag-num">06</div>
+          <div class="hrm-redflag-title">عقد قبل العرض الرسمي</div>
+          <div class="hrm-redflag-text">"وقّع العقد ونرسل العرض غداً." <b>المعنى:</b> محاولة قفل التزامك قبل كشف الشروط. ⚠ <b>لا توقّع شيئاً</b> بدون رؤية كل البنود.</div>
+        </div>
+        <div class="hrm-redflag-card">
+          <div class="hrm-redflag-num">07</div>
+          <div class="hrm-redflag-title">"Assignment خلال 24 ساعة"</div>
+          <div class="hrm-redflag-text">مهمة كبيرة (project حقيقي) بضغط زمني. <b>المعنى:</b> غالباً يحاولون الحصول على عمل مجاني. اقبل فقط مع scope محدود (2 ساعات max).</div>
+        </div>
+        <div class="hrm-redflag-card">
+          <div class="hrm-redflag-num">08</div>
+          <div class="hrm-redflag-title">المكتب فوضوي / الموظفون متجهمون</div>
+          <div class="hrm-redflag-text">حين تزور: لا أحد يبتسم، الجو متوتر، أوراق متناثرة. <b>المعنى:</b> مؤشر مرئي للثقافة. ثق بحدسك.</div>
+        </div>
+        <div class="hrm-redflag-card">
+          <div class="hrm-redflag-num">09</div>
+          <div class="hrm-redflag-title">الـ Interviewer متعب/غاضب</div>
+          <div class="hrm-redflag-text">يبدو منهكاً، يقطع كلامك، ينظر للهاتف. <b>المعنى:</b> فريق محترق. لو هذا في أفضل لحظة (المقابلة)، الواقع أسوأ.</div>
+        </div>
+        <div class="hrm-redflag-card">
+          <div class="hrm-redflag-num">10</div>
+          <div class="hrm-redflag-title">سياسة الإجازات غامضة</div>
+          <div class="hrm-redflag-text">تسأل: "كم يوم إجازة سنوية؟" → "حسب الظرف..." <b>المعنى:</b> لا توجد سياسة، أو السياسة غير محترمة عملياً.</div>
+        </div>
+        <div class="hrm-redflag-card">
+          <div class="hrm-redflag-num">11</div>
+          <div class="hrm-redflag-title">لا حديث عن growth path</div>
+          <div class="hrm-redflag-text">"كيف يبدو مساري بعد سنتين؟" → إجابة مبهمة. <b>المعنى:</b> الشركة لا تستثمر في موظفيها. ستركد سنوات.</div>
+        </div>
+        <div class="hrm-redflag-card">
+          <div class="hrm-redflag-num">12</div>
+          <div class="hrm-redflag-title">Glassdoor reviews سلبية متكررة</div>
+          <div class="hrm-redflag-text">10+ مراجعات ذات شكوى مشابهة (راتب يتأخر، إدارة سامة). <b>المعنى:</b> النمط حقيقي. مراجعة سلبية واحدة = شخص. عشرة = نظام.</div>
+        </div>
+      </div>
+
+      <!-- Phase 4 marker -->
+      <div id="hrm-phase-4-end" style="display:none;"></div>
+
     </section><!-- /page-hrmastery -->
 
 
