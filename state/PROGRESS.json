@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-15T16:05:00Z",
+  "last_updated": "2026-05-15T16:35:00Z",
   "current": {
     "worker": "08",
     "worker_name": "HR_NEGOTIATION",
-    "phase": 3,
+    "phase": 4,
     "phases_total": 5,
     "branch": "worker-08-complete",
     "status": "in-progress"
@@ -45,8 +45,9 @@
     { "worker": "07", "phase": 5, "title": "6 Interactive Labs + Career Path + Cheat Sheet + 12 Citations", "branch": "worker-07-complete", "lines_added": 1206 },
     { "worker": "08", "phase": 1, "title": "HR psychology (5 dims) + STAR framework + 15 Common Questions", "branch": "worker-08-complete", "lines_added": 1202 },
     { "worker": "08", "phase": 2, "title": "30 Trap Questions + Pre-Interview Toolkit + Post-Interview Playbook", "branch": "worker-08-complete", "lines_added": 660 },
-    { "worker": "08", "phase": 3, "title": "Salary Negotiation Calculator IQ + 6 principles + Iraq Salary table", "branch": "worker-08-complete", "lines_added": 672 }
+    { "worker": "08", "phase": 3, "title": "Salary Negotiation Calculator IQ + 6 principles + Iraq Salary table", "branch": "worker-08-complete", "lines_added": 672 },
+    { "worker": "08", "phase": 4, "title": "15 Scenarios Player + Job Ad Decoder + 12 HR Red Flags", "branch": "worker-08-complete", "lines_added": 920 }
   ],
-  "next_action": "Continue Worker 08 Phase 4 — 15 Scenarios + Job Ad Decoder + HR Red Flags.",
-  "notes": "Worker 08 Phase 3 done. Salary Calculator IQ: 15 roles, exp slider, location/corp/skills multipliers. Outputs: Walk-away/Median/Target/Anchor bars + Total Comp + Annual + 5-stage negotiation script. localStorage upg_salary_drafts (last 10)."
+  "next_action": "Continue Worker 08 Phase 5 — Mock Screen Timer + Offer Compare + Iraq Labor Law + Citations + Cheat Sheet.",
+  "notes": "Worker 08 Phase 4 done. 15 negotiation scenarios with 4 options each (weak/med/med/strong) + final scoreboard. Job Ad Decoder with 21 flag keywords (7 green/7 yellow/7 red). 12 Red Flags grid."
 }
