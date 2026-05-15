@@ -8183,6 +8183,213 @@
         </div>
       </div>
 
+      <!-- ════════════════════════════════════════════════════════════
+           WORKER 05 · Junior Programmer Mastery — Real-World Roadmap
+           Phases will be appended above this marker.
+      ════════════════════════════════════════════════════════════ -->
+      <div id="prog-w05-anchor" data-w05-anchor="1" hidden></div>
+
+      <!-- ┌─ W05·P1 ─────────────────────────────────────────────────┐
+           │ Fundamentals Gate (8 cards + Quiz) + Path Decision Tree │
+           └────────────────────────────────────────────────────────┘ -->
+      <section class="prog-w05" data-w05-phase="1" aria-labelledby="prog-fund-title">
+
+        <div class="prog-w05-hero">
+          <div class="prog-w05-hero-ic">🧭</div>
+          <div>
+            <h2 id="prog-fund-title">Fundamentals Gate · بوابة الأساسيات</h2>
+            <p>قبل أي framework — هذه ثمانية مفاهيم لا يكتمل المبرمج بدونها. اقرأ البطاقات، ثم اجتز الـ Quiz بنسبة <strong>70%+</strong> لفتح خرائط الطرق.</p>
+          </div>
+          <div class="prog-w05-hero-meta" data-w05-progress="fundamentals">
+            <span class="lbl">تقدّمك</span>
+            <span class="val" data-fund-pct>0%</span>
+          </div>
+        </div>
+
+        <!-- 8 Fundamentals cards -->
+        <div class="prog-fund-grid" data-fund-grid>
+
+          <article class="prog-fund-card" data-fund-card="1">
+            <header><span class="prog-fund-num">01</span><h3>Variables &amp; Types</h3><span class="prog-fund-tag">core</span></header>
+            <p>الفرق بين قيمة <code>primitive</code> (رقم، نص، boolean — تُنسخ) وقيمة <code>reference</code> (object، array، function — تُمرَّر بالعنوان). فهم هذا يُجنّبك أغرب bugs الـ mutation.</p>
+            <pre><code>let a = 5; let b = a; b = 9;        // a = 5
+let o = {x:1}; let p = o; p.x = 9;  // o.x = 9 (نفس المرجع)</code></pre>
+            <div class="prog-fund-foot">
+              <span class="prog-fund-mini">تمرين: ما قيمة <code>a</code> و<code>o.x</code>؟</span>
+              <button class="prog-fund-mark" data-fund-mark="1" type="button">✓ فهمتها</button>
+            </div>
+            <cite>MDN — JavaScript data types and structures</cite>
+          </article>
+
+          <article class="prog-fund-card" data-fund-card="2">
+            <header><span class="prog-fund-num">02</span><h3>Control Flow</h3><span class="prog-fund-tag">core</span></header>
+            <p><code>if/else</code>، الحلقات (<code>for</code>, <code>while</code>, <code>for…of</code>)، والـ recursion. اختيار البنية الصحيحة يجعل الكود يُقرأ كنص — لا كلغز.</p>
+            <pre><code>function sum(n){ return n &lt;= 0 ? 0 : n + sum(n - 1); }  // recursion
+for (const item of list) { if (item.skip) continue; handle(item); }</code></pre>
+            <div class="prog-fund-foot">
+              <span class="prog-fund-mini">تمرين: حوّل <code>sum</code> إلى loop.</span>
+              <button class="prog-fund-mark" data-fund-mark="2" type="button">✓ فهمتها</button>
+            </div>
+            <cite>Eloquent JavaScript — Ch. 2 (Marijn Haverbeke)</cite>
+          </article>
+
+          <article class="prog-fund-card" data-fund-card="3">
+            <header><span class="prog-fund-num">03</span><h3>Functions</h3><span class="prog-fund-tag">core</span></header>
+            <p>الدالة النقية (<em>pure</em>) لا تعتمد على شيء خارجي ولا تُغيّره — لذلك يسهل اختبارها. الدالة العالية (<em>higher-order</em>) تأخذ أو تُرجع دالة.</p>
+            <pre><code>const double = x =&gt; x * 2;                  // pure
+const map = (arr, fn) =&gt; arr.map(fn);       // higher-order
+map([1,2,3], double);                       // [2,4,6]</code></pre>
+            <div class="prog-fund-foot">
+              <span class="prog-fund-mini">سؤال: لماذا <code>Math.random()</code> ليست pure؟</span>
+              <button class="prog-fund-mark" data-fund-mark="3" type="button">✓ فهمتها</button>
+            </div>
+            <cite>Functional-Light JavaScript — Kyle Simpson, Ch. 4</cite>
+          </article>
+
+          <article class="prog-fund-card" data-fund-card="4">
+            <header><span class="prog-fund-num">04</span><h3>Scope &amp; Closures</h3><span class="prog-fund-tag">deep</span></header>
+            <p>الـ scope هو "أين تُرى هذه المتغيّرات". الـ closure هو دالة تتذكر متغيّرات بيئتها حتى بعد انتهاء تلك البيئة.</p>
+            <pre><code>function counter(){ let n = 0; return () =&gt; ++n; }
+const c = counter(); c(); c(); c();   // 3 — n محفوظ في closure</code></pre>
+            <div class="prog-fund-foot">
+              <span class="prog-fund-mini">تمرين: اصنع دالة <code>once(fn)</code> تشغّل <code>fn</code> مرة واحدة فقط.</span>
+              <button class="prog-fund-mark" data-fund-mark="4" type="button">✓ فهمتها</button>
+            </div>
+            <cite>You Don't Know JS Yet — Scope &amp; Closures</cite>
+          </article>
+
+          <article class="prog-fund-card" data-fund-card="5">
+            <header><span class="prog-fund-num">05</span><h3>Async vs Sync</h3><span class="prog-fund-tag">deep</span></header>
+            <p>المتصفّح ينفّذ كود JS على thread واحد. العمليات الطويلة (شبكة، ملف) لا تُجمَّد — بل تُسلَّم لـ Web APIs، ثم تعود نتائجها عبر <em>event loop</em> إلى queue. الـ <code>await</code> يُسهّل قراءة هذا التدفق.</p>
+            <pre><code>async function load(){
+  const r = await fetch('/api/x');     // لا يجمّد الـ UI
+  return r.json();
+}</code></pre>
+            <div class="prog-fund-foot">
+              <span class="prog-fund-mini">سؤال: لماذا تحتاج <code>try/catch</code> مع <code>await</code>؟</span>
+              <button class="prog-fund-mark" data-fund-mark="5" type="button">✓ فهمتها</button>
+            </div>
+            <cite>Jake Archibald — "In The Loop" (JSConf.Asia 2018)</cite>
+          </article>
+
+          <article class="prog-fund-card" data-fund-card="6">
+            <header><span class="prog-fund-num">06</span><h3>Memory Model</h3><span class="prog-fund-tag">deep</span></header>
+            <p>المتغيّرات الـ primitive تعيش على <strong>stack</strong> (سريع، محدود). الـ objects على <strong>heap</strong> (مرن، أبطأ، يحتاج garbage collection). فهم هذا يفسّر سلوك المراجع.</p>
+            <pre><code>// Stack: a, b
+let a = 5, b = a;
+// Heap: { x:1 } — متغيّرَا o و p يشيران للعنوان نفسه
+let o = {x:1}, p = o;</code></pre>
+            <div class="prog-fund-foot">
+              <span class="prog-fund-mini">تمرين: ارسم stack &amp; heap للسطور أعلاه.</span>
+              <button class="prog-fund-mark" data-fund-mark="6" type="button">✓ فهمتها</button>
+            </div>
+            <cite>MDN — Memory Management</cite>
+          </article>
+
+          <article class="prog-fund-card" data-fund-card="7">
+            <header><span class="prog-fund-num">07</span><h3>Big-O Notation</h3><span class="prog-fund-tag">deep</span></header>
+            <p>طريقة لوصف <em>كيف ينمو</em> زمن/ذاكرة الخوارزمية مع زيادة الإدخال. الترتيب من الأسرع إلى الأبطأ:</p>
+            <ul class="prog-fund-list">
+              <li><b>O(1)</b> — ثابت (Hashmap.get)</li>
+              <li><b>O(log n)</b> — لوغاريتمي (Binary Search)</li>
+              <li><b>O(n)</b> — خطي (loop)</li>
+              <li><b>O(n log n)</b> — sort فعّال</li>
+              <li><b>O(n²)</b> — nested loops</li>
+            </ul>
+            <div class="prog-fund-foot">
+              <span class="prog-fund-mini">سؤال: ما Big-O لإيجاد عنصر في مصفوفة غير مرتّبة؟</span>
+              <button class="prog-fund-mark" data-fund-mark="7" type="button">✓ فهمتها</button>
+            </div>
+            <cite>Cracking the Coding Interview — G. McDowell, Ch. VI</cite>
+          </article>
+
+          <article class="prog-fund-card" data-fund-card="8">
+            <header><span class="prog-fund-num">08</span><h3>Data Structures</h3><span class="prog-fund-tag">core</span></header>
+            <p>أربع بنى تكفي لـ 90% من المشاكل اليومية:</p>
+            <ul class="prog-fund-list">
+              <li><b>Array</b> — ترتيب ووصول بفهرس O(1)</li>
+              <li><b>Object/Map</b> — بحث بمفتاح O(1)</li>
+              <li><b>Stack</b> — LIFO (undo, تتبّع call)</li>
+              <li><b>Queue</b> — FIFO (jobs, requests)</li>
+            </ul>
+            <div class="prog-fund-foot">
+              <span class="prog-fund-mini">سؤال: لماذا <code>Map</code> أفضل من <code>Object</code> لمفاتيح ديناميكية؟</span>
+              <button class="prog-fund-mark" data-fund-mark="8" type="button">✓ فهمتها</button>
+            </div>
+            <cite>Grokking Algorithms — Aditya Bhargava, Ch. 1-3</cite>
+          </article>
+
+        </div>
+
+        <!-- Gate Quiz -->
+        <div class="prog-quiz" data-prog-quiz>
+          <header>
+            <div>
+              <h3>Gate Quiz · 10 أسئلة</h3>
+              <p>اجتز <strong>70%</strong> أو أكثر لفتح خرائط الطرق في Phase التالي.</p>
+            </div>
+            <div class="prog-quiz-score" data-quiz-score>—</div>
+          </header>
+          <ol class="prog-quiz-list" data-quiz-list></ol>
+          <div class="prog-quiz-foot">
+            <button type="button" class="prog-quiz-submit" data-quiz-submit>تصحيح الإجابات</button>
+            <button type="button" class="prog-quiz-reset" data-quiz-reset>إعادة المحاولة</button>
+            <span class="prog-quiz-hint" data-quiz-hint>لم تبدأ بعد</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ┌─ W05·P1b ─ Path Decision Tree ─┐ -->
+      <section class="prog-w05 prog-paths" data-w05-phase="1b" aria-labelledby="prog-paths-title">
+        <header class="prog-w05-sub">
+          <h2 id="prog-paths-title">شجرة قرار المسار 🛣️</h2>
+          <p>أجب على ثلاثة أسئلة — تحصل على توصية مسار + سبب + خطوة أولى عملية.</p>
+        </header>
+
+        <div class="prog-paths-tree" data-paths-tree>
+          <div class="prog-paths-step" data-step="1">
+            <div class="prog-paths-q">١) أيّهما يُحمّسك أكثر؟</div>
+            <div class="prog-paths-opts">
+              <button data-pick="visual"   type="button">🎨 تصميم وتفاعل بصري</button>
+              <button data-pick="systems"  type="button">⚙️ أنظمة وقواعد بيانات</button>
+              <button data-pick="mobile"   type="button">📱 تطبيقات الموبايل</button>
+              <button data-pick="data"     type="button">📊 البيانات والتحليل</button>
+            </div>
+          </div>
+          <div class="prog-paths-step" data-step="2" hidden>
+            <div class="prog-paths-q">٢) كم ساعة في الأسبوع تستطيع تخصيصها؟</div>
+            <div class="prog-paths-opts">
+              <button data-hours="lt10"  type="button">أقل من 10</button>
+              <button data-hours="10-20" type="button">10–20</button>
+              <button data-hours="gt20"  type="button">أكثر من 20</button>
+            </div>
+          </div>
+          <div class="prog-paths-step" data-step="3" hidden>
+            <div class="prog-paths-q">٣) أين تطمح بعد سنة؟</div>
+            <div class="prog-paths-opts">
+              <button data-goal="local"  type="button">وظيفة محلية في العراق</button>
+              <button data-goal="remote" type="button">عمل remote بالدولار</button>
+              <button data-goal="found"  type="button">إطلاق مشروعي الخاص</button>
+            </div>
+          </div>
+          <div class="prog-paths-result" data-step="4" hidden>
+            <div class="prog-paths-pill" data-result-pill>FRONTEND</div>
+            <h3 data-result-title>Frontend Web</h3>
+            <p data-result-why>لأن إجاباتك تشير إلى ميل بصري + عقلية تنفيذية + سوق محلّي طلبه عالٍ على React.</p>
+            <div class="prog-paths-first">
+              <div class="lbl">الخطوة الأولى هذا الأسبوع</div>
+              <div class="val" data-result-first>ثبّت VS Code + git، أنشئ مشروع HTML/CSS بسيط (Personal Card)، ادفعه على GitHub.</div>
+            </div>
+            <div class="prog-paths-meta">
+              <span data-result-stack>HTML5 · CSS3 · JS · React · Vite</span>
+              <span data-result-time>~12 أسبوع للوصول لمستوى Junior</span>
+            </div>
+            <button type="button" class="prog-paths-restart" data-paths-restart>إعادة الاختيار</button>
+          </div>
+        </div>
+      </section>
+
     </section><!-- /page-programming -->
 
 
