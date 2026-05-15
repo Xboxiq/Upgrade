@@ -7395,3 +7395,363 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
   #page-callcenter .cc-cheat li { color: #000; }
   #page-callcenter .sim-shell, #page-callcenter .iraq-grid > div { background: #fff !important; border: 1px solid #999 !important; color: #000 !important; }
 }
+
+
+
+/* ════════════════════════════════════════════════════════════════
+   WORKER 04 · PHASE 3 — Iraqi Tax + Salary Calculator
+═══════════════════════════════════════════════════════════════ */
+
+#page-accounting .acc-tax {
+  display: grid;
+  gap: 22px;
+  margin-block: 22px 18px;
+}
+
+/* ── Block 7 · Tax Brackets ──────────────────────────────────── */
+#page-accounting .acc-tax-bracket-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-block: 8px 14px;
+}
+#page-accounting .acc-tax-bracket {
+  position: relative;
+  padding: 16px 18px;
+  background: rgba(0,0,0,0.24);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  overflow: hidden;
+}
+#page-accounting .acc-tax-bracket::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 4px;
+}
+#page-accounting .acc-tax-bracket[data-bracket="0"]::before { background: linear-gradient(90deg, #34D399, transparent); }
+#page-accounting .acc-tax-bracket[data-bracket="1"]::before { background: linear-gradient(90deg, #60A5FA, transparent); }
+#page-accounting .acc-tax-bracket[data-bracket="2"]::before { background: linear-gradient(90deg, #F59E0B, transparent); }
+#page-accounting .acc-tax-bracket[data-bracket="3"]::before { background: linear-gradient(90deg, #F87171, transparent); }
+#page-accounting .acc-tax-bracket-rate {
+  font-size: 28px;
+  font-weight: 900;
+  font-feature-settings: "tnum" 1;
+  letter-spacing: -0.02em;
+  margin-block-end: 4px;
+}
+#page-accounting .acc-tax-bracket[data-bracket="0"] .acc-tax-bracket-rate { color: #34D399; }
+#page-accounting .acc-tax-bracket[data-bracket="1"] .acc-tax-bracket-rate { color: #60A5FA; }
+#page-accounting .acc-tax-bracket[data-bracket="2"] .acc-tax-bracket-rate { color: #F59E0B; }
+#page-accounting .acc-tax-bracket[data-bracket="3"] .acc-tax-bracket-rate { color: #F87171; }
+#page-accounting .acc-tax-bracket-range {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text);
+  font-feature-settings: "tnum" 1;
+  margin-block-end: 6px;
+}
+#page-accounting .acc-tax-bracket-note {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+#page-accounting .acc-tax-misc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+#page-accounting .acc-tax-misc {
+  padding: 12px 14px;
+  background: rgba(102,252,241,0.04);
+  border: 1px solid rgba(102,252,241,0.15);
+  border-radius: 10px;
+}
+#page-accounting .acc-tax-misc h6 {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--accent, #66FCF1);
+  letter-spacing: 0.04em;
+}
+#page-accounting .acc-tax-misc p {
+  margin: 0;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  font-feature-settings: "tnum" 1;
+}
+#page-accounting .acc-tax-misc b { color: var(--text); }
+
+/* ── Block 8 · Tax Calculator + Slip ────────────────────────── */
+#page-accounting .acc-tax-calc-shell {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(360px, 1.4fr);
+  gap: 18px;
+  align-items: start;
+}
+#page-accounting .acc-tax-form {
+  padding: 18px 18px 14px;
+  background: rgba(0,0,0,0.24);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  display: grid;
+  gap: 12px;
+}
+#page-accounting .acc-tax-field {
+  display: grid;
+  gap: 5px;
+}
+#page-accounting .acc-tax-field label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+#page-accounting .acc-tax-field input,
+#page-accounting .acc-tax-field select {
+  background: rgba(0,0,0,0.30);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  font-feature-settings: "tnum" 1;
+  padding: 9px 12px;
+  border-radius: 9px;
+  transition: border-color 180ms ease;
+}
+#page-accounting .acc-tax-field input:focus,
+#page-accounting .acc-tax-field select:focus {
+  border-color: var(--accent, #66FCF1);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(102,252,241,0.12);
+}
+#page-accounting .acc-tax-actions {
+  display: flex;
+  gap: 8px;
+  margin-block-start: 4px;
+}
+#page-accounting .acc-tax-btn {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 12.5px;
+  font-weight: 800;
+  font-family: inherit;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 200ms ease;
+  border: 1px solid transparent;
+}
+#page-accounting .acc-tax-btn.primary {
+  background: linear-gradient(135deg, var(--accent, #66FCF1), #818CF8);
+  color: #0B0F1C;
+  border: 0;
+}
+#page-accounting .acc-tax-btn.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(102,252,241,0.30);
+}
+#page-accounting .acc-tax-btn.ghost {
+  background: transparent;
+  border-color: rgba(255,255,255,0.12);
+  color: var(--text);
+}
+#page-accounting .acc-tax-btn.ghost:hover {
+  border-color: var(--accent, #66FCF1);
+  color: var(--accent, #66FCF1);
+}
+
+#page-accounting .acc-tax-slip {
+  padding: 22px;
+  background: linear-gradient(160deg, rgba(255,255,255,0.04), rgba(102,252,241,0.025));
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  position: relative;
+}
+#page-accounting .acc-tax-slip-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-block-end: 14px;
+  margin-block-end: 12px;
+  border-block-end: 1px dashed rgba(255,255,255,0.10);
+}
+#page-accounting .acc-tax-slip-tag {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--accent, #66FCF1);
+  margin-block-end: 4px;
+}
+#page-accounting .acc-tax-slip-head h4 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text);
+}
+#page-accounting .acc-tax-slip-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  text-align: end;
+}
+#page-accounting .acc-tax-slip-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+#page-accounting .acc-tax-slip-rows li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-feature-settings: "tnum" 1;
+  border-radius: 8px;
+}
+#page-accounting .acc-tax-slip-rows li.add { background: rgba(16,185,129,0.06); color: #34D399; }
+#page-accounting .acc-tax-slip-rows li.sub { background: rgba(239,68,68,0.06); color: #F87171; }
+#page-accounting .acc-tax-slip-rows li.sum {
+  background: rgba(102,252,241,0.08);
+  color: var(--text);
+  font-weight: 800;
+  border: 1px solid rgba(102,252,241,0.20);
+}
+#page-accounting .acc-tax-slip-rows li.sum.negative {
+  background: rgba(239,68,68,0.10);
+  border-color: rgba(239,68,68,0.30);
+  color: #FCA5A5;
+}
+#page-accounting .acc-tax-slip-rows li.net {
+  background: linear-gradient(90deg, rgba(102,252,241,0.18), rgba(139,92,246,0.18));
+  color: var(--text);
+  font-weight: 900;
+  font-size: 15px;
+  padding: 12px 14px;
+  border: 1px solid rgba(102,252,241,0.35);
+  margin-block-start: 6px;
+}
+#page-accounting .acc-tax-slip-rows li b { font-weight: inherit; }
+#page-accounting .acc-tax-slip-employer {
+  margin-block-start: 14px;
+  padding: 12px 14px;
+  background: rgba(0,0,0,0.20);
+  border: 1px dashed rgba(255,255,255,0.10);
+  border-radius: 10px;
+}
+#page-accounting .acc-tax-slip-employer h6 {
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.10em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+#page-accounting .acc-tax-slip-employer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-feature-settings: "tnum" 1;
+}
+#page-accounting .acc-tax-slip-employer li {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+#page-accounting .acc-tax-slip-employer li.emp-total {
+  border-block-start: 1px dashed rgba(255,255,255,0.10);
+  padding-block-start: 8px;
+  margin-block-start: 4px;
+  font-weight: 800;
+  color: #F59E0B;
+}
+#page-accounting .acc-tax-slip-employer li b { color: var(--text); font-weight: 700; }
+#page-accounting .acc-tax-slip-breakdown {
+  margin-block-start: 14px;
+  padding: 12px 14px;
+  background: rgba(245,158,11,0.05);
+  border: 1px dashed rgba(245,158,11,0.25);
+  border-radius: 10px;
+}
+#page-accounting .acc-tax-slip-breakdown h6 {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #F59E0B;
+  text-transform: uppercase;
+}
+#page-accounting .acc-tax-slip-breakdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 3px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-feature-settings: "tnum" 1;
+  line-height: 1.7;
+}
+#page-accounting .acc-tax-slip-breakdown li b { color: var(--text); }
+
+#page-accounting .acc-tax-disclaimer {
+  display: flex;
+  gap: 10px;
+  padding: 12px 14px;
+  background: rgba(245,158,11,0.06);
+  border: 1px solid rgba(245,158,11,0.22);
+  border-radius: 10px;
+  margin-block-start: 14px;
+  align-items: flex-start;
+}
+#page-accounting .acc-tax-disclaimer span { font-size: 18px; }
+#page-accounting .acc-tax-disclaimer p {
+  margin: 0;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.85;
+}
+
+@media (max-width: 880px) {
+  #page-accounting .acc-tax-calc-shell {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  body * { visibility: hidden; }
+  #page-accounting .acc-tax-slip,
+  #page-accounting .acc-tax-slip * { visibility: visible; }
+  #page-accounting .acc-tax-slip {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 100%;
+    background: #fff !important;
+    color: #000 !important;
+    border: 1px solid #999 !important;
+  }
+  #page-accounting .acc-tax-slip h4,
+  #page-accounting .acc-tax-slip h6,
+  #page-accounting .acc-tax-slip-tag,
+  #page-accounting .acc-tax-slip-rows li b,
+  #page-accounting .acc-tax-slip-rows li span,
+  #page-accounting .acc-tax-slip-employer * { color: #000 !important; }
+  #page-accounting .acc-tax-slip-rows li.net {
+    background: #f0fdfa !important;
+    border: 2px solid #0f766e !important;
+  }
+}
