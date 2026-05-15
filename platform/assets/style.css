@@ -10645,3 +10645,247 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
   padding: 8px 12px; line-height: 1.7;
 }
 #page-programming .prog-port-card .stretch b { color: #FCD34D; }
+
+
+
+/* ════════════════════════════════════════════════════════════
+   WORKER 05 · Phase 5 — Iraq Block + Cheat Sheet + Citations
+   ════════════════════════════════════════════════════════════ */
+
+#page-programming .prog-iraq {
+  background: linear-gradient(180deg, rgba(34,197,94,0.05), rgba(15,23,42,0.55));
+  border-color: rgba(34,197,94,0.22);
+}
+#page-programming .prog-iraq::before { background: linear-gradient(135deg,#22C55E,#10B981); }
+
+#page-programming .prog-iraq-card {
+  background: rgba(2,6,23,0.55);
+  border: 1px solid rgba(34,197,94,0.22);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-block-end: 14px;
+}
+#page-programming .prog-iraq-card:last-child { margin-block-end: 0; }
+#page-programming .prog-iraq-card h3 {
+  font-size: 15px; font-weight: 800; color: #86EFAC;
+  margin: 0 0 12px;
+}
+
+#page-programming .prog-iraq-table-wrap { overflow-x: auto; }
+#page-programming .prog-iraq-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  min-width: 540px;
+}
+#page-programming .prog-iraq-table th,
+#page-programming .prog-iraq-table td {
+  padding: 9px 10px;
+  border-block-end: 1px dashed rgba(255,255,255,0.08);
+  text-align: start;
+  color: var(--text-muted);
+}
+#page-programming .prog-iraq-table th {
+  font-weight: 800; color: var(--text);
+  background: rgba(34,197,94,0.08);
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+}
+#page-programming .prog-iraq-table td:first-child { color: var(--text); font-weight: 600; }
+#page-programming .prog-iraq-table tr.hl td {
+  background: rgba(34,197,94,0.07);
+  color: #86EFAC; font-weight: 700;
+}
+#page-programming .prog-iraq-note {
+  margin: 10px 0 0; padding: 10px 12px;
+  background: rgba(34,197,94,0.07);
+  border: 1px solid rgba(34,197,94,0.22);
+  border-radius: 10px;
+  font-size: 12px; color: var(--text); line-height: 1.7;
+}
+
+#page-programming .prog-iraq-co {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
+}
+#page-programming .prog-iraq-co > div {
+  padding: 10px 12px;
+  background: rgba(15,23,42,0.5);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+}
+#page-programming .prog-iraq-co h5 {
+  font-size: 12px; color: #86EFAC;
+  margin: 0 0 4px;
+}
+#page-programming .prog-iraq-co p {
+  font-size: 11.5px; color: var(--text-muted);
+  margin: 0; line-height: 1.7;
+}
+
+#page-programming .prog-iraq-skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+#page-programming .prog-iraq-skills > div {
+  padding: 12px;
+  background: rgba(15,23,42,0.5);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+}
+#page-programming .prog-iraq-skills h5 {
+  font-size: 12px; color: var(--text); margin: 0 0 6px;
+  padding-block-end: 6px;
+  border-block-end: 1px dashed rgba(255,255,255,0.08);
+}
+#page-programming .prog-iraq-skills ul {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 4px;
+  font-size: 12px; color: var(--text-muted);
+}
+#page-programming .prog-iraq-skills li::before {
+  content: "▸"; color: #22C55E; margin-inline-end: 6px;
+}
+
+#page-programming .prog-iraq-strategy h3 { color: #FCD34D; }
+#page-programming .prog-iraq-steps {
+  list-style: none; counter-reset: step;
+  padding: 0; margin: 0;
+  display: grid; gap: 8px;
+}
+#page-programming .prog-iraq-steps li {
+  counter-increment: step;
+  padding: 10px 12px 10px 50px;
+  background: rgba(15,23,42,0.5);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  font-size: 12.5px; color: var(--text-muted);
+  line-height: 1.7;
+  position: relative;
+}
+#page-programming .prog-iraq-steps li::before {
+  content: counter(step);
+  position: absolute; inset-inline-start: 12px; inset-block-start: 10px;
+  width: 28px; height: 28px;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg,#22C55E,#10B981);
+  color: #fff; font-weight: 800;
+  border-radius: 8px; font-size: 12px;
+}
+#page-programming .prog-iraq-steps li b { color: var(--text); }
+
+#page-programming .prog-iraq-cta {
+  margin-block-start: 14px;
+  padding: 14px 16px;
+  background: rgba(245,158,11,0.06);
+  border: 1px solid rgba(245,158,11,0.22);
+  border-radius: 12px;
+}
+#page-programming .prog-iraq-cta .lbl {
+  display: block; font-size: 12px; font-weight: 800; color: #FCD34D;
+  margin-block-end: 8px;
+}
+#page-programming .prog-iraq-cta ol {
+  margin: 0; padding-inline-start: 22px;
+  font-size: 12px; color: var(--text-muted); line-height: 1.85;
+}
+
+/* ── Cheat Sheet ── */
+#page-programming .prog-cheat {
+  background: linear-gradient(180deg, rgba(245,158,11,0.05), rgba(15,23,42,0.55));
+  border-color: rgba(245,158,11,0.22);
+}
+#page-programming .prog-cheat::before { background: linear-gradient(135deg,#F59E0B,#FCD34D); }
+
+#page-programming .prog-cheat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+#page-programming .prog-cheat-card {
+  background: rgba(2,6,23,0.55);
+  border: 1px solid rgba(245,158,11,0.22);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+#page-programming .prog-cheat-card h4 {
+  font-size: 13px; color: #FCD34D; margin: 0 0 10px;
+  padding-block-end: 6px;
+  border-block-end: 1px dashed rgba(245,158,11,0.22);
+}
+#page-programming .prog-cheat-card ul {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 5px;
+}
+#page-programming .prog-cheat-card li {
+  font-size: 11.5px; color: var(--text-muted); line-height: 1.7;
+  padding-inline-start: 18px; position: relative;
+}
+#page-programming .prog-cheat-card li::before {
+  content: "▸"; color: #F59E0B;
+  position: absolute; inset-inline-start: 0;
+}
+#page-programming .prog-cheat-card code {
+  background: rgba(245,158,11,0.12);
+  color: #FCD34D;
+  padding: 1px 5px; border-radius: 4px;
+  font-family: ui-monospace, monospace;
+  font-size: 10.5px;
+  direction: ltr; display: inline-block;
+}
+
+/* ── Citations ── */
+#page-programming .prog-cite {
+  background: linear-gradient(180deg, rgba(99,102,241,0.05), rgba(15,23,42,0.55));
+  border-color: rgba(99,102,241,0.22);
+}
+#page-programming .prog-cite::before { background: linear-gradient(135deg,#6366F1,#8B5CF6); }
+
+#page-programming .prog-cite-list {
+  list-style: none; counter-reset: cite;
+  margin: 0; padding: 0;
+  display: grid; gap: 8px;
+}
+#page-programming .prog-cite-list li {
+  counter-increment: cite;
+  padding: 10px 14px 10px 50px;
+  background: rgba(2,6,23,0.55);
+  border: 1px solid rgba(99,102,241,0.22);
+  border-radius: 10px;
+  font-size: 12px; color: var(--text-muted); line-height: 1.7;
+  position: relative;
+}
+#page-programming .prog-cite-list li::before {
+  content: counter(cite);
+  position: absolute; inset-inline-start: 12px; inset-block-start: 10px;
+  width: 28px; height: 28px;
+  display: grid; place-items: center;
+  background: rgba(99,102,241,0.22); color: #C7D2FE;
+  border: 1px solid rgba(99,102,241,0.4);
+  border-radius: 8px;
+  font-weight: 800; font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+#page-programming .prog-cite-list b { color: var(--text); }
+#page-programming .prog-cite-foot {
+  margin-block-start: 12px;
+  padding: 10px 14px;
+  background: rgba(99,102,241,0.06);
+  border: 1px solid rgba(99,102,241,0.22);
+  border-radius: 10px;
+  font-size: 12px; color: var(--text-muted); line-height: 1.7;
+}
+#page-programming .prog-cite-foot em { color: #C7D2FE; font-style: normal; }
+
+@media print {
+  #page-programming .prog-iraq-card,
+  #page-programming .prog-cheat-card,
+  #page-programming .prog-cite-list li {
+    background: #fff !important; color: #000 !important;
+    border: 1px solid #999 !important; page-break-inside: avoid;
+  }
+  #page-programming .prog-iraq-card h3 { color: #047857 !important; }
+  #page-programming .prog-cheat-card h4 { color: #B45309 !important; }
+}
