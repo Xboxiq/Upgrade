@@ -1,49 +1,35 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-15T00:00:00Z",
+  "last_updated": "2026-05-15T04:00:00Z",
   "current": {
-    "worker": "01",
-    "worker_name": "UI_UX",
+    "worker": "02",
+    "worker_name": "SALES_AND_AM",
     "phase": 4,
-    "phases_total": 4,
-    "branch": "worker-01-phase-4",
-    "status": "completed"
+    "phases_total": 5,
+    "branch": "worker-02-phase-4",
+    "status": "in-progress"
   },
   "completed_phases": [
+    { "worker": "01", "phase": 1, "title": "Foundation Tokens & Aurora Mesh",                    "branch": "worker-01-phase-1-v2", "lines_added": 121 },
+    { "worker": "01", "phase": 2, "title": "Conic Halo + Magnetic Cursor Aura",                  "branch": "worker-01-phase-2",   "lines_added": 204 },
+    { "worker": "01", "phase": 3, "title": "Living Numerals + Sectional Identity Tint",          "branch": "worker-01-phase-3",   "lines_added": 193 },
+    { "worker": "01", "phase": 4, "title": "Polish: reduced-motion, print, View Transitions, visibility-pause", "branch": "worker-01-phase-4", "lines_added": 145 },
+    { "worker": "02", "phase": 1, "title": "Sales Frameworks Comparison (4 schools)",            "branch": "worker-02-phase-1",   "lines_added": 564 },
+    { "worker": "02", "phase": 2, "title": "Discovery Library + Closing + Iraqi Objections",     "branch": "worker-02-phase-2",   "lines_added": 440 },
+    { "worker": "02", "phase": 3, "title": "3 Interactive Labs",                                  "branch": "worker-02-phase-3",   "lines_added": 550 },
     {
-      "worker": "01",
-      "phase": 1,
-      "title": "Foundation Tokens & Aurora Mesh",
-      "branch": "worker-01-phase-1-v2",
-      "lines_added": 121
-    },
-    {
-      "worker": "01",
-      "phase": 2,
-      "title": "Conic Halo + Magnetic Cursor Aura",
-      "branch": "worker-01-phase-2",
-      "lines_added": 204
-    },
-    {
-      "worker": "01",
-      "phase": 3,
-      "title": "Living Numerals + Sectional Identity Tint",
-      "branch": "worker-01-phase-3",
-      "lines_added": 193
-    },
-    {
-      "worker": "01",
-      "phase": 4,
-      "title": "Polish: reduced-motion, print, View Transitions, visibility-pause",
-      "branch": "worker-01-phase-4",
-      "lines_added": 145,
+      "worker": "02", "phase": 4,
+      "title": "Account Manager Page — KAM Lifecycle + Stakeholder Map + QBR + NRR + Health Score + Renewal",
+      "branch": "worker-02-phase-4",
+      "lines_added": 515,
       "files_modified": [
+        "platform/index.html",
         "platform/assets/style.css",
         "platform/assets/app.js"
       ],
-      "summary": "Full reduced-motion coverage on every v13 surface, ::view-transition-old/new fades, full @media print stylesheet (paper-friendly), contrast lift for warm tints, body.is-hidden animation pause, qlThemeViewTransition wrap of toggleTheme (idempotent, fallback-safe), qlVisibilityPause IIFE"
+      "summary": "New page-accountmgr created. Includes: Hunter vs Farmer comparison, KAM 7-stage lifecycle (Onboarding → Recovery), 2x3 Stakeholder Map matrix, printable QBR template (window.print), NRR calculator (>=110% gold, 100-110% maintenance, <100% danger), 6-factor weighted Health Score (usage 25, NPS 20, support 15, exec 15, contract 10, payment 15), Renewal Playbook 90/60/30. New nav-item; routing entry added to PAGES registry. JS in qlAccountMgr IIFE. CSS namespaced under #page-accountmgr."
     }
   ],
-  "next_action": "Worker 01 finished. Begin Worker 02 — Sales & Account Management on next session.",
-  "notes": "Worker 01 (UI/UX Quantum Leap v13 Signature Edition) complete. Total: 663 lines, 4 PRs (#6, #7, #8, plus Phase 4 PR). Awaiting human merge of PRs in order before Worker 02."
+  "next_action": "Worker 02 Phase 5 — Iraq Salary Map + Career Ladder + Cheat Sheet + Citations + localStorage progress.",
+  "notes": "Phase 4 done. Branch worker-02-phase-4 ready. Phase 5 closes the Worker."
 }

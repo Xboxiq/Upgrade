@@ -94,6 +94,16 @@
         <span class="nav-badge">جديد</span>
       </div>
 
+      <div class="nav-item" data-page="accountmgr">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M22 11l-3 3-2-2"/>
+        </svg>
+        <span class="nav-label">إدارة الحسابات</span>
+        <span class="nav-badge" style="background:linear-gradient(135deg,#22C55E,#0EA5E9);color:#fff;">KAM</span>
+      </div>
+
       <div class="nav-item" data-page="social">
         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
@@ -2568,6 +2578,194 @@
       </div>
 
     </section><!-- /page-fieldsales -->
+
+
+    <!-- ════════════════════════════════════════════════════════════════
+         PAGE 3.5 — ACCOUNT MANAGEMENT (KAM)
+         WORKER 02 · PHASE 4 — Created from scratch.
+         Sub-blocks: Hunter vs Farmer · KAM Lifecycle (7 stages) ·
+         Stakeholder Map · QBR Template · NRR Calc · Health Score · Renewal Playbook
+    ════════════════════════════════════════════════════════════════ -->
+    <section class="page" id="page-accountmgr">
+
+      <div class="page-header">
+        <h1>إدارة الحسابات الكبيرة (KAM)</h1>
+        <p>من Hunter إلى Farmer — دورة حياة الحساب، خريطة أصحاب القرار، QBR، NRR، Health Score، وكتاب التجديد.</p>
+      </div>
+
+      <!-- ── A. Hunter vs Farmer ─────────────────────────────────── -->
+      <div class="sales-section-header">
+        <div>
+          <h2>BLOCK A — Sales Hunter ضد Account Farmer</h2>
+          <p>عقليتان مختلفتان جذرياً. خلط الدورين = فقدان عملاء أو فقدان نمو.</p>
+        </div>
+        <span class="tag accent">عقليتان</span>
+      </div>
+
+      <div class="hf-grid">
+        <div class="hf-card hf-hunter">
+          <div class="hf-eyebrow">🎯 Hunter</div>
+          <h4>Sales Hunter</h4>
+          <ul>
+            <li><b>الهدف:</b> صفقة جديدة (NEW logo).</li>
+            <li><b>الأفق الزمني:</b> 30-90 يوم.</li>
+            <li><b>الـ KPI:</b> صفقات مغلقة، معدّل تحويل، حجم pipeline.</li>
+            <li><b>المهارة الأهم:</b> الإقناع تحت الضغط + handling refusal.</li>
+            <li><b>الخطر:</b> قد يفقد العميل بعد البيع — لا يهتم بالـ retention.</li>
+          </ul>
+        </div>
+        <div class="hf-card hf-farmer">
+          <div class="hf-eyebrow">🌱 Farmer</div>
+          <h4>Account Manager (Farmer)</h4>
+          <ul>
+            <li><b>الهدف:</b> النمو من العميل القائم (Expansion + Retention).</li>
+            <li><b>الأفق الزمني:</b> 12-36 شهر.</li>
+            <li><b>الـ KPI:</b> NRR، NPS، Logo Retention، Adoption rate.</li>
+            <li><b>المهارة الأهم:</b> بناء ثقة طويلة + قراءة إشارات churn.</li>
+            <li><b>الخطر:</b> قد يصير «صديق» للعميل ويفقد القدرة على رفع السعر.</li>
+          </ul>
+        </div>
+        <div class="hf-card hf-bridge">
+          <div class="hf-eyebrow">↔ متى تنتقل</div>
+          <h4>الانتقال بين الدورين</h4>
+          <p>Hunter يصبح Farmer لمن يصل لمرحلة «أكره أبدأ من الصفر مع كل عميل». Farmer يصبح Hunter لمن يكتشف «حسابات قائمة ما تنمو بدون عميل جديد كل سنة». الانتقال صحي — الخلط في نفس اللحظة كارثي.</p>
+        </div>
+      </div>
+
+      <!-- ── B. KAM Lifecycle (7 stages) ─────────────────────────── -->
+      <div class="sales-section-header" style="margin-top:32px;">
+        <div>
+          <h2>BLOCK B — دورة حياة الحساب (KAM Lifecycle)</h2>
+          <p>سبع مراحل. كل مرحلة لها هدف، إشارات نجاح، إشارات خطر.</p>
+        </div>
+        <span class="tag accent">7 مراحل</span>
+      </div>
+
+      <ol class="kam-stages">
+        <li class="kam-stage" data-kam="onboarding"><span class="kam-num">1</span><div class="kam-body"><h5>Onboarding</h5><p><b>الهدف:</b> Time-to-First-Value &lt; 14 يوم. <b>إشارة نجاح:</b> العميل استخدم 3 ميزات أساسية. <b>خطر:</b> صمت أول 7 أيام = احتمال churn 60%.</p></div></li>
+        <li class="kam-stage" data-kam="adoption"><span class="kam-num">2</span><div class="kam-body"><h5>Adoption</h5><p><b>الهدف:</b> توسيع الاستخدام داخل الفريق. <b>نجاح:</b> ≥ 60% من المستخدمين النشطين أسبوعياً. <b>خطر:</b> يستخدمه شخص واحد فقط — single-thread risk.</p></div></li>
+        <li class="kam-stage" data-kam="value"><span class="kam-num">3</span><div class="kam-body"><h5>Value Realization</h5><p><b>الهدف:</b> توثيق ROI رقمي. <b>نجاح:</b> العميل يقول «وفّرلنا X» في QBR. <b>خطر:</b> ما حد يقدر يقيس القيمة → renewal صعب.</p></div></li>
+        <li class="kam-stage" data-kam="renewal"><span class="kam-num">4</span><div class="kam-body"><h5>Renewal</h5><p><b>الهدف:</b> تجديد + price uplift. <b>نجاح:</b> توقيع قبل 30 يوم من انتهاء العقد. <b>خطر:</b> «نأجلها لمن نحكي» = صفقة مهددة.</p></div></li>
+        <li class="kam-stage" data-kam="expansion"><span class="kam-num">5</span><div class="kam-body"><h5>Expansion</h5><p><b>الهدف:</b> Cross-sell / Upsell. <b>نجاح:</b> NRR &gt; 110%. <b>خطر:</b> النمو من زيادة سعر فقط، لا منتجات إضافية = هش.</p></div></li>
+        <li class="kam-stage" data-kam="advocacy"><span class="kam-num">6</span><div class="kam-body"><h5>Advocacy</h5><p><b>الهدف:</b> العميل يُحيلك. <b>نجاح:</b> case study موقّع + إحالة واحدة بالربع. <b>خطر:</b> العميل يحب المنتج لكن ما يحكي عنه — قيمة ضائعة.</p></div></li>
+        <li class="kam-stage" data-kam="recovery"><span class="kam-num">7</span><div class="kam-body kam-danger"><h5>Recovery (لو في خطر)</h5><p><b>الهدف:</b> إنقاذ حساب على وشك الـ churn. <b>نجاح:</b> escalation سريع + خطة 30 يوم. <b>خطر:</b> الإنكار — «هم بخير» وهم بالحقيقة وقّعوا مع منافس.</p></div></li>
+      </ol>
+
+      <!-- ── C. Stakeholder Map (interactive grid) ───────────────── -->
+      <div class="sales-section-header" style="margin-top:32px;">
+        <div>
+          <h2>BLOCK C — خريطة أصحاب القرار (Stakeholder Map)</h2>
+          <p>صنّف كل اسم في حسابك على محورين: التأثير × الاهتمام.</p>
+        </div>
+        <span class="tag accent">2x2 matrix</span>
+      </div>
+
+      <div class="sm-wrap ql-glass">
+        <div class="sm-grid">
+          <div class="sm-axis-y"><span>تأثير عالي</span></div>
+          <div class="sm-cell sm-cell-decision"><div class="sm-cell-name">Decision Maker</div><div class="sm-cell-tip">يوقّع. أعطه ROI + مخاطر التحوّل.</div></div>
+          <div class="sm-cell sm-cell-blocker"><div class="sm-cell-name">Blocker</div><div class="sm-cell-tip">يقاوم. اكتشف سبب المقاومة (سياسي؟ تقني؟ شخصي؟).</div></div>
+          <div class="sm-axis-x sm-axis-x-l"><span>اهتمام عالي →</span></div>
+          <div class="sm-cell sm-cell-champion"><div class="sm-cell-name">Champion</div><div class="sm-cell-tip">يقاتل لإقرارك. درّبه على جدالات داخلية + زوّده بأرقام.</div></div>
+          <div class="sm-cell sm-cell-influencer"><div class="sm-cell-name">Influencer</div><div class="sm-cell-tip">يهمس بأذن صانع القرار. اسبه قبل القرار، لا بعده.</div></div>
+          <div class="sm-cell sm-cell-user"><div class="sm-cell-name">End User</div><div class="sm-cell-tip">يستخدم يومياً. شكواه تقتل التجديد. اتصل به ربعياً.</div></div>
+          <div class="sm-cell sm-cell-passive"><div class="sm-cell-name">Passive</div><div class="sm-cell-tip">لا تأثير، لا اهتمام. لا تضيع وقت — متابعة email تكفي.</div></div>
+        </div>
+        <p class="sm-note"><b>قاعدة ذهبية:</b> حساب بدون Champion = حساب مهدّد. Champion يموت/ينتقل = خطر فوري.</p>
+      </div>
+
+      <!-- ── D. QBR Template ─────────────────────────────────────── -->
+      <div class="sales-section-header" style="margin-top:32px;">
+        <div>
+          <h2>BLOCK D — قالب QBR (Quarterly Business Review)</h2>
+          <p>قالب جاهز للطباعة. كل حساب رئيسي يحصل على QBR ربعية إلزامية.</p>
+        </div>
+        <button class="lab-btn lab-btn-ghost" type="button" onclick="window.print()">🖨️ اطبع</button>
+      </div>
+
+      <div class="qbr-card">
+        <ol class="qbr-list">
+          <li><b>1. مراجعة أهداف الربع السابق</b><span>ما اتفقنا عليه آخر QBR — تحقّق منه؟ 100%، 70%، 30%؟</span></li>
+          <li><b>2. KPIs المحققة</b><span>أرقام صلبة: usage، NPS، support tickets، تكلفة موفّرة، إيراد مضاف.</span></li>
+          <li><b>3. نقاط الألم المكتشفة</b><span>ما ظهر هذا الربع ولم يكن واضحاً؟ مشاكل متكررة؟ ميزات ناقصة؟</span></li>
+          <li><b>4. خارطة المنتج (Roadmap alignment)</b><span>أي ميزة قادمة تخدم العميل؟ أي طلب من العميل دخل الـ roadmap؟</span></li>
+          <li><b>5. فرص التوسّع</b><span>قسم/فرع/منتج جديد. عرض expansion محدد بأرقام.</span></li>
+          <li><b>6. المخاطر والتخفيفات</b><span>تغيير قيادة، ميزانية مهددة، منافس ضاغط — وكيف نخفّف.</span></li>
+          <li><b>7. الالتزامات للربع القادم</b><span>3-5 التزامات محددة من الطرفين. وقّعها كتابياً.</span></li>
+        </ol>
+      </div>
+
+      <!-- ── E. NRR Calculator + Health Score ────────────────────── -->
+      <div class="sales-section-header" style="margin-top:32px;">
+        <div>
+          <h2>BLOCK E — أدوات قياس صحة الحساب</h2>
+          <p>NRR Calculator + Health Score بستة عوامل موزونة.</p>
+        </div>
+        <span class="tag accent">2 أدوات</span>
+      </div>
+
+      <div class="lab-card ql-glass" data-lab="nrr">
+        <div class="lab-head">
+          <div class="lab-eyebrow">NRR Calculator</div>
+          <h3>حاسبة Net Revenue Retention</h3>
+          <p>صيغة معيار SaaS: <code>(Starting MRR + Expansion − Downgrades − Churned) / Starting MRR</code>. الهدف: &gt; 110%.</p>
+        </div>
+        <div class="lab-body lab-funnel-body">
+          <div class="lab-inputs">
+            <label class="lab-field"><span>Starting MRR (USD)</span><input type="number" min="0" step="100" data-nrr="start" value="50000"></label>
+            <label class="lab-field"><span>Expansion (USD)</span><input type="number" min="0" step="100" data-nrr="expand" value="8000"></label>
+            <label class="lab-field"><span>Downgrades (USD)</span><input type="number" min="0" step="100" data-nrr="down" value="1500"></label>
+            <label class="lab-field"><span>Churned (USD)</span><input type="number" min="0" step="100" data-nrr="churn" value="2500"></label>
+          </div>
+          <div class="lab-output">
+            <div class="lab-stats">
+              <div class="lab-stat"><span class="lab-stat-lbl">NRR %</span><span class="lab-stat-val" data-nrr-out="nrr">—</span></div>
+              <div class="lab-stat"><span class="lab-stat-lbl">صافي الحركة (USD)</span><span class="lab-stat-val" data-nrr-out="net">—</span></div>
+              <div class="lab-warn" data-nrr-warn hidden></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-card ql-glass" data-lab="health">
+        <div class="lab-head">
+          <div class="lab-eyebrow">Health Score</div>
+          <h3>مؤشر صحة الحساب (6 عوامل موزونة)</h3>
+          <p>نتيجة من 0-100. &lt; 50 = خطر churn. &gt; 80 = جاهز للـ expansion.</p>
+        </div>
+        <div class="lab-body">
+          <div class="hs-list" data-hs-list>
+            <div class="hs-row"><label>Product usage frequency</label><input type="range" min="0" max="100" value="70" data-hs="usage"><span class="hs-val">70</span><span class="hs-w">×0.25</span></div>
+            <div class="hs-row"><label>NPS Score</label><input type="range" min="0" max="100" value="60" data-hs="nps"><span class="hs-val">60</span><span class="hs-w">×0.20</span></div>
+            <div class="hs-row"><label>Support ticket trend</label><input type="range" min="0" max="100" value="80" data-hs="support"><span class="hs-val">80</span><span class="hs-w">×0.15</span></div>
+            <div class="hs-row"><label>Executive engagement</label><input type="range" min="0" max="100" value="50" data-hs="exec"><span class="hs-val">50</span><span class="hs-w">×0.15</span></div>
+            <div class="hs-row"><label>Contract length remaining</label><input type="range" min="0" max="100" value="70" data-hs="contract"><span class="hs-val">70</span><span class="hs-w">×0.10</span></div>
+            <div class="hs-row"><label>Payment timeliness</label><input type="range" min="0" max="100" value="90" data-hs="payment"><span class="hs-val">90</span><span class="hs-w">×0.15</span></div>
+          </div>
+          <div class="hs-result">
+            <div class="hs-score-wrap"><span class="hs-score-lbl">Health Score</span><span class="hs-score" data-hs-score>—</span></div>
+            <div class="hs-band" data-hs-band>—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── F. Renewal Playbook ─────────────────────────────────── -->
+      <div class="sales-section-header" style="margin-top:32px;">
+        <div>
+          <h2>BLOCK F — كتاب التجديد (Renewal Playbook)</h2>
+          <p>متى تبدأ المحادثة، ماذا تقول، وكيف تُمرر زيادة السعر بدون فقدان الحساب.</p>
+        </div>
+        <span class="tag accent">90/60/30</span>
+      </div>
+
+      <div class="rp-grid">
+        <div class="rp-card"><div class="rp-day">90 يوم</div><h5>Discovery قبل التجديد</h5><ul><li>QBR صريح: «شنو نجح؟ شنو ما نجح؟»</li><li>تحقق من Champion ما زال في الشركة.</li><li>اجمع 3 use cases جديدة لمبرر السعر.</li></ul></div>
+        <div class="rp-card"><div class="rp-day">60 يوم</div><h5>Pre-renewal Pitch</h5><ul><li>عرض رسمي للتجديد — مع تحديد uplift إن وُجد (5-15%).</li><li>اربط الـ uplift بميزات جديدة، لا «تكاليف ارتفعت».</li><li>اعرض 3 خيارات: Standard renew، Renew+expansion، Multi-year discount.</li></ul></div>
+        <div class="rp-card"><div class="rp-day">30 يوم</div><h5>Decision Window</h5><ul><li>لو ما وقّع → escalate لمدير حسابك + EB العميل.</li><li>اعرض حافز محدد: «التوقيع هذا الأسبوع = مجاناً X».</li><li>سيناريو الـ takeaway: «تأجيل التجديد يعني انقطاع الخدمة. هل هذا خيارك؟»</li></ul></div>
+        <div class="rp-card rp-card-warn"><div class="rp-day">⚠</div><h5>Price Increase Conversation</h5><ul><li>أرسل 90 يوم قبل التطبيق — لا تفاجئ.</li><li>اربطها بقيمة محددة: «أضفنا ميزات X، Y، Z قيمتها أكبر من الزيادة».</li><li>اعرض «grandfather» للعقود متعددة السنوات.</li><li>توقّع 10-15% رفض → جهّز خطة retention بديلة.</li></ul></div>
+      </div>
+
+    </section><!-- /page-accountmgr -->
 
 
     <!-- ===========================
