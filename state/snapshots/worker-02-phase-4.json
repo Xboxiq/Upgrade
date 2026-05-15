@@ -1,0 +1,31 @@
+{
+  "worker": "02",
+  "phase": 4,
+  "title": "page-accountmgr created (KAM)",
+  "branch": "worker-02-phase-4",
+  "completed_at": "2026-05-15T04:00:00Z",
+  "lines_added_total": 515,
+  "files_modified": [
+    {"path": "platform/index.html",       "delta": 198},
+    {"path": "platform/assets/style.css", "delta": 222},
+    {"path": "platform/assets/app.js",    "delta": 95}
+  ],
+  "blocks": ["Hunter vs Farmer", "KAM Lifecycle (7 stages)", "Stakeholder Map (2x3)", "QBR Template (printable)", "NRR Calculator", "Health Score (6-factor weighted)", "Renewal Playbook (90/60/30)"],
+  "kam_stages": ["Onboarding","Adoption","Value Realization","Renewal","Expansion","Advocacy","Recovery"],
+  "health_weights": { "usage": 0.25, "nps": 0.20, "support": 0.15, "exec": 0.15, "contract": 0.10, "payment": 0.15 },
+  "nrr_thresholds": { "gold": ">= 110", "maintenance": "100-110", "danger": "< 100" },
+  "anchors": [
+    "#page-accountmgr",
+    "[data-kam=...]",
+    "[data-lab=\"nrr\"]", "[data-nrr=...]", "[data-nrr-out=...]",
+    "[data-lab=\"health\"]", "[data-hs=...]", "[data-hs-score]", "[data-hs-band]"
+  ],
+  "css_namespaces": [
+    "#page-accountmgr .hf-*", "#page-accountmgr .kam-*",
+    "#page-accountmgr .sm-*", "#page-accountmgr .qbr-*",
+    "#page-accountmgr .hs-*", "#page-accountmgr .rp-*"
+  ],
+  "js_iife": "qlAccountMgr",
+  "routing": "PAGES.accountmgr added to assets/app.js navigation registry",
+  "next_action": "Worker 02 Phase 5 — Iraq Salary Map + Career Ladder + Cheat Sheet + Citations + progress."
+}
