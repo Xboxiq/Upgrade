@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-15T00:00:00Z",
+  "last_updated": "2026-05-15T01:00:00Z",
   "current": {
-    "worker": "01",
-    "worker_name": "UI_UX",
-    "phase": 4,
-    "phases_total": 4,
-    "branch": "worker-01-phase-4",
-    "status": "completed"
+    "worker": "02",
+    "worker_name": "SALES_AND_AM",
+    "phase": 1,
+    "phases_total": 5,
+    "branch": "worker-02-phase-1",
+    "status": "in-progress"
   },
   "completed_phases": [
     {
@@ -42,8 +42,21 @@
         "platform/assets/app.js"
       ],
       "summary": "Full reduced-motion coverage on every v13 surface, ::view-transition-old/new fades, full @media print stylesheet (paper-friendly), contrast lift for warm tints, body.is-hidden animation pause, qlThemeViewTransition wrap of toggleTheme (idempotent, fallback-safe), qlVisibilityPause IIFE"
+    },
+    {
+      "worker": "02",
+      "phase": 1,
+      "title": "Sales Frameworks Comparison (SPIN / Challenger / Sandler / Solution)",
+      "branch": "worker-02-phase-1",
+      "lines_added": 564,
+      "files_modified": [
+        "platform/index.html",
+        "platform/assets/style.css",
+        "platform/assets/app.js"
+      ],
+      "summary": "Comparative table of 4 sales schools at start of #page-fieldsales (additive — preserves existing SPIN block A). Click/Enter/Space row opens modal with: extended explanation, full 3-4 turn Iraqi-Arabic dialogue (Baghdad POS, Erbil clinic, Basra law office, Mosul ERP), failure modes. JS in IIFE (qlSalesFrameworks) with focus return + ESC close + body lock. CSS additive with mobile responsive grid + reduced-motion guard."
     }
   ],
-  "next_action": "Worker 01 finished. Begin Worker 02 — Sales & Account Management on next session.",
-  "notes": "Worker 01 (UI/UX Quantum Leap v13 Signature Edition) complete. Total: 663 lines, 4 PRs (#6, #7, #8, plus Phase 4 PR). Awaiting human merge of PRs in order before Worker 02."
+  "next_action": "Worker 02 Phase 2 — Discovery Questions Library + Closing Techniques + 12 Iraqi objection cards.",
+  "notes": "Worker 02 Phase 1 complete. Branch worker-02-phase-1 ready for PR + merge to main. Begin Phase 2 next."
 }
