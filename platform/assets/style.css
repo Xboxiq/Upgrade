@@ -14349,3 +14349,117 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
 @media print{
   .w09i-card{ background:#fff !important; color:#000 !important; border:1px solid #999 !important; }
 }
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   WORKER 09 · PHASE 5 — Therapist Bridge + Insights + Citations
+═══════════════════════════════════════════════════════════════════════ */
+#page-psych .w09f-section{
+  margin-top: 28px;
+  border-top: 1px dashed rgba(255,255,255,.06);
+  padding-top: 24px;
+}
+#page-psych .w09f-bridge{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 14px;
+}
+@media (max-width: 900px){
+  #page-psych .w09f-bridge{ grid-template-columns: 1fr; }
+}
+#page-psych .w09f-snapshot,
+#page-psych .w09f-questions,
+#page-psych .w09f-insights{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+}
+#page-psych .w09f-snapshot-head{
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  margin-bottom: 8px;
+}
+#page-psych .w09f-snapshot-head span{ font-size:18px; }
+#page-psych .w09f-snapshot-head b{ color: var(--text); font-size: 13px; }
+#page-psych .w09f-snapshot-head small{ color: var(--text-faint); font-size: 11px; }
+#page-psych .w09f-snapshot textarea{
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  color: var(--text);
+  font-size: 11.5px;
+  font-family: 'SFMono-Regular','Consolas',monospace;
+  line-height: 1.7;
+  resize: vertical;
+  min-height: 180px;
+}
+#page-psych .w09f-snapshot-actions{
+  display:flex; gap:8px; flex-wrap:wrap; margin-top: 8px;
+}
+#page-psych .w09f-snapshot-disc{
+  font-size: 10.5px; color: var(--text-faint);
+  text-align: center; margin: 8px 0 0;
+  padding-top: 6px; border-top: 1px dashed rgba(255,255,255,.05);
+}
+#page-psych .w09f-questions b{
+  color: var(--text); font-size: 13px; display:block; margin-bottom: 8px;
+}
+#page-psych .w09f-q-list{
+  margin: 0; padding-right: 22px;
+  font-size: 12px; color: var(--text-muted); line-height: 1.85;
+  max-height: 320px; overflow-y: auto;
+}
+#page-psych .w09f-q-list li{ margin-bottom: 4px; }
+
+/* Insights */
+#page-psych .w09f-insights{
+  margin-top: 14px;
+}
+#page-psych .w09f-insights-out{
+  margin-top: 12px;
+}
+#page-psych .w09f-empty{
+  text-align: center; color: var(--text-faint);
+  font-size: 12px; padding: 20px 0; margin: 0;
+}
+#page-psych .w09f-pattern{
+  background: var(--surface-2);
+  border-right: 3px solid var(--accent);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+#page-psych .w09f-pattern b{ color: var(--text); }
+#page-psych .w09f-pattern.growth{ border-right-color: #EAB308; }
+#page-psych .w09f-pattern.strength{ border-right-color: #22C55E; }
+#page-psych .w09f-pattern.match{ border-right-color: #8B5CF6; }
+
+/* Citations */
+#page-psych .w09f-cite-list{
+  margin: 0; padding-right: 24px;
+  font-size: 12px; color: var(--text-muted); line-height: 1.85;
+}
+#page-psych .w09f-cite-list li{
+  margin-bottom: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed rgba(255,255,255,.04);
+}
+#page-psych .w09f-cite-list li:last-child{ border-bottom: none; }
+#page-psych .w09f-cite-list b{ color: var(--text); }
+#page-psych .w09f-cite-list i{ color: var(--accent); font-style: italic; }
+
+@media print{
+  #page-psych .w09f-snapshot,
+  #page-psych .w09f-questions,
+  #page-psych .w09f-insights{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important;
+  }
+}
