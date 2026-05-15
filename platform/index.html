@@ -1306,6 +1306,267 @@
       </div>
       <!-- ============================================================ END PSYCHOLOGY BLOCK 1 ============================================================ -->
 
+
+      <!-- ============================================================
+           WORKER 03 · PHASE 2 — KPI Deep-Dive + Calculator + Call Anatomy
+      ============================================================ -->
+
+      <!-- ====== A. KPI Deep-Dive Cards ====== -->
+      <div class="cc-section-header" data-cc-block>
+        <div>
+          <span class="cc-eyebrow"><i class="dot"></i> Performance Metrics</span>
+          <h2>KPIs الكول سنتر — تشريح علمي</h2>
+          <p>كل مؤشر له معادلة، نطاق صناعي مرجعي (ICMI / CCW Research)، ومتى يكون "جيد جداً" مؤشراً سلبياً.</p>
+        </div>
+        <span class="tag accent">6 KPIs · ICMI Benchmarks</span>
+      </div>
+
+      <div class="kpi-grid" data-cc-kpigrid>
+
+        <article class="kpi-card" data-kpi="aht">
+          <header class="kpi-head">
+            <span class="kpi-icon">⏱️</span>
+            <h3>AHT — Average Handle Time</h3>
+            <span class="kpi-tag">⏰ Time</span>
+          </header>
+          <div class="kpi-formula">AHT = (Talk + Hold + ACW) ÷ Calls</div>
+          <div class="kpi-bench">
+            <span>المرجع الصناعي</span>
+            <b>4 – 6 دقائق</b><small>· Mid-complexity B2C</small>
+          </div>
+          <p class="kpi-note">انخفاض AHT تحت 3 دقائق <b>ليس دائماً جيداً</b> — قد يعني rushed calls و FCR منخفض. التوازن مع FCR هو المعيار.</p>
+        </article>
+
+        <article class="kpi-card" data-kpi="fcr">
+          <header class="kpi-head">
+            <span class="kpi-icon">✅</span>
+            <h3>FCR — First Call Resolution</h3>
+            <span class="kpi-tag">🎯 Quality</span>
+          </header>
+          <div class="kpi-formula">FCR % = (Resolved on 1st call ÷ Total calls) × 100</div>
+          <div class="kpi-bench">
+            <span>المرجع الصناعي</span>
+            <b>70 – 79%</b><small>· SQM Group benchmark</small>
+          </div>
+          <p class="kpi-note"><b>أهم من AHT</b>. كل 1% زيادة في FCR = 1% انخفاض في تكلفة التشغيل (SQM Research). معدل أعلى من 85% نادر — تحقّق من تعريف "محلولة".</p>
+        </article>
+
+        <article class="kpi-card" data-kpi="csat">
+          <header class="kpi-head">
+            <span class="kpi-icon">😊</span>
+            <h3>CSAT — Customer Satisfaction</h3>
+            <span class="kpi-tag">💛 Voice</span>
+          </header>
+          <div class="kpi-formula">CSAT % = (Satisfied responses ÷ Total responses) × 100</div>
+          <div class="kpi-bench">
+            <span>المرجع الصناعي</span>
+            <b>≥ 85%</b><small>· Top-quartile</small>
+          </div>
+          <p class="kpi-note">يقيس <b>التجربة الفورية</b> بعد المكالمة. حسّاس للـ Peak-End Rule. استخدمه لقياس مكالمة محددة، لا للولاء طويل المدى.</p>
+        </article>
+
+        <article class="kpi-card" data-kpi="nps">
+          <header class="kpi-head">
+            <span class="kpi-icon">📈</span>
+            <h3>NPS — Net Promoter Score</h3>
+            <span class="kpi-tag">🌐 Loyalty</span>
+          </header>
+          <div class="kpi-formula">NPS = % Promoters − % Detractors  (range: −100 → +100)</div>
+          <div class="kpi-bench">
+            <span>المرجع الصناعي</span>
+            <b>+30 إلى +50</b><small>· Telecom average</small>
+          </div>
+          <p class="kpi-note">يقيس <b>الولاء طويل المدى</b>. لا يستخدم بعد كل مكالمة — يستخدم ربعياً. الفرق عن CSAT: NPS يسأل "هل توصي؟"، CSAT يسأل "هل ارتحت؟".</p>
+        </article>
+
+        <article class="kpi-card" data-kpi="adh">
+          <header class="kpi-head">
+            <span class="kpi-icon">🗓️</span>
+            <h3>Adherence — التزام الجدول</h3>
+            <span class="kpi-tag">⚙️ Ops</span>
+          </header>
+          <div class="kpi-formula">Adherence % = (Time on schedule ÷ Scheduled time) × 100</div>
+          <div class="kpi-bench">
+            <span>المرجع الصناعي</span>
+            <b>92 – 95%</b><small>· WFM standard</small>
+          </div>
+          <p class="kpi-note">100% Adherence مؤشر سلبي — يعني الموظف لا يأخذ استراحات بشكل صحي → burnout قادم. ابحث عن 92–95% مع جودة عالية.</p>
+        </article>
+
+        <article class="kpi-card" data-kpi="qa">
+          <header class="kpi-head">
+            <span class="kpi-icon">📋</span>
+            <h3>QA Score — Quality Rubric</h3>
+            <span class="kpi-tag">🏆 Audit</span>
+          </header>
+          <div class="kpi-formula">QA = Σ (criterion_weight × score) ÷ max_total</div>
+          <div class="kpi-bench">
+            <span>8 معايير وزنية</span>
+            <b>≥ 90%</b><small>· COPC standard</small>
+          </div>
+          <p class="kpi-note">8 معايير: Greeting (5%) · Verification (10%) · Empathy (15%) · Accuracy (25%) · Resolution (20%) · Compliance (15%) · Soft Skills (5%) · Closing (5%).</p>
+        </article>
+
+      </div><!-- /.kpi-grid -->
+
+
+      <!-- ====== B. KPI Calculator (Agent Performance Index) ====== -->
+      <div class="cc-section-header" data-cc-block>
+        <div>
+          <span class="cc-eyebrow"><i class="dot"></i> Interactive Tool</span>
+          <h2>حاسبة Agent Performance Index</h2>
+          <p>أدخل أرقامك → احسب مؤشر الأداء المركّب → قارن بـ benchmark + 3 توصيات تخصصية.</p>
+        </div>
+        <span class="tag accent">Composite Score · Local Only</span>
+      </div>
+
+      <div class="kpi-calc" data-cc-calc>
+        <div class="kc-grid">
+          <div class="kc-field">
+            <label for="kc-aht">AHT (دقائق)</label>
+            <input type="number" id="kc-aht" data-kc="aht" min="1" max="20" step="0.1" value="5.2" />
+            <span class="kc-hint">المرجع: 4–6 د</span>
+          </div>
+          <div class="kc-field">
+            <label for="kc-fcr">FCR %</label>
+            <input type="number" id="kc-fcr" data-kc="fcr" min="0" max="100" step="1" value="72" />
+            <span class="kc-hint">المرجع: 70–79%</span>
+          </div>
+          <div class="kc-field">
+            <label for="kc-csat">CSAT %</label>
+            <input type="number" id="kc-csat" data-kc="csat" min="0" max="100" step="1" value="84" />
+            <span class="kc-hint">المرجع: ≥ 85%</span>
+          </div>
+          <div class="kc-field">
+            <label for="kc-adh">Adherence %</label>
+            <input type="number" id="kc-adh" data-kc="adh" min="0" max="100" step="1" value="93" />
+            <span class="kc-hint">المرجع: 92–95%</span>
+          </div>
+          <div class="kc-field">
+            <label for="kc-qa">QA Score %</label>
+            <input type="number" id="kc-qa" data-kc="qa" min="0" max="100" step="1" value="88" />
+            <span class="kc-hint">المرجع: ≥ 90%</span>
+          </div>
+          <div class="kc-field">
+            <label for="kc-calls">المكالمات/يوم</label>
+            <input type="number" id="kc-calls" data-kc="calls" min="0" max="500" step="1" value="60" />
+            <span class="kc-hint">معدل: 50–80</span>
+          </div>
+        </div>
+
+        <button class="kc-btn" type="button" data-kc-run>احسب الـ APIndex</button>
+
+        <div class="kc-out" data-kc-out hidden>
+          <div class="kc-score">
+            <div class="kc-score-ring" data-kc-ring>
+              <span class="kc-score-num" data-kc-num>0</span>
+              <span class="kc-score-lbl">APIndex / 100</span>
+            </div>
+            <div class="kc-score-tier" data-kc-tier>—</div>
+          </div>
+
+          <div class="kc-bars">
+            <div class="kc-bar"><span>AHT</span><div class="kc-bar-track"><i data-kc-bar="aht"></i></div><b data-kc-pct="aht">0%</b></div>
+            <div class="kc-bar"><span>FCR</span><div class="kc-bar-track"><i data-kc-bar="fcr"></i></div><b data-kc-pct="fcr">0%</b></div>
+            <div class="kc-bar"><span>CSAT</span><div class="kc-bar-track"><i data-kc-bar="csat"></i></div><b data-kc-pct="csat">0%</b></div>
+            <div class="kc-bar"><span>Adherence</span><div class="kc-bar-track"><i data-kc-bar="adh"></i></div><b data-kc-pct="adh">0%</b></div>
+            <div class="kc-bar"><span>QA</span><div class="kc-bar-track"><i data-kc-bar="qa"></i></div><b data-kc-pct="qa">0%</b></div>
+          </div>
+
+          <div class="kc-recos">
+            <h4>3 توصيات تخصصية</h4>
+            <ol data-kc-recos></ol>
+          </div>
+        </div>
+      </div><!-- /.kpi-calc -->
+
+
+      <!-- ====== C. Call Anatomy — 7 Scientific Stages ====== -->
+      <div class="cc-section-header" data-cc-block>
+        <div>
+          <span class="cc-eyebrow"><i class="dot"></i> Call Architecture</span>
+          <h2>تشريح المكالمة — 7 مراحل علمية</h2>
+          <p>لكل مرحلة: ميزانية زمنية، قالب نصي جاهز، وأخطاء شائعة. إجمالي الوقت ≈ 4–6 دقائق.</p>
+        </div>
+        <span class="tag accent">7 stages · Voss + Cialdini</span>
+      </div>
+
+      <ol class="anat-list" data-cc-anatomy>
+
+        <li class="anat-step" data-anat="1">
+          <div class="anat-num"><span>01</span><small>5s</small></div>
+          <div class="anat-body">
+            <h4>Greeting · الاستقبال</h4>
+            <p class="anat-budget">الميزانية الزمنية: <b>5 ثوانٍ</b> · 3 عناصر: شركة + اسم + سؤال مفتوح</p>
+            <div class="anat-tmpl">"السلام عليكم، معكم [اسم] من [شركة]، كيف أقدر أساعدك اليوم؟"</div>
+            <div class="anat-err"><b>خطأ:</b> "ألو، نعم؟" — يخلق إحساس "وصلت لمكان غلط".</div>
+          </div>
+        </li>
+
+        <li class="anat-step" data-anat="2">
+          <div class="anat-num"><span>02</span><small>15-30s</small></div>
+          <div class="anat-body">
+            <h4>Active Listening · الإصغاء النشط</h4>
+            <p class="anat-budget">الميزانية الزمنية: <b>15–30 ثانية</b> · لا تقاطع · لا تكتب أي حل بعد</p>
+            <div class="anat-tmpl">"تفضل، أنا أسمعك..." (صمت داعم) ثم: "خذ وقتك."</div>
+            <div class="anat-err"><b>خطأ:</b> القفز للحل بعد 5 ثوانٍ — يخسر الـ Empathy Window.</div>
+          </div>
+        </li>
+
+        <li class="anat-step" data-anat="3">
+          <div class="anat-num"><span>03</span><small>10s</small></div>
+          <div class="anat-body">
+            <h4>Mirroring · المرآة</h4>
+            <p class="anat-budget">الميزانية الزمنية: <b>10 ثوانٍ</b> · تردد 1–3 كلمات مفتاحية فقط (Voss technique)</p>
+            <div class="anat-tmpl">العميل: "ما اشتغل النت من 3 أيام." — أنت: "3 أيام؟"</div>
+            <div class="anat-err"><b>خطأ:</b> تكرار جملة كاملة — يبدو ساخراً. كلمة–ثلاث فقط.</div>
+          </div>
+        </li>
+
+        <li class="anat-step" data-anat="4">
+          <div class="anat-num"><span>04</span><small>30-45s</small></div>
+          <div class="anat-body">
+            <h4>Diagnose · التشخيص</h4>
+            <p class="anat-budget">الميزانية الزمنية: <b>30–45 ثانية</b> · 3 أسئلة محددة كحد أقصى</p>
+            <div class="anat-tmpl">"متى بدأت المشكلة بالضبط؟ · هل جربت [خطوة]؟ · ما رقم الموديم؟"</div>
+            <div class="anat-err"><b>خطأ:</b> أكثر من 5 أسئلة — يشعر العميل أنك تستجوبه.</div>
+          </div>
+        </li>
+
+        <li class="anat-step" data-anat="5">
+          <div class="anat-num"><span>05</span><small>45-60s</small></div>
+          <div class="anat-body">
+            <h4>Position Solution · عرض الحل</h4>
+            <p class="anat-budget">الميزانية الزمنية: <b>45–60 ثانية</b> · Feature → Benefit → Proof</p>
+            <div class="anat-tmpl">"السبب [feature]، يعني عندك [benefit]، ولاحظت لـ 87% من الحالات يحلها (proof)."</div>
+            <div class="anat-err"><b>خطأ:</b> features فقط بدون benefits — العميل لا يهمه الـ "كيف"، يهمه "ماذا أكسب".</div>
+          </div>
+        </li>
+
+        <li class="anat-step" data-anat="6">
+          <div class="anat-num"><span>06</span><small>20s</small></div>
+          <div class="anat-body">
+            <h4>Close · الإغلاق</h4>
+            <p class="anat-budget">الميزانية الزمنية: <b>20 ثانية</b> · أكّد الاتفاق + ما الخطوة القادمة + متى</p>
+            <div class="anat-tmpl">"إذاً اتفقنا: [القرار]. سأرسل لك تأكيداً نصياً خلال 5 دقائق. هل تريد إضافة شيء؟"</div>
+            <div class="anat-err"><b>خطأ:</b> "هل في شيء آخر؟" قبل تأكيد الاتفاق — يفتح الباب لإعادة البداية.</div>
+          </div>
+        </li>
+
+        <li class="anat-step" data-anat="7">
+          <div class="anat-num"><span>07</span><small>10s</small></div>
+          <div class="anat-body">
+            <h4>Soft Goodbye · الوداع الناعم</h4>
+            <p class="anat-budget">الميزانية الزمنية: <b>10 ثوانٍ</b> · تأكيد رضى + فتح باب للعودة (Peak-End Rule)</p>
+            <div class="anat-tmpl">"شكراً لاتصالك [اسم العميل]، أي وقت تحتاجنا، نحن هنا. يومك سعيد."</div>
+            <div class="anat-err"><b>خطأ:</b> "إلى اللقاء" جاف — يخسر فرصة ذروة إيجابية في الذاكرة.</div>
+          </div>
+        </li>
+
+      </ol><!-- /.anat-list -->
+
+      <!-- ============================================================ END WORKER 03 PHASE 2 ============================================================ -->
+
     </section><!-- /page-callcenter -->
 
 
