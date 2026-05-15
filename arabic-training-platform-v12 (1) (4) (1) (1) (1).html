@@ -330,6 +330,167 @@
        END Quantum Leap v12.2 additions
     ============================================================ */
 
+    /* ============================================================
+       AURORA GLASS v13 — Additive layer (does NOT override ql-*)
+    ============================================================ */
+    :root {
+      --aurora-c1: #66FCF1;
+      --aurora-c2: #8B5CF6;
+      --aurora-c3: #F472B6;
+      --aurora-c4: #34D399;
+
+      --glass-base-v13: linear-gradient(160deg, rgba(14,18,32,.62) 0%, rgba(21,25,41,.40) 50%, rgba(14,18,32,.68) 100%);
+      --glass-veil-v13: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0) 40%);
+      --glass-noise-v13: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .04 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+
+      --aurora-edge: conic-gradient(from 140deg at 50% 50%, var(--aurora-c1), var(--aurora-c2), var(--aurora-c3), var(--aurora-c4), var(--aurora-c1));
+      --spring-soft: cubic-bezier(.16,1,.3,1);
+      --spring-snap: cubic-bezier(.34,1.56,.64,1);
+
+      --depth-1: 0 1px 0 rgba(255,255,255,.05) inset, 0 8px 24px -12px rgba(0,0,0,.55);
+      --depth-2: 0 1px 0 rgba(255,255,255,.06) inset, 0 24px 60px -24px rgba(0,0,0,.65), 0 0 0 1px rgba(148,197,255,.06);
+      --depth-3: 0 1px 0 rgba(255,255,255,.08) inset, 0 40px 90px -32px rgba(0,0,0,.75), 0 0 0 1px rgba(102,252,241,.10);
+    }
+
+    /* Aurora Card */
+    .aur-card {
+      position: relative; isolation: isolate;
+      border-radius: 22px;
+      background: var(--glass-base-v13);
+      backdrop-filter: blur(22px) saturate(180%);
+      -webkit-backdrop-filter: blur(22px) saturate(180%);
+      box-shadow: var(--depth-2);
+      overflow: hidden;
+      padding: 24px;
+    }
+    .aur-card::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: var(--glass-veil-v13), var(--glass-noise-v13);
+      mix-blend-mode: screen; opacity: .7;
+    }
+    .aur-card::after {
+      content: ""; position: absolute; inset: -1px; padding: 1px; border-radius: inherit;
+      background: var(--aurora-edge);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+              mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      pointer-events: none;
+      opacity: .35;
+      animation: aurSpin 14s linear infinite;
+    }
+    @keyframes aurSpin { to { filter: hue-rotate(360deg); } }
+
+    /* Tilt hover */
+    .aur-tilt {
+      transition: transform .6s var(--spring-soft), box-shadow .6s var(--spring-soft);
+      transform-style: preserve-3d;
+    }
+    .aur-tilt:hover {
+      transform: translateY(-4px) rotateX(2deg) rotateY(-2deg);
+      box-shadow: var(--depth-3);
+    }
+
+    /* Magnet Button */
+    .aur-magnet-btn {
+      position: relative; padding: 12px 20px; border-radius: 14px;
+      border: 1px solid rgba(102,252,241,.22);
+      background: linear-gradient(135deg, rgba(102,252,241,.10), rgba(139,92,246,.10));
+      color: var(--text); font-weight: 700; font-family: var(--font);
+      cursor: pointer; font-size: 13px;
+      transition: transform .25s var(--spring-snap), box-shadow .25s ease;
+    }
+    .aur-magnet-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -10px rgba(102,252,241,.35); }
+    .aur-magnet-btn:active { transform: translateY(0) scale(.98); }
+    .aur-magnet-btn:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(102,252,241,.4), 0 12px 28px -10px rgba(102,252,241,.35);
+    }
+
+    /* Reveal on scroll */
+    .aur-reveal {
+      opacity: 0; transform: translateY(16px);
+      transition: opacity .6s var(--spring-soft), transform .6s var(--spring-soft);
+    }
+    .aur-reveal.is-in { opacity: 1; transform: translateY(0); }
+
+    /* Focus-visible aurora ring */
+    *:focus-visible {
+      outline: 2px solid var(--aurora-c1);
+      outline-offset: 3px;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .aur-card::after { animation: none; }
+      .aur-tilt:hover { transform: none; }
+      .aur-reveal { transition-duration: 0.01ms; }
+      @keyframes qlAmbientDrift { 0%, 100% { transform: none; opacity: 0.9; } }
+    }
+
+    /* ── Career Page Specific Styles ── */
+    .career-block { margin-bottom: 24px; }
+    .career-block h3 {
+      font-size: 16px; font-weight: 900; color: var(--text);
+      margin-bottom: 8px; letter-spacing: -0.2px;
+    }
+    .career-block .block-source {
+      font-size: 10.5px; font-weight: 700; letter-spacing: 1.2px;
+      text-transform: uppercase; color: var(--aurora-c2); margin-bottom: 12px;
+    }
+    .career-scenario {
+      background: rgba(14,18,32,.5); border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: 16px; margin-top: 10px;
+      cursor: pointer; transition: border-color .3s ease;
+    }
+    .career-scenario:hover { border-color: var(--border-hover); }
+    .career-scenario .scenario-label {
+      font-size: 10px; font-weight: 800; letter-spacing: 1.4px;
+      text-transform: uppercase; color: var(--text-faint); margin-bottom: 6px;
+    }
+    .career-scenario .scenario-text {
+      font-size: 13px; color: var(--text-muted); line-height: 1.8;
+    }
+    .career-opt { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+    .career-opt label {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 10px 14px; border-radius: var(--radius-sm);
+      border: 1px solid rgba(148,197,255,.06); background: rgba(10,13,24,.4);
+      cursor: pointer; transition: all .2s ease; font-size: 12.5px; color: var(--text-muted); line-height: 1.7;
+    }
+    .career-opt label:hover { border-color: rgba(102,252,241,.22); background: rgba(102,252,241,.04); }
+    .career-opt label.correct { border-color: rgba(34,197,94,.45); background: rgba(34,197,94,.08); }
+    .career-opt label.wrong { border-color: rgba(239,68,68,.35); background: rgba(239,68,68,.06); }
+    .career-opt input[type="radio"] { accent-color: var(--accent); margin-top: 3px; }
+    .career-salary-table {
+      width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 12px;
+    }
+    .career-salary-table th, .career-salary-table td {
+      padding: 10px 12px; text-align: right;
+      border-bottom: 1px solid rgba(148,197,255,.06);
+    }
+    .career-salary-table th {
+      font-weight: 800; color: var(--accent); font-size: 11px;
+      letter-spacing: .5px; text-transform: uppercase;
+    }
+    .career-salary-table td { color: var(--text-muted); }
+    .career-salary-table tr:hover td { color: var(--text); background: rgba(102,252,241,.03); }
+    .career-worksheet {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 12px;
+    }
+    @media (max-width: 768px) { .career-worksheet { grid-template-columns: 1fr; } }
+    .career-worksheet input {
+      width: 100%; padding: 10px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); background: rgba(10,13,24,.6);
+      color: var(--text); font-family: var(--font); font-size: 13px;
+      transition: border-color .2s ease;
+    }
+    .career-worksheet input:focus { border-color: var(--accent); outline: none; }
+    .career-worksheet label { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; display: block; }
+
+    /* ============================================================
+       END Aurora Glass v13
+    ============================================================ */
+
 
     /* Scrollbars */
     ::-webkit-scrollbar { width: 5px; height: 5px; }
@@ -3430,6 +3591,14 @@
         </svg>
         <span class="nav-label">المحاسبة والكاشير</span>
         <span class="nav-badge" style="background:linear-gradient(135deg,#F59E0B,#10B981);color:#fff;">جديد</span>
+      </div>
+
+      <div class="nav-item" data-page="career">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>
+        </svg>
+        <span class="nav-label">التوظيف و HR</span>
+        <span class="nav-badge" style="background:linear-gradient(135deg,#8B5CF6,#F472B6);color:#fff;">جديد</span>
       </div>
 
       <span class="nav-section-label">الإدارة</span>
@@ -10907,6 +11076,426 @@
 
     </section><!-- /page-accounting -->
 
+    <!-- ============================================================
+         PAGE: CAREER & HR MASTERY (M4)
+    ============================================================ -->
+    <section class="page" id="page-career">
+
+      <div class="page-header">
+        <h1>مسار التوظيف والتفاوض مع HR</h1>
+        <p>من كتابة السيرة الذاتية إلى التفاوض على الراتب — مهارات الحصول على الوظيفة والاحتفاظ بها</p>
+      </div>
+
+      <!-- BLOCK 1: CV Teardown -->
+      <div class="aur-card aur-tilt aur-reveal career-block" style="margin-bottom:24px;">
+        <div class="block-source">المصدر: Knock 'em Dead — Martin Yate + 60 Seconds &amp; You're Hired — Robin Ryan</div>
+        <h3>تشريح السيرة الذاتية — من ضعيفة إلى قاتلة</h3>
+        <p style="color:var(--text-muted);font-size:13px;line-height:1.8;margin-bottom:14px;">
+          السيرة الذاتية ليست ملخّص حياتك — هي إعلان تسويقي مدته 6 ثوانٍ (متوسط وقت نظر الـ HR الأول). الهدف: إثارة الفضول الكافي لتحصل على مقابلة، لا أكثر.
+        </p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px;">
+          <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:var(--radius-sm);padding:14px;">
+            <div style="font-size:10px;font-weight:800;color:#EF4444;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:8px;">قبل (ضعيف)</div>
+            <p style="font-size:12px;color:var(--text-muted);line-height:1.8;">
+              "أبحث عن فرصة عمل في مجال المبيعات لتطوير مهاراتي والمساهمة في نجاح الشركة."
+            </p>
+          </div>
+          <div style="background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);border-radius:var(--radius-sm);padding:14px;">
+            <div style="font-size:10px;font-weight:800;color:#22C55E;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:8px;">بعد (قوي)</div>
+            <p style="font-size:12px;color:var(--text-muted);line-height:1.8;">
+              "موظف مبيعات B2B حققت 127% من التارجت في Q4 2025 بمحفظة 38 عميل — متخصص بقطاع الاتصالات (زين/آسياسيل)."
+            </p>
+          </div>
+        </div>
+
+        <div class="ql-recall" onclick="this.classList.toggle('open')" style="margin-top:14px;">
+          <div class="ql-recall-q">لماذا عبارة "أبحث عن فرصة" قاتلة للسيرة الذاتية؟</div>
+          <span class="ql-recall-hint">اضغط لكشف الجواب بعد ما تجاوب بنفسك</span>
+          <div class="ql-recall-a">لأنها تتكلم عنك أنت (أنا أريد) بدل ما تتكلم عن القيمة للشركة. الـ HR يبحث عن "ماذا ستفعل لنا" وليس "ماذا نفعل لك". قاعدة Yate: أول 3 سطور = عرض قيمة مُكمَّم.</div>
+        </div>
+      </div>
+
+      <!-- BLOCK 2: STAR Method Trainer -->
+      <div class="aur-card aur-tilt aur-reveal career-block" style="margin-bottom:24px;">
+        <div class="block-source">المصدر: Competency-Based Interview Model + STAR Framework</div>
+        <h3>مدرّب STAR — أجوبة المقابلات السلوكية</h3>
+        <p style="color:var(--text-muted);font-size:13px;line-height:1.8;margin-bottom:14px;">
+          90% من أسئلة المقابلات الحديثة سلوكية ("احكيلي عن مرة..."). بدون هيكل STAR، جوابك يصير قصة عشوائية بدل دليل كفاءة.
+        </p>
+
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;">
+          <div style="text-align:center;padding:12px;background:rgba(102,252,241,.05);border-radius:var(--radius-sm);border:1px solid rgba(102,252,241,.15);">
+            <div style="font-size:22px;font-weight:900;color:var(--accent);">S</div>
+            <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">الموقف<br/>Situation</div>
+          </div>
+          <div style="text-align:center;padding:12px;background:rgba(139,92,246,.05);border-radius:var(--radius-sm);border:1px solid rgba(139,92,246,.15);">
+            <div style="font-size:22px;font-weight:900;color:var(--aurora-c2);">T</div>
+            <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">المهمة<br/>Task</div>
+          </div>
+          <div style="text-align:center;padding:12px;background:rgba(244,114,182,.05);border-radius:var(--radius-sm);border:1px solid rgba(244,114,182,.15);">
+            <div style="font-size:22px;font-weight:900;color:var(--aurora-c3);">A</div>
+            <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">الفعل<br/>Action</div>
+          </div>
+          <div style="text-align:center;padding:12px;background:rgba(52,211,153,.05);border-radius:var(--radius-sm);border:1px solid rgba(52,211,153,.15);">
+            <div style="font-size:22px;font-weight:900;color:var(--aurora-c4);">R</div>
+            <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">النتيجة<br/>Result</div>
+          </div>
+        </div>
+
+        <div class="career-scenario">
+          <div class="scenario-label">[سؤال مقابلة حقيقي]</div>
+          <div class="scenario-text">"احكيلي عن مرة تعاملت مع عميل صعب وقدرت تحوّل الموقف لصالحك."</div>
+        </div>
+        <div style="margin-top:12px;padding:14px;background:rgba(10,13,24,.5);border-radius:var(--radius-sm);border:1px solid var(--border);">
+          <div style="font-size:11px;font-weight:700;color:var(--accent);margin-bottom:6px;">جواب نموذجي STAR:</div>
+          <p style="font-size:12px;color:var(--text-muted);line-height:1.85;">
+            <b style="color:var(--accent);">S:</b> بشركة آسياسيل، عميل تجزئة (صاحب محل بالشورجة) هدّد بإلغاء العقد السنوي (قيمته 18 مليون دينار).<br/>
+            <b style="color:var(--aurora-c2);">T:</b> مطلوب مني أحافظ على العقد + أحل مشكلته (تأخر شحن بطاقات) خلال 48 ساعة.<br/>
+            <b style="color:var(--aurora-c3);">A:</b> زرته شخصياً، اعتذرت بصراحة، قدّمت حل فوري (شحنة طوارئ) + خصم 5% كتعويض + رقمي الشخصي كخط ساخن.<br/>
+            <b style="color:var(--aurora-c4);">R:</b> جدّد العقد + أضاف طلب شهري ثاني. صار referral لثلاث محلات جديدة. Revenue ↑ 22%.
+          </p>
+        </div>
+
+        <div class="ql-recall" onclick="this.classList.toggle('open')" style="margin-top:14px;">
+          <div class="ql-recall-q">ما الخطأ الأشيع في أجوبة STAR؟</div>
+          <span class="ql-recall-hint">اضغط لكشف الجواب</span>
+          <div class="ql-recall-a">إضاعة 80% من الوقت على S و T (السياق) و 20% فقط على A و R (الفعل والنتيجة). القاعدة: 20/10/50/20 — ركّز على Action بالتفصيل لأنه يُظهر الكفاءة الفعلية.</div>
+        </div>
+      </div>
+
+      <!-- BLOCK 3: 50 Interview Questions Library -->
+      <div class="aur-card aur-tilt aur-reveal career-block" style="margin-bottom:24px;">
+        <div class="block-source">المصدر: Competency-Based Interviews + HR Psychology Research</div>
+        <h3>مكتبة أسئلة المقابلة — ماذا يبحث عنه الـ HR فعلياً</h3>
+        <p style="color:var(--text-muted);font-size:13px;line-height:1.8;margin-bottom:14px;">
+          كل سؤال مقابلة يقيس كفاءة محددة. لما تعرف "ماذا يقيس" تكدر تُهندس جوابك بدقة.
+        </p>
+
+        <div id="careerQBank" style="display:flex;flex-direction:column;gap:8px;">
+          <!-- Populated by JS below -->
+        </div>
+      </div>
+
+      <!-- BLOCK 4: Salary Research Table -->
+      <div class="aur-card aur-tilt aur-reveal career-block" style="margin-bottom:24px;">
+        <div class="block-source">المصدر: Bayt.com + LinkedIn Salary Insights + خبرات سوق العمل — تقديرات Q2 2026</div>
+        <h3>جدول الرواتب التقديرية — السوق العراقي والخليجي</h3>
+        <p style="color:var(--text-muted);font-size:13px;line-height:1.8;margin-bottom:8px;">
+          هذه تقديرات مبنية على بيانات سوقية. الرواتب الفعلية تتأثر بالخبرة والشركة والمدينة.
+        </p>
+        <div style="overflow-x:auto;">
+          <table class="career-salary-table">
+            <thead>
+              <tr><th>المسمى</th><th>العراق (IQD/شهر)</th><th>السعودية (SAR/شهر)</th><th>الإمارات (AED/شهر)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>موظف مبيعات مبتدئ</td><td>600,000 – 900,000</td><td>4,500 – 6,500</td><td>5,000 – 7,500</td></tr>
+              <tr><td>كول سنتر</td><td>500,000 – 750,000</td><td>4,000 – 5,500</td><td>4,500 – 6,000</td></tr>
+              <tr><td>كاشير</td><td>450,000 – 650,000</td><td>3,500 – 5,000</td><td>3,500 – 5,500</td></tr>
+              <tr><td>محاسب مبتدئ</td><td>700,000 – 1,100,000</td><td>5,000 – 8,000</td><td>6,000 – 9,000</td></tr>
+              <tr><td>سوشيال ميديا</td><td>600,000 – 1,000,000</td><td>5,000 – 8,000</td><td>5,500 – 9,000</td></tr>
+              <tr><td>مبرمج مبتدئ</td><td>800,000 – 1,500,000</td><td>6,000 – 10,000</td><td>7,000 – 12,000</td></tr>
+              <tr><td>اكونت منجر</td><td>900,000 – 1,400,000</td><td>7,000 – 12,000</td><td>8,000 – 14,000</td></tr>
+              <tr><td>فني صيانة هاتف</td><td>500,000 – 1,200,000</td><td>3,500 – 6,000</td><td>4,000 – 7,000</td></tr>
+              <tr><td>تسويق رقمي</td><td>700,000 – 1,200,000</td><td>5,500 – 9,000</td><td>6,000 – 10,000</td></tr>
+              <tr><td>خدمة عملاء</td><td>500,000 – 800,000</td><td>4,000 – 6,000</td><td>4,500 – 7,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:10.5px;color:var(--text-faint);margin-top:8px;">* الأرقام تقديرية — محدّث Q2 2026. تختلف حسب المدينة وحجم الشركة والخبرة.</p>
+      </div>
+
+      <!-- BLOCK 5: Salary Negotiation Simulator -->
+      <div class="aur-card aur-tilt aur-reveal career-block" style="margin-bottom:24px;">
+        <div class="block-source">المصدر: Never Split the Difference — Chris Voss + Getting to Yes — Fisher &amp; Ury</div>
+        <h3>محاكاة التفاوض على الراتب</h3>
+        <p style="color:var(--text-muted);font-size:13px;line-height:1.8;margin-bottom:14px;">
+          الـ HR عرض عليك راتب. ردّك الأول يحدد سقف التفاوض. اختر بحكمة.
+        </p>
+
+        <div id="salarySimulator">
+          <div class="career-scenario">
+            <div class="scenario-label">[لهجة عراقية — مقابلة توظيف]</div>
+            <div class="scenario-text" style="font-size:14px;color:var(--text);">
+              مسؤول الـ HR: "أخي الكريم، شفنا سيرتك ممتازة. الراتب المعتمد للوظيفة 750 ألف دينار شهرياً + تأمين. شنو رأيك؟"
+            </div>
+          </div>
+
+          <div class="career-opt" style="margin-top:14px;" id="simOptions">
+            <label onclick="selectSalaryOpt(this, 'weak')">
+              <input type="radio" name="salary-sim" />
+              <span>"ممتاز، موافق. متى أبدي؟"</span>
+            </label>
+            <label onclick="selectSalaryOpt(this, 'correct')">
+              <input type="radio" name="salary-sim" />
+              <span>"أقدّر العرض. بناءً على خبرتي بالقطاع + الأرقام اللي حققتها (127% تارجت)، كنت أتوقع نطاق 900 ألف – مليون. هل عندكم مرونة بالحزمة — سواء بالراتب أو البدلات؟"</span>
+            </label>
+            <label onclick="selectSalaryOpt(this, 'aggressive')">
+              <input type="radio" name="salary-sim" />
+              <span>"لا، هذا قليل. أنا أستاهل مليون ونص على الأقل."</span>
+            </label>
+          </div>
+
+          <div id="simFeedback" style="display:none;margin-top:14px;padding:14px;border-radius:var(--radius-sm);font-size:12.5px;line-height:1.8;"></div>
+        </div>
+
+        <div class="ql-recall" onclick="this.classList.toggle('open')" style="margin-top:14px;">
+          <div class="ql-recall-q">لماذا تقنية "النطاق المُرسى" (Anchored Range) أقوى من رقم واحد؟</div>
+          <span class="ql-recall-hint">اضغط لكشف الجواب</span>
+          <div class="ql-recall-a">لأن النطاق يُعطي انطباع المرونة (لست متصلّب) بينما يُرسي الرقم الأعلى بذهن المفاوض (Anchoring Bias — Kahneman). الـ HR غالباً يقترح رقماً في الوسط، وهو أعلى من عرضه الأولي.</div>
+        </div>
+      </div>
+
+      <!-- BLOCK 6: BATNA/ZOPA Worksheet -->
+      <div class="aur-card aur-tilt aur-reveal career-block" style="margin-bottom:24px;">
+        <div class="block-source">المصدر: Getting to Yes — Fisher &amp; Ury | Bargaining for Advantage — G. Richard Shell</div>
+        <h3>ورقة عمل BATNA / ZOPA — جهّز قبل أي تفاوض</h3>
+        <p style="color:var(--text-muted);font-size:13px;line-height:1.8;margin-bottom:14px;">
+          <b>BATNA</b> = أفضل بديل لو فشل التفاوض. <b>ZOPA</b> = منطقة الاتفاق الممكنة بين أدناك وأعلاهم.
+          بدون BATNA واضح، أنت تتفاوض من موقف ضعف.
+        </p>
+
+        <div class="career-worksheet" id="batnaWorksheet">
+          <div>
+            <label for="batna-ideal">الراتب المثالي (الحلم)</label>
+            <input type="text" id="batna-ideal" placeholder="مثلاً: 1,200,000 IQD" oninput="saveBATNA()" />
+          </div>
+          <div>
+            <label for="batna-target">الراتب المستهدف (واقعي)</label>
+            <input type="text" id="batna-target" placeholder="مثلاً: 950,000 IQD" oninput="saveBATNA()" />
+          </div>
+          <div>
+            <label for="batna-walk">نقطة الانسحاب (أقل رقم تقبله)</label>
+            <input type="text" id="batna-walk" placeholder="مثلاً: 750,000 IQD" oninput="saveBATNA()" />
+          </div>
+        </div>
+        <div style="margin-top:10px;">
+          <div>
+            <label for="batna-alt" style="font-size:11px;color:var(--text-muted);margin-bottom:4px;display:block;">بديلك الأفضل (BATNA) — ماذا لو رفضت؟</label>
+            <input type="text" id="batna-alt" placeholder="مثلاً: عرض من شركة ثانية 800 ألف + سيارة" oninput="saveBATNA()" style="width:100%;padding:10px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);background:rgba(10,13,24,.6);color:var(--text);font-family:var(--font);font-size:13px;" />
+          </div>
+        </div>
+
+        <div class="ql-recall" onclick="this.classList.toggle('open')" style="margin-top:14px;">
+          <div class="ql-recall-q">إذا ما عندك BATNA حقيقي (لا عرض ثاني)، شنو تسوي؟</div>
+          <span class="ql-recall-hint">اضغط لكشف الجواب</span>
+          <div class="ql-recall-a">اصنع BATNA مصطنع قبل المقابلة: تقدّم على 3-5 شركات بالتوازي. حتى لو ما حصلت عرض رسمي، كثرة الخيارات تُعطيك ثقة حقيقية تنعكس على لغة جسدك. Shell يسمّيها "Creating Leverage Before You Need It".</div>
+        </div>
+      </div>
+
+      <!-- BLOCK 7: Counter-Offer Scripts -->
+      <div class="aur-card aur-tilt aur-reveal career-block" style="margin-bottom:24px;">
+        <div class="block-source">المصدر: 60 Seconds &amp; You're Hired — Robin Ryan + خبرات سوق العمل العراقي</div>
+        <h3>7 سكربتات للتفاوض — جاهزة للاستخدام</h3>
+        <p style="color:var(--text-muted);font-size:13px;line-height:1.8;margin-bottom:14px;">
+          كل سكربت مصمّم لموقف محدد. احفظ البنية، عدّل الأرقام حسب وضعك.
+        </p>
+
+        <div style="display:flex;flex-direction:column;gap:10px;" id="counterScripts">
+          <div class="career-scenario" onclick="this.classList.toggle('open')" style="cursor:pointer;">
+            <div class="scenario-label">سكربت #1 — طلب زيادة على العرض الأولي</div>
+            <div class="scenario-text" style="max-height:0;overflow:hidden;transition:max-height .35s ease;">
+              [لهجة عراقية]<br/>
+              "أقدّر هالعرض وأنا متحمّس للفريق. بس بناءً على بحثي بالسوق وخبرتي [X سنوات] بـ[القطاع]، النطاق المتعارف عليه هو [رقم أعلى 15-20%]. هل نكدر نوصل لنقطة وسط — سواء بالراتب أو بحزمة البدلات؟"
+            </div>
+          </div>
+          <div class="career-scenario" onclick="this.classList.toggle('open')" style="cursor:pointer;">
+            <div class="scenario-label">سكربت #2 — رفض عرض بأدب (تحافظ على العلاقة)</div>
+            <div class="scenario-text" style="max-height:0;overflow:hidden;transition:max-height .35s ease;">
+              "أشكركم على الثقة والوقت. بعد دراسة العرض، أشوف إنه ما يتوافق مع مرحلتي المهنية الحالية. أتمنى نبقى على تواصل لأن الفريق والبيئة عجبوني — وإذا تغيّرت الظروف مستقبلاً أكون سعيد نرجع نحكي."
+            </div>
+          </div>
+          <div class="career-scenario" onclick="this.classList.toggle('open')" style="cursor:pointer;">
+            <div class="scenario-label">سكربت #3 — تأجيل القرار بدون خسارة العرض</div>
+            <div class="scenario-text" style="max-height:0;overflow:hidden;transition:max-height .35s ease;">
+              "العرض ممتاز وأنا جدّي. أحتاج يومين أراجع التفاصيل مع عائلتي وأرجعلكم بجواب نهائي يوم [الأحد]. هل هذا مناسب؟"<br/>
+              <span style="color:var(--accent);font-size:11px;">← لماذا: تمنع ضغط القبول الفوري + تخلّيك تقارن مع عروض ثانية بهدوء.</span>
+            </div>
+          </div>
+          <div class="career-scenario" onclick="this.classList.toggle('open')" style="cursor:pointer;">
+            <div class="scenario-label">سكربت #4 — التفاوض على البدلات (لما الراتب ثابت)</div>
+            <div class="scenario-text" style="max-height:0;overflow:hidden;transition:max-height .35s ease;">
+              "أفهم أن سلّم الرواتب محدد. هل عندكم مرونة بـ: بدل مواصلات / تأمين عائلة / أيام إجازة إضافية / bonus ربعي على الأداء / تدريب خارجي مموّل؟ أي من هاي تفرق عندي."<br/>
+              <span style="color:var(--accent);font-size:11px;">← لماذا: الشركات غالباً عندها مرونة بالبدلات أكثر من الأساسي.</span>
+            </div>
+          </div>
+          <div class="career-scenario" onclick="this.classList.toggle('open')" style="cursor:pointer;">
+            <div class="scenario-label">سكربت #5 — طلب زيادة بعد فترة التجربة</div>
+            <div class="scenario-text" style="max-height:0;overflow:hidden;transition:max-height .35s ease;">
+              "خلال الـ 3 شهور الأخيرة حققت [إنجاز مُكمَّم]. أحب نراجع الحزمة بما يعكس المساهمة الفعلية. شنو الآلية المعتمدة عندكم للمراجعة؟"<br/>
+              <span style="color:var(--accent);font-size:11px;">← لماذا: تربط الطلب بنتائج مثبتة + تسأل عن "الآلية" بدل المواجهة المباشرة.</span>
+            </div>
+          </div>
+          <div class="career-scenario" onclick="this.classList.toggle('open')" style="cursor:pointer;">
+            <div class="scenario-label">سكربت #6 — ردّ على "ما عندنا ميزانية"</div>
+            <div class="scenario-text" style="max-height:0;overflow:hidden;transition:max-height .35s ease;">
+              "أقدّر الشفافية. سؤال: هل ممكن نتفق على مراجعة بعد 6 شهور مربوطة بـ KPIs محددة؟ يعني لو حققت [هدف X]، الراتب يصعد لـ [رقم Y]. هيج أنا مرتاح وأنتم مطمئنين."<br/>
+              <span style="color:var(--accent);font-size:11px;">← لماذا: تحوّل "لا" إلى "ليس الآن" مع وعد مشروط — الشركة تربح موظف محفّز وأنت تربح خارطة طريق.</span>
+            </div>
+          </div>
+          <div class="career-scenario" onclick="this.classList.toggle('open')" style="cursor:pointer;">
+            <div class="scenario-label">سكربت #7 — التفاوض من موقف قوة (عندك عرض ثاني)</div>
+            <div class="scenario-text" style="max-height:0;overflow:hidden;transition:max-height .35s ease;">
+              "أنا صريح معكم: عندي عرض ثاني بقيمة [X]. لكن أفضّل أشتغل هنا بسبب [سبب حقيقي — الفريق/المشروع/النمو]. هل تكدرون تقتربون من هالرقم حتى أقدر آخذ القرار براحة؟"<br/>
+              <span style="color:var(--accent);font-size:11px;">← لماذا: تستخدم BATNA حقيقي + تُظهر ولاء (مو ابتزاز) — Voss يسمّيها "Calibrated Honesty".</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOCK 8: Red Flags -->
+      <div class="aur-card aur-tilt aur-reveal career-block" style="margin-bottom:24px;">
+        <div class="block-source">المصدر: خبرات سوق العمل + Ask A Manager — Alison Green</div>
+        <h3>9 علامات تحذيرية — متى ترفض العرض؟</h3>
+        <p style="color:var(--text-muted);font-size:13px;line-height:1.8;margin-bottom:14px;">
+          ليس كل وظيفة تستحق القبول. هذه إشارات أن البيئة سامة أو العرض مصيدة.
+        </p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;" id="redFlagsGrid">
+          <div style="padding:14px;background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);border-radius:var(--radius-sm);">
+            <div style="font-size:11px;font-weight:800;color:#EF4444;margin-bottom:6px;">1. غموض المسمّى</div>
+            <div style="font-size:11.5px;color:var(--text-muted);line-height:1.7;">"موظف إداري" يطلع منك كل شي — مبيعات + سكرتارية + IT. لا توصيف = لا حدود.</div>
+          </div>
+          <div style="padding:14px;background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);border-radius:var(--radius-sm);">
+            <div style="font-size:11px;font-weight:800;color:#EF4444;margin-bottom:6px;">2. ضغط للقبول الفوري</div>
+            <div style="font-size:11.5px;color:var(--text-muted);line-height:1.7;">"لازم تجاوب اليوم" — شركة جيدة تعطيك 3-5 أيام. الضغط يعني يخافون تقارن.</div>
+          </div>
+          <div style="padding:14px;background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);border-radius:var(--radius-sm);">
+            <div style="font-size:11px;font-weight:800;color:#EF4444;margin-bottom:6px;">3. لا مقابلة فنية</div>
+            <div style="font-size:11.5px;color:var(--text-muted);line-height:1.7;">قبلوك بدون ما يسألوك سؤال واحد عن الشغل = ما يهتمون بالجودة، يبحثون عن "جسم يملأ كرسي".</div>
+          </div>
+          <div style="padding:14px;background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);border-radius:var(--radius-sm);">
+            <div style="font-size:11px;font-weight:800;color:#EF4444;margin-bottom:6px;">4. راتب "بعدين نحكي"</div>
+            <div style="font-size:11.5px;color:var(--text-muted);line-height:1.7;">يرفضون يذكرون الرقم ويأجلون لبعد التوقيع. القاعدة: لا توقّع بدون عرض مكتوب واضح.</div>
+          </div>
+          <div style="padding:14px;background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);border-radius:var(--radius-sm);">
+            <div style="font-size:11px;font-weight:800;color:#EF4444;margin-bottom:6px;">5. دوران موظفين عالي</div>
+            <div style="font-size:11.5px;color:var(--text-muted);line-height:1.7;">اسأل "شكم واحد بالفريق أكثر من سنة؟" — إذا الجواب ضبابي، في مشكلة إدارية.</div>
+          </div>
+          <div style="padding:14px;background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);border-radius:var(--radius-sm);">
+            <div style="font-size:11px;font-weight:800;color:#EF4444;margin-bottom:6px;">6. "نحن عائلة هنا"</div>
+            <div style="font-size:11.5px;color:var(--text-muted);line-height:1.7;">غالباً تعني: ما في حدود، overtime مجاني، ومطلوب منك "تضحّي". العمل عمل، مو عائلة.</div>
+          </div>
+          <div style="padding:14px;background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);border-radius:var(--radius-sm);">
+            <div style="font-size:11px;font-weight:800;color:#EF4444;margin-bottom:6px;">7. المقابلة فوضوية</div>
+            <div style="font-size:11.5px;color:var(--text-muted);line-height:1.7;">يتأخرون، يغيّرون الموعد 3 مرات، ما يعرفون الوظيفة بالضبط — هيج يديرون الشغل أيضاً.</div>
+          </div>
+          <div style="padding:14px;background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);border-radius:var(--radius-sm);">
+            <div style="font-size:11px;font-weight:800;color:#EF4444;margin-bottom:6px;">8. "الراتب حسب الكفاءة"</div>
+            <div style="font-size:11.5px;color:var(--text-muted);line-height:1.7;">عبارة غامضة تعني: "راح نعطيك أقل ما ممكن". الشركة المحترمة عندها نطاق واضح.</div>
+          </div>
+          <div style="padding:14px;background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.15);border-radius:var(--radius-sm);">
+            <div style="font-size:11px;font-weight:800;color:#EF4444;margin-bottom:6px;">9. يسألونك "شكم تتوقع؟" أولاً</div>
+            <div style="font-size:11.5px;color:var(--text-muted);line-height:1.7;">يريدون أنت تُرسي. القاعدة: "أفضّل أسمع نطاقكم المعتمد أولاً حتى نشوف إذا متوافقين."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOCK 9: 90-Day Onboarding Plan -->
+      <div class="aur-card aur-tilt aur-reveal career-block" style="margin-bottom:24px;">
+        <div class="block-source">المصدر: The First 90 Days — Michael Watkins</div>
+        <h3>خطة الـ 30/60/90 يوم — أول 3 شهور بأي وظيفة</h3>
+        <p style="color:var(--text-muted);font-size:13px;line-height:1.8;margin-bottom:14px;">
+          أول 90 يوم يحددون سمعتك لسنوات. هذا القالب يخلّيك تبني مصداقية بسرعة.
+        </p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
+          <div style="padding:16px;background:rgba(102,252,241,.04);border:1px solid rgba(102,252,241,.18);border-radius:var(--radius-md);">
+            <div style="font-size:12px;font-weight:900;color:var(--accent);margin-bottom:10px;">أول 30 يوم — اسمع واستوعب</div>
+            <ul style="font-size:11.5px;color:var(--text-muted);line-height:2;list-style:none;padding:0;">
+              <li>• افهم المنتج/الخدمة 100%</li>
+              <li>• اعرف كل شخص بالفريق ودوره</li>
+              <li>• اسأل مديرك: "شنو معيار النجاح بعد 3 شهور؟"</li>
+              <li>• لا تنتقد أي شي — بس لاحظ ودوّن</li>
+              <li>• أكمل كل onboarding tasks بسرعة</li>
+            </ul>
+          </div>
+          <div style="padding:16px;background:rgba(139,92,246,.04);border:1px solid rgba(139,92,246,.18);border-radius:var(--radius-md);">
+            <div style="font-size:12px;font-weight:900;color:var(--aurora-c2);margin-bottom:10px;">30-60 يوم — ابدأ تساهم</div>
+            <ul style="font-size:11.5px;color:var(--text-muted);line-height:2;list-style:none;padding:0;">
+              <li>• نفّذ أول مشروع/مهمة مستقل</li>
+              <li>• اقترح تحسين صغير واحد (Quick Win)</li>
+              <li>• ابني علاقة مع شخص من قسم ثاني</li>
+              <li>• اطلب feedback من مديرك: "شنو أحسّن؟"</li>
+              <li>• وثّق إنجازاتك (ستحتاجها لاحقاً)</li>
+            </ul>
+          </div>
+          <div style="padding:16px;background:rgba(52,211,153,.04);border:1px solid rgba(52,211,153,.18);border-radius:var(--radius-md);">
+            <div style="font-size:12px;font-weight:900;color:var(--aurora-c4);margin-bottom:10px;">60-90 يوم — أثبت قيمتك</div>
+            <ul style="font-size:11.5px;color:var(--text-muted);line-height:2;list-style:none;padding:0;">
+              <li>• قدّم نتائج قابلة للقياس</li>
+              <li>• اطلب مسؤوليات إضافية</li>
+              <li>• شارك بمبادرة فريق واحدة</li>
+              <li>• اجتمع مع مديرك: "كيف أداءي vs التوقعات؟"</li>
+              <li>• حدّد هدفك للـ 6 شهور القادمة</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="ql-recall" onclick="this.classList.toggle('open')" style="margin-top:14px;">
+          <div class="ql-recall-q">ما أكبر خطأ يسويه موظف جديد بأول 30 يوم؟</div>
+          <span class="ql-recall-hint">اضغط لكشف الجواب</span>
+          <div class="ql-recall-a">يحاول يثبت نفسه بسرعة بانتقاد الأنظمة القائمة ("أنا بمكاني السابق كنّا نسوي أحسن"). Watkins يسمّيها "The Arrive-and-Fix Trap". القاعدة: أول 30 يوم = استماع فقط. الثقة تُبنى بالاحترام قبل الإنجاز.</div>
+        </div>
+      </div>
+
+      <!-- BLOCK 10: LinkedIn Personal Brand -->
+      <div class="aur-card aur-tilt aur-reveal career-block" style="margin-bottom:24px;">
+        <div class="block-source">المصدر: LinkedIn Recruiter Insights + Knock 'em Dead — Yate</div>
+        <h3>تحسين ملف LinkedIn — اجعل الـ Recruiters يجونك</h3>
+        <p style="color:var(--text-muted);font-size:13px;line-height:1.8;margin-bottom:14px;">
+          72% من الـ recruiters يبحثون بـ LinkedIn قبل أي منصة ثانية. ملفك = واجهة متجرك المهني.
+        </p>
+
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div style="padding:14px;background:rgba(10,13,24,.5);border-radius:var(--radius-sm);border:1px solid var(--border);">
+            <div style="font-size:11px;font-weight:800;color:var(--accent);margin-bottom:4px;">Headline (أهم 120 حرف)</div>
+            <div style="font-size:12px;color:var(--text-muted);line-height:1.7;">
+              <b>خطأ:</b> "باحث عن فرصة عمل | خريج جامعة بغداد"<br/>
+              <b>صح:</b> "مبيعات B2B | +127% Target Q4 | قطاع الاتصالات | أساعد الشركات تنمّي محفظتها"
+            </div>
+          </div>
+          <div style="padding:14px;background:rgba(10,13,24,.5);border-radius:var(--radius-sm);border:1px solid var(--border);">
+            <div style="font-size:11px;font-weight:800;color:var(--accent);margin-bottom:4px;">About Section (أول 3 أسطر تظهر)</div>
+            <div style="font-size:12px;color:var(--text-muted);line-height:1.7;">
+              ابدأ بنتيجة ← "في آخر 12 شهر، ساعدت 38 عميل B2B يزيدون مبيعاتهم بمتوسط 22%."<br/>
+              ثم أضف: ماذا تسوي + لمن + كيف تختلف + CTA (طريقة التواصل).
+            </div>
+          </div>
+          <div style="padding:14px;background:rgba(10,13,24,.5);border-radius:var(--radius-sm);border:1px solid var(--border);">
+            <div style="font-size:11px;font-weight:800;color:var(--accent);margin-bottom:4px;">5 تحسينات سريعة (أسوّيها اليوم)</div>
+            <div style="font-size:12px;color:var(--text-muted);line-height:1.7;">
+              1. صورة احترافية (خلفية موحّدة، ابتسامة، ملابس العمل)<br/>
+              2. Banner مخصص (Canva مجاني — اكتب تخصصك عليه)<br/>
+              3. أضف 5+ مهارات مطابقة للوظيفة المستهدفة<br/>
+              4. اطلب 3 توصيات من زملاء/مدراء سابقين<br/>
+              5. انشر محتوى أسبوعي (حتى لو رأي بسيط عن مجالك)
+            </div>
+          </div>
+        </div>
+
+        <div class="ql-recall" onclick="this.classList.toggle('open')" style="margin-top:14px;">
+          <div class="ql-recall-q">لماذا "Open to Work" الإطار الأخضر ممكن يضرّك؟</div>
+          <span class="ql-recall-hint">اضغط لكشف الجواب</span>
+          <div class="ql-recall-a">بعض الـ recruiters يعتبرونه إشارة "يائس" — وهذا غلط لكنه واقع. البديل: فعّل خيار "Open to recruiters only" (مخفي عن الكل ما عدا الـ recruiters). تحصل على نفس الفائدة بدون وصمة.</div>
+        </div>
+      </div>
+
+      <!-- Cross-links to other pages -->
+      <div class="aur-card career-block" style="margin-bottom:24px;padding:18px;">
+        <h3 style="font-size:14px;margin-bottom:10px;">خرائط ربط — هذا المسار يتقاطع مع:</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <button class="aur-magnet-btn" onclick="navigateTo('negotiation')" aria-label="انتقل لصفحة التفاوض">التفاوض والإقناع</button>
+          <button class="aur-magnet-btn" onclick="navigateTo('psych')" aria-label="انتقل لصفحة الدوافع النفسية">الدوافع النفسية</button>
+          <button class="aur-magnet-btn" onclick="navigateTo('eq')" aria-label="انتقل لصفحة الذكاء العاطفي">الذكاء العاطفي</button>
+          <button class="aur-magnet-btn" onclick="navigateTo('fieldsales')" aria-label="انتقل لصفحة المبيعات">المبيعات الميدانية</button>
+        </div>
+      </div>
+
+    </section><!-- /page-career -->
+
+
 
   <!-- ✅ FOOTER — after ALL pages so flex order is correct -->
   <footer id="smart-footer">
@@ -11032,6 +11621,13 @@
         breadcrumb: 'الرئيسية / وحدات التدريب / المحاسبة والكاشير',
         icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <rect x="2" y="3" width="20" height="18" rx="2"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="10" y1="3" x2="10" y2="21"/>
+        </svg>`
+      },
+      career: {
+        title: 'مسار التوظيف والتفاوض مع HR',
+        breadcrumb: 'الرئيسية / وحدات التدريب / التوظيف و HR',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>
         </svg>`
       }
     };
@@ -15645,6 +16241,150 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Expose small debug surface
   window.__PHASE1 = { refreshRadar, PHASE1 };
+})();
+</script>
+
+<!-- ============================================================
+     AURORA v13 — Micro-interactions + Career Page JS
+============================================================ -->
+<script>
+(function(){
+  'use strict';
+
+  /* ─── 1. IntersectionObserver: Reveal on Scroll ─── */
+  const revealEls = document.querySelectorAll('.aur-reveal');
+  if (revealEls.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function(el) { io.observe(el); });
+  }
+
+  /* ─── 2. Cursor Parallax Tilt (desktop only) ─── */
+  if (!('ontouchstart' in window) && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var tiltCards = document.querySelectorAll('.aur-tilt');
+    tiltCards.forEach(function(card) {
+      card.addEventListener('mousemove', function(e) {
+        var rect = card.getBoundingClientRect();
+        var x = (e.clientX - rect.left) / rect.width - 0.5;
+        var y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = 'translateY(-4px) rotateY(' + (x * 6) + 'deg) rotateX(' + (y * -6) + 'deg)';
+      });
+      card.addEventListener('mouseleave', function() {
+        card.style.transform = '';
+      });
+    });
+  }
+
+  /* ─── 3. Career Page: Salary Simulator ─── */
+  window.selectSalaryOpt = function(label, type) {
+    var opts = document.querySelectorAll('#simOptions label');
+    opts.forEach(function(l) { l.classList.remove('correct','wrong'); });
+    var fb = document.getElementById('simFeedback');
+    fb.style.display = 'block';
+    if (type === 'correct') {
+      label.classList.add('correct');
+      fb.style.background = 'rgba(34,197,94,.08)';
+      fb.style.border = '1px solid rgba(34,197,94,.3)';
+      fb.style.color = '#86EFAC';
+      fb.innerHTML = '<b>ممتاز.</b> استخدمت تقنية النطاق المُرسى (Anchored Range) + ربطت الرقم بإنجاز مُكمَّم + فتحت باب المرونة بالحزمة الكاملة. هذا بالضبط ما يوصي به Chris Voss: "اجعل الطرف الآخر يشعر أنه يختار، لا أنه يُضغط عليه."';
+    } else if (type === 'weak') {
+      label.classList.add('wrong');
+      fb.style.background = 'rgba(245,158,11,.08)';
+      fb.style.border = '1px solid rgba(245,158,11,.3)';
+      fb.style.color = '#FDE68A';
+      fb.innerHTML = '<b>ضعيف.</b> قبلت أول رقم بدون تفاوض. الـ HR غالباً يبدأ بـ 70-85% من الميزانية المتاحة — بمعنى في مساحة 15-30% ما استغليتها. القاعدة: لا تقبل أول عرض أبداً، حتى لو يعجبك.';
+    } else {
+      label.classList.add('wrong');
+      fb.style.background = 'rgba(239,68,68,.08)';
+      fb.style.border = '1px solid rgba(239,68,68,.3)';
+      fb.style.color = '#FCA5A5';
+      fb.innerHTML = '<b>عدواني.</b> طلبت رقم بدون تبرير + بدون مرونة. هذا يُغلق باب التفاوض ويُعطي انطباع "صعب التعامل معه". Fisher & Ury: "افصل الإنسان عن المشكلة" — تفاوض على المعايير، لا على المواقف.';
+    }
+  };
+
+  /* ─── 4. Career Page: BATNA Worksheet (localStorage) ─── */
+  var BATNA_KEY = 'career_batna_v1';
+  function loadBATNA() {
+    try {
+      var d = JSON.parse(localStorage.getItem(BATNA_KEY));
+      if (d) {
+        if (d.ideal) document.getElementById('batna-ideal').value = d.ideal;
+        if (d.target) document.getElementById('batna-target').value = d.target;
+        if (d.walk) document.getElementById('batna-walk').value = d.walk;
+        if (d.alt) document.getElementById('batna-alt').value = d.alt;
+      }
+    } catch(e) {}
+  }
+  window.saveBATNA = function() {
+    var obj = {
+      ideal: document.getElementById('batna-ideal').value,
+      target: document.getElementById('batna-target').value,
+      walk: document.getElementById('batna-walk').value,
+      alt: document.getElementById('batna-alt').value
+    };
+    localStorage.setItem(BATNA_KEY, JSON.stringify(obj));
+  };
+  // Load on page ready
+  if (document.getElementById('batna-ideal')) loadBATNA();
+
+  /* ─── 5. Career Page: Counter-offer Script Toggles ─── */
+  var scripts = document.querySelectorAll('#counterScripts .career-scenario');
+  scripts.forEach(function(s) {
+    var text = s.querySelector('.scenario-text');
+    if (text) {
+      s.addEventListener('click', function() {
+        var isOpen = text.style.maxHeight && text.style.maxHeight !== '0px';
+        text.style.maxHeight = isOpen ? '0px' : (text.scrollHeight + 'px');
+        text.style.marginTop = isOpen ? '0' : '8px';
+      });
+    }
+  });
+
+  /* ─── 6. Career Page: Interview Questions Bank ─── */
+  var QUESTIONS = [
+    {q:'احكيلي عن نفسك.', measures:'قدرتك على التلخيص + ربط خبرتك بالوظيفة', cat:'Behavioral'},
+    {q:'ليش تركت شغلك السابق؟', measures:'النضج + عدم التحدث بسلبية عن الآخرين', cat:'Behavioral'},
+    {q:'شنو نقطة ضعفك؟', measures:'الوعي الذاتي + خطة التحسين', cat:'Behavioral'},
+    {q:'وين تشوف نفسك بعد 5 سنوات؟', measures:'الطموح الواقعي + التوافق مع مسار الشركة', cat:'Behavioral'},
+    {q:'احكيلي عن مرة فشلت.', measures:'المرونة + التعلم من الخطأ (Growth Mindset)', cat:'Behavioral'},
+    {q:'كيف تتعامل مع ضغط العمل؟', measures:'آليات التنظيم الانفعالي + الأولويات', cat:'Behavioral'},
+    {q:'احكيلي عن مرة اختلفت مع مديرك.', measures:'الدبلوماسية + القدرة على قول "لا" باحترام', cat:'Behavioral'},
+    {q:'شنو أكبر إنجاز مهني حققته؟', measures:'التفكير بالنتائج + القدرة على القياس', cat:'Behavioral'},
+    {q:'كيف تتعامل مع عميل غاضب؟', measures:'الذكاء العاطفي + أسلوب LAST', cat:'Technical'},
+    {q:'شنو تعرف عن شركتنا؟', measures:'البحث المسبق + الاهتمام الحقيقي', cat:'Cultural'},
+    {q:'ليش نختارك أنت بالذات؟', measures:'عرض القيمة الفريدة (USP شخصي)', cat:'Behavioral'},
+    {q:'شنو توقعاتك للراتب؟', measures:'البحث السوقي + مهارة التفاوض', cat:'Behavioral'},
+    {q:'هل عندك أسئلة لنا؟', measures:'الفضول المهني + التفكير الاستراتيجي', cat:'Cultural'},
+    {q:'احكيلي عن مرة قُدت فريق.', measures:'مهارات القيادة + تفويض المهام', cat:'Behavioral'},
+    {q:'كيف تتعلم مهارة جديدة بسرعة؟', measures:'أسلوب التعلم + التطبيق العملي', cat:'Technical'}
+  ];
+  var qBank = document.getElementById('careerQBank');
+  if (qBank) {
+    var html = '';
+    QUESTIONS.forEach(function(item, i) {
+      html += '<div class="career-scenario" onclick="this.classList.toggle(\'open\')" style="cursor:pointer;">';
+      html += '<div class="scenario-label" style="display:flex;justify-content:space-between;align-items:center;">';
+      html += '<span>' + (i+1) + '. ' + item.q + '</span>';
+      html += '<span style="font-size:9px;padding:3px 7px;border-radius:99px;background:rgba(102,252,241,.1);color:var(--accent);">' + item.cat + '</span>';
+      html += '</div>';
+      html += '<div class="scenario-text" style="max-height:0;overflow:hidden;transition:max-height .35s ease;margin-top:0;">';
+      html += '<span style="color:var(--aurora-c2);font-weight:700;">ما يقيسه الـ HR:</span> ' + item.measures;
+      html += '</div></div>';
+    });
+    qBank.innerHTML = html;
+    qBank.querySelectorAll('.career-scenario').forEach(function(s) {
+      s.addEventListener('click', function() {
+        var t = s.querySelector('.scenario-text');
+        var open = t.style.maxHeight && t.style.maxHeight !== '0px';
+        t.style.maxHeight = open ? '0px' : (t.scrollHeight + 'px');
+        t.style.marginTop = open ? '0' : '8px';
+      });
+    });
+  }
+
 })();
 </script>
 
