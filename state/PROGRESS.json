@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-15T18:05:00Z",
+  "last_updated": "2026-05-15T18:25:00Z",
   "current": {
     "worker": "09",
     "worker_name": "PSYCHOLOGY_LAYER",
-    "phase": 3,
+    "phase": 4,
     "phases_total": 5,
     "branch": "worker-09-complete",
     "status": "in-progress"
@@ -50,8 +50,9 @@
     { "worker": "08", "phase": 5, "title": "Mock Screen Timer + Offer Compare + Iraq Labor Law + Cheat Sheet + 14 Citations", "branch": "worker-08-complete", "lines_added": 977 },
     { "worker": "09", "phase": 1, "title": "7 Drives + 12 Biases in page-psych", "branch": "worker-09-complete", "lines_added": 478 },
     { "worker": "09", "phase": 2, "title": "Goleman 5 + RULER + Mood Meter Interactive in page-eq", "branch": "worker-09-complete", "lines_added": 612 },
-    { "worker": "09", "phase": 3, "title": "Self-Diagnostic Suite — 6 tests + scoring engine", "branch": "worker-09-complete", "lines_added": 845 }
+    { "worker": "09", "phase": 3, "title": "Self-Diagnostic Suite — 6 tests + scoring engine", "branch": "worker-09-complete", "lines_added": 845 },
+    { "worker": "09", "phase": 4, "title": "Psych Insets — cross-page micro-cards (7 pages × 3 insets)", "branch": "worker-09-complete", "lines_added": 232 }
   ],
-  "next_action": "Continue Worker 09 Phase 4 — Psych Insets component + injection in 6 functional pages.",
-  "notes": "Worker 09 Phase 3 done. 6 self-tests with tabs, progress, export. localStorage: upg_psych_results."
+  "next_action": "Continue Worker 09 Phase 5 — Therapist Bridge + Insights System + Citations.",
+  "notes": "Worker 09 Phase 4 done. JS-driven injection: 21 psych insets across 7 functional pages, idempotent."
 }
