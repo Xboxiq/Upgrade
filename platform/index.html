@@ -8895,6 +8895,344 @@
         </div>
       </div>
 
+      <!-- ════════════════════════════════════════════════════════════
+           WORKER 04 · PHASE 5 — Cashier Track + Iraq Salary + Citations
+      ════════════════════════════════════════════════════════════ -->
+      <section class="acc-cashier" data-acc-phase="5" aria-labelledby="acc-cashier-title">
+
+        <div class="acc-section-head">
+          <span class="acc-eyebrow">مسار الكاشير · من المبتدئ للمشرف</span>
+          <h2 id="acc-cashier-title">دورة الكاشير · إدارة النقد · منع الخسائر · POS</h2>
+          <p>قبل اللمسة الأولى للدرج: تعرف على دورتك، 8 قواعد للنقد، 12 مؤشر سرقة، وكيف تختار نظام POS مناسب لبيئة العمل العراقية.</p>
+        </div>
+
+        <!-- ───────── BLOCK 12 · Cashier Cycle 6 stages ───────── -->
+        <article class="acc-cs-cycle-lab" data-acc-lab="cs-cycle">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 12</div>
+            <h3>دورة الكاشير · 6 مراحل في الوردية</h3>
+            <p>كل مرحلة لها هدف، أداة، وخطأ شائع. التميُّز يبدأ من الافتتاح وينتهي بالإغلاق.</p>
+          </header>
+
+          <div class="acc-cs-cycle-grid">
+            <div class="acc-cs-stage" data-stage="1">
+              <div class="acc-cs-stage-num">1</div>
+              <h5>افتتاح الدرج · Opening the Till</h5>
+              <p>عدّ الفلوت (Float) الأولي مع المشرف وتوقيع كلاكما على المبلغ — ليس مجرد إجراء، حماية لك من البداية.</p>
+              <div class="acc-cs-stage-meta">
+                <span><b>المخرج:</b> تسجيل ابتدائي موقّع</span>
+                <span><b>أداة:</b> دفتر التسليم/الاستلام</span>
+                <span><b>الخطأ الشائع:</b> القبول دون عدّ كل فئة</span>
+              </div>
+            </div>
+            <div class="acc-cs-stage" data-stage="2">
+              <div class="acc-cs-stage-num">2</div>
+              <h5>استقبال العميل · Customer Greeting</h5>
+              <p>قاعدة الـ 3 ثوان: تواصل بصري + ابتسامة + تحية. هذا يبني ثقة فورية ويردع المحتالين الذين يبحثون عن كاشير غافل.</p>
+              <div class="acc-cs-stage-meta">
+                <span><b>المخرج:</b> تجربة عميل إيجابية</span>
+                <span><b>أداة:</b> سكربت تحية موحّد</span>
+                <span><b>الخطأ الشائع:</b> الانشغال بالهاتف</span>
+              </div>
+            </div>
+            <div class="acc-cs-stage" data-stage="3">
+              <div class="acc-cs-stage-num">3</div>
+              <h5>المسح والإدخال · Scanning & Entry</h5>
+              <p>توازن السرعة والدقة — الباركود يُمسح بزاوية صحيحة، الإدخال اليدوي يُعاد التحقق منه. كل سلعة بالقيمة الصحيحة.</p>
+              <div class="acc-cs-stage-meta">
+                <span><b>المخرج:</b> فاتورة دقيقة</span>
+                <span><b>أداة:</b> POS scanner + ميزان</span>
+                <span><b>الخطأ الشائع:</b> سعر مكرر/مفقود</span>
+              </div>
+            </div>
+            <div class="acc-cs-stage" data-stage="4">
+              <div class="acc-cs-stage-num">4</div>
+              <h5>الدفع · Payment Processing</h5>
+              <p>نقد / بطاقة / محفظة رقمية (Asia Pay, Zain Cash, FastPay). كل وسيلة لها بروتوكول. تحقّق من العملة قبل القبول.</p>
+              <div class="acc-cs-stage-meta">
+                <span><b>المخرج:</b> تأكيد دفع موثّق</span>
+                <span><b>أداة:</b> POS + UV + flag العملة</span>
+                <span><b>الخطأ الشائع:</b> قبول قطعة بدون فحص</span>
+              </div>
+            </div>
+            <div class="acc-cs-stage" data-stage="5">
+              <div class="acc-cs-stage-num">5</div>
+              <h5>التغليف والإيصال · Bagging & Receipt</h5>
+              <p>ترتيب منطقي (الثقيل أسفل، الهش أعلى). الإيصال يُسلَّم مباشرة لليد لا في الكيس. هنا فرصة Cross-sell ذكي.</p>
+              <div class="acc-cs-stage-meta">
+                <span><b>المخرج:</b> طلب مكتمل + إيصال</span>
+                <span><b>أداة:</b> أكياس + حقيبة هدية</span>
+                <span><b>الخطأ الشائع:</b> نسيان الإيصال</span>
+              </div>
+            </div>
+            <div class="acc-cs-stage" data-stage="6">
+              <div class="acc-cs-stage-num">6</div>
+              <h5>إغلاق الدرج · Closing the Till</h5>
+              <p>تقرير X (قبل العدّ) → عدّ كل فئة → مطابقة → توثيق الفروقات → تسليم. لا تترك أبداً تسليماً بدون توقيع متبادل.</p>
+              <div class="acc-cs-stage-meta">
+                <span><b>المخرج:</b> تسوية صفرية موثّقة</span>
+                <span><b>أداة:</b> Z-report + log</span>
+                <span><b>الخطأ الشائع:</b> "نشوف بكرة"</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 13 · Cash Handling 8 Rules + Loss Prevention 12 ───────── -->
+        <article class="acc-cs-rules-lab" data-acc-lab="cs-rules">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 13</div>
+            <h3>قواعد النقد + مؤشرات الخسارة</h3>
+            <p>الجزء الأول: 8 قواعد تحمي الدرج. الثاني: 12 مؤشر سرقة يجب أن تعرفها كل إدارة.</p>
+          </header>
+
+          <div class="acc-cs-twocol">
+            <div class="acc-cs-block">
+              <h5 class="acc-cs-block-title"><span>🔒</span>قواعد إدارة النقد · 8</h5>
+              <ol class="acc-cs-rules-list">
+                <li><b>انضباط الدرج:</b> لا تتركه مفتوحاً ولو لثانية. الفتح = نافذة خسارة.</li>
+                <li><b>تحقّق العملة:</b> UV light + ملمس + علامة مائية لكل قطعة ≥ 25,000 IQD.</li>
+                <li><b>كشف التزوير:</b> العملة العراقية الحديثة لها 5 علامات أمنية — تعلّمها كلها.</li>
+                <li><b>عدّ الباقي بصوت:</b> "خمسة وعشرين، خمسين، مية" — يقلّل النزاعات 70%.</li>
+                <li><b>إدارة Float:</b> حد أعلى 500k IQD في الدرج — أكثر = drop للخزنة.</li>
+                <li><b>Skim Drops:</b> سحب الفائض كل ساعة لخزنة آمنة بتوقيع المشرف.</li>
+                <li><b>حد الفروقات:</b> أقل من 5,000 = OK · أكثر = تحقيق فوري.</li>
+                <li><b>قاعدة الشخصين:</b> لإغلاق الكاش الكبير (≥ 5M) يجب وجود اثنين.</li>
+              </ol>
+            </div>
+
+            <div class="acc-cs-block">
+              <h5 class="acc-cs-block-title"><span>🚨</span>مؤشرات السرقة · 12</h5>
+              <div class="acc-cs-loss-grid">
+                <div class="acc-cs-loss"><b>1. Sweethearting</b><span>تخفيض غير مصرح به للأقارب/الأصدقاء.</span></div>
+                <div class="acc-cs-loss"><b>2. Refund Fraud</b><span>إرجاعات وهمية لإخراج النقد.</span></div>
+                <div class="acc-cs-loss"><b>3. Voids كثيرة</b><span>إلغاءات لعمليات بدون مبرر.</span></div>
+                <div class="acc-cs-loss"><b>4. No-Sale</b><span>فتح الدرج بدون عملية بيع.</span></div>
+                <div class="acc-cs-loss"><b>5. إيصالات عشوائية</b><span>طباعة وحذف للتمويه.</span></div>
+                <div class="acc-cs-loss"><b>6. Discount Abuse</b><span>تطبيق خصم موظف على عملاء.</span></div>
+                <div class="acc-cs-loss"><b>7. Coupon Cloning</b><span>إعادة استخدام كوبون مستهلك.</span></div>
+                <div class="acc-cs-loss"><b>8. Underring</b><span>إدخال سعر أقل من الحقيقي.</span></div>
+                <div class="acc-cs-loss"><b>9. Phantom Voids</b><span>إلغاء بعد دفع فعلي.</span></div>
+                <div class="acc-cs-loss"><b>10. Skipping Items</b><span>عدم مسح بعض السلع للأقارب.</span></div>
+                <div class="acc-cs-loss"><b>11. Drawer Loans</b><span>"دين قصير" من الدرج بنية الإرجاع.</span></div>
+                <div class="acc-cs-loss"><b>12. Receipt Recycling</b><span>استخدام إيصال قديم لإرجاع وهمي.</span></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 14 · POS Systems Iraq + Counterfeit Trainer ───────── -->
+        <article class="acc-cs-pos-lab" data-acc-lab="cs-pos">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 14</div>
+            <h3>أنظمة POS في العراق · والكشف عن التزوير</h3>
+            <p>الـ POS ليس صندوق نقدي — هو منظومة. اختياره يحدّد كفاءة العمليات والمحاسبة والمخزون لسنوات.</p>
+          </header>
+
+          <div class="acc-pos-grid">
+            <div class="acc-pos-card">
+              <div class="acc-pos-name">Foodics</div>
+              <div class="acc-pos-cat">مطاعم وكافيهات</div>
+              <ul>
+                <li>تكامل مع المخزون والمكونات (Recipe Cost)</li>
+                <li>تطبيق طلبات الطاولات والديليفري</li>
+                <li>دعم عربي + Cloud-based</li>
+              </ul>
+              <div class="acc-pos-fit">مناسب: مطاعم بغداد، أربيل، البصرة بحجم متوسط/كبير.</div>
+            </div>
+            <div class="acc-pos-card">
+              <div class="acc-pos-name">Loyverse</div>
+              <div class="acc-pos-cat">تجزئة صغيرة</div>
+              <ul>
+                <li>مجاني للأساسيات + اشتراك للتقارير المتقدمة</li>
+                <li>يعمل على تابلت/جوال</li>
+                <li>تكامل مع Stripe وبعض البوابات</li>
+              </ul>
+              <div class="acc-pos-fit">مناسب: متاجر الأحياء، ورشات، Boutique stores.</div>
+            </div>
+            <div class="acc-pos-card">
+              <div class="acc-pos-name">Zain Cash POS</div>
+              <div class="acc-pos-cat">محافظ رقمية</div>
+              <ul>
+                <li>قبول دفع Zain Cash + Asia Pay</li>
+                <li>تكامل مباشر مع شركة الاتصال</li>
+                <li>أقل تكلفة معاملة في السوق</li>
+              </ul>
+              <div class="acc-pos-fit">مناسب: نقاط البيع التي تستهدف الشباب والعملاء بدون بطاقة.</div>
+            </div>
+            <div class="acc-pos-card">
+              <div class="acc-pos-name">Dynamics 365 (Retail)</div>
+              <div class="acc-pos-cat">مؤسسات كبيرة</div>
+              <ul>
+                <li>تكامل ERP كامل + متعدد الفروع</li>
+                <li>تقارير CFO-grade + IFRS-ready</li>
+                <li>تكلفة ترخيص أعلى وتدريب مكثّف</li>
+              </ul>
+              <div class="acc-pos-fit">مناسب: سلاسل تجزئة كبرى، مولات، مجموعات تجارية.</div>
+            </div>
+          </div>
+
+          <div class="acc-counterfeit">
+            <h5><span>🪪</span>5 علامات أمنية في الدينار العراقي</h5>
+            <ol>
+              <li><b>الخيط الأمني (Security Thread):</b> شريط معدني يظهر مستمراً عند التضيء — مكسور أو متقطع = مزور.</li>
+              <li><b>العلامة المائية (Watermark):</b> صورة شفافة (نخلة/شخصية) تظهر مع الإضاءة الخلفية.</li>
+              <li><b>الحبر المتحول (Color-Shift Ink):</b> يتغير من ذهبي إلى أخضر عند إمالة الورقة.</li>
+              <li><b>النقش البارز (Intaglio):</b> ملمس بارز عند تمرير الإصبع — مزيف يكون أملس.</li>
+              <li><b>UV Reactive:</b> تحت الأشعة فوق البنفسجية تظهر ألياف وعلامات إضافية.</li>
+            </ol>
+            <p class="acc-counterfeit-tip"><b>قاعدة ميدانية:</b> فحص أي ورقة ≥ 25,000 IQD يأخذ 3 ثوان فقط — اعتبرها استثمار في الدفاع لا تأخير للعميل.</p>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 15 · Iraq Salary Block ───────── -->
+        <article class="acc-cs-iraq-lab" data-acc-lab="cs-iraq">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 15</div>
+            <h3>السوق العراقي · رواتب وشهادات وسلّم مهني</h3>
+            <p>الأرقام الواقعية في بغداد/أربيل/البصرة — ومسارات الترقي للمحاسبين والكاشير في القطاع الخاص.</p>
+          </header>
+
+          <table class="acc-iraq-salary-tbl">
+            <thead>
+              <tr><th>الدور</th><th>الراتب IQD/شهر</th><th>الراتب USD تقريبي</th><th>المؤهل والخبرة</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Junior Accountant (0-1 سنة)</td><td>600k — 900k</td><td>$460 — $690</td><td>بكالوريوس محاسبة</td></tr>
+              <tr><td>Senior Accountant (3-5 سنوات)</td><td>1.1M — 1.7M</td><td>$840 — $1,300</td><td>+ خبرة + شهادة IPA/CMA</td></tr>
+              <tr><td>Chief Accountant</td><td>1.8M — 3M</td><td>$1,380 — $2,300</td><td>+ 7 سنوات + قيادة فريق</td></tr>
+              <tr><td>Auditor (Public)</td><td>1.5M — 4M+</td><td>$1,150 — $3,070+</td><td>+ شهادة + مكتب معتمد</td></tr>
+              <tr><td>Tax Consultant</td><td>1.5M — 3.5M</td><td>$1,150 — $2,690</td><td>+ خبرة ضريبية + شبكة علاقات</td></tr>
+              <tr><td>Cashier (Junior)</td><td>450k — 650k</td><td>$345 — $500</td><td>ثانوية + تدريب POS</td></tr>
+              <tr><td>Senior Cashier / Supervisor</td><td>700k — 1.1M</td><td>$540 — $840</td><td>+ 3 سنوات + إدارة فريق صغير</td></tr>
+              <tr><td>Finance Manager</td><td>3M — 6M+</td><td>$2,300 — $4,600+</td><td>+ ماجستير/CMA + 10 سنوات</td></tr>
+            </tbody>
+          </table>
+
+          <div class="acc-iraq-grid">
+            <div class="acc-iraq-card">
+              <h6>📜 شهادات مفيدة</h6>
+              <ul>
+                <li><b>IPA</b> — المعهد العربي للمحاسبين القانونيين (محلياً معتمدة)</li>
+                <li><b>CMA</b> — Certified Management Accountant (دولية)</li>
+                <li><b>CPA</b> — للأسواق الدولية والأمريكية</li>
+                <li><b>ACCA</b> — IFRS-focused (للراغبين بالعمل في GCC)</li>
+                <li><b>دورات هيئة الضرائب</b> — للمتخصصين الضريبيين</li>
+              </ul>
+            </div>
+            <div class="acc-iraq-card">
+              <h6>🪜 سلّم الترقي للمحاسب</h6>
+              <ol>
+                <li><b>سنة 0-1</b> · Junior — قيود يومية + تسويات بسيطة</li>
+                <li><b>سنة 1-3</b> · Mid — مراقبة بنود + إقرارات ضريبية</li>
+                <li><b>سنة 3-6</b> · Senior — إعداد قوائم + تدقيق</li>
+                <li><b>سنة 6-10</b> · Chief — قيادة قسم + تخطيط</li>
+                <li><b>سنة 10+</b> · CFO/مدير مالي — استراتيجية + استثمار</li>
+              </ol>
+            </div>
+            <div class="acc-iraq-card">
+              <h6>🏢 المؤسسات المرجعية</h6>
+              <ul>
+                <li>هيئة الضرائب العامة العراقية</li>
+                <li>وزارة المالية (دائرة المحاسبة)</li>
+                <li>سوق العراق للأوراق المالية (ISX)</li>
+                <li>المصرف المركزي العراقي</li>
+                <li>الاتحاد الدولي للمحاسبين (IFAC)</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 16 · Cheat Sheet ───────── -->
+        <article class="acc-cs-cheat-lab" data-acc-lab="cs-cheat">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 16</div>
+            <h3>Cheat Sheet · ورقة المحاسب اليومية</h3>
+            <p>أهم القواعد في صفحة واحدة — اطبعها واحتفظ بها بجانب مكتبك.</p>
+          </header>
+
+          <div class="acc-cheat-grid">
+            <div class="acc-cheat-col">
+              <h6>المعادلة المحاسبية</h6>
+              <ul>
+                <li><b>Assets</b> = Liabilities + Equity</li>
+                <li>كل قيد له طرفان: مدين + دائن</li>
+                <li>مجموع الـ Debit = مجموع الـ Credit</li>
+              </ul>
+            </div>
+            <div class="acc-cheat-col">
+              <h6>اتجاهات الحسابات</h6>
+              <ul>
+                <li><b>الأصول/المصاريف:</b> تزيد مديناً، تنقص دائناً</li>
+                <li><b>الخصوم/الحقوق/الإيرادات:</b> تزيد دائناً، تنقص مديناً</li>
+              </ul>
+            </div>
+            <div class="acc-cheat-col">
+              <h6>الضريبة العراقية شهرياً</h6>
+              <ul>
+                <li>0% ≤ 250k</li>
+                <li>3% على 250k–500k</li>
+                <li>5% على 500k–1M</li>
+                <li>15% على ما فوق المليون</li>
+                <li>+ 5% ضمان من الموظف</li>
+              </ul>
+            </div>
+            <div class="acc-cheat-col">
+              <h6>قواعد الكاشير الذهبية</h6>
+              <ul>
+                <li>عدّ الباقي بصوت عالٍ</li>
+                <li>افحص أي ورقة ≥ 25k</li>
+                <li>أي فرق ≥ 5k = تحقيق</li>
+                <li>درج مفتوح = مخاطرة فورية</li>
+              </ul>
+            </div>
+            <div class="acc-cheat-col">
+              <h6>تحذيرات قوائم مالية</h6>
+              <ul>
+                <li>GP < 15% = خطر</li>
+                <li>OP سالب = العمليات تخسر</li>
+                <li>تغطية فوائد < 3x = ديون مرتفعة</li>
+                <li>Net Margin < 3% = هامش هش</li>
+              </ul>
+            </div>
+            <div class="acc-cheat-col">
+              <h6>عند الشك</h6>
+              <ul>
+                <li>أوقف العملية</li>
+                <li>وثّق ما حصل</li>
+                <li>أبلِغ المشرف فوراً</li>
+                <li>اقترح حلاً مع المشكلة</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 17 · Citations ───────── -->
+        <article class="acc-cs-citations-lab" data-acc-lab="cs-citations">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 17</div>
+            <h3>المصادر والمراجع · 12 مصدراً مهنياً</h3>
+            <p>كل ادعاء في هذه الوحدة مدعوم — هذه قائمة بالمصادر الأساسية للقراءة المعمّقة.</p>
+          </header>
+
+          <ol class="acc-citations">
+            <li><b>IFRS Foundation</b> — <i>IFRS Standards (IAS 1, IAS 2, IFRS 15, IFRS 16, IFRS 9, IFRS 13)</i> · المرجع الدولي للقوائم والاعتراف بالإيراد والإيجارات.</li>
+            <li><b>هيئة الضرائب العامة العراقية</b> — <i>قانون ضريبة الدخل رقم 113 لسنة 1982 وتعديلاته</i> · شرائح الدخل والإعفاءات الشخصية.</li>
+            <li><b>دائرة التقاعد والضمان الاجتماعي للعمال</b> — <i>قانون التقاعد والضمان رقم 39 لسنة 1971 (مع تعديلات 2023)</i> · نسب 5% + 12%.</li>
+            <li><b>وزارة المالية العراقية</b> — <i>الدليل المحاسبي الموحد للقطاع الخاص</i> · التصنيف 1xxx-5xxx.</li>
+            <li><b>قانون الشركات العراقي رقم 21 لسنة 1997</b> — <i>متطلبات الإفصاح ومسك الدفاتر</i>.</li>
+            <li><b>IFAC — Code of Ethics for Professional Accountants</b> · مبادئ الاستقلالية والمصداقية.</li>
+            <li><b>Kaplan & Norton</b> — <i>The Balanced Scorecard, 1996</i> · ربط النسب المالية بالأداء التشغيلي.</li>
+            <li><b>Damodaran, A.</b> — <i>Investment Valuation, 3rd ed.</i> · مرجع نسب الربحية والعائد.</li>
+            <li><b>ACFE</b> — <i>Report to the Nations on Occupational Fraud, 2024</i> · 12 مؤشر سرقة في نقطة البيع.</li>
+            <li><b>Gary Klein</b> — <i>Sources of Power, 1998</i> · القرار تحت الضغط في الكاشير.</li>
+            <li><b>Daniel Kahneman</b> — <i>Thinking, Fast and Slow, 2011</i> · Attention Fatigue + Speed-Accuracy Tradeoff.</li>
+            <li><b>سوق العراق للأوراق المالية (ISX)</b> — <i>دليل الإفصاح المالي للشركات المدرجة</i>.</li>
+          </ol>
+        </article>
+
+      </section><!-- /acc-cashier Phase 5 -->
+
     </section><!-- /page-accounting -->
 
 
