@@ -9109,6 +9109,195 @@ const bird = { ...canMove(), ...canFly() };
         </div>
       </section>
 
+      <!-- ┌─ W05·P4 ─ 5 Interactive Labs ─┐ -->
+      <section class="prog-w05 prog-labs" data-w05-phase="4" aria-labelledby="prog-labs-title">
+        <header class="prog-w05-sub">
+          <h2 id="prog-labs-title">المختبرات التفاعلية · ٥ أدوات 🧪</h2>
+          <p>تجارب عملية: تتبّع كود — سباق Big-O — Git مرئي — محاكي مقابلة — مولّد مشاريع portfolio.</p>
+        </header>
+
+        <div class="prog-labs-tabs" role="tablist">
+          <button role="tab" data-lab-tab="trace"  class="is-active">🔍 Code Trace</button>
+          <button role="tab" data-lab-tab="bigo">⚡ Big-O Race</button>
+          <button role="tab" data-lab-tab="git">🌿 Git Sandbox</button>
+          <button role="tab" data-lab-tab="iv">🎤 Interview Sim</button>
+          <button role="tab" data-lab-tab="port">🎯 Portfolio Gen</button>
+        </div>
+
+        <!-- LAB 1 — Code Trace Visualizer -->
+        <div class="prog-lab is-active" data-lab="trace">
+          <div class="prog-lab-head">
+            <div>
+              <h3>Code Trace Visualizer</h3>
+              <p>اختر snippet — اضغط <em>تشغيل خطوة بخطوة</em> — راقب المتغيّرات تتغيّر.</p>
+            </div>
+            <select data-trace-pick aria-label="snippet">
+              <option value="0">1) loop · مجموع الأرقام</option>
+              <option value="1">2) closures · counter</option>
+              <option value="2">3) array map / filter</option>
+              <option value="3">4) recursion · factorial</option>
+              <option value="4">5) async · then chain</option>
+              <option value="5">6) destructuring + spread</option>
+              <option value="6">7) reduce — أكثر قيمة شيوعاً</option>
+              <option value="7">8) try/catch + finally</option>
+            </select>
+          </div>
+          <div class="prog-lab-stage" data-trace-stage>
+            <pre class="prog-trace-code" data-trace-code></pre>
+            <div class="prog-trace-side">
+              <div class="prog-trace-vars">
+                <div class="lbl">المتغيّرات</div>
+                <ul data-trace-vars></ul>
+              </div>
+              <div class="prog-trace-out">
+                <div class="lbl">المخرج</div>
+                <pre data-trace-out></pre>
+              </div>
+            </div>
+          </div>
+          <div class="prog-lab-bar">
+            <button type="button" data-trace-prev>◀︎ السابق</button>
+            <button type="button" data-trace-next>التالي ▶︎</button>
+            <button type="button" data-trace-reset>إعادة</button>
+            <span class="prog-lab-counter" data-trace-step>0 / 0</span>
+            <span class="prog-lab-note" data-trace-note></span>
+          </div>
+        </div>
+
+        <!-- LAB 2 — Big-O Race -->
+        <div class="prog-lab" data-lab="bigo">
+          <div class="prog-lab-head">
+            <div>
+              <h3>Big-O Race</h3>
+              <p>أربع خوارزميات تتسابق على نفس المدخل. شاهد الفروق البصرية.</p>
+            </div>
+            <div class="prog-bigo-controls">
+              <label>n: <input type="range" min="50" max="2000" step="50" value="500" data-bigo-n></label>
+              <span data-bigo-nval>500</span>
+            </div>
+          </div>
+          <canvas data-bigo-canvas width="640" height="320" aria-label="Big-O comparison"></canvas>
+          <div class="prog-bigo-legend">
+            <span><i style="background:#22C55E"></i>O(1)</span>
+            <span><i style="background:#06B6D4"></i>O(log n)</span>
+            <span><i style="background:#F59E0B"></i>O(n)</span>
+            <span><i style="background:#EF4444"></i>O(n²)</span>
+          </div>
+          <p class="prog-lab-note">📌 الفارق يكبر أسّياً مع <code>n</code> — لذا اختيار الخوارزمية يهمّ في المقابلات.</p>
+        </div>
+
+        <!-- LAB 3 — Git Sandbox -->
+        <div class="prog-lab" data-lab="git">
+          <div class="prog-lab-head">
+            <div>
+              <h3>Git Sandbox · Visual</h3>
+              <p>اضغط الأوامر — راقب الفروع والـ commits تتحدّث.</p>
+            </div>
+            <button type="button" class="prog-lab-secondary" data-gits-reset>إعادة المحاكاة</button>
+          </div>
+          <div class="prog-gits-stage">
+            <svg data-gits-svg viewBox="0 0 640 220" aria-label="git tree"></svg>
+            <div class="prog-gits-side">
+              <div class="prog-gits-state">
+                <div><span class="lbl">HEAD</span><span data-gits-head>main</span></div>
+                <div><span class="lbl">Branches</span><span data-gits-branches>main</span></div>
+              </div>
+              <div class="prog-gits-cmds">
+                <button type="button" data-gits-cmd="commit">git commit</button>
+                <button type="button" data-gits-cmd="branch">git switch -c feat</button>
+                <button type="button" data-gits-cmd="commitFeat">commit on feat</button>
+                <button type="button" data-gits-cmd="switchMain">git switch main</button>
+                <button type="button" data-gits-cmd="merge">git merge feat</button>
+                <button type="button" data-gits-cmd="undo">↶ تراجع</button>
+              </div>
+              <div class="prog-gits-log">
+                <div class="lbl">Activity</div>
+                <ul data-gits-log></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LAB 4 — Technical Interview Simulator -->
+        <div class="prog-lab" data-lab="iv">
+          <div class="prog-lab-head">
+            <div>
+              <h3>Technical Interview Simulator</h3>
+              <p>15 سؤال موزّع: Conceptual + Code-walkthrough · Easy/Medium/Hard.</p>
+            </div>
+            <div class="prog-iv-filters">
+              <label>المسار:
+                <select data-iv-track>
+                  <option value="any">عام</option><option value="fe">Frontend</option><option value="be">Backend</option>
+                </select>
+              </label>
+              <label>المستوى:
+                <select data-iv-level>
+                  <option value="any">كل المستويات</option>
+                  <option value="easy">Easy</option><option value="med">Medium</option><option value="hard">Hard</option>
+                </select>
+              </label>
+            </div>
+          </div>
+          <div class="prog-iv-panel">
+            <div class="prog-iv-q">
+              <div class="prog-iv-meta">
+                <span class="prog-iv-num" data-iv-num>1 / 15</span>
+                <span class="prog-iv-tag" data-iv-tags>conceptual · easy</span>
+              </div>
+              <h4 data-iv-stem>Loading…</h4>
+              <textarea data-iv-answer rows="5" placeholder="اكتب إجابتك بكلماتك (أو الكود)..."></textarea>
+            </div>
+            <div class="prog-iv-bar">
+              <button type="button" data-iv-grade>قيِّم إجابتي</button>
+              <button type="button" data-iv-next>التالي ▶︎</button>
+              <button type="button" data-iv-reset>إعادة</button>
+            </div>
+            <div class="prog-iv-feedback" data-iv-feedback hidden></div>
+            <div class="prog-iv-report" data-iv-report hidden>
+              <h4>تقريرك النهائي</h4>
+              <div class="prog-iv-axes">
+                <div><span class="lbl">المعرفة</span><div class="bar"><i data-iv-ax="knowledge"></i></div></div>
+                <div><span class="lbl">التواصل</span><div class="bar"><i data-iv-ax="comm"></i></div></div>
+                <div><span class="lbl">حلّ المشكلات</span><div class="bar"><i data-iv-ax="solve"></i></div></div>
+                <div><span class="lbl">جودة الكود</span><div class="bar"><i data-iv-ax="quality"></i></div></div>
+              </div>
+              <p data-iv-summary></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- LAB 5 — Portfolio Project Generator -->
+        <div class="prog-lab" data-lab="port">
+          <div class="prog-lab-head">
+            <div>
+              <h3>Portfolio Project Generator</h3>
+              <p>أجب على ٣ أسئلة → احصل على ٣ مشاريع portfolio بـ spec كامل.</p>
+            </div>
+          </div>
+          <div class="prog-port-form">
+            <label>المسار:
+              <select data-port-track>
+                <option value="fe">Frontend</option><option value="be">Backend</option><option value="full">Full-Stack</option>
+              </select>
+            </label>
+            <label>المستوى:
+              <select data-port-level>
+                <option value="beg">مبتدئ</option><option value="mid">متوسّط</option><option value="adv">متقدّم</option>
+              </select>
+            </label>
+            <label>الوقت/أسبوع:
+              <select data-port-hours>
+                <option value="lt10">أقل من 10</option><option value="10-20">10–20</option><option value="gt20">أكثر من 20</option>
+              </select>
+            </label>
+            <button type="button" data-port-go>توليد ٣ أفكار</button>
+          </div>
+          <div class="prog-port-results" data-port-results></div>
+        </div>
+
+      </section>
+
     </section><!-- /page-programming -->
 
 
