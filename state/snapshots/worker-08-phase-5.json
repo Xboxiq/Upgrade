@@ -1,0 +1,25 @@
+{
+  "worker": "08",
+  "phase_completed": 5,
+  "phases_total": 5,
+  "title": "Mock Screen Timer + Offer Compare + Iraq Labor Law + Cheat Sheet + 14 Citations",
+  "lines_added": 977,
+  "branch": "worker-08-complete",
+  "files_modified": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "sections_added": [
+    "Section M: Mock Phone Screen Timer (Lab 5) — 5 questions, 30s each, live word/time counter, post-game report (avg words, filler %, I/We ratio, avg time)",
+    "Section N: Offer Compare Matrix (Lab 6) — 5 weighted criteria, 3 offers, dynamic recommendation",
+    "Section O: Iraq Labor Law 37/2015 (9 cards) — contract, social insurance, tax, leaves, probation, termination, maternity, hours/OT",
+    "Section P: Cheat Sheet (6 cards)",
+    "Section Q: 14 Citations (Voss, Fisher/Ury, Cialdini, Galinsky, Ames, Lewicki, Kahneman, Goleman, Mehrabian, Iraqi Labor Law, SHRM, Glassdoor, HBR, Levels.fyi)"
+  ],
+  "localStorage_keys": ["upg_salary_drafts", "upg_interview_attempts_hr"],
+  "open_threads": [],
+  "worker_status": "COMPLETE",
+  "total_lines_worker": 4431,
+  "next_action": "Open consolidated PR. Worker 09 next session."
+}

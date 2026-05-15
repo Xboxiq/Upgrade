@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-15T14:35:00Z",
+  "last_updated": "2026-05-15T17:10:00Z",
   "current": {
-    "worker": "07",
-    "worker_name": "PHONE_REPAIR",
+    "worker": "08",
+    "worker_name": "HR_NEGOTIATION",
     "phase": 5,
     "phases_total": 5,
-    "branch": "worker-07-complete",
+    "branch": "worker-08-complete",
     "status": "completed"
   },
   "completed_phases": [
@@ -42,8 +42,13 @@
     { "worker": "07", "phase": 2, "title": "Mainboard Anatomy interactive + 10 Repair Cards (1-10)", "branch": "worker-07-complete", "lines_added": 582 },
     { "worker": "07", "phase": 3, "title": "Repair Cards 11-20 + 3 Decision Trees + Software Side", "branch": "worker-07-complete", "lines_added": 572 },
     { "worker": "07", "phase": 4, "title": "Micro-Solder Intro + Customer Service + Ethics + Iraq Block", "branch": "worker-07-complete", "lines_added": 481 },
-    { "worker": "07", "phase": 5, "title": "6 Interactive Labs + Career Path + Cheat Sheet + 12 Citations", "branch": "worker-07-complete", "lines_added": 1206 }
+    { "worker": "07", "phase": 5, "title": "6 Interactive Labs + Career Path + Cheat Sheet + 12 Citations", "branch": "worker-07-complete", "lines_added": 1206 },
+    { "worker": "08", "phase": 1, "title": "HR psychology (5 dims) + STAR framework + 15 Common Questions", "branch": "worker-08-complete", "lines_added": 1202 },
+    { "worker": "08", "phase": 2, "title": "30 Trap Questions + Pre-Interview Toolkit + Post-Interview Playbook", "branch": "worker-08-complete", "lines_added": 660 },
+    { "worker": "08", "phase": 3, "title": "Salary Negotiation Calculator IQ + 6 principles + Iraq Salary table", "branch": "worker-08-complete", "lines_added": 672 },
+    { "worker": "08", "phase": 4, "title": "15 Scenarios Player + Job Ad Decoder + 12 HR Red Flags", "branch": "worker-08-complete", "lines_added": 920 },
+    { "worker": "08", "phase": 5, "title": "Mock Screen Timer + Offer Compare + Iraq Labor Law + Cheat Sheet + 14 Citations", "branch": "worker-08-complete", "lines_added": 977 }
   ],
-  "next_action": "Worker 07 COMPLETE. Open consolidated PR. Begin Worker 08 — HR/Negotiation on next session.",
-  "notes": "Worker 07 (Phone Repair) COMPLETE. NEW MODULE created from scratch (page-phonerepair). Total ~3,319 lines across 5 phases on linear branch worker-07-complete (Method A). Single consolidated PR. localStorage: upg_pr_lab_scores, upg_pr_estimates."
+  "next_action": "Worker 08 COMPLETE. Open consolidated PR. Begin Worker 09 — Psychology Layer on next session.",
+  "notes": "Worker 08 (HR + Salary Negotiation) COMPLETE. NEW MODULE page-hrmastery. Total ~4,431 lines across 5 phases on linear branch worker-08-complete (Method A). 4 interactive labs: Salary Calc IQ, 15 Scenarios Player, Job Ad Decoder, Mock Screen Timer, Offer Compare Matrix. localStorage: upg_salary_drafts, upg_interview_attempts_hr."
 }

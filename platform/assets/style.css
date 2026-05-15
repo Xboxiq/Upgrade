@@ -12027,3 +12027,1522 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
     border:1px solid #999 !important; page-break-inside:avoid;
   }
 }
+
+
+
+/* ===========================================================
+   WORKER 08 — HR MASTERY (Phase 1)
+   Scope: #page-hrmastery only. Additive. Vanilla. RTL-safe.
+   =========================================================== */
+
+#page-hrmastery .hrm-banner{
+  display:flex; gap:16px; align-items:flex-start;
+  background: linear-gradient(135deg, rgba(168,85,247,.12), rgba(236,72,153,.08));
+  border:1px solid rgba(168,85,247,.25);
+  border-radius: var(--radius-lg);
+  padding:20px 24px; margin-bottom:26px;
+}
+#page-hrmastery .hrm-banner-icon{ font-size:30px; flex-shrink:0; margin-top:2px; }
+#page-hrmastery .hrm-banner-title{
+  font-size:14px; font-weight:800; color:var(--text); margin-bottom:7px;
+}
+#page-hrmastery .hrm-banner-text{
+  font-size:12.5px; color:var(--text-muted); line-height:1.85;
+}
+#page-hrmastery .hrm-banner-text b{ color:var(--text); }
+
+/* Section titles */
+#page-hrmastery .hrm-section-title-wrap{ margin-bottom:18px; }
+#page-hrmastery .hrm-section-eyebrow{
+  font-size:11px; font-weight:700; color:#A855F7;
+  text-transform:uppercase; letter-spacing:1.5px; margin-bottom:6px;
+}
+#page-hrmastery .hrm-section-title{
+  font-size:20px; font-weight:800; color:var(--text); margin:0 0 6px;
+}
+#page-hrmastery .hrm-section-title i{ color:var(--accent); font-style:italic; }
+#page-hrmastery .hrm-section-sub{
+  font-size:12.5px; color:var(--text-muted); margin:0; line-height:1.7;
+}
+
+/* 5 dimensions cards */
+#page-hrmastery .hrm-dims-grid{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:14px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-dim-card{
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: var(--radius-lg); padding:16px;
+  transition: var(--transition);
+  position:relative; overflow:hidden;
+}
+#page-hrmastery .hrm-dim-card::before{
+  content:''; position:absolute; top:0; right:0;
+  width:60px; height:60px;
+  background: radial-gradient(circle at top right, var(--card-tint, rgba(168,85,247,.18)), transparent 70%);
+  pointer-events:none;
+}
+#page-hrmastery .hrm-dim-card:hover{
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+#page-hrmastery .hrm-dim-head{
+  display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;
+}
+#page-hrmastery .hrm-dim-emoji{ font-size:22px; }
+#page-hrmastery .hrm-dim-weight{
+  font-size:18px; font-weight:900; color:var(--text);
+  background: rgba(255,255,255,.04); padding:3px 10px; border-radius:8px;
+  border:1px solid var(--border);
+}
+#page-hrmastery .hrm-dim-name{
+  font-size:13.5px; font-weight:800; color:var(--text); margin-bottom:8px;
+}
+#page-hrmastery .hrm-dim-how,
+#page-hrmastery .hrm-dim-prove{
+  font-size:11.5px; color:var(--text-muted); line-height:1.7; margin-bottom:6px;
+}
+#page-hrmastery .hrm-dim-prove{ color: var(--text); }
+#page-hrmastery .hrm-dim-bar{
+  height:6px; background: rgba(255,255,255,.05); border-radius:99px;
+  overflow:hidden; margin-top:10px;
+}
+#page-hrmastery .hrm-dim-bar-fill{
+  height:100%; border-radius:99px; transition: width .6s ease;
+}
+
+#page-hrmastery .hrm-callout{
+  display:flex; gap:12px; align-items:flex-start;
+  background: rgba(102,252,241,.05);
+  border:1px solid rgba(102,252,241,.18);
+  border-radius: var(--radius-lg);
+  padding:14px 16px; margin-top:10px;
+  font-size:12.5px; color:var(--text-muted); line-height:1.75;
+}
+#page-hrmastery .hrm-callout-icon{ font-size:22px; flex-shrink:0; }
+#page-hrmastery .hrm-callout b{ color:var(--text); }
+
+/* STAR cards */
+#page-hrmastery .hrm-star-grid{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap:14px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-star-card{
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: var(--radius-lg); padding:16px 18px;
+  transition: var(--transition);
+}
+#page-hrmastery .hrm-star-card.primary{
+  border-color: rgba(168,85,247,.4);
+  box-shadow: 0 0 24px rgba(168,85,247,.08);
+}
+#page-hrmastery .hrm-star-card:hover{
+  border-color: var(--border-hover); transform: translateY(-2px);
+}
+#page-hrmastery .hrm-star-tag{
+  display:inline-block; font-size:10px; font-weight:700;
+  background: rgba(168,85,247,.12); color:#A855F7;
+  padding:3px 10px; border-radius:99px; margin-bottom:8px;
+  text-transform:uppercase; letter-spacing:1px;
+}
+#page-hrmastery .hrm-star-name{
+  font-size:22px; font-weight:900; color:var(--text); margin-bottom:6px;
+  letter-spacing:1px;
+}
+#page-hrmastery .hrm-star-when{
+  font-size:11.5px; color:var(--text-faint); margin-bottom:10px;
+  font-style:italic;
+}
+#page-hrmastery .hrm-star-rows{
+  display:flex; flex-direction:column; gap:6px; margin-bottom:10px;
+}
+#page-hrmastery .hrm-star-row{
+  font-size:12px; color:var(--text-muted); line-height:1.7;
+  padding:6px 10px; background: rgba(255,255,255,.02);
+  border-radius:8px; border:1px solid rgba(255,255,255,.04);
+}
+#page-hrmastery .hrm-star-row b{
+  display:inline-block; min-width:18px; color:#A855F7;
+  font-weight:900; margin-left:6px;
+}
+#page-hrmastery .hrm-star-time{
+  font-size:11px; color:var(--text-faint);
+  border-top:1px dashed rgba(255,255,255,.06);
+  padding-top:8px; margin-top:6px;
+}
+
+/* Question accordion */
+#page-hrmastery .hrm-q-accordion{
+  display:flex; flex-direction:column; gap:10px;
+}
+#page-hrmastery .hrm-q-item{
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: var(--radius-lg); overflow:hidden;
+  transition: var(--transition);
+}
+#page-hrmastery .hrm-q-item:hover{ border-color: var(--border-hover); }
+#page-hrmastery .hrm-q-item.open{
+  border-color: rgba(168,85,247,.4);
+  box-shadow: 0 0 18px rgba(168,85,247,.08);
+}
+#page-hrmastery .hrm-q-head{
+  display:flex; align-items:center; gap:14px;
+  padding:14px 18px; cursor:pointer; user-select:none;
+}
+#page-hrmastery .hrm-q-num{
+  font-size:14px; font-weight:900; color:#A855F7;
+  background: rgba(168,85,247,.10);
+  width:36px; height:36px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+#page-hrmastery .hrm-q-text{
+  flex:1; font-size:13.5px; font-weight:700; color:var(--text);
+  line-height:1.5;
+}
+#page-hrmastery .hrm-q-tag{
+  font-size:10.5px; font-weight:700; padding:3px 9px;
+  border-radius:99px; flex-shrink:0;
+  white-space:nowrap;
+}
+#page-hrmastery .hrm-q-chev{
+  width:18px; height:18px; color:var(--text-faint);
+  transition: transform .25s ease, color .25s ease; flex-shrink:0;
+}
+#page-hrmastery .hrm-q-item.open .hrm-q-chev{
+  transform: rotate(180deg); color:#A855F7;
+}
+#page-hrmastery .hrm-q-body{
+  display:none; padding:0 18px 18px; border-top:1px dashed rgba(255,255,255,.06);
+  padding-top:14px;
+}
+#page-hrmastery .hrm-q-item.open .hrm-q-body{ display:block; }
+#page-hrmastery .hrm-q-subtext{
+  font-size:12px; color:var(--text-muted); line-height:1.75;
+  background: rgba(168,85,247,.05);
+  border-right: 3px solid #A855F7;
+  padding:10px 14px; border-radius:8px; margin-bottom:14px;
+}
+#page-hrmastery .hrm-q-subtext b{ color:var(--text); }
+#page-hrmastery .hrm-q-bands{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap:10px; margin-bottom:14px;
+}
+#page-hrmastery .hrm-q-band{
+  background: rgba(255,255,255,.02);
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:10px; padding:12px;
+}
+#page-hrmastery .hrm-q-band[data-level="J"]{ border-color: rgba(34,197,94,.25); }
+#page-hrmastery .hrm-q-band[data-level="M"]{ border-color: rgba(59,130,246,.25); }
+#page-hrmastery .hrm-q-band[data-level="S"]{ border-color: rgba(168,85,247,.25); }
+#page-hrmastery .hrm-q-band-tag{
+  display:inline-block; font-size:10px; font-weight:800;
+  padding:3px 9px; border-radius:99px; margin-bottom:8px;
+  text-transform:uppercase; letter-spacing:1px;
+}
+#page-hrmastery .hrm-q-band[data-level="J"] .hrm-q-band-tag{
+  background: rgba(34,197,94,.12); color:#22C55E;
+}
+#page-hrmastery .hrm-q-band[data-level="M"] .hrm-q-band-tag{
+  background: rgba(59,130,246,.12); color:#3B82F6;
+}
+#page-hrmastery .hrm-q-band[data-level="S"] .hrm-q-band-tag{
+  background: rgba(168,85,247,.12); color:#A855F7;
+}
+#page-hrmastery .hrm-q-band-text{
+  font-size:11.5px; color:var(--text-muted); line-height:1.8;
+}
+#page-hrmastery .hrm-q-grid2{
+  display:grid; grid-template-columns: 1fr 1fr; gap:10px;
+}
+#page-hrmastery .hrm-q-block{
+  background: rgba(255,255,255,.02);
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:10px; padding:12px;
+}
+#page-hrmastery .hrm-q-block.bad{
+  border-color: rgba(239,68,68,.20);
+  background: rgba(239,68,68,.04);
+}
+#page-hrmastery .hrm-q-block.good{
+  border-color: rgba(34,197,94,.22);
+  background: rgba(34,197,94,.04);
+}
+#page-hrmastery .hrm-q-block-h{
+  font-size:12px; font-weight:800; color:var(--text); margin-bottom:8px;
+}
+#page-hrmastery .hrm-q-block ul{
+  margin:0; padding-right:16px;
+  font-size:11.5px; color:var(--text-muted); line-height:1.8;
+}
+#page-hrmastery .hrm-q-block li{ margin-bottom:4px; }
+
+@media (max-width: 720px){
+  #page-hrmastery .hrm-q-grid2{ grid-template-columns: 1fr; }
+  #page-hrmastery .hrm-q-tag{ display:none; }
+}
+
+@media print{
+  #page-hrmastery .hrm-q-body{ display:block !important; }
+  #page-hrmastery .hrm-dim-card,
+  #page-hrmastery .hrm-star-card,
+  #page-hrmastery .hrm-q-item{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
+
+
+
+/* ===========================================================
+   WORKER 08 — HR MASTERY (Phase 2)
+   Trap questions tabs + Pre-Interview + Post-Interview
+   =========================================================== */
+
+/* Trap questions tabs */
+#page-hrmastery .hrm-trap-tabs{
+  display:flex; gap:8px; flex-wrap:wrap;
+  border-bottom:1px solid var(--border);
+  margin-bottom:16px; padding-bottom:0;
+}
+#page-hrmastery .hrm-trap-tab{
+  background: transparent; color: var(--text-muted);
+  border: 1px solid var(--border); border-bottom:none;
+  padding:10px 16px;
+  border-radius: 10px 10px 0 0;
+  font-size:12.5px; font-weight:700;
+  cursor:pointer; transition: var(--transition);
+  font-family: inherit;
+}
+#page-hrmastery .hrm-trap-tab:hover{ color: var(--text); border-color: var(--border-hover); }
+#page-hrmastery .hrm-trap-tab.active{
+  background: rgba(168,85,247,.10);
+  color:#A855F7; border-color: rgba(168,85,247,.4);
+  position: relative;
+}
+#page-hrmastery .hrm-trap-tab.active::after{
+  content:''; position:absolute;
+  left:0; right:0; bottom:-1px; height:2px;
+  background: linear-gradient(90deg, transparent, #A855F7, transparent);
+}
+
+#page-hrmastery .hrm-trap-list{
+  display:none;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap:12px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-trap-list[data-active="1"]{ display:grid; }
+
+#page-hrmastery .hrm-trap-card{
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: var(--radius-lg); padding:14px 16px;
+  transition: var(--transition);
+}
+#page-hrmastery .hrm-trap-card:hover{
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+#page-hrmastery .hrm-trap-q{
+  font-size:13px; font-weight:800; color:var(--text);
+  margin-bottom:10px; line-height:1.55;
+  padding-right:0;
+}
+#page-hrmastery .hrm-trap-q::before{
+  content:'❓'; margin-left:6px; font-size:14px; opacity:.85;
+}
+#page-hrmastery .hrm-trap-why,
+#page-hrmastery .hrm-trap-smart{
+  font-size:11.5px; color:var(--text-muted); line-height:1.75;
+  padding:8px 10px; border-radius:8px;
+  margin-bottom:6px;
+}
+#page-hrmastery .hrm-trap-why{
+  background: rgba(239,68,68,.06);
+  border-right: 3px solid #EF4444;
+}
+#page-hrmastery .hrm-trap-smart{
+  background: rgba(34,197,94,.05);
+  border-right: 3px solid #22C55E;
+  margin-bottom:0;
+}
+#page-hrmastery .hrm-trap-why b,
+#page-hrmastery .hrm-trap-smart b{ color: var(--text); }
+
+/* Pre-interview grid */
+#page-hrmastery .hrm-pre-grid{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap:14px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-pre-card{
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: var(--radius-lg); padding:18px;
+  display:flex; flex-direction:column; gap:10px;
+}
+#page-hrmastery .hrm-pre-card:hover{ border-color: var(--border-hover); }
+#page-hrmastery .hrm-pre-icon{
+  font-size:28px; line-height:1; margin-bottom:2px;
+}
+#page-hrmastery .hrm-pre-title{
+  font-size:14px; font-weight:800; color:var(--text);
+  margin-bottom:4px;
+}
+#page-hrmastery .hrm-pre-list,
+#page-hrmastery .hrm-pre-list-num{
+  margin:0; padding-right:18px;
+  font-size:12px; color:var(--text-muted); line-height:1.85;
+}
+#page-hrmastery .hrm-pre-list li,
+#page-hrmastery .hrm-pre-list-num li{ margin-bottom:5px; }
+#page-hrmastery .hrm-pre-list b,
+#page-hrmastery .hrm-pre-list-num b{ color: var(--text); }
+#page-hrmastery .hrm-pre-tip{
+  font-size:11.5px; color:var(--text-muted); line-height:1.7;
+  background: rgba(102,252,241,.05);
+  border:1px solid rgba(102,252,241,.18);
+  border-radius:8px; padding:8px 12px;
+  margin-top:auto;
+}
+#page-hrmastery .hrm-pre-tip b{ color: var(--text); }
+
+/* Outfit rows */
+#page-hrmastery .hrm-outfit-rows{
+  display:flex; flex-direction:column; gap:8px;
+}
+#page-hrmastery .hrm-outfit-row{
+  display:flex; gap:10px; align-items:flex-start;
+  padding:8px; border-radius:8px;
+  background: rgba(255,255,255,.02);
+}
+#page-hrmastery .hrm-outfit-tag{
+  font-size:10.5px; font-weight:800;
+  padding:4px 10px; border-radius:99px; flex-shrink:0;
+  white-space:nowrap;
+}
+#page-hrmastery .hrm-outfit-text{
+  font-size:11.5px; color:var(--text-muted); line-height:1.7;
+}
+#page-hrmastery .hrm-outfit-text b{ color: var(--text); }
+
+/* Post-interview grid */
+#page-hrmastery .hrm-post-grid{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap:14px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-post-card{
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: var(--radius-lg); padding:18px;
+}
+#page-hrmastery .hrm-post-card.thank{
+  border-color: rgba(34,197,94,.30);
+  box-shadow: 0 0 18px rgba(34,197,94,.06);
+}
+#page-hrmastery .hrm-post-head{
+  display:flex; gap:12px; align-items:flex-start; margin-bottom:12px;
+}
+#page-hrmastery .hrm-post-icon{ font-size:28px; flex-shrink:0; }
+#page-hrmastery .hrm-post-title{
+  font-size:14px; font-weight:800; color:var(--text); margin-bottom:3px;
+}
+#page-hrmastery .hrm-post-sub{
+  font-size:11.5px; color:var(--text-faint); font-style:italic;
+}
+
+#page-hrmastery .hrm-post-template{
+  background: rgba(255,255,255,.02);
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:10px; padding:12px;
+  margin-bottom:10px;
+}
+#page-hrmastery .hrm-post-tlabel{
+  font-size:11px; font-weight:700; color:#A855F7;
+  text-transform:uppercase; letter-spacing:1px;
+  margin-bottom:6px;
+}
+#page-hrmastery .hrm-post-pre{
+  font-family: var(--font-mono, monospace);
+  font-size:12px; color:var(--text);
+  line-height:1.75; white-space:pre-wrap;
+  margin:0; direction: rtl; text-align: right;
+}
+#page-hrmastery .hrm-post-tips{
+  font-size:12px; color:var(--text-muted); line-height:1.7;
+}
+#page-hrmastery .hrm-post-tips b{ color: var(--text); }
+#page-hrmastery .hrm-post-tips ul{
+  margin:6px 0 0; padding-right:18px;
+}
+#page-hrmastery .hrm-post-tips li{ margin-bottom:3px; font-size:11.5px; }
+
+/* Cadence */
+#page-hrmastery .hrm-cadence{
+  display:flex; flex-direction:column; gap:8px;
+}
+#page-hrmastery .hrm-cadence-row{
+  display:flex; gap:10px; align-items:flex-start;
+  padding:8px 10px; border-radius:8px;
+  background: rgba(255,255,255,.02);
+  border-right: 3px solid rgba(168,85,247,.35);
+}
+#page-hrmastery .hrm-cadence-row.final{
+  border-right-color: rgba(239,68,68,.45);
+  background: rgba(239,68,68,.04);
+}
+#page-hrmastery .hrm-cadence-day{
+  font-size:11px; font-weight:800; color:#A855F7;
+  background: rgba(168,85,247,.10);
+  padding:3px 9px; border-radius:8px;
+  flex-shrink:0; white-space:nowrap; min-width:70px; text-align:center;
+}
+#page-hrmastery .hrm-cadence-row.final .hrm-cadence-day{
+  color:#EF4444; background: rgba(239,68,68,.10);
+}
+#page-hrmastery .hrm-cadence-text{
+  font-size:12px; color:var(--text-muted); line-height:1.7;
+}
+
+@media print{
+  #page-hrmastery .hrm-trap-list{ display:grid !important; }
+  #page-hrmastery .hrm-trap-card,
+  #page-hrmastery .hrm-pre-card,
+  #page-hrmastery .hrm-post-card{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
+
+
+
+/* ===========================================================
+   WORKER 08 — HR MASTERY (Phase 3)
+   Negotiation principles + Iraq Salary Table + Calculator IQ
+   =========================================================== */
+
+/* Negotiation 6 principles grid */
+#page-hrmastery .hrm-neg-grid{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap:14px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-neg-card{
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: var(--radius-lg); padding:18px;
+  position:relative; overflow:hidden;
+  transition: var(--transition);
+}
+#page-hrmastery .hrm-neg-card::before{
+  content:''; position:absolute; top:-20px; left:-20px;
+  width:90px; height:90px; border-radius:50%;
+  background: radial-gradient(circle, var(--card-tint, rgba(168,85,247,.18)), transparent 70%);
+  pointer-events:none;
+}
+#page-hrmastery .hrm-neg-card[data-tint="#A855F7"]{ --card-tint: rgba(168,85,247,.20); }
+#page-hrmastery .hrm-neg-card[data-tint="#EC4899"]{ --card-tint: rgba(236,72,153,.20); }
+#page-hrmastery .hrm-neg-card[data-tint="#F59E0B"]{ --card-tint: rgba(245,158,11,.20); }
+#page-hrmastery .hrm-neg-card[data-tint="#22C55E"]{ --card-tint: rgba(34,197,94,.20); }
+#page-hrmastery .hrm-neg-card[data-tint="#3B82F6"]{ --card-tint: rgba(59,130,246,.20); }
+#page-hrmastery .hrm-neg-card[data-tint="#EF4444"]{ --card-tint: rgba(239,68,68,.20); }
+#page-hrmastery .hrm-neg-card:hover{
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+#page-hrmastery .hrm-neg-num{
+  font-size:22px; font-weight:900; color:var(--text);
+  background: rgba(255,255,255,.04);
+  width:42px; height:42px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:10px;
+  border:1px solid var(--border);
+  position:relative; z-index:1;
+}
+#page-hrmastery .hrm-neg-name{
+  font-size:14px; font-weight:800; color:var(--text); margin-bottom:8px;
+  position:relative; z-index:1;
+}
+#page-hrmastery .hrm-neg-text{
+  font-size:12px; color:var(--text-muted); line-height:1.75; margin-bottom:8px;
+  position:relative; z-index:1;
+}
+#page-hrmastery .hrm-neg-text b{ color:var(--text); }
+#page-hrmastery .hrm-neg-ref{
+  font-size:10.5px; color:var(--text-faint); font-style:italic;
+  border-top:1px dashed rgba(255,255,255,.06);
+  padding-top:7px; position:relative; z-index:1;
+}
+
+/* Iraq Salary Table */
+#page-hrmastery .hrm-salary-table-wrap{
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: var(--radius-lg); padding:8px;
+  margin-bottom:10px; overflow-x:auto;
+}
+#page-hrmastery .hrm-salary-table{
+  width:100%; border-collapse: collapse; min-width: 540px;
+  font-size:12.5px;
+}
+#page-hrmastery .hrm-salary-table th{
+  text-align:right; padding:10px 12px;
+  font-size:11.5px; font-weight:800; color:#A855F7;
+  text-transform:uppercase; letter-spacing:0.5px;
+  border-bottom:2px solid rgba(168,85,247,.20);
+  background: rgba(168,85,247,.05);
+}
+#page-hrmastery .hrm-salary-table td{
+  padding:10px 12px; color: var(--text-muted);
+  border-bottom:1px solid rgba(255,255,255,.04);
+}
+#page-hrmastery .hrm-salary-table td:first-child{
+  color: var(--text); font-weight:700;
+}
+#page-hrmastery .hrm-salary-table tr:hover td{
+  background: rgba(168,85,247,.04);
+}
+#page-hrmastery .hrm-salary-table tr.highlight td{
+  background: rgba(168,85,247,.06);
+  font-weight:700; color: var(--text);
+}
+
+/* Calculator */
+#page-hrmastery .hrm-calc{
+  background: linear-gradient(135deg, rgba(168,85,247,.06), rgba(236,72,153,.04));
+  border:1px solid rgba(168,85,247,.25);
+  border-radius: var(--radius-lg);
+  padding:20px;
+  margin-bottom:18px;
+}
+#page-hrmastery .hrm-calc-grid{
+  display:grid; grid-template-columns: 1fr 1fr; gap:16px;
+}
+@media (max-width: 920px){
+  #page-hrmastery .hrm-calc-grid{ grid-template-columns: 1fr; }
+}
+#page-hrmastery .hrm-calc-inputs{
+  display:flex; flex-direction:column; gap:14px;
+}
+#page-hrmastery .hrm-calc-row{
+  display:flex; flex-direction:column; gap:6px;
+}
+#page-hrmastery .hrm-calc-label{
+  font-size:12px; font-weight:700; color: var(--text);
+}
+#page-hrmastery .hrm-calc-label span{
+  color:#A855F7; font-weight:900;
+}
+#page-hrmastery .hrm-calc-input,
+#page-hrmastery .hrm-calc-range{
+  width:100%; padding:10px 12px;
+  background: rgba(255,255,255,.03);
+  border:1px solid var(--border);
+  border-radius:8px;
+  color: var(--text); font-size:13px;
+  font-family: inherit;
+  outline:none;
+  transition: var(--transition);
+}
+#page-hrmastery .hrm-calc-input:focus,
+#page-hrmastery .hrm-calc-range:focus{
+  border-color: rgba(168,85,247,.5);
+  box-shadow: 0 0 0 3px rgba(168,85,247,.15);
+}
+#page-hrmastery .hrm-calc-range{
+  -webkit-appearance: none; appearance: none;
+  height: 6px; padding:0;
+  background: rgba(255,255,255,.06);
+  cursor: pointer;
+}
+#page-hrmastery .hrm-calc-range::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  width:18px; height:18px; border-radius:50%;
+  background: linear-gradient(135deg, #A855F7, #EC4899);
+  cursor: pointer; border:2px solid var(--bg);
+  box-shadow: 0 0 8px rgba(168,85,247,.5);
+}
+#page-hrmastery .hrm-calc-range::-moz-range-thumb{
+  width:18px; height:18px; border-radius:50%;
+  background: linear-gradient(135deg, #A855F7, #EC4899);
+  cursor: pointer; border:2px solid var(--bg);
+}
+#page-hrmastery .hrm-calc-range-labels{
+  display:flex; justify-content:space-between;
+  font-size:10px; color: var(--text-faint);
+  padding: 0 4px;
+}
+#page-hrmastery .hrm-calc-chips{
+  display:flex; flex-wrap:wrap; gap:6px;
+}
+#page-hrmastery .hrm-calc-chip{
+  background: rgba(255,255,255,.03);
+  color: var(--text-muted);
+  border:1px solid var(--border);
+  padding:7px 12px; border-radius:99px;
+  font-size:11.5px; font-weight:600;
+  cursor:pointer; transition: var(--transition);
+  font-family: inherit;
+}
+#page-hrmastery .hrm-calc-chip:hover{
+  border-color: var(--border-hover); color: var(--text);
+}
+#page-hrmastery .hrm-calc-chip.active{
+  background: linear-gradient(135deg, rgba(168,85,247,.20), rgba(236,72,153,.15));
+  color: #fff;
+  border-color: rgba(168,85,247,.5);
+  box-shadow: 0 0 12px rgba(168,85,247,.20);
+}
+#page-hrmastery .hrm-calc-go{
+  background: linear-gradient(135deg, #A855F7, #EC4899);
+  color:#fff; border:none;
+  padding:14px 20px; border-radius:10px;
+  font-size:13.5px; font-weight:800;
+  cursor:pointer; transition: var(--transition);
+  font-family: inherit;
+  margin-top:8px;
+}
+#page-hrmastery .hrm-calc-go:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(168,85,247,.30);
+}
+#page-hrmastery .hrm-calc-go:active{ transform: translateY(0); }
+
+/* Calc outputs */
+#page-hrmastery .hrm-calc-outputs{
+  background: rgba(0,0,0,.20);
+  border:1px solid var(--border);
+  border-radius: 12px;
+  padding:18px; min-height: 280px;
+  display:flex; flex-direction:column; gap:12px;
+}
+#page-hrmastery .hrm-calc-empty{
+  margin: auto; text-align:center;
+  color: var(--text-faint); font-size:13px;
+  display:flex; flex-direction:column; gap:10px;
+  align-items:center;
+}
+#page-hrmastery .hrm-calc-empty-icon{ font-size:48px; opacity:.5; }
+#page-hrmastery .hrm-calc-empty b{ color: var(--text); }
+
+/* Result blocks */
+#page-hrmastery .hrm-calc-result-head{
+  font-size:13px; font-weight:800; color:#A855F7;
+  text-transform:uppercase; letter-spacing:1.5px;
+  border-bottom:1px dashed rgba(255,255,255,.08);
+  padding-bottom:8px;
+}
+#page-hrmastery .hrm-calc-bars{
+  display:flex; flex-direction:column; gap:10px;
+}
+#page-hrmastery .hrm-calc-bar-row{
+  display:flex; flex-direction:column; gap:4px;
+}
+#page-hrmastery .hrm-calc-bar-label{
+  display:flex; justify-content:space-between;
+  font-size:11.5px; color: var(--text-muted);
+}
+#page-hrmastery .hrm-calc-bar-label b{ color: var(--text); font-weight:800; }
+#page-hrmastery .hrm-calc-bar{
+  height:14px; background: rgba(255,255,255,.05);
+  border-radius:99px; overflow:hidden; position:relative;
+}
+#page-hrmastery .hrm-calc-bar-fill{
+  height:100%; border-radius:99px;
+  transition: width .8s ease;
+}
+#page-hrmastery .hrm-calc-bar-fill.walk{ background: linear-gradient(90deg, #EF4444, #F59E0B); }
+#page-hrmastery .hrm-calc-bar-fill.median{ background: linear-gradient(90deg, #F59E0B, #EAB308); }
+#page-hrmastery .hrm-calc-bar-fill.target{ background: linear-gradient(90deg, #22C55E, #10B981); }
+#page-hrmastery .hrm-calc-bar-fill.anchor{ background: linear-gradient(90deg, #A855F7, #EC4899); }
+
+#page-hrmastery .hrm-calc-totals{
+  display:grid; grid-template-columns: repeat(2,1fr); gap:8px;
+  padding-top:8px;
+}
+#page-hrmastery .hrm-calc-total-card{
+  background: rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:10px; padding:10px 12px;
+}
+#page-hrmastery .hrm-calc-total-label{
+  font-size:10.5px; color: var(--text-faint);
+  text-transform:uppercase; letter-spacing:1px;
+  margin-bottom:4px;
+}
+#page-hrmastery .hrm-calc-total-val{
+  font-size:16px; font-weight:900; color: var(--text);
+}
+#page-hrmastery .hrm-calc-total-val small{
+  font-size:11px; color: var(--text-faint);
+  font-weight:600; margin-right:4px;
+}
+
+#page-hrmastery .hrm-calc-script{
+  background: rgba(168,85,247,.06);
+  border:1px solid rgba(168,85,247,.22);
+  border-radius:10px; padding:14px;
+  font-size:12.5px; color: var(--text-muted); line-height:1.85;
+  white-space: pre-wrap;
+}
+#page-hrmastery .hrm-calc-script b{ color: var(--text); }
+#page-hrmastery .hrm-calc-script .hrm-script-tag{
+  display:inline-block;
+  background: rgba(168,85,247,.20); color:#fff;
+  font-size:10px; font-weight:800;
+  padding:2px 8px; border-radius:99px;
+  margin-bottom:6px; letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+@media print{
+  #page-hrmastery .hrm-calc,
+  #page-hrmastery .hrm-salary-table-wrap,
+  #page-hrmastery .hrm-neg-card{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
+
+
+
+/* ===========================================================
+   WORKER 08 — HR MASTERY (Phase 4)
+   Scenarios player + Job Ad Decoder + 12 Red Flags
+   =========================================================== */
+
+/* Scenarios player */
+#page-hrmastery .hrm-scn-shell{
+  background: linear-gradient(135deg, rgba(168,85,247,.06), rgba(59,130,246,.04));
+  border:1px solid rgba(168,85,247,.25);
+  border-radius: var(--radius-lg);
+  padding:18px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-scn-header{
+  display:grid; grid-template-columns: auto 1fr auto;
+  gap:14px; align-items:center; margin-bottom:14px;
+}
+#page-hrmastery .hrm-scn-counter{
+  font-size:14px; font-weight:900; color:var(--text);
+  background: rgba(168,85,247,.10);
+  padding:6px 12px; border-radius:8px;
+  border:1px solid rgba(168,85,247,.30);
+}
+#page-hrmastery .hrm-scn-counter span:first-child{ color:#A855F7; }
+#page-hrmastery .hrm-scn-progress{
+  height:8px; background: rgba(255,255,255,.05);
+  border-radius:99px; overflow:hidden;
+}
+#page-hrmastery .hrm-scn-progress-fill{
+  height:100%; width:0%;
+  background: linear-gradient(90deg, #A855F7, #EC4899);
+  border-radius:99px; transition: width .4s ease;
+}
+#page-hrmastery .hrm-scn-score{
+  font-size:13px; color: var(--text-muted);
+  display:flex; align-items:center; gap:5px;
+  background: rgba(255,255,255,.03);
+  padding:6px 12px; border-radius:8px;
+  border:1px solid var(--border);
+}
+#page-hrmastery .hrm-scn-score-label{ color: var(--text-faint); font-size:11px; }
+#page-hrmastery .hrm-scn-score-val{
+  font-size:16px; font-weight:900; color:#22C55E;
+}
+
+#page-hrmastery .hrm-scn-body{ min-height:340px; }
+#page-hrmastery .hrm-scn-title{
+  font-size:15px; font-weight:800; color:var(--text);
+  margin-bottom:6px;
+}
+#page-hrmastery .hrm-scn-context{
+  font-size:12.5px; color: var(--text-muted); line-height:1.85;
+  background: rgba(255,255,255,.02);
+  border-right: 3px solid #A855F7;
+  border-radius: 8px;
+  padding: 10px 14px; margin-bottom:8px;
+}
+#page-hrmastery .hrm-scn-offer{
+  font-size:12.5px; color: var(--text); line-height:1.8;
+  background: rgba(245,158,11,.05);
+  border:1px solid rgba(245,158,11,.20);
+  border-radius:8px;
+  padding:10px 14px; margin-bottom:14px;
+  font-weight:600;
+}
+#page-hrmastery .hrm-scn-offer b{ color:#F59E0B; }
+
+#page-hrmastery .hrm-scn-options{
+  display:grid; grid-template-columns: 1fr 1fr;
+  gap:10px; margin-bottom:14px;
+}
+@media (max-width: 720px){
+  #page-hrmastery .hrm-scn-options{ grid-template-columns: 1fr; }
+  #page-hrmastery .hrm-scn-header{ grid-template-columns: 1fr; }
+}
+#page-hrmastery .hrm-scn-option{
+  background: rgba(255,255,255,.02);
+  border:1px solid var(--border);
+  border-radius:10px; padding:12px 14px;
+  cursor:pointer; transition: var(--transition);
+  text-align:right;
+  font-family: inherit;
+  color: var(--text-muted);
+  font-size:12.5px; line-height:1.7;
+}
+#page-hrmastery .hrm-scn-option:hover{
+  border-color: var(--border-hover);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+#page-hrmastery .hrm-scn-option.picked{ pointer-events: none; }
+#page-hrmastery .hrm-scn-option.picked.weak{
+  border-color: rgba(239,68,68,.5);
+  background: rgba(239,68,68,.08);
+  color: var(--text);
+}
+#page-hrmastery .hrm-scn-option.picked.med{
+  border-color: rgba(245,158,11,.5);
+  background: rgba(245,158,11,.08);
+  color: var(--text);
+}
+#page-hrmastery .hrm-scn-option.picked.strong{
+  border-color: rgba(34,197,94,.5);
+  background: rgba(34,197,94,.10);
+  color: var(--text);
+  box-shadow: 0 0 20px rgba(34,197,94,.20);
+}
+#page-hrmastery .hrm-scn-result{
+  background: rgba(0,0,0,.18);
+  border-radius:10px; padding:14px;
+  margin-top:8px;
+  border:1px solid var(--border);
+}
+#page-hrmastery .hrm-scn-result.weak{ border-color: rgba(239,68,68,.30); }
+#page-hrmastery .hrm-scn-result.med{ border-color: rgba(245,158,11,.30); }
+#page-hrmastery .hrm-scn-result.strong{ border-color: rgba(34,197,94,.40); }
+#page-hrmastery .hrm-scn-result-tag{
+  display:inline-block;
+  font-size:10.5px; font-weight:800;
+  padding:3px 10px; border-radius:99px; margin-bottom:6px;
+  text-transform:uppercase; letter-spacing:1px;
+}
+#page-hrmastery .hrm-scn-result.weak .hrm-scn-result-tag{ background: rgba(239,68,68,.12); color:#EF4444; }
+#page-hrmastery .hrm-scn-result.med .hrm-scn-result-tag{ background: rgba(245,158,11,.12); color:#F59E0B; }
+#page-hrmastery .hrm-scn-result.strong .hrm-scn-result-tag{ background: rgba(34,197,94,.15); color:#22C55E; }
+#page-hrmastery .hrm-scn-result-out{
+  font-size:12.5px; color: var(--text-muted); line-height:1.8;
+  margin-bottom:8px;
+}
+#page-hrmastery .hrm-scn-result-out b{ color: var(--text); }
+#page-hrmastery .hrm-scn-result-lesson{
+  font-size:11.5px; color: #A855F7;
+  background: rgba(168,85,247,.06);
+  border-right: 3px solid #A855F7;
+  padding:8px 12px; border-radius:8px;
+}
+#page-hrmastery .hrm-scn-result-lesson b{ color: #fff; }
+
+#page-hrmastery .hrm-scn-controls{
+  display:flex; gap:10px; justify-content:space-between;
+  flex-wrap:wrap;
+  border-top:1px dashed rgba(255,255,255,.06);
+  padding-top:14px;
+}
+#page-hrmastery .hrm-scn-btn{
+  background: transparent; color: var(--text-muted);
+  border:1px solid var(--border);
+  padding:9px 18px; border-radius:8px;
+  font-size:12px; font-weight:700;
+  cursor:pointer; font-family: inherit;
+  transition: var(--transition);
+}
+#page-hrmastery .hrm-scn-btn:hover{
+  color: var(--text); border-color: var(--border-hover);
+}
+#page-hrmastery .hrm-scn-btn.primary{
+  background: linear-gradient(135deg, #A855F7, #EC4899);
+  color:#fff; border-color: transparent;
+}
+#page-hrmastery .hrm-scn-btn.primary:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(168,85,247,.30);
+}
+#page-hrmastery .hrm-scn-btn:disabled{
+  opacity:.4; cursor: not-allowed; transform: none;
+}
+
+/* Final scoreboard */
+#page-hrmastery .hrm-scn-final{
+  text-align:center; padding:20px 16px;
+}
+#page-hrmastery .hrm-scn-final-icon{ font-size:48px; margin-bottom:8px; }
+#page-hrmastery .hrm-scn-final-score{
+  font-size:32px; font-weight:900; color:#22C55E; margin-bottom:6px;
+}
+#page-hrmastery .hrm-scn-final-msg{
+  font-size:13px; color: var(--text-muted); line-height:1.7;
+  max-width: 480px; margin: 0 auto 12px;
+}
+
+/* Job Ad Decoder */
+#page-hrmastery .hrm-decoder{
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding:18px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-decoder-grid{
+  display:grid; grid-template-columns: 1fr 1fr;
+  gap:16px; margin-bottom:14px;
+}
+@media (max-width: 920px){
+  #page-hrmastery .hrm-decoder-grid{ grid-template-columns: 1fr; }
+}
+#page-hrmastery .hrm-decoder-input-wrap{
+  display:flex; flex-direction:column; gap:10px;
+}
+#page-hrmastery .hrm-decoder-label{
+  font-size:12px; font-weight:700; color: var(--text);
+}
+#page-hrmastery .hrm-decoder-text{
+  width:100%; min-height:200px;
+  background: rgba(0,0,0,.20);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:12px;
+  color: var(--text); font-size:12.5px;
+  font-family: inherit; line-height:1.7;
+  outline:none; resize:vertical;
+  direction:rtl; text-align:right;
+}
+#page-hrmastery .hrm-decoder-text:focus{
+  border-color: rgba(168,85,247,.5);
+  box-shadow: 0 0 0 3px rgba(168,85,247,.15);
+}
+#page-hrmastery .hrm-decoder-actions{
+  display:flex; gap:8px; flex-wrap:wrap;
+}
+#page-hrmastery .hrm-decoder-btn{
+  background: transparent; color: var(--text-muted);
+  border:1px solid var(--border);
+  padding:8px 14px; border-radius:8px;
+  font-size:12px; font-weight:700;
+  cursor:pointer; font-family:inherit;
+  transition: var(--transition);
+}
+#page-hrmastery .hrm-decoder-btn:hover{ color: var(--text); border-color: var(--border-hover); }
+#page-hrmastery .hrm-decoder-btn.primary{
+  background: linear-gradient(135deg, #A855F7, #EC4899);
+  color:#fff; border-color: transparent;
+}
+#page-hrmastery .hrm-decoder-btn.primary:hover{
+  transform: translateY(-1px);
+}
+
+#page-hrmastery .hrm-decoder-output{
+  background: rgba(0,0,0,.20);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:16px; min-height: 200px;
+  display:flex; flex-direction:column; gap:10px;
+}
+#page-hrmastery .hrm-decoder-score{
+  display:flex; align-items:center; gap:10px;
+  padding:10px 12px; border-radius:8px;
+  font-size:13px;
+}
+#page-hrmastery .hrm-decoder-score.healthy{
+  background: rgba(34,197,94,.10);
+  color:#22C55E;
+  border:1px solid rgba(34,197,94,.30);
+}
+#page-hrmastery .hrm-decoder-score.caution{
+  background: rgba(245,158,11,.10);
+  color:#F59E0B;
+  border:1px solid rgba(245,158,11,.30);
+}
+#page-hrmastery .hrm-decoder-score.toxic{
+  background: rgba(239,68,68,.10);
+  color:#EF4444;
+  border:1px solid rgba(239,68,68,.30);
+}
+#page-hrmastery .hrm-decoder-score b{ font-size:18px; }
+#page-hrmastery .hrm-decoder-flags{
+  display:flex; flex-direction:column; gap:6px;
+  font-size:12px;
+}
+#page-hrmastery .hrm-decoder-flag{
+  padding:7px 11px; border-radius:8px;
+  display:flex; gap:8px; align-items:flex-start;
+  line-height:1.6;
+}
+#page-hrmastery .hrm-decoder-flag.green{ background: rgba(34,197,94,.06); border:1px solid rgba(34,197,94,.20); color: var(--text); }
+#page-hrmastery .hrm-decoder-flag.yellow{ background: rgba(245,158,11,.06); border:1px solid rgba(245,158,11,.20); color: var(--text); }
+#page-hrmastery .hrm-decoder-flag.red{ background: rgba(239,68,68,.06); border:1px solid rgba(239,68,68,.25); color: var(--text); }
+#page-hrmastery .hrm-decoder-flag-icon{ flex-shrink:0; font-size:14px; }
+#page-hrmastery .hrm-decoder-flag b{ color: var(--text); }
+#page-hrmastery .hrm-decoder-flag-meta{
+  font-size:10.5px; color: var(--text-faint);
+  margin-right:auto;
+  flex-shrink:0;
+}
+
+#page-hrmastery .hrm-decoder-ref{
+  margin-top:14px;
+  border-top:1px dashed rgba(255,255,255,.06);
+  padding-top:14px;
+}
+#page-hrmastery .hrm-decoder-ref-title{
+  font-size:13px; font-weight:800; color: var(--text);
+  margin-bottom:10px;
+}
+#page-hrmastery .hrm-flag-grid{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:10px;
+}
+#page-hrmastery .hrm-flag-card{
+  background: rgba(255,255,255,.02);
+  border:1px solid var(--border);
+  border-radius:10px; padding:12px;
+}
+#page-hrmastery .hrm-flag-card.good{ border-color: rgba(34,197,94,.25); }
+#page-hrmastery .hrm-flag-card.warn{ border-color: rgba(245,158,11,.25); }
+#page-hrmastery .hrm-flag-card.bad{ border-color: rgba(239,68,68,.25); }
+#page-hrmastery .hrm-flag-h{
+  font-size:13px; font-weight:800; color: var(--text);
+  margin-bottom:8px;
+}
+
+/* 12 Red Flags grid */
+#page-hrmastery .hrm-redflag-grid{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap:12px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-redflag-card{
+  background: var(--surface); border:1px solid var(--border);
+  border-right: 4px solid rgba(239,68,68,.4);
+  border-radius: var(--radius-lg); padding:14px;
+  transition: var(--transition);
+}
+#page-hrmastery .hrm-redflag-card:hover{
+  border-color: var(--border-hover);
+  border-right-color: #EF4444;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+#page-hrmastery .hrm-redflag-num{
+  font-size:11px; font-weight:800; color:#EF4444;
+  background: rgba(239,68,68,.08);
+  width:28px; height:28px; border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:8px;
+}
+#page-hrmastery .hrm-redflag-title{
+  font-size:13.5px; font-weight:800; color: var(--text);
+  margin-bottom:6px;
+}
+#page-hrmastery .hrm-redflag-text{
+  font-size:11.5px; color: var(--text-muted); line-height:1.75;
+}
+#page-hrmastery .hrm-redflag-text b{ color: var(--text); }
+
+@media print{
+  #page-hrmastery .hrm-scn-shell,
+  #page-hrmastery .hrm-decoder,
+  #page-hrmastery .hrm-redflag-card,
+  #page-hrmastery .hrm-flag-card{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
+
+
+
+/* ===========================================================
+   WORKER 08 — HR MASTERY (Phase 5)
+   Mock Screen + Offer Compare + Iraq Labor Law + Cheat + Citations
+   =========================================================== */
+
+/* Mock Screen */
+#page-hrmastery .hrm-mock{
+  background: linear-gradient(135deg, rgba(168,85,247,.06), rgba(34,197,94,.04));
+  border:1px solid rgba(168,85,247,.25);
+  border-radius: var(--radius-lg);
+  padding:18px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-mock-intro{
+  text-align:center; padding:30px 20px;
+}
+#page-hrmastery .hrm-mock-intro-icon{ font-size:54px; margin-bottom:12px; }
+#page-hrmastery .hrm-mock-intro-text{
+  font-size:13px; color:var(--text-muted); line-height:1.85;
+  max-width: 480px; margin:0 auto 18px;
+}
+#page-hrmastery .hrm-mock-intro-text b{ color: var(--text); }
+
+#page-hrmastery .hrm-mock-btn{
+  background: transparent; color: var(--text-muted);
+  border:1px solid var(--border);
+  padding:11px 22px; border-radius:10px;
+  font-size:13px; font-weight:800;
+  cursor:pointer; font-family:inherit;
+  transition: var(--transition);
+}
+#page-hrmastery .hrm-mock-btn:hover{
+  color: var(--text); border-color: var(--border-hover);
+}
+#page-hrmastery .hrm-mock-btn.primary{
+  background: linear-gradient(135deg, #A855F7, #EC4899);
+  color:#fff; border-color: transparent;
+}
+#page-hrmastery .hrm-mock-btn.primary:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(168,85,247,.30);
+}
+
+#page-hrmastery .hrm-mock-top{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:14px; margin-bottom:14px;
+}
+#page-hrmastery .hrm-mock-step{
+  font-size:12px; font-weight:800; color:var(--text);
+  background: rgba(168,85,247,.10);
+  padding:6px 12px; border-radius:8px;
+  border:1px solid rgba(168,85,247,.30);
+}
+#page-hrmastery .hrm-mock-step span{ color:#A855F7; }
+#page-hrmastery .hrm-mock-timer-wrap{
+  display:flex; align-items:center; gap:10px;
+  flex:1; max-width:300px;
+}
+#page-hrmastery .hrm-mock-timer-bar{
+  flex:1; height:10px; background: rgba(255,255,255,.05);
+  border-radius:99px; overflow:hidden;
+}
+#page-hrmastery .hrm-mock-timer-fill{
+  height:100%; width:100%;
+  background: linear-gradient(90deg, #22C55E, #EAB308, #EF4444);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  border-radius:99px;
+  transition: width 1s linear;
+}
+#page-hrmastery .hrm-mock-timer-num{
+  font-size:18px; font-weight:900; color: var(--text);
+  min-width: 38px; text-align:center;
+}
+#page-hrmastery .hrm-mock-timer-num.warn{ color:#F59E0B; }
+#page-hrmastery .hrm-mock-timer-num.danger{ color:#EF4444; animation: hrmPulse .6s infinite; }
+
+@keyframes hrmPulse{
+  0%, 100%{ opacity:1; transform:scale(1); }
+  50%{ opacity:.55; transform:scale(.95); }
+}
+
+#page-hrmastery .hrm-mock-q{
+  font-size:16px; font-weight:800; color: var(--text);
+  background: rgba(255,255,255,.03);
+  border-right: 4px solid #A855F7;
+  border-radius:8px;
+  padding:14px 18px; margin-bottom:12px;
+  line-height:1.6;
+}
+#page-hrmastery .hrm-mock-input{
+  width:100%; min-height:140px;
+  background: rgba(0,0,0,.20);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:12px;
+  color: var(--text); font-size:13px;
+  font-family: inherit; line-height:1.7;
+  outline:none; resize:vertical;
+  direction:rtl; text-align:right;
+}
+#page-hrmastery .hrm-mock-input:focus{
+  border-color: rgba(168,85,247,.5);
+  box-shadow: 0 0 0 3px rgba(168,85,247,.15);
+}
+#page-hrmastery .hrm-mock-controls{
+  display:flex; justify-content:space-between; gap:12px;
+  flex-wrap:wrap; margin-top:10px;
+}
+#page-hrmastery .hrm-mock-stats{
+  display:flex; gap:14px; align-items:center;
+  font-size:12px; color: var(--text-muted);
+}
+#page-hrmastery .hrm-mock-stats span b,
+#page-hrmastery .hrm-mock-stats > span{ color: var(--text); }
+
+/* Mock report */
+#page-hrmastery .hrm-mock-report-h{
+  font-size:18px; font-weight:900; color:var(--text);
+  margin-bottom:6px;
+}
+#page-hrmastery .hrm-mock-report-sub{
+  font-size:12.5px; color: var(--text-muted); margin-bottom:14px;
+}
+#page-hrmastery .hrm-mock-metrics{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap:10px; margin-bottom:14px;
+}
+#page-hrmastery .hrm-mock-metric{
+  background: rgba(255,255,255,.03);
+  border:1px solid var(--border);
+  border-radius:10px; padding:12px;
+  text-align:center;
+}
+#page-hrmastery .hrm-mock-metric-val{
+  font-size:24px; font-weight:900; color: #A855F7;
+  margin-bottom:4px;
+}
+#page-hrmastery .hrm-mock-metric-val.good{ color:#22C55E; }
+#page-hrmastery .hrm-mock-metric-val.warn{ color:#F59E0B; }
+#page-hrmastery .hrm-mock-metric-val.bad{ color:#EF4444; }
+#page-hrmastery .hrm-mock-metric-label{
+  font-size:10.5px; color: var(--text-faint);
+  text-transform:uppercase; letter-spacing:1px;
+}
+#page-hrmastery .hrm-mock-feedback{
+  background: rgba(168,85,247,.05);
+  border:1px solid rgba(168,85,247,.20);
+  border-radius:10px; padding:14px;
+  font-size:12.5px; color: var(--text-muted); line-height:1.85;
+  margin-bottom:10px;
+}
+#page-hrmastery .hrm-mock-feedback b{ color:var(--text); }
+#page-hrmastery .hrm-mock-answers{
+  background: rgba(0,0,0,.15);
+  border:1px solid var(--border);
+  border-radius:10px; padding:12px;
+  margin-bottom:10px;
+}
+#page-hrmastery .hrm-mock-ans-q{
+  font-size:12px; font-weight:800; color: var(--text-muted); margin-top:8px;
+}
+#page-hrmastery .hrm-mock-ans-a{
+  font-size:12px; color: var(--text); line-height:1.75;
+  background: rgba(255,255,255,.03);
+  border-radius:8px; padding:8px 10px; margin-top:4px;
+  white-space: pre-wrap;
+}
+
+/* Offer Compare */
+#page-hrmastery .hrm-cmp{
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding:18px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-cmp-section-title{
+  font-size:14px; font-weight:800; color: var(--text);
+  margin-bottom:10px;
+}
+#page-hrmastery .hrm-cmp-weights{ margin-bottom:18px; }
+#page-hrmastery .hrm-cmp-weights-grid{
+  display:grid; grid-template-columns: 1fr 1fr;
+  gap:10px;
+}
+@media (max-width: 720px){
+  #page-hrmastery .hrm-cmp-weights-grid{ grid-template-columns: 1fr; }
+}
+#page-hrmastery .hrm-cmp-weight-row{
+  display:grid; grid-template-columns: 130px 1fr 36px;
+  gap:10px; align-items:center;
+  background: rgba(255,255,255,.02);
+  padding:8px 10px; border-radius:8px;
+}
+#page-hrmastery .hrm-cmp-weight-row label{
+  font-size:12px; color: var(--text-muted);
+}
+#page-hrmastery .hrm-cmp-w,
+#page-hrmastery .hrm-cmp-s{
+  -webkit-appearance: none; appearance: none;
+  width:100%; height:6px; padding:0;
+  background: rgba(255,255,255,.06);
+  border-radius:99px;
+  cursor: pointer;
+}
+#page-hrmastery .hrm-cmp-w::-webkit-slider-thumb,
+#page-hrmastery .hrm-cmp-s::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  width:14px; height:14px; border-radius:50%;
+  background: linear-gradient(135deg, #A855F7, #EC4899);
+  cursor: pointer; border:2px solid var(--bg);
+}
+#page-hrmastery .hrm-cmp-w-val,
+#page-hrmastery .hrm-cmp-sv{
+  font-size:13px; font-weight:800; color:#A855F7;
+  text-align:center;
+}
+#page-hrmastery .hrm-cmp-total{
+  font-size:12px; color: var(--text-muted);
+  margin-top:8px;
+  text-align:left;
+}
+#page-hrmastery .hrm-cmp-total span{
+  color:#22C55E; font-weight:800;
+}
+#page-hrmastery .hrm-cmp-total.warn span{ color:#F59E0B; }
+#page-hrmastery .hrm-cmp-total.bad span{ color:#EF4444; }
+
+#page-hrmastery .hrm-cmp-offers-grid{
+  display:grid; grid-template-columns: repeat(3, 1fr);
+  gap:10px; margin-bottom:14px;
+}
+@media (max-width: 920px){
+  #page-hrmastery .hrm-cmp-offers-grid{ grid-template-columns: 1fr; }
+}
+#page-hrmastery .hrm-cmp-offer{
+  background: rgba(255,255,255,.02);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px;
+  display:flex; flex-direction:column; gap:8px;
+}
+#page-hrmastery .hrm-cmp-name{
+  width:100%;
+  background: transparent;
+  border: none; border-bottom:1px solid var(--border);
+  padding: 6px 4px;
+  color: var(--text); font-size:14px; font-weight:800;
+  font-family: inherit; outline:none;
+  text-align: right;
+}
+#page-hrmastery .hrm-cmp-name:focus{ border-bottom-color: #A855F7; }
+#page-hrmastery .hrm-cmp-row{
+  display:grid; grid-template-columns: 70px 1fr 24px;
+  gap:8px; align-items:center;
+}
+#page-hrmastery .hrm-cmp-row label{
+  font-size:11px; color: var(--text-muted);
+}
+
+/* Compare result */
+#page-hrmastery .hrm-cmp-result{
+  background: rgba(0,0,0,.20);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:16px;
+}
+#page-hrmastery .hrm-cmp-winner{
+  display:flex; align-items:center; gap:12px;
+  background: linear-gradient(135deg, rgba(34,197,94,.10), rgba(168,85,247,.05));
+  border:1px solid rgba(34,197,94,.30);
+  border-radius:10px; padding:12px 16px;
+  margin-bottom:14px;
+}
+#page-hrmastery .hrm-cmp-winner-icon{ font-size:28px; }
+#page-hrmastery .hrm-cmp-winner-text{
+  font-size:14px; color: var(--text);
+}
+#page-hrmastery .hrm-cmp-winner-text b{ color:#22C55E; font-size:16px; }
+
+#page-hrmastery .hrm-cmp-bars{
+  display:flex; flex-direction:column; gap:10px;
+}
+#page-hrmastery .hrm-cmp-bar-row{
+  display:grid; grid-template-columns: 110px 1fr 60px;
+  gap:10px; align-items:center;
+}
+#page-hrmastery .hrm-cmp-bar-row label{
+  font-size:12px; color: var(--text); font-weight:700;
+}
+#page-hrmastery .hrm-cmp-bar{
+  height:18px; background: rgba(255,255,255,.05);
+  border-radius:99px; overflow:hidden;
+}
+#page-hrmastery .hrm-cmp-bar-fill{
+  height:100%; border-radius:99px;
+  background: linear-gradient(90deg, #A855F7, #EC4899);
+  display:flex; align-items:center; justify-content:flex-end;
+  padding-left:8px; padding-right:8px;
+  transition: width .8s ease;
+  font-size:11px; font-weight:800; color:#fff;
+}
+#page-hrmastery .hrm-cmp-bar-fill.win{
+  background: linear-gradient(90deg, #22C55E, #10B981);
+  box-shadow: 0 0 18px rgba(34,197,94,.30);
+}
+#page-hrmastery .hrm-cmp-bar-score{
+  font-size:14px; font-weight:900; color: var(--text);
+  text-align:center;
+}
+
+/* Iraq Labor Law */
+#page-hrmastery .hrm-law-grid{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:12px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-law-card{
+  background: var(--surface); border:1px solid var(--border);
+  border-right: 4px solid rgba(168,85,247,.35);
+  border-radius: var(--radius-lg); padding:14px;
+  transition: var(--transition);
+}
+#page-hrmastery .hrm-law-card:hover{
+  border-color: var(--border-hover);
+  border-right-color: #A855F7;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+#page-hrmastery .hrm-law-icon{ font-size:24px; margin-bottom:6px; }
+#page-hrmastery .hrm-law-title{
+  font-size:13.5px; font-weight:800; color: var(--text);
+  margin-bottom:6px;
+}
+#page-hrmastery .hrm-law-text{
+  font-size:11.5px; color: var(--text-muted); line-height:1.75;
+}
+#page-hrmastery .hrm-law-text b{ color: var(--text); }
+
+/* Cheat Sheet */
+#page-hrmastery .hrm-cheat-grid{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap:12px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-cheat-card{
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: var(--radius-lg); padding:14px 16px;
+  transition: var(--transition);
+}
+#page-hrmastery .hrm-cheat-card:hover{
+  border-color: var(--border-hover);
+}
+#page-hrmastery .hrm-cheat-h{
+  font-size:13.5px; font-weight:800; color: var(--text);
+  margin-bottom:8px;
+  border-bottom:1px dashed rgba(255,255,255,.06);
+  padding-bottom:6px;
+}
+#page-hrmastery .hrm-cheat-card ul{
+  margin:0; padding-right:18px;
+  font-size:11.5px; color: var(--text-muted); line-height:1.85;
+}
+#page-hrmastery .hrm-cheat-card li{ margin-bottom:4px; }
+#page-hrmastery .hrm-cheat-card b{ color: var(--text); }
+
+/* Citations */
+#page-hrmastery .hrm-citations{
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding:18px 24px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-cite-list{
+  margin:0; padding-right:20px;
+  font-size:12.5px; color: var(--text-muted); line-height:1.85;
+  counter-reset: hrm-cite;
+}
+#page-hrmastery .hrm-cite-list li{
+  margin-bottom:8px; padding-bottom:8px;
+  border-bottom:1px dashed rgba(255,255,255,.05);
+}
+#page-hrmastery .hrm-cite-list li:last-child{ border-bottom:none; }
+#page-hrmastery .hrm-cite-list b{ color: var(--text); }
+#page-hrmastery .hrm-cite-list i{ color: var(--text-faint); }
+
+@media print{
+  #page-hrmastery .hrm-mock,
+  #page-hrmastery .hrm-cmp,
+  #page-hrmastery .hrm-law-card,
+  #page-hrmastery .hrm-cheat-card,
+  #page-hrmastery .hrm-citations{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}

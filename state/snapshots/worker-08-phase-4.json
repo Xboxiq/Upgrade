@@ -1,0 +1,23 @@
+{
+  "worker": "08",
+  "phase_completed": 4,
+  "phases_total": 5,
+  "title": "15 Scenarios Player + Job Ad Decoder + 12 HR Red Flags",
+  "lines_added": 920,
+  "branch": "worker-08-complete",
+  "files_modified": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "sections_added": [
+    "Section J: 15 Negotiation Scenarios Player (Lab 2) — situation + offer + 4 options (weak/med/med/strong) + result + lesson + final scoreboard",
+    "Section K: Job Ad Decoder (Lab 3) — 21 flag keywords, healthy/caution/toxic verdict",
+    "Section L: 12 HR Red Flags grid"
+  ],
+  "localStorage_keys": ["upg_salary_drafts"],
+  "open_threads": [
+    "Phase 5: Mock Screen Timer (Lab 5) + Offer Compare Matrix (Lab 6) + Iraq Labor Law block + 14 Citations + Cheat Sheet"
+  ],
+  "next_action": "Continue Worker 08 Phase 5 (final)"
+}
