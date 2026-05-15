@@ -121,6 +121,15 @@ function togglePsychAcc(btn) {
           <circle cx="9" cy="7" r="4"/>
           <path d="M22 11l-3 3-2-2"/>
         </svg>`
+      },
+      phonerepair: {
+        title: 'صيانة الهواتف الذكية',
+        breadcrumb: 'الرئيسية / وحدات التدريب / صيانة الهواتف',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="6" y="2" width="12" height="20" rx="2"/>
+          <line x1="11" y1="18" x2="13" y2="18"/>
+          <path d="M9 6h6"/>
+        </svg>`
       }
     };
 
@@ -8862,6 +8871,48 @@ document.addEventListener('DOMContentLoaded', () => {
   } else { init(); }
   document.addEventListener('click', function(e){
     var t = e.target.closest && e.target.closest('[data-page="social"]');
+    if (t) setTimeout(init, 60);
+  });
+})();
+
+
+
+/* ============================================================
+   WORKER 07 · PHASE 1 — Phone Repair (page-phonerepair)
+   Scope: #page-phonerepair only. Vanilla JS. IIFE isolated.
+============================================================ */
+(function(){
+  'use strict';
+
+  function $$(sel, root){ return (root||document).querySelectorAll(sel); }
+
+  function bindElecToggles(){
+    var btns = $$('#page-phonerepair .pr-card-toggle[data-pr-toggle]');
+    btns.forEach(function(btn){
+      if (btn.__pr_bound) return; btn.__pr_bound = true;
+      btn.addEventListener('click', function(){
+        var key = btn.getAttribute('data-pr-toggle');
+        var body = document.getElementById('pr-body-' + key);
+        if (!body) return;
+        var isOpen = !body.hidden;
+        body.hidden = isOpen;
+        btn.classList.toggle('is-open', !isOpen);
+        btn.textContent = isOpen ? 'عرض التفاصيل ▾' : 'إخفاء التفاصيل ▴';
+      });
+    });
+  }
+
+  function init(){
+    if (!document.getElementById('page-phonerepair')) return;
+    bindElecToggles();
+  }
+
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+
+  document.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('[data-page="phonerepair"]');
     if (t) setTimeout(init, 60);
   });
 })();

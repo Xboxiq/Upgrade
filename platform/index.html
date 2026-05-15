@@ -176,6 +176,16 @@
         <span class="nav-badge" style="background:linear-gradient(135deg,#F59E0B,#10B981);color:#fff;">جديد</span>
       </div>
 
+      <div class="nav-item" data-page="phonerepair">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="6" y="2" width="12" height="20" rx="2"/>
+          <line x1="11" y1="18" x2="13" y2="18"/>
+          <path d="M9 6h6"/>
+        </svg>
+        <span class="nav-label">صيانة الهواتف</span>
+        <span class="nav-badge" style="background:linear-gradient(135deg,#EF4444,#F59E0B);color:#fff;">جديد</span>
+      </div>
+
       <span class="nav-section-label">الإدارة</span>
 
       <div class="nav-item" data-page="none">
@@ -12225,6 +12235,267 @@ const bird = { ...canMove(), ...canFly() };
       </section><!-- /acc-cashier Phase 5 -->
 
     </section><!-- /page-accounting -->
+
+
+    <!-- ============================================================
+         PAGE 12 — PHONE REPAIR (Worker 07 — صيانة الهواتف)
+         Scope: #page-phonerepair only. Additive. Vanilla.
+    ============================================================ -->
+    <section class="page" id="page-phonerepair">
+
+      <div class="page-header">
+        <h1>📱🔧 صيانة الهواتف الذكية — Mastery</h1>
+        <p>من الإلكترونيات الأساسية حتى Logic Board Repair — مع سوق العراق الحقيقي.</p>
+      </div>
+
+      <!-- ============================================================
+           PHASE 1 · A — Electronics Fundamentals (Knowledge Spine)
+      ============================================================ -->
+      <section class="pr-section" id="pr-electronics-fund" data-pr-section="electronics">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">الأساسيات الإلكترونية · Electronics 101</span>
+          <h2>قبل أن تفك أي جهاز — افهم الفيزياء</h2>
+          <p>ست بطاقات interactive تشرح أساسيات لا غنى عنها لأي فني. اضغط على أي بطاقة لتوسيعها.</p>
+        </header>
+
+        <div class="pr-grid pr-grid-3" id="pr-elec-grid">
+
+          <article class="pr-card pr-elec-card" data-pr-elec="ohm">
+            <div class="pr-card-icon">⚡</div>
+            <h3>Ohm's Law — قانون أوم</h3>
+            <p class="pr-card-lead">V = I × R · الجهد = التيار × المقاومة</p>
+            <button class="pr-card-toggle" data-pr-toggle="ohm">عرض التفاصيل ▾</button>
+            <div class="pr-card-body" id="pr-body-ohm" hidden>
+              <ul>
+                <li><b>Voltage (V):</b> الفرق في الجهد بين نقطتين — قياسه بالـ Multimeter في وضع DCV.</li>
+                <li><b>Current (I):</b> تدفق الإلكترونات — يقاس بالأمبير. على الموبايل بالـ mA عادةً.</li>
+                <li><b>Resistance (R):</b> ممانعة المسار للتيار — تقاس بالأوم Ω.</li>
+                <li><b>تطبيق عملي:</b> بطارية iPhone 11 = 3.83V × 0.85A أثناء التشغيل ≈ 3.25W.</li>
+              </ul>
+              <div class="pr-formula">
+                <code>V = I × R</code> <span>·</span>
+                <code>I = V ÷ R</code> <span>·</span>
+                <code>P = V × I</code>
+              </div>
+              <p class="pr-tip">💡 <b>تطبيق:</b> لو قست 0V على pin من PMIC المفترض يعطي 1.8V → إما PMIC تالف، إما short circuit يسحب الجهد.</p>
+            </div>
+          </article>
+
+          <article class="pr-card pr-elec-card" data-pr-elec="dcac">
+            <div class="pr-card-icon">🔄</div>
+            <h3>DC vs AC — تيار مستمر vs متناوب</h3>
+            <p class="pr-card-lead">الموبايل DC · الشاحن يحوّل من AC إلى DC</p>
+            <button class="pr-card-toggle" data-pr-toggle="dcac">عرض التفاصيل ▾</button>
+            <div class="pr-card-body" id="pr-body-dcac" hidden>
+              <ul>
+                <li><b>AC (220V/50Hz):</b> ما يدخل من الكهرباء البيتية — موجة sine متناوبة.</li>
+                <li><b>DC:</b> تيار في اتجاه واحد — تحتاجه كل الإلكترونيات الرقمية.</li>
+                <li><b>Charger (Adapter):</b> داخله rectifier (ديود) + transformer + capacitor → يحوّل AC إلى DC نظيف.</li>
+                <li><b>USB-C PD:</b> يتفاوض مع الجهاز عبر CC pins ليرفع الجهد (5V/9V/15V/20V).</li>
+              </ul>
+              <p class="pr-tip">💡 لا تقيس AC على لوحة الموبايل أبداً — DCV هو الوضع الصحيح.</p>
+            </div>
+          </article>
+
+          <article class="pr-card pr-elec-card" data-pr-elec="capind">
+            <div class="pr-card-icon">🔋</div>
+            <h3>Capacitors &amp; Inductors</h3>
+            <p class="pr-card-lead">المكثفات تخزن جهد · الملفات تخزن مجال مغناطيسي</p>
+            <button class="pr-card-toggle" data-pr-toggle="capind">عرض التفاصيل ▾</button>
+            <div class="pr-card-body" id="pr-body-capind" hidden>
+              <ul>
+                <li><b>Capacitor (C):</b> يفلتر الضوضاء + يخزن طاقة لحظية. على الـ board تشاهد آلاف منها (أرقام صغيرة 0402/0201).</li>
+                <li><b>عطل شائع:</b> capacitor مكسور = short بين Vcc وGround → الجهاز ما يقلع. تختبر بـ Diode Mode.</li>
+                <li><b>Inductor (L):</b> ملف صغير — يستخدم في DC-DC converters لرفع/خفض الجهد.</li>
+                <li><b>اختبار:</b> Continuity على inductor المفترض يعطي قراءة قريبة من 0Ω. لو OL = مكسور.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="pr-card pr-elec-card" data-pr-elec="diodetr">
+            <div class="pr-card-icon">🚪</div>
+            <h3>Diodes &amp; Transistors</h3>
+            <p class="pr-card-lead">الديود = صمام · الترانزستور = مفتاح/مكبّر</p>
+            <button class="pr-card-toggle" data-pr-toggle="diodetr">عرض التفاصيل ▾</button>
+            <div class="pr-card-body" id="pr-body-diodetr" hidden>
+              <ul>
+                <li><b>Diode:</b> يسمح للتيار في اتجاه واحد فقط. قراءة طبيعية في Diode Mode = 0.4-0.7V.</li>
+                <li><b>Schottky Diode:</b> أسرع + drop أقل (0.2V). يستخدم للـ ESD protection.</li>
+                <li><b>MOSFET:</b> الترانزستور الأشهر على الـ board — مفتاح يتحكم به Gate voltage.</li>
+                <li><b>تطبيق:</b> Tristar (iPhone) عبارة عن متحكم MOSFETs لإدارة الشحن.</li>
+              </ul>
+              <p class="pr-tip">💡 ESD diode تالف = مدخل USB-C ما يستجيب رغم سلامة الـ flex.</p>
+            </div>
+          </article>
+
+          <article class="pr-card pr-elec-card" data-pr-elec="ics">
+            <div class="pr-card-icon">🔲</div>
+            <h3>Integrated Circuits (ICs)</h3>
+            <p class="pr-card-lead">معالجات صغيرة لكل وظيفة — Power, Audio, RF, Charging</p>
+            <button class="pr-card-toggle" data-pr-toggle="ics">عرض التفاصيل ▾</button>
+            <div class="pr-card-body" id="pr-body-ics" hidden>
+              <ul>
+                <li><b>PMIC (Power Management IC):</b> يولّد كل rails الجهد للجهاز. تلفه = no boot.</li>
+                <li><b>Tristar / Charging IC:</b> يدير الشحن + USB negotiation.</li>
+                <li><b>Audio IC:</b> يخرج الصوت للسماعة + الميكروفون. تلفه = "no service" أحياناً (iPhone 7).</li>
+                <li><b>RF Transceiver:</b> Wi-Fi/BT/Cellular — أعراض تلفه: ضعف إشارة، انقطاع متكرر.</li>
+                <li><b>Display IC:</b> يولّد الجهد العالي (~12V) للـ OLED. تلفه = شاشة ميتة رغم سلامتها.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="pr-card pr-elec-card" data-pr-elec="pcb">
+            <div class="pr-card-icon">🧱</div>
+            <h3>PCB Layers — طبقات اللوحة</h3>
+            <p class="pr-card-lead">multilayer PCB · vias · traces</p>
+            <button class="pr-card-toggle" data-pr-toggle="pcb">عرض التفاصيل ▾</button>
+            <div class="pr-card-body" id="pr-body-pcb" hidden>
+              <ul>
+                <li><b>Layers:</b> iPhone Logic Board ~10-12 طبقة. كل طبقة فيها traces.</li>
+                <li><b>Via:</b> ثقب صغير يربط بين الطبقات.</li>
+                <li><b>Ground Plane:</b> طبقة كاملة تعمل GND — تحت كل IC تقريباً.</li>
+                <li><b>تحدي:</b> trace مقطوع داخلياً = صعب جداً يصلح بدون micro-soldering.</li>
+                <li><b>Pad Lifted:</b> المسمار اللي تلصقه عليه IC ينقلع — يحتاج jumper wire.</li>
+              </ul>
+              <p class="pr-tip">⚠️ الحرارة الزائدة تكسر الـ pads. استخدم Hot Air بدرجة 350°C لا أكثر، وقت محدود.</p>
+            </div>
+          </article>
+
+        </div><!-- /pr-elec-grid -->
+      </section><!-- /pr-electronics-fund -->
+
+
+      <!-- ============================================================
+           PHASE 1 · B — Tools Gallery
+      ============================================================ -->
+      <section class="pr-section" id="pr-tools-gallery" data-pr-section="tools">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">معرض الأدوات · Tools of the Trade</span>
+          <h2>أدواتك = نصف المعركة</h2>
+          <p>كل أداة مع وظيفتها، نطاق سعرها بالـ IQD، ونصيحة شراء من السوق العراقي.</p>
+        </header>
+
+        <div class="pr-grid pr-grid-2" id="pr-tools-grid">
+
+          <article class="pr-tool-card">
+            <div class="pr-tool-icon">📏</div>
+            <h3>Multimeter (DMM)</h3>
+            <p>القلب النابض للتشخيص. بدونه أنت تعمل أعمى.</p>
+            <ul>
+              <li><b>الوظائف الأساسية:</b> DCV, ACV, Resistance, Continuity, Diode Mode.</li>
+              <li><b>السعر IQD:</b> 25k (صيني عادي) — 250k (Fluke 117) — 700k+ (Fluke 87V).</li>
+              <li><b>نصيحة:</b> ابدأ بـ ANENG AN8008 (~50k) — دقيق ويكفي للمبتدئ.</li>
+              <li><b>الأهم:</b> Continuity Mode (يصفر بسرعة) لتتبع الـ shorts.</li>
+            </ul>
+          </article>
+
+          <article class="pr-tool-card">
+            <div class="pr-tool-icon">🔌</div>
+            <h3>DC Power Supply</h3>
+            <p>ملك التشخيص — يخبرك بسحب الجهاز للتيار.</p>
+            <ul>
+              <li><b>الوظيفة:</b> تغذي الجهاز بـ 4.0V بدل البطارية وتراقب mA.</li>
+              <li><b>القراءات الذهبية:</b> Idle ~50-100mA · Boot ~250-500mA · Short = 1A+ فوراً.</li>
+              <li><b>السعر IQD:</b> 150k (صيني صغير) — 600k (KORAD KA3005P) — 1.5M+ (Mech-Pro).</li>
+              <li><b>نصيحة:</b> ابحث عن واحد بـ Current Limiting لحماية الجهاز.</li>
+            </ul>
+          </article>
+
+          <article class="pr-tool-card">
+            <div class="pr-tool-icon">🔥</div>
+            <h3>Soldering Iron + Hot Air Station</h3>
+            <p>للـ component-level repair — سوديريضن مزدوج.</p>
+            <ul>
+              <li><b>Soldering Iron:</b> JBC أفضل — ولكن Hakko FX-888D (~350k IQD) ممتازة للبدء.</li>
+              <li><b>Hot Air:</b> Quick 861DW أو Atten ST-862D — للـ BGA reflow.</li>
+              <li><b>Tips:</b> سن 0.3mm للـ micro · سن 1.2mm للـ pads العادية.</li>
+              <li><b>درجة الحرارة:</b> Lead-free 350°C · Leaded 300°C.</li>
+              <li><b>السعر IQD:</b> 200k (Yihua 8786D combo) — 800k+ (محطات احترافية).</li>
+            </ul>
+          </article>
+
+          <article class="pr-tool-card">
+            <div class="pr-tool-icon">🔬</div>
+            <h3>Microscope (10x-40x)</h3>
+            <p>عيناك الثانية — لا غنى عنه للـ Logic Board.</p>
+            <ul>
+              <li><b>التكبير:</b> 10x للعمل العادي · 40x للـ micro-soldering.</li>
+              <li><b>الإضاءة:</b> LED ring light ضرورية.</li>
+              <li><b>السعر IQD:</b> 280k (AmScope SM-1B) — 700k+ (binocular احترافي).</li>
+              <li><b>نصيحة:</b> اختر Trinocular لو تخطط تصور فيديو/صور للزبون.</li>
+            </ul>
+          </article>
+
+          <article class="pr-tool-card">
+            <div class="pr-tool-icon">🌊</div>
+            <h3>Ultrasonic Cleaner</h3>
+            <p>لتنظيف الـ board بعد water damage.</p>
+            <ul>
+              <li><b>الحجم المناسب:</b> 0.6L كافي للموبايل.</li>
+              <li><b>السائل:</b> Isopropyl Alcohol 99% — لا تستخدم ماء.</li>
+              <li><b>المدة:</b> 3-5 دقائق على 40kHz.</li>
+              <li><b>السعر IQD:</b> 90k - 250k حسب القوة.</li>
+              <li><b>تحذير:</b> أزل البطارية قبل أي تنظيف.</li>
+            </ul>
+          </article>
+
+          <article class="pr-tool-card">
+            <div class="pr-tool-icon">🔧</div>
+            <h3>Pry Tools, Suction Cup, Picks</h3>
+            <p>أدوات الفتح اليدوية — رخيصة لكن حرجة.</p>
+            <ul>
+              <li><b>iSesamo / Spudger:</b> لفصل الشاشة.</li>
+              <li><b>Suction Cup:</b> برفع شاشة LCD/OLED.</li>
+              <li><b>Plastic Picks:</b> للـ Samsung — رقيقة لتمر تحت الشاشة.</li>
+              <li><b>مفك Pentalobe P2:</b> ضروري لـ iPhone.</li>
+              <li><b>السعر IQD:</b> طقم كامل 30k - 80k (مثل Jakemy/iFixit kit).</li>
+            </ul>
+          </article>
+
+          <article class="pr-tool-card">
+            <div class="pr-tool-icon">🛡️</div>
+            <h3>ESD-safe Mat + Wrist Strap</h3>
+            <p>الكهرباء الساكنة قاتلة للـ ICs الحساسة.</p>
+            <ul>
+              <li><b>الخطر:</b> 200V من جسمك (لا تشعر بها) كافية لتلف IC.</li>
+              <li><b>المعدات:</b> Anti-static mat + grounded wrist strap.</li>
+              <li><b>السعر IQD:</b> 35k - 80k للطقم الكامل.</li>
+              <li><b>نصيحة:</b> ضع المحطة + الـ mat على نفس الـ ground point.</li>
+            </ul>
+          </article>
+
+          <article class="pr-tool-card">
+            <div class="pr-tool-icon">🧪</div>
+            <h3>Flux + Solder Wick + Paste</h3>
+            <p>المواد الاستهلاكية — جودتها تحدد جودة عملك.</p>
+            <ul>
+              <li><b>Flux:</b> Amtech NC-559-V2 الأشهر (~25k IQD لـ 10cc).</li>
+              <li><b>Solder Wire:</b> 0.3mm leaded 60/40 للـ micro · 0.5mm للعادي.</li>
+              <li><b>Solder Paste:</b> SAC305 للـ BGA reflow.</li>
+              <li><b>Solder Wick:</b> لإزالة الزائد — مهم لـ BGA reballing.</li>
+              <li><b>تحذير صحي:</b> Lead-based solder = استخدم fume extractor.</li>
+            </ul>
+          </article>
+
+        </div><!-- /pr-tools-grid -->
+
+        <div class="pr-tools-summary">
+          <h4>💰 الميزانية المقترحة للبدء (Setup احترافي للمبتدئ)</h4>
+          <ul class="pr-tools-budget">
+            <li>Multimeter جيد: <b>~80k IQD</b></li>
+            <li>Soldering combo (Iron + Hot Air): <b>~250k IQD</b></li>
+            <li>Microscope بسيط: <b>~280k IQD</b></li>
+            <li>طقم Pry Tools + Pentalobe: <b>~50k IQD</b></li>
+            <li>ESD mat + strap: <b>~50k IQD</b></li>
+            <li>Flux + Solder + Wick: <b>~60k IQD</b></li>
+            <li>DC Power Supply صغير: <b>~150k IQD</b></li>
+          </ul>
+          <p class="pr-tools-total">المجموع: <b>~920k IQD (~$700)</b> — تبدأ شغل عادي في محل أو من البيت.</p>
+        </div>
+      </section><!-- /pr-tools-gallery -->
+
+      <!-- (المراحل التالية ستضاف في Phases 2-5) -->
+    </section><!-- /page-phonerepair -->
 
 
   <!-- ✅ FOOTER — after ALL pages so flex order is correct -->
