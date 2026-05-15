@@ -11105,3 +11105,26 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
   #page-social .w6-funnel-card{ background:#fff !important; color:#000 !important; }
   #page-social .w6-perf-input-wrap{ display:none; }
 }
+
+
+/* ============================================================
+   WORKER 06 · PHASE 4 — Email + WhatsApp + Influencer (page-social)
+============================================================ */
+#page-social .w6-sub-item{
+  background:var(--surface-2, rgba(255,255,255,.02));
+  border:1px solid var(--border); border-radius:8px;
+  padding:9px 11px; font-size:11.5px; color:var(--text-muted);
+  line-height:1.55;
+}
+#page-social .w6-sub-item b{ color:var(--text); }
+
+#page-social #w6InfFlags > div{
+  font-size:11.5px; padding:9px 12px; border-radius:8px;
+  display:flex; align-items:center; gap:8px; line-height:1.55;
+}
+
+@media print{
+  #page-social .w6-sub-item, #page-social #w6InfFlags > div{
+    background:#fff !important; color:#000 !important; border-color:#999 !important;
+  }
+}
