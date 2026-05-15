@@ -7870,6 +7870,53 @@
         </div>
       </section><!-- /w09-biases -->
 
+      <!-- ════════════════════════════════════════════════════════════════
+           WORKER 09 · PHASE 3 — Self-Diagnostic Suite (6 tests)
+           Tests: BFI-2-S short / DISC / EQ-i adapted / Career Anchors /
+                  Stress Response / Strengths Quick-Scan
+           localStorage: upg_psych_results (per-test object)
+      ════════════════════════════════════════════════════════════════ -->
+      <section class="w09t-section" data-w09-phase="3" id="w09t-suite" aria-labelledby="w09t-title">
+        <header class="w09-section-head">
+          <span class="w09-eyebrow">Self-Diagnostic Suite · Worker 09</span>
+          <h2 id="w09t-title">٦ اختبارات شخصية — استكشاف لا تشخيص</h2>
+          <p>أدوات تعليمية مستوحاة من أبحاث Soto &amp; John (BFI-2), Marston (DISC), Bar-On (EQ-i), Schein (Anchors), Cannon (Stress), Clifton (Strengths). كل بياناتك تُحفظ محلياً.</p>
+        </header>
+
+        <div class="w09t-banner">
+          <span>⚠️</span>
+          <div>
+            <b>تنبيه أخلاقي إجباري</b>
+            <span>هذه أدوات استكشافية تعليمية — ليست تشخيصاً نفسياً. للتشخيص الموثوق راجع اختصاصياً مرخّصاً. كل بياناتك تُحفظ محلياً (localStorage) ولا تُرسل لأي خادم.</span>
+          </div>
+        </div>
+
+        <div class="w09t-tabs" role="tablist" id="w09tTabs">
+          <button class="w09t-tab active" data-test="bfi"   role="tab">Big Five</button>
+          <button class="w09t-tab" data-test="disc"  role="tab">DISC</button>
+          <button class="w09t-tab" data-test="eq"    role="tab">EQ Quotient</button>
+          <button class="w09t-tab" data-test="anch"  role="tab">Career Anchors</button>
+          <button class="w09t-tab" data-test="stress" role="tab">Stress Style</button>
+          <button class="w09t-tab" data-test="str"   role="tab">Strengths</button>
+        </div>
+
+        <div class="w09t-host" id="w09tHost"
+             aria-live="polite"
+             data-test-active="bfi">
+          <!-- runtime injects the active test here -->
+        </div>
+
+        <div class="w09t-actions">
+          <button type="button" class="w09e-btn" id="w09tReset">🗑️ مسح كل النتائج المحفوظة</button>
+          <button type="button" class="w09e-btn" id="w09tExport">📋 نسخ ملخص النتائج</button>
+        </div>
+
+        <div class="w09t-summary" id="w09tSummary" hidden>
+          <b>📦 ملخص نتائجك المحفوظة:</b>
+          <pre id="w09tSummaryBody"></pre>
+        </div>
+      </section><!-- /w09t-suite -->
+
     </section><!-- /page-psych -->
 
     <!-- moved to assets/style.css :: block #6 -->

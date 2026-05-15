@@ -14038,3 +14038,244 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
 @media (prefers-reduced-motion: reduce){
   #page-eq .w09e-domain, #page-eq .w09e-ruler-step{ transition: none; }
 }
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   WORKER 09 · PHASE 3 — Self-Diagnostic Suite (6 tests)
+═══════════════════════════════════════════════════════════════════════ */
+#page-psych .w09t-section{
+  margin-top: 32px;
+  border-top: 1px dashed rgba(255,255,255,.06);
+  padding-top: 24px;
+}
+#page-psych .w09t-banner{
+  display:flex; gap:14px; align-items:flex-start;
+  background: linear-gradient(135deg, rgba(234,179,8,.10), rgba(239,68,68,.06));
+  border: 1px solid rgba(234,179,8,.25);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+  margin: 14px 0 18px;
+}
+#page-psych .w09t-banner span:first-child{ font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+#page-psych .w09t-banner b{ display:block; color: var(--text); font-size: 13px; margin-bottom: 4px; }
+#page-psych .w09t-banner span:last-child{ font-size: 12px; color: var(--text-muted); line-height: 1.7; }
+
+/* Tabs */
+#page-psych .w09t-tabs{
+  display:flex; gap: 6px; flex-wrap: wrap;
+  margin-bottom: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 6px;
+}
+#page-psych .w09t-tab{
+  flex: 1 1 auto; min-width: 110px;
+  font-size: 12px; font-weight: 700;
+  padding: 9px 10px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+}
+#page-psych .w09t-tab:hover{ color: var(--text); border-color: var(--border); }
+#page-psych .w09t-tab.active{
+  background: linear-gradient(135deg, rgba(102,252,241,.12), rgba(139,92,246,.08));
+  border-color: rgba(102,252,241,.35);
+  color: var(--accent);
+}
+
+/* Host */
+#page-psych .w09t-host{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  min-height: 200px;
+}
+#page-psych .w09t-intro{
+  margin-bottom: 14px;
+}
+#page-psych .w09t-intro h3{
+  font-size: 16px; font-weight: 800; color: var(--text); margin: 0 0 6px;
+}
+#page-psych .w09t-intro p{
+  font-size: 12.5px; color: var(--text-muted); line-height: 1.7; margin: 0 0 6px;
+}
+#page-psych .w09t-meta{
+  display:flex; gap:10px; flex-wrap: wrap;
+  font-size: 11.5px; color: var(--text-faint);
+  padding-bottom: 10px; margin-bottom: 12px;
+  border-bottom: 1px dashed rgba(255,255,255,.05);
+}
+#page-psych .w09t-meta b{ color: var(--text); margin-left: 4px; }
+
+/* Question */
+#page-psych .w09t-q{
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  margin-bottom: 10px;
+}
+#page-psych .w09t-q-text{
+  font-size: 13px; color: var(--text); margin-bottom: 8px;
+  line-height: 1.6;
+}
+#page-psych .w09t-q-text small{
+  color: var(--text-faint); font-size: 11px; margin-right: 8px;
+}
+#page-psych .w09t-likert{
+  display:flex; gap: 6px; flex-wrap: wrap;
+}
+#page-psych .w09t-likert label{
+  flex: 1 1 60px;
+  display:flex; align-items:center; justify-content:center;
+  gap: 6px;
+  font-size: 11px; font-weight: 700;
+  padding: 8px 6px;
+  background: var(--surface);
+  border:1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--text-muted);
+}
+#page-psych .w09t-likert input{
+  appearance: none; -webkit-appearance: none;
+  width: 12px; height: 12px;
+  border: 1.5px solid var(--text-faint);
+  border-radius: 50%;
+  margin: 0;
+  flex-shrink: 0;
+}
+#page-psych .w09t-likert input:checked{
+  background: var(--accent); border-color: var(--accent);
+}
+#page-psych .w09t-likert label:has(input:checked){
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(102,252,241,.06);
+}
+
+/* Forced choice (DISC) */
+#page-psych .w09t-fc{
+  display:grid; gap:6px;
+}
+#page-psych .w09t-fc-opt{
+  display:flex; align-items:center; gap:8px;
+  padding: 8px 10px;
+  border:1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 12px; color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+}
+#page-psych .w09t-fc-opt:hover{ border-color: var(--border-hover); }
+#page-psych .w09t-fc-opt input{
+  appearance: none; width: 12px; height: 12px;
+  border: 1.5px solid var(--text-faint); border-radius: 50%;
+}
+#page-psych .w09t-fc-opt input:checked{ background: var(--accent); border-color: var(--accent); }
+#page-psych .w09t-fc-opt:has(input:checked){
+  border-color: var(--accent); color: var(--accent);
+  background: rgba(102,252,241,.05);
+}
+
+/* Submit + result */
+#page-psych .w09t-submit{
+  margin-top: 12px;
+  font-size: 12.5px; font-weight: 800;
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, var(--accent), #8B5CF6);
+  color: #08151B; cursor: pointer;
+  transition: var(--transition);
+}
+#page-psych .w09t-submit:hover{ filter: brightness(1.06); }
+#page-psych .w09t-submit:disabled{
+  opacity: .5; cursor: not-allowed;
+}
+#page-psych .w09t-progress{
+  margin-top: 8px;
+  height: 6px; background: var(--surface-2);
+  border-radius: 999px; overflow: hidden;
+}
+#page-psych .w09t-progress > div{
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #8B5CF6);
+  width: 0%;
+  transition: width .25s ease;
+}
+#page-psych .w09t-result{
+  margin-top: 14px;
+  background: linear-gradient(135deg, rgba(102,252,241,.05), rgba(139,92,246,.04));
+  border: 1px solid rgba(102,252,241,.2);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+}
+#page-psych .w09t-result h4{
+  font-size: 14.5px; color: var(--text); margin: 0 0 8px;
+}
+#page-psych .w09t-bars{
+  display:grid; gap: 8px; margin: 8px 0;
+}
+#page-psych .w09t-bar-row{
+  display:grid; grid-template-columns: 110px 1fr 50px;
+  gap: 10px; align-items: center;
+  font-size: 11.5px;
+}
+#page-psych .w09t-bar-row > label{ color: var(--text); font-weight: 700; }
+#page-psych .w09t-bar{
+  height: 12px; background: var(--surface-2);
+  border-radius: 999px; overflow: hidden;
+  border:1px solid var(--border);
+}
+#page-psych .w09t-bar > div{
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #8B5CF6);
+  border-radius: inherit;
+}
+#page-psych .w09t-bar-row > b{ color: var(--accent); text-align: end; font-weight: 800; }
+#page-psych .w09t-recos{
+  margin-top: 10px;
+  font-size: 12px; color: var(--text-muted); line-height: 1.75;
+}
+#page-psych .w09t-recos b{ color: var(--text); }
+
+/* Actions */
+#page-psych .w09t-actions{
+  display:flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;
+}
+#page-psych .w09t-summary{
+  margin-top: 12px;
+  background: var(--surface);
+  border:1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 12px 16px;
+}
+#page-psych .w09t-summary b{ color: var(--text); }
+#page-psych .w09t-summary pre{
+  margin: 8px 0 0;
+  background: var(--surface-2);
+  border:1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  font-size: 11px; color: var(--text-muted);
+  font-family: 'SFMono-Regular','Consolas',monospace;
+  line-height: 1.7;
+  white-space: pre-wrap; word-break: break-word;
+  max-height: 240px; overflow:auto;
+}
+
+@media print{
+  #page-psych .w09t-host, #page-psych .w09t-result{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside: avoid;
+  }
+  #page-psych .w09t-tabs{ display:none; }
+}
