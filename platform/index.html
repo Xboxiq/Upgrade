@@ -8895,6 +8895,154 @@
         </div>
       </div>
 
+      <!-- ════════════════════════════════════════════════════════════
+           WORKER 04 · PHASE 3 — Iraqi Tax Calculator + Salary Slip
+      ════════════════════════════════════════════════════════════ -->
+      <section class="acc-tax" data-acc-phase="3" aria-labelledby="acc-tax-title">
+
+        <div class="acc-section-head">
+          <span class="acc-eyebrow">الضرائب العراقية · حاسبة وكشف راتب</span>
+          <h2 id="acc-tax-title">ضريبة الدخل · الإقتطاع الاجتماعي · ضريبة الشركات</h2>
+          <p>الشرائح المُعتمدة من هيئة الضرائب العراقية — شرح الجداول، حاسبة تفاعلية، وكشف راتب قابل للطباعة.</p>
+        </div>
+
+        <!-- ───────── BLOCK 7 · Income Tax Brackets Table ───────── -->
+        <article class="acc-tax-table-lab" data-acc-lab="tax-brackets">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 7</div>
+            <h3>شرائح ضريبة الدخل على الرواتب · 2024-2025</h3>
+            <p>النظام التصاعدي الشهري — كل شريحة تُحسب على الجزء الواقع ضمنها فقط (مارجينال).</p>
+          </header>
+
+          <div class="acc-tax-bracket-grid">
+            <div class="acc-tax-bracket" data-bracket="0">
+              <div class="acc-tax-bracket-rate">معفى</div>
+              <div class="acc-tax-bracket-range">≤ 250,000 IQD/شهر</div>
+              <div class="acc-tax-bracket-note">الحد الأدنى المعفى — لا ضريبة دخل تُطبق على هذا الجزء.</div>
+            </div>
+            <div class="acc-tax-bracket" data-bracket="1">
+              <div class="acc-tax-bracket-rate">3%</div>
+              <div class="acc-tax-bracket-range">250,001 — 500,000</div>
+              <div class="acc-tax-bracket-note">على الجزء داخل هذا النطاق فقط (حد أعلى 7,500 IQD).</div>
+            </div>
+            <div class="acc-tax-bracket" data-bracket="2">
+              <div class="acc-tax-bracket-rate">5%</div>
+              <div class="acc-tax-bracket-range">500,001 — 1,000,000</div>
+              <div class="acc-tax-bracket-note">على الجزء داخل هذا النطاق (حد أعلى 25,000 IQD).</div>
+            </div>
+            <div class="acc-tax-bracket" data-bracket="3">
+              <div class="acc-tax-bracket-rate">15%</div>
+              <div class="acc-tax-bracket-range">> 1,000,000</div>
+              <div class="acc-tax-bracket-note">على كل ما يزيد عن المليون — الفئة العليا.</div>
+            </div>
+          </div>
+
+          <div class="acc-tax-misc-grid">
+            <div class="acc-tax-misc">
+              <h6>الضمان الاجتماعي · القطاع الخاص</h6>
+              <p><b>5%</b> تُقتطع من الموظف + <b>12%</b> على المؤسسة = <b>17% إجمالي</b> يُورَّد لهيئة التقاعد والضمان الاجتماعي للعمال.</p>
+            </div>
+            <div class="acc-tax-misc">
+              <h6>ضريبة الشركات</h6>
+              <p><b>15%</b> على الشركات التجارية والصناعية. <b>35%</b> على شركات النفط الأجنبية. إقرار ربع سنوي + سنوي.</p>
+            </div>
+            <div class="acc-tax-misc">
+              <h6>الجمارك (TARIC)</h6>
+              <p>الرسوم تتراوح <b>5%-30%</b> حسب البند الجمركي. السلع الأساسية والإنتاجية تحظى بأقل المعدلات.</p>
+            </div>
+            <div class="acc-tax-misc">
+              <h6>الإعفاءات الشخصية السنوية</h6>
+              <p>أعزب: <b>2,500,000</b> · متزوج: <b>4,500,000</b> · لكل ولد ≤ 18 سنة: <b>200,000</b>. تُقسَّم على 12 شهراً.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 8 · Tax Calculator IQ + Salary Slip ───────── -->
+        <article class="acc-tax-calc-lab" data-acc-lab="tax-calc">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 8</div>
+            <h3>حاسبة الراتب الصافي · IQ Salary Calculator</h3>
+            <p>أدخل الراتب الإجمالي وحالتك الاجتماعية — احصل على كشف راتب احترافي بكل الإقتطاعات. النتيجة قابلة للطباعة.</p>
+          </header>
+
+          <div class="acc-tax-calc-shell">
+            <div class="acc-tax-form">
+              <div class="acc-tax-field">
+                <label for="acc-tax-gross">الراتب الإجمالي الشهري (IQD)</label>
+                <input id="acc-tax-gross" type="number" min="0" step="50000" value="1500000" data-acc-tax="gross" inputmode="numeric">
+              </div>
+              <div class="acc-tax-field">
+                <label for="acc-tax-status">الحالة الاجتماعية</label>
+                <select id="acc-tax-status" data-acc-tax="status">
+                  <option value="single">أعزب · إعفاء 2.5M سنوي</option>
+                  <option value="married" selected>متزوج · إعفاء 4.5M سنوي</option>
+                </select>
+              </div>
+              <div class="acc-tax-field">
+                <label for="acc-tax-children">عدد الأولاد ≤ 18 سنة</label>
+                <input id="acc-tax-children" type="number" min="0" max="10" value="2" data-acc-tax="children" inputmode="numeric">
+              </div>
+              <div class="acc-tax-field">
+                <label for="acc-tax-allowances">بدلات شهرية إضافية (نقل/إجازة)</label>
+                <input id="acc-tax-allowances" type="number" min="0" step="10000" value="0" data-acc-tax="allowances" inputmode="numeric">
+              </div>
+              <div class="acc-tax-field">
+                <label for="acc-tax-otherded">استقطاعات أخرى (سلف/تأمين)</label>
+                <input id="acc-tax-otherded" type="number" min="0" step="10000" value="0" data-acc-tax="otherded" inputmode="numeric">
+              </div>
+              <div class="acc-tax-actions">
+                <button type="button" class="acc-tax-btn primary" data-acc-tax-calc>احسب الراتب الصافي</button>
+                <button type="button" class="acc-tax-btn ghost" data-acc-tax-print>طباعة كشف الراتب</button>
+              </div>
+            </div>
+
+            <div class="acc-tax-slip" data-acc-tax-slip>
+              <div class="acc-tax-slip-head">
+                <div>
+                  <div class="acc-tax-slip-tag">كشف راتب نموذجي · IQD</div>
+                  <h4>كشف الراتب الشهري</h4>
+                </div>
+                <div class="acc-tax-slip-meta">
+                  <span data-acc-tax-meta-month>شهر &mdash;</span>
+                  <span data-acc-tax-meta-status>متزوج · 2 أطفال</span>
+                </div>
+              </div>
+
+              <ul class="acc-tax-slip-rows">
+                <li class="add"><span>الراتب الأساسي</span><b data-acc-tax-row="gross">0</b></li>
+                <li class="add"><span>بدلات</span><b data-acc-tax-row="allowances">0</b></li>
+                <li class="sum"><span>إجمالي الدخل</span><b data-acc-tax-row="total">0</b></li>
+                <li class="sub"><span>ضريبة الدخل (شرائح)</span><b data-acc-tax-row="tax">0</b></li>
+                <li class="sub"><span>الضمان الاجتماعي · 5%</span><b data-acc-tax-row="social">0</b></li>
+                <li class="sub"><span>استقطاعات أخرى</span><b data-acc-tax-row="otherded">0</b></li>
+                <li class="sum negative"><span>إجمالي الإقتطاعات</span><b data-acc-tax-row="totalded">0</b></li>
+                <li class="net"><span>صافي الراتب المستحق</span><b data-acc-tax-row="net">0</b></li>
+              </ul>
+
+              <div class="acc-tax-slip-employer">
+                <h6>كلفة الموظف على المؤسسة</h6>
+                <ul>
+                  <li><span>الراتب الإجمالي</span><b data-acc-tax-emp-row="total">0</b></li>
+                  <li><span>الضمان الاجتماعي حصة المؤسسة · 12%</span><b data-acc-tax-emp-row="empsocial">0</b></li>
+                  <li class="emp-total"><span>إجمالي الكلفة الفعلية</span><b data-acc-tax-emp-row="empcost">0</b></li>
+                </ul>
+              </div>
+
+              <div class="acc-tax-slip-breakdown" data-acc-tax-breakdown>
+                <h6>تفاصيل احتساب الضريبة</h6>
+                <ul></ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-tax-disclaimer">
+            <span>⚠️</span>
+            <p>هذه الحاسبة للتدريب التعليمي — هيئة الضرائب العراقية قد تُصدر تعديلات دورية على الشرائح أو الإعفاءات. للأرقام الرسمية لكل سنة مالية، راجع البلاغات الصادرة عن الهيئة.</p>
+          </div>
+        </article>
+
+      </section><!-- /acc-tax Phase 3 -->
+
     </section><!-- /page-accounting -->
 
 
