@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-15T08:08:00Z",
+  "last_updated": "2026-05-15T11:15:00Z",
   "current": {
-    "worker": "04",
-    "worker_name": "ACCOUNTING_CASHIER",
+    "worker": "05",
+    "worker_name": "PROGRAMMER",
     "phase": 5,
     "phases_total": 5,
-    "branch": "worker-04-complete",
+    "branch": "worker-05-complete",
     "status": "completed"
   },
   "completed_phases": [
@@ -27,8 +27,13 @@
     { "worker": "04", "phase": 2, "title": "Iraqi COA + IFRS vs Local + 10 Ratios", "branch": "worker-04-phase-2", "lines_added": 639 },
     { "worker": "04", "phase": 3, "title": "Iraqi Tax Calculator + Salary Slip", "branch": "worker-04-phase-3", "lines_added": 685 },
     { "worker": "04", "phase": 4, "title": "Income Statement + Balance Sheet Builders + Cash Flow + Equity Change", "branch": "worker-04-phase-4", "lines_added": 812 },
-    { "worker": "04", "phase": 5, "title": "Cashier Track + Iraq Salary + Cheat Sheet + 12 Citations", "branch": "worker-04-phase-5", "lines_added": 680 }
+    { "worker": "04", "phase": 5, "title": "Cashier Track + Iraq Salary + Cheat Sheet + 12 Citations", "branch": "worker-04-phase-5", "lines_added": 680 },
+    { "worker": "05", "phase": 1, "title": "Fundamentals Gate (8 cards + Quiz) + Path Decision Tree", "branch": "worker-05-complete", "lines_added": 874 },
+    { "worker": "05", "phase": 2, "title": "FE + BE 12-week Roadmaps + Git Survival Kit",            "branch": "worker-05-complete", "lines_added": 714 },
+    { "worker": "05", "phase": 3, "title": "Clean Code Pillars + Code Review Etiquette + Soft Skills","branch": "worker-05-complete", "lines_added": 482 },
+    { "worker": "05", "phase": 4, "title": "5 Interactive Labs — Trace, Big-O, Git Sandbox, Interview Sim, Portfolio Gen", "branch": "worker-05-complete", "lines_added": 1353 },
+    { "worker": "05", "phase": 5, "title": "Iraq Salary + Companies + First-Job Strategy + Cheat Sheet + 12 Citations", "branch": "worker-05-complete", "lines_added": 445 }
   ],
-  "next_action": "Worker 04 complete (consolidated). Begin Worker 05 — Programmer on next session.",
-  "notes": "Worker 04 (Accounting & Cashier) COMPLETE. Total 3,996 lines across 5 phases. Consolidated branch worker-04-complete merges all 5 phase blocks in order. Phase PRs #23-#27 should be closed in favor of single consolidated PR for mobile-friendly merging."
+  "next_action": "Worker 05 COMPLETE. Begin Worker 06 — Social Marketing on next session.",
+  "notes": "Worker 05 (Junior Programmer) COMPLETE. Total 3,868 lines across 5 phases on linear branch worker-05-complete (Method A). Single consolidated PR ready for review."
 }
