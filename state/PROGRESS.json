@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-15T18:25:00Z",
+  "last_updated": "2026-05-15T18:50:00Z",
   "current": {
     "worker": "09",
     "worker_name": "PSYCHOLOGY_LAYER",
-    "phase": 4,
+    "phase": 5,
     "phases_total": 5,
     "branch": "worker-09-complete",
-    "status": "in-progress"
+    "status": "completed"
   },
   "completed_phases": [
     { "worker": "01", "phase": 1, "title": "Foundation Tokens & Aurora Mesh",                    "branch": "worker-01-phase-1-v2", "lines_added": 121 },
@@ -51,8 +51,9 @@
     { "worker": "09", "phase": 1, "title": "7 Drives + 12 Biases in page-psych", "branch": "worker-09-complete", "lines_added": 478 },
     { "worker": "09", "phase": 2, "title": "Goleman 5 + RULER + Mood Meter Interactive in page-eq", "branch": "worker-09-complete", "lines_added": 612 },
     { "worker": "09", "phase": 3, "title": "Self-Diagnostic Suite — 6 tests + scoring engine", "branch": "worker-09-complete", "lines_added": 845 },
-    { "worker": "09", "phase": 4, "title": "Psych Insets — cross-page micro-cards (7 pages × 3 insets)", "branch": "worker-09-complete", "lines_added": 232 }
+    { "worker": "09", "phase": 4, "title": "Psych Insets — cross-page micro-cards (7 pages × 3 insets)", "branch": "worker-09-complete", "lines_added": 232 },
+    { "worker": "09", "phase": 5, "title": "Therapist Bridge + Insights Engine + 16 Citations", "branch": "worker-09-complete", "lines_added": 365 }
   ],
-  "next_action": "Continue Worker 09 Phase 5 — Therapist Bridge + Insights System + Citations.",
-  "notes": "Worker 09 Phase 4 done. JS-driven injection: 21 psych insets across 7 functional pages, idempotent."
+  "next_action": "Worker 09 COMPLETE. Open consolidated PR for worker-09-complete. ALL 9 WORKERS DONE.",
+  "notes": "Worker 09 (Psychology Integration Layer) COMPLETE. Total ~2,532 lines across 5 phases on linear branch worker-09-complete (Method A). Major additions: 7 drives + 12 biases (page-psych), Goleman-5/RULER/Mood Meter (page-eq), Self-Diagnostic Suite (6 tests with scoring), Psych Insets (21 cards across 7 pages), Therapist Bridge (snapshot + 30 questions), Insights Engine (cross-test pattern detection), 16 citations. localStorage: upg_psych_results, upg_mood_log."
 }
