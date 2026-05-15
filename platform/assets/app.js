@@ -121,6 +121,15 @@ function togglePsychAcc(btn) {
           <circle cx="9" cy="7" r="4"/>
           <path d="M22 11l-3 3-2-2"/>
         </svg>`
+      },
+      phonerepair: {
+        title: 'صيانة الهواتف الذكية',
+        breadcrumb: 'الرئيسية / وحدات التدريب / صيانة الهواتف',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="6" y="2" width="12" height="20" rx="2"/>
+          <line x1="11" y1="18" x2="13" y2="18"/>
+          <path d="M9 6h6"/>
+        </svg>`
       }
     };
 
@@ -8863,5 +8872,737 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('click', function(e){
     var t = e.target.closest && e.target.closest('[data-page="social"]');
     if (t) setTimeout(init, 60);
+  });
+})();
+
+
+
+/* ============================================================
+   WORKER 07 · PHASE 1 — Phone Repair (page-phonerepair)
+   Scope: #page-phonerepair only. Vanilla JS. IIFE isolated.
+============================================================ */
+(function(){
+  'use strict';
+
+  function $$(sel, root){ return (root||document).querySelectorAll(sel); }
+
+  function bindElecToggles(){
+    var btns = $$('#page-phonerepair .pr-card-toggle[data-pr-toggle]');
+    btns.forEach(function(btn){
+      if (btn.__pr_bound) return; btn.__pr_bound = true;
+      btn.addEventListener('click', function(){
+        var key = btn.getAttribute('data-pr-toggle');
+        var body = document.getElementById('pr-body-' + key);
+        if (!body) return;
+        var isOpen = !body.hidden;
+        body.hidden = isOpen;
+        btn.classList.toggle('is-open', !isOpen);
+        btn.textContent = isOpen ? 'عرض التفاصيل ▾' : 'إخفاء التفاصيل ▴';
+      });
+    });
+  }
+
+  function init(){
+    if (!document.getElementById('page-phonerepair')) return;
+    bindElecToggles();
+  }
+
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+
+  document.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('[data-page="phonerepair"]');
+    if (t) setTimeout(init, 60);
+  });
+})();
+
+
+
+/* ============================================================
+   WORKER 07 · PHASE 2 — Mainboard Anatomy interactions
+============================================================ */
+(function(){
+  'use strict';
+
+  var IC_DATA = {
+    cpu: {
+      title: 'SoC / CPU (Application Processor)',
+      what: 'القلب الرئيسي للجهاز — يدير كل شيء (Apple A-Series / Snapdragon / Exynos).',
+      symptoms: 'No Boot · Boot Loop · Heating شديد · Black Screen تماماً.',
+      fix: 'CPU underfill repair (لو فقد contact مع البورد بسبب الصدمة) — Reflow بحرارة عالية أو Reball. خبرة عالية جداً مطلوبة.'
+    },
+    pmic: {
+      title: 'PMIC — Power Management IC',
+      what: 'يولّد كل rails الجهد (1.8V, 1.2V, 3.3V…) من البطارية لباقي ICs.',
+      symptoms: 'No Boot · لا حرارة على الـ board · DC PSU يقرأ 0mA حتى مع 4V.',
+      fix: 'استبدال PMIC = micro-soldering متقدم. الإجراء: Hot Air 380°C، رفع، تنظيف الـ pads، reball، لصق جديد. أحياناً يكفي reflow.'
+    },
+    tristar: {
+      title: 'Tristar / Charging IC',
+      what: 'يدير الشحن + USB negotiation + Lightning communication (iPhone).',
+      symptoms: 'لا يشحن · يسحب 0.5A+ على الفور · Apple logo ثم يطفي على الشاحن.',
+      fix: 'استبدال Tristar (BGA صغير 36-pin). أحد أكثر الأعطال شيوعاً في iPhone 6/7. سعر القطعة بالعراق: 5k IQD.'
+    },
+    audio: {
+      title: 'Audio IC (Cirrus Logic / NXP)',
+      what: 'يعالج كل الصوت — السماعة، الميكروفون، Speakerphone.',
+      symptoms: 'iPhone 7: "loop disease" — الصوت يختفي في المكالمات · Recovery loop. الجهاز يقلع لكن مايعطي صوت.',
+      fix: 'iPhone 7: jumper wire على trace U3101_RQ_C18 (الحل المعروف) أو إعادة لحام الـ IC.'
+    },
+    display: {
+      title: 'Display IC (Display Driver)',
+      what: 'يولّد الجهد العالي (~12V) للـ OLED + يدير touch sensing.',
+      symptoms: 'شاشة سوداء بالكامل (مع backlight يعمل) · بقع أفقية · لا touch.',
+      fix: 'تغيير الـ chip بدقة عالية — أو استبدال الشاشة كاملة لو ما عندك خبرة.'
+    },
+    rf: {
+      title: 'RF Transceiver (Wi-Fi/BT/Cellular)',
+      what: 'يعالج كل الإشارات اللاسلكية.',
+      symptoms: 'No Service · Wi-Fi grayed out · ضعف إشارة دائم · "Searching..." مستمر.',
+      fix: 'iPhone 7: مشكلة Wi-Fi شائعة — IC على corner اللوحة. حل دائم = استبدال IC + تنظيف pads.'
+    },
+    nand: {
+      title: 'NAND Flash Storage',
+      what: 'الذاكرة الدائمة — كل بيانات المستخدم + iOS/Android.',
+      symptoms: 'Boot Loop دائم · Error 9/14 على iTunes · فجأة الجهاز ما يقلع.',
+      fix: 'NAND replacement = micro-soldering متقدم جداً + Programmer (Pro3000s). يمكن upgrade من 32GB لـ 256GB!'
+    },
+    batt: {
+      title: 'Battery Connector + Fuel Gauge',
+      what: 'موصل البطارية + IC يقرأ نسبة الشحن.',
+      symptoms: 'البطارية لا تتعرّف · % خاطئ · يطفي فجأة.',
+      fix: 'تنظيف الـ connector pins · استبدال الـ FPC لو fault · Reset الـ Fuel Gauge عبر تركيب البطارية بترتيب معين.'
+    },
+    cam: {
+      title: 'Camera Connectors',
+      what: 'موصلات flex الكاميرا (Front, Back, Telephoto, Wide).',
+      symptoms: 'كاميرا واحدة لا تعمل · شاشة سوداء عند الفتح · "Camera Error".',
+      fix: 'فك الـ flex، تنظيف الـ contacts بـ IPA، إعادة تركيب. لو الـ pad lifted = jumper wire.'
+    },
+    ant: {
+      title: 'Antenna Pads',
+      what: 'نقاط تلامس مع antenna feeds (للإشارة + Wi-Fi + GPS).',
+      symptoms: 'ضعف إشارة بعد تغيير شاشة أو بطارية (نسيت توصيل antenna spring).',
+      fix: 'تأكد من spring contacts أنها على الـ pads. لو الـ pad سقط = lift جديد بـ jumper.'
+    },
+    charge: {
+      title: 'Charging IC (Samsung MAX77705 / etc.)',
+      what: 'مكافئ Tristar في Samsung — يدير USB-C PD + Wireless Charging.',
+      symptoms: 'لا يشحن · شحن بطيء جداً · Wireless Charging لا يعمل.',
+      fix: 'استبدال IC على daughter board (أسهل من iPhone Tristar). متوفر في السوق العراقي بسعر 8-15k IQD.'
+    }
+  };
+
+  function $id(id){ return document.getElementById(id); }
+
+  function bindMainboardTabs(){
+    var tabs = document.querySelectorAll('#page-phonerepair .pr-mb-tab');
+    tabs.forEach(function(tab){
+      if (tab.__pr_bound) return; tab.__pr_bound = true;
+      tab.addEventListener('click', function(){
+        var which = tab.getAttribute('data-pr-mb');
+        tabs.forEach(function(t){ t.classList.toggle('is-active', t === tab); });
+        var ip = $id('pr-mb-iphone');
+        var sm = $id('pr-mb-samsung');
+        if (ip) ip.hidden = (which !== 'iphone');
+        if (sm) sm.hidden = (which !== 'samsung');
+        clearMbInfo();
+      });
+    });
+  }
+
+  function clearMbInfo(){
+    var info = $id('pr-mb-info');
+    if (!info) return;
+    info.innerHTML = '<p class="pr-mb-info-empty">👆 اضغط على أي IC في الرسم لمعرفة وظيفته + أعراض تلفه + إجراء الإصلاح.</p>';
+    document.querySelectorAll('#page-phonerepair .pr-mb-ic.is-selected').forEach(function(g){
+      g.classList.remove('is-selected');
+    });
+  }
+
+  function bindIcClicks(){
+    var ics = document.querySelectorAll('#page-phonerepair .pr-mb-ic');
+    ics.forEach(function(g){
+      if (g.__pr_bound) return; g.__pr_bound = true;
+      g.addEventListener('click', function(){
+        var key = g.getAttribute('data-pr-ic');
+        var info = $id('pr-mb-info');
+        var data = IC_DATA[key];
+        if (!info || !data) return;
+
+        document.querySelectorAll('#page-phonerepair .pr-mb-ic.is-selected').forEach(function(x){
+          x.classList.remove('is-selected');
+        });
+        g.classList.add('is-selected');
+
+        info.innerHTML =
+          '<h4>' + data.title + '</h4>' +
+          '<p><b>الوظيفة:</b> ' + data.what + '</p>' +
+          '<p class="pr-mb-symptoms"><b>أعراض التلف:</b> ' + data.symptoms + '</p>' +
+          '<p><b>الإصلاح:</b> ' + data.fix + '</p>';
+      });
+    });
+  }
+
+  function init(){
+    if (!document.getElementById('page-phonerepair')) return;
+    bindMainboardTabs();
+    bindIcClicks();
+  }
+
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+
+  document.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('[data-page="phonerepair"]');
+    if (t) setTimeout(init, 80);
+  });
+})();
+
+
+
+/* ============================================================
+   WORKER 07 · PHASE 3 — Decision Tree tabs
+============================================================ */
+(function(){
+  'use strict';
+
+  function $id(id){ return document.getElementById(id); }
+
+  function bindTreeTabs(){
+    var tabs = document.querySelectorAll('#page-phonerepair .pr-tree-tab');
+    tabs.forEach(function(tab){
+      if (tab.__pr_bound) return; tab.__pr_bound = true;
+      tab.addEventListener('click', function(){
+        var which = tab.getAttribute('data-pr-tree');
+        tabs.forEach(function(t){ t.classList.toggle('is-active', t === tab); });
+        ['noboot','nocharge','water'].forEach(function(k){
+          var el = $id('pr-tree-' + k);
+          if (el) el.hidden = (k !== which);
+        });
+      });
+    });
+  }
+
+  function init(){
+    if (!document.getElementById('page-phonerepair')) return;
+    bindTreeTabs();
+  }
+
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+
+  document.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('[data-page="phonerepair"]');
+    if (t) setTimeout(init, 80);
+  });
+})();
+
+
+
+/* ============================================================
+   WORKER 07 · PHASE 5 — 6 Labs (Multimeter, Walker, Cost,
+                                  Water Damage, PCB ID, Convo)
+============================================================ */
+(function(){
+  'use strict';
+
+  function $id(id){ return document.getElementById(id); }
+  function on(el, ev, fn){ if (el) el.addEventListener(ev, fn); }
+
+  /* -- LAB TABS -- */
+  function bindLabTabs(){
+    var tabs = document.querySelectorAll('#page-phonerepair .pr-lab-tab');
+    var keys = ['dmm','walk','cost','water','pcb','convo'];
+    tabs.forEach(function(tab){
+      if (tab.__pr_bound) return; tab.__pr_bound = true;
+      tab.addEventListener('click', function(){
+        var which = tab.getAttribute('data-pr-lab');
+        tabs.forEach(function(t){ t.classList.toggle('is-active', t === tab); });
+        keys.forEach(function(k){
+          var el = $id('pr-lab-' + k);
+          if (el) el.hidden = (k !== which);
+        });
+      });
+    });
+  }
+
+  /* -- LAB 1: Multimeter -- */
+  var DMM_DATA = {
+    dcv: {
+      batt: { val:'3.92 V', ok:true, hint:'طبيعي ✓ — جهد البطارية في وضع جزئي شحن.' },
+      pmic: { val:'1.79 V', ok:true, hint:'طبيعي ✓ — rail PMIC المتوقع 1.8V (تسامح ±2%).' },
+      vbus: { val:'5.02 V', ok:true, hint:'طبيعي ✓ — VBUS قياسي على USB connector.' },
+      gnd: { val:'OL', ok:false, hint:'⚠️ في وضع DCV لا تقرأ continuity. غيّر للـ Continuity Mode.' },
+      cap: { val:'0.00 V', ok:true, hint:'طبيعي ✓ — capacitor فاضي بدون تيار.' },
+      charge: { val:'0.12 V', ok:true, hint:'inductor طبيعي — drop صغير عند الـ idle.' },
+      audio: { val:'0.00 V', ok:false, hint:'⚠️ يجب 1.8V هنا. Audio IC قد يكون تالف.' },
+      fuse: { val:'OL', ok:false, hint:'⚠️ Fuse مفتوح في DCV — جرب Continuity للتأكد.' }
+    },
+    ohm: {
+      batt: { val:'2.4 MΩ', ok:false, hint:'لا تقيس Ω على circuit مغذى. أزل البطارية أولاً.' },
+      pmic: { val:'-', ok:false, hint:'PMIC فيها rails متعددة — قياس Ω غير دقيق على circuit.' },
+      vbus: { val:'1.2 KΩ', ok:true, hint:'مقاومة VBUS-to-GND طبيعية.' },
+      gnd: { val:'0.4 Ω', ok:true, hint:'GND نظيف ✓' },
+      cap: { val:'OL', ok:true, hint:'capacitor سليم — لا short.' },
+      charge: { val:'0.2 Ω', ok:true, hint:'inductor طبيعي ✓' },
+      audio: { val:'52 Ω', ok:true, hint:'مقاومة Audio IC OK.' },
+      fuse: { val:'0.0 Ω', ok:true, hint:'Fuse سليم ✓' }
+    },
+    cont: {
+      batt: { val:'0 ✓ (beep)', ok:false, hint:'⚠️ short مشتبه! الـ Battery FPC ما يجب يكون short.' },
+      pmic: { val:'OL', ok:true, hint:'PMIC غير short ✓' },
+      vbus: { val:'OL', ok:true, hint:'VBUS-to-GND غير short ✓' },
+      gnd: { val:'0 ✓ (beep)', ok:true, hint:'GND-to-shield متصل ✓' },
+      cap: { val:'OL', ok:true, hint:'capacitor سليم ✓' },
+      charge: { val:'0 ✓ (beep)', ok:true, hint:'inductor متصل ✓' },
+      audio: { val:'OL', ok:true, hint:'Audio IC غير short ✓' },
+      fuse: { val:'0 ✓ (beep)', ok:true, hint:'Fuse سليم ومتصل ✓' }
+    },
+    diode: {
+      batt: { val:'0.45 V', ok:true, hint:'Diode drop طبيعي على ESD diode للـ battery.' },
+      pmic: { val:'0.52 V', ok:true, hint:'Drop طبيعي على PMIC pin.' },
+      vbus: { val:'0.36 V', ok:true, hint:'Schottky diode على VBUS — drop منخفض ✓' },
+      gnd: { val:'0.00 V', ok:false, hint:'⚠️ short محتمل — اختبر بالـ Continuity للتأكيد.' },
+      cap: { val:'OL', ok:true, hint:'capacitor سليم في diode mode ✓' },
+      charge: { val:'0.05 V', ok:true, hint:'inductor طبيعي.' },
+      audio: { val:'0.00 V', ok:false, hint:'⚠️ short على Audio IC pin — IC تالف.' },
+      fuse: { val:'0.00 V', ok:true, hint:'Fuse مغلق (متصل) — drop=0 طبيعي.' }
+    }
+  };
+
+  function bindDmmLab(){
+    var btn = $id('pr-dmm-measure');
+    if (!btn || btn.__pr_bound) return;
+    btn.__pr_bound = true;
+    btn.addEventListener('click', function(){
+      var mode = $id('pr-dmm-mode').value;
+      var pt = $id('pr-dmm-point').value;
+      var data = DMM_DATA[mode] && DMM_DATA[mode][pt];
+      var screen = $id('pr-dmm-screen');
+      var hint = $id('pr-dmm-hint');
+      if (!data){
+        screen.textContent = '--';
+        hint.textContent = 'لا توجد قراءة لهذا التركيب.';
+        return;
+      }
+      screen.textContent = data.val;
+      screen.style.color = data.ok ? '#66FCF1' : '#EF4444';
+      screen.style.textShadow = '0 0 8px ' + (data.ok ? '#66FCF1' : '#EF4444');
+      hint.textContent = data.hint;
+      try {
+        var key = 'upg_pr_lab_scores';
+        var s = JSON.parse(localStorage.getItem(key) || '{}');
+        s.dmm = (s.dmm||0) + 1;
+        localStorage.setItem(key, JSON.stringify(s));
+      } catch(e){}
+    });
+  }
+
+  /* -- LAB 2: Decision Walker -- */
+  var WALK_TREE = {
+    root: { q:'هل سحب التيار من Battery FPC؟', opts:[
+      { t:'0mA', next:'fuse' },
+      { t:'سحب فوري 1A+', next:'short' },
+      { t:'30-100mA يبدأ ثم 0', next:'pmic' },
+      { t:'200-500mA لـ 5 ثواني ثم drop', next:'audio' }
+    ]},
+    fuse: { q:'PMIC ميتة. هل الـ main fuse مغلق (continuity)؟', opts:[
+      { t:'مغلق (متصل)', leaf:'PMIC تالف. استبدل PMIC IC. (micro-soldering متقدم.)' },
+      { t:'مفتوح (OL)', leaf:'الـ fuse مكسور — ابدأ باستبداله. لو الجهاز عاد = حالة سهلة.' }
+    ]},
+    short: { q:'Short circuit. هل الـ short على VBAT أم على rail داخلي؟', opts:[
+      { t:'VBAT مباشرة', leaf:'capacitor قرب البطارية مكسور غالباً. Freeze spray + شيلد component المتسبب.' },
+      { t:'1.8V أو 1.2V rail', leaf:'PMIC داخلياً short — قد يحتاج استبدال.' }
+    ]},
+    pmic: { q:'PMIC تبدأ بس ما تكمل. هل الـ rails (1.8V, 1.2V, 0.85V) كلها تطلع؟', opts:[
+      { t:'كلها تطلع', leaf:'مشكلة في RAM/CPU underfill — جرب reflow CPU.' },
+      { t:'rail واحد ناقص', leaf:'استبدل PMIC IC.' }
+    ]},
+    audio: { q:'الجهاز يبدأ ثم يطفي. هل ظهر Apple/Samsung logo؟', opts:[
+      { t:'لا — black screen', leaf:'CPU underfill أو NAND fault. ابدأ بـ DFU/EDL restore.' },
+      { t:'logo ثم black', leaf:'Audio IC على iPhone 7 (المشكلة الأشهر) — jumper U3101 أو استبدال IC.' }
+    ]}
+  };
+
+  function renderWalk(nodeKey){
+    var node = WALK_TREE[nodeKey] || WALK_TREE.root;
+    var qEl = $id('pr-walk-q');
+    var optsEl = $id('pr-walk-opts');
+    if (!qEl || !optsEl) return;
+    qEl.textContent = node.q;
+    optsEl.innerHTML = '';
+    (node.opts || []).forEach(function(opt){
+      var b = document.createElement('button');
+      b.textContent = opt.t;
+      b.addEventListener('click', function(){
+        if (opt.leaf){
+          qEl.innerHTML = '✅ <b>الخلاصة:</b> ' + opt.leaf;
+          optsEl.innerHTML = '';
+          try {
+            var key = 'upg_pr_lab_scores';
+            var s = JSON.parse(localStorage.getItem(key) || '{}');
+            s.walk = (s.walk||0) + 1;
+            localStorage.setItem(key, JSON.stringify(s));
+          } catch(e){}
+        } else if (opt.next){
+          renderWalk(opt.next);
+        }
+      });
+      optsEl.appendChild(b);
+    });
+  }
+
+  function bindWalkLab(){
+    var reset = $id('pr-walk-reset');
+    if (!reset || reset.__pr_bound) return;
+    reset.__pr_bound = true;
+    reset.addEventListener('click', function(){ renderWalk('root'); });
+    renderWalk('root');
+  }
+
+  /* -- LAB 3: Cost Estimator -- */
+  var COST_DATA = {
+    ip11: { name:'iPhone 11', screen:60, screenoem:160, battery:32, charge:22, camera:80, speaker:25, board:50 },
+    ip12pro: { name:'iPhone 12 Pro', screen:130, screenoem:240, battery:40, charge:30, camera:240, speaker:30, board:70 },
+    ip13: { name:'iPhone 13', screen:140, screenoem:260, battery:45, charge:35, camera:180, speaker:30, board:80 },
+    sa52: { name:'Samsung A52', screen:70, screenoem:130, battery:38, charge:18, camera:55, speaker:22, board:50 },
+    sa72: { name:'Samsung A72', screen:90, screenoem:160, battery:45, charge:22, camera:65, speaker:25, board:55 },
+    sn21: { name:'Samsung Note 21', screen:130, screenoem:230, battery:55, charge:28, camera:90, speaker:30, board:80 },
+    rd11: { name:'Redmi Note 11', screen:55, screenoem:95, battery:28, charge:14, camera:38, speaker:18, board:40 },
+    rd12: { name:'Redmi Note 12', screen:60, screenoem:105, battery:32, charge:16, camera:42, speaker:20, board:45 }
+  };
+  var REPAIR_LABEL = {
+    screen:'شاشة (aftermarket)', screenoem:'شاشة (OEM)',
+    battery:'بطارية', charge:'منفذ شحن', camera:'كاميرا',
+    speaker:'سماعة', board:'Logic Board diag'
+  };
+
+  function bindCostLab(){
+    var calc = $id('pr-cost-calc');
+    if (!calc || calc.__pr_bound) return;
+    calc.__pr_bound = true;
+
+    var mr = $id('pr-cost-markup');
+    var mv = $id('pr-cost-markup-val');
+    var lr = $id('pr-cost-labor');
+    var lv = $id('pr-cost-labor-val');
+    if (mr) mr.addEventListener('input', function(){ mv.textContent = mr.value + '%'; });
+    if (lr) lr.addEventListener('input', function(){ lv.textContent = lr.value + '%'; });
+
+    calc.addEventListener('click', function(){
+      var dev = COST_DATA[$id('pr-cost-device').value];
+      var rep = $id('pr-cost-repair').value;
+      var partK = dev[rep];
+      var markup = parseInt(mr.value, 10) / 100;
+      var labor = parseInt(lr.value, 10) / 100;
+      var partWithMarkup = Math.round(partK * (1 + markup));
+      var laborCost = Math.round(partK * labor);
+      var total = partWithMarkup + laborCost;
+      var totalRound = Math.ceil(total / 5) * 5;
+      var profit = totalRound - partK;
+
+      var result = $id('pr-cost-result');
+      result.innerHTML =
+        '<b>الجهاز:</b> ' + dev.name + ' — ' + REPAIR_LABEL[rep] + '<br>' +
+        '<b>سعر القطعة (التكلفة):</b> ' + partK + 'k IQD<br>' +
+        '<b>+ Markup ' + (markup*100) + '%:</b> ' + partWithMarkup + 'k<br>' +
+        '<b>+ Labor ' + (labor*100) + '%:</b> ' + laborCost + 'k<br>' +
+        '<b>السعر للزبون (round):</b> <span style="font-size:18px;color:#22C55E;">' + totalRound + 'k IQD</span><br>' +
+        '<b>صافي الربح:</b> ~' + profit + 'k IQD';
+
+      try {
+        var key = 'upg_pr_estimates';
+        var arr = JSON.parse(localStorage.getItem(key) || '[]');
+        arr.unshift({ d:dev.name, r:REPAIR_LABEL[rep], price:totalRound, t:Date.now() });
+        if (arr.length > 20) arr = arr.slice(0,20);
+        localStorage.setItem(key, JSON.stringify(arr));
+      } catch(e){}
+    });
+  }
+
+  /* -- LAB 4: Water Damage Game -- */
+  var WD_STEPS = [
+    { id:1, t:'1. فك البطارية فوراً', correct:true, ord:1 },
+    { id:2, t:'شغّل الجهاز للتأكد', correct:false },
+    { id:3, t:'2. فك الجهاز كاملاً', correct:true, ord:2 },
+    { id:4, t:'ضع الجهاز في أرز', correct:false },
+    { id:5, t:'3. Ultrasonic Cleaner + IPA 99% لـ 5 دقائق', correct:true, ord:3 },
+    { id:6, t:'4. فحص بصري عن corrosion', correct:true, ord:4 },
+    { id:7, t:'5. كشط الـ corrosion + إعادة تنظيف', correct:true, ord:5 },
+    { id:8, t:'6. تجفيف بـ Hot Air منخفض', correct:true, ord:6 },
+    { id:9, t:'7. اختبر الجهاز قبل الإغلاق', correct:true, ord:7 },
+    { id:10, t:'اشحنه فوراً', correct:false }
+  ];
+
+  function shuffle(arr){
+    var a = arr.slice();
+    for (var i=a.length-1;i>0;i--){
+      var j = Math.floor(Math.random()*(i+1));
+      var tmp = a[i]; a[i]=a[j]; a[j]=tmp;
+    }
+    return a;
+  }
+
+  function renderWdPool(){
+    var pool = $id('pr-wd-pool');
+    var order = $id('pr-wd-order');
+    if (!pool || !order) return;
+    pool.innerHTML = '';
+    order.innerHTML = '';
+    var shuffled = shuffle(WD_STEPS);
+    shuffled.forEach(function(st){
+      var b = document.createElement('button');
+      b.className = 'pr-wd-step';
+      b.textContent = st.t;
+      b.dataset.id = st.id;
+      b.addEventListener('click', function(){
+        if (b.parentNode === pool){ order.appendChild(b); }
+        else { pool.appendChild(b); }
+      });
+      pool.appendChild(b);
+    });
+  }
+
+  function bindWdLab(){
+    var check = $id('pr-wd-check');
+    var reset = $id('pr-wd-reset');
+    if (!check || check.__pr_bound) return;
+    check.__pr_bound = true;
+    if (reset) reset.addEventListener('click', renderWdPool);
+    check.addEventListener('click', function(){
+      var order = $id('pr-wd-order');
+      var result = $id('pr-wd-result');
+      var picked = order.querySelectorAll('.pr-wd-step');
+      var correctCount = 0;
+      var inOrder = true;
+      var lastOrd = 0;
+      picked.forEach(function(b){
+        var st = WD_STEPS.filter(function(s){ return s.id == b.dataset.id; })[0];
+        if (st && st.correct){
+          correctCount++;
+          if (st.ord < lastOrd) inOrder = false;
+          lastOrd = st.ord;
+          b.classList.add('is-correct'); b.classList.remove('is-wrong');
+        } else {
+          b.classList.add('is-wrong'); b.classList.remove('is-correct');
+        }
+      });
+      var totalCorrect = WD_STEPS.filter(function(s){return s.correct;}).length;
+      var pct = Math.round((correctCount/totalCorrect)*100);
+      var msg = '✓ اخترت ' + correctCount + ' من ' + totalCorrect + ' خطوات صحيحة. ';
+      msg += inOrder ? 'الترتيب صحيح ✓' : 'الترتيب فيه أخطاء ✗';
+      msg += '<br><b>درجة الإنقاذ:</b> ' + pct + '%';
+      if (pct >= 85) result.style.background = 'rgba(34,197,94,.10)';
+      else if (pct >= 50) result.style.background = 'rgba(245,158,11,.10)';
+      else result.style.background = 'rgba(239,68,68,.10)';
+      result.innerHTML = msg;
+    });
+    renderWdPool();
+  }
+
+  /* -- LAB 5: PCB Component ID -- */
+  var PCB_QUESTIONS = [
+    { p:'مكون مستطيل صغير 0402، رقم "104" — ما هو؟', a:'Capacitor 100nF', opts:['Resistor 104Ω','Capacitor 100nF','Inductor 100nH','Diode'] },
+    { p:'BGA كبير في وسط اللوحة، 1000+ pin — ما هو؟', a:'CPU/SoC', opts:['CPU/SoC','RAM','NAND Flash','PMIC'] },
+    { p:'BGA متوسط بجانب CPU، عادة فوقه — ما هو؟', a:'RAM (PoP)', opts:['RAM (PoP)','PMIC','Audio IC','RF Transceiver'] },
+    { p:'IC مع علامة "338S" قرب البطارية — ما هو؟', a:'PMIC', opts:['PMIC','Tristar','Audio IC','RF'] },
+    { p:'مكون أسطواني صغير ملفوف، عادة قرب charging — ما هو؟', a:'Inductor', opts:['Capacitor','Inductor','Crystal Oscillator','Fuse'] },
+    { p:'IC صغير مع 36-pin قرب Lightning — ما هو؟', a:'Tristar (Charging IC)', opts:['Tristar (Charging IC)','Audio Codec','Touch Controller','Backlight Driver'] },
+    { p:'مكوّن زجاجي صغير، 4 pads حوله — ما هو؟', a:'Crystal Oscillator', opts:['Capacitor','Crystal Oscillator','Diode','Resistor Network'] },
+    { p:'BGA أصفر اللون، تحته كرات solder — ما هو؟', a:'NAND Flash Storage', opts:['NAND Flash Storage','Wi-Fi Chip','Audio IC','PMIC'] }
+  ];
+
+  var pcbState = { idx:0, score:0, total:0 };
+
+  function renderPcbQuestion(){
+    var q = PCB_QUESTIONS[pcbState.idx % PCB_QUESTIONS.length];
+    var prompt = $id('pr-pcb-prompt');
+    var opts = $id('pr-pcb-options');
+    var fb = $id('pr-pcb-feedback');
+    var sc = $id('pr-pcb-score');
+    if (!prompt || !opts) return;
+    prompt.textContent = q.p;
+    opts.innerHTML = '';
+    fb.textContent = '';
+    var shuffled = shuffle(q.opts);
+    shuffled.forEach(function(o){
+      var b = document.createElement('button');
+      b.textContent = o;
+      b.addEventListener('click', function(){
+        pcbState.total++;
+        if (o === q.a){
+          pcbState.score++;
+          b.classList.add('is-correct');
+          fb.innerHTML = '<b style="color:#22C55E;">✓ صحيح!</b> ' + q.a;
+        } else {
+          b.classList.add('is-wrong');
+          opts.querySelectorAll('button').forEach(function(x){
+            if (x.textContent === q.a) x.classList.add('is-correct');
+          });
+          fb.innerHTML = '<b style="color:#EF4444;">✗ خطأ.</b> الإجابة الصحيحة: <b>' + q.a + '</b>';
+        }
+        sc.textContent = 'النقاط: ' + pcbState.score + ' / ' + pcbState.total;
+        try {
+          var key = 'upg_pr_lab_scores';
+          var s = JSON.parse(localStorage.getItem(key) || '{}');
+          s.pcb_correct = (s.pcb_correct||0) + (o === q.a ? 1 : 0);
+          s.pcb_total = (s.pcb_total||0) + 1;
+          localStorage.setItem(key, JSON.stringify(s));
+        } catch(e){}
+        opts.querySelectorAll('button').forEach(function(x){ x.disabled = true; });
+      });
+      opts.appendChild(b);
+    });
+  }
+
+  function bindPcbLab(){
+    var nxt = $id('pr-pcb-next');
+    if (!nxt || nxt.__pr_bound) return;
+    nxt.__pr_bound = true;
+    nxt.addEventListener('click', function(){
+      pcbState.idx++;
+      renderPcbQuestion();
+    });
+    renderPcbQuestion();
+  }
+
+  /* -- LAB 6: Convo Trainer -- */
+  var CONVO_FLOW = [
+    {
+      customer:'الزبون: "اخويا، أنا جبت الجهاز قبل أسبوع، وما تصلح! وأنا دفعت لك! شو القصة؟؟"',
+      opts:[
+        { t:'"خل أشوف بس... ما أعرف شو صار."', emp:0, trans:0, ret:-10 },
+        { t:'"حضرتك آسف على هذي التجربة. خل أفحصه الآن وأشرح لك بالضبط شو حصل."', emp:8, trans:5, ret:8 },
+        { t:'"الجهاز كان فيه عطل أكبر من اللي قلتلك بس ما حبيت تسمع."', emp:-5, trans:3, ret:-8 },
+        { t:'"ما فيها مشكلة، خل أعطيك جهاز ثاني."', emp:3, trans:-5, ret:0 }
+      ]
+    },
+    {
+      customer:'الزبون: "أنت تخسرني وقتي. كم مرة جيت؟"',
+      opts:[
+        { t:'"حضرتك حق علي. خل أعطيك أولوية وأكمل اليوم."', emp:7, trans:5, ret:8 },
+        { t:'"الكل عنده مشكلة، احنا مو الوحيدين."', emp:-8, trans:0, ret:-10 },
+        { t:'"خذ هذا التخفيض 20% على إصلاحات قادمة."', emp:3, trans:6, ret:5 },
+        { t:'"خلني أشتغل بهدوء وأرجع لك بـ ساعة بنتيجة."', emp:5, trans:7, ret:6 }
+      ]
+    },
+    {
+      customer:'الزبون: "هاي القطعة اللي ركبتها مو أصلية! أنا متأكد!"',
+      opts:[
+        { t:'"بصراحة هذي قطعة aftermarket — اتفقنا عليها. لو تريد OEM السعر يصير 220k."', emp:5, trans:9, ret:6 },
+        { t:'"لا أبداً، أصلية 100% Apple."', emp:-5, trans:-10, ret:-8 },
+        { t:'"خل أفك الجهاز قدامك ونتأكد سوية."', emp:7, trans:8, ret:7 },
+        { t:'"شو دليلك؟ احنا مو غشاشين."', emp:-7, trans:-3, ret:-9 }
+      ]
+    },
+    {
+      customer:'الزبون: "خلاص ما بدي إصلاح، رجع لي فلوسي!"',
+      opts:[
+        { t:'"تمام. خل أرجع لك فلوسك كاملة، وآسف على التجربة."', emp:6, trans:8, ret:4 },
+        { t:'"ما يصير، الفلوس راحت على القطعة."', emp:-6, trans:0, ret:-8 },
+        { t:'"حضرتك، خل أعطيك خيارين: refund كامل، أو مصلح ثاني نشتغل عليه. شو تختار؟"', emp:8, trans:7, ret:8 },
+        { t:'"خذ بضاعة بـ نفس القيمة من المحل."', emp:3, trans:5, ret:5 }
+      ]
+    },
+    {
+      customer:'الزبون: "شكراً، شو رأيك أنشر تجربتي على Instagram؟"',
+      opts:[
+        { t:'"نعم لو حابب، بس خذ صور قبل/بعد منا."', emp:5, trans:5, ret:7 },
+        { t:'"إذا تكتب reviewإيجابي خل أعطيك خصم على إصلاح آخر."', emp:6, trans:4, ret:8 },
+        { t:'"لا، الـ posting يضرني."', emp:-3, trans:-5, ret:-3 },
+        { t:'"أكيد. شارك تجربتك بصدق سواء كانت إيجابية أو سلبية. الناس بحاجة لشفافية."', emp:9, trans:10, ret:9 }
+      ]
+    }
+  ];
+
+  var convoState = { turn:0, emp:50, trans:50, ret:50 };
+
+  function renderConvo(){
+    var step = CONVO_FLOW[convoState.turn];
+    var stage = $id('pr-convo-customer');
+    var opts = $id('pr-convo-options');
+    var fb = $id('pr-convo-feedback');
+    var meters = $id('pr-convo-meters');
+    if (!step){
+      // Final
+      stage.innerHTML = '<b>انتهى الحوار.</b><br>التقييم النهائي:<br>التعاطف: ' + convoState.emp +
+        '% · الشفافية: ' + convoState.trans + '% · الاحتفاظ: ' + convoState.ret + '%<br>' +
+        (convoState.ret > 70 ? '🏆 ممتاز — احتفظت بالعميل + بنيت ثقة.' :
+         convoState.ret > 40 ? '⚠️ جيد، بس فيه فرص تحسين في التواصل.' :
+         '❌ خسرت العميل غالباً — راجع ردودك.');
+      opts.innerHTML = '';
+      fb.textContent = '';
+      meters.hidden = false;
+      $id('pr-meter-emp').style.width = convoState.emp + '%';
+      $id('pr-meter-trans').style.width = convoState.trans + '%';
+      $id('pr-meter-ret').style.width = convoState.ret + '%';
+      return;
+    }
+    stage.textContent = step.customer;
+    opts.innerHTML = '';
+    fb.textContent = '';
+    meters.hidden = false;
+    $id('pr-meter-emp').style.width = convoState.emp + '%';
+    $id('pr-meter-trans').style.width = convoState.trans + '%';
+    $id('pr-meter-ret').style.width = convoState.ret + '%';
+
+    step.opts.forEach(function(opt){
+      var b = document.createElement('button');
+      b.textContent = opt.t;
+      b.addEventListener('click', function(){
+        convoState.emp = Math.max(0, Math.min(100, convoState.emp + opt.emp));
+        convoState.trans = Math.max(0, Math.min(100, convoState.trans + opt.trans));
+        convoState.ret = Math.max(0, Math.min(100, convoState.ret + opt.ret));
+        var sign = function(n){ return (n>=0?'+':'') + n; };
+        fb.innerHTML = '<b>التأثير:</b> تعاطف ' + sign(opt.emp) + ' · شفافية ' + sign(opt.trans) + ' · احتفاظ ' + sign(opt.ret);
+        try {
+          var key = 'upg_pr_lab_scores';
+          var s = JSON.parse(localStorage.getItem(key) || '{}');
+          s.convo_turns = (s.convo_turns||0) + 1;
+          localStorage.setItem(key, JSON.stringify(s));
+        } catch(e){}
+        setTimeout(function(){
+          convoState.turn++;
+          renderConvo();
+        }, 900);
+      });
+      opts.appendChild(b);
+    });
+  }
+
+  function bindConvoLab(){
+    var reset = $id('pr-convo-reset');
+    if (!reset || reset.__pr_bound) return;
+    reset.__pr_bound = true;
+    reset.addEventListener('click', function(){
+      convoState = { turn:0, emp:50, trans:50, ret:50 };
+      renderConvo();
+    });
+    renderConvo();
+  }
+
+  /* INIT */
+  function init(){
+    if (!document.getElementById('page-phonerepair')) return;
+    bindLabTabs();
+    bindDmmLab();
+    bindWalkLab();
+    bindCostLab();
+    bindWdLab();
+    bindPcbLab();
+    bindConvoLab();
+  }
+
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+
+  document.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('[data-page="phonerepair"]');
+    if (t) setTimeout(init, 80);
   });
 })();

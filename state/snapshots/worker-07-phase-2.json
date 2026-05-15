@@ -1,0 +1,20 @@
+{
+  "worker": "07",
+  "worker_name": "PHONE_REPAIR",
+  "phase": 2,
+  "phases_total": 5,
+  "title": "Mainboard Anatomy interactive + 10 Repair Cards (1-10)",
+  "branch": "worker-07-complete",
+  "lines_added": 582,
+  "files_modified": [
+    "platform/index.html",
+    "platform/assets/app.js",
+    "platform/assets/style.css"
+  ],
+  "sections_added": [
+    "pr-mainboard-anatomy (iPhone + Samsung tabs, 10 ICs each, info panel)",
+    "pr-repair-cards-1 (10 cards: screen, battery, charge, speaker, mic, camera, power-btn, vol-btn, home, wifi-bt)"
+  ],
+  "ic_data_keys": ["cpu","pmic","tristar","audio","display","rf","nand","batt","cam","ant","charge"],
+  "next_action": "Phase 3: Repair Cards 11-20 + 3 Decision Trees + Software Side"
+}

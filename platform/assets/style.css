@@ -11162,3 +11162,868 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
     border:1px solid #999 !important; page-break-inside:avoid;
   }
 }
+
+
+
+/* ============================================================
+   WORKER 07 · PHASE 1 — Phone Repair (page-phonerepair)
+   Scope: #page-phonerepair only. Additive. No legacy edits.
+============================================================ */
+
+#page-phonerepair{ --pr-accent:#EF4444; --pr-accent-2:#F59E0B; --pr-glow:rgba(239,68,68,.18); }
+
+#page-phonerepair .pr-section{
+  margin: 28px 0 36px;
+  padding: 22px 22px 24px;
+  background: var(--surface, rgba(255,255,255,.02));
+  border: 1px solid var(--border, rgba(255,255,255,.06));
+  border-radius: 16px;
+  position: relative;
+}
+#page-phonerepair .pr-section::before{
+  content:""; position:absolute; inset:0; border-radius:16px; pointer-events:none;
+  background: radial-gradient(circle at 0% 0%, var(--pr-glow), transparent 40%);
+  opacity:.6;
+}
+
+#page-phonerepair .pr-section-head{ position:relative; margin-bottom:18px; }
+#page-phonerepair .pr-eyebrow{
+  display:inline-block; font-size:11px; letter-spacing:.04em;
+  color: var(--pr-accent); background: rgba(239,68,68,.08);
+  border:1px solid rgba(239,68,68,.25); border-radius:999px;
+  padding:4px 11px; margin-bottom:8px; font-weight:700;
+}
+#page-phonerepair .pr-section-head h2{
+  font-size:22px; margin:6px 0 6px; color: var(--text, #E8EEF6);
+  font-weight:800;
+}
+#page-phonerepair .pr-section-head p{
+  margin:0; color: var(--text-muted, rgba(232,238,246,.65));
+  font-size:13.5px; line-height:1.7;
+}
+
+#page-phonerepair .pr-grid{ display:grid; gap:14px; }
+#page-phonerepair .pr-grid-2{ grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+#page-phonerepair .pr-grid-3{ grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+#page-phonerepair .pr-card,
+#page-phonerepair .pr-tool-card{
+  background: var(--surface-2, rgba(255,255,255,.03));
+  border:1px solid var(--border, rgba(255,255,255,.07));
+  border-radius:12px; padding:16px;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  position:relative;
+}
+#page-phonerepair .pr-card:hover,
+#page-phonerepair .pr-tool-card:hover{
+  transform: translateY(-2px);
+  border-color: rgba(239,68,68,.35);
+  box-shadow: 0 6px 24px -10px var(--pr-glow);
+}
+
+#page-phonerepair .pr-card-icon,
+#page-phonerepair .pr-tool-icon{
+  width:42px; height:42px; border-radius:10px;
+  background: linear-gradient(135deg, var(--pr-accent), var(--pr-accent-2));
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px; margin-bottom:10px;
+  box-shadow: 0 4px 12px -4px var(--pr-glow);
+}
+
+#page-phonerepair .pr-card h3,
+#page-phonerepair .pr-tool-card h3{
+  margin:0 0 6px; font-size:15.5px; font-weight:800;
+  color: var(--text, #E8EEF6);
+}
+#page-phonerepair .pr-card-lead{
+  margin:0 0 10px; font-size:12.5px; color: var(--text-muted);
+  line-height:1.6;
+}
+
+#page-phonerepair .pr-card-toggle{
+  background: transparent; border:1px solid var(--border);
+  color: var(--pr-accent); border-radius:8px;
+  padding:6px 12px; font-size:12px; cursor:pointer;
+  font-weight:700; font-family:inherit;
+  transition: background .2s ease;
+}
+#page-phonerepair .pr-card-toggle:hover{ background: rgba(239,68,68,.08); }
+#page-phonerepair .pr-card-toggle.is-open{ background: rgba(239,68,68,.12); color: #fff; }
+
+#page-phonerepair .pr-card-body{
+  margin-top:12px; padding-top:12px;
+  border-top:1px dashed rgba(255,255,255,.08);
+  font-size:13px; color: var(--text-muted); line-height:1.75;
+}
+#page-phonerepair .pr-card-body ul{ padding-right:18px; margin:0 0 8px; }
+#page-phonerepair .pr-card-body li{ margin-bottom:5px; }
+#page-phonerepair .pr-card-body b{ color: var(--text); }
+
+#page-phonerepair .pr-formula{
+  background: rgba(0,0,0,.18); border:1px solid var(--border);
+  border-radius:8px; padding:8px 12px; margin:8px 0;
+  display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+  font-size:13px;
+}
+#page-phonerepair .pr-formula code{
+  background: rgba(239,68,68,.12); color:#fff;
+  padding:3px 8px; border-radius:5px; font-family:'Fira Code', monospace;
+  font-size:12.5px;
+}
+#page-phonerepair .pr-formula span{ color: var(--text-faint); }
+
+#page-phonerepair .pr-tip{
+  margin:8px 0 0; padding:8px 12px;
+  background: rgba(245,158,11,.08); border-right:3px solid var(--pr-accent-2);
+  border-radius:6px; font-size:12.5px; color: var(--text);
+  line-height:1.7;
+}
+
+#page-phonerepair .pr-tool-card ul{
+  margin:0; padding-right:18px; font-size:12.5px;
+  color: var(--text-muted); line-height:1.7;
+}
+#page-phonerepair .pr-tool-card ul li{ margin-bottom:4px; }
+#page-phonerepair .pr-tool-card b{ color: var(--text); }
+
+#page-phonerepair .pr-tools-summary{
+  margin-top:18px; padding:14px 16px;
+  background: linear-gradient(135deg, rgba(239,68,68,.06), rgba(245,158,11,.04));
+  border:1px solid rgba(239,68,68,.18); border-radius:10px;
+}
+#page-phonerepair .pr-tools-summary h4{
+  margin:0 0 8px; font-size:14px; font-weight:800; color: var(--text);
+}
+#page-phonerepair .pr-tools-budget{
+  list-style:none; padding:0; margin:0 0 8px;
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:6px;
+  font-size:12.5px; color: var(--text-muted);
+}
+#page-phonerepair .pr-tools-budget li{
+  padding:4px 0;
+  border-bottom:1px dashed rgba(255,255,255,.05);
+}
+#page-phonerepair .pr-tools-budget b{ color: var(--pr-accent-2); }
+#page-phonerepair .pr-tools-total{
+  margin:6px 0 0; padding-top:8px;
+  border-top:1px solid var(--border);
+  font-size:13.5px; color: var(--text);
+}
+#page-phonerepair .pr-tools-total b{ color: var(--pr-accent); }
+
+@media print{
+  #page-phonerepair .pr-section{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+  #page-phonerepair .pr-card-body{ display:block !important; }
+}
+
+
+
+/* ============================================================
+   WORKER 07 · PHASE 2 — Mainboard Anatomy + Repair Cards
+============================================================ */
+
+#page-phonerepair .pr-mb-wrap{
+  display:flex; flex-direction:column; gap:14px;
+}
+
+#page-phonerepair .pr-mb-tabs{
+  display:flex; gap:8px; flex-wrap:wrap;
+}
+#page-phonerepair .pr-mb-tab{
+  background:transparent; border:1px solid var(--border);
+  color: var(--text-muted); border-radius:8px;
+  padding:8px 14px; font-size:13px; font-weight:700;
+  cursor:pointer; font-family:inherit;
+  transition: all .2s ease;
+}
+#page-phonerepair .pr-mb-tab.is-active{
+  background: rgba(239,68,68,.12);
+  border-color: var(--pr-accent);
+  color: #fff;
+}
+#page-phonerepair .pr-mb-tab:hover{ border-color: var(--pr-accent); }
+
+#page-phonerepair .pr-mb-stage{
+  background: rgba(0,0,0,.25);
+  border:1px solid var(--border);
+  border-radius:12px; padding:14px; overflow:auto;
+}
+#page-phonerepair .pr-mb-svg{ width:100%; height:auto; max-width:600px; margin:0 auto; display:block; }
+
+#page-phonerepair .pr-mb-ic{ cursor:pointer; transition: filter .2s ease; }
+#page-phonerepair .pr-mb-ic:hover rect{
+  filter: drop-shadow(0 0 6px var(--pr-accent));
+  stroke-width: 2.5;
+}
+#page-phonerepair .pr-mb-ic.is-selected rect{
+  filter: drop-shadow(0 0 12px #fff);
+}
+
+#page-phonerepair .pr-mb-info{
+  background: var(--surface-2, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; min-height:80px;
+  font-size:13px; color: var(--text-muted); line-height:1.75;
+}
+#page-phonerepair .pr-mb-info-empty{
+  margin:0; text-align:center; color: var(--text-faint);
+  font-style: italic;
+}
+#page-phonerepair .pr-mb-info h4{
+  margin:0 0 8px; color: var(--text); font-size:15px;
+}
+#page-phonerepair .pr-mb-info p{ margin:6px 0; }
+#page-phonerepair .pr-mb-info b{ color: var(--text); }
+#page-phonerepair .pr-mb-info .pr-mb-symptoms{
+  display:inline-block; background: rgba(239,68,68,.08);
+  border-right:3px solid var(--pr-accent);
+  padding:6px 10px; margin-top:6px; border-radius:5px;
+}
+
+/* Repair Cards */
+#page-phonerepair .pr-repair-card{
+  background: var(--surface-2, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:12px;
+  padding:14px 16px;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+#page-phonerepair .pr-repair-card:hover{
+  border-color: rgba(239,68,68,.35);
+  box-shadow: 0 4px 16px -8px var(--pr-glow);
+}
+
+#page-phonerepair .pr-repair-head{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:8px; gap:10px;
+}
+#page-phonerepair .pr-repair-head h3{
+  margin:0; font-size:15px; font-weight:800;
+  color: var(--text);
+}
+#page-phonerepair .pr-diff{
+  font-size:12px; color: var(--pr-accent-2);
+  letter-spacing:1px;
+}
+
+#page-phonerepair .pr-repair-meta{
+  display:flex; gap:14px; flex-wrap:wrap;
+  font-size:11.5px; color: var(--text-muted);
+  padding:6px 0; border-bottom:1px dashed rgba(255,255,255,.06);
+  margin-bottom:8px;
+}
+#page-phonerepair .pr-repair-meta span{
+  display:inline-flex; gap:4px; align-items:center;
+}
+
+#page-phonerepair .pr-repair-body{
+  font-size:12.5px; color: var(--text-muted); line-height:1.7;
+}
+#page-phonerepair .pr-repair-body p{ margin:5px 0; }
+#page-phonerepair .pr-repair-body b{ color: var(--text); }
+
+@media print{
+  #page-phonerepair .pr-mb-stage{ background:#fff !important; }
+  #page-phonerepair .pr-repair-card{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
+
+
+
+/* ============================================================
+   WORKER 07 · PHASE 3 — Decision Trees + Software Side
+============================================================ */
+
+#page-phonerepair .pr-tree-tabs{
+  display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;
+}
+#page-phonerepair .pr-tree-tab{
+  background:transparent; border:1px solid var(--border);
+  color: var(--text-muted); border-radius:8px;
+  padding:8px 14px; font-size:13px; font-weight:700;
+  cursor:pointer; font-family:inherit;
+  transition: all .2s ease;
+}
+#page-phonerepair .pr-tree-tab.is-active{
+  background: rgba(239,68,68,.12);
+  border-color: var(--pr-accent);
+  color: #fff;
+}
+#page-phonerepair .pr-tree-tab:hover{ border-color: var(--pr-accent); }
+
+#page-phonerepair .pr-tree{
+  background: rgba(0,0,0,.18);
+  border:1px solid var(--border); border-radius:12px;
+  padding:16px; overflow-x:auto;
+}
+
+#page-phonerepair .pr-tree-node,
+#page-phonerepair .pr-tree-branch{
+  position:relative; padding-right:18px;
+}
+
+#page-phonerepair .pr-tree-q{
+  background: linear-gradient(135deg, rgba(239,68,68,.10), rgba(245,158,11,.04));
+  border:1px solid rgba(239,68,68,.25);
+  border-radius:8px; padding:10px 14px;
+  margin-bottom:8px; font-size:13px;
+  color: var(--text); font-weight:600; line-height:1.6;
+}
+
+#page-phonerepair .pr-tree-children{
+  margin-right:18px;
+  border-right:2px dashed rgba(239,68,68,.2);
+  padding-right:14px; padding-top:6px;
+}
+
+#page-phonerepair .pr-tree-branch{
+  margin-bottom:10px;
+}
+#page-phonerepair .pr-tree-edge{
+  display:inline-block;
+  background: rgba(102,252,241,.08);
+  border:1px solid rgba(102,252,241,.25);
+  color: #66FCF1;
+  padding:3px 10px; border-radius:6px;
+  font-size:11.5px; font-weight:700;
+  margin-bottom:5px;
+}
+
+#page-phonerepair .pr-tree-leaf{
+  background: rgba(34,197,94,.06);
+  border-right:3px solid #22C55E;
+  padding:8px 12px; border-radius:6px;
+  font-size:12.5px; color: var(--text-muted);
+  line-height:1.7;
+}
+#page-phonerepair .pr-tree-leaf b{ color: #22C55E; }
+
+#page-phonerepair .pr-tree-no .pr-tree-edge{
+  background: rgba(239,68,68,.10); border-color: rgba(239,68,68,.3); color: #EF4444;
+}
+#page-phonerepair .pr-tree-yes .pr-tree-edge{
+  background: rgba(34,197,94,.08); border-color: rgba(34,197,94,.3); color: #22C55E;
+}
+
+/* Software Cards */
+#page-phonerepair .pr-sw-card{
+  background: var(--surface-2, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:12px;
+  padding:14px 16px;
+  transition: border-color .2s ease;
+}
+#page-phonerepair .pr-sw-card:hover{ border-color: rgba(102,252,241,.35); }
+#page-phonerepair .pr-sw-card h3{
+  margin:0 0 8px; font-size:14.5px; font-weight:800;
+  color: var(--text);
+}
+#page-phonerepair .pr-sw-card ul{
+  margin:0; padding-right:18px;
+  font-size:12.5px; color: var(--text-muted); line-height:1.75;
+}
+#page-phonerepair .pr-sw-card li{ margin-bottom:5px; }
+#page-phonerepair .pr-sw-card b{ color: var(--text); }
+
+#page-phonerepair .pr-sw-warning{
+  background: linear-gradient(135deg, rgba(239,68,68,.08), rgba(245,158,11,.04));
+  border-color: rgba(239,68,68,.3);
+}
+#page-phonerepair .pr-sw-warning h3{ color: #EF4444; }
+
+@media print{
+  #page-phonerepair .pr-tree{ background:#fff !important; }
+  #page-phonerepair .pr-tree-q,
+  #page-phonerepair .pr-tree-leaf,
+  #page-phonerepair .pr-sw-card{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
+
+
+
+/* ============================================================
+   WORKER 07 · PHASE 4 — Micro-Solder + Customer Service + Ethics + Iraq
+============================================================ */
+
+/* Micro-solder cards */
+#page-phonerepair .pr-ms-card{
+  background: var(--surface-2, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:12px;
+  padding:14px 16px;
+  transition: border-color .2s ease;
+}
+#page-phonerepair .pr-ms-card:hover{ border-color: rgba(245,158,11,.35); }
+#page-phonerepair .pr-ms-card h3{
+  margin:0 0 8px; font-size:14.5px; font-weight:800;
+  color: var(--pr-accent-2);
+}
+#page-phonerepair .pr-ms-card ul{
+  margin:0; padding-right:18px;
+  font-size:12.5px; color: var(--text-muted); line-height:1.75;
+}
+#page-phonerepair .pr-ms-card li{ margin-bottom:5px; }
+#page-phonerepair .pr-ms-card b{ color: var(--text); }
+
+/* Customer Service Grid */
+#page-phonerepair .pr-cs-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap:14px;
+}
+#page-phonerepair .pr-cs-card{
+  background: var(--surface-2, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:12px;
+  padding:14px 16px;
+}
+#page-phonerepair .pr-cs-card h3{
+  margin:0 0 8px; font-size:14.5px; font-weight:800;
+  color: #22C55E;
+}
+#page-phonerepair .pr-cs-card p{
+  margin:5px 0; font-size:12.5px; color: var(--text-muted); line-height:1.7;
+}
+#page-phonerepair .pr-cs-card ul{
+  margin:0; padding-right:18px;
+  font-size:12.5px; color: var(--text-muted); line-height:1.7;
+}
+#page-phonerepair .pr-cs-card li{ margin-bottom:4px; }
+#page-phonerepair .pr-cs-card b{ color: var(--text); }
+
+/* Ethics */
+#page-phonerepair .pr-ethics-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap:14px;
+}
+#page-phonerepair .pr-ethics-card{
+  background: var(--surface-2, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:12px;
+  padding:14px 16px; position:relative;
+}
+#page-phonerepair .pr-ethics-tag{
+  display:inline-block;
+  font-size:11px; font-weight:700;
+  padding:3px 9px; border-radius:999px;
+  margin-bottom:6px;
+  background: rgba(102,252,241,.08);
+  border:1px solid rgba(102,252,241,.25);
+  color: #66FCF1;
+}
+#page-phonerepair .pr-ethics-card.pr-ethics-critical{
+  background: linear-gradient(135deg, rgba(239,68,68,.08), rgba(245,158,11,.04));
+  border-color: rgba(239,68,68,.3);
+}
+#page-phonerepair .pr-ethics-card.pr-ethics-critical .pr-ethics-tag{
+  background: rgba(239,68,68,.15); border-color: rgba(239,68,68,.4); color: #EF4444;
+}
+#page-phonerepair .pr-ethics-card h3{
+  margin:4px 0 8px; font-size:14.5px; font-weight:800; color: var(--text);
+}
+#page-phonerepair .pr-ethics-card p{
+  margin:5px 0; font-size:12.5px; color: var(--text-muted); line-height:1.7;
+}
+#page-phonerepair .pr-ethics-card ul{
+  margin:0; padding-right:18px;
+  font-size:12.5px; color: var(--text-muted); line-height:1.75;
+}
+#page-phonerepair .pr-ethics-card li{ margin-bottom:4px; }
+#page-phonerepair .pr-ethics-card b{ color: var(--text); }
+
+/* Iraq Block */
+#page-phonerepair .pr-iq-block{
+  background: linear-gradient(135deg, rgba(34,197,94,.05), rgba(245,158,11,.03));
+  border:1px solid rgba(34,197,94,.2);
+  border-radius:12px; padding:14px 16px;
+  margin-bottom:14px;
+}
+#page-phonerepair .pr-iq-block h3{
+  margin:0 0 10px; font-size:15px; font-weight:800; color: var(--text);
+}
+#page-phonerepair .pr-iq-table{
+  width:100%; border-collapse: collapse;
+  font-size:12.5px; color: var(--text-muted);
+}
+#page-phonerepair .pr-iq-table th,
+#page-phonerepair .pr-iq-table td{
+  padding:7px 10px; text-align:right;
+  border-bottom:1px dashed rgba(255,255,255,.06);
+}
+#page-phonerepair .pr-iq-table th{
+  color: var(--text); font-weight:700;
+  background: rgba(0,0,0,.18);
+}
+#page-phonerepair .pr-iq-table tr:hover td{
+  background: rgba(34,197,94,.04);
+}
+#page-phonerepair .pr-iq-note{
+  margin:8px 0 0; font-size:11.5px;
+  color: var(--text-faint); font-style: italic;
+}
+
+#page-phonerepair .pr-iq-zones{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:8px;
+}
+#page-phonerepair .pr-iq-zone{
+  background: rgba(0,0,0,.18);
+  border:1px solid var(--border); border-radius:8px;
+  padding:8px 11px; font-size:12.5px;
+  color: var(--text-muted);
+}
+#page-phonerepair .pr-iq-zone b{ color: var(--pr-accent-2); }
+
+#page-phonerepair .pr-iq-challenges{
+  background: linear-gradient(135deg, rgba(239,68,68,.05), rgba(245,158,11,.03));
+  border-color: rgba(239,68,68,.25);
+}
+#page-phonerepair .pr-iq-challenges ul{
+  margin:0; padding-right:18px;
+  font-size:12.5px; color: var(--text-muted); line-height:1.8;
+}
+#page-phonerepair .pr-iq-challenges li{ margin-bottom:5px; }
+#page-phonerepair .pr-iq-challenges b{ color: var(--text); }
+
+@media print{
+  #page-phonerepair .pr-ms-card,
+  #page-phonerepair .pr-cs-card,
+  #page-phonerepair .pr-ethics-card,
+  #page-phonerepair .pr-iq-block{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
+
+
+
+/* ============================================================
+   WORKER 07 · PHASE 5 — Labs + Career + Cheat + Citations
+============================================================ */
+
+#page-phonerepair .pr-lab-tabs{
+  display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px;
+}
+#page-phonerepair .pr-lab-tab{
+  background:transparent; border:1px solid var(--border);
+  color: var(--text-muted); border-radius:8px;
+  padding:7px 12px; font-size:12px; font-weight:700;
+  cursor:pointer; font-family:inherit;
+  transition: all .2s ease;
+}
+#page-phonerepair .pr-lab-tab.is-active{
+  background: rgba(239,68,68,.12);
+  border-color: var(--pr-accent); color: #fff;
+}
+#page-phonerepair .pr-lab-tab:hover{ border-color: var(--pr-accent); }
+
+#page-phonerepair .pr-lab{
+  background: rgba(0,0,0,.18);
+  border:1px solid var(--border); border-radius:12px;
+  padding:16px;
+}
+#page-phonerepair .pr-lab h3{
+  margin:0 0 6px; font-size:15.5px; font-weight:800;
+  color: var(--text);
+}
+#page-phonerepair .pr-lab-desc{
+  margin:0 0 12px; font-size:12.5px; color: var(--text-muted);
+  line-height:1.7;
+}
+
+/* Buttons */
+#page-phonerepair .pr-btn-primary{
+  background: linear-gradient(135deg, var(--pr-accent), var(--pr-accent-2));
+  color:#fff; border:none; border-radius:8px;
+  padding:8px 16px; font-size:13px; font-weight:700;
+  cursor:pointer; font-family:inherit;
+}
+#page-phonerepair .pr-btn-primary:hover{ filter: brightness(1.1); }
+#page-phonerepair .pr-btn-secondary{
+  background: transparent; color: var(--text-muted);
+  border:1px solid var(--border); border-radius:8px;
+  padding:7px 14px; font-size:12.5px; font-weight:700;
+  cursor:pointer; font-family:inherit; margin-right:6px;
+}
+#page-phonerepair .pr-btn-secondary:hover{ border-color: var(--pr-accent); color: #fff; }
+
+/* DMM Lab */
+#page-phonerepair .pr-dmm-stage{
+  display:grid; grid-template-columns: 1fr 1fr; gap:14px;
+  margin-bottom:10px;
+}
+@media (max-width:600px){ #page-phonerepair .pr-dmm-stage{ grid-template-columns: 1fr; } }
+#page-phonerepair .pr-dmm-mode label{
+  display:block; font-size:12px; color: var(--text-muted);
+  margin: 8px 0 4px;
+}
+#page-phonerepair .pr-dmm-mode select{
+  width:100%; padding:7px 10px;
+  background: var(--surface, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:7px;
+  color: var(--text); font-family:inherit; font-size:13px;
+}
+#page-phonerepair .pr-dmm-display{
+  background: #0a0d0f; border:2px solid var(--pr-accent);
+  border-radius:10px; padding:14px;
+  display:flex; flex-direction:column; align-items:center;
+  justify-content:center; min-height:140px;
+  box-shadow: inset 0 0 12px rgba(239,68,68,.15);
+}
+#page-phonerepair .pr-dmm-screen{
+  font-family: 'Courier New', monospace;
+  font-size:36px; font-weight:bold;
+  color: #66FCF1;
+  text-shadow: 0 0 8px #66FCF1;
+  margin-bottom:8px;
+}
+#page-phonerepair .pr-dmm-hint{
+  font-size:12px; color: var(--text-muted);
+  text-align:center; line-height:1.5;
+}
+
+/* Walker */
+#page-phonerepair .pr-walk-stage{
+  background: rgba(0,0,0,.18);
+  border:1px solid var(--border); border-radius:10px;
+  padding:14px; margin-bottom:8px;
+}
+#page-phonerepair .pr-walk-question{
+  font-size:14.5px; font-weight:700; color: var(--text);
+  margin-bottom:10px;
+  background: linear-gradient(135deg, rgba(239,68,68,.10), rgba(245,158,11,.04));
+  border:1px solid rgba(239,68,68,.25); border-radius:8px;
+  padding:10px 14px;
+}
+#page-phonerepair .pr-walk-options{
+  display:flex; flex-direction:column; gap:6px;
+}
+#page-phonerepair .pr-walk-options button{
+  background: var(--surface-2, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:8px;
+  padding:8px 12px; font-size:13px;
+  text-align:right; color: var(--text);
+  cursor:pointer; font-family:inherit;
+}
+#page-phonerepair .pr-walk-options button:hover{
+  border-color: var(--pr-accent); background: rgba(239,68,68,.06);
+}
+
+/* Cost Estimator */
+#page-phonerepair .pr-cost-stage{
+  display:grid; grid-template-columns: 120px 1fr 60px; gap:8px;
+  align-items:center; margin-bottom:14px;
+}
+@media (max-width:600px){
+  #page-phonerepair .pr-cost-stage{ grid-template-columns: 1fr; }
+}
+#page-phonerepair .pr-cost-stage label{
+  font-size:13px; color: var(--text-muted);
+}
+#page-phonerepair .pr-cost-stage select,
+#page-phonerepair .pr-cost-stage input{
+  padding:7px 10px;
+  background: var(--surface, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:7px;
+  color: var(--text); font-family:inherit; font-size:13px;
+}
+#page-phonerepair .pr-cost-stage button{ grid-column: 1 / -1; }
+#page-phonerepair .pr-cost-result{
+  margin-top:10px; padding:12px 14px;
+  background: linear-gradient(135deg, rgba(34,197,94,.07), rgba(102,252,241,.04));
+  border:1px solid rgba(34,197,94,.25);
+  border-radius:10px;
+  font-size:13px; line-height:1.7;
+}
+#page-phonerepair .pr-cost-result b{ color: #22C55E; }
+
+/* Water Damage Game */
+#page-phonerepair .pr-wd-stage{
+  display:flex; flex-direction:column; gap:10px;
+}
+#page-phonerepair .pr-wd-pool,
+#page-phonerepair .pr-wd-order{
+  display:flex; flex-wrap:wrap; gap:6px;
+  min-height:60px; padding:8px;
+  background: rgba(0,0,0,.12);
+  border:1px dashed rgba(255,255,255,.08); border-radius:8px;
+}
+#page-phonerepair .pr-wd-step{
+  background: var(--surface-2, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:6px;
+  padding:6px 10px; font-size:11.5px;
+  color: var(--text); cursor:pointer;
+  transition: all .2s ease;
+}
+#page-phonerepair .pr-wd-step:hover{ border-color: var(--pr-accent); }
+#page-phonerepair .pr-wd-step.is-correct{ border-color: #22C55E; background: rgba(34,197,94,.08); }
+#page-phonerepair .pr-wd-step.is-wrong{ border-color: #EF4444; background: rgba(239,68,68,.08); }
+#page-phonerepair .pr-wd-result{
+  font-size:13px; line-height:1.7;
+  padding:8px 12px; border-radius:8px;
+}
+
+/* PCB ID */
+#page-phonerepair .pr-pcb-stage{
+  background: rgba(0,0,0,.18);
+  border:1px solid var(--border); border-radius:10px;
+  padding:14px; margin-bottom:8px;
+}
+#page-phonerepair .pr-pcb-prompt{
+  font-size:14.5px; color: var(--text);
+  margin-bottom:10px; padding:10px 14px;
+  background: linear-gradient(135deg, rgba(102,252,241,.08), rgba(102,252,241,.02));
+  border:1px solid rgba(102,252,241,.25); border-radius:8px;
+}
+#page-phonerepair .pr-pcb-options{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap:6px;
+}
+#page-phonerepair .pr-pcb-options button{
+  background: var(--surface-2, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:7px;
+  padding:9px 12px; font-size:13px; color: var(--text);
+  cursor:pointer; font-family:inherit;
+}
+#page-phonerepair .pr-pcb-options button:hover{ border-color: var(--pr-accent); }
+#page-phonerepair .pr-pcb-options button.is-correct{ background: rgba(34,197,94,.15); border-color: #22C55E; }
+#page-phonerepair .pr-pcb-options button.is-wrong{ background: rgba(239,68,68,.15); border-color: #EF4444; }
+#page-phonerepair .pr-pcb-feedback{
+  margin-top:10px; font-size:12.5px; line-height:1.7;
+  color: var(--text-muted);
+}
+#page-phonerepair .pr-pcb-score{
+  margin-top:8px; font-size:13px; font-weight:700;
+  color: var(--pr-accent-2);
+}
+
+/* Convo Trainer */
+#page-phonerepair .pr-convo-stage{
+  background: rgba(0,0,0,.18);
+  border:1px solid var(--border); border-radius:10px;
+  padding:14px; margin-bottom:8px;
+}
+#page-phonerepair .pr-convo-customer{
+  font-size:13.5px; line-height:1.75;
+  padding:10px 14px;
+  background: linear-gradient(135deg, rgba(239,68,68,.10), rgba(245,158,11,.03));
+  border-right:3px solid var(--pr-accent);
+  border-radius: 4px 8px 8px 4px;
+  margin-bottom:10px;
+}
+#page-phonerepair .pr-convo-options{
+  display:flex; flex-direction:column; gap:6px;
+}
+#page-phonerepair .pr-convo-options button{
+  background: var(--surface-2, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:8px;
+  padding:9px 12px; font-size:12.5px; line-height:1.6;
+  color: var(--text); text-align:right;
+  cursor:pointer; font-family:inherit;
+}
+#page-phonerepair .pr-convo-options button:hover{ border-color: var(--pr-accent); }
+#page-phonerepair .pr-convo-feedback{
+  margin-top:10px; font-size:12.5px; line-height:1.7;
+}
+
+#page-phonerepair .pr-convo-meters{
+  display:flex; flex-direction:column; gap:8px;
+  margin-top:10px; padding:10px 14px;
+  background: rgba(0,0,0,.15); border-radius:8px;
+}
+#page-phonerepair .pr-meter{
+  display:flex; align-items:center; gap:10px;
+  font-size:12px; color: var(--text-muted);
+}
+#page-phonerepair .pr-meter span{ min-width:120px; }
+#page-phonerepair .pr-meter-bar{
+  flex:1; height:8px;
+  background: rgba(255,255,255,.05);
+  border-radius:4px; overflow:hidden;
+}
+#page-phonerepair .pr-meter-bar div{
+  height:100%; background: linear-gradient(90deg, var(--pr-accent-2), #22C55E);
+  transition: width .4s ease;
+}
+
+/* Career */
+#page-phonerepair .pr-career-list{
+  list-style:none; padding:0; margin:0;
+  display:flex; flex-direction:column; gap:14px;
+}
+#page-phonerepair .pr-career-step{
+  display:flex; gap:12px;
+  background: var(--surface-2, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:12px;
+  padding:14px;
+}
+#page-phonerepair .pr-career-num{
+  flex-shrink:0;
+  width:42px; height:42px; border-radius:50%;
+  background: linear-gradient(135deg, var(--pr-accent), var(--pr-accent-2));
+  color:#fff; font-size:18px; font-weight:800;
+  display:flex; align-items:center; justify-content:center;
+}
+#page-phonerepair .pr-career-body h4{
+  margin:0 0 6px; font-size:15px; font-weight:800;
+  color: var(--text);
+}
+#page-phonerepair .pr-career-body p{
+  margin:0 0 8px; font-size:12.5px;
+  color: var(--text-muted); line-height:1.6;
+}
+#page-phonerepair .pr-career-body ul{
+  margin:0; padding-right:18px;
+  font-size:12.5px; color: var(--text-muted); line-height:1.7;
+}
+#page-phonerepair .pr-career-body li{ margin-bottom:3px; }
+#page-phonerepair .pr-career-body b{ color: var(--text); }
+
+/* Cheat Sheet */
+#page-phonerepair .pr-cheat-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap:12px;
+}
+#page-phonerepair .pr-cheat-card{
+  background: var(--surface-2, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:10px;
+  padding:12px 14px;
+}
+#page-phonerepair .pr-cheat-card h4{
+  margin:0 0 8px; font-size:13.5px; font-weight:800;
+  color: var(--pr-accent-2);
+}
+#page-phonerepair .pr-cheat-card ul{
+  margin:0; padding-right:18px;
+  font-size:12px; color: var(--text-muted); line-height:1.7;
+}
+#page-phonerepair .pr-cheat-card li{ margin-bottom:4px; }
+#page-phonerepair .pr-cheat-card b{ color: var(--text); }
+
+/* Citations */
+#page-phonerepair .pr-cite-list{
+  margin:0; padding-right:20px;
+  font-size:12.5px; color: var(--text-muted); line-height:1.85;
+}
+#page-phonerepair .pr-cite-list li{
+  margin-bottom:6px; padding-bottom:6px;
+  border-bottom:1px dashed rgba(255,255,255,.05);
+}
+#page-phonerepair .pr-cite-list li:last-child{ border-bottom:none; }
+#page-phonerepair .pr-cite-list b{ color: var(--text); }
+#page-phonerepair .pr-cite-list i{ color: var(--text-faint); }
+
+@media print{
+  #page-phonerepair .pr-lab,
+  #page-phonerepair .pr-career-step,
+  #page-phonerepair .pr-cheat-card,
+  #page-phonerepair .pr-citations{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}

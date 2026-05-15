@@ -176,6 +176,16 @@
         <span class="nav-badge" style="background:linear-gradient(135deg,#F59E0B,#10B981);color:#fff;">جديد</span>
       </div>
 
+      <div class="nav-item" data-page="phonerepair">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="6" y="2" width="12" height="20" rx="2"/>
+          <line x1="11" y1="18" x2="13" y2="18"/>
+          <path d="M9 6h6"/>
+        </svg>
+        <span class="nav-label">صيانة الهواتف</span>
+        <span class="nav-badge" style="background:linear-gradient(135deg,#EF4444,#F59E0B);color:#fff;">جديد</span>
+      </div>
+
       <span class="nav-section-label">الإدارة</span>
 
       <div class="nav-item" data-page="none">
@@ -12225,6 +12235,1702 @@ const bird = { ...canMove(), ...canFly() };
       </section><!-- /acc-cashier Phase 5 -->
 
     </section><!-- /page-accounting -->
+
+
+    <!-- ============================================================
+         PAGE 12 — PHONE REPAIR (Worker 07 — صيانة الهواتف)
+         Scope: #page-phonerepair only. Additive. Vanilla.
+    ============================================================ -->
+    <section class="page" id="page-phonerepair">
+
+      <div class="page-header">
+        <h1>📱🔧 صيانة الهواتف الذكية — Mastery</h1>
+        <p>من الإلكترونيات الأساسية حتى Logic Board Repair — مع سوق العراق الحقيقي.</p>
+      </div>
+
+      <!-- ============================================================
+           PHASE 1 · A — Electronics Fundamentals (Knowledge Spine)
+      ============================================================ -->
+      <section class="pr-section" id="pr-electronics-fund" data-pr-section="electronics">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">الأساسيات الإلكترونية · Electronics 101</span>
+          <h2>قبل أن تفك أي جهاز — افهم الفيزياء</h2>
+          <p>ست بطاقات interactive تشرح أساسيات لا غنى عنها لأي فني. اضغط على أي بطاقة لتوسيعها.</p>
+        </header>
+
+        <div class="pr-grid pr-grid-3" id="pr-elec-grid">
+
+          <article class="pr-card pr-elec-card" data-pr-elec="ohm">
+            <div class="pr-card-icon">⚡</div>
+            <h3>Ohm's Law — قانون أوم</h3>
+            <p class="pr-card-lead">V = I × R · الجهد = التيار × المقاومة</p>
+            <button class="pr-card-toggle" data-pr-toggle="ohm">عرض التفاصيل ▾</button>
+            <div class="pr-card-body" id="pr-body-ohm" hidden>
+              <ul>
+                <li><b>Voltage (V):</b> الفرق في الجهد بين نقطتين — قياسه بالـ Multimeter في وضع DCV.</li>
+                <li><b>Current (I):</b> تدفق الإلكترونات — يقاس بالأمبير. على الموبايل بالـ mA عادةً.</li>
+                <li><b>Resistance (R):</b> ممانعة المسار للتيار — تقاس بالأوم Ω.</li>
+                <li><b>تطبيق عملي:</b> بطارية iPhone 11 = 3.83V × 0.85A أثناء التشغيل ≈ 3.25W.</li>
+              </ul>
+              <div class="pr-formula">
+                <code>V = I × R</code> <span>·</span>
+                <code>I = V ÷ R</code> <span>·</span>
+                <code>P = V × I</code>
+              </div>
+              <p class="pr-tip">💡 <b>تطبيق:</b> لو قست 0V على pin من PMIC المفترض يعطي 1.8V → إما PMIC تالف، إما short circuit يسحب الجهد.</p>
+            </div>
+          </article>
+
+          <article class="pr-card pr-elec-card" data-pr-elec="dcac">
+            <div class="pr-card-icon">🔄</div>
+            <h3>DC vs AC — تيار مستمر vs متناوب</h3>
+            <p class="pr-card-lead">الموبايل DC · الشاحن يحوّل من AC إلى DC</p>
+            <button class="pr-card-toggle" data-pr-toggle="dcac">عرض التفاصيل ▾</button>
+            <div class="pr-card-body" id="pr-body-dcac" hidden>
+              <ul>
+                <li><b>AC (220V/50Hz):</b> ما يدخل من الكهرباء البيتية — موجة sine متناوبة.</li>
+                <li><b>DC:</b> تيار في اتجاه واحد — تحتاجه كل الإلكترونيات الرقمية.</li>
+                <li><b>Charger (Adapter):</b> داخله rectifier (ديود) + transformer + capacitor → يحوّل AC إلى DC نظيف.</li>
+                <li><b>USB-C PD:</b> يتفاوض مع الجهاز عبر CC pins ليرفع الجهد (5V/9V/15V/20V).</li>
+              </ul>
+              <p class="pr-tip">💡 لا تقيس AC على لوحة الموبايل أبداً — DCV هو الوضع الصحيح.</p>
+            </div>
+          </article>
+
+          <article class="pr-card pr-elec-card" data-pr-elec="capind">
+            <div class="pr-card-icon">🔋</div>
+            <h3>Capacitors &amp; Inductors</h3>
+            <p class="pr-card-lead">المكثفات تخزن جهد · الملفات تخزن مجال مغناطيسي</p>
+            <button class="pr-card-toggle" data-pr-toggle="capind">عرض التفاصيل ▾</button>
+            <div class="pr-card-body" id="pr-body-capind" hidden>
+              <ul>
+                <li><b>Capacitor (C):</b> يفلتر الضوضاء + يخزن طاقة لحظية. على الـ board تشاهد آلاف منها (أرقام صغيرة 0402/0201).</li>
+                <li><b>عطل شائع:</b> capacitor مكسور = short بين Vcc وGround → الجهاز ما يقلع. تختبر بـ Diode Mode.</li>
+                <li><b>Inductor (L):</b> ملف صغير — يستخدم في DC-DC converters لرفع/خفض الجهد.</li>
+                <li><b>اختبار:</b> Continuity على inductor المفترض يعطي قراءة قريبة من 0Ω. لو OL = مكسور.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="pr-card pr-elec-card" data-pr-elec="diodetr">
+            <div class="pr-card-icon">🚪</div>
+            <h3>Diodes &amp; Transistors</h3>
+            <p class="pr-card-lead">الديود = صمام · الترانزستور = مفتاح/مكبّر</p>
+            <button class="pr-card-toggle" data-pr-toggle="diodetr">عرض التفاصيل ▾</button>
+            <div class="pr-card-body" id="pr-body-diodetr" hidden>
+              <ul>
+                <li><b>Diode:</b> يسمح للتيار في اتجاه واحد فقط. قراءة طبيعية في Diode Mode = 0.4-0.7V.</li>
+                <li><b>Schottky Diode:</b> أسرع + drop أقل (0.2V). يستخدم للـ ESD protection.</li>
+                <li><b>MOSFET:</b> الترانزستور الأشهر على الـ board — مفتاح يتحكم به Gate voltage.</li>
+                <li><b>تطبيق:</b> Tristar (iPhone) عبارة عن متحكم MOSFETs لإدارة الشحن.</li>
+              </ul>
+              <p class="pr-tip">💡 ESD diode تالف = مدخل USB-C ما يستجيب رغم سلامة الـ flex.</p>
+            </div>
+          </article>
+
+          <article class="pr-card pr-elec-card" data-pr-elec="ics">
+            <div class="pr-card-icon">🔲</div>
+            <h3>Integrated Circuits (ICs)</h3>
+            <p class="pr-card-lead">معالجات صغيرة لكل وظيفة — Power, Audio, RF, Charging</p>
+            <button class="pr-card-toggle" data-pr-toggle="ics">عرض التفاصيل ▾</button>
+            <div class="pr-card-body" id="pr-body-ics" hidden>
+              <ul>
+                <li><b>PMIC (Power Management IC):</b> يولّد كل rails الجهد للجهاز. تلفه = no boot.</li>
+                <li><b>Tristar / Charging IC:</b> يدير الشحن + USB negotiation.</li>
+                <li><b>Audio IC:</b> يخرج الصوت للسماعة + الميكروفون. تلفه = "no service" أحياناً (iPhone 7).</li>
+                <li><b>RF Transceiver:</b> Wi-Fi/BT/Cellular — أعراض تلفه: ضعف إشارة، انقطاع متكرر.</li>
+                <li><b>Display IC:</b> يولّد الجهد العالي (~12V) للـ OLED. تلفه = شاشة ميتة رغم سلامتها.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="pr-card pr-elec-card" data-pr-elec="pcb">
+            <div class="pr-card-icon">🧱</div>
+            <h3>PCB Layers — طبقات اللوحة</h3>
+            <p class="pr-card-lead">multilayer PCB · vias · traces</p>
+            <button class="pr-card-toggle" data-pr-toggle="pcb">عرض التفاصيل ▾</button>
+            <div class="pr-card-body" id="pr-body-pcb" hidden>
+              <ul>
+                <li><b>Layers:</b> iPhone Logic Board ~10-12 طبقة. كل طبقة فيها traces.</li>
+                <li><b>Via:</b> ثقب صغير يربط بين الطبقات.</li>
+                <li><b>Ground Plane:</b> طبقة كاملة تعمل GND — تحت كل IC تقريباً.</li>
+                <li><b>تحدي:</b> trace مقطوع داخلياً = صعب جداً يصلح بدون micro-soldering.</li>
+                <li><b>Pad Lifted:</b> المسمار اللي تلصقه عليه IC ينقلع — يحتاج jumper wire.</li>
+              </ul>
+              <p class="pr-tip">⚠️ الحرارة الزائدة تكسر الـ pads. استخدم Hot Air بدرجة 350°C لا أكثر، وقت محدود.</p>
+            </div>
+          </article>
+
+        </div><!-- /pr-elec-grid -->
+      </section><!-- /pr-electronics-fund -->
+
+
+      <!-- ============================================================
+           PHASE 1 · B — Tools Gallery
+      ============================================================ -->
+      <section class="pr-section" id="pr-tools-gallery" data-pr-section="tools">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">معرض الأدوات · Tools of the Trade</span>
+          <h2>أدواتك = نصف المعركة</h2>
+          <p>كل أداة مع وظيفتها، نطاق سعرها بالـ IQD، ونصيحة شراء من السوق العراقي.</p>
+        </header>
+
+        <div class="pr-grid pr-grid-2" id="pr-tools-grid">
+
+          <article class="pr-tool-card">
+            <div class="pr-tool-icon">📏</div>
+            <h3>Multimeter (DMM)</h3>
+            <p>القلب النابض للتشخيص. بدونه أنت تعمل أعمى.</p>
+            <ul>
+              <li><b>الوظائف الأساسية:</b> DCV, ACV, Resistance, Continuity, Diode Mode.</li>
+              <li><b>السعر IQD:</b> 25k (صيني عادي) — 250k (Fluke 117) — 700k+ (Fluke 87V).</li>
+              <li><b>نصيحة:</b> ابدأ بـ ANENG AN8008 (~50k) — دقيق ويكفي للمبتدئ.</li>
+              <li><b>الأهم:</b> Continuity Mode (يصفر بسرعة) لتتبع الـ shorts.</li>
+            </ul>
+          </article>
+
+          <article class="pr-tool-card">
+            <div class="pr-tool-icon">🔌</div>
+            <h3>DC Power Supply</h3>
+            <p>ملك التشخيص — يخبرك بسحب الجهاز للتيار.</p>
+            <ul>
+              <li><b>الوظيفة:</b> تغذي الجهاز بـ 4.0V بدل البطارية وتراقب mA.</li>
+              <li><b>القراءات الذهبية:</b> Idle ~50-100mA · Boot ~250-500mA · Short = 1A+ فوراً.</li>
+              <li><b>السعر IQD:</b> 150k (صيني صغير) — 600k (KORAD KA3005P) — 1.5M+ (Mech-Pro).</li>
+              <li><b>نصيحة:</b> ابحث عن واحد بـ Current Limiting لحماية الجهاز.</li>
+            </ul>
+          </article>
+
+          <article class="pr-tool-card">
+            <div class="pr-tool-icon">🔥</div>
+            <h3>Soldering Iron + Hot Air Station</h3>
+            <p>للـ component-level repair — سوديريضن مزدوج.</p>
+            <ul>
+              <li><b>Soldering Iron:</b> JBC أفضل — ولكن Hakko FX-888D (~350k IQD) ممتازة للبدء.</li>
+              <li><b>Hot Air:</b> Quick 861DW أو Atten ST-862D — للـ BGA reflow.</li>
+              <li><b>Tips:</b> سن 0.3mm للـ micro · سن 1.2mm للـ pads العادية.</li>
+              <li><b>درجة الحرارة:</b> Lead-free 350°C · Leaded 300°C.</li>
+              <li><b>السعر IQD:</b> 200k (Yihua 8786D combo) — 800k+ (محطات احترافية).</li>
+            </ul>
+          </article>
+
+          <article class="pr-tool-card">
+            <div class="pr-tool-icon">🔬</div>
+            <h3>Microscope (10x-40x)</h3>
+            <p>عيناك الثانية — لا غنى عنه للـ Logic Board.</p>
+            <ul>
+              <li><b>التكبير:</b> 10x للعمل العادي · 40x للـ micro-soldering.</li>
+              <li><b>الإضاءة:</b> LED ring light ضرورية.</li>
+              <li><b>السعر IQD:</b> 280k (AmScope SM-1B) — 700k+ (binocular احترافي).</li>
+              <li><b>نصيحة:</b> اختر Trinocular لو تخطط تصور فيديو/صور للزبون.</li>
+            </ul>
+          </article>
+
+          <article class="pr-tool-card">
+            <div class="pr-tool-icon">🌊</div>
+            <h3>Ultrasonic Cleaner</h3>
+            <p>لتنظيف الـ board بعد water damage.</p>
+            <ul>
+              <li><b>الحجم المناسب:</b> 0.6L كافي للموبايل.</li>
+              <li><b>السائل:</b> Isopropyl Alcohol 99% — لا تستخدم ماء.</li>
+              <li><b>المدة:</b> 3-5 دقائق على 40kHz.</li>
+              <li><b>السعر IQD:</b> 90k - 250k حسب القوة.</li>
+              <li><b>تحذير:</b> أزل البطارية قبل أي تنظيف.</li>
+            </ul>
+          </article>
+
+          <article class="pr-tool-card">
+            <div class="pr-tool-icon">🔧</div>
+            <h3>Pry Tools, Suction Cup, Picks</h3>
+            <p>أدوات الفتح اليدوية — رخيصة لكن حرجة.</p>
+            <ul>
+              <li><b>iSesamo / Spudger:</b> لفصل الشاشة.</li>
+              <li><b>Suction Cup:</b> برفع شاشة LCD/OLED.</li>
+              <li><b>Plastic Picks:</b> للـ Samsung — رقيقة لتمر تحت الشاشة.</li>
+              <li><b>مفك Pentalobe P2:</b> ضروري لـ iPhone.</li>
+              <li><b>السعر IQD:</b> طقم كامل 30k - 80k (مثل Jakemy/iFixit kit).</li>
+            </ul>
+          </article>
+
+          <article class="pr-tool-card">
+            <div class="pr-tool-icon">🛡️</div>
+            <h3>ESD-safe Mat + Wrist Strap</h3>
+            <p>الكهرباء الساكنة قاتلة للـ ICs الحساسة.</p>
+            <ul>
+              <li><b>الخطر:</b> 200V من جسمك (لا تشعر بها) كافية لتلف IC.</li>
+              <li><b>المعدات:</b> Anti-static mat + grounded wrist strap.</li>
+              <li><b>السعر IQD:</b> 35k - 80k للطقم الكامل.</li>
+              <li><b>نصيحة:</b> ضع المحطة + الـ mat على نفس الـ ground point.</li>
+            </ul>
+          </article>
+
+          <article class="pr-tool-card">
+            <div class="pr-tool-icon">🧪</div>
+            <h3>Flux + Solder Wick + Paste</h3>
+            <p>المواد الاستهلاكية — جودتها تحدد جودة عملك.</p>
+            <ul>
+              <li><b>Flux:</b> Amtech NC-559-V2 الأشهر (~25k IQD لـ 10cc).</li>
+              <li><b>Solder Wire:</b> 0.3mm leaded 60/40 للـ micro · 0.5mm للعادي.</li>
+              <li><b>Solder Paste:</b> SAC305 للـ BGA reflow.</li>
+              <li><b>Solder Wick:</b> لإزالة الزائد — مهم لـ BGA reballing.</li>
+              <li><b>تحذير صحي:</b> Lead-based solder = استخدم fume extractor.</li>
+            </ul>
+          </article>
+
+        </div><!-- /pr-tools-grid -->
+
+        <div class="pr-tools-summary">
+          <h4>💰 الميزانية المقترحة للبدء (Setup احترافي للمبتدئ)</h4>
+          <ul class="pr-tools-budget">
+            <li>Multimeter جيد: <b>~80k IQD</b></li>
+            <li>Soldering combo (Iron + Hot Air): <b>~250k IQD</b></li>
+            <li>Microscope بسيط: <b>~280k IQD</b></li>
+            <li>طقم Pry Tools + Pentalobe: <b>~50k IQD</b></li>
+            <li>ESD mat + strap: <b>~50k IQD</b></li>
+            <li>Flux + Solder + Wick: <b>~60k IQD</b></li>
+            <li>DC Power Supply صغير: <b>~150k IQD</b></li>
+          </ul>
+          <p class="pr-tools-total">المجموع: <b>~920k IQD (~$700)</b> — تبدأ شغل عادي في محل أو من البيت.</p>
+        </div>
+      </section><!-- /pr-tools-gallery -->
+
+      <!-- ============================================================
+           PHASE 2 · A — Mainboard Anatomy (Interactive Diagram)
+      ============================================================ -->
+      <section class="pr-section" id="pr-mainboard-anatomy" data-pr-section="mainboard">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">معمارية اللوحة · Mainboard Anatomy</span>
+          <h2>تشريح Logic Board — اضغط أي IC لمعرفة وظيفته</h2>
+          <p>رسم تخطيطي مبسط لـ iPhone &amp; Samsung A-Series. كل IC اضغط عليه لتعرف ماذا يفعل + أعراض تلفه.</p>
+        </header>
+
+        <div class="pr-mb-wrap">
+          <div class="pr-mb-tabs" role="tablist">
+            <button class="pr-mb-tab is-active" data-pr-mb="iphone" type="button">📱 iPhone Logic Board</button>
+            <button class="pr-mb-tab" data-pr-mb="samsung" type="button">📲 Samsung A-Series</button>
+          </div>
+
+          <div class="pr-mb-stage">
+            <!-- iPhone diagram -->
+            <svg class="pr-mb-svg" id="pr-mb-iphone" viewBox="0 0 600 360" role="img" aria-label="iPhone Logic Board diagram">
+              <rect x="20" y="20" width="560" height="320" rx="14" fill="#0e1218" stroke="rgba(239,68,68,.4)" stroke-width="2"/>
+              <text x="300" y="14" text-anchor="middle" font-size="11" fill="#888">iPhone — Top View (مبسط)</text>
+
+              <g class="pr-mb-ic" data-pr-ic="cpu" data-pr-mb-page="iphone">
+                <rect x="240" y="120" width="120" height="100" rx="8" fill="#1a2230" stroke="#66FCF1" stroke-width="2"/>
+                <text x="300" y="165" text-anchor="middle" font-size="14" fill="#66FCF1" font-weight="bold">SoC / CPU</text>
+                <text x="300" y="185" text-anchor="middle" font-size="10" fill="#aaa">A-Series Bionic</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="pmic" data-pr-mb-page="iphone">
+                <rect x="60" y="80" width="80" height="60" rx="6" fill="#2a1a1a" stroke="#EF4444" stroke-width="1.5"/>
+                <text x="100" y="115" text-anchor="middle" font-size="12" fill="#EF4444" font-weight="bold">PMIC</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="tristar" data-pr-mb-page="iphone">
+                <rect x="60" y="160" width="80" height="50" rx="6" fill="#2a2a1a" stroke="#F59E0B" stroke-width="1.5"/>
+                <text x="100" y="190" text-anchor="middle" font-size="11" fill="#F59E0B" font-weight="bold">Tristar</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="audio" data-pr-mb-page="iphone">
+                <rect x="60" y="230" width="80" height="50" rx="6" fill="#1a2a1a" stroke="#22C55E" stroke-width="1.5"/>
+                <text x="100" y="260" text-anchor="middle" font-size="11" fill="#22C55E" font-weight="bold">Audio IC</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="display" data-pr-mb-page="iphone">
+                <rect x="460" y="80" width="80" height="60" rx="6" fill="#1a1a2a" stroke="#8B5CF6" stroke-width="1.5"/>
+                <text x="500" y="115" text-anchor="middle" font-size="11" fill="#8B5CF6" font-weight="bold">Display IC</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="rf" data-pr-mb-page="iphone">
+                <rect x="460" y="160" width="80" height="50" rx="6" fill="#1a2a2a" stroke="#06B6D4" stroke-width="1.5"/>
+                <text x="500" y="190" text-anchor="middle" font-size="11" fill="#06B6D4" font-weight="bold">RF Transceiver</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="nand" data-pr-mb-page="iphone">
+                <rect x="240" y="40" width="120" height="60" rx="6" fill="#2a201a" stroke="#EAB308" stroke-width="1.5"/>
+                <text x="300" y="75" text-anchor="middle" font-size="12" fill="#EAB308" font-weight="bold">NAND Storage</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="batt" data-pr-mb-page="iphone">
+                <rect x="240" y="240" width="120" height="50" rx="6" fill="#1a2a1f" stroke="#10B981" stroke-width="1.5"/>
+                <text x="300" y="270" text-anchor="middle" font-size="11" fill="#10B981" font-weight="bold">Battery Connector</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="cam" data-pr-mb-page="iphone">
+                <rect x="460" y="230" width="80" height="50" rx="6" fill="#2a1a2a" stroke="#EC4899" stroke-width="1.5"/>
+                <text x="500" y="260" text-anchor="middle" font-size="11" fill="#EC4899" font-weight="bold">Camera Conn.</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="ant" data-pr-mb-page="iphone">
+                <rect x="240" y="305" width="120" height="22" rx="6" fill="#1a1a1a" stroke="#9CA3AF" stroke-width="1.5"/>
+                <text x="300" y="320" text-anchor="middle" font-size="10" fill="#9CA3AF">Antenna Pads</text>
+              </g>
+            </svg>
+
+            <!-- Samsung diagram -->
+            <svg class="pr-mb-svg" id="pr-mb-samsung" viewBox="0 0 600 360" role="img" aria-label="Samsung Logic Board diagram" hidden>
+              <rect x="20" y="20" width="560" height="320" rx="14" fill="#0e1218" stroke="rgba(245,158,11,.4)" stroke-width="2"/>
+              <text x="300" y="14" text-anchor="middle" font-size="11" fill="#888">Samsung A-Series — مبسط</text>
+
+              <g class="pr-mb-ic" data-pr-ic="cpu" data-pr-mb-page="samsung">
+                <rect x="200" y="100" width="200" height="120" rx="8" fill="#1a2230" stroke="#66FCF1" stroke-width="2"/>
+                <text x="300" y="155" text-anchor="middle" font-size="14" fill="#66FCF1" font-weight="bold">Exynos / Snapdragon</text>
+                <text x="300" y="175" text-anchor="middle" font-size="10" fill="#aaa">SoC + RAM (PoP)</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="pmic" data-pr-mb-page="samsung">
+                <rect x="50" y="60" width="100" height="50" rx="6" fill="#2a1a1a" stroke="#EF4444" stroke-width="1.5"/>
+                <text x="100" y="90" text-anchor="middle" font-size="11" fill="#EF4444" font-weight="bold">PMIC (S2MPS)</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="charge" data-pr-mb-page="samsung">
+                <rect x="50" y="130" width="100" height="50" rx="6" fill="#2a2a1a" stroke="#F59E0B" stroke-width="1.5"/>
+                <text x="100" y="160" text-anchor="middle" font-size="10" fill="#F59E0B" font-weight="bold">Charging IC (MAX77705)</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="audio" data-pr-mb-page="samsung">
+                <rect x="50" y="200" width="100" height="50" rx="6" fill="#1a2a1a" stroke="#22C55E" stroke-width="1.5"/>
+                <text x="100" y="230" text-anchor="middle" font-size="11" fill="#22C55E" font-weight="bold">Audio (NXP)</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="display" data-pr-mb-page="samsung">
+                <rect x="450" y="60" width="100" height="50" rx="6" fill="#1a1a2a" stroke="#8B5CF6" stroke-width="1.5"/>
+                <text x="500" y="90" text-anchor="middle" font-size="11" fill="#8B5CF6" font-weight="bold">Display IC</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="rf" data-pr-mb-page="samsung">
+                <rect x="450" y="130" width="100" height="50" rx="6" fill="#1a2a2a" stroke="#06B6D4" stroke-width="1.5"/>
+                <text x="500" y="160" text-anchor="middle" font-size="10" fill="#06B6D4" font-weight="bold">RF + Wi-Fi/BT</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="nand" data-pr-mb-page="samsung">
+                <rect x="450" y="200" width="100" height="50" rx="6" fill="#2a201a" stroke="#EAB308" stroke-width="1.5"/>
+                <text x="500" y="230" text-anchor="middle" font-size="11" fill="#EAB308" font-weight="bold">UFS Storage</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="batt" data-pr-mb-page="samsung">
+                <rect x="200" y="240" width="200" height="40" rx="6" fill="#1a2a1f" stroke="#10B981" stroke-width="1.5"/>
+                <text x="300" y="265" text-anchor="middle" font-size="11" fill="#10B981" font-weight="bold">Battery Connector + Fuel Gauge</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="cam" data-pr-mb-page="samsung">
+                <rect x="200" y="295" width="200" height="32" rx="6" fill="#2a1a2a" stroke="#EC4899" stroke-width="1.5"/>
+                <text x="300" y="316" text-anchor="middle" font-size="11" fill="#EC4899" font-weight="bold">Camera Connectors (×3)</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="pr-mb-info" id="pr-mb-info" aria-live="polite">
+            <p class="pr-mb-info-empty">👆 اضغط على أي IC في الرسم لمعرفة وظيفته + أعراض تلفه + إجراء الإصلاح.</p>
+          </div>
+        </div>
+      </section><!-- /pr-mainboard-anatomy -->
+
+
+      <!-- ============================================================
+           PHASE 2 · B — Top 20 Repairs (الجزء الأول 1-10)
+      ============================================================ -->
+      <section class="pr-section" id="pr-repair-cards-1" data-pr-section="repairs1">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">الإصلاحات الأكثر طلباً · 1-10 من 20</span>
+          <h2>بطاقات الإجراء — الأعطال الأشهر</h2>
+          <p>كل بطاقة: العرض، الأسباب المحتملة (مرتبة احتمالية)، التشخيص، الإصلاح، الوقت، السعر العراقي، الصعوبة.</p>
+        </header>
+
+        <div class="pr-grid pr-grid-2" id="pr-repair-grid-1">
+
+          <article class="pr-repair-card" data-pr-repair="screen">
+            <div class="pr-repair-head">
+              <h3>1. شاشة مكسورة</h3>
+              <span class="pr-diff" data-stars="2">★★☆☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 30-60 دقيقة</span>
+              <span>💰 65k - 220k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> زجاج مكسور أو شاشة لا تستجيب.</p>
+              <p><b>التفريق المهم:</b> LCD vs OLED · Assembly كامل vs Glass-Only.</p>
+              <p><b>التشخيص:</b> هل الـ touch يعمل؟ هل العرض يظهر؟ هل توجد بقع سوداء (LCD bleeding)؟</p>
+              <p><b>الإصلاح:</b> فك الـ Pentalobe (iPhone) · سخّن الإطار · ارفع الشاشة بـ suction · افصل الـ flex · ركّب الجديدة.</p>
+              <p class="pr-tip">⚠️ iPhone X+ شاشة OEM ضرورية للـ True Tone — aftermarket تفقد الميزة.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="battery">
+            <div class="pr-repair-head">
+              <h3>2. بطارية ضعيفة / منتفخة</h3>
+              <span class="pr-diff" data-stars="1">★☆☆☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 20-40 دقيقة</span>
+              <span>💰 35k - 85k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> الجهاز يطفي على %20 · ينتفخ ويرفع الشاشة · يسخن بسرعة.</p>
+              <p><b>التشخيص:</b> 3uTools للـ iPhone (يقرأ Cycle Count + Capacity %). لو &lt; 80% = استبدلها.</p>
+              <p><b>الإصلاح:</b> افصل البطارية القديمة · أزل اللصق بحرص (لا تثقبها!) · لصق جديد · ركّب.</p>
+              <p class="pr-tip">⚠️ بطارية منتفخة = خطر حريق. لا تستخدم أداة معدنية حادة.</p>
+              <p><b>iPhone:</b> بعد التركيب لازم Toolkit لـ "Genuine Battery" (Apple message).</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="charge">
+            <div class="pr-repair-head">
+              <h3>3. منفذ شحن لا يشحن</h3>
+              <span class="pr-diff" data-stars="2">★★☆☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 30-90 دقيقة</span>
+              <span>💰 25k - 75k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> لا يشحن · يشحن لما تضغط الكابل · يومض شحن ويطفي.</p>
+              <p><b>الأسباب (احتمالية):</b> 1) أوساخ في المنفذ، 2) كابل/شاحن، 3) flex المنفذ، 4) Tristar/Charging IC.</p>
+              <p><b>التشخيص:</b> نظف المنفذ بفرشاة + IPA · جرب كابل آخر · إذا فشل → DC Power Supply.</p>
+              <p><b>القياس الذهبي:</b> ضع 4V على Battery FPC. لو سحب &gt; 200mA بدون شاشة = short على VBUS.</p>
+              <p><b>الإصلاح:</b> Samsung — المنفذ ملحوم على daughter board (سهل). iPhone — flex كامل.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="speaker">
+            <div class="pr-repair-head">
+              <h3>4. سماعة الأذن / مكبر الصوت</h3>
+              <span class="pr-diff" data-stars="1">★☆☆☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 25-45 دقيقة</span>
+              <span>💰 30k - 60k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> صوت منخفض · صدى · لا صوت · أو يحول إلى Speaker تلقائياً.</p>
+              <p><b>التشخيص:</b> اختبر Voice Memo + Phone Call. لو السماعة تعمل في Speaker لكن ليس في الأذن → earpiece فقط.</p>
+              <p><b>الأسباب:</b> 1) أتربة في الفتحة، 2) earpiece mesh مسدود، 3) الـ speaker نفسه، 4) Audio IC.</p>
+              <p><b>الإصلاح:</b> نظف الـ mesh بفرشاة ناعمة أولاً · لو فشل، استبدل القطعة.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="mic">
+            <div class="pr-repair-head">
+              <h3>5. ميكروفون لا يعمل</h3>
+              <span class="pr-diff" data-stars="2">★★☆☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 35-60 دقيقة</span>
+              <span>💰 30k - 70k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> الطرف الآخر لا يسمعك · Voice Memo فارغ · Siri لا تستجيب.</p>
+              <p><b>تذكر:</b> الموبايل فيه 2-4 ميكروفونات (Bottom, Top, Back). اختبر كل واحد على حدة.</p>
+              <p><b>التشخيص:</b> Voice Memo (Bottom mic) · Phone Speaker (Top mic) · Video record (Back mic).</p>
+              <p><b>الأسباب:</b> 1) المنفذ مسدود، 2) الـ flex، 3) Audio IC (نادر).</p>
+              <p><b>الإصلاح:</b> غالباً تغيير الـ flex السفلي (يحوي charging port + mic + antenna).</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="camera">
+            <div class="pr-repair-head">
+              <h3>6. كاميرا أمامية / خلفية</h3>
+              <span class="pr-diff" data-stars="2">★★☆☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 30-60 دقيقة</span>
+              <span>💰 60k - 280k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> صور ضبابية · شاشة سوداء عند الفتح · لا تعمل أساساً · بقع.</p>
+              <p><b>الأسباب:</b> 1) الزجاج الخارجي مكسور، 2) lens مهتزة (focus motor)، 3) الـ module نفسها، 4) الـ flex.</p>
+              <p><b>التشخيص:</b> هل الكاميرا الخلفية تعمل في Video Mode وتجمد في Photo؟ → Image Signal Processor.</p>
+              <p><b>الإصلاح:</b> عادي جداً — استبدال الـ camera module. iPhone 12+ لازم Toolkit للـ pairing.</p>
+              <p class="pr-tip">⚠️ كاميرا iPhone 12 Pro الخلفية ~270k IQD — تأكد قبل الموافقة.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="power-btn">
+            <div class="pr-repair-head">
+              <h3>7. زر Power مكسور</h3>
+              <span class="pr-diff" data-stars="3">★★★☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 60-120 دقيقة</span>
+              <span>💰 45k - 100k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> لا يستجيب · مزدوج (يضغط مرتين) · لزج.</p>
+              <p><b>الأسباب:</b> 1) أتربة، 2) الـ tact switch، 3) flex مكسور، 4) المسمار الميكانيكي.</p>
+              <p><b>التشخيص:</b> AssistiveTouch لتشغيل الموبايل بدون الزر · Continuity Test على flex.</p>
+              <p><b>الإصلاح:</b> iPhone — تغيير الـ flex العلوي (صعب — يحتاج فك كل اللوحة). Samsung — أسهل.</p>
+              <p><b>تذكر:</b> هذا flex يحوي أيضاً Volume + Mute + Top Mic عادةً.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="vol-btn">
+            <div class="pr-repair-head">
+              <h3>8. أزرار Volume</h3>
+              <span class="pr-diff" data-stars="2">★★☆☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 45-90 دقيقة</span>
+              <span>💰 35k - 80k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> Volume Up أو Down لا يعمل · أو يتغير عشوائياً.</p>
+              <p><b>التشخيص:</b> اختبر في Settings → Sound (slider يجب يتحرك).</p>
+              <p><b>الإصلاح:</b> غالباً نفس الـ flex مع Power (iPhone) أو flex جانبي مستقل (Samsung).</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="home">
+            <div class="pr-repair-head">
+              <h3>9. زر Home (الأجهزة القديمة)</h3>
+              <span class="pr-diff" data-stars="3">★★★☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 45-90 دقيقة</span>
+              <span>💰 50k - 150k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> لا يستجيب · بطيء · Touch ID لا يعمل.</p>
+              <p><b>تحذير حرج:</b> iPhone 7/8/SE2 — زر Home مرتبط بالـ board بالـ pairing. تغييره = فقدان Touch ID.</p>
+              <p><b>الإصلاح:</b> استخدم زر original مع flex assembly · للـ iPhone 5/6 — أبسط.</p>
+              <p><b>Workaround:</b> AssistiveTouch software — اعرضه للزبون كحل مؤقت.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="wifi-bt">
+            <div class="pr-repair-head">
+              <h3>10. وايفاي / بلوتوث</h3>
+              <span class="pr-diff" data-stars="3">★★★☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 60-180 دقيقة</span>
+              <span>💰 50k - 200k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> Wi-Fi grayed out · Bluetooth لا يفتح · انقطاع متكرر.</p>
+              <p><b>الأسباب:</b> 1) Antenna flex مفصول، 2) RF IC تالف (heat damage), 3) الـ chip نفسه.</p>
+              <p><b>التشخيص:</b> Settings → General → About → Wi-Fi Address. لو "N/A" → IC تالف.</p>
+              <p><b>الإصلاح:</b> Antenna flex (سهل) أو reflow الـ Wi-Fi chip (يحتاج Hot Air + خبرة).</p>
+              <p class="pr-tip">⚠️ iPhone 7 الشهير: مشكلة Wi-Fi grayed out = Wi-Fi/BT IC. حل permanent يحتاج تبديل IC.</p>
+            </div>
+          </article>
+
+        </div>
+      </section><!-- /pr-repair-cards-1 -->
+
+      <!-- ============================================================
+           PHASE 3 · A — Top 20 Repairs (الجزء الثاني 11-20)
+      ============================================================ -->
+      <section class="pr-section" id="pr-repair-cards-2" data-pr-section="repairs2">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">الإصلاحات الأكثر طلباً · 11-20 من 20</span>
+          <h2>الإصلاحات المتقدمة + Software Issues</h2>
+          <p>الجزء الثاني — يشمل أعطال أصعب وتتطلب خبرة أعمق.</p>
+        </header>
+
+        <div class="pr-grid pr-grid-2" id="pr-repair-grid-2">
+
+          <article class="pr-repair-card" data-pr-repair="signal">
+            <div class="pr-repair-head">
+              <h3>11. شبكة / إشارة ضعيفة</h3>
+              <span class="pr-diff" data-stars="3">★★★☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 60-180 دقيقة</span>
+              <span>💰 50k - 250k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> No Service · إشارة ضعيفة دائماً · تنقطع المكالمات.</p>
+              <p><b>الأسباب:</b> 1) Antenna spring مفصول، 2) Baseband IC تالف، 3) SIM tray contacts، 4) PMIC RF.</p>
+              <p><b>التشخيص:</b> Settings → About → Wi-Fi/BT/IMEI. لو IMEI = "Unavailable" → Baseband.</p>
+              <p><b>الإصلاح:</b> أسهل أولاً (antenna) · لو فشل، Baseband repair (متقدم — يحتاج programmer أحياناً).</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="fingerprint">
+            <div class="pr-repair-head">
+              <h3>12. بصمة الإصبع (Fingerprint)</h3>
+              <span class="pr-diff" data-stars="4">★★★★☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 60-120 دقيقة</span>
+              <span>💰 50k - 200k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> "Fingerprint sensor not available" · لا تتعرف.</p>
+              <p><b>تحذير حرج لـ iPhone:</b> Touch ID مرتبط بالـ board بـ pairing — لا يمكن استبداله من جهاز آخر.</p>
+              <p><b>Samsung Ultrasonic (S10+):</b> حساس داخل الشاشة — يلزم تغيير الشاشة كاملة.</p>
+              <p><b>iPhone 5/6:</b> الزر original من نفس الجهاز يصلح. iPhone 7/8 = حساس مدمج بـ flex.</p>
+              <p><b>Android Capacitive:</b> أسهل — استبدال الـ module.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="faceid">
+            <div class="pr-repair-head">
+              <h3>13. Face ID (iPhone X+)</h3>
+              <span class="pr-diff" data-stars="5">★★★★★</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 90-240 دقيقة</span>
+              <span>💰 80k - 350k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> "Face ID is not available" · "Move iPhone Lower/Higher" دائماً.</p>
+              <p><b>تحذير شديد:</b> Face ID يحوي Dot Projector + IR Camera + Flood Illuminator — كلها مرتبطة بـ Secure Enclave.</p>
+              <p><b>المسببات الأكثر:</b> 1) Earpiece/Front Camera flex (سهل نسبياً), 2) Dot Projector تلف بحرارة (Hot Air أعلى من 200°C يقتله).</p>
+              <p><b>الإصلاح:</b> فك بحذر شديد · لا تستخدم Hot Air قرب الـ TrueDepth Camera · استبدال الـ flex المتأذي.</p>
+              <p><b>محذور:</b> لا يمكن نقل Face ID من جهاز آخر — Apple Toolkit يلزم لـ "calibration" جزئية فقط.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="noboot">
+            <div class="pr-repair-head">
+              <h3>14. لا يقلع — No Boot</h3>
+              <span class="pr-diff" data-stars="4">★★★★☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 60-300 دقيقة</span>
+              <span>💰 100k - 500k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> الجهاز لا يستجيب أبداً · لا شاشة · لا اهتزاز.</p>
+              <p><b>التشخيص (DC PSU):</b> ضع 4.0V على Battery FPC. راقب mA:</p>
+              <ul>
+                <li>0mA → PMIC ميتة أو fuse مكسور.</li>
+                <li>سحب فوري 1A+ → short circuit (capacitor مكسور أو Tristar).</li>
+                <li>30-50mA ثم يتوقف → PMIC تبدأ ولكن لا تكمل.</li>
+              </ul>
+              <p><b>الإصلاح:</b> اتبع شجرة No Boot (تحت). صعوبة عالية — micro-soldering.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="bootloop">
+            <div class="pr-repair-head">
+              <h3>15. Boot Loop</h3>
+              <span class="pr-diff" data-stars="3">★★★☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 30-180 دقيقة</span>
+              <span>💰 50k - 250k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> يعرض الـ logo ويعيد التشغيل باستمرار.</p>
+              <p><b>الأسباب:</b> 1) iOS/Android تالف — حلها restore، 2) NAND fault، 3) PMIC sub-rail واحد متقطع، 4) RAM (PoP) failure.</p>
+              <p><b>التشخيص:</b> ابدأ بـ DFU/EDL restore. لو نجح = software. لو فشل = hardware.</p>
+              <p><b>الإصلاح:</b> Software → 3uTools/Odin · Hardware → reflow CPU/RAM (متقدم).</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="logo">
+            <div class="pr-repair-head">
+              <h3>16. Logo فقط ثم يطفي</h3>
+              <span class="pr-diff" data-stars="4">★★★★☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 60-240 دقيقة</span>
+              <span>💰 80k - 350k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> Apple/Samsung logo يظهر 5-10 ثواني ثم black.</p>
+              <p><b>الأسباب:</b> 1) NAND read error في boot stage، 2) رطوبة على Audio IC (iPhone 7), 3) Battery تنخفض فجأة (ESR عالي).</p>
+              <p><b>التشخيص:</b> اختبر مع DC PSU + ammeter — راقب الأمبير عند الـ logo. لو يقفز ل2A وينقطع = نقص جهد.</p>
+              <p><b>الإصلاح:</b> غالباً Audio IC أو CPU underfill. خبرة عالية.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="water">
+            <div class="pr-repair-head">
+              <h3>17. غارق في الماء (Water Damage)</h3>
+              <span class="pr-diff" data-stars="4">★★★★☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 120-360 دقيقة</span>
+              <span>💰 80k - 500k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>تحذير حرج:</b> أول دقيقة = أهم دقيقة. اشرح للزبون لا يفتحه/يشحنه.</p>
+              <p><b>البروتوكول:</b></p>
+              <ul>
+                <li>1) فك البطارية فوراً.</li>
+                <li>2) فك الجهاز كاملاً.</li>
+                <li>3) Ultrasonic Cleaner مع IPA 99% لـ 5 دقائق.</li>
+                <li>4) فحص بصري عن corrosion (أخضر/أبيض).</li>
+                <li>5) كشط الـ corrosion + إعادة تنظيف.</li>
+                <li>6) تجفيف بـ Hot Air منخفض.</li>
+                <li>7) فحص component-by-component لو ما يقلع.</li>
+              </ul>
+              <p class="pr-tip">⚠️ ماء البحر/الكولا = أسوأ بكثير من الماء العادي. تنظيف فوري ضروري.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="usbc-clean">
+            <div class="pr-repair-head">
+              <h3>18. تنظيف منفذ USB-C/Lightning</h3>
+              <span class="pr-diff" data-stars="1">★☆☆☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 5-15 دقيقة</span>
+              <span>💰 5k - 15k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> الكابل لا يدخل تماماً · يخرج فوراً · لا يثبت.</p>
+              <p><b>السبب:</b> توس/أوساخ متراكمة (السبب الأشهر — قبل أن تشخّص أي عطل آخر).</p>
+              <p><b>الإصلاح:</b> فرشاة أسنان ناعمة + IPA + إبرة plastic. لا تستخدم معدن!</p>
+              <p class="pr-tip">💰 خدمة سريعة جداً ومربحة — كل مرة تنبه الزبون "كان فقط أوساخ".</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="touch">
+            <div class="pr-repair-head">
+              <h3>19. Touch لا يستجيب (digitizer)</h3>
+              <span class="pr-diff" data-stars="2">★★☆☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 30-90 دقيقة</span>
+              <span>💰 60k - 220k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> Touch لا يعمل في منطقة معينة · ghost touches · لا يستجيب أبداً.</p>
+              <p><b>الأسباب:</b> 1) digitizer منفصل عن LCD، 2) flex مكسور، 3) Touch IC على board (iPhone 6 Plus = Touch Disease).</p>
+              <p><b>التشخيص:</b> اختبار شاشة قطرية (iPhone) أو "Test Mode" (Samsung *#0*#).</p>
+              <p><b>الإصلاح:</b> غالباً استبدال الشاشة. iPhone 6 Plus Touch Disease = reflow Touch ICs.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="heating">
+            <div class="pr-repair-head">
+              <h3>20. Heating / Overheating</h3>
+              <span class="pr-diff" data-stars="3">★★★☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 30-180 دقيقة</span>
+              <span>💰 50k - 350k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> الجهاز يسخن بسرعة حتى وهو idle · بطارية تنتهي بسرعة.</p>
+              <p><b>التشخيص:</b> أي IC الذي يسخن؟ استخدم ثرمومتر IR (gun) أو أصبعك بحذر.</p>
+              <p><b>الأسباب:</b> 1) Software (rogue app/process), 2) Charging IC, 3) PMIC, 4) CPU throttle issue, 5) بطارية معطوبة.</p>
+              <p><b>الإصلاح:</b> ابدأ بـ Battery Health → Settings · ثم ابحث عن hot IC.</p>
+            </div>
+          </article>
+
+        </div>
+      </section><!-- /pr-repair-cards-2 -->
+
+
+      <!-- ============================================================
+           PHASE 3 · B — Diagnostic Decision Trees
+      ============================================================ -->
+      <section class="pr-section" id="pr-decision-trees" data-pr-section="trees">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">شجرة قرار التشخيص · Diagnostic Trees</span>
+          <h2>3 أشجار قرار للأعطال الحرجة</h2>
+          <p>اتبع كل شجرة خطوة بخطوة — تتبع التشعب لتصل لسبب جذري بدل التخمين.</p>
+        </header>
+
+        <div class="pr-tree-tabs" role="tablist">
+          <button class="pr-tree-tab is-active" data-pr-tree="noboot" type="button">🔌 No Boot</button>
+          <button class="pr-tree-tab" data-pr-tree="nocharge" type="button">🔋 No Charge</button>
+          <button class="pr-tree-tab" data-pr-tree="water" type="button">💧 Water Damage</button>
+        </div>
+
+        <!-- Tree: No Boot -->
+        <div class="pr-tree" id="pr-tree-noboot">
+          <div class="pr-tree-node pr-tree-root">
+            <div class="pr-tree-q">الجهاز لا يقلع. هل سحب التيار من البطارية؟ (DC PSU)</div>
+            <div class="pr-tree-children">
+              <div class="pr-tree-branch pr-tree-no">
+                <div class="pr-tree-edge">0mA</div>
+                <div class="pr-tree-q">PMIC ميتة أو fuse رئيسي مكسور.</div>
+                <div class="pr-tree-children">
+                  <div class="pr-tree-branch">
+                    <div class="pr-tree-edge">→ افحص</div>
+                    <div class="pr-tree-leaf"><b>الحل:</b> Continuity على VBAT line. لو مفتوح = استبدل الـ fuse. لو مغلق = استبدل PMIC.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pr-tree-branch pr-tree-yes">
+                <div class="pr-tree-edge">سحب فوري 1A+</div>
+                <div class="pr-tree-q">Short circuit. أين الـ short؟</div>
+                <div class="pr-tree-children">
+                  <div class="pr-tree-branch">
+                    <div class="pr-tree-edge">→ افحص</div>
+                    <div class="pr-tree-leaf"><b>الحل:</b> Inject voltage low + Freeze Spray — الـ component الذي يسخن أولاً = المعطل. عادة capacitor قرب CPU/PMIC.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pr-tree-branch">
+                <div class="pr-tree-edge">30-100mA ثم 0</div>
+                <div class="pr-tree-q">PMIC تبدأ بس ما تكمل التتابع.</div>
+                <div class="pr-tree-children">
+                  <div class="pr-tree-branch">
+                    <div class="pr-tree-edge">→ افحص</div>
+                    <div class="pr-tree-leaf"><b>الحل:</b> راقب rails (1.8V, 1.2V) باستخدام scope. لو واحد ما يطلع = استبدل PMIC.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pr-tree-branch">
+                <div class="pr-tree-edge">200-500mA — يشتغل ثم يطفي</div>
+                <div class="pr-tree-q">يدخل boot ثم يفشل.</div>
+                <div class="pr-tree-children">
+                  <div class="pr-tree-branch">
+                    <div class="pr-tree-edge">→ Software؟</div>
+                    <div class="pr-tree-leaf"><b>الحل:</b> جرب DFU/EDL restore. لو فشل = NAND fault أو Audio IC (iPhone 7). reflow أو استبدل.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tree: No Charge -->
+        <div class="pr-tree" id="pr-tree-nocharge" hidden>
+          <div class="pr-tree-node pr-tree-root">
+            <div class="pr-tree-q">الجهاز لا يشحن. هل المنفذ نظيف؟</div>
+            <div class="pr-tree-children">
+              <div class="pr-tree-branch pr-tree-no">
+                <div class="pr-tree-edge">لا</div>
+                <div class="pr-tree-leaf"><b>الحل:</b> نظف بفرشاة + IPA. غالباً المشكلة هذه فقط (40% من الحالات).</div>
+              </div>
+
+              <div class="pr-tree-branch">
+                <div class="pr-tree-edge">نعم — جرب كابل آخر</div>
+                <div class="pr-tree-q">يشحن مع كابل آخر؟</div>
+                <div class="pr-tree-children">
+                  <div class="pr-tree-branch pr-tree-yes">
+                    <div class="pr-tree-edge">نعم</div>
+                    <div class="pr-tree-leaf"><b>الحل:</b> الكابل/الشاحن معطل. أبلغ الزبون.</div>
+                  </div>
+                  <div class="pr-tree-branch pr-tree-no">
+                    <div class="pr-tree-edge">لا</div>
+                    <div class="pr-tree-q">جرب DC PSU على Battery FPC.</div>
+                    <div class="pr-tree-children">
+                      <div class="pr-tree-branch">
+                        <div class="pr-tree-edge">يشحن من PSU بس مش USB</div>
+                        <div class="pr-tree-leaf"><b>الحل:</b> Charging port flex معطل أو Tristar. ابدأ باستبدال flex (أرخص).</div>
+                      </div>
+                      <div class="pr-tree-branch">
+                        <div class="pr-tree-edge">لا يشتغل حتى من PSU</div>
+                        <div class="pr-tree-leaf"><b>الحل:</b> مشكلة أعمق — Battery FPC connector أو fuse على VBAT. fuse continuity check.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tree: Water Damage -->
+        <div class="pr-tree" id="pr-tree-water" hidden>
+          <div class="pr-tree-node pr-tree-root">
+            <div class="pr-tree-q">جهاز غارق وصلك. هل الزبون شغّله بعد الغرق؟</div>
+            <div class="pr-tree-children">
+              <div class="pr-tree-branch pr-tree-no">
+                <div class="pr-tree-edge">لا (الموقف الأفضل)</div>
+                <div class="pr-tree-leaf"><b>الحل:</b> فك → Ultrasonic + IPA → جفّف → اختبر. فرصة النجاح 70-90%.</div>
+              </div>
+
+              <div class="pr-tree-branch pr-tree-yes">
+                <div class="pr-tree-edge">نعم (شغّله أو شحنه)</div>
+                <div class="pr-tree-q">هل ظهر دخان أو حرق؟</div>
+                <div class="pr-tree-children">
+                  <div class="pr-tree-branch">
+                    <div class="pr-tree-edge">نعم — حرق</div>
+                    <div class="pr-tree-leaf"><b>الحل:</b> Short circuit شغل · IC احترق غالباً. فحص بصري + thermal camera. فرصة استرداد البيانات فقط أحياناً.</div>
+                  </div>
+                  <div class="pr-tree-branch">
+                    <div class="pr-tree-edge">لا</div>
+                    <div class="pr-tree-leaf"><b>الحل:</b> Ultrasonic + corrosion cleaning. فرصة 40-60%.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pr-tree-branch">
+                <div class="pr-tree-edge">ماء البحر / كولا / عصير</div>
+                <div class="pr-tree-leaf"><b>تحذير:</b> أكلوريد/سكر يسرع corrosion بشكل كبير. تنظيف فوري وكامل ضروري — fluoride تنتج corrosion 3 أيام بعد التنظيف.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section><!-- /pr-decision-trees -->
+
+
+      <!-- ============================================================
+           PHASE 3 · C — Software Side
+      ============================================================ -->
+      <section class="pr-section" id="pr-software-side" data-pr-section="software">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">الجانب البرمجي · Software Side</span>
+          <h2>iOS · Android · Bootloader · Flashing</h2>
+          <p>الإصلاحات البرمجية = 30% من الحالات. لو ما تعرفها، ترسل الزبون لمحل آخر بدون داعي.</p>
+        </header>
+
+        <div class="pr-grid pr-grid-2">
+
+          <article class="pr-sw-card">
+            <h3>📱 iOS — Recovery vs DFU Mode</h3>
+            <ul>
+              <li><b>Recovery Mode:</b> الجهاز يعرض كابل + iTunes logo. iTunes/Finder يقدر يحدّث أو يعيد. الـ data تضيع لو "Restore".</li>
+              <li><b>DFU Mode:</b> شاشة سوداء كاملة. iTunes يقول "device in recovery mode". أعمق من Recovery — يكتب على bootloader نفسه.</li>
+              <li><b>متى تستخدم DFU:</b> لو Recovery فشل، أو لو تريد downgrade iOS، أو لو الجهاز "stuck".</li>
+              <li><b>iPhone 8+ DFU:</b> Volume Up سريع → Volume Down سريع → اضغط Power 10 ثواني → استمر بـ Power + اضغط Volume Down 5 ثواني → اترك Power فقط.</li>
+            </ul>
+          </article>
+
+          <article class="pr-sw-card">
+            <h3>🤖 Android — Fastboot · Recovery · EDL</h3>
+            <ul>
+              <li><b>Recovery Mode:</b> Power + Vol Up. للـ wipe data أو install update من SD.</li>
+              <li><b>Fastboot:</b> Power + Vol Down. للـ flash images عبر USB (إنترفيس bootloader).</li>
+              <li><b>EDL Mode (Qualcomm):</b> "Emergency Download" — ينقذ الجهاز حتى لو bootloader مكسور. يحتاج EDL cable + MiFlash.</li>
+              <li><b>Samsung Download Mode:</b> Power + Vol Down + Home (الأقدم) أو Power + Vol Down + Bixby. يستخدم مع Odin.</li>
+            </ul>
+          </article>
+
+          <article class="pr-sw-card">
+            <h3>🔓 Bootloader Unlocking</h3>
+            <ul>
+              <li><b>متى مفيد:</b> root، تركيب custom ROM، استرداد بيانات.</li>
+              <li><b>التكلفة:</b> Knox tripped (Samsung) — يقطع Samsung Pay + بعض الميزات للأبد.</li>
+              <li><b>تحذير:</b> Wipe كامل للجهاز عند الـ unlock — أبلغ الزبون قبل.</li>
+              <li><b>غير قابل في:</b> iPhone (مغلق نهائياً), Huawei (منذ 2018), Xiaomi (تأخير 7 أيام بحساب Mi).</li>
+            </ul>
+          </article>
+
+          <article class="pr-sw-card">
+            <h3>💾 Flashing Tools (الأدوات الأساسية)</h3>
+            <ul>
+              <li><b>3uTools (iPhone):</b> Restore, jailbreak, battery health, IMEI info.</li>
+              <li><b>Odin (Samsung):</b> Flash firmware من Sammobile. ابحث عن نفس CSC/region.</li>
+              <li><b>MiFlash (Xiaomi):</b> Flash via Fastboot/EDL.</li>
+              <li><b>SP Flash Tool (MediaTek):</b> Flash MTK chips — Oppo/Vivo القديمة.</li>
+              <li><b>QFIL (Qualcomm):</b> Flash via EDL — للجهاز المعطل تماماً.</li>
+            </ul>
+          </article>
+
+          <article class="pr-sw-card pr-sw-warning">
+            <h3>⚠️ IMEI · iCloud · FRP — أخلاقيات حرجة</h3>
+            <ul>
+              <li><b>IMEI تغيير:</b> <b>جريمة</b> في العراق وأغلب الدول. عقوبة سجن في القانون العراقي. <b>لا تفعلها أبداً.</b></li>
+              <li><b>iCloud Lock:</b> لو ظهر "Find My iPhone Activated" — اطلب من الزبون إثبات الملكية + Apple ID وكلمة المرور. لا تتجاوزها على جهاز مسروق.</li>
+              <li><b>FRP Lock (Android):</b> نفس المبدأ — لا تتجاوزها بدون إثبات ملكية.</li>
+              <li><b>سياسة المحل:</b> اطلب فاتورة شراء أو رسالة من المالك الأصلي. وثّق في receipt.</li>
+            </ul>
+          </article>
+
+          <article class="pr-sw-card">
+            <h3>🛠️ Software Toolkit للفني العراقي</h3>
+            <ul>
+              <li><b>3uTools</b> + <b>iMazing</b> — للـ iPhone.</li>
+              <li><b>Odin</b> + <b>Samsung Smart Switch</b> — للـ Samsung.</li>
+              <li><b>MiFlash</b> + <b>Mi PC Suite</b> — للـ Xiaomi/Redmi.</li>
+              <li><b>UnlockTool / Z3X / Octoplus</b> — أدوات احترافية (مدفوعة بـ subscription).</li>
+              <li><b>Tenorshare ReiBoot</b> — حلول software سريعة بـ click.</li>
+            </ul>
+          </article>
+
+        </div>
+      </section><!-- /pr-software-side -->
+
+      <!-- ============================================================
+           PHASE 4 · A — Micro-Soldering Intro
+      ============================================================ -->
+      <section class="pr-section" id="pr-microsolder" data-pr-section="microsolder">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">Logic Board Repair · Micro-Soldering Intro</span>
+          <h2>الـ Micro-Soldering — أرفع المهارات (لكن ليس بـ يومين)</h2>
+          <p>إخلاء مسؤولية: هذا تعريف فقط. إتقان micro-soldering يحتاج 6+ أشهر تدريب يومي + معدات احترافية.</p>
+        </header>
+
+        <div class="pr-grid pr-grid-2">
+
+          <article class="pr-ms-card">
+            <h3>🎯 لماذا Micro-Soldering؟</h3>
+            <ul>
+              <li><b>الفرق التجاري:</b> 80% من المحلات تتوقف عند "Board damage = جهاز خربان". أنت تستطيع إصلاحه = ربح مضاعف.</li>
+              <li><b>الإصلاحات الممكنة:</b> Tristar replacement, Audio IC repair, NAND upgrade, Touch IC reflow, Backlight circuit repair.</li>
+              <li><b>الاستثمار:</b> Microscope جيد + Hot Air متقدم + Hakko/JBC + خبرة طويلة.</li>
+              <li><b>الوقت للإتقان:</b> 6 أشهر للأساسيات · 2-3 سنوات لتصبح خبير.</li>
+            </ul>
+          </article>
+
+          <article class="pr-ms-card">
+            <h3>🛡️ السلامة (Health &amp; Safety)</h3>
+            <ul>
+              <li><b>Lead Exposure:</b> الـ leaded solder سام. اغسل يديك دائماً قبل الأكل. <b>لا تأكل في مساحة العمل.</b></li>
+              <li><b>Fume Extractor:</b> ضروري — الدخان (Flux fumes) يؤذي الرئتين على المدى الطويل.</li>
+              <li><b>حماية العين:</b> safety glasses عند الـ reflow — Solder splatter ممكن.</li>
+              <li><b>تهوية جيدة:</b> لا تعمل في غرفة مغلقة.</li>
+              <li><b>Cooldown:</b> القطع المحمّاة بالـ Hot Air = 350°C — تحرق فوراً.</li>
+            </ul>
+          </article>
+
+          <article class="pr-ms-card">
+            <h3>🔧 المهارات الأساسية للبدء</h3>
+            <ul>
+              <li><b>Tinning Wire:</b> تعلّم لحام سلك رفيع (0.3mm) بسيد 0.4mm — أساس كل شيء.</li>
+              <li><b>Pad Cleaning:</b> Solder Wick + Flux لتنظيف bad joint بدون lifting الـ pad.</li>
+              <li><b>BGA Reflow:</b> رفع IC وإعادة لصقه. حرارة 380°C، 30-45 ثانية.</li>
+              <li><b>BGA Reballing:</b> إعادة كرات الـ solder تحت IC قبل reflow. يحتاج reballing stencil.</li>
+              <li><b>Jumper Wire:</b> سلك رفيع جداً (0.05mm enameled) لإصلاح traces مكسورة.</li>
+            </ul>
+          </article>
+
+          <article class="pr-ms-card">
+            <h3>📚 مصادر التعلم (روابط/مراجع)</h3>
+            <ul>
+              <li><b>Louis Rossmann YouTube:</b> القناة الأشهر — مئات الفيديوهات تعليمية مجانية.</li>
+              <li><b>iPad Rehab YouTube:</b> Jessa Jones — متخصصة في NAND + iPhone repair.</li>
+              <li><b>Mendon's iPad Repair:</b> دروس component-level خطوة بخطوة.</li>
+              <li><b>طرق محلية:</b> أكاديميات الموبايل في بغداد (شارع الكرادة الداخل) — دورات 3-6 أشهر.</li>
+              <li><b>كتاب:</b> "Modern PCB Soldering for Mobile Repair" متاح PDF بالإنجليزية.</li>
+            </ul>
+          </article>
+
+          <article class="pr-ms-card">
+            <h3>⚡ Common Repairs (للمتقدم)</h3>
+            <ul>
+              <li><b>Tristar Replacement:</b> iPhone 6/7 — أكثر إصلاح طلباً. سعر القطعة 5k IQD، السعر للزبون 80-150k.</li>
+              <li><b>Audio IC Jumper (iPhone 7):</b> jumper trace U3101 RQ_C18 — يحل "loop disease" تماماً.</li>
+              <li><b>Backlight Circuit:</b> diode + filter + boost coil — لو الشاشة ميتة لكن العرض موجود.</li>
+              <li><b>Charging Port Daughter Board (Samsung):</b> أسهل إصلاح متقدم — استبدال board صغير.</li>
+            </ul>
+          </article>
+
+          <article class="pr-ms-card">
+            <h3>🚫 ما لا تحاوله بدون تدريب</h3>
+            <ul>
+              <li><b>CPU Reball:</b> صعب جداً — خطأ واحد = يتلف الـ board.</li>
+              <li><b>NAND Upgrade:</b> يحتاج programmer ($300+) + خبرة.</li>
+              <li><b>PMIC Replacement على iPhone 11+:</b> الـ PMIC تحت EMI shield ملحوم — صعب الإزالة.</li>
+              <li><b>قاعدة:</b> لو خسارة جهاز الزبون = لا تستطيع تعويضه → لا تعمل عليه.</li>
+            </ul>
+          </article>
+
+        </div>
+      </section><!-- /pr-microsolder -->
+
+
+      <!-- ============================================================
+           PHASE 4 · B — Customer Service & Pricing
+      ============================================================ -->
+      <section class="pr-section" id="pr-customer-service" data-pr-section="customer">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">خدمة العملاء + التسعير · Customer &amp; Pricing</span>
+          <h2>كيف تتعامل مع الزبون وتسعّر بشكل احترافي</h2>
+          <p>خدمة العميل = 50% من نجاح المحل. الجودة فقط لا تكفي.</p>
+        </header>
+
+        <div class="pr-cs-grid">
+
+          <article class="pr-cs-card">
+            <h3>📋 Intake Form (نموذج الاستلام)</h3>
+            <p>كل جهاز استلمه = وثيقة. لا اعتمد على الذاكرة.</p>
+            <ul>
+              <li><b>بيانات الزبون:</b> اسم + رقم + تاريخ.</li>
+              <li><b>الجهاز:</b> الموديل + IMEI + Serial.</li>
+              <li><b>الكلمة السرية:</b> اطلبها لاختبار الإصلاح (Pattern/PIN).</li>
+              <li><b>وصف العطل:</b> بكلمات الزبون.</li>
+              <li><b>صور قبل:</b> 4-6 صور لكل جانب — توثيق الخدوش الموجودة.</li>
+              <li><b>إقرار البيانات:</b> "أقر أنني نسخت بياناتي وأن المحل غير مسؤول عن أي فقدان."</li>
+              <li><b>التاريخ المتوقع للاستلام + التكلفة الأولية.</b></li>
+            </ul>
+          </article>
+
+          <article class="pr-cs-card">
+            <h3>💰 سياسة الفحص (Diagnostic Fee)</h3>
+            <ul>
+              <li><b>فحص مجاني:</b> الأعطال الواضحة (شاشة مكسورة، بطارية).</li>
+              <li><b>فحص بأجر 10-25k IQD:</b> الأعطال المعقدة (لا يقلع، Logic Board).</li>
+              <li><b>الخصم:</b> الـ fee يُخصم من قيمة الإصلاح لو وافق الزبون.</li>
+              <li><b>الفائدة:</b> يحجز المتفرّج الزائر — يتعاطى فقط من جاد.</li>
+            </ul>
+          </article>
+
+          <article class="pr-cs-card">
+            <h3>📊 Pricing Model</h3>
+            <p><b>الصيغة:</b> سعر القطعة × Markup + Labor</p>
+            <ul>
+              <li><b>Markup عادل:</b> 25-40% على القطعة (لو متوفرة في السوق).</li>
+              <li><b>Labor:</b> 30-50% من قيمة القطعة (مجال متوسط).</li>
+              <li><b>مثال:</b> شاشة iPhone 11 سعرها 60k → markup 30% → 78k → labor 25k → سعر للزبون 103k.</li>
+              <li><b>Round Up:</b> احتسب الرقم النهائي روند (105k بدل 103k) — يبدو أنظف.</li>
+            </ul>
+          </article>
+
+          <article class="pr-cs-card">
+            <h3>✅ No-Fix-No-Fee vs Diagnostic Fee</h3>
+            <ul>
+              <li><b>No-Fix-No-Fee:</b> لو ما أصلحت = ما تأخذ شيء. <b>عيب:</b> أنت تخسر وقت + قطع تجريبية.</li>
+              <li><b>Diagnostic Fee:</b> الفحص بأجر · الإصلاح إضافي. <b>أفضل للأعطال المعقدة.</b></li>
+              <li><b>توصيتنا:</b> Free diagnostic للأعطال البسيطة + Paid لـ Logic Board work.</li>
+            </ul>
+          </article>
+
+          <article class="pr-cs-card">
+            <h3>🛡️ ضمان الإصلاح (Warranty)</h3>
+            <ul>
+              <li><b>30 يوم:</b> للقطع aftermarket (شاشة، بطارية رخيصة).</li>
+              <li><b>60 يوم:</b> للقطع OEM/Pulled (جودة أعلى).</li>
+              <li><b>90 يوم:</b> للإصلاحات Logic Board.</li>
+              <li><b>لا ضمان:</b> Water damage بعد التركيب · سقوط الجهاز · شد القطعة بقوة.</li>
+              <li><b>وثّق:</b> رقم الضمان على receipt + مدة + استثناءات.</li>
+            </ul>
+          </article>
+
+          <article class="pr-cs-card">
+            <h3>🤝 التعامل مع الإنكار + الشكاوى</h3>
+            <p><b>سيناريو شائع:</b> "أنا ما عملت شي وانكسرت!"</p>
+            <ul>
+              <li><b>الحل الوقائي:</b> صور قبل + intake form موقّع = درعك.</li>
+              <li><b>الرد:</b> "حضرتك هذه الصور وقت الاستلام. نعالجها معاك سوية."</li>
+              <li><b>الإصلاح الخاطئ من المحل:</b> اعترف بسرعة + اعمل refund أو إعادة إصلاح. الشكوى تقتل السمعة في عصر السوشيال.</li>
+              <li><b>الحالات الصعبة:</b> ادعُهم لـ replay الفيديو (لو فيه كاميرا في المحل).</li>
+            </ul>
+          </article>
+
+        </div>
+      </section><!-- /pr-customer-service -->
+
+
+      <!-- ============================================================
+           PHASE 4 · C — Ethics &amp; Legal (Iraq focus)
+      ============================================================ -->
+      <section class="pr-section" id="pr-ethics-legal" data-pr-section="ethics">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">الأخلاقيات والقانون · Ethics &amp; Legal</span>
+          <h2>قواعد لا تتجاوزها — حفاظاً على نفسك ومحلك</h2>
+          <p>هذه ليست "نصائح" — هذه قواعد قانونية وأخلاقية تحميك من الدعاوى وتحمي زبائنك.</p>
+        </header>
+
+        <div class="pr-ethics-grid">
+
+          <article class="pr-ethics-card pr-ethics-critical">
+            <div class="pr-ethics-tag">🔴 محذور قانوني</div>
+            <h3>تعديل IMEI</h3>
+            <p>تغيير IMEI أو إعادة برمجته <b>جريمة</b> في القانون العراقي وأغلب القوانين العالمية.</p>
+            <ul>
+              <li>عقوبة سجن حسب قانون الاتصالات العراقي رقم 65 لسنة 2004.</li>
+              <li>الزبون اللي يطلب منك تعديل IMEI = جهاز مسروق غالباً.</li>
+              <li>قول له "آسف، هذا غير قانوني" واطلب منه يغادر بأدب.</li>
+            </ul>
+          </article>
+
+          <article class="pr-ethics-card pr-ethics-critical">
+            <div class="pr-ethics-tag">🔴 محذور قانوني</div>
+            <h3>iCloud Lock / FRP Bypass</h3>
+            <p>تجاوز قفل الحساب على جهاز ليس لك = مشاركة في سرقة.</p>
+            <ul>
+              <li>اطلب فاتورة شراء أصلية + Apple ID وكلمة المرور.</li>
+              <li>لو الزبون "نسي كلمة السر" → وجّهه لـ Apple Support أو Samsung Customer Service.</li>
+              <li>لا تستخدم أي tool يكسر iCloud activation lock.</li>
+            </ul>
+          </article>
+
+          <article class="pr-ethics-card">
+            <div class="pr-ethics-tag">🟡 خصوصية</div>
+            <h3>Data Privacy</h3>
+            <p>بيانات الزبون مقدّسة — لا تفتحها بدون داعي.</p>
+            <ul>
+              <li><b>لا تفتح Gallery</b> ولا تتصفح صور/رسائل.</li>
+              <li>الكلمة السرية تستخدم <b>فقط</b> لاختبار الإصلاح.</li>
+              <li>إذا طلب الزبون wipe البيانات → احصل على إذن مكتوب.</li>
+              <li>لا تنسخ بياناته لأي مكان آخر — حتى للنسخ الاحتياطي.</li>
+            </ul>
+          </article>
+
+          <article class="pr-ethics-card">
+            <div class="pr-ethics-tag">🟡 إفصاح</div>
+            <h3>Original vs Aftermarket Disclosure</h3>
+            <p>لازم تخبر الزبون بنوع القطعة قبل التركيب.</p>
+            <ul>
+              <li><b>OEM (Original):</b> القطعة الأصلية من المصنع. أعلى سعر.</li>
+              <li><b>Pulled (مسحوبة):</b> من جهاز سليم — أصلية لكن مستعملة.</li>
+              <li><b>Aftermarket:</b> صناعة طرف ثالث — أرخص بكثير، جودة متفاوتة.</li>
+              <li><b>Refurbished:</b> أصلية أُعيد تجديدها.</li>
+              <li><b>المخالفة:</b> بيع aftermarket على أنها OEM = احتيال.</li>
+            </ul>
+          </article>
+
+          <article class="pr-ethics-card">
+            <div class="pr-ethics-tag">🟢 سلوك مهني</div>
+            <h3>Stolen Phone Protocol</h3>
+            <p>لو شككت أن الجهاز مسروق:</p>
+            <ul>
+              <li>اطلب فاتورة شراء أصلية.</li>
+              <li>اسأل عن iCloud/Google account credentials.</li>
+              <li>لو رفض الزبون → اطلب منه أخذ جهازه ومغادرة المحل.</li>
+              <li>وثّق الحادثة (رقم الزبون، الوقت، الموديل) — قد تحتاجها للأمن.</li>
+            </ul>
+          </article>
+
+          <article class="pr-ethics-card">
+            <div class="pr-ethics-tag">🟢 سلوك مهني</div>
+            <h3>Customer Data Wipe Consent</h3>
+            <p>إذا الإصلاح يتطلب wipe (مثل DFU restore):</p>
+            <ul>
+              <li>اشرح للزبون <b>قبل</b> أن البيانات ستضيع.</li>
+              <li>اطلب توقيعه على نموذج موافقة.</li>
+              <li>اعرض عمل backup (لو ممكن).</li>
+              <li>هذا يحميك قانونياً + يبني ثقة.</li>
+            </ul>
+          </article>
+
+        </div>
+      </section><!-- /pr-ethics-legal -->
+
+
+      <!-- ============================================================
+           PHASE 4 · D — Iraq Market Block
+      ============================================================ -->
+      <section class="pr-section" id="pr-iraq-block" data-pr-section="iraq">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">سوق العراق · Iraq Market Reality</span>
+          <h2>🇮🇶 السوق العراقي — الأرقام الحقيقية</h2>
+          <p>دخل واقعي + مناطق ذهبية + تحديات السوق + أمثلة تسعير 2024-2025.</p>
+        </header>
+
+        <!-- Income Table -->
+        <div class="pr-iq-block">
+          <h3>💵 نطاقات الدخل الشهري (Freelance/Shop)</h3>
+          <table class="pr-iq-table">
+            <thead>
+              <tr><th>المستوى</th><th>الدخل IQD</th><th>تقريباً USD</th><th>سنوات الخبرة</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>متدرب (في محل)</td><td>350k - 600k</td><td>$270 - $460</td><td>0-1</td></tr>
+              <tr><td>فني عادي</td><td>700k - 1.4M</td><td>$530 - $1,070</td><td>1-3</td></tr>
+              <tr><td>فني متخصص (iPhone/Samsung)</td><td>1.5M - 3M</td><td>$1,150 - $2,290</td><td>3+</td></tr>
+              <tr><td>Micro-solderer متقن</td><td>3M - 7M+</td><td>$2,290 - $5,340+</td><td>5+</td></tr>
+              <tr><td>صاحب محل (تقريبي)</td><td>4M - 15M+</td><td>...</td><td>يعتمد على الموقع</td></tr>
+            </tbody>
+          </table>
+          <p class="pr-iq-note">⚠️ الأرقام تقريبية — تختلف بحسب المنطقة، الموسم، والسمعة.</p>
+        </div>
+
+        <!-- Golden Zones -->
+        <div class="pr-iq-block">
+          <h3>📍 المناطق الذهبية في العراق</h3>
+          <div class="pr-iq-zones">
+            <div class="pr-iq-zone"><b>بغداد:</b> الباب الشرقي، الكرادة، الحارثية، الجادرية</div>
+            <div class="pr-iq-zone"><b>النجف:</b> السوق الكبير، شارع المدينة</div>
+            <div class="pr-iq-zone"><b>البصرة:</b> شارع الكويت، العشار</div>
+            <div class="pr-iq-zone"><b>أربيل:</b> سوق قيصرية، شارع 60 متر</div>
+            <div class="pr-iq-zone"><b>الموصل:</b> شارع نينوى، الدواسة</div>
+            <div class="pr-iq-zone"><b>كربلاء:</b> منطقة الحسين، شارع الإمام علي</div>
+          </div>
+        </div>
+
+        <!-- Pricing Examples -->
+        <div class="pr-iq-block">
+          <h3>💰 أمثلة تسعير واقعية (2024-2025)</h3>
+          <table class="pr-iq-table">
+            <thead>
+              <tr><th>الإصلاح</th><th>السعر مع التركيب IQD</th><th>ملاحظة</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>شاشة iPhone 11 (aftermarket)</td><td>65k - 90k</td><td>incell جودة متوسطة</td></tr>
+              <tr><td>شاشة iPhone 11 (OEM)</td><td>180k - 220k</td><td>True Tone يعمل</td></tr>
+              <tr><td>بطارية iPhone 11</td><td>35k - 55k</td><td>aftermarket</td></tr>
+              <tr><td>منفذ شحن iPhone 11</td><td>25k - 40k</td><td>flex assembly</td></tr>
+              <tr><td>شاشة Samsung A52 (incell)</td><td>75k - 95k</td><td>صعوبة متوسطة</td></tr>
+              <tr><td>بطارية Samsung A52</td><td>40k - 65k</td><td>أصلية</td></tr>
+              <tr><td>Water damage recovery</td><td>80k - 200k</td><td>حسب الضرر</td></tr>
+              <tr><td>Tristar replacement</td><td>80k - 150k</td><td>micro-soldering</td></tr>
+              <tr><td>Audio IC repair (iPhone 7)</td><td>120k - 200k</td><td>jumper</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Market Challenges -->
+        <div class="pr-iq-block pr-iq-challenges">
+          <h3>⚠️ تحديات السوق المحلي</h3>
+          <ul>
+            <li><b>قطع غير أصلية:</b> الموزع يكذب بـ "Original" — افحص قبل البيع. اختبر شاشة قبل التركيب.</li>
+            <li><b>المساومة قبل التشخيص:</b> "كم تأخذ على الإصلاح؟" قبل ما يفتح الجهاز. الرد: "اعطني 10 دقائق فحص أولاً."</li>
+            <li><b>المنافسة بالسعر:</b> دائماً فيه واحد يخفض. تميّز بـ ضمان أطول + سرعة + ثقة (مراجعات، صور before/after).</li>
+            <li><b>صعوبة استيراد القطع:</b> بعض القطع الأصلية متأخرة 2-3 أسابيع. اشرح للزبون.</li>
+            <li><b>الكهرباء غير المستقرة:</b> استخدم UPS لـ soldering equipment — يحميها من spike.</li>
+            <li><b>التضخم:</b> راجع قائمة أسعار القطع كل شهر — الدولار يتغير.</li>
+          </ul>
+        </div>
+
+      </section><!-- /pr-iraq-block -->
+
+      <!-- ============================================================
+           PHASE 5 · A — Interactive Labs (6 labs)
+      ============================================================ -->
+      <section class="pr-section" id="pr-labs" data-pr-section="labs">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">المختبرات التفاعلية · 6 Interactive Labs</span>
+          <h2>تدرّب — لا تكتفي بالقراءة</h2>
+          <p>كل lab يقيس مهارة محددة. النتائج تُحفظ محلياً (localStorage).</p>
+        </header>
+
+        <!-- Lab Tabs -->
+        <div class="pr-lab-tabs" role="tablist">
+          <button class="pr-lab-tab is-active" data-pr-lab="dmm" type="button">📏 Multimeter</button>
+          <button class="pr-lab-tab" data-pr-lab="walk" type="button">🌳 Decision Walker</button>
+          <button class="pr-lab-tab" data-pr-lab="cost" type="button">💰 Cost Estimator</button>
+          <button class="pr-lab-tab" data-pr-lab="water" type="button">💧 Water Damage</button>
+          <button class="pr-lab-tab" data-pr-lab="pcb" type="button">🔬 PCB ID</button>
+          <button class="pr-lab-tab" data-pr-lab="convo" type="button">🗣️ Customer Convo</button>
+        </div>
+
+        <!-- LAB 1: Multimeter Trainer -->
+        <div class="pr-lab pr-lab-dmm" id="pr-lab-dmm">
+          <h3>Lab 1 — Multimeter Trainer</h3>
+          <p class="pr-lab-desc">اختر الوضع، اختر النقطة، شوف القراءة وحدد لو طبيعية.</p>
+
+          <div class="pr-dmm-stage">
+            <div class="pr-dmm-mode">
+              <label>الوضع:</label>
+              <select id="pr-dmm-mode">
+                <option value="dcv">DCV (Voltage)</option>
+                <option value="ohm">Ω (Resistance)</option>
+                <option value="cont">Continuity</option>
+                <option value="diode">Diode Mode</option>
+              </select>
+
+              <label>نقطة الفحص:</label>
+              <select id="pr-dmm-point">
+                <option value="batt">Battery FPC + (Power rail)</option>
+                <option value="pmic">PMIC output 1.8V rail</option>
+                <option value="vbus">USB VBUS pad</option>
+                <option value="gnd">GND continuity to shield</option>
+                <option value="cap">Capacitor C111 across</option>
+                <option value="charge">Charging coil inductor</option>
+                <option value="audio">Audio IC pin 12</option>
+                <option value="fuse">Main fuse continuity</option>
+              </select>
+
+              <button class="pr-btn-primary" id="pr-dmm-measure">⚡ خذ القراءة</button>
+            </div>
+
+            <div class="pr-dmm-display" id="pr-dmm-display">
+              <div class="pr-dmm-screen" id="pr-dmm-screen">--</div>
+              <div class="pr-dmm-hint" id="pr-dmm-hint">اختر الوضع والنقطة ثم اضغط "خذ القراءة"</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LAB 2: Decision Walker -->
+        <div class="pr-lab" id="pr-lab-walk" hidden>
+          <h3>Lab 2 — Decision Tree Walker</h3>
+          <p class="pr-lab-desc">سيناريو: زبون يقول "جهازي ما يقلع". امش بالشجرة خطوة بخطوة.</p>
+
+          <div class="pr-walk-stage" id="pr-walk-stage">
+            <div class="pr-walk-question" id="pr-walk-q">هل سحب التيار من Battery FPC؟</div>
+            <div class="pr-walk-options" id="pr-walk-opts"></div>
+          </div>
+          <button class="pr-btn-secondary" id="pr-walk-reset">🔄 إعادة البدء</button>
+        </div>
+
+        <!-- LAB 3: Cost Estimator -->
+        <div class="pr-lab" id="pr-lab-cost" hidden>
+          <h3>Lab 3 — Repair Cost Estimator</h3>
+          <p class="pr-lab-desc">اختر الجهاز + الإصلاح + احسب السعر النهائي للزبون.</p>
+
+          <div class="pr-cost-stage">
+            <label>الجهاز:</label>
+            <select id="pr-cost-device">
+              <option value="ip11">iPhone 11</option>
+              <option value="ip12pro">iPhone 12 Pro</option>
+              <option value="ip13">iPhone 13</option>
+              <option value="sa52">Samsung A52</option>
+              <option value="sa72">Samsung A72</option>
+              <option value="sn21">Samsung Note 21</option>
+              <option value="rd11">Redmi Note 11</option>
+              <option value="rd12">Redmi Note 12</option>
+            </select>
+
+            <label>الإصلاح:</label>
+            <select id="pr-cost-repair">
+              <option value="screen">شاشة (aftermarket)</option>
+              <option value="screenoem">شاشة (OEM)</option>
+              <option value="battery">بطارية</option>
+              <option value="charge">منفذ شحن</option>
+              <option value="camera">كاميرا</option>
+              <option value="speaker">سماعة</option>
+              <option value="board">Logic Board diag</option>
+            </select>
+
+            <label>Markup %:</label>
+            <input type="range" id="pr-cost-markup" min="20" max="60" value="35" step="5"/>
+            <span id="pr-cost-markup-val">35%</span>
+
+            <label>Labor %:</label>
+            <input type="range" id="pr-cost-labor" min="20" max="60" value="35" step="5"/>
+            <span id="pr-cost-labor-val">35%</span>
+
+            <button class="pr-btn-primary" id="pr-cost-calc">احسب</button>
+          </div>
+
+          <div class="pr-cost-result" id="pr-cost-result"></div>
+        </div>
+
+        <!-- LAB 4: Water Damage Game -->
+        <div class="pr-lab" id="pr-lab-water" hidden>
+          <h3>Lab 4 — Water Damage Recovery</h3>
+          <p class="pr-lab-desc">رتّب الخطوات بالترتيب الصحيح (اضغط بالترتيب الذي تظنه صحيح).</p>
+
+          <div class="pr-wd-stage">
+            <div class="pr-wd-pool" id="pr-wd-pool"></div>
+            <div class="pr-wd-order" id="pr-wd-order"></div>
+            <button class="pr-btn-primary" id="pr-wd-check">✅ تحقق من الترتيب</button>
+            <button class="pr-btn-secondary" id="pr-wd-reset">🔄 إعادة</button>
+            <div class="pr-wd-result" id="pr-wd-result"></div>
+          </div>
+        </div>
+
+        <!-- LAB 5: PCB ID -->
+        <div class="pr-lab" id="pr-lab-pcb" hidden>
+          <h3>Lab 5 — PCB Component Identifier</h3>
+          <p class="pr-lab-desc">شاهد الـ component، اختر اسمه من 4 خيارات.</p>
+
+          <div class="pr-pcb-stage" id="pr-pcb-stage">
+            <div class="pr-pcb-prompt" id="pr-pcb-prompt"></div>
+            <div class="pr-pcb-options" id="pr-pcb-options"></div>
+            <div class="pr-pcb-feedback" id="pr-pcb-feedback"></div>
+          </div>
+          <button class="pr-btn-secondary" id="pr-pcb-next">➡️ السؤال التالي</button>
+          <div class="pr-pcb-score" id="pr-pcb-score">النقاط: 0 / 0</div>
+        </div>
+
+        <!-- LAB 6: Customer Convo -->
+        <div class="pr-lab" id="pr-lab-convo" hidden>
+          <h3>Lab 6 — Customer Conversation Trainer</h3>
+          <p class="pr-lab-desc">سيناريو: زبون غاضب جهازه ما تصلح بعد المحاولة. اختر ردك في كل دورة.</p>
+
+          <div class="pr-convo-stage" id="pr-convo-stage">
+            <div class="pr-convo-customer" id="pr-convo-customer"></div>
+            <div class="pr-convo-options" id="pr-convo-options"></div>
+            <div class="pr-convo-feedback" id="pr-convo-feedback"></div>
+          </div>
+          <div class="pr-convo-meters" id="pr-convo-meters" hidden>
+            <div class="pr-meter"><span>التعاطف</span><div class="pr-meter-bar"><div id="pr-meter-emp" style="width:0%"></div></div></div>
+            <div class="pr-meter"><span>الشفافية</span><div class="pr-meter-bar"><div id="pr-meter-trans" style="width:0%"></div></div></div>
+            <div class="pr-meter"><span>الاحتفاظ بالعميل</span><div class="pr-meter-bar"><div id="pr-meter-ret" style="width:0%"></div></div></div>
+          </div>
+          <button class="pr-btn-secondary" id="pr-convo-reset">🔄 إعادة البدء</button>
+        </div>
+
+      </section><!-- /pr-labs -->
+
+
+      <!-- ============================================================
+           PHASE 5 · B — Career Path
+      ============================================================ -->
+      <section class="pr-section" id="pr-career" data-pr-section="career">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">سلم الكاريير · Career Ladder</span>
+          <h2>من متدرب إلى صاحب سلسلة محلات</h2>
+          <p>كل قفزة: مهارات + استثمار مالي + وقت تقريبي.</p>
+        </header>
+
+        <ol class="pr-career-list">
+          <li class="pr-career-step">
+            <div class="pr-career-num">1</div>
+            <div class="pr-career-body">
+              <h4>متدرب · Apprentice</h4>
+              <p>تعلم في محل قائم. تكتسب الأساسيات.</p>
+              <ul>
+                <li><b>المهارات:</b> فك/تركيب · شاشة · بطارية · تنظيف منفذ.</li>
+                <li><b>الاستثمار:</b> 0 IQD (المحل يدفع لك راتب 350-600k).</li>
+                <li><b>المدة:</b> 6 أشهر - 1 سنة.</li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="pr-career-step">
+            <div class="pr-career-num">2</div>
+            <div class="pr-career-body">
+              <h4>فني عام · General Tech</h4>
+              <p>تستطيع التعامل مع أغلب الأعطال البسيطة + الشائعة.</p>
+              <ul>
+                <li><b>المهارات:</b> كل الـ 20 إصلاح + flashing software + diagnostic.</li>
+                <li><b>الاستثمار:</b> ~1M IQD لمعدات شخصية + قطع.</li>
+                <li><b>الراتب:</b> 700k - 1.4M IQD.</li>
+                <li><b>المدة في المنصب:</b> 1-3 سنوات.</li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="pr-career-step">
+            <div class="pr-career-num">3</div>
+            <div class="pr-career-body">
+              <h4>فني متخصص · Specialist (iPhone / Samsung / Mainboard)</h4>
+              <p>تتميّز في فرع محدد — تجلب أعطال الآخرين العاجزين عنها.</p>
+              <ul>
+                <li><b>المهارات:</b> Logic Board diagnostic · BGA reflow · Audio IC repair.</li>
+                <li><b>الاستثمار:</b> ~3-5M IQD (Microscope + Hot Air متقدم + DC PSU).</li>
+                <li><b>الراتب:</b> 1.5M - 3M IQD.</li>
+                <li><b>المدة:</b> 3+ سنوات.</li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="pr-career-step">
+            <div class="pr-career-num">4</div>
+            <div class="pr-career-body">
+              <h4>Micro-Solderer متقن</h4>
+              <p>تعمل على CPU underfills · NAND replacement · حالات مستحيلة.</p>
+              <ul>
+                <li><b>المهارات:</b> Reballing · BGA rework · Tristar/Audio/PMIC swap · NAND programming.</li>
+                <li><b>الاستثمار:</b> ~10M IQD (Trinocular Microscope + JBC + NAND programmer).</li>
+                <li><b>الدخل:</b> 3M - 7M+ IQD.</li>
+                <li><b>المدة للوصول:</b> 5+ سنوات تدريب يومي.</li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="pr-career-step">
+            <div class="pr-career-num">5</div>
+            <div class="pr-career-body">
+              <h4>صاحب محل · Shop Owner</h4>
+              <p>تفتح محلك الخاص + توظف 1-3 فنيين.</p>
+              <ul>
+                <li><b>المتطلبات:</b> رأس مال 15-40M IQD (إيجار + معدات + ستوك قطع + ماركيتنغ).</li>
+                <li><b>التحديات:</b> إدارة + محاسبة + ماركيتنغ + توظيف + سوشيال.</li>
+                <li><b>الدخل:</b> 4M - 15M+ IQD (يعتمد على الموقع).</li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="pr-career-step">
+            <div class="pr-career-num">6</div>
+            <div class="pr-career-body">
+              <h4>متعدد الفروع / Wholesale Parts Dealer / مدرّب</h4>
+              <p>التطور لمستوى business بدل إصلاح فردي.</p>
+              <ul>
+                <li><b>Multi-shop:</b> فرعين+ في مدن مختلفة.</li>
+                <li><b>Parts wholesale:</b> استيراد بالجملة + توزيع للمحلات.</li>
+                <li><b>أكاديمية / دورات:</b> تعلّم آخرين بـ 500k - 2M IQD لكل دورة 3 أشهر.</li>
+                <li><b>الدخل:</b> 20M+ IQD محتمل.</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+      </section><!-- /pr-career -->
+
+
+      <!-- ============================================================
+           PHASE 5 · C — Cheat Sheet (طبع وعلق على الجدار)
+      ============================================================ -->
+      <section class="pr-section pr-cheat" id="pr-cheat-sheet" data-pr-section="cheat">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">📋 Cheat Sheet · للطباعة والتعليق</span>
+          <h2>المرجع السريع للفني</h2>
+          <p>القواعد الذهبية + قراءات Multimeter + أسعار قطع شائعة.</p>
+        </header>
+
+        <div class="pr-cheat-grid">
+
+          <article class="pr-cheat-card">
+            <h4>⚡ Multimeter Quick Reference</h4>
+            <ul>
+              <li>Battery FPC voltage = <b>3.7-4.2V</b> طبيعي</li>
+              <li>VBUS USB = <b>5V</b> (PD up to 20V)</li>
+              <li>1.8V rail (PMIC) = <b>1.78-1.82V</b></li>
+              <li>Continuity GND-to-GND = <b>&lt; 1Ω</b></li>
+              <li>Diode Mode على capacitor = <b>OL</b> طبيعي</li>
+              <li>Diode على capacitor = <b>0V short</b> = capacitor تالف</li>
+            </ul>
+          </article>
+
+          <article class="pr-cheat-card">
+            <h4>🔥 Hot Air Settings</h4>
+            <ul>
+              <li>BGA removal = <b>380°C / 4.5</b> airflow</li>
+              <li>BGA reflow = <b>360°C / 4</b></li>
+              <li>Component removal صغير = <b>340°C / 3</b></li>
+              <li>تنشيف بعد water = <b>120°C / 2</b></li>
+              <li>تحذير: لا تقرّب أكثر من 2cm</li>
+            </ul>
+          </article>
+
+          <article class="pr-cheat-card">
+            <h4>🛠️ DC Power Supply Quick Check</h4>
+            <ul>
+              <li>0mA → PMIC dead أو fuse مكسور</li>
+              <li>30-50mA stable → PMIC OK، البحث عن sub-issue</li>
+              <li>200-500mA boot ثم drop → CPU/Audio/NAND</li>
+              <li>1A+ فوراً → Short circuit (ابحث عنه)</li>
+              <li>Voltage = 4.0V (محاكاة بطارية مشحونة جزئياً)</li>
+            </ul>
+          </article>
+
+          <article class="pr-cheat-card">
+            <h4>💰 Markup Quick Math</h4>
+            <ul>
+              <li>قطعة بسيطة (شاشة، بطارية): <b>+30%</b></li>
+              <li>قطعة محترقة (Tristar IC): <b>+200%</b> (تشمل المهارة)</li>
+              <li>Labor عادي: <b>30-40%</b> من قيمة القطعة</li>
+              <li>Labor متقدم (Logic Board): <b>50-100%</b></li>
+              <li>Round up للأسعار النهائية (10k، 50k، 100k)</li>
+            </ul>
+          </article>
+
+          <article class="pr-cheat-card">
+            <h4>📞 Customer Phrases (عراقي)</h4>
+            <ul>
+              <li><b>قبل التشخيص:</b> "اعطني 10 دقايق فحص قبل ما اعطيك سعر."</li>
+              <li><b>بعد التشخيص:</b> "العطل هو [...] . السعر [k] د.ع. هل تريد المتابعة؟"</li>
+              <li><b>إصلاح طويل:</b> "هذا يحتاج 3 ساعات. تعال بعد العصر."</li>
+              <li><b>الإنكار:</b> "حضرتك هذي صور وقت الاستلام. نعالجها سوية بهدوء."</li>
+              <li><b>الضمان:</b> "ضمان 60 يوم على القطعة + الشغل، عدا حالات السقوط أو الماء."</li>
+            </ul>
+          </article>
+
+          <article class="pr-cheat-card">
+            <h4>🚫 Red Flags (رفض الزبون)</h4>
+            <ul>
+              <li>يطلب تعديل IMEI</li>
+              <li>iCloud/FRP locked + لا فاتورة</li>
+              <li>يصر "جهازي يخصني" بدون إثبات</li>
+              <li>يصر على سعر &lt; 50% من السوق</li>
+              <li>يهدّد بالشكاوى قبل البدء</li>
+              <li>يطلب فتح قبل الموافقة على fee</li>
+            </ul>
+          </article>
+
+        </div>
+      </section><!-- /pr-cheat-sheet -->
+
+
+      <!-- ============================================================
+           PHASE 5 · D — Citations
+      ============================================================ -->
+      <section class="pr-section pr-citations" id="pr-citations" data-pr-section="cite">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">المراجع · Citations</span>
+          <h2>المصادر العلمية والصناعية</h2>
+          <p>مصادر يمكن الرجوع إليها لتعميق المهارة. روابط ثابتة.</p>
+        </header>
+
+        <ol class="pr-cite-list">
+          <li><b>iFixit Repair Guides</b> — <i>Free open repair manuals (1000s of guides)</i> · اللاند مارك في dismantle procedures.</li>
+          <li><b>Louis Rossmann</b> — <i>Rossmann Repair Group YouTube + Schematic Library</i> · مرجع micro-soldering للـ MacBook + iPhone.</li>
+          <li><b>Jessa Jones (iPad Rehab)</b> — <i>iPad Rehab YouTube + Forum</i> · NAND replacement + Logic Board repair.</li>
+          <li><b>Apple Service Manuals (Internal, Leaked)</b> — <i>Bobby's Repair leaked schematics</i> · مرجع للـ board-view.</li>
+          <li><b>Right to Repair Movement</b> — <i>Repair.org + EU Right to Repair Directive 2024</i> · حقوق المستهلك في الإصلاح.</li>
+          <li><b>قانون الاتصالات العراقي رقم 65 لسنة 2004</b> — <i>المادتان 28-30 (تعديل IMEI = جريمة)</i>.</li>
+          <li><b>ZX-W Dongle / ZXW Tools</b> — <i>Schematic + Boardview software للموبايلات</i> · أداة محورية للتشخيص.</li>
+          <li><b>JC Pro / Apple Tag-on-Tag Programmer</b> — <i>NAND data recovery + IMEI legitimate restoration</i>.</li>
+          <li><b>IPC J-STD-001</b> — <i>Industry Standard for Soldered Electrical Assemblies</i> · المعيار الذهبي للحام.</li>
+          <li><b>WHO Lead Exposure Guidelines</b> — <i>Permissible exposure limits for solder fume</i> · المرجع الصحي.</li>
+          <li><b>3uTools / Tenorshare ReiBoot</b> — <i>iPhone software diagnostics official documentation</i>.</li>
+          <li><b>Phone Repair Academies — Iraq</b> — <i>أكاديميات بغداد + أربيل (دورات 3-6 أشهر)</i> · مصدر تعلم عملي محلي.</li>
+        </ol>
+      </section><!-- /pr-citations -->
+
+    </section><!-- /page-phonerepair -->
 
 
   <!-- ✅ FOOTER — after ALL pages so flex order is correct -->
