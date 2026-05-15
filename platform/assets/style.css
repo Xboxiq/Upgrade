@@ -14279,3 +14279,73 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
   }
   #page-psych .w09t-tabs{ display:none; }
 }
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   WORKER 09 · PHASE 4 — Psych Insets (cross-page micro-cards)
+═══════════════════════════════════════════════════════════════════════ */
+.w09i-mount{
+  margin: 18px 0 22px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
+}
+.w09i-card{
+  background: linear-gradient(135deg, rgba(139,92,246,.08), rgba(102,252,241,.04));
+  border: 1px solid rgba(139,92,246,.22);
+  border-radius: var(--radius-lg);
+  padding: 12px 14px;
+  position: relative;
+  transition: var(--transition);
+  cursor: pointer;
+}
+.w09i-card:hover{
+  border-color: rgba(102,252,241,.35);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.18);
+}
+.w09i-card-head{
+  display:flex; align-items:center; gap: 8px;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .06em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.w09i-card-head::before{
+  content:"🧠"; font-size: 14px;
+}
+.w09i-card h5{
+  font-size: 13px; font-weight: 800; color: var(--text);
+  margin: 0 0 4px;
+}
+.w09i-card-src{
+  font-size: 10.5px; color: var(--text-faint);
+  margin: 0 0 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed rgba(255,255,255,.05);
+}
+.w09i-card-apply{
+  font-size: 11.5px; color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0 0 6px;
+}
+.w09i-card-apply b{ color: var(--text); }
+.w09i-card-warn{
+  font-size: 10.5px; color: #FBBF24;
+  background: rgba(251,191,36,.06);
+  border-right: 2px solid #FBBF24;
+  padding: 5px 8px;
+  border-radius: var(--radius-md);
+  line-height: 1.55;
+}
+.w09i-card-link{
+  margin-top: 8px;
+  font-size: 11px; font-weight: 700;
+  color: var(--accent);
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.w09i-card-link::after{ content:"→"; }
+@media print{
+  .w09i-card{ background:#fff !important; color:#000 !important; border:1px solid #999 !important; }
+}
