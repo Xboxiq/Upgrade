@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-15T05:00:00Z",
+  "last_updated": "2026-05-15T05:50:00Z",
   "current": {
-    "worker": "02",
-    "worker_name": "SALES_AND_AM",
-    "phase": 5,
-    "phases_total": 5,
-    "branch": "worker-02-complete",
-    "status": "completed"
+    "worker": "03",
+    "worker_name": "CALLCENTER",
+    "phase": 2,
+    "phases_total": 4,
+    "branch": "worker-03-phase-2",
+    "status": "in-progress"
   },
   "completed_phases": [
     { "worker": "01", "phase": 1, "title": "Foundation Tokens & Aurora Mesh",                    "branch": "worker-01-phase-1-v2", "lines_added": 121 },
@@ -18,8 +18,10 @@
     { "worker": "02", "phase": 2, "title": "Discovery Library + Closing + Iraqi Objections",     "branch": "worker-02-phase-2",   "lines_added": 440 },
     { "worker": "02", "phase": 3, "title": "3 Interactive Labs",                                  "branch": "worker-02-phase-3",   "lines_added": 550 },
     { "worker": "02", "phase": 4, "title": "page-accountmgr (KAM)",                               "branch": "worker-02-phase-4",   "lines_added": 515 },
-    { "worker": "02", "phase": 5, "title": "Iraq Salary + Career Ladder + Cheat Sheet + Citations + Progress", "branch": "worker-02-phase-5", "lines_added": 386 }
+    { "worker": "02", "phase": 5, "title": "Iraq Salary + Career Ladder + Cheat Sheet + Citations + Progress", "branch": "worker-02-phase-5", "lines_added": 386 },
+    { "worker": "03", "phase": 1, "title": "Voice Profile (5 dims) + Empathy Loop + 14 Archetypes", "branch": "worker-03-phase-1", "lines_added": 895 },
+    { "worker": "03", "phase": 2, "title": "KPI Deep-Dive + APIndex Calculator + Call Anatomy 7 Stages", "branch": "worker-03-phase-2", "lines_added": 828 }
   ],
-  "next_action": "Worker 02 complete (consolidated). Begin Worker 03 — Call Center on next session.",
-  "notes": "Worker 02 (Sales + Account Management) COMPLETE. Total: 2,455 lines across 5 phases. Consolidated branch worker-02-complete contains all phases. Phase PRs (#12-#16) will be closed in favor of single consolidated PR for mobile-friendly merging."
+  "next_action": "Worker 03 Phase 3 → Voice Self-Assessment Studio (Web Audio + Web Speech).",
+  "notes": "Worker 03 Phase 2 complete. KPI metrics + interactive APIndex calculator + 7-stage call anatomy. All additive."
 }
