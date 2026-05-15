@@ -1,0 +1,46 @@
+{
+  "worker": "02",
+  "worker_name": "SALES_AND_AM",
+  "phase": 1,
+  "phases_total": 5,
+  "title": "Sales Frameworks Comparison (SPIN / Challenger / Sandler / Solution)",
+  "branch": "worker-02-phase-1",
+  "completed_at": "2026-05-15T01:00:00Z",
+  "lines_added_total": 564,
+  "files_modified": [
+    {"path": "platform/index.html",       "delta": 234},
+    {"path": "platform/assets/style.css", "delta": 259},
+    {"path": "platform/assets/app.js",    "delta": 71}
+  ],
+  "anchors": [
+    "[data-sf-anchor]",
+    "[data-sf-table]",
+    "[data-sf-row=\"spin\"]",
+    "[data-sf-row=\"challenger\"]",
+    "[data-sf-row=\"sandler\"]",
+    "[data-sf-row=\"solution\"]",
+    "[data-sf-modal=\"spin\"]",
+    "[data-sf-modal=\"challenger\"]",
+    "[data-sf-modal=\"sandler\"]",
+    "[data-sf-modal=\"solution\"]"
+  ],
+  "css_namespaces": [
+    "#page-fieldsales .sf-table-wrap",
+    "#page-fieldsales .sales-frameworks",
+    "#page-fieldsales .sf-row",
+    "#page-fieldsales .sf-modal",
+    "body.sf-modal-open"
+  ],
+  "js_iife": "qlSalesFrameworks (window.__sfBound guard)",
+  "localStorage_keys": [],
+  "iraqi_scenarios": [
+    "Baghdad — POS for restaurant chain (SPIN)",
+    "Erbil — clinic management system (Challenger)",
+    "Basra — cloud accounting for law office (Sandler)",
+    "Mosul — ERP for clothing factory (Solution Selling)"
+  ],
+  "open_threads": [
+    "Phase 2 will add Discovery Questions Library + Closing Techniques + 12 Iraqi objection cards."
+  ],
+  "next_action": "Begin Worker 02 Phase 2."
+}
