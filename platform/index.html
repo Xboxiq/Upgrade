@@ -12819,7 +12819,426 @@ const bird = { ...canMove(), ...canFly() };
         </div>
       </section><!-- /pr-repair-cards-1 -->
 
-      <!-- (المراحل التالية ستضاف في Phases 3-5) -->
+      <!-- ============================================================
+           PHASE 3 · A — Top 20 Repairs (الجزء الثاني 11-20)
+      ============================================================ -->
+      <section class="pr-section" id="pr-repair-cards-2" data-pr-section="repairs2">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">الإصلاحات الأكثر طلباً · 11-20 من 20</span>
+          <h2>الإصلاحات المتقدمة + Software Issues</h2>
+          <p>الجزء الثاني — يشمل أعطال أصعب وتتطلب خبرة أعمق.</p>
+        </header>
+
+        <div class="pr-grid pr-grid-2" id="pr-repair-grid-2">
+
+          <article class="pr-repair-card" data-pr-repair="signal">
+            <div class="pr-repair-head">
+              <h3>11. شبكة / إشارة ضعيفة</h3>
+              <span class="pr-diff" data-stars="3">★★★☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 60-180 دقيقة</span>
+              <span>💰 50k - 250k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> No Service · إشارة ضعيفة دائماً · تنقطع المكالمات.</p>
+              <p><b>الأسباب:</b> 1) Antenna spring مفصول، 2) Baseband IC تالف، 3) SIM tray contacts، 4) PMIC RF.</p>
+              <p><b>التشخيص:</b> Settings → About → Wi-Fi/BT/IMEI. لو IMEI = "Unavailable" → Baseband.</p>
+              <p><b>الإصلاح:</b> أسهل أولاً (antenna) · لو فشل، Baseband repair (متقدم — يحتاج programmer أحياناً).</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="fingerprint">
+            <div class="pr-repair-head">
+              <h3>12. بصمة الإصبع (Fingerprint)</h3>
+              <span class="pr-diff" data-stars="4">★★★★☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 60-120 دقيقة</span>
+              <span>💰 50k - 200k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> "Fingerprint sensor not available" · لا تتعرف.</p>
+              <p><b>تحذير حرج لـ iPhone:</b> Touch ID مرتبط بالـ board بـ pairing — لا يمكن استبداله من جهاز آخر.</p>
+              <p><b>Samsung Ultrasonic (S10+):</b> حساس داخل الشاشة — يلزم تغيير الشاشة كاملة.</p>
+              <p><b>iPhone 5/6:</b> الزر original من نفس الجهاز يصلح. iPhone 7/8 = حساس مدمج بـ flex.</p>
+              <p><b>Android Capacitive:</b> أسهل — استبدال الـ module.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="faceid">
+            <div class="pr-repair-head">
+              <h3>13. Face ID (iPhone X+)</h3>
+              <span class="pr-diff" data-stars="5">★★★★★</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 90-240 دقيقة</span>
+              <span>💰 80k - 350k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> "Face ID is not available" · "Move iPhone Lower/Higher" دائماً.</p>
+              <p><b>تحذير شديد:</b> Face ID يحوي Dot Projector + IR Camera + Flood Illuminator — كلها مرتبطة بـ Secure Enclave.</p>
+              <p><b>المسببات الأكثر:</b> 1) Earpiece/Front Camera flex (سهل نسبياً), 2) Dot Projector تلف بحرارة (Hot Air أعلى من 200°C يقتله).</p>
+              <p><b>الإصلاح:</b> فك بحذر شديد · لا تستخدم Hot Air قرب الـ TrueDepth Camera · استبدال الـ flex المتأذي.</p>
+              <p><b>محذور:</b> لا يمكن نقل Face ID من جهاز آخر — Apple Toolkit يلزم لـ "calibration" جزئية فقط.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="noboot">
+            <div class="pr-repair-head">
+              <h3>14. لا يقلع — No Boot</h3>
+              <span class="pr-diff" data-stars="4">★★★★☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 60-300 دقيقة</span>
+              <span>💰 100k - 500k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> الجهاز لا يستجيب أبداً · لا شاشة · لا اهتزاز.</p>
+              <p><b>التشخيص (DC PSU):</b> ضع 4.0V على Battery FPC. راقب mA:</p>
+              <ul>
+                <li>0mA → PMIC ميتة أو fuse مكسور.</li>
+                <li>سحب فوري 1A+ → short circuit (capacitor مكسور أو Tristar).</li>
+                <li>30-50mA ثم يتوقف → PMIC تبدأ ولكن لا تكمل.</li>
+              </ul>
+              <p><b>الإصلاح:</b> اتبع شجرة No Boot (تحت). صعوبة عالية — micro-soldering.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="bootloop">
+            <div class="pr-repair-head">
+              <h3>15. Boot Loop</h3>
+              <span class="pr-diff" data-stars="3">★★★☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 30-180 دقيقة</span>
+              <span>💰 50k - 250k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> يعرض الـ logo ويعيد التشغيل باستمرار.</p>
+              <p><b>الأسباب:</b> 1) iOS/Android تالف — حلها restore، 2) NAND fault، 3) PMIC sub-rail واحد متقطع، 4) RAM (PoP) failure.</p>
+              <p><b>التشخيص:</b> ابدأ بـ DFU/EDL restore. لو نجح = software. لو فشل = hardware.</p>
+              <p><b>الإصلاح:</b> Software → 3uTools/Odin · Hardware → reflow CPU/RAM (متقدم).</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="logo">
+            <div class="pr-repair-head">
+              <h3>16. Logo فقط ثم يطفي</h3>
+              <span class="pr-diff" data-stars="4">★★★★☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 60-240 دقيقة</span>
+              <span>💰 80k - 350k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> Apple/Samsung logo يظهر 5-10 ثواني ثم black.</p>
+              <p><b>الأسباب:</b> 1) NAND read error في boot stage، 2) رطوبة على Audio IC (iPhone 7), 3) Battery تنخفض فجأة (ESR عالي).</p>
+              <p><b>التشخيص:</b> اختبر مع DC PSU + ammeter — راقب الأمبير عند الـ logo. لو يقفز ل2A وينقطع = نقص جهد.</p>
+              <p><b>الإصلاح:</b> غالباً Audio IC أو CPU underfill. خبرة عالية.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="water">
+            <div class="pr-repair-head">
+              <h3>17. غارق في الماء (Water Damage)</h3>
+              <span class="pr-diff" data-stars="4">★★★★☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 120-360 دقيقة</span>
+              <span>💰 80k - 500k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>تحذير حرج:</b> أول دقيقة = أهم دقيقة. اشرح للزبون لا يفتحه/يشحنه.</p>
+              <p><b>البروتوكول:</b></p>
+              <ul>
+                <li>1) فك البطارية فوراً.</li>
+                <li>2) فك الجهاز كاملاً.</li>
+                <li>3) Ultrasonic Cleaner مع IPA 99% لـ 5 دقائق.</li>
+                <li>4) فحص بصري عن corrosion (أخضر/أبيض).</li>
+                <li>5) كشط الـ corrosion + إعادة تنظيف.</li>
+                <li>6) تجفيف بـ Hot Air منخفض.</li>
+                <li>7) فحص component-by-component لو ما يقلع.</li>
+              </ul>
+              <p class="pr-tip">⚠️ ماء البحر/الكولا = أسوأ بكثير من الماء العادي. تنظيف فوري ضروري.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="usbc-clean">
+            <div class="pr-repair-head">
+              <h3>18. تنظيف منفذ USB-C/Lightning</h3>
+              <span class="pr-diff" data-stars="1">★☆☆☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 5-15 دقيقة</span>
+              <span>💰 5k - 15k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> الكابل لا يدخل تماماً · يخرج فوراً · لا يثبت.</p>
+              <p><b>السبب:</b> توس/أوساخ متراكمة (السبب الأشهر — قبل أن تشخّص أي عطل آخر).</p>
+              <p><b>الإصلاح:</b> فرشاة أسنان ناعمة + IPA + إبرة plastic. لا تستخدم معدن!</p>
+              <p class="pr-tip">💰 خدمة سريعة جداً ومربحة — كل مرة تنبه الزبون "كان فقط أوساخ".</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="touch">
+            <div class="pr-repair-head">
+              <h3>19. Touch لا يستجيب (digitizer)</h3>
+              <span class="pr-diff" data-stars="2">★★☆☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 30-90 دقيقة</span>
+              <span>💰 60k - 220k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> Touch لا يعمل في منطقة معينة · ghost touches · لا يستجيب أبداً.</p>
+              <p><b>الأسباب:</b> 1) digitizer منفصل عن LCD، 2) flex مكسور، 3) Touch IC على board (iPhone 6 Plus = Touch Disease).</p>
+              <p><b>التشخيص:</b> اختبار شاشة قطرية (iPhone) أو "Test Mode" (Samsung *#0*#).</p>
+              <p><b>الإصلاح:</b> غالباً استبدال الشاشة. iPhone 6 Plus Touch Disease = reflow Touch ICs.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="heating">
+            <div class="pr-repair-head">
+              <h3>20. Heating / Overheating</h3>
+              <span class="pr-diff" data-stars="3">★★★☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 30-180 دقيقة</span>
+              <span>💰 50k - 350k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> الجهاز يسخن بسرعة حتى وهو idle · بطارية تنتهي بسرعة.</p>
+              <p><b>التشخيص:</b> أي IC الذي يسخن؟ استخدم ثرمومتر IR (gun) أو أصبعك بحذر.</p>
+              <p><b>الأسباب:</b> 1) Software (rogue app/process), 2) Charging IC, 3) PMIC, 4) CPU throttle issue, 5) بطارية معطوبة.</p>
+              <p><b>الإصلاح:</b> ابدأ بـ Battery Health → Settings · ثم ابحث عن hot IC.</p>
+            </div>
+          </article>
+
+        </div>
+      </section><!-- /pr-repair-cards-2 -->
+
+
+      <!-- ============================================================
+           PHASE 3 · B — Diagnostic Decision Trees
+      ============================================================ -->
+      <section class="pr-section" id="pr-decision-trees" data-pr-section="trees">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">شجرة قرار التشخيص · Diagnostic Trees</span>
+          <h2>3 أشجار قرار للأعطال الحرجة</h2>
+          <p>اتبع كل شجرة خطوة بخطوة — تتبع التشعب لتصل لسبب جذري بدل التخمين.</p>
+        </header>
+
+        <div class="pr-tree-tabs" role="tablist">
+          <button class="pr-tree-tab is-active" data-pr-tree="noboot" type="button">🔌 No Boot</button>
+          <button class="pr-tree-tab" data-pr-tree="nocharge" type="button">🔋 No Charge</button>
+          <button class="pr-tree-tab" data-pr-tree="water" type="button">💧 Water Damage</button>
+        </div>
+
+        <!-- Tree: No Boot -->
+        <div class="pr-tree" id="pr-tree-noboot">
+          <div class="pr-tree-node pr-tree-root">
+            <div class="pr-tree-q">الجهاز لا يقلع. هل سحب التيار من البطارية؟ (DC PSU)</div>
+            <div class="pr-tree-children">
+              <div class="pr-tree-branch pr-tree-no">
+                <div class="pr-tree-edge">0mA</div>
+                <div class="pr-tree-q">PMIC ميتة أو fuse رئيسي مكسور.</div>
+                <div class="pr-tree-children">
+                  <div class="pr-tree-branch">
+                    <div class="pr-tree-edge">→ افحص</div>
+                    <div class="pr-tree-leaf"><b>الحل:</b> Continuity على VBAT line. لو مفتوح = استبدل الـ fuse. لو مغلق = استبدل PMIC.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pr-tree-branch pr-tree-yes">
+                <div class="pr-tree-edge">سحب فوري 1A+</div>
+                <div class="pr-tree-q">Short circuit. أين الـ short؟</div>
+                <div class="pr-tree-children">
+                  <div class="pr-tree-branch">
+                    <div class="pr-tree-edge">→ افحص</div>
+                    <div class="pr-tree-leaf"><b>الحل:</b> Inject voltage low + Freeze Spray — الـ component الذي يسخن أولاً = المعطل. عادة capacitor قرب CPU/PMIC.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pr-tree-branch">
+                <div class="pr-tree-edge">30-100mA ثم 0</div>
+                <div class="pr-tree-q">PMIC تبدأ بس ما تكمل التتابع.</div>
+                <div class="pr-tree-children">
+                  <div class="pr-tree-branch">
+                    <div class="pr-tree-edge">→ افحص</div>
+                    <div class="pr-tree-leaf"><b>الحل:</b> راقب rails (1.8V, 1.2V) باستخدام scope. لو واحد ما يطلع = استبدل PMIC.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pr-tree-branch">
+                <div class="pr-tree-edge">200-500mA — يشتغل ثم يطفي</div>
+                <div class="pr-tree-q">يدخل boot ثم يفشل.</div>
+                <div class="pr-tree-children">
+                  <div class="pr-tree-branch">
+                    <div class="pr-tree-edge">→ Software؟</div>
+                    <div class="pr-tree-leaf"><b>الحل:</b> جرب DFU/EDL restore. لو فشل = NAND fault أو Audio IC (iPhone 7). reflow أو استبدل.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tree: No Charge -->
+        <div class="pr-tree" id="pr-tree-nocharge" hidden>
+          <div class="pr-tree-node pr-tree-root">
+            <div class="pr-tree-q">الجهاز لا يشحن. هل المنفذ نظيف؟</div>
+            <div class="pr-tree-children">
+              <div class="pr-tree-branch pr-tree-no">
+                <div class="pr-tree-edge">لا</div>
+                <div class="pr-tree-leaf"><b>الحل:</b> نظف بفرشاة + IPA. غالباً المشكلة هذه فقط (40% من الحالات).</div>
+              </div>
+
+              <div class="pr-tree-branch">
+                <div class="pr-tree-edge">نعم — جرب كابل آخر</div>
+                <div class="pr-tree-q">يشحن مع كابل آخر؟</div>
+                <div class="pr-tree-children">
+                  <div class="pr-tree-branch pr-tree-yes">
+                    <div class="pr-tree-edge">نعم</div>
+                    <div class="pr-tree-leaf"><b>الحل:</b> الكابل/الشاحن معطل. أبلغ الزبون.</div>
+                  </div>
+                  <div class="pr-tree-branch pr-tree-no">
+                    <div class="pr-tree-edge">لا</div>
+                    <div class="pr-tree-q">جرب DC PSU على Battery FPC.</div>
+                    <div class="pr-tree-children">
+                      <div class="pr-tree-branch">
+                        <div class="pr-tree-edge">يشحن من PSU بس مش USB</div>
+                        <div class="pr-tree-leaf"><b>الحل:</b> Charging port flex معطل أو Tristar. ابدأ باستبدال flex (أرخص).</div>
+                      </div>
+                      <div class="pr-tree-branch">
+                        <div class="pr-tree-edge">لا يشتغل حتى من PSU</div>
+                        <div class="pr-tree-leaf"><b>الحل:</b> مشكلة أعمق — Battery FPC connector أو fuse على VBAT. fuse continuity check.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tree: Water Damage -->
+        <div class="pr-tree" id="pr-tree-water" hidden>
+          <div class="pr-tree-node pr-tree-root">
+            <div class="pr-tree-q">جهاز غارق وصلك. هل الزبون شغّله بعد الغرق؟</div>
+            <div class="pr-tree-children">
+              <div class="pr-tree-branch pr-tree-no">
+                <div class="pr-tree-edge">لا (الموقف الأفضل)</div>
+                <div class="pr-tree-leaf"><b>الحل:</b> فك → Ultrasonic + IPA → جفّف → اختبر. فرصة النجاح 70-90%.</div>
+              </div>
+
+              <div class="pr-tree-branch pr-tree-yes">
+                <div class="pr-tree-edge">نعم (شغّله أو شحنه)</div>
+                <div class="pr-tree-q">هل ظهر دخان أو حرق؟</div>
+                <div class="pr-tree-children">
+                  <div class="pr-tree-branch">
+                    <div class="pr-tree-edge">نعم — حرق</div>
+                    <div class="pr-tree-leaf"><b>الحل:</b> Short circuit شغل · IC احترق غالباً. فحص بصري + thermal camera. فرصة استرداد البيانات فقط أحياناً.</div>
+                  </div>
+                  <div class="pr-tree-branch">
+                    <div class="pr-tree-edge">لا</div>
+                    <div class="pr-tree-leaf"><b>الحل:</b> Ultrasonic + corrosion cleaning. فرصة 40-60%.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pr-tree-branch">
+                <div class="pr-tree-edge">ماء البحر / كولا / عصير</div>
+                <div class="pr-tree-leaf"><b>تحذير:</b> أكلوريد/سكر يسرع corrosion بشكل كبير. تنظيف فوري وكامل ضروري — fluoride تنتج corrosion 3 أيام بعد التنظيف.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section><!-- /pr-decision-trees -->
+
+
+      <!-- ============================================================
+           PHASE 3 · C — Software Side
+      ============================================================ -->
+      <section class="pr-section" id="pr-software-side" data-pr-section="software">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">الجانب البرمجي · Software Side</span>
+          <h2>iOS · Android · Bootloader · Flashing</h2>
+          <p>الإصلاحات البرمجية = 30% من الحالات. لو ما تعرفها، ترسل الزبون لمحل آخر بدون داعي.</p>
+        </header>
+
+        <div class="pr-grid pr-grid-2">
+
+          <article class="pr-sw-card">
+            <h3>📱 iOS — Recovery vs DFU Mode</h3>
+            <ul>
+              <li><b>Recovery Mode:</b> الجهاز يعرض كابل + iTunes logo. iTunes/Finder يقدر يحدّث أو يعيد. الـ data تضيع لو "Restore".</li>
+              <li><b>DFU Mode:</b> شاشة سوداء كاملة. iTunes يقول "device in recovery mode". أعمق من Recovery — يكتب على bootloader نفسه.</li>
+              <li><b>متى تستخدم DFU:</b> لو Recovery فشل، أو لو تريد downgrade iOS، أو لو الجهاز "stuck".</li>
+              <li><b>iPhone 8+ DFU:</b> Volume Up سريع → Volume Down سريع → اضغط Power 10 ثواني → استمر بـ Power + اضغط Volume Down 5 ثواني → اترك Power فقط.</li>
+            </ul>
+          </article>
+
+          <article class="pr-sw-card">
+            <h3>🤖 Android — Fastboot · Recovery · EDL</h3>
+            <ul>
+              <li><b>Recovery Mode:</b> Power + Vol Up. للـ wipe data أو install update من SD.</li>
+              <li><b>Fastboot:</b> Power + Vol Down. للـ flash images عبر USB (إنترفيس bootloader).</li>
+              <li><b>EDL Mode (Qualcomm):</b> "Emergency Download" — ينقذ الجهاز حتى لو bootloader مكسور. يحتاج EDL cable + MiFlash.</li>
+              <li><b>Samsung Download Mode:</b> Power + Vol Down + Home (الأقدم) أو Power + Vol Down + Bixby. يستخدم مع Odin.</li>
+            </ul>
+          </article>
+
+          <article class="pr-sw-card">
+            <h3>🔓 Bootloader Unlocking</h3>
+            <ul>
+              <li><b>متى مفيد:</b> root، تركيب custom ROM، استرداد بيانات.</li>
+              <li><b>التكلفة:</b> Knox tripped (Samsung) — يقطع Samsung Pay + بعض الميزات للأبد.</li>
+              <li><b>تحذير:</b> Wipe كامل للجهاز عند الـ unlock — أبلغ الزبون قبل.</li>
+              <li><b>غير قابل في:</b> iPhone (مغلق نهائياً), Huawei (منذ 2018), Xiaomi (تأخير 7 أيام بحساب Mi).</li>
+            </ul>
+          </article>
+
+          <article class="pr-sw-card">
+            <h3>💾 Flashing Tools (الأدوات الأساسية)</h3>
+            <ul>
+              <li><b>3uTools (iPhone):</b> Restore, jailbreak, battery health, IMEI info.</li>
+              <li><b>Odin (Samsung):</b> Flash firmware من Sammobile. ابحث عن نفس CSC/region.</li>
+              <li><b>MiFlash (Xiaomi):</b> Flash via Fastboot/EDL.</li>
+              <li><b>SP Flash Tool (MediaTek):</b> Flash MTK chips — Oppo/Vivo القديمة.</li>
+              <li><b>QFIL (Qualcomm):</b> Flash via EDL — للجهاز المعطل تماماً.</li>
+            </ul>
+          </article>
+
+          <article class="pr-sw-card pr-sw-warning">
+            <h3>⚠️ IMEI · iCloud · FRP — أخلاقيات حرجة</h3>
+            <ul>
+              <li><b>IMEI تغيير:</b> <b>جريمة</b> في العراق وأغلب الدول. عقوبة سجن في القانون العراقي. <b>لا تفعلها أبداً.</b></li>
+              <li><b>iCloud Lock:</b> لو ظهر "Find My iPhone Activated" — اطلب من الزبون إثبات الملكية + Apple ID وكلمة المرور. لا تتجاوزها على جهاز مسروق.</li>
+              <li><b>FRP Lock (Android):</b> نفس المبدأ — لا تتجاوزها بدون إثبات ملكية.</li>
+              <li><b>سياسة المحل:</b> اطلب فاتورة شراء أو رسالة من المالك الأصلي. وثّق في receipt.</li>
+            </ul>
+          </article>
+
+          <article class="pr-sw-card">
+            <h3>🛠️ Software Toolkit للفني العراقي</h3>
+            <ul>
+              <li><b>3uTools</b> + <b>iMazing</b> — للـ iPhone.</li>
+              <li><b>Odin</b> + <b>Samsung Smart Switch</b> — للـ Samsung.</li>
+              <li><b>MiFlash</b> + <b>Mi PC Suite</b> — للـ Xiaomi/Redmi.</li>
+              <li><b>UnlockTool / Z3X / Octoplus</b> — أدوات احترافية (مدفوعة بـ subscription).</li>
+              <li><b>Tenorshare ReiBoot</b> — حلول software سريعة بـ click.</li>
+            </ul>
+          </article>
+
+        </div>
+      </section><!-- /pr-software-side -->
+
+      <!-- (المراحل التالية ستضاف في Phases 4-5) -->
     </section><!-- /page-phonerepair -->  <!-- ✅ FOOTER — after ALL pages so flex order is correct -->
   <footer id="smart-footer">
     <div class="footer-section">
