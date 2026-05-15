@@ -13546,3 +13546,195 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
     border:1px solid #999 !important; page-break-inside:avoid;
   }
 }
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   WORKER 09 · PHASE 1 — Drives + Biases (additive only)
+   Scope: #page-psych w09-* classes
+═══════════════════════════════════════════════════════════════════════ */
+#page-psych .w09-section{
+  margin-top: 32px;
+  border-top: 1px dashed rgba(255,255,255,.06);
+  padding-top: 26px;
+}
+#page-psych .w09-section-head{
+  margin-bottom: 22px;
+}
+#page-psych .w09-eyebrow{
+  display:inline-block;
+  font-size: 10.5px; font-weight: 700; letter-spacing:.08em;
+  color: var(--accent); text-transform: uppercase;
+  background: rgba(102,252,241,.08);
+  border:1px solid rgba(102,252,241,.18);
+  padding: 4px 10px; border-radius: 999px;
+  margin-bottom: 10px;
+}
+#page-psych .w09-section-head h2{
+  font-size: 22px; font-weight: 800; color: var(--text);
+  margin: 0 0 6px;
+}
+#page-psych .w09-section-head p{
+  font-size: 13px; color: var(--text-muted); line-height: 1.75;
+  margin: 0; max-width: 880px;
+}
+
+/* Drives grid */
+#page-psych .w09-drives-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+}
+#page-psych .w09-drive{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px 14px;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+#page-psych .w09-drive::before{
+  content:"";
+  position:absolute; inset: 0 auto auto 0;
+  width: 4px; height: 100%;
+  background: linear-gradient(180deg, var(--accent), transparent);
+  opacity:.55;
+}
+#page-psych .w09-drive:hover{
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+#page-psych .w09-drive[data-drive="mastery"]::before{ background: linear-gradient(180deg,#66FCF1,transparent); }
+#page-psych .w09-drive[data-drive="status"]::before{ background: linear-gradient(180deg,#EAB308,transparent); }
+#page-psych .w09-drive[data-drive="belonging"]::before{ background: linear-gradient(180deg,#22C55E,transparent); }
+#page-psych .w09-drive[data-drive="avoidance"]::before{ background: linear-gradient(180deg,#EF4444,transparent); }
+#page-psych .w09-drive[data-drive="curiosity"]::before{ background: linear-gradient(180deg,#3B82F6,transparent); }
+#page-psych .w09-drive[data-drive="justice"]::before{ background: linear-gradient(180deg,#8B5CF6,transparent); }
+#page-psych .w09-drive[data-drive="meaning"]::before{ background: linear-gradient(180deg,#EC4899,transparent); }
+#page-psych .w09-drive-top{
+  display:flex; align-items:center; justify-content: space-between;
+  margin-bottom: 10px;
+}
+#page-psych .w09-drive-emoji{ font-size: 22px; }
+#page-psych .w09-drive-tag{
+  font-size: 10.5px; font-weight: 700;
+  color: var(--text-muted);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  padding: 3px 9px; border-radius: 999px;
+  letter-spacing: .04em;
+}
+#page-psych .w09-drive h3{
+  font-size: 15px; font-weight: 800; color: var(--text);
+  margin: 0 0 4px;
+}
+#page-psych .w09-drive-src{
+  font-size: 11.5px; color: var(--text-faint);
+  margin: 0 0 10px; line-height: 1.6;
+}
+#page-psych .w09-drive-list{
+  margin: 0 0 12px; padding-right: 16px;
+  font-size: 12px; color: var(--text-muted); line-height: 1.85;
+}
+#page-psych .w09-drive-list li{ margin-bottom: 4px; }
+#page-psych .w09-drive-list b{ color: var(--text); }
+#page-psych .w09-drive-list i{ color: var(--accent); font-style: normal; }
+#page-psych .w09-drive-foot{
+  font-size: 11.5px; color: var(--text-muted);
+  background: var(--surface-2);
+  border-radius: var(--radius-md);
+  padding: 8px 10px;
+  border-right: 3px solid var(--accent);
+  line-height: 1.65;
+}
+#page-psych .w09-drive-foot b{ color: var(--accent); }
+
+/* Callouts */
+#page-psych .w09-callout,
+#page-psych .w09-self-check{
+  margin-top: 18px;
+  display:flex; align-items:flex-start; gap: 14px;
+  background: linear-gradient(135deg, rgba(102,252,241,.06), rgba(139,92,246,.04));
+  border: 1px solid rgba(102,252,241,.18);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+}
+#page-psych .w09-callout-icon,
+#page-psych .w09-self-check-icon{
+  font-size: 22px; flex-shrink: 0; margin-top: 2px;
+}
+#page-psych .w09-callout b,
+#page-psych .w09-self-check b{
+  display:block; color: var(--text); font-size: 13px; margin-bottom: 4px;
+}
+#page-psych .w09-callout span,
+#page-psych .w09-self-check span{
+  font-size: 12.5px; color: var(--text-muted); line-height: 1.75;
+}
+
+/* Biases grid */
+#page-psych .w09-bias-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+#page-psych .w09-bias{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px 12px;
+  transition: var(--transition);
+  position: relative;
+}
+#page-psych .w09-bias:hover{
+  border-color: var(--border-hover);
+  transform: translateY(-1px);
+}
+#page-psych .w09-bias-num{
+  position: absolute;
+  inset-inline-end: 12px;
+  top: 10px;
+  font-size: 11px; font-weight: 800; letter-spacing:.06em;
+  color: var(--text-faint);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  padding: 3px 8px; border-radius: 999px;
+}
+#page-psych .w09-bias h4{
+  font-size: 14px; font-weight: 800; color: var(--text);
+  margin: 0 60px 6px 0; line-height: 1.45;
+}
+#page-psych .w09-bias-def{
+  font-size: 12px; color: var(--text-muted);
+  line-height: 1.7; margin: 0 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed rgba(255,255,255,.05);
+}
+#page-psych .w09-bias-row{
+  font-size: 11.5px; color: var(--text-muted);
+  line-height: 1.7; margin-bottom: 4px;
+}
+#page-psych .w09-bias-row b{ color: var(--text); }
+#page-psych .w09-bias-counter{
+  margin-top: 10px;
+  font-size: 11.5px; color: var(--text);
+  background: rgba(102,252,241,.06);
+  border-right: 3px solid var(--accent);
+  border-radius: var(--radius-md);
+  padding: 7px 10px;
+  line-height: 1.65;
+}
+#page-psych .w09-bias-counter b{ color: var(--accent); }
+
+@media print{
+  #page-psych .w09-drive,
+  #page-psych .w09-bias{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside: avoid;
+  }
+}
+@media (prefers-reduced-motion: reduce){
+  #page-psych .w09-drive,
+  #page-psych .w09-bias{ transition: none; }
+}
