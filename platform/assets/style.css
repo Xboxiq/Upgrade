@@ -7395,3 +7395,396 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
   #page-callcenter .cc-cheat li { color: #000; }
   #page-callcenter .sim-shell, #page-callcenter .iraq-grid > div { background: #fff !important; border: 1px solid #999 !important; color: #000 !important; }
 }
+
+
+
+/* ════════════════════════════════════════════════════════════════
+   WORKER 04 · PHASE 4 — Statements Builders + Cash Flow
+═══════════════════════════════════════════════════════════════ */
+
+#page-accounting .acc-statements {
+  display: grid;
+  gap: 22px;
+  margin-block: 22px 18px;
+}
+
+/* ── Block 9 · Income Statement Builder ─────────────────────── */
+#page-accounting .acc-is-shell {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(360px, 1.2fr);
+  gap: 18px;
+  align-items: start;
+}
+#page-accounting .acc-is-form {
+  display: grid;
+  gap: 14px;
+}
+#page-accounting .acc-is-group {
+  padding: 14px 16px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+}
+#page-accounting .acc-is-group h6 {
+  margin: 0 0 10px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--accent, #66FCF1);
+  text-transform: uppercase;
+}
+#page-accounting .acc-is-group label,
+#page-accounting .acc-bs-form label {
+  display: grid;
+  gap: 4px;
+  margin-block-end: 8px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+#page-accounting .acc-is-group input,
+#page-accounting .acc-bs-form input {
+  background: rgba(0,0,0,0.30);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  font-feature-settings: "tnum" 1;
+  padding: 8px 11px;
+  border-radius: 8px;
+}
+#page-accounting .acc-is-group input:focus,
+#page-accounting .acc-bs-form input:focus {
+  border-color: var(--accent, #66FCF1);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(102,252,241,0.12);
+}
+#page-accounting .acc-is-stmt {
+  padding: 22px;
+  background: linear-gradient(160deg, rgba(255,255,255,0.04), rgba(102,252,241,0.025));
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  position: sticky;
+  top: 14px;
+}
+#page-accounting .acc-is-stmt-tag {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--accent, #66FCF1);
+}
+#page-accounting .acc-is-stmt-head h4 {
+  margin: 4px 0 14px;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text);
+}
+#page-accounting .acc-is-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  font-feature-settings: "tnum" 1;
+}
+#page-accounting .acc-is-rows li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 12.5px;
+  border-radius: 8px;
+}
+#page-accounting .acc-is-rows li.reg { background: rgba(255,255,255,0.02); color: var(--text-muted); }
+#page-accounting .acc-is-rows li.reg b { color: var(--text); font-weight: 700; }
+#page-accounting .acc-is-rows li.sub { background: rgba(239,68,68,0.06); color: #FCA5A5; }
+#page-accounting .acc-is-rows li.sum {
+  background: rgba(102,252,241,0.08);
+  color: var(--text);
+  font-weight: 800;
+  border: 1px solid rgba(102,252,241,0.20);
+}
+#page-accounting .acc-is-rows li.sum em { font-style: normal; font-size: 11px; color: var(--text-muted); margin-inline-start: 6px; }
+#page-accounting .acc-is-rows li.sum.gp { border-color: rgba(16,185,129,0.30); background: rgba(16,185,129,0.06); }
+#page-accounting .acc-is-rows li.sum.op { border-color: rgba(96,165,250,0.30); background: rgba(96,165,250,0.06); }
+#page-accounting .acc-is-rows li.net {
+  background: linear-gradient(90deg, rgba(102,252,241,0.16), rgba(139,92,246,0.16));
+  color: var(--text);
+  font-weight: 900;
+  font-size: 14px;
+  padding: 12px 14px;
+  border: 1px solid rgba(102,252,241,0.35);
+  margin-block-start: 6px;
+}
+#page-accounting .acc-is-rows li.net em { font-size: 11px; color: rgba(255,255,255,0.75); margin-inline-start: 6px; font-style: normal; font-weight: 700; }
+#page-accounting .acc-is-rows li.negative b { color: #F87171 !important; }
+#page-accounting .acc-is-warnings {
+  display: grid;
+  gap: 6px;
+  margin-block-start: 12px;
+}
+#page-accounting .acc-is-warn {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 11.5px;
+  line-height: 1.6;
+}
+#page-accounting .acc-is-warn.danger { background: rgba(239,68,68,0.10); border: 1px solid rgba(239,68,68,0.30); color: #FCA5A5; }
+#page-accounting .acc-is-warn.warn   { background: rgba(245,158,11,0.10); border: 1px solid rgba(245,158,11,0.30); color: #FCD34D; }
+#page-accounting .acc-is-warn.ok     { background: rgba(16,185,129,0.10); border: 1px solid rgba(16,185,129,0.30); color: #6EE7B7; }
+#page-accounting .acc-is-warn b { font-weight: 800; }
+
+/* ── Block 10 · Balance Sheet ────────────────────────────────── */
+#page-accounting .acc-bs-shell {
+  display: grid;
+  gap: 16px;
+}
+#page-accounting .acc-bs-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+#page-accounting .acc-bs-col {
+  padding: 14px 16px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+}
+#page-accounting .acc-bs-col > h6 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--accent, #66FCF1);
+  text-transform: uppercase;
+}
+#page-accounting .acc-bs-form fieldset {
+  border: 1px dashed rgba(255,255,255,0.10);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-block-end: 10px;
+}
+#page-accounting .acc-bs-form legend {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  padding: 0 6px;
+  letter-spacing: 0.04em;
+}
+#page-accounting .acc-bs-summary {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 12px;
+  padding: 18px;
+  background: linear-gradient(160deg, rgba(255,255,255,0.03), rgba(102,252,241,0.03));
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  align-items: center;
+}
+#page-accounting .acc-bs-side { padding: 12px 14px; }
+#page-accounting .acc-bs-side-tag {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-block-end: 4px;
+}
+#page-accounting .acc-bs-side-val {
+  font-size: 20px;
+  font-weight: 900;
+  font-feature-settings: "tnum" 1;
+  color: var(--text);
+  margin-block-end: 10px;
+}
+#page-accounting .acc-bs-side ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  font-size: 12px;
+  font-feature-settings: "tnum" 1;
+  color: var(--text-muted);
+}
+#page-accounting .acc-bs-side li {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-block-end: 1px dashed rgba(255,255,255,0.06);
+}
+#page-accounting .acc-bs-side li b { color: var(--text); font-weight: 700; }
+#page-accounting .acc-bs-eq {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--accent, #66FCF1);
+  text-align: center;
+}
+#page-accounting .acc-bs-eq[data-balance="off"] { color: #F87171; }
+#page-accounting .acc-bs-flag {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 800;
+  font-feature-settings: "tnum" 1;
+}
+#page-accounting .acc-bs-flag[data-balance="ok"] {
+  background: rgba(16,185,129,0.12);
+  border: 1px solid rgba(16,185,129,0.30);
+  color: #34D399;
+}
+#page-accounting .acc-bs-flag[data-balance="off"] {
+  background: rgba(239,68,68,0.12);
+  border: 1px solid rgba(239,68,68,0.30);
+  color: #F87171;
+}
+#page-accounting .acc-bs-flag-icon { font-size: 18px; }
+#page-accounting .acc-bs-flag-text { flex: 1; }
+#page-accounting .acc-bs-flag-diff b { font-feature-settings: "tnum" 1; }
+
+/* ── Block 11 · Cash Flow + Equity Change ────────────────────── */
+#page-accounting .acc-cf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  margin-block: 8px 18px;
+}
+#page-accounting .acc-cf-col {
+  padding: 16px 18px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+}
+#page-accounting .acc-cf-col[data-cf="op"]  { border-block-start: 3px solid #34D399; }
+#page-accounting .acc-cf-col[data-cf="inv"] { border-block-start: 3px solid #60A5FA; }
+#page-accounting .acc-cf-col[data-cf="fin"] { border-block-start: 3px solid #C4B5FD; }
+#page-accounting .acc-cf-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-block-end: 6px;
+}
+#page-accounting .acc-cf-col[data-cf="op"]  .acc-cf-tag { color: #34D399; background: rgba(16,185,129,0.10); }
+#page-accounting .acc-cf-col[data-cf="inv"] .acc-cf-tag { color: #60A5FA; background: rgba(96,165,250,0.10); }
+#page-accounting .acc-cf-col[data-cf="fin"] .acc-cf-tag { color: #C4B5FD; background: rgba(139,92,246,0.10); }
+#page-accounting .acc-cf-col-head h4 {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text);
+}
+#page-accounting .acc-cf-col-head p {
+  margin: 0 0 10px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+#page-accounting .acc-cf-col ul {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+#page-accounting .acc-cf-col ul li {
+  padding: 5px 8px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 6px;
+}
+#page-accounting .acc-cf-col ul li i {
+  font-style: normal;
+  color: var(--text-muted);
+  font-size: 10.5px;
+  margin-inline-start: 4px;
+}
+#page-accounting .acc-cf-rule {
+  font-size: 11.5px;
+  color: var(--text);
+  background: rgba(245,158,11,0.06);
+  border-inline-start: 3px solid rgba(245,158,11,0.45);
+  padding: 8px 10px;
+  border-radius: 0 8px 8px 0;
+  line-height: 1.7;
+}
+#page-accounting .acc-cf-rule b { color: #F59E0B; }
+#page-accounting .acc-cf-equity {
+  padding: 18px 20px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+}
+#page-accounting .acc-cf-equity-head h4 {
+  margin: 0 0 4px;
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--text);
+}
+#page-accounting .acc-cf-equity-head p {
+  margin: 0 0 14px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+#page-accounting .acc-cf-equity-table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  font-feature-settings: "tnum" 1;
+}
+#page-accounting .acc-cf-equity-table th {
+  background: rgba(102,252,241,0.06);
+  padding: 10px 12px;
+  font-size: 11.5px;
+  font-weight: 800;
+  text-align: start;
+  border-block-end: 1px solid rgba(255,255,255,0.08);
+  color: var(--text);
+}
+#page-accounting .acc-cf-equity-table td {
+  padding: 9px 12px;
+  border-block-end: 1px solid rgba(255,255,255,0.04);
+  color: var(--text-muted);
+}
+#page-accounting .acc-cf-equity-table td:first-child { color: var(--text); font-weight: 700; }
+#page-accounting .acc-cf-equity-table tr.add td      { background: rgba(16,185,129,0.05); color: #6EE7B7; }
+#page-accounting .acc-cf-equity-table tr.sub td      { background: rgba(239,68,68,0.05); color: #FCA5A5; }
+#page-accounting .acc-cf-equity-table tr.total td    {
+  background: rgba(102,252,241,0.08);
+  font-weight: 800;
+  color: var(--text);
+  border-block: 1px solid rgba(102,252,241,0.30);
+}
+
+@media (max-width: 880px) {
+  #page-accounting .acc-is-shell,
+  #page-accounting .acc-bs-form { grid-template-columns: 1fr; }
+  #page-accounting .acc-bs-summary { grid-template-columns: 1fr; }
+  #page-accounting .acc-bs-eq { transform: rotate(90deg); }
+}
+
+@media print {
+  #page-accounting .acc-is-form,
+  #page-accounting .acc-bs-form { display: none; }
+  #page-accounting .acc-is-stmt,
+  #page-accounting .acc-bs-summary,
+  #page-accounting .acc-cf-col,
+  #page-accounting .acc-cf-equity {
+    background: #fff !important;
+    border: 1px solid #999 !important;
+    color: #000 !important;
+  }
+  #page-accounting .acc-is-rows li.net { background: #f0fdfa !important; border-color: #0f766e !important; }
+}

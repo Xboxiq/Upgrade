@@ -8895,6 +8895,228 @@
         </div>
       </div>
 
+      <!-- ════════════════════════════════════════════════════════════
+           WORKER 04 · PHASE 4 — Statements Builders + Cash Flow
+      ════════════════════════════════════════════════════════════ -->
+      <section class="acc-statements" data-acc-phase="4" aria-labelledby="acc-statements-title">
+
+        <div class="acc-section-head">
+          <span class="acc-eyebrow">القوائم المالية · مختبر بناء</span>
+          <h2 id="acc-statements-title">قائمة الدخل · الميزانية · التدفقات النقدية</h2>
+          <p>أدخل الأرقام واحصل على القوائم محسوبة، مع تحققات تلقائية: المعادلة، الهوامش، التحذيرات الصحية للأرقام.</p>
+        </div>
+
+        <!-- ───────── BLOCK 9 · Income Statement Builder ───────── -->
+        <article class="acc-is-lab" data-acc-lab="income-stmt">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 9</div>
+            <h3>Income Statement Builder · قائمة الدخل</h3>
+            <p>تنسيق متعدد الخطوات (Multi-Step) — يُظهر الربح الإجمالي، التشغيلي، وصافي الربح بشكل منفصل.</p>
+          </header>
+
+          <div class="acc-is-shell">
+            <div class="acc-is-form">
+              <div class="acc-is-group"><h6>الإيرادات</h6>
+                <label>إجمالي المبيعات (IQD)<input type="number" min="0" value="200000000" data-is="sales" inputmode="numeric"></label>
+                <label>مردودات + خصومات المبيعات<input type="number" min="0" value="3000000" data-is="returns" inputmode="numeric"></label>
+              </div>
+              <div class="acc-is-group"><h6>تكلفة المبيعات</h6>
+                <label>تكلفة البضاعة المباعة (COGS)<input type="number" min="0" value="125000000" data-is="cogs" inputmode="numeric"></label>
+              </div>
+              <div class="acc-is-group"><h6>مصاريف تشغيلية</h6>
+                <label>الرواتب + الضمان الاجتماعي<input type="number" min="0" value="22000000" data-is="opSalaries" inputmode="numeric"></label>
+                <label>الإيجارات والخدمات<input type="number" min="0" value="9000000" data-is="opRent" inputmode="numeric"></label>
+                <label>التسويق والإعلانات<input type="number" min="0" value="6000000" data-is="opMkt" inputmode="numeric"></label>
+                <label>الإهلاك<input type="number" min="0" value="4500000" data-is="opDep" inputmode="numeric"></label>
+                <label>أخرى (إدارية/قانونية)<input type="number" min="0" value="3500000" data-is="opOther" inputmode="numeric"></label>
+              </div>
+              <div class="acc-is-group"><h6>غير تشغيلي</h6>
+                <label>إيرادات أخرى (فوائد دائنة)<input type="number" min="0" value="1200000" data-is="otherInc" inputmode="numeric"></label>
+                <label>مصروف الفوائد<input type="number" min="0" value="2200000" data-is="interest" inputmode="numeric"></label>
+                <label>ضريبة الدخل (15%)<input type="number" min="0" max="100" step="0.5" value="15" data-is="taxRate" inputmode="numeric"></label>
+              </div>
+            </div>
+
+            <div class="acc-is-stmt" data-acc-is-stmt>
+              <div class="acc-is-stmt-head">
+                <div class="acc-is-stmt-tag">قائمة الدخل · للسنة المنتهية</div>
+                <h4>Income Statement · IQD</h4>
+              </div>
+              <ul class="acc-is-rows">
+                <li class="reg"><span>المبيعات الإجمالية</span><b data-is-out="sales">0</b></li>
+                <li class="sub"><span>مردودات وخصومات</span><b data-is-out="returns">0</b></li>
+                <li class="sum"><span>صافي المبيعات</span><b data-is-out="netSales">0</b></li>
+                <li class="sub"><span>تكلفة المبيعات (COGS)</span><b data-is-out="cogs">0</b></li>
+                <li class="sum gp"><span>إجمالي الربح <em data-is-out="gpPct">0%</em></span><b data-is-out="gp">0</b></li>
+                <li class="sub"><span>مصاريف تشغيلية</span><b data-is-out="opex">0</b></li>
+                <li class="sum op"><span>الربح التشغيلي <em data-is-out="opPct">0%</em></span><b data-is-out="op">0</b></li>
+                <li class="reg"><span>إيرادات أخرى</span><b data-is-out="otherInc">0</b></li>
+                <li class="sub"><span>مصروف الفوائد</span><b data-is-out="interest">0</b></li>
+                <li class="reg"><span>الربح قبل الضريبة (EBT)</span><b data-is-out="ebt">0</b></li>
+                <li class="sub"><span>ضريبة الدخل</span><b data-is-out="tax">0</b></li>
+                <li class="net"><span>صافي الربح <em data-is-out="netPct">0%</em></span><b data-is-out="net">0</b></li>
+              </ul>
+
+              <div class="acc-is-warnings" data-acc-is-warn></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 10 · Balance Sheet Builder ───────── -->
+        <article class="acc-bs-lab" data-acc-lab="balance-sheet">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 10</div>
+            <h3>Balance Sheet Builder · الميزانية العمومية</h3>
+            <p>اختبار تلقائي: <b>Assets = Liabilities + Equity</b>. لو الفرق ≠ 0 = خطأ في القيود.</p>
+          </header>
+
+          <div class="acc-bs-shell">
+            <div class="acc-bs-form">
+              <div class="acc-bs-col">
+                <h6>الأصول · Assets</h6>
+                <fieldset><legend>أصول متداولة</legend>
+                  <label>النقد والبنوك<input type="number" min="0" value="32000000" data-bs="cash" inputmode="numeric"></label>
+                  <label>المدينون<input type="number" min="0" value="48000000" data-bs="ar" inputmode="numeric"></label>
+                  <label>المخزون<input type="number" min="0" value="55000000" data-bs="inv" inputmode="numeric"></label>
+                  <label>أخرى متداولة<input type="number" min="0" value="5000000" data-bs="otherCa" inputmode="numeric"></label>
+                </fieldset>
+                <fieldset><legend>أصول ثابتة</legend>
+                  <label>الأراضي والمباني<input type="number" min="0" value="120000000" data-bs="land" inputmode="numeric"></label>
+                  <label>المعدات والأثاث (صافي)<input type="number" min="0" value="40000000" data-bs="ppe" inputmode="numeric"></label>
+                  <label>أصول غير ملموسة<input type="number" min="0" value="0" data-bs="intang" inputmode="numeric"></label>
+                </fieldset>
+              </div>
+              <div class="acc-bs-col">
+                <h6>الخصوم · Liabilities</h6>
+                <fieldset><legend>خصوم متداولة</legend>
+                  <label>الدائنون<input type="number" min="0" value="38000000" data-bs="ap" inputmode="numeric"></label>
+                  <label>قروض قصيرة<input type="number" min="0" value="15000000" data-bs="stl" inputmode="numeric"></label>
+                  <label>ضرائب وضمان مستحق<input type="number" min="0" value="6000000" data-bs="taxDue" inputmode="numeric"></label>
+                </fieldset>
+                <fieldset><legend>خصوم طويلة</legend>
+                  <label>قروض طويلة<input type="number" min="0" value="60000000" data-bs="ltl" inputmode="numeric"></label>
+                  <label>التزامات أخرى<input type="number" min="0" value="4000000" data-bs="otherLtl" inputmode="numeric"></label>
+                </fieldset>
+                <h6 style="margin-top:14px;">حقوق الملكية · Equity</h6>
+                <fieldset><legend>الملكية</legend>
+                  <label>رأس المال<input type="number" min="0" value="120000000" data-bs="capital" inputmode="numeric"></label>
+                  <label>الأرباح المحتجزة<input type="number" min="0" value="55000000" data-bs="retained" inputmode="numeric"></label>
+                  <label>احتياطيات<input type="number" min="0" value="2000000" data-bs="reserves" inputmode="numeric"></label>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="acc-bs-summary" data-acc-bs-summary>
+              <div class="acc-bs-side">
+                <div class="acc-bs-side-tag">الأصول</div>
+                <div class="acc-bs-side-val" data-bs-out="totalAssets">0</div>
+                <ul>
+                  <li><span>أصول متداولة</span><b data-bs-out="ca">0</b></li>
+                  <li><span>أصول ثابتة</span><b data-bs-out="fa">0</b></li>
+                </ul>
+              </div>
+              <div class="acc-bs-eq" data-acc-bs-eq>=</div>
+              <div class="acc-bs-side">
+                <div class="acc-bs-side-tag">الخصوم + الحقوق</div>
+                <div class="acc-bs-side-val" data-bs-out="totalLE">0</div>
+                <ul>
+                  <li><span>خصوم متداولة</span><b data-bs-out="cl">0</b></li>
+                  <li><span>خصوم طويلة</span><b data-bs-out="ll">0</b></li>
+                  <li><span>حقوق الملكية</span><b data-bs-out="eq">0</b></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="acc-bs-flag" data-acc-bs-flag>
+              <span class="acc-bs-flag-icon">⚖</span>
+              <span class="acc-bs-flag-text">المعادلة متوازنة</span>
+              <span class="acc-bs-flag-diff">فرق: <b>0</b></span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 11 · Cash Flow + Equity Change ───────── -->
+        <article class="acc-cf-lab" data-acc-lab="cash-flow">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 11</div>
+            <h3>قائمة التدفقات النقدية + التغير في حقوق الملكية</h3>
+            <p>الأرقام لا تكفي — التدفقات تكشف الحقيقة. شركة رابحة قد تنهار من ضعف التدفق التشغيلي.</p>
+          </header>
+
+          <div class="acc-cf-grid">
+            <div class="acc-cf-col" data-cf="op">
+              <div class="acc-cf-col-head">
+                <span class="acc-cf-tag">Operating</span>
+                <h4>التدفق من الأنشطة التشغيلية</h4>
+                <p>القلب — يقيس قدرة العمليات الأساسية على توليد نقد.</p>
+              </div>
+              <ul>
+                <li>صافي الربح <i>(نقطة البداية)</i></li>
+                <li>+ الإهلاك والاستهلاك <i>(غير نقدي)</i></li>
+                <li>± التغير في الذمم المدينة</li>
+                <li>± التغير في المخزون</li>
+                <li>± التغير في الذمم الدائنة</li>
+              </ul>
+              <div class="acc-cf-rule">
+                <b>قاعدة:</b> تدفق تشغيلي سلبي عامين متتاليين = خطر إفلاس حتى لو الأرباح موجبة (خداع المستحقات).
+              </div>
+            </div>
+
+            <div class="acc-cf-col" data-cf="inv">
+              <div class="acc-cf-col-head">
+                <span class="acc-cf-tag">Investing</span>
+                <h4>التدفق من الأنشطة الاستثمارية</h4>
+                <p>كم تستثمر في النمو — أصول، شركات تابعة، أوراق مالية.</p>
+              </div>
+              <ul>
+                <li>− شراء أصول ثابتة (CapEx)</li>
+                <li>+ بيع أصول قديمة</li>
+                <li>− استحواذات</li>
+                <li>± شراء/بيع أوراق مالية للاستثمار</li>
+              </ul>
+              <div class="acc-cf-rule">
+                <b>قاعدة:</b> تدفق استثماري سلبي = شركة تنمو. تدفق إيجابي مزمن = استنزاف الأصول.
+              </div>
+            </div>
+
+            <div class="acc-cf-col" data-cf="fin">
+              <div class="acc-cf-col-head">
+                <span class="acc-cf-tag">Financing</span>
+                <h4>التدفق من الأنشطة التمويلية</h4>
+                <p>من أين يأتي رأس المال — قروض، إصدار أسهم، توزيعات.</p>
+              </div>
+              <ul>
+                <li>+ قروض جديدة</li>
+                <li>− سداد قروض</li>
+                <li>+ إصدار أسهم جديدة</li>
+                <li>− توزيعات أرباح للملاك</li>
+              </ul>
+              <div class="acc-cf-rule">
+                <b>قاعدة:</b> الاعتماد المستمر على التمويل لتغطية العمليات = نموذج عمل مكسور.
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-cf-equity">
+            <div class="acc-cf-equity-head">
+              <h4>قائمة التغير في حقوق الملكية · Statement of Changes in Equity</h4>
+              <p>تتبع كيف تغيّر رأس المال والاحتياطيات والأرباح المحتجزة خلال الفترة.</p>
+            </div>
+            <table class="acc-cf-equity-table">
+              <thead><tr><th>البند</th><th>رأس المال</th><th>احتياطي قانوني</th><th>أرباح محتجزة</th><th>الإجمالي</th></tr></thead>
+              <tbody>
+                <tr><td>الرصيد أول الفترة</td><td>120,000,000</td><td>1,800,000</td><td>43,000,000</td><td>164,800,000</td></tr>
+                <tr class="add"><td>+ صافي ربح السنة</td><td>—</td><td>—</td><td>15,200,000</td><td>15,200,000</td></tr>
+                <tr class="add"><td>+ تحويل لاحتياطي قانوني (5%)</td><td>—</td><td>200,000</td><td>(200,000)</td><td>—</td></tr>
+                <tr class="sub"><td>− توزيعات أرباح</td><td>—</td><td>—</td><td>(3,000,000)</td><td>(3,000,000)</td></tr>
+                <tr class="total"><td>الرصيد آخر الفترة</td><td>120,000,000</td><td>2,000,000</td><td>55,000,000</td><td>177,000,000</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+      </section><!-- /acc-statements Phase 4 -->
+
     </section><!-- /page-accounting -->
 
 
