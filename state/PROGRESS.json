@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "last_updated": null,
+  "current": {
+    "worker": null,
+    "phase": 0,
+    "phases_total": 0,
+    "branch": null,
+    "status": "idle"
+  },
+  "completed_phases": [],
+  "next_action": null,
+  "notes": "هذا الملف هو ذاكرة دائمة للـ AI. يُحدَّث تلقائياً بعد كل phase. لا تحرّره يدوياً إلا للضرورة."
+}

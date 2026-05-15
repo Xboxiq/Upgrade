@@ -40,8 +40,19 @@ Upgrade/
 
 ## 🛠️ كيف تطوّر المنصة (مع AI)
 
-### الخطوات
+### 🚁 الطريقة الموصى بها — AUTO_PILOT (تنفيذ ذاتي كامل)
 1. **افتح session جديد** في Kiro / Claude / GPT
+2. **افتح `prompts/AUTO_PILOT.md`** وانسخ البرومت داخل البلوك
+3. **الصقه واضغط Send** — وراح AI:
+   - يقرأ `state/PROGRESS.json` ويعرف وين توقف
+   - ينفّذ phases متتالية بدون توقف
+   - يعمل commit + push + merge تلقائياً
+   - يحدّث PROGRESS.json بعد كل phase
+4. **عُد بعد 15-30 دقيقة** وراجع PRs المدموجة على GitHub
+5. **في session جديد**: الصق نفس البرومت — يكمل من حيث توقف
+
+### 🛠️ الطريقة اليدوية (لو تحب التحكم phase-by-phase)
+1. **افتح session جديد**
 2. **ألصق `prompts/COMPACT_MASTER.md`** (الموصى به) أو الكامل
 3. **ألصق Worker** (مثلاً `prompts/01_WORKER_UI_UX.md`)
 4. **اكتب**: `موافق ابدأ`
