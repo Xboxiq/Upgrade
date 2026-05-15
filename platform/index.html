@@ -12494,11 +12494,333 @@ const bird = { ...canMove(), ...canFly() };
         </div>
       </section><!-- /pr-tools-gallery -->
 
-      <!-- (المراحل التالية ستضاف في Phases 2-5) -->
-    </section><!-- /page-phonerepair -->
+      <!-- ============================================================
+           PHASE 2 · A — Mainboard Anatomy (Interactive Diagram)
+      ============================================================ -->
+      <section class="pr-section" id="pr-mainboard-anatomy" data-pr-section="mainboard">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">معمارية اللوحة · Mainboard Anatomy</span>
+          <h2>تشريح Logic Board — اضغط أي IC لمعرفة وظيفته</h2>
+          <p>رسم تخطيطي مبسط لـ iPhone &amp; Samsung A-Series. كل IC اضغط عليه لتعرف ماذا يفعل + أعراض تلفه.</p>
+        </header>
+
+        <div class="pr-mb-wrap">
+          <div class="pr-mb-tabs" role="tablist">
+            <button class="pr-mb-tab is-active" data-pr-mb="iphone" type="button">📱 iPhone Logic Board</button>
+            <button class="pr-mb-tab" data-pr-mb="samsung" type="button">📲 Samsung A-Series</button>
+          </div>
+
+          <div class="pr-mb-stage">
+            <!-- iPhone diagram -->
+            <svg class="pr-mb-svg" id="pr-mb-iphone" viewBox="0 0 600 360" role="img" aria-label="iPhone Logic Board diagram">
+              <rect x="20" y="20" width="560" height="320" rx="14" fill="#0e1218" stroke="rgba(239,68,68,.4)" stroke-width="2"/>
+              <text x="300" y="14" text-anchor="middle" font-size="11" fill="#888">iPhone — Top View (مبسط)</text>
+
+              <g class="pr-mb-ic" data-pr-ic="cpu" data-pr-mb-page="iphone">
+                <rect x="240" y="120" width="120" height="100" rx="8" fill="#1a2230" stroke="#66FCF1" stroke-width="2"/>
+                <text x="300" y="165" text-anchor="middle" font-size="14" fill="#66FCF1" font-weight="bold">SoC / CPU</text>
+                <text x="300" y="185" text-anchor="middle" font-size="10" fill="#aaa">A-Series Bionic</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="pmic" data-pr-mb-page="iphone">
+                <rect x="60" y="80" width="80" height="60" rx="6" fill="#2a1a1a" stroke="#EF4444" stroke-width="1.5"/>
+                <text x="100" y="115" text-anchor="middle" font-size="12" fill="#EF4444" font-weight="bold">PMIC</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="tristar" data-pr-mb-page="iphone">
+                <rect x="60" y="160" width="80" height="50" rx="6" fill="#2a2a1a" stroke="#F59E0B" stroke-width="1.5"/>
+                <text x="100" y="190" text-anchor="middle" font-size="11" fill="#F59E0B" font-weight="bold">Tristar</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="audio" data-pr-mb-page="iphone">
+                <rect x="60" y="230" width="80" height="50" rx="6" fill="#1a2a1a" stroke="#22C55E" stroke-width="1.5"/>
+                <text x="100" y="260" text-anchor="middle" font-size="11" fill="#22C55E" font-weight="bold">Audio IC</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="display" data-pr-mb-page="iphone">
+                <rect x="460" y="80" width="80" height="60" rx="6" fill="#1a1a2a" stroke="#8B5CF6" stroke-width="1.5"/>
+                <text x="500" y="115" text-anchor="middle" font-size="11" fill="#8B5CF6" font-weight="bold">Display IC</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="rf" data-pr-mb-page="iphone">
+                <rect x="460" y="160" width="80" height="50" rx="6" fill="#1a2a2a" stroke="#06B6D4" stroke-width="1.5"/>
+                <text x="500" y="190" text-anchor="middle" font-size="11" fill="#06B6D4" font-weight="bold">RF Transceiver</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="nand" data-pr-mb-page="iphone">
+                <rect x="240" y="40" width="120" height="60" rx="6" fill="#2a201a" stroke="#EAB308" stroke-width="1.5"/>
+                <text x="300" y="75" text-anchor="middle" font-size="12" fill="#EAB308" font-weight="bold">NAND Storage</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="batt" data-pr-mb-page="iphone">
+                <rect x="240" y="240" width="120" height="50" rx="6" fill="#1a2a1f" stroke="#10B981" stroke-width="1.5"/>
+                <text x="300" y="270" text-anchor="middle" font-size="11" fill="#10B981" font-weight="bold">Battery Connector</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="cam" data-pr-mb-page="iphone">
+                <rect x="460" y="230" width="80" height="50" rx="6" fill="#2a1a2a" stroke="#EC4899" stroke-width="1.5"/>
+                <text x="500" y="260" text-anchor="middle" font-size="11" fill="#EC4899" font-weight="bold">Camera Conn.</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="ant" data-pr-mb-page="iphone">
+                <rect x="240" y="305" width="120" height="22" rx="6" fill="#1a1a1a" stroke="#9CA3AF" stroke-width="1.5"/>
+                <text x="300" y="320" text-anchor="middle" font-size="10" fill="#9CA3AF">Antenna Pads</text>
+              </g>
+            </svg>
+
+            <!-- Samsung diagram -->
+            <svg class="pr-mb-svg" id="pr-mb-samsung" viewBox="0 0 600 360" role="img" aria-label="Samsung Logic Board diagram" hidden>
+              <rect x="20" y="20" width="560" height="320" rx="14" fill="#0e1218" stroke="rgba(245,158,11,.4)" stroke-width="2"/>
+              <text x="300" y="14" text-anchor="middle" font-size="11" fill="#888">Samsung A-Series — مبسط</text>
+
+              <g class="pr-mb-ic" data-pr-ic="cpu" data-pr-mb-page="samsung">
+                <rect x="200" y="100" width="200" height="120" rx="8" fill="#1a2230" stroke="#66FCF1" stroke-width="2"/>
+                <text x="300" y="155" text-anchor="middle" font-size="14" fill="#66FCF1" font-weight="bold">Exynos / Snapdragon</text>
+                <text x="300" y="175" text-anchor="middle" font-size="10" fill="#aaa">SoC + RAM (PoP)</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="pmic" data-pr-mb-page="samsung">
+                <rect x="50" y="60" width="100" height="50" rx="6" fill="#2a1a1a" stroke="#EF4444" stroke-width="1.5"/>
+                <text x="100" y="90" text-anchor="middle" font-size="11" fill="#EF4444" font-weight="bold">PMIC (S2MPS)</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="charge" data-pr-mb-page="samsung">
+                <rect x="50" y="130" width="100" height="50" rx="6" fill="#2a2a1a" stroke="#F59E0B" stroke-width="1.5"/>
+                <text x="100" y="160" text-anchor="middle" font-size="10" fill="#F59E0B" font-weight="bold">Charging IC (MAX77705)</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="audio" data-pr-mb-page="samsung">
+                <rect x="50" y="200" width="100" height="50" rx="6" fill="#1a2a1a" stroke="#22C55E" stroke-width="1.5"/>
+                <text x="100" y="230" text-anchor="middle" font-size="11" fill="#22C55E" font-weight="bold">Audio (NXP)</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="display" data-pr-mb-page="samsung">
+                <rect x="450" y="60" width="100" height="50" rx="6" fill="#1a1a2a" stroke="#8B5CF6" stroke-width="1.5"/>
+                <text x="500" y="90" text-anchor="middle" font-size="11" fill="#8B5CF6" font-weight="bold">Display IC</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="rf" data-pr-mb-page="samsung">
+                <rect x="450" y="130" width="100" height="50" rx="6" fill="#1a2a2a" stroke="#06B6D4" stroke-width="1.5"/>
+                <text x="500" y="160" text-anchor="middle" font-size="10" fill="#06B6D4" font-weight="bold">RF + Wi-Fi/BT</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="nand" data-pr-mb-page="samsung">
+                <rect x="450" y="200" width="100" height="50" rx="6" fill="#2a201a" stroke="#EAB308" stroke-width="1.5"/>
+                <text x="500" y="230" text-anchor="middle" font-size="11" fill="#EAB308" font-weight="bold">UFS Storage</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="batt" data-pr-mb-page="samsung">
+                <rect x="200" y="240" width="200" height="40" rx="6" fill="#1a2a1f" stroke="#10B981" stroke-width="1.5"/>
+                <text x="300" y="265" text-anchor="middle" font-size="11" fill="#10B981" font-weight="bold">Battery Connector + Fuel Gauge</text>
+              </g>
+
+              <g class="pr-mb-ic" data-pr-ic="cam" data-pr-mb-page="samsung">
+                <rect x="200" y="295" width="200" height="32" rx="6" fill="#2a1a2a" stroke="#EC4899" stroke-width="1.5"/>
+                <text x="300" y="316" text-anchor="middle" font-size="11" fill="#EC4899" font-weight="bold">Camera Connectors (×3)</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="pr-mb-info" id="pr-mb-info" aria-live="polite">
+            <p class="pr-mb-info-empty">👆 اضغط على أي IC في الرسم لمعرفة وظيفته + أعراض تلفه + إجراء الإصلاح.</p>
+          </div>
+        </div>
+      </section><!-- /pr-mainboard-anatomy -->
 
 
-  <!-- ✅ FOOTER — after ALL pages so flex order is correct -->
+      <!-- ============================================================
+           PHASE 2 · B — Top 20 Repairs (الجزء الأول 1-10)
+      ============================================================ -->
+      <section class="pr-section" id="pr-repair-cards-1" data-pr-section="repairs1">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">الإصلاحات الأكثر طلباً · 1-10 من 20</span>
+          <h2>بطاقات الإجراء — الأعطال الأشهر</h2>
+          <p>كل بطاقة: العرض، الأسباب المحتملة (مرتبة احتمالية)، التشخيص، الإصلاح، الوقت، السعر العراقي، الصعوبة.</p>
+        </header>
+
+        <div class="pr-grid pr-grid-2" id="pr-repair-grid-1">
+
+          <article class="pr-repair-card" data-pr-repair="screen">
+            <div class="pr-repair-head">
+              <h3>1. شاشة مكسورة</h3>
+              <span class="pr-diff" data-stars="2">★★☆☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 30-60 دقيقة</span>
+              <span>💰 65k - 220k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> زجاج مكسور أو شاشة لا تستجيب.</p>
+              <p><b>التفريق المهم:</b> LCD vs OLED · Assembly كامل vs Glass-Only.</p>
+              <p><b>التشخيص:</b> هل الـ touch يعمل؟ هل العرض يظهر؟ هل توجد بقع سوداء (LCD bleeding)؟</p>
+              <p><b>الإصلاح:</b> فك الـ Pentalobe (iPhone) · سخّن الإطار · ارفع الشاشة بـ suction · افصل الـ flex · ركّب الجديدة.</p>
+              <p class="pr-tip">⚠️ iPhone X+ شاشة OEM ضرورية للـ True Tone — aftermarket تفقد الميزة.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="battery">
+            <div class="pr-repair-head">
+              <h3>2. بطارية ضعيفة / منتفخة</h3>
+              <span class="pr-diff" data-stars="1">★☆☆☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 20-40 دقيقة</span>
+              <span>💰 35k - 85k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> الجهاز يطفي على %20 · ينتفخ ويرفع الشاشة · يسخن بسرعة.</p>
+              <p><b>التشخيص:</b> 3uTools للـ iPhone (يقرأ Cycle Count + Capacity %). لو &lt; 80% = استبدلها.</p>
+              <p><b>الإصلاح:</b> افصل البطارية القديمة · أزل اللصق بحرص (لا تثقبها!) · لصق جديد · ركّب.</p>
+              <p class="pr-tip">⚠️ بطارية منتفخة = خطر حريق. لا تستخدم أداة معدنية حادة.</p>
+              <p><b>iPhone:</b> بعد التركيب لازم Toolkit لـ "Genuine Battery" (Apple message).</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="charge">
+            <div class="pr-repair-head">
+              <h3>3. منفذ شحن لا يشحن</h3>
+              <span class="pr-diff" data-stars="2">★★☆☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 30-90 دقيقة</span>
+              <span>💰 25k - 75k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> لا يشحن · يشحن لما تضغط الكابل · يومض شحن ويطفي.</p>
+              <p><b>الأسباب (احتمالية):</b> 1) أوساخ في المنفذ، 2) كابل/شاحن، 3) flex المنفذ، 4) Tristar/Charging IC.</p>
+              <p><b>التشخيص:</b> نظف المنفذ بفرشاة + IPA · جرب كابل آخر · إذا فشل → DC Power Supply.</p>
+              <p><b>القياس الذهبي:</b> ضع 4V على Battery FPC. لو سحب &gt; 200mA بدون شاشة = short على VBUS.</p>
+              <p><b>الإصلاح:</b> Samsung — المنفذ ملحوم على daughter board (سهل). iPhone — flex كامل.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="speaker">
+            <div class="pr-repair-head">
+              <h3>4. سماعة الأذن / مكبر الصوت</h3>
+              <span class="pr-diff" data-stars="1">★☆☆☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 25-45 دقيقة</span>
+              <span>💰 30k - 60k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> صوت منخفض · صدى · لا صوت · أو يحول إلى Speaker تلقائياً.</p>
+              <p><b>التشخيص:</b> اختبر Voice Memo + Phone Call. لو السماعة تعمل في Speaker لكن ليس في الأذن → earpiece فقط.</p>
+              <p><b>الأسباب:</b> 1) أتربة في الفتحة، 2) earpiece mesh مسدود، 3) الـ speaker نفسه، 4) Audio IC.</p>
+              <p><b>الإصلاح:</b> نظف الـ mesh بفرشاة ناعمة أولاً · لو فشل، استبدل القطعة.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="mic">
+            <div class="pr-repair-head">
+              <h3>5. ميكروفون لا يعمل</h3>
+              <span class="pr-diff" data-stars="2">★★☆☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 35-60 دقيقة</span>
+              <span>💰 30k - 70k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> الطرف الآخر لا يسمعك · Voice Memo فارغ · Siri لا تستجيب.</p>
+              <p><b>تذكر:</b> الموبايل فيه 2-4 ميكروفونات (Bottom, Top, Back). اختبر كل واحد على حدة.</p>
+              <p><b>التشخيص:</b> Voice Memo (Bottom mic) · Phone Speaker (Top mic) · Video record (Back mic).</p>
+              <p><b>الأسباب:</b> 1) المنفذ مسدود، 2) الـ flex، 3) Audio IC (نادر).</p>
+              <p><b>الإصلاح:</b> غالباً تغيير الـ flex السفلي (يحوي charging port + mic + antenna).</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="camera">
+            <div class="pr-repair-head">
+              <h3>6. كاميرا أمامية / خلفية</h3>
+              <span class="pr-diff" data-stars="2">★★☆☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 30-60 دقيقة</span>
+              <span>💰 60k - 280k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> صور ضبابية · شاشة سوداء عند الفتح · لا تعمل أساساً · بقع.</p>
+              <p><b>الأسباب:</b> 1) الزجاج الخارجي مكسور، 2) lens مهتزة (focus motor)، 3) الـ module نفسها، 4) الـ flex.</p>
+              <p><b>التشخيص:</b> هل الكاميرا الخلفية تعمل في Video Mode وتجمد في Photo؟ → Image Signal Processor.</p>
+              <p><b>الإصلاح:</b> عادي جداً — استبدال الـ camera module. iPhone 12+ لازم Toolkit للـ pairing.</p>
+              <p class="pr-tip">⚠️ كاميرا iPhone 12 Pro الخلفية ~270k IQD — تأكد قبل الموافقة.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="power-btn">
+            <div class="pr-repair-head">
+              <h3>7. زر Power مكسور</h3>
+              <span class="pr-diff" data-stars="3">★★★☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 60-120 دقيقة</span>
+              <span>💰 45k - 100k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> لا يستجيب · مزدوج (يضغط مرتين) · لزج.</p>
+              <p><b>الأسباب:</b> 1) أتربة، 2) الـ tact switch، 3) flex مكسور، 4) المسمار الميكانيكي.</p>
+              <p><b>التشخيص:</b> AssistiveTouch لتشغيل الموبايل بدون الزر · Continuity Test على flex.</p>
+              <p><b>الإصلاح:</b> iPhone — تغيير الـ flex العلوي (صعب — يحتاج فك كل اللوحة). Samsung — أسهل.</p>
+              <p><b>تذكر:</b> هذا flex يحوي أيضاً Volume + Mute + Top Mic عادةً.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="vol-btn">
+            <div class="pr-repair-head">
+              <h3>8. أزرار Volume</h3>
+              <span class="pr-diff" data-stars="2">★★☆☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 45-90 دقيقة</span>
+              <span>💰 35k - 80k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> Volume Up أو Down لا يعمل · أو يتغير عشوائياً.</p>
+              <p><b>التشخيص:</b> اختبر في Settings → Sound (slider يجب يتحرك).</p>
+              <p><b>الإصلاح:</b> غالباً نفس الـ flex مع Power (iPhone) أو flex جانبي مستقل (Samsung).</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="home">
+            <div class="pr-repair-head">
+              <h3>9. زر Home (الأجهزة القديمة)</h3>
+              <span class="pr-diff" data-stars="3">★★★☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 45-90 دقيقة</span>
+              <span>💰 50k - 150k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> لا يستجيب · بطيء · Touch ID لا يعمل.</p>
+              <p><b>تحذير حرج:</b> iPhone 7/8/SE2 — زر Home مرتبط بالـ board بالـ pairing. تغييره = فقدان Touch ID.</p>
+              <p><b>الإصلاح:</b> استخدم زر original مع flex assembly · للـ iPhone 5/6 — أبسط.</p>
+              <p><b>Workaround:</b> AssistiveTouch software — اعرضه للزبون كحل مؤقت.</p>
+            </div>
+          </article>
+
+          <article class="pr-repair-card" data-pr-repair="wifi-bt">
+            <div class="pr-repair-head">
+              <h3>10. وايفاي / بلوتوث</h3>
+              <span class="pr-diff" data-stars="3">★★★☆☆</span>
+            </div>
+            <div class="pr-repair-meta">
+              <span>⏱️ 60-180 دقيقة</span>
+              <span>💰 50k - 200k IQD</span>
+            </div>
+            <div class="pr-repair-body">
+              <p><b>العرض:</b> Wi-Fi grayed out · Bluetooth لا يفتح · انقطاع متكرر.</p>
+              <p><b>الأسباب:</b> 1) Antenna flex مفصول، 2) RF IC تالف (heat damage), 3) الـ chip نفسه.</p>
+              <p><b>التشخيص:</b> Settings → General → About → Wi-Fi Address. لو "N/A" → IC تالف.</p>
+              <p><b>الإصلاح:</b> Antenna flex (سهل) أو reflow الـ Wi-Fi chip (يحتاج Hot Air + خبرة).</p>
+              <p class="pr-tip">⚠️ iPhone 7 الشهير: مشكلة Wi-Fi grayed out = Wi-Fi/BT IC. حل permanent يحتاج تبديل IC.</p>
+            </div>
+          </article>
+
+        </div>
+      </section><!-- /pr-repair-cards-1 -->
+
+      <!-- (المراحل التالية ستضاف في Phases 3-5) -->
+    </section><!-- /page-phonerepair -->  <!-- ✅ FOOTER — after ALL pages so flex order is correct -->
   <footer id="smart-footer">
     <div class="footer-section">
       <span>📊</span>

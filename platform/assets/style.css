@@ -11318,3 +11318,116 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
   }
   #page-phonerepair .pr-card-body{ display:block !important; }
 }
+
+
+
+/* ============================================================
+   WORKER 07 · PHASE 2 — Mainboard Anatomy + Repair Cards
+============================================================ */
+
+#page-phonerepair .pr-mb-wrap{
+  display:flex; flex-direction:column; gap:14px;
+}
+
+#page-phonerepair .pr-mb-tabs{
+  display:flex; gap:8px; flex-wrap:wrap;
+}
+#page-phonerepair .pr-mb-tab{
+  background:transparent; border:1px solid var(--border);
+  color: var(--text-muted); border-radius:8px;
+  padding:8px 14px; font-size:13px; font-weight:700;
+  cursor:pointer; font-family:inherit;
+  transition: all .2s ease;
+}
+#page-phonerepair .pr-mb-tab.is-active{
+  background: rgba(239,68,68,.12);
+  border-color: var(--pr-accent);
+  color: #fff;
+}
+#page-phonerepair .pr-mb-tab:hover{ border-color: var(--pr-accent); }
+
+#page-phonerepair .pr-mb-stage{
+  background: rgba(0,0,0,.25);
+  border:1px solid var(--border);
+  border-radius:12px; padding:14px; overflow:auto;
+}
+#page-phonerepair .pr-mb-svg{ width:100%; height:auto; max-width:600px; margin:0 auto; display:block; }
+
+#page-phonerepair .pr-mb-ic{ cursor:pointer; transition: filter .2s ease; }
+#page-phonerepair .pr-mb-ic:hover rect{
+  filter: drop-shadow(0 0 6px var(--pr-accent));
+  stroke-width: 2.5;
+}
+#page-phonerepair .pr-mb-ic.is-selected rect{
+  filter: drop-shadow(0 0 12px #fff);
+}
+
+#page-phonerepair .pr-mb-info{
+  background: var(--surface-2, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:10px;
+  padding:14px 16px; min-height:80px;
+  font-size:13px; color: var(--text-muted); line-height:1.75;
+}
+#page-phonerepair .pr-mb-info-empty{
+  margin:0; text-align:center; color: var(--text-faint);
+  font-style: italic;
+}
+#page-phonerepair .pr-mb-info h4{
+  margin:0 0 8px; color: var(--text); font-size:15px;
+}
+#page-phonerepair .pr-mb-info p{ margin:6px 0; }
+#page-phonerepair .pr-mb-info b{ color: var(--text); }
+#page-phonerepair .pr-mb-info .pr-mb-symptoms{
+  display:inline-block; background: rgba(239,68,68,.08);
+  border-right:3px solid var(--pr-accent);
+  padding:6px 10px; margin-top:6px; border-radius:5px;
+}
+
+/* Repair Cards */
+#page-phonerepair .pr-repair-card{
+  background: var(--surface-2, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:12px;
+  padding:14px 16px;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+#page-phonerepair .pr-repair-card:hover{
+  border-color: rgba(239,68,68,.35);
+  box-shadow: 0 4px 16px -8px var(--pr-glow);
+}
+
+#page-phonerepair .pr-repair-head{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:8px; gap:10px;
+}
+#page-phonerepair .pr-repair-head h3{
+  margin:0; font-size:15px; font-weight:800;
+  color: var(--text);
+}
+#page-phonerepair .pr-diff{
+  font-size:12px; color: var(--pr-accent-2);
+  letter-spacing:1px;
+}
+
+#page-phonerepair .pr-repair-meta{
+  display:flex; gap:14px; flex-wrap:wrap;
+  font-size:11.5px; color: var(--text-muted);
+  padding:6px 0; border-bottom:1px dashed rgba(255,255,255,.06);
+  margin-bottom:8px;
+}
+#page-phonerepair .pr-repair-meta span{
+  display:inline-flex; gap:4px; align-items:center;
+}
+
+#page-phonerepair .pr-repair-body{
+  font-size:12.5px; color: var(--text-muted); line-height:1.7;
+}
+#page-phonerepair .pr-repair-body p{ margin:5px 0; }
+#page-phonerepair .pr-repair-body b{ color: var(--text); }
+
+@media print{
+  #page-phonerepair .pr-mb-stage{ background:#fff !important; }
+  #page-phonerepair .pr-repair-card{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
