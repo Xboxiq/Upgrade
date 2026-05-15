@@ -9849,3 +9849,209 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
   #page-programming .prog-fund-card,
   #page-programming .prog-paths-opts button { transition: none; }
 }
+
+
+
+/* ════════════════════════════════════════════════════════════
+   WORKER 05 · Phase 2 — Roadmaps + Git Survival Kit
+   ════════════════════════════════════════════════════════════ */
+
+#page-programming .prog-rm-tabs {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  padding: 4px;
+  background: rgba(2,6,23,0.55);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  margin-block-end: 18px;
+}
+#page-programming .prog-rm-tabs button {
+  flex: 1; min-width: 160px;
+  padding: 10px 14px; border-radius: 10px;
+  background: transparent; border: 0; color: var(--text-muted);
+  font-size: 13px; font-weight: 700; cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+#page-programming .prog-rm-tabs button:hover { color: var(--text); }
+#page-programming .prog-rm-tabs button.is-active {
+  background: linear-gradient(135deg,#06B6D4,#8B5CF6); color: #fff;
+}
+
+#page-programming .prog-rm-panel { display: none; }
+#page-programming .prog-rm-panel.is-active { display: block; }
+
+#page-programming .prog-rm-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
+  margin-block-end: 18px;
+  padding: 14px 16px;
+  background: rgba(15,23,42,0.45);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+}
+#page-programming .prog-rm-summary > div {
+  display: flex; flex-direction: column; gap: 2px;
+}
+#page-programming .prog-rm-summary .lbl {
+  font-size: 10.5px; color: var(--text-muted); letter-spacing: 0.05em;
+}
+#page-programming .prog-rm-summary .val {
+  font-size: 14px; font-weight: 800; color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+#page-programming .prog-rm-weeks {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; gap: 12px;
+}
+#page-programming .prog-rm-week {
+  background: rgba(15,23,42,0.55);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: grid; gap: 10px;
+}
+#page-programming .prog-rm-week header {
+  display: flex; align-items: center; gap: 12px;
+}
+#page-programming .prog-rm-week .wk {
+  font-size: 10.5px; font-weight: 800;
+  padding: 4px 10px; border-radius: 999px;
+  background: linear-gradient(135deg,#06B6D4,#0EA5E9);
+  color: #fff; letter-spacing: 0.06em;
+}
+#page-programming .prog-rm-week h4 {
+  font-size: 14px; font-weight: 700; color: var(--text); margin: 0;
+}
+#page-programming .prog-rm-res,
+#page-programming .prog-rm-chk {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; gap: 5px;
+}
+#page-programming .prog-rm-res li {
+  font-size: 12px; color: var(--text-muted); line-height: 1.7;
+  padding-inline-start: 4px;
+}
+#page-programming .prog-rm-chk li {
+  font-size: 12px; line-height: 1.6;
+}
+#page-programming .prog-rm-chk label {
+  display: flex; align-items: center; gap: 8px;
+  cursor: pointer; color: var(--text-muted);
+  padding: 5px 8px; border-radius: 8px;
+  transition: background .15s ease;
+}
+#page-programming .prog-rm-chk label:hover { background: rgba(34,197,94,0.06); }
+#page-programming .prog-rm-chk input[type="checkbox"] { accent-color: #22C55E; }
+#page-programming .prog-rm-chk label:has(input:checked) {
+  color: #86EFAC;
+  text-decoration: line-through;
+  text-decoration-color: rgba(34,197,94,0.4);
+}
+#page-programming .prog-rm-mp {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 10px 12px;
+  background: rgba(245,158,11,0.07);
+  border: 1px solid rgba(245,158,11,0.28);
+  border-radius: 10px;
+  font-size: 12px; color: var(--text); line-height: 1.7;
+}
+#page-programming .prog-rm-mp .lbl {
+  font-size: 10.5px; font-weight: 800; color: #FCD34D;
+  letter-spacing: 0.06em; flex-shrink: 0;
+  padding-block-start: 2px;
+}
+#page-programming .prog-rm-mp code {
+  background: rgba(2,6,23,0.6); color: #67E8F9;
+  padding: 1px 5px; border-radius: 4px; font-size: 11px;
+  font-family: ui-monospace, monospace; direction: ltr;
+}
+
+/* ── Git Survival Kit ── */
+#page-programming .prog-git {
+  background: linear-gradient(180deg, rgba(34,197,94,0.05), rgba(15,23,42,0.55));
+  border-color: rgba(34,197,94,0.22);
+}
+#page-programming .prog-git::before { background: linear-gradient(135deg,#22C55E,#06B6D4); }
+
+#page-programming .prog-git-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+}
+#page-programming .prog-git-card {
+  background: rgba(2,6,23,0.55);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: grid; gap: 8px;
+  transition: border-color .2s ease, transform .2s ease;
+}
+#page-programming .prog-git-card:hover {
+  border-color: rgba(34,197,94,0.4);
+  transform: translateY(-1px);
+}
+#page-programming .prog-git-card header {
+  display: flex; align-items: center; gap: 10px;
+}
+#page-programming .prog-git-card .num {
+  width: 28px; height: 28px;
+  display: grid; place-items: center;
+  font-size: 11px; font-weight: 800;
+  background: rgba(34,197,94,0.18);
+  border: 1px solid rgba(34,197,94,0.32);
+  color: #86EFAC;
+  border-radius: 8px;
+}
+#page-programming .prog-git-card h4 {
+  flex: 1; font-size: 13px; color: var(--text); margin: 0;
+}
+#page-programming .prog-git-card .risk {
+  font-size: 9.5px; font-weight: 800;
+  padding: 3px 8px; border-radius: 999px;
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+#page-programming .prog-git-card .risk.lo { background: rgba(34,197,94,0.18); color: #86EFAC; }
+#page-programming .prog-git-card .risk.md { background: rgba(245,158,11,0.18); color: #FCD34D; }
+#page-programming .prog-git-card .risk.hi { background: rgba(239,68,68,0.18);  color: #FCA5A5; }
+
+#page-programming .prog-git-card pre {
+  margin: 0; padding: 10px 12px;
+  background: rgba(2,6,23,0.85);
+  border: 1px solid rgba(34,197,94,0.18);
+  border-radius: 10px;
+  font-size: 11px; line-height: 1.65;
+  font-family: ui-monospace, monospace;
+  direction: ltr; text-align: start;
+  overflow-x: auto;
+  color: #BBF7D0;
+}
+#page-programming .prog-git-card pre code { color: inherit; background: transparent; padding: 0; }
+#page-programming .prog-git-card p {
+  font-size: 11.5px; color: var(--text-muted); line-height: 1.7; margin: 0;
+}
+#page-programming .prog-git-card p b { color: var(--text); }
+#page-programming .prog-git-card p.warn b { color: #FCA5A5; }
+#page-programming .prog-git-card p code {
+  background: rgba(34,197,94,0.12); color: #86EFAC;
+  padding: 1px 4px; border-radius: 4px;
+  font-family: ui-monospace, monospace; font-size: 10.5px;
+  direction: ltr; display: inline-block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #page-programming .prog-git-card { transition: none; }
+}
+
+@media print {
+  #page-programming .prog-rm-tabs,
+  #page-programming .prog-paths-restart,
+  #page-programming .prog-quiz-foot { display: none !important; }
+  #page-programming .prog-rm-panel { display: block !important; page-break-before: always; }
+  #page-programming .prog-fund-card,
+  #page-programming .prog-git-card,
+  #page-programming .prog-rm-week {
+    background: #fff !important; color: #000 !important;
+    border: 1px solid #999 !important; page-break-inside: avoid;
+  }
+}
