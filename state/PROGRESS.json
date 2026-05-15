@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-15T06:50:00Z",
+  "last_updated": "2026-05-15T07:10:00Z",
   "current": {
-    "worker": "03",
-    "worker_name": "CALLCENTER",
-    "phase": 4,
-    "phases_total": 4,
-    "branch": "worker-03-complete",
-    "status": "completed"
+    "worker": "04",
+    "worker_name": "ACCOUNTING_CASHIER",
+    "phase": 1,
+    "phases_total": 5,
+    "branch": "worker-04-phase-1",
+    "status": "in-progress"
   },
   "completed_phases": [
     { "worker": "01", "phase": 1, "title": "Foundation Tokens & Aurora Mesh",                    "branch": "worker-01-phase-1-v2", "lines_added": 121 },
@@ -22,8 +22,9 @@
     { "worker": "03", "phase": 1, "title": "Voice Profile (5 dims) + Empathy Loop + 14 Archetypes", "branch": "worker-03-phase-1", "lines_added": 895 },
     { "worker": "03", "phase": 2, "title": "KPI Deep-Dive + APIndex Calculator + Call Anatomy 7 Stages", "branch": "worker-03-phase-2", "lines_added": 828 },
     { "worker": "03", "phase": 3, "title": "Voice Self-Assessment Studio (Web Audio + Web Speech)", "branch": "worker-03-phase-3", "lines_added": 979 },
-    { "worker": "03", "phase": 4, "title": "Simulator + Iraq Block + Cheat Sheet + 12 Citations", "branch": "worker-03-phase-4", "lines_added": 1002 }
+    { "worker": "03", "phase": 4, "title": "Simulator + Iraq Block + Cheat Sheet + 12 Citations", "branch": "worker-03-phase-4", "lines_added": 1002 },
+    { "worker": "04", "phase": 1, "title": "Accounting Foundations (Equation + T-Account + 9-Step Cycle)", "branch": "worker-04-phase-1", "lines_added": 1180 }
   ],
-  "next_action": "Worker 03 complete (consolidated). Begin Worker 04 — Accounting/Cashier on next session.",
-  "notes": "Worker 03 (Call Center Voice Psychology) COMPLETE. Total: 3,704 lines across 4 phases. Consolidated branch worker-03-complete merges all 4 phase blocks in order. Phase PRs #18-#21 should be closed in favor of single consolidated PR for mobile-friendly merging."
+  "next_action": "Worker 04 Phase 2 — Iraqi Chart of Accounts + IFRS vs Local + Ratios Cards",
+  "notes": "Phase 1 of Worker 04 complete: 3 visual labs added under #page-accounting (additive only). Mounts: .acc-eq-lab, .acc-taccount-lab, .acc-cycle-lab."
 }
