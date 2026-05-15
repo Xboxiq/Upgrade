@@ -5,12 +5,13 @@
  * بدون تغيير أي سلوك. آمن — يُنشئ ملفات جديدة في dist/ بدون لمس الأصل.
  *
  * Usage:
- *   node scripts/split-platform.mjs "arabic-training-platform-v12 (1) (4) (1) (1) (1).html"
+ *   node scripts/split-platform.mjs archive/arabic-training-platform-v12-original.html
+ *   node scripts/split-platform.mjs <input.html> [outputDir]
  *
- * المخرجات:
- *   dist/index.html        ← الهيكل + روابط للـ assets
- *   dist/assets/style.css  ← كل <style> blocks مدموجة بالترتيب
- *   dist/assets/app.js     ← كل <script> blocks (inline) مدموجة بالترتيب
+ * المخرجات (افتراضياً في dist/ — انقلها لاحقاً إلى platform/):
+ *   <out>/index.html        ← الهيكل + روابط للـ assets
+ *   <out>/assets/style.css  ← كل <style> blocks مدموجة بالترتيب
+ *   <out>/assets/app.js     ← كل <script> blocks (inline) مدموجة بالترتيب
  *
  * يحافظ على:
  * - ترتيب الـ blocks (CSS و JS بنفس ترتيب ظهورها — مهم للـ specificity والـ IIFE deps)
@@ -35,7 +36,7 @@ if (!fs.existsSync(inputPath)) {
 }
 
 const html = fs.readFileSync(inputPath, 'utf8');
-const outDir = path.resolve('dist');
+const outDir = path.resolve(process.argv[3] || 'dist');
 const assetsDir = path.join(outDir, 'assets');
 fs.mkdirSync(assetsDir, { recursive: true });
 

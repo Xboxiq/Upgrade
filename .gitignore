@@ -1,0 +1,16 @@
+# Auto-generated split output (regenerable from archive/)
+dist/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Local-only Kiro state
+.kiro/sessions/
+.kiro/web-session/
+
+# Snapshots saved during development sessions (keep locally)
+snapshots/
