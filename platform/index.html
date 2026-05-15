@@ -8895,6 +8895,130 @@
         </div>
       </div>
 
+      <!-- ════════════════════════════════════════════════════════════
+           WORKER 04 · PHASE 2 — Iraqi COA + IFRS vs Local + Ratios
+           Scope: additive blocks under #page-accounting only.
+      ════════════════════════════════════════════════════════════ -->
+      <section class="acc-standards" data-acc-phase="2" aria-labelledby="acc-standards-title">
+
+        <div class="acc-section-head">
+          <span class="acc-eyebrow">المعايير والنسب · المرجع المهني</span>
+          <h2 id="acc-standards-title">الدليل العراقي · IFRS vs محلي · 10 نسب مالية</h2>
+          <p>المحاسب المحترف يعرف أين يضع الرقم (الدليل)، وما الفرق بين المعيار الذي طُبِق (IFRS أو محلي)، وكيف يقرأ الأرقام (النسب).</p>
+        </div>
+
+        <!-- ───────── BLOCK 4 · Iraqi Unified Chart of Accounts ───────── -->
+        <article class="acc-coa-lab" data-acc-lab="coa">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 4</div>
+            <h3>الدليل المحاسبي العراقي الموحّد</h3>
+            <p>السلسلة الرقمية 1xxx-5xxx — كل مجموعة لها منطقها. اضغط على المجموعة لتفتح حساباتها التفصيلية.</p>
+          </header>
+
+          <div class="acc-coa-legend">
+            <span><b style="color:#34D399">1xxx</b> الأصول</span>
+            <span><b style="color:#F59E0B">2xxx</b> الخصوم</span>
+            <span><b style="color:#C4B5FD">3xxx</b> حقوق الملكية</span>
+            <span><b style="color:#60A5FA">4xxx</b> الإيرادات</span>
+            <span><b style="color:#F87171">5xxx</b> المصاريف</span>
+          </div>
+
+          <div class="acc-coa-stack" data-acc-coa-stack></div>
+
+          <div class="acc-coa-tip">
+            <span>💡</span>
+            <div>
+              <b>قاعدة ميدانية:</b> الترقيم يحدد الترتيب في القوائم المالية. أصل ترقيمه 1101 (نقد) يظهر قبل 1301 (مخزون) — لأن الترتيب من الأكثر سيولة للأقل سيولة.
+            </div>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 5 · IFRS vs Local Diff ───────── -->
+        <article class="acc-ifrs-lab" data-acc-lab="ifrs">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 5</div>
+            <h3>IFRS مقابل المحاسبة العراقية التقليدية</h3>
+            <p>حيث ينحرف التطبيق المحلي عن المعايير الدولية — والأثر العملي على الأرباح والميزانية.</p>
+          </header>
+
+          <div class="acc-ifrs-table-wrap">
+            <table class="acc-ifrs-table">
+              <thead>
+                <tr>
+                  <th>البند</th>
+                  <th>IFRS</th>
+                  <th>محلي تقليدي</th>
+                  <th>الأثر العملي</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>المخزون</b><br><span>Inventory Costing</span></td>
+                  <td>FIFO أو متوسط مرجَّح فقط — <b style="color:#F87171">LIFO ممنوع</b> (IAS 2)</td>
+                  <td>LIFO مسموح في بعض الممارسات</td>
+                  <td>في التضخم: LIFO يخفض الربح المعلن ويوفر ضريبة، لكن يشوّه قيمة المخزون في الميزانية.</td>
+                </tr>
+                <tr>
+                  <td><b>الإيراد</b><br><span>Revenue Recognition</span></td>
+                  <td>IFRS 15 · 5 خطوات (تحديد العقد، الالتزام، السعر، التوزيع، الاعتراف)</td>
+                  <td>غالباً عند إصدار الفاتورة أو التسليم</td>
+                  <td>فرق توقيت كبير في عقود طويلة (إنشاءات/خدمات سنوية) — يخل بمقابلة الإيراد بالمصروف.</td>
+                </tr>
+                <tr>
+                  <td><b>الإيجارات</b><br><span>Leases</span></td>
+                  <td>IFRS 16 · كل عقد يدخل الميزانية كحق استخدام + التزام إيجار</td>
+                  <td>تشغيلي خارج الميزانية</td>
+                  <td>تطبيق IFRS 16 يرفع الأصول والخصوم 10-30% — يؤثر على D/E ومؤشرات الاقتراض.</td>
+                </tr>
+                <tr>
+                  <td><b>الإهلاك</b><br><span>Depreciation</span></td>
+                  <td>طرق متعددة (قسط ثابت، متناقص، وحدات إنتاج) حسب نمط الاستهلاك</td>
+                  <td>غالباً قسط ثابت لجميع الأصول</td>
+                  <td>الأصول كثيفة الاستخدام في السنوات الأولى يجب أن تُهلك متناقصاً — قسط ثابت يضخم الربح المبكر.</td>
+                </tr>
+                <tr>
+                  <td><b>القيمة العادلة</b><br><span>Fair Value</span></td>
+                  <td>IFRS 13 · 3 مستويات (Level 1/2/3) للأصول المتداولة</td>
+                  <td>التكلفة التاريخية في الغالب</td>
+                  <td>عقارات استثمارية وأوراق مالية: التكلفة التاريخية تخفي مكاسب أو خسائر فعلية.</td>
+                </tr>
+                <tr>
+                  <td><b>أدوات مالية</b><br><span>Financial Instruments</span></td>
+                  <td>IFRS 9 · ECL (الخسائر الائتمانية المتوقعة) قبل تحقق الخسارة</td>
+                  <td>مخصص بعد التعثر الفعلي</td>
+                  <td>البنوك تكوّن مخصصات أعلى مبكراً — يخفض الربح لكن يعكس المخاطر بصدق.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="acc-ifrs-callout">
+            <div class="acc-ifrs-callout-tag">📌 الخلاصة</div>
+            <p>المؤسسة المدرجة في سوق الأوراق المالية العراقي يجب أن تتبع IFRS. المؤسسات الصغيرة والمتوسطة قد تستخدم IFRS for SMEs أو الممارسة المحلية — لكن للحصول على تمويل خارجي، IFRS الكامل شرط شبه دائم.</p>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 6 · 10 Financial Ratios ───────── -->
+        <article class="acc-ratios-lab" data-acc-lab="ratios">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 6</div>
+            <h3>عشر نسب مالية أساسية · مع نطاق صحي عراقي</h3>
+            <p>كل بطاقة: المعادلة، ما تقيس، النطاق المثالي، ومثال عراقي تطبيقي بأرقام واقعية.</p>
+          </header>
+
+          <div class="acc-ratios-filter">
+            <button type="button" class="acc-ratio-pill active" data-ratio-cat="all">الكل</button>
+            <button type="button" class="acc-ratio-pill" data-ratio-cat="liq">السيولة</button>
+            <button type="button" class="acc-ratio-pill" data-ratio-cat="lev">الرفع</button>
+            <button type="button" class="acc-ratio-pill" data-ratio-cat="prof">الربحية</button>
+            <button type="button" class="acc-ratio-pill" data-ratio-cat="eff">الكفاءة</button>
+          </div>
+
+          <div class="acc-ratios-grid" data-acc-ratios-grid></div>
+        </article>
+
+      </section><!-- /acc-standards Phase 2 -->
+
     </section><!-- /page-accounting -->
 
 
