@@ -10055,3 +10055,188 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
     border: 1px solid #999 !important; page-break-inside: avoid;
   }
 }
+
+
+
+/* ════════════════════════════════════════════════════════════
+   WORKER 05 · Phase 3 — Clean Code + Code Review + Soft Skills
+   ════════════════════════════════════════════════════════════ */
+
+#page-programming .prog-clean {
+  background: linear-gradient(180deg, rgba(245,158,11,0.05), rgba(15,23,42,0.55));
+  border-color: rgba(245,158,11,0.22);
+}
+#page-programming .prog-clean::before { background: linear-gradient(135deg,#F59E0B,#EF4444); }
+
+#page-programming .prog-clean-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 14px;
+}
+#page-programming .prog-clean-card {
+  background: rgba(2,6,23,0.55);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 16px 16px 14px;
+  display: grid; gap: 10px;
+}
+#page-programming .prog-clean-card header {
+  display: flex; align-items: center; gap: 10px;
+}
+#page-programming .prog-clean-card .num {
+  width: 30px; height: 30px;
+  display: grid; place-items: center;
+  font-size: 11px; font-weight: 800;
+  background: linear-gradient(135deg,#F59E0B,#EF4444);
+  color: #fff;
+  border-radius: 10px;
+}
+#page-programming .prog-clean-card h4 {
+  font-size: 14px; font-weight: 700; color: var(--text); margin: 0;
+}
+#page-programming .prog-clean-card > p {
+  font-size: 12px; color: var(--text-muted); line-height: 1.85; margin: 0;
+}
+#page-programming .prog-clean-card p.rule {
+  background: rgba(245,158,11,0.07);
+  border: 1px solid rgba(245,158,11,0.22);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 11.5px; color: var(--text);
+}
+
+#page-programming .prog-clean-code {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+}
+#page-programming .prog-clean-code > div {
+  display: flex; flex-direction: column; gap: 6px;
+}
+#page-programming .prog-clean-code .lbl {
+  font-size: 9.5px; font-weight: 800; letter-spacing: 0.08em;
+  padding: 3px 8px; border-radius: 999px;
+  align-self: flex-start;
+}
+#page-programming .prog-clean-code .bad .lbl {
+  background: rgba(239,68,68,0.18); color: #FCA5A5;
+}
+#page-programming .prog-clean-code .good .lbl {
+  background: rgba(34,197,94,0.18); color: #86EFAC;
+}
+#page-programming .prog-clean-code pre {
+  margin: 0; padding: 10px 12px;
+  background: rgba(0,0,0,0.4);
+  border-radius: 10px;
+  font-size: 11px; line-height: 1.65;
+  font-family: ui-monospace, monospace;
+  direction: ltr; text-align: start;
+  overflow-x: auto;
+}
+#page-programming .prog-clean-code .bad pre {
+  border: 1px solid rgba(239,68,68,0.28);
+  color: #FECACA;
+}
+#page-programming .prog-clean-code .good pre {
+  border: 1px solid rgba(34,197,94,0.28);
+  color: #BBF7D0;
+}
+#page-programming .prog-clean-card code:not(pre code) {
+  background: rgba(245,158,11,0.12);
+  color: #FCD34D;
+  padding: 1px 5px; border-radius: 5px;
+  font-family: ui-monospace, monospace; font-size: 11px;
+  direction: ltr; display: inline-block;
+}
+
+@media (max-width: 600px) {
+  #page-programming .prog-clean-code { grid-template-columns: 1fr; }
+}
+
+/* ── Code Review ── */
+#page-programming .prog-cr {
+  background: linear-gradient(180deg, rgba(99,102,241,0.05), rgba(15,23,42,0.55));
+  border-color: rgba(99,102,241,0.22);
+}
+#page-programming .prog-cr::before { background: linear-gradient(135deg,#6366F1,#8B5CF6); }
+
+#page-programming .prog-cr-list {
+  list-style: none; padding: 0; margin: 0;
+  counter-reset: cr;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 10px;
+}
+#page-programming .prog-cr-list li {
+  counter-increment: cr;
+  background: rgba(2,6,23,0.55);
+  border: 1px solid rgba(99,102,241,0.22);
+  border-radius: 12px;
+  padding: 12px 14px 10px 50px;
+  position: relative;
+  min-height: 64px;
+}
+#page-programming .prog-cr-list li::before {
+  content: counter(cr);
+  position: absolute; inset-inline-start: 12px; inset-block-start: 10px;
+  width: 28px; height: 28px;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg,#6366F1,#8B5CF6);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 12px; font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+#page-programming .prog-cr-list h5 {
+  font-size: 13px; font-weight: 700; color: var(--text);
+  margin: 0 0 4px;
+}
+#page-programming .prog-cr-list p {
+  font-size: 12px; color: var(--text-muted); line-height: 1.7; margin: 0;
+}
+#page-programming .prog-cr-list code {
+  background: rgba(99,102,241,0.16); color: #C7D2FE;
+  padding: 1px 5px; border-radius: 4px;
+  font-family: ui-monospace, monospace; font-size: 11px; direction: ltr;
+}
+
+/* ── Soft skills ── */
+#page-programming .prog-soft {
+  background: linear-gradient(180deg, rgba(236,72,153,0.05), rgba(15,23,42,0.55));
+  border-color: rgba(236,72,153,0.22);
+}
+#page-programming .prog-soft::before { background: linear-gradient(135deg,#EC4899,#F472B6); }
+
+#page-programming .prog-soft-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 12px;
+}
+#page-programming .prog-soft-card {
+  background: rgba(2,6,23,0.55);
+  border: 1px solid rgba(236,72,153,0.22);
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: grid; gap: 8px;
+}
+#page-programming .prog-soft-card header {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 22px;
+}
+#page-programming .prog-soft-card h4 {
+  font-size: 14px; font-weight: 700; color: var(--text); margin: 0;
+}
+#page-programming .prog-soft-card > p {
+  font-size: 12px; color: var(--text-muted); line-height: 1.85; margin: 0;
+}
+#page-programming .prog-soft-card ul {
+  margin: 0; padding-inline-start: 18px;
+  font-size: 12px; color: var(--text-muted); line-height: 1.85;
+}
+#page-programming .prog-soft-card ul b { color: var(--text); }
+#page-programming .prog-soft-card p.rule {
+  margin-block-start: 4px;
+  background: rgba(236,72,153,0.06);
+  border: 1px solid rgba(236,72,153,0.22);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 11.5px; color: var(--text);
+}

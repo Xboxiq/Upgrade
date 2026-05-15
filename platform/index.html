@@ -8812,6 +8812,303 @@ git reset --hard HEAD@{3}    # ارجع 3 خطوات</code></pre>
         </div>
       </section>
 
+      <!-- ┌─ W05·P3 ─ Clean Code + Code Review + Soft Skills ─┐ -->
+      <section class="prog-w05 prog-clean" data-w05-phase="3" aria-labelledby="prog-clean-title">
+        <header class="prog-w05-sub">
+          <h2 id="prog-clean-title">Clean Code Pillars · ٨ قواعد مع أمثلة 🧹</h2>
+          <p>القاعدة → مثال سيّئ مقابل جيد بكود حقيقي. التطبيق <strong>عملي لا أيديولوجي</strong> — اعرف متى تكسر القاعدة.</p>
+        </header>
+
+        <div class="prog-clean-grid">
+
+          <article class="prog-clean-card" data-clean="1">
+            <header><span class="num">01</span><h4>Naming · أسماء واضحة</h4></header>
+            <p>اسم متغيّر/دالة = توثيق مجاني. القاعدة: 2-4 كلمات بـ camelCase، تُجيب على "ماذا" أو "ماذا يُرجع".</p>
+            <div class="prog-clean-code">
+              <div class="bad">
+                <span class="lbl">سيّئ</span>
+                <pre><code>function p(d){
+  return d * 0.15 + d;
+}</code></pre>
+              </div>
+              <div class="good">
+                <span class="lbl">جيد</span>
+                <pre><code>function priceWithVAT(amount){
+  const VAT_RATE = 0.15;
+  return amount * (1 + VAT_RATE);
+}</code></pre>
+              </div>
+            </div>
+            <p class="rule">⚠️ تجنّب: <code>data, info, manager, helper, util</code> — كلها مفرغة من المعنى.</p>
+          </article>
+
+          <article class="prog-clean-card" data-clean="2">
+            <header><span class="num">02</span><h4>Functions · مسؤولية واحدة</h4></header>
+            <p>كل دالة تفعل شيئًا واحدًا، ≤ 20 سطر مفضّلاً. لو احتجت "و" في وصف الدالة — قسّمها.</p>
+            <div class="prog-clean-code">
+              <div class="bad">
+                <span class="lbl">سيّئ</span>
+                <pre><code>function processOrder(o){
+  // validate + calc + save + email + log
+  if (!o.items.length) throw Error('empty');
+  let total = 0;
+  for (const i of o.items) total += i.price * i.qty;
+  db.save({...o, total});
+  mailer.send(o.email, total);
+  console.log('order', o.id);
+}</code></pre>
+              </div>
+              <div class="good">
+                <span class="lbl">جيد</span>
+                <pre><code>function processOrder(order){
+  validate(order);
+  const total = computeTotal(order.items);
+  const saved = saveOrder({ ...order, total });
+  notifyCustomer(saved);
+  return saved;
+}</code></pre>
+              </div>
+            </div>
+            <p class="rule">✅ كل دالة فرعية تُختبر وحدها — هذا أهم مكسب.</p>
+          </article>
+
+          <article class="prog-clean-card" data-clean="3">
+            <header><span class="num">03</span><h4>Comments · اشرح "لماذا"</h4></header>
+            <p>الكود يخبرك "ماذا". التعليق يخبرك "لماذا". إذا الكود يحتاج تعليقاً ليُفهم — أعد تسمية أو هيكلة.</p>
+            <div class="prog-clean-code">
+              <div class="bad">
+                <span class="lbl">ضوضاء</span>
+                <pre><code>// زيادة العداد بواحد
+i++;
+// إعادة المجموع
+return total;</code></pre>
+              </div>
+              <div class="good">
+                <span class="lbl">قيمة</span>
+                <pre><code>// نتجاوز فهرس 0 لأن أول صف يحتوي رؤوس الأعمدة
+for (let i = 1; i &lt; rows.length; i++) { ... }
+
+// fallback لـ legacy iOS &lt; 14 — انظر ticket #482
+if (isLegacyIOS) usePolyfill();</code></pre>
+              </div>
+            </div>
+            <p class="rule">📌 TODOs لها تاريخ ومالك: <code>// TODO(ali, 2024-12): replace with cache layer</code>.</p>
+          </article>
+
+          <article class="prog-clean-card" data-clean="4">
+            <header><span class="num">04</span><h4>DRY بحدود · أحياناً WET أفضل</h4></header>
+            <p>تكرار <em>سياقي</em> ≠ تكرار <em>عرضي</em>. إذا تشابهت سطور لكن تتطوّر بشكل مختلف — تركها مكرّرة أأمن من تجريد قسري.</p>
+            <div class="prog-clean-code">
+              <div class="bad">
+                <span class="lbl">تجريد قسري</span>
+                <pre><code>// "وحّد" تنسيق الفاتورة و رسالة الترحيب
+function formatAny(x, type){
+  if (type==='invoice'){...}
+  else if (type==='greet'){...}
+  else if (type==='ad'){...}
+}</code></pre>
+              </div>
+              <div class="good">
+                <span class="lbl">منفصل ومُستقرّ</span>
+                <pre><code>function formatInvoice(inv){ ... }
+function formatGreeting(name){ ... }
+function formatAd(ad){ ... }</code></pre>
+              </div>
+            </div>
+            <p class="rule">📌 Sandi Metz: "Duplication is far cheaper than the wrong abstraction."</p>
+          </article>
+
+          <article class="prog-clean-card" data-clean="5">
+            <header><span class="num">05</span><h4>YAGNI · لا تكتب لـ "ربما"</h4></header>
+            <p>كل سطر تكتبه = صيانة. لا تُضِف configurability/abstraction قبل وجود حالة استخدام ثانية فعلية.</p>
+            <div class="prog-clean-code">
+              <div class="bad">
+                <span class="lbl">over-engineering</span>
+                <pre><code>// واحد فقط من المستخدمين، لكن "ربما" نحتاج plugins
+class NotifierFactory {
+  static create(type, opts, plugins=[], hooks={}) { ... }
+}</code></pre>
+              </div>
+              <div class="good">
+                <span class="lbl">حسب الحاجة</span>
+                <pre><code>function sendEmail(to, body){
+  return mailer.send({to, body});
+}
+// يوم تحتاج SMS، أضف sendSMS بنفس الشكل.</code></pre>
+              </div>
+            </div>
+            <p class="rule">⚠️ القاعدة: <strong>Rule of Three</strong> — جرّد بعد التكرار الثالث، لا الأول.</p>
+          </article>
+
+          <article class="prog-clean-card" data-clean="6">
+            <header><span class="num">06</span><h4>SSOT · Single Source of Truth</h4></header>
+            <p>كل قطعة بيانات تعيش في مكان واحد. لو احتجت نسخة ثانية — اشتقّها (computed) لا تُكرّرها.</p>
+            <div class="prog-clean-code">
+              <div class="bad">
+                <span class="lbl">تكرار حالة</span>
+                <pre><code>state.items = [...];
+state.itemsCount = state.items.length;     // ❌
+state.totalPrice = sum(state.items);       // ❌</code></pre>
+              </div>
+              <div class="good">
+                <span class="lbl">مشتق</span>
+                <pre><code>state.items = [...];
+const itemsCount  = items.length;
+const totalPrice  = items.reduce(...);
+// derived عند الحاجة، لا مخزّن</code></pre>
+              </div>
+            </div>
+            <p class="rule">📌 يجنّبك bugs الـ "نسيت تحديث X بعد Y".</p>
+          </article>
+
+          <article class="prog-clean-card" data-clean="7">
+            <header><span class="num">07</span><h4>Composition over Inheritance</h4></header>
+            <p>التركيب أكثر مرونة من الوراثة. الوراثة العميقة (3+ مستويات) صداع صيانة.</p>
+            <div class="prog-clean-code">
+              <div class="bad">
+                <span class="lbl">وراثة هشّة</span>
+                <pre><code>class Animal {}
+class Dog extends Animal {}
+class FlyingDog extends Dog {}   // 🤨</code></pre>
+              </div>
+              <div class="good">
+                <span class="lbl">تركيب</span>
+                <pre><code>const dog = { ...canMove(), ...canBark() };
+const bird = { ...canMove(), ...canFly() };
+// اخلط القدرات بحرّية</code></pre>
+              </div>
+            </div>
+            <p class="rule">📌 React/Vue يفرضان هذا أصلاً عبر components + hooks.</p>
+          </article>
+
+          <article class="prog-clean-card" data-clean="8">
+            <header><span class="num">08</span><h4>Fail Fast · تحقّق على الحدود</h4></header>
+            <p>افحص المدخلات عند نقطة الدخول، ارمِ الخطأ مبكرًا. لا تدع قيمة سيئة تنتشر داخل النظام.</p>
+            <div class="prog-clean-code">
+              <div class="bad">
+                <span class="lbl">انتشار صامت</span>
+                <pre><code>function transfer(from, to, amt){
+  // لا تحقق
+  accounts[from] -= amt;        // قد يصبح NaN
+  accounts[to]   += amt;
+}</code></pre>
+              </div>
+              <div class="good">
+                <span class="lbl">حدود واضحة</span>
+                <pre><code>function transfer(from, to, amt){
+  if (!Number.isFinite(amt) || amt &lt;= 0)
+    throw new TypeError('amount must be positive number');
+  if (accounts[from] &lt; amt)
+    throw new Error('insufficient funds');
+  // الآن آمن
+}</code></pre>
+              </div>
+            </div>
+            <p class="rule">📌 Zod / Joi لـ inputs الـ API. <code>assert</code> للحالات الداخلية.</p>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ┌─ W05·P3b ─ Code Review Etiquette ─┐ -->
+      <section class="prog-w05 prog-cr" data-w05-phase="3b" aria-labelledby="prog-cr-title">
+        <header class="prog-w05-sub">
+          <h2 id="prog-cr-title">Code Review Etiquette · ١٠ قواعد ⚖️</h2>
+          <p>الـ Code Review مهارة قيادية. سيّء = يقتل المعنويات. جيد = يرفع الفريق كله.</p>
+        </header>
+
+        <ol class="prog-cr-list">
+          <li><h5>Focus on code, not coder</h5><p>"هذه الدالة يصعب اختبارها" — لا "أنت ماتختبر".</p></li>
+          <li><h5>اشرح "لماذا" — لا فقط "غيّر"</h5><p>اقترح بسبب: "لو فشل الـ API هنا، الـ UI يتجمّد. دعنا نُضيف timeout."</p></li>
+          <li><h5>"نحن" بدلاً من "أنت"</h5><p>"كيف نعالج حالة null هنا؟" يفتح حواراً بدل دفاع.</p></li>
+          <li><h5>امدح الجيد فعلاً</h5><p>"الفصل بين validation وservice نظيف جداً" — يبني ثقة.</p></li>
+          <li><h5>صنّف ملاحظاتك</h5><p>استخدم prefixes: <code>nit:</code> (شكلي)، <code>question:</code> (استفسار)، <code>blocker:</code> (يجب).</p></li>
+          <li><h5>اقترح بدائل صغيرة بكود</h5><p>مقتطف 3 أسطر يوفّر 30 دقيقة جدال. <em>اقتراح suggestion</em> في GitHub أداة ممتازة.</p></li>
+          <li><h5>لا تُراجع وأنت متعب أو غاضب</h5><p>الإيقاع العاطفي يتسرّب. أجّل.</p></li>
+          <li><h5>راجع أولاً <em>الـ goal</em> ثم الـ implementation</h5><p>هل هذا يحلّ المشكلة الصحيحة أصلاً؟ — قبل تفاصيل التسمية.</p></li>
+          <li><h5>معرفة متى تتنازل</h5><p>"أنا أُفضّل forEach، لكنك تستخدم map والكود يعمل — مقبول."</p></li>
+          <li><h5>أجب خلال 24 ساعة</h5><p>تأخير الـ review = تأخير الفريق + قلق المؤلف. حدّد ساعة يومياً للمراجعات.</p></li>
+        </ol>
+      </section>
+
+      <!-- ┌─ W05·P3c ─ Soft Skills ─┐ -->
+      <section class="prog-w05 prog-soft" data-w05-phase="3c" aria-labelledby="prog-soft-title">
+        <header class="prog-w05-sub">
+          <h2 id="prog-soft-title">المهارات الناعمة للمبرمج 💬</h2>
+          <p>الفرق بين Junior وSenior كثيراً ما يكون هنا — لا في عدد اللغات.</p>
+        </header>
+
+        <div class="prog-soft-grid">
+
+          <article class="prog-soft-card">
+            <header>📐 <h4>Estimation · قاعدة الـ 3x</h4></header>
+            <p>الـ Junior يُقدّر "هذا يومان" — يستغرق ٦ أيام (3x). السبب: غياب احتساب: review، testing، unknowns، meetings.</p>
+            <ul>
+              <li>قسّم المهمة لـ &lt; نصف يوم لكل قطعة قبل التقدير</li>
+              <li>أضف "buffer غموض" 20-30% للـ unknowns</li>
+              <li>اختم بـ "إذا اكتشفت X خلال أول 4 ساعات، سأُحدّث التقدير"</li>
+            </ul>
+            <p class="rule">⚠️ متى لا تنطبق 3x: مهمة جربت مثلها قبل 3 مرات → التقدير يقترب من الواقع.</p>
+          </article>
+
+          <article class="prog-soft-card">
+            <header>❓ <h4>Asking Questions · سؤال جيد</h4></header>
+            <p>السؤال الجيد يوفّر وقت الجميع. اتّبع نموذج <strong>SSCCE</strong>: Short, Self-contained, Compilable, Example.</p>
+            <ul>
+              <li><b>السياق:</b> ماذا تحاول؟ (الهدف لا الكود)</li>
+              <li><b>المتوقع:</b> ماذا تتوقع أن يحدث؟</li>
+              <li><b>الفعلي:</b> ماذا حدث فعلاً؟ (مع رسالة الخطأ كاملة)</li>
+              <li><b>الذي جرّبته:</b> ٣ محاولات على الأقل</li>
+            </ul>
+            <p class="rule">📌 قبل السؤال: ابحث ٢٠ دقيقة + اقرأ أول صفحة Google + اقرأ الـ docs الرسمية.</p>
+          </article>
+
+          <article class="prog-soft-card">
+            <header>📅 <h4>Standup · ٣ جمل</h4></header>
+            <p>الـ daily standup ليس تقرير إنجاز — هو إشارة تنسيق.</p>
+            <ul>
+              <li><b>أمس:</b> "أنهيت endpoint الـ login + tests"</li>
+              <li><b>اليوم:</b> "أبدأ refresh tokens"</li>
+              <li><b>عوائق:</b> "أحتاج credentials للـ staging — @ali"</li>
+            </ul>
+            <p class="rule">⚠️ تجنّب: قراءة كل ما فعلت، تفاصيل تقنية لا تهمّ غيرك، شكاوى عامة.</p>
+          </article>
+
+          <article class="prog-soft-card">
+            <header>🤷 <h4>قُلها بثقة: "لا أعرف"</h4></header>
+            <p>أكثر مهارة سرّية للـ Senior. الـ Junior يُخفي الجهل → يعمل bugs خفية. الـ Senior يقول "لا أعرف، سأعرف خلال ساعة."</p>
+            <ul>
+              <li>"لم أعمل على هذا قبلاً، لكن أتوقع X — هل تريد أن أتأكد؟"</li>
+              <li>"لست متأكدًا — أحتاج ٣٠ دقيقة فحص"</li>
+              <li>"لا أعرف، لكن @ahmed عمل مشروعًا مشابهاً قبل أشهر"</li>
+            </ul>
+            <p class="rule">📌 الثقة = الصراحة بحدود معرفتك، لا التظاهر بعكسها.</p>
+          </article>
+
+          <article class="prog-soft-card">
+            <header>👥 <h4>Pair Programming · driver/navigator</h4></header>
+            <p>اثنان أمام نفس الكود: الـ <em>driver</em> يكتب، الـ <em>navigator</em> يفكر استراتيجياً. تبادلوا كل ٢٥ دقيقة.</p>
+            <ul>
+              <li>navigator لا يقاطع driver في كل سطر — يُلاحظ نقاط بعدية</li>
+              <li>driver يفكر بصوت عالٍ — "الآن أتحقق من null"</li>
+              <li>تجنّب pairing &gt; ٢ ساعات بدون استراحة — منهك ذهنياً</li>
+            </ul>
+            <p class="rule">📌 ممتاز للمهام الجديدة، التعلّم، debugging صعب. مكلف للأعمال الروتينية.</p>
+          </article>
+
+          <article class="prog-soft-card">
+            <header>📨 <h4>كتابة رسالة Slack/Email احترافية</h4></header>
+            <p>القاعدة: <strong>BLUF</strong> = Bottom Line Up Front. الجملة الأولى تحمل الطلب أو الخلاصة.</p>
+            <ul>
+              <li><b>سيّئ:</b> "أمس كنت أعمل على... ثم... ثم... وأخيراً، ممكن صلاحية staging؟"</li>
+              <li><b>جيد:</b> "أحتاج صلاحية staging لاختبار refresh tokens. السبب: نسخت credentials قديمة لكنها expired."</li>
+            </ul>
+            <p class="rule">📌 رسالتك تنافس ١٠٠ رسالة أخرى — اجعلها سهلة الردّ.</p>
+          </article>
+
+        </div>
+      </section>
+
     </section><!-- /page-programming -->
 
 
