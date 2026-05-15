@@ -1,0 +1,33 @@
+{
+  "worker": "04",
+  "worker_name": "ACCOUNTING_CASHIER",
+  "phase": 5,
+  "title": "Cashier Track + Iraq Salary + Cheat Sheet + Citations",
+  "branch": "worker-04-phase-5",
+  "completed_at": "2026-05-15T08:08:00Z",
+  "lines_added": 680,
+  "files_modified": [
+    "platform/index.html",
+    "platform/assets/style.css"
+  ],
+  "html_mounts": [
+    "section.acc-cashier[data-acc-phase=\"5\"]",
+    "article[data-acc-lab=\"cs-cycle\"]",
+    "article[data-acc-lab=\"cs-rules\"]",
+    "article[data-acc-lab=\"cs-pos\"]",
+    "article[data-acc-lab=\"cs-iraq\"]",
+    "article[data-acc-lab=\"cs-cheat\"]",
+    "article[data-acc-lab=\"cs-citations\"]"
+  ],
+  "content_breakdown": {
+    "cashier_stages": 6,
+    "cash_handling_rules": 8,
+    "loss_indicators": 12,
+    "pos_systems": 4,
+    "counterfeit_marks": 5,
+    "iraq_salary_rows": 8,
+    "cheat_sheet_columns": 6,
+    "citations": 12
+  },
+  "next_phase": "Worker 05 — Programmer (next session)"
+}
