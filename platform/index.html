@@ -15590,6 +15590,288 @@ const bird = { ...canMove(), ...canFly() };
       <!-- Phase 4 marker -->
       <div id="hrm-phase-4-end" style="display:none;"></div>
 
+      <!-- ========== PHASE 5 START ========== -->
+
+      <!-- Section M — Mock Phone Screen Timer (Lab 5) -->
+      <div class="hrm-section-title-wrap" style="margin-top:32px;">
+        <div class="hrm-section-eyebrow">M · المختبر التفاعلي #4</div>
+        <h2 class="hrm-section-title">Mock Phone Screen Timer — محاكي مكالمة HR</h2>
+        <p class="hrm-section-sub">5 أسئلة، 30 ثانية لكل واحد. اكتب إجابتك. التقرير يقيس: الكثافة، نسبة "أنا/نحن"، كلمات الحشو، الالتزام بالوقت.</p>
+      </div>
+
+      <div class="hrm-mock" id="hrmMock">
+        <div class="hrm-mock-stage" data-stage="intro">
+          <div class="hrm-mock-intro">
+            <div class="hrm-mock-intro-icon">📞</div>
+            <div class="hrm-mock-intro-text">
+              <b>كيف يعمل:</b> سيظهر سؤال + 30 ثانية. اكتب إجابتك بسرعة كأنك تتكلم. لا تتوقف. النظام يحلّل أسلوبك في النهاية.
+            </div>
+            <button class="hrm-mock-btn primary" id="hrmMockStart">ابدأ المحاكاة 🎤</button>
+          </div>
+        </div>
+
+        <div class="hrm-mock-stage" data-stage="play" style="display:none;">
+          <div class="hrm-mock-top">
+            <div class="hrm-mock-step">
+              السؤال <span id="hrmMockNum">1</span> / 5
+            </div>
+            <div class="hrm-mock-timer-wrap">
+              <div class="hrm-mock-timer-bar"><div class="hrm-mock-timer-fill" id="hrmMockTimerFill"></div></div>
+              <div class="hrm-mock-timer-num" id="hrmMockTimerNum">30</div>
+            </div>
+          </div>
+          <div class="hrm-mock-q" id="hrmMockQ">—</div>
+          <textarea class="hrm-mock-input" id="hrmMockInput" rows="5" placeholder="اكتب إجابتك بسرعة..."></textarea>
+          <div class="hrm-mock-controls">
+            <div class="hrm-mock-stats">
+              <span>📝 <span id="hrmMockWords">0</span> كلمة</span>
+              <span>⏱ <span id="hrmMockElapsed">0</span> ثانية</span>
+            </div>
+            <button class="hrm-mock-btn primary" id="hrmMockNext">السؤال التالي ▶</button>
+          </div>
+        </div>
+
+        <div class="hrm-mock-stage" data-stage="report" style="display:none;">
+          <div id="hrmMockReport"></div>
+          <button class="hrm-mock-btn ghost" id="hrmMockRestart">إعادة المحاكاة 🔁</button>
+        </div>
+      </div>
+
+      <!-- Section N — Offer Compare Matrix (Lab 6) -->
+      <div class="hrm-section-title-wrap" style="margin-top:32px;">
+        <div class="hrm-section-eyebrow">N · المختبر التفاعلي #5</div>
+        <h2 class="hrm-section-title">Offer Compare Matrix — قارن 3 عروض بمعايير وزنية</h2>
+        <p class="hrm-section-sub">حدد أوزان المعايير حسب أولوياتك → أدخل بيانات كل عرض → احصل على توصية مرجّحة.</p>
+      </div>
+
+      <div class="hrm-cmp">
+        <div class="hrm-cmp-weights">
+          <div class="hrm-cmp-section-title">⚖ أوزان أولوياتك (المجموع 100)</div>
+          <div class="hrm-cmp-weights-grid">
+            <div class="hrm-cmp-weight-row">
+              <label>راتب base</label>
+              <input type="range" class="hrm-cmp-w" data-w="salary" min="0" max="50" value="35">
+              <span class="hrm-cmp-w-val" data-wv="salary">35</span>
+            </div>
+            <div class="hrm-cmp-weight-row">
+              <label>استقرار الشركة</label>
+              <input type="range" class="hrm-cmp-w" data-w="stability" min="0" max="50" value="20">
+              <span class="hrm-cmp-w-val" data-wv="stability">20</span>
+            </div>
+            <div class="hrm-cmp-weight-row">
+              <label>فرص النمو</label>
+              <input type="range" class="hrm-cmp-w" data-w="growth" min="0" max="50" value="20">
+              <span class="hrm-cmp-w-val" data-wv="growth">20</span>
+            </div>
+            <div class="hrm-cmp-weight-row">
+              <label>ثقافة + بيئة</label>
+              <input type="range" class="hrm-cmp-w" data-w="culture" min="0" max="50" value="15">
+              <span class="hrm-cmp-w-val" data-wv="culture">15</span>
+            </div>
+            <div class="hrm-cmp-weight-row">
+              <label>المرونة (remote/إجازات)</label>
+              <input type="range" class="hrm-cmp-w" data-w="flex" min="0" max="50" value="10">
+              <span class="hrm-cmp-w-val" data-wv="flex">10</span>
+            </div>
+          </div>
+          <div class="hrm-cmp-total">المجموع: <span id="hrmCmpWTotal">100</span> / 100</div>
+        </div>
+
+        <div class="hrm-cmp-offers">
+          <div class="hrm-cmp-section-title">🎯 العروض الثلاثة (1-10 لكل معيار)</div>
+          <div class="hrm-cmp-offers-grid">
+            <!-- Offer A -->
+            <div class="hrm-cmp-offer" data-offer="A">
+              <input type="text" class="hrm-cmp-name" placeholder="اسم العرض A" value="عرض A">
+              <div class="hrm-cmp-row"><label>راتب (10/10 = ممتاز)</label><input type="range" class="hrm-cmp-s" data-s="salary" min="1" max="10" value="6"><span class="hrm-cmp-sv" data-sv="salary">6</span></div>
+              <div class="hrm-cmp-row"><label>استقرار</label><input type="range" class="hrm-cmp-s" data-s="stability" min="1" max="10" value="8"><span class="hrm-cmp-sv" data-sv="stability">8</span></div>
+              <div class="hrm-cmp-row"><label>نمو</label><input type="range" class="hrm-cmp-s" data-s="growth" min="1" max="10" value="5"><span class="hrm-cmp-sv" data-sv="growth">5</span></div>
+              <div class="hrm-cmp-row"><label>ثقافة</label><input type="range" class="hrm-cmp-s" data-s="culture" min="1" max="10" value="7"><span class="hrm-cmp-sv" data-sv="culture">7</span></div>
+              <div class="hrm-cmp-row"><label>مرونة</label><input type="range" class="hrm-cmp-s" data-s="flex" min="1" max="10" value="6"><span class="hrm-cmp-sv" data-sv="flex">6</span></div>
+            </div>
+            <!-- Offer B -->
+            <div class="hrm-cmp-offer" data-offer="B">
+              <input type="text" class="hrm-cmp-name" placeholder="اسم العرض B" value="عرض B">
+              <div class="hrm-cmp-row"><label>راتب</label><input type="range" class="hrm-cmp-s" data-s="salary" min="1" max="10" value="8"><span class="hrm-cmp-sv" data-sv="salary">8</span></div>
+              <div class="hrm-cmp-row"><label>استقرار</label><input type="range" class="hrm-cmp-s" data-s="stability" min="1" max="10" value="6"><span class="hrm-cmp-sv" data-sv="stability">6</span></div>
+              <div class="hrm-cmp-row"><label>نمو</label><input type="range" class="hrm-cmp-s" data-s="growth" min="1" max="10" value="9"><span class="hrm-cmp-sv" data-sv="growth">9</span></div>
+              <div class="hrm-cmp-row"><label>ثقافة</label><input type="range" class="hrm-cmp-s" data-s="culture" min="1" max="10" value="6"><span class="hrm-cmp-sv" data-sv="culture">6</span></div>
+              <div class="hrm-cmp-row"><label>مرونة</label><input type="range" class="hrm-cmp-s" data-s="flex" min="1" max="10" value="7"><span class="hrm-cmp-sv" data-sv="flex">7</span></div>
+            </div>
+            <!-- Offer C -->
+            <div class="hrm-cmp-offer" data-offer="C">
+              <input type="text" class="hrm-cmp-name" placeholder="اسم العرض C" value="عرض C">
+              <div class="hrm-cmp-row"><label>راتب</label><input type="range" class="hrm-cmp-s" data-s="salary" min="1" max="10" value="9"><span class="hrm-cmp-sv" data-sv="salary">9</span></div>
+              <div class="hrm-cmp-row"><label>استقرار</label><input type="range" class="hrm-cmp-s" data-s="stability" min="1" max="10" value="4"><span class="hrm-cmp-sv" data-sv="stability">4</span></div>
+              <div class="hrm-cmp-row"><label>نمو</label><input type="range" class="hrm-cmp-s" data-s="growth" min="1" max="10" value="9"><span class="hrm-cmp-sv" data-sv="growth">9</span></div>
+              <div class="hrm-cmp-row"><label>ثقافة</label><input type="range" class="hrm-cmp-s" data-s="culture" min="1" max="10" value="8"><span class="hrm-cmp-sv" data-sv="culture">8</span></div>
+              <div class="hrm-cmp-row"><label>مرونة</label><input type="range" class="hrm-cmp-s" data-s="flex" min="1" max="10" value="9"><span class="hrm-cmp-sv" data-sv="flex">9</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hrm-cmp-result" id="hrmCmpResult">
+          <!-- populated by JS -->
+        </div>
+      </div>
+
+      <!-- Section O — Iraq Labor Law Block -->
+      <div class="hrm-section-title-wrap" style="margin-top:32px;">
+        <div class="hrm-section-eyebrow">O · 🇮🇶 خصوصية العراق</div>
+        <h2 class="hrm-section-title">قانون العمل العراقي 37/2015 — ما يجب أن تعرفه</h2>
+        <p class="hrm-section-sub">حقوقك وفقاً للقانون. اعرفها قبل التوقيع، ووظّفها في التفاوض.</p>
+      </div>
+
+      <div class="hrm-law-grid">
+        <div class="hrm-law-card">
+          <div class="hrm-law-icon">📜</div>
+          <div class="hrm-law-title">العقد المكتوب — إلزامي</div>
+          <div class="hrm-law-text">القانون يلزم صاحب العمل بعقد مكتوب بنسختين (واحدة للموظف). العقد الشفهي قابل للطعن. ⚠ <b>لا تبدأ بدون نسخة موقّعة.</b></div>
+        </div>
+        <div class="hrm-law-card">
+          <div class="hrm-law-icon">🛡️</div>
+          <div class="hrm-law-title">التأمين الاجتماعي</div>
+          <div class="hrm-law-text">إلزامي: <b>5% من الموظف + 12% من صاحب العمل</b>. لو الشركة لا تسجّلك، خسرت تقاعدك + غطاء إصاباتك.</div>
+        </div>
+        <div class="hrm-law-card">
+          <div class="hrm-law-icon">💰</div>
+          <div class="hrm-law-title">ضريبة الدخل</div>
+          <div class="hrm-law-text">تُخصم من المصدر. الشرائح: 3% (حتى 250k) → 15% (فوق 1M). اطلب stub راتب يبيّن الخصومات.</div>
+        </div>
+        <div class="hrm-law-card">
+          <div class="hrm-law-icon">🌴</div>
+          <div class="hrm-law-title">الإجازة السنوية</div>
+          <div class="hrm-law-text"><b>21 يوم</b> بعد سنة، <b>30 يوم</b> بعد 5 سنوات. مدفوعة بالكامل. لا يمكن التنازل عنها قانونياً.</div>
+        </div>
+        <div class="hrm-law-card">
+          <div class="hrm-law-icon">🩺</div>
+          <div class="hrm-law-title">الإجازة المرضية</div>
+          <div class="hrm-law-text">حتى <b>30 يوم</b> سنوياً مدفوعة (بشهادة طبية). لا يحق فصلك بسبب مرض موثّق.</div>
+        </div>
+        <div class="hrm-law-card">
+          <div class="hrm-law-icon">⏳</div>
+          <div class="hrm-law-title">فترة التجربة</div>
+          <div class="hrm-law-text">حد أقصى <b>3 أشهر</b> للأدوار العادية، 6 أشهر للأدوار الفنية. <b>مدفوعة كاملة</b>. ⚠ "trial بدون راتب" غير قانوني.</div>
+        </div>
+        <div class="hrm-law-card">
+          <div class="hrm-law-icon">📅</div>
+          <div class="hrm-law-title">إنهاء الخدمة</div>
+          <div class="hrm-law-text"><b>إشعار 30 يوم</b> من أي طرف (قابل للتفاوض في العقد). الفصل التعسفي يستوجب تعويضاً (راتب 2-12 شهر حسب المدة).</div>
+        </div>
+        <div class="hrm-law-card">
+          <div class="hrm-law-icon">👶</div>
+          <div class="hrm-law-title">إجازة الأمومة</div>
+          <div class="hrm-law-text"><b>14 أسبوع</b> مدفوعة (4 قبل + 10 بعد الولادة). لا يحق فصل المرأة الحامل أو خلال إجازتها.</div>
+        </div>
+        <div class="hrm-law-card">
+          <div class="hrm-law-icon">⏰</div>
+          <div class="hrm-law-title">ساعات العمل + OT</div>
+          <div class="hrm-law-text"><b>8 ساعات/يوم، 48/أسبوع</b>. أي ساعة إضافية = 50% أجر إضافي (ليالي/جمعة/عطلات = 100% إضافي). ⚠ OT بدون أجر = مخالفة.</div>
+        </div>
+      </div>
+
+      <!-- Section P — Cheat Sheet -->
+      <div class="hrm-section-title-wrap" style="margin-top:32px;">
+        <div class="hrm-section-eyebrow">P · المرجع السريع</div>
+        <h2 class="hrm-section-title">Cheat Sheet — تذكرها قبل أي مقابلة</h2>
+        <p class="hrm-section-sub">طباعة وحفظ في الجيب. كل ما تحتاجه في صفحة واحدة.</p>
+      </div>
+
+      <div class="hrm-cheat-grid">
+        <div class="hrm-cheat-card">
+          <div class="hrm-cheat-h">⚡ قبل المقابلة (90 دقيقة research)</div>
+          <ul>
+            <li><b>الشركة:</b> آخر 3 أخبار + منتج + منافسين</li>
+            <li><b>Interviewer:</b> LinkedIn + خلفيتهم</li>
+            <li><b>Glassdoor:</b> 10 مراجعات</li>
+            <li>قائمة 7 أسئلة جاهزة</li>
+            <li>3 STAR examples لكل مهارة في الإعلان</li>
+          </ul>
+        </div>
+        <div class="hrm-cheat-card">
+          <div class="hrm-cheat-h">🎯 خلال المقابلة</div>
+          <ul>
+            <li><b>STAR</b> لكل سؤال سلوكي (90-120 ثانية)</li>
+            <li>Eye contact 60-70%، صمت بدل "آآآ"</li>
+            <li>سؤال راتب → "ما النطاق المعتمد عندكم؟"</li>
+            <li>أنهِ بـ 3 أسئلة قوية للمحادثة</li>
+            <li>اطلب Next Step قبل الانصراف</li>
+          </ul>
+        </div>
+        <div class="hrm-cheat-card">
+          <div class="hrm-cheat-h">💵 تفاوض الراتب — 6 قواعد</div>
+          <ul>
+            <li><b>Anchor:</b> دعهم يبدأون أو ابدأ عالٍ</li>
+            <li><b>Range:</b> النهاية السفلى = هدفك</li>
+            <li><b>Total Comp:</b> base + bonus + benefits</li>
+            <li><b>BATNA:</b> اعرف بديلك دائماً</li>
+            <li><b>ZOPA:</b> اكتشف نطاقهم</li>
+            <li><b>Silence:</b> 7 ثوانٍ بعد عرضهم</li>
+          </ul>
+        </div>
+        <div class="hrm-cheat-card">
+          <div class="hrm-cheat-h">📨 بعد المقابلة (24-72 ساعة)</div>
+          <ul>
+            <li><b>Day 1:</b> Thank-you email (إجباري)</li>
+            <li><b>Day 4:</b> follow-up لطيف</li>
+            <li><b>Day 8:</b> "تحديث سريع — في مرحلة متقدمة مع آخر"</li>
+            <li><b>Day 12:</b> آخر متابعة</li>
+            <li>بعد 14 يوم → اعتبرها no</li>
+          </ul>
+        </div>
+        <div class="hrm-cheat-card">
+          <div class="hrm-cheat-h">🚨 Red Flags — انسحب فوراً</div>
+          <ul>
+            <li>"24/7 available"</li>
+            <li>"Trial شهر بدون راتب"</li>
+            <li>"الراتب يحدد بعد القبول"</li>
+            <li>طلب deposit/كفالة مالية</li>
+            <li>عقد قبل العرض المكتوب</li>
+            <li>إلغاء مواعيد متكرر</li>
+          </ul>
+        </div>
+        <div class="hrm-cheat-card">
+          <div class="hrm-cheat-h">🇮🇶 حقوقك القانونية</div>
+          <ul>
+            <li>عقد مكتوب بنسختين</li>
+            <li>تأمين اجتماعي 5% + 12%</li>
+            <li>إجازة سنوية 21 يوم (30 بعد 5س)</li>
+            <li>إشعار 30 يوم من أي طرف</li>
+            <li>OT = 50-100% إضافي</li>
+            <li>فترة تجربة مدفوعة (3-6 أشهر max)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Section Q — Citations -->
+      <div class="hrm-section-title-wrap" style="margin-top:32px;">
+        <div class="hrm-section-eyebrow">Q · مراجع موثّقة</div>
+        <h2 class="hrm-section-title">المراجع — 14 مصدر علمي</h2>
+        <p class="hrm-section-sub">كل ادعاء في هذه الوحدة مستند لمصدر علمي/قانوني. هذه قائمتها.</p>
+      </div>
+
+      <div class="hrm-citations">
+        <ol class="hrm-cite-list">
+          <li><b>Voss, Chris (2016)</b> — <i>Never Split the Difference: Negotiating As If Your Life Depended On It.</i> HarperBusiness. أساس "Silence is a tool" + Tactical Empathy.</li>
+          <li><b>Fisher, Roger; Ury, William; Patton, Bruce (1981/2011)</b> — <i>Getting to Yes: Negotiating Agreement Without Giving In.</i> Penguin. أصل BATNA + Interest-Based Negotiation.</li>
+          <li><b>Cialdini, Robert B. (1984/2021)</b> — <i>Influence: The Psychology of Persuasion</i> (New &amp; Expanded). Harper Business. الأسلحة الستة + Pre-Suasion.</li>
+          <li><b>Galinsky, Adam D.; Mussweiler, Thomas (2001)</b> — "First Offers as Anchors: The Role of Perspective-Taking and Negotiator Focus." <i>Journal of Personality and Social Psychology</i>, 81(4), 657–669.</li>
+          <li><b>Ames, Daniel; Mason, Malia (2015)</b> — "Tandem Anchoring: Informational and Politeness Effects of Range Offers in Social Exchange." <i>Journal of Personality and Social Psychology</i>, 108(2), 254–274.</li>
+          <li><b>Lewicki, Roy J.; Hiam, Alexander (2006)</b> — <i>Mastering Business Negotiation: A Working Guide to Making Deals and Resolving Conflict.</i> Jossey-Bass. تعريف ZOPA.</li>
+          <li><b>Kahneman, Daniel (2011)</b> — <i>Thinking, Fast and Slow.</i> Farrar, Straus and Giroux. علم نفس Anchoring + Framing.</li>
+          <li><b>Goleman, Daniel (1995/2005)</b> — <i>Emotional Intelligence: Why It Can Matter More Than IQ.</i> Bantam. EQ في المقابلات.</li>
+          <li><b>Mehrabian, Albert (1971)</b> — <i>Silent Messages: Implicit Communication of Emotions and Attitudes.</i> Wadsworth. الـ 7%-38%-55% (لفظي/صوتي/بصري) — في السياقات العاطفية.</li>
+          <li><b>قانون العمل العراقي رقم 37 لسنة 2015</b> — <i>الجريدة الرسمية، عدد 4396 (2015/11/02).</i> المرجع القانوني للعقود + الإجازات + التأمين الاجتماعي + الفصل.</li>
+          <li><b>SHRM (Society for Human Resource Management)</b> — <i>Compensation &amp; Benefits Benchmarking Reports 2023-2025.</i> shrm.org. توزيع Total Compensation.</li>
+          <li><b>Glassdoor (2024-2025)</b> — <i>Salary Methodology &amp; Iraq Market Reports.</i> glassdoor.com. المراجع الرقمية لرواتب الشرق الأوسط.</li>
+          <li><b>Harvard Business Review</b> — Pinkley, Jensen, Geddes (2017): "How to Negotiate Salary in a Tough Economy." HBR Negotiation Series.</li>
+          <li><b>Levels.fyi (2025)</b> — Remote/Global compensation data للأدوار التقنية. levels.fyi. مرجع تفاوض remote-first.</li>
+        </ol>
+      </div>
+
+      <!-- Phase 5 marker (FINAL) -->
+      <div id="hrm-phase-5-end" style="display:none;"></div>
+
     </section><!-- /page-hrmastery -->
 
 

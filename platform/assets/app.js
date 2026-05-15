@@ -9651,6 +9651,8 @@ document.addEventListener('DOMContentLoaded', () => {
     bindCalculator();
     bindScenarios();
     bindDecoder();
+    bindMock();
+    bindCompare();
   }
 
   function bindTrapTabs(){
@@ -10264,6 +10266,305 @@ document.addEventListener('DOMContentLoaded', () => {
 
     html += '</div>';
     out.innerHTML = html;
+  }
+
+  /* =========================
+     MOCK PHONE SCREEN TIMER (Lab 5)
+     localStorage: upg_interview_attempts_hr
+     ========================= */
+  var MOCK_QUESTIONS = [
+    'حدّثني عن نفسك في 30 ثانية.',
+    'لماذا تريد ترك وظيفتك الحالية؟',
+    'ما أكبر إنجاز افتخرت به آخر سنة؟ بأرقام.',
+    'ما توقعاتك للراتب؟',
+    'هل عندك أسئلة؟ اذكر سؤالاً واحداً قوياً.'
+  ];
+  var FILLER_WORDS = ['اممم','ام','يعني','مثلاً','شي','هيك','كذا','حقيقة','بصراحة','يمكن','ممكن'];
+
+  var mockState = { idx:0, time:30, timerId:null, answers:[], times:[] };
+
+  function bindMock(){
+    var page = document.getElementById('page-hrmastery');
+    if (!page) return;
+    var mock = page.querySelector('#hrmMock');
+    if (!mock || mock.__hrmBound) return;
+    mock.__hrmBound = true;
+
+    page.querySelector('#hrmMockStart').addEventListener('click', function(){
+      mockState = { idx:0, time:30, timerId:null, answers:[], times:[] };
+      showMockStage('play');
+      startMockQuestion();
+    });
+
+    page.querySelector('#hrmMockNext').addEventListener('click', function(){
+      saveMockAnswer();
+      mockState.idx++;
+      if (mockState.idx >= MOCK_QUESTIONS.length){
+        renderMockReport();
+      } else {
+        startMockQuestion();
+      }
+    });
+
+    page.querySelector('#hrmMockRestart').addEventListener('click', function(){
+      stopMockTimer();
+      showMockStage('intro');
+    });
+
+    var input = page.querySelector('#hrmMockInput');
+    if (input){
+      input.addEventListener('input', function(){
+        var w = input.value.trim().split(/\s+/).filter(Boolean).length;
+        page.querySelector('#hrmMockWords').textContent = w;
+      });
+    }
+  }
+
+  function showMockStage(name){
+    var page = document.getElementById('page-hrmastery');
+    if (!page) return;
+    page.querySelectorAll('.hrm-mock-stage').forEach(function(s){
+      s.style.display = (s.getAttribute('data-stage') === name) ? '' : 'none';
+    });
+  }
+
+  function startMockQuestion(){
+    var page = document.getElementById('page-hrmastery');
+    if (!page) return;
+    page.querySelector('#hrmMockNum').textContent = (mockState.idx + 1);
+    page.querySelector('#hrmMockQ').textContent = MOCK_QUESTIONS[mockState.idx];
+    var input = page.querySelector('#hrmMockInput');
+    input.value = ''; input.focus();
+    page.querySelector('#hrmMockWords').textContent = '0';
+    page.querySelector('#hrmMockElapsed').textContent = '0';
+
+    stopMockTimer();
+    mockState.time = 30;
+    mockState.startedAt = Date.now();
+    updateMockTimer();
+    mockState.timerId = setInterval(function(){
+      mockState.time--;
+      updateMockTimer();
+      if (mockState.time <= 0){
+        stopMockTimer();
+        // auto next
+        var btn = page.querySelector('#hrmMockNext');
+        if (btn) btn.click();
+      }
+    }, 1000);
+  }
+
+  function updateMockTimer(){
+    var page = document.getElementById('page-hrmastery');
+    if (!page) return;
+    var fill = page.querySelector('#hrmMockTimerFill');
+    var num = page.querySelector('#hrmMockTimerNum');
+    var elapsedEl = page.querySelector('#hrmMockElapsed');
+    if (!fill || !num) return;
+    var pct = Math.max(0, (mockState.time / 30) * 100);
+    fill.style.width = pct + '%';
+    num.textContent = mockState.time;
+    num.classList.toggle('warn', mockState.time <= 10 && mockState.time > 5);
+    num.classList.toggle('danger', mockState.time <= 5);
+    if (elapsedEl){
+      var elapsed = Math.round((Date.now() - mockState.startedAt) / 1000);
+      elapsedEl.textContent = elapsed;
+    }
+  }
+
+  function stopMockTimer(){
+    if (mockState.timerId){
+      clearInterval(mockState.timerId);
+      mockState.timerId = null;
+    }
+  }
+
+  function saveMockAnswer(){
+    var page = document.getElementById('page-hrmastery');
+    if (!page) return;
+    var input = page.querySelector('#hrmMockInput');
+    var elapsed = Math.round((Date.now() - mockState.startedAt) / 1000);
+    mockState.answers.push(input.value.trim());
+    mockState.times.push(elapsed);
+  }
+
+  function renderMockReport(){
+    stopMockTimer();
+    var page = document.getElementById('page-hrmastery');
+    if (!page) return;
+    showMockStage('report');
+
+    // Aggregate metrics
+    var totalWords = 0, totalChars = 0, totalTime = 0;
+    var fillerCount = 0;
+    var iCount = 0, weCount = 0;
+    mockState.answers.forEach(function(a){
+      var t = (a || '').toLowerCase();
+      var words = t.split(/\s+/).filter(Boolean);
+      totalWords += words.length;
+      totalChars += t.length;
+      FILLER_WORDS.forEach(function(f){
+        var re = new RegExp('\\b' + f + '\\b','g');
+        var m = t.match(re);
+        if (m) fillerCount += m.length;
+      });
+      iCount += (t.match(/(?:^|\s)(?:أنا|انا)(?=\s|\.|,|$)/g) || []).length;
+      weCount += (t.match(/(?:^|\s)(?:نحن|إحنا|احنا|كنا|قمنا|نعمل|عملنا)(?=\s|\.|,|$)/g) || []).length;
+    });
+    mockState.times.forEach(function(t){ totalTime += t; });
+    var avgWordsPerAns = mockState.answers.length ? Math.round(totalWords / mockState.answers.length) : 0;
+    var fillerRatio = totalWords ? Math.round((fillerCount / totalWords) * 100) : 0;
+    var iRatio = (iCount + weCount) > 0 ? Math.round((iCount / (iCount + weCount)) * 100) : 0;
+    var avgTime = mockState.times.length ? Math.round(totalTime / mockState.times.length) : 0;
+
+    // Class colors
+    function cls(val, good, warn){
+      if (val <= good) return 'good';
+      if (val <= warn) return 'warn';
+      return 'bad';
+    }
+    var fillerCls = cls(fillerRatio, 3, 7); // 3% great, 7% ok, more = bad
+    var lengthCls = avgWordsPerAns >= 25 && avgWordsPerAns <= 70 ? 'good' :
+                    avgWordsPerAns < 25 ? 'warn' : 'bad';
+    var iRatioCls = iRatio >= 35 && iRatio <= 65 ? 'good' :
+                    'warn'; // too me-heavy or too we-heavy
+    var timeCls = avgTime >= 20 && avgTime <= 28 ? 'good' :
+                  avgTime < 12 ? 'warn' : avgTime < 30 ? 'good' : 'bad';
+
+    // Generate feedback
+    var feedback = '<b>📊 الملخص:</b><br>';
+    feedback += avgWordsPerAns < 25 ? 'إجاباتك قصيرة جداً — تحتاج تطوير الفكرة بمثال محدد. ' :
+                avgWordsPerAns > 70 ? 'إجاباتك مطوّلة — حضّر النسخة المضغوطة (60 ثانية). ' :
+                'طول إجاباتك مناسب. ';
+    feedback += fillerRatio > 7 ? 'كلمات الحشو مرتفعة — تدرّب على الصمت بدل "اممم/يعني". ' :
+                fillerRatio > 3 ? 'كلمات الحشو معقولة، لكن قابلة للتحسين. ' :
+                'كلمات الحشو ممتازة. ';
+    feedback += iCount > 0 && iRatio > 70 ? 'تستخدم "أنا" أكثر مما ينبغي — اذكر الفريق أكثر. ' :
+                iCount > 0 && iRatio < 30 ? '"نحن" تطغى — في المقابلات HR يحتاج معرفة دورك تحديداً، استخدم "أنا" أكثر. ' :
+                'توازن "أنا/نحن" جيد. ';
+    feedback += avgTime < 12 ? 'تنهي الإجابة بسرعة — استثمر الوقت كاملاً. ' :
+                avgTime > 28 ? 'تستخدم الوقت كاملاً — جيد لإجابات معقدة. ' : 'إدارة الوقت ممتازة. ';
+
+    var html = ''
+      + '<div class="hrm-mock-report-h">📋 تقرير محاكاة HR</div>'
+      + '<div class="hrm-mock-report-sub">5 أسئلة، تحليل اللغة + الإيقاع + التوازن</div>'
+      + '<div class="hrm-mock-metrics">'
+      +   '<div class="hrm-mock-metric"><div class="hrm-mock-metric-val ' + lengthCls + '">' + avgWordsPerAns + '</div><div class="hrm-mock-metric-label">متوسط كلمات / إجابة</div></div>'
+      +   '<div class="hrm-mock-metric"><div class="hrm-mock-metric-val ' + fillerCls + '">' + fillerRatio + '%</div><div class="hrm-mock-metric-label">كلمات حشو</div></div>'
+      +   '<div class="hrm-mock-metric"><div class="hrm-mock-metric-val ' + iRatioCls + '">' + iRatio + '% / ' + (100 - iRatio) + '%</div><div class="hrm-mock-metric-label">أنا / نحن</div></div>'
+      +   '<div class="hrm-mock-metric"><div class="hrm-mock-metric-val ' + timeCls + '">' + avgTime + 's</div><div class="hrm-mock-metric-label">متوسط زمن الإجابة</div></div>'
+      + '</div>'
+      + '<div class="hrm-mock-feedback">' + feedback + '</div>'
+      + '<div class="hrm-mock-answers">';
+    mockState.answers.forEach(function(a, i){
+      html += '<div class="hrm-mock-ans-q">' + (i+1) + '. ' + MOCK_QUESTIONS[i] + '  <span style="color:var(--text-faint);font-weight:400;">(' + (mockState.times[i]||0) + 's)</span></div>';
+      html += '<div class="hrm-mock-ans-a">' + (a || '<i style="color:var(--text-faint);">لا إجابة</i>') + '</div>';
+    });
+    html += '</div>';
+
+    page.querySelector('#hrmMockReport').innerHTML = html;
+
+    // Save attempt
+    try {
+      var rec = { ts: Date.now(), avgWords: avgWordsPerAns, filler: fillerRatio, iRatio: iRatio, avgTime: avgTime };
+      var arr = JSON.parse(localStorage.getItem('upg_interview_attempts_hr') || '[]');
+      arr.unshift(rec); arr = arr.slice(0,15);
+      localStorage.setItem('upg_interview_attempts_hr', JSON.stringify(arr));
+    } catch(e){}
+  }
+
+  /* =========================
+     OFFER COMPARE MATRIX (Lab 6)
+     ========================= */
+  function bindCompare(){
+    var page = document.getElementById('page-hrmastery');
+    if (!page) return;
+    var cmp = page.querySelector('.hrm-cmp');
+    if (!cmp || cmp.__hrmBound) return;
+    cmp.__hrmBound = true;
+
+    // weight inputs
+    page.querySelectorAll('.hrm-cmp-w').forEach(function(r){
+      r.addEventListener('input', function(){
+        var key = r.getAttribute('data-w');
+        var v = page.querySelector('[data-wv="' + key + '"]');
+        if (v) v.textContent = r.value;
+        runCompare();
+      });
+    });
+    // score inputs
+    page.querySelectorAll('.hrm-cmp-s').forEach(function(r){
+      r.addEventListener('input', function(){
+        var key = r.getAttribute('data-s');
+        var offer = r.closest('.hrm-cmp-offer');
+        var v = offer.querySelector('[data-sv="' + key + '"]');
+        if (v) v.textContent = r.value;
+        runCompare();
+      });
+    });
+    // names
+    page.querySelectorAll('.hrm-cmp-name').forEach(function(n){
+      n.addEventListener('input', runCompare);
+    });
+
+    runCompare();
+  }
+
+  function runCompare(){
+    var page = document.getElementById('page-hrmastery');
+    if (!page) return;
+    var weights = {};
+    page.querySelectorAll('.hrm-cmp-w').forEach(function(r){
+      weights[r.getAttribute('data-w')] = parseInt(r.value, 10) || 0;
+    });
+    var totalW = Object.keys(weights).reduce(function(s,k){ return s + weights[k]; }, 0);
+
+    // Update total
+    var totalEl = page.querySelector('#hrmCmpWTotal');
+    if (totalEl){
+      totalEl.textContent = totalW;
+      var totalParent = totalEl.closest('.hrm-cmp-total');
+      totalParent.classList.toggle('warn', totalW < 90 || totalW > 110);
+      totalParent.classList.toggle('bad', totalW < 80 || totalW > 120);
+    }
+
+    // Calculate offers
+    var offers = [];
+    page.querySelectorAll('.hrm-cmp-offer').forEach(function(o){
+      var name = o.querySelector('.hrm-cmp-name').value || o.getAttribute('data-offer');
+      var scores = {};
+      o.querySelectorAll('.hrm-cmp-s').forEach(function(r){
+        scores[r.getAttribute('data-s')] = parseInt(r.value, 10) || 0;
+      });
+      // Weighted score (out of 1000) normalized to /100
+      var weighted = 0;
+      Object.keys(weights).forEach(function(k){
+        weighted += weights[k] * (scores[k] || 0); // max = sum(weights) * 10 = ~1000
+      });
+      var pct = totalW > 0 ? Math.round((weighted / (totalW * 10)) * 100) : 0;
+      offers.push({ name: name, scores: scores, weighted: weighted, pct: pct });
+    });
+
+    var maxPct = Math.max.apply(null, offers.map(function(o){ return o.pct; }));
+    var winner = offers.find(function(o){ return o.pct === maxPct; });
+
+    var html = ''
+      + '<div class="hrm-cmp-winner">'
+      +   '<div class="hrm-cmp-winner-icon">🏆</div>'
+      +   '<div class="hrm-cmp-winner-text">التوصية: <b>' + winner.name + '</b> (' + winner.pct + '/100) — أفضل توافق مع أوزانك</div>'
+      + '</div>'
+      + '<div class="hrm-cmp-bars">';
+    offers.forEach(function(o){
+      var winCls = o.pct === maxPct ? 'win' : '';
+      html += '<div class="hrm-cmp-bar-row">'
+        +   '<label>' + o.name + '</label>'
+        +   '<div class="hrm-cmp-bar"><div class="hrm-cmp-bar-fill ' + winCls + '" style="width:' + Math.max(8, o.pct) + '%;">' + o.pct + '%</div></div>'
+        +   '<div class="hrm-cmp-bar-score">' + o.pct + '/100</div>'
+        + '</div>';
+    });
+    html += '</div>';
+
+    page.querySelector('#hrmCmpResult').innerHTML = html;
   }
 
   if (document.readyState === 'loading'){

@@ -13152,3 +13152,397 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
     border:1px solid #999 !important; page-break-inside:avoid;
   }
 }
+
+
+
+/* ===========================================================
+   WORKER 08 — HR MASTERY (Phase 5)
+   Mock Screen + Offer Compare + Iraq Labor Law + Cheat + Citations
+   =========================================================== */
+
+/* Mock Screen */
+#page-hrmastery .hrm-mock{
+  background: linear-gradient(135deg, rgba(168,85,247,.06), rgba(34,197,94,.04));
+  border:1px solid rgba(168,85,247,.25);
+  border-radius: var(--radius-lg);
+  padding:18px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-mock-intro{
+  text-align:center; padding:30px 20px;
+}
+#page-hrmastery .hrm-mock-intro-icon{ font-size:54px; margin-bottom:12px; }
+#page-hrmastery .hrm-mock-intro-text{
+  font-size:13px; color:var(--text-muted); line-height:1.85;
+  max-width: 480px; margin:0 auto 18px;
+}
+#page-hrmastery .hrm-mock-intro-text b{ color: var(--text); }
+
+#page-hrmastery .hrm-mock-btn{
+  background: transparent; color: var(--text-muted);
+  border:1px solid var(--border);
+  padding:11px 22px; border-radius:10px;
+  font-size:13px; font-weight:800;
+  cursor:pointer; font-family:inherit;
+  transition: var(--transition);
+}
+#page-hrmastery .hrm-mock-btn:hover{
+  color: var(--text); border-color: var(--border-hover);
+}
+#page-hrmastery .hrm-mock-btn.primary{
+  background: linear-gradient(135deg, #A855F7, #EC4899);
+  color:#fff; border-color: transparent;
+}
+#page-hrmastery .hrm-mock-btn.primary:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(168,85,247,.30);
+}
+
+#page-hrmastery .hrm-mock-top{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:14px; margin-bottom:14px;
+}
+#page-hrmastery .hrm-mock-step{
+  font-size:12px; font-weight:800; color:var(--text);
+  background: rgba(168,85,247,.10);
+  padding:6px 12px; border-radius:8px;
+  border:1px solid rgba(168,85,247,.30);
+}
+#page-hrmastery .hrm-mock-step span{ color:#A855F7; }
+#page-hrmastery .hrm-mock-timer-wrap{
+  display:flex; align-items:center; gap:10px;
+  flex:1; max-width:300px;
+}
+#page-hrmastery .hrm-mock-timer-bar{
+  flex:1; height:10px; background: rgba(255,255,255,.05);
+  border-radius:99px; overflow:hidden;
+}
+#page-hrmastery .hrm-mock-timer-fill{
+  height:100%; width:100%;
+  background: linear-gradient(90deg, #22C55E, #EAB308, #EF4444);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  border-radius:99px;
+  transition: width 1s linear;
+}
+#page-hrmastery .hrm-mock-timer-num{
+  font-size:18px; font-weight:900; color: var(--text);
+  min-width: 38px; text-align:center;
+}
+#page-hrmastery .hrm-mock-timer-num.warn{ color:#F59E0B; }
+#page-hrmastery .hrm-mock-timer-num.danger{ color:#EF4444; animation: hrmPulse .6s infinite; }
+
+@keyframes hrmPulse{
+  0%, 100%{ opacity:1; transform:scale(1); }
+  50%{ opacity:.55; transform:scale(.95); }
+}
+
+#page-hrmastery .hrm-mock-q{
+  font-size:16px; font-weight:800; color: var(--text);
+  background: rgba(255,255,255,.03);
+  border-right: 4px solid #A855F7;
+  border-radius:8px;
+  padding:14px 18px; margin-bottom:12px;
+  line-height:1.6;
+}
+#page-hrmastery .hrm-mock-input{
+  width:100%; min-height:140px;
+  background: rgba(0,0,0,.20);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:12px;
+  color: var(--text); font-size:13px;
+  font-family: inherit; line-height:1.7;
+  outline:none; resize:vertical;
+  direction:rtl; text-align:right;
+}
+#page-hrmastery .hrm-mock-input:focus{
+  border-color: rgba(168,85,247,.5);
+  box-shadow: 0 0 0 3px rgba(168,85,247,.15);
+}
+#page-hrmastery .hrm-mock-controls{
+  display:flex; justify-content:space-between; gap:12px;
+  flex-wrap:wrap; margin-top:10px;
+}
+#page-hrmastery .hrm-mock-stats{
+  display:flex; gap:14px; align-items:center;
+  font-size:12px; color: var(--text-muted);
+}
+#page-hrmastery .hrm-mock-stats span b,
+#page-hrmastery .hrm-mock-stats > span{ color: var(--text); }
+
+/* Mock report */
+#page-hrmastery .hrm-mock-report-h{
+  font-size:18px; font-weight:900; color:var(--text);
+  margin-bottom:6px;
+}
+#page-hrmastery .hrm-mock-report-sub{
+  font-size:12.5px; color: var(--text-muted); margin-bottom:14px;
+}
+#page-hrmastery .hrm-mock-metrics{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap:10px; margin-bottom:14px;
+}
+#page-hrmastery .hrm-mock-metric{
+  background: rgba(255,255,255,.03);
+  border:1px solid var(--border);
+  border-radius:10px; padding:12px;
+  text-align:center;
+}
+#page-hrmastery .hrm-mock-metric-val{
+  font-size:24px; font-weight:900; color: #A855F7;
+  margin-bottom:4px;
+}
+#page-hrmastery .hrm-mock-metric-val.good{ color:#22C55E; }
+#page-hrmastery .hrm-mock-metric-val.warn{ color:#F59E0B; }
+#page-hrmastery .hrm-mock-metric-val.bad{ color:#EF4444; }
+#page-hrmastery .hrm-mock-metric-label{
+  font-size:10.5px; color: var(--text-faint);
+  text-transform:uppercase; letter-spacing:1px;
+}
+#page-hrmastery .hrm-mock-feedback{
+  background: rgba(168,85,247,.05);
+  border:1px solid rgba(168,85,247,.20);
+  border-radius:10px; padding:14px;
+  font-size:12.5px; color: var(--text-muted); line-height:1.85;
+  margin-bottom:10px;
+}
+#page-hrmastery .hrm-mock-feedback b{ color:var(--text); }
+#page-hrmastery .hrm-mock-answers{
+  background: rgba(0,0,0,.15);
+  border:1px solid var(--border);
+  border-radius:10px; padding:12px;
+  margin-bottom:10px;
+}
+#page-hrmastery .hrm-mock-ans-q{
+  font-size:12px; font-weight:800; color: var(--text-muted); margin-top:8px;
+}
+#page-hrmastery .hrm-mock-ans-a{
+  font-size:12px; color: var(--text); line-height:1.75;
+  background: rgba(255,255,255,.03);
+  border-radius:8px; padding:8px 10px; margin-top:4px;
+  white-space: pre-wrap;
+}
+
+/* Offer Compare */
+#page-hrmastery .hrm-cmp{
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding:18px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-cmp-section-title{
+  font-size:14px; font-weight:800; color: var(--text);
+  margin-bottom:10px;
+}
+#page-hrmastery .hrm-cmp-weights{ margin-bottom:18px; }
+#page-hrmastery .hrm-cmp-weights-grid{
+  display:grid; grid-template-columns: 1fr 1fr;
+  gap:10px;
+}
+@media (max-width: 720px){
+  #page-hrmastery .hrm-cmp-weights-grid{ grid-template-columns: 1fr; }
+}
+#page-hrmastery .hrm-cmp-weight-row{
+  display:grid; grid-template-columns: 130px 1fr 36px;
+  gap:10px; align-items:center;
+  background: rgba(255,255,255,.02);
+  padding:8px 10px; border-radius:8px;
+}
+#page-hrmastery .hrm-cmp-weight-row label{
+  font-size:12px; color: var(--text-muted);
+}
+#page-hrmastery .hrm-cmp-w,
+#page-hrmastery .hrm-cmp-s{
+  -webkit-appearance: none; appearance: none;
+  width:100%; height:6px; padding:0;
+  background: rgba(255,255,255,.06);
+  border-radius:99px;
+  cursor: pointer;
+}
+#page-hrmastery .hrm-cmp-w::-webkit-slider-thumb,
+#page-hrmastery .hrm-cmp-s::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  width:14px; height:14px; border-radius:50%;
+  background: linear-gradient(135deg, #A855F7, #EC4899);
+  cursor: pointer; border:2px solid var(--bg);
+}
+#page-hrmastery .hrm-cmp-w-val,
+#page-hrmastery .hrm-cmp-sv{
+  font-size:13px; font-weight:800; color:#A855F7;
+  text-align:center;
+}
+#page-hrmastery .hrm-cmp-total{
+  font-size:12px; color: var(--text-muted);
+  margin-top:8px;
+  text-align:left;
+}
+#page-hrmastery .hrm-cmp-total span{
+  color:#22C55E; font-weight:800;
+}
+#page-hrmastery .hrm-cmp-total.warn span{ color:#F59E0B; }
+#page-hrmastery .hrm-cmp-total.bad span{ color:#EF4444; }
+
+#page-hrmastery .hrm-cmp-offers-grid{
+  display:grid; grid-template-columns: repeat(3, 1fr);
+  gap:10px; margin-bottom:14px;
+}
+@media (max-width: 920px){
+  #page-hrmastery .hrm-cmp-offers-grid{ grid-template-columns: 1fr; }
+}
+#page-hrmastery .hrm-cmp-offer{
+  background: rgba(255,255,255,.02);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px;
+  display:flex; flex-direction:column; gap:8px;
+}
+#page-hrmastery .hrm-cmp-name{
+  width:100%;
+  background: transparent;
+  border: none; border-bottom:1px solid var(--border);
+  padding: 6px 4px;
+  color: var(--text); font-size:14px; font-weight:800;
+  font-family: inherit; outline:none;
+  text-align: right;
+}
+#page-hrmastery .hrm-cmp-name:focus{ border-bottom-color: #A855F7; }
+#page-hrmastery .hrm-cmp-row{
+  display:grid; grid-template-columns: 70px 1fr 24px;
+  gap:8px; align-items:center;
+}
+#page-hrmastery .hrm-cmp-row label{
+  font-size:11px; color: var(--text-muted);
+}
+
+/* Compare result */
+#page-hrmastery .hrm-cmp-result{
+  background: rgba(0,0,0,.20);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:16px;
+}
+#page-hrmastery .hrm-cmp-winner{
+  display:flex; align-items:center; gap:12px;
+  background: linear-gradient(135deg, rgba(34,197,94,.10), rgba(168,85,247,.05));
+  border:1px solid rgba(34,197,94,.30);
+  border-radius:10px; padding:12px 16px;
+  margin-bottom:14px;
+}
+#page-hrmastery .hrm-cmp-winner-icon{ font-size:28px; }
+#page-hrmastery .hrm-cmp-winner-text{
+  font-size:14px; color: var(--text);
+}
+#page-hrmastery .hrm-cmp-winner-text b{ color:#22C55E; font-size:16px; }
+
+#page-hrmastery .hrm-cmp-bars{
+  display:flex; flex-direction:column; gap:10px;
+}
+#page-hrmastery .hrm-cmp-bar-row{
+  display:grid; grid-template-columns: 110px 1fr 60px;
+  gap:10px; align-items:center;
+}
+#page-hrmastery .hrm-cmp-bar-row label{
+  font-size:12px; color: var(--text); font-weight:700;
+}
+#page-hrmastery .hrm-cmp-bar{
+  height:18px; background: rgba(255,255,255,.05);
+  border-radius:99px; overflow:hidden;
+}
+#page-hrmastery .hrm-cmp-bar-fill{
+  height:100%; border-radius:99px;
+  background: linear-gradient(90deg, #A855F7, #EC4899);
+  display:flex; align-items:center; justify-content:flex-end;
+  padding-left:8px; padding-right:8px;
+  transition: width .8s ease;
+  font-size:11px; font-weight:800; color:#fff;
+}
+#page-hrmastery .hrm-cmp-bar-fill.win{
+  background: linear-gradient(90deg, #22C55E, #10B981);
+  box-shadow: 0 0 18px rgba(34,197,94,.30);
+}
+#page-hrmastery .hrm-cmp-bar-score{
+  font-size:14px; font-weight:900; color: var(--text);
+  text-align:center;
+}
+
+/* Iraq Labor Law */
+#page-hrmastery .hrm-law-grid{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:12px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-law-card{
+  background: var(--surface); border:1px solid var(--border);
+  border-right: 4px solid rgba(168,85,247,.35);
+  border-radius: var(--radius-lg); padding:14px;
+  transition: var(--transition);
+}
+#page-hrmastery .hrm-law-card:hover{
+  border-color: var(--border-hover);
+  border-right-color: #A855F7;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+#page-hrmastery .hrm-law-icon{ font-size:24px; margin-bottom:6px; }
+#page-hrmastery .hrm-law-title{
+  font-size:13.5px; font-weight:800; color: var(--text);
+  margin-bottom:6px;
+}
+#page-hrmastery .hrm-law-text{
+  font-size:11.5px; color: var(--text-muted); line-height:1.75;
+}
+#page-hrmastery .hrm-law-text b{ color: var(--text); }
+
+/* Cheat Sheet */
+#page-hrmastery .hrm-cheat-grid{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap:12px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-cheat-card{
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: var(--radius-lg); padding:14px 16px;
+  transition: var(--transition);
+}
+#page-hrmastery .hrm-cheat-card:hover{
+  border-color: var(--border-hover);
+}
+#page-hrmastery .hrm-cheat-h{
+  font-size:13.5px; font-weight:800; color: var(--text);
+  margin-bottom:8px;
+  border-bottom:1px dashed rgba(255,255,255,.06);
+  padding-bottom:6px;
+}
+#page-hrmastery .hrm-cheat-card ul{
+  margin:0; padding-right:18px;
+  font-size:11.5px; color: var(--text-muted); line-height:1.85;
+}
+#page-hrmastery .hrm-cheat-card li{ margin-bottom:4px; }
+#page-hrmastery .hrm-cheat-card b{ color: var(--text); }
+
+/* Citations */
+#page-hrmastery .hrm-citations{
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding:18px 24px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-cite-list{
+  margin:0; padding-right:20px;
+  font-size:12.5px; color: var(--text-muted); line-height:1.85;
+  counter-reset: hrm-cite;
+}
+#page-hrmastery .hrm-cite-list li{
+  margin-bottom:8px; padding-bottom:8px;
+  border-bottom:1px dashed rgba(255,255,255,.05);
+}
+#page-hrmastery .hrm-cite-list li:last-child{ border-bottom:none; }
+#page-hrmastery .hrm-cite-list b{ color: var(--text); }
+#page-hrmastery .hrm-cite-list i{ color: var(--text-faint); }
+
+@media print{
+  #page-hrmastery .hrm-mock,
+  #page-hrmastery .hrm-cmp,
+  #page-hrmastery .hrm-law-card,
+  #page-hrmastery .hrm-cheat-card,
+  #page-hrmastery .hrm-citations{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
