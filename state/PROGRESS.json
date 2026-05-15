@@ -1,49 +1,34 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-15T00:00:00Z",
+  "last_updated": "2026-05-15T03:00:00Z",
   "current": {
-    "worker": "01",
-    "worker_name": "UI_UX",
-    "phase": 4,
-    "phases_total": 4,
-    "branch": "worker-01-phase-4",
-    "status": "completed"
+    "worker": "02",
+    "worker_name": "SALES_AND_AM",
+    "phase": 3,
+    "phases_total": 5,
+    "branch": "worker-02-phase-3",
+    "status": "in-progress"
   },
   "completed_phases": [
+    { "worker": "01", "phase": 1, "title": "Foundation Tokens & Aurora Mesh",                    "branch": "worker-01-phase-1-v2", "lines_added": 121 },
+    { "worker": "01", "phase": 2, "title": "Conic Halo + Magnetic Cursor Aura",                  "branch": "worker-01-phase-2",   "lines_added": 204 },
+    { "worker": "01", "phase": 3, "title": "Living Numerals + Sectional Identity Tint",          "branch": "worker-01-phase-3",   "lines_added": 193 },
+    { "worker": "01", "phase": 4, "title": "Polish: reduced-motion, print, View Transitions, visibility-pause", "branch": "worker-01-phase-4", "lines_added": 145 },
+    { "worker": "02", "phase": 1, "title": "Sales Frameworks Comparison (4 schools)",            "branch": "worker-02-phase-1",   "lines_added": 564 },
+    { "worker": "02", "phase": 2, "title": "Discovery Library (52 Q) + Closing (8) + Iraqi Objections (12)", "branch": "worker-02-phase-2", "lines_added": 440 },
     {
-      "worker": "01",
-      "phase": 1,
-      "title": "Foundation Tokens & Aurora Mesh",
-      "branch": "worker-01-phase-1-v2",
-      "lines_added": 121
-    },
-    {
-      "worker": "01",
-      "phase": 2,
-      "title": "Conic Halo + Magnetic Cursor Aura",
-      "branch": "worker-01-phase-2",
-      "lines_added": 204
-    },
-    {
-      "worker": "01",
-      "phase": 3,
-      "title": "Living Numerals + Sectional Identity Tint",
-      "branch": "worker-01-phase-3",
-      "lines_added": 193
-    },
-    {
-      "worker": "01",
-      "phase": 4,
-      "title": "Polish: reduced-motion, print, View Transitions, visibility-pause",
-      "branch": "worker-01-phase-4",
-      "lines_added": 145,
+      "worker": "02", "phase": 3,
+      "title": "3 Interactive Labs — Funnel Calc + Objection Trainer + Pitch Builder",
+      "branch": "worker-02-phase-3",
+      "lines_added": 550,
       "files_modified": [
+        "platform/index.html",
         "platform/assets/style.css",
         "platform/assets/app.js"
       ],
-      "summary": "Full reduced-motion coverage on every v13 surface, ::view-transition-old/new fades, full @media print stylesheet (paper-friendly), contrast lift for warm tints, body.is-hidden animation pause, qlThemeViewTransition wrap of toggleTheme (idempotent, fallback-safe), qlVisibilityPause IIFE"
+      "summary": "Lab1 funnel: live math, SVG stage labels, Pipeline Coverage Ratio with 2.5x/3x thresholds (Salesforce benchmark). Lab2 objection trainer: rule-based 4-axis rubric (Empathy/Reframe/Specificity/Forward) with 12 random Iraqi prompts and last-10 score history. Lab3 pitch builder: 5-block 60s template (10/15/20/10/5s) with copy-to-clipboard. All wrapped in qlSalesLabs IIFE (window.__qlSalesLabs guard). localStorage keys: upg_pitch_drafts, upg_objection_scores."
     }
   ],
-  "next_action": "Worker 01 finished. Begin Worker 02 — Sales & Account Management on next session.",
-  "notes": "Worker 01 (UI/UX Quantum Leap v13 Signature Edition) complete. Total: 663 lines, 4 PRs (#6, #7, #8, plus Phase 4 PR). Awaiting human merge of PRs in order before Worker 02."
+  "next_action": "Worker 02 Phase 4 — Create page-accountmgr (KAM Lifecycle, Stakeholder Map, QBR template, NRR Calculator, Health Score) + nav-item.",
+  "notes": "Phase 3 done. Branch worker-02-phase-3 ready. Phase 4 builds NEW account manager page from scratch."
 }
