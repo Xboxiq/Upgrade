@@ -1,0 +1,15 @@
+{
+  "worker": "06",
+  "phase": 5,
+  "phase_title": "Iraq Salary + Companies + Iraqi Hooks + Cultural Sensitivity + Cheat Sheet + 12 Citations",
+  "branch": "worker-06-complete",
+  "files_modified": ["platform/index.html", "platform/assets/style.css"],
+  "lines_added_total": 230,
+  "sections_added": [
+    "BLOCK W6-L · Iraq salary table (7 roles), platform ranking, hiring companies, Iraqi-dialect hooks (6), cultural sensitivity",
+    "BLOCK W6-M · Cheat Sheet (10 golden rules + 9 formulas + Do/Don't lists)",
+    "BLOCK W6-N · 12 academic + industry citations"
+  ],
+  "localStorage_keys": [],
+  "next_action": "Worker 06 COMPLETE. Open consolidated PR. Begin Worker 07 — Phone Repair on next session."
+}

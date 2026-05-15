@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-15T12:30:00Z",
+  "last_updated": "2026-05-15T12:50:00Z",
   "current": {
     "worker": "06",
     "worker_name": "SOCIAL_MARKETING",
-    "phase": 4,
+    "phase": 5,
     "phases_total": 5,
     "branch": "worker-06-complete",
-    "status": "in-progress"
+    "status": "completed"
   },
   "completed_phases": [
     { "worker": "01", "phase": 1, "title": "Foundation Tokens & Aurora Mesh",                    "branch": "worker-01-phase-1-v2", "lines_added": 121 },
@@ -36,8 +36,9 @@
     { "worker": "06", "phase": 1, "title": "Attention Psychology (6 axes) + Algo Anatomy (7 platforms)", "branch": "worker-06-complete", "lines_added": 660 },
     { "worker": "06", "phase": 2, "title": "Content Pillars + 15 Hook Frameworks + 30-day Calendar Builder", "branch": "worker-06-complete", "lines_added": 580 },
     { "worker": "06", "phase": 3, "title": "Marketing Funnel (5 stages) + Performance Math Calculator + A/B Test Designer", "branch": "worker-06-complete", "lines_added": 508 },
-    { "worker": "06", "phase": 4, "title": "Email + WhatsApp + Influencer Vetting Tool", "branch": "worker-06-complete", "lines_added": 368 }
+    { "worker": "06", "phase": 4, "title": "Email + WhatsApp + Influencer Vetting Tool", "branch": "worker-06-complete", "lines_added": 368 },
+    { "worker": "06", "phase": 5, "title": "Iraq Salary + Companies + Iraqi Hooks + Cheat Sheet + 12 Citations", "branch": "worker-06-complete", "lines_added": 230 }
   ],
-  "next_action": "Continue Worker 06 Phase 5 — Iraq/MENA Block + Salary + Cheat Sheet + 12 Citations",
-  "notes": "Worker 06 phases 1-4 done. localStorage: upg_calendar_drafts, upg_campaigns."
+  "next_action": "Worker 06 COMPLETE. Open consolidated PR. Begin Worker 07 — Phone Repair on next session.",
+  "notes": "Worker 06 (Social Marketing) COMPLETE. Total ~2,346 lines across 5 phases on linear branch worker-06-complete (Method A). Single consolidated PR ready. localStorage: upg_calendar_drafts, upg_campaigns."
 }
