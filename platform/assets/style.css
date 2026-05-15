@@ -11543,3 +11543,158 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
     border:1px solid #999 !important; page-break-inside:avoid;
   }
 }
+
+
+
+/* ============================================================
+   WORKER 07 · PHASE 4 — Micro-Solder + Customer Service + Ethics + Iraq
+============================================================ */
+
+/* Micro-solder cards */
+#page-phonerepair .pr-ms-card{
+  background: var(--surface-2, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:12px;
+  padding:14px 16px;
+  transition: border-color .2s ease;
+}
+#page-phonerepair .pr-ms-card:hover{ border-color: rgba(245,158,11,.35); }
+#page-phonerepair .pr-ms-card h3{
+  margin:0 0 8px; font-size:14.5px; font-weight:800;
+  color: var(--pr-accent-2);
+}
+#page-phonerepair .pr-ms-card ul{
+  margin:0; padding-right:18px;
+  font-size:12.5px; color: var(--text-muted); line-height:1.75;
+}
+#page-phonerepair .pr-ms-card li{ margin-bottom:5px; }
+#page-phonerepair .pr-ms-card b{ color: var(--text); }
+
+/* Customer Service Grid */
+#page-phonerepair .pr-cs-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap:14px;
+}
+#page-phonerepair .pr-cs-card{
+  background: var(--surface-2, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:12px;
+  padding:14px 16px;
+}
+#page-phonerepair .pr-cs-card h3{
+  margin:0 0 8px; font-size:14.5px; font-weight:800;
+  color: #22C55E;
+}
+#page-phonerepair .pr-cs-card p{
+  margin:5px 0; font-size:12.5px; color: var(--text-muted); line-height:1.7;
+}
+#page-phonerepair .pr-cs-card ul{
+  margin:0; padding-right:18px;
+  font-size:12.5px; color: var(--text-muted); line-height:1.7;
+}
+#page-phonerepair .pr-cs-card li{ margin-bottom:4px; }
+#page-phonerepair .pr-cs-card b{ color: var(--text); }
+
+/* Ethics */
+#page-phonerepair .pr-ethics-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap:14px;
+}
+#page-phonerepair .pr-ethics-card{
+  background: var(--surface-2, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:12px;
+  padding:14px 16px; position:relative;
+}
+#page-phonerepair .pr-ethics-tag{
+  display:inline-block;
+  font-size:11px; font-weight:700;
+  padding:3px 9px; border-radius:999px;
+  margin-bottom:6px;
+  background: rgba(102,252,241,.08);
+  border:1px solid rgba(102,252,241,.25);
+  color: #66FCF1;
+}
+#page-phonerepair .pr-ethics-card.pr-ethics-critical{
+  background: linear-gradient(135deg, rgba(239,68,68,.08), rgba(245,158,11,.04));
+  border-color: rgba(239,68,68,.3);
+}
+#page-phonerepair .pr-ethics-card.pr-ethics-critical .pr-ethics-tag{
+  background: rgba(239,68,68,.15); border-color: rgba(239,68,68,.4); color: #EF4444;
+}
+#page-phonerepair .pr-ethics-card h3{
+  margin:4px 0 8px; font-size:14.5px; font-weight:800; color: var(--text);
+}
+#page-phonerepair .pr-ethics-card p{
+  margin:5px 0; font-size:12.5px; color: var(--text-muted); line-height:1.7;
+}
+#page-phonerepair .pr-ethics-card ul{
+  margin:0; padding-right:18px;
+  font-size:12.5px; color: var(--text-muted); line-height:1.75;
+}
+#page-phonerepair .pr-ethics-card li{ margin-bottom:4px; }
+#page-phonerepair .pr-ethics-card b{ color: var(--text); }
+
+/* Iraq Block */
+#page-phonerepair .pr-iq-block{
+  background: linear-gradient(135deg, rgba(34,197,94,.05), rgba(245,158,11,.03));
+  border:1px solid rgba(34,197,94,.2);
+  border-radius:12px; padding:14px 16px;
+  margin-bottom:14px;
+}
+#page-phonerepair .pr-iq-block h3{
+  margin:0 0 10px; font-size:15px; font-weight:800; color: var(--text);
+}
+#page-phonerepair .pr-iq-table{
+  width:100%; border-collapse: collapse;
+  font-size:12.5px; color: var(--text-muted);
+}
+#page-phonerepair .pr-iq-table th,
+#page-phonerepair .pr-iq-table td{
+  padding:7px 10px; text-align:right;
+  border-bottom:1px dashed rgba(255,255,255,.06);
+}
+#page-phonerepair .pr-iq-table th{
+  color: var(--text); font-weight:700;
+  background: rgba(0,0,0,.18);
+}
+#page-phonerepair .pr-iq-table tr:hover td{
+  background: rgba(34,197,94,.04);
+}
+#page-phonerepair .pr-iq-note{
+  margin:8px 0 0; font-size:11.5px;
+  color: var(--text-faint); font-style: italic;
+}
+
+#page-phonerepair .pr-iq-zones{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:8px;
+}
+#page-phonerepair .pr-iq-zone{
+  background: rgba(0,0,0,.18);
+  border:1px solid var(--border); border-radius:8px;
+  padding:8px 11px; font-size:12.5px;
+  color: var(--text-muted);
+}
+#page-phonerepair .pr-iq-zone b{ color: var(--pr-accent-2); }
+
+#page-phonerepair .pr-iq-challenges{
+  background: linear-gradient(135deg, rgba(239,68,68,.05), rgba(245,158,11,.03));
+  border-color: rgba(239,68,68,.25);
+}
+#page-phonerepair .pr-iq-challenges ul{
+  margin:0; padding-right:18px;
+  font-size:12.5px; color: var(--text-muted); line-height:1.8;
+}
+#page-phonerepair .pr-iq-challenges li{ margin-bottom:5px; }
+#page-phonerepair .pr-iq-challenges b{ color: var(--text); }
+
+@media print{
+  #page-phonerepair .pr-ms-card,
+  #page-phonerepair .pr-cs-card,
+  #page-phonerepair .pr-ethics-card,
+  #page-phonerepair .pr-iq-block{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}

@@ -13238,7 +13238,332 @@ const bird = { ...canMove(), ...canFly() };
         </div>
       </section><!-- /pr-software-side -->
 
-      <!-- (المراحل التالية ستضاف في Phases 4-5) -->
+      <!-- ============================================================
+           PHASE 4 · A — Micro-Soldering Intro
+      ============================================================ -->
+      <section class="pr-section" id="pr-microsolder" data-pr-section="microsolder">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">Logic Board Repair · Micro-Soldering Intro</span>
+          <h2>الـ Micro-Soldering — أرفع المهارات (لكن ليس بـ يومين)</h2>
+          <p>إخلاء مسؤولية: هذا تعريف فقط. إتقان micro-soldering يحتاج 6+ أشهر تدريب يومي + معدات احترافية.</p>
+        </header>
+
+        <div class="pr-grid pr-grid-2">
+
+          <article class="pr-ms-card">
+            <h3>🎯 لماذا Micro-Soldering؟</h3>
+            <ul>
+              <li><b>الفرق التجاري:</b> 80% من المحلات تتوقف عند "Board damage = جهاز خربان". أنت تستطيع إصلاحه = ربح مضاعف.</li>
+              <li><b>الإصلاحات الممكنة:</b> Tristar replacement, Audio IC repair, NAND upgrade, Touch IC reflow, Backlight circuit repair.</li>
+              <li><b>الاستثمار:</b> Microscope جيد + Hot Air متقدم + Hakko/JBC + خبرة طويلة.</li>
+              <li><b>الوقت للإتقان:</b> 6 أشهر للأساسيات · 2-3 سنوات لتصبح خبير.</li>
+            </ul>
+          </article>
+
+          <article class="pr-ms-card">
+            <h3>🛡️ السلامة (Health &amp; Safety)</h3>
+            <ul>
+              <li><b>Lead Exposure:</b> الـ leaded solder سام. اغسل يديك دائماً قبل الأكل. <b>لا تأكل في مساحة العمل.</b></li>
+              <li><b>Fume Extractor:</b> ضروري — الدخان (Flux fumes) يؤذي الرئتين على المدى الطويل.</li>
+              <li><b>حماية العين:</b> safety glasses عند الـ reflow — Solder splatter ممكن.</li>
+              <li><b>تهوية جيدة:</b> لا تعمل في غرفة مغلقة.</li>
+              <li><b>Cooldown:</b> القطع المحمّاة بالـ Hot Air = 350°C — تحرق فوراً.</li>
+            </ul>
+          </article>
+
+          <article class="pr-ms-card">
+            <h3>🔧 المهارات الأساسية للبدء</h3>
+            <ul>
+              <li><b>Tinning Wire:</b> تعلّم لحام سلك رفيع (0.3mm) بسيد 0.4mm — أساس كل شيء.</li>
+              <li><b>Pad Cleaning:</b> Solder Wick + Flux لتنظيف bad joint بدون lifting الـ pad.</li>
+              <li><b>BGA Reflow:</b> رفع IC وإعادة لصقه. حرارة 380°C، 30-45 ثانية.</li>
+              <li><b>BGA Reballing:</b> إعادة كرات الـ solder تحت IC قبل reflow. يحتاج reballing stencil.</li>
+              <li><b>Jumper Wire:</b> سلك رفيع جداً (0.05mm enameled) لإصلاح traces مكسورة.</li>
+            </ul>
+          </article>
+
+          <article class="pr-ms-card">
+            <h3>📚 مصادر التعلم (روابط/مراجع)</h3>
+            <ul>
+              <li><b>Louis Rossmann YouTube:</b> القناة الأشهر — مئات الفيديوهات تعليمية مجانية.</li>
+              <li><b>iPad Rehab YouTube:</b> Jessa Jones — متخصصة في NAND + iPhone repair.</li>
+              <li><b>Mendon's iPad Repair:</b> دروس component-level خطوة بخطوة.</li>
+              <li><b>طرق محلية:</b> أكاديميات الموبايل في بغداد (شارع الكرادة الداخل) — دورات 3-6 أشهر.</li>
+              <li><b>كتاب:</b> "Modern PCB Soldering for Mobile Repair" متاح PDF بالإنجليزية.</li>
+            </ul>
+          </article>
+
+          <article class="pr-ms-card">
+            <h3>⚡ Common Repairs (للمتقدم)</h3>
+            <ul>
+              <li><b>Tristar Replacement:</b> iPhone 6/7 — أكثر إصلاح طلباً. سعر القطعة 5k IQD، السعر للزبون 80-150k.</li>
+              <li><b>Audio IC Jumper (iPhone 7):</b> jumper trace U3101 RQ_C18 — يحل "loop disease" تماماً.</li>
+              <li><b>Backlight Circuit:</b> diode + filter + boost coil — لو الشاشة ميتة لكن العرض موجود.</li>
+              <li><b>Charging Port Daughter Board (Samsung):</b> أسهل إصلاح متقدم — استبدال board صغير.</li>
+            </ul>
+          </article>
+
+          <article class="pr-ms-card">
+            <h3>🚫 ما لا تحاوله بدون تدريب</h3>
+            <ul>
+              <li><b>CPU Reball:</b> صعب جداً — خطأ واحد = يتلف الـ board.</li>
+              <li><b>NAND Upgrade:</b> يحتاج programmer ($300+) + خبرة.</li>
+              <li><b>PMIC Replacement على iPhone 11+:</b> الـ PMIC تحت EMI shield ملحوم — صعب الإزالة.</li>
+              <li><b>قاعدة:</b> لو خسارة جهاز الزبون = لا تستطيع تعويضه → لا تعمل عليه.</li>
+            </ul>
+          </article>
+
+        </div>
+      </section><!-- /pr-microsolder -->
+
+
+      <!-- ============================================================
+           PHASE 4 · B — Customer Service & Pricing
+      ============================================================ -->
+      <section class="pr-section" id="pr-customer-service" data-pr-section="customer">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">خدمة العملاء + التسعير · Customer &amp; Pricing</span>
+          <h2>كيف تتعامل مع الزبون وتسعّر بشكل احترافي</h2>
+          <p>خدمة العميل = 50% من نجاح المحل. الجودة فقط لا تكفي.</p>
+        </header>
+
+        <div class="pr-cs-grid">
+
+          <article class="pr-cs-card">
+            <h3>📋 Intake Form (نموذج الاستلام)</h3>
+            <p>كل جهاز استلمه = وثيقة. لا اعتمد على الذاكرة.</p>
+            <ul>
+              <li><b>بيانات الزبون:</b> اسم + رقم + تاريخ.</li>
+              <li><b>الجهاز:</b> الموديل + IMEI + Serial.</li>
+              <li><b>الكلمة السرية:</b> اطلبها لاختبار الإصلاح (Pattern/PIN).</li>
+              <li><b>وصف العطل:</b> بكلمات الزبون.</li>
+              <li><b>صور قبل:</b> 4-6 صور لكل جانب — توثيق الخدوش الموجودة.</li>
+              <li><b>إقرار البيانات:</b> "أقر أنني نسخت بياناتي وأن المحل غير مسؤول عن أي فقدان."</li>
+              <li><b>التاريخ المتوقع للاستلام + التكلفة الأولية.</b></li>
+            </ul>
+          </article>
+
+          <article class="pr-cs-card">
+            <h3>💰 سياسة الفحص (Diagnostic Fee)</h3>
+            <ul>
+              <li><b>فحص مجاني:</b> الأعطال الواضحة (شاشة مكسورة، بطارية).</li>
+              <li><b>فحص بأجر 10-25k IQD:</b> الأعطال المعقدة (لا يقلع، Logic Board).</li>
+              <li><b>الخصم:</b> الـ fee يُخصم من قيمة الإصلاح لو وافق الزبون.</li>
+              <li><b>الفائدة:</b> يحجز المتفرّج الزائر — يتعاطى فقط من جاد.</li>
+            </ul>
+          </article>
+
+          <article class="pr-cs-card">
+            <h3>📊 Pricing Model</h3>
+            <p><b>الصيغة:</b> سعر القطعة × Markup + Labor</p>
+            <ul>
+              <li><b>Markup عادل:</b> 25-40% على القطعة (لو متوفرة في السوق).</li>
+              <li><b>Labor:</b> 30-50% من قيمة القطعة (مجال متوسط).</li>
+              <li><b>مثال:</b> شاشة iPhone 11 سعرها 60k → markup 30% → 78k → labor 25k → سعر للزبون 103k.</li>
+              <li><b>Round Up:</b> احتسب الرقم النهائي روند (105k بدل 103k) — يبدو أنظف.</li>
+            </ul>
+          </article>
+
+          <article class="pr-cs-card">
+            <h3>✅ No-Fix-No-Fee vs Diagnostic Fee</h3>
+            <ul>
+              <li><b>No-Fix-No-Fee:</b> لو ما أصلحت = ما تأخذ شيء. <b>عيب:</b> أنت تخسر وقت + قطع تجريبية.</li>
+              <li><b>Diagnostic Fee:</b> الفحص بأجر · الإصلاح إضافي. <b>أفضل للأعطال المعقدة.</b></li>
+              <li><b>توصيتنا:</b> Free diagnostic للأعطال البسيطة + Paid لـ Logic Board work.</li>
+            </ul>
+          </article>
+
+          <article class="pr-cs-card">
+            <h3>🛡️ ضمان الإصلاح (Warranty)</h3>
+            <ul>
+              <li><b>30 يوم:</b> للقطع aftermarket (شاشة، بطارية رخيصة).</li>
+              <li><b>60 يوم:</b> للقطع OEM/Pulled (جودة أعلى).</li>
+              <li><b>90 يوم:</b> للإصلاحات Logic Board.</li>
+              <li><b>لا ضمان:</b> Water damage بعد التركيب · سقوط الجهاز · شد القطعة بقوة.</li>
+              <li><b>وثّق:</b> رقم الضمان على receipt + مدة + استثناءات.</li>
+            </ul>
+          </article>
+
+          <article class="pr-cs-card">
+            <h3>🤝 التعامل مع الإنكار + الشكاوى</h3>
+            <p><b>سيناريو شائع:</b> "أنا ما عملت شي وانكسرت!"</p>
+            <ul>
+              <li><b>الحل الوقائي:</b> صور قبل + intake form موقّع = درعك.</li>
+              <li><b>الرد:</b> "حضرتك هذه الصور وقت الاستلام. نعالجها معاك سوية."</li>
+              <li><b>الإصلاح الخاطئ من المحل:</b> اعترف بسرعة + اعمل refund أو إعادة إصلاح. الشكوى تقتل السمعة في عصر السوشيال.</li>
+              <li><b>الحالات الصعبة:</b> ادعُهم لـ replay الفيديو (لو فيه كاميرا في المحل).</li>
+            </ul>
+          </article>
+
+        </div>
+      </section><!-- /pr-customer-service -->
+
+
+      <!-- ============================================================
+           PHASE 4 · C — Ethics &amp; Legal (Iraq focus)
+      ============================================================ -->
+      <section class="pr-section" id="pr-ethics-legal" data-pr-section="ethics">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">الأخلاقيات والقانون · Ethics &amp; Legal</span>
+          <h2>قواعد لا تتجاوزها — حفاظاً على نفسك ومحلك</h2>
+          <p>هذه ليست "نصائح" — هذه قواعد قانونية وأخلاقية تحميك من الدعاوى وتحمي زبائنك.</p>
+        </header>
+
+        <div class="pr-ethics-grid">
+
+          <article class="pr-ethics-card pr-ethics-critical">
+            <div class="pr-ethics-tag">🔴 محذور قانوني</div>
+            <h3>تعديل IMEI</h3>
+            <p>تغيير IMEI أو إعادة برمجته <b>جريمة</b> في القانون العراقي وأغلب القوانين العالمية.</p>
+            <ul>
+              <li>عقوبة سجن حسب قانون الاتصالات العراقي رقم 65 لسنة 2004.</li>
+              <li>الزبون اللي يطلب منك تعديل IMEI = جهاز مسروق غالباً.</li>
+              <li>قول له "آسف، هذا غير قانوني" واطلب منه يغادر بأدب.</li>
+            </ul>
+          </article>
+
+          <article class="pr-ethics-card pr-ethics-critical">
+            <div class="pr-ethics-tag">🔴 محذور قانوني</div>
+            <h3>iCloud Lock / FRP Bypass</h3>
+            <p>تجاوز قفل الحساب على جهاز ليس لك = مشاركة في سرقة.</p>
+            <ul>
+              <li>اطلب فاتورة شراء أصلية + Apple ID وكلمة المرور.</li>
+              <li>لو الزبون "نسي كلمة السر" → وجّهه لـ Apple Support أو Samsung Customer Service.</li>
+              <li>لا تستخدم أي tool يكسر iCloud activation lock.</li>
+            </ul>
+          </article>
+
+          <article class="pr-ethics-card">
+            <div class="pr-ethics-tag">🟡 خصوصية</div>
+            <h3>Data Privacy</h3>
+            <p>بيانات الزبون مقدّسة — لا تفتحها بدون داعي.</p>
+            <ul>
+              <li><b>لا تفتح Gallery</b> ولا تتصفح صور/رسائل.</li>
+              <li>الكلمة السرية تستخدم <b>فقط</b> لاختبار الإصلاح.</li>
+              <li>إذا طلب الزبون wipe البيانات → احصل على إذن مكتوب.</li>
+              <li>لا تنسخ بياناته لأي مكان آخر — حتى للنسخ الاحتياطي.</li>
+            </ul>
+          </article>
+
+          <article class="pr-ethics-card">
+            <div class="pr-ethics-tag">🟡 إفصاح</div>
+            <h3>Original vs Aftermarket Disclosure</h3>
+            <p>لازم تخبر الزبون بنوع القطعة قبل التركيب.</p>
+            <ul>
+              <li><b>OEM (Original):</b> القطعة الأصلية من المصنع. أعلى سعر.</li>
+              <li><b>Pulled (مسحوبة):</b> من جهاز سليم — أصلية لكن مستعملة.</li>
+              <li><b>Aftermarket:</b> صناعة طرف ثالث — أرخص بكثير، جودة متفاوتة.</li>
+              <li><b>Refurbished:</b> أصلية أُعيد تجديدها.</li>
+              <li><b>المخالفة:</b> بيع aftermarket على أنها OEM = احتيال.</li>
+            </ul>
+          </article>
+
+          <article class="pr-ethics-card">
+            <div class="pr-ethics-tag">🟢 سلوك مهني</div>
+            <h3>Stolen Phone Protocol</h3>
+            <p>لو شككت أن الجهاز مسروق:</p>
+            <ul>
+              <li>اطلب فاتورة شراء أصلية.</li>
+              <li>اسأل عن iCloud/Google account credentials.</li>
+              <li>لو رفض الزبون → اطلب منه أخذ جهازه ومغادرة المحل.</li>
+              <li>وثّق الحادثة (رقم الزبون، الوقت، الموديل) — قد تحتاجها للأمن.</li>
+            </ul>
+          </article>
+
+          <article class="pr-ethics-card">
+            <div class="pr-ethics-tag">🟢 سلوك مهني</div>
+            <h3>Customer Data Wipe Consent</h3>
+            <p>إذا الإصلاح يتطلب wipe (مثل DFU restore):</p>
+            <ul>
+              <li>اشرح للزبون <b>قبل</b> أن البيانات ستضيع.</li>
+              <li>اطلب توقيعه على نموذج موافقة.</li>
+              <li>اعرض عمل backup (لو ممكن).</li>
+              <li>هذا يحميك قانونياً + يبني ثقة.</li>
+            </ul>
+          </article>
+
+        </div>
+      </section><!-- /pr-ethics-legal -->
+
+
+      <!-- ============================================================
+           PHASE 4 · D — Iraq Market Block
+      ============================================================ -->
+      <section class="pr-section" id="pr-iraq-block" data-pr-section="iraq">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow">سوق العراق · Iraq Market Reality</span>
+          <h2>🇮🇶 السوق العراقي — الأرقام الحقيقية</h2>
+          <p>دخل واقعي + مناطق ذهبية + تحديات السوق + أمثلة تسعير 2024-2025.</p>
+        </header>
+
+        <!-- Income Table -->
+        <div class="pr-iq-block">
+          <h3>💵 نطاقات الدخل الشهري (Freelance/Shop)</h3>
+          <table class="pr-iq-table">
+            <thead>
+              <tr><th>المستوى</th><th>الدخل IQD</th><th>تقريباً USD</th><th>سنوات الخبرة</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>متدرب (في محل)</td><td>350k - 600k</td><td>$270 - $460</td><td>0-1</td></tr>
+              <tr><td>فني عادي</td><td>700k - 1.4M</td><td>$530 - $1,070</td><td>1-3</td></tr>
+              <tr><td>فني متخصص (iPhone/Samsung)</td><td>1.5M - 3M</td><td>$1,150 - $2,290</td><td>3+</td></tr>
+              <tr><td>Micro-solderer متقن</td><td>3M - 7M+</td><td>$2,290 - $5,340+</td><td>5+</td></tr>
+              <tr><td>صاحب محل (تقريبي)</td><td>4M - 15M+</td><td>...</td><td>يعتمد على الموقع</td></tr>
+            </tbody>
+          </table>
+          <p class="pr-iq-note">⚠️ الأرقام تقريبية — تختلف بحسب المنطقة، الموسم، والسمعة.</p>
+        </div>
+
+        <!-- Golden Zones -->
+        <div class="pr-iq-block">
+          <h3>📍 المناطق الذهبية في العراق</h3>
+          <div class="pr-iq-zones">
+            <div class="pr-iq-zone"><b>بغداد:</b> الباب الشرقي، الكرادة، الحارثية، الجادرية</div>
+            <div class="pr-iq-zone"><b>النجف:</b> السوق الكبير، شارع المدينة</div>
+            <div class="pr-iq-zone"><b>البصرة:</b> شارع الكويت، العشار</div>
+            <div class="pr-iq-zone"><b>أربيل:</b> سوق قيصرية، شارع 60 متر</div>
+            <div class="pr-iq-zone"><b>الموصل:</b> شارع نينوى، الدواسة</div>
+            <div class="pr-iq-zone"><b>كربلاء:</b> منطقة الحسين، شارع الإمام علي</div>
+          </div>
+        </div>
+
+        <!-- Pricing Examples -->
+        <div class="pr-iq-block">
+          <h3>💰 أمثلة تسعير واقعية (2024-2025)</h3>
+          <table class="pr-iq-table">
+            <thead>
+              <tr><th>الإصلاح</th><th>السعر مع التركيب IQD</th><th>ملاحظة</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>شاشة iPhone 11 (aftermarket)</td><td>65k - 90k</td><td>incell جودة متوسطة</td></tr>
+              <tr><td>شاشة iPhone 11 (OEM)</td><td>180k - 220k</td><td>True Tone يعمل</td></tr>
+              <tr><td>بطارية iPhone 11</td><td>35k - 55k</td><td>aftermarket</td></tr>
+              <tr><td>منفذ شحن iPhone 11</td><td>25k - 40k</td><td>flex assembly</td></tr>
+              <tr><td>شاشة Samsung A52 (incell)</td><td>75k - 95k</td><td>صعوبة متوسطة</td></tr>
+              <tr><td>بطارية Samsung A52</td><td>40k - 65k</td><td>أصلية</td></tr>
+              <tr><td>Water damage recovery</td><td>80k - 200k</td><td>حسب الضرر</td></tr>
+              <tr><td>Tristar replacement</td><td>80k - 150k</td><td>micro-soldering</td></tr>
+              <tr><td>Audio IC repair (iPhone 7)</td><td>120k - 200k</td><td>jumper</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Market Challenges -->
+        <div class="pr-iq-block pr-iq-challenges">
+          <h3>⚠️ تحديات السوق المحلي</h3>
+          <ul>
+            <li><b>قطع غير أصلية:</b> الموزع يكذب بـ "Original" — افحص قبل البيع. اختبر شاشة قبل التركيب.</li>
+            <li><b>المساومة قبل التشخيص:</b> "كم تأخذ على الإصلاح؟" قبل ما يفتح الجهاز. الرد: "اعطني 10 دقائق فحص أولاً."</li>
+            <li><b>المنافسة بالسعر:</b> دائماً فيه واحد يخفض. تميّز بـ ضمان أطول + سرعة + ثقة (مراجعات، صور before/after).</li>
+            <li><b>صعوبة استيراد القطع:</b> بعض القطع الأصلية متأخرة 2-3 أسابيع. اشرح للزبون.</li>
+            <li><b>الكهرباء غير المستقرة:</b> استخدم UPS لـ soldering equipment — يحميها من spike.</li>
+            <li><b>التضخم:</b> راجع قائمة أسعار القطع كل شهر — الدولار يتغير.</li>
+          </ul>
+        </div>
+
+      </section><!-- /pr-iraq-block -->
+
+      <!-- (المرحلة الأخيرة Phase 5 ستضاف لاحقاً) -->
     </section><!-- /page-phonerepair -->  <!-- ✅ FOOTER — after ALL pages so flex order is correct -->
   <footer id="smart-footer">
     <div class="footer-section">
