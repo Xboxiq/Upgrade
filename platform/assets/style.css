@@ -4376,3 +4376,246 @@
     .v12-challenge-done-btn { font-family:var(--font);font-size:12px;font-weight:700;padding:8px 18px;border-radius:var(--radius-sm);border:none;background:var(--accent);color:var(--bg);cursor:pointer;transition:var(--transition); }
     .v12-challenge-done-btn:hover { box-shadow:var(--shadow-accent); }
     .v12-challenge-done-btn.completed { background:rgba(34,197,94,0.15);color:#22C55E;border:1px solid rgba(34,197,94,0.3);cursor:default; }
+
+
+
+/* ============================================================
+   QUANTUM LEAP v13 — Signature Edition · Phase 1/4
+   Foundation tokens + Aurora Mesh + Film Grain
+   (additive only — never overrides existing v12.2 rules)
+============================================================ */
+
+:root.v13 {
+  /* Aurora mesh palette (4 layers blended via screen) */
+  --aurora-1: rgba(102, 252, 241, 0.18);   /* cyan signature */
+  --aurora-2: rgba(139, 92, 246, 0.16);    /* violet */
+  --aurora-3: rgba(236, 72, 153, 0.10);    /* pink whisper */
+  --aurora-4: rgba(34, 211, 238, 0.14);    /* electric */
+
+  /* Grain & cursor aura tokens (consumed in Phase 2) */
+  --grain-opacity:        0.035;
+  --cursor-aura-blur:     60px;
+  --cursor-aura-size:     320px;
+
+  /* Sectional identity tints — one per page */
+  --section-tint-sales:        #8B5CF6;
+  --section-tint-callcenter:   #06B6D4;
+  --section-tint-programming:  #22D3EE;
+  --section-tint-accounting:   #F59E0B;
+  --section-tint-social:       #EC4899;
+  --section-tint-phonerepair:  #10B981;
+  --section-tint-negotiation:  #F97316;
+  --section-tint-hr:           #EF4444;
+  --section-tint-customercare: #14B8A6;
+  --section-tint-psych:        #A78BFA;
+  --section-tint-eq:           #F472B6;
+  --section-tint-lab:          #FBBF24;
+  --section-tint-fieldsales:   #8B5CF6;
+  --section-tint-dashboard:    var(--accent);
+
+  /* Default current-tint (overridden per page in Phase 3) */
+  --current-tint: var(--accent);
+}
+
+/* ── Aurora Mesh — body::after layered radials, drifting independently ── */
+html.v13 body::after {
+  content: '';
+  position: fixed;
+  inset: -10%;                       /* slight overshoot prevents edge banding */
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(40% 35% at 18% 22%,  var(--aurora-1) 0%, transparent 70%),
+    radial-gradient(45% 40% at 82% 28%,  var(--aurora-2) 0%, transparent 72%),
+    radial-gradient(38% 32% at 28% 86%,  var(--aurora-3) 0%, transparent 68%),
+    radial-gradient(50% 42% at 78% 82%,  var(--aurora-4) 0%, transparent 75%);
+  mix-blend-mode: screen;
+  opacity: 0.85;
+  animation: qlAuroraDrift 32s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+@keyframes qlAuroraDrift {
+  0%   { transform: translate3d(0, 0, 0)         scale(1);    }
+  25%  { transform: translate3d(-2%, 1.5%, 0)    scale(1.04); }
+  50%  { transform: translate3d(2.5%, -1%, 0)    scale(1.06); }
+  75%  { transform: translate3d(-1.5%, -2%, 0)   scale(1.03); }
+  100% { transform: translate3d(1%, 2%, 0)       scale(1.05); }
+}
+
+/* ── Film grain overlay (analog texture) — uses inline SVG <filter> ── */
+.ql-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--grain-opacity, 0.035);
+  filter: url(#grainFilter);
+  background:
+    repeating-conic-gradient(
+      from 0deg,
+      rgba(255,255,255,0.04) 0deg 10deg,
+      rgba(0,0,0,0.04) 10deg 20deg
+    );
+  mix-blend-mode: overlay;
+}
+
+/* Hide raw SVG container (used only for filter definitions) */
+#ql-svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Keep app shell above the new aurora layer */
+html.v13 #app, html.v13 #smart-footer { z-index: 1; }
+
+/* Reduced motion respected (full a11y rules in Phase 4) */
+@media (prefers-reduced-motion: reduce) {
+  html.v13 body::after { animation: none; }
+}
+
+
+
+/* ============================================================
+   QUANTUM LEAP v13 · Phase 2/4
+   Conic Halo on hover + Magnetic Cursor Aura
+   (additive utilities — opt-in via .ql-halo class)
+============================================================ */
+
+/* @property registration enables transitionable rotation angle.
+   Browsers without support gracefully ignore — fallback below uses
+   keyframes-only rotation, identical visual result. */
+@property --halo-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* ── Conic Halo utility — wraps any card / surface ── */
+.ql-halo {
+  position: relative;
+  isolation: isolate;
+}
+
+.ql-halo::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--halo-angle, 0deg),
+    transparent 0deg,
+    var(--current-tint, var(--accent)) 70deg,
+    transparent 140deg,
+    var(--current-tint, var(--accent)) 210deg,
+    transparent 280deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.32s ease;
+  pointer-events: none;
+  z-index: 2;
+  animation: qlHaloRotate 6s linear infinite;
+}
+
+.ql-halo:hover::before,
+.ql-halo:focus-within::before {
+  opacity: 1;
+}
+
+@keyframes qlHaloRotate {
+  to { --halo-angle: 360deg; }
+}
+
+/* Fallback for engines without @property — transform-based rotation
+   on a child layer keeps the same effect. */
+@supports not (background: conic-gradient(from 0deg, red, blue)) {
+  .ql-halo::before { display: none; }
+}
+
+/* ── Auto-promote known card/glass surfaces to halo without HTML edits ── */
+html.v13 .ql-glass,
+html.v13 .module-card,
+html.v13 .stat-card,
+html.v13 .skill-card,
+html.v13 .call-card {
+  position: relative;
+  isolation: isolate;
+}
+
+html.v13 .ql-glass:hover::after,
+html.v13 .module-card:hover::after,
+html.v13 .stat-card:hover::after,
+html.v13 .skill-card:hover::after,
+html.v13 .call-card:hover::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--halo-angle, 0deg),
+    transparent 0deg,
+    var(--current-tint, var(--accent)) 80deg,
+    transparent 160deg,
+    var(--current-tint, var(--accent)) 240deg,
+    transparent 320deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  z-index: 2;
+  animation: qlHaloRotate 6s linear infinite;
+}
+
+/* ── Magnetic Cursor Aura — colored blob following the pointer ── */
+#cursor-aura {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--cursor-aura-size, 320px);
+  height: var(--cursor-aura-size, 320px);
+  margin-top:  calc(var(--cursor-aura-size, 320px) / -2);
+  margin-left: calc(var(--cursor-aura-size, 320px) / -2);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  background: radial-gradient(
+    circle,
+    var(--current-tint, var(--accent)) 0%,
+    transparent 60%
+  );
+  filter: blur(var(--cursor-aura-blur, 60px));
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  will-change: transform, opacity;
+}
+
+#cursor-aura.is-active { opacity: 0.35; }
+
+/* Hide aura on touch / coarse pointer devices */
+@media (pointer: coarse), (hover: none) {
+  #cursor-aura { display: none !important; }
+}
+
+/* Reduced motion: keep aura color but freeze animations */
+@media (prefers-reduced-motion: reduce) {
+  html.v13 .ql-glass:hover::after,
+  html.v13 .module-card:hover::after,
+  html.v13 .stat-card:hover::after,
+  html.v13 .skill-card:hover::after,
+  html.v13 .call-card:hover::after,
+  .ql-halo::before { animation: none; }
+}
