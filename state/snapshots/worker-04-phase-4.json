@@ -1,0 +1,28 @@
+{
+  "worker": "04",
+  "worker_name": "ACCOUNTING_CASHIER",
+  "phase": 4,
+  "title": "Income Statement + Balance Sheet Builders + Cash Flow",
+  "branch": "worker-04-phase-4",
+  "completed_at": "2026-05-15T07:55:00Z",
+  "lines_added": 812,
+  "files_modified": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "html_mounts": [
+    "section.acc-statements[data-acc-phase=\"4\"]",
+    "article[data-acc-lab=\"income-stmt\"]",
+    "article[data-acc-lab=\"balance-sheet\"]",
+    "article[data-acc-lab=\"cash-flow\"]"
+  ],
+  "is_warnings": [
+    "GP < 15% danger / 15-25% warn / ≥25% ok",
+    "Operating loss danger",
+    "Net margin <3% warn / ≥10% ok",
+    "Interest coverage <3x warn"
+  ],
+  "localStorage_keys": ["upg_statements_drafts"],
+  "next_phase": "Cashier Track (cycle, cash handling, loss prevention, POS, simulator) + Iraq Salary + Citations"
+}
