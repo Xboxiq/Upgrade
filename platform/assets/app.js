@@ -4979,3 +4979,1049 @@ document.addEventListener('DOMContentLoaded', () => {
     blocks.forEach(function(b){ io.observe(b); });
   });
 })();
+
+/* ================================================================
+   WORKER 03 · PHASE 1 — Archetype Card Toggle
+   Click an archetype card head → toggles open class.
+   Multiple-open allowed (different from psych accordion).
+================================================================ */
+(function qlArchToggle(){
+  'use strict';
+  if (window.__qlArchToggle) return;
+  window.__qlArchToggle = true;
+
+  function ready(fn){
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn);
+    } else {
+      setTimeout(fn, 0);
+    }
+  }
+
+  ready(function(){
+    var page = document.getElementById('page-callcenter');
+    if (!page) return;
+    var heads = page.querySelectorAll('[data-arch-toggle]');
+    heads.forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        var card = btn.closest('.arch-card');
+        if (!card) return;
+        card.classList.toggle('open');
+      });
+    });
+  });
+})();
+
+/* ================================================================
+   WORKER 03 · PHASE 2 — KPI Calculator (Agent Performance Index)
+   Composite scoring + benchmark comparison + 3 dynamic recommendations.
+   No localStorage write; pure compute. localStorage key reserved for Phase 3.
+================================================================ */
+(function qlKpiCalc(){
+  'use strict';
+  if (window.__qlKpiCalc) return;
+  window.__qlKpiCalc = true;
+
+  function ready(fn){
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn);
+    } else {
+      setTimeout(fn, 0);
+    }
+  }
+
+  // Score helpers — each returns 0-100
+  function scoreAHT(min){
+    // Optimal 4-6 min. Below 3 or above 8 penalized.
+    if (min >= 4 && min <= 6) return 100;
+    if (min >= 3 && min < 4) return 85;
+    if (min > 6 && min <= 7) return 80;
+    if (min > 7 && min <= 8) return 60;
+    if (min < 3) return 50;  // Too fast = rushed
+    return Math.max(20, 100 - (min - 8) * 12);
+  }
+  function scoreLinear(val, target){
+    // FCR/CSAT/QA: higher is better up to target then capped
+    if (val >= target) return 100;
+    return Math.max(0, Math.round((val / target) * 100));
+  }
+  function scoreAdh(val){
+    // Optimal 92-95. 100 is bad sign.
+    if (val >= 92 && val <= 95) return 100;
+    if (val > 95 && val <= 98) return 90;
+    if (val > 98) return 70;     // suspiciously high
+    if (val >= 88 && val < 92) return 80;
+    return Math.max(20, val - 50);
+  }
+
+  function tier(score){
+    if (score >= 90) return { label: '🏆 نخبة — Top Performer', color: '#22c55e' };
+    if (score >= 80) return { label: '✨ ممتاز — Above Average', color: '#66FCF1' };
+    if (score >= 70) return { label: '✅ جيد — Meets Target', color: '#a3e635' };
+    if (score >= 60) return { label: '⚠️ يحتاج تطوير — Improvement Plan', color: '#f59e0b' };
+    return { label: '🚨 حرج — Coaching Required', color: '#ef4444' };
+  }
+
+  function recommend(scores, raw){
+    var recos = [];
+    // Sort by score ascending → tackle lowest first
+    var pairs = Object.keys(scores).map(function(k){ return [k, scores[k]]; });
+    pairs.sort(function(a, b){ return a[1] - b[1]; });
+    var picked = pairs.slice(0, 3);
+
+    var msgs = {
+      aht: function(s, v){
+        if (v < 3) return 'الـ AHT منخفض جداً (' + v + ' د) — راجع FCR، قد تكون مكالماتك متسرّعة. ادرج تأكيد الفهم في خطوة الإغلاق.';
+        if (v > 7) return 'AHT مرتفع (' + v + ' د) — درّب على Mirroring 3 كلمات بدل إعادة كاملة، وأسئلة Diagnose محصورة بـ 3.';
+        return 'AHT في النطاق الجيد (' + v + ' د). للتحسين: قلّل Hold Time عبر Knowledge Base shortcut.';
+      },
+      fcr: function(s, v){
+        if (v < 60) return 'FCR منخفض (' + v + '%) — أهم محرك للتكلفة. ركّز على Diagnose أعمق وتأكيد كامل قبل الإغلاق (Voss summary).';
+        if (v < 75) return 'FCR (' + v + '%) قريب من المرجع. تحسين بسيط: تأكد من إغلاق التذكرة بعد التأكيد لا قبله.';
+        return 'FCR ممتاز (' + v + '%) — حافظ عليه عبر تدوين الحالات النادرة.';
+      },
+      csat: function(s, v){
+        if (v < 75) return 'CSAT منخفض (' + v + '%) — راجع Peak-End: آخر 90 ثانية يجب تحوي قيمة غير متوقعة.';
+        if (v < 85) return 'CSAT (' + v + '%) جيد. للارتقاء: استخدم اسم العميل 3 مرات في المكالمة + ابتسامة فيزيائية قبل الرفع.';
+        return 'CSAT ممتاز (' + v + '%) — استمر بصيغ Empathy Loop الموثّقة.';
+      },
+      adh: function(s, v){
+        if (v > 98) return 'Adherence ' + v + '% علامة burnout قادم. خذ استراحاتك المجدولة فعلاً — هذا مطلب جودة لا تكاسل.';
+        if (v < 90) return 'Adherence ' + v + '% — أعد ترتيب الجدول الشخصي. كل 1% انضباط = 0.6% تحسّن في CSAT.';
+        return 'Adherence (' + v + '%) في نطاق صحي. حافظ على روتين الاستراحات.';
+      },
+      qa: function(s, v){
+        if (v < 75) return 'QA Score (' + v + '%) — راجع 3 معايير الأهم: Empathy (15%) + Accuracy (25%) + Resolution (20%).';
+        if (v < 90) return 'QA (' + v + '%) قريب من معيار COPC. ركّز على Compliance + Closing.';
+        return 'QA ممتاز (' + v + '%) — مرشّح ممتاز لدور QA Analyst أو Trainer.';
+      }
+    };
+
+    picked.forEach(function(p){
+      var k = p[0];
+      var v = raw[k];
+      if (msgs[k]) recos.push(msgs[k](p[1], v));
+    });
+    return recos;
+  }
+
+  ready(function(){
+    var page = document.getElementById('page-callcenter');
+    if (!page) return;
+    var calc = page.querySelector('[data-cc-calc]');
+    if (!calc) return;
+    var btn  = calc.querySelector('[data-kc-run]');
+    var out  = calc.querySelector('[data-kc-out]');
+    if (!btn || !out) return;
+
+    function num(sel){
+      var el = calc.querySelector('[data-kc="' + sel + '"]');
+      return el ? parseFloat(el.value) || 0 : 0;
+    }
+
+    btn.addEventListener('click', function(){
+      var raw = {
+        aht:  num('aht'),
+        fcr:  num('fcr'),
+        csat: num('csat'),
+        adh:  num('adh'),
+        qa:   num('qa')
+      };
+      var scores = {
+        aht:  scoreAHT(raw.aht),
+        fcr:  scoreLinear(raw.fcr, 80),
+        csat: scoreLinear(raw.csat, 90),
+        adh:  scoreAdh(raw.adh),
+        qa:   scoreLinear(raw.qa, 90)
+      };
+      // Weighted composite — FCR + QA + CSAT lead
+      var index = Math.round(
+        scores.fcr  * 0.30 +
+        scores.qa   * 0.25 +
+        scores.csat * 0.20 +
+        scores.aht  * 0.15 +
+        scores.adh  * 0.10
+      );
+
+      // Paint
+      out.hidden = false;
+      var ring = calc.querySelector('[data-kc-ring]');
+      var t    = tier(index);
+      if (ring) {
+        ring.style.setProperty('--p', String(index));
+        ring.style.background = 'conic-gradient(' + t.color + ' ' + index + '%, rgba(255,255,255,0.06) 0)';
+      }
+      var nEl = calc.querySelector('[data-kc-num]'); if (nEl) nEl.textContent = String(index);
+      var tEl = calc.querySelector('[data-kc-tier]');
+      if (tEl) {
+        tEl.textContent = t.label + ' · ' + index + '/100';
+        tEl.style.borderColor = t.color;
+        tEl.style.color = t.color;
+      }
+      ['aht','fcr','csat','adh','qa'].forEach(function(k){
+        var bar = calc.querySelector('[data-kc-bar="' + k + '"]');
+        var pct = calc.querySelector('[data-kc-pct="' + k + '"]');
+        if (bar) bar.style.inlineSize = scores[k] + '%';
+        if (bar) bar.style.width      = scores[k] + '%';
+        if (pct) pct.textContent      = scores[k] + '%';
+      });
+
+      var recos = recommend(scores, raw);
+      var ol = calc.querySelector('[data-kc-recos]');
+      if (ol) {
+        ol.innerHTML = '';
+        recos.forEach(function(r){
+          var li = document.createElement('li');
+          li.textContent = r;
+          ol.appendChild(li);
+        });
+      }
+    });
+  });
+})();
+
+/* ================================================================
+   WORKER 03 · PHASE 3 — Voice Self-Assessment Studio
+   Web Audio API (AnalyserNode) + Web Speech API (SpeechRecognition)
+   100% local, no network. Stores last 5 attempts (numeric only) in
+   localStorage key: upg_voice_recordings_meta
+================================================================ */
+(function qlVoiceStudio(){
+  'use strict';
+  if (window.__qlVoiceStudio) return;
+  window.__qlVoiceStudio = true;
+
+  var STORAGE_KEY = 'upg_voice_recordings_meta';
+  var REC_DURATION_MS = 30000;
+
+  function ready(fn){
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn);
+    } else {
+      setTimeout(fn, 0);
+    }
+  }
+
+  function setStatus(node, state, message){
+    if (!node) return;
+    node.setAttribute('data-state', state);
+    var msg = node.querySelector('[data-vs-msg]');
+    if (msg) msg.textContent = message;
+  }
+
+  function loadHistory(){
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return [];
+      var arr = JSON.parse(raw);
+      return Array.isArray(arr) ? arr : [];
+    } catch(_){ return []; }
+  }
+  function saveHistory(arr){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(arr.slice(-5))); } catch(_){}
+  }
+
+  function gradeOf(metric, value){
+    // Returns one of: excellent, good, fair, poor
+    if (metric === 'wpm'){
+      if (value >= 140 && value <= 160) return 'excellent';
+      if (value >= 120 && value <= 175) return 'good';
+      if (value >= 100 && value <= 195) return 'fair';
+      return 'poor';
+    }
+    if (metric === 'pitch'){
+      if (value >= 18) return 'excellent';
+      if (value >= 13) return 'good';
+      if (value >= 8) return 'fair';
+      return 'poor';
+    }
+    if (metric === 'volume'){
+      if (value >= 75) return 'excellent';
+      if (value >= 60) return 'good';
+      if (value >= 45) return 'fair';
+      return 'poor';
+    }
+    if (metric === 'pause'){
+      if (value >= 12 && value <= 22) return 'excellent';
+      if (value >= 8 && value <= 28) return 'good';
+      if (value >= 4 && value <= 38) return 'fair';
+      return 'poor';
+    }
+    if (metric === 'energy'){
+      if (value >= 60 && value <= 80) return 'excellent';
+      if (value >= 45 && value <= 90) return 'good';
+      if (value >= 30 && value <= 95) return 'fair';
+      return 'poor';
+    }
+    return 'fair';
+  }
+
+  function tierLabel(grade){
+    return ({
+      excellent: '🏆 ممتاز',
+      good:      '✅ جيد',
+      fair:      '⚠️ متوسط',
+      poor:      '🚨 يحتاج تطوير'
+    })[grade] || '—';
+  }
+
+  function recommendations(metrics){
+    var out = [];
+    var grades = {
+      wpm:    gradeOf('wpm',    metrics.wpm),
+      pitch:  gradeOf('pitch',  metrics.pitch),
+      volume: gradeOf('volume', metrics.volume),
+      pause:  gradeOf('pause',  metrics.pause),
+      energy: gradeOf('energy', metrics.energy)
+    };
+    if (grades.wpm === 'poor' || grades.wpm === 'fair'){
+      if (metrics.wpm > 175) out.push('إيقاعك سريع (' + metrics.wpm + ' WPM) — تمرين: اقرأ نصاً 150 كلمة في 60 ثانية بالضبط، 3 مرات يومياً.');
+      else if (metrics.wpm < 120) out.push('إيقاعك بطيء (' + metrics.wpm + ' WPM) — قد يُفسَّر كتردد. ارفع السرعة المستهدفة إلى 140-160 تدريجياً.');
+      else out.push('الإيقاع (' + metrics.wpm + ' WPM) قريب من المثالي — صيد دقيق.');
+    }
+    if (grades.pitch === 'poor' || grades.pitch === 'fair'){
+      out.push('تباين النبرة منخفض (' + metrics.pitch + '%). تمرين: اقرأ جملة بـ 5 سياقات (مفاجأة/حزن/فرح/غضب/فضول) لكسر الـ Monotone Trap.');
+    }
+    if (grades.volume === 'poor'){
+      out.push('ثبات الصوت ضعيف (' + metrics.volume + '%) — راقب End-of-Sentence Drop. تمرين: أكّد آخر كلمتين كل جملة بنفس الطاقة.');
+    }
+    if (grades.pause === 'poor' && metrics.pause < 4){
+      out.push('نسبة الصمت متدنية (' + metrics.pause + '%) — تتحدث بدون استراحات تنفسية. أدخل وقفة 0.5 ثانية بعد كل نقطة (Voss Tactical Silence).');
+    }
+    if (grades.pause === 'poor' && metrics.pause > 38){
+      out.push('نسبة الصمت مرتفعة (' + metrics.pause + '%) — قد تكون "filler pauses". قلل الـ "أه/يعني" وحاول تنفيذ نص 30 ثانية متواصل.');
+    }
+    if (grades.energy === 'poor'){
+      out.push('مؤشر الطاقة (' + metrics.energy + ') خارج النطاق الصحي 60-80 — جرّب 3 أنفاس عميقة + ابتسامة فيزيائية قبل التسجيل.');
+    }
+    if (out.length === 0){
+      out.push('أداؤك في النطاق المثالي عبر الأبعاد الخمسة. حافظ على الروتين وكرّر التقييم أسبوعياً.');
+    }
+    return out.slice(0, 4);
+  }
+
+  // ===== Spectrogram drawer =====
+  function drawSpectro(canvas, dataArray, isActive){
+    var ctx = canvas.getContext('2d');
+    var w = canvas.width, h = canvas.height;
+    ctx.fillStyle = 'rgba(0,0,0,0.55)';
+    ctx.fillRect(0, 0, w, h);
+    if (!isActive) return;
+    var bars = 64;
+    var step = Math.floor(dataArray.length / bars);
+    var barW = w / bars;
+    for (var i = 0; i < bars; i++){
+      var v = dataArray[i * step] || 0;
+      var hh = (v / 255) * h;
+      var hue = 180 - (v / 255) * 30;
+      ctx.fillStyle = 'hsla(' + hue + ', 95%, 65%, 0.92)';
+      ctx.fillRect(i * barW + 1, h - hh, barW - 2, hh);
+    }
+  }
+
+  ready(function(){
+    var page = document.getElementById('page-callcenter');
+    if (!page) return;
+    var studio = page.querySelector('[data-cc-vstudio]');
+    if (!studio) return;
+
+    var statusBox = studio.querySelector('[data-vs-status]');
+    var recBtn    = studio.querySelector('[data-vs-rec]');
+    var stopBtn   = studio.querySelector('[data-vs-stop]');
+    var progBar   = studio.querySelector('[data-vs-progbar]');
+    var timeEl    = studio.querySelector('[data-vs-time]');
+    var canvas    = studio.querySelector('[data-vs-canvas]');
+    var transcript= studio.querySelector('[data-vs-transcript]');
+    var report    = studio.querySelector('[data-vs-report]');
+    var clearBtn  = studio.querySelector('[data-vs-clear]');
+    var histList  = studio.querySelector('[data-vs-history]');
+
+    if (!recBtn || !canvas) return;
+
+    // Resize canvas to device pixel ratio
+    function fitCanvas(){
+      var dpr = window.devicePixelRatio || 1;
+      var rect = canvas.getBoundingClientRect();
+      canvas.width  = Math.max(400, Math.floor(rect.width * dpr));
+      canvas.height = Math.floor(120 * dpr);
+    }
+    fitCanvas();
+    window.addEventListener('resize', fitCanvas, { passive: true });
+
+    // Render history
+    function renderHistory(){
+      var hist = loadHistory();
+      if (!histList) return;
+      histList.innerHTML = '';
+      if (!hist.length){
+        var empty = document.createElement('li');
+        empty.className = 'vs-hist-empty';
+        empty.textContent = 'لا توجد محاولات سابقة بعد.';
+        histList.appendChild(empty);
+        return;
+      }
+      hist.slice().reverse().forEach(function(entry){
+        var li = document.createElement('li');
+        var d  = new Date(entry.t || Date.now());
+        var hh = String(d.getHours()).padStart(2,'0');
+        var mm = String(d.getMinutes()).padStart(2,'0');
+        var dd = String(d.getDate()).padStart(2,'0');
+        var mo = String(d.getMonth()+1).padStart(2,'0');
+        li.innerHTML =
+          '<time>' + dd + '/' + mo + ' ' + hh + ':' + mm + '</time>' +
+          '<span><small>WPM</small><b>' + entry.wpm + '</b></span>' +
+          '<span><small>Pitch</small><b>' + entry.pitch + '%</b></span>' +
+          '<span><small>Vol</small><b>' + entry.volume + '%</b></span>' +
+          '<span><small>Pause</small><b>' + entry.pause + '%</b></span>' +
+          '<span><small>Energy</small><b>' + entry.energy + '</b></span>';
+        histList.appendChild(li);
+      });
+    }
+    renderHistory();
+
+    if (clearBtn){
+      clearBtn.addEventListener('click', function(){
+        try { localStorage.removeItem(STORAGE_KEY); } catch(_){}
+        renderHistory();
+      });
+    }
+
+    // ===== Recording state =====
+    var state = {
+      stream: null,
+      audioCtx: null,
+      analyser: null,
+      pitchAnalyser: null,
+      source: null,
+      rafId: 0,
+      startTs: 0,
+      timerId: 0,
+      pitchSamples: [],
+      volSamples: [],
+      energySamples: [],
+      silenceFrames: 0,
+      totalFrames: 0,
+      transcriptText: '',
+      recognition: null,
+      active: false
+    };
+
+    function cleanup(){
+      if (state.rafId) cancelAnimationFrame(state.rafId);
+      if (state.timerId) clearInterval(state.timerId);
+      if (state.recognition){
+        try { state.recognition.stop(); } catch(_){}
+        state.recognition = null;
+      }
+      if (state.stream){
+        state.stream.getTracks().forEach(function(t){ try { t.stop(); } catch(_){} });
+        state.stream = null;
+      }
+      if (state.audioCtx){
+        try { state.audioCtx.close(); } catch(_){}
+        state.audioCtx = null;
+      }
+      state.analyser = null;
+      state.pitchAnalyser = null;
+      state.source = null;
+      state.active = false;
+      recBtn.removeAttribute('data-active');
+      if (stopBtn) stopBtn.disabled = true;
+    }
+
+    // Autocorrelation pitch detect (fundamental F0 via time-domain)
+    function detectPitchHz(buf, sampleRate){
+      var SIZE = buf.length;
+      var rms = 0;
+      for (var i = 0; i < SIZE; i++){ var v = buf[i]; rms += v*v; }
+      rms = Math.sqrt(rms/SIZE);
+      if (rms < 0.01) return -1;
+      var r1 = 0, r2 = SIZE - 1, thres = 0.2;
+      for (var j = 0; j < SIZE/2; j++){ if (Math.abs(buf[j]) < thres){ r1 = j; break; } }
+      for (var k = 1; k < SIZE/2; k++){ if (Math.abs(buf[SIZE-k]) < thres){ r2 = SIZE-k; break; } }
+      var b = buf.slice(r1, r2);
+      var newSize = b.length;
+      var c = new Array(newSize).fill(0);
+      for (var l = 0; l < newSize; l++){
+        for (var m = 0; m < newSize - l; m++){
+          c[l] = c[l] + b[m] * b[m+l];
+        }
+      }
+      var d = 0; while (c[d] > c[d+1]) d++;
+      var maxval = -1, maxpos = -1;
+      for (var n = d; n < newSize; n++){
+        if (c[n] > maxval){ maxval = c[n]; maxpos = n; }
+      }
+      if (maxpos < 1) return -1;
+      var T0 = maxpos;
+      return sampleRate / T0;
+    }
+
+    function startRecording(){
+      if (state.active) return;
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+        setStatus(statusBox, 'error', 'متصفحك لا يدعم الميكروفون.');
+        return;
+      }
+      setStatus(statusBox, 'processing', 'طلب إذن الميكروفون...');
+      navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(function(stream){
+          state.stream = stream;
+          var AC = window.AudioContext || window.webkitAudioContext;
+          state.audioCtx = new AC();
+          state.source = state.audioCtx.createMediaStreamSource(stream);
+          state.analyser = state.audioCtx.createAnalyser();
+          state.analyser.fftSize = 1024;
+          state.pitchAnalyser = state.audioCtx.createAnalyser();
+          state.pitchAnalyser.fftSize = 2048;
+          state.source.connect(state.analyser);
+          state.source.connect(state.pitchAnalyser);
+
+          var bufLen = state.analyser.frequencyBinCount;
+          var freqData = new Uint8Array(bufLen);
+          var timeData = new Float32Array(state.pitchAnalyser.fftSize);
+
+          state.pitchSamples = [];
+          state.volSamples   = [];
+          state.energySamples= [];
+          state.silenceFrames= 0;
+          state.totalFrames  = 0;
+          state.transcriptText = '';
+          if (transcript) transcript.textContent = '—';
+          if (report) report.hidden = true;
+
+          // Web Speech (best-effort)
+          var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+          if (SR){
+            try {
+              state.recognition = new SR();
+              state.recognition.lang = 'ar-SA';
+              state.recognition.continuous = true;
+              state.recognition.interimResults = true;
+              state.recognition.onresult = function(ev){
+                var finalT = '', interim = '';
+                for (var i = ev.resultIndex; i < ev.results.length; i++){
+                  var r = ev.results[i];
+                  if (r.isFinal) finalT += r[0].transcript + ' ';
+                  else interim   += r[0].transcript + ' ';
+                }
+                state.transcriptText = (state.transcriptText + finalT).trim();
+                if (transcript) transcript.textContent = (state.transcriptText + ' ' + interim).trim() || '—';
+              };
+              state.recognition.onerror = function(){ /* graceful */ };
+              state.recognition.start();
+            } catch(_){
+              if (transcript) transcript.textContent = '(تعرّف الكلام غير متاح في هذا المتصفح — التحليل الصوتي يكفي)';
+            }
+          } else {
+            if (transcript) transcript.textContent = '(تعرّف الكلام غير متاح في هذا المتصفح — التحليل الصوتي يكفي)';
+          }
+
+          state.active = true;
+          state.startTs = performance.now();
+          recBtn.setAttribute('data-active', '1');
+          if (stopBtn) stopBtn.disabled = false;
+          setStatus(statusBox, 'recording', 'تسجيل... تكلم بطبيعتك لـ 30 ثانية.');
+
+          function tick(){
+            if (!state.active) return;
+            state.analyser.getByteFrequencyData(freqData);
+            state.pitchAnalyser.getFloatTimeDomainData(timeData);
+
+            // Volume RMS (0-100)
+            var sum = 0;
+            for (var i = 0; i < freqData.length; i++) sum += freqData[i];
+            var avg = sum / freqData.length;
+            state.volSamples.push(avg);
+            state.energySamples.push(avg);
+
+            // Silence detection
+            state.totalFrames++;
+            if (avg < 8) state.silenceFrames++;
+
+            // Pitch (sample every ~6 frames to save CPU)
+            if (state.totalFrames % 6 === 0){
+              var hz = detectPitchHz(timeData, state.audioCtx.sampleRate);
+              if (hz > 60 && hz < 500) state.pitchSamples.push(hz);
+            }
+
+            drawSpectro(canvas, freqData, true);
+            state.rafId = requestAnimationFrame(tick);
+          }
+          tick();
+
+          // Progress timer
+          state.timerId = setInterval(function(){
+            var elapsed = performance.now() - state.startTs;
+            var pct = Math.min(100, (elapsed / REC_DURATION_MS) * 100);
+            if (progBar) { progBar.style.inlineSize = pct + '%'; progBar.style.width = pct + '%'; }
+            if (timeEl) timeEl.textContent = (elapsed/1000).toFixed(1) + 's / 30.0s';
+            if (elapsed >= REC_DURATION_MS) stopRecording();
+          }, 80);
+        })
+        .catch(function(err){
+          setStatus(statusBox, 'error', 'تعذّر الوصول للميكروفون: ' + (err.message || 'إذن مرفوض'));
+          cleanup();
+        });
+    }
+
+    function computeReport(){
+      // WPM from transcript word count
+      var words = (state.transcriptText || '').trim().split(/\s+/).filter(Boolean).length;
+      var elapsedSec = Math.max(1, (performance.now() - state.startTs)/1000);
+      var wpm = Math.round((words / elapsedSec) * 60);
+      // If transcript empty/too short, estimate from voiced frames
+      if (words < 5){
+        var voicedRatio = state.totalFrames > 0 ? (1 - state.silenceFrames / state.totalFrames) : 0;
+        wpm = Math.round(voicedRatio * 165); // proxy estimate
+      }
+
+      // Pitch variability (CV of F0 samples)
+      var pitchPct = 0;
+      if (state.pitchSamples.length > 4){
+        var s = state.pitchSamples;
+        var m = s.reduce(function(a,b){return a+b;},0)/s.length;
+        var v = s.reduce(function(a,b){return a + (b-m)*(b-m);},0)/s.length;
+        var sd = Math.sqrt(v);
+        pitchPct = Math.round((sd / m) * 100);
+      }
+
+      // Volume stability (1 - CV of avg volume)
+      var volPct = 0;
+      if (state.volSamples.length > 10){
+        var v2 = state.volSamples;
+        var m2 = v2.reduce(function(a,b){return a+b;},0)/v2.length;
+        var var2 = v2.reduce(function(a,b){return a + (b-m2)*(b-m2);},0)/v2.length;
+        var sd2 = Math.sqrt(var2);
+        var cv  = m2 > 0 ? sd2 / m2 : 1;
+        volPct = Math.round(Math.max(0, Math.min(100, (1 - cv) * 100)));
+      }
+
+      // Pause ratio
+      var pausePct = state.totalFrames > 0
+        ? Math.round((state.silenceFrames / state.totalFrames) * 100)
+        : 0;
+
+      // Energy index (mean volume normalized 0-100)
+      var energy = 0;
+      if (state.energySamples.length){
+        var em = state.energySamples.reduce(function(a,b){return a+b;},0) / state.energySamples.length;
+        energy = Math.round(Math.min(100, em * 1.2));
+      }
+
+      return { wpm: wpm, pitch: pitchPct, volume: volPct, pause: pausePct, energy: energy };
+    }
+
+    function paintReport(m){
+      if (!report) return;
+      report.hidden = false;
+      ['wpm','pitch','volume','pause','energy'].forEach(function(k){
+        var valEl = report.querySelector('[data-vs-m="' + k + '"]');
+        var tEl   = report.querySelector('[data-vs-tier="' + k + '"]');
+        if (!valEl) return;
+        if (k === 'wpm')         valEl.textContent = m.wpm;
+        else if (k === 'energy') valEl.textContent = m.energy;
+        else                     valEl.textContent = m[k] + '%';
+        var grade = gradeOf(k, m[k]);
+        if (tEl){
+          tEl.setAttribute('data-grade', grade);
+          tEl.textContent = tierLabel(grade);
+        }
+      });
+      var ul = report.querySelector('[data-vs-recos]');
+      if (ul){
+        ul.innerHTML = '';
+        recommendations(m).forEach(function(r){
+          var li = document.createElement('li');
+          li.textContent = r;
+          ul.appendChild(li);
+        });
+      }
+    }
+
+    function stopRecording(){
+      if (!state.active) return;
+      var m = computeReport();
+      cleanup();
+      drawSpectro(canvas, new Uint8Array(0), false);
+      if (progBar) { progBar.style.inlineSize = '100%'; progBar.style.width = '100%'; }
+      if (timeEl) timeEl.textContent = '30.0s / 30.0s';
+      setStatus(statusBox, 'ready', 'انتهى التسجيل — تقريرك جاهز.');
+      paintReport(m);
+      // Persist meta
+      var hist = loadHistory();
+      hist.push({ t: Date.now(), wpm: m.wpm, pitch: m.pitch, volume: m.volume, pause: m.pause, energy: m.energy });
+      saveHistory(hist);
+      renderHistory();
+    }
+
+    recBtn.addEventListener('click', function(){
+      if (state.active) stopRecording();
+      else startRecording();
+    });
+    if (stopBtn) stopBtn.addEventListener('click', stopRecording);
+  });
+})();
+
+/* ================================================================
+   WORKER 03 · PHASE 4 — Difficult Caller Simulator
+   3 scenarios × 4-5 turns × 4 options each.
+   Score persisted in localStorage: upg_simulator_scores
+================================================================ */
+(function qlSimulator(){
+  'use strict';
+  if (window.__qlSimulator) return;
+  window.__qlSimulator = true;
+
+  var STORAGE_KEY = 'upg_simulator_scores';
+
+  function ready(fn){
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn);
+    } else {
+      setTimeout(fn, 0);
+    }
+  }
+
+  // grade weights: excellent=2, ok=1, bad=0
+  var GRADE_PTS = { excellent: 2, ok: 1, bad: 0 };
+
+  var SCENARIOS = {
+    screamer: {
+      title: 'الصارخ — Screamer',
+      emoji: '🔥',
+      turns: [
+        {
+          client: 'الصارخ: "هاي ثالث مرة أتصل! ما أحد يحل مشكلتي! ما تستحون؟!"',
+          options: [
+            { txt: '"أعتذر سيدي بشدة، هذا غير مقبول، خل أتأكد فوراً..."', grade: 'ok',
+              fb: 'اعتذار صحيح لكنك بدأت بالـ Action قبل الإقرار العاطفي. الصارخ يحتاج "L" من LEAR أولاً.' },
+            { txt: '"أسمعك. ثلاث مرات بدون حل — هذا فعلاً يجنّن. خذ نفس وحكيلي شنو الموضوع من الأول."', grade: 'excellent',
+              fb: 'ممتاز — Listen + Mirror ("ثلاث مرات بدون حل") + Empathy + Refocus بدون دفاع. تطبيق LEAR كامل.' },
+            { txt: '"سيدي ارفع صوتك بالشكل المناسب رجاءً وإلا..."', grade: 'bad',
+              fb: 'كارثة — أنت تقاتل الغضب بالحدود. هذا يصعّد لا يهدّئ. لا ترفع حدود الصوت أبداً في الـ turn الأول.' },
+            { txt: '"بسم الله، خل أحوّلك للمشرف."', grade: 'bad',
+              fb: 'هروب فوري = فقدان ثقة كامل. الصارخ يفسّر التحويل كـ "هذا الموظف ما يقدر".' }
+          ]
+        },
+        {
+          client: 'الصارخ: "النت من 3 أيام مقطوع! وأنا أدفع شهرياً 100 ألف! شو هذا؟!"',
+          options: [
+            { txt: '"3 أيام بدون نت ودفعك مستمر — هذا حقك تنزعج. خلّيني أتحقق من حسابك الحين، اسم الحساب من فضلك؟"', grade: 'excellent',
+              fb: 'Validate صريح + Action مباشر + سؤال تشخيصي محدد. هذا تحوّل صحي من العاطفة للعمل.' },
+            { txt: '"حضرتك، الفاتورة تخصم بشكل أوتوماتيكي حتى لو الخدمة منقطعة، هذا في العقد..."', grade: 'bad',
+              fb: 'لا تدافع عن العقد لعميل غاضب. القانون لاحقاً، التعاطف الآن.' },
+            { txt: '"مفهوم، ممكن نشوف خياراتنا بعد ما نحل المشكلة الأساسية أولاً."', grade: 'ok',
+              fb: 'وسط — تجاهلت موضوع الفاتورة. سيعود لها لاحقاً بقوة أكبر.' },
+            { txt: '"نعم، نعم، شو رقم الموديم؟"', grade: 'bad',
+              fb: 'تجاهلت الإحساس وقفزت للحل التقني. الصارخ سيشعر أنك آلة.' }
+          ]
+        },
+        {
+          client: 'الصارخ: "كل مرة تقولولي راح نحل، بس ما حدا يحل! شو الضمانة هاي المرة؟"',
+          options: [
+            { txt: '"أفهمك، الوعود السابقة كسرت ثقتك. الحين أنا مسؤولك المباشر، رقم تذكرتي 4521، راح أتابعها شخصياً واتصل بك في 24 ساعة."', grade: 'excellent',
+              fb: 'Ownership + رقم مرجعي + التزام زمني = ثقة. Cialdini Commitment principle.' },
+            { txt: '"إن شاء الله هذي المرة بنحل."', grade: 'bad',
+              fb: '"إن شاء الله" + "بنحل" = صفر التزام. هذا اللي خلاه يصرخ من الأساس.' },
+            { txt: '"أعدك أنا شخصياً سأتابع."', grade: 'ok',
+              fb: 'وعد بدون رقم، بدون زمن، بدون تذكرة. عميل مكسور الثقة يحتاج بيانات لا كلمات.' },
+            { txt: '"الضمانة هي إجراءاتنا الداخلية."', grade: 'bad',
+              fb: 'كلام شركاتي فارغ. لا يثق بالـ "إجراءات".' }
+          ]
+        },
+        {
+          client: 'الصارخ (هدأ قليلاً): "أوكي... هسة شو راح تسوي؟"',
+          options: [
+            { txt: '"الحين 3 خطوات: 1) تذكرة عاجلة لقسم الشبكة، 2) خصم على فاتورة الشهر بسبب الانقطاع، 3) اتصال متابعة مني خلال 24 ساعة. متفقين؟"', grade: 'excellent',
+              fb: 'Close مثالي — 3 خيارات مرقّمة + تأكيد الاتفاق. Peak-End يبدأ بنهاية إيجابية.' },
+            { txt: '"راح ندرس الموضوع ونرجعلك."', grade: 'bad',
+              fb: 'بعد كل التعب، لغة "ندرس" تعيد الغضب فوراً. لا تدرس — افعل.' },
+            { txt: '"الفنيين يخبروك بالتفاصيل."', grade: 'bad',
+              fb: 'تخلّيت عن Ownership في اللحظة الحاسمة.' },
+            { txt: '"راح أفتح تذكرة وأشوف."', grade: 'ok',
+              fb: 'وسط — افتقدت الالتزام الزمني والخصم.' }
+          ]
+        }
+      ]
+    },
+
+    threat: {
+      title: 'المهدد القانوني — Legal Threat',
+      emoji: '⚖️',
+      turns: [
+        {
+          client: 'المهدد: "والله العظيم راح أشتكي عليكم بالمحكمة وبحماية المستهلك!"',
+          options: [
+            { txt: '"حضرتك، هاي حقك القانوني الكامل، وأنا راح أساعدك بأي توثيق تحتاجه. قبل ذلك، أگدر أفهم منك القصة كاملة؟"', grade: 'excellent',
+              fb: 'Calm-Doc — اعتراف بالحق + عدم تراجع + جمع معلومات. هذا يفصل التهديد عن المشكلة الفعلية.' },
+            { txt: '"لو سمحت ما تهددنا، عندنا قسم قانوني..."', grade: 'bad',
+              fb: 'مواجهة قانونية فورية = تصعيد مضمون. لا تذكر "قسمنا القانوني" أبداً في الـ turn الأول.' },
+            { txt: '"اشتكي إذا تريد، هذا حقك."', grade: 'bad',
+              fb: 'تحدّي مباشر = معركة شخصية. هذا ينقل المكالمة من شكوى لقضية كرامة.' },
+            { txt: '"حضرتك، خلّيني أتحقق من الموضوع وأرجعلك."', grade: 'ok',
+              fb: 'تجاهل التهديد لا يجدي — العميل يريد سماع اعتراف بحقه أولاً.' }
+          ]
+        },
+        {
+          client: 'المهدد: "أنتم خصمتم 200 ألف بدون إذني! هذا سرقة!"',
+          options: [
+            { txt: '"خصم 200 ألف بدون موافقتك — هذا فعلاً يستدعي تحقيق. خلّيني أفتح ملف رسمي وأنطيك رقم متابعة، اسم الحساب؟"', grade: 'excellent',
+              fb: 'تأكيد الرقم (Mirror) + جدّية الإجراء + توثيق. هذا يقلل الـ legal threat لأن العميل يحس أنه مأخوذ بجدية.' },
+            { txt: '"يمكن ضرائب أو رسوم، خلّينا نتحقق."', grade: 'ok',
+              fb: 'تخفيف من شأن الادعاء قد يفسّر كاستهانة. اعترف بالشكوى أولاً، ثم تحقق.' },
+            { txt: '"كلمة سرقة كبيرة جداً، نحن شركة محترمة."', grade: 'bad',
+              fb: 'الدفاع عن سمعة الشركة = إهمال للعميل. التهديد سيرتفع.' },
+            { txt: '"الخصم ربما من شريك خارجي."', grade: 'bad',
+              fb: 'إلقاء اللوم على طرف ثالث = تهرّب. العميل يدفع لك أنت.' }
+          ]
+        },
+        {
+          client: 'المهدد: "عندي تسجيلات وكل شي! راح تكلفكم!"',
+          options: [
+            { txt: '"التسجيل من حقك، وأنا راح أتأكد أن كل ما يقال هنا دقيق ومسجّل من جانبنا أيضاً. هل تسمح أن أوثّق بياناتك الآن؟"', grade: 'excellent',
+              fb: 'الاعتراف بحقه في التسجيل + الإشارة إلى تسجيلكم الرسمي = توازن قانوني. لا تخفي، لا تخاف.' },
+            { txt: '"كذلك مكالماتنا مسجلة، فلا قلق."', grade: 'ok',
+              fb: 'صح لكن نبرة دفاعية. كان أفضل بصياغة شراكة لا مواجهة.' },
+            { txt: '"عرضك بالتسجيل غير قانوني بدون إذن."', grade: 'bad',
+              fb: 'معلومة قانونية خاطئة (في معظم الدول التسجيل لطرف في المكالمة قانوني) + مواجهة عدائية.' },
+            { txt: '"لا تهددنا بالتسجيلات."', grade: 'bad',
+              fb: 'كلمة "تهددنا" تثبت في رأسه أنك تشعر بالتهديد = ضعف.' }
+          ]
+        },
+        {
+          client: 'المهدد: "أوكي، شو راح تسوي قبل ما أمشي للمحكمة؟"',
+          options: [
+            { txt: '"3 خطوات اليوم: 1) فتح تحقيق رسمي بالخصم، 2) إرجاع المبلغ خلال 5 أيام عمل إذا ثبت الخطأ، 3) اتصال مني شخصياً خلال 48 ساعة. هل هذا يناسبك كبداية قبل أي خيار آخر؟"', grade: 'excellent',
+              fb: 'إجراءات محددة + التزام زمني + خيار للعميل = de-escalation كاملة. Voss "How am I supposed to do that?" inverted.' },
+            { txt: '"راح أحوّلك للقسم القانوني."', grade: 'bad',
+              fb: 'تحويل = هروب. القسم القانوني يأتي لاحقاً، لا قبل محاولة الحل.' },
+            { txt: '"خلّيني أرى ماذا أستطيع."', grade: 'bad',
+              fb: 'إجابة ضبابية = استمرار للتهديد.' },
+            { txt: '"راح أفتح ملف وأرجعلك خلال أسبوع."', grade: 'ok',
+              fb: 'أفضل من الضبابي لكن "أسبوع" كثير لشخص يهدد بالمحكمة. قلّلها لـ 48 ساعة.' }
+          ]
+        },
+        {
+          client: 'المهدد (نبرته هدأت): "خلّيني أنتظر 48 ساعة، شوف شو تطلع."',
+          options: [
+            { txt: '"شكراً على ثقتك. رقم تذكرتك 7821، اسمي [اسم] والاتصال مني شخصياً قبل بعد غد. أي شي ضروري قبل ما نقفل؟"', grade: 'excellent',
+              fb: 'Soft Close + رقم + اسم + تأكيد. Peak-End ممتاز يحوّل ذكرى المكالمة من تهديد إلى مهنية.' },
+            { txt: '"إلى اللقاء."', grade: 'bad',
+              fb: 'وداع جاف بعد كل هذا = خسارة كل المكاسب العاطفية.' },
+            { txt: '"شكراً، إن شاء الله."', grade: 'ok',
+              fb: 'أفضل من الجاف لكن بدون التزام مرجعي.' },
+            { txt: '"تمام، بس لا تشتكي قبل ما نرد."', grade: 'bad',
+              fb: 'إعادة فتح الجرح = خطأ كارثي في الخطوة الأخيرة.' }
+          ]
+        }
+      ]
+    },
+
+    cold: {
+      title: 'الغاضب الهادئ — Cold Angry',
+      emoji: '🧊',
+      turns: [
+        {
+          client: 'الهادئ: "أحب أتأكد من شي... رقم حسابي 882194، اشتراك ذهبي. صح؟"',
+          options: [
+            { txt: '"نعم سيدي، أكدت الرقم 882194 — اشتراك ذهبي منذ 2022. كيف أساعدك تحديداً؟"', grade: 'excellent',
+              fb: 'تأكيد دقيق + تاريخ + سؤال محدد. الهادئ يحب الدقة والكفاءة، يكره الكلام الفارغ.' },
+            { txt: '"أهلاً سيدي، كيف الحال؟ نعم اشتراك ذهبي."', grade: 'bad',
+              fb: 'مجاملة فارغة + جواب جزئي. الهادئ يفسّر هذا كاستخفاف.' },
+            { txt: '"أكيد، تأمر شي؟"', grade: 'ok',
+              fb: 'سريع لكن بدون توثيق رقم الحساب صراحة. الدقة مفقودة.' },
+            { txt: '"إيه إيه، شو الموضوع؟"', grade: 'bad',
+              fb: 'لغة عامية مفرطة لعميل بارد منظّم = إهانة ضمنية.' }
+          ]
+        },
+        {
+          client: 'الهادئ (نفس النبرة): "أرسلت ثلاثة إيميلات من 12 يوم. لم يرد أحد. لماذا؟"',
+          options: [
+            { txt: '"عذراً سيدي. 12 يوم بدون رد على 3 إيميلات هو خطأ من جانبنا. خلّيني أبحث عنها الآن — هل تذكر تاريخ آخر إيميل؟"', grade: 'excellent',
+              fb: 'اعتذار محدد بالأرقام + مسؤولية + سؤال دقيق. الهادئ يقدّر الاعتراف الواضح بالخطأ.' },
+            { txt: '"يمكن وصلت سبام، تحقق من الإيميل."', grade: 'bad',
+              fb: 'إلقاء اللوم على نظامه = تصعيد فوري للهادئ. هو سيقدّم شكوى رسمية بعد المكالمة.' },
+            { txt: '"السيستم عندنا أحياناً يأخر الإيميلات."', grade: 'bad',
+              fb: 'تبرير غير شخصي = استهانة. الهادئ يريد شخصاً يعترف.' },
+            { txt: '"معذرة، خلّيني أتحقق."', grade: 'ok',
+              fb: 'الاعتذار صحيح لكن ينقصه التحديد بالأرقام (12 يوم، 3 إيميلات).' }
+          ]
+        },
+        {
+          client: 'الهادئ: "أتوقع جواب محدد. ما الإجراء التصحيحي؟"',
+          options: [
+            { txt: '"3 إجراءات: 1) فتح ملف خاص بحالتك مع متابعة من مسؤول مباشر (أنا)، 2) تعويض شهر مجاني للتأخير، 3) اتصال مكتوب وصوتي خلال 24 ساعة بأي قرار. هل تقبل بهذا كأولوية؟"', grade: 'excellent',
+              fb: 'محدد + مرقّم + ملموس + يطلب موافقته. هذه اللغة الوحيدة التي تنزع شحنة الهادئ.' },
+            { txt: '"الإجراء معتاد: نراجع وننسّق."', grade: 'bad',
+              fb: '"معتاد" = مهين للهادئ. هو يريد إجراء استثنائي.' },
+            { txt: '"سأتابع شخصياً."', grade: 'ok',
+              fb: 'صحيح لكن بدون أرقام = كلام عاطفي للهادئ.' },
+            { txt: '"هي أمور إدارية تأخذ وقتها."', grade: 'bad',
+              fb: 'فلسفة بدلاً من حل = اشتعال هادئ مضمون.' }
+          ]
+        },
+        {
+          client: 'الهادئ (نبرة لم تتغير): "تماماً. سأنتظر 24 ساعة. اسمك ورقم تذكرتي."',
+          options: [
+            { txt: '"اسمي [اسم]، الموقع [الموقع]، ID رقم 4485، رقم تذكرتك CC-2026-4485. سأتصل قبل [الساعة] غداً. هل تسمح بإغلاق المكالمة؟"', grade: 'excellent',
+              fb: 'بيانات كاملة + التزام بساعة محددة + استئذان مهذب. للهادئ، هذا = احترافية كاملة.' },
+            { txt: '"اسمي [اسم]، التذكرة في النظام."', grade: 'bad',
+              fb: 'بيانات ناقصة لمن طلبها صراحة = إهانة.' },
+            { txt: '"رقم التذكرة سيصلك عبر SMS."', grade: 'ok',
+              fb: 'مقبول لكن الأفضل إعطاؤه فوراً + SMS تأكيد.' },
+            { txt: '"الأنظمة موثّقة، ما تخاف."', grade: 'bad',
+              fb: '"ما تخاف" تعليق سطحي يجرّد الهادئ من جدّيته = مأساة.' }
+          ]
+        }
+      ]
+    }
+  };
+
+  // ===== Render =====
+  ready(function(){
+    var page = document.getElementById('page-callcenter');
+    if (!page) return;
+    var shell = page.querySelector('[data-cc-sim]');
+    if (!shell) return;
+
+    var picker  = shell.querySelector('[data-sim-picker]');
+    var active  = shell.querySelector('[data-sim-active]');
+    var emojiEl = shell.querySelector('[data-sim-emoji]');
+    var titleEl = shell.querySelector('[data-sim-title]');
+    var stepNow = shell.querySelector('[data-sim-step-now]');
+    var stepTot = shell.querySelector('[data-sim-step-total]');
+    var progBar = shell.querySelector('[data-sim-progbar]');
+    var clientEl= shell.querySelector('[data-sim-client]');
+    var optsEl  = shell.querySelector('[data-sim-options]');
+    var fb      = shell.querySelector('[data-sim-feedback]');
+    var fbTag   = shell.querySelector('[data-sim-feedback-tag]');
+    var fbText  = shell.querySelector('[data-sim-feedback-text]');
+    var nextBtn = shell.querySelector('[data-sim-next]');
+    var finalEl = shell.querySelector('[data-sim-final]');
+    var finNum  = shell.querySelector('[data-sim-final-num]');
+    var finMax  = shell.querySelector('[data-sim-final-max]');
+    var finTier = shell.querySelector('[data-sim-final-tier]');
+    var finList = shell.querySelector('[data-sim-final-list]');
+    var restart = shell.querySelector('[data-sim-restart]');
+    var backBtn = shell.querySelector('[data-sim-back]');
+
+    var run = null;
+
+    function showPicker(){
+      if (picker) picker.hidden = false;
+      if (active) active.hidden = true;
+      if (finalEl) finalEl.hidden = true;
+    }
+    function showActive(){
+      if (picker) picker.hidden = true;
+      if (active) active.hidden = false;
+      if (finalEl) finalEl.hidden = true;
+    }
+
+    function start(key){
+      var sc = SCENARIOS[key];
+      if (!sc) return;
+      run = { key: key, scenario: sc, idx: 0, picks: [] };
+      if (emojiEl) emojiEl.textContent = sc.emoji;
+      if (titleEl) titleEl.textContent = sc.title;
+      if (stepTot) stepTot.textContent = sc.turns.length;
+      if (finMax)  finMax.textContent  = sc.turns.length * 2;
+      showActive();
+      paintTurn();
+    }
+
+    function paintTurn(){
+      if (!run) return;
+      var turn = run.scenario.turns[run.idx];
+      if (!turn) return;
+      if (stepNow) stepNow.textContent = run.idx + 1;
+      if (progBar) {
+        var pct = Math.round((run.idx / run.scenario.turns.length) * 100);
+        progBar.style.inlineSize = pct + '%';
+        progBar.style.width      = pct + '%';
+      }
+      if (clientEl) clientEl.textContent = turn.client;
+      if (fb) fb.hidden = true;
+      if (!optsEl) return;
+      optsEl.innerHTML = '';
+      turn.options.forEach(function(opt, i){
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'sim-option';
+        btn.textContent = opt.txt;
+        btn.addEventListener('click', function(){
+          // disable all
+          optsEl.querySelectorAll('.sim-option').forEach(function(b){ b.disabled = true; });
+          btn.setAttribute('data-picked', opt.grade);
+          run.picks.push({ index: i, grade: opt.grade, fb: opt.fb });
+          if (fb) fb.hidden = false;
+          if (fbTag) {
+            fbTag.setAttribute('data-grade', opt.grade);
+            fbTag.textContent = opt.grade === 'excellent' ? '🏆 ممتاز' : (opt.grade === 'ok' ? '⚠️ مقبول' : '🚨 خاطئ');
+          }
+          if (fbText) fbText.textContent = opt.fb;
+        });
+        optsEl.appendChild(btn);
+      });
+    }
+
+    function finishRun(){
+      var sc = run.scenario;
+      var pts = run.picks.reduce(function(s, p){ return s + GRADE_PTS[p.grade]; }, 0);
+      var max = sc.turns.length * 2;
+      var pct = Math.round((pts / max) * 100);
+      var tier;
+      if (pct >= 90) tier = '🏆 خبير';
+      else if (pct >= 70) tier = '✨ متمكن';
+      else if (pct >= 50) tier = '✅ مقبول';
+      else tier = '🚨 يحتاج تدريب';
+
+      if (finNum) finNum.textContent = pts;
+      if (finTier) finTier.textContent = tier + ' · ' + pct + '%';
+      if (finList){
+        finList.innerHTML = '';
+        run.picks.forEach(function(p, i){
+          var li = document.createElement('li');
+          li.setAttribute('data-grade', p.grade);
+          li.innerHTML = '<b>' + (i+1) + '</b><div>' + p.fb + '<small>' +
+            (p.grade === 'excellent' ? '+2 نقطة' : (p.grade === 'ok' ? '+1 نقطة' : '0 نقطة')) +
+            '</small></div>';
+          finList.appendChild(li);
+        });
+      }
+      if (finalEl) finalEl.hidden = false;
+
+      // Persist
+      try {
+        var raw = localStorage.getItem(STORAGE_KEY);
+        var arr = raw ? JSON.parse(raw) : [];
+        if (!Array.isArray(arr)) arr = [];
+        arr.push({ scenario: run.key, score: pts, max: max, pct: pct, t: Date.now() });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(arr.slice(-20)));
+      } catch(_){}
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(){
+        if (!run) return;
+        run.idx++;
+        if (run.idx >= run.scenario.turns.length){
+          finishRun();
+        } else {
+          paintTurn();
+        }
+      });
+    }
+    if (restart) restart.addEventListener('click', function(){ run = null; showPicker(); });
+    if (backBtn) backBtn.addEventListener('click', function(){ run = null; showPicker(); });
+
+    shell.querySelectorAll('[data-sim-load]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var key = btn.getAttribute('data-sim-load');
+        start(key);
+      });
+    });
+  });
+})();
