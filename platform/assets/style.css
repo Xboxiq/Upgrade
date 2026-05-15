@@ -4619,3 +4619,75 @@ html.v13 .call-card:hover::after {
   html.v13 .call-card:hover::after,
   .ql-halo::before { animation: none; }
 }
+
+
+
+/* ============================================================
+   QUANTUM LEAP v13 · Phase 3/4
+   Living Numerals + Sectional Identity Tint
+   (additive — driven by body[data-active-section] + [data-count-to])
+============================================================ */
+
+/* Numerals: tabular figures + smooth counter transitions */
+[data-count-to] {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+  display: inline-block;
+  min-width: 1ch;
+}
+
+/* ── Sectional tint binding — one rule per page id ── */
+html.v13 body[data-active-section="dashboard"]    { --current-tint: var(--section-tint-dashboard);    }
+html.v13 body[data-active-section="callcenter"]   { --current-tint: var(--section-tint-callcenter);   }
+html.v13 body[data-active-section="fieldsales"]   { --current-tint: var(--section-tint-fieldsales);   }
+html.v13 body[data-active-section="social"]       { --current-tint: var(--section-tint-social);       }
+html.v13 body[data-active-section="lab"]          { --current-tint: var(--section-tint-lab);          }
+html.v13 body[data-active-section="psych"]        { --current-tint: var(--section-tint-psych);        }
+html.v13 body[data-active-section="eq"]           { --current-tint: var(--section-tint-eq);           }
+html.v13 body[data-active-section="negotiation"]  { --current-tint: var(--section-tint-negotiation);  }
+html.v13 body[data-active-section="customercare"] { --current-tint: var(--section-tint-customercare); }
+html.v13 body[data-active-section="programming"]  { --current-tint: var(--section-tint-programming);  }
+html.v13 body[data-active-section="accounting"]   { --current-tint: var(--section-tint-accounting);   }
+
+/* ── Visible signature on each page-header (animated underline accent) ── */
+html.v13 .page.active .page-header {
+  position: relative;
+}
+html.v13 .page.active .page-header::after {
+  content: '';
+  display: block;
+  height: 2px;
+  margin-top: 14px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--current-tint, var(--accent)) 35%,
+    var(--current-tint, var(--accent)) 65%,
+    transparent 100%
+  );
+  opacity: 0.85;
+  transform-origin: right center;            /* RTL */
+  animation: qlHeaderSweep 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes qlHeaderSweep {
+  from { transform: scaleX(0);   opacity: 0; }
+  to   { transform: scaleX(1);   opacity: 0.85; }
+}
+
+/* ── Sectional scrollbar tint ── */
+html.v13 ::-webkit-scrollbar-thumb        { background: color-mix(in oklab, var(--current-tint, var(--accent)) 60%, var(--surface-3)); }
+html.v13 ::-webkit-scrollbar-thumb:hover  { background: var(--current-tint, var(--accent)); }
+html.v13 * { scrollbar-color: var(--current-tint, var(--accent)) var(--bg); }
+
+/* ── Topbar icon glow follows tint ── */
+html.v13 #topbar-icon {
+  filter: drop-shadow(0 0 6px color-mix(in oklab, var(--current-tint, var(--accent)) 50%, transparent));
+  transition: filter 0.45s ease;
+}
+
+/* ── Stat-card accent border picks up tint (only when v13 active) ── */
+html.v13 .stat-card { border-color: color-mix(in oklab, var(--current-tint, var(--accent)) 18%, var(--border)); }
+
+/* color-mix fallback: if not supported, the rules above do nothing harmful (CSS skips them) */
