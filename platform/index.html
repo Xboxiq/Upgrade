@@ -1306,6 +1306,240 @@
         <p>منهجيات عالمية بتطبيق عربي — أطر، اعتراضات، ودورة البيع السبعية</p>
       </div>
 
+      <!-- ════════════════════════════════════════════════════════════════
+           WORKER 02 · PHASE 1 — Sales Frameworks Comparison (Knowledge Spine)
+           4 مدارس بيع عالمية، جدول مقارن + modals بأمثلة محادثة عربية كاملة.
+           Hooks: data-sf-row, data-sf-modal, data-sf-close. JS in app.js IIFE.
+      ════════════════════════════════════════════════════════════════ -->
+      <div class="sales-section-header" data-sf-anchor>
+        <div>
+          <h2>BLOCK 0 — مدارس البيع الأربع (Comparative Frameworks)</h2>
+          <p>قبل أي إطار، اعرف أيّ مدرسة تنتمي إليها صفقتك. كل صف قابل للنقر — يفتح محادثة عربية كاملة (3 إلى 4 turns) ومتى يفشل الإطار.</p>
+        </div>
+        <span class="tag accent">4 مدارس</span>
+      </div>
+
+      <div class="sf-table-wrap ql-glass" data-sf-table>
+        <table class="sales-frameworks">
+          <thead>
+            <tr>
+              <th scope="col" class="sf-col-name">الإطار</th>
+              <th scope="col" class="sf-col-author">المؤلف · السنة</th>
+              <th scope="col" class="sf-col-core">الجوهر (Core Loop)</th>
+              <th scope="col" class="sf-col-when">متى تستخدمه</th>
+              <th scope="col" class="sf-col-flaw">عيبه الجوهري</th>
+              <th scope="col" class="sf-col-action" aria-label="فتح"></th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr class="sf-row sf-row-spin" data-sf-row="spin" tabindex="0" role="button" aria-haspopup="dialog" aria-label="افتح تفاصيل إطار SPIN">
+              <td>
+                <span class="sf-name">SPIN Selling</span>
+                <span class="sf-tagline">سؤال يقود سؤال</span>
+              </td>
+              <td>Neil Rackham · 1988</td>
+              <td>Situation → Problem → Implication → Need-payoff</td>
+              <td>بيع B2B معقد، صفقات متوسطة وكبيرة، دورات شراء طويلة</td>
+              <td>بطيء على السلع البسيطة، يحتاج وقت discovery حقيقي</td>
+              <td><span class="sf-open-icon" aria-hidden="true">+</span></td>
+            </tr>
+
+            <tr class="sf-row sf-row-challenger" data-sf-row="challenger" tabindex="0" role="button" aria-haspopup="dialog" aria-label="افتح تفاصيل إطار Challenger Sale">
+              <td>
+                <span class="sf-name">Challenger Sale</span>
+                <span class="sf-tagline">علّم → خصّص → سيطر</span>
+              </td>
+              <td>Dixon &amp; Adamson · 2011</td>
+              <td>Teach → Tailor → Take Control</td>
+              <td>عملاء غير واعين بمشكلتهم، أسواق ناضجة، منتجات معقدة</td>
+              <td>يحتاج خبير قطاع — يفشل مع مندوب جديد بلا ذخيرة معرفية</td>
+              <td><span class="sf-open-icon" aria-hidden="true">+</span></td>
+            </tr>
+
+            <tr class="sf-row sf-row-sandler" data-sf-row="sandler" tabindex="0" role="button" aria-haspopup="dialog" aria-label="افتح تفاصيل إطار Sandler">
+              <td>
+                <span class="sf-name">Sandler Method</span>
+                <span class="sf-tagline">قوة الـ«لا» المبكرة</span>
+              </td>
+              <td>David Sandler · 1967</td>
+              <td>Bonding → Pain Funnel → Up-front Contract</td>
+              <td>كسر دورات البيع المستنزفة، عملاء يماطلون كثيراً</td>
+              <td>منهج معاكس للحدس — مندوب غير مدرّب يطبّقه فيبدو جافاً</td>
+              <td><span class="sf-open-icon" aria-hidden="true">+</span></td>
+            </tr>
+
+            <tr class="sf-row sf-row-solution" data-sf-row="solution" tabindex="0" role="button" aria-haspopup="dialog" aria-label="افتح تفاصيل إطار Solution Selling">
+              <td>
+                <span class="sf-name">Solution Selling</span>
+                <span class="sf-tagline">شخّص ثم وصِف</span>
+              </td>
+              <td>Mike Bosworth · 1994</td>
+              <td>Diagnose → Vision → Prescribe</td>
+              <td>بيع تكنولوجي، حلول قابلة للتخصيص، عميل يعرف مشكلته جزئياً</td>
+              <td>نمطي إذا طُبّق حرفياً — يتحوّل لقالب جامد بدل محادثة</td>
+              <td><span class="sf-open-icon" aria-hidden="true">+</span></td>
+            </tr>
+
+          </tbody>
+        </table>
+        <p class="sf-hint">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          انقر على أي صف لرؤية محادثة عربية كاملة + متى يفشل الإطار + قيود التطبيق العراقي.
+        </p>
+      </div>
+
+      <!-- Modals — hidden by default. JS toggles [data-sf-open]. -->
+      <div class="sf-modal" data-sf-modal="spin" role="dialog" aria-modal="true" aria-labelledby="sf-modal-title-spin" hidden>
+        <div class="sf-modal-overlay" data-sf-close></div>
+        <div class="sf-modal-card ql-glass">
+          <button class="sf-modal-close" type="button" data-sf-close aria-label="إغلاق">×</button>
+          <div class="sf-modal-head sf-tint-spin">
+            <div class="sf-modal-eyebrow">SPIN Selling · 1988</div>
+            <h3 id="sf-modal-title-spin">سؤال يقود سؤال — Neil Rackham</h3>
+            <p>اقتُبس من تحليل 35,000 مكالمة بيع. الفكرة: لا تبيع — اسأل، فتقود إجابات العميل قراره الخاص.</p>
+          </div>
+          <div class="sf-modal-body">
+            <div class="sf-modal-block">
+              <div class="sf-modal-label">شرح موسّع</div>
+              <p>SPIN ليس سكريبت — هو تسلسل أسئلة. تبدأ بـ Situation (سياق)، تنتقل لـ Problem (ألم محتمل)، ثم Implication (تكلفة الاستمرار)، وتختم بـ Need-payoff (العميل يصف المنفعة بكلماته). الفعّال هو الـ I — السؤال الذي يجعل العميل يكتشف بنفسه حجم الفجوة.</p>
+            </div>
+            <div class="sf-modal-block">
+              <div class="sf-modal-label">مثال محادثة كاملة — نظام POS لمطعم في بغداد</div>
+              <div class="sf-script">
+                <div class="sf-line"><span class="sf-spk agent">المندوب</span><span class="sf-txt"><strong>S:</strong> «حالياً، شلون تتابع مبيعات الفروع الثلاثة آخر اليوم؟»</span></div>
+                <div class="sf-line"><span class="sf-spk client">العميل</span><span class="sf-txt">«المحاسب يجمع الإيصالات يدوياً ويبعثلي تقرير صباح ثاني يوم.»</span></div>
+                <div class="sf-line"><span class="sf-spk agent">المندوب</span><span class="sf-txt"><strong>P:</strong> «هل صار وقت اكتشفت اختلاف بين الكاش الفعلي والتقرير؟»</span></div>
+                <div class="sf-line"><span class="sf-spk client">العميل</span><span class="sf-txt">«هاي تصير شهرياً تقريباً. أحياناً 50 ألف، أحياناً أكثر.»</span></div>
+                <div class="sf-line"><span class="sf-spk agent">المندوب</span><span class="sf-txt"><strong>I:</strong> «50 ألف بالشهر = 600 ألف بالسنة لكل فرع. كم فرع عندك؟ وكيف هذا يأثّر على ثقتك بالمحاسب؟»</span></div>
+                <div class="sf-line"><span class="sf-spk client">العميل</span><span class="sf-txt">«ثلاث فروع... يعني 1.8 مليون. وصراحة، صرت أشك حتى وين ما لازم أشك.»</span></div>
+                <div class="sf-line"><span class="sf-spk agent">المندوب</span><span class="sf-txt"><strong>N:</strong> «لو نظام يعطيك أرقام دقيقة لحظياً ويرفع الشك عن فريقك — شنو يعني هذا لإنت؟»</span></div>
+                <div class="sf-line"><span class="sf-spk client">العميل</span><span class="sf-txt">«يعني وقت أرجعه لتطوير المنيو بدل ما أُحقّق. ودا الأهم.»</span></div>
+              </div>
+            </div>
+            <div class="sf-modal-block sf-warn">
+              <div class="sf-modal-label">متى يفشل SPIN</div>
+              <ul>
+                <li>السلع البسيطة قصيرة الدورة (مثلاً عميل يدخل يبي شريحة Asiacell — ما يحتاج Implication).</li>
+                <li>عميل بحالة استعجال شديد — يريد سعر، لا محادثة استشارية.</li>
+                <li>مندوب يطبّقه ميكانيكياً بدون إصغاء — تتحوّل لاستجواب وتكسر العلاقة.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sf-modal" data-sf-modal="challenger" role="dialog" aria-modal="true" aria-labelledby="sf-modal-title-challenger" hidden>
+        <div class="sf-modal-overlay" data-sf-close></div>
+        <div class="sf-modal-card ql-glass">
+          <button class="sf-modal-close" type="button" data-sf-close aria-label="إغلاق">×</button>
+          <div class="sf-modal-head sf-tint-challenger">
+            <div class="sf-modal-eyebrow">Challenger Sale · 2011</div>
+            <h3 id="sf-modal-title-challenger">علّم العميل ما لا يعرفه — Dixon &amp; Adamson</h3>
+            <p>دراسة CEB على 6,000 مندوب: الأعلى أداءً ليس «بنّاء العلاقات»، بل «المتحدّي» الذي يُعلّم العميل رؤية جديدة لمشكلته.</p>
+          </div>
+          <div class="sf-modal-body">
+            <div class="sf-modal-block">
+              <div class="sf-modal-label">شرح موسّع</div>
+              <p>Challenger ينقلك من «أُلبّي حاجة» إلى «أُعيد تأطير الحاجة». تبدأ بـ Reframe (رؤية مختلفة)، ثم Rational Drowning (أرقام تُغرق العميل في عمق المشكلة)، Emotional Impact (تربط بمسؤولياته الشخصية)، New Way (الحل بصياغتك)، وأخيراً Your Solution. الفكرة: قبل تبيع، علّم.</p>
+            </div>
+            <div class="sf-modal-block">
+              <div class="sf-modal-label">مثال محادثة — نظام إدارة عيادة طبية في أربيل</div>
+              <div class="sf-script">
+                <div class="sf-line"><span class="sf-spk agent">المندوب</span><span class="sf-txt"><strong>Reframe:</strong> «دكتور، أكثر العيادات تظن مشكلتها في حجوزات تتأخر. الحقيقة من بياناتنا: 73% من الإيراد المفقود سببه مرضى ما رجعوا لمتابعة بعد أول زيارة.»</span></div>
+                <div class="sf-line"><span class="sf-spk client">العميل</span><span class="sf-txt">«هذا غريب — أنا فعلاً ألاحظ مرضى يجون مرة وحدة بس.»</span></div>
+                <div class="sf-line"><span class="sf-spk agent">المندوب</span><span class="sf-txt"><strong>Rational Drowning:</strong> «بحساب متوسط زيارة 50 ألف د.ع، عيادة مثل عيادتك تخسر 18-22 مليون شهرياً من غياب follow-ups.»</span></div>
+                <div class="sf-line"><span class="sf-spk agent">المندوب</span><span class="sf-txt"><strong>New Way:</strong> «الحل ليس موظف استقبال إضافي — بل نظام يرسل تذكير + يحجز تلقائياً قبل ما المريض يطلع من العيادة.»</span></div>
+              </div>
+            </div>
+            <div class="sf-modal-block sf-warn">
+              <div class="sf-modal-label">متى يفشل Challenger</div>
+              <ul>
+                <li>المندوب الجديد بلا «insight» قطاعي — Reframe بدون بيانات يبدو متعالٍ.</li>
+                <li>سوق صغير حيث العميل يعرف منافسيه ومنتجاتهم خير منك.</li>
+                <li>عميل ثقافياً يفضّل العلاقة على المعلومة — قد يأخذ Reframe كاتهام.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sf-modal" data-sf-modal="sandler" role="dialog" aria-modal="true" aria-labelledby="sf-modal-title-sandler" hidden>
+        <div class="sf-modal-overlay" data-sf-close></div>
+        <div class="sf-modal-card ql-glass">
+          <button class="sf-modal-close" type="button" data-sf-close aria-label="إغلاق">×</button>
+          <div class="sf-modal-head sf-tint-sandler">
+            <div class="sf-modal-eyebrow">Sandler Method · 1967</div>
+            <h3 id="sf-modal-title-sandler">قوة الـ«لا» المبكرة — David Sandler</h3>
+            <p>تنطلق من قاعدة معاكسة: لا تخاف من «لا» — اطلبها مبكراً لتختصر دورة بيع لن تُغلق أصلاً.</p>
+          </div>
+          <div class="sf-modal-body">
+            <div class="sf-modal-block">
+              <div class="sf-modal-label">شرح موسّع</div>
+              <p>Sandler يبدأ بـ Up-front Contract («اتفقنا 30 دقيقة، ولك حق تقول لا في الآخر بدون حرج»)، ثم Pain Funnel (سبع طبقات أسئلة تنزل من العام للشخصي للمالي)، ثم Budget &amp; Decision قبل Solution. الهدف: لا تُقدّم حلاً قبل ما تُثبت أن العميل قادر ومستعد.</p>
+            </div>
+            <div class="sf-modal-block">
+              <div class="sf-modal-label">مثال محادثة — منصة محاسبة سحابية لمكتب محامين في البصرة</div>
+              <div class="sf-script">
+                <div class="sf-line"><span class="sf-spk agent">المندوب</span><span class="sf-txt"><strong>Up-front:</strong> «أستاذ، عندي 25 دقيقة. آخر اللقاء، ثلاث نتائج محتملة: نمشي سوا، تقول لي «لا تناسبني»، أو تطلب وقت. الثلاثة مقبولة عندي. اتفقنا؟»</span></div>
+                <div class="sf-line"><span class="sf-spk client">العميل</span><span class="sf-txt">«مقبول. خلصني بسرعة.»</span></div>
+                <div class="sf-line"><span class="sf-spk agent">المندوب</span><span class="sf-txt"><strong>Pain L1:</strong> «شنو خلاك توافق على هاي المكالمة أصلاً؟» <strong>Pain L4:</strong> «وذيك التأخر بإصدار الفواتير، شنو كلّفك آخر شهرين؟»</span></div>
+                <div class="sf-line"><span class="sf-spk client">العميل</span><span class="sf-txt">«صراحة... قاعدة أفقد ثقة شريكي بإدارتي للحسابات.»</span></div>
+                <div class="sf-line"><span class="sf-spk agent">المندوب</span><span class="sf-txt"><strong>Budget:</strong> «قبل ما أحكي عن الحل، لو لقينا نظام يحلّ هاي القصة — ميزانية شهرية بحدود مليون د.ع منطقية لمكتبك؟»</span></div>
+              </div>
+            </div>
+            <div class="sf-modal-block sf-warn">
+              <div class="sf-modal-label">متى يفشل Sandler</div>
+              <ul>
+                <li>ثقافة لا تتقبّل «الـ Up-front contract» — تبدو مباشرة جافّة.</li>
+                <li>صفقات صغيرة — Pain Funnel السبع مراحل أطول من حجم الصفقة.</li>
+                <li>مندوب يسأل عن الميزانية باكراً قبل بناء ثقة كافية — يُقفل الباب.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sf-modal" data-sf-modal="solution" role="dialog" aria-modal="true" aria-labelledby="sf-modal-title-solution" hidden>
+        <div class="sf-modal-overlay" data-sf-close></div>
+        <div class="sf-modal-card ql-glass">
+          <button class="sf-modal-close" type="button" data-sf-close aria-label="إغلاق">×</button>
+          <div class="sf-modal-head sf-tint-solution">
+            <div class="sf-modal-eyebrow">Solution Selling · 1994</div>
+            <h3 id="sf-modal-title-solution">شخّص ثم وصِف — Mike Bosworth</h3>
+            <p>الفلسفة: المندوب طبيب، لا تاجر. لا تصف قبل ما تُشخّص — والوصفة مخصّصة، لا منتج جاهز.</p>
+          </div>
+          <div class="sf-modal-body">
+            <div class="sf-modal-block">
+              <div class="sf-modal-label">شرح موسّع</div>
+              <p>Solution Selling يبني <em>Vision Reengineering</em>: يبدأ العميل برؤية حل، يُعيد المندوب صياغتها بعدسة منتجه. التسلسل: Diagnose (تشخيص بأسئلة دقيقة) → Vision (تشكيل صورة الحل) → Value (تكلفة عدم الفعل) → Prescribe (الحل المخصّص).</p>
+            </div>
+            <div class="sf-modal-block">
+              <div class="sf-modal-label">مثال محادثة — حل ERP لمصنع ملابس في الموصل</div>
+              <div class="sf-script">
+                <div class="sf-line"><span class="sf-spk agent">المندوب</span><span class="sf-txt"><strong>Diagnose:</strong> «حالياً، لمن طلبية تتأخر، تعرف السبب فوراً لو تحتاج تفتش؟»</span></div>
+                <div class="sf-line"><span class="sf-spk client">العميل</span><span class="sf-txt">«لازم أتصل برئيس قسم الإنتاج، وهو يتصل بمسؤول الخامات، ودوامة.»</span></div>
+                <div class="sf-line"><span class="sf-spk agent">المندوب</span><span class="sf-txt"><strong>Vision:</strong> «تخيّل لوحة وحدة، تشوف فيها كل طلبية بأي مرحلة، ولمن تتأخر فوق 24 ساعة، يطلعلك تنبيه تلقائي بسبب التأخر.»</span></div>
+                <div class="sf-line"><span class="sf-spk client">العميل</span><span class="sf-txt">«هاي بالضبط لي أحتاجه. ممكن؟»</span></div>
+                <div class="sf-line"><span class="sf-spk agent">المندوب</span><span class="sf-txt"><strong>Prescribe:</strong> «نعم. مع فارق: ما رح نفعّل كل الموديولات دفعة وحدة. شهر 1: الإنتاج فقط. شهر 2: نُضيف الخامات. هذا يضمن تبنّي بدل صدمة.»</span></div>
+              </div>
+            </div>
+            <div class="sf-modal-block sf-warn">
+              <div class="sf-modal-label">متى يفشل Solution Selling</div>
+              <ul>
+                <li>مندوب يتعامل معه كقالب جامد — كل عميل يأخذ نفس الـ Vision.</li>
+                <li>منتج بسيط أو سلعة — لا يوجد ما تُشخّصه أصلاً.</li>
+                <li>عميل خبير بالمنتج أكثر من المندوب — Diagnose يبدو سطحياً.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════════════════════════════════
+           END · WORKER 02 PHASE 1
+      ════════════════════════════════════════════════════════════════ -->
+
       <!-- ====== BLOCK A — إطار SPIN ====== -->
       <div class="sales-section-header">
         <div>
