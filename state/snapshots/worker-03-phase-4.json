@@ -1,0 +1,26 @@
+{
+  "worker": "03",
+  "worker_name": "CALLCENTER",
+  "phase": 4,
+  "phases_total": 4,
+  "title": "Difficult Caller Simulator + Iraq Block + Cheat Sheet + 12 Citations",
+  "branch": "worker-03-phase-4",
+  "lines_added": 1002,
+  "files_modified": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "sections_added": [
+    "sim-shell (3-scenario decision simulator with picker, turn engine, feedback, final score+tier)",
+    "iraq-grid (salary table 5 levels IQD+USD + 10 Iraqi objections)",
+    "cc-cheat (6-column print-friendly cheat sheet)",
+    "cc-citations (12 entries: Voss/Goleman/Cialdini/Goldman-Eisler/Hincks/Scherer/Hatfield/Kahneman/SQM/ICMI/COPC/W3C)"
+  ],
+  "data_attributes": ["data-cc-sim", "data-sim-picker", "data-sim-active", "data-sim-emoji", "data-sim-title", "data-sim-step-now", "data-sim-step-total", "data-sim-progbar", "data-sim-client", "data-sim-options", "data-sim-feedback", "data-sim-feedback-tag", "data-sim-feedback-text", "data-sim-next", "data-sim-final", "data-sim-final-num", "data-sim-final-max", "data-sim-final-tier", "data-sim-final-list", "data-sim-restart", "data-sim-back", "data-sim-load", "data-cc-iraq", "data-cc-cheat", "data-cc-citations"],
+  "localStorage_keys": ["upg_simulator_scores"],
+  "iife_blocks": ["qlSimulator"],
+  "scenarios": ["screamer (4 turns)", "threat (5 turns)", "cold (4 turns)"],
+  "next_action": "Worker 03 COMPLETE. Create consolidated worker-03-complete branch for single-PR merge.",
+  "completed_at": "2026-05-15T06:35:00Z"
+}
