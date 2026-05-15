@@ -61,12 +61,38 @@
      - لو ما عندك صلاحية merge، اترك الـ PR مفتوح وحدّد في next_action
   ح) انتقل لـ Phase التالي بدون انتظار
 
-📌 قاعدة Consolidation (لتسهيل الدمج من الجوّال):
-- إذا انتهت كل phases الـ Worker بنجاح في session واحد:
-  • أنشئ branch إضافي اسمه `worker-<id>-complete` يحوي مجموع كل التعديلات
-  • PR واحد فقط من هذا الـ branch مع وصف يجمع الـ phases الأربعة
-  • أغلق PRs الـ phase-by-phase الفردية بدون دمج (محتواها موجود في الـ consolidated PR)
-- المستخدم على الجوّال يدمج PR واحد فقط بدل 4
+📌 قاعدة Consolidation (مهم — تجنّبها فشل cherry-pick):
+
+السيناريو السيء (تجنّبه):
+- بنيت 5 phase branches مستقلة من main → كلها تعدّل نفس نقطة في `<section id="page-X">`
+- محاولة cherry-pick أو merge متتالي تطلع conflicts عند نفس السطر
+- النتيجة: لا يُنشأ worker-<id>-complete وتنقطع السلسلة
+
+الطريقة الصحيحة (اتبعها بالضبط):
+
+طريقة A — المفضّلة (Linear Branch):
+- بدل ما تبني كل phase من main، **استمر في نفس الـ branch**:
+  • Phase 1: branch `worker-<id>-complete` من main → commit
+  • Phase 2: نفس الـ branch → commit جديد
+  • ...
+  • Phase N: نفس الـ branch → commit
+- لا تنشئ branches منفصلة لكل phase
+- في النهاية: branch واحد `worker-<id>-complete` فيه N commits → PR واحد
+- المستخدم يدمج PR واحد فقط
+
+طريقة B — البديل (Phase branches + final consolidation):
+- لو فعلاً صنعت phase branches (مثل ما حصل في Worker 04)، ولا cherry-pick شغّال:
+  • انشاء branch `worker-<id>-complete` من main
+  • انسخ ملفات platform/* من main كأساس
+  • طبّق diff كل phase تراكمياً عبر `git apply` أو نسخ الكتل المضافة
+  • أو استخدم 3-way merge: لكل ملف، خذ نسخة main + نسخة phase → ادمجهم بـ git merge-file
+  • commit واحد كبير على worker-<id>-complete → push → PR
+
+في كلا الحالتين:
+- المخرج النهائي = branch واحد + PR واحد + المستخدم يدمج مرة واحدة
+
+ملاحظة Worker 04: حصل خطأ stacking conflicts فيه. تم إصلاحه يدوياً عبر طريقة B.
+احرص على استخدام طريقة A للـ Workers القادمة (05, 06, 07, 08, 09).
 
 📦 ميزانية الـ session:
 - خلال session واحد، نفّذ phases متتالية حتى يتحقق أحد:
