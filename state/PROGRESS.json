@@ -4,9 +4,9 @@
   "current": {
     "worker": "01",
     "worker_name": "UI_UX",
-    "phase": 1,
+    "phase": 2,
     "phases_total": 4,
-    "branch": "worker-01-phase-1",
+    "branch": "worker-01-phase-2",
     "status": "in-progress"
   },
   "completed_phases": [
@@ -14,15 +14,27 @@
       "worker": "01",
       "phase": 1,
       "title": "Foundation Tokens & Aurora Mesh",
-      "branch": "worker-01-phase-1",
+      "branch": "worker-01-phase-1-v2",
       "lines_added": 121,
       "files_modified": [
         "platform/assets/style.css",
         "platform/index.html"
       ],
-      "summary": "v13 :root tokens (aurora 1-4, grain, cursor aura, 14 section tints), animated aurora mesh on body::after, SVG grain filter, ql-grain overlay, html.v13 hook"
+      "summary": "v13 :root tokens (aurora 1-4, grain, cursor aura, 14 section tints), animated aurora mesh, SVG grain filter, .ql-grain overlay, html.v13 hook"
+    },
+    {
+      "worker": "01",
+      "phase": 2,
+      "title": "Conic Halo + Magnetic Cursor Aura",
+      "branch": "worker-01-phase-2",
+      "lines_added": 204,
+      "files_modified": [
+        "platform/assets/style.css",
+        "platform/assets/app.js"
+      ],
+      "summary": "@property --halo-angle, .ql-halo utility, auto-promoted halo on .ql-glass/.module-card/.stat-card/.skill-card/.call-card, #cursor-aura element + IIFE with rAF easing, touch/reduced-motion guards"
     }
   ],
-  "next_action": "Worker 01 — Phase 2: Conic Halo on hover + Magnetic Cursor Aura (IIFE JS, @property --halo-angle, ql-halo utility)",
-  "notes": "هذا الملف هو ذاكرة دائمة للـ AI. يُحدَّث تلقائياً بعد كل phase. لا تحرّره يدوياً إلا للضرورة."
+  "next_action": "Worker 01 — Phase 3: Living Numerals (IntersectionObserver counter) + Sectional Identity Tint (navigateTo hook to body[data-active-section])",
+  "notes": "هذا الملف هو ذاكرة دائمة للـ AI."
 }
