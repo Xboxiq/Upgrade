@@ -8096,3 +8096,772 @@ document.addEventListener('DOMContentLoaded', () => {
     try { setupPortfolio(root); } catch(e){ console.warn('W05 port', e); }
   });
 })();
+
+
+
+/* ============================================================
+   WORKER 06 · PHASE 1 — Algorithm Anatomy renderer (IIFE)
+   Scope: #page-social · platform tabs + panel data
+============================================================ */
+(function(){
+  'use strict';
+
+  var DATA = {
+    ig: {
+      name:'Instagram', emoji:'📸', color:'#E4405F',
+      summary:'محرّك Meta يعتمد على "الإشارات الاجتماعية" — كم شخصاً أرسل المنشور لصديق، حفظه، أو شاهده مرتين.',
+      signals:[
+        ['Send to friend',   '× 4.0'],
+        ['Save',             '× 3.5'],
+        ['Comment > 4 words','× 2.8'],
+        ['Watch time (Reels)', '× 2.5'],
+        ['Like',             '× 1.0'],
+      ],
+      penalties:[
+        ['Watermark TikTok',         '−40% reach'],
+        ['Reposted content',         '−25% reach'],
+        ['Hashtags > 10 (spammy)',   '−15% reach'],
+        ['اختفاء فجأة + رجوع (gap)', '−20% trust'],
+      ],
+      ideal:[
+        ['Reels',         '7-15 ثانية, hook في الإطار 1'],
+        ['Carousel',      '8-10 شرائح, سؤال في الشريحة 1'],
+        ['Caption',       '125 حرف قبل "more", value في السطر 2'],
+        ['Cover',         'وجه واضح + نص ضخم 4-7 كلمات'],
+      ]
+    },
+    tt: {
+      name:'TikTok', emoji:'🎵', color:'#FE2C55',
+      summary:'Watch-time و completion-rate هما المَلِكان. الـ For You Page تختبر كل فيديو على 200-500 شخص أولاً.',
+      signals:[
+        ['Completion rate %',  '× 5.0'],
+        ['Re-watch / replay',  '× 4.0'],
+        ['Share + save',       '× 3.0'],
+        ['Comment',            '× 2.0'],
+        ['Like',               '× 1.0'],
+      ],
+      penalties:[
+        ['روابط في bio فقط (لا في caption)', 'محايد'],
+        ['موسيقى محذوفة (copyright)',         '−60%'],
+        ['watermark منصة أخرى',               '−35%'],
+        ['Hook ضعيف → pass في &lt;1.5s',        'موت طبيعي'],
+      ],
+      ideal:[
+        ['الطول',     '9-21 ثانية للـ viral, 30-60s للـ tutorial'],
+        ['Hook',      'الذروة في الثانية الأولى, نص على الشاشة'],
+        ['Caption',   '60-100 حرف + 3 hashtags هدفية'],
+        ['Format',    'Vertical 9:16, مضاءة جيداً'],
+      ]
+    },
+    x: {
+      name:'X / Twitter', emoji:'𝕏', color:'#1DA1F2',
+      summary:'Replies و dwell time أهم من Likes. خوارزمية Musk تُكافئ الـ controversy والـ thread الطويل.',
+      signals:[
+        ['Replies',         '× 3.5'],
+        ['Dwell time',      '× 3.0'],
+        ['Retweet + quote', '× 2.5'],
+        ['Bookmarks',       '× 2.0'],
+        ['Like',            '× 1.0'],
+      ],
+      penalties:[
+        ['روابط خارجية فوراً',  '−40%'],
+        ['Bot-like behaviour',   '−70% (shadow ban)'],
+        ['Negative keywords',    '−30% (للمعلنين)'],
+      ],
+      ideal:[
+        ['Tweet مفرد',  '&lt; 12 كلمة, hot take أو سؤال صادم'],
+        ['Thread',      '5-9 tweets, التمهيد بـ "كنت أعتقد X لكن..."'],
+        ['الصورة',      'Meme, مخطط واضح, أو لقطة شاشة'],
+        ['الزمن',       'Reply بعد 5-15 دقيقة من النشر'],
+      ]
+    },
+    li: {
+      name:'LinkedIn', emoji:'💼', color:'#0A91CC',
+      summary:'Algorithm 2024 يُعطي وزناً ضخماً للـ comments والـ dwell time. القصص الشخصية تتفوق على المحتوى الترويجي.',
+      signals:[
+        ['Comments + replies', '× 4.0'],
+        ['Dwell time',         '× 3.5'],
+        ['Saves',              '× 3.0'],
+        ['Shares',             '× 2.0'],
+        ['Reactions',          '× 1.0'],
+      ],
+      penalties:[
+        ['روابط في النص الأصلي',  '−50% (انقلها للتعليق الأول)'],
+        ['Hashtags > 5',          '−10%'],
+        ['نشر متكرر < 18h',       '−15% للمنشور التالي'],
+      ],
+      ideal:[
+        ['الطول',    '1200-1500 حرف · سطور قصيرة'],
+        ['Hook',     'سطر شخصي في البداية: "في 2019 خسرت..."'],
+        ['Format',   'سطر فراغ بين كل جملتين = mobile-readable'],
+        ['CTA',      'سؤال مفتوح في النهاية = comments'],
+      ]
+    },
+    yt: {
+      name:'YouTube', emoji:'▶️', color:'#FF0000',
+      summary:'CTR (thumbnail) + AVD (Average View Duration) + session time. الـ algorithm يكره من يأخذ المشاهد ويتركه.',
+      signals:[
+        ['CTR thumbnail',       '× 5.0'],
+        ['AVD %',               '× 4.5'],
+        ['Session time',        '× 3.5'],
+        ['Comments',            '× 2.5'],
+        ['Likes / Dislikes',    '× 1.5'],
+      ],
+      penalties:[
+        ['Clickbait مخالف للمحتوى',  '−40% + dislikes'],
+        ['Reused content',           '−demonetization'],
+        ['Tag stuffing',             'محايد لكن غير مفيد'],
+      ],
+      ideal:[
+        ['Long-form',  '8-15 دقيقة, intro 30s قوية'],
+        ['Shorts',     '&lt; 60 ثانية, hook في 2s'],
+        ['Thumbnail',  '3 عناصر بصرية كحد أقصى, نص &lt; 6 كلمات'],
+        ['Title',      'سؤال أو رقم: "لماذا..." / "5 طرق..."'],
+      ]
+    },
+    sc: {
+      name:'Snapchat', emoji:'👻', color:'#FFFC00',
+      summary:'Replies و screenshots و completion rate. جمهور Gen-Z أقل من 25 سنة في الخليج.',
+      signals:[
+        ['Replies + DMs',    '× 4.0'],
+        ['Screenshots',      '× 3.5'],
+        ['Completion %',     '× 3.0'],
+        ['Story re-views',   '× 2.0'],
+      ],
+      penalties:[
+        ['Static images بلا حركة',     '−reach'],
+        ['Story طويلة بدون تنويع',     'drop-off عالي'],
+      ],
+      ideal:[
+        ['Snap واحدة',  '5-10 ثوان, متحركة, نص ديناميكي'],
+        ['Story',       '5-8 snaps, متنوعة (نص+فيديو+تصويت)'],
+        ['الوقت',       '8-11 PM للـ Gen-Z في الخليج'],
+        ['Filter/AR',   'تجريبي = رفع الـ engagement +60%'],
+      ]
+    },
+    th: {
+      name:'Threads', emoji:'🧵', color:'#666666',
+      summary:'Threads (Meta) — algorithm جديد لكن يُكافئ الـ replies بشدة + يدفع المحتوى الـ conversational.',
+      signals:[
+        ['Replies',     '× 4.0'],
+        ['Reposts',     '× 3.0'],
+        ['Likes',       '× 1.5'],
+      ],
+      penalties:[
+        ['روابط خارجية',     '−25%'],
+        ['Cross-post من IG',  'محايد لكن لا boost'],
+      ],
+      ideal:[
+        ['Post',        '100-300 حرف conversational'],
+        ['أسلوب',       'سؤال صريح أو رأي قابل للنقاش'],
+        ['Frequency',   '2-5 posts/day مقبول (لا spam)'],
+        ['Format',      'صور أحياناً, لا فيديوهات طويلة'],
+      ]
+    }
+  };
+
+  function row(label, value, bad){
+    var cls = bad ? 'w6-pp-row bad' : 'w6-pp-row';
+    return '<div class="'+cls+'"><span>'+label+'</span><b>'+value+'</b></div>';
+  }
+
+  function card(title, rows, bad){
+    var html = '<div class="w6-pp-card"><h4>'+title+'</h4>';
+    for (var i=0; i<rows.length; i++){
+      html += row(rows[i][0], rows[i][1], bad);
+    }
+    html += '</div>';
+    return html;
+  }
+
+  function renderPlatform(key){
+    var d = DATA[key]; if (!d) return;
+    var panel = document.getElementById('w6PlatformPanel');
+    if (!panel) return;
+    var head = ''+
+      '<div class="ql-glass" style="padding:16px 18px; border-radius:12px; margin-bottom:14px; border-color:'+d.color+'40; background:'+d.color+'08;">'+
+        '<div style="display:flex; align-items:center; gap:12px; margin-bottom:6px;">'+
+          '<span style="font-size:24px;">'+d.emoji+'</span>'+
+          '<h3 style="margin:0; font-size:16px; font-weight:800; color:var(--text);">'+d.name+'</h3>'+
+        '</div>'+
+        '<div style="font-size:12.5px; color:var(--text-muted); line-height:1.7;">'+d.summary+'</div>'+
+      '</div>';
+    var body = '<div class="w6-pp-grid">'+
+      card('🚀 إشارات الترتيب', d.signals, false)+
+      card('⚠️ العقوبات', d.penalties, true)+
+      card('🎯 المحتوى المثالي', d.ideal, false)+
+    '</div>';
+    panel.innerHTML = head + body;
+  }
+
+  // Expose globally for inline onclick
+  window.w6SelectPlatform = function(key, btn){
+    try {
+      var tabs = document.querySelectorAll('#w6PlatformTabs .w6-pbtn');
+      for (var i=0; i<tabs.length; i++) tabs[i].classList.remove('active');
+      if (btn) btn.classList.add('active');
+      renderPlatform(key);
+    } catch(e){ console.warn('w6SelectPlatform', e); }
+  };
+
+  // Init when page-social ever rendered
+  function init(){
+    var panel = document.getElementById('w6PlatformPanel');
+    if (panel && !panel.dataset.w6Init){
+      panel.dataset.w6Init = '1';
+      renderPlatform('ig');
+    }
+  }
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+  // Also re-init on navigation (page may not be in DOM at first load timing)
+  document.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('[data-page="social"]');
+    if (t) setTimeout(init, 50);
+  });
+})();
+
+
+
+/* ============================================================
+   WORKER 06 · PHASE 2 — Pillars + 15 Frameworks + Calendar Builder
+============================================================ */
+(function(){
+  'use strict';
+
+  /* ──────── 1. Pillar Calculator ──────── */
+  var INDUSTRY_MIX = {
+    default:    { edu:40, ent:25, ins:15, prom:15, bts:5,  hint:'مزيج متوازن للعلامات العامة. غيّر الصناعة لتعديل دقيق.' },
+    b2b:        { edu:55, ent:10, ins:15, prom:15, bts:5,  hint:'B2B / SaaS: التعليم والـ thought leadership أولوية. الترفيه أقل، Behind-the-scenes للـ humanization.' },
+    ecom:       { edu:25, ent:25, ins:10, prom:30, bts:10, hint:'تجارة إلكترونية: الـ promotional يصل 30% (UGC + demos + offers). الترفيه يدفع الـ shares.' },
+    restaurant: { edu:15, ent:30, ins:10, prom:25, bts:20, hint:'مطاعم: BTS عالي (المطبخ، الطاهي) + ترفيه + عروض. الناس تشتري التجربة قبل الطعام.' },
+    education:  { edu:60, ent:10, ins:15, prom:10, bts:5,  hint:'تعليم/كورسات: 60% تعليمي = إثبات الـ authority. ترويجي محدود لكي لا يبدو spammy.' },
+    fashion:    { edu:15, ent:20, ins:25, prom:25, bts:15, hint:'أزياء: الإلهام (lookbooks) والترويجي متساويان. BTS من الـ shoots = حقيقية.' },
+    tech:       { edu:50, ent:15, ins:10, prom:20, bts:5,  hint:'تكنولوجيا: tutorials + product updates. الترفيه عبر memes تقنية.' },
+    health:     { edu:50, ent:10, ins:25, prom:10, bts:5,  hint:'صحة: تعليم وإلهام يبنيان الثقة. الترويج محدود (regulations).' }
+  };
+
+  function w6UpdatePillars(key){
+    var mix = INDUSTRY_MIX[key] || INDUSTRY_MIX.default;
+    Object.keys(mix).forEach(function(k){
+      if (k==='hint') return;
+      var el = document.querySelector('[data-pillar-pct="'+k+'"]');
+      if (el) el.textContent = mix[k] + '%';
+    });
+    var hint = document.getElementById('w6IndustryHint');
+    if (hint) hint.textContent = mix.hint;
+  }
+  window.w6UpdatePillars = w6UpdatePillars;
+
+  /* ──────── 2. 15 Frameworks Data ──────── */
+  var FRAMEWORKS = [
+    { id:1,  name:'AIDA', sub:'Attention · Interest · Desire · Action', def:'إطار كلاسيكي من 1898 — جذب الانتباه ثم بناء الاهتمام، تحويله لرغبة، ثم دفعة للفعل.', ex:'هل تخسر 4 ساعات يومياً في reports؟ (A) — معظم المحاسبين كذلك (I) — هذا قالب Excel يختصرها لـ 30 دقيقة (D) — حمّله مجاناً من البايو (A).', when:'منشورات تعليمية + B2B + LinkedIn', fail:'لا يصلح للـ Reels القصيرة — يحتاج مساحة أكبر من 7 ثوان.', color:'#06B6D4' },
+    { id:2,  name:'PAS',  sub:'Problem · Agitate · Solution', def:'حدّد مشكلة محددة، ثم ضخّم ألمها، ثم قدّم الحل.', ex:'تابع ما يكتب — لكن ما يبيع. ولا حملة ترفع المبيعات. شهر بعد شهر، نفس الأرقام. الحل: 5 مكونات في كل caption — لا تتجاوز كلمة "نحن".', when:'بيع منتج/خدمة + Direct response', fail:'إذا بالغت في "Agitate" يبدو مزعجاً ويفقد الثقة.', color:'#EF4444' },
+    { id:3,  name:'4Ps', sub:'Promise · Picture · Proof · Push', def:'وعد كبير → تخيّل النتيجة → دليل/إثبات → دعوة فعل.', ex:'ضاعِف متابعينك في 60 يوماً (Promise). تخيّل 10 آلاف يقرأون كل منشور (Picture). 47 عميل سبقك حقق هذا (Proof). سجل في الورشة الأحد (Push).', when:'بيع كورس / خدمة عالية القيمة', fail:'لو الـ Proof ضعيف أو مفبرك، تنهار الثقة سريعاً.', color:'#F59E0B' },
+    { id:4,  name:'Open Loop', sub:'الفجوة المعرفية', def:'افتح سؤالاً قوياً واترك إجابته للنهاية — يجبر الدماغ على المتابعة.', ex:'في 2021 خسرت 12 ألف دولار بسبب خطأ واحد… سأخبركم بنهاية المنشور ✨ (ثم 3 نصائح ثم الخطأ).', when:'Reels + LinkedIn stories + threads', fail:'لو الإجابة مخيبة بعد كل هذا التشويق، تخسر المتابع للأبد.', color:'#8B5CF6' },
+    { id:5,  name:'Listicle Hook', sub:'3 طرق لـ X', def:'القوائم تُنظّم المعرفة + تُسهّل الحفظ + تُعطي توقع واضح.', ex:'7 أخطاء قاتلة يرتكبها المسوّق المبتدئ (الخامس يصدمك).', when:'Carousels + threads + Shorts تعليمية', fail:'لو القائمة سطحية وكلها معروفة = unfollow.', color:'#22C55E' },
+    { id:6,  name:'Contrarian', sub:'الرأي الجريء ضد التيار', def:'اضرب رأياً سائداً — يولد نقاش = comments = reach.', ex:'"التسويق بالمحتوى مات" — قلت هذا قبل سنتين والآن أتراجع. هذا ما تغيّر…', when:'X + LinkedIn + خبراء معروفون', fail:'لو رأيك ضد التيار بدون دليل = troll. ولو متطرف = blocks.', color:'#EC4899' },
+    { id:7,  name:'Vulnerability', sub:'الاعتراف الصادق', def:'اعترف بضعف/فشل/خوف — يبني تعاطف وثقة عميقة.', ex:'في أول كلاينت لي، طلبت 200$. خاف، تردد، وغادر. علمتني هذه اللحظة 3 دروس…', when:'Personal brand + Founders + LinkedIn', fail:'لو يبدو "performative" أو مُفتعل لجذب التعاطف.', color:'#F97316' },
+    { id:8,  name:'Stat Shock', sub:'إحصاء صادم', def:'ابدأ برقم لا يُصدّق + مصدر موثوق = جذب فوري.', ex:'87% من Reels يتركها الناس قبل 3 ثوان (TikTok 2023). إليك ما يفعل الـ 13% المتبقون…', when:'Educational posts + B2B + reports', fail:'إذا الإحصاء قديم/غير موثوق → ينقلب ضدك.', color:'#0EA5E9' },
+    { id:9,  name:'POV', sub:'وجهة نظر داخلية', def:'"POV: أنت X" — يضع المتابع داخل القصة بشكل سينمائي.', ex:'POV: أنت مدير حساب جديد، الكلاينت يطلب 5 deliverables بنفس اليوم. هذا ما تفعله…', when:'TikTok + Reels + قصص قصيرة', fail:'تكراره يومياً يفقد التأثير ويصبح memes فقط.', color:'#A855F7' },
+    { id:10, name:'Mistake Confession', sub:'اعتراف بخطأ مهني', def:'"كنت أفعل X لـ 3 سنوات حتى اكتشفت Y" — يستغل Negativity Bias.', ex:'كنت أنشر 3 مرات يومياً ظناً أن "أكثر = أفضل". خسرت 30% من متابعيّ. هذا ما تعلمته…', when:'Authority building + tutorials', fail:'لو الخطأ تافه أو مصطنع، يُكشف.', color:'#DC2626' },
+    { id:11, name:'Before/After', sub:'التحوّل', def:'حالة قبل + حالة بعد + الجسر بينهما = أقوى format لمحتوى الـ transformation.', ex:'حسابي: قبل 6 أشهر — 800 متابع، 2% engagement. بعد — 24K متابع، 11% engagement. التغيير في 4 خطوات…', when:'تجارة, تجميل, تعليم, لياقة', fail:'بدون "الجسر" (الخطوات الفعلية) = clickbait فارغ.', color:'#10B981' },
+    { id:12, name:'Question Hook', sub:'السؤال المفتوح', def:'سؤال مباشر يستحضر تجربة المتابع الشخصية.', ex:'متى آخر مرة فتحت Instagram وأغلقته بعد دقيقة شعورياً بالفراغ؟', when:'Carousels تعليمية + community building', fail:'سؤال generic مثل "هل تعرف؟" = صفر engagement.', color:'#3B82F6' },
+    { id:13, name:'Comparison', sub:'X vs Y', def:'مقارنة مباشرة بين خيارين/أداتين/منهجين = clarity + قيمة فورية.', ex:'Meta Ads vs TikTok Ads في 2025: لمن، بأي ميزانية، ومتى لكل منصة. (carousel 8 شرائح)', when:'B2B + reviews + buying guides', fail:'لو غير عادل/مدفوع، يخسر المصداقية.', color:'#14B8A6' },
+    { id:14, name:'Cliffhanger', sub:'النهاية المعلّقة', def:'انهِ المنشور بسؤال/تشويق يدفع للجزء التالي.', ex:'…وفي الجزء الـ 2 نتكلم عن الخطأ الأكبر الذي يُدمّر 90% من الحملات. تابعوا.', when:'Threads + series + reels جزء 1 و 2', fail:'لا تكرّره لو لم تُكمل الجزء التالي خلال 48h = خسارة ثقة.', color:'#FBBF24' },
+    { id:15, name:'Call-out', sub:'التوجيه المباشر', def:'استهدف فئة محددة من المتابعين بنداء واضح.', ex:'إلى كل freelancer يرفض رفع أسعاره خوفاً من خسارة العملاء — اقرأ هذا حتى النهاية.', when:'Niche audiences + segmentation + community', fail:'لو الـ niche واسع جداً = الكلام الفارغ.', color:'#F472B6' }
+  ];
+
+  function renderFrameworks(){
+    var grid = document.getElementById('w6FwGrid');
+    if (!grid || grid.dataset.w6Init === '1') return;
+    grid.dataset.w6Init = '1';
+    var html = '';
+    FRAMEWORKS.forEach(function(f){
+      html += ''+
+      '<div class="ql-glass w6-fw-card" style="padding:14px 16px; border-radius:12px; border-color:'+f.color+'40;">'+
+        '<div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">'+
+          '<div style="width:30px;height:30px;border-radius:8px;background:'+f.color+'18;color:'+f.color+';display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;">'+f.id+'</div>'+
+          '<div>'+
+            '<div style="font-size:13px; font-weight:800; color:var(--text);">'+f.name+'</div>'+
+            '<div style="font-size:10.5px; color:var(--text-faint);">'+f.sub+'</div>'+
+          '</div>'+
+        '</div>'+
+        '<div style="font-size:12px; color:var(--text-muted); line-height:1.65; margin-bottom:8px;">'+f.def+'</div>'+
+        '<div style="background:'+f.color+'08; border-right:3px solid '+f.color+'; padding:9px 11px; border-radius:6px; font-size:11.5px; color:var(--text); line-height:1.7; margin-bottom:8px;">'+
+          '<b style="color:'+f.color+'; font-size:10px; letter-spacing:0.8px;">مثال عربي:</b><br>'+f.ex+
+        '</div>'+
+        '<div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; font-size:10.5px;">'+
+          '<div style="background:rgba(34,197,94,0.06); border:1px solid rgba(34,197,94,0.18); border-radius:6px; padding:7px 9px; color:#22C55E;"><b>✅ يصلح:</b> '+f.when+'</div>'+
+          '<div style="background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.18); border-radius:6px; padding:7px 9px; color:#EF4444;"><b>❌ يفشل:</b> '+f.fail+'</div>'+
+        '</div>'+
+      '</div>';
+    });
+    grid.innerHTML = html;
+  }
+
+  /* ──────── 3. Calendar Builder ──────── */
+  var PILL_INFO = {
+    edu:  { label:'🎓 تعليمي', color:'#66FCF1', bg:'rgba(102,252,241,0.18)', border:'rgba(102,252,241,0.45)' },
+    ent:  { label:'😄 ترفيهي', color:'#F59E0B', bg:'rgba(245,158,11,0.18)',  border:'rgba(245,158,11,0.45)' },
+    ins:  { label:'💡 ملهم',  color:'#8B5CF6', bg:'rgba(139,92,246,0.18)',  border:'rgba(139,92,246,0.45)' },
+    prom: { label:'💰 ترويجي', color:'#22C55E', bg:'rgba(34,197,94,0.18)',   border:'rgba(34,197,94,0.45)' },
+    bts:  { label:'🎬 كواليس', color:'#EC4899', bg:'rgba(236,72,153,0.18)',  border:'rgba(236,72,153,0.45)' }
+  };
+
+  var STORAGE_KEY = 'upg_calendar_drafts';
+
+  function loadCal(){
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return Array(30).fill('');
+      var arr = JSON.parse(raw);
+      if (Array.isArray(arr) && arr.length === 30) return arr;
+    } catch(e){}
+    return Array(30).fill('');
+  }
+  function saveCal(arr){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); } catch(e){}
+  }
+
+  function dayCellHtml(idx, val){
+    var info = PILL_INFO[val];
+    var bg     = info ? info.bg     : 'rgba(255,255,255,0.02)';
+    var border = info ? info.border : 'var(--border)';
+    var color  = info ? info.color  : 'var(--text-faint)';
+    var label  = info ? info.label  : '<span style="opacity:0.5;">+</span>';
+    return ''+
+      '<div class="w6-cal-day" data-day="'+idx+'" '+
+           'style="min-height:62px; background:'+bg+'; border:1px solid '+border+'; border-radius:8px; padding:6px 8px; cursor:pointer; '+
+                  'display:flex; flex-direction:column; justify-content:space-between; transition:transform .15s ease;">'+
+        '<div style="font-size:10px; font-weight:800; color:var(--text-faint);">يوم '+(idx+1)+'</div>'+
+        '<div style="font-size:11.5px; font-weight:700; color:'+color+';">'+label+'</div>'+
+      '</div>';
+  }
+
+  function renderCalendar(){
+    var grid = document.getElementById('w6CalGrid');
+    if (!grid) return;
+    var data = loadCal();
+    var html = '';
+    for (var i=0; i<30; i++) html += dayCellHtml(i, data[i]);
+    grid.innerHTML = html;
+    // attach listeners
+    var cells = grid.querySelectorAll('.w6-cal-day');
+    cells.forEach(function(c){
+      c.addEventListener('dragover', function(e){ e.preventDefault(); c.style.transform='scale(1.05)'; });
+      c.addEventListener('dragleave', function(){ c.style.transform='scale(1)'; });
+      c.addEventListener('drop', function(e){
+        e.preventDefault();
+        c.style.transform='scale(1)';
+        var pill = e.dataTransfer.getData('w6/pill');
+        if (!pill) return;
+        var idx = parseInt(c.dataset.day, 10);
+        var arr = loadCal();
+        arr[idx] = (pill === 'clear') ? '' : pill;
+        saveCal(arr);
+        renderCalendar();
+        renderStats();
+      });
+      // click cycles through pillars (mobile-friendly fallback)
+      c.addEventListener('click', function(){
+        var idx = parseInt(c.dataset.day, 10);
+        var arr = loadCal();
+        var order = ['', 'edu', 'ent', 'ins', 'prom', 'bts'];
+        var cur = order.indexOf(arr[idx] || '');
+        arr[idx] = order[(cur+1) % order.length];
+        saveCal(arr);
+        renderCalendar();
+        renderStats();
+      });
+    });
+    renderStats();
+  }
+
+  function renderStats(){
+    var statsEl = document.getElementById('w6CalStats');
+    if (!statsEl) return;
+    var arr = loadCal();
+    var counts = {edu:0, ent:0, ins:0, prom:0, bts:0, empty:0};
+    arr.forEach(function(v){ if (v) counts[v]++; else counts.empty++; });
+    var filled = 30 - counts.empty;
+    var line = function(k){
+      var c = counts[k];
+      var pct = filled ? Math.round(c/filled*100) : 0;
+      return '<div><b style="color:'+PILL_INFO[k].color+';">'+PILL_INFO[k].label+'</b> · '+c+' ('+pct+'%)</div>';
+    };
+    statsEl.innerHTML =
+      line('edu')+line('ent')+line('ins')+line('prom')+line('bts')+
+      '<div style="margin-top:6px; font-size:10.5px; color:var(--text-faint);">📋 مملوء: '+filled+'/30</div>';
+  }
+
+  function setupPillsDrag(){
+    var pills = document.querySelectorAll('#page-social .w6-cal-pill');
+    pills.forEach(function(p){
+      if (p.dataset.w6Drag === '1') return;
+      p.dataset.w6Drag = '1';
+      p.addEventListener('dragstart', function(e){
+        e.dataTransfer.setData('w6/pill', p.dataset.pill);
+        e.dataTransfer.effectAllowed = 'copy';
+        p.style.opacity = '0.6';
+      });
+      p.addEventListener('dragend', function(){ p.style.opacity = '1'; });
+    });
+  }
+
+  window.w6CalAuto = function(){
+    var pillars = ['edu','ent','ins','prom','bts'];
+    // weighted distribution: 12 edu, 8 ent, 5 ins, 4 prom, 1 bts
+    var pool = [].concat(
+      Array(12).fill('edu'),
+      Array(8).fill('ent'),
+      Array(5).fill('ins'),
+      Array(4).fill('prom'),
+      Array(1).fill('bts')
+    );
+    // shuffle
+    for (var i=pool.length-1; i>0; i--){
+      var j = Math.floor(Math.random()*(i+1));
+      var tmp=pool[i]; pool[i]=pool[j]; pool[j]=tmp;
+    }
+    saveCal(pool);
+    renderCalendar();
+  };
+
+  window.w6CalReset = function(){
+    if (!confirm('هل أنت متأكد من تصفير الجدول؟')) return;
+    saveCal(Array(30).fill(''));
+    renderCalendar();
+  };
+
+  window.w6CalExport = function(){
+    var arr = loadCal();
+    var data = {
+      generated_at: new Date().toISOString(),
+      total_days: 30,
+      schedule: arr.map(function(v, i){
+        return { day: i+1, pillar: v || null, label: v ? PILL_INFO[v].label : null };
+      })
+    };
+    var blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = 'content-calendar-'+Date.now()+'.json';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  function init(){
+    if (!document.getElementById('w6FwGrid')) return;
+    renderFrameworks();
+    setupPillsDrag();
+    renderCalendar();
+  }
+
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+  document.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('[data-page="social"]');
+    if (t) setTimeout(init, 60);
+  });
+})();
+
+
+
+/* ============================================================
+   WORKER 06 · PHASE 3 — Funnel + Performance Math + A/B Tester
+============================================================ */
+(function(){
+  'use strict';
+
+  var BENCHMARKS = {
+    cpm:  { good: '< $4', warn: '$4-$10', bad: '> $10' },
+    cpc:  { good: '< $0.5', warn: '$0.5-$2', bad: '> $2' },
+    ctr:  { good: '> 1.5%', warn: '0.7-1.5%', bad: '< 0.7%' },
+    cvr:  { good: '> 3%', warn: '1-3%', bad: '< 1%' },
+    roas: { good: '> 3x', warn: '1-3x', bad: '< 1x' },
+    cac:  { good: '—', warn: '—', bad: '—' }
+  };
+
+  function $id(id){ return document.getElementById(id); }
+  function num(id){ var v = parseFloat(($id(id)||{}).value); return isFinite(v) ? v : 0; }
+
+  function fmtMoney(v){ return '$' + (isFinite(v)?v.toFixed(2):'0.00'); }
+  function fmtPct(v){ return (isFinite(v)?v.toFixed(2):'0.00') + '%'; }
+  function fmtMul(v){ return (isFinite(v)?v.toFixed(2):'0.00') + 'x'; }
+
+  function flagColor(metric, val){
+    // returns color code for value vs benchmark
+    if (metric === 'cpm'){ return val < 4 ? '#22C55E' : (val < 10 ? '#F59E0B' : '#EF4444'); }
+    if (metric === 'cpc'){ return val < 0.5 ? '#22C55E' : (val < 2 ? '#F59E0B' : '#EF4444'); }
+    if (metric === 'ctr'){ return val > 1.5 ? '#22C55E' : (val > 0.7 ? '#F59E0B' : '#EF4444'); }
+    if (metric === 'cvr'){ return val > 3 ? '#22C55E' : (val > 1 ? '#F59E0B' : '#EF4444'); }
+    if (metric === 'roas'){ return val > 3 ? '#22C55E' : (val > 1 ? '#F59E0B' : '#EF4444'); }
+    return 'var(--accent)';
+  }
+
+  function w6Calc(){
+    var spend = num('w6PfSpend');
+    var imp   = num('w6PfImp');
+    var clk   = num('w6PfClk');
+    var cnv   = num('w6PfCnv');
+    var rev   = num('w6PfRev');
+    var cus   = num('w6PfCus');
+
+    var cpm  = imp ? (spend/imp)*1000 : 0;
+    var cpc  = clk ? (spend/clk) : 0;
+    var ctr  = imp ? (clk/imp)*100 : 0;
+    var cvr  = clk ? (cnv/clk)*100 : 0;
+    var roas = spend ? (rev/spend) : 0;
+    var cac  = cus ? (spend/cus) : 0;
+
+    var setOut = function(id, val, metric, fmt){
+      var el = $id(id);
+      if (!el) return;
+      el.textContent = fmt(val);
+      el.style.color = flagColor(metric, val);
+    };
+    setOut('w6OutCpm',  cpm,  'cpm',  fmtMoney);
+    setOut('w6OutCpc',  cpc,  'cpc',  fmtMoney);
+    setOut('w6OutCtr',  ctr,  'ctr',  fmtPct);
+    setOut('w6OutCvr',  cvr,  'cvr',  fmtPct);
+    setOut('w6OutRoas', roas, 'roas', fmtMul);
+    setOut('w6OutCac',  cac,  'cac',  fmtMoney);
+
+    var setBench = function(id, m){
+      var el = $id(id); if (!el) return;
+      var b = BENCHMARKS[m];
+      el.textContent = '🟢 ' + b.good + ' · 🟡 ' + b.warn + ' · 🔴 ' + b.bad;
+    };
+    setBench('w6BnchCpm','cpm');
+    setBench('w6BnchCpc','cpc');
+    setBench('w6BnchCtr','ctr');
+    setBench('w6BnchCvr','cvr');
+    setBench('w6BnchRoas','roas');
+    var bn = $id('w6BnchCac');
+    if (bn) bn.textContent = 'يعتمد على الصناعة + LTV';
+  }
+
+  window.w6Calc = w6Calc;
+
+  window.w6PfSave = function(){
+    var keys = ['w6PfSpend','w6PfImp','w6PfClk','w6PfCnv','w6PfRev','w6PfCus'];
+    var data = {};
+    keys.forEach(function(k){ data[k] = ($id(k)||{}).value; });
+    data._t = new Date().toISOString();
+    try {
+      var arr = JSON.parse(localStorage.getItem('upg_campaigns') || '[]');
+      arr.push(data); localStorage.setItem('upg_campaigns', JSON.stringify(arr));
+      alert('✅ تم حفظ الحملة. عدد الحملات المحفوظة: ' + arr.length);
+    } catch(e){ alert('❌ فشل الحفظ'); }
+  };
+
+  window.w6PfLoad = function(){
+    try {
+      var arr = JSON.parse(localStorage.getItem('upg_campaigns') || '[]');
+      if (!arr.length){ alert('لا توجد حملات محفوظة'); return; }
+      var last = arr[arr.length-1];
+      ['w6PfSpend','w6PfImp','w6PfClk','w6PfCnv','w6PfRev','w6PfCus'].forEach(function(k){
+        if ($id(k) && last[k] != null) $id(k).value = last[k];
+      });
+      w6Calc();
+      alert('📂 تم استرجاع آخر حملة (' + (last._t||'بدون تاريخ') + ')');
+    } catch(e){ alert('❌ خطأ في القراءة'); }
+  };
+
+  window.w6PfClear = function(){
+    if (!confirm('حذف كل الحملات المحفوظة؟')) return;
+    try { localStorage.removeItem('upg_campaigns'); alert('🗑️ تم المسح'); } catch(e){}
+  };
+
+  /* ──────── A/B Test Calculator ──────── */
+  // Z-scores
+  var Z = { 90: 1.645, 95: 1.96, 99: 2.576 };
+
+  function w6Ab(){
+    var p1   = num('w6AbBaseline') / 100; // baseline conv rate
+    var lift = num('w6AbLift') / 100;
+    var d    = num('w6AbDaily');
+    var conf = parseInt(($id('w6AbConf')||{}).value || '95', 10);
+    var z    = Z[conf] || 1.96;
+
+    if (p1 <= 0 || p1 >= 1 || lift <= 0 || d <= 0){
+      ['w6AbSize','w6AbDays','w6AbTarget','w6AbStatus'].forEach(function(id){
+        if ($id(id)) $id(id).textContent = '—';
+      });
+      return;
+    }
+
+    var p2 = p1 * (1 + lift);
+    if (p2 >= 0.99) p2 = 0.99;
+
+    // Standard sample size formula (two-proportion z-test):
+    // n = ((z * sqrt(2*p_avg*(1-p_avg)) + z_b*sqrt(p1*(1-p1)+p2*(1-p2)))^2) / (p2-p1)^2
+    // Simplified to z * z * (p1*(1-p1) + p2*(1-p2)) / (p2-p1)^2 (approx, 80% power assumed)
+    var pavg = (p1 + p2) / 2;
+    var num1 = Math.pow(z, 2) * 2 * pavg * (1 - pavg);
+    var n = Math.ceil(num1 / Math.pow(p2 - p1, 2));
+
+    var days = Math.ceil(n / d);
+
+    var statusEl = $id('w6AbStatus');
+    var hintEl   = $id('w6AbHint');
+    var sizeEl   = $id('w6AbSize');
+    var daysEl   = $id('w6AbDays');
+    var tgtEl    = $id('w6AbTarget');
+    if (sizeEl) sizeEl.textContent = n.toLocaleString('en-US');
+    if (daysEl) daysEl.textContent = days.toLocaleString('en-US');
+    if (tgtEl)  tgtEl.textContent  = (p2*100).toFixed(2) + '%';
+
+    if (statusEl){
+      if (days <= 14){
+        statusEl.textContent = '✅ ممتاز';
+        statusEl.style.color = '#22C55E';
+        if (hintEl) hintEl.textContent = 'مدة قابلة للتنفيذ';
+      } else if (days <= 30){
+        statusEl.textContent = '⚠️ مقبول';
+        statusEl.style.color = '#F59E0B';
+        if (hintEl) hintEl.textContent = 'استعد لشهر اختبار';
+      } else {
+        statusEl.textContent = '❌ صعب';
+        statusEl.style.color = '#EF4444';
+        if (hintEl) hintEl.textContent = 'تحتاج زوار أكثر أو lift أعلى';
+      }
+    }
+  }
+  window.w6Ab = w6Ab;
+
+  function init(){
+    if ($id('w6OutCpm')) w6Calc();
+    if ($id('w6AbSize')) w6Ab();
+  }
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+  document.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('[data-page="social"]');
+    if (t) setTimeout(init, 60);
+  });
+})();
+
+
+
+/* ============================================================
+   WORKER 06 · PHASE 4 — Influencer Vetting Tool
+============================================================ */
+(function(){
+  'use strict';
+
+  // Healthy ER bands per tier (Instagram industry data)
+  var ER_BANDS = {
+    nano:  { excellent: 5,   good: 3,   ok: 1.5,  bad: 1   }, // %
+    micro: { excellent: 3.5, good: 2,   ok: 1,    bad: 0.5 },
+    mid:   { excellent: 2,   good: 1.2, ok: 0.7,  bad: 0.3 },
+    macro: { excellent: 1.5, good: 0.8, ok: 0.4,  bad: 0.2 },
+    mega:  { excellent: 1,   good: 0.5, ok: 0.25, bad: 0.1 }
+  };
+
+  function $id(id){ return document.getElementById(id); }
+  function num(id){ var v = parseFloat(($id(id)||{}).value); return isFinite(v) ? v : 0; }
+
+  function flag(color, icon, text){
+    var bg = color === 'red' ? 'rgba(239,68,68,0.08)' :
+             color === 'amber' ? 'rgba(245,158,11,0.08)' :
+             color === 'green' ? 'rgba(34,197,94,0.08)' :
+             'rgba(102,252,241,0.08)';
+    var border = color === 'red' ? 'rgba(239,68,68,0.3)' :
+                 color === 'amber' ? 'rgba(245,158,11,0.3)' :
+                 color === 'green' ? 'rgba(34,197,94,0.3)' :
+                 'rgba(102,252,241,0.3)';
+    var fg = color === 'red' ? '#EF4444' :
+             color === 'amber' ? '#F59E0B' :
+             color === 'green' ? '#22C55E' :
+             '#66FCF1';
+    return '<div style="background:'+bg+';border:1px solid '+border+';color:'+fg+';">'+
+      '<span style="font-size:14px;">'+icon+'</span><span>'+text+'</span></div>';
+  }
+
+  function w6Inf(){
+    var fol     = num('w6InfFol');
+    var likes   = num('w6InfLikes');
+    var coms    = num('w6InfCom');
+    var reach   = num('w6InfReach');
+    var price   = num('w6InfPrice');
+    var tier    = ($id('w6InfTier')||{}).value || 'micro';
+
+    if (fol <= 0){
+      ['w6InfER','w6InfCPE','w6InfCR','w6InfVerdict'].forEach(function(id){
+        if ($id(id)) $id(id).textContent = '—';
+      });
+      var fl = $id('w6InfFlags'); if (fl) fl.innerHTML = '';
+      return;
+    }
+
+    var engagements = likes + coms;
+    var er = (engagements / fol) * 100;
+    var erReach = reach > 0 ? (engagements / reach) * 100 : null;
+    var cpe = engagements > 0 ? (price / engagements) : 0;
+    var commentRatio = likes > 0 ? (coms / likes) : 0;
+
+    if ($id('w6InfER'))  $id('w6InfER').textContent  = er.toFixed(2) + '%';
+    if ($id('w6InfCPE')) $id('w6InfCPE').textContent = '$' + cpe.toFixed(2);
+    if ($id('w6InfCR'))  $id('w6InfCR').textContent  = (commentRatio*100).toFixed(1) + '%';
+
+    var bands = ER_BANDS[tier] || ER_BANDS.micro;
+    var verdict, color, note;
+    if (er >= bands.excellent){ verdict='💎 ممتاز'; color='#22C55E'; note='تعاون فوري'; }
+    else if (er >= bands.good){ verdict='✅ جيد';   color='#22C55E'; note='تعاون موصى به'; }
+    else if (er >= bands.ok){   verdict='⚠️ مقبول'; color='#F59E0B'; note='تفاوض على السعر'; }
+    else if (er >= bands.bad){  verdict='⚠️ ضعيف'; color='#F59E0B'; note='احذر — راجع المحتوى'; }
+    else                        { verdict='❌ سيء'; color='#EF4444'; note='احتمال bots عالي'; }
+
+    if ($id('w6InfVerdict')){
+      $id('w6InfVerdict').textContent = verdict;
+      $id('w6InfVerdict').style.color = color;
+    }
+    if ($id('w6InfVerdictNote')) $id('w6InfVerdictNote').textContent = note;
+
+    // Flags
+    var flags = '';
+    if (er < 1){
+      flags += flag('red', '🚨', 'ER &lt; 1% غير طبيعي للحجم — احتمال bots أو followers مشتراة.');
+    }
+    if (commentRatio < 0.005 && likes > 100){
+      flags += flag('amber', '⚠️', 'Comment Ratio &lt; 0.5% — likes كثيرة مقابل comments قليلة، علامة passive followers.');
+    }
+    if (commentRatio > 0.3){
+      flags += flag('green', '🌟', 'Comment Ratio &gt; 30% — جمهور تفاعلي حقيقي.');
+    }
+    if (cpe > 5){
+      flags += flag('amber', '💸', 'Cost per Engagement &gt; $5 — مرتفع. تفاوض أو ابحث عن بديل.');
+    }
+    if (cpe > 0 && cpe < 0.5){
+      flags += flag('green', '💎', 'Cost per Engagement &lt; $0.5 — صفقة ممتازة.');
+    }
+    if (er > bands.excellent * 1.5 && fol > 100000){
+      flags += flag('amber', '🤔', 'ER مرتفع جداً للحجم — تحقق من real likes vs engagement pods.');
+    }
+    if (reach > 0 && erReach !== null && erReach < er * 0.5){
+      flags += flag('red', '📉', 'ER على Reach منخفض جداً مقارنة بالـ Followers — engagement مزيف محتمل.');
+    }
+    if (!flags){
+      flags = flag('green', '✅', 'لا توجد علامات تحذير — المؤثر يبدو طبيعياً للحجم.');
+    }
+    var fEl = $id('w6InfFlags');
+    if (fEl) fEl.innerHTML = flags;
+  }
+  window.w6Inf = w6Inf;
+
+  function init(){
+    if ($id('w6InfFol')) w6Inf();
+  }
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+  document.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('[data-page="social"]');
+    if (t) setTimeout(init, 60);
+  });
+})();

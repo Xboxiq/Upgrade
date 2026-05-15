@@ -10889,3 +10889,276 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
   #page-programming .prog-iraq-card h3 { color: #047857 !important; }
   #page-programming .prog-cheat-card h4 { color: #B45309 !important; }
 }
+
+
+/* ============================================================
+   WORKER 06 · PHASE 1 — Attention Psych + Algo Anatomy (page-social)
+   Additive only. Scoped to #page-social via [data-w6] hooks.
+============================================================ */
+#page-social [data-w6="block-a"],
+#page-social [data-w6="block-b"]{
+  display:flex; align-items:flex-start; justify-content:space-between; gap:14px; flex-wrap:wrap;
+}
+#page-social .w6-attn-card{
+  position:relative; transition:transform .25s ease, box-shadow .25s ease;
+  border-color:var(--border);
+}
+#page-social .w6-attn-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 14px 36px -22px rgba(102,252,241,0.35);
+}
+
+/* Platform tabs */
+#page-social .w6-platform-tabs .w6-pbtn{
+  font-family:inherit; font-size:12.5px; font-weight:700;
+  background:var(--surface-2, rgba(255,255,255,.03));
+  color:var(--text-muted); border:1px solid var(--border);
+  border-radius:10px; padding:9px 14px; cursor:pointer;
+  transition:all .2s ease;
+}
+#page-social .w6-platform-tabs .w6-pbtn:hover{
+  color:var(--text); border-color:rgba(102,252,241,0.4);
+}
+#page-social .w6-platform-tabs .w6-pbtn.active{
+  background:linear-gradient(135deg, rgba(102,252,241,.16), rgba(102,252,241,.04));
+  color:var(--text); border-color:rgba(102,252,241,.55);
+  box-shadow:0 0 0 1px rgba(102,252,241,.18) inset, 0 8px 24px -14px rgba(102,252,241,.5);
+}
+
+/* Platform panel layout */
+#page-social .w6-pp-grid{
+  display:grid; grid-template-columns:1.1fr 1fr 1fr; gap:14px;
+}
+#page-social .w6-pp-card{
+  background:var(--surface-2, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:12px; padding:14px 16px;
+}
+#page-social .w6-pp-card h4{
+  font-size:11.5px; font-weight:800; letter-spacing:1px; text-transform:uppercase;
+  margin:0 0 10px 0; color:var(--text-faint);
+}
+#page-social .w6-pp-row{
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+  padding:7px 0; border-bottom:1px dashed var(--border); font-size:12px;
+}
+#page-social .w6-pp-row:last-child{ border-bottom:none; }
+#page-social .w6-pp-row b{
+  background:rgba(102,252,241,.08); color:var(--accent);
+  border-radius:6px; padding:2px 8px; font-weight:700; font-size:11px;
+}
+#page-social .w6-pp-row.bad b{
+  background:rgba(239,68,68,.08); color:#EF4444;
+}
+
+/* Algo comparison table */
+#page-social .w6-algo-table .w6-th{
+  background:rgba(102,252,241,0.08);
+  font-size:11px; font-weight:800; letter-spacing:1px; text-transform:uppercase;
+  color:var(--accent); padding:11px 14px;
+  border-bottom:1px solid var(--border);
+}
+#page-social .w6-algo-table .w6-tr-h{
+  font-weight:800; padding:11px 14px;
+  border-bottom:1px dashed var(--border);
+  background:rgba(255,255,255,.015);
+}
+#page-social .w6-algo-table .w6-tr{
+  padding:11px 14px; font-size:11.5px; color:var(--text-muted);
+  border-bottom:1px dashed var(--border);
+  background:rgba(255,255,255,.015);
+  line-height:1.6;
+}
+#page-social .w6-algo-table > div:nth-last-child(-n+4){ border-bottom:none; }
+
+@media (max-width: 880px){
+  #page-social .w6-pp-grid{ grid-template-columns:1fr; }
+  #page-social .w6-algo-table{ grid-template-columns:1fr 1fr !important; }
+  #page-social .w6-algo-table .w6-th:nth-child(n+3),
+  #page-social .w6-algo-table .w6-tr-h,
+  #page-social .w6-algo-table .w6-tr{ font-size:11px; }
+}
+@media (prefers-reduced-motion: reduce){
+  #page-social .w6-attn-card:hover{ transform:none; }
+}
+@media print{
+  #page-social .w6-platform-tabs{ display:none; }
+  #page-social .w6-pp-card, #page-social .w6-attn-card{
+    background:#fff !important; border:1px solid #999 !important;
+    color:#000 !important; page-break-inside:avoid;
+  }
+}
+
+
+/* ============================================================
+   WORKER 06 · PHASE 2 — Pillars + Frameworks + Calendar (page-social)
+============================================================ */
+#page-social .w6-pillar-card{
+  position:relative;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+#page-social .w6-pillar-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 14px 40px -22px rgba(102,252,241,0.45);
+}
+#page-social [data-pillar-pct]{
+  font-variant-numeric:tabular-nums;
+  font-feature-settings:'tnum';
+  transition:color .25s ease;
+}
+
+/* Frameworks grid */
+#page-social .w6-fw-card{
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+#page-social .w6-fw-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 32px -20px rgba(139,92,246,0.4);
+}
+
+/* Calendar */
+#page-social .w6-cal-pill{
+  transition:transform .15s ease, opacity .15s ease;
+  user-select:none;
+}
+#page-social .w6-cal-pill:active{ cursor:grabbing; transform:scale(0.97); }
+#page-social .w6-cal-day{
+  transition:transform .15s ease, border-color .2s ease;
+}
+#page-social .w6-cal-day:hover{
+  border-color:rgba(102,252,241,0.45);
+}
+
+@media (max-width: 880px){
+  #page-social .w6-cal-wrap{ grid-template-columns:1fr !important; }
+  #page-social .w6-cal-pills{ flex-direction:row !important; flex-wrap:wrap; }
+}
+@media (prefers-reduced-motion: reduce){
+  #page-social .w6-pillar-card:hover,
+  #page-social .w6-fw-card:hover,
+  #page-social .w6-cal-day:hover{ transform:none; }
+}
+@media print{
+  #page-social .w6-cal-pills, #page-social .w6-cal-wrap > div:first-child{ display:none; }
+  #page-social .w6-fw-card{ background:#fff !important; color:#000 !important; page-break-inside:avoid; }
+}
+
+
+/* ============================================================
+   WORKER 06 · PHASE 3 — Funnel + Performance + A/B (page-social)
+============================================================ */
+#page-social .w6-funnel-card{
+  position:relative;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+#page-social .w6-funnel-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 18px 44px -22px rgba(102,252,241,0.45);
+}
+
+/* Performance inputs */
+#page-social .w6-perf-input-wrap label{
+  display:block; font-size:10.5px; font-weight:800; letter-spacing:0.6px;
+  color:var(--text-faint); margin-bottom:6px; text-transform:uppercase;
+}
+#page-social .w6-perf-input-wrap input,
+#page-social .w6-perf-input-wrap select{
+  width:100%; background:var(--surface-2, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:10px;
+  padding:11px 13px; color:var(--text); font-family:inherit;
+  font-size:14px; font-weight:700; font-variant-numeric:tabular-nums;
+  transition:border-color .2s ease, background .2s ease;
+}
+#page-social .w6-perf-input-wrap input:focus,
+#page-social .w6-perf-input-wrap select:focus{
+  outline:none;
+  border-color:rgba(102,252,241,0.5);
+  background:rgba(102,252,241,0.05);
+}
+
+/* Performance outputs */
+#page-social .w6-perf-out{
+  background:var(--surface-2, rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:12px;
+  padding:14px 14px; text-align:center;
+  transition:transform .2s ease;
+}
+#page-social .w6-perf-out:hover{ transform:translateY(-2px); }
+#page-social .w6-perf-label{
+  font-size:10.5px; font-weight:800; letter-spacing:1.1px;
+  color:var(--text-faint); text-transform:uppercase; margin-bottom:6px;
+}
+#page-social .w6-perf-value{
+  font-size:22px; font-weight:900; color:var(--accent);
+  font-variant-numeric:tabular-nums; line-height:1.15; margin-bottom:4px;
+  transition:color .25s ease;
+}
+#page-social .w6-perf-bench{
+  font-size:10px; color:var(--text-faint);
+  letter-spacing:0.4px; line-height:1.4;
+}
+
+@media (prefers-reduced-motion: reduce){
+  #page-social .w6-funnel-card:hover,
+  #page-social .w6-perf-out:hover{ transform:none; }
+}
+@media print{
+  #page-social .w6-funnel-card{ background:#fff !important; color:#000 !important; }
+  #page-social .w6-perf-input-wrap{ display:none; }
+}
+
+
+/* ============================================================
+   WORKER 06 · PHASE 4 — Email + WhatsApp + Influencer (page-social)
+============================================================ */
+#page-social .w6-sub-item{
+  background:var(--surface-2, rgba(255,255,255,.02));
+  border:1px solid var(--border); border-radius:8px;
+  padding:9px 11px; font-size:11.5px; color:var(--text-muted);
+  line-height:1.55;
+}
+#page-social .w6-sub-item b{ color:var(--text); }
+
+#page-social #w6InfFlags > div{
+  font-size:11.5px; padding:9px 12px; border-radius:8px;
+  display:flex; align-items:center; gap:8px; line-height:1.55;
+}
+
+@media print{
+  #page-social .w6-sub-item, #page-social #w6InfFlags > div{
+    background:#fff !important; color:#000 !important; border-color:#999 !important;
+  }
+}
+
+
+/* ============================================================
+   WORKER 06 · PHASE 5 — Iraq + Cheat + Citations (page-social)
+============================================================ */
+#page-social .w6-iq-salary table th,
+#page-social .w6-iq-salary table td{ vertical-align:middle; }
+#page-social .w6-iq-salary table tr:hover td{
+  background:rgba(102,252,241,0.04);
+}
+
+#page-social .w6-iq-hook{
+  background:var(--surface-2, rgba(255,255,255,.025));
+  border:1px solid var(--border); border-radius:10px;
+  padding:11px 13px; font-size:12px; color:var(--text-muted);
+  line-height:1.7;
+}
+
+#page-social .w6-cheat ol li,
+#page-social .w6-cheat ul li{ margin-bottom:4px; }
+
+#page-social .w6-cite-list li{
+  margin-bottom:6px; padding-bottom:6px;
+  border-bottom:1px dashed rgba(255,255,255,0.04);
+}
+#page-social .w6-cite-list li:last-child{ border-bottom:none; }
+
+@media print{
+  #page-social .w6-iq-salary, #page-social .w6-cheat, #page-social .w6-cite-list,
+  #page-social .w6-iq-hook{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
