@@ -8895,6 +8895,989 @@
         </div>
       </div>
 
+      <!-- ════════════════════════════════════════════════════════════
+           WORKER 04 · PHASE 1 — Accounting Foundations (Visual Lab)
+           Scope: additive blocks under #page-accounting only.
+           Mounts: .acc-eq-lab | .acc-taccount-lab | .acc-cycle-lab
+      ════════════════════════════════════════════════════════════ -->
+      <section class="acc-foundations" data-acc-phase="1" aria-labelledby="acc-foundations-title">
+
+        <div class="acc-section-head">
+          <span class="acc-eyebrow">المحاسبة الأساسية · مختبر بصري</span>
+          <h2 id="acc-foundations-title">الركائز الثلاث · معادلة، قيد مزدوج، دورة كاملة</h2>
+          <p>قبل أي ضريبة أو قائمة مالية، تتقن الفيزياء المحاسبية: المعادلة لا تنكسر، كل عملية تُسجَّل مرتين، والدورة تنتهي حيث بدأت.</p>
+        </div>
+
+        <!-- ───────── BLOCK 1 · Accounting Equation Visualizer ───────── -->
+        <article class="acc-eq-lab" data-acc-lab="equation">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 1</div>
+            <h3>Assets = Liabilities + Equity</h3>
+            <p>اختر معاملة من القائمة وراقب الأعمدة الثلاثة تتحرك live. المعادلة لا تنكسر أبداً — لو انكسرت، فالقيد خطأ.</p>
+          </header>
+
+          <div class="acc-eq-board">
+            <div class="acc-eq-col" data-col="assets">
+              <div class="acc-eq-col-head">
+                <span class="acc-eq-col-name">الأصول · Assets</span>
+                <span class="acc-eq-col-amt" data-acc-eq-val="assets">0</span>
+              </div>
+              <ul class="acc-eq-stack" data-acc-eq-stack="assets" aria-live="polite"></ul>
+            </div>
+            <div class="acc-eq-eq">=</div>
+            <div class="acc-eq-col" data-col="liab">
+              <div class="acc-eq-col-head">
+                <span class="acc-eq-col-name">الخصوم · Liabilities</span>
+                <span class="acc-eq-col-amt" data-acc-eq-val="liab">0</span>
+              </div>
+              <ul class="acc-eq-stack" data-acc-eq-stack="liab" aria-live="polite"></ul>
+            </div>
+            <div class="acc-eq-eq">+</div>
+            <div class="acc-eq-col" data-col="equity">
+              <div class="acc-eq-col-head">
+                <span class="acc-eq-col-name">حقوق الملكية · Equity</span>
+                <span class="acc-eq-col-amt" data-acc-eq-val="equity">0</span>
+              </div>
+              <ul class="acc-eq-stack" data-acc-eq-stack="equity" aria-live="polite"></ul>
+            </div>
+          </div>
+
+          <div class="acc-eq-balance" data-acc-eq-balance>
+            <span class="acc-eq-balance-label">حالة المعادلة</span>
+            <span class="acc-eq-balance-val">0 = 0 + 0</span>
+            <span class="acc-eq-balance-flag" data-acc-eq-flag="ok">متوازنة</span>
+          </div>
+
+          <div class="acc-eq-controls">
+            <div class="acc-eq-controls-head">
+              <span>10 معاملات نموذجية بأرقام عراقية (IQD)</span>
+              <button type="button" class="acc-eq-reset" data-acc-eq-reset>تصفير</button>
+            </div>
+            <ol class="acc-eq-tx-list" data-acc-eq-tx></ol>
+          </div>
+
+          <p class="acc-eq-note">الفكرة الجوهرية: الميزانية ليست قائمة أرقام — هي <b>هوية رياضية</b>. أي عملية تخل بها = خطأ في القيد، ليست رأياً.</p>
+        </article>
+
+        <!-- ───────── BLOCK 2 · T-Account Visualizer ───────── -->
+        <article class="acc-taccount-lab" data-acc-lab="taccount">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 2</div>
+            <h3>T-Account · أين يذهب القيد؟</h3>
+            <p>القيد المزدوج ليس فلسفة — هو حماية. كل دينار يخرج من حساب لازم يدخل حساب آخر. اختر العملية واتركها ترسم لك المسار.</p>
+          </header>
+
+          <div class="acc-taccount-toolbar">
+            <label class="acc-taccount-label" for="acc-tx-select">اختر معاملة</label>
+            <select id="acc-tx-select" class="acc-taccount-select" data-acc-tx-select aria-label="اختيار المعاملة المحاسبية"></select>
+            <button type="button" class="acc-taccount-clear" data-acc-tx-clear>مسح القيود</button>
+          </div>
+
+          <div class="acc-taccount-current" data-acc-tx-current>
+            <span class="acc-taccount-curr-tag">القيد الحالي</span>
+            <span class="acc-taccount-curr-text">— اختر معاملة لتظهر القيود —</span>
+          </div>
+
+          <div class="acc-taccount-grid" data-acc-tx-grid>
+            <!-- T-Accounts injected dynamically -->
+          </div>
+
+          <div class="acc-taccount-rules">
+            <div class="acc-taccount-rule">
+              <span class="acc-rule-icon">⬅</span>
+              <div>
+                <b>الأصول والمصاريف</b> تزيد <em>مديناً (Debit)</em> وتنقص <em>دائناً (Credit)</em>.
+              </div>
+            </div>
+            <div class="acc-taccount-rule">
+              <span class="acc-rule-icon">➡</span>
+              <div>
+                <b>الخصوم وحقوق الملكية والإيرادات</b> تزيد <em>دائناً</em> وتنقص <em>مديناً</em>.
+              </div>
+            </div>
+            <div class="acc-taccount-rule">
+              <span class="acc-rule-icon">∑</span>
+              <div>
+                مجموع المدين = مجموع الدائن في كل قيد. هذا اختبار سريع لصحة القيد قبل الترحيل.
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 3 · 9-Step Accounting Cycle ───────── -->
+        <article class="acc-cycle-lab" data-acc-lab="cycle">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 3</div>
+            <h3>الدورة المحاسبية · 9 خطوات</h3>
+            <p>من تحليل المعاملة حتى ميزان ما بعد الإقفال. كل خطوة تخدم الخطوة التي تليها — لا اختصارات.</p>
+          </header>
+
+          <div class="acc-cycle-shell">
+            <div class="acc-cycle-ring" role="list" data-acc-cycle-ring>
+              <svg class="acc-cycle-svg" viewBox="0 0 360 360" aria-hidden="true">
+                <circle class="acc-cycle-track" cx="180" cy="180" r="138"></circle>
+                <circle class="acc-cycle-dash" cx="180" cy="180" r="138"></circle>
+              </svg>
+              <!-- Step buttons injected dynamically -->
+            </div>
+            <div class="acc-cycle-detail" data-acc-cycle-detail aria-live="polite">
+              <span class="acc-cycle-step-tag">الخطوة 1</span>
+              <h4 class="acc-cycle-step-title">تحليل المعاملات</h4>
+              <p class="acc-cycle-step-body">اضغط على أي خطوة في الحلقة لتظهر تفاصيلها هنا — مع مثال عملي بأرقام عراقية.</p>
+              <ul class="acc-cycle-step-meta">
+                <li><span>المخرج</span><b data-acc-cycle-output>—</b></li>
+                <li><span>أداة العمل</span><b data-acc-cycle-tool>—</b></li>
+                <li><span>الخطأ الشائع</span><b data-acc-cycle-pitfall>—</b></li>
+              </ul>
+              <div class="acc-cycle-example" data-acc-cycle-example>
+                <span class="acc-cycle-example-tag">مثال عراقي</span>
+                <p>—</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-cycle-progress">
+            <div class="acc-cycle-progress-bar">
+              <span data-acc-cycle-progress style="width:11%"></span>
+            </div>
+            <div class="acc-cycle-progress-text"><b data-acc-cycle-progress-num>1</b> / 9 خطوات مستكشفة</div>
+          </div>
+        </article>
+
+      </section><!-- /acc-foundations Phase 1 -->
+
+      <!-- ════════════════════════════════════════════════════════════
+           WORKER 04 · PHASE 2 — Iraqi COA + IFRS vs Local + Ratios
+           Scope: additive blocks under #page-accounting only.
+      ════════════════════════════════════════════════════════════ -->
+      <section class="acc-standards" data-acc-phase="2" aria-labelledby="acc-standards-title">
+
+        <div class="acc-section-head">
+          <span class="acc-eyebrow">المعايير والنسب · المرجع المهني</span>
+          <h2 id="acc-standards-title">الدليل العراقي · IFRS vs محلي · 10 نسب مالية</h2>
+          <p>المحاسب المحترف يعرف أين يضع الرقم (الدليل)، وما الفرق بين المعيار الذي طُبِق (IFRS أو محلي)، وكيف يقرأ الأرقام (النسب).</p>
+        </div>
+
+        <!-- ───────── BLOCK 4 · Iraqi Unified Chart of Accounts ───────── -->
+        <article class="acc-coa-lab" data-acc-lab="coa">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 4</div>
+            <h3>الدليل المحاسبي العراقي الموحّد</h3>
+            <p>السلسلة الرقمية 1xxx-5xxx — كل مجموعة لها منطقها. اضغط على المجموعة لتفتح حساباتها التفصيلية.</p>
+          </header>
+
+          <div class="acc-coa-legend">
+            <span><b style="color:#34D399">1xxx</b> الأصول</span>
+            <span><b style="color:#F59E0B">2xxx</b> الخصوم</span>
+            <span><b style="color:#C4B5FD">3xxx</b> حقوق الملكية</span>
+            <span><b style="color:#60A5FA">4xxx</b> الإيرادات</span>
+            <span><b style="color:#F87171">5xxx</b> المصاريف</span>
+          </div>
+
+          <div class="acc-coa-stack" data-acc-coa-stack></div>
+
+          <div class="acc-coa-tip">
+            <span>💡</span>
+            <div>
+              <b>قاعدة ميدانية:</b> الترقيم يحدد الترتيب في القوائم المالية. أصل ترقيمه 1101 (نقد) يظهر قبل 1301 (مخزون) — لأن الترتيب من الأكثر سيولة للأقل سيولة.
+            </div>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 5 · IFRS vs Local Diff ───────── -->
+        <article class="acc-ifrs-lab" data-acc-lab="ifrs">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 5</div>
+            <h3>IFRS مقابل المحاسبة العراقية التقليدية</h3>
+            <p>حيث ينحرف التطبيق المحلي عن المعايير الدولية — والأثر العملي على الأرباح والميزانية.</p>
+          </header>
+
+          <div class="acc-ifrs-table-wrap">
+            <table class="acc-ifrs-table">
+              <thead>
+                <tr>
+                  <th>البند</th>
+                  <th>IFRS</th>
+                  <th>محلي تقليدي</th>
+                  <th>الأثر العملي</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>المخزون</b><br><span>Inventory Costing</span></td>
+                  <td>FIFO أو متوسط مرجَّح فقط — <b style="color:#F87171">LIFO ممنوع</b> (IAS 2)</td>
+                  <td>LIFO مسموح في بعض الممارسات</td>
+                  <td>في التضخم: LIFO يخفض الربح المعلن ويوفر ضريبة، لكن يشوّه قيمة المخزون في الميزانية.</td>
+                </tr>
+                <tr>
+                  <td><b>الإيراد</b><br><span>Revenue Recognition</span></td>
+                  <td>IFRS 15 · 5 خطوات (تحديد العقد، الالتزام، السعر، التوزيع، الاعتراف)</td>
+                  <td>غالباً عند إصدار الفاتورة أو التسليم</td>
+                  <td>فرق توقيت كبير في عقود طويلة (إنشاءات/خدمات سنوية) — يخل بمقابلة الإيراد بالمصروف.</td>
+                </tr>
+                <tr>
+                  <td><b>الإيجارات</b><br><span>Leases</span></td>
+                  <td>IFRS 16 · كل عقد يدخل الميزانية كحق استخدام + التزام إيجار</td>
+                  <td>تشغيلي خارج الميزانية</td>
+                  <td>تطبيق IFRS 16 يرفع الأصول والخصوم 10-30% — يؤثر على D/E ومؤشرات الاقتراض.</td>
+                </tr>
+                <tr>
+                  <td><b>الإهلاك</b><br><span>Depreciation</span></td>
+                  <td>طرق متعددة (قسط ثابت، متناقص، وحدات إنتاج) حسب نمط الاستهلاك</td>
+                  <td>غالباً قسط ثابت لجميع الأصول</td>
+                  <td>الأصول كثيفة الاستخدام في السنوات الأولى يجب أن تُهلك متناقصاً — قسط ثابت يضخم الربح المبكر.</td>
+                </tr>
+                <tr>
+                  <td><b>القيمة العادلة</b><br><span>Fair Value</span></td>
+                  <td>IFRS 13 · 3 مستويات (Level 1/2/3) للأصول المتداولة</td>
+                  <td>التكلفة التاريخية في الغالب</td>
+                  <td>عقارات استثمارية وأوراق مالية: التكلفة التاريخية تخفي مكاسب أو خسائر فعلية.</td>
+                </tr>
+                <tr>
+                  <td><b>أدوات مالية</b><br><span>Financial Instruments</span></td>
+                  <td>IFRS 9 · ECL (الخسائر الائتمانية المتوقعة) قبل تحقق الخسارة</td>
+                  <td>مخصص بعد التعثر الفعلي</td>
+                  <td>البنوك تكوّن مخصصات أعلى مبكراً — يخفض الربح لكن يعكس المخاطر بصدق.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="acc-ifrs-callout">
+            <div class="acc-ifrs-callout-tag">📌 الخلاصة</div>
+            <p>المؤسسة المدرجة في سوق الأوراق المالية العراقي يجب أن تتبع IFRS. المؤسسات الصغيرة والمتوسطة قد تستخدم IFRS for SMEs أو الممارسة المحلية — لكن للحصول على تمويل خارجي، IFRS الكامل شرط شبه دائم.</p>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 6 · 10 Financial Ratios ───────── -->
+        <article class="acc-ratios-lab" data-acc-lab="ratios">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 6</div>
+            <h3>عشر نسب مالية أساسية · مع نطاق صحي عراقي</h3>
+            <p>كل بطاقة: المعادلة، ما تقيس، النطاق المثالي، ومثال عراقي تطبيقي بأرقام واقعية.</p>
+          </header>
+
+          <div class="acc-ratios-filter">
+            <button type="button" class="acc-ratio-pill active" data-ratio-cat="all">الكل</button>
+            <button type="button" class="acc-ratio-pill" data-ratio-cat="liq">السيولة</button>
+            <button type="button" class="acc-ratio-pill" data-ratio-cat="lev">الرفع</button>
+            <button type="button" class="acc-ratio-pill" data-ratio-cat="prof">الربحية</button>
+            <button type="button" class="acc-ratio-pill" data-ratio-cat="eff">الكفاءة</button>
+          </div>
+
+          <div class="acc-ratios-grid" data-acc-ratios-grid></div>
+        </article>
+
+      </section><!-- /acc-standards Phase 2 -->
+
+      <!-- ════════════════════════════════════════════════════════════
+           WORKER 04 · PHASE 3 — Iraqi Tax Calculator + Salary Slip
+      ════════════════════════════════════════════════════════════ -->
+      <section class="acc-tax" data-acc-phase="3" aria-labelledby="acc-tax-title">
+
+        <div class="acc-section-head">
+          <span class="acc-eyebrow">الضرائب العراقية · حاسبة وكشف راتب</span>
+          <h2 id="acc-tax-title">ضريبة الدخل · الإقتطاع الاجتماعي · ضريبة الشركات</h2>
+          <p>الشرائح المُعتمدة من هيئة الضرائب العراقية — شرح الجداول، حاسبة تفاعلية، وكشف راتب قابل للطباعة.</p>
+        </div>
+
+        <!-- ───────── BLOCK 7 · Income Tax Brackets Table ───────── -->
+        <article class="acc-tax-table-lab" data-acc-lab="tax-brackets">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 7</div>
+            <h3>شرائح ضريبة الدخل على الرواتب · 2024-2025</h3>
+            <p>النظام التصاعدي الشهري — كل شريحة تُحسب على الجزء الواقع ضمنها فقط (مارجينال).</p>
+          </header>
+
+          <div class="acc-tax-bracket-grid">
+            <div class="acc-tax-bracket" data-bracket="0">
+              <div class="acc-tax-bracket-rate">معفى</div>
+              <div class="acc-tax-bracket-range">≤ 250,000 IQD/شهر</div>
+              <div class="acc-tax-bracket-note">الحد الأدنى المعفى — لا ضريبة دخل تُطبق على هذا الجزء.</div>
+            </div>
+            <div class="acc-tax-bracket" data-bracket="1">
+              <div class="acc-tax-bracket-rate">3%</div>
+              <div class="acc-tax-bracket-range">250,001 — 500,000</div>
+              <div class="acc-tax-bracket-note">على الجزء داخل هذا النطاق فقط (حد أعلى 7,500 IQD).</div>
+            </div>
+            <div class="acc-tax-bracket" data-bracket="2">
+              <div class="acc-tax-bracket-rate">5%</div>
+              <div class="acc-tax-bracket-range">500,001 — 1,000,000</div>
+              <div class="acc-tax-bracket-note">على الجزء داخل هذا النطاق (حد أعلى 25,000 IQD).</div>
+            </div>
+            <div class="acc-tax-bracket" data-bracket="3">
+              <div class="acc-tax-bracket-rate">15%</div>
+              <div class="acc-tax-bracket-range">> 1,000,000</div>
+              <div class="acc-tax-bracket-note">على كل ما يزيد عن المليون — الفئة العليا.</div>
+            </div>
+          </div>
+
+          <div class="acc-tax-misc-grid">
+            <div class="acc-tax-misc">
+              <h6>الضمان الاجتماعي · القطاع الخاص</h6>
+              <p><b>5%</b> تُقتطع من الموظف + <b>12%</b> على المؤسسة = <b>17% إجمالي</b> يُورَّد لهيئة التقاعد والضمان الاجتماعي للعمال.</p>
+            </div>
+            <div class="acc-tax-misc">
+              <h6>ضريبة الشركات</h6>
+              <p><b>15%</b> على الشركات التجارية والصناعية. <b>35%</b> على شركات النفط الأجنبية. إقرار ربع سنوي + سنوي.</p>
+            </div>
+            <div class="acc-tax-misc">
+              <h6>الجمارك (TARIC)</h6>
+              <p>الرسوم تتراوح <b>5%-30%</b> حسب البند الجمركي. السلع الأساسية والإنتاجية تحظى بأقل المعدلات.</p>
+            </div>
+            <div class="acc-tax-misc">
+              <h6>الإعفاءات الشخصية السنوية</h6>
+              <p>أعزب: <b>2,500,000</b> · متزوج: <b>4,500,000</b> · لكل ولد ≤ 18 سنة: <b>200,000</b>. تُقسَّم على 12 شهراً.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 8 · Tax Calculator IQ + Salary Slip ───────── -->
+        <article class="acc-tax-calc-lab" data-acc-lab="tax-calc">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 8</div>
+            <h3>حاسبة الراتب الصافي · IQ Salary Calculator</h3>
+            <p>أدخل الراتب الإجمالي وحالتك الاجتماعية — احصل على كشف راتب احترافي بكل الإقتطاعات. النتيجة قابلة للطباعة.</p>
+          </header>
+
+          <div class="acc-tax-calc-shell">
+            <div class="acc-tax-form">
+              <div class="acc-tax-field">
+                <label for="acc-tax-gross">الراتب الإجمالي الشهري (IQD)</label>
+                <input id="acc-tax-gross" type="number" min="0" step="50000" value="1500000" data-acc-tax="gross" inputmode="numeric">
+              </div>
+              <div class="acc-tax-field">
+                <label for="acc-tax-status">الحالة الاجتماعية</label>
+                <select id="acc-tax-status" data-acc-tax="status">
+                  <option value="single">أعزب · إعفاء 2.5M سنوي</option>
+                  <option value="married" selected>متزوج · إعفاء 4.5M سنوي</option>
+                </select>
+              </div>
+              <div class="acc-tax-field">
+                <label for="acc-tax-children">عدد الأولاد ≤ 18 سنة</label>
+                <input id="acc-tax-children" type="number" min="0" max="10" value="2" data-acc-tax="children" inputmode="numeric">
+              </div>
+              <div class="acc-tax-field">
+                <label for="acc-tax-allowances">بدلات شهرية إضافية (نقل/إجازة)</label>
+                <input id="acc-tax-allowances" type="number" min="0" step="10000" value="0" data-acc-tax="allowances" inputmode="numeric">
+              </div>
+              <div class="acc-tax-field">
+                <label for="acc-tax-otherded">استقطاعات أخرى (سلف/تأمين)</label>
+                <input id="acc-tax-otherded" type="number" min="0" step="10000" value="0" data-acc-tax="otherded" inputmode="numeric">
+              </div>
+              <div class="acc-tax-actions">
+                <button type="button" class="acc-tax-btn primary" data-acc-tax-calc>احسب الراتب الصافي</button>
+                <button type="button" class="acc-tax-btn ghost" data-acc-tax-print>طباعة كشف الراتب</button>
+              </div>
+            </div>
+
+            <div class="acc-tax-slip" data-acc-tax-slip>
+              <div class="acc-tax-slip-head">
+                <div>
+                  <div class="acc-tax-slip-tag">كشف راتب نموذجي · IQD</div>
+                  <h4>كشف الراتب الشهري</h4>
+                </div>
+                <div class="acc-tax-slip-meta">
+                  <span data-acc-tax-meta-month>شهر &mdash;</span>
+                  <span data-acc-tax-meta-status>متزوج · 2 أطفال</span>
+                </div>
+              </div>
+
+              <ul class="acc-tax-slip-rows">
+                <li class="add"><span>الراتب الأساسي</span><b data-acc-tax-row="gross">0</b></li>
+                <li class="add"><span>بدلات</span><b data-acc-tax-row="allowances">0</b></li>
+                <li class="sum"><span>إجمالي الدخل</span><b data-acc-tax-row="total">0</b></li>
+                <li class="sub"><span>ضريبة الدخل (شرائح)</span><b data-acc-tax-row="tax">0</b></li>
+                <li class="sub"><span>الضمان الاجتماعي · 5%</span><b data-acc-tax-row="social">0</b></li>
+                <li class="sub"><span>استقطاعات أخرى</span><b data-acc-tax-row="otherded">0</b></li>
+                <li class="sum negative"><span>إجمالي الإقتطاعات</span><b data-acc-tax-row="totalded">0</b></li>
+                <li class="net"><span>صافي الراتب المستحق</span><b data-acc-tax-row="net">0</b></li>
+              </ul>
+
+              <div class="acc-tax-slip-employer">
+                <h6>كلفة الموظف على المؤسسة</h6>
+                <ul>
+                  <li><span>الراتب الإجمالي</span><b data-acc-tax-emp-row="total">0</b></li>
+                  <li><span>الضمان الاجتماعي حصة المؤسسة · 12%</span><b data-acc-tax-emp-row="empsocial">0</b></li>
+                  <li class="emp-total"><span>إجمالي الكلفة الفعلية</span><b data-acc-tax-emp-row="empcost">0</b></li>
+                </ul>
+              </div>
+
+              <div class="acc-tax-slip-breakdown" data-acc-tax-breakdown>
+                <h6>تفاصيل احتساب الضريبة</h6>
+                <ul></ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-tax-disclaimer">
+            <span>⚠️</span>
+            <p>هذه الحاسبة للتدريب التعليمي — هيئة الضرائب العراقية قد تُصدر تعديلات دورية على الشرائح أو الإعفاءات. للأرقام الرسمية لكل سنة مالية، راجع البلاغات الصادرة عن الهيئة.</p>
+          </div>
+        </article>
+
+      </section><!-- /acc-tax Phase 3 -->
+
+      <!-- ════════════════════════════════════════════════════════════
+           WORKER 04 · PHASE 4 — Statements Builders + Cash Flow
+      ════════════════════════════════════════════════════════════ -->
+      <section class="acc-statements" data-acc-phase="4" aria-labelledby="acc-statements-title">
+
+        <div class="acc-section-head">
+          <span class="acc-eyebrow">القوائم المالية · مختبر بناء</span>
+          <h2 id="acc-statements-title">قائمة الدخل · الميزانية · التدفقات النقدية</h2>
+          <p>أدخل الأرقام واحصل على القوائم محسوبة، مع تحققات تلقائية: المعادلة، الهوامش، التحذيرات الصحية للأرقام.</p>
+        </div>
+
+        <!-- ───────── BLOCK 9 · Income Statement Builder ───────── -->
+        <article class="acc-is-lab" data-acc-lab="income-stmt">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 9</div>
+            <h3>Income Statement Builder · قائمة الدخل</h3>
+            <p>تنسيق متعدد الخطوات (Multi-Step) — يُظهر الربح الإجمالي، التشغيلي، وصافي الربح بشكل منفصل.</p>
+          </header>
+
+          <div class="acc-is-shell">
+            <div class="acc-is-form">
+              <div class="acc-is-group"><h6>الإيرادات</h6>
+                <label>إجمالي المبيعات (IQD)<input type="number" min="0" value="200000000" data-is="sales" inputmode="numeric"></label>
+                <label>مردودات + خصومات المبيعات<input type="number" min="0" value="3000000" data-is="returns" inputmode="numeric"></label>
+              </div>
+              <div class="acc-is-group"><h6>تكلفة المبيعات</h6>
+                <label>تكلفة البضاعة المباعة (COGS)<input type="number" min="0" value="125000000" data-is="cogs" inputmode="numeric"></label>
+              </div>
+              <div class="acc-is-group"><h6>مصاريف تشغيلية</h6>
+                <label>الرواتب + الضمان الاجتماعي<input type="number" min="0" value="22000000" data-is="opSalaries" inputmode="numeric"></label>
+                <label>الإيجارات والخدمات<input type="number" min="0" value="9000000" data-is="opRent" inputmode="numeric"></label>
+                <label>التسويق والإعلانات<input type="number" min="0" value="6000000" data-is="opMkt" inputmode="numeric"></label>
+                <label>الإهلاك<input type="number" min="0" value="4500000" data-is="opDep" inputmode="numeric"></label>
+                <label>أخرى (إدارية/قانونية)<input type="number" min="0" value="3500000" data-is="opOther" inputmode="numeric"></label>
+              </div>
+              <div class="acc-is-group"><h6>غير تشغيلي</h6>
+                <label>إيرادات أخرى (فوائد دائنة)<input type="number" min="0" value="1200000" data-is="otherInc" inputmode="numeric"></label>
+                <label>مصروف الفوائد<input type="number" min="0" value="2200000" data-is="interest" inputmode="numeric"></label>
+                <label>ضريبة الدخل (15%)<input type="number" min="0" max="100" step="0.5" value="15" data-is="taxRate" inputmode="numeric"></label>
+              </div>
+            </div>
+
+            <div class="acc-is-stmt" data-acc-is-stmt>
+              <div class="acc-is-stmt-head">
+                <div class="acc-is-stmt-tag">قائمة الدخل · للسنة المنتهية</div>
+                <h4>Income Statement · IQD</h4>
+              </div>
+              <ul class="acc-is-rows">
+                <li class="reg"><span>المبيعات الإجمالية</span><b data-is-out="sales">0</b></li>
+                <li class="sub"><span>مردودات وخصومات</span><b data-is-out="returns">0</b></li>
+                <li class="sum"><span>صافي المبيعات</span><b data-is-out="netSales">0</b></li>
+                <li class="sub"><span>تكلفة المبيعات (COGS)</span><b data-is-out="cogs">0</b></li>
+                <li class="sum gp"><span>إجمالي الربح <em data-is-out="gpPct">0%</em></span><b data-is-out="gp">0</b></li>
+                <li class="sub"><span>مصاريف تشغيلية</span><b data-is-out="opex">0</b></li>
+                <li class="sum op"><span>الربح التشغيلي <em data-is-out="opPct">0%</em></span><b data-is-out="op">0</b></li>
+                <li class="reg"><span>إيرادات أخرى</span><b data-is-out="otherInc">0</b></li>
+                <li class="sub"><span>مصروف الفوائد</span><b data-is-out="interest">0</b></li>
+                <li class="reg"><span>الربح قبل الضريبة (EBT)</span><b data-is-out="ebt">0</b></li>
+                <li class="sub"><span>ضريبة الدخل</span><b data-is-out="tax">0</b></li>
+                <li class="net"><span>صافي الربح <em data-is-out="netPct">0%</em></span><b data-is-out="net">0</b></li>
+              </ul>
+
+              <div class="acc-is-warnings" data-acc-is-warn></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 10 · Balance Sheet Builder ───────── -->
+        <article class="acc-bs-lab" data-acc-lab="balance-sheet">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 10</div>
+            <h3>Balance Sheet Builder · الميزانية العمومية</h3>
+            <p>اختبار تلقائي: <b>Assets = Liabilities + Equity</b>. لو الفرق ≠ 0 = خطأ في القيود.</p>
+          </header>
+
+          <div class="acc-bs-shell">
+            <div class="acc-bs-form">
+              <div class="acc-bs-col">
+                <h6>الأصول · Assets</h6>
+                <fieldset><legend>أصول متداولة</legend>
+                  <label>النقد والبنوك<input type="number" min="0" value="32000000" data-bs="cash" inputmode="numeric"></label>
+                  <label>المدينون<input type="number" min="0" value="48000000" data-bs="ar" inputmode="numeric"></label>
+                  <label>المخزون<input type="number" min="0" value="55000000" data-bs="inv" inputmode="numeric"></label>
+                  <label>أخرى متداولة<input type="number" min="0" value="5000000" data-bs="otherCa" inputmode="numeric"></label>
+                </fieldset>
+                <fieldset><legend>أصول ثابتة</legend>
+                  <label>الأراضي والمباني<input type="number" min="0" value="120000000" data-bs="land" inputmode="numeric"></label>
+                  <label>المعدات والأثاث (صافي)<input type="number" min="0" value="40000000" data-bs="ppe" inputmode="numeric"></label>
+                  <label>أصول غير ملموسة<input type="number" min="0" value="0" data-bs="intang" inputmode="numeric"></label>
+                </fieldset>
+              </div>
+              <div class="acc-bs-col">
+                <h6>الخصوم · Liabilities</h6>
+                <fieldset><legend>خصوم متداولة</legend>
+                  <label>الدائنون<input type="number" min="0" value="38000000" data-bs="ap" inputmode="numeric"></label>
+                  <label>قروض قصيرة<input type="number" min="0" value="15000000" data-bs="stl" inputmode="numeric"></label>
+                  <label>ضرائب وضمان مستحق<input type="number" min="0" value="6000000" data-bs="taxDue" inputmode="numeric"></label>
+                </fieldset>
+                <fieldset><legend>خصوم طويلة</legend>
+                  <label>قروض طويلة<input type="number" min="0" value="60000000" data-bs="ltl" inputmode="numeric"></label>
+                  <label>التزامات أخرى<input type="number" min="0" value="4000000" data-bs="otherLtl" inputmode="numeric"></label>
+                </fieldset>
+                <h6 style="margin-top:14px;">حقوق الملكية · Equity</h6>
+                <fieldset><legend>الملكية</legend>
+                  <label>رأس المال<input type="number" min="0" value="120000000" data-bs="capital" inputmode="numeric"></label>
+                  <label>الأرباح المحتجزة<input type="number" min="0" value="55000000" data-bs="retained" inputmode="numeric"></label>
+                  <label>احتياطيات<input type="number" min="0" value="2000000" data-bs="reserves" inputmode="numeric"></label>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="acc-bs-summary" data-acc-bs-summary>
+              <div class="acc-bs-side">
+                <div class="acc-bs-side-tag">الأصول</div>
+                <div class="acc-bs-side-val" data-bs-out="totalAssets">0</div>
+                <ul>
+                  <li><span>أصول متداولة</span><b data-bs-out="ca">0</b></li>
+                  <li><span>أصول ثابتة</span><b data-bs-out="fa">0</b></li>
+                </ul>
+              </div>
+              <div class="acc-bs-eq" data-acc-bs-eq>=</div>
+              <div class="acc-bs-side">
+                <div class="acc-bs-side-tag">الخصوم + الحقوق</div>
+                <div class="acc-bs-side-val" data-bs-out="totalLE">0</div>
+                <ul>
+                  <li><span>خصوم متداولة</span><b data-bs-out="cl">0</b></li>
+                  <li><span>خصوم طويلة</span><b data-bs-out="ll">0</b></li>
+                  <li><span>حقوق الملكية</span><b data-bs-out="eq">0</b></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="acc-bs-flag" data-acc-bs-flag>
+              <span class="acc-bs-flag-icon">⚖</span>
+              <span class="acc-bs-flag-text">المعادلة متوازنة</span>
+              <span class="acc-bs-flag-diff">فرق: <b>0</b></span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 11 · Cash Flow + Equity Change ───────── -->
+        <article class="acc-cf-lab" data-acc-lab="cash-flow">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 11</div>
+            <h3>قائمة التدفقات النقدية + التغير في حقوق الملكية</h3>
+            <p>الأرقام لا تكفي — التدفقات تكشف الحقيقة. شركة رابحة قد تنهار من ضعف التدفق التشغيلي.</p>
+          </header>
+
+          <div class="acc-cf-grid">
+            <div class="acc-cf-col" data-cf="op">
+              <div class="acc-cf-col-head">
+                <span class="acc-cf-tag">Operating</span>
+                <h4>التدفق من الأنشطة التشغيلية</h4>
+                <p>القلب — يقيس قدرة العمليات الأساسية على توليد نقد.</p>
+              </div>
+              <ul>
+                <li>صافي الربح <i>(نقطة البداية)</i></li>
+                <li>+ الإهلاك والاستهلاك <i>(غير نقدي)</i></li>
+                <li>± التغير في الذمم المدينة</li>
+                <li>± التغير في المخزون</li>
+                <li>± التغير في الذمم الدائنة</li>
+              </ul>
+              <div class="acc-cf-rule">
+                <b>قاعدة:</b> تدفق تشغيلي سلبي عامين متتاليين = خطر إفلاس حتى لو الأرباح موجبة (خداع المستحقات).
+              </div>
+            </div>
+
+            <div class="acc-cf-col" data-cf="inv">
+              <div class="acc-cf-col-head">
+                <span class="acc-cf-tag">Investing</span>
+                <h4>التدفق من الأنشطة الاستثمارية</h4>
+                <p>كم تستثمر في النمو — أصول، شركات تابعة، أوراق مالية.</p>
+              </div>
+              <ul>
+                <li>− شراء أصول ثابتة (CapEx)</li>
+                <li>+ بيع أصول قديمة</li>
+                <li>− استحواذات</li>
+                <li>± شراء/بيع أوراق مالية للاستثمار</li>
+              </ul>
+              <div class="acc-cf-rule">
+                <b>قاعدة:</b> تدفق استثماري سلبي = شركة تنمو. تدفق إيجابي مزمن = استنزاف الأصول.
+              </div>
+            </div>
+
+            <div class="acc-cf-col" data-cf="fin">
+              <div class="acc-cf-col-head">
+                <span class="acc-cf-tag">Financing</span>
+                <h4>التدفق من الأنشطة التمويلية</h4>
+                <p>من أين يأتي رأس المال — قروض، إصدار أسهم، توزيعات.</p>
+              </div>
+              <ul>
+                <li>+ قروض جديدة</li>
+                <li>− سداد قروض</li>
+                <li>+ إصدار أسهم جديدة</li>
+                <li>− توزيعات أرباح للملاك</li>
+              </ul>
+              <div class="acc-cf-rule">
+                <b>قاعدة:</b> الاعتماد المستمر على التمويل لتغطية العمليات = نموذج عمل مكسور.
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-cf-equity">
+            <div class="acc-cf-equity-head">
+              <h4>قائمة التغير في حقوق الملكية · Statement of Changes in Equity</h4>
+              <p>تتبع كيف تغيّر رأس المال والاحتياطيات والأرباح المحتجزة خلال الفترة.</p>
+            </div>
+            <table class="acc-cf-equity-table">
+              <thead><tr><th>البند</th><th>رأس المال</th><th>احتياطي قانوني</th><th>أرباح محتجزة</th><th>الإجمالي</th></tr></thead>
+              <tbody>
+                <tr><td>الرصيد أول الفترة</td><td>120,000,000</td><td>1,800,000</td><td>43,000,000</td><td>164,800,000</td></tr>
+                <tr class="add"><td>+ صافي ربح السنة</td><td>—</td><td>—</td><td>15,200,000</td><td>15,200,000</td></tr>
+                <tr class="add"><td>+ تحويل لاحتياطي قانوني (5%)</td><td>—</td><td>200,000</td><td>(200,000)</td><td>—</td></tr>
+                <tr class="sub"><td>− توزيعات أرباح</td><td>—</td><td>—</td><td>(3,000,000)</td><td>(3,000,000)</td></tr>
+                <tr class="total"><td>الرصيد آخر الفترة</td><td>120,000,000</td><td>2,000,000</td><td>55,000,000</td><td>177,000,000</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+      </section><!-- /acc-statements Phase 4 -->
+
+      <!-- ════════════════════════════════════════════════════════════
+           WORKER 04 · PHASE 5 — Cashier Track + Iraq Salary + Citations
+      ════════════════════════════════════════════════════════════ -->
+      <section class="acc-cashier" data-acc-phase="5" aria-labelledby="acc-cashier-title">
+
+        <div class="acc-section-head">
+          <span class="acc-eyebrow">مسار الكاشير · من المبتدئ للمشرف</span>
+          <h2 id="acc-cashier-title">دورة الكاشير · إدارة النقد · منع الخسائر · POS</h2>
+          <p>قبل اللمسة الأولى للدرج: تعرف على دورتك، 8 قواعد للنقد، 12 مؤشر سرقة، وكيف تختار نظام POS مناسب لبيئة العمل العراقية.</p>
+        </div>
+
+        <!-- ───────── BLOCK 12 · Cashier Cycle 6 stages ───────── -->
+        <article class="acc-cs-cycle-lab" data-acc-lab="cs-cycle">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 12</div>
+            <h3>دورة الكاشير · 6 مراحل في الوردية</h3>
+            <p>كل مرحلة لها هدف، أداة، وخطأ شائع. التميُّز يبدأ من الافتتاح وينتهي بالإغلاق.</p>
+          </header>
+
+          <div class="acc-cs-cycle-grid">
+            <div class="acc-cs-stage" data-stage="1">
+              <div class="acc-cs-stage-num">1</div>
+              <h5>افتتاح الدرج · Opening the Till</h5>
+              <p>عدّ الفلوت (Float) الأولي مع المشرف وتوقيع كلاكما على المبلغ — ليس مجرد إجراء، حماية لك من البداية.</p>
+              <div class="acc-cs-stage-meta">
+                <span><b>المخرج:</b> تسجيل ابتدائي موقّع</span>
+                <span><b>أداة:</b> دفتر التسليم/الاستلام</span>
+                <span><b>الخطأ الشائع:</b> القبول دون عدّ كل فئة</span>
+              </div>
+            </div>
+            <div class="acc-cs-stage" data-stage="2">
+              <div class="acc-cs-stage-num">2</div>
+              <h5>استقبال العميل · Customer Greeting</h5>
+              <p>قاعدة الـ 3 ثوان: تواصل بصري + ابتسامة + تحية. هذا يبني ثقة فورية ويردع المحتالين الذين يبحثون عن كاشير غافل.</p>
+              <div class="acc-cs-stage-meta">
+                <span><b>المخرج:</b> تجربة عميل إيجابية</span>
+                <span><b>أداة:</b> سكربت تحية موحّد</span>
+                <span><b>الخطأ الشائع:</b> الانشغال بالهاتف</span>
+              </div>
+            </div>
+            <div class="acc-cs-stage" data-stage="3">
+              <div class="acc-cs-stage-num">3</div>
+              <h5>المسح والإدخال · Scanning & Entry</h5>
+              <p>توازن السرعة والدقة — الباركود يُمسح بزاوية صحيحة، الإدخال اليدوي يُعاد التحقق منه. كل سلعة بالقيمة الصحيحة.</p>
+              <div class="acc-cs-stage-meta">
+                <span><b>المخرج:</b> فاتورة دقيقة</span>
+                <span><b>أداة:</b> POS scanner + ميزان</span>
+                <span><b>الخطأ الشائع:</b> سعر مكرر/مفقود</span>
+              </div>
+            </div>
+            <div class="acc-cs-stage" data-stage="4">
+              <div class="acc-cs-stage-num">4</div>
+              <h5>الدفع · Payment Processing</h5>
+              <p>نقد / بطاقة / محفظة رقمية (Asia Pay, Zain Cash, FastPay). كل وسيلة لها بروتوكول. تحقّق من العملة قبل القبول.</p>
+              <div class="acc-cs-stage-meta">
+                <span><b>المخرج:</b> تأكيد دفع موثّق</span>
+                <span><b>أداة:</b> POS + UV + flag العملة</span>
+                <span><b>الخطأ الشائع:</b> قبول قطعة بدون فحص</span>
+              </div>
+            </div>
+            <div class="acc-cs-stage" data-stage="5">
+              <div class="acc-cs-stage-num">5</div>
+              <h5>التغليف والإيصال · Bagging & Receipt</h5>
+              <p>ترتيب منطقي (الثقيل أسفل، الهش أعلى). الإيصال يُسلَّم مباشرة لليد لا في الكيس. هنا فرصة Cross-sell ذكي.</p>
+              <div class="acc-cs-stage-meta">
+                <span><b>المخرج:</b> طلب مكتمل + إيصال</span>
+                <span><b>أداة:</b> أكياس + حقيبة هدية</span>
+                <span><b>الخطأ الشائع:</b> نسيان الإيصال</span>
+              </div>
+            </div>
+            <div class="acc-cs-stage" data-stage="6">
+              <div class="acc-cs-stage-num">6</div>
+              <h5>إغلاق الدرج · Closing the Till</h5>
+              <p>تقرير X (قبل العدّ) → عدّ كل فئة → مطابقة → توثيق الفروقات → تسليم. لا تترك أبداً تسليماً بدون توقيع متبادل.</p>
+              <div class="acc-cs-stage-meta">
+                <span><b>المخرج:</b> تسوية صفرية موثّقة</span>
+                <span><b>أداة:</b> Z-report + log</span>
+                <span><b>الخطأ الشائع:</b> "نشوف بكرة"</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 13 · Cash Handling 8 Rules + Loss Prevention 12 ───────── -->
+        <article class="acc-cs-rules-lab" data-acc-lab="cs-rules">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 13</div>
+            <h3>قواعد النقد + مؤشرات الخسارة</h3>
+            <p>الجزء الأول: 8 قواعد تحمي الدرج. الثاني: 12 مؤشر سرقة يجب أن تعرفها كل إدارة.</p>
+          </header>
+
+          <div class="acc-cs-twocol">
+            <div class="acc-cs-block">
+              <h5 class="acc-cs-block-title"><span>🔒</span>قواعد إدارة النقد · 8</h5>
+              <ol class="acc-cs-rules-list">
+                <li><b>انضباط الدرج:</b> لا تتركه مفتوحاً ولو لثانية. الفتح = نافذة خسارة.</li>
+                <li><b>تحقّق العملة:</b> UV light + ملمس + علامة مائية لكل قطعة ≥ 25,000 IQD.</li>
+                <li><b>كشف التزوير:</b> العملة العراقية الحديثة لها 5 علامات أمنية — تعلّمها كلها.</li>
+                <li><b>عدّ الباقي بصوت:</b> "خمسة وعشرين، خمسين، مية" — يقلّل النزاعات 70%.</li>
+                <li><b>إدارة Float:</b> حد أعلى 500k IQD في الدرج — أكثر = drop للخزنة.</li>
+                <li><b>Skim Drops:</b> سحب الفائض كل ساعة لخزنة آمنة بتوقيع المشرف.</li>
+                <li><b>حد الفروقات:</b> أقل من 5,000 = OK · أكثر = تحقيق فوري.</li>
+                <li><b>قاعدة الشخصين:</b> لإغلاق الكاش الكبير (≥ 5M) يجب وجود اثنين.</li>
+              </ol>
+            </div>
+
+            <div class="acc-cs-block">
+              <h5 class="acc-cs-block-title"><span>🚨</span>مؤشرات السرقة · 12</h5>
+              <div class="acc-cs-loss-grid">
+                <div class="acc-cs-loss"><b>1. Sweethearting</b><span>تخفيض غير مصرح به للأقارب/الأصدقاء.</span></div>
+                <div class="acc-cs-loss"><b>2. Refund Fraud</b><span>إرجاعات وهمية لإخراج النقد.</span></div>
+                <div class="acc-cs-loss"><b>3. Voids كثيرة</b><span>إلغاءات لعمليات بدون مبرر.</span></div>
+                <div class="acc-cs-loss"><b>4. No-Sale</b><span>فتح الدرج بدون عملية بيع.</span></div>
+                <div class="acc-cs-loss"><b>5. إيصالات عشوائية</b><span>طباعة وحذف للتمويه.</span></div>
+                <div class="acc-cs-loss"><b>6. Discount Abuse</b><span>تطبيق خصم موظف على عملاء.</span></div>
+                <div class="acc-cs-loss"><b>7. Coupon Cloning</b><span>إعادة استخدام كوبون مستهلك.</span></div>
+                <div class="acc-cs-loss"><b>8. Underring</b><span>إدخال سعر أقل من الحقيقي.</span></div>
+                <div class="acc-cs-loss"><b>9. Phantom Voids</b><span>إلغاء بعد دفع فعلي.</span></div>
+                <div class="acc-cs-loss"><b>10. Skipping Items</b><span>عدم مسح بعض السلع للأقارب.</span></div>
+                <div class="acc-cs-loss"><b>11. Drawer Loans</b><span>"دين قصير" من الدرج بنية الإرجاع.</span></div>
+                <div class="acc-cs-loss"><b>12. Receipt Recycling</b><span>استخدام إيصال قديم لإرجاع وهمي.</span></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 14 · POS Systems Iraq + Counterfeit Trainer ───────── -->
+        <article class="acc-cs-pos-lab" data-acc-lab="cs-pos">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 14</div>
+            <h3>أنظمة POS في العراق · والكشف عن التزوير</h3>
+            <p>الـ POS ليس صندوق نقدي — هو منظومة. اختياره يحدّد كفاءة العمليات والمحاسبة والمخزون لسنوات.</p>
+          </header>
+
+          <div class="acc-pos-grid">
+            <div class="acc-pos-card">
+              <div class="acc-pos-name">Foodics</div>
+              <div class="acc-pos-cat">مطاعم وكافيهات</div>
+              <ul>
+                <li>تكامل مع المخزون والمكونات (Recipe Cost)</li>
+                <li>تطبيق طلبات الطاولات والديليفري</li>
+                <li>دعم عربي + Cloud-based</li>
+              </ul>
+              <div class="acc-pos-fit">مناسب: مطاعم بغداد، أربيل، البصرة بحجم متوسط/كبير.</div>
+            </div>
+            <div class="acc-pos-card">
+              <div class="acc-pos-name">Loyverse</div>
+              <div class="acc-pos-cat">تجزئة صغيرة</div>
+              <ul>
+                <li>مجاني للأساسيات + اشتراك للتقارير المتقدمة</li>
+                <li>يعمل على تابلت/جوال</li>
+                <li>تكامل مع Stripe وبعض البوابات</li>
+              </ul>
+              <div class="acc-pos-fit">مناسب: متاجر الأحياء، ورشات، Boutique stores.</div>
+            </div>
+            <div class="acc-pos-card">
+              <div class="acc-pos-name">Zain Cash POS</div>
+              <div class="acc-pos-cat">محافظ رقمية</div>
+              <ul>
+                <li>قبول دفع Zain Cash + Asia Pay</li>
+                <li>تكامل مباشر مع شركة الاتصال</li>
+                <li>أقل تكلفة معاملة في السوق</li>
+              </ul>
+              <div class="acc-pos-fit">مناسب: نقاط البيع التي تستهدف الشباب والعملاء بدون بطاقة.</div>
+            </div>
+            <div class="acc-pos-card">
+              <div class="acc-pos-name">Dynamics 365 (Retail)</div>
+              <div class="acc-pos-cat">مؤسسات كبيرة</div>
+              <ul>
+                <li>تكامل ERP كامل + متعدد الفروع</li>
+                <li>تقارير CFO-grade + IFRS-ready</li>
+                <li>تكلفة ترخيص أعلى وتدريب مكثّف</li>
+              </ul>
+              <div class="acc-pos-fit">مناسب: سلاسل تجزئة كبرى، مولات، مجموعات تجارية.</div>
+            </div>
+          </div>
+
+          <div class="acc-counterfeit">
+            <h5><span>🪪</span>5 علامات أمنية في الدينار العراقي</h5>
+            <ol>
+              <li><b>الخيط الأمني (Security Thread):</b> شريط معدني يظهر مستمراً عند التضيء — مكسور أو متقطع = مزور.</li>
+              <li><b>العلامة المائية (Watermark):</b> صورة شفافة (نخلة/شخصية) تظهر مع الإضاءة الخلفية.</li>
+              <li><b>الحبر المتحول (Color-Shift Ink):</b> يتغير من ذهبي إلى أخضر عند إمالة الورقة.</li>
+              <li><b>النقش البارز (Intaglio):</b> ملمس بارز عند تمرير الإصبع — مزيف يكون أملس.</li>
+              <li><b>UV Reactive:</b> تحت الأشعة فوق البنفسجية تظهر ألياف وعلامات إضافية.</li>
+            </ol>
+            <p class="acc-counterfeit-tip"><b>قاعدة ميدانية:</b> فحص أي ورقة ≥ 25,000 IQD يأخذ 3 ثوان فقط — اعتبرها استثمار في الدفاع لا تأخير للعميل.</p>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 15 · Iraq Salary Block ───────── -->
+        <article class="acc-cs-iraq-lab" data-acc-lab="cs-iraq">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 15</div>
+            <h3>السوق العراقي · رواتب وشهادات وسلّم مهني</h3>
+            <p>الأرقام الواقعية في بغداد/أربيل/البصرة — ومسارات الترقي للمحاسبين والكاشير في القطاع الخاص.</p>
+          </header>
+
+          <table class="acc-iraq-salary-tbl">
+            <thead>
+              <tr><th>الدور</th><th>الراتب IQD/شهر</th><th>الراتب USD تقريبي</th><th>المؤهل والخبرة</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Junior Accountant (0-1 سنة)</td><td>600k — 900k</td><td>$460 — $690</td><td>بكالوريوس محاسبة</td></tr>
+              <tr><td>Senior Accountant (3-5 سنوات)</td><td>1.1M — 1.7M</td><td>$840 — $1,300</td><td>+ خبرة + شهادة IPA/CMA</td></tr>
+              <tr><td>Chief Accountant</td><td>1.8M — 3M</td><td>$1,380 — $2,300</td><td>+ 7 سنوات + قيادة فريق</td></tr>
+              <tr><td>Auditor (Public)</td><td>1.5M — 4M+</td><td>$1,150 — $3,070+</td><td>+ شهادة + مكتب معتمد</td></tr>
+              <tr><td>Tax Consultant</td><td>1.5M — 3.5M</td><td>$1,150 — $2,690</td><td>+ خبرة ضريبية + شبكة علاقات</td></tr>
+              <tr><td>Cashier (Junior)</td><td>450k — 650k</td><td>$345 — $500</td><td>ثانوية + تدريب POS</td></tr>
+              <tr><td>Senior Cashier / Supervisor</td><td>700k — 1.1M</td><td>$540 — $840</td><td>+ 3 سنوات + إدارة فريق صغير</td></tr>
+              <tr><td>Finance Manager</td><td>3M — 6M+</td><td>$2,300 — $4,600+</td><td>+ ماجستير/CMA + 10 سنوات</td></tr>
+            </tbody>
+          </table>
+
+          <div class="acc-iraq-grid">
+            <div class="acc-iraq-card">
+              <h6>📜 شهادات مفيدة</h6>
+              <ul>
+                <li><b>IPA</b> — المعهد العربي للمحاسبين القانونيين (محلياً معتمدة)</li>
+                <li><b>CMA</b> — Certified Management Accountant (دولية)</li>
+                <li><b>CPA</b> — للأسواق الدولية والأمريكية</li>
+                <li><b>ACCA</b> — IFRS-focused (للراغبين بالعمل في GCC)</li>
+                <li><b>دورات هيئة الضرائب</b> — للمتخصصين الضريبيين</li>
+              </ul>
+            </div>
+            <div class="acc-iraq-card">
+              <h6>🪜 سلّم الترقي للمحاسب</h6>
+              <ol>
+                <li><b>سنة 0-1</b> · Junior — قيود يومية + تسويات بسيطة</li>
+                <li><b>سنة 1-3</b> · Mid — مراقبة بنود + إقرارات ضريبية</li>
+                <li><b>سنة 3-6</b> · Senior — إعداد قوائم + تدقيق</li>
+                <li><b>سنة 6-10</b> · Chief — قيادة قسم + تخطيط</li>
+                <li><b>سنة 10+</b> · CFO/مدير مالي — استراتيجية + استثمار</li>
+              </ol>
+            </div>
+            <div class="acc-iraq-card">
+              <h6>🏢 المؤسسات المرجعية</h6>
+              <ul>
+                <li>هيئة الضرائب العامة العراقية</li>
+                <li>وزارة المالية (دائرة المحاسبة)</li>
+                <li>سوق العراق للأوراق المالية (ISX)</li>
+                <li>المصرف المركزي العراقي</li>
+                <li>الاتحاد الدولي للمحاسبين (IFAC)</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 16 · Cheat Sheet ───────── -->
+        <article class="acc-cs-cheat-lab" data-acc-lab="cs-cheat">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 16</div>
+            <h3>Cheat Sheet · ورقة المحاسب اليومية</h3>
+            <p>أهم القواعد في صفحة واحدة — اطبعها واحتفظ بها بجانب مكتبك.</p>
+          </header>
+
+          <div class="acc-cheat-grid">
+            <div class="acc-cheat-col">
+              <h6>المعادلة المحاسبية</h6>
+              <ul>
+                <li><b>Assets</b> = Liabilities + Equity</li>
+                <li>كل قيد له طرفان: مدين + دائن</li>
+                <li>مجموع الـ Debit = مجموع الـ Credit</li>
+              </ul>
+            </div>
+            <div class="acc-cheat-col">
+              <h6>اتجاهات الحسابات</h6>
+              <ul>
+                <li><b>الأصول/المصاريف:</b> تزيد مديناً، تنقص دائناً</li>
+                <li><b>الخصوم/الحقوق/الإيرادات:</b> تزيد دائناً، تنقص مديناً</li>
+              </ul>
+            </div>
+            <div class="acc-cheat-col">
+              <h6>الضريبة العراقية شهرياً</h6>
+              <ul>
+                <li>0% ≤ 250k</li>
+                <li>3% على 250k–500k</li>
+                <li>5% على 500k–1M</li>
+                <li>15% على ما فوق المليون</li>
+                <li>+ 5% ضمان من الموظف</li>
+              </ul>
+            </div>
+            <div class="acc-cheat-col">
+              <h6>قواعد الكاشير الذهبية</h6>
+              <ul>
+                <li>عدّ الباقي بصوت عالٍ</li>
+                <li>افحص أي ورقة ≥ 25k</li>
+                <li>أي فرق ≥ 5k = تحقيق</li>
+                <li>درج مفتوح = مخاطرة فورية</li>
+              </ul>
+            </div>
+            <div class="acc-cheat-col">
+              <h6>تحذيرات قوائم مالية</h6>
+              <ul>
+                <li>GP < 15% = خطر</li>
+                <li>OP سالب = العمليات تخسر</li>
+                <li>تغطية فوائد < 3x = ديون مرتفعة</li>
+                <li>Net Margin < 3% = هامش هش</li>
+              </ul>
+            </div>
+            <div class="acc-cheat-col">
+              <h6>عند الشك</h6>
+              <ul>
+                <li>أوقف العملية</li>
+                <li>وثّق ما حصل</li>
+                <li>أبلِغ المشرف فوراً</li>
+                <li>اقترح حلاً مع المشكلة</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 17 · Citations ───────── -->
+        <article class="acc-cs-citations-lab" data-acc-lab="cs-citations">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 17</div>
+            <h3>المصادر والمراجع · 12 مصدراً مهنياً</h3>
+            <p>كل ادعاء في هذه الوحدة مدعوم — هذه قائمة بالمصادر الأساسية للقراءة المعمّقة.</p>
+          </header>
+
+          <ol class="acc-citations">
+            <li><b>IFRS Foundation</b> — <i>IFRS Standards (IAS 1, IAS 2, IFRS 15, IFRS 16, IFRS 9, IFRS 13)</i> · المرجع الدولي للقوائم والاعتراف بالإيراد والإيجارات.</li>
+            <li><b>هيئة الضرائب العامة العراقية</b> — <i>قانون ضريبة الدخل رقم 113 لسنة 1982 وتعديلاته</i> · شرائح الدخل والإعفاءات الشخصية.</li>
+            <li><b>دائرة التقاعد والضمان الاجتماعي للعمال</b> — <i>قانون التقاعد والضمان رقم 39 لسنة 1971 (مع تعديلات 2023)</i> · نسب 5% + 12%.</li>
+            <li><b>وزارة المالية العراقية</b> — <i>الدليل المحاسبي الموحد للقطاع الخاص</i> · التصنيف 1xxx-5xxx.</li>
+            <li><b>قانون الشركات العراقي رقم 21 لسنة 1997</b> — <i>متطلبات الإفصاح ومسك الدفاتر</i>.</li>
+            <li><b>IFAC — Code of Ethics for Professional Accountants</b> · مبادئ الاستقلالية والمصداقية.</li>
+            <li><b>Kaplan & Norton</b> — <i>The Balanced Scorecard, 1996</i> · ربط النسب المالية بالأداء التشغيلي.</li>
+            <li><b>Damodaran, A.</b> — <i>Investment Valuation, 3rd ed.</i> · مرجع نسب الربحية والعائد.</li>
+            <li><b>ACFE</b> — <i>Report to the Nations on Occupational Fraud, 2024</i> · 12 مؤشر سرقة في نقطة البيع.</li>
+            <li><b>Gary Klein</b> — <i>Sources of Power, 1998</i> · القرار تحت الضغط في الكاشير.</li>
+            <li><b>Daniel Kahneman</b> — <i>Thinking, Fast and Slow, 2011</i> · Attention Fatigue + Speed-Accuracy Tradeoff.</li>
+            <li><b>سوق العراق للأوراق المالية (ISX)</b> — <i>دليل الإفصاح المالي للشركات المدرجة</i>.</li>
+          </ol>
+        </article>
+
+      </section><!-- /acc-cashier Phase 5 -->
+
     </section><!-- /page-accounting -->
 
 

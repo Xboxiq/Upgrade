@@ -6025,3 +6025,910 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 })();
+
+
+
+/* ════════════════════════════════════════════════════════════════
+   WORKER 04 · PHASE 1 — Accounting Foundations Lab
+   - Equation Visualizer (10 transactions, IQD)
+   - T-Account Visualizer (12 transactions)
+   - 9-Step Accounting Cycle Ring
+   localStorage: upg_acc_eq_state, upg_acc_cycle_visited
+═══════════════════════════════════════════════════════════════ */
+(function(){
+  'use strict';
+  if (window.__UPG_ACC_PHASE1__) return;
+  window.__UPG_ACC_PHASE1__ = true;
+
+  function ready(fn){
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn, { once: true });
+    } else { fn(); }
+  }
+
+  var fmtIQD = function(n){
+    var x = Math.round(Number(n) || 0);
+    return x.toLocaleString('en-US') + ' د.ع';
+  };
+
+  /* ── Block 1 · Equation Visualizer ───────────────────────────── */
+  var EQ_TX = [
+    { id:'eq01', title:'تأسيس الشركة برأس مال نقدي', detail:'إيداع 50,000,000 IQD في الحساب البنكي',
+      effects:[{col:'assets',label:'النقد في البنك',val:50000000},{col:'equity',label:'رأس المال',val:50000000}] },
+    { id:'eq02', title:'شراء معدات نقداً', detail:'شراء حواسيب ومعدات مكتبية',
+      effects:[{col:'assets',label:'معدات',val:8000000},{col:'assets',label:'النقد في البنك',val:-8000000}] },
+    { id:'eq03', title:'قرض من المصرف', detail:'قرض إنتاجي من مصرف الرافدين',
+      effects:[{col:'assets',label:'النقد في البنك',val:25000000},{col:'liab',label:'قرض طويل الأجل',val:25000000}] },
+    { id:'eq04', title:'شراء بضاعة بالأجل', detail:'بضاعة من مورد محلي على الحساب',
+      effects:[{col:'assets',label:'مخزون',val:12000000},{col:'liab',label:'دائنون',val:12000000}] },
+    { id:'eq05', title:'بيع بضاعة نقداً (بربح)', detail:'تكلفة البضاعة 5M، بيعت بـ 8M',
+      effects:[{col:'assets',label:'النقد',val:8000000},{col:'assets',label:'مخزون',val:-5000000},{col:'equity',label:'صافي ربح محتجز',val:3000000}] },
+    { id:'eq06', title:'دفع راتب موظف', detail:'راتب 1,200,000 IQD نقداً',
+      effects:[{col:'assets',label:'النقد',val:-1200000},{col:'equity',label:'مصروفات (تخفض الأرباح)',val:-1200000}] },
+    { id:'eq07', title:'سداد جزء من الدائنين', detail:'تسديد 4M IQD من المستحقات',
+      effects:[{col:'assets',label:'النقد في البنك',val:-4000000},{col:'liab',label:'دائنون',val:-4000000}] },
+    { id:'eq08', title:'تحصيل من زبون', detail:'زبون كان مدينًا بـ 6M سدّد المبلغ',
+      effects:[{col:'assets',label:'النقد',val:6000000},{col:'assets',label:'مدينون',val:-6000000}] },
+    { id:'eq09', title:'بيع بالأجل', detail:'بضاعة بـ 10M بتكلفة 6M على الحساب',
+      effects:[{col:'assets',label:'مدينون',val:10000000},{col:'assets',label:'مخزون',val:-6000000},{col:'equity',label:'صافي ربح محتجز',val:4000000}] },
+    { id:'eq10', title:'توزيع أرباح للملاك', detail:'سحب 2M من الأرباح المحتجزة',
+      effects:[{col:'assets',label:'النقد',val:-2000000},{col:'equity',label:'سحوبات',val:-2000000}] }
+  ];
+
+  function setupEquation(){
+    var lab = document.querySelector('[data-acc-lab="equation"]');
+    if (!lab) return;
+    var list = lab.querySelector('[data-acc-eq-tx]');
+    var stacks = {
+      assets: lab.querySelector('[data-acc-eq-stack="assets"]'),
+      liab:   lab.querySelector('[data-acc-eq-stack="liab"]'),
+      equity: lab.querySelector('[data-acc-eq-stack="equity"]')
+    };
+    var amts = {
+      assets: lab.querySelector('[data-acc-eq-val="assets"]'),
+      liab:   lab.querySelector('[data-acc-eq-val="liab"]'),
+      equity: lab.querySelector('[data-acc-eq-val="equity"]')
+    };
+    var balanceVal = lab.querySelector('.acc-eq-balance-val');
+    var balanceFlag = lab.querySelector('[data-acc-eq-flag]');
+    var resetBtn = lab.querySelector('[data-acc-eq-reset]');
+
+    var state = { applied: [], totals: { assets:0, liab:0, equity:0 } };
+
+    EQ_TX.forEach(function(tx){
+      var li = document.createElement('li');
+      li.dataset.txId = tx.id;
+      var net = tx.effects.reduce(function(acc, e){
+        acc[e.col] = (acc[e.col] || 0) + e.val; return acc;
+      }, {});
+      var parts = [];
+      ['assets','liab','equity'].forEach(function(c){
+        if (net[c]) {
+          var sign = net[c] > 0 ? '+' : '−';
+          var name = c === 'assets' ? 'أصول' : c === 'liab' ? 'خصوم' : 'حقوق';
+          parts.push(name + ' ' + sign + Math.abs(net[c]).toLocaleString('en-US'));
+        }
+      });
+      li.innerHTML =
+        '<span class="acc-eq-tx-title">'+tx.title+'</span>'+
+        '<span class="acc-eq-tx-effect">'+tx.detail+' · '+parts.join(' / ')+'</span>';
+      li.addEventListener('click', function(){ apply(tx, li); });
+      list.appendChild(li);
+    });
+
+    function apply(tx, li){
+      tx.effects.forEach(function(eff){
+        state.totals[eff.col] += eff.val;
+        var item = document.createElement('li');
+        item.className = eff.val < 0 ? 'neg' : 'pos';
+        var sign = eff.val < 0 ? '−' : '+';
+        item.innerHTML = '<span>'+eff.label+'</span><b>'+sign+Math.abs(eff.val).toLocaleString('en-US')+'</b>';
+        stacks[eff.col].appendChild(item);
+      });
+      li.classList.add('applied');
+      state.applied.push(tx.id);
+      paint();
+      try { localStorage.setItem('upg_acc_eq_state', JSON.stringify(state.applied)); } catch(_){}
+    }
+
+    function paint(){
+      amts.assets.textContent = fmtIQD(state.totals.assets);
+      amts.liab.textContent   = fmtIQD(state.totals.liab);
+      amts.equity.textContent = fmtIQD(state.totals.equity);
+      var lhs = state.totals.assets;
+      var rhs = state.totals.liab + state.totals.equity;
+      balanceVal.textContent = lhs.toLocaleString('en-US') + ' = ' +
+        state.totals.liab.toLocaleString('en-US') + ' + ' +
+        state.totals.equity.toLocaleString('en-US');
+      var ok = Math.abs(lhs - rhs) < 0.01;
+      balanceFlag.dataset.accEqFlag = ok ? 'ok' : 'off';
+      balanceFlag.textContent = ok ? 'متوازنة' : 'غير متوازنة';
+    }
+
+    resetBtn.addEventListener('click', function(){
+      state = { applied: [], totals: { assets:0, liab:0, equity:0 } };
+      ['assets','liab','equity'].forEach(function(c){ stacks[c].innerHTML = ''; });
+      list.querySelectorAll('li').forEach(function(li){ li.classList.remove('applied'); });
+      paint();
+      try { localStorage.removeItem('upg_acc_eq_state'); } catch(_){}
+    });
+
+    paint();
+  }
+
+  /* ── Block 2 · T-Account Visualizer ──────────────────────────── */
+  var T_TX = [
+    { id:'t01', title:'إيداع رأس مال 50M في البنك', dr:[{a:'البنك',t:'أصل',v:50000000}], cr:[{a:'رأس المال',t:'حقوق ملكية',v:50000000}] },
+    { id:'t02', title:'شراء حاسوب 3M نقداً',         dr:[{a:'معدات',t:'أصل',v:3000000}],     cr:[{a:'النقد',t:'أصل',v:3000000}] },
+    { id:'t03', title:'بيع بضاعة 8M نقداً (تكلفة 5M)',dr:[{a:'النقد',t:'أصل',v:8000000},{a:'تكلفة المبيعات',t:'مصروف',v:5000000}], cr:[{a:'مبيعات',t:'إيراد',v:8000000},{a:'مخزون',t:'أصل',v:5000000}] },
+    { id:'t04', title:'دفع راتب موظف 1.2M',          dr:[{a:'مصروف رواتب',t:'مصروف',v:1200000}], cr:[{a:'النقد',t:'أصل',v:1200000}] },
+    { id:'t05', title:'شراء مخزون 12M بالأجل',       dr:[{a:'مخزون',t:'أصل',v:12000000}],   cr:[{a:'دائنون',t:'خصم',v:12000000}] },
+    { id:'t06', title:'تحصيل من مدين 6M',             dr:[{a:'النقد',t:'أصل',v:6000000}],    cr:[{a:'مدينون',t:'أصل',v:6000000}] },
+    { id:'t07', title:'سداد قسط قرض 2M (1.7M أصل + 0.3M فائدة)', dr:[{a:'قروض طويلة',t:'خصم',v:1700000},{a:'مصروف فوائد',t:'مصروف',v:300000}], cr:[{a:'البنك',t:'أصل',v:2000000}] },
+    { id:'t08', title:'استلام إيجار مقدم 6M (12 شهر)', dr:[{a:'النقد',t:'أصل',v:6000000}],   cr:[{a:'إيرادات مقبوضة مقدماً',t:'خصم',v:6000000}] },
+    { id:'t09', title:'الإهلاك الشهري 200k',          dr:[{a:'مصروف الإهلاك',t:'مصروف',v:200000}], cr:[{a:'مجمع الإهلاك',t:'أصل (مقابل)',v:200000}] },
+    { id:'t10', title:'توزيع أرباح 5M للملاك',        dr:[{a:'أرباح موزعة',t:'حقوق ملكية',v:5000000}], cr:[{a:'البنك',t:'أصل',v:5000000}] },
+    { id:'t11', title:'بيع 10M بالأجل (تكلفة 6M)',    dr:[{a:'مدينون',t:'أصل',v:10000000},{a:'تكلفة المبيعات',t:'مصروف',v:6000000}], cr:[{a:'مبيعات',t:'إيراد',v:10000000},{a:'مخزون',t:'أصل',v:6000000}] },
+    { id:'t12', title:'تسوية ضريبية شهرية 800k',      dr:[{a:'مصروف ضرائب',t:'مصروف',v:800000}], cr:[{a:'ضرائب مستحقة',t:'خصم',v:800000}] }
+  ];
+
+  function setupTAccount(){
+    var lab = document.querySelector('[data-acc-lab="taccount"]');
+    if (!lab) return;
+    var sel = lab.querySelector('[data-acc-tx-select]');
+    var grid = lab.querySelector('[data-acc-tx-grid]');
+    var current = lab.querySelector('[data-acc-tx-current] .acc-taccount-curr-text');
+    var clearBtn = lab.querySelector('[data-acc-tx-clear]');
+
+    sel.innerHTML = '<option value="">— اختر —</option>' +
+      T_TX.map(function(t){ return '<option value="'+t.id+'">'+t.title+'</option>'; }).join('');
+
+    var accounts = {}; // name -> {type, dr:[], cr:[]}
+
+    function ensure(name, type){
+      if (!accounts[name]) accounts[name] = { type: type, dr: [], cr: [] };
+      return accounts[name];
+    }
+
+    function render(){
+      grid.innerHTML = '';
+      var names = Object.keys(accounts);
+      if (!names.length) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;font-size:12px;color:var(--text-muted);padding:18px;">لا توجد قيود بعد. اختر معاملة من الأعلى.</div>';
+        return;
+      }
+      names.forEach(function(name){
+        var a = accounts[name];
+        var totalDr = a.dr.reduce(function(s,x){return s+x;},0);
+        var totalCr = a.cr.reduce(function(s,x){return s+x;},0);
+        var el = document.createElement('div');
+        el.className = 'acc-tacct';
+        el.innerHTML =
+          '<div class="acc-tacct-head"><span>'+name+'</span><span class="acc-tacct-type">'+a.type+'</span></div>'+
+          '<div class="acc-tacct-body">'+
+            '<div class="acc-tacct-side" data-side="dr"><h6>مدين Debit</h6><ul>'+
+              a.dr.map(function(v){return '<li>'+v.toLocaleString('en-US')+'</li>';}).join('') +
+              (totalDr ? '<li style="border-top:1px dashed rgba(255,255,255,0.10);margin-top:4px;font-weight:800;">∑ '+totalDr.toLocaleString('en-US')+'</li>' : '')+
+            '</ul></div>'+
+            '<div class="acc-tacct-side" data-side="cr"><h6>دائن Credit</h6><ul>'+
+              a.cr.map(function(v){return '<li>'+v.toLocaleString('en-US')+'</li>';}).join('') +
+              (totalCr ? '<li style="border-top:1px dashed rgba(255,255,255,0.10);margin-top:4px;font-weight:800;">∑ '+totalCr.toLocaleString('en-US')+'</li>' : '')+
+            '</ul></div>'+
+          '</div>';
+        grid.appendChild(el);
+      });
+    }
+
+    function apply(tx){
+      tx.dr.forEach(function(e){ ensure(e.a, e.t).dr.push(e.v); });
+      tx.cr.forEach(function(e){ ensure(e.a, e.t).cr.push(e.v); });
+      render();
+      // highlight active sides briefly
+      grid.querySelectorAll('.acc-tacct-side').forEach(function(s){ s.classList.remove('active'); });
+      tx.dr.concat(tx.cr).forEach(function(){});
+      var totalDr = tx.dr.reduce(function(s,x){return s+x.v;},0);
+      var totalCr = tx.cr.reduce(function(s,x){return s+x.v;},0);
+      var ok = totalDr === totalCr;
+      current.innerHTML = '<b>القيد:</b> ' + tx.title +
+        ' · مدين ' + totalDr.toLocaleString('en-US') +
+        ' / دائن ' + totalCr.toLocaleString('en-US') +
+        ' · <span style="color:'+(ok?'#34D399':'#F87171')+';font-weight:800;">'+(ok?'متوازن':'غير متوازن')+'</span>';
+    }
+
+    sel.addEventListener('change', function(){
+      var id = sel.value;
+      if (!id) return;
+      var tx = T_TX.find(function(t){ return t.id === id; });
+      if (tx) apply(tx);
+    });
+    clearBtn.addEventListener('click', function(){
+      accounts = {};
+      sel.value = '';
+      current.textContent = '— اختر معاملة لتظهر القيود —';
+      render();
+    });
+    render();
+  }
+
+  /* ── Block 3 · Cycle Ring ─────────────────────────────────────── */
+  var CYCLE = [
+    { n:1, t:'تحليل المعاملات', body:'فحص المستندات (فاتورة، إيصال، عقد) وتحديد الحسابات المتأثرة وطبيعة الأثر (مدين/دائن).',
+      out:'تصنيف معاملة قابل للقيد', tool:'كشف معاملات يومي', pitfall:'تجاهل المعاملات بلا مستند',
+      ex:'فاتورة شراء أثاث 5M IQD من مكتب الزهراء بالعرف الكاش — تُحلَّل كأصل + خفض نقد.' },
+    { n:2, t:'قيد اليومية', body:'تسجيل القيد في دفتر اليومية بصيغة (مدين / إلى دائن) مع شرح ورقم مستند ومرجع.',
+      out:'قيد يومية موثّق', tool:'دفتر اليومية', pitfall:'قيود بلا شرح أو بلا مرجع',
+      ex:'٢٠٢٤/٠٤/٠١ — من ح/ الأثاث 5,000,000 / إلى ح/ النقد 5,000,000 — شراء أثاث مكتبي.' },
+    { n:3, t:'الترحيل', body:'نقل القيود من دفتر اليومية إلى الحسابات في دفتر الأستاذ بالترتيب الزمني.',
+      out:'حسابات أستاذ محدّثة', tool:'دفتر الأستاذ + برنامج محاسبة', pitfall:'الترحيل لحساب خاطئ',
+      ex:'ترحيل 5M إلى الجانب المدين من حساب «الأثاث» وإلى الجانب الدائن من حساب «النقد».' },
+    { n:4, t:'ميزان المراجعة', body:'مجموع الجانب المدين لجميع الحسابات = مجموع الجانب الدائن. اختبار رياضي أولي.',
+      out:'ميزان غير معدّل متوازن', tool:'تقرير ميزان المراجعة', pitfall:'توازن ميزان لا يعني صحة كاملة',
+      ex:'في 31/3 المدين = 87,400,000 والدائن = 87,400,000 — فرق صفر.' },
+    { n:5, t:'التسويات الجردية', body:'قيود نهاية الفترة: استحقاق المصاريف، الإيرادات المقدمة، الإهلاك، المخصصات.',
+      out:'قيود تسوية', tool:'ورقة عمل + تقرير الإهلاك', pitfall:'نسيان الإهلاك أو الفوائد المستحقة',
+      ex:'إهلاك شهري 200k IQD لمعدات بقيمة 24M على 10 سنوات — من ح/ مصروف الإهلاك / إلى ح/ مجمع الإهلاك.' },
+    { n:6, t:'ميزان مراجعة معدّل', body:'بعد قيود التسوية: ميزان جديد يعكس الواقع المحاسبي الكامل للفترة.',
+      out:'ميزان معدّل صالح للقوائم', tool:'ورقة عمل 10 أعمدة', pitfall:'إعداد القوائم قبل التسوية',
+      ex:'الفرق عن الميزان غير المعدّل: إضافة 200k لمصروف الإهلاك و200k لمجمع الإهلاك.' },
+    { n:7, t:'إعداد القوائم المالية', body:'قائمة الدخل، الميزانية، التدفقات النقدية، التغير في حقوق الملكية.',
+      out:'قوائم مالية كاملة', tool:'IFRS / المعايير المحلية', pitfall:'خلط بنود تشغيلية بغير تشغيلية',
+      ex:'صافي ربح الفترة 7.8M IQD، إجمالي الأصول 95M، حقوق الملكية 58M.' },
+    { n:8, t:'القيود الختامية', body:'إقفال حسابات الإيرادات والمصاريف في حساب «ملخص الدخل» ثم إلى الأرباح المحتجزة.',
+      out:'حسابات مؤقتة بصفر', tool:'قيود إقفال', pitfall:'نسيان إقفال حساب توزيعات الأرباح',
+      ex:'من ح/ المبيعات 18M / إلى ح/ ملخص الدخل 18M — ثم تحويل صافي الربح 7.8M إلى الأرباح المحتجزة.' },
+    { n:9, t:'ميزان ما بعد الإقفال', body:'يحتوي فقط على الحسابات الدائمة (الميزانية). دليل على جاهزية فترة جديدة.',
+      out:'نقطة بداية للفترة الجديدة', tool:'تقرير ختامي', pitfall:'بقاء أرصدة في حسابات مؤقتة',
+      ex:'لا يظهر في الميزان أي حساب إيراد أو مصروف — فقط الأصول والخصوم وحقوق الملكية.' }
+  ];
+
+  function setupCycle(){
+    var lab = document.querySelector('[data-acc-lab="cycle"]');
+    if (!lab) return;
+    var ring = lab.querySelector('[data-acc-cycle-ring]');
+    var detail = lab.querySelector('[data-acc-cycle-detail]');
+    var tag = detail.querySelector('.acc-cycle-step-tag');
+    var title = detail.querySelector('.acc-cycle-step-title');
+    var body = detail.querySelector('.acc-cycle-step-body');
+    var outEl = detail.querySelector('[data-acc-cycle-output]');
+    var toolEl = detail.querySelector('[data-acc-cycle-tool]');
+    var pitEl = detail.querySelector('[data-acc-cycle-pitfall]');
+    var exWrap = detail.querySelector('[data-acc-cycle-example]');
+    var exP = exWrap.querySelector('p');
+    var progBar = lab.querySelector('[data-acc-cycle-progress]');
+    var progNum = lab.querySelector('[data-acc-cycle-progress-num]');
+
+    var visited = {};
+    try {
+      var raw = localStorage.getItem('upg_acc_cycle_visited');
+      if (raw) visited = JSON.parse(raw) || {};
+    } catch(_){}
+
+    var R = 138; // matches CSS svg circle r
+    var cx = 180, cy = 180;
+    CYCLE.forEach(function(step, i){
+      var angle = (i / CYCLE.length) * 2 * Math.PI - Math.PI / 2;
+      var x = cx + Math.cos(angle) * R;
+      var y = cy + Math.sin(angle) * R;
+      var pctX = (x / 360) * 100;
+      var pctY = (y / 360) * 100;
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'acc-cycle-step';
+      btn.style.insetInlineStart = pctX + '%';
+      btn.style.insetBlockStart = pctY + '%';
+      btn.dataset.step = String(step.n);
+      btn.innerHTML = step.n + '<span>'+step.t.split(' ')[0]+'</span>';
+      btn.setAttribute('aria-label', 'الخطوة '+step.n+': '+step.t);
+      if (visited[step.n]) btn.classList.add('visited');
+      btn.addEventListener('click', function(){ activate(step.n); });
+      ring.appendChild(btn);
+    });
+
+    function updateProgress(){
+      var count = Object.keys(visited).length;
+      if (progBar) progBar.style.width = ((count/9)*100) + '%';
+      if (progNum) progNum.textContent = count;
+    }
+
+    function activate(n){
+      var step = CYCLE.find(function(s){ return s.n === n; });
+      if (!step) return;
+      ring.querySelectorAll('.acc-cycle-step').forEach(function(b){ b.classList.remove('active'); });
+      var btn = ring.querySelector('[data-step="'+n+'"]');
+      if (btn) { btn.classList.add('active'); btn.classList.add('visited'); }
+      tag.textContent = 'الخطوة ' + n;
+      title.textContent = step.t;
+      body.textContent = step.body;
+      outEl.textContent = step.out;
+      toolEl.textContent = step.tool;
+      pitEl.textContent = step.pitfall;
+      exP.textContent = step.ex;
+      visited[n] = true;
+      try { localStorage.setItem('upg_acc_cycle_visited', JSON.stringify(visited)); } catch(_){}
+      updateProgress();
+    }
+
+    activate(1);
+  }
+
+  ready(function(){
+    try { setupEquation(); } catch(e) { console.warn('eq lab error', e); }
+    try { setupTAccount(); } catch(e) { console.warn('t-account lab error', e); }
+    try { setupCycle();    } catch(e) { console.warn('cycle lab error', e); }
+  });
+})();
+
+
+
+/* ════════════════════════════════════════════════════════════════
+   WORKER 04 · PHASE 2 — Iraqi COA + IFRS + 10 Ratios
+═══════════════════════════════════════════════════════════════ */
+(function(){
+  'use strict';
+  if (window.__UPG_ACC_PHASE2__) return;
+  window.__UPG_ACC_PHASE2__ = true;
+
+  function ready(fn){
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn, { once: true });
+    } else { fn(); }
+  }
+
+  /* ── Block 4 · Iraqi Unified Chart of Accounts ───────────────── */
+  var COA = [
+    { num:'1xxx', name:'الأصول', en:'Assets', type:'مدين',
+      accts: [
+        {n:'1101', ar:'صندوق النقدية', en:'Cash on Hand', ex:'النقد في خزنة المؤسسة بالدينار العراقي/الدولار.'},
+        {n:'1102', ar:'حسابات بنكية جارية', en:'Bank Current Accounts', ex:'مصرف الرافدين، الرشيد، البنك الأهلي العراقي.'},
+        {n:'1201', ar:'مدينون تجاريون', en:'Trade Receivables', ex:'مبيعات بالأجل لزبائن الجملة.'},
+        {n:'1202', ar:'أوراق قبض', en:'Notes Receivable', ex:'كمبيالات مستحقة لصالح المؤسسة.'},
+        {n:'1301', ar:'مخزون البضاعة', en:'Inventory — Goods', ex:'بضاعة الصنف المباع — تُقيَّم بـ FIFO أو متوسط مرجَّح.'},
+        {n:'1302', ar:'مخزون مواد خام', en:'Inventory — Raw Materials', ex:'مواد للتصنيع داخل المعمل.'},
+        {n:'1401', ar:'الأراضي', en:'Land', ex:'لا تُهلَك. تُسجَّل بسعر الكلفة + رسوم التسجيل.'},
+        {n:'1402', ar:'المباني', en:'Buildings', ex:'تُهلَك على 25-50 سنة حسب نوع البناء.'},
+        {n:'1403', ar:'الآلات والمعدات', en:'Machinery & Equipment', ex:'تُهلَك على 5-15 سنة.'},
+        {n:'1404', ar:'مجمع الإهلاك (مقابل)', en:'Accumulated Depreciation', ex:'حساب أصل مقابل — يُطرح من قيمة الأصل الدفترية.'}
+      ]},
+    { num:'2xxx', name:'الخصوم', en:'Liabilities', type:'دائن',
+      accts: [
+        {n:'2101', ar:'دائنون تجاريون', en:'Trade Payables', ex:'موردون لم تُسدَّد فواتيرهم بعد.'},
+        {n:'2102', ar:'أوراق دفع', en:'Notes Payable', ex:'كمبيالات صادرة للموردين.'},
+        {n:'2103', ar:'مصاريف مستحقة', en:'Accrued Expenses', ex:'رواتب آخر الشهر، إيجارات، فوائد.'},
+        {n:'2201', ar:'ضريبة الدخل المستحقة', en:'Income Tax Payable', ex:'الضريبة الموقوفة عن الموظفين + ضريبة الشركة.'},
+        {n:'2202', ar:'الضمان الاجتماعي', en:'Social Security Payable', ex:'5% من راتب الموظف + 12% من المؤسسة (الإجمالي 17%).'},
+        {n:'2301', ar:'قروض قصيرة الأجل', en:'Short-term Loans', ex:'تسهيلات بنكية ≤ 12 شهراً.'},
+        {n:'2401', ar:'قروض طويلة الأجل', en:'Long-term Loans', ex:'قروض الاستثمار من المصارف الحكومية أو الخاصة.'}
+      ]},
+    { num:'3xxx', name:'حقوق الملكية', en:'Equity', type:'دائن',
+      accts: [
+        {n:'3101', ar:'رأس المال', en:'Capital / Share Capital', ex:'الحد الأدنى 100 مليون IQD لشركة محدودة المسؤولية.'},
+        {n:'3102', ar:'احتياطي قانوني', en:'Legal Reserve', ex:'5% من صافي الربح حتى يبلغ 25% من رأس المال.'},
+        {n:'3103', ar:'أرباح محتجزة', en:'Retained Earnings', ex:'تراكم صافي الأرباح بعد توزيعات الملاك.'},
+        {n:'3104', ar:'سحوبات الملاك (مقابل)', en:'Owner Drawings', ex:'تُطرح من حقوق الملكية في نهاية السنة.'}
+      ]},
+    { num:'4xxx', name:'الإيرادات', en:'Revenues', type:'دائن',
+      accts: [
+        {n:'4101', ar:'مبيعات', en:'Sales Revenue', ex:'الإيراد التشغيلي الرئيسي للمؤسسة.'},
+        {n:'4102', ar:'مردودات المبيعات (مقابل)', en:'Sales Returns', ex:'تُطرح من إجمالي المبيعات.'},
+        {n:'4103', ar:'خصم مسموح به (مقابل)', en:'Sales Discounts', ex:'خصومات تعجيل دفع — تُطرح من المبيعات.'},
+        {n:'4201', ar:'إيرادات خدمات', en:'Service Revenue', ex:'لشركات الخدمات: استشارات، صيانة، تدريب.'},
+        {n:'4301', ar:'إيرادات أخرى', en:'Other Revenue', ex:'فوائد دائنة، إيجارات، أرباح بيع أصل ثابت.'}
+      ]},
+    { num:'5xxx', name:'المصاريف', en:'Expenses', type:'مدين',
+      accts: [
+        {n:'5101', ar:'تكلفة المبيعات', en:'Cost of Goods Sold', ex:'المخزون المُباع بسعر التكلفة.'},
+        {n:'5201', ar:'مصروف الرواتب', en:'Salaries Expense', ex:'يشمل البدلات والحوافز قبل الإقتطاعات.'},
+        {n:'5202', ar:'الضمان الاجتماعي (حصة المؤسسة)', en:'Employer Social Security', ex:'12% من الرواتب على عاتق المؤسسة.'},
+        {n:'5301', ar:'إيجارات', en:'Rent Expense', ex:'إيجار المقر + الفروع.'},
+        {n:'5302', ar:'مصاريف خدمات', en:'Utilities (Power/Water/Net)', ex:'كهرباء، ماء، إنترنت (Earthlink/Asiacell).'},
+        {n:'5303', ar:'وقود ومحروقات', en:'Fuel', ex:'تكلفة المولدات الكهربائية اليومية في العراق.'},
+        {n:'5401', ar:'إهلاك الأصول الثابتة', en:'Depreciation Expense', ex:'الإهلاك الشهري لكل الأصول الثابتة.'},
+        {n:'5501', ar:'مصروف الفوائد', en:'Interest Expense', ex:'فوائد القروض البنكية.'},
+        {n:'5601', ar:'مصاريف عمومية', en:'General & Admin', ex:'قرطاسية، استشارات قانونية، تأمين.'},
+        {n:'5701', ar:'مصاريف تسويق', en:'Marketing & Advertising', ex:'إعلانات Asiacell ads, لوحات، Facebook/Instagram.'}
+      ]}
+  ];
+
+  function setupCOA(){
+    var lab = document.querySelector('[data-acc-lab="coa"]');
+    if (!lab) return;
+    var stack = lab.querySelector('[data-acc-coa-stack]');
+    var palette = { '1xxx':'#34D399', '2xxx':'#F59E0B', '3xxx':'#C4B5FD', '4xxx':'#60A5FA', '5xxx':'#F87171' };
+
+    COA.forEach(function(g, i){
+      var el = document.createElement('div');
+      el.className = 'acc-coa-group';
+      if (i === 0) el.classList.add('open');
+      var color = palette[g.num] || '#66FCF1';
+      el.innerHTML =
+        '<div class="acc-coa-group-head">'+
+          '<span class="acc-coa-group-num" style="color:'+color+';background:'+color+'1A;border-color:'+color+'40">'+g.num+'</span>'+
+          '<span class="acc-coa-group-name">'+g.name+'</span>'+
+          '<span class="acc-coa-group-type">'+g.en+' · '+g.type+'</span>'+
+          '<svg class="acc-coa-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>'+
+        '</div>'+
+        '<div class="acc-coa-group-body"><ul class="acc-coa-acct-list">'+
+          g.accts.map(function(a){
+            return '<li class="acc-coa-acct">'+
+              '<div class="acc-coa-acct-head">'+
+                '<span class="acc-coa-acct-num">'+a.n+'</span>'+
+                '<span class="acc-coa-acct-name">'+a.ar+'</span>'+
+                '<span class="acc-coa-acct-en">'+a.en+'</span>'+
+              '</div>'+
+              '<div class="acc-coa-acct-ex">'+a.ex+'</div>'+
+            '</li>';
+          }).join('') +
+        '</ul></div>';
+      el.querySelector('.acc-coa-group-head').addEventListener('click', function(){
+        el.classList.toggle('open');
+      });
+      stack.appendChild(el);
+    });
+  }
+
+  /* ── Block 6 · 10 Financial Ratios ──────────────────────────── */
+  var RATIOS = [
+    { cat:'liq',  catLabel:'سيولة', name:'النسبة الجارية', en:'Current Ratio',
+      formula:'الأصول المتداولة ÷ الخصوم المتداولة',
+      measure:'قدرة المؤسسة على سداد التزاماتها قصيرة الأجل من أصولها المتداولة.',
+      ideal:'1.5 — 3.0 (أعلى من 3 = نقد عاطل، أقل من 1 = خطر سيولة)',
+      ex:'مؤسسة عراقية: أصول متداولة 240M، خصوم متداولة 120M → النسبة 2.0 ✅' },
+    { cat:'liq',  catLabel:'سيولة', name:'النسبة السريعة (Quick)', en:'Acid-Test Ratio',
+      formula:'(الأصول المتداولة − المخزون) ÷ الخصوم المتداولة',
+      measure:'سيولة فورية بدون الاعتماد على بيع المخزون.',
+      ideal:'≥ 1.0 (أقل = الاعتماد الكبير على المخزون)',
+      ex:'متجر: 240M − 90M مخزون = 150M، الخصوم 120M → 1.25 ✅' },
+    { cat:'lev',  catLabel:'رفع', name:'نسبة الديون لحقوق الملكية', en:'Debt-to-Equity',
+      formula:'إجمالي الخصوم ÷ حقوق الملكية',
+      measure:'مدى تمويل المؤسسة بالديون مقارنة بالملكية.',
+      ideal:'≤ 1.0 لمعظم القطاعات (المصارف يصلون 8-10)',
+      ex:'شركة إنشاءات: ديون 80M، حقوق 100M → 0.8 ✅' },
+    { cat:'lev',  catLabel:'رفع', name:'تغطية الفوائد', en:'Interest Coverage',
+      formula:'الربح قبل الفوائد والضريبة ÷ مصروف الفوائد',
+      measure:'كم مرة يغطي الربح التشغيلي مصروف الفوائد.',
+      ideal:'≥ 3.0 (أقل = خطر تعثر)',
+      ex:'EBIT = 18M، فوائد = 4M → 4.5x ✅' },
+    { cat:'prof', catLabel:'ربحية', name:'هامش الربح الإجمالي', en:'Gross Margin %',
+      formula:'(المبيعات − تكلفة المبيعات) ÷ المبيعات × 100',
+      measure:'كفاءة الإنتاج/الشراء قبل المصاريف الأخرى.',
+      ideal:'يختلف بالقطاع: تجزئة 25-40%، خدمات 40-70%',
+      ex:'متجر: مبيعات 200M، تكلفة 130M → 35% ✅ للتجزئة' },
+    { cat:'prof', catLabel:'ربحية', name:'هامش صافي الربح', en:'Net Margin %',
+      formula:'صافي الربح ÷ المبيعات × 100',
+      measure:'الربح بعد كل المصاريف والضرائب لكل دينار مبيعات.',
+      ideal:'5-10% للتجزئة، 10-25% للخدمات',
+      ex:'مطعم: مبيعات 600M، صافي ربح 54M → 9% ✅' },
+    { cat:'prof', catLabel:'ربحية', name:'العائد على الأصول', en:'ROA',
+      formula:'صافي الربح ÷ متوسط إجمالي الأصول × 100',
+      measure:'كفاءة استخدام الأصول لتوليد الأرباح.',
+      ideal:'≥ 5% (أعلى = استخدام أكفأ)',
+      ex:'مصنع: ربح 30M، أصول 400M → 7.5% ✅' },
+    { cat:'prof', catLabel:'ربحية', name:'العائد على حقوق الملكية', en:'ROE',
+      formula:'صافي الربح ÷ متوسط حقوق الملكية × 100',
+      measure:'العائد لكل دينار يستثمره الملاك.',
+      ideal:'≥ 12% (السوق العراقي 8-20%)',
+      ex:'شركة اتصالات: ربح 80M، حقوق 500M → 16% ✅' },
+    { cat:'eff',  catLabel:'كفاءة', name:'دوران المخزون', en:'Inventory Turnover',
+      formula:'تكلفة المبيعات ÷ متوسط المخزون',
+      measure:'سرعة بيع وتجديد المخزون.',
+      ideal:'4-12 سنوياً للتجزئة، 8-20 للأغذية',
+      ex:'سوبرماركت: تكلفة 480M، مخزون 60M → 8x ✅' },
+    { cat:'eff',  catLabel:'كفاءة', name:'فترة تحصيل المدينين', en:'DSO',
+      formula:'(المدينون ÷ المبيعات الآجلة) × 365',
+      measure:'متوسط أيام تحصيل الفواتير.',
+      ideal:'≤ 45 يوم للتجزئة، 30-60 للجملة',
+      ex:'جملة: مدينون 60M، مبيعات آجلة 600M → 36.5 يوم ✅' }
+  ];
+
+  function setupRatios(){
+    var lab = document.querySelector('[data-acc-lab="ratios"]');
+    if (!lab) return;
+    var grid = lab.querySelector('[data-acc-ratios-grid]');
+    var pills = lab.querySelectorAll('[data-ratio-cat]');
+
+    RATIOS.forEach(function(r){
+      var card = document.createElement('article');
+      card.className = 'acc-ratio-card';
+      card.dataset.ratioCat = r.cat;
+      card.innerHTML =
+        '<span class="acc-ratio-cat '+r.cat+'">'+r.catLabel+'</span>'+
+        '<div class="acc-ratio-name">'+r.name+'<span>'+r.en+'</span></div>'+
+        '<div class="acc-ratio-formula">'+r.formula+'</div>'+
+        '<div class="acc-ratio-row"><span>تقيس</span><div>'+r.measure+'</div></div>'+
+        '<div class="acc-ratio-row"><span>النطاق المثالي</span><div>'+r.ideal+'</div></div>'+
+        '<div class="acc-ratio-ex"><b>مثال:</b> '+r.ex+'</div>';
+      grid.appendChild(card);
+    });
+
+    pills.forEach(function(p){
+      p.addEventListener('click', function(){
+        pills.forEach(function(x){ x.classList.remove('active'); });
+        p.classList.add('active');
+        var cat = p.dataset.ratioCat;
+        grid.querySelectorAll('.acc-ratio-card').forEach(function(c){
+          if (cat === 'all' || c.dataset.ratioCat === cat) c.classList.remove('hide');
+          else c.classList.add('hide');
+        });
+      });
+    });
+  }
+
+  ready(function(){
+    try { setupCOA();    } catch(e) { console.warn('coa lab error', e); }
+    try { setupRatios(); } catch(e) { console.warn('ratios lab error', e); }
+  });
+})();
+
+
+
+/* ════════════════════════════════════════════════════════════════
+   WORKER 04 · PHASE 3 — Iraqi Tax Calculator + Salary Slip
+═══════════════════════════════════════════════════════════════ */
+(function(){
+  'use strict';
+  if (window.__UPG_ACC_PHASE3__) return;
+  window.__UPG_ACC_PHASE3__ = true;
+
+  function ready(fn){
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn, { once: true });
+    } else { fn(); }
+  }
+
+  /**
+   * Iraqi Income Tax (Monthly, marginal brackets):
+   *   ≤ 250,000          → 0%
+   *   250,001 – 500,000  → 3% on excess
+   *   500,001 – 1,000,000 → 5% on excess
+   *   > 1,000,000        → 15% on excess
+   *
+   * Personal allowance (annual ÷ 12 monthly):
+   *   single: 2,500,000/yr → ~208,333/mo
+   *   married: 4,500,000/yr → 375,000/mo
+   *   per child ≤18: 200,000/yr → 16,666/mo
+   *
+   * Social security (private sector):
+   *   Employee 5%, Employer 12%
+   */
+  function calcTax(taxableMonthly){
+    var brackets = [
+      { from: 0,        to: 250000,    rate: 0.00 },
+      { from: 250000,   to: 500000,    rate: 0.03 },
+      { from: 500000,   to: 1000000,   rate: 0.05 },
+      { from: 1000000,  to: Infinity,  rate: 0.15 }
+    ];
+    var tax = 0, breakdown = [];
+    for (var i = 0; i < brackets.length; i++){
+      var b = brackets[i];
+      if (taxableMonthly <= b.from) break;
+      var slice = Math.min(taxableMonthly, b.to) - b.from;
+      var amt = slice * b.rate;
+      tax += amt;
+      if (slice > 0) {
+        breakdown.push({
+          range: b.from.toLocaleString('en-US') + ' – ' + (b.to === Infinity ? '∞' : b.to.toLocaleString('en-US')),
+          rate: (b.rate * 100).toFixed(0) + '%',
+          slice: Math.round(slice),
+          tax: Math.round(amt)
+        });
+      }
+    }
+    return { tax: Math.round(tax), breakdown: breakdown };
+  }
+
+  function setupTaxCalc(){
+    var lab = document.querySelector('[data-acc-lab="tax-calc"]');
+    if (!lab) return;
+    var grossIn  = lab.querySelector('[data-acc-tax="gross"]');
+    var statusIn = lab.querySelector('[data-acc-tax="status"]');
+    var kidsIn   = lab.querySelector('[data-acc-tax="children"]');
+    var allowIn  = lab.querySelector('[data-acc-tax="allowances"]');
+    var otherIn  = lab.querySelector('[data-acc-tax="otherded"]');
+    var calcBtn  = lab.querySelector('[data-acc-tax-calc]');
+    var printBtn = lab.querySelector('[data-acc-tax-print]');
+
+    var rows = {};
+    lab.querySelectorAll('[data-acc-tax-row]').forEach(function(el){
+      rows[el.dataset.accTaxRow] = el;
+    });
+    var emp = {};
+    lab.querySelectorAll('[data-acc-tax-emp-row]').forEach(function(el){
+      emp[el.dataset.accTaxEmpRow] = el;
+    });
+    var metaMonth = lab.querySelector('[data-acc-tax-meta-month]');
+    var metaStatus = lab.querySelector('[data-acc-tax-meta-status]');
+    var bdWrap = lab.querySelector('[data-acc-tax-breakdown] ul');
+
+    function fmt(n){ return Math.round(n).toLocaleString('en-US') + ' د.ع'; }
+
+    function compute(){
+      var gross = Math.max(0, Number(grossIn.value) || 0);
+      var allow = Math.max(0, Number(allowIn.value) || 0);
+      var other = Math.max(0, Number(otherIn.value) || 0);
+      var status = statusIn.value;
+      var kids = Math.max(0, Math.min(10, Number(kidsIn.value) || 0));
+
+      var totalIncome = gross + allow;
+      // Personal allowance per month (annual / 12)
+      var baseAllow = (status === 'married' ? 4500000 : 2500000) / 12;
+      var kidAllow  = (kids * 200000) / 12;
+      var monthlyAllow = baseAllow + kidAllow;
+
+      var taxable = Math.max(0, totalIncome - monthlyAllow);
+      var taxRes = calcTax(taxable);
+      var tax = taxRes.tax;
+      var social = totalIncome * 0.05;
+      var totalDed = tax + social + other;
+      var net = totalIncome - totalDed;
+      var empSocial = totalIncome * 0.12;
+      var empCost = totalIncome + empSocial;
+
+      rows.gross.textContent = fmt(gross);
+      rows.allowances.textContent = fmt(allow);
+      rows.total.textContent = fmt(totalIncome);
+      rows.tax.textContent = '− ' + fmt(tax);
+      rows.social.textContent = '− ' + fmt(social);
+      rows.otherded.textContent = '− ' + fmt(other);
+      rows.totalded.textContent = '− ' + fmt(totalDed);
+      rows.net.textContent = fmt(net);
+
+      emp.total.textContent = fmt(totalIncome);
+      emp.empsocial.textContent = '+ ' + fmt(empSocial);
+      emp.empcost.textContent = fmt(empCost);
+
+      var statusText = (status === 'married' ? 'متزوج' : 'أعزب') + ' · ' + kids + ' أطفال';
+      metaStatus.textContent = statusText;
+      var d = new Date();
+      var months = ['كانون الثاني','شباط','آذار','نيسان','أيار','حزيران','تموز','آب','أيلول','تشرين الأول','تشرين الثاني','كانون الأول'];
+      metaMonth.textContent = 'شهر ' + months[d.getMonth()] + ' ' + d.getFullYear();
+
+      bdWrap.innerHTML = '';
+      bdWrap.innerHTML +=
+        '<li><b>الدخل الإجمالي:</b> ' + fmt(totalIncome) + '</li>' +
+        '<li><b>إعفاء شخصي شهري:</b> − ' + fmt(monthlyAllow) +
+          ' <i style="color:var(--text-muted)">(أساسي ' + fmt(baseAllow) +
+          (kids ? ' + أولاد ' + fmt(kidAllow) : '') + ')</i></li>' +
+        '<li><b>الدخل الخاضع للضريبة:</b> ' + fmt(taxable) + '</li>';
+      taxRes.breakdown.forEach(function(b){
+        bdWrap.innerHTML +=
+          '<li>شريحة ' + b.range + ' × ' + b.rate +
+          ' على <b>' + fmt(b.slice) + '</b> = <b style="color:#F87171">' + fmt(b.tax) + '</b></li>';
+      });
+      bdWrap.innerHTML += '<li><b>إجمالي الضريبة الشهرية:</b> ' + fmt(tax) + '</li>';
+
+      try {
+        localStorage.setItem('upg_tax_drafts', JSON.stringify({
+          gross: gross, status: status, children: kids, allow: allow, other: other, ts: Date.now()
+        }));
+      } catch(_){}
+    }
+
+    [grossIn, statusIn, kidsIn, allowIn, otherIn].forEach(function(el){
+      el.addEventListener('input', compute);
+      el.addEventListener('change', compute);
+    });
+    calcBtn.addEventListener('click', compute);
+    printBtn.addEventListener('click', function(){
+      compute();
+      window.print();
+    });
+
+    // Restore last draft
+    try {
+      var raw = localStorage.getItem('upg_tax_drafts');
+      if (raw) {
+        var d = JSON.parse(raw);
+        if (d && typeof d === 'object') {
+          if (typeof d.gross === 'number') grossIn.value = d.gross;
+          if (d.status) statusIn.value = d.status;
+          if (typeof d.children === 'number') kidsIn.value = d.children;
+          if (typeof d.allow === 'number') allowIn.value = d.allow;
+          if (typeof d.other === 'number') otherIn.value = d.other;
+        }
+      }
+    } catch(_){}
+
+    compute();
+  }
+
+  ready(function(){
+    try { setupTaxCalc(); } catch(e) { console.warn('tax calc lab error', e); }
+  });
+})();
+
+
+
+/* ════════════════════════════════════════════════════════════════
+   WORKER 04 · PHASE 4 — Income Statement + Balance Sheet Builders
+═══════════════════════════════════════════════════════════════ */
+(function(){
+  'use strict';
+  if (window.__UPG_ACC_PHASE4__) return;
+  window.__UPG_ACC_PHASE4__ = true;
+
+  function ready(fn){
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn, { once: true });
+    } else { fn(); }
+  }
+
+  function fmt(n){
+    var x = Math.round(Number(n) || 0);
+    var sign = x < 0 ? '−' : '';
+    return sign + Math.abs(x).toLocaleString('en-US');
+  }
+  function getN(input){ return Math.max(0, Number(input.value) || 0); }
+
+  /* ── Block 9 · Income Statement Builder ─────────────────────── */
+  function setupIS(){
+    var lab = document.querySelector('[data-acc-lab="income-stmt"]');
+    if (!lab) return;
+    var ins = {};
+    lab.querySelectorAll('[data-is]').forEach(function(el){ ins[el.dataset.is] = el; });
+    var outs = {};
+    lab.querySelectorAll('[data-is-out]').forEach(function(el){ outs[el.dataset.isOut] = el; });
+    var warnWrap = lab.querySelector('[data-acc-is-warn]');
+
+    function compute(){
+      var sales = getN(ins.sales);
+      var returns = getN(ins.returns);
+      var cogs = getN(ins.cogs);
+      var opex = getN(ins.opSalaries) + getN(ins.opRent) + getN(ins.opMkt) + getN(ins.opDep) + getN(ins.opOther);
+      var otherInc = getN(ins.otherInc);
+      var interest = getN(ins.interest);
+      var taxRate = Math.max(0, Math.min(100, Number(ins.taxRate.value) || 0)) / 100;
+
+      var netSales = sales - returns;
+      var gp = netSales - cogs;
+      var op = gp - opex;
+      var ebt = op + otherInc - interest;
+      var tax = ebt > 0 ? ebt * taxRate : 0;
+      var net = ebt - tax;
+
+      outs.sales.textContent     = fmt(sales);
+      outs.returns.textContent   = '(' + fmt(returns) + ')';
+      outs.netSales.textContent  = fmt(netSales);
+      outs.cogs.textContent      = '(' + fmt(cogs) + ')';
+      outs.gp.textContent        = fmt(gp);
+      outs.opex.textContent      = '(' + fmt(opex) + ')';
+      outs.op.textContent        = fmt(op);
+      outs.otherInc.textContent  = fmt(otherInc);
+      outs.interest.textContent  = '(' + fmt(interest) + ')';
+      outs.ebt.textContent       = fmt(ebt);
+      outs.tax.textContent       = '(' + fmt(tax) + ')';
+      outs.net.textContent       = fmt(net);
+
+      var pct = function(num){
+        if (netSales <= 0) return '—';
+        return ((num / netSales) * 100).toFixed(1) + '%';
+      };
+      outs.gpPct.textContent  = pct(gp);
+      outs.opPct.textContent  = pct(op);
+      outs.netPct.textContent = pct(net);
+
+      // negative styling
+      ['gp','op','net'].forEach(function(k){
+        var li = outs[k] && outs[k].closest('li');
+        if (!li) return;
+        var v = k === 'gp' ? gp : (k === 'op' ? op : net);
+        if (v < 0) li.classList.add('negative'); else li.classList.remove('negative');
+      });
+
+      // Warnings
+      var warns = [];
+      var gpPct = netSales > 0 ? gp / netSales : 0;
+      var opPct = netSales > 0 ? op / netSales : 0;
+      var netPct = netSales > 0 ? net / netSales : 0;
+      if (gpPct < 0.15) warns.push({lvl:'danger', t:'هامش الربح الإجمالي ضعيف (<15%) — راجع تكلفة الشراء أو الإنتاج.'});
+      else if (gpPct < 0.25) warns.push({lvl:'warn', t:'هامش الربح الإجمالي متوسط (15-25%) — مساحة لتحسين هامش التسعير.'});
+      else warns.push({lvl:'ok', t:'هامش الربح الإجمالي صحي (≥25%).'});
+
+      if (op < 0) warns.push({lvl:'danger', t:'الربح التشغيلي سالب — العمليات الأساسية تخسر، تحقق من المصاريف الإدارية.'});
+      else if (opPct < 0.05) warns.push({lvl:'warn', t:'الربح التشغيلي ضعيف (<5%) — العمليات بالكاد تغطي مصاريفها.'});
+
+      if (net < 0) warns.push({lvl:'danger', t:'صافي ربح سالب — الشركة في خسارة هذه الفترة.'});
+      else if (netPct < 0.03) warns.push({lvl:'warn', t:'صافي الربح هامشي (<3%) — هامش أمان منخفض ضد الصدمات.'});
+      else if (netPct >= 0.10) warns.push({lvl:'ok', t:'صافي ربح ممتاز (≥10%).'});
+
+      if (interest > 0 && op > 0 && (op / interest) < 3) {
+        warns.push({lvl:'warn', t:'تغطية الفوائد <3x — المخاطر المالية مرتفعة.'});
+      }
+
+      warnWrap.innerHTML = warns.map(function(w){
+        var icon = w.lvl === 'danger' ? '⛔' : w.lvl === 'warn' ? '⚠️' : '✅';
+        return '<div class="acc-is-warn '+w.lvl+'"><span>'+icon+'</span><span>'+w.t+'</span></div>';
+      }).join('');
+
+      try {
+        var draft = {};
+        Object.keys(ins).forEach(function(k){ draft[k] = ins[k].value; });
+        localStorage.setItem('upg_statements_drafts', JSON.stringify(Object.assign(JSON.parse(localStorage.getItem('upg_statements_drafts')||'{}'), { is: draft })));
+      } catch(_){}
+    }
+
+    Object.keys(ins).forEach(function(k){
+      ins[k].addEventListener('input', compute);
+      ins[k].addEventListener('change', compute);
+    });
+
+    // Restore
+    try {
+      var draft = JSON.parse(localStorage.getItem('upg_statements_drafts')||'{}');
+      if (draft && draft.is) {
+        Object.keys(draft.is).forEach(function(k){
+          if (ins[k] && draft.is[k] !== '') ins[k].value = draft.is[k];
+        });
+      }
+    } catch(_){}
+
+    compute();
+  }
+
+  /* ── Block 10 · Balance Sheet Builder ───────────────────────── */
+  function setupBS(){
+    var lab = document.querySelector('[data-acc-lab="balance-sheet"]');
+    if (!lab) return;
+    var ins = {};
+    lab.querySelectorAll('[data-bs]').forEach(function(el){ ins[el.dataset.bs] = el; });
+    var outs = {};
+    lab.querySelectorAll('[data-bs-out]').forEach(function(el){ outs[el.dataset.bsOut] = el; });
+    var flag = lab.querySelector('[data-acc-bs-flag]');
+    var eqEl = lab.querySelector('[data-acc-bs-eq]');
+    var flagText = flag.querySelector('.acc-bs-flag-text');
+    var flagDiff = flag.querySelector('.acc-bs-flag-diff b');
+
+    function compute(){
+      var ca = getN(ins.cash) + getN(ins.ar) + getN(ins.inv) + getN(ins.otherCa);
+      var fa = getN(ins.land) + getN(ins.ppe) + getN(ins.intang);
+      var totalAssets = ca + fa;
+
+      var cl = getN(ins.ap) + getN(ins.stl) + getN(ins.taxDue);
+      var ll = getN(ins.ltl) + getN(ins.otherLtl);
+      var eq = getN(ins.capital) + getN(ins.retained) + getN(ins.reserves);
+      var totalLE = cl + ll + eq;
+
+      outs.ca.textContent = fmt(ca);
+      outs.fa.textContent = fmt(fa);
+      outs.totalAssets.textContent = fmt(totalAssets);
+      outs.cl.textContent = fmt(cl);
+      outs.ll.textContent = fmt(ll);
+      outs.eq.textContent = fmt(eq);
+      outs.totalLE.textContent = fmt(totalLE);
+
+      var diff = totalAssets - totalLE;
+      var ok = Math.abs(diff) < 0.5;
+      flag.dataset.balance = ok ? 'ok' : 'off';
+      eqEl.dataset.balance = ok ? 'ok' : 'off';
+      eqEl.textContent = ok ? '=' : '≠';
+      flagText.textContent = ok ? 'المعادلة متوازنة · Assets = Liabilities + Equity' : 'المعادلة غير متوازنة — راجع القيود';
+      flagDiff.textContent = fmt(diff);
+
+      try {
+        var draft = {};
+        Object.keys(ins).forEach(function(k){ draft[k] = ins[k].value; });
+        localStorage.setItem('upg_statements_drafts', JSON.stringify(Object.assign(JSON.parse(localStorage.getItem('upg_statements_drafts')||'{}'), { bs: draft })));
+      } catch(_){}
+    }
+
+    Object.keys(ins).forEach(function(k){
+      ins[k].addEventListener('input', compute);
+      ins[k].addEventListener('change', compute);
+    });
+
+    try {
+      var draft = JSON.parse(localStorage.getItem('upg_statements_drafts')||'{}');
+      if (draft && draft.bs) {
+        Object.keys(draft.bs).forEach(function(k){
+          if (ins[k] && draft.bs[k] !== '') ins[k].value = draft.bs[k];
+        });
+      }
+    } catch(_){}
+
+    compute();
+  }
+
+  ready(function(){
+    try { setupIS(); } catch(e) { console.warn('IS lab error', e); }
+    try { setupBS(); } catch(e) { console.warn('BS lab error', e); }
+  });
+})();

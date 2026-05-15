@@ -7395,3 +7395,2109 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
   #page-callcenter .cc-cheat li { color: #000; }
   #page-callcenter .sim-shell, #page-callcenter .iraq-grid > div { background: #fff !important; border: 1px solid #999 !important; color: #000 !important; }
 }
+
+
+
+/* ════════════════════════════════════════════════════════════════
+   WORKER 04 · PHASE 1 — Accounting Foundations Visual Lab
+   Scope: #page-accounting .acc-foundations and descendants only.
+   All rules additive; uses --accent (#66FCF1) and existing surfaces.
+═══════════════════════════════════════════════════════════════ */
+
+#page-accounting .acc-foundations {
+  display: grid;
+  gap: 22px;
+  margin-block: 28px 18px;
+}
+#page-accounting .acc-section-head {
+  padding: 18px 22px 4px;
+}
+#page-accounting .acc-eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent, #66FCF1);
+  background: linear-gradient(135deg, rgba(102,252,241,0.12), rgba(139,92,246,0.10));
+  border: 1px solid rgba(102,252,241,0.28);
+  border-radius: 999px;
+  padding: 5px 12px;
+  margin-block-end: 10px;
+}
+#page-accounting .acc-section-head h2 {
+  margin: 0 0 6px;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+#page-accounting .acc-section-head p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--text-muted);
+  max-width: 760px;
+}
+
+/* ── Lab card shared ─────────────────────────────────────────── */
+#page-accounting [data-acc-lab] {
+  position: relative;
+  padding: 22px 24px 24px;
+  background: linear-gradient(160deg, rgba(255,255,255,0.025), rgba(102,252,241,0.025));
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 18px;
+  overflow: hidden;
+}
+#page-accounting [data-acc-lab]::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  inline-size: 4px;
+  block-size: 100%;
+  background: linear-gradient(180deg, var(--accent, #66FCF1), rgba(139,92,246,0.6));
+  opacity: 0.55;
+}
+#page-accounting .acc-lab-head { margin-block-end: 18px; }
+#page-accounting .acc-lab-tag {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent, #66FCF1);
+  background: rgba(102,252,241,0.10);
+  border: 1px solid rgba(102,252,241,0.24);
+  border-radius: 6px;
+  padding: 3px 9px;
+  margin-block-end: 8px;
+}
+#page-accounting .acc-lab-head h3 {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text);
+}
+#page-accounting .acc-lab-head p {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+/* ── Block 1 · Equation Visualizer ───────────────────────────── */
+#page-accounting .acc-eq-board {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  align-items: stretch;
+  gap: 10px;
+  margin-block: 14px;
+}
+#page-accounting .acc-eq-col {
+  position: relative;
+  padding: 14px 14px 12px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  min-block-size: 200px;
+  display: flex;
+  flex-direction: column;
+}
+#page-accounting .acc-eq-col[data-col="assets"]   { box-shadow: inset 0 -2px 0 rgba(102,252,241,0.45); }
+#page-accounting .acc-eq-col[data-col="liab"]     { box-shadow: inset 0 -2px 0 rgba(245,158,11,0.55); }
+#page-accounting .acc-eq-col[data-col="equity"]   { box-shadow: inset 0 -2px 0 rgba(139,92,246,0.55); }
+#page-accounting .acc-eq-col-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin-block-end: 10px;
+}
+#page-accounting .acc-eq-col-name {
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+#page-accounting .acc-eq-col-amt {
+  font-size: 17px;
+  font-weight: 900;
+  font-feature-settings: "tnum" 1;
+  color: var(--accent, #66FCF1);
+}
+#page-accounting .acc-eq-col[data-col="liab"]   .acc-eq-col-amt { color: #F59E0B; }
+#page-accounting .acc-eq-col[data-col="equity"] .acc-eq-col-amt { color: #C4B5FD; }
+#page-accounting .acc-eq-stack {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  max-block-size: 180px;
+  overflow-y: auto;
+}
+#page-accounting .acc-eq-stack li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 5px 8px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 6px;
+  font-feature-settings: "tnum" 1;
+  animation: accEqIn 320ms ease both;
+}
+@keyframes accEqIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+#page-accounting .acc-eq-stack li.neg { color: #F87171; }
+#page-accounting .acc-eq-stack li.pos { color: var(--text); }
+#page-accounting .acc-eq-eq {
+  align-self: center;
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--text-muted);
+  padding: 0 2px;
+}
+#page-accounting .acc-eq-balance {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 10px 16px;
+  background: rgba(0,0,0,0.28);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  margin-block: 8px 12px;
+  font-feature-settings: "tnum" 1;
+}
+#page-accounting .acc-eq-balance-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+#page-accounting .acc-eq-balance-val {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+}
+#page-accounting .acc-eq-balance-flag {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+#page-accounting .acc-eq-balance-flag[data-acc-eq-flag="ok"] {
+  background: rgba(16,185,129,0.18);
+  color: #34D399;
+  border: 1px solid rgba(16,185,129,0.38);
+}
+#page-accounting .acc-eq-balance-flag[data-acc-eq-flag="off"] {
+  background: rgba(239,68,68,0.18);
+  color: #F87171;
+  border: 1px solid rgba(239,68,68,0.38);
+}
+
+#page-accounting .acc-eq-controls {
+  margin-block: 10px;
+}
+#page-accounting .acc-eq-controls-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-weight: 700;
+  margin-block-end: 8px;
+}
+#page-accounting .acc-eq-reset {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+#page-accounting .acc-eq-reset:hover {
+  background: rgba(239,68,68,0.10);
+  border-color: rgba(239,68,68,0.4);
+  color: #F87171;
+}
+#page-accounting .acc-eq-tx-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 8px;
+}
+#page-accounting .acc-eq-tx-list li {
+  padding: 10px 12px;
+  background: rgba(0,0,0,0.20);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 180ms ease;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+#page-accounting .acc-eq-tx-list li:hover {
+  border-color: rgba(102,252,241,0.35);
+  background: rgba(102,252,241,0.04);
+  transform: translateY(-1px);
+}
+#page-accounting .acc-eq-tx-list li.applied {
+  border-color: rgba(16,185,129,0.45);
+  background: rgba(16,185,129,0.06);
+}
+#page-accounting .acc-eq-tx-list li .acc-eq-tx-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text);
+}
+#page-accounting .acc-eq-tx-list li .acc-eq-tx-effect {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-feature-settings: "tnum" 1;
+}
+#page-accounting .acc-eq-note {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.85;
+  padding: 10px 14px;
+  background: rgba(102,252,241,0.04);
+  border-inline-start: 3px solid var(--accent, #66FCF1);
+  border-radius: 0 8px 8px 0;
+}
+#page-accounting .acc-eq-note b { color: var(--text); }
+
+/* ── Block 2 · T-Account Visualizer ──────────────────────────── */
+#page-accounting .acc-taccount-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-block-end: 10px;
+}
+#page-accounting .acc-taccount-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+#page-accounting .acc-taccount-select {
+  flex: 1 1 280px;
+  background: rgba(0,0,0,0.30);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-size: 12.5px;
+  font-family: inherit;
+  cursor: pointer;
+}
+#page-accounting .acc-taccount-select:focus {
+  border-color: var(--accent, #66FCF1);
+  outline: none;
+}
+#page-accounting .acc-taccount-clear {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--text);
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+#page-accounting .acc-taccount-clear:hover {
+  border-color: rgba(239,68,68,0.4);
+  color: #F87171;
+}
+#page-accounting .acc-taccount-current {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(0,0,0,0.24);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  margin-block-end: 14px;
+  flex-wrap: wrap;
+}
+#page-accounting .acc-taccount-curr-tag {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--accent, #66FCF1);
+}
+#page-accounting .acc-taccount-curr-text {
+  font-size: 12.5px;
+  color: var(--text);
+  line-height: 1.7;
+  font-feature-settings: "tnum" 1;
+}
+#page-accounting .acc-taccount-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  min-block-size: 80px;
+}
+#page-accounting .acc-tacct {
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  overflow: hidden;
+  animation: accEqIn 320ms ease both;
+}
+#page-accounting .acc-tacct-head {
+  padding: 8px 12px;
+  background: rgba(102,252,241,0.06);
+  border-block-end: 1px solid rgba(255,255,255,0.06);
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text);
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+}
+#page-accounting .acc-tacct-head .acc-tacct-type {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+#page-accounting .acc-tacct-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: 11.5px;
+}
+#page-accounting .acc-tacct-side {
+  padding: 8px 10px;
+  min-block-size: 80px;
+  font-feature-settings: "tnum" 1;
+}
+#page-accounting .acc-tacct-side + .acc-tacct-side {
+  border-inline-start: 1px solid rgba(255,255,255,0.05);
+}
+#page-accounting .acc-tacct-side h6 {
+  margin: 0 0 6px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+#page-accounting .acc-tacct-side[data-side="dr"].active h6 { color: var(--accent, #66FCF1); }
+#page-accounting .acc-tacct-side[data-side="cr"].active h6 { color: #F59E0B; }
+#page-accounting .acc-tacct-side ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 3px;
+}
+#page-accounting .acc-tacct-side li {
+  padding: 3px 6px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.02);
+  color: var(--text);
+}
+#page-accounting .acc-tacct-side[data-side="dr"] li { color: var(--accent, #66FCF1); }
+#page-accounting .acc-tacct-side[data-side="cr"] li { color: #FBBF24; }
+#page-accounting .acc-taccount-rules {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  margin-block-start: 14px;
+}
+#page-accounting .acc-taccount-rule {
+  display: flex;
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 10px;
+  font-size: 11.5px;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+#page-accounting .acc-taccount-rule b { color: var(--text); }
+#page-accounting .acc-taccount-rule em {
+  color: var(--accent, #66FCF1);
+  font-style: normal;
+  font-weight: 700;
+}
+#page-accounting .acc-rule-icon {
+  flex-shrink: 0;
+  inline-size: 28px;
+  block-size: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(102,252,241,0.10);
+  color: var(--accent, #66FCF1);
+  font-weight: 800;
+}
+
+/* ── Block 3 · Cycle Ring ─────────────────────────────────────── */
+#page-accounting .acc-cycle-shell {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 22px;
+  align-items: start;
+  margin-block: 8px;
+}
+#page-accounting .acc-cycle-ring {
+  position: relative;
+  inline-size: 360px;
+  block-size: 360px;
+  margin: 0 auto;
+}
+#page-accounting .acc-cycle-svg {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  transform: rotate(-90deg);
+}
+#page-accounting .acc-cycle-track {
+  fill: none;
+  stroke: rgba(255,255,255,0.06);
+  stroke-width: 2;
+}
+#page-accounting .acc-cycle-dash {
+  fill: none;
+  stroke: var(--accent, #66FCF1);
+  stroke-width: 2.5;
+  stroke-dasharray: 6 10;
+  opacity: 0.55;
+  animation: accCycleDash 18s linear infinite;
+}
+@keyframes accCycleDash {
+  to { stroke-dashoffset: -200; }
+}
+#page-accounting .acc-cycle-step {
+  position: absolute;
+  inline-size: 64px;
+  block-size: 64px;
+  margin-block-start: -32px;
+  margin-inline-start: -32px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.50);
+  border: 1.5px solid rgba(255,255,255,0.10);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 220ms cubic-bezier(0.34,1.56,0.64,1);
+  font-family: inherit;
+}
+#page-accounting .acc-cycle-step span {
+  display: block;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-block-start: 1px;
+}
+#page-accounting .acc-cycle-step:hover {
+  border-color: rgba(102,252,241,0.55);
+  transform: scale(1.06);
+}
+#page-accounting .acc-cycle-step.active {
+  background: linear-gradient(135deg, var(--accent, #66FCF1), #818CF8);
+  color: #0B0F1C;
+  border-color: var(--accent, #66FCF1);
+  box-shadow: 0 0 0 4px rgba(102,252,241,0.18), 0 6px 20px rgba(102,252,241,0.25);
+}
+#page-accounting .acc-cycle-step.active span { color: rgba(11,15,28,0.7); }
+#page-accounting .acc-cycle-step.visited:not(.active) {
+  border-color: rgba(16,185,129,0.45);
+}
+
+#page-accounting .acc-cycle-detail {
+  padding: 18px 20px;
+  background: rgba(0,0,0,0.24);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  min-block-size: 360px;
+}
+#page-accounting .acc-cycle-step-tag {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--accent, #66FCF1);
+  background: rgba(102,252,241,0.08);
+  border: 1px solid rgba(102,252,241,0.22);
+  border-radius: 6px;
+  padding: 3px 9px;
+  margin-block-end: 8px;
+}
+#page-accounting .acc-cycle-step-title {
+  margin: 0 0 8px;
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--text);
+}
+#page-accounting .acc-cycle-step-body {
+  margin: 0 0 14px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.85;
+}
+#page-accounting .acc-cycle-step-meta {
+  list-style: none;
+  margin: 0 0 14px;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+#page-accounting .acc-cycle-step-meta li {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 10px;
+  padding: 7px 10px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 8px;
+  font-size: 12px;
+}
+#page-accounting .acc-cycle-step-meta li span {
+  color: var(--text-muted);
+  font-weight: 700;
+}
+#page-accounting .acc-cycle-step-meta li b {
+  color: var(--text);
+  font-weight: 700;
+}
+#page-accounting .acc-cycle-example {
+  padding: 12px 14px;
+  background: linear-gradient(135deg, rgba(245,158,11,0.06), rgba(102,252,241,0.04));
+  border: 1px solid rgba(245,158,11,0.18);
+  border-radius: 10px;
+}
+#page-accounting .acc-cycle-example-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: #F59E0B;
+  margin-block-end: 4px;
+}
+#page-accounting .acc-cycle-example p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text);
+  line-height: 1.8;
+  font-feature-settings: "tnum" 1;
+}
+#page-accounting .acc-cycle-progress {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-block-start: 12px;
+  padding: 10px 14px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+}
+#page-accounting .acc-cycle-progress-bar {
+  flex: 1 1 auto;
+  block-size: 6px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 999px;
+  overflow: hidden;
+}
+#page-accounting .acc-cycle-progress-bar span {
+  display: block;
+  block-size: 100%;
+  background: linear-gradient(90deg, var(--accent, #66FCF1), #818CF8);
+  border-radius: 999px;
+  transition: width 320ms ease;
+}
+#page-accounting .acc-cycle-progress-text {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+#page-accounting .acc-cycle-progress-text b { color: var(--text); }
+
+@media (max-width: 880px) {
+  #page-accounting .acc-eq-board {
+    grid-template-columns: 1fr;
+  }
+  #page-accounting .acc-eq-eq {
+    text-align: center;
+  }
+  #page-accounting .acc-cycle-shell {
+    grid-template-columns: 1fr;
+  }
+  #page-accounting .acc-cycle-ring {
+    inline-size: 300px;
+    block-size: 300px;
+  }
+  #page-accounting .acc-cycle-step {
+    inline-size: 54px;
+    block-size: 54px;
+    margin-block-start: -27px;
+    margin-inline-start: -27px;
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #page-accounting .acc-cycle-dash { animation: none; opacity: 0.35; }
+  #page-accounting .acc-eq-stack li { animation: none; }
+  #page-accounting .acc-tacct { animation: none; }
+}
+
+@media print {
+  #page-accounting .acc-foundations,
+  #page-accounting [data-acc-lab],
+  #page-accounting .acc-eq-col,
+  #page-accounting .acc-tacct,
+  #page-accounting .acc-cycle-detail {
+    background: #fff !important;
+    border: 1px solid #999 !important;
+    color: #000 !important;
+  }
+  #page-accounting .acc-eyebrow,
+  #page-accounting .acc-lab-tag,
+  #page-accounting .acc-cycle-step-tag,
+  #page-accounting .acc-cycle-example-tag {
+    color: #0f766e !important;
+    background: #fff !important;
+    border: 1px solid #0f766e !important;
+  }
+  #page-accounting .acc-cycle-step.active {
+    background: #0f766e !important;
+    color: #fff !important;
+  }
+}
+
+
+
+/* ════════════════════════════════════════════════════════════════
+   WORKER 04 · PHASE 2 — Iraqi COA + IFRS vs Local + Ratios
+═══════════════════════════════════════════════════════════════ */
+
+#page-accounting .acc-standards {
+  display: grid;
+  gap: 22px;
+  margin-block: 22px 18px;
+}
+
+/* ── Block 4 · COA accordion ─────────────────────────────────── */
+#page-accounting .acc-coa-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  padding: 10px 12px;
+  background: rgba(0,0,0,0.20);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  margin-block-end: 14px;
+}
+#page-accounting .acc-coa-legend span {
+  padding: 3px 9px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.05);
+  font-feature-settings: "tnum" 1;
+}
+#page-accounting .acc-coa-stack {
+  display: grid;
+  gap: 8px;
+}
+#page-accounting .acc-coa-group {
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  overflow: hidden;
+}
+#page-accounting .acc-coa-group-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 200ms ease;
+}
+#page-accounting .acc-coa-group-head:hover { background: rgba(255,255,255,0.02); }
+#page-accounting .acc-coa-group-num {
+  font-size: 14px;
+  font-weight: 900;
+  font-feature-settings: "tnum" 1;
+  inline-size: 56px;
+  text-align: center;
+  padding: 4px 0;
+  background: rgba(102,252,241,0.10);
+  border: 1px solid rgba(102,252,241,0.25);
+  border-radius: 6px;
+  color: var(--accent, #66FCF1);
+}
+#page-accounting .acc-coa-group-name {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text);
+}
+#page-accounting .acc-coa-group-type {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+#page-accounting .acc-coa-chev {
+  inline-size: 18px;
+  block-size: 18px;
+  color: var(--text-muted);
+  transition: transform 220ms ease;
+}
+#page-accounting .acc-coa-group.open .acc-coa-chev { transform: rotate(180deg); }
+#page-accounting .acc-coa-group-body {
+  display: none;
+  padding: 8px 14px 14px;
+  border-block-start: 1px solid rgba(255,255,255,0.05);
+}
+#page-accounting .acc-coa-group.open .acc-coa-group-body { display: block; }
+#page-accounting .acc-coa-acct-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#page-accounting .acc-coa-acct {
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 8px;
+  font-size: 12px;
+  display: grid;
+  gap: 4px;
+}
+#page-accounting .acc-coa-acct-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#page-accounting .acc-coa-acct-num {
+  font-size: 11px;
+  font-weight: 800;
+  font-feature-settings: "tnum" 1;
+  color: var(--accent, #66FCF1);
+  background: rgba(102,252,241,0.08);
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+#page-accounting .acc-coa-acct-name { color: var(--text); font-weight: 700; }
+#page-accounting .acc-coa-acct-en { font-size: 10.5px; color: var(--text-muted); margin-inline-start: auto; font-style: italic; }
+#page-accounting .acc-coa-acct-ex { font-size: 11px; color: var(--text-muted); line-height: 1.7; padding-inline-start: 4px; border-inline-start: 2px solid rgba(102,252,241,0.18); }
+#page-accounting .acc-coa-tip {
+  margin-block-start: 14px;
+  display: flex;
+  gap: 12px;
+  padding: 12px 14px;
+  background: linear-gradient(135deg, rgba(245,158,11,0.05), rgba(102,252,241,0.04));
+  border: 1px solid rgba(245,158,11,0.18);
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+#page-accounting .acc-coa-tip span { font-size: 18px; }
+#page-accounting .acc-coa-tip b { color: var(--text); }
+
+/* ── Block 5 · IFRS table ────────────────────────────────────── */
+#page-accounting .acc-ifrs-table-wrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+#page-accounting .acc-ifrs-table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  background: rgba(0,0,0,0.22);
+}
+#page-accounting .acc-ifrs-table thead th {
+  background: rgba(102,252,241,0.06);
+  color: var(--text);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 12px 14px;
+  text-align: start;
+  border-block-end: 1px solid rgba(255,255,255,0.08);
+}
+#page-accounting .acc-ifrs-table tbody td {
+  padding: 14px;
+  vertical-align: top;
+  color: var(--text-muted);
+  line-height: 1.85;
+  border-block-end: 1px solid rgba(255,255,255,0.04);
+}
+#page-accounting .acc-ifrs-table tbody td:first-child { color: var(--text); }
+#page-accounting .acc-ifrs-table tbody td:first-child b { display: block; font-weight: 800; font-size: 13px; margin-block-end: 2px; }
+#page-accounting .acc-ifrs-table tbody td:first-child span { font-size: 10.5px; color: var(--text-muted); font-style: italic; letter-spacing: 0.04em; }
+#page-accounting .acc-ifrs-table tbody td b { color: var(--text); }
+#page-accounting .acc-ifrs-table tbody tr:nth-child(odd) td { background: rgba(255,255,255,0.012); }
+#page-accounting .acc-ifrs-callout {
+  margin-block-start: 14px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, rgba(102,252,241,0.05), rgba(139,92,246,0.04));
+  border: 1px solid rgba(102,252,241,0.18);
+  border-radius: 10px;
+}
+#page-accounting .acc-ifrs-callout-tag {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.10em;
+  color: var(--accent, #66FCF1);
+  margin-block-end: 6px;
+}
+#page-accounting .acc-ifrs-callout p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.85;
+}
+
+/* ── Block 6 · Ratios cards ──────────────────────────────────── */
+#page-accounting .acc-ratios-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-block: 6px 14px;
+}
+#page-accounting .acc-ratio-pill {
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--text-muted);
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 180ms ease;
+  font-family: inherit;
+}
+#page-accounting .acc-ratio-pill:hover {
+  border-color: rgba(102,252,241,0.35);
+  color: var(--text);
+}
+#page-accounting .acc-ratio-pill.active {
+  background: linear-gradient(135deg, var(--accent, #66FCF1), #818CF8);
+  color: #0B0F1C;
+  border-color: var(--accent, #66FCF1);
+}
+#page-accounting .acc-ratios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+#page-accounting .acc-ratio-card {
+  position: relative;
+  padding: 16px 18px;
+  background: rgba(0,0,0,0.24);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  display: grid;
+  gap: 8px;
+  transition: all 220ms ease;
+}
+#page-accounting .acc-ratio-card.hide { display: none; }
+#page-accounting .acc-ratio-card:hover {
+  border-color: rgba(102,252,241,0.32);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(0,0,0,0.30);
+}
+#page-accounting .acc-ratio-cat {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  align-self: start;
+}
+#page-accounting .acc-ratio-cat.liq  { color: #34D399; background: rgba(16,185,129,0.10); border:1px solid rgba(16,185,129,0.25); }
+#page-accounting .acc-ratio-cat.lev  { color: #F87171; background: rgba(239,68,68,0.10);  border:1px solid rgba(239,68,68,0.25); }
+#page-accounting .acc-ratio-cat.prof { color: #C4B5FD; background: rgba(139,92,246,0.10); border:1px solid rgba(139,92,246,0.25); }
+#page-accounting .acc-ratio-cat.eff  { color: #FBBF24; background: rgba(245,158,11,0.10); border:1px solid rgba(245,158,11,0.25); }
+#page-accounting .acc-ratio-name {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text);
+}
+#page-accounting .acc-ratio-name span {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-style: italic;
+}
+#page-accounting .acc-ratio-formula {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  color: var(--accent, #66FCF1);
+  background: rgba(102,252,241,0.06);
+  padding: 8px 10px;
+  border-radius: 8px;
+  border-inline-start: 3px solid var(--accent, #66FCF1);
+  font-feature-settings: "tnum" 1;
+  line-height: 1.5;
+}
+#page-accounting .acc-ratio-row {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: 8px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+#page-accounting .acc-ratio-row span { font-weight: 800; color: var(--text); }
+#page-accounting .acc-ratio-ex {
+  font-size: 11px;
+  color: var(--text-muted);
+  background: rgba(245,158,11,0.04);
+  border-inline-start: 3px solid rgba(245,158,11,0.45);
+  padding: 6px 10px;
+  border-radius: 0 6px 6px 0;
+  line-height: 1.7;
+  font-feature-settings: "tnum" 1;
+}
+#page-accounting .acc-ratio-ex b { color: var(--text); }
+
+@media print {
+  #page-accounting .acc-coa-group,
+  #page-accounting .acc-ifrs-table-wrap,
+  #page-accounting .acc-ratio-card {
+    background: #fff !important;
+    border: 1px solid #999 !important;
+    color: #000 !important;
+  }
+  #page-accounting .acc-coa-group-body { display: block !important; }
+  #page-accounting .acc-ratio-card.hide { display: grid !important; }
+}
+
+
+
+/* ════════════════════════════════════════════════════════════════
+   WORKER 04 · PHASE 3 — Iraqi Tax + Salary Calculator
+═══════════════════════════════════════════════════════════════ */
+
+#page-accounting .acc-tax {
+  display: grid;
+  gap: 22px;
+  margin-block: 22px 18px;
+}
+
+/* ── Block 7 · Tax Brackets ──────────────────────────────────── */
+#page-accounting .acc-tax-bracket-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-block: 8px 14px;
+}
+#page-accounting .acc-tax-bracket {
+  position: relative;
+  padding: 16px 18px;
+  background: rgba(0,0,0,0.24);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  overflow: hidden;
+}
+#page-accounting .acc-tax-bracket::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 4px;
+}
+#page-accounting .acc-tax-bracket[data-bracket="0"]::before { background: linear-gradient(90deg, #34D399, transparent); }
+#page-accounting .acc-tax-bracket[data-bracket="1"]::before { background: linear-gradient(90deg, #60A5FA, transparent); }
+#page-accounting .acc-tax-bracket[data-bracket="2"]::before { background: linear-gradient(90deg, #F59E0B, transparent); }
+#page-accounting .acc-tax-bracket[data-bracket="3"]::before { background: linear-gradient(90deg, #F87171, transparent); }
+#page-accounting .acc-tax-bracket-rate {
+  font-size: 28px;
+  font-weight: 900;
+  font-feature-settings: "tnum" 1;
+  letter-spacing: -0.02em;
+  margin-block-end: 4px;
+}
+#page-accounting .acc-tax-bracket[data-bracket="0"] .acc-tax-bracket-rate { color: #34D399; }
+#page-accounting .acc-tax-bracket[data-bracket="1"] .acc-tax-bracket-rate { color: #60A5FA; }
+#page-accounting .acc-tax-bracket[data-bracket="2"] .acc-tax-bracket-rate { color: #F59E0B; }
+#page-accounting .acc-tax-bracket[data-bracket="3"] .acc-tax-bracket-rate { color: #F87171; }
+#page-accounting .acc-tax-bracket-range {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text);
+  font-feature-settings: "tnum" 1;
+  margin-block-end: 6px;
+}
+#page-accounting .acc-tax-bracket-note {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+#page-accounting .acc-tax-misc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+#page-accounting .acc-tax-misc {
+  padding: 12px 14px;
+  background: rgba(102,252,241,0.04);
+  border: 1px solid rgba(102,252,241,0.15);
+  border-radius: 10px;
+}
+#page-accounting .acc-tax-misc h6 {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--accent, #66FCF1);
+  letter-spacing: 0.04em;
+}
+#page-accounting .acc-tax-misc p {
+  margin: 0;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  font-feature-settings: "tnum" 1;
+}
+#page-accounting .acc-tax-misc b { color: var(--text); }
+
+/* ── Block 8 · Tax Calculator + Slip ────────────────────────── */
+#page-accounting .acc-tax-calc-shell {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(360px, 1.4fr);
+  gap: 18px;
+  align-items: start;
+}
+#page-accounting .acc-tax-form {
+  padding: 18px 18px 14px;
+  background: rgba(0,0,0,0.24);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  display: grid;
+  gap: 12px;
+}
+#page-accounting .acc-tax-field {
+  display: grid;
+  gap: 5px;
+}
+#page-accounting .acc-tax-field label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+#page-accounting .acc-tax-field input,
+#page-accounting .acc-tax-field select {
+  background: rgba(0,0,0,0.30);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  font-feature-settings: "tnum" 1;
+  padding: 9px 12px;
+  border-radius: 9px;
+  transition: border-color 180ms ease;
+}
+#page-accounting .acc-tax-field input:focus,
+#page-accounting .acc-tax-field select:focus {
+  border-color: var(--accent, #66FCF1);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(102,252,241,0.12);
+}
+#page-accounting .acc-tax-actions {
+  display: flex;
+  gap: 8px;
+  margin-block-start: 4px;
+}
+#page-accounting .acc-tax-btn {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 12.5px;
+  font-weight: 800;
+  font-family: inherit;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 200ms ease;
+  border: 1px solid transparent;
+}
+#page-accounting .acc-tax-btn.primary {
+  background: linear-gradient(135deg, var(--accent, #66FCF1), #818CF8);
+  color: #0B0F1C;
+  border: 0;
+}
+#page-accounting .acc-tax-btn.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(102,252,241,0.30);
+}
+#page-accounting .acc-tax-btn.ghost {
+  background: transparent;
+  border-color: rgba(255,255,255,0.12);
+  color: var(--text);
+}
+#page-accounting .acc-tax-btn.ghost:hover {
+  border-color: var(--accent, #66FCF1);
+  color: var(--accent, #66FCF1);
+}
+
+#page-accounting .acc-tax-slip {
+  padding: 22px;
+  background: linear-gradient(160deg, rgba(255,255,255,0.04), rgba(102,252,241,0.025));
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  position: relative;
+}
+#page-accounting .acc-tax-slip-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-block-end: 14px;
+  margin-block-end: 12px;
+  border-block-end: 1px dashed rgba(255,255,255,0.10);
+}
+#page-accounting .acc-tax-slip-tag {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--accent, #66FCF1);
+  margin-block-end: 4px;
+}
+#page-accounting .acc-tax-slip-head h4 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text);
+}
+#page-accounting .acc-tax-slip-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  text-align: end;
+}
+#page-accounting .acc-tax-slip-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+#page-accounting .acc-tax-slip-rows li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-feature-settings: "tnum" 1;
+  border-radius: 8px;
+}
+#page-accounting .acc-tax-slip-rows li.add { background: rgba(16,185,129,0.06); color: #34D399; }
+#page-accounting .acc-tax-slip-rows li.sub { background: rgba(239,68,68,0.06); color: #F87171; }
+#page-accounting .acc-tax-slip-rows li.sum {
+  background: rgba(102,252,241,0.08);
+  color: var(--text);
+  font-weight: 800;
+  border: 1px solid rgba(102,252,241,0.20);
+}
+#page-accounting .acc-tax-slip-rows li.sum.negative {
+  background: rgba(239,68,68,0.10);
+  border-color: rgba(239,68,68,0.30);
+  color: #FCA5A5;
+}
+#page-accounting .acc-tax-slip-rows li.net {
+  background: linear-gradient(90deg, rgba(102,252,241,0.18), rgba(139,92,246,0.18));
+  color: var(--text);
+  font-weight: 900;
+  font-size: 15px;
+  padding: 12px 14px;
+  border: 1px solid rgba(102,252,241,0.35);
+  margin-block-start: 6px;
+}
+#page-accounting .acc-tax-slip-rows li b { font-weight: inherit; }
+#page-accounting .acc-tax-slip-employer {
+  margin-block-start: 14px;
+  padding: 12px 14px;
+  background: rgba(0,0,0,0.20);
+  border: 1px dashed rgba(255,255,255,0.10);
+  border-radius: 10px;
+}
+#page-accounting .acc-tax-slip-employer h6 {
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.10em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+#page-accounting .acc-tax-slip-employer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-feature-settings: "tnum" 1;
+}
+#page-accounting .acc-tax-slip-employer li {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+#page-accounting .acc-tax-slip-employer li.emp-total {
+  border-block-start: 1px dashed rgba(255,255,255,0.10);
+  padding-block-start: 8px;
+  margin-block-start: 4px;
+  font-weight: 800;
+  color: #F59E0B;
+}
+#page-accounting .acc-tax-slip-employer li b { color: var(--text); font-weight: 700; }
+#page-accounting .acc-tax-slip-breakdown {
+  margin-block-start: 14px;
+  padding: 12px 14px;
+  background: rgba(245,158,11,0.05);
+  border: 1px dashed rgba(245,158,11,0.25);
+  border-radius: 10px;
+}
+#page-accounting .acc-tax-slip-breakdown h6 {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #F59E0B;
+  text-transform: uppercase;
+}
+#page-accounting .acc-tax-slip-breakdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 3px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-feature-settings: "tnum" 1;
+  line-height: 1.7;
+}
+#page-accounting .acc-tax-slip-breakdown li b { color: var(--text); }
+
+#page-accounting .acc-tax-disclaimer {
+  display: flex;
+  gap: 10px;
+  padding: 12px 14px;
+  background: rgba(245,158,11,0.06);
+  border: 1px solid rgba(245,158,11,0.22);
+  border-radius: 10px;
+  margin-block-start: 14px;
+  align-items: flex-start;
+}
+#page-accounting .acc-tax-disclaimer span { font-size: 18px; }
+#page-accounting .acc-tax-disclaimer p {
+  margin: 0;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.85;
+}
+
+@media (max-width: 880px) {
+  #page-accounting .acc-tax-calc-shell {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  body * { visibility: hidden; }
+  #page-accounting .acc-tax-slip,
+  #page-accounting .acc-tax-slip * { visibility: visible; }
+  #page-accounting .acc-tax-slip {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 100%;
+    background: #fff !important;
+    color: #000 !important;
+    border: 1px solid #999 !important;
+  }
+  #page-accounting .acc-tax-slip h4,
+  #page-accounting .acc-tax-slip h6,
+  #page-accounting .acc-tax-slip-tag,
+  #page-accounting .acc-tax-slip-rows li b,
+  #page-accounting .acc-tax-slip-rows li span,
+  #page-accounting .acc-tax-slip-employer * { color: #000 !important; }
+  #page-accounting .acc-tax-slip-rows li.net {
+    background: #f0fdfa !important;
+    border: 2px solid #0f766e !important;
+  }
+}
+
+
+
+/* ════════════════════════════════════════════════════════════════
+   WORKER 04 · PHASE 4 — Statements Builders + Cash Flow
+═══════════════════════════════════════════════════════════════ */
+
+#page-accounting .acc-statements {
+  display: grid;
+  gap: 22px;
+  margin-block: 22px 18px;
+}
+
+/* ── Block 9 · Income Statement Builder ─────────────────────── */
+#page-accounting .acc-is-shell {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(360px, 1.2fr);
+  gap: 18px;
+  align-items: start;
+}
+#page-accounting .acc-is-form {
+  display: grid;
+  gap: 14px;
+}
+#page-accounting .acc-is-group {
+  padding: 14px 16px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+}
+#page-accounting .acc-is-group h6 {
+  margin: 0 0 10px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--accent, #66FCF1);
+  text-transform: uppercase;
+}
+#page-accounting .acc-is-group label,
+#page-accounting .acc-bs-form label {
+  display: grid;
+  gap: 4px;
+  margin-block-end: 8px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+#page-accounting .acc-is-group input,
+#page-accounting .acc-bs-form input {
+  background: rgba(0,0,0,0.30);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  font-feature-settings: "tnum" 1;
+  padding: 8px 11px;
+  border-radius: 8px;
+}
+#page-accounting .acc-is-group input:focus,
+#page-accounting .acc-bs-form input:focus {
+  border-color: var(--accent, #66FCF1);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(102,252,241,0.12);
+}
+#page-accounting .acc-is-stmt {
+  padding: 22px;
+  background: linear-gradient(160deg, rgba(255,255,255,0.04), rgba(102,252,241,0.025));
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  position: sticky;
+  top: 14px;
+}
+#page-accounting .acc-is-stmt-tag {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--accent, #66FCF1);
+}
+#page-accounting .acc-is-stmt-head h4 {
+  margin: 4px 0 14px;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text);
+}
+#page-accounting .acc-is-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  font-feature-settings: "tnum" 1;
+}
+#page-accounting .acc-is-rows li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 12.5px;
+  border-radius: 8px;
+}
+#page-accounting .acc-is-rows li.reg { background: rgba(255,255,255,0.02); color: var(--text-muted); }
+#page-accounting .acc-is-rows li.reg b { color: var(--text); font-weight: 700; }
+#page-accounting .acc-is-rows li.sub { background: rgba(239,68,68,0.06); color: #FCA5A5; }
+#page-accounting .acc-is-rows li.sum {
+  background: rgba(102,252,241,0.08);
+  color: var(--text);
+  font-weight: 800;
+  border: 1px solid rgba(102,252,241,0.20);
+}
+#page-accounting .acc-is-rows li.sum em { font-style: normal; font-size: 11px; color: var(--text-muted); margin-inline-start: 6px; }
+#page-accounting .acc-is-rows li.sum.gp { border-color: rgba(16,185,129,0.30); background: rgba(16,185,129,0.06); }
+#page-accounting .acc-is-rows li.sum.op { border-color: rgba(96,165,250,0.30); background: rgba(96,165,250,0.06); }
+#page-accounting .acc-is-rows li.net {
+  background: linear-gradient(90deg, rgba(102,252,241,0.16), rgba(139,92,246,0.16));
+  color: var(--text);
+  font-weight: 900;
+  font-size: 14px;
+  padding: 12px 14px;
+  border: 1px solid rgba(102,252,241,0.35);
+  margin-block-start: 6px;
+}
+#page-accounting .acc-is-rows li.net em { font-size: 11px; color: rgba(255,255,255,0.75); margin-inline-start: 6px; font-style: normal; font-weight: 700; }
+#page-accounting .acc-is-rows li.negative b { color: #F87171 !important; }
+#page-accounting .acc-is-warnings {
+  display: grid;
+  gap: 6px;
+  margin-block-start: 12px;
+}
+#page-accounting .acc-is-warn {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 11.5px;
+  line-height: 1.6;
+}
+#page-accounting .acc-is-warn.danger { background: rgba(239,68,68,0.10); border: 1px solid rgba(239,68,68,0.30); color: #FCA5A5; }
+#page-accounting .acc-is-warn.warn   { background: rgba(245,158,11,0.10); border: 1px solid rgba(245,158,11,0.30); color: #FCD34D; }
+#page-accounting .acc-is-warn.ok     { background: rgba(16,185,129,0.10); border: 1px solid rgba(16,185,129,0.30); color: #6EE7B7; }
+#page-accounting .acc-is-warn b { font-weight: 800; }
+
+/* ── Block 10 · Balance Sheet ────────────────────────────────── */
+#page-accounting .acc-bs-shell {
+  display: grid;
+  gap: 16px;
+}
+#page-accounting .acc-bs-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+#page-accounting .acc-bs-col {
+  padding: 14px 16px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+}
+#page-accounting .acc-bs-col > h6 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--accent, #66FCF1);
+  text-transform: uppercase;
+}
+#page-accounting .acc-bs-form fieldset {
+  border: 1px dashed rgba(255,255,255,0.10);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-block-end: 10px;
+}
+#page-accounting .acc-bs-form legend {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  padding: 0 6px;
+  letter-spacing: 0.04em;
+}
+#page-accounting .acc-bs-summary {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 12px;
+  padding: 18px;
+  background: linear-gradient(160deg, rgba(255,255,255,0.03), rgba(102,252,241,0.03));
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  align-items: center;
+}
+#page-accounting .acc-bs-side { padding: 12px 14px; }
+#page-accounting .acc-bs-side-tag {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-block-end: 4px;
+}
+#page-accounting .acc-bs-side-val {
+  font-size: 20px;
+  font-weight: 900;
+  font-feature-settings: "tnum" 1;
+  color: var(--text);
+  margin-block-end: 10px;
+}
+#page-accounting .acc-bs-side ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  font-size: 12px;
+  font-feature-settings: "tnum" 1;
+  color: var(--text-muted);
+}
+#page-accounting .acc-bs-side li {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-block-end: 1px dashed rgba(255,255,255,0.06);
+}
+#page-accounting .acc-bs-side li b { color: var(--text); font-weight: 700; }
+#page-accounting .acc-bs-eq {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--accent, #66FCF1);
+  text-align: center;
+}
+#page-accounting .acc-bs-eq[data-balance="off"] { color: #F87171; }
+#page-accounting .acc-bs-flag {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 800;
+  font-feature-settings: "tnum" 1;
+}
+#page-accounting .acc-bs-flag[data-balance="ok"] {
+  background: rgba(16,185,129,0.12);
+  border: 1px solid rgba(16,185,129,0.30);
+  color: #34D399;
+}
+#page-accounting .acc-bs-flag[data-balance="off"] {
+  background: rgba(239,68,68,0.12);
+  border: 1px solid rgba(239,68,68,0.30);
+  color: #F87171;
+}
+#page-accounting .acc-bs-flag-icon { font-size: 18px; }
+#page-accounting .acc-bs-flag-text { flex: 1; }
+#page-accounting .acc-bs-flag-diff b { font-feature-settings: "tnum" 1; }
+
+/* ── Block 11 · Cash Flow + Equity Change ────────────────────── */
+#page-accounting .acc-cf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  margin-block: 8px 18px;
+}
+#page-accounting .acc-cf-col {
+  padding: 16px 18px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+}
+#page-accounting .acc-cf-col[data-cf="op"]  { border-block-start: 3px solid #34D399; }
+#page-accounting .acc-cf-col[data-cf="inv"] { border-block-start: 3px solid #60A5FA; }
+#page-accounting .acc-cf-col[data-cf="fin"] { border-block-start: 3px solid #C4B5FD; }
+#page-accounting .acc-cf-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-block-end: 6px;
+}
+#page-accounting .acc-cf-col[data-cf="op"]  .acc-cf-tag { color: #34D399; background: rgba(16,185,129,0.10); }
+#page-accounting .acc-cf-col[data-cf="inv"] .acc-cf-tag { color: #60A5FA; background: rgba(96,165,250,0.10); }
+#page-accounting .acc-cf-col[data-cf="fin"] .acc-cf-tag { color: #C4B5FD; background: rgba(139,92,246,0.10); }
+#page-accounting .acc-cf-col-head h4 {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text);
+}
+#page-accounting .acc-cf-col-head p {
+  margin: 0 0 10px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+#page-accounting .acc-cf-col ul {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+#page-accounting .acc-cf-col ul li {
+  padding: 5px 8px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 6px;
+}
+#page-accounting .acc-cf-col ul li i {
+  font-style: normal;
+  color: var(--text-muted);
+  font-size: 10.5px;
+  margin-inline-start: 4px;
+}
+#page-accounting .acc-cf-rule {
+  font-size: 11.5px;
+  color: var(--text);
+  background: rgba(245,158,11,0.06);
+  border-inline-start: 3px solid rgba(245,158,11,0.45);
+  padding: 8px 10px;
+  border-radius: 0 8px 8px 0;
+  line-height: 1.7;
+}
+#page-accounting .acc-cf-rule b { color: #F59E0B; }
+#page-accounting .acc-cf-equity {
+  padding: 18px 20px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+}
+#page-accounting .acc-cf-equity-head h4 {
+  margin: 0 0 4px;
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--text);
+}
+#page-accounting .acc-cf-equity-head p {
+  margin: 0 0 14px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+#page-accounting .acc-cf-equity-table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  font-feature-settings: "tnum" 1;
+}
+#page-accounting .acc-cf-equity-table th {
+  background: rgba(102,252,241,0.06);
+  padding: 10px 12px;
+  font-size: 11.5px;
+  font-weight: 800;
+  text-align: start;
+  border-block-end: 1px solid rgba(255,255,255,0.08);
+  color: var(--text);
+}
+#page-accounting .acc-cf-equity-table td {
+  padding: 9px 12px;
+  border-block-end: 1px solid rgba(255,255,255,0.04);
+  color: var(--text-muted);
+}
+#page-accounting .acc-cf-equity-table td:first-child { color: var(--text); font-weight: 700; }
+#page-accounting .acc-cf-equity-table tr.add td      { background: rgba(16,185,129,0.05); color: #6EE7B7; }
+#page-accounting .acc-cf-equity-table tr.sub td      { background: rgba(239,68,68,0.05); color: #FCA5A5; }
+#page-accounting .acc-cf-equity-table tr.total td    {
+  background: rgba(102,252,241,0.08);
+  font-weight: 800;
+  color: var(--text);
+  border-block: 1px solid rgba(102,252,241,0.30);
+}
+
+@media (max-width: 880px) {
+  #page-accounting .acc-is-shell,
+  #page-accounting .acc-bs-form { grid-template-columns: 1fr; }
+  #page-accounting .acc-bs-summary { grid-template-columns: 1fr; }
+  #page-accounting .acc-bs-eq { transform: rotate(90deg); }
+}
+
+@media print {
+  #page-accounting .acc-is-form,
+  #page-accounting .acc-bs-form { display: none; }
+  #page-accounting .acc-is-stmt,
+  #page-accounting .acc-bs-summary,
+  #page-accounting .acc-cf-col,
+  #page-accounting .acc-cf-equity {
+    background: #fff !important;
+    border: 1px solid #999 !important;
+    color: #000 !important;
+  }
+  #page-accounting .acc-is-rows li.net { background: #f0fdfa !important; border-color: #0f766e !important; }
+}
+
+
+
+/* ════════════════════════════════════════════════════════════════
+   WORKER 04 · PHASE 5 — Cashier Track + Iraq Salary + Citations
+═══════════════════════════════════════════════════════════════ */
+
+#page-accounting .acc-cashier {
+  display: grid;
+  gap: 22px;
+  margin-block: 22px 28px;
+}
+
+/* ── Block 12 · Cashier Cycle ────────────────────────────────── */
+#page-accounting .acc-cs-cycle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+#page-accounting .acc-cs-stage {
+  position: relative;
+  padding: 16px 18px 14px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  transition: all 220ms ease;
+}
+#page-accounting .acc-cs-stage:hover {
+  border-color: rgba(102,252,241,0.30);
+  transform: translateY(-2px);
+}
+#page-accounting .acc-cs-stage-num {
+  position: absolute;
+  inset-inline-end: 14px;
+  inset-block-start: -16px;
+  inline-size: 32px;
+  block-size: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent, #66FCF1), #818CF8);
+  color: #0B0F1C;
+  font-weight: 900;
+  font-size: 13px;
+  box-shadow: 0 4px 12px rgba(102,252,241,0.25);
+}
+#page-accounting .acc-cs-stage h5 {
+  margin: 4px 0 6px;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--text);
+}
+#page-accounting .acc-cs-stage > p {
+  margin: 0 0 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+#page-accounting .acc-cs-stage-meta {
+  display: grid;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+#page-accounting .acc-cs-stage-meta span {
+  padding: 4px 8px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 6px;
+}
+#page-accounting .acc-cs-stage-meta b { color: var(--accent, #66FCF1); margin-inline-end: 3px; }
+
+/* ── Block 13 · Cash Rules + Loss Prevention ─────────────────── */
+#page-accounting .acc-cs-twocol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+@media (max-width: 880px) { #page-accounting .acc-cs-twocol { grid-template-columns: 1fr; } }
+#page-accounting .acc-cs-block {
+  padding: 16px 18px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+}
+#page-accounting .acc-cs-block-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text);
+}
+#page-accounting .acc-cs-block-title span { font-size: 16px; }
+#page-accounting .acc-cs-rules-list {
+  margin: 0;
+  padding-inline-start: 22px;
+  display: grid;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+#page-accounting .acc-cs-rules-list li {
+  padding: 6px 8px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 6px;
+}
+#page-accounting .acc-cs-rules-list li b { color: var(--text); }
+#page-accounting .acc-cs-loss-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 6px;
+}
+#page-accounting .acc-cs-loss {
+  padding: 8px 10px;
+  background: rgba(239,68,68,0.05);
+  border: 1px solid rgba(239,68,68,0.18);
+  border-radius: 8px;
+  font-size: 11.5px;
+  display: grid;
+  gap: 2px;
+}
+#page-accounting .acc-cs-loss b { color: #FCA5A5; font-size: 12px; }
+#page-accounting .acc-cs-loss span { color: var(--text-muted); line-height: 1.6; }
+
+/* ── Block 14 · POS + Counterfeit ────────────────────────────── */
+#page-accounting .acc-pos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-block: 8px 14px;
+}
+#page-accounting .acc-pos-card {
+  padding: 14px 16px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+}
+#page-accounting .acc-pos-name {
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--text);
+  margin-block-end: 2px;
+}
+#page-accounting .acc-pos-cat {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--accent, #66FCF1);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-block-end: 8px;
+}
+#page-accounting .acc-pos-card ul {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+#page-accounting .acc-pos-card ul li {
+  padding: 4px 8px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 6px;
+}
+#page-accounting .acc-pos-fit {
+  font-size: 11px;
+  color: var(--text);
+  background: rgba(102,252,241,0.06);
+  border-inline-start: 3px solid var(--accent, #66FCF1);
+  padding: 6px 10px;
+  border-radius: 0 6px 6px 0;
+  line-height: 1.6;
+}
+#page-accounting .acc-counterfeit {
+  padding: 16px 18px;
+  background: linear-gradient(135deg, rgba(245,158,11,0.06), rgba(102,252,241,0.04));
+  border: 1px solid rgba(245,158,11,0.20);
+  border-radius: 12px;
+}
+#page-accounting .acc-counterfeit h5 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--text);
+}
+#page-accounting .acc-counterfeit ol {
+  margin: 0;
+  padding-inline-start: 22px;
+  display: grid;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+#page-accounting .acc-counterfeit li b { color: var(--text); }
+#page-accounting .acc-counterfeit-tip {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  background: rgba(0,0,0,0.20);
+  border-radius: 8px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+#page-accounting .acc-counterfeit-tip b { color: #F59E0B; }
+
+/* ── Block 15 · Iraq Salary ──────────────────────────────────── */
+#page-accounting .acc-iraq-salary-tbl {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  margin-block: 8px 14px;
+  font-feature-settings: "tnum" 1;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  overflow: hidden;
+}
+#page-accounting .acc-iraq-salary-tbl th {
+  background: rgba(102,252,241,0.06);
+  padding: 11px 14px;
+  text-align: start;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--text);
+  border-block-end: 1px solid rgba(255,255,255,0.08);
+}
+#page-accounting .acc-iraq-salary-tbl td {
+  padding: 11px 14px;
+  color: var(--text-muted);
+  border-block-end: 1px solid rgba(255,255,255,0.04);
+}
+#page-accounting .acc-iraq-salary-tbl tbody tr:nth-child(odd) td { background: rgba(255,255,255,0.012); }
+#page-accounting .acc-iraq-salary-tbl tbody td:first-child { color: var(--text); font-weight: 700; }
+#page-accounting .acc-iraq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+#page-accounting .acc-iraq-card {
+  padding: 14px 16px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+}
+#page-accounting .acc-iraq-card h6 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--accent, #66FCF1);
+  letter-spacing: 0.04em;
+}
+#page-accounting .acc-iraq-card ul,
+#page-accounting .acc-iraq-card ol {
+  margin: 0;
+  padding-inline-start: 18px;
+  display: grid;
+  gap: 4px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+#page-accounting .acc-iraq-card li b { color: var(--text); }
+
+/* ── Block 16 · Cheat Sheet ──────────────────────────────────── */
+#page-accounting .acc-cheat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+}
+#page-accounting .acc-cheat-col {
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 10px;
+}
+#page-accounting .acc-cheat-col h6 {
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent, #66FCF1);
+}
+#page-accounting .acc-cheat-col ul {
+  margin: 0;
+  padding-inline-start: 16px;
+  display: grid;
+  gap: 4px;
+  font-size: 11.5px;
+  color: var(--text);
+  line-height: 1.7;
+}
+#page-accounting .acc-cheat-col li b { color: var(--accent, #66FCF1); margin-inline-end: 3px; }
+
+/* ── Block 17 · Citations ────────────────────────────────────── */
+#page-accounting .acc-citations {
+  margin-block: 10px 0;
+  padding: 18px 22px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.20);
+  border: 1px solid rgba(255,255,255,0.06);
+  font-size: 12px;
+  line-height: 1.85;
+  color: var(--text);
+  list-style-position: inside;
+}
+#page-accounting .acc-citations li {
+  padding: 7px 0;
+  border-block-end: 1px dashed rgba(255,255,255,0.04);
+}
+#page-accounting .acc-citations li:last-child { border-block-end: 0; }
+#page-accounting .acc-citations b { color: var(--accent, #66FCF1); margin-inline-end: 4px; }
+#page-accounting .acc-citations i { color: var(--text-muted); }
+
+@media print {
+  #page-accounting .acc-cs-stage,
+  #page-accounting .acc-cs-block,
+  #page-accounting .acc-pos-card,
+  #page-accounting .acc-counterfeit,
+  #page-accounting .acc-iraq-card,
+  #page-accounting .acc-cheat-col,
+  #page-accounting .acc-citations {
+    background: #fff !important;
+    border: 1px solid #999 !important;
+    color: #000 !important;
+    page-break-inside: avoid;
+  }
+  #page-accounting .acc-cs-stage-num,
+  #page-accounting .acc-cs-block-title span,
+  #page-accounting .acc-pos-cat,
+  #page-accounting .acc-cheat-col h6,
+  #page-accounting .acc-iraq-card h6,
+  #page-accounting .acc-citations b { color: #0f766e !important; }
+}

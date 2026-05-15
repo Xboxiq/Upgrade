@@ -1,0 +1,32 @@
+{
+  "worker": "04",
+  "worker_name": "ACCOUNTING_CASHIER",
+  "phase": 3,
+  "title": "Iraqi Tax Calculator + Salary Slip",
+  "branch": "worker-04-phase-3",
+  "completed_at": "2026-05-15T07:38:00Z",
+  "lines_added": 685,
+  "files_modified": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "html_mounts": [
+    "section.acc-tax[data-acc-phase=\"3\"]",
+    "article[data-acc-lab=\"tax-brackets\"]",
+    "article[data-acc-lab=\"tax-calc\"]"
+  ],
+  "calc_logic": {
+    "brackets_count": 4,
+    "brackets": [
+      "0–250k → 0%",
+      "250k–500k → 3%",
+      "500k–1M → 5%",
+      ">1M → 15%"
+    ],
+    "social_security": "employee 5% + employer 12%",
+    "personal_allowance_annual": { "single": 2500000, "married": 4500000, "per_child": 200000 }
+  },
+  "localStorage_keys": ["upg_tax_drafts"],
+  "next_phase": "Income Statement & Balance Sheet Builders + Cash Flow explainer"
+}
