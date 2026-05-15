@@ -8895,6 +8895,157 @@
         </div>
       </div>
 
+      <!-- ════════════════════════════════════════════════════════════
+           WORKER 04 · PHASE 1 — Accounting Foundations (Visual Lab)
+           Scope: additive blocks under #page-accounting only.
+           Mounts: .acc-eq-lab | .acc-taccount-lab | .acc-cycle-lab
+      ════════════════════════════════════════════════════════════ -->
+      <section class="acc-foundations" data-acc-phase="1" aria-labelledby="acc-foundations-title">
+
+        <div class="acc-section-head">
+          <span class="acc-eyebrow">المحاسبة الأساسية · مختبر بصري</span>
+          <h2 id="acc-foundations-title">الركائز الثلاث · معادلة، قيد مزدوج، دورة كاملة</h2>
+          <p>قبل أي ضريبة أو قائمة مالية، تتقن الفيزياء المحاسبية: المعادلة لا تنكسر، كل عملية تُسجَّل مرتين، والدورة تنتهي حيث بدأت.</p>
+        </div>
+
+        <!-- ───────── BLOCK 1 · Accounting Equation Visualizer ───────── -->
+        <article class="acc-eq-lab" data-acc-lab="equation">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 1</div>
+            <h3>Assets = Liabilities + Equity</h3>
+            <p>اختر معاملة من القائمة وراقب الأعمدة الثلاثة تتحرك live. المعادلة لا تنكسر أبداً — لو انكسرت، فالقيد خطأ.</p>
+          </header>
+
+          <div class="acc-eq-board">
+            <div class="acc-eq-col" data-col="assets">
+              <div class="acc-eq-col-head">
+                <span class="acc-eq-col-name">الأصول · Assets</span>
+                <span class="acc-eq-col-amt" data-acc-eq-val="assets">0</span>
+              </div>
+              <ul class="acc-eq-stack" data-acc-eq-stack="assets" aria-live="polite"></ul>
+            </div>
+            <div class="acc-eq-eq">=</div>
+            <div class="acc-eq-col" data-col="liab">
+              <div class="acc-eq-col-head">
+                <span class="acc-eq-col-name">الخصوم · Liabilities</span>
+                <span class="acc-eq-col-amt" data-acc-eq-val="liab">0</span>
+              </div>
+              <ul class="acc-eq-stack" data-acc-eq-stack="liab" aria-live="polite"></ul>
+            </div>
+            <div class="acc-eq-eq">+</div>
+            <div class="acc-eq-col" data-col="equity">
+              <div class="acc-eq-col-head">
+                <span class="acc-eq-col-name">حقوق الملكية · Equity</span>
+                <span class="acc-eq-col-amt" data-acc-eq-val="equity">0</span>
+              </div>
+              <ul class="acc-eq-stack" data-acc-eq-stack="equity" aria-live="polite"></ul>
+            </div>
+          </div>
+
+          <div class="acc-eq-balance" data-acc-eq-balance>
+            <span class="acc-eq-balance-label">حالة المعادلة</span>
+            <span class="acc-eq-balance-val">0 = 0 + 0</span>
+            <span class="acc-eq-balance-flag" data-acc-eq-flag="ok">متوازنة</span>
+          </div>
+
+          <div class="acc-eq-controls">
+            <div class="acc-eq-controls-head">
+              <span>10 معاملات نموذجية بأرقام عراقية (IQD)</span>
+              <button type="button" class="acc-eq-reset" data-acc-eq-reset>تصفير</button>
+            </div>
+            <ol class="acc-eq-tx-list" data-acc-eq-tx></ol>
+          </div>
+
+          <p class="acc-eq-note">الفكرة الجوهرية: الميزانية ليست قائمة أرقام — هي <b>هوية رياضية</b>. أي عملية تخل بها = خطأ في القيد، ليست رأياً.</p>
+        </article>
+
+        <!-- ───────── BLOCK 2 · T-Account Visualizer ───────── -->
+        <article class="acc-taccount-lab" data-acc-lab="taccount">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 2</div>
+            <h3>T-Account · أين يذهب القيد؟</h3>
+            <p>القيد المزدوج ليس فلسفة — هو حماية. كل دينار يخرج من حساب لازم يدخل حساب آخر. اختر العملية واتركها ترسم لك المسار.</p>
+          </header>
+
+          <div class="acc-taccount-toolbar">
+            <label class="acc-taccount-label" for="acc-tx-select">اختر معاملة</label>
+            <select id="acc-tx-select" class="acc-taccount-select" data-acc-tx-select aria-label="اختيار المعاملة المحاسبية"></select>
+            <button type="button" class="acc-taccount-clear" data-acc-tx-clear>مسح القيود</button>
+          </div>
+
+          <div class="acc-taccount-current" data-acc-tx-current>
+            <span class="acc-taccount-curr-tag">القيد الحالي</span>
+            <span class="acc-taccount-curr-text">— اختر معاملة لتظهر القيود —</span>
+          </div>
+
+          <div class="acc-taccount-grid" data-acc-tx-grid>
+            <!-- T-Accounts injected dynamically -->
+          </div>
+
+          <div class="acc-taccount-rules">
+            <div class="acc-taccount-rule">
+              <span class="acc-rule-icon">⬅</span>
+              <div>
+                <b>الأصول والمصاريف</b> تزيد <em>مديناً (Debit)</em> وتنقص <em>دائناً (Credit)</em>.
+              </div>
+            </div>
+            <div class="acc-taccount-rule">
+              <span class="acc-rule-icon">➡</span>
+              <div>
+                <b>الخصوم وحقوق الملكية والإيرادات</b> تزيد <em>دائناً</em> وتنقص <em>مديناً</em>.
+              </div>
+            </div>
+            <div class="acc-taccount-rule">
+              <span class="acc-rule-icon">∑</span>
+              <div>
+                مجموع المدين = مجموع الدائن في كل قيد. هذا اختبار سريع لصحة القيد قبل الترحيل.
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ───────── BLOCK 3 · 9-Step Accounting Cycle ───────── -->
+        <article class="acc-cycle-lab" data-acc-lab="cycle">
+          <header class="acc-lab-head">
+            <div class="acc-lab-tag">Block 3</div>
+            <h3>الدورة المحاسبية · 9 خطوات</h3>
+            <p>من تحليل المعاملة حتى ميزان ما بعد الإقفال. كل خطوة تخدم الخطوة التي تليها — لا اختصارات.</p>
+          </header>
+
+          <div class="acc-cycle-shell">
+            <div class="acc-cycle-ring" role="list" data-acc-cycle-ring>
+              <svg class="acc-cycle-svg" viewBox="0 0 360 360" aria-hidden="true">
+                <circle class="acc-cycle-track" cx="180" cy="180" r="138"></circle>
+                <circle class="acc-cycle-dash" cx="180" cy="180" r="138"></circle>
+              </svg>
+              <!-- Step buttons injected dynamically -->
+            </div>
+            <div class="acc-cycle-detail" data-acc-cycle-detail aria-live="polite">
+              <span class="acc-cycle-step-tag">الخطوة 1</span>
+              <h4 class="acc-cycle-step-title">تحليل المعاملات</h4>
+              <p class="acc-cycle-step-body">اضغط على أي خطوة في الحلقة لتظهر تفاصيلها هنا — مع مثال عملي بأرقام عراقية.</p>
+              <ul class="acc-cycle-step-meta">
+                <li><span>المخرج</span><b data-acc-cycle-output>—</b></li>
+                <li><span>أداة العمل</span><b data-acc-cycle-tool>—</b></li>
+                <li><span>الخطأ الشائع</span><b data-acc-cycle-pitfall>—</b></li>
+              </ul>
+              <div class="acc-cycle-example" data-acc-cycle-example>
+                <span class="acc-cycle-example-tag">مثال عراقي</span>
+                <p>—</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-cycle-progress">
+            <div class="acc-cycle-progress-bar">
+              <span data-acc-cycle-progress style="width:11%"></span>
+            </div>
+            <div class="acc-cycle-progress-text"><b data-acc-cycle-progress-num>1</b> / 9 خطوات مستكشفة</div>
+          </div>
+        </article>
+
+      </section><!-- /acc-foundations Phase 1 -->
+
     </section><!-- /page-accounting -->
 
 
