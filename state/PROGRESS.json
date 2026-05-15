@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-15T15:05:00Z",
+  "last_updated": "2026-05-15T15:35:00Z",
   "current": {
     "worker": "08",
     "worker_name": "HR_NEGOTIATION",
-    "phase": 1,
+    "phase": 2,
     "phases_total": 5,
     "branch": "worker-08-complete",
     "status": "in-progress"
@@ -43,8 +43,9 @@
     { "worker": "07", "phase": 3, "title": "Repair Cards 11-20 + 3 Decision Trees + Software Side", "branch": "worker-07-complete", "lines_added": 572 },
     { "worker": "07", "phase": 4, "title": "Micro-Solder Intro + Customer Service + Ethics + Iraq Block", "branch": "worker-07-complete", "lines_added": 481 },
     { "worker": "07", "phase": 5, "title": "6 Interactive Labs + Career Path + Cheat Sheet + 12 Citations", "branch": "worker-07-complete", "lines_added": 1206 },
-    { "worker": "08", "phase": 1, "title": "HR psychology (5 dims) + STAR framework + 15 Common Questions", "branch": "worker-08-complete", "lines_added": 1202 }
+    { "worker": "08", "phase": 1, "title": "HR psychology (5 dims) + STAR framework + 15 Common Questions", "branch": "worker-08-complete", "lines_added": 1202 },
+    { "worker": "08", "phase": 2, "title": "30 Trap Questions + Pre-Interview Toolkit + Post-Interview Playbook", "branch": "worker-08-complete", "lines_added": 660 }
   ],
-  "next_action": "Continue Worker 08 Phase 2 — 30 Trap Questions + Pre/Post Interview Toolkits.",
-  "notes": "Worker 08 (HR + Salary Negotiation) IN-PROGRESS on linear branch worker-08-complete. New module page-hrmastery created. Phase 1: ~1,202 lines (HTML 884 + CSS 266 + JS 52). 5 dimensions, 4 STAR variants, 15 questions accordion with J/M/S bands."
+  "next_action": "Continue Worker 08 Phase 3 — Salary Negotiation Calculator IQ + Iraq Salary tables.",
+  "notes": "Worker 08 Phase 2 done. Trap questions split in 3 tabs (behavioral 10, weakness-detectors 10, legal/personal 10). Pre-Interview: 6 cards (Research/Outfit/Body Language/Voice/Documents/24h). Post-Interview: 4 cards with thank-you template + cadence + multi-offers + rejection."
 }

@@ -1,0 +1,23 @@
+{
+  "worker": "08",
+  "phase_completed": 2,
+  "phases_total": 5,
+  "title": "30 Trap Questions + Pre-Interview Toolkit + Post-Interview Playbook",
+  "lines_added": 660,
+  "branch": "worker-08-complete",
+  "files_modified": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "sections_added": [
+    "Section D: 30 Trap Questions in 3 tabs (behavioral, weakness-detectors, legal/personal)",
+    "Section E: Pre-Interview Toolkit (Research, Outfit, Body Language, Voice Prep, Documents, 24h before)",
+    "Section F: Post-Interview Playbook (Thank-you template, Follow-up cadence, Multiple offers, Rejecting politely)"
+  ],
+  "localStorage_keys": [],
+  "open_threads": [
+    "Phase 3: Salary Negotiation Calculator IQ + Iraq Salary tables"
+  ],
+  "next_action": "Continue Worker 08 Phase 3"
+}
