@@ -1,0 +1,27 @@
+{
+  "worker": "04",
+  "worker_name": "ACCOUNTING_CASHIER",
+  "phase": 2,
+  "title": "Iraqi COA + IFRS vs Local + 10 Ratios",
+  "branch": "worker-04-phase-2",
+  "completed_at": "2026-05-15T07:25:00Z",
+  "lines_added": 639,
+  "files_modified": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "html_mounts": [
+    "section.acc-standards[data-acc-phase=\"2\"]",
+    "article[data-acc-lab=\"coa\"]",
+    "article[data-acc-lab=\"ifrs\"]",
+    "article[data-acc-lab=\"ratios\"]"
+  ],
+  "data_breakdown": {
+    "coa_groups": 5,
+    "coa_accounts_total": 36,
+    "ifrs_table_rows": 6,
+    "ratios_cards": 10
+  },
+  "next_phase": "Tax Calculator IQ + Iraqi Tax tables + Salary Slip generator"
+}
