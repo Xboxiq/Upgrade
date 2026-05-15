@@ -9648,6 +9648,7 @@ document.addEventListener('DOMContentLoaded', () => {
     bindAccordion();
     animateDimBars();
     bindTrapTabs();
+    bindCalculator();
   }
 
   function bindTrapTabs(){
@@ -9671,6 +9672,206 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
     });
+  }
+
+  /* =========================
+     SALARY CALCULATOR IQ
+     Reference data + dynamic plan generator
+     localStorage: upg_salary_drafts (saved scenarios)
+     ========================= */
+  var SALARY_BASE = {
+    sales_jr:    { p25:600000,    median:850000,    p75:1400000,   label:'Sales Junior' },
+    account_mgr: { p25:1500000,   median:2200000,   p75:3500000,   label:'Account Manager' },
+    cc_agent:    { p25:500000,    median:700000,    p75:1100000,   label:'Call Center Agent' },
+    cc_lead:     { p25:900000,    median:1300000,   p75:1900000,   label:'Call Center Team Lead' },
+    prog_jr:     { p25:700000,    median:1100000,   p75:1800000,   label:'Junior Programmer' },
+    prog_mid:    { p25:1500000,   median:2200000,   p75:3500000,   label:'Mid Programmer' },
+    prog_sr:     { p25:3000000,   median:4500000,   p75:7000000,   label:'Senior Programmer' },
+    acct_jr:     { p25:600000,    median:850000,    p75:1300000,   label:'Junior Accountant' },
+    acct_sr:     { p25:1200000,   median:1800000,   p75:3000000,   label:'Senior Accountant' },
+    cashier:     { p25:450000,    median:600000,    p75:850000,    label:'Cashier' },
+    smm:         { p25:600000,    median:1100000,   p75:2000000,   label:'Social Media Manager' },
+    mkt_mgr:     { p25:2000000,   median:3200000,   p75:5000000,   label:'Marketing Manager' },
+    phone_tech:  { p25:700000,    median:1300000,   p75:3000000,   label:'Phone Tech' },
+    hr_spec:     { p25:900000,    median:1400000,   p75:2200000,   label:'HR Specialist' },
+    ops_mgr:     { p25:2500000,   median:3800000,   p75:5500000,   label:'Operations Manager' }
+  };
+  var IQD_PER_USD = 1310; // approximate
+
+  function fmtIQD(n){
+    if (n >= 1000000) return (n/1000000).toFixed(2).replace(/\.?0+$/,'') + 'M IQD';
+    if (n >= 1000)    return Math.round(n/1000) + 'k IQD';
+    return Math.round(n) + ' IQD';
+  }
+  function fmtUSD(n){
+    var v = n / IQD_PER_USD;
+    return '~$' + Math.round(v).toLocaleString('en-US');
+  }
+
+  function getChipsValue(container){
+    if (!container) return [];
+    var multi = container.classList.contains('multi');
+    var actives = container.querySelectorAll('.hrm-calc-chip.active');
+    if (!multi){
+      var c = actives[0];
+      return c ? { val:c.getAttribute('data-val'), mult: parseFloat(c.getAttribute('data-mult')||'1') } : null;
+    }
+    var arr = [];
+    actives.forEach(function(c){
+      arr.push({ val:c.getAttribute('data-val'), label:c.textContent.trim(), mult:parseFloat(c.getAttribute('data-mult')||'0') });
+    });
+    return arr;
+  }
+
+  function bindCalculator(){
+    var page = document.getElementById('page-hrmastery');
+    if (!page) return;
+    var calc = page.querySelector('.hrm-calc');
+    if (!calc || calc.__hrmBound) return;
+    calc.__hrmBound = true;
+
+    // chip toggling
+    page.querySelectorAll('.hrm-calc-chips').forEach(function(group){
+      var multi = group.classList.contains('multi');
+      group.querySelectorAll('.hrm-calc-chip').forEach(function(chip){
+        chip.addEventListener('click', function(){
+          if (multi){
+            chip.classList.toggle('active');
+          } else {
+            group.querySelectorAll('.hrm-calc-chip').forEach(function(c){ c.classList.remove('active'); });
+            chip.classList.add('active');
+          }
+        });
+      });
+    });
+
+    // exp slider live label
+    var exp = page.querySelector('#hrmCalcExp');
+    var expVal = page.querySelector('#hrmCalcExpVal');
+    if (exp && expVal){
+      exp.addEventListener('input', function(){
+        expVal.textContent = exp.value;
+      });
+    }
+
+    // GO
+    var btn = page.querySelector('#hrmCalcGo');
+    if (btn){
+      btn.addEventListener('click', function(){
+        runCalculator();
+      });
+    }
+  }
+
+  function runCalculator(){
+    var page = document.getElementById('page-hrmastery');
+    if (!page) return;
+    var roleKey = page.querySelector('#hrmCalcRole').value;
+    var exp = parseInt(page.querySelector('#hrmCalcExp').value, 10) || 0;
+    var loc = getChipsValue(page.querySelector('#hrmCalcLoc'));
+    var corp = getChipsValue(page.querySelector('#hrmCalcCorp'));
+    var skills = getChipsValue(page.querySelector('#hrmCalcSkills')) || [];
+    var base = SALARY_BASE[roleKey];
+    if (!base) return;
+
+    // Experience adjustment: 0->0%, 5->+8%, 10->+18%, 15+->+30%
+    var expMult = 1 + Math.min(0.30, exp * 0.022);
+    var locMult = loc ? loc.mult : 1.0;
+    var corpMult = corp ? corp.mult : 1.0;
+    var skillsBoost = skills.reduce(function(s,c){ return s + c.mult; }, 0);
+    var totalMult = expMult * locMult * corpMult * (1 + skillsBoost);
+
+    var p25 = Math.round(base.p25 * totalMult / 10000) * 10000;
+    var med = Math.round(base.median * totalMult / 10000) * 10000;
+    var p75 = Math.round(base.p75 * totalMult / 10000) * 10000;
+
+    // Anchor = 5-10% above P75 (so they negotiate down to your target)
+    var anchor = Math.round(p75 * 1.08 / 10000) * 10000;
+    // Walk-away = 95% of P25 (only if you have BATNA)
+    var walkAway = Math.round(p25 * 0.95 / 10000) * 10000;
+    // Target = your real goal = midpoint between median and P75
+    var target = Math.round((med + p75) / 2 / 10000) * 10000;
+
+    // Total comp estimate: base + ~25% benefits (insurance + transport + bonus)
+    var totalCompMonthly = Math.round(target * 1.25 / 10000) * 10000;
+    var annualBase = target * 12;
+    var annualTotal = totalCompMonthly * 12 + Math.round(target * 1.5);  // +1.5 month bonus typical
+
+    // Build script
+    var script = buildNegotiationScript(base.label, anchor, target, walkAway, skills);
+
+    var html = ''
+      + '<div class="hrm-calc-result-head">📊 خطتك التفاوضية الكاملة</div>'
+
+      + '<div class="hrm-calc-bars">'
+      +   '<div class="hrm-calc-bar-row">'
+      +     '<div class="hrm-calc-bar-label"><span>Walk-away (الحد الأدنى المقبول)</span><b>' + fmtIQD(walkAway) + '</b></div>'
+      +     '<div class="hrm-calc-bar"><div class="hrm-calc-bar-fill walk" style="width:' + barW(walkAway, anchor) + '%"></div></div>'
+      +   '</div>'
+      +   '<div class="hrm-calc-bar-row">'
+      +     '<div class="hrm-calc-bar-label"><span>Median السوق</span><b>' + fmtIQD(med) + '</b></div>'
+      +     '<div class="hrm-calc-bar"><div class="hrm-calc-bar-fill median" style="width:' + barW(med, anchor) + '%"></div></div>'
+      +   '</div>'
+      +   '<div class="hrm-calc-bar-row">'
+      +     '<div class="hrm-calc-bar-label"><span>Target (هدفك الفعلي)</span><b>' + fmtIQD(target) + '</b></div>'
+      +     '<div class="hrm-calc-bar"><div class="hrm-calc-bar-fill target" style="width:' + barW(target, anchor) + '%"></div></div>'
+      +   '</div>'
+      +   '<div class="hrm-calc-bar-row">'
+      +     '<div class="hrm-calc-bar-label"><span>⚓ Anchor (الرقم الذي تطرحه أولاً)</span><b>' + fmtIQD(anchor) + '</b></div>'
+      +     '<div class="hrm-calc-bar"><div class="hrm-calc-bar-fill anchor" style="width:100%"></div></div>'
+      +   '</div>'
+      + '</div>'
+
+      + '<div class="hrm-calc-totals">'
+      +   '<div class="hrm-calc-total-card"><div class="hrm-calc-total-label">Total Comp شهري</div><div class="hrm-calc-total-val">' + fmtIQD(totalCompMonthly) + ' <small>' + fmtUSD(totalCompMonthly) + '</small></div></div>'
+      +   '<div class="hrm-calc-total-card"><div class="hrm-calc-total-label">Annual Base</div><div class="hrm-calc-total-val">' + fmtIQD(annualBase) + ' <small>' + fmtUSD(annualBase) + '</small></div></div>'
+      +   '<div class="hrm-calc-total-card"><div class="hrm-calc-total-label">Annual Total Comp</div><div class="hrm-calc-total-val">' + fmtIQD(annualTotal) + ' <small>' + fmtUSD(annualTotal) + '</small></div></div>'
+      +   '<div class="hrm-calc-total-card"><div class="hrm-calc-total-label">معامل التعديل</div><div class="hrm-calc-total-val">×' + totalMult.toFixed(2) + '</div></div>'
+      + '</div>'
+
+      + '<div class="hrm-calc-script">'
+      +   '<div class="hrm-script-tag">📜 SCRIPT تفاوض جاهز</div>'
+      +   script
+      + '</div>';
+
+    var out = page.querySelector('#hrmCalcOut');
+    if (out) out.innerHTML = html;
+
+    // Save to localStorage as last draft
+    try {
+      var draft = {
+        ts: Date.now(), role:base.label, exp:exp,
+        anchor:anchor, target:target, walkAway:walkAway, totalComp:totalCompMonthly
+      };
+      var arr = JSON.parse(localStorage.getItem('upg_salary_drafts') || '[]');
+      arr.unshift(draft); arr = arr.slice(0,10);
+      localStorage.setItem('upg_salary_drafts', JSON.stringify(arr));
+    } catch(e){}
+  }
+
+  function barW(val, ref){
+    if (ref <= 0) return 0;
+    return Math.max(8, Math.min(100, Math.round((val / ref) * 100)));
+  }
+
+  function buildNegotiationScript(role, anchor, target, walkAway, skills){
+    var skillsLine = '';
+    if (skills && skills.length){
+      var labels = skills.map(function(s){ return s.label; }).join('، ');
+      skillsLine = 'لديّ مهارات تضيف قيمة محددة: ' + labels + '. ';
+    }
+    var s = ''
+      + '<b>المرحلة 1 — لو سُئلتَ عن الراتب أولاً:</b>\n'
+      + '"شكراً، قبل أن أذكر رقماً أحب أن أفهم النطاق المعتمد للدور — هذا يساعدني أعرف لو نحن في نفس الصفحة."\n\n'
+      + '<b>المرحلة 2 — لو ضغطوا لرقم:</b>\n'
+      + '"بناءً على بحثي للسوق العراقي لأدوار ' + role + ' بمستوى مماثل، النطاق المنطقي بين ' + fmtIQD(target) + ' و ' + fmtIQD(anchor) + '. ' + skillsLine + 'لكني منفتح على نقاش الحزمة الكاملة."\n\n'
+      + '<b>المرحلة 3 — لو جاء عرضهم أقل من ' + fmtIQD(target) + ':</b>\n'
+      + '(صمت 7 ثوانٍ) ثم: "أُقدّر العرض. بصراحة، توقعت رقماً أقرب لـ ' + fmtIQD(anchor) + '. هل هناك مرونة على base أو على bonus/تأمين/إجازات؟"\n\n'
+      + '<b>المرحلة 4 — لو وصلوا لـ ' + fmtIQD(target) + ':</b>\n'
+      + '"شكراً، هذا قريب جداً من توقعي. لو نضيف [بدل تدريب 200,000 IQD سنوياً / يوم remote إضافي / مراجعة 6 أشهر] نتفق اليوم."\n\n'
+      + '<b>المرحلة 5 — حدّك الأدنى ' + fmtIQD(walkAway) + ':</b>\n'
+      + 'أي عرض أقل من هذا = ارفض باحترام. "أُقدّر وقتكم، لكن هذا الرقم لا يعكس قيمة الدور بالنسبة لي. أتمنى لكم النجاح في إيجاد المرشح المناسب."';
+    return s;
   }
 
   if (document.readyState === 'loading'){

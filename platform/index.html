@@ -15231,6 +15231,189 @@ const bird = { ...canMove(), ...canFly() };
       <!-- Phase 2 marker -->
       <div id="hrm-phase-2-end" style="display:none;"></div>
 
+      <!-- ========== PHASE 3 START ========== -->
+
+      <!-- Section G — Salary Negotiation Science -->
+      <div class="hrm-section-title-wrap" style="margin-top:32px;">
+        <div class="hrm-section-eyebrow">G · علم التفاوض</div>
+        <h2 class="hrm-section-title">المبادئ الستة قبل أن تذكر أي رقم</h2>
+        <p class="hrm-section-sub">90% من فقدان الراتب يحدث بسبب جهل المبادئ، لا بسبب ضعف المهارة. اعرف اللعبة قبل أن تلعب.</p>
+      </div>
+
+      <div class="hrm-neg-grid">
+        <div class="hrm-neg-card" data-tint="#A855F7">
+          <div class="hrm-neg-num">01</div>
+          <div class="hrm-neg-name">Anchor First (لكن بحذر)</div>
+          <div class="hrm-neg-text">لو سُئلت عن الراتب أولاً وكنت <b>تعرف نطاق السوق جيداً</b> → أعطِ الـ anchor عالٍ. لو كنت <b>غير متأكد</b> → اقلب السؤال: "ما النطاق المعتمد عندكم؟"</div>
+          <div class="hrm-neg-ref">Galinsky &amp; Mussweiler (2001) — First offer bias</div>
+        </div>
+        <div class="hrm-neg-card" data-tint="#EC4899">
+          <div class="hrm-neg-num">02</div>
+          <div class="hrm-neg-name">Range Theory</div>
+          <div class="hrm-neg-text">قدّم range نهايته السفلى = <b>هدفك الفعلي</b>. مثال: تريد 2.5M → قدّم "2.5-3.2M". الدراسة: 75% يقبلون نقطة وسط الـ range.</div>
+          <div class="hrm-neg-ref">Ames &amp; Mason (2015) — Bolstering range offers</div>
+        </div>
+        <div class="hrm-neg-card" data-tint="#F59E0B">
+          <div class="hrm-neg-num">03</div>
+          <div class="hrm-neg-name">Total Compensation</div>
+          <div class="hrm-neg-text">الراتب الأساسي = 60-75% من الحزمة. الباقي: bonus، تأمين، إجازات، مواصلات، تدريب، remote، vesting. <b>تفاوض الحزمة كاملة</b>.</div>
+          <div class="hrm-neg-ref">SHRM Compensation Benchmark Reports</div>
+        </div>
+        <div class="hrm-neg-card" data-tint="#22C55E">
+          <div class="hrm-neg-num">04</div>
+          <div class="hrm-neg-name">BATNA — قوتك الحقيقية</div>
+          <div class="hrm-neg-text">Best Alternative To Negotiated Agreement. <b>اعرف بديلك</b> قبل أن تدخل. لو ما عندك بديل = ستقبل أي شي. عرض ثاني = ورقة قوية.</div>
+          <div class="hrm-neg-ref">Fisher, Ury &amp; Patton — Getting to Yes (1981)</div>
+        </div>
+        <div class="hrm-neg-card" data-tint="#3B82F6">
+          <div class="hrm-neg-num">05</div>
+          <div class="hrm-neg-name">ZOPA — منطقة الاتفاق</div>
+          <div class="hrm-neg-text">Zone Of Possible Agreement = التداخل بين أقصى ما تقبله أنت وأقصى ما يدفعونه هم. مهمتك: <b>اكتشف ZOPA</b> بدون كشف ورقتك أولاً.</div>
+          <div class="hrm-neg-ref">Lewicki &amp; Hiam — Mastering Business Negotiation</div>
+        </div>
+        <div class="hrm-neg-card" data-tint="#EF4444">
+          <div class="hrm-neg-num">06</div>
+          <div class="hrm-neg-name">Silence is a Tool</div>
+          <div class="hrm-neg-text">بعد عرضهم، <b>صمت 7 ثوانٍ</b>. الصمت يجعلهم يفكرون: "هل عرضي ضعيف؟". 40% من الوقت يحسّنون العرض بدون أن تسأل.</div>
+          <div class="hrm-neg-ref">Voss — Never Split the Difference (2016)</div>
+        </div>
+      </div>
+
+      <!-- Section H — Iraq Salary Reality Table -->
+      <div class="hrm-section-title-wrap" style="margin-top:32px;">
+        <div class="hrm-section-eyebrow">H · الواقع العراقي</div>
+        <h2 class="hrm-section-title">جدول رواتب العراق 2026 — مرجع P25 / Median / P75</h2>
+        <p class="hrm-section-sub">أرقام تقديرية مبنية على عينات من Asiacell, Earthlink, Zain, البنوك التجارية، وشركات IT. الأرقام بـ <b>IQD/شهر</b>. ضرب 1.5 لـ Erbil، خصم 10% للجنوب.</p>
+      </div>
+
+      <div class="hrm-salary-table-wrap">
+        <table class="hrm-salary-table" id="hrmSalaryTable">
+          <thead>
+            <tr>
+              <th>الوظيفة</th>
+              <th>P25 (low)</th>
+              <th>Median</th>
+              <th>P75 (high)</th>
+              <th>USD ~Median</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Sales Junior</td><td>600,000</td><td>850,000</td><td>1,400,000</td><td>~$650</td></tr>
+            <tr><td>Account Manager</td><td>1,500,000</td><td>2,200,000</td><td>3,500,000</td><td>~$1,680</td></tr>
+            <tr><td>Call Center Agent</td><td>500,000</td><td>700,000</td><td>1,100,000</td><td>~$535</td></tr>
+            <tr><td>Call Center Team Lead</td><td>900,000</td><td>1,300,000</td><td>1,900,000</td><td>~$990</td></tr>
+            <tr><td>Junior Programmer</td><td>700,000</td><td>1,100,000</td><td>1,800,000</td><td>~$840</td></tr>
+            <tr class="highlight"><td>Mid Programmer</td><td>1,500,000</td><td>2,200,000</td><td>3,500,000</td><td>~$1,680</td></tr>
+            <tr><td>Senior Programmer</td><td>3,000,000</td><td>4,500,000</td><td>7,000,000</td><td>~$3,435</td></tr>
+            <tr><td>Junior Accountant</td><td>600,000</td><td>850,000</td><td>1,300,000</td><td>~$650</td></tr>
+            <tr><td>Senior Accountant</td><td>1,200,000</td><td>1,800,000</td><td>3,000,000</td><td>~$1,375</td></tr>
+            <tr><td>Cashier</td><td>450,000</td><td>600,000</td><td>850,000</td><td>~$460</td></tr>
+            <tr><td>Social Media Manager</td><td>600,000</td><td>1,100,000</td><td>2,000,000</td><td>~$840</td></tr>
+            <tr><td>Marketing Manager</td><td>2,000,000</td><td>3,200,000</td><td>5,000,000</td><td>~$2,445</td></tr>
+            <tr><td>Phone Tech (Repair)</td><td>700,000</td><td>1,300,000</td><td>3,000,000</td><td>~$990</td></tr>
+            <tr><td>HR Specialist</td><td>900,000</td><td>1,400,000</td><td>2,200,000</td><td>~$1,070</td></tr>
+            <tr><td>Operations Manager</td><td>2,500,000</td><td>3,800,000</td><td>5,500,000</td><td>~$2,900</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="hrm-callout">
+        <div class="hrm-callout-icon">📐</div>
+        <div>
+          <b>تعديل الموقع:</b> Erbil/Sulaymaniyah ×1.5، البصرة/النفط ×1.4، النجف/كربلاء ×0.9. <b>تعديل الشركة:</b> Asiacell/Earthlink/Zain ×1.2، البنوك الخاصة ×1.15، الشركات الناشئة ×0.85 (لكن مع equity).
+        </div>
+      </div>
+
+      <!-- Section I — Salary Calculator IQ (Lab 1) -->
+      <div class="hrm-section-title-wrap" style="margin-top:32px;">
+        <div class="hrm-section-eyebrow">I · المختبر التفاعلي #1</div>
+        <h2 class="hrm-section-title">Salary Negotiation Calculator IQ ⭐ — أهم Lab في المنصة</h2>
+        <p class="hrm-section-sub">حدد الوظيفة + الخبرة + الموقع + المهارات النادرة → احصل على Anchor + Walk-away + Total Comp + Script تفاوض جاهز.</p>
+      </div>
+
+      <div class="hrm-calc">
+        <div class="hrm-calc-grid">
+          <!-- Inputs -->
+          <div class="hrm-calc-inputs">
+            <div class="hrm-calc-row">
+              <label class="hrm-calc-label" for="hrmCalcRole">الوظيفة</label>
+              <select class="hrm-calc-input" id="hrmCalcRole">
+                <option value="sales_jr">Sales Junior</option>
+                <option value="account_mgr">Account Manager</option>
+                <option value="cc_agent">Call Center Agent</option>
+                <option value="cc_lead">Call Center Team Lead</option>
+                <option value="prog_jr">Junior Programmer</option>
+                <option value="prog_mid" selected>Mid Programmer</option>
+                <option value="prog_sr">Senior Programmer</option>
+                <option value="acct_jr">Junior Accountant</option>
+                <option value="acct_sr">Senior Accountant</option>
+                <option value="cashier">Cashier</option>
+                <option value="smm">Social Media Manager</option>
+                <option value="mkt_mgr">Marketing Manager</option>
+                <option value="phone_tech">Phone Tech</option>
+                <option value="hr_spec">HR Specialist</option>
+                <option value="ops_mgr">Operations Manager</option>
+              </select>
+            </div>
+
+            <div class="hrm-calc-row">
+              <label class="hrm-calc-label" for="hrmCalcExp">سنوات الخبرة: <span id="hrmCalcExpVal">3</span></label>
+              <input type="range" class="hrm-calc-range" id="hrmCalcExp" min="0" max="15" step="1" value="3">
+              <div class="hrm-calc-range-labels">
+                <span>0</span><span>5</span><span>10</span><span>15+</span>
+              </div>
+            </div>
+
+            <div class="hrm-calc-row">
+              <label class="hrm-calc-label">الموقع</label>
+              <div class="hrm-calc-chips" id="hrmCalcLoc" data-name="loc">
+                <button class="hrm-calc-chip active" data-val="bgd" data-mult="1.0">بغداد</button>
+                <button class="hrm-calc-chip" data-val="erb" data-mult="1.5">أربيل/السليمانية</button>
+                <button class="hrm-calc-chip" data-val="bsr" data-mult="1.4">البصرة/النفط</button>
+                <button class="hrm-calc-chip" data-val="oth" data-mult="0.9">محافظات أخرى</button>
+              </div>
+            </div>
+
+            <div class="hrm-calc-row">
+              <label class="hrm-calc-label">نوع الشركة</label>
+              <div class="hrm-calc-chips" id="hrmCalcCorp" data-name="corp">
+                <button class="hrm-calc-chip active" data-val="local" data-mult="1.0">محلية متوسطة</button>
+                <button class="hrm-calc-chip" data-val="telecom" data-mult="1.2">Asiacell/Zain/Earthlink</button>
+                <button class="hrm-calc-chip" data-val="bank" data-mult="1.15">بنك خاص</button>
+                <button class="hrm-calc-chip" data-val="startup" data-mult="0.85">شركة ناشئة</button>
+                <button class="hrm-calc-chip" data-val="ngo" data-mult="1.3">NGO/دولية</button>
+              </div>
+            </div>
+
+            <div class="hrm-calc-row">
+              <label class="hrm-calc-label">مهارات نادرة (تضيف بريميوم)</label>
+              <div class="hrm-calc-chips multi" id="hrmCalcSkills" data-name="skills">
+                <button class="hrm-calc-chip" data-val="english" data-mult="0.08">إنجليزي ممتاز</button>
+                <button class="hrm-calc-chip" data-val="kurdish" data-mult="0.05">كردي</button>
+                <button class="hrm-calc-chip" data-val="cert" data-mult="0.10">شهادة دولية (CPA/PMP/AWS)</button>
+                <button class="hrm-calc-chip" data-val="leadership" data-mult="0.12">قاد فريق 3+</button>
+                <button class="hrm-calc-chip" data-val="gov" data-mult="0.08">علاقات حكومية</button>
+                <button class="hrm-calc-chip" data-val="bilingual_tech" data-mult="0.15">مزيج تقني-تجاري نادر</button>
+                <button class="hrm-calc-chip" data-val="oil" data-mult="0.20">خبرة قطاع النفط</button>
+              </div>
+            </div>
+
+            <button class="hrm-calc-go" id="hrmCalcGo">احسب الخطة الكاملة 🎯</button>
+          </div>
+
+          <!-- Outputs -->
+          <div class="hrm-calc-outputs" id="hrmCalcOut">
+            <div class="hrm-calc-empty">
+              <div class="hrm-calc-empty-icon">📊</div>
+              <div>عدّل المدخلات يساراً ثم اضغط <b>احسب الخطة الكاملة</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 3 marker -->
+      <div id="hrm-phase-3-end" style="display:none;"></div>
+
     </section><!-- /page-hrmastery -->
 
 

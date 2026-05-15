@@ -12512,3 +12512,291 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
     border:1px solid #999 !important; page-break-inside:avoid;
   }
 }
+
+
+
+/* ===========================================================
+   WORKER 08 — HR MASTERY (Phase 3)
+   Negotiation principles + Iraq Salary Table + Calculator IQ
+   =========================================================== */
+
+/* Negotiation 6 principles grid */
+#page-hrmastery .hrm-neg-grid{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap:14px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-neg-card{
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: var(--radius-lg); padding:18px;
+  position:relative; overflow:hidden;
+  transition: var(--transition);
+}
+#page-hrmastery .hrm-neg-card::before{
+  content:''; position:absolute; top:-20px; left:-20px;
+  width:90px; height:90px; border-radius:50%;
+  background: radial-gradient(circle, var(--card-tint, rgba(168,85,247,.18)), transparent 70%);
+  pointer-events:none;
+}
+#page-hrmastery .hrm-neg-card[data-tint="#A855F7"]{ --card-tint: rgba(168,85,247,.20); }
+#page-hrmastery .hrm-neg-card[data-tint="#EC4899"]{ --card-tint: rgba(236,72,153,.20); }
+#page-hrmastery .hrm-neg-card[data-tint="#F59E0B"]{ --card-tint: rgba(245,158,11,.20); }
+#page-hrmastery .hrm-neg-card[data-tint="#22C55E"]{ --card-tint: rgba(34,197,94,.20); }
+#page-hrmastery .hrm-neg-card[data-tint="#3B82F6"]{ --card-tint: rgba(59,130,246,.20); }
+#page-hrmastery .hrm-neg-card[data-tint="#EF4444"]{ --card-tint: rgba(239,68,68,.20); }
+#page-hrmastery .hrm-neg-card:hover{
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+#page-hrmastery .hrm-neg-num{
+  font-size:22px; font-weight:900; color:var(--text);
+  background: rgba(255,255,255,.04);
+  width:42px; height:42px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:10px;
+  border:1px solid var(--border);
+  position:relative; z-index:1;
+}
+#page-hrmastery .hrm-neg-name{
+  font-size:14px; font-weight:800; color:var(--text); margin-bottom:8px;
+  position:relative; z-index:1;
+}
+#page-hrmastery .hrm-neg-text{
+  font-size:12px; color:var(--text-muted); line-height:1.75; margin-bottom:8px;
+  position:relative; z-index:1;
+}
+#page-hrmastery .hrm-neg-text b{ color:var(--text); }
+#page-hrmastery .hrm-neg-ref{
+  font-size:10.5px; color:var(--text-faint); font-style:italic;
+  border-top:1px dashed rgba(255,255,255,.06);
+  padding-top:7px; position:relative; z-index:1;
+}
+
+/* Iraq Salary Table */
+#page-hrmastery .hrm-salary-table-wrap{
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: var(--radius-lg); padding:8px;
+  margin-bottom:10px; overflow-x:auto;
+}
+#page-hrmastery .hrm-salary-table{
+  width:100%; border-collapse: collapse; min-width: 540px;
+  font-size:12.5px;
+}
+#page-hrmastery .hrm-salary-table th{
+  text-align:right; padding:10px 12px;
+  font-size:11.5px; font-weight:800; color:#A855F7;
+  text-transform:uppercase; letter-spacing:0.5px;
+  border-bottom:2px solid rgba(168,85,247,.20);
+  background: rgba(168,85,247,.05);
+}
+#page-hrmastery .hrm-salary-table td{
+  padding:10px 12px; color: var(--text-muted);
+  border-bottom:1px solid rgba(255,255,255,.04);
+}
+#page-hrmastery .hrm-salary-table td:first-child{
+  color: var(--text); font-weight:700;
+}
+#page-hrmastery .hrm-salary-table tr:hover td{
+  background: rgba(168,85,247,.04);
+}
+#page-hrmastery .hrm-salary-table tr.highlight td{
+  background: rgba(168,85,247,.06);
+  font-weight:700; color: var(--text);
+}
+
+/* Calculator */
+#page-hrmastery .hrm-calc{
+  background: linear-gradient(135deg, rgba(168,85,247,.06), rgba(236,72,153,.04));
+  border:1px solid rgba(168,85,247,.25);
+  border-radius: var(--radius-lg);
+  padding:20px;
+  margin-bottom:18px;
+}
+#page-hrmastery .hrm-calc-grid{
+  display:grid; grid-template-columns: 1fr 1fr; gap:16px;
+}
+@media (max-width: 920px){
+  #page-hrmastery .hrm-calc-grid{ grid-template-columns: 1fr; }
+}
+#page-hrmastery .hrm-calc-inputs{
+  display:flex; flex-direction:column; gap:14px;
+}
+#page-hrmastery .hrm-calc-row{
+  display:flex; flex-direction:column; gap:6px;
+}
+#page-hrmastery .hrm-calc-label{
+  font-size:12px; font-weight:700; color: var(--text);
+}
+#page-hrmastery .hrm-calc-label span{
+  color:#A855F7; font-weight:900;
+}
+#page-hrmastery .hrm-calc-input,
+#page-hrmastery .hrm-calc-range{
+  width:100%; padding:10px 12px;
+  background: rgba(255,255,255,.03);
+  border:1px solid var(--border);
+  border-radius:8px;
+  color: var(--text); font-size:13px;
+  font-family: inherit;
+  outline:none;
+  transition: var(--transition);
+}
+#page-hrmastery .hrm-calc-input:focus,
+#page-hrmastery .hrm-calc-range:focus{
+  border-color: rgba(168,85,247,.5);
+  box-shadow: 0 0 0 3px rgba(168,85,247,.15);
+}
+#page-hrmastery .hrm-calc-range{
+  -webkit-appearance: none; appearance: none;
+  height: 6px; padding:0;
+  background: rgba(255,255,255,.06);
+  cursor: pointer;
+}
+#page-hrmastery .hrm-calc-range::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  width:18px; height:18px; border-radius:50%;
+  background: linear-gradient(135deg, #A855F7, #EC4899);
+  cursor: pointer; border:2px solid var(--bg);
+  box-shadow: 0 0 8px rgba(168,85,247,.5);
+}
+#page-hrmastery .hrm-calc-range::-moz-range-thumb{
+  width:18px; height:18px; border-radius:50%;
+  background: linear-gradient(135deg, #A855F7, #EC4899);
+  cursor: pointer; border:2px solid var(--bg);
+}
+#page-hrmastery .hrm-calc-range-labels{
+  display:flex; justify-content:space-between;
+  font-size:10px; color: var(--text-faint);
+  padding: 0 4px;
+}
+#page-hrmastery .hrm-calc-chips{
+  display:flex; flex-wrap:wrap; gap:6px;
+}
+#page-hrmastery .hrm-calc-chip{
+  background: rgba(255,255,255,.03);
+  color: var(--text-muted);
+  border:1px solid var(--border);
+  padding:7px 12px; border-radius:99px;
+  font-size:11.5px; font-weight:600;
+  cursor:pointer; transition: var(--transition);
+  font-family: inherit;
+}
+#page-hrmastery .hrm-calc-chip:hover{
+  border-color: var(--border-hover); color: var(--text);
+}
+#page-hrmastery .hrm-calc-chip.active{
+  background: linear-gradient(135deg, rgba(168,85,247,.20), rgba(236,72,153,.15));
+  color: #fff;
+  border-color: rgba(168,85,247,.5);
+  box-shadow: 0 0 12px rgba(168,85,247,.20);
+}
+#page-hrmastery .hrm-calc-go{
+  background: linear-gradient(135deg, #A855F7, #EC4899);
+  color:#fff; border:none;
+  padding:14px 20px; border-radius:10px;
+  font-size:13.5px; font-weight:800;
+  cursor:pointer; transition: var(--transition);
+  font-family: inherit;
+  margin-top:8px;
+}
+#page-hrmastery .hrm-calc-go:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(168,85,247,.30);
+}
+#page-hrmastery .hrm-calc-go:active{ transform: translateY(0); }
+
+/* Calc outputs */
+#page-hrmastery .hrm-calc-outputs{
+  background: rgba(0,0,0,.20);
+  border:1px solid var(--border);
+  border-radius: 12px;
+  padding:18px; min-height: 280px;
+  display:flex; flex-direction:column; gap:12px;
+}
+#page-hrmastery .hrm-calc-empty{
+  margin: auto; text-align:center;
+  color: var(--text-faint); font-size:13px;
+  display:flex; flex-direction:column; gap:10px;
+  align-items:center;
+}
+#page-hrmastery .hrm-calc-empty-icon{ font-size:48px; opacity:.5; }
+#page-hrmastery .hrm-calc-empty b{ color: var(--text); }
+
+/* Result blocks */
+#page-hrmastery .hrm-calc-result-head{
+  font-size:13px; font-weight:800; color:#A855F7;
+  text-transform:uppercase; letter-spacing:1.5px;
+  border-bottom:1px dashed rgba(255,255,255,.08);
+  padding-bottom:8px;
+}
+#page-hrmastery .hrm-calc-bars{
+  display:flex; flex-direction:column; gap:10px;
+}
+#page-hrmastery .hrm-calc-bar-row{
+  display:flex; flex-direction:column; gap:4px;
+}
+#page-hrmastery .hrm-calc-bar-label{
+  display:flex; justify-content:space-between;
+  font-size:11.5px; color: var(--text-muted);
+}
+#page-hrmastery .hrm-calc-bar-label b{ color: var(--text); font-weight:800; }
+#page-hrmastery .hrm-calc-bar{
+  height:14px; background: rgba(255,255,255,.05);
+  border-radius:99px; overflow:hidden; position:relative;
+}
+#page-hrmastery .hrm-calc-bar-fill{
+  height:100%; border-radius:99px;
+  transition: width .8s ease;
+}
+#page-hrmastery .hrm-calc-bar-fill.walk{ background: linear-gradient(90deg, #EF4444, #F59E0B); }
+#page-hrmastery .hrm-calc-bar-fill.median{ background: linear-gradient(90deg, #F59E0B, #EAB308); }
+#page-hrmastery .hrm-calc-bar-fill.target{ background: linear-gradient(90deg, #22C55E, #10B981); }
+#page-hrmastery .hrm-calc-bar-fill.anchor{ background: linear-gradient(90deg, #A855F7, #EC4899); }
+
+#page-hrmastery .hrm-calc-totals{
+  display:grid; grid-template-columns: repeat(2,1fr); gap:8px;
+  padding-top:8px;
+}
+#page-hrmastery .hrm-calc-total-card{
+  background: rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:10px; padding:10px 12px;
+}
+#page-hrmastery .hrm-calc-total-label{
+  font-size:10.5px; color: var(--text-faint);
+  text-transform:uppercase; letter-spacing:1px;
+  margin-bottom:4px;
+}
+#page-hrmastery .hrm-calc-total-val{
+  font-size:16px; font-weight:900; color: var(--text);
+}
+#page-hrmastery .hrm-calc-total-val small{
+  font-size:11px; color: var(--text-faint);
+  font-weight:600; margin-right:4px;
+}
+
+#page-hrmastery .hrm-calc-script{
+  background: rgba(168,85,247,.06);
+  border:1px solid rgba(168,85,247,.22);
+  border-radius:10px; padding:14px;
+  font-size:12.5px; color: var(--text-muted); line-height:1.85;
+  white-space: pre-wrap;
+}
+#page-hrmastery .hrm-calc-script b{ color: var(--text); }
+#page-hrmastery .hrm-calc-script .hrm-script-tag{
+  display:inline-block;
+  background: rgba(168,85,247,.20); color:#fff;
+  font-size:10px; font-weight:800;
+  padding:2px 8px; border-radius:99px;
+  margin-bottom:6px; letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+@media print{
+  #page-hrmastery .hrm-calc,
+  #page-hrmastery .hrm-salary-table-wrap,
+  #page-hrmastery .hrm-neg-card{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
