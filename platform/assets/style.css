@@ -4476,3 +4476,146 @@ html.v13 #app, html.v13 #smart-footer { z-index: 1; }
 @media (prefers-reduced-motion: reduce) {
   html.v13 body::after { animation: none; }
 }
+
+
+
+/* ============================================================
+   QUANTUM LEAP v13 · Phase 2/4
+   Conic Halo on hover + Magnetic Cursor Aura
+   (additive utilities — opt-in via .ql-halo class)
+============================================================ */
+
+/* @property registration enables transitionable rotation angle.
+   Browsers without support gracefully ignore — fallback below uses
+   keyframes-only rotation, identical visual result. */
+@property --halo-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* ── Conic Halo utility — wraps any card / surface ── */
+.ql-halo {
+  position: relative;
+  isolation: isolate;
+}
+
+.ql-halo::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--halo-angle, 0deg),
+    transparent 0deg,
+    var(--current-tint, var(--accent)) 70deg,
+    transparent 140deg,
+    var(--current-tint, var(--accent)) 210deg,
+    transparent 280deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.32s ease;
+  pointer-events: none;
+  z-index: 2;
+  animation: qlHaloRotate 6s linear infinite;
+}
+
+.ql-halo:hover::before,
+.ql-halo:focus-within::before {
+  opacity: 1;
+}
+
+@keyframes qlHaloRotate {
+  to { --halo-angle: 360deg; }
+}
+
+/* Fallback for engines without @property — transform-based rotation
+   on a child layer keeps the same effect. */
+@supports not (background: conic-gradient(from 0deg, red, blue)) {
+  .ql-halo::before { display: none; }
+}
+
+/* ── Auto-promote known card/glass surfaces to halo without HTML edits ── */
+html.v13 .ql-glass,
+html.v13 .module-card,
+html.v13 .stat-card,
+html.v13 .skill-card,
+html.v13 .call-card {
+  position: relative;
+  isolation: isolate;
+}
+
+html.v13 .ql-glass:hover::after,
+html.v13 .module-card:hover::after,
+html.v13 .stat-card:hover::after,
+html.v13 .skill-card:hover::after,
+html.v13 .call-card:hover::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--halo-angle, 0deg),
+    transparent 0deg,
+    var(--current-tint, var(--accent)) 80deg,
+    transparent 160deg,
+    var(--current-tint, var(--accent)) 240deg,
+    transparent 320deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  z-index: 2;
+  animation: qlHaloRotate 6s linear infinite;
+}
+
+/* ── Magnetic Cursor Aura — colored blob following the pointer ── */
+#cursor-aura {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--cursor-aura-size, 320px);
+  height: var(--cursor-aura-size, 320px);
+  margin-top:  calc(var(--cursor-aura-size, 320px) / -2);
+  margin-left: calc(var(--cursor-aura-size, 320px) / -2);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  background: radial-gradient(
+    circle,
+    var(--current-tint, var(--accent)) 0%,
+    transparent 60%
+  );
+  filter: blur(var(--cursor-aura-blur, 60px));
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  will-change: transform, opacity;
+}
+
+#cursor-aura.is-active { opacity: 0.35; }
+
+/* Hide aura on touch / coarse pointer devices */
+@media (pointer: coarse), (hover: none) {
+  #cursor-aura { display: none !important; }
+}
+
+/* Reduced motion: keep aura color but freeze animations */
+@media (prefers-reduced-motion: reduce) {
+  html.v13 .ql-glass:hover::after,
+  html.v13 .module-card:hover::after,
+  html.v13 .stat-card:hover::after,
+  html.v13 .skill-card:hover::after,
+  html.v13 .call-card:hover::after,
+  .ql-halo::before { animation: none; }
+}
