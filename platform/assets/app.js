@@ -4979,3 +4979,39 @@ document.addEventListener('DOMContentLoaded', () => {
     blocks.forEach(function(b){ io.observe(b); });
   });
 })();
+
+
+
+
+/* ================================================================
+   WORKER 03 · PHASE 1 — Archetype Card Toggle
+   Click an archetype card head → toggles open class.
+   Multiple-open allowed (different from psych accordion).
+================================================================ */
+(function qlArchToggle(){
+  'use strict';
+  if (window.__qlArchToggle) return;
+  window.__qlArchToggle = true;
+
+  function ready(fn){
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn);
+    } else {
+      setTimeout(fn, 0);
+    }
+  }
+
+  ready(function(){
+    var page = document.getElementById('page-callcenter');
+    if (!page) return;
+    var heads = page.querySelectorAll('[data-arch-toggle]');
+    heads.forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        var card = btn.closest('.arch-card');
+        if (!card) return;
+        card.classList.toggle('open');
+      });
+    });
+  });
+})();
