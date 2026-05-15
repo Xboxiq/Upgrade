@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-15T17:30:00Z",
+  "last_updated": "2026-05-15T17:45:00Z",
   "current": {
     "worker": "09",
     "worker_name": "PSYCHOLOGY_LAYER",
-    "phase": 1,
+    "phase": 2,
     "phases_total": 5,
     "branch": "worker-09-complete",
     "status": "in-progress"
@@ -48,8 +48,9 @@
     { "worker": "08", "phase": 3, "title": "Salary Negotiation Calculator IQ + 6 principles + Iraq Salary table", "branch": "worker-08-complete", "lines_added": 672 },
     { "worker": "08", "phase": 4, "title": "15 Scenarios Player + Job Ad Decoder + 12 HR Red Flags", "branch": "worker-08-complete", "lines_added": 920 },
     { "worker": "08", "phase": 5, "title": "Mock Screen Timer + Offer Compare + Iraq Labor Law + Cheat Sheet + 14 Citations", "branch": "worker-08-complete", "lines_added": 977 },
-    { "worker": "09", "phase": 1, "title": "7 Drives + 12 Biases in page-psych", "branch": "worker-09-complete", "lines_added": 478 }
+    { "worker": "09", "phase": 1, "title": "7 Drives + 12 Biases in page-psych", "branch": "worker-09-complete", "lines_added": 478 },
+    { "worker": "09", "phase": 2, "title": "Goleman 5 + RULER + Mood Meter Interactive in page-eq", "branch": "worker-09-complete", "lines_added": 612 }
   ],
-  "next_action": "Continue Worker 09 Phase 2 — RULER Method + Mood Meter Interactive + Goleman deep-dive in page-eq.",
-  "notes": "Worker 09 Phase 1 done on linear branch worker-09-complete (Method A). Adds 7 psychological drives + 12 cognitive biases as additive sections inside page-psych. No JS yet (static cards). Citations seeded for later consolidation phase."
+  "next_action": "Continue Worker 09 Phase 3 — 6 Self-Diagnostic Tests + scoring engine.",
+  "notes": "Worker 09 Phase 2 done. Mood Meter is first interactive widget on linear branch worker-09-complete. localStorage: upg_mood_log."
 }
