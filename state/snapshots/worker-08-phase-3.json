@@ -1,0 +1,25 @@
+{
+  "worker": "08",
+  "phase_completed": 3,
+  "phases_total": 5,
+  "title": "Salary Negotiation Calculator IQ + 6 principles + Iraq Salary table",
+  "lines_added": 672,
+  "branch": "worker-08-complete",
+  "files_modified": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "sections_added": [
+    "Section G: 6 Negotiation Principles cards (Anchor, Range, Total Comp, BATNA, ZOPA, Silence)",
+    "Section H: Iraq Salary Reality Table (15 roles with P25/Median/P75/USD)",
+    "Section I: Salary Calculator IQ (Lab 1) — role + exp slider + loc/corp/skills chips",
+    "Lab outputs: Walk-away / Median / Target / Anchor bars + Total Comp + Annual Base + Annual Total",
+    "Dynamic 5-stage negotiation script (Voss-style) generated based on inputs"
+  ],
+  "localStorage_keys": ["upg_salary_drafts"],
+  "open_threads": [
+    "Phase 4: 15 Scenarios + Job Ad Decoder + HR Red Flags"
+  ],
+  "next_action": "Continue Worker 08 Phase 4"
+}
