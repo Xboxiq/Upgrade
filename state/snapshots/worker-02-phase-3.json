@@ -1,0 +1,32 @@
+{
+  "worker": "02",
+  "phase": 3,
+  "title": "3 Interactive Labs",
+  "branch": "worker-02-phase-3",
+  "completed_at": "2026-05-15T03:00:00Z",
+  "lines_added_total": 550,
+  "files_modified": [
+    {"path": "platform/index.html",       "delta": 121},
+    {"path": "platform/assets/style.css", "delta": 197},
+    {"path": "platform/assets/app.js",    "delta": 232}
+  ],
+  "labs": [
+    {"id": "funnel",    "type": "calculator",   "inputs": 6, "outputs": 4, "math": "live",      "warnings": ["coverage<2.5x", "coverage>=3x ok"]},
+    {"id": "objection", "type": "rubric",       "axes": 4,   "prompts": 12, "scoring": "rule-based keyword indicators"},
+    {"id": "pitch",     "type": "generator",    "blocks": 5, "structure": "10s/15s/20s/10s/5s = 60s"}
+  ],
+  "anchors": [
+    "[data-labs-anchor]",
+    "[data-lab=\"funnel\"]", "[data-lab=\"objection\"]", "[data-lab=\"pitch\"]",
+    "[data-funnel=...]", "[data-funnel-out=...]", "[data-funnel-warn]",
+    "[data-ot-prompt]", "[data-ot-input]", "[data-ot-bars]", "[data-ot-feedback]",
+    "[data-pitch=...]", "[data-pitch-output]", "[data-pitch-out=...]"
+  ],
+  "css_namespaces": [
+    "#page-fieldsales .lab-card", "#page-fieldsales .lab-funnel-svg",
+    "#page-fieldsales .ot-*", "#page-fieldsales .pitch-*"
+  ],
+  "js_iife": "qlSalesLabs (window.__qlSalesLabs guard)",
+  "localStorage_keys": ["upg_pitch_drafts", "upg_objection_scores"],
+  "next_action": "Worker 02 Phase 4 — Create page-accountmgr."
+}

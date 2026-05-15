@@ -112,6 +112,15 @@ function togglePsychAcc(btn) {
         icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <rect x="2" y="3" width="20" height="18" rx="2"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="10" y1="3" x2="10" y2="21"/>
         </svg>`
+      },
+      accountmgr: {
+        title: 'إدارة الحسابات الكبيرة (KAM)',
+        breadcrumb: 'الرئيسية / وحدات التدريب / إدارة الحسابات',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M22 11l-3 3-2-2"/>
+        </svg>`
       }
     };
 
@@ -4506,4 +4515,467 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   document.addEventListener('visibilitychange', update);
   update();
+})();
+
+
+
+/* ================================================================
+   WORKER 02 · PHASE 4 — Account Management Tools
+   - NRR Calculator (live)
+   - Health Score (weighted 6-factor)
+================================================================ */
+(function qlAccountMgr(){
+  'use strict';
+  if (window.__qlAccountMgr) return;
+  window.__qlAccountMgr = true;
+
+  function $(sel){ return document.querySelector(sel); }
+  function $$(sel){ return Array.prototype.slice.call(document.querySelectorAll(sel)); }
+  function fmt(n){ return (Number(n)||0).toLocaleString('en-US'); }
+
+  /* ── NRR ─────────────────────────────────────────────────── */
+  function recalcNRR(){
+    var s = +($('[data-nrr="start"]')||{}).value || 0;
+    var e = +($('[data-nrr="expand"]')||{}).value || 0;
+    var d = +($('[data-nrr="down"]')||{}).value || 0;
+    var c = +($('[data-nrr="churn"]')||{}).value || 0;
+    var net = e - d - c;
+    var nrr = s > 0 ? ((s + net) / s) * 100 : 0;
+
+    var nrrOut = $('[data-nrr-out="nrr"]');
+    var netOut = $('[data-nrr-out="net"]');
+    var warn   = $('[data-nrr-warn]');
+    if (nrrOut) nrrOut.textContent = nrr.toFixed(1) + '%';
+    if (netOut) netOut.textContent = (net >= 0 ? '+$' : '−$') + fmt(Math.abs(Math.round(net)));
+    if (warn) {
+      if (s <= 0) { warn.hidden = true; }
+      else if (nrr >= 110) {
+        warn.hidden = false; warn.classList.add('lab-warn-ok');
+        warn.textContent = '✓ ممتاز: NRR ≥ 110% — نمو من القاعدة القائمة (المعيار الذهبي SaaS).';
+      } else if (nrr >= 100) {
+        warn.hidden = false; warn.classList.remove('lab-warn-ok');
+        warn.textContent = 'مقبول: NRR بين 100-110%. تعويض churn فقط، بلا توسّع حقيقي.';
+      } else {
+        warn.hidden = false; warn.classList.remove('lab-warn-ok');
+        warn.textContent = '⚠️ خطر: NRR < 100% — تخسر إيراد من العملاء القائمين. راجع Health Scores.';
+      }
+    }
+  }
+  $$('[data-nrr]').forEach(function(i){ i.addEventListener('input', recalcNRR); });
+  if ($('[data-lab="nrr"]')) recalcNRR();
+
+  /* ── Health Score (weighted) ─────────────────────────────── */
+  var WEIGHTS = { usage: 0.25, nps: 0.20, support: 0.15, exec: 0.15, contract: 0.10, payment: 0.15 };
+  function recalcHS(){
+    var total = 0;
+    Object.keys(WEIGHTS).forEach(function(k){
+      var input = $('[data-hs="' + k + '"]');
+      var v = input ? +input.value || 0 : 0;
+      total += v * WEIGHTS[k];
+      // sync the value display
+      if (input) {
+        var row = input.closest('.hs-row');
+        if (row) {
+          var valSpan = row.querySelector('.hs-val');
+          if (valSpan) valSpan.textContent = v;
+        }
+      }
+    });
+    var score = Math.round(total);
+    var scoreEl = $('[data-hs-score]');
+    var bandEl  = $('[data-hs-band]');
+    if (scoreEl) scoreEl.textContent = score;
+    if (bandEl) {
+      bandEl.classList.remove('hs-band-good','hs-band-mid','hs-band-bad');
+      if (score >= 80) {
+        bandEl.classList.add('hs-band-good');
+        bandEl.textContent = '✓ ممتاز — جاهز للـ Expansion. اقترح cross-sell خلال 30 يوم.';
+      } else if (score >= 50) {
+        bandEl.classList.add('hs-band-mid');
+        bandEl.textContent = 'متوسط — راقب. حدّد عاملين أضعف وضع خطة 60 يوم لرفعهما.';
+      } else {
+        bandEl.classList.add('hs-band-bad');
+        bandEl.textContent = '⚠ خطر churn — escalate فوراً. خطة Recovery 30 يوم + تواصل تنفيذي.';
+      }
+    }
+  }
+  $$('[data-hs]').forEach(function(i){ i.addEventListener('input', recalcHS); });
+  if ($('[data-lab="health"]')) recalcHS();
+})();
+
+
+
+/* ================================================================
+   WORKER 02 · PHASE 1 — Sales Frameworks Modal Controller
+   Hooks: [data-sf-row], [data-sf-modal], [data-sf-close]
+   - Click / Enter / Space on a row opens the matching modal.
+   - Overlay click, close button, or ESC closes it.
+   - Focus trap is light (returns focus to trigger row on close).
+   - Idempotent: guards against double-binding via window.__sfBound.
+================================================================ */
+(function qlSalesFrameworks(){
+  'use strict';
+  if (window.__sfBound) return;
+  window.__sfBound = true;
+
+  var lastTrigger = null;
+
+  function getModal(key){
+    return document.querySelector('[data-sf-modal="' + key + '"]');
+  }
+
+  function openModal(key){
+    var modal = getModal(key);
+    if (!modal) return;
+    modal.hidden = false;
+    document.body.classList.add('sf-modal-open');
+    var btn = modal.querySelector('.sf-modal-close');
+    if (btn) { try { btn.focus({ preventScroll: true }); } catch(_){} }
+  }
+
+  function closeModal(modal){
+    if (!modal || modal.hidden) return;
+    modal.hidden = true;
+    if (!document.querySelector('.sf-modal:not([hidden])')) {
+      document.body.classList.remove('sf-modal-open');
+    }
+    if (lastTrigger) {
+      try { lastTrigger.focus({ preventScroll: true }); } catch(_){}
+      lastTrigger = null;
+    }
+  }
+
+  function closeAll(){
+    document.querySelectorAll('.sf-modal:not([hidden])').forEach(closeModal);
+  }
+
+  document.addEventListener('click', function(e){
+    var row = e.target.closest && e.target.closest('[data-sf-row]');
+    if (row) {
+      lastTrigger = row;
+      openModal(row.getAttribute('data-sf-row'));
+      return;
+    }
+    if (e.target.closest && e.target.closest('[data-sf-close]')) {
+      var modal = e.target.closest('.sf-modal');
+      closeModal(modal);
+    }
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' || e.keyCode === 27) { closeAll(); return; }
+    var row = e.target && e.target.matches && e.target.matches('[data-sf-row]') ? e.target : null;
+    if (!row) return;
+    if (e.key === 'Enter' || e.key === ' ' || e.keyCode === 13 || e.keyCode === 32) {
+      e.preventDefault();
+      lastTrigger = row;
+      openModal(row.getAttribute('data-sf-row'));
+    }
+  });
+})();
+
+
+
+/* ================================================================
+   WORKER 02 · PHASE 3 — Interactive Sales Labs
+   - Lab 1: Funnel Calculator (live math + SVG labels + warning)
+   - Lab 2: Objection Trainer (rule-based 4-axis rubric)
+   - Lab 3: Pitch Builder (template-driven, 60s structure)
+   localStorage: upg_pitch_drafts (last pitch only), upg_objection_scores (last 10)
+================================================================ */
+(function qlSalesLabs(){
+  'use strict';
+  if (window.__qlSalesLabs) return;
+  window.__qlSalesLabs = true;
+
+  function $(sel, root){ return (root || document).querySelector(sel); }
+  function $$(sel, root){ return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+  function fmt(n){ return (Number(n)||0).toLocaleString('en-US'); }
+  function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+
+  /* ── Lab 1: Funnel ─────────────────────────────────────────── */
+  function recalcFunnel(){
+    var leads  = +($('[data-funnel="leads"]')||{}).value || 0;
+    var r1     = clamp(+($('[data-funnel="r1"]')||{}).value || 0, 0, 100) / 100;
+    var r2     = clamp(+($('[data-funnel="r2"]')||{}).value || 0, 0, 100) / 100;
+    var r3     = clamp(+($('[data-funnel="r3"]')||{}).value || 0, 0, 100) / 100;
+    var size   = +($('[data-funnel="size"]')||{}).value || 0;
+    var quota  = +($('[data-funnel="quota"]')||{}).value || 0;
+
+    var qual = leads * r1;
+    var prop = qual  * r2;
+    var won  = prop  * r3;
+    var revenue = won * size;
+    // Pipeline coverage: total proposal-stage value / quota
+    var pipelineValue = prop * size;
+    var coverage = quota > 0 ? (pipelineValue / quota) : 0;
+
+    setText('[data-funnel-label="leads"]', fmt(Math.round(leads)));
+    setText('[data-funnel-label="qual"]',  fmt(Math.round(qual)));
+    setText('[data-funnel-label="prop"]',  fmt(Math.round(prop)));
+    setText('[data-funnel-label="won"]',   fmt(Math.round(won)));
+
+    setText('[data-funnel-out="deals"]',   fmt(Math.round(won)));
+    setText('[data-funnel-out="revenue"]', '$' + fmt(Math.round(revenue)));
+    setText('[data-funnel-out="coverage"]', coverage.toFixed(2) + 'x');
+
+    var warn = $('[data-funnel-warn]');
+    if (warn) {
+      if (quota <= 0) {
+        warn.hidden = true;
+      } else if (coverage < 2.5) {
+        warn.hidden = false;
+        warn.classList.remove('lab-warn-ok');
+        warn.textContent = '⚠️ خطر: Pipeline Coverage ' + coverage.toFixed(2) + 'x أقل من 2.5x — لن تحقق الـ quota. ابحث عن leads إضافية أو حسّن نسبة Qualified→Proposal.';
+      } else if (coverage >= 3) {
+        warn.hidden = false;
+        warn.classList.add('lab-warn-ok');
+        warn.textContent = '✓ ممتاز: Coverage ' + coverage.toFixed(2) + 'x ضمن المعيار الصحي (≥ 3x).';
+      } else {
+        warn.hidden = false;
+        warn.classList.remove('lab-warn-ok');
+        warn.textContent = 'تنبيه: Coverage ' + coverage.toFixed(2) + 'x مقبول لكن قريب من الحد الأدنى. زِد الـ leads أو حسّن التحويل.';
+      }
+    }
+  }
+  function setText(sel, val){ var el = $(sel); if (el) el.textContent = val; }
+
+  $$('[data-funnel]').forEach(function(input){
+    input.addEventListener('input', recalcFunnel);
+  });
+  if ($('[data-lab="funnel"]')) recalcFunnel();
+
+  /* ── Lab 2: Objection Trainer (rule-based) ─────────────────── */
+  var OBJECTIONS = [
+    'غاااالي والله، ما يستاهل هل المبلغ.',
+    'خل أفكر وأرجعلك بكرة.',
+    'اخويه عنده هذا الشي بنص السعر.',
+    'ميزانيتنا قاطعة هل سنة، السنة الجاية ممكن.',
+    'لازم آخذ موافقة المدير قبل أمضي.',
+    'نشوف بالأشهر الجاية، الحين مو أولوية.',
+    'الشركة الفلانية اتصلت بينا قبلكم.',
+    'حضرتك ما عندك مكتب بالعراق؟',
+    'السعر بالدولار لو دينار؟ الصرف يتغيّر.',
+    'الدفع كاش لو حوالة؟',
+    'نجرب شهر بس، وبعدين نحكي.',
+    'خلي مديرك يتصل بنا، أنت مو متخوّل.'
+  ];
+  // Per-axis indicator tokens (each indicator: 1 point if present in answer)
+  var INDICATORS = {
+    empathy:    ['أفهم', 'أعرف', 'طبيعي', 'حقك', 'أحترم', 'صح', 'منطقي', 'معك', 'أتفق'],
+    reframe:    ['بالمقارنة', 'القيمة', 'تكلفة', 'ROI', 'لو ما', 'عائد', 'فرق', 'ميزة', 'سؤال', 'تخيّل', 'الحقيقة'],
+    specific:   ['د.ع', 'دينار', 'ألف', 'مليون', 'يوم', 'شهر', 'ساعة', '%', 'SLA', 'عميل', 'مرة', 'حالة'],
+    forward:    ['نتفق', 'موعد', 'نمضي', 'الخطوة', 'بكرة', 'ممكن', 'نحجز', 'عقد', 'pilot', 'تجربة', 'ندخل', 'نوقّع']
+  };
+  function score(text){
+    var t = (text || '').toLowerCase();
+    var axes = {};
+    Object.keys(INDICATORS).forEach(function(axis){
+      var hits = 0;
+      INDICATORS[axis].forEach(function(tok){
+        if (t.indexOf(tok.toLowerCase()) >= 0) hits++;
+      });
+      // 5-point scale: cap at 5
+      axes[axis] = clamp(hits, 0, 5);
+    });
+    // length sanity: ultra-short answer halves all (no real answer)
+    if (t.replace(/\s+/g,' ').trim().length < 40) {
+      Object.keys(axes).forEach(function(k){ axes[k] = Math.max(0, axes[k] - 2); });
+    }
+    return axes;
+  }
+  function renderScore(s){
+    var labels = { empathy: 'Empathy (تعاطف)', reframe: 'Reframe (إعادة تأطير)', specific: 'Specificity (دقة)', forward: 'Forward Motion (تحريك للأمام)' };
+    var bars = $('[data-ot-bars]');
+    if (bars) {
+      bars.innerHTML = Object.keys(s).map(function(k){
+        var pct = (s[k] / 5) * 100;
+        return '<div class="ot-bar"><span>' + labels[k] + '</span>' +
+               '<span class="ot-bar-track"><span class="ot-bar-fill" style="inline-size:' + pct + '%;width:' + pct + '%;"></span></span>' +
+               '<span class="ot-bar-val">' + s[k] + '/5</span></div>';
+      }).join('');
+    }
+    var fb = $('[data-ot-feedback]');
+    if (fb) {
+      var tips = [];
+      if (s.empathy < 2)  tips.push('ابدأ بإقرار: «أفهم» / «طبيعي تسأل» قبل ما تردّ. التعاطف يفتح الأذن.');
+      if (s.reframe < 2)  tips.push('أعد تأطير الاعتراض — اربطه بالقيمة (ROI / تكلفة عدم الفعل) لا بالسعر فقط.');
+      if (s.specific < 2) tips.push('أضف رقم محدد: د.ع/USD/أيام/% — الأرقام تُسكت الجدل.');
+      if (s.forward < 2)  tips.push('أنهِ بخطوة واضحة: «نحجز موعد بكرة؟» — لا تترك الكرة ساكنة.');
+      if (!tips.length) tips.push('ردّ متين على كل المحاور. حسّن الأسلوب بتنويع نبرة الـ empathy.');
+      fb.innerHTML = '<b>توصيات:</b><ul>' + tips.map(function(t){ return '<li>' + t + '</li>'; }).join('') + '</ul>';
+    }
+    var box = $('[data-ot-result]');
+    if (box) box.hidden = false;
+
+    // persist last 10
+    try {
+      var k = 'upg_objection_scores';
+      var arr = JSON.parse(localStorage.getItem(k) || '[]');
+      arr.push({ ts: Date.now(), s: s });
+      if (arr.length > 10) arr = arr.slice(-10);
+      localStorage.setItem(k, JSON.stringify(arr));
+    } catch(_){}
+  }
+  var newBtn   = $('[data-ot-new]');
+  var scoreBtn = $('[data-ot-score]');
+  if (newBtn) newBtn.addEventListener('click', function(){
+    var idx = Math.floor(Math.random() * OBJECTIONS.length);
+    var p = $('[data-ot-prompt]');
+    if (p) p.textContent = OBJECTIONS[idx];
+    var box = $('[data-ot-result]');
+    if (box) box.hidden = true;
+    var input = $('[data-ot-input]');
+    if (input) input.value = '';
+  });
+  if (scoreBtn) scoreBtn.addEventListener('click', function(){
+    var input = $('[data-ot-input]');
+    var txt = input ? input.value : '';
+    if (!txt || txt.trim().length < 3) {
+      alert('اكتب ردك أولاً قبل التقييم.');
+      return;
+    }
+    renderScore(score(txt));
+  });
+
+  /* ── Lab 3: Pitch Builder ──────────────────────────────────── */
+  var CTA_TEXT = {
+    demo:    'هل نحجز Demo قصيرة 15 دقيقة هذا الأسبوع؟',
+    pilot:   'نبدأ Pilot 30 يوم بمعايير نتفق عليها سوا؟',
+    meeting: 'نرتّب لقاء قصير مع مديرك يوم الأحد القادم؟',
+    trial:   'نفعّل لك تجربة مجانية 14 يوم اليوم؟'
+  };
+  function buildPitch(){
+    function v(k){ var el = $('[data-pitch="' + k + '"]'); return (el && el.value || '').trim(); }
+    var product  = v('product')  || '[المنتج]';
+    var audience = v('audience') || '[العميل]';
+    var problem  = v('problem')  || '[المشكلة]';
+    var solution = v('solution') || '[الحل]';
+    var diff     = v('diff')     || '[الـ Differentiator]';
+    var proof    = v('proof')    || '[Proof Point]';
+    var cta      = v('cta')      || 'demo';
+
+    var hookText     = 'كم من ' + audience + ' يخسرون يومياً بسبب ' + problem + '؟';
+    var problemText  = 'المشكلة: ' + problem + '. النتيجة: وقت ضائع، أرقام غير موثوقة، وقرارات مبنية على تخمين.';
+    var solutionText = product + ' = ' + solution + '. الفرق الجوهري: ' + diff + '.';
+    var proofText    = 'دليل ميداني: ' + proof + '.';
+    var ctaText      = CTA_TEXT[cta] || CTA_TEXT.demo;
+
+    setOut('hook',     hookText);
+    setOut('problem',  problemText);
+    setOut('solution', solutionText);
+    setOut('proof',    proofText);
+    setOut('cta',      ctaText);
+    var out = $('[data-pitch-output]');
+    if (out) out.hidden = false;
+
+    try {
+      localStorage.setItem('upg_pitch_drafts', JSON.stringify({
+        ts: Date.now(),
+        hook: hookText, problem: problemText, solution: solutionText, proof: proofText, cta: ctaText
+      }));
+    } catch(_){}
+  }
+  function setOut(k, v){ var el = $('[data-pitch-out="' + k + '"]'); if (el) el.textContent = v; }
+
+  var genBtn = $('[data-pitch-generate]');
+  if (genBtn) genBtn.addEventListener('click', buildPitch);
+
+  var copyBtn = $('[data-pitch-copy]');
+  if (copyBtn) copyBtn.addEventListener('click', function(){
+    var parts = ['hook','problem','solution','proof','cta'].map(function(k){
+      var el = $('[data-pitch-out="' + k + '"]');
+      return el ? el.textContent : '';
+    }).filter(Boolean);
+    var txt = parts.join('\n\n');
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt);
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = txt; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch(_){}
+        document.body.removeChild(ta);
+      }
+      var saved = $('[data-pitch-saved]');
+      if (saved) {
+        saved.hidden = false;
+        setTimeout(function(){ saved.hidden = true; }, 1800);
+      }
+    } catch(_){}
+  });
+})();
+
+
+
+/* ================================================================
+   WORKER 02 · PHASE 5 — Sales Module Progress Tracker
+   IntersectionObserver counts how many ".sales-section-header"
+   blocks have entered the viewport on #page-fieldsales,
+   updates the sticky progress pill, and persists via localStorage.
+   Key: upg_progress_sales (best-ever percentage seen).
+================================================================ */
+(function qlSalesProgress(){
+  'use strict';
+  if (window.__qlSalesProgress) return;
+  window.__qlSalesProgress = true;
+  if (!('IntersectionObserver' in window)) return;
+
+  function ready(fn){
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn);
+    } else {
+      setTimeout(fn, 0);
+    }
+  }
+
+  ready(function(){
+    var page = document.getElementById('page-fieldsales');
+    if (!page) return;
+
+    var pill   = page.querySelector('[data-sp-pill]');
+    var fill   = page.querySelector('[data-sp-fill]');
+    var pct    = page.querySelector('[data-sp-pct]');
+    var dn     = page.querySelector('[data-sp-blocks]');
+    var dt     = page.querySelector('[data-sp-total]');
+    if (!pill || !fill || !pct || !dn || !dt) return;
+
+    var blocks = page.querySelectorAll('.sales-section-header');
+    var total  = blocks.length;
+    if (!total) return;
+    var seen = new Set();
+
+    // Hydrate from storage (best ever)
+    var stored = 0;
+    try {
+      var raw = localStorage.getItem('upg_progress_sales');
+      stored = raw ? Math.max(0, Math.min(100, parseFloat(raw) || 0)) : 0;
+    } catch(_){}
+
+    function paint(){
+      var current = Math.round((seen.size / total) * 100);
+      var best    = Math.max(current, stored);
+      fill.style.inlineSize = best + '%';
+      fill.style.width      = best + '%';
+      pct.textContent       = best;
+      dn.textContent        = seen.size;
+      dt.textContent        = total;
+      if (current > stored) {
+        stored = current;
+        try { localStorage.setItem('upg_progress_sales', String(current)); } catch(_){}
+      }
+    }
+    paint();
+
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting && entry.intersectionRatio > 0.4) {
+          seen.add(entry.target);
+        }
+      });
+      paint();
+    }, { threshold: [0, 0.4, 0.75], rootMargin: '0px 0px -20% 0px' });
+
+    blocks.forEach(function(b){ io.observe(b); });
+  });
 })();
