@@ -43,23 +43,37 @@
 
   أ) اقرأ فقط الجزء المطلوب من platform/* (مثلاً 200 سطر بـ start_line)
   ب) اكتب التعديلات (CSS additive, JS in IIFE, HTML data-* hooks)
-  ج) commit على branch worker-<id>-phase-<N>:
-     - **مهم: قبل ما تعمل branch جديد، تأكد إنك على main محدّث (origin/main)**
-     - **لا تبني phases فوق بعض (no stacking) — كل branch ينطلق من main**
-     - رسالة commit موجزة بالعربي
-     - push للـ remote
-  د) حدّث state/PROGRESS.json:
-     - current.phase = N
+  ج) **بداية أول phase فقط:** أنشئ branch واحد اسمه `worker-<id>-complete` من main محدّث
+     **بقية الـ phases:** استمر على نفس الـ branch — لا تنشئ branch جديد
+  د) commit (في نفس الـ branch worker-<id>-complete):
+     - رسالة موجزة بالعربي: "phase N: <العنوان>"
+  ه) **🚨 PUSH فوراً للـ remote** — لا تنتظر نهاية الـ Worker
+     - هذا حرج: لو context limit ضرب بعد phase N، الـ phase محفوظ على GitHub
+     - الـ commits السابقة لن تضيع
+  و) حدّث state/PROGRESS.json:
+     - current.phase = N, status = "in-progress"
      - أضف entry في completed_phases[]
-     - حدّث next_action
-  ه) احفظ snapshot في state/snapshots/<worker>-phase-<N>.json
-  و) commit ثاني على نفس الـ branch بعنوان "state: update progress after phase N"
-  ز) ادمج الـ branch مع main تلقائياً عبر PR + merge:
-     - أنشئ PR
-     - أضف وصف موجز
-     - ادمج (لو الـ tool متوفر)
-     - لو ما عندك صلاحية merge، اترك الـ PR مفتوح وحدّد في next_action
-  ح) انتقل لـ Phase التالي بدون انتظار
+     - حدّث next_action: "Continue Worker <id> Phase <N+1>"
+  ز) احفظ snapshot في state/snapshots/<worker>-phase-<N>.json
+  ح) commit ثاني: "state: phase N committed and pushed"
+  ط) **🚨 PUSH ثاني فوراً** — حالة الـ progress محفوظة على remote
+  ي) فحص ميزانية context قبل المتابعة:
+     - context_remaining > 35% → ابدأ Phase التالي
+     - context_remaining ≤ 35% → اطبع 🛑 SESSION CHECKPOINT وتوقف
+       (الـ Worker ناقص لكن الـ progress محفوظ — session جديد يكمل)
+
+📌 PR الموحّد (في نهاية Worker كامل، أو نهاية session):
+- بعد آخر phase نُفّذ في هذا الـ session (سواء وصلت لـ phases_total أو توقفت بسبب context):
+  • أنشئ PR من `worker-<id>-complete` إلى main
+  • العنوان: "feat: Worker <id> — <name> (phases <done>/<total>)"
+  • الوصف: ملخص كل commit على الـ branch
+- المستخدم يدمج PR واحد فقط = كل العمل (سواء كامل أو جزئي)
+
+🛑 PUSH-AFTER-EVERY-PHASE هي القاعدة الأهم:
+- لا تكتفِ بـ commit محلي ثم تكمل phase تالي ثم push في النهاية
+- كل phase ← commit ← push ← state-commit ← push (الترتيب الصحيح)
+- السبب: context limit يضرب بدون إشعار. push المتكرر يحفظ كل phase فوراً.
+- الكلفة: 2 push extra لكل phase = ~10 ثوان. التوفير: لا تخسر 600 سطر عمل.
 
 📌 قاعدة Consolidation (مهم — تجنّبها فشل cherry-pick):
 
