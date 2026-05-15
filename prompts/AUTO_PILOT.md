@@ -44,6 +44,8 @@
   أ) اقرأ فقط الجزء المطلوب من platform/* (مثلاً 200 سطر بـ start_line)
   ب) اكتب التعديلات (CSS additive, JS in IIFE, HTML data-* hooks)
   ج) commit على branch worker-<id>-phase-<N>:
+     - **مهم: قبل ما تعمل branch جديد، تأكد إنك على main محدّث (origin/main)**
+     - **لا تبني phases فوق بعض (no stacking) — كل branch ينطلق من main**
      - رسالة commit موجزة بالعربي
      - push للـ remote
   د) حدّث state/PROGRESS.json:
@@ -58,6 +60,13 @@
      - ادمج (لو الـ tool متوفر)
      - لو ما عندك صلاحية merge، اترك الـ PR مفتوح وحدّد في next_action
   ح) انتقل لـ Phase التالي بدون انتظار
+
+📌 قاعدة Consolidation (لتسهيل الدمج من الجوّال):
+- إذا انتهت كل phases الـ Worker بنجاح في session واحد:
+  • أنشئ branch إضافي اسمه `worker-<id>-complete` يحوي مجموع كل التعديلات
+  • PR واحد فقط من هذا الـ branch مع وصف يجمع الـ phases الأربعة
+  • أغلق PRs الـ phase-by-phase الفردية بدون دمج (محتواها موجود في الـ consolidated PR)
+- المستخدم على الجوّال يدمج PR واحد فقط بدل 4
 
 📦 ميزانية الـ session:
 - خلال session واحد، نفّذ phases متتالية حتى يتحقق أحد:
