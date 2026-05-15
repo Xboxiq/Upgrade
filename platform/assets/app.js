@@ -9647,6 +9647,30 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!document.getElementById('page-hrmastery')) return;
     bindAccordion();
     animateDimBars();
+    bindTrapTabs();
+  }
+
+  function bindTrapTabs(){
+    var page = document.getElementById('page-hrmastery');
+    if (!page) return;
+    var tabs = page.querySelectorAll('.hrm-trap-tab');
+    if (!tabs.length) return;
+    tabs.forEach(function(t){
+      if (t.__hrmBound) return;
+      t.__hrmBound = true;
+      t.addEventListener('click', function(){
+        var key = t.getAttribute('data-trap-tab');
+        page.querySelectorAll('.hrm-trap-tab').forEach(function(x){ x.classList.remove('active'); });
+        t.classList.add('active');
+        page.querySelectorAll('.hrm-trap-list').forEach(function(p){
+          if (p.getAttribute('data-trap-pane') === key){
+            p.setAttribute('data-active','1');
+          } else {
+            p.removeAttribute('data-active');
+          }
+        });
+      });
+    });
   }
 
   if (document.readyState === 'loading'){

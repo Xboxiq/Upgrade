@@ -14814,6 +14814,423 @@ const bird = { ...canMove(), ...canFly() };
       <!-- Phase 1 marker (continue in subsequent phases) -->
       <div id="hrm-phase-1-end" style="display:none;"></div>
 
+      <!-- ========== PHASE 2 START ========== -->
+
+      <!-- Section D — 30 Trap Questions -->
+      <div class="hrm-section-title-wrap" style="margin-top:32px;">
+        <div class="hrm-section-eyebrow">D · فنّ الإجابة الذكية</div>
+        <h2 class="hrm-section-title">الـ 30 سؤال المصيدة — <i>تبدو بريئة لكن لها فخ</i></h2>
+        <p class="hrm-section-sub">أسئلة تأتي بنبرة ودودة لكنها تكشف ما لا تنتبه إليه. لكل واحد: لماذا هو فخ + الإجابة الذكية.</p>
+      </div>
+
+      <div class="hrm-trap-tabs" id="hrmTrapTabs">
+        <button class="hrm-trap-tab active" data-trap-tab="behav">سلوكية (10)</button>
+        <button class="hrm-trap-tab" data-trap-tab="weak">كاشفات ضعف (10)</button>
+        <button class="hrm-trap-tab" data-trap-tab="legal">قانونية / شخصية (10)</button>
+      </div>
+
+      <div class="hrm-trap-list" data-trap-pane="behav" data-active="1">
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"هل تفضل العمل وحدك أم بفريق؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> أي إجابة مطلقة تخسرك. لو قلت "وحدي" → ضعف فريق. لو قلت "بفريق" → ضعف استقلال.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> "كلاهما حسب الموقف. للتحليل العميق أحتاج ساعات تركيز فردي. للقرارات والتنفيذ أحتاج فريقاً ينتقد فكرتي. مثال حديث: [قصة]."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"هل تتعامل مع الضغط؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> "نعم" بدون مثال = لا شيء. الإجابة بدون أداة محددة = ادعاء.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> "أحوّل الضغط إلى قائمة. أكتب 3 أولويات + ما يمكن تأجيله. آخر مرة: [قصة 30 ثانية]. الضغط دائم في عملي، الفرق هو طريقة الاستجابة."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"كيف تستقبل النقد؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> "أحب النقد!" = نفاق. "لا أحبه" = ضعف. الفخ في الإطلاق.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> "أفصل النقد عن الناقد. أسأل سؤالاً واحداً للتأكد من الفهم. أنفّذ تجربة صغيرة لاختبار النقد. قصة: [مرة بنيت feature، نقد UX انتقد flow، أعدت الاختبار، النقد كان صحيحاً]."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"كيف تتعامل مع الفشل؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> الإجابة العاطفية ("أحزن ثم أنهض") سطحية. ما يبحث عنه HR: عملية محددة.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> "ثلاث خطوات: 1) post-mortem مكتوب خلال 48 ساعة. 2) فصل الـ ’سبب الجذري‘ عن ’الأعراض‘. 3) تغيير في النظام، ليس في الناس. مثال: [قصة]."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"وصف نفسك بـ 3 كلمات"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> 3 كلمات generic ("مجتهد، مخلص، صبور") = صفر تأثير. الفرصة: 3 كلمات تتذكرها HR لاحقاً.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> اختر 3 كلمات غير شائعة + أعطِ مثالاً سريعاً لكل واحدة. مثلاً: "Pattern-spotter, builder, الـ ’translator‘ بين فرق. خلال [مشروع]، رأيت نمطاً، بنيت إطاراً، شرحت لـ 3 فرق مختلفة."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"ماذا تعرف عن منافسينا؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> اختبار research. لو قلت "ما أعرف" — انتهيت. لو ذمّيتهم — يقلق HR من احتمال أن تذمّه لاحقاً.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> اذكر 2-3 منافسين بالاسم + ميزة قوية لكل واحد + ما يميز شركتهم. "X قوي في [Y]، Z يبرع في [W]، لكن أنتم تتميزون في [V] لأن [مبرر]."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"لو رئيسك طلب منك شيئاً غير أخلاقي؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> الإجابة المسرحية ("أستقيل فوراً!") تبدو غير ناضجة. الإجابة المتساهلة تخيف HR.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> 3 خطوات: 1) أسأل بدون اتهام لفهم المنطق. 2) أوضح خلافي بحجج (تأثير، سمعة، قانون). 3) أصعّد للمستوى الأعلى أو HR إذا لم يُحل. الانسحاب كملاذ أخير، ليس أول رد."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"كيف تتعامل مع زميل ’كسول‘؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> أي وصف سلبي للزميل = HR يسجل عليك. الكلمة "كسول" نفسها فخ.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> "نادراً ما يكون السبب ’كسل‘ — عادة سياق أو غموض دور. أسأل، أعيد توزيع وضوح المسؤوليات، أوافق على SLA. لو استمر بعد ذلك، أصعّد بمستندات."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"ما الذي يحبطك في العمل؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> أي شي قد يصف بيئتهم! "اجتماعات كثيرة" قد تكون ثقافتهم. "بطء القرارات" قد يكون نمطهم.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> صف شيئاً عاماً + كيف عالجته. "حين تُتخذ قرارات بدون بيانات، أبني أداة تجمع البيانات. أحب البيئات التي تقدّر التجربة قبل الرأي."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"هل تكذب أحياناً؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> "لا أبداً!" = كذب واضح، يخسرك مصداقيتك. "نعم!" = كارثة.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> "في العمل، التزم بالحقيقة حتى لو غير مريحة. اجتماعياً، الـ ’كذب الأبيض‘ موجود — مثل قول ’الطعام لذيذ‘ تأدباً. الفرق بين سياقات."</div>
+        </div>
+      </div>
+
+      <div class="hrm-trap-list" data-trap-pane="weak">
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"ليش كنت بدون شغل لـ X شهر؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> Gap في CV. لو دافعت بشكل خجول، تبدو شخصاً يحتاج أي شيء. لو تجاهلت، تبدو غير شفاف.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> اعترف بصراحة + أعطِ سبباً ناضجاً + أظهر إنجازاً خلال الفترة. "خصصت 4 أشهر لتعلم [X] + شهادة [Y] + مشروع [Z]. كنت عمداً انتقائياً، لا أردت قبول أي عرض."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"ليش غيّرت 3 شركات في سنتين؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> Job hopper علامة. HR يخاف توظيفك ثم رحيلك بعد 8 أشهر.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> أعطِ سرداً واضحاً لكل قفزة + عامل مشترك واحد ("بحثت عن نمو محدد") + اشرح لماذا هذا الدور مختلف ("استقرار طويل". اذكر ما يجعلك تبقى)."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"لماذا لم تترقَّ في شركتك الحالية؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> يُلمح إلى أن مديرك لم يثق بك. لو دافعت بقوة → ضعف. لو ضعفت → ضعف.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> "هيكل الشركة لا يفتح المسار خلال إطار زمني معقول، أو الترقية المتاحة لا تتطابق مع ما أبحث عنه. ناقشتُ مديري وكان داعماً لفكرة بحثي عن دور أوسع خارج الشركة."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"لماذا قطعت الدراسة؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> يبحث عن سبب ’غير جدي‘ يكشف نقص التزام.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> أعطِ سبباً واقعياً (مالي، عائلي، تحوّل مهني واعٍ) + ما تعلمتَه عملياً يعوّض الشهادة. "أكملتُ [دورات معتمدة] + [مشاريع] غطت محتوى السنوات المتبقية بشكل تطبيقي."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"لماذا تتدنى راتبك السابق؟" (الفخ المعكوس)</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> لا يبحث عن راتبك السابق فعلاً — يبحث عن "أنت رخيص أم مقدّر؟"</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> لا تكشف الرقم. "في وظيفتي السابقة كنت أبني خبرة، الراتب كان جزءاً من الحزمة. الآن أبحث عن دور بأثر أكبر، مع total comp يعكس قيمة ما أقدمه. ما النطاق المعتمد عندكم؟"</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"كيف تعرف أن مديرك لن يفصلك؟" (سؤال ساخر)</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> سؤال يهدف لزعزعة ثقتك ورؤية كيف تتصرف تحت الضغط النفسي.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> اضحك بثقة + أجب بشكل احترافي. "لا أقاتل في معارك مفترضة. أركز على إيصال قيمة قابلة للقياس، وآخذ feedback مبكراً. لو حدث، عندي خطة B جاهزة دائماً (BATNA)."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"لماذا لم تتقدم لشركة أكبر منا؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> اختبار حقيقي للدوافع. الإجابة الخطأ: "ما قبلوني".</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> "تقدّمتُ بانتقائية، ليس بكثرة. شركتكم في حجمها الحالي تعطيني نطاق ملكية لا أحصل عليه في شركة أكبر بـ 10×. هذا قرار واعٍ."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"هل تعرف عيوب نفسك؟" (مكرر بصياغة جديدة)</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> صياغة مختلفة ليرى إن كنتَ ستعطي إجابة مختلفة عن "ما نقاط ضعفك".</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> أعطِ نفس الإجابة بثبات + أضف بُعداً جديداً صغيراً. الثبات = صدق. التغيير الكبير = تخمين.</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"كم تتوقع أن تنجح هنا؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> رقم ساذج (100%، أكيد) = غرور. رقم متردد = ضعف ثقة.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> "إذا الـ scope الذي ناقشناه دقيق وعندي الدعم اللازم في الـ 90 يوم الأولى، احتمال نجاحي عالٍ جداً. النجاح يعتمد على وضوح التوقعات + جودة الفريق + مساحة القرار."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"لو رفضناك، ماذا ستفعل؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> اختبار BATNA الحقيقي. لو قلت "لا أعرف" → موقف ضعيف. لو قلت "أنتقم" → خروج فوري.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> "أتفهّم — قراركم بحسب ملاءمتي للدور. لدي محادثات أخرى متقدمة، وأعمل على [مشروع شخصي]. لكن عرضكم الأفضل من الناحية الاستراتيجية، لذلك جئت اليوم."</div>
+        </div>
+      </div>
+
+      <div class="hrm-trap-list" data-trap-pane="legal">
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"هل تخطط للزواج/الإنجاب قريباً؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> ⚠ سؤال غير قانوني في معظم الأنظمة. لكن في العراق يُسأل أحياناً. لا يحق لهم استخدامه ضدك، لكنه قد يؤثر باللاوعي.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> "حياتي الشخصية لا تؤثر على التزامي المهني. لدي 7 سنوات سجل بدون انقطاع. السؤال الأهم: هل لديكم القلق من أداء أي مرشح متزوج؟ أعطيك أمثلة على مرونتي."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"كم عمرك؟ متى تخرّجت؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> سن غير قانوني للسؤال في كثير من البلدان. الهدف: تقدير عمرك للحكم بشكل غير واعٍ.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> "خبرتي [X] سنوات في [مجالات]. التخرج تفصيل لن يضيف للقرار. ما أهم تحدٍ يواجه الفريق هذا الربع؟" (تحويل اللعبة).</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"ما ديانتك؟ من أي محافظة؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> ⚠ غير قانوني، وغير أخلاقي. تجاهله بأدب أو حدّد حدودك.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> "أفضّل التركيز على المؤهلات المهنية. عملت بنجاح في فرق متنوعة في [أمثلة]. القدرة على التعامل المهني مع الجميع جزء من سيرتي."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"هل عندك أطفال؟ من يربيهم وأنت في العمل؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> سؤال للنساء غالباً. ⚠ غير قانوني. الهدف: تقييم "التزامك المتوقع".</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> "ترتيباتي العائلية مستقرة ولا تتعارض مع متطلبات العمل. سجلي يثبت ذلك — لم أتغيب عن مواعيد حرجة في 5 سنوات."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"هل تنوي السفر/الهجرة؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> سؤال شائع للشباب. الإجابة "نعم" قد تخسرك العرض. الكذب يخلق مشاكل لاحقة.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> "خططي القريبة (2-3 سنوات) مرتبطة ببناء مسيرتي هنا. السفر السياحي وارد، لكن النقلة المهنية لا تكون قبل تحقيق أثر ملموس مع شركة تستثمر فيّ."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"هل خدمتَ بالجيش؟ متى؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> قانوني لكن قد يستخدم لتقدير العمر/الفجوات. أجب بصراحة بدون تفصيل زائد.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> "أنهيت خدمتي عام [X] / لا تنطبق عليّ. الفترة منحتني انضباطاً وقدرة على العمل تحت ضغط، تركت أثراً في طريقتي."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"هل لديك مرض مزمن؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> ⚠ غير قانوني السؤال إلا للأدوار التي تتطلب لياقة جسدية محددة (شرطة، طيران).</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> "صحتي تسمح لي بأداء كل متطلبات الدور بكفاءة. هل هناك متطلب جسدي محدد للوظيفة أحتاج معرفته؟"</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"كم راتبك في الوظيفة الحالية؟" (الفخ الكلاسيكي)</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> الكشف يقيدك بسقفك السابق + يعطيهم لانكشار. ⚠ في كثير من البلدان يُحظر السؤال.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> "لا أشارك راتبي السابق كسياسة شخصية. أفضّل أن نتفق على قيمة الدور المعروض. ما النطاق المعتمد لهذه الوظيفة؟"</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"هل تشرب/تدخن/علاقاتك الاجتماعية؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> سؤال خاص جداً. لا يحق لهم إلا في حالات محدودة (سائق، أمن).</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> "حياتي الشخصية لا تؤثر على عملي. سجلي المهني يتحدث. هل هذه السياسة جزء من عقد العمل؟ أحب أن أعرف التوقعات الرسمية."</div>
+        </div>
+        <div class="hrm-trap-card">
+          <div class="hrm-trap-q">"إذا عرضنا عليك العرض، ستوقع غداً؟"</div>
+          <div class="hrm-trap-why"><b>الفخ:</b> الضغط للقبول السريع = جودة عرض ضعيفة. الموافقة = تنازل عن قوتك التفاوضية.</div>
+          <div class="hrm-trap-smart"><b>الإجابة الذكية:</b> "أحترم وقتكم، لكني أراجع كل عرض رسمي مع شريكي خلال 48-72 ساعة لاتخاذ قرار مدروس. هذا ما يضمن التزامي طويل المدى لو وقّعت."</div>
+        </div>
+      </div>
+
+      <!-- Section E — Pre-Interview Toolkit -->
+      <div class="hrm-section-title-wrap" style="margin-top:32px;">
+        <div class="hrm-section-eyebrow">E · قبل المقابلة</div>
+        <h2 class="hrm-section-title">Pre-Interview Toolkit — التحضير الذي يفصلك عن الـ 95%</h2>
+        <p class="hrm-section-sub">الفائزون يُحضّرون 4-6 ساعات لكل مقابلة. الباقون يقرأون "About Us" قبل 5 دقائق. هذه قائمتك.</p>
+      </div>
+
+      <div class="hrm-pre-grid">
+        <!-- Research checklist -->
+        <div class="hrm-pre-card">
+          <div class="hrm-pre-icon">🔍</div>
+          <div class="hrm-pre-title">Research Checklist (90 دقيقة)</div>
+          <ul class="hrm-pre-list">
+            <li><b>الشركة:</b> الموقع الرسمي + قسم الأخبار + أحدث 3 إعلانات</li>
+            <li><b>المنتج:</b> جرّبه إن أمكن. اعرف 3 ميزات و2 نقاط ضعف</li>
+            <li><b>الـ Interviewer:</b> LinkedIn — خلفيتهم، آخر منشور، شركات سابقة</li>
+            <li><b>المنافسون:</b> 3 منافسين رئيسيين + ميزة كل واحد</li>
+            <li><b>الـ Financials:</b> حجم الشركة، التمويل، الإيرادات (إن متاح)</li>
+            <li><b>News:</b> آخر 3 أخبار في Google خلال 6 أشهر</li>
+            <li><b>Glassdoor:</b> 10 مراجعات حديثة — الإيجابية والسلبية</li>
+            <li><b>Culture:</b> منشورات الموظفين على LinkedIn — كيف يصفون البيئة</li>
+          </ul>
+        </div>
+
+        <!-- Outfit guide -->
+        <div class="hrm-pre-card">
+          <div class="hrm-pre-icon">👔</div>
+          <div class="hrm-pre-title">Outfit — حسب نوع الشركة</div>
+          <div class="hrm-outfit-rows">
+            <div class="hrm-outfit-row">
+              <div class="hrm-outfit-tag" style="background:#1F2937;color:#fff;">Formal</div>
+              <div class="hrm-outfit-text"><b>بنوك، حكومة، استشارات:</b> بدلة كحلية/رمادية، قميص أبيض، ربطة هادئة. للنساء: blazer + بلوزة محتشمة + بنطلون أو تنورة طويلة.</div>
+            </div>
+            <div class="hrm-outfit-row">
+              <div class="hrm-outfit-tag" style="background:#3B82F6;color:#fff;">Business Casual</div>
+              <div class="hrm-outfit-text"><b>الشركات الكبيرة، Asiacell/Earthlink:</b> قميص + بنطلون قماش، بدون ربطة. للنساء: blazer + بنطلون smart.</div>
+            </div>
+            <div class="hrm-outfit-row">
+              <div class="hrm-outfit-tag" style="background:#22C55E;color:#fff;">Smart Casual</div>
+              <div class="hrm-outfit-text"><b>الشركات الناشئة، التكنولوجيا:</b> قميص أنيق + بنطلون chinos. تجنّب جينز ممزق + تي شيرت بشعار صاخب.</div>
+            </div>
+          </div>
+          <div class="hrm-pre-tip">💡 <b>القاعدة:</b> ارتدِ مستوى أعلى من ثقافة المكان بدرجة واحدة فقط. لا أكثر.</div>
+        </div>
+
+        <!-- Body language -->
+        <div class="hrm-pre-card">
+          <div class="hrm-pre-icon">🧍</div>
+          <div class="hrm-pre-title">Body Language — 7 إشارات حاسمة</div>
+          <ol class="hrm-pre-list-num">
+            <li><b>Eye contact:</b> 60-70% من الوقت. كسر الاتصال بقصد، لا بخوف.</li>
+            <li><b>Posture:</b> ظهر مستقيم، أكتاف للخلف. قف أو اجلس بثبات.</li>
+            <li><b>Handshake:</b> ثابت، 2 ثانية، نظرة في العين. ليس قوياً جداً ولا ضعيفاً.</li>
+            <li><b>Smiling baseline:</b> ابتسامة هادئة دائمة. ليست عريضة دائماً ولا جامدة.</li>
+            <li><b>Mirroring lite:</b> اعكس وضعهم الجسدي بشكل طبيعي (يبني rapport لاوعي).</li>
+            <li><b>No folded arms:</b> الذراعان مفتوحتان أو على الطاولة. لا تتقاطع.</li>
+            <li><b>Lean-in moments:</b> عند ذكر نقطة مهمة منهم، انحنِ قليلاً للأمام.</li>
+          </ol>
+          <div class="hrm-pre-tip">⚠ <b>تجنّب:</b> النظر للمصباح/الأرض/الهاتف، تشابك الأصابع المستمر، تحريك القدم تحت الطاولة.</div>
+        </div>
+
+        <!-- Voice prep -->
+        <div class="hrm-pre-card">
+          <div class="hrm-pre-icon">🎤</div>
+          <div class="hrm-pre-title">Voice Prep (30 دقيقة قبل)</div>
+          <ol class="hrm-pre-list-num">
+            <li><b>Hum 3 دقائق:</b> صوت "همم" بنبرة منخفضة لإحماء الحبال.</li>
+            <li><b>Tongue twisters:</b> "خميس خمّس خميس خميس" × 5 — تنشيط النطق.</li>
+            <li><b>قراءة بصوت عالٍ:</b> اقرأ مقالاً عربياً بنبرة طبيعية.</li>
+            <li><b>تسجيل ذاتي:</b> سجّل إجابتك على Q1 ("حدّثني عن نفسك") + استمع.</li>
+            <li><b>تنفس 4-7-8:</b> شهيق 4، حبس 7، زفير 8 × 4 مرات (يخفض كورتيزول).</li>
+            <li><b>ماء فاتر:</b> لا قهوة لـ 90 دقيقة قبل (تجفّف الحبال).</li>
+          </ol>
+          <div class="hrm-pre-tip">🎯 <b>الهدف:</b> صوت ثابت، نبرة وسطى، تنفّس بطيء. الصمت أفضل من "آآآ".</div>
+        </div>
+
+        <!-- Documents -->
+        <div class="hrm-pre-card">
+          <div class="hrm-pre-icon">📄</div>
+          <div class="hrm-pre-title">Documents Pack</div>
+          <ul class="hrm-pre-list">
+            <li>3 نسخ مطبوعة من CV (لو كان أكثر من interviewer)</li>
+            <li>Portfolio مطبوع/iPad جاهز للعرض</li>
+            <li>3 references بأرقام جاهزة (مع إذن مسبق)</li>
+            <li>دفتر ملاحظات + قلم (لتسجيل أسماء + أسئلة لاحقة)</li>
+            <li>قائمة 7 أسئلة جاهزة لتطرحها</li>
+            <li>شهادات/جوائز رئيسية (نسخ، ليس أصل)</li>
+            <li>هوية + رقم وثيقة (لو طلبوا)</li>
+          </ul>
+          <div class="hrm-pre-tip">📁 <b>تنظيم:</b> ملف بلاستيكي بسيط. لا تحضر بدون استعداد، ولا تُغرق المقابلة بأوراق.</div>
+        </div>
+
+        <!-- 24h before -->
+        <div class="hrm-pre-card">
+          <div class="hrm-pre-icon">⏰</div>
+          <div class="hrm-pre-title">آخر 24 ساعة</div>
+          <ul class="hrm-pre-list">
+            <li>تأكيد الموعد + العنوان + اسم الـ interviewer</li>
+            <li>زيارة الموقع جسدياً (لو محلي) لمعرفة الوقت الفعلي</li>
+            <li>تحضير الملابس + كيها في الليل</li>
+            <li>نوم 7+ ساعات (مهم جداً لجودة الصوت والتركيز)</li>
+            <li>إفطار خفيف + ماء (لا قهوة كثيرة)</li>
+            <li>الوصول قبل 15 دقيقة (لا أكثر — يخلق ضغط)</li>
+            <li>هاتف على الصامت + ساعة على معصمك</li>
+          </ul>
+          <div class="hrm-pre-tip">🌙 <b>الليلة قبل:</b> راجع 5 أسئلة فقط. لا تذاكر متأخراً — التركيز أهم من المعرفة الإضافية.</div>
+        </div>
+      </div>
+
+      <!-- Section F — Post-Interview Playbook -->
+      <div class="hrm-section-title-wrap" style="margin-top:32px;">
+        <div class="hrm-section-eyebrow">F · بعد المقابلة</div>
+        <h2 class="hrm-section-title">Post-Interview Playbook — ما تفعله الـ 24-72 ساعة بعد</h2>
+        <p class="hrm-section-sub">90% من المرشحين يجلسون ينتظرون. الـ 10% الفائزون يديرون الـ post-interview بنفس احترافية الـ pre-interview.</p>
+      </div>
+
+      <div class="hrm-post-grid">
+        <!-- Thank-you email -->
+        <div class="hrm-post-card thank">
+          <div class="hrm-post-head">
+            <div class="hrm-post-icon">✉️</div>
+            <div>
+              <div class="hrm-post-title">Thank-You Email — خلال 24 ساعة</div>
+              <div class="hrm-post-sub">قاعدة: أرسله نفس اليوم لو ممكن، وإلا في الصباح التالي.</div>
+            </div>
+          </div>
+          <div class="hrm-post-template">
+            <div class="hrm-post-tlabel">قالب جاهز:</div>
+<pre class="hrm-post-pre">السلام عليكم [الاسم]،
+
+شكراً لوقتك اليوم — استمتعت بحديثنا حول [موضوع محدد ذكرته].
+نقطة لفتت انتباهي: [تفصيل من الحديث] — وهذا تحديداً نوع التحدي الذي
+تركّز عليه خبرتي. خلال [مشروع سابق] واجهتُ [موقف مشابه]، ولاحظت
+أن [observation] قد يكون مفيداً لكم.
+
+أنا متحمس لاحتمال الانضمام لفريقكم وأتطلع للخطوة التالية.
+
+تحياتي،
+[الاسم]
+</pre>
+          </div>
+          <div class="hrm-post-tips">
+            <b>قواعد:</b>
+            <ul>
+              <li>3 فقرات بحد أقصى</li>
+              <li>اذكر تفصيلاً محدداً من الحديث (يثبت أنك تنصت)</li>
+              <li>أضف قيمة جديدة (فكرة، مقال، اقتراح)</li>
+              <li>لا أخطاء إملائية — اقرأ مرتين</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Follow-up cadence -->
+        <div class="hrm-post-card">
+          <div class="hrm-post-head">
+            <div class="hrm-post-icon">📅</div>
+            <div>
+              <div class="hrm-post-title">Follow-up Cadence</div>
+              <div class="hrm-post-sub">إيقاع المتابعة بدون إزعاج</div>
+            </div>
+          </div>
+          <div class="hrm-cadence">
+            <div class="hrm-cadence-row">
+              <div class="hrm-cadence-day">Day 1</div>
+              <div class="hrm-cadence-text">Thank-you email — إجباري</div>
+            </div>
+            <div class="hrm-cadence-row">
+              <div class="hrm-cadence-day">Day 4</div>
+              <div class="hrm-cadence-text">إيميل لطيف: "أردت التأكد من وصول رسالتي + أضع رقمي للتواصل لو احتجتم تفاصيل"</div>
+            </div>
+            <div class="hrm-cadence-row">
+              <div class="hrm-cadence-day">Day 8</div>
+              <div class="hrm-cadence-text">إيميل قصير: "تحديث سريع — هل لديكم تطورات؟ أنا في مرحلة متقدمة مع مكان آخر"</div>
+            </div>
+            <div class="hrm-cadence-row">
+              <div class="hrm-cadence-day">Day 12</div>
+              <div class="hrm-cadence-text">آخر متابعة: "إن لم يكن هذا التوقيت مناسباً، أتفهم — أتمنى لكم التوفيق"</div>
+            </div>
+            <div class="hrm-cadence-row final">
+              <div class="hrm-cadence-day">بعد 14 يوم</div>
+              <div class="hrm-cadence-text">اعتبرها no — لا تذلّ نفسك بمتابعات أكثر</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multiple offers -->
+        <div class="hrm-post-card">
+          <div class="hrm-post-head">
+            <div class="hrm-post-icon">⚖️</div>
+            <div>
+              <div class="hrm-post-title">إدارة عروض متعددة (أخلاقياً)</div>
+              <div class="hrm-post-sub">المرونة دون حرق الجسور</div>
+            </div>
+          </div>
+          <ul class="hrm-pre-list">
+            <li><b>الشفافية المُحكمة:</b> "لدي محادثة متقدمة مع مكان آخر، وأحتاج اتخاذ قرار خلال X أيام"</li>
+            <li><b>لا تكشف الاسم:</b> اذكر "شركة في نفس القطاع" بدون تفصيل</li>
+            <li><b>اطلب وقتاً للقرار:</b> 5-7 أيام لقرار مدروس مقبول مهنياً</li>
+            <li><b>قارن باحترام:</b> "عرضكم قوي، عرض الآخر يتفوق في X — هل هناك مرونة؟"</li>
+            <li><b>لا تكذب:</b> العرض الوهمي يُكتشف ويدمر علاقاتك</li>
+          </ul>
+          <div class="hrm-pre-tip">💡 <b>قاعدة BATNA:</b> ولاءك لقراراتك المدروسة، وليس لشركة لم توقّع معها بعد.</div>
+        </div>
+
+        <!-- Rejecting politely -->
+        <div class="hrm-post-card">
+          <div class="hrm-post-head">
+            <div class="hrm-post-icon">🚪</div>
+            <div>
+              <div class="hrm-post-title">رفض عرض باحترام</div>
+              <div class="hrm-post-sub">لأن قد ترجع لهم بعد سنتين</div>
+            </div>
+          </div>
+          <div class="hrm-post-template">
+            <div class="hrm-post-tlabel">قالب الرفض:</div>
+<pre class="hrm-post-pre">[الاسم]،
+
+شكراً جزيلاً على ثقتكم وعرضكم. بعد دراسة شاملة، قررت قبول
+عرض آخر يتطابق مع توجّهي الحالي بشكل أقرب. لكن أُقدّر
+احترافية الفريق وأتمنى لكم النجاح في إيجاد المرشح المناسب.
+
+أرجو أن نبقى على تواصل — السوق صغير، وقد يجمعنا مشروع
+في المستقبل.
+
+تحياتي،
+[الاسم]
+</pre>
+          </div>
+          <div class="hrm-post-tips">
+            <b>قواعد:</b>
+            <ul>
+              <li>أرسل خلال 24 ساعة من قرارك</li>
+              <li>لا تشرح بتفاصيل (لا داعي لذكر "الراتب أقل")</li>
+              <li>اشكر بصدق + اترك الباب مفتوحاً</li>
+              <li>لا ترفض شفهياً ثم تتجاهل — اكتب رسمياً</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 2 marker -->
+      <div id="hrm-phase-2-end" style="display:none;"></div>
+
     </section><!-- /page-hrmastery -->
 
 
