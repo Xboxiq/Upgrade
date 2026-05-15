@@ -5870,3 +5870,383 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
   #page-fieldsales .sp-fill,
   #page-fieldsales .career-ladder .cl-step { transition: none !important; transform: none !important; }
 }
+
+
+
+
+/* ================================================================
+   WORKER 03 · PHASE 3 — Voice Self-Assessment Studio
+   Web Audio + Web Speech UI. Scope: #page-callcenter only.
+================================================================ */
+
+#page-callcenter .vstudio {
+  background: var(--surface, rgba(255,255,255,0.03));
+  border: 1px solid var(--border, rgba(255,255,255,0.06));
+  border-radius: 16px;
+  padding: 18px;
+  margin-block-end: 18px;
+  display: grid;
+  gap: 14px;
+}
+
+/* Privacy banner */
+#page-callcenter .vs-privacy {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(34,197,94,0.06);
+  border: 1px solid rgba(34,197,94,0.22);
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--text);
+}
+#page-callcenter .vs-privacy-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+#page-callcenter .vs-privacy b { color: #22c55e; margin-inline-end: 4px; }
+#page-callcenter .vs-privacy code {
+  font-family: ui-monospace, "Menlo", "Consolas", monospace;
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(0,0,0,0.25);
+  color: var(--accent, #66FCF1);
+}
+
+/* Status chip */
+#page-callcenter .vs-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  font-size: 12px;
+  color: var(--text);
+  align-self: flex-start;
+}
+#page-callcenter .vs-dot {
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: 50%;
+  background: var(--text-muted, #94a3b8);
+  transition: background-color .25s ease;
+}
+#page-callcenter .vs-status[data-state="recording"] .vs-dot {
+  background: #ef4444;
+  animation: vs-pulse 1s ease-in-out infinite;
+}
+#page-callcenter .vs-status[data-state="ready"] .vs-dot { background: #22c55e; }
+#page-callcenter .vs-status[data-state="processing"] .vs-dot { background: #f59e0b; animation: vs-pulse 1s ease-in-out infinite; }
+#page-callcenter .vs-status[data-state="error"] .vs-dot { background: #ef4444; }
+
+@keyframes vs-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(1.4); }
+}
+
+/* Recorder controls */
+#page-callcenter .vs-recorder {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+#page-callcenter .vs-rec-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border-radius: 12px;
+  border: 1px solid rgba(239,68,68,0.42);
+  background: linear-gradient(135deg, rgba(239,68,68,0.18), rgba(239,68,68,0.06));
+  color: #ef4444;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .25s ease;
+}
+#page-callcenter .vs-rec-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(239,68,68,0.18);
+}
+#page-callcenter .vs-rec-btn[data-active="1"] {
+  background: linear-gradient(135deg, rgba(239,68,68,0.42), rgba(239,68,68,0.18));
+  color: #fff;
+  animation: vs-pulse-btn 1.4s ease-in-out infinite;
+}
+@keyframes vs-pulse-btn {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.45); }
+  50%      { box-shadow: 0 0 0 8px rgba(239,68,68,0); }
+}
+#page-callcenter .vs-rec-icon {
+  inline-size: 12px;
+  block-size: 12px;
+  border-radius: 50%;
+  background: currentColor;
+  display: inline-block;
+}
+#page-callcenter .vs-stop-btn {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.03);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity .2s ease;
+}
+#page-callcenter .vs-stop-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Progress bar */
+#page-callcenter .vs-progress {
+  flex: 1;
+  min-inline-size: 200px;
+  position: relative;
+  block-size: 22px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden;
+}
+#page-callcenter .vs-progress-bar {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block: 0;
+  inline-size: 0;
+  background: linear-gradient(90deg, var(--accent, #66FCF1), rgba(102,252,241,0.4));
+  transition: inline-size .1s linear;
+}
+#page-callcenter .vs-progress-time {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: ui-monospace, "Menlo", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.03em;
+  z-index: 2;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+
+/* Spectrogram canvas */
+#page-callcenter .vs-canvas-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+#page-callcenter .vs-canvas {
+  display: block;
+  inline-size: 100%;
+  block-size: 120px;
+}
+
+/* Transcript */
+#page-callcenter .vs-transcript {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+#page-callcenter .vs-transcript-label {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent, #66FCF1);
+  margin-block-end: 6px;
+}
+#page-callcenter .vs-transcript-text {
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: var(--text);
+  min-block-size: 24px;
+  font-style: italic;
+}
+
+/* Report */
+#page-callcenter .vs-report {
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(102,252,241,0.05), rgba(102,252,241,0.01));
+  border: 1px solid rgba(102,252,241,0.22);
+}
+#page-callcenter .vs-report h3 {
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+}
+#page-callcenter .vs-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin-block-end: 14px;
+}
+#page-callcenter .vs-metric {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 8px;
+  row-gap: 4px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+#page-callcenter .vs-metric-icon {
+  grid-row: 1 / 3;
+  font-size: 22px;
+  display: grid;
+  place-items: center;
+}
+#page-callcenter .vs-metric-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+#page-callcenter .vs-metric-value {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--accent, #66FCF1);
+  line-height: 1;
+}
+#page-callcenter .vs-metric-tier {
+  grid-column: 1 / 3;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  text-align: center;
+  font-weight: 600;
+}
+#page-callcenter .vs-metric-tier[data-grade="excellent"] { background: rgba(34,197,94,0.14); color: #22c55e; }
+#page-callcenter .vs-metric-tier[data-grade="good"]      { background: rgba(102,252,241,0.14); color: #66FCF1; }
+#page-callcenter .vs-metric-tier[data-grade="fair"]      { background: rgba(245,158,11,0.14); color: #f59e0b; }
+#page-callcenter .vs-metric-tier[data-grade="poor"]      { background: rgba(239,68,68,0.14); color: #ef4444; }
+
+#page-callcenter .vs-recos h4 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--accent, #66FCF1);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+#page-callcenter .vs-recos ul {
+  margin: 0;
+  padding-inline-start: 18px;
+  display: grid;
+  gap: 5px;
+}
+#page-callcenter .vs-recos li {
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+/* History */
+#page-callcenter .vs-history {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+#page-callcenter .vs-history h4 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--accent, #66FCF1);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+#page-callcenter .vs-history h4 small {
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-inline-start: 6px;
+  font-size: 11px;
+}
+#page-callcenter .vs-hist-list {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+#page-callcenter .vs-hist-list .vs-hist-empty {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+#page-callcenter .vs-hist-list li:not(.vs-hist-empty) {
+  display: grid;
+  grid-template-columns: 70px repeat(5, 1fr);
+  gap: 6px;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+  font-size: 11.5px;
+}
+#page-callcenter .vs-hist-list li:not(.vs-hist-empty) time {
+  color: var(--text-muted);
+  font-family: ui-monospace, monospace;
+}
+#page-callcenter .vs-hist-list li:not(.vs-hist-empty) span {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+#page-callcenter .vs-hist-list li:not(.vs-hist-empty) span small { color: var(--text-muted); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.04em; }
+#page-callcenter .vs-hist-list li:not(.vs-hist-empty) span b     { color: var(--text); font-weight: 700; }
+#page-callcenter .vs-hist-clear {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(239,68,68,0.3);
+  background: rgba(239,68,68,0.06);
+  color: #ef4444;
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color .2s ease;
+}
+#page-callcenter .vs-hist-clear:hover { background: rgba(239,68,68,0.12); }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  #page-callcenter .vs-rec-btn,
+  #page-callcenter .vs-rec-btn[data-active="1"],
+  #page-callcenter .vs-status[data-state="recording"] .vs-dot,
+  #page-callcenter .vs-progress-bar { animation: none !important; transition: none !important; }
+}
+
+/* Print */
+@media print {
+  #page-callcenter .vs-recorder,
+  #page-callcenter .vs-canvas-wrap,
+  #page-callcenter .vs-status { display: none; }
+  #page-callcenter .vstudio,
+  #page-callcenter .vs-report,
+  #page-callcenter .vs-history { background: #fff !important; border: 1px solid #999 !important; color: #000 !important; }
+}

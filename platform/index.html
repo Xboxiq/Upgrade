@@ -1306,6 +1306,119 @@
       </div>
       <!-- ============================================================ END PSYCHOLOGY BLOCK 1 ============================================================ -->
 
+
+      <!-- ============================================================
+           WORKER 03 · PHASE 3 — Voice Self-Assessment Studio
+           Web Audio API + Web Speech API · 100% local processing
+      ============================================================ -->
+
+      <div class="cc-section-header" data-cc-block>
+        <div>
+          <span class="cc-eyebrow"><i class="dot"></i> Lab · 100% On-Device</span>
+          <h2>استوديو تقييم الصوت — تسجيل 30 ثانية + تقرير 5 أبعاد</h2>
+          <p>سجّل 30 ثانية. سيُحلَّل صوتك محلياً (Web Audio + Web Speech) ويُولَّد تقرير: WPM، تباين النبرة، ثبات الصوت، نسبة الصمت، الطاقة. <b>لا يُرسَل أي شيء لأي خادم.</b></p>
+        </div>
+        <span class="tag accent">Web Audio · Privacy First</span>
+      </div>
+
+      <section class="vstudio" data-cc-vstudio aria-label="استوديو الصوت">
+
+        <!-- Privacy banner -->
+        <div class="vs-privacy" role="note">
+          <span class="vs-privacy-icon">🔒</span>
+          <div>
+            <b>خصوصية كاملة</b> — التسجيل والتحليل يتمان بالكامل في متصفحك. لا upload، لا server، لا cloud. عند إغلاق الصفحة يُمحى التسجيل من الذاكرة. آخر 5 محاولات تُحفظ كأرقام فقط في <code>localStorage</code> (بلا صوت).
+          </div>
+        </div>
+
+        <!-- Status chip -->
+        <div class="vs-status" data-vs-status>
+          <span class="vs-dot" data-vs-dot></span>
+          <span class="vs-msg" data-vs-msg>جاهز للبدء — اضغط زر التسجيل أدناه.</span>
+        </div>
+
+        <!-- Recorder controls -->
+        <div class="vs-recorder">
+          <button type="button" class="vs-rec-btn" data-vs-rec aria-label="ابدأ التسجيل">
+            <span class="vs-rec-icon">●</span>
+            <span class="vs-rec-label">ابدأ التسجيل</span>
+          </button>
+
+          <div class="vs-progress" aria-hidden="true">
+            <div class="vs-progress-bar" data-vs-progbar></div>
+            <span class="vs-progress-time" data-vs-time>0.0s / 30.0s</span>
+          </div>
+
+          <button type="button" class="vs-stop-btn" data-vs-stop disabled aria-label="إيقاف التسجيل">⏹ إيقاف</button>
+        </div>
+
+        <!-- Live spectrogram canvas -->
+        <div class="vs-canvas-wrap">
+          <canvas class="vs-canvas" data-vs-canvas width="800" height="120" aria-label="مرئيات الصوت اللحظية"></canvas>
+        </div>
+
+        <!-- Live transcript -->
+        <div class="vs-transcript">
+          <span class="vs-transcript-label">النص المُكتشف</span>
+          <div class="vs-transcript-text" data-vs-transcript>—</div>
+        </div>
+
+        <!-- Report -->
+        <div class="vs-report" data-vs-report hidden>
+          <h3>📊 تقرير الجلسة</h3>
+
+          <div class="vs-metrics">
+            <div class="vs-metric">
+              <span class="vs-metric-icon">⏱️</span>
+              <span class="vs-metric-label">WPM · الإيقاع</span>
+              <span class="vs-metric-value" data-vs-m="wpm">0</span>
+              <span class="vs-metric-tier" data-vs-tier="wpm">—</span>
+            </div>
+            <div class="vs-metric">
+              <span class="vs-metric-icon">🎚️</span>
+              <span class="vs-metric-label">Pitch Variability</span>
+              <span class="vs-metric-value" data-vs-m="pitch">0%</span>
+              <span class="vs-metric-tier" data-vs-tier="pitch">—</span>
+            </div>
+            <div class="vs-metric">
+              <span class="vs-metric-icon">🔊</span>
+              <span class="vs-metric-label">Volume Stability</span>
+              <span class="vs-metric-value" data-vs-m="volume">0%</span>
+              <span class="vs-metric-tier" data-vs-tier="volume">—</span>
+            </div>
+            <div class="vs-metric">
+              <span class="vs-metric-icon">⏸️</span>
+              <span class="vs-metric-label">نسبة الصمت</span>
+              <span class="vs-metric-value" data-vs-m="pause">0%</span>
+              <span class="vs-metric-tier" data-vs-tier="pause">—</span>
+            </div>
+            <div class="vs-metric">
+              <span class="vs-metric-icon">⚡</span>
+              <span class="vs-metric-label">Energy Index</span>
+              <span class="vs-metric-value" data-vs-m="energy">0</span>
+              <span class="vs-metric-tier" data-vs-tier="energy">—</span>
+            </div>
+          </div>
+
+          <div class="vs-recos">
+            <h4>توصيات تخصصية</h4>
+            <ul data-vs-recos></ul>
+          </div>
+        </div>
+
+        <!-- History (last 5 attempts) -->
+        <div class="vs-history">
+          <h4>آخر 5 محاولات <small>(محفوظة محلياً)</small></h4>
+          <ol class="vs-hist-list" data-vs-history>
+            <li class="vs-hist-empty">لا توجد محاولات سابقة بعد.</li>
+          </ol>
+          <button type="button" class="vs-hist-clear" data-vs-clear>🗑️ مسح السجل</button>
+        </div>
+
+      </section>
+
+      <!-- ============================================================ END WORKER 03 PHASE 3 ============================================================ -->
+
     </section><!-- /page-callcenter -->
 
 
