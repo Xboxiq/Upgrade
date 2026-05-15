@@ -10987,3 +10987,57 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
     color:#000 !important; page-break-inside:avoid;
   }
 }
+
+
+/* ============================================================
+   WORKER 06 · PHASE 2 — Pillars + Frameworks + Calendar (page-social)
+============================================================ */
+#page-social .w6-pillar-card{
+  position:relative;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+#page-social .w6-pillar-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 14px 40px -22px rgba(102,252,241,0.45);
+}
+#page-social [data-pillar-pct]{
+  font-variant-numeric:tabular-nums;
+  font-feature-settings:'tnum';
+  transition:color .25s ease;
+}
+
+/* Frameworks grid */
+#page-social .w6-fw-card{
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+#page-social .w6-fw-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 32px -20px rgba(139,92,246,0.4);
+}
+
+/* Calendar */
+#page-social .w6-cal-pill{
+  transition:transform .15s ease, opacity .15s ease;
+  user-select:none;
+}
+#page-social .w6-cal-pill:active{ cursor:grabbing; transform:scale(0.97); }
+#page-social .w6-cal-day{
+  transition:transform .15s ease, border-color .2s ease;
+}
+#page-social .w6-cal-day:hover{
+  border-color:rgba(102,252,241,0.45);
+}
+
+@media (max-width: 880px){
+  #page-social .w6-cal-wrap{ grid-template-columns:1fr !important; }
+  #page-social .w6-cal-pills{ flex-direction:row !important; flex-wrap:wrap; }
+}
+@media (prefers-reduced-motion: reduce){
+  #page-social .w6-pillar-card:hover,
+  #page-social .w6-fw-card:hover,
+  #page-social .w6-cal-day:hover{ transform:none; }
+}
+@media print{
+  #page-social .w6-cal-pills, #page-social .w6-cal-wrap > div:first-child{ display:none; }
+  #page-social .w6-fw-card{ background:#fff !important; color:#000 !important; page-break-inside:avoid; }
+}

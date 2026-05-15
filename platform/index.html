@@ -5760,6 +5760,149 @@
         </div>
       </div>
 
+      <!-- ============================================================
+           WORKER 06 · PHASE 2 — CONTENT PILLARS + 15 FRAMEWORKS + CALENDAR
+      ============================================================ -->
+
+      <!-- ══════════════════════════════════════════════════════
+           BLOCK W6-C · The Content Pillar System
+      ══════════════════════════════════════════════════════ -->
+      <div class="social-section-header" data-w6="block-c" style="margin-top:48px; margin-bottom:20px;">
+        <div>
+          <h2 style="font-size:17px; font-weight:800; color:var(--text); margin-bottom:4px;">BLOCK W6-C — نظام الـ Content Pillars</h2>
+          <p style="font-size:12.5px; color:var(--text-muted);">5 ركائز محتوى · توزيع نسبي مُجرّب · مع حاسبة Pillar Calculator حسب الصناعة</p>
+        </div>
+        <span class="tag accent">5-Pillar Mix</span>
+      </div>
+
+      <div class="w6-pillars-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;">
+        <div class="ql-glass w6-pillar-card" data-pillar="edu" style="padding:16px; border-radius:14px; border-color:rgba(102,252,241,0.3);">
+          <div style="font-size:22px; margin-bottom:6px;">🎓</div>
+          <div style="font-size:13px; font-weight:800; color:var(--accent); margin-bottom:4px;">تعليمي</div>
+          <div style="font-size:24px; font-weight:900; color:var(--text); margin-bottom:6px;" data-pillar-pct="edu">40%</div>
+          <div style="font-size:11.5px; color:var(--text-muted); line-height:1.65;">شرح، قوائم، how-to، إحصاءات. يبني الـ authority ويُعزّز الـ saves.</div>
+        </div>
+        <div class="ql-glass w6-pillar-card" data-pillar="ent" style="padding:16px; border-radius:14px; border-color:rgba(245,158,11,0.3);">
+          <div style="font-size:22px; margin-bottom:6px;">😄</div>
+          <div style="font-size:13px; font-weight:800; color:#F59E0B; margin-bottom:4px;">ترفيهي</div>
+          <div style="font-size:24px; font-weight:900; color:var(--text); margin-bottom:6px;" data-pillar-pct="ent">25%</div>
+          <div style="font-size:11.5px; color:var(--text-muted); line-height:1.65;">Memes, ردود طريفة, كواليس. يُضاعف الـ shares والـ reach.</div>
+        </div>
+        <div class="ql-glass w6-pillar-card" data-pillar="ins" style="padding:16px; border-radius:14px; border-color:rgba(139,92,246,0.3);">
+          <div style="font-size:22px; margin-bottom:6px;">💡</div>
+          <div style="font-size:13px; font-weight:800; color:#8B5CF6; margin-bottom:4px;">ملهم</div>
+          <div style="font-size:24px; font-weight:900; color:var(--text); margin-bottom:6px;" data-pillar-pct="ins">15%</div>
+          <div style="font-size:11.5px; color:var(--text-muted); line-height:1.65;">قصص نجاح، اقتباسات، تحديات. يبني العاطفة + الانتماء.</div>
+        </div>
+        <div class="ql-glass w6-pillar-card" data-pillar="prom" style="padding:16px; border-radius:14px; border-color:rgba(34,197,94,0.3);">
+          <div style="font-size:22px; margin-bottom:6px;">💰</div>
+          <div style="font-size:13px; font-weight:800; color:#22C55E; margin-bottom:4px;">ترويجي</div>
+          <div style="font-size:24px; font-weight:900; color:var(--text); margin-bottom:6px;" data-pillar-pct="prom">15%</div>
+          <div style="font-size:11.5px; color:var(--text-muted); line-height:1.65;">عروض، demos، تجارب، testimonials. القاعدة 80/20 — لا تتجاوز هذي النسبة.</div>
+        </div>
+        <div class="ql-glass w6-pillar-card" data-pillar="bts" style="padding:16px; border-radius:14px; border-color:rgba(236,72,153,0.3);">
+          <div style="font-size:22px; margin-bottom:6px;">🎬</div>
+          <div style="font-size:13px; font-weight:800; color:#EC4899; margin-bottom:4px;">كواليس</div>
+          <div style="font-size:24px; font-weight:900; color:var(--text); margin-bottom:6px;" data-pillar-pct="bts">5%</div>
+          <div style="font-size:11.5px; color:var(--text-muted); line-height:1.65;">يوم في حياتنا، الفريق، أخطاء صغيرة. يصنع الـ humanization.</div>
+        </div>
+      </div>
+
+      <!-- Pillar Calculator -->
+      <div class="ql-glass" style="margin-top:18px; padding:18px 20px; border-radius:14px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:14px;">
+          <div>
+            <div style="font-size:13px; font-weight:800; color:var(--text); margin-bottom:2px;">🧮 Pillar Calculator — اختر صناعتك</div>
+            <div style="font-size:11.5px; color:var(--text-muted);">يُعدّل النسب تلقائياً حسب طبيعة الجمهور المتوقع</div>
+          </div>
+          <select id="w6IndustrySel" onchange="w6UpdatePillars(this.value)"
+            style="background:var(--surface-2); border:1px solid var(--border); color:var(--text); border-radius:10px; padding:9px 14px; font-family:inherit; font-size:12.5px; min-width:220px;">
+            <option value="default">⚖️ افتراضي (متوازن)</option>
+            <option value="b2b">💼 B2B / SaaS / استشارات</option>
+            <option value="ecom">🛒 تجارة إلكترونية</option>
+            <option value="restaurant">🍔 مطاعم / تجزئة</option>
+            <option value="education">📚 تعليم / كورسات</option>
+            <option value="fashion">👗 أزياء / تجميل</option>
+            <option value="tech">💻 تكنولوجيا / تطبيقات</option>
+            <option value="health">🏥 صحة / عافية</option>
+          </select>
+        </div>
+        <div id="w6IndustryHint" style="font-size:12px; color:var(--text-muted); line-height:1.7; padding:12px 14px; background:rgba(102,252,241,0.05); border-radius:10px; border:1px solid rgba(102,252,241,0.15);">
+          النسب الحالية = القيم الافتراضية. غيّر الصناعة لرؤية كيف يتعدّل المزيج.
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════
+           BLOCK W6-D · 15 Hook & Caption Frameworks
+      ══════════════════════════════════════════════════════ -->
+      <div class="social-section-header" data-w6="block-d" style="margin-top:48px; margin-bottom:20px;">
+        <div>
+          <h2 style="font-size:17px; font-weight:800; color:var(--text); margin-bottom:4px;">BLOCK W6-D — 15 إطاراً للكتابة</h2>
+          <p style="font-size:12.5px; color:var(--text-muted);">كل إطار: التعريف · مثال عربي حقيقي · متى يُستخدم · متى يفشل</p>
+        </div>
+        <span class="tag accent">15 Frameworks</span>
+      </div>
+
+      <!-- Frameworks accordion -->
+      <div class="w6-fw-grid" id="w6FwGrid" data-w6="frameworks-list" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:12px;">
+        <!-- rendered by w6.renderFrameworks() -->
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════
+           BLOCK W6-E · Content Calendar Builder (30 days)
+      ══════════════════════════════════════════════════════ -->
+      <div class="social-section-header" data-w6="block-e" style="margin-top:48px; margin-bottom:20px;">
+        <div>
+          <h2 style="font-size:17px; font-weight:800; color:var(--text); margin-bottom:4px;">BLOCK W6-E — Content Calendar Builder</h2>
+          <p style="font-size:12.5px; color:var(--text-muted);">شبكة 30 يوماً · اسحب pillar إلى يوم · يُحفظ تلقائياً (localStorage) · تصدير JSON</p>
+        </div>
+        <span class="tag accent">Drag & Drop</span>
+      </div>
+
+      <div class="w6-cal-wrap" style="display:grid; grid-template-columns:200px 1fr; gap:16px; align-items:flex-start;">
+
+        <!-- Sidebar: pillars draggable + actions -->
+        <div class="ql-glass" style="padding:14px; border-radius:14px; position:sticky; top:80px;">
+          <div style="font-size:11px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--text-faint); margin-bottom:10px;">السحب من هنا</div>
+          <div class="w6-cal-pills" style="display:flex; flex-direction:column; gap:8px;">
+            <div class="w6-cal-pill" draggable="true" data-pill="edu"  style="background:rgba(102,252,241,0.1); color:var(--accent); border:1px solid rgba(102,252,241,0.3); padding:8px 10px; border-radius:8px; font-size:12px; font-weight:700; cursor:grab;">🎓 تعليمي</div>
+            <div class="w6-cal-pill" draggable="true" data-pill="ent"  style="background:rgba(245,158,11,0.1); color:#F59E0B; border:1px solid rgba(245,158,11,0.3); padding:8px 10px; border-radius:8px; font-size:12px; font-weight:700; cursor:grab;">😄 ترفيهي</div>
+            <div class="w6-cal-pill" draggable="true" data-pill="ins"  style="background:rgba(139,92,246,0.1); color:#8B5CF6; border:1px solid rgba(139,92,246,0.3); padding:8px 10px; border-radius:8px; font-size:12px; font-weight:700; cursor:grab;">💡 ملهم</div>
+            <div class="w6-cal-pill" draggable="true" data-pill="prom" style="background:rgba(34,197,94,0.1); color:#22C55E; border:1px solid rgba(34,197,94,0.3); padding:8px 10px; border-radius:8px; font-size:12px; font-weight:700; cursor:grab;">💰 ترويجي</div>
+            <div class="w6-cal-pill" draggable="true" data-pill="bts"  style="background:rgba(236,72,153,0.1); color:#EC4899; border:1px solid rgba(236,72,153,0.3); padding:8px 10px; border-radius:8px; font-size:12px; font-weight:700; cursor:grab;">🎬 كواليس</div>
+            <div class="w6-cal-pill" draggable="true" data-pill="clear" style="background:rgba(255,255,255,0.04); color:var(--text-muted); border:1px dashed var(--border); padding:8px 10px; border-radius:8px; font-size:12px; font-weight:700; cursor:grab;">🗑️ مسح</div>
+          </div>
+
+          <div style="height:1px; background:var(--border); margin:14px 0;"></div>
+
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <button onclick="w6CalAuto()" style="background:linear-gradient(135deg,#8B5CF6,#EC4899); color:#fff; border:none; padding:9px 12px; border-radius:8px; font-family:inherit; font-size:12px; font-weight:800; cursor:pointer;">🎲 توزيع تلقائي</button>
+            <button onclick="w6CalReset()" style="background:rgba(239,68,68,0.1); color:#EF4444; border:1px solid rgba(239,68,68,0.3); padding:9px 12px; border-radius:8px; font-family:inherit; font-size:12px; font-weight:800; cursor:pointer;">♻️ تصفير</button>
+            <button onclick="w6CalExport()" style="background:rgba(34,197,94,0.1); color:#22C55E; border:1px solid rgba(34,197,94,0.3); padding:9px 12px; border-radius:8px; font-family:inherit; font-size:12px; font-weight:800; cursor:pointer;">📤 تصدير JSON</button>
+          </div>
+
+          <div style="height:1px; background:var(--border); margin:14px 0;"></div>
+
+          <div style="font-size:10.5px; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:var(--text-faint); margin-bottom:8px;">📊 التوزيع الفعلي</div>
+          <div id="w6CalStats" style="font-size:11.5px; color:var(--text-muted); line-height:1.85;">
+            <div>—</div>
+          </div>
+        </div>
+
+        <!-- Calendar grid -->
+        <div>
+          <div style="display:grid; grid-template-columns:repeat(7, 1fr); gap:6px; margin-bottom:8px; font-size:10.5px; font-weight:800; color:var(--text-faint); text-align:center;">
+            <div>سبت</div><div>أحد</div><div>اثنين</div><div>ثلاثاء</div><div>أربعاء</div><div>خميس</div><div>جمعة</div>
+          </div>
+          <div id="w6CalGrid" data-w6="cal-grid" style="display:grid; grid-template-columns:repeat(7, 1fr); gap:6px;">
+            <!-- 30 day cells rendered by w6.renderCalendar() -->
+          </div>
+          <div style="font-size:11px; color:var(--text-faint); margin-top:10px; line-height:1.7;">
+            💡 <b>تلميح:</b> اسحب pillar من اليسار وأفلته على أي يوم. الجدول يُحفظ تلقائياً تحت <code>upg_calendar_drafts</code>.
+          </div>
+        </div>
+      </div>
+
     </section><!-- /page-social -->
 
 
