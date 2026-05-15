@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-15T17:10:00Z",
+  "last_updated": "2026-05-15T17:30:00Z",
   "current": {
-    "worker": "08",
-    "worker_name": "HR_NEGOTIATION",
-    "phase": 5,
+    "worker": "09",
+    "worker_name": "PSYCHOLOGY_LAYER",
+    "phase": 1,
     "phases_total": 5,
-    "branch": "worker-08-complete",
-    "status": "completed"
+    "branch": "worker-09-complete",
+    "status": "in-progress"
   },
   "completed_phases": [
     { "worker": "01", "phase": 1, "title": "Foundation Tokens & Aurora Mesh",                    "branch": "worker-01-phase-1-v2", "lines_added": 121 },
@@ -47,8 +47,9 @@
     { "worker": "08", "phase": 2, "title": "30 Trap Questions + Pre-Interview Toolkit + Post-Interview Playbook", "branch": "worker-08-complete", "lines_added": 660 },
     { "worker": "08", "phase": 3, "title": "Salary Negotiation Calculator IQ + 6 principles + Iraq Salary table", "branch": "worker-08-complete", "lines_added": 672 },
     { "worker": "08", "phase": 4, "title": "15 Scenarios Player + Job Ad Decoder + 12 HR Red Flags", "branch": "worker-08-complete", "lines_added": 920 },
-    { "worker": "08", "phase": 5, "title": "Mock Screen Timer + Offer Compare + Iraq Labor Law + Cheat Sheet + 14 Citations", "branch": "worker-08-complete", "lines_added": 977 }
+    { "worker": "08", "phase": 5, "title": "Mock Screen Timer + Offer Compare + Iraq Labor Law + Cheat Sheet + 14 Citations", "branch": "worker-08-complete", "lines_added": 977 },
+    { "worker": "09", "phase": 1, "title": "7 Drives + 12 Biases in page-psych", "branch": "worker-09-complete", "lines_added": 478 }
   ],
-  "next_action": "Worker 08 COMPLETE. Open consolidated PR. Begin Worker 09 — Psychology Layer on next session.",
-  "notes": "Worker 08 (HR + Salary Negotiation) COMPLETE. NEW MODULE page-hrmastery. Total ~4,431 lines across 5 phases on linear branch worker-08-complete (Method A). 4 interactive labs: Salary Calc IQ, 15 Scenarios Player, Job Ad Decoder, Mock Screen Timer, Offer Compare Matrix. localStorage: upg_salary_drafts, upg_interview_attempts_hr."
+  "next_action": "Continue Worker 09 Phase 2 — RULER Method + Mood Meter Interactive + Goleman deep-dive in page-eq.",
+  "notes": "Worker 09 Phase 1 done on linear branch worker-09-complete (Method A). Adds 7 psychological drives + 12 cognitive biases as additive sections inside page-psych. No JS yet (static cards). Citations seeded for later consolidation phase."
 }
