@@ -9606,3 +9606,55 @@ document.addEventListener('DOMContentLoaded', () => {
     if (t) setTimeout(init, 80);
   });
 })();
+
+
+
+/* ===========================================================
+   WORKER 08 — HR MASTERY (Phase 1)
+   Scope: #page-hrmastery only. IIFE-isolated.
+   localStorage: upg_progress_hr (created in later phases)
+   =========================================================== */
+(function(){
+  'use strict';
+
+  function bindAccordion(){
+    var page = document.getElementById('page-hrmastery');
+    if (!page) return;
+    var heads = page.querySelectorAll('[data-hrm-toggle]');
+    heads.forEach(function(h){
+      if (h.__hrmBound) return;
+      h.__hrmBound = true;
+      h.addEventListener('click', function(){
+        var item = h.closest('.hrm-q-item');
+        if (!item) return;
+        item.classList.toggle('open');
+      });
+    });
+  }
+
+  function animateDimBars(){
+    var page = document.getElementById('page-hrmastery');
+    if (!page) return;
+    var fills = page.querySelectorAll('.hrm-dim-bar-fill');
+    fills.forEach(function(f){
+      var w = f.style.width;
+      f.style.width = '0%';
+      setTimeout(function(){ f.style.width = w; }, 60);
+    });
+  }
+
+  function init(){
+    if (!document.getElementById('page-hrmastery')) return;
+    bindAccordion();
+    animateDimBars();
+  }
+
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+
+  document.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('[data-page="hrmastery"]');
+    if (t) setTimeout(init, 80);
+  });
+})();

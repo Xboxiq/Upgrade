@@ -12027,3 +12027,269 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
     border:1px solid #999 !important; page-break-inside:avoid;
   }
 }
+
+
+
+/* ===========================================================
+   WORKER 08 — HR MASTERY (Phase 1)
+   Scope: #page-hrmastery only. Additive. Vanilla. RTL-safe.
+   =========================================================== */
+
+#page-hrmastery .hrm-banner{
+  display:flex; gap:16px; align-items:flex-start;
+  background: linear-gradient(135deg, rgba(168,85,247,.12), rgba(236,72,153,.08));
+  border:1px solid rgba(168,85,247,.25);
+  border-radius: var(--radius-lg);
+  padding:20px 24px; margin-bottom:26px;
+}
+#page-hrmastery .hrm-banner-icon{ font-size:30px; flex-shrink:0; margin-top:2px; }
+#page-hrmastery .hrm-banner-title{
+  font-size:14px; font-weight:800; color:var(--text); margin-bottom:7px;
+}
+#page-hrmastery .hrm-banner-text{
+  font-size:12.5px; color:var(--text-muted); line-height:1.85;
+}
+#page-hrmastery .hrm-banner-text b{ color:var(--text); }
+
+/* Section titles */
+#page-hrmastery .hrm-section-title-wrap{ margin-bottom:18px; }
+#page-hrmastery .hrm-section-eyebrow{
+  font-size:11px; font-weight:700; color:#A855F7;
+  text-transform:uppercase; letter-spacing:1.5px; margin-bottom:6px;
+}
+#page-hrmastery .hrm-section-title{
+  font-size:20px; font-weight:800; color:var(--text); margin:0 0 6px;
+}
+#page-hrmastery .hrm-section-title i{ color:var(--accent); font-style:italic; }
+#page-hrmastery .hrm-section-sub{
+  font-size:12.5px; color:var(--text-muted); margin:0; line-height:1.7;
+}
+
+/* 5 dimensions cards */
+#page-hrmastery .hrm-dims-grid{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:14px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-dim-card{
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: var(--radius-lg); padding:16px;
+  transition: var(--transition);
+  position:relative; overflow:hidden;
+}
+#page-hrmastery .hrm-dim-card::before{
+  content:''; position:absolute; top:0; right:0;
+  width:60px; height:60px;
+  background: radial-gradient(circle at top right, var(--card-tint, rgba(168,85,247,.18)), transparent 70%);
+  pointer-events:none;
+}
+#page-hrmastery .hrm-dim-card:hover{
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+#page-hrmastery .hrm-dim-head{
+  display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;
+}
+#page-hrmastery .hrm-dim-emoji{ font-size:22px; }
+#page-hrmastery .hrm-dim-weight{
+  font-size:18px; font-weight:900; color:var(--text);
+  background: rgba(255,255,255,.04); padding:3px 10px; border-radius:8px;
+  border:1px solid var(--border);
+}
+#page-hrmastery .hrm-dim-name{
+  font-size:13.5px; font-weight:800; color:var(--text); margin-bottom:8px;
+}
+#page-hrmastery .hrm-dim-how,
+#page-hrmastery .hrm-dim-prove{
+  font-size:11.5px; color:var(--text-muted); line-height:1.7; margin-bottom:6px;
+}
+#page-hrmastery .hrm-dim-prove{ color: var(--text); }
+#page-hrmastery .hrm-dim-bar{
+  height:6px; background: rgba(255,255,255,.05); border-radius:99px;
+  overflow:hidden; margin-top:10px;
+}
+#page-hrmastery .hrm-dim-bar-fill{
+  height:100%; border-radius:99px; transition: width .6s ease;
+}
+
+#page-hrmastery .hrm-callout{
+  display:flex; gap:12px; align-items:flex-start;
+  background: rgba(102,252,241,.05);
+  border:1px solid rgba(102,252,241,.18);
+  border-radius: var(--radius-lg);
+  padding:14px 16px; margin-top:10px;
+  font-size:12.5px; color:var(--text-muted); line-height:1.75;
+}
+#page-hrmastery .hrm-callout-icon{ font-size:22px; flex-shrink:0; }
+#page-hrmastery .hrm-callout b{ color:var(--text); }
+
+/* STAR cards */
+#page-hrmastery .hrm-star-grid{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap:14px; margin-bottom:18px;
+}
+#page-hrmastery .hrm-star-card{
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: var(--radius-lg); padding:16px 18px;
+  transition: var(--transition);
+}
+#page-hrmastery .hrm-star-card.primary{
+  border-color: rgba(168,85,247,.4);
+  box-shadow: 0 0 24px rgba(168,85,247,.08);
+}
+#page-hrmastery .hrm-star-card:hover{
+  border-color: var(--border-hover); transform: translateY(-2px);
+}
+#page-hrmastery .hrm-star-tag{
+  display:inline-block; font-size:10px; font-weight:700;
+  background: rgba(168,85,247,.12); color:#A855F7;
+  padding:3px 10px; border-radius:99px; margin-bottom:8px;
+  text-transform:uppercase; letter-spacing:1px;
+}
+#page-hrmastery .hrm-star-name{
+  font-size:22px; font-weight:900; color:var(--text); margin-bottom:6px;
+  letter-spacing:1px;
+}
+#page-hrmastery .hrm-star-when{
+  font-size:11.5px; color:var(--text-faint); margin-bottom:10px;
+  font-style:italic;
+}
+#page-hrmastery .hrm-star-rows{
+  display:flex; flex-direction:column; gap:6px; margin-bottom:10px;
+}
+#page-hrmastery .hrm-star-row{
+  font-size:12px; color:var(--text-muted); line-height:1.7;
+  padding:6px 10px; background: rgba(255,255,255,.02);
+  border-radius:8px; border:1px solid rgba(255,255,255,.04);
+}
+#page-hrmastery .hrm-star-row b{
+  display:inline-block; min-width:18px; color:#A855F7;
+  font-weight:900; margin-left:6px;
+}
+#page-hrmastery .hrm-star-time{
+  font-size:11px; color:var(--text-faint);
+  border-top:1px dashed rgba(255,255,255,.06);
+  padding-top:8px; margin-top:6px;
+}
+
+/* Question accordion */
+#page-hrmastery .hrm-q-accordion{
+  display:flex; flex-direction:column; gap:10px;
+}
+#page-hrmastery .hrm-q-item{
+  background: var(--surface); border:1px solid var(--border);
+  border-radius: var(--radius-lg); overflow:hidden;
+  transition: var(--transition);
+}
+#page-hrmastery .hrm-q-item:hover{ border-color: var(--border-hover); }
+#page-hrmastery .hrm-q-item.open{
+  border-color: rgba(168,85,247,.4);
+  box-shadow: 0 0 18px rgba(168,85,247,.08);
+}
+#page-hrmastery .hrm-q-head{
+  display:flex; align-items:center; gap:14px;
+  padding:14px 18px; cursor:pointer; user-select:none;
+}
+#page-hrmastery .hrm-q-num{
+  font-size:14px; font-weight:900; color:#A855F7;
+  background: rgba(168,85,247,.10);
+  width:36px; height:36px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+#page-hrmastery .hrm-q-text{
+  flex:1; font-size:13.5px; font-weight:700; color:var(--text);
+  line-height:1.5;
+}
+#page-hrmastery .hrm-q-tag{
+  font-size:10.5px; font-weight:700; padding:3px 9px;
+  border-radius:99px; flex-shrink:0;
+  white-space:nowrap;
+}
+#page-hrmastery .hrm-q-chev{
+  width:18px; height:18px; color:var(--text-faint);
+  transition: transform .25s ease, color .25s ease; flex-shrink:0;
+}
+#page-hrmastery .hrm-q-item.open .hrm-q-chev{
+  transform: rotate(180deg); color:#A855F7;
+}
+#page-hrmastery .hrm-q-body{
+  display:none; padding:0 18px 18px; border-top:1px dashed rgba(255,255,255,.06);
+  padding-top:14px;
+}
+#page-hrmastery .hrm-q-item.open .hrm-q-body{ display:block; }
+#page-hrmastery .hrm-q-subtext{
+  font-size:12px; color:var(--text-muted); line-height:1.75;
+  background: rgba(168,85,247,.05);
+  border-right: 3px solid #A855F7;
+  padding:10px 14px; border-radius:8px; margin-bottom:14px;
+}
+#page-hrmastery .hrm-q-subtext b{ color:var(--text); }
+#page-hrmastery .hrm-q-bands{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap:10px; margin-bottom:14px;
+}
+#page-hrmastery .hrm-q-band{
+  background: rgba(255,255,255,.02);
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:10px; padding:12px;
+}
+#page-hrmastery .hrm-q-band[data-level="J"]{ border-color: rgba(34,197,94,.25); }
+#page-hrmastery .hrm-q-band[data-level="M"]{ border-color: rgba(59,130,246,.25); }
+#page-hrmastery .hrm-q-band[data-level="S"]{ border-color: rgba(168,85,247,.25); }
+#page-hrmastery .hrm-q-band-tag{
+  display:inline-block; font-size:10px; font-weight:800;
+  padding:3px 9px; border-radius:99px; margin-bottom:8px;
+  text-transform:uppercase; letter-spacing:1px;
+}
+#page-hrmastery .hrm-q-band[data-level="J"] .hrm-q-band-tag{
+  background: rgba(34,197,94,.12); color:#22C55E;
+}
+#page-hrmastery .hrm-q-band[data-level="M"] .hrm-q-band-tag{
+  background: rgba(59,130,246,.12); color:#3B82F6;
+}
+#page-hrmastery .hrm-q-band[data-level="S"] .hrm-q-band-tag{
+  background: rgba(168,85,247,.12); color:#A855F7;
+}
+#page-hrmastery .hrm-q-band-text{
+  font-size:11.5px; color:var(--text-muted); line-height:1.8;
+}
+#page-hrmastery .hrm-q-grid2{
+  display:grid; grid-template-columns: 1fr 1fr; gap:10px;
+}
+#page-hrmastery .hrm-q-block{
+  background: rgba(255,255,255,.02);
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:10px; padding:12px;
+}
+#page-hrmastery .hrm-q-block.bad{
+  border-color: rgba(239,68,68,.20);
+  background: rgba(239,68,68,.04);
+}
+#page-hrmastery .hrm-q-block.good{
+  border-color: rgba(34,197,94,.22);
+  background: rgba(34,197,94,.04);
+}
+#page-hrmastery .hrm-q-block-h{
+  font-size:12px; font-weight:800; color:var(--text); margin-bottom:8px;
+}
+#page-hrmastery .hrm-q-block ul{
+  margin:0; padding-right:16px;
+  font-size:11.5px; color:var(--text-muted); line-height:1.8;
+}
+#page-hrmastery .hrm-q-block li{ margin-bottom:4px; }
+
+@media (max-width: 720px){
+  #page-hrmastery .hrm-q-grid2{ grid-template-columns: 1fr; }
+  #page-hrmastery .hrm-q-tag{ display:none; }
+}
+
+@media print{
+  #page-hrmastery .hrm-q-body{ display:block !important; }
+  #page-hrmastery .hrm-dim-card,
+  #page-hrmastery .hrm-star-card,
+  #page-hrmastery .hrm-q-item{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
