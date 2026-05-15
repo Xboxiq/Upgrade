@@ -1306,6 +1306,127 @@
         <p>منهجيات عالمية بتطبيق عربي — أطر، اعتراضات، ودورة البيع السبعية</p>
       </div>
 
+      <!-- ════════════════════════════════════════════════════════════════
+           WORKER 02 · PHASE 3 — Interactive Labs
+           Lab 1: Funnel Calculator   ·  Lab 2: Objection Trainer (rule-based)
+           Lab 3: Pitch Builder       ·  All in qlSalesLabs IIFE.
+      ════════════════════════════════════════════════════════════════ -->
+
+      <div class="sales-section-header" data-labs-anchor>
+        <div>
+          <h2>BLOCK B3 — مختبرات تفاعلية (3 Labs)</h2>
+          <p>حساب funnel حقيقي · مدرّب اعتراضات يقيّم ردّك · مولّد pitch 60 ثانية.</p>
+        </div>
+        <span class="tag accent">3 أدوات</span>
+      </div>
+
+      <!-- ── Lab 1: Funnel Calculator ────────────────────────────── -->
+      <div class="lab-card ql-glass" data-lab="funnel">
+        <div class="lab-head">
+          <div class="lab-eyebrow">Lab 1</div>
+          <h3>حاسبة قمع المبيعات (Funnel Calculator)</h3>
+          <p>أدخل أرقامك → احسب live: صفقات متوقعة، Pipeline Coverage، تحذير لو &lt; 2.5x من الـ quota.</p>
+        </div>
+        <div class="lab-body lab-funnel-body">
+          <div class="lab-inputs">
+            <label class="lab-field"><span>عدد الـ Leads شهرياً</span><input type="number" min="0" step="1" data-funnel="leads" value="200"></label>
+            <label class="lab-field"><span>% Lead → Qualified</span><input type="number" min="0" max="100" step="1" data-funnel="r1" value="40"></label>
+            <label class="lab-field"><span>% Qualified → Proposal</span><input type="number" min="0" max="100" step="1" data-funnel="r2" value="50"></label>
+            <label class="lab-field"><span>% Proposal → Closed</span><input type="number" min="0" max="100" step="1" data-funnel="r3" value="30"></label>
+            <label class="lab-field"><span>متوسط حجم الصفقة (USD)</span><input type="number" min="0" step="100" data-funnel="size" value="3000"></label>
+            <label class="lab-field"><span>Quota شهرية (USD)</span><input type="number" min="0" step="500" data-funnel="quota" value="30000"></label>
+          </div>
+          <div class="lab-output">
+            <svg viewBox="0 0 220 200" class="lab-funnel-svg" aria-hidden="true">
+              <defs>
+                <linearGradient id="funnelGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#66FCF1" stop-opacity="0.85"/>
+                  <stop offset="100%" stop-color="#66FCF1" stop-opacity="0.18"/>
+                </linearGradient>
+              </defs>
+              <polygon data-funnel-shape points="10,10 210,10 175,55 45,55"  class="funnel-stage" fill="url(#funnelGrad)"/>
+              <polygon data-funnel-shape points="45,55 175,55 155,100 65,100" class="funnel-stage"/>
+              <polygon data-funnel-shape points="65,100 155,100 135,145 85,145" class="funnel-stage"/>
+              <polygon data-funnel-shape points="85,145 135,145 125,190 95,190" class="funnel-stage"/>
+              <text data-funnel-label="leads" x="110" y="36"  text-anchor="middle">—</text>
+              <text data-funnel-label="qual"  x="110" y="83"  text-anchor="middle">—</text>
+              <text data-funnel-label="prop"  x="110" y="128" text-anchor="middle">—</text>
+              <text data-funnel-label="won"   x="110" y="172" text-anchor="middle">—</text>
+            </svg>
+            <div class="lab-stats">
+              <div class="lab-stat"><span class="lab-stat-lbl">صفقات متوقعة شهرياً</span><span class="lab-stat-val" data-funnel-out="deals">—</span></div>
+              <div class="lab-stat"><span class="lab-stat-lbl">إيراد متوقع (USD)</span><span class="lab-stat-val" data-funnel-out="revenue">—</span></div>
+              <div class="lab-stat"><span class="lab-stat-lbl">Pipeline Coverage</span><span class="lab-stat-val" data-funnel-out="coverage">—</span></div>
+              <div class="lab-warn" data-funnel-warn hidden></div>
+            </div>
+          </div>
+          <p class="lab-note">المرجع: Salesforce State of Sales 2023 — التوصية &gt; 3x للنمو، &lt; 2.5x = خطر deficit.</p>
+        </div>
+      </div>
+
+      <!-- ── Lab 2: Objection Trainer ────────────────────────────── -->
+      <div class="lab-card ql-glass" data-lab="objection">
+        <div class="lab-head">
+          <div class="lab-eyebrow">Lab 2</div>
+          <h3>مدرّب الاعتراضات (Objection Trainer)</h3>
+          <p>اعتراض عشوائي عراقي → اكتب ردّك → تقييم rule-based على 4 أبعاد (Empathy · Reframe · Specificity · Forward motion).</p>
+        </div>
+        <div class="lab-body">
+          <div class="ot-prompt">
+            <div class="ot-eyebrow">اعتراض العميل:</div>
+            <div class="ot-text" data-ot-prompt>اضغط «اعتراض جديد» للبدء.</div>
+            <button class="lab-btn" type="button" data-ot-new>🎲 اعتراض جديد</button>
+          </div>
+          <textarea class="ot-input" data-ot-input rows="3" placeholder="اكتب ردّك هنا (اقتباساً من ميدان البيع، 2-4 جمل)..."></textarea>
+          <button class="lab-btn lab-btn-primary" type="button" data-ot-score>قيّم ردّي</button>
+          <div class="ot-result" data-ot-result hidden>
+            <div class="ot-bars" data-ot-bars></div>
+            <div class="ot-feedback" data-ot-feedback></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Lab 3: Pitch Builder ────────────────────────────────── -->
+      <div class="lab-card ql-glass" data-lab="pitch">
+        <div class="lab-head">
+          <div class="lab-eyebrow">Lab 3</div>
+          <h3>مولّد عرض 60 ثانية (Pitch Builder)</h3>
+          <p>أدخل التفاصيل → ينتج pitch منظّم: Hook 10s → Problem 15s → Solution 20s → Proof 10s → CTA 5s.</p>
+        </div>
+        <div class="lab-body lab-pitch-body">
+          <div class="lab-inputs">
+            <label class="lab-field"><span>المنتج / الخدمة</span><input type="text" data-pitch="product" placeholder="مثلاً: نظام POS سحابي"></label>
+            <label class="lab-field"><span>العميل المستهدف</span><input type="text" data-pitch="audience" placeholder="مطاعم 3+ فروع في بغداد"></label>
+            <label class="lab-field"><span>المشكلة الرئيسية</span><input type="text" data-pitch="problem" placeholder="فجوة بين كاش الفرع والتقرير"></label>
+            <label class="lab-field"><span>الحل (سطر واحد)</span><input type="text" data-pitch="solution" placeholder="تقارير لحظية + تنبيهات تلقائية"></label>
+            <label class="lab-field"><span>الـ Differentiator</span><input type="text" data-pitch="diff" placeholder="onsite support بالعربي خلال 4 ساعات"></label>
+            <label class="lab-field"><span>الـ Proof Point</span><input type="text" data-pitch="proof" placeholder="مطعم X وفّر 1.8M د.ع شهرياً"></label>
+            <label class="lab-field"><span>الـ Call to Action</span>
+              <select data-pitch="cta">
+                <option value="demo">حجز Demo (15 دقيقة)</option>
+                <option value="pilot">Pilot 30 يوم</option>
+                <option value="meeting">لقاء قصير مع المدير</option>
+                <option value="trial">تجربة مجانية 14 يوم</option>
+              </select>
+            </label>
+          </div>
+          <button class="lab-btn lab-btn-primary" type="button" data-pitch-generate>توليد الـ Pitch</button>
+          <div class="pitch-output" data-pitch-output hidden>
+            <div class="pitch-block"><span class="pitch-time">10s</span><b>Hook</b><p data-pitch-out="hook"></p></div>
+            <div class="pitch-block"><span class="pitch-time">15s</span><b>Problem</b><p data-pitch-out="problem"></p></div>
+            <div class="pitch-block"><span class="pitch-time">20s</span><b>Solution</b><p data-pitch-out="solution"></p></div>
+            <div class="pitch-block"><span class="pitch-time">10s</span><b>Proof</b><p data-pitch-out="proof"></p></div>
+            <div class="pitch-block"><span class="pitch-time">5s</span><b>CTA</b><p data-pitch-out="cta"></p></div>
+            <button class="lab-btn lab-btn-ghost" type="button" data-pitch-copy>📋 انسخ النص الكامل</button>
+            <span class="lab-saved" data-pitch-saved hidden>✓ نُسخ</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════════════════════════════════
+           END · WORKER 02 PHASE 3
+      ════════════════════════════════════════════════════════════════ -->
+
       <!-- ====== BLOCK A — إطار SPIN ====== -->
       <div class="sales-section-header">
         <div>
