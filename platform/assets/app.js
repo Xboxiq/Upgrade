@@ -4279,3 +4279,185 @@ document.addEventListener('DOMContentLoaded', () => {
   // Expose small debug surface
   window.__PHASE1 = { refreshRadar, PHASE1 };
 })();
+
+
+
+/* ===== JS block — QL v13 Phase 2 · Magnetic Cursor Aura ===== */
+(function qlCursorAura(){
+  'use strict';
+  // Bail on touch / coarse pointer
+  if (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) return;
+  if (window.matchMedia && window.matchMedia('(hover: none)').matches) return;
+  // Respect reduced motion: still show aura but skip rAF easing — snap instead
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function init(){
+    if (document.getElementById('cursor-aura')) return;
+    var aura = document.createElement('div');
+    aura.id = 'cursor-aura';
+    aura.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(aura);
+
+    var tx = window.innerWidth / 2;
+    var ty = window.innerHeight / 2;
+    var x = tx, y = ty;
+    var seen = false;
+
+    function onMove(e){
+      tx = e.clientX;
+      ty = e.clientY;
+      if (!seen) {
+        seen = true;
+        aura.classList.add('is-active');
+      }
+    }
+    function onLeave(){ aura.classList.remove('is-active'); seen = false; }
+    function onEnter(){ aura.classList.add('is-active'); seen = true; }
+
+    document.addEventListener('mousemove', onMove, { passive: true });
+    document.addEventListener('mouseleave', onLeave);
+    document.addEventListener('mouseenter', onEnter);
+
+    if (reduce) {
+      document.addEventListener('mousemove', function(e){
+        aura.style.transform = 'translate3d(' + e.clientX + 'px,' + e.clientY + 'px,0)';
+      }, { passive: true });
+      return;
+    }
+
+    function loop(){
+      x += (tx - x) * 0.14;
+      y += (ty - y) * 0.14;
+      aura.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)';
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+
+
+/* ===== JS block — QL v13 Phase 3 · Sectional Identity + Living Numerals ===== */
+(function qlSectionalIdentity(){
+  'use strict';
+  function setActive(pageId){
+    if (!pageId) return;
+    document.body.dataset.activeSection = pageId;
+  }
+  // Wrap navigateTo if it exists; else listen for nav clicks as a safety net.
+  function wrapNavigate(){
+    if (typeof window.navigateTo === 'function') {
+      var orig = window.navigateTo;
+      window.navigateTo = function(pageId){
+        var r = orig.apply(this, arguments);
+        try { setActive(pageId); } catch(_){}
+        return r;
+      };
+    }
+    // Safety net: also catch direct nav-item clicks (matches existing pattern)
+    document.addEventListener('click', function(e){
+      var item = e.target.closest && e.target.closest('.nav-item[data-page]');
+      if (item) setActive(item.dataset.page);
+    }, true);
+    // Initial tint for whichever page is active on load
+    var activePage = document.querySelector('.page.active');
+    if (activePage && activePage.id && activePage.id.indexOf('page-') === 0) {
+      setActive(activePage.id.replace('page-', ''));
+    } else {
+      setActive('dashboard');
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', wrapNavigate);
+  } else {
+    // Defer one tick so we wrap AFTER block #3 IIFE registered window.navigateTo
+    setTimeout(wrapNavigate, 0);
+  }
+})();
+
+/* ===== JS block — QL v13 Phase 3 · Living Numerals (counter on viewport) ===== */
+(function qlLivingNumerals(){
+  'use strict';
+  if (!('IntersectionObserver' in window)) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
+
+  function animate(el){
+    var to       = parseFloat(el.dataset.countTo);
+    var from     = parseFloat(el.dataset.countFrom || '0');
+    var duration = parseInt(el.dataset.countDuration || '1400', 10);
+    var decimals = parseInt(el.dataset.countDecimals || '0', 10);
+    var prefix   = el.dataset.countPrefix || '';
+    var suffix   = el.dataset.countSuffix || '';
+    if (isNaN(to)) return;
+    if (reduce) {
+      el.textContent = prefix + to.toFixed(decimals) + suffix;
+      return;
+    }
+    var start = null;
+    function step(ts){
+      if (start === null) start = ts;
+      var p = Math.min(1, (ts - start) / duration);
+      var v = from + (to - from) * easeOutCubic(p);
+      el.textContent = prefix + v.toFixed(decimals) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function observe(){
+    var nodes = document.querySelectorAll('[data-count-to]');
+    if (!nodes.length) return;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) {
+          animate(en.target);
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.35, rootMargin: '0px 0px -8% 0px' });
+    nodes.forEach(function(n){ io.observe(n); });
+  }
+
+  // Auto-tag visible numeric stats so existing markup gets the effect for free.
+  function autoTag(){
+    var candidates = document.querySelectorAll(
+      '.call-card .num, .stat-value, .stat-card .num, [data-stat-num]'
+    );
+    candidates.forEach(function(el){
+      if (el.dataset.countTo) return;
+      var raw = (el.textContent || '').trim();
+      // accept "1,234", "98", "12.5", "5K" → strip non-digits/dot for parse
+      var clean = raw.replace(/[^\d.\-]/g, '');
+      if (!clean) return;
+      var n = parseFloat(clean);
+      if (isNaN(n) || n === 0) return;
+      // Preserve any non-digit suffix (K, %, +) by detecting trailing chars
+      var m = raw.match(/[^\d,\.\s\-]+$/);
+      if (m) el.dataset.countSuffix = m[0];
+      // Decimals
+      if (clean.indexOf('.') > -1) {
+        el.dataset.countDecimals = String(clean.split('.')[1].length);
+      }
+      el.dataset.countTo = String(n);
+    });
+  }
+
+  function boot(){
+    autoTag();
+    observe();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    setTimeout(boot, 50);
+  }
+})();
