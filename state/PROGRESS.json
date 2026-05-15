@@ -1,49 +1,36 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-15T00:00:00Z",
+  "last_updated": "2026-05-15T05:00:00Z",
   "current": {
-    "worker": "01",
-    "worker_name": "UI_UX",
-    "phase": 4,
-    "phases_total": 4,
-    "branch": "worker-01-phase-4",
+    "worker": "02",
+    "worker_name": "SALES_AND_AM",
+    "phase": 5,
+    "phases_total": 5,
+    "branch": "worker-02-phase-5",
     "status": "completed"
   },
   "completed_phases": [
+    { "worker": "01", "phase": 1, "title": "Foundation Tokens & Aurora Mesh",                    "branch": "worker-01-phase-1-v2", "lines_added": 121 },
+    { "worker": "01", "phase": 2, "title": "Conic Halo + Magnetic Cursor Aura",                  "branch": "worker-01-phase-2",   "lines_added": 204 },
+    { "worker": "01", "phase": 3, "title": "Living Numerals + Sectional Identity Tint",          "branch": "worker-01-phase-3",   "lines_added": 193 },
+    { "worker": "01", "phase": 4, "title": "Polish: reduced-motion, print, View Transitions, visibility-pause", "branch": "worker-01-phase-4", "lines_added": 145 },
+    { "worker": "02", "phase": 1, "title": "Sales Frameworks Comparison (4 schools)",            "branch": "worker-02-phase-1",   "lines_added": 564 },
+    { "worker": "02", "phase": 2, "title": "Discovery Library + Closing + Iraqi Objections",     "branch": "worker-02-phase-2",   "lines_added": 440 },
+    { "worker": "02", "phase": 3, "title": "3 Interactive Labs",                                  "branch": "worker-02-phase-3",   "lines_added": 550 },
+    { "worker": "02", "phase": 4, "title": "page-accountmgr (KAM)",                               "branch": "worker-02-phase-4",   "lines_added": 515 },
     {
-      "worker": "01",
-      "phase": 1,
-      "title": "Foundation Tokens & Aurora Mesh",
-      "branch": "worker-01-phase-1-v2",
-      "lines_added": 121
-    },
-    {
-      "worker": "01",
-      "phase": 2,
-      "title": "Conic Halo + Magnetic Cursor Aura",
-      "branch": "worker-01-phase-2",
-      "lines_added": 204
-    },
-    {
-      "worker": "01",
-      "phase": 3,
-      "title": "Living Numerals + Sectional Identity Tint",
-      "branch": "worker-01-phase-3",
-      "lines_added": 193
-    },
-    {
-      "worker": "01",
-      "phase": 4,
-      "title": "Polish: reduced-motion, print, View Transitions, visibility-pause",
-      "branch": "worker-01-phase-4",
-      "lines_added": 145,
+      "worker": "02", "phase": 5,
+      "title": "Iraq Salary Map + Career Ladder + Cheat Sheet + 14 Citations + Progress Tracker",
+      "branch": "worker-02-phase-5",
+      "lines_added": 386,
       "files_modified": [
+        "platform/index.html",
         "platform/assets/style.css",
         "platform/assets/app.js"
       ],
-      "summary": "Full reduced-motion coverage on every v13 surface, ::view-transition-old/new fades, full @media print stylesheet (paper-friendly), contrast lift for warm tints, body.is-hidden animation pause, qlThemeViewTransition wrap of toggleTheme (idempotent, fallback-safe), qlVisibilityPause IIFE"
+      "summary": "Iraq sales salary map (5 levels IQD/USD with sectors). 5-step career ladder. Printable Cheat Sheet (6 columns). 14 citations (Rackham, Dixon, Sandler, Bosworth, Cialdini, Kahneman, Voss, Goleman, Mehta, Tversky, Salesforce 2023, HubSpot 2024, LinkedIn MENA, etc). Sticky sales-progress pill auto-tracks reading via IntersectionObserver, persists best-ever percentage in localStorage:upg_progress_sales. JS in qlSalesProgress IIFE."
     }
   ],
-  "next_action": "Worker 01 finished. Begin Worker 02 — Sales & Account Management on next session.",
-  "notes": "Worker 01 (UI/UX Quantum Leap v13 Signature Edition) complete. Total: 663 lines, 4 PRs (#6, #7, #8, plus Phase 4 PR). Awaiting human merge of PRs in order before Worker 02."
+  "next_action": "Worker 02 finished. Begin Worker 03 — Call Center on next session.",
+  "notes": "Worker 02 (Sales + Account Management) COMPLETE. Total Worker 02: 2,455 lines across 5 phases. 5 PRs (#12, #13, #14, #15, #16-pending) + consolidated worker-02-complete PR. Awaiting human merge."
 }
