@@ -4376,3 +4376,137 @@
     .v12-challenge-done-btn { font-family:var(--font);font-size:12px;font-weight:700;padding:8px 18px;border-radius:var(--radius-sm);border:none;background:var(--accent);color:var(--bg);cursor:pointer;transition:var(--transition); }
     .v12-challenge-done-btn:hover { box-shadow:var(--shadow-accent); }
     .v12-challenge-done-btn.completed { background:rgba(34,197,94,0.15);color:#22C55E;border:1px solid rgba(34,197,94,0.3);cursor:default; }
+
+
+/* ════════════════════════════════════════════════════════════════════
+   v13 — WORKER 01 · PHASE 1/4
+   FOUNDATION TOKENS & AURORA MESH
+   Scope: additive only. Activated via <html class="v13">.
+   No existing rule is overridden. No JS in this phase.
+   ════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Foundation tokens ─────────────────────────────────────────── */
+:root.v13 {
+  /* Aurora palette (4 mesh nodes) */
+  --v13-aurora-1: #66FCF1;   /* cyan   — accent echo */
+  --v13-aurora-2: #8B5CF6;   /* violet — depth       */
+  --v13-aurora-3: #06B6D4;   /* teal   — cool fill   */
+  --v13-aurora-4: #F59E0B;   /* amber  — warm pop    */
+
+  /* Section tints (8 — bound to data-active-section in Phase 3) */
+  --v13-tint-dashboard:   #66FCF1;
+  --v13-tint-callcenter:  #06B6D4;
+  --v13-tint-fieldsales:  #22C55E;
+  --v13-tint-social:      #EC4899;
+  --v13-tint-accounting:  #F59E0B;
+  --v13-tint-programmer:  #8B5CF6;
+  --v13-tint-repair:      #EF4444;
+  --v13-tint-hr:          #14B8A6;
+
+  /* Default current tint = dashboard (Phase 3 will swap dynamically) */
+  --v13-current-tint: var(--v13-tint-dashboard);
+
+  /* Atmosphere knobs */
+  --v13-grain-opacity:  0.045;
+  --v13-aurora-opacity: 0.55;
+  --v13-aurora-blur:    90px;
+  --v13-cursor-aura-blur: 140px;
+
+  /* Motion tokens */
+  --v13-aurora-duration: 28s;
+  --v13-ease-organic:    cubic-bezier(0.45, 0.05, 0.35, 1);
+}
+
+/* ── 2. Aurora mesh layer (4 drifting radial gradients) ───────────── */
+html.v13 #v13-aurora {
+  position: fixed;
+  inset: -10vmax;                         /* bleed past viewport edges */
+  z-index: 0;
+  pointer-events: none;
+  opacity: var(--v13-aurora-opacity);
+  filter: blur(var(--v13-aurora-blur)) saturate(135%);
+  background:
+    radial-gradient(38vmax 30vmax at 18% 22%,
+      var(--v13-aurora-1) 0%, transparent 62%),
+    radial-gradient(34vmax 28vmax at 82% 14%,
+      var(--v13-aurora-2) 0%, transparent 60%),
+    radial-gradient(40vmax 32vmax at 72% 88%,
+      var(--v13-aurora-3) 0%, transparent 60%),
+    radial-gradient(28vmax 26vmax at 12% 86%,
+      var(--v13-aurora-4) 0%, transparent 58%);
+  background-repeat: no-repeat;
+  background-blend-mode: screen;
+  will-change: transform, background-position;
+  animation: v13AuroraDrift var(--v13-aurora-duration)
+             var(--v13-ease-organic) infinite alternate;
+}
+
+/* Soft tint wash on top of aurora — picks up section context (Phase 3) */
+html.v13 #v13-aurora::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60vmax 45vmax at 50% 40%,
+                              var(--v13-current-tint) 0%,
+                              transparent 70%);
+  opacity: 0.18;
+  mix-blend-mode: soft-light;
+  transition: background 0.8s var(--v13-ease-organic);
+}
+
+/* ── 3. Film-grain overlay (uses SVG turbulence filter) ───────────── */
+html.v13 #v13-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 1;                             /* above aurora, below #app */
+  pointer-events: none;
+  opacity: var(--v13-grain-opacity);
+  mix-blend-mode: overlay;
+  /* Inline data-uri SVG so we don't depend on filter-id resolution
+     across stacking contexts. Kept tiny (~120 B encoded). */
+  background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'>\
+<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/>\
+<feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/></filter>\
+<rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 220px 220px;
+}
+
+/* Make sure interactive shell sits above both visual layers */
+html.v13 #app,
+html.v13 #smart-footer { position: relative; z-index: 2; }
+
+/* ── 4. Aurora keyframes ─────────────────────────────────────────── */
+@keyframes v13AuroraDrift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    background-position:
+       0%   0%,
+     100%   0%,
+     100% 100%,
+       0% 100%;
+  }
+  50% {
+    transform: translate3d(2vmax, -1.5vmax, 0) scale(1.04);
+    background-position:
+       8%  -4%,
+      92%   6%,
+      94% 104%,
+      -6%  96%;
+  }
+  100% {
+    transform: translate3d(-1.8vmax, 2vmax, 0) scale(1.02);
+    background-position:
+      -6%   8%,
+     108%  -4%,
+      88%  92%,
+       6% 108%;
+  }
+}
+
+/* ── 5. Reduced-motion guard ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html.v13 #v13-aurora { animation: none; }
+}
+
+/* ── 6. End of v13 Phase 1 ──────────────────────────────────────── */
