@@ -1,49 +1,52 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-15T00:00:00Z",
+  "last_updated": "2026-05-15T02:00:00Z",
   "current": {
-    "worker": "01",
-    "worker_name": "UI_UX",
-    "phase": 4,
-    "phases_total": 4,
-    "branch": "worker-01-phase-4",
-    "status": "completed"
+    "worker": "02",
+    "worker_name": "SALES_AND_AM",
+    "phase": 2,
+    "phases_total": 5,
+    "branch": "worker-02-phase-2",
+    "status": "in-progress"
   },
   "completed_phases": [
     {
-      "worker": "01",
-      "phase": 1,
+      "worker": "01", "phase": 1,
       "title": "Foundation Tokens & Aurora Mesh",
-      "branch": "worker-01-phase-1-v2",
-      "lines_added": 121
+      "branch": "worker-01-phase-1-v2", "lines_added": 121
     },
     {
-      "worker": "01",
-      "phase": 2,
+      "worker": "01", "phase": 2,
       "title": "Conic Halo + Magnetic Cursor Aura",
-      "branch": "worker-01-phase-2",
-      "lines_added": 204
+      "branch": "worker-01-phase-2", "lines_added": 204
     },
     {
-      "worker": "01",
-      "phase": 3,
+      "worker": "01", "phase": 3,
       "title": "Living Numerals + Sectional Identity Tint",
-      "branch": "worker-01-phase-3",
-      "lines_added": 193
+      "branch": "worker-01-phase-3", "lines_added": 193
     },
     {
-      "worker": "01",
-      "phase": 4,
+      "worker": "01", "phase": 4,
       "title": "Polish: reduced-motion, print, View Transitions, visibility-pause",
-      "branch": "worker-01-phase-4",
-      "lines_added": 145,
+      "branch": "worker-01-phase-4", "lines_added": 145
+    },
+    {
+      "worker": "02", "phase": 1,
+      "title": "Sales Frameworks Comparison (SPIN / Challenger / Sandler / Solution)",
+      "branch": "worker-02-phase-1", "lines_added": 564
+    },
+    {
+      "worker": "02", "phase": 2,
+      "title": "Discovery Library (52 Q) + 8 Closing Techniques + 12 Iraqi Objections",
+      "branch": "worker-02-phase-2",
+      "lines_added": 440,
       "files_modified": [
-        "platform/assets/style.css",
-        "platform/assets/app.js"
+        "platform/index.html",
+        "platform/assets/style.css"
       ],
-      "summary": "Full reduced-motion coverage on every v13 surface, ::view-transition-old/new fades, full @media print stylesheet (paper-friendly), contrast lift for warm tints, body.is-hidden animation pause, qlThemeViewTransition wrap of toggleTheme (idempotent, fallback-safe), qlVisibilityPause IIFE"
+      "summary": "Native <details> accordions for 5 discovery categories (Situation 12 / Pain 15 / Impact 10 / Budget 8 / MEDDIC 7). 8 closing technique cards (Assumptive, Alternative, Summary, Urgency, Puppy Dog, Question, Soft, Takeaway) — each with example, when-to, when-to-avoid. 12 Iraqi objection cards in objection-grid: subtext + bad-response + 3 good replies + follow-up objection. Zero JS additions (native HTML behavior). Fully namespaced under #page-fieldsales."
     }
   ],
-  "next_action": "Worker 01 finished. Begin Worker 02 — Sales & Account Management on next session.",
-  "notes": "Worker 01 (UI/UX Quantum Leap v13 Signature Edition) complete. Total: 663 lines, 4 PRs (#6, #7, #8, plus Phase 4 PR). Awaiting human merge of PRs in order before Worker 02."
+  "next_action": "Worker 02 Phase 3 — 3 Interactive Labs: Funnel Calculator, Objection Trainer, Pitch Builder.",
+  "notes": "Phase 2 done. Branch worker-02-phase-2 ready for PR + merge to main. Phase 3 next."
 }
