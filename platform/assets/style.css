@@ -5870,3 +5870,393 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
   #page-fieldsales .sp-fill,
   #page-fieldsales .career-ladder .cl-step { transition: none !important; transform: none !important; }
 }
+
+
+
+
+/* ================================================================
+   WORKER 03 · PHASE 4 — Simulator + Iraq + Cheat Sheet + Citations
+================================================================ */
+
+/* ===== Simulator ===== */
+#page-callcenter .sim-shell {
+  background: var(--surface, rgba(255,255,255,0.03));
+  border: 1px solid var(--border, rgba(255,255,255,0.06));
+  border-radius: 16px;
+  padding: 18px;
+  margin-block-end: 16px;
+}
+#page-callcenter .sim-picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+#page-callcenter .sim-scenario {
+  text-align: start;
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  font-family: inherit;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color .2s ease, transform .15s ease;
+}
+#page-callcenter .sim-scenario:hover { border-color: rgba(102,252,241,0.32); transform: translateY(-2px); }
+#page-callcenter .sim-scenario-emoji {
+  font-size: 28px;
+  inline-size: 44px;
+  block-size: 44px;
+  border-radius: 10px;
+  background: rgba(102,252,241,0.07);
+  border: 1px solid rgba(102,252,241,0.18);
+  display: grid;
+  place-items: center;
+}
+#page-callcenter .sim-scenario h4 { margin: 0; font-size: 14.5px; font-weight: 800; color: var(--text); }
+#page-callcenter .sim-scenario p  { margin: 0; font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+#page-callcenter .sim-scenario-arch {
+  align-self: flex-start;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(102,252,241,0.1);
+  color: var(--accent, #66FCF1);
+  border: 1px solid rgba(102,252,241,0.24);
+  letter-spacing: 0.04em;
+  margin-block-start: 4px;
+}
+
+#page-callcenter .sim-active { display: flex; flex-direction: column; gap: 12px; }
+#page-callcenter .sim-active-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+#page-callcenter .sim-active-emoji {
+  font-size: 24px;
+  inline-size: 42px;
+  block-size: 42px;
+  border-radius: 10px;
+  background: rgba(102,252,241,0.07);
+  border: 1px solid rgba(102,252,241,0.18);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+#page-callcenter .sim-active-head h4 { margin: 0; font-size: 14.5px; font-weight: 800; color: var(--text); }
+#page-callcenter .sim-progress-text { font-size: 11.5px; color: var(--text-muted); }
+#page-callcenter .sim-progress-text b { color: var(--accent, #66FCF1); }
+#page-callcenter .sim-back {
+  margin-inline-start: auto;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.03);
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 11.5px;
+  cursor: pointer;
+}
+#page-callcenter .sim-back:hover { color: var(--accent, #66FCF1); border-color: rgba(102,252,241,0.3); }
+
+#page-callcenter .sim-progress {
+  block-size: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.05);
+  overflow: hidden;
+}
+#page-callcenter .sim-progress-bar {
+  inline-size: 0;
+  block-size: 100%;
+  background: linear-gradient(90deg, var(--accent, #66FCF1), rgba(102,252,241,0.5));
+  transition: inline-size .4s cubic-bezier(.2,.8,.2,1);
+}
+
+#page-callcenter .sim-turn { display: grid; gap: 10px; }
+#page-callcenter .sim-bubble {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(239,68,68,0.18);
+  background: rgba(239,68,68,0.06);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text);
+  max-inline-size: 90%;
+  align-self: flex-start;
+}
+#page-callcenter .sim-bubble.client::before {
+  content: "👤 العميل";
+  display: block;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #ef4444;
+  margin-block-end: 4px;
+}
+#page-callcenter .sim-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 8px;
+}
+#page-callcenter .sim-option {
+  text-align: start;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  font-family: inherit;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+#page-callcenter .sim-option:hover { border-color: rgba(102,252,241,0.3); background: rgba(102,252,241,0.04); }
+#page-callcenter .sim-option:disabled { cursor: not-allowed; opacity: 0.5; }
+#page-callcenter .sim-option[data-picked="excellent"] { border-color: rgba(34,197,94,0.5); background: rgba(34,197,94,0.08); }
+#page-callcenter .sim-option[data-picked="ok"]        { border-color: rgba(245,158,11,0.5); background: rgba(245,158,11,0.08); }
+#page-callcenter .sim-option[data-picked="bad"]       { border-color: rgba(239,68,68,0.5); background: rgba(239,68,68,0.08); }
+
+#page-callcenter .sim-feedback {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(102,252,241,0.05);
+  border: 1px solid rgba(102,252,241,0.18);
+}
+#page-callcenter .sim-feedback-tag {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-block-end: 6px;
+}
+#page-callcenter .sim-feedback-tag[data-grade="excellent"] { background: rgba(34,197,94,0.16); color: #22c55e; border: 1px solid rgba(34,197,94,0.4); }
+#page-callcenter .sim-feedback-tag[data-grade="ok"]        { background: rgba(245,158,11,0.16); color: #f59e0b; border: 1px solid rgba(245,158,11,0.4); }
+#page-callcenter .sim-feedback-tag[data-grade="bad"]       { background: rgba(239,68,68,0.16); color: #ef4444; border: 1px solid rgba(239,68,68,0.4); }
+#page-callcenter .sim-feedback p { margin: 0 0 10px; font-size: 12.5px; line-height: 1.7; color: var(--text); }
+#page-callcenter .sim-next, #page-callcenter .sim-restart {
+  padding: 8px 16px;
+  border-radius: 9px;
+  border: 1px solid rgba(102,252,241,0.42);
+  background: linear-gradient(135deg, rgba(102,252,241,0.18), rgba(102,252,241,0.06));
+  color: var(--accent, #66FCF1);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+#page-callcenter .sim-next:hover, #page-callcenter .sim-restart:hover { box-shadow: 0 4px 14px rgba(102,252,241,0.18); }
+
+#page-callcenter .sim-final {
+  padding: 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(102,252,241,0.06), rgba(102,252,241,0.01));
+  border: 1px solid rgba(102,252,241,0.22);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+#page-callcenter .sim-final h3 { margin: 0; font-size: 15px; font-weight: 800; color: var(--text); }
+#page-callcenter .sim-final-score {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+#page-callcenter .sim-final-num {
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--accent, #66FCF1);
+  line-height: 1;
+}
+#page-callcenter .sim-final-out {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+#page-callcenter .sim-final-out b { color: var(--text); }
+#page-callcenter .sim-final-tier {
+  margin-inline-start: auto;
+  font-size: 12.5px;
+  font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(102,252,241,0.32);
+  background: rgba(102,252,241,0.08);
+  color: var(--accent, #66FCF1);
+}
+#page-callcenter .sim-final-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+#page-callcenter .sim-final-list li {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  font-size: 12px;
+  line-height: 1.6;
+}
+#page-callcenter .sim-final-list li small {
+  display: block;
+  font-size: 10.5px;
+  color: var(--text-muted);
+  margin-block-start: 2px;
+}
+#page-callcenter .sim-final-list li b { font-size: 14px; }
+#page-callcenter .sim-final-list li[data-grade="excellent"] b { color: #22c55e; }
+#page-callcenter .sim-final-list li[data-grade="ok"] b        { color: #f59e0b; }
+#page-callcenter .sim-final-list li[data-grade="bad"] b       { color: #ef4444; }
+
+/* ===== Iraq Block ===== */
+#page-callcenter .iraq-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 14px;
+  margin-block-end: 16px;
+}
+@media (max-width: 880px) {
+  #page-callcenter .iraq-grid { grid-template-columns: 1fr; }
+}
+#page-callcenter .iraq-salary,
+#page-callcenter .iraq-objections {
+  background: var(--surface, rgba(255,255,255,0.03));
+  border: 1px solid var(--border, rgba(255,255,255,0.06));
+  border-radius: 14px;
+  padding: 16px;
+}
+#page-callcenter .iraq-salary h4,
+#page-callcenter .iraq-objections h4 {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--accent, #66FCF1);
+}
+#page-callcenter .iraq-salary-table {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  overflow: hidden;
+}
+#page-callcenter .ist-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.6fr;
+  gap: 8px;
+  padding: 9px 11px;
+  font-size: 12px;
+  align-items: center;
+  border-block-end: 1px solid rgba(255,255,255,0.04);
+}
+#page-callcenter .ist-row:last-child { border-block-end: 0; }
+#page-callcenter .ist-row.ist-head {
+  background: rgba(102,252,241,0.06);
+  font-weight: 800;
+  color: var(--accent, #66FCF1);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 10.5px;
+}
+#page-callcenter .ist-row b { color: var(--text); font-size: 13px; font-weight: 700; }
+#page-callcenter .ist-row i { color: var(--accent, #66FCF1); font-style: normal; font-size: 12px; }
+#page-callcenter .ist-row small { display: block; color: var(--text-muted); font-size: 10.5px; margin-block-start: 2px; }
+#page-callcenter .iraq-salary-note {
+  margin: 10px 0 0;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+#page-callcenter .io-list {
+  margin: 0;
+  padding-inline-start: 22px;
+  display: grid;
+  gap: 8px;
+}
+#page-callcenter .io-list li {
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--text);
+  padding-inline-start: 6px;
+}
+#page-callcenter .io-list li b {
+  color: var(--accent, #66FCF1);
+  margin-inline-end: 4px;
+}
+
+/* ===== Cheat Sheet (reuses sales pattern, scoped) ===== */
+#page-callcenter .cc-cheat {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  padding: 18px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(102,252,241,0.18);
+  margin-block-end: 14px;
+}
+#page-callcenter .cc-cheat .cs-col {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+#page-callcenter .cc-cheat h6 {
+  margin: 0 0 8px;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--accent, #66FCF1);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+#page-callcenter .cc-cheat ul { margin: 0; padding-inline-start: 16px; display: grid; gap: 4px; }
+#page-callcenter .cc-cheat li { font-size: 11.5px; line-height: 1.7; color: var(--text); }
+#page-callcenter .cc-cheat li b { color: var(--accent, #66FCF1); margin-inline-end: 3px; }
+
+/* ===== Citations ===== */
+#page-callcenter .cc-citations {
+  margin-block: 14px 24px;
+  padding: 18px 22px;
+  border-radius: var(--radius-md, 12px);
+  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.06);
+  font-size: 12px;
+  line-height: 1.85;
+  color: var(--text);
+  list-style-position: inside;
+}
+#page-callcenter .cc-citations li {
+  padding: 6px 0;
+  border-block-end: 1px dashed rgba(255,255,255,0.04);
+}
+#page-callcenter .cc-citations li:last-child { border-block-end: 0; }
+#page-callcenter .cc-citations b { color: var(--accent, #66FCF1); margin-inline-end: 4px; }
+#page-callcenter .cc-citations i { color: var(--text-muted, #94a3b8); }
+#page-callcenter .cc-citations a { color: var(--accent, #66FCF1); text-decoration: underline; }
+
+@media (prefers-reduced-motion: reduce) {
+  #page-callcenter .sim-progress-bar,
+  #page-callcenter .sim-scenario { transition: none !important; transform: none !important; }
+}
+
+@media print {
+  #page-callcenter .cc-cheat { background: #fff; border: 1px solid #999; }
+  #page-callcenter .cc-cheat .cs-col { background: #fff; border: 1px solid #ccc; color: #000; page-break-inside: avoid; }
+  #page-callcenter .cc-cheat h6, #page-callcenter .cc-cheat li b { color: #0f766e; }
+  #page-callcenter .cc-cheat li { color: #000; }
+  #page-callcenter .sim-shell, #page-callcenter .iraq-grid > div { background: #fff !important; border: 1px solid #999 !important; color: #000 !important; }
+}
