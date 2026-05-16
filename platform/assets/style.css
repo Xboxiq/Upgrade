@@ -18930,3 +18930,435 @@ body[data-material-density="high"] {
 }
 
 /* End ATELIER v16 / Phase 5 ─────────────────────────────────────────────── */
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ATELIER v16 — Final Utilities Pack (Worker 14 / Phase 6)
+   Inline-purge support classes. APPEND-only.
+   Pairs with scripts/atelier-v16-purge.mjs (215 → 76 inline styles).
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* 1) Width % — odd values (5% increments handled in W12/P7; this fills gaps) */
+.u-w-0   { width: 0%   !important; }
+.u-w-10  { width: 10%  !important; }
+.u-w-11  { width: 11%  !important; }
+.u-w-15  { width: 15%  !important; }
+.u-w-16  { width: 16%  !important; }
+.u-w-18  { width: 18%  !important; }
+.u-w-22  { width: 22%  !important; }
+.u-w-25  { width: 25%  !important; }
+.u-w-35  { width: 35%  !important; }
+.u-w-36  { width: 36%  !important; }
+.u-w-40  { width: 40%  !important; }
+.u-w-61  { width: 61%  !important; }
+.u-w-72  { width: 72%  !important; }
+.u-w-75  { width: 75%  !important; }
+.u-w-88  { width: 88%  !important; }
+.u-w-92  { width: 92%  !important; }
+
+/* 2) Progress-bar inner fills: solid color */
+.u-bar-red    { background: #EF4444; }
+.u-bar-yellow { background: #EAB308; }
+.u-bar-green  { background: #22C55E; }
+.u-bar-blue   { background: #3B82F6; }
+.u-bar-violet { background: #A855F7; }
+
+/* 3) Progress-bar inner fills: gradient (90deg) */
+.u-bar-grad-red          { background: linear-gradient(90deg, #EF4444, #DC2626); }
+.u-bar-grad-blue         { background: linear-gradient(90deg, #3B82F6, #2563EB); }
+.u-bar-grad-amber        { background: linear-gradient(90deg, #EAB308, #F59E0B); }
+.u-bar-grad-green        { background: linear-gradient(90deg, #22C55E, #16A34A); }
+.u-bar-grad-red-pink     { background: linear-gradient(90deg, #EF4444, #EC4899); }
+.u-bar-grad-yellow-orange{ background: linear-gradient(90deg, #EAB308, #F97316); }
+.u-bar-grad-green-cyan   { background: linear-gradient(90deg, #22C55E, #0EA5E9); }
+.u-bar-grad-violet-cyan  { background: linear-gradient(90deg, #8B5CF6, #0EA5E9); }
+.u-bar-grad-pink-violet  { background: linear-gradient(90deg, #EC4899, #8B5CF6); }
+.u-bar-grad-orange-yellow{ background: linear-gradient(90deg, #F97316, #EAB308); }
+
+/* 4) Chip squircle (size + color presets) — extends W12/P7 .u-chip-sm/md */
+.u-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: var(--radius-md, 12px);
+  font-weight: 700;
+}
+.u-chip-36 { width: 36px; height: 36px; border-radius: 10px; font-size: 18px; }
+.u-chip-46 { width: 46px; height: 46px; font-size: 22px; }
+.u-chip-48 { width: 48px; height: 48px; }
+
+.u-chip-cyan      { background: linear-gradient(135deg, #06B6D4, #3B82F6); color: #fff; }
+.u-chip-emerald   { background: linear-gradient(135deg, #22C55E, #10B981); color: #fff; }
+.u-chip-violet    { background: linear-gradient(135deg, #8B5CF6, #EC4899); color: #fff; }
+.u-chip-pink      { background: linear-gradient(135deg, #EC4899, #F43F5E); color: #fff; }
+.u-chip-red       { background: linear-gradient(135deg, #EF4444, #7F1D1D); color: #fff; }
+.u-chip-amber     { background: linear-gradient(135deg, #F59E0B, #EF4444); color: #fff; }
+.u-chip-emerald-soft {
+  background: linear-gradient(135deg, rgba(34,197,94,0.18), rgba(14,165,233,0.12));
+  border: 1px solid rgba(34,197,94,0.25);
+}
+.u-chip-pink-soft {
+  background: linear-gradient(135deg, rgba(236,72,153,0.18), rgba(139,92,246,0.12));
+  border: 1px solid rgba(236,72,153,0.25);
+}
+.u-chip-bicolor {
+  background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(59,130,246,0.15));
+  border: 1px solid var(--border-hover);
+}
+
+/* 5) Table-th meta */
+.u-th-meta {
+  text-align: right;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* 6) Progress-bar tracks (outer pill containers) */
+.u-track {
+  background: var(--surface-3);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.u-track-200 { width: 200px; height: 4px; }
+.u-track-120 { width: 120px; height: 6px; }
+
+/* 7) Stack-center wrapper (max-w + auto + center) */
+.u-stack-center {
+  margin-inline: auto;
+  text-align: center;
+  padding: 40px 32px;
+}
+.u-max-600 { max-width: 600px; }
+
+/* 8) Inline color hex utilities (single-color) */
+.u-c-emerald       { color: #10B981; }
+.u-c-purple        { color: #A855F7; }
+.u-c-black         { color: #000; }
+.u-c-green         { color: #22C55E; }
+.u-c-red           { color: #EF4444; }
+.u-c-cyan          { color: #06B6D4; }
+.u-c-violet        { color: #8B5CF6; }
+.u-c-pink          { color: #EC4899; }
+.u-c-yellow        { color: #EAB308; }
+.u-c-amber         { color: #F59E0B; }
+.u-c-blue          { color: #3B82F6; }
+.u-c-emerald-light { color: #34D399; }
+.u-c-blue-light    { color: #60A5FA; }
+.u-c-violet-light  { color: #C4B5FD; }
+.u-c-accent        { color: var(--accent); }
+
+/* 9) Marker dots */
+.u-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  display: inline-block;
+}
+.u-dot-accent    { background: var(--accent); }
+.u-dot-yellow    { background: #EAB308; }
+.u-dot-instagram { background: #E4405F; }
+
+/* 10) Pills (rgba bg + hex fg) */
+.u-pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+.u-pill-green  { background: rgba(34,197,94,0.12);  color: #22C55E; }
+.u-pill-red    { background: rgba(239,68,68,0.12);  color: #EF4444; }
+.u-pill-yellow { background: rgba(234,179,8,0.12);  color: #EAB308; }
+.u-pill-blue   { background: rgba(59,130,246,0.12); color: #3B82F6; }
+
+/* 11) Min-height tracks */
+.u-min-h-280 { min-height: 280px; }
+
+/* 12) "code" style background (light theme legibility) */
+.u-bg-slate-on-white { background: #1F2937; color: #fff; }
+
+/* ──────────────────────────────────────────────────────────
+   13) Tinted callouts — 6 identity tints, hero-section style
+   ────────────────────────────────────────────────────────── */
+.u-callout {
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin-bottom: 26px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  border: 1px solid transparent;
+}
+.u-callout-sm    { padding: 18px 22px; }
+.u-callout-cyan {
+  background: linear-gradient(135deg, rgba(6,182,212,0.12), rgba(139,92,246,0.08));
+  border-color: rgba(6,182,212,0.25);
+}
+.u-callout-green {
+  background: linear-gradient(135deg, rgba(34,197,94,0.12), rgba(14,165,233,0.08));
+  border-color: rgba(34,197,94,0.25);
+}
+.u-callout-orange {
+  background: linear-gradient(135deg, rgba(249,115,22,0.12), rgba(234,179,8,0.08));
+  border-color: rgba(249,115,22,0.25);
+}
+.u-callout-amber {
+  background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(16,185,129,0.08));
+  border-color: rgba(245,158,11,0.25);
+}
+.u-callout-pink {
+  background: linear-gradient(135deg, rgba(236,72,153,0.12), rgba(139,92,246,0.08));
+  border-color: rgba(236,72,153,0.25);
+}
+.u-callout-violet {
+  background: linear-gradient(135deg, rgba(139,92,246,0.12), rgba(102,252,241,0.08));
+  border-color: rgba(139,92,246,0.25);
+}
+.u-callout-soft {
+  background: linear-gradient(135deg, rgba(102,252,241,0.06), rgba(139,92,246,0.06));
+  border-color: var(--border-hover);
+  padding: 22px;
+  display: block;          /* override flex for soft variant */
+  margin-bottom: 0;
+}
+.u-mt-26 { margin-top: 26px !important; }
+
+/* 14) Deep card (rgba(10,13,24,0.55) base + colored 1px border + radius-md) */
+.u-card-deep {
+  padding: 18px;
+  background: rgba(10,13,24,0.55);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.u-bd-cyan   { border-color: rgba(6,182,212,0.18); }
+.u-bd-green  { border-color: rgba(34,197,94,0.18); }
+.u-bd-amber  { border-color: rgba(245,158,11,0.18); }
+.u-bd-violet { border-color: rgba(139,92,246,0.18); }
+
+/* 15) Tinted soft cards (border-color rgba .35 + faded gradient base) */
+.u-card-tint {
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+}
+.u-card-thin { padding: 16px; border-radius: 14px; border: 1px solid transparent; }
+.u-card-row  { padding: 16px 18px; border-radius: 14px; border: 1px solid transparent; }
+.u-card-tile { padding: 14px 16px; border-radius: 12px; border: 1px solid transparent; }
+
+.u-tint-cyan   { border-color: rgba(102,252,241,0.35); background: linear-gradient(135deg, rgba(102,252,241,0.06), transparent); }
+.u-tint-green  { border-color: rgba(34,197,94,0.35);   background: linear-gradient(135deg, rgba(34,197,94,0.06),   transparent); }
+.u-tint-amber  { border-color: rgba(245,158,11,0.35);  background: linear-gradient(135deg, rgba(245,158,11,0.06),  transparent); }
+.u-tint-violet { border-color: rgba(139,92,246,0.35);  background: linear-gradient(135deg, rgba(139,92,246,0.06),  transparent); }
+.u-tint-pink   { border-color: rgba(236,72,153,0.35);  background: linear-gradient(135deg, rgba(236,72,153,0.06),  transparent); }
+.u-tint-red    { border-color: rgba(239,68,68,0.3); }
+
+/* For thinner cards we override slightly */
+.u-card-thin.u-tint-cyan,
+.u-card-thin.u-tint-green,
+.u-card-thin.u-tint-amber,
+.u-card-thin.u-tint-violet,
+.u-card-thin.u-tint-pink,
+.u-card-row.u-tint-green,
+.u-card-row.u-tint-amber,
+.u-card-row.u-tint-red,
+.u-card-tile.u-tint-amber,
+.u-card-tile.u-tint-pink,
+.u-card-tile.u-tint-violet { background: transparent; }
+.u-card-thin.u-tint-cyan   { border-color: rgba(102,252,241,0.3); }
+.u-card-thin.u-tint-green  { border-color: rgba(34,197,94,0.3); }
+.u-card-thin.u-tint-amber  { border-color: rgba(245,158,11,0.3); }
+.u-card-thin.u-tint-violet { border-color: rgba(139,92,246,0.3); }
+.u-card-thin.u-tint-pink   { border-color: rgba(236,72,153,0.3); }
+.u-card-tile.u-tint-amber  { border-color: rgba(245,158,11,0.25); }
+.u-card-tile.u-tint-pink   { border-color: rgba(236,72,153,0.25); }
+.u-card-tile.u-tint-violet { border-color: rgba(139,92,246,0.25); }
+.u-tint-fill { background: rgba(245,158,11,0.04) !important; }
+.u-grid-span-full { grid-column: 1 / -1; }
+
+/* 16) Stat numbers — typography presets for big numerals */
+.u-stat-36 { font-size: 36px; font-weight: 900; margin-bottom: 8px; }
+.u-stat-28 { font-size: 28px; font-weight: 900; margin-bottom: 8px; }
+.u-stat-26 { font-size: 26px; font-weight: 900; }
+
+/* 17) Information chip — solid foreground hex */
+.u-info-chip {
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 11.5px;
+  border: 1px solid transparent;
+  line-height: 1.6;
+}
+.u-info-cyan   { background: rgba(6,182,212,0.07);  border-color: rgba(6,182,212,0.2);  color: #06B6D4; }
+.u-info-green  { background: rgba(34,197,94,0.07);  border-color: rgba(34,197,94,0.2);  color: #22C55E; }
+.u-info-violet { background: rgba(139,92,246,0.07); border-color: rgba(139,92,246,0.2); color: #8B5CF6; }
+.u-info-pink   { background: rgba(236,72,153,0.07); border-color: rgba(236,72,153,0.2); color: #EC4899; }
+.u-info-red    { background: rgba(239,68,68,0.07);  border-color: rgba(239,68,68,0.2);  color: #EF4444; }
+.u-info-amber  { background: rgba(245,158,11,0.07); border-color: rgba(245,158,11,0.2); color: #F59E0B; }
+
+/* 18) Knowledge boxes — soft tint, default text-color */
+.u-info-box {
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 11.5px;
+  line-height: 1.75;
+  color: var(--text);
+  border: 1px solid transparent;
+}
+.u-info-cyan-soft   { background: rgba(102,252,241,0.06); border-color: rgba(102,252,241,0.18); }
+.u-info-green-soft  { background: rgba(34,197,94,0.06);   border-color: rgba(34,197,94,0.18); }
+.u-info-violet-soft { background: rgba(139,92,246,0.06);  border-color: rgba(139,92,246,0.18); }
+.u-info-pink-soft   { background: rgba(236,72,153,0.06);  border-color: rgba(236,72,153,0.18); }
+.u-info-amber-soft  { background: rgba(245,158,11,0.06);  border-color: rgba(245,158,11,0.18); }
+
+/* 19) Drag buttons */
+.u-drag-btn {
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: grab;
+  border: 1px solid transparent;
+  user-select: none;
+}
+.u-drag-btn:active { cursor: grabbing; }
+.u-drag-accent { background: rgba(102,252,241,0.1); color: var(--accent); border-color: rgba(102,252,241,0.3); }
+.u-drag-pink   { background: rgba(236,72,153,0.1);  color: #EC4899;       border-color: rgba(236,72,153,0.3); }
+.u-drag-amber  { background: rgba(245,158,11,0.1);  color: #F59E0B;       border-color: rgba(245,158,11,0.3); }
+.u-drag-ghost  { background: rgba(255,255,255,0.04); color: var(--text-muted); border-style: dashed; border-color: var(--border); }
+
+/* 20) Tinted action buttons */
+.u-btn-tinted {
+  padding: 9px 14px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 0.15s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+.u-btn-tinted:hover { transform: translateY(-1px); }
+.u-btn-accent { background: rgba(102,252,241,0.1); color: var(--accent); border-color: rgba(102,252,241,0.3); }
+.u-btn-red    { background: rgba(239,68,68,0.1);   color: #EF4444;       border-color: rgba(239,68,68,0.3); }
+
+.u-btn-grad {
+  padding: 9px 14px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  color: #fff;
+  border: none;
+  transition: transform 0.15s ease, box-shadow 0.18s ease;
+}
+.u-btn-grad:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
+.u-btn-grad-emerald { background: linear-gradient(135deg, #22C55E, #10B981); }
+.u-btn-grad-violet  { background: linear-gradient(135deg, #8B5CF6, #EC4899); padding: 9px 12px; }
+
+/* 21) "padding:14px 16px;" tinted cells */
+.u-cell {
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+}
+.u-cell-amber       { background: rgba(245,158,11,0.06); border-color: rgba(245,158,11,0.2); }
+.u-cell-red         { background: rgba(239,68,68,0.06);  border-color: rgba(239,68,68,0.2); }
+.u-cell-violet      { background: rgba(139,92,246,0.06); border-color: rgba(139,92,246,0.2); }
+.u-cell-green-soft  { background: rgba(34,197,94,0.04);  border-color: rgba(34,197,94,0.15); }
+.u-cell-red-soft    { background: rgba(239,68,68,0.04);  border-color: rgba(239,68,68,0.15); }
+
+/* 22) Bg+border-color two-shot tint stacks (compose with existing card classes) */
+.u-tint-bg-green-04   { background: rgba(34,197,94,0.04); }
+.u-tint-bg-green-06   { background: rgba(34,197,94,0.06); }
+.u-tint-bg-blue-06    { background: rgba(59,130,246,0.06); }
+.u-tint-bg-yellow-06  { background: rgba(234,179,8,0.06); }
+.u-tint-bg-red-06     { background: rgba(239,68,68,0.06); }
+.u-tint-bg-red-08     { background: rgba(255,0,0,0.08); }
+.u-tint-bd-green      { border-color: rgba(34,197,94,0.2); }
+.u-tint-bd-blue       { border-color: rgba(59,130,246,0.2); }
+.u-tint-bd-yellow     { border-color: rgba(234,179,8,0.2); }
+.u-tint-bd-red        { border-color: rgba(239,68,68,0.2); }
+
+/* 23) Pill-xs (10px font, soft tint) */
+.u-pill-xs {
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  border: 1px solid transparent;
+  display: inline-block;
+}
+.u-pill-orange { background: rgba(249,115,22,0.12); color: #F97316; border-color: rgba(249,115,22,0.25); }
+.u-pill-pink   { background: rgba(236,72,153,0.12); color: #EC4899; border-color: rgba(236,72,153,0.25); }
+.u-pill-purple { background: rgba(168,85,247,0.12); color: #A855F7; border-color: rgba(168,85,247,0.2); }
+.u-pill-violet { background: rgba(139,92,246,0.12); color: #8B5CF6; border-color: rgba(139,92,246,0.25); }
+/* (.u-pill-green already defined above with .12 bg/.2 bd — works for xs) */
+.u-pill-xs.u-pill-green { background: rgba(34,197,94,0.12); border-color: rgba(34,197,94,0.2); }
+
+/* 24) "Pad-card" small content cards */
+.u-pad-card {
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+}
+.u-pad-card-accent {
+  background: rgba(102,252,241,0.04);
+  border-color: rgba(102,252,241,0.12);
+  padding: 12px;
+}
+.u-pad-card-violet {
+  background: rgba(139,92,246,0.06);
+  border-color: rgba(139,92,246,0.18);
+  padding: 12px;
+}
+.u-pad-card-row {
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  padding: 14px 16px;
+}
+.u-mb-12 { margin-bottom: 12px !important; }
+.u-mt-16 { margin-top: 16px !important; }
+
+/* 25) Inline ribbon (code-like accent badge) */
+.u-inline-mark {
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.92em;
+  display: inline-block;
+}
+.u-inline-mark-accent { background: rgba(102,252,241,0.1); color: var(--accent); }
+
+/* 26) Soft gradient accents (purged from inline) */
+.u-bg-accent-06         { background: rgba(102,252,241,0.06); }
+.u-grad-amber-soft      { background: linear-gradient(135deg, rgba(245,158,11,0.14), rgba(16,185,129,0.1)); }
+.u-grad-cyan-violet-soft{ background: linear-gradient(135deg, rgba(6,182,212,0.14),  rgba(139,92,246,0.1)); }
+
+/* 27) Print + a11y forced-colors */
+@media print {
+  .u-no-print { display: none !important; }
+  .u-print-block { display: block !important; }
+  .u-print-page-break { page-break-after: always; }
+}
+@media (forced-colors: active) {
+  .u-chip,
+  .u-callout,
+  .u-card-deep,
+  .u-card-tint,
+  .u-card-thin,
+  .u-card-row,
+  .u-card-tile,
+  .u-info-chip,
+  .u-info-box,
+  .u-pill,
+  .u-pill-xs,
+  .u-btn-tinted,
+  .u-btn-grad { border: 1px solid CanvasText !important; }
+}
+
+/* End ATELIER v16 / Phase 6 — Final Utilities Pack ──────────────────────── */

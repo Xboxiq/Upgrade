@@ -1,18 +1,25 @@
 {
   "name": "Upgrade — منصة التطوير المهني الذاتي",
   "short_name": "Upgrade",
-  "description": "9 مسارات تخصصية، تعلم تفاعلي، محتوى علمي عميق — Cathedral v14.",
-  "start_url": "./",
+  "description": "9 مسارات تخصصية، تعلم تفاعلي، محتوى علمي عميق — Cathedral v16 (ATELIER).",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "orientation": "portrait-primary",
+  "orientation": "any",
   "lang": "ar",
   "dir": "rtl",
   "background_color": "#0E1220",
   "theme_color": "#0E1220",
-  "categories": ["education", "productivity", "training"],
+  "categories": ["education", "productivity", "business", "training"],
   "icons": [
     { "src": "favicon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any" },
-    { "src": "favicon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "maskable" }
+    { "src": "favicon.svg", "type": "image/svg+xml", "sizes": "192x192", "purpose": "any maskable" },
+    { "src": "favicon.svg", "type": "image/svg+xml", "sizes": "512x512", "purpose": "any maskable" }
+  ],
+  "shortcuts": [
+    { "name": "لوحة التحكم", "short_name": "لوحة", "url": "./index.html#dashboard", "description": "الذهاب إلى الـ Dashboard" },
+    { "name": "كول سنتر", "short_name": "كول", "url": "./index.html#callcenter", "description": "مسار الكول سنتر" },
+    { "name": "تقدمي", "short_name": "تقدم", "url": "./index.html#myprogress", "description": "صفحة تقدمي الشخصي" },
+    { "name": "محاسبة", "short_name": "محاسبة", "url": "./index.html#accounting", "description": "مسار المحاسبة" }
   ]
 }
