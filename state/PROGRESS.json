@@ -1,14 +1,23 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-16T13:30:00Z",
+  "last_updated": "2026-05-16T00:00:00Z",
   "current": {
+    "worker": null,
+    "worker_name": null,
+    "phase": null,
+    "phases_total": null,
+    "phase_order": [],
+    "branch": null,
+    "status": "idle"
+  },
+  "last_completed_worker": {
     "worker": "12",
     "worker_name": "AURORA_APPLE_GRADE",
-    "phase": 7,
     "phases_total": 8,
     "phase_order": ["1", "1B", "2", "3", "4", "5", "6", "7"],
     "branch": "worker-12-aurora",
-    "status": "completed"
+    "merged_pr": 44,
+    "merge_commit": "47f2858"
   },
   "completed_phases": [
     { "worker": "01", "phase": 1, "title": "Foundation Tokens & Aurora Mesh",                    "branch": "worker-01-phase-1-v2", "lines_added": 121 },
@@ -70,6 +79,6 @@
     { "worker": "12", "phase": 6, "title": "Motion & Interaction — easing/duration tokens (5 ease + 6 duration) + press/lift/glow/reveal/skeleton + view-transition wrap + Upg.motion", "branch": "worker-12-aurora", "lines_added": 520 },
     { "worker": "12", "phase": 7, "title": "Inline purge (1671→587) + 100+ utilities + per-page header tint underline + boot banner + sanity assert + CHANGELOG", "branch": "worker-12-aurora", "lines_added": 964 }
   ],
-  "next_action": "Worker 12 AURORA complete (7/7). PR worker-12-aurora → main is ready for review and merge. After merge, plan future Workers (13+) or maintenance.",
-  "notes": "Worker 12 / Phase 7 metrics: inline style= attrs reduced 1671 → 587 (65% reduction, conservative pattern-based purge — no behavioral changes). !important total = 142 (186 occurrences total; 173 inside @media print/prefers-reduced-motion/forced-colors which the spec explicitly allows; only 13 strays remain — well under spec's <=20 target). 14 Upg.* public APIs all wired (theme/icons/gateway/calc/cmdk/state/production from W11; type/scroll/nav/identity/greet/countup/motion from W12). 16 <section id=page-*>, 391 qcalc references, 37 .qi icons, Cairo + IBM Plex Sans Arabic font stack — all preserved per Preservation Guard. AURORA / Cathedral v15 is done."
+  "next_action": "All planned Workers (01-09, 11, 12) are complete and merged to main. No active worker. To start new work (Worker 13+ or maintenance), assign explicitly.",
+  "notes": "Worker 12 AURORA / Cathedral v15 merged to main via PR #44 (commit 47f2858). All 58 phase snapshots saved in state/snapshots/. Workers 01-09 cover the original training-platform scope (UI/UX, Sales+AM, CallCenter, Accounting+Cashier, Programmer, Social+Marketing, Phone Repair, HR+Negotiation, Psychology). Worker 11 = Platform Foundation (theme, icons, gateway, qcalc, command palette, dashboard, PWA). Worker 12 = AURORA Apple-grade polish (typography, materials, navigation chrome, dashboard hero, motion, inline purge). Worker 12 / Phase 7 metrics: inline style= attrs reduced 1671 -> 587 (65% reduction). 14 Upg.* public APIs wired. Cairo + IBM Plex Sans Arabic font stack preserved per Preservation Guard."
 }
