@@ -501,7 +501,7 @@
 
       <span class="nav-section-label">الإدارة</span>
 
-      <div class="nav-item" data-page="none">
+      <div class="nav-item" data-page="myprogress">
         <i class="qi qi-md nav-icon" data-icon="trending-up"></i>
         <span class="nav-label">تقدمي</span>
       </div>
@@ -659,6 +659,80 @@
         <h1>مرحباً بك في لوحة التحكم 👋</h1>
         <p>نظرة عامة على مسيرتك التدريبية — تدريب ذاتي احترافي</p>
       </div>
+
+      <!-- ══════════════════ Cathedral v14 — Real Dashboard (Worker 11 / Phase 6) ══════════════════ -->
+      <section class="cath-dash" data-cath-dash aria-label="إحصاءاتك الحقيقية">
+        <header class="cath-dash-greeting">
+          <div class="cath-dash-greeting-avatar" data-cath-bind="profile.initial">U</div>
+          <div class="cath-dash-greeting-text">
+            <h2>أهلاً <span data-cath-bind="profile.name">صديقي</span> 👋</h2>
+            <p data-cath-bind="profile.streakLine">رحلتك تبدأ من هنا — تابع تقدّمك أدناه.</p>
+          </div>
+          <span class="cath-progress-pill" data-cath-bind="profile.role">—</span>
+        </header>
+
+        <div class="cath-dash-stats">
+          <article class="cath-stat">
+            <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="check-circle"></i></div>
+            <div class="cath-stat-body">
+              <div><span class="cath-stat-value" data-cath-stat="unitsCompleted">0</span></div>
+              <span class="cath-stat-label">وحدة مُكتملة</span>
+            </div>
+          </article>
+          <article class="cath-stat">
+            <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="bar-chart"></i></div>
+            <div class="cath-stat-body">
+              <div><span class="cath-stat-value" data-cath-stat="avgCompletionRate">0</span><span class="cath-stat-suffix">%</span></div>
+              <span class="cath-stat-label">معدل الإتمام</span>
+            </div>
+          </article>
+          <article class="cath-stat">
+            <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="trending-up"></i></div>
+            <div class="cath-stat-body">
+              <div><span class="cath-stat-value" data-cath-stat="trainingHours">0</span><span class="cath-stat-suffix">ساعة</span></div>
+              <span class="cath-stat-label">إجمالي التدريب</span>
+            </div>
+          </article>
+          <article class="cath-stat">
+            <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="alert-triangle"></i></div>
+            <div class="cath-stat-body">
+              <div><span class="cath-stat-value" data-cath-stat="streak">0</span><span class="cath-stat-suffix">يوم</span></div>
+              <span class="cath-stat-label">streak متتابع</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="cath-dash-grid">
+          <div class="cath-dash-card">
+            <header>
+              <h2><i class="qi" data-icon="layout-dashboard"></i> شجرة المهارات</h2>
+              <button class="cath-card-link" type="button" data-page="myprogress">عرض التفاصيل</button>
+            </header>
+            <div class="cath-skill-grid" id="cath-skill-grid"></div>
+          </div>
+          <div class="cath-dash-card">
+            <header>
+              <h2><i class="qi" data-icon="trending-up"></i> آخر النشاط</h2>
+            </header>
+            <ul class="cath-activity-list" id="cath-activity-list"></ul>
+          </div>
+        </div>
+
+        <div class="cath-dash-card">
+          <header>
+            <h2><i class="qi" data-icon="command"></i> إجراءات سريعة</h2>
+            <span style="font-size:.75rem;color:var(--color-text-faint,rgba(255,255,255,.5));">Cmd+K للبحث</span>
+          </header>
+          <div class="cath-quick-actions">
+            <button class="cath-quick-action" type="button" data-page="callcenter"><i class="qi qi-lg" data-icon="phone"></i><span>مكالمة تجريبية</span></button>
+            <button class="cath-quick-action" type="button" data-page="hrmastery"><i class="qi qi-lg" data-icon="briefcase"></i><span>مقابلة وهمية</span></button>
+            <button class="cath-quick-action" type="button" data-page="accounting"><i class="qi qi-lg" data-icon="calculator"></i><span>حاسبة الراتب</span></button>
+            <button class="cath-quick-action" type="button" data-page="psych"><i class="qi qi-lg" data-icon="brain"></i><span>اختبار شخصية</span></button>
+            <button class="cath-quick-action" type="button" data-page="lab"><i class="qi qi-lg" data-icon="flask-conical"></i><span>سيناريو عشوائي</span></button>
+            <button class="cath-quick-action" type="button" data-page="myprogress"><i class="qi qi-lg" data-icon="bar-chart"></i><span>تقدمي الكامل</span></button>
+          </div>
+        </div>
+      </section>
 
       <!-- Welcome Banner -->
       <div class="welcome-banner">
@@ -17450,6 +17524,84 @@ const bird = { ...canMove(), ...canFly() };
       <span onclick="if(confirm('هل تريد مسح كل بيانات التقدم المحفوظة؟')){localStorage.clear();location.reload();}" style="cursor:pointer;color:var(--text-faint);font-size:10.5px;text-decoration:underline;text-decoration-color:var(--border-hover);" title="مسح البيانات المحفوظة">مسح البيانات</span>
     </div>
   </footer>
+
+  <!-- ══════════════════ Cathedral v14 — page-myprogress (Worker 11 / Phase 6) ══════════════════ -->
+  <section class="page" id="page-myprogress">
+    <div class="page-header">
+      <h1>تقدمي 📊</h1>
+      <p>صورة كاملة لكل ما أنجزته على المنصة — لا أرقام مزيّفة.</p>
+    </div>
+
+    <div class="cath-dash-stats">
+      <article class="cath-stat">
+        <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="check-circle"></i></div>
+        <div class="cath-stat-body">
+          <div><span class="cath-stat-value" data-cath-stat="unitsCompleted">0</span></div>
+          <span class="cath-stat-label">وحدة مُكتملة</span>
+        </div>
+      </article>
+      <article class="cath-stat">
+        <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="bar-chart"></i></div>
+        <div class="cath-stat-body">
+          <div><span class="cath-stat-value" data-cath-stat="quizzesTaken">0</span></div>
+          <span class="cath-stat-label">تقييمات نفسية</span>
+        </div>
+      </article>
+      <article class="cath-stat">
+        <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="bookmark"></i></div>
+        <div class="cath-stat-body">
+          <div><span class="cath-stat-value" data-cath-stat="draftCount">0</span></div>
+          <span class="cath-stat-label">مسوّدة محفوظة</span>
+        </div>
+      </article>
+      <article class="cath-stat">
+        <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="star"></i></div>
+        <div class="cath-stat-body">
+          <div><span class="cath-stat-value" data-cath-stat="topScore">0</span></div>
+          <span class="cath-stat-label">أعلى درجة لاب</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="progress-grid">
+      <div class="cath-dash-card">
+        <header>
+          <h2><i class="qi" data-icon="line-chart"></i> النشاط — آخر 30 يوم</h2>
+          <span style="font-size:.78rem;color:var(--color-text-faint,rgba(255,255,255,.5));">حدث / يوم</span>
+        </header>
+        <div class="progress-chart-wrap">
+          <canvas id="progress-chart" width="600" height="180"></canvas>
+        </div>
+      </div>
+      <div class="cath-dash-card">
+        <header><h2><i class="qi" data-icon="layout-dashboard"></i> شجرة المهارات</h2></header>
+        <div class="cath-skill-grid" id="cath-skill-grid-progress"></div>
+      </div>
+    </div>
+
+    <div class="progress-grid">
+      <div class="cath-dash-card">
+        <header><h2><i class="qi" data-icon="bookmark"></i> مسوّداتي</h2></header>
+        <ul class="cath-activity-list" id="my-drafts-list"></ul>
+      </div>
+      <div class="cath-dash-card">
+        <header><h2><i class="qi" data-icon="trending-up"></i> أعلى الدرجات</h2></header>
+        <ul class="cath-activity-list" id="my-achievements-list"></ul>
+      </div>
+    </div>
+
+    <div class="progress-footer">
+      <button class="cath-quick-action" type="button" data-action="export-progress">
+        <i class="qi qi-lg" data-icon="download"></i><span>تصدير كل البيانات (JSON)</span>
+      </button>
+      <button class="cath-quick-action" type="button" data-action="import-progress">
+        <i class="qi qi-lg" data-icon="upload"></i><span>استيراد ملف</span>
+      </button>
+      <button class="cath-quick-action cath-action-danger" type="button" data-action="reset-progress">
+        <i class="qi qi-lg" data-icon="trash"></i><span>حذف كل التقدم</span>
+      </button>
+    </div>
+  </section>
 
   </main><!-- /main -->
 

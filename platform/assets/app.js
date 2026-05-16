@@ -130,6 +130,23 @@ function togglePsychAcc(btn) {
           <line x1="11" y1="18" x2="13" y2="18"/>
           <path d="M9 6h6"/>
         </svg>`
+      },
+      hrmastery: {
+        title: 'إتقان HR والتفاوض على الراتب',
+        breadcrumb: 'الرئيسية / وحدات التدريب / مقابلات HR',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="7" width="20" height="14" rx="2"/>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+        </svg>`
+      },
+      myprogress: {
+        title: 'تقدمي',
+        breadcrumb: 'الرئيسية / تقدمي',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="12" y1="20" x2="12" y2="10"/>
+          <line x1="18" y1="20" x2="18" y2="4"/>
+          <line x1="6" y1="20" x2="6" y2="16"/>
+        </svg>`
       }
     };
 
@@ -13062,6 +13079,584 @@ document.addEventListener('DOMContentLoaded', () => {
       register: (cmd) => { if (cmd && typeof cmd.action === 'function') commands.push(cmd); },
       getShortcuts: () => SHORTCUTS.slice()
     };
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CATHEDRAL v14 — Unified State Layer + Real Dashboard (Worker 11 / Phase 6)
+   Facade over 22+ existing upg_* localStorage keys.
+   Public API: window.Upg.state.{ progress, scores, drafts, misc, profile,
+                                  activity, logActivity, compute, on }
+   ═══════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+
+  const _read = (k, fallback) => {
+    try {
+      const v = localStorage.getItem(k);
+      if (v == null) return fallback;
+      return JSON.parse(v);
+    } catch {
+      // Could be a non-JSON legacy string
+      const raw = localStorage.getItem(k);
+      return raw == null ? fallback : raw;
+    }
+  };
+  const _write = (k, v) => {
+    try {
+      localStorage.setItem(k, JSON.stringify(v));
+      notify(k, v);
+    } catch (e) {
+      console.warn('[Upg.state] write failed', k, e);
+    }
+  };
+
+  const listeners = new Map();
+  const on = (event, fn) => {
+    if (!listeners.has(event)) listeners.set(event, new Set());
+    listeners.get(event).add(fn);
+    return () => listeners.get(event)?.delete(fn);
+  };
+  const notify = (k, v) => {
+    listeners.get('change')?.forEach(fn => safe(fn, k, v));
+    listeners.get(`change:${k}`)?.forEach(fn => safe(fn, v));
+  };
+  const safe = (fn, ...args) => { try { fn(...args); } catch (e) { console.error('[Upg.state] listener', e); } };
+
+  // ─── Reading helpers (best-effort discovery) ───
+  const progress = () => ({
+    sales:        _read('upg_progress_sales', {}),
+    callcenter:   _read('upg_progress_callcenter', {}),
+    accounting:   _read('upg_progress_accounting', _read('upg_progress_acc', {})),
+    programming:  _read('upg_progress_prog', _read('upg_progress_programming', {})),
+    social:       _read('upg_progress_social', {}),
+    phonerepair:  _read('upg_progress_phonerepair', {}),
+    hrmastery:    _read('upg_progress_hr',  _read('upg_progress_hrmastery', {})),
+    psych:        _read('upg_progress_psych', {}),
+    eq:           _read('upg_progress_eq', {}),
+  });
+
+  const scores = () => ({
+    simulator:    _read('upg_simulator_scores', []),
+    objection:    _read('upg_objection_scores', []),
+    prLab:        _read('upg_pr_lab_scores', []),
+    psych:        _read('upg_psych_results', {}),
+    interviews:   _read('upg_interview_attempts', []),
+    interviewsHr: _read('upg_interview_attempts_hr', []),
+    bigfive:      _read('upg_bigfive_scores', []),
+  });
+
+  const drafts = () => ({
+    pitch:      _read('upg_pitch_drafts', []),
+    salary:     _read('upg_salary_drafts', []),
+    tax:        _read('upg_tax_drafts', []),
+    portfolio:  _read('upg_portfolio_drafts', []),
+    statements: _read('upg_statements_drafts', []),
+    pr:         _read('upg_pr_estimates', []),
+    calendar:   _read('upg_calendar_drafts', []),
+    campaigns:  _read('upg_campaigns', []),
+    objections: _read('upg_objections_drafts', []),
+  });
+
+  const misc = () => ({
+    moodLog:         _read('upg_mood_log', []),
+    pathChoice:      _read('upg_path_choice', null),
+    accCycleVisited: _read('upg_acc_cycle_visited', []),
+    accEqState:      _read('upg_acc_eq_state', {}),
+    voiceMeta:       _read('upg_voice_recordings_meta', []),
+  });
+
+  const profile  = () => _read('upg_user_profile', null);
+  const activity = () => _read('upg_activity_log', []);
+
+  const logActivity = (type, payload) => {
+    const log = activity();
+    log.unshift({ ts: Date.now(), type, payload: payload || null });
+    _write('upg_activity_log', log.slice(0, 200));
+  };
+
+  // ─── Computed metrics ───
+  const countDone = (dict) => {
+    if (!dict || typeof dict !== 'object') return 0;
+    return Object.values(dict).filter(v => v === true || (v && typeof v === 'object' && v.completed)).length;
+  };
+  const countTotal = (dict) => (dict && typeof dict === 'object') ? Object.keys(dict).length : 0;
+
+  const compute = {
+    unitsCompleted() {
+      return Object.values(progress()).reduce((sum, dict) => sum + countDone(dict), 0);
+    },
+    avgCompletionRate() {
+      const all = Object.values(progress());
+      const total = all.reduce((s, d) => s + countTotal(d), 0);
+      const done = compute.unitsCompleted();
+      if (total === 0) return 0;
+      return Math.round((done / total) * 100);
+    },
+    trainingHours() {
+      const log = activity().filter(a => a.type === 'session_end' || a.type === 'session_tick');
+      const minutes = log.reduce((sum, e) => sum + (e.payload?.minutes || 0), 0);
+      return Math.round(minutes / 6) / 10; // 1 decimal
+    },
+    streak() {
+      const dates = new Set(activity().map(a => new Date(a.ts).toDateString()));
+      let streak = 0;
+      const d = new Date();
+      while (dates.has(d.toDateString())) {
+        streak++;
+        d.setDate(d.getDate() - 1);
+      }
+      return streak;
+    },
+    topScore() {
+      const s = scores();
+      const all = [...(s.simulator || []), ...(s.objection || []), ...(s.prLab || []), ...(s.interviews || []), ...(s.interviewsHr || [])];
+      const nums = all.map(x => typeof x === 'number' ? x : (x?.score ?? x?.value ?? 0));
+      return nums.length ? Math.max(...nums) : 0;
+    },
+    quizzesTaken() {
+      const psych = scores().psych || {};
+      return Object.keys(psych).length;
+    },
+    draftCount() {
+      return Object.values(drafts()).reduce((s, arr) => s + (Array.isArray(arr) ? arr.length : 0), 0);
+    },
+    moodAvg(days = 7) {
+      const log = misc().moodLog || [];
+      const cutoff = Date.now() - days * 86400000;
+      const recent = log.filter(m => (m?.ts || 0) > cutoff);
+      if (!recent.length) return null;
+      const total = recent.reduce((s, m) => s + ((m.energy || 0) + (m.pleasantness || 0)) / 2, 0);
+      return total / recent.length;
+    },
+    workerStats() {
+      const p = progress();
+      const list = [
+        { id: 'fieldsales', key: 'sales',       name: 'المبيعات',     icon: 'briefcase' },
+        { id: 'callcenter', key: 'callcenter',  name: 'الكول سنتر',   icon: 'phone' },
+        { id: 'accounting', key: 'accounting',  name: 'المحاسبة',     icon: 'calculator' },
+        { id: 'programming', key: 'programming', name: 'البرمجة',      icon: 'code' },
+        { id: 'social',     key: 'social',      name: 'السوشيال',     icon: 'megaphone' },
+        { id: 'phonerepair', key: 'phonerepair', name: 'الصيانة',      icon: 'wrench' },
+        { id: 'hrmastery',  key: 'hrmastery',   name: 'HR',           icon: 'briefcase' },
+        { id: 'psych',      key: 'psych',       name: 'علم النفس',    icon: 'brain' },
+        { id: 'eq',         key: 'eq',          name: 'الذكاء العاطفي',icon: 'heart-handshake' },
+      ];
+      return list.map(w => {
+        const dict = p[w.key] || {};
+        const total = countTotal(dict);
+        const done  = countDone(dict);
+        return {
+          ...w,
+          total, done,
+          pct: total > 0 ? Math.round((done / total) * 100) : 0
+        };
+      });
+    }
+  };
+
+  // Public API
+  window.Upg = window.Upg || {};
+  window.Upg.state = {
+    progress, scores, drafts, misc, profile, activity, logActivity, compute, on,
+    _read, _write
+  };
+
+  // ─── Auto-hooks (passive logging) ───
+  document.addEventListener('click', (e) => {
+    const navItem = e.target.closest('[data-page]');
+    if (navItem) {
+      const p = navItem.dataset.page;
+      if (p && p !== 'none') logActivity('navigate', { page: p });
+    }
+    const completeBtn = e.target.closest('[data-action="mark-complete"]');
+    if (completeBtn) logActivity('lesson_complete', { ref: completeBtn.dataset.ref || completeBtn.id || null });
+  });
+
+  // Session ticks every 5 min, plus end-of-session
+  let sessionStart = Date.now();
+  let lastTick = sessionStart;
+  setInterval(() => {
+    const now = Date.now();
+    const minutes = Math.round((now - lastTick) / 60000);
+    if (minutes >= 5) {
+      logActivity('session_tick', { minutes });
+      lastTick = now;
+    }
+  }, 60000);
+  window.addEventListener('beforeunload', () => {
+    const minutes = Math.round((Date.now() - lastTick) / 60000);
+    if (minutes > 0) logActivity('session_end', { minutes });
+  });
+
+  // Storage cross-tab sync
+  window.addEventListener('storage', (e) => {
+    if (e.key && e.key.startsWith('upg_')) notify(e.key, e.newValue);
+  });
+})();
+
+/* ═══════════════════════════════════════════════════════════════
+   CATHEDRAL v14 — Dashboard Renderer + page-myprogress + navigateTo wrap
+   ═══════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+
+  // Dispatch upg:page-shown after navigateTo (so cmdk + dashboard can react)
+  const wrapNav = () => {
+    if (typeof window.navigateTo !== 'function') {
+      setTimeout(wrapNav, 50);
+      return;
+    }
+    if (window.navigateTo.__cathedralWrapped) return;
+    const orig = window.navigateTo;
+    const wrapped = function (pageId) {
+      orig.call(this, pageId);
+      try { window.dispatchEvent(new CustomEvent('upg:page-shown', { detail: { page: pageId } })); }
+      catch (e) { /* noop */ }
+    };
+    wrapped.__cathedralWrapped = true;
+    window.navigateTo = wrapped;
+  };
+  wrapNav();
+
+  // ─── Helpers ───
+  const animateNumber = (el, target, opts = {}) => {
+    target = +target || 0;
+    const start = +(el.textContent || '0').replace(/[^\d.-]/g, '') || 0;
+    const dur = opts.duration ?? 600;
+    const t0  = performance.now();
+    const isFloat = !Number.isInteger(target) || opts.float;
+    if (typeof requestAnimationFrame !== 'function') { el.textContent = isFloat ? target.toFixed(1) : Math.round(target); return; }
+    const step = (t) => {
+      const k = Math.min(1, (t - t0) / dur);
+      const eased = 1 - Math.pow(1 - k, 3);
+      const cur = start + (target - start) * eased;
+      el.textContent = isFloat ? cur.toFixed(1) : Math.round(cur);
+      if (k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const activityIcon = (t) => ({
+    navigate:        'chevron-right',
+    lesson_complete: 'check-circle',
+    session_end:     'check',
+    session_tick:    'trending-up',
+    quiz_finished:   'star',
+  })[t] || 'sparkles';
+  const activityLabel = (a) => {
+    if (a.type === 'navigate')        return `زيارة <strong>${escapeHtml(a.payload?.page || '—')}</strong>`;
+    if (a.type === 'lesson_complete') return `إكمال درس${a.payload?.ref ? ` <strong>${escapeHtml(a.payload.ref)}</strong>` : ''}`;
+    if (a.type === 'session_end')     return `انتهاء جلسة (${a.payload?.minutes || 0} دقيقة)`;
+    if (a.type === 'session_tick')    return `تدريب نشط (${a.payload?.minutes || 0} د)`;
+    if (a.type === 'quiz_finished')   return `إنهاء تقييم${a.payload?.score ? ` بـ ${a.payload.score}` : ''}`;
+    return escapeHtml(a.type);
+  };
+  const relTime = (ts) => {
+    const diff = Date.now() - ts;
+    if (diff < 0) return 'الآن';
+    if (diff < 60_000)        return 'الآن';
+    if (diff < 3_600_000)     return `قبل ${Math.round(diff/60000)} د`;
+    if (diff < 86_400_000)    return `قبل ${Math.round(diff/3600000)} س`;
+    if (diff < 30 * 86_400_000) return `قبل ${Math.round(diff/86400000)} يوم`;
+    return new Date(ts).toLocaleDateString('ar-IQ', { year:'numeric', month:'short', day:'numeric' });
+  };
+  function escapeHtml(s) {
+    return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  const profileInitial = (p) => {
+    if (!p?.name) return 'U';
+    return String(p.name).trim().charAt(0).toUpperCase() || 'U';
+  };
+
+  // ─── Stats / profile bindings (works across both pages) ───
+  const renderBindings = (root = document) => {
+    if (!window.Upg?.state) return;
+    const c = window.Upg.state.compute;
+    const p = window.Upg.state.profile();
+
+    root.querySelectorAll('[data-cath-stat]').forEach(el => {
+      const key = el.dataset.cathStat;
+      if (typeof c[key] === 'function') animateNumber(el, c[key]());
+    });
+    root.querySelectorAll('[data-cath-bind]').forEach(el => {
+      const key = el.dataset.cathBind;
+      if (key === 'profile.name')      el.textContent = p?.name || 'صديقي';
+      if (key === 'profile.initial')   el.textContent = profileInitial(p);
+      if (key === 'profile.role')      el.textContent = p?.role ? p.role : 'متدرّب';
+      if (key === 'profile.streakLine') {
+        const s = c.streak();
+        el.textContent = s > 0
+          ? `لديك streak من ${s} ${s === 1 ? 'يوم' : 'أيام'} 🔥 — استمر!`
+          : 'ابدأ اليوم وكوّن streak جديد!';
+      }
+    });
+  };
+
+  // ─── Skill grid ───
+  const renderSkillGrid = (containerId) => {
+    const grid = document.getElementById(containerId);
+    if (!grid || !window.Upg?.state) return;
+    const list = window.Upg.state.compute.workerStats();
+    grid.innerHTML = list.map(w => `
+      <button class="cath-skill" type="button" data-page="${escapeHtml(w.id)}" aria-label="${escapeHtml(w.name)} (${w.pct}%)">
+        <div class="cath-skill-ring" style="--p:${w.pct}">
+          <i class="qi qi-md" data-icon="${escapeHtml(w.icon)}"></i>
+        </div>
+        <span class="cath-skill-name">${escapeHtml(w.name)}</span>
+        <span class="cath-skill-pct">${w.pct}%</span>
+      </button>`).join('');
+    window.Upg?.icons?.renderAll?.(grid);
+  };
+
+  // ─── Activity list (dashboard) ───
+  const renderActivityList = (listId, limit = 10) => {
+    const list = document.getElementById(listId);
+    if (!list || !window.Upg?.state) return;
+    const items = window.Upg.state.activity().slice(0, limit);
+    if (!items.length) {
+      list.innerHTML = `<li class="cath-activity-empty">ابدأ التفاعل مع المنصة لتتبّع نشاطك.</li>`;
+      return;
+    }
+    list.innerHTML = items.map(a => `
+      <li>
+        <i class="qi" data-icon="${escapeHtml(activityIcon(a.type))}"></i>
+        <span>${activityLabel(a)}</span>
+        <time datetime="${new Date(a.ts).toISOString()}">${escapeHtml(relTime(a.ts))}</time>
+      </li>`).join('');
+    window.Upg?.icons?.renderAll?.(list);
+  };
+
+  // ─── Drafts list (myprogress) ───
+  const renderDraftsList = () => {
+    const list = document.getElementById('my-drafts-list');
+    if (!list || !window.Upg?.state) return;
+    const d = window.Upg.state.drafts();
+    const items = [];
+    Object.entries(d).forEach(([category, arr]) => {
+      if (!Array.isArray(arr)) return;
+      const count = arr.length;
+      if (count > 0) items.push({ category, count });
+    });
+    if (!items.length) {
+      list.innerHTML = `<li class="cath-activity-empty">لا توجد مسوّدات محفوظة بعد.</li>`;
+      return;
+    }
+    const labels = {
+      pitch:'عروض بيع', salary:'مفاوضات راتب', tax:'حسابات ضريبة',
+      portfolio:'بورتفوليو', statements:'قوائم مالية', pr:'حملات PR',
+      calendar:'تقاويم', campaigns:'حملات', objections:'اعتراضات'
+    };
+    list.innerHTML = items.map(it => `
+      <li>
+        <i class="qi" data-icon="bookmark"></i>
+        <span>${escapeHtml(labels[it.category] || it.category)}</span>
+        <time>${it.count}</time>
+      </li>`).join('');
+    window.Upg?.icons?.renderAll?.(list);
+  };
+
+  // ─── Achievements (top scores) ───
+  const renderAchievements = () => {
+    const list = document.getElementById('my-achievements-list');
+    if (!list || !window.Upg?.state) return;
+    const s = window.Upg.state.scores();
+    const flatten = (arr, label) => (arr || []).map(x => {
+      const score = typeof x === 'number' ? x : (x?.score ?? x?.value);
+      return Number.isFinite(score) ? { score, label, ts: x?.ts || 0 } : null;
+    }).filter(Boolean);
+    const all = [
+      ...flatten(s.simulator, 'محاكي مكالمة'),
+      ...flatten(s.objection, 'مدرب الاعتراض'),
+      ...flatten(s.prLab, 'مختبر PR'),
+      ...flatten(s.interviews, 'مقابلة عامة'),
+      ...flatten(s.interviewsHr, 'مقابلة HR'),
+    ].sort((a, b) => b.score - a.score).slice(0, 8);
+    if (!all.length) {
+      list.innerHTML = `<li class="cath-activity-empty">لا توجد درجات محفوظة بعد — جرّب المختبرات.</li>`;
+      return;
+    }
+    list.innerHTML = all.map(a => `
+      <li>
+        <i class="qi" data-icon="trending-up"></i>
+        <span>${escapeHtml(a.label)}</span>
+        <time>${a.score}</time>
+      </li>`).join('');
+    window.Upg?.icons?.renderAll?.(list);
+  };
+
+  // ─── Activity chart (canvas, 30 days) ───
+  const renderProgressChart = () => {
+    const canvas = document.getElementById('progress-chart');
+    if (!canvas || !window.Upg?.state) return;
+    const dpr = window.devicePixelRatio || 1;
+    const cssW = canvas.clientWidth || 600;
+    const cssH = 180;
+    canvas.width  = cssW * dpr;
+    canvas.height = cssH * dpr;
+    canvas.style.height = cssH + 'px';
+    const ctx = canvas.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, cssW, cssH);
+
+    const days = 30;
+    const buckets = new Array(days).fill(0);
+    const today = new Date(); today.setHours(0,0,0,0);
+    window.Upg.state.activity().forEach(a => {
+      const d = new Date(a.ts || 0); d.setHours(0,0,0,0);
+      const diff = Math.round((today.getTime() - d.getTime()) / 86_400_000);
+      if (diff >= 0 && diff < days) buckets[days - 1 - diff]++;
+    });
+    const max = Math.max(1, ...buckets);
+
+    const styles = getComputedStyle(document.documentElement);
+    const brandColor = styles.getPropertyValue('--color-brand').trim() || '#66FCF1';
+    const trackColor = styles.getPropertyValue('--color-surface-2').trim() || 'rgba(255,255,255,0.06)';
+    const axisColor  = styles.getPropertyValue('--color-text-faint').trim() || 'rgba(255,255,255,0.5)';
+
+    const padX = 8, padTop = 14, padBottom = 18;
+    const drawArea = cssH - padTop - padBottom;
+    const barW = (cssW - padX * 2) / days;
+
+    // Track + bars
+    buckets.forEach((v, i) => {
+      const x = padX + i * barW;
+      ctx.fillStyle = trackColor;
+      ctx.fillRect(x + 1, padTop, Math.max(1, barW - 2), drawArea);
+      const h = (v / max) * drawArea;
+      ctx.fillStyle = brandColor;
+      ctx.fillRect(x + 1, padTop + (drawArea - h), Math.max(1, barW - 2), h);
+    });
+
+    // X axis labels (every 5 days)
+    ctx.fillStyle = axisColor;
+    ctx.font = '10px ui-sans-serif, system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    for (let i = 0; i < days; i += 5) {
+      const x = padX + i * barW + barW / 2;
+      const d = new Date(today.getTime() - (days - 1 - i) * 86_400_000);
+      ctx.fillText(`${d.getDate()}/${d.getMonth() + 1}`, x, cssH - 4);
+    }
+    // Total label
+    ctx.textAlign = 'start';
+    const total = buckets.reduce((s,v) => s+v, 0);
+    ctx.fillText(`إجمالي: ${total} حدث`, padX, padTop - 4);
+  };
+
+  // ─── My-progress action handlers ───
+  const wireMyProgressActions = () => {
+    document.body.addEventListener('click', (e) => {
+      const t = e.target.closest('[data-action="export-progress"]');
+      if (t) { exportAllUpg(); }
+      const i = e.target.closest('[data-action="import-progress"]');
+      if (i) { importAllUpg(); }
+      const r = e.target.closest('[data-action="reset-progress"]');
+      if (r) { resetAllUpg(); }
+    });
+  };
+
+  function exportAllUpg() {
+    const data = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith('upg_')) data[k] = localStorage.getItem(k);
+    }
+    const payload = { exported_at: new Date().toISOString(), version: 'cathedral-v14', data };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `upgrade-progress-${new Date().toISOString().slice(0,10)}.json`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+  }
+  function importAllUpg() {
+    const inp = document.createElement('input');
+    inp.type = 'file';
+    inp.accept = 'application/json,.json';
+    inp.addEventListener('change', () => {
+      const file = inp.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const parsed = JSON.parse(reader.result);
+          const data = parsed?.data || parsed;
+          if (!data || typeof data !== 'object') throw new Error('bad payload');
+          if (!confirm('سيتم استبدال بياناتك الحالية. متابعة؟')) return;
+          Object.entries(data).forEach(([k, v]) => {
+            if (k.startsWith('upg_')) localStorage.setItem(k, v);
+          });
+          location.reload();
+        } catch (e) { alert('ملف غير صالح: ' + e.message); }
+      };
+      reader.readAsText(file);
+    });
+    inp.click();
+  }
+  function resetAllUpg() {
+    if (!confirm('سيتم حذف كل تقدمك وبياناتك. هل أنت متأكد؟')) return;
+    if (!confirm('تأكيد ثاني — هذا حذف نهائي.')) return;
+    Object.keys(localStorage).filter(k => k.startsWith('upg_')).forEach(k => localStorage.removeItem(k));
+    sessionStorage.clear();
+    location.reload();
+  }
+
+  // ─── Render functions ───
+  const renderDashboard = () => {
+    const root = document.getElementById('page-dashboard');
+    if (!root) return;
+    renderBindings(root);
+    renderSkillGrid('cath-skill-grid');
+    renderActivityList('cath-activity-list', 10);
+  };
+  const renderMyProgress = () => {
+    const root = document.getElementById('page-myprogress');
+    if (!root) return;
+    renderBindings(root);
+    renderSkillGrid('cath-skill-grid-progress');
+    renderDraftsList();
+    renderAchievements();
+    renderProgressChart();
+  };
+
+  const init = () => {
+    wireMyProgressActions();
+    renderDashboard();
+    renderMyProgress();
+
+    // Re-render on page navigation
+    window.addEventListener('upg:page-shown', (e) => {
+      const p = e.detail?.page;
+      if (p === 'dashboard') renderDashboard();
+      else if (p === 'myprogress') renderMyProgress();
+    });
+
+    // Re-render on profile/state changes
+    window.addEventListener('upg:profile-ready', renderDashboard);
+    window.Upg?.state?.on?.('change', () => {
+      // Throttle re-renders
+      cancelAnimationFrame(init.__rafId);
+      init.__rafId = requestAnimationFrame(() => {
+        renderDashboard();
+        renderMyProgress();
+      });
+    });
+
+    // Resize handler for chart
+    let rT;
+    window.addEventListener('resize', () => {
+      clearTimeout(rT);
+      rT = setTimeout(() => {
+        if (!document.getElementById('page-myprogress')?.hidden &&
+            document.getElementById('page-myprogress')?.classList.contains('active')) {
+          renderProgressChart();
+        }
+      }, 180);
+    });
   };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
