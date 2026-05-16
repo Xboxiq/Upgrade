@@ -659,98 +659,92 @@
     =========================== -->
     <section class="page active" id="page-dashboard">
 
-      <div class="page-header">
-        <h1>مرحباً بك في لوحة التحكم 👋</h1>
-        <p>نظرة عامة على مسيرتك التدريبية — تدريب ذاتي احترافي</p>
+      <!-- ══════════════════ AURORA v15.1 — Bento Dashboard (Worker 13 / Phase 1) ══════════════════
+           Sacred preserved:
+             • 4 [data-cath-stat] (unitsCompleted, avgCompletionRate, trainingHours, streak)
+             • #cath-skill-grid  ← Worker 11 state populates
+             • #cath-activity-list ← Worker 11 state populates
+           Worker 12 wired Upg.greet/Upg.countup/Upg.identity but markup never landed; this delivers it. -->
+      <div class="bento" data-cath-dash>
+
+        <!-- Hero Greet — 2x1 (Upg.greet writes time-of-day greeting + profile.name) -->
+        <article class="bento-greet b-2x1">
+          <span class="h-eyebrow">لوحة التحكم</span>
+          <h1 data-greet-title>أهلاً <span data-cath-bind="profile.name">بعودتك</span></h1>
+          <p data-greet-sub data-cath-bind="profile.streakLine">تابع رحلتك التدريبية — اليوم خطوة جديدة بانتظارك.</p>
+        </article>
+
+        <!-- Stat tile #1 — Units completed -->
+        <article class="stat-tile b-1x1">
+          <div class="stat-tile-icon"><i class="qi" data-icon="check-circle"></i></div>
+          <div class="stat-tile-value u-num" data-countup data-cath-stat="unitsCompleted">0</div>
+          <div class="stat-tile-label">وحدة مُكتملة</div>
+          <span class="stat-tile-trend is-up"><i class="qi" data-icon="trending-up"></i> +3 هذا الأسبوع</span>
+        </article>
+
+        <!-- Stat tile #2 — Avg completion rate -->
+        <article class="stat-tile b-1x1">
+          <div class="stat-tile-icon"><i class="qi" data-icon="bar-chart"></i></div>
+          <div class="stat-tile-value u-num"><span data-countup data-cath-stat="avgCompletionRate">0</span>%</div>
+          <div class="stat-tile-label">معدل الإتمام</div>
+          <span class="stat-tile-trend is-up"><i class="qi" data-icon="trending-up"></i> +5%</span>
+        </article>
+
+        <!-- Skill tree — 2x1 (Worker 11 updates #cath-skill-grid) -->
+        <article class="b-2x1 dashboard-skills">
+          <div class="dashboard-card-header">
+            <h2 class="h-card"><i class="qi" data-icon="layout-dashboard"></i> شجرة المهارات</h2>
+            <button class="cath-card-link" type="button" data-page="myprogress">عرض التفاصيل ←</button>
+          </div>
+          <div class="cath-skill-grid" id="cath-skill-grid"></div>
+        </article>
+
+        <!-- Activity feed — 2x1 (Worker 11 updates #cath-activity-list) -->
+        <article class="b-2x1 dashboard-activity">
+          <h2 class="h-card dashboard-card-title">
+            <i class="qi" data-icon="trending-up"></i> آخر النشاط
+          </h2>
+          <ul class="cath-activity-list" id="cath-activity-list"></ul>
+        </article>
+
+        <!-- Stat tile #3 — Training hours -->
+        <article class="stat-tile b-1x1">
+          <div class="stat-tile-icon"><i class="qi" data-icon="clock"></i></div>
+          <div class="stat-tile-value u-num" data-countup data-cath-stat="trainingHours">0</div>
+          <div class="stat-tile-label">ساعة تدريب</div>
+        </article>
+
+        <!-- Stat tile #4 — Streak -->
+        <article class="stat-tile b-1x1">
+          <div class="stat-tile-icon"><i class="qi" data-icon="flame"></i></div>
+          <div class="stat-tile-value u-num" data-countup data-cath-stat="streak">0</div>
+          <div class="stat-tile-label">يوم streak</div>
+        </article>
+
+        <!-- Dock — 6 quick actions, full row -->
+        <nav class="dock b-4x1" aria-label="إجراءات سريعة">
+          <button class="dock-btn" type="button" data-page="callcenter">
+            <i class="qi" data-icon="phone"></i><span>مكالمة</span>
+          </button>
+          <button class="dock-btn" type="button" data-page="hrmastery">
+            <i class="qi" data-icon="briefcase"></i><span>مقابلة</span>
+          </button>
+          <button class="dock-btn" type="button" data-page="accounting">
+            <i class="qi" data-icon="calculator"></i><span>حاسبة راتب</span>
+          </button>
+          <button class="dock-btn" type="button" data-page="psych">
+            <i class="qi" data-icon="brain"></i><span>اختبار</span>
+          </button>
+          <button class="dock-btn" type="button" data-page="lab">
+            <i class="qi" data-icon="flask-conical"></i><span>سيناريو</span>
+          </button>
+          <button class="dock-btn" type="button" data-page="myprogress">
+            <i class="qi" data-icon="bar-chart"></i><span>تقدمي</span>
+          </button>
+        </nav>
+
       </div>
-
-      <!-- ══════════════════ Cathedral v14 — Real Dashboard (Worker 11 / Phase 6) ══════════════════ -->
-      <section class="cath-dash" data-cath-dash aria-label="إحصاءاتك الحقيقية">
-        <header class="cath-dash-greeting">
-          <div class="cath-dash-greeting-avatar" data-cath-bind="profile.initial">U</div>
-          <div class="cath-dash-greeting-text">
-            <h2>أهلاً <span data-cath-bind="profile.name">صديقي</span> 👋</h2>
-            <p data-cath-bind="profile.streakLine">رحلتك تبدأ من هنا — تابع تقدّمك أدناه.</p>
-          </div>
-          <span class="cath-progress-pill" data-cath-bind="profile.role">—</span>
-        </header>
-
-        <div class="cath-dash-stats">
-          <article class="cath-stat">
-            <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="check-circle"></i></div>
-            <div class="cath-stat-body">
-              <div><span class="cath-stat-value" data-cath-stat="unitsCompleted">0</span></div>
-              <span class="cath-stat-label">وحدة مُكتملة</span>
-            </div>
-          </article>
-          <article class="cath-stat">
-            <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="bar-chart"></i></div>
-            <div class="cath-stat-body">
-              <div><span class="cath-stat-value" data-cath-stat="avgCompletionRate">0</span><span class="cath-stat-suffix">%</span></div>
-              <span class="cath-stat-label">معدل الإتمام</span>
-            </div>
-          </article>
-          <article class="cath-stat">
-            <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="trending-up"></i></div>
-            <div class="cath-stat-body">
-              <div><span class="cath-stat-value" data-cath-stat="trainingHours">0</span><span class="cath-stat-suffix">ساعة</span></div>
-              <span class="cath-stat-label">إجمالي التدريب</span>
-            </div>
-          </article>
-          <article class="cath-stat">
-            <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="alert-triangle"></i></div>
-            <div class="cath-stat-body">
-              <div><span class="cath-stat-value" data-cath-stat="streak">0</span><span class="cath-stat-suffix">يوم</span></div>
-              <span class="cath-stat-label">streak متتابع</span>
-            </div>
-          </article>
-        </div>
-
-        <div class="cath-dash-grid">
-          <div class="cath-dash-card">
-            <header>
-              <h2><i class="qi" data-icon="layout-dashboard"></i> شجرة المهارات</h2>
-              <button class="cath-card-link" type="button" data-page="myprogress">عرض التفاصيل</button>
-            </header>
-            <div class="cath-skill-grid" id="cath-skill-grid"></div>
-          </div>
-          <div class="cath-dash-card">
-            <header>
-              <h2><i class="qi" data-icon="trending-up"></i> آخر النشاط</h2>
-            </header>
-            <ul class="cath-activity-list" id="cath-activity-list"></ul>
-          </div>
-        </div>
-
-        <div class="cath-dash-card">
-          <header>
-            <h2><i class="qi" data-icon="command"></i> إجراءات سريعة</h2>
-            <span style="font-size:.75rem;color:var(--color-text-faint,rgba(255,255,255,.5));">Cmd+K للبحث</span>
-          </header>
-          <div class="cath-quick-actions">
-            <button class="cath-quick-action" type="button" data-page="callcenter"><i class="qi qi-lg" data-icon="phone"></i><span>مكالمة تجريبية</span></button>
-            <button class="cath-quick-action" type="button" data-page="hrmastery"><i class="qi qi-lg" data-icon="briefcase"></i><span>مقابلة وهمية</span></button>
-            <button class="cath-quick-action" type="button" data-page="accounting"><i class="qi qi-lg" data-icon="calculator"></i><span>حاسبة الراتب</span></button>
-            <button class="cath-quick-action" type="button" data-page="psych"><i class="qi qi-lg" data-icon="brain"></i><span>اختبار شخصية</span></button>
-            <button class="cath-quick-action" type="button" data-page="lab"><i class="qi qi-lg" data-icon="flask-conical"></i><span>سيناريو عشوائي</span></button>
-            <button class="cath-quick-action" type="button" data-page="myprogress"><i class="qi qi-lg" data-icon="bar-chart"></i><span>تقدمي الكامل</span></button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Welcome Banner -->
-      <div class="welcome-banner">
-        <div class="welcome-text">
-          <h2>استمر في رحلة التدريب</h2>
-          <p>لديك 3 وحدات تدريبية مفتوحة و4 مهارات قيد التطوير</p>
-        </div>
-        <div class="welcome-badge">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
-          <span>المستوى الذهبي</span>
-        </div>
-      </div>
+      <!-- ══════════════════ /Bento Dashboard ══════════════════ -->
 
       <!-- Stats -->
       <div class="grid-4 mb-16">

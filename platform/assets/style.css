@@ -17542,3 +17542,25 @@ body, .u-prose p {
 .u-meta-md-loose { font-size: 12px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.75; }
 
 /* End of AURORA v15 — Phase 7 round-4 utilities ─────────────────────────── */
+
+
+/* ═══════════════════════════════════════════════════════════════
+   AURORA v15.1 — Dashboard Card Utilities (Worker 13 / Phase 1)
+   Bridges Bento articles' inner header layouts to the existing
+   #cath-skill-grid / #cath-activity-list children that Worker 11
+   state still populates. Additive, non-destructive.
+   ═══════════════════════════════════════════════════════════════ */
+.dashboard-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4, 16px);
+}
+.dashboard-card-title {
+  margin: 0 0 var(--space-4, 16px) 0;
+}
+.dashboard-skills .cath-skill-grid,
+.dashboard-activity .cath-activity-list {
+  margin-top: 0;
+}
+/* End of Worker 13 / Phase 1 dashboard utilities ─────────────────── */
