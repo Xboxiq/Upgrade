@@ -1,0 +1,59 @@
+{
+  "worker": "12",
+  "worker_name": "AURORA_APPLE_GRADE",
+  "phase": 2,
+  "phase_title": "Linen-Bone Off-White Re-chisel",
+  "phases_total": 8,
+  "branch": "worker-12-aurora",
+  "commit_message": "phase 2 (aurora): linen-bone off-white re-chisel + nav-badge identity classes",
+  "lines_added": 115,
+  "files_touched": [
+    "platform/assets/style.css",
+    "platform/index.html"
+  ],
+  "palette_changes": {
+    "scope": "[data-theme=\"light\"] only — dark theme untouched",
+    "before_mood": "cold, generic off-white (40 18% 97%)",
+    "after_mood": "warm linen + bone (38 28% 96.5%) — Sonoma reading-room",
+    "shadows": "flat black → tinted azure-warm (220 30% 18% + 36 28% 35%)",
+    "brand": "teal 70% 38% → teal 64% 34% (deeper, Apple-grade contrast)"
+  },
+  "tokens_modified": [
+    "--color-bg", "--color-surface-0..3", "--color-text", "--color-text-muted", "--color-text-faint",
+    "--color-border", "--color-border-strong",
+    "--color-brand", "--color-brand-hover", "--color-brand-soft", "--color-brand-strong",
+    "--color-success", "--color-warning", "--color-danger", "--color-info",
+    "--shadow-c-sm", "--shadow-c-md", "--shadow-c-lg", "--shadow-c-xl",
+    "--ring"
+  ],
+  "tokens_added": ["--tonal-tint"],
+  "utilities_added": [
+    ".elev-0", ".elev-1", ".elev-2", ".elev-3",
+    ".nav-badge", ".nav-badge--success", ".nav-badge--ember", ".nav-badge--violet",
+    ".nav-badge--pink", ".nav-badge--amber", ".nav-badge--mint", ".nav-badge--azure",
+    ".nav-badge--gold", ".nav-badge--royal",
+    ".welcome-badge--gold", ".welcome-badge--brand", ".welcome-badge--success"
+  ],
+  "inline_styles": {
+    "before": 1602,
+    "after": 1592,
+    "removed": 10,
+    "removed_target": "all sidebar nav-badge gradient inline styles"
+  },
+  "important_count": {
+    "before": 144,
+    "after": 142,
+    "removed": 2,
+    "remaining_legitimate": "138 of 142 are inside @media print/forced-colors/prefers-reduced-motion (defensive overrides) — Phase 7 will trim further"
+  },
+  "preservation_check": {
+    "pages_count": 14,
+    "qcalc_instances": 8,
+    "upg_apis_intact": ["theme", "icons", "gateway", "calc", "cmdk", "state", "production", "type"],
+    "dark_theme_unchanged": true,
+    "all_14_nav_items_present": true,
+    "nav_items_text_unchanged": true,
+    "nav_items_order_unchanged": true
+  },
+  "next_phase": "3 — Materials & Depth (4-tier glass + scroll elevation + edge-light + grain)"
+}
