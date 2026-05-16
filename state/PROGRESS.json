@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-16T02:30:00Z",
+  "last_updated": "2026-05-16T03:15:00Z",
   "current": {
     "worker": "11",
     "worker_name": "PLATFORM_FOUNDATION",
-    "phase": 4,
+    "phase": 5,
     "phases_total": 7,
     "branch": "worker-11-phase-4-7",
     "status": "in-progress"
@@ -56,8 +56,9 @@
     { "worker": "11", "phase": 1, "title": "Sovereign Theme System (tokens + bridge + 3-state toggle)", "branch": "worker-11-complete", "lines_added": 359 },
     { "worker": "11", "phase": 2, "title": "Lucide-style Icon System (95 symbols + .qi + migrator)", "branch": "worker-11-complete", "lines_added": 401 },
     { "worker": "11", "phase": 3, "title": "Entry Gateway + Identity Lock + Onboarding 4-step", "branch": "worker-11-complete", "lines_added": 912 },
-    { "worker": "11", "phase": 4, "title": "Calculator Foundation Component (qcalc) + 8 migrations", "branch": "worker-11-phase-4-7", "lines_added": 1368 }
+    { "worker": "11", "phase": 4, "title": "Calculator Foundation Component (qcalc) + 8 migrations", "branch": "worker-11-phase-4-7", "lines_added": 1368 },
+    { "worker": "11", "phase": 5, "title": "Command Palette + Keyboard Shortcuts (30+ commands)",     "branch": "worker-11-phase-4-7", "lines_added": 713 }
   ],
-  "next_action": "Continue Worker 11 Phase 5 — Command Palette (Cmd+K) + 30 commands + cheat sheet",
-  "notes": "Worker 11 Phase 4 complete. qcalc framework registered with 8 calculators: iraq-tax (page-accounting), salary-slip (page-accounting), sales-commission (page-fieldsales), apindex (page-callcenter), ab-test (page-social), batna (page-negotiation), bigo-cost (page-programming), bigfive-score (page-psych). Each has reset/copy/export actions, live update, tabular-nums, Intl.NumberFormat('ar-IQ'), explain section with citations. Math kept 1:1 from Worker references (قانون 113 IQ tax, COPC CX 6.2 APIndex, two-proportion z-test for A/B, Harvard ZOPA, NEO-PI-R Big Five). NOTE: previous worker-11-complete branch had divergent stale ref on remote — this session uses worker-11-phase-4-7. PR will target main from this branch. Add classes: .qcalc, .qcalc-header/title/body/inputs/summary/result-card/explain/toast, .qcalc-meter, .qcalc-eyebrow. JS API: window.Upg.calc.{register, mount, init, format}. Auto-mounts on DOMContentLoaded and on upg:page-shown event. Toast UX for reset/copy/export feedback."
+  "next_action": "Continue Worker 11 Phase 6 — Real Dashboard (Upg.state facade + activity feed + page-myprogress)",
+  "notes": "Worker 11 Phase 5 complete. Cmd+K palette opens in <100ms with 30+ commands across 5 groups: انتقال (14 pages), الثيم (4), حاسبات (8 qcalc shortcuts), البيانات (export/import/reset), النظام (lock/help/print/reload). Fuzzy search by title+tags+group. Arrow keys + Enter navigation, Esc closes. Cheat sheet via '?' key with 15 shortcuts in 4 categories. Global keyboard: Cmd/Ctrl+K, ?, T (theme), L (lock), G+{D,S,C,P,A,H,R,M,X,N,E,Y} for page jumps. Topbar search now opens palette (readonly + ⌘K hint). All shortcuts skip when input/textarea focused. Public API: window.Upg.cmdk.{open, close, register, getShortcuts}. Deep-links to qcalc instances scroll + focus first input."
 }
