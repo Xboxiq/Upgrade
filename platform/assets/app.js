@@ -14799,3 +14799,238 @@ document.addEventListener('DOMContentLoaded', () => {
   window.Upg = window.Upg || {};
   window.Upg.transition = Object.freeze({ navigate, supports });
 })();
+
+
+
+/* ============================================================
+   ATELIER v16 — Focus Trap (Worker 14 / Phase 6)
+   Public API: window.Upg.focusTrap.{ enable, disable }
+
+   Use:
+     const opener = document.activeElement;
+     Upg.focusTrap.enable(modalEl, opener);
+     // ...later, when closing:
+     Upg.focusTrap.disable(modalEl);
+
+   Behaviour:
+   - Tab/Shift+Tab cycles inside `container`.
+   - ESC clicks `[data-close]` inside container if present, else
+     dispatches a `focusTrap:escape` CustomEvent caller can listen to.
+   - First focusable element receives focus on enable.
+   - On disable, focus returns to `returnFocusEl`.
+   ============================================================ */
+(() => {
+  'use strict';
+  const FOCUSABLE_SEL = [
+    'a[href]',
+    'button:not([disabled])',
+    'input:not([disabled]):not([type="hidden"])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    '[tabindex]:not([tabindex="-1"])',
+    'audio[controls]',
+    'video[controls]',
+    'details > summary:first-of-type',
+  ].join(',');
+
+  const traps = new WeakMap();
+
+  const getFocusables = (container) => {
+    if (!container) return [];
+    const all = container.querySelectorAll(FOCUSABLE_SEL);
+    // Filter out invisible elements (display:none, hidden attr, etc.)
+    return Array.from(all).filter((el) => {
+      if (el.hasAttribute('hidden')) return false;
+      const rect = el.getBoundingClientRect();
+      return rect.width > 0 || rect.height > 0 || el === document.activeElement;
+    });
+  };
+
+  const enable = (container, returnFocusEl) => {
+    if (!container || traps.has(container)) return;
+
+    const handler = (e) => {
+      if (e.key !== 'Tab') return;
+      const items = getFocusables(container);
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && (document.activeElement === first || !container.contains(document.activeElement))) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    const escHandler = (e) => {
+      if (e.key !== 'Escape') return;
+      const closeBtn = container.querySelector('[data-close]');
+      if (closeBtn) {
+        e.stopPropagation();
+        closeBtn.click();
+      } else {
+        container.dispatchEvent(new CustomEvent('focusTrap:escape', { bubbles: true }));
+      }
+    };
+
+    container.addEventListener('keydown', handler);
+    container.addEventListener('keydown', escHandler);
+    traps.set(container, { handler, escHandler, returnFocusEl: returnFocusEl || null });
+
+    // Send focus to first focusable on next tick (allow opening transition)
+    requestAnimationFrame(() => {
+      const items = getFocusables(container);
+      if (items.length) items[0].focus();
+    });
+  };
+
+  const disable = (container) => {
+    const t = traps.get(container);
+    if (!t) return;
+    container.removeEventListener('keydown', t.handler);
+    container.removeEventListener('keydown', t.escHandler);
+    traps.delete(container);
+    if (t.returnFocusEl && typeof t.returnFocusEl.focus === 'function') {
+      try { t.returnFocusEl.focus(); } catch (_) {}
+    }
+  };
+
+  window.Upg = window.Upg || {};
+  window.Upg.focusTrap = { enable, disable };
+})();
+
+
+/* ============================================================
+   ATELIER v16 — Auto-attach Focus Trap on common modals
+   Heuristic: any element matching [role="dialog"], .modal, .qmodal,
+   or [data-modal] that becomes "open" (class .is-open / aria-modal=true)
+   gets a focus trap automatically. Disable when closed.
+   ============================================================ */
+(() => {
+  'use strict';
+  const SEL = '[role="dialog"], .modal, .qmodal, [data-modal]';
+
+  const isOpen = (el) =>
+    el.classList.contains('is-open') ||
+    el.getAttribute('aria-modal') === 'true' ||
+    (el.style && el.style.display && el.style.display !== 'none' && el.hasAttribute('data-modal-open'));
+
+  const wire = (el) => {
+    if (el.__atelierTrapWired) return;
+    el.__atelierTrapWired = true;
+    const observer = new MutationObserver(() => {
+      const open = isOpen(el);
+      if (open && !el.__atelierTrapped) {
+        el.__atelierTrapped = true;
+        const opener = document.activeElement && document.activeElement !== el && !el.contains(document.activeElement)
+          ? document.activeElement
+          : null;
+        if (window.Upg && window.Upg.focusTrap) window.Upg.focusTrap.enable(el, opener);
+      } else if (!open && el.__atelierTrapped) {
+        el.__atelierTrapped = false;
+        if (window.Upg && window.Upg.focusTrap) window.Upg.focusTrap.disable(el);
+      }
+    });
+    observer.observe(el, { attributes: true, attributeFilter: ['class', 'style', 'aria-modal', 'data-modal-open'] });
+  };
+
+  const refresh = () => document.querySelectorAll(SEL).forEach(wire);
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', refresh, { once: true });
+  } else {
+    refresh();
+  }
+  // Re-scan periodically for SPA-injected modals (cheap)
+  setTimeout(refresh, 1500);
+  setTimeout(refresh, 4000);
+
+  window.Upg = window.Upg || {};
+  window.Upg.focusTrap = window.Upg.focusTrap || {};
+  window.Upg.focusTrap.refresh = refresh;
+})();
+
+
+/* ============================================================
+   ATELIER v16 — Lighthouse Boot Helper (Worker 14 / Phase 6)
+   - Adds passive listeners hint on common scrollers
+   - Lazy-loads images with no loading attr
+   - Prefetch on hover for nav-items (perceived speed)
+   ============================================================ */
+(() => {
+  'use strict';
+
+  // Lazy-loading hint on all <img> without explicit loading attr
+  const lazyImages = () => {
+    document.querySelectorAll('img:not([loading])').forEach((img) => {
+      if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+      if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+    });
+  };
+
+  // Prefetch hint on nav-item hover (CSS already does view-transitions; this primes any sub-resource)
+  const navPrefetch = () => {
+    document.querySelectorAll('.nav-item[data-page]').forEach((el) => {
+      let primed = false;
+      el.addEventListener('pointerenter', () => {
+        if (primed) return;
+        primed = true;
+        // Cheap warm-up: requestIdleCallback-style schedule
+        const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 200));
+        idle(() => {
+          // No-op: marker; real prefetching not needed for SPA in-memory pages.
+          el.dataset.prefetched = '1';
+        });
+      }, { passive: true });
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => { lazyImages(); navPrefetch(); }, { once: true });
+  } else {
+    lazyImages();
+    navPrefetch();
+  }
+})();
+
+
+/* ============================================================
+   ATELIER v16 — Sanity Banner (Worker 14 / Phase 6)
+   Final boot assert — verifies all 19 Upg.* modules are present.
+   Prints PASS banner or warns about missing modules.
+   ============================================================ */
+(() => {
+  'use strict';
+  const REQUIRED = [
+    // Worker 11 (7)
+    'theme', 'icons', 'gateway', 'calc', 'cmdk', 'state', 'production',
+    // Worker 12 (7)
+    'type', 'scroll', 'nav', 'identity', 'greet', 'countup', 'motion',
+    // Worker 14 (5)
+    'material', 'chrome', 'choreo', 'transition', 'focusTrap',
+  ];
+
+  const check = () => {
+    const present = REQUIRED.filter((k) => window.Upg && typeof window.Upg[k] !== 'undefined');
+    const missing = REQUIRED.filter((k) => !(window.Upg && typeof window.Upg[k] !== 'undefined'));
+    if (missing.length === 0) {
+      console.log(
+        '%c🪞 ATELIER v16 — Cathedral v16 ready · ' + present.length + '/' + REQUIRED.length + ' modules loaded',
+        'color:#66FCF1;font-weight:700;font-family:ui-monospace,SFMono-Regular,monospace;font-size:12px;'
+      );
+    } else {
+      console.warn(
+        '[ATELIER v16] missing Upg modules (' + missing.length + '/' + REQUIRED.length + '):',
+        missing.join(', ')
+      );
+    }
+  };
+
+  // Run after all other IIFEs have had a chance to register
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(check, 250);
+  } else {
+    window.addEventListener('load', () => setTimeout(check, 200), { once: true });
+  }
+})();

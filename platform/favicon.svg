@@ -1,16 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Upgrade">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Upgrade">
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0E1220"/>
-      <stop offset="1" stop-color="#161B2D"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0E1220"/>
+      <stop offset="100%" stop-color="#161B2D"/>
     </linearGradient>
-    <radialGradient id="halo" cx="50%" cy="38%" r="55%">
-      <stop offset="0" stop-color="#66FCF1" stop-opacity="0.35"/>
-      <stop offset="1" stop-color="#66FCF1" stop-opacity="0"/>
+    <linearGradient id="stroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#66FCF1"/>
+      <stop offset="100%" stop-color="#4F46E5"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="38%" r="60%">
+      <stop offset="0%"  stop-color="#66FCF1" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#66FCF1" stop-opacity="0"/>
     </radialGradient>
   </defs>
-  <rect width="64" height="64" rx="14" fill="url(#g)"/>
-  <rect width="64" height="64" rx="14" fill="url(#halo)"/>
-  <path d="M22 16 v24 a10 10 0 0 0 20 0 V16" fill="none" stroke="#66FCF1" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="32" cy="14" r="3" fill="#66FCF1"/>
+  <rect width="100" height="100" rx="22" fill="url(#bg)"/>
+  <rect width="100" height="100" rx="22" fill="url(#halo)"/>
+  <path d="M30 65 V35 L50 50 L70 35 V65" fill="none" stroke="url(#stroke)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="50" cy="22" r="3.5" fill="#66FCF1"/>
 </svg>

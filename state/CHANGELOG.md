@@ -1,5 +1,102 @@
 # Upgrade Platform — CHANGELOG
 
+## v16 — ATELIER (Apple Liquid-Glass Pass) — Worker 14 — 2026-05
+
+### Added — 5 new Upg.* APIs (total 19)
+- **`Upg.material`** (Phase 1) — material density tier (low / standard / high), persists to `localStorage` (`upg_material_density`).
+- **`Upg.chrome`** (Phase 4) — topbar Dynamic-Island scroll-shrink (64→48px @ scrollY > 80), sidebar collapse pill spring, mobile drawer scrim + ESC + swipe-to-close.
+- **`Upg.choreo`** (Phase 5) — magnetic hover (`[data-magnet]`, 18% strength × 80px range), reveal-on-intersect (`[data-reveal]`), stagger children (`[data-stagger]`), cursor glow (`.u-cursor-glow`).
+- **`Upg.transition`** (Phase 5) — page transitions via View Transitions API where supported, spring fallback animation (360ms) otherwise.
+- **`Upg.focusTrap`** (Phase 6) — modal focus trap with ESC-to-close, Tab/Shift+Tab cycling, return-focus on disable, auto-attached to `[role="dialog"], .modal, .qmodal, [data-modal]` via MutationObserver.
+
+### Added — Files
+- `platform/offline.html` — RTL Cairo offline page with online auto-reload, retry button, and home link (≈3.4 KB).
+- `scripts/atelier-v16-purge.mjs` — deterministic inline-style purger (62 patterns; 215 → 76 inline styles).
+
+### Changed — Apple Liquid-Glass spec (WWDC 2025+)
+- 4 glass tiers blur ladder (Phase 1): 16 / 24 / 32 / 40px (was 12 / 15 / 18 / 22).
+- Saturate 200% (was 180%), brightness 1.05 dark / 1.02 light.
+- Edge specular highlight (`inset 0 1px 0 rgba(255,255,255,...)`) on every glass surface.
+- Light theme 3-tier paper tonal palette (`paper-tone-1/2/3`).
+- Paper grain v2 — SVG noise data-URI, opacity 0.025 on light theme only.
+
+### Changed — Page Headers (Phase 2)
+- 13 page-headers refactored to `.page-h` block (eyebrow + title-with-icon + lede + 56px tint underline).
+- Emoji purged from all `<h1>` inside `<section class="page">` (kept everywhere else: skill cards, scenario cards, stat-tiles).
+
+### Changed — Dashboard Consolidation (Phase 3)
+- `#page-dashboard` reduced from 6 duplicated sections to 1 unified Bento (10 cells).
+- Removed: `dashboard-legacy` wrapper, `welcome-banner`, `grid-4` legacy stats.
+- 5 sacred IDs (`cath-stats`, `cath-skill-grid`, `cath-activity-list`, `v12Heatmap`, `v12Challenge*`) relocated cleanly. Net change: +255/-385 lines.
+
+### Changed — Chrome (Phase 4)
+- Topbar Dynamic-Island scroll-shrink (64→48px @ scrollY > 80).
+- Search input → search button → opens Command Palette.
+- Sidebar nav-pill spring slide (320ms `cubic-bezier(0.5, 1.5, 0.5, 1)`).
+- 17 collapsed-mode tooltips for nav-items.
+- Mobile drawer: scrim + ESC + swipe-to-close.
+
+### Changed — Motion (Phase 5)
+- Magnetic hover on `.dock-btn` (max 6px pull, range 80px).
+- Stagger reveal on `[data-stagger]` (60ms step).
+- Card reveal on intersect (`[data-reveal]`).
+- Page transitions: View Transitions API + spring fallback (360ms).
+
+### Changed — Production Pass (Phase 6 — this entry)
+- **Inline purge**: `style="..."` reduced from **215 → 76** (139 removed; 64% reduction).
+  - Width %, progress-bar inner gradients, chip avatars (36/46/48), tinted callouts, info-chips, stat-numerals, drag buttons, action buttons, tinted cells, pills, info boxes, and code-like inline marks all moved to `.u-*` utilities.
+- **Service Worker rewritten**: 74 → 119 lines.
+  - Versioned caches (`shell`/`assets`/`fonts` per `atelier-v16-2026-05`).
+  - Navigation: network-first → `offline.html` fallback.
+  - Same-origin assets: stale-while-revalidate.
+  - Cross-origin (Google Fonts): SWR in dedicated `fonts` cache.
+  - `SKIP_WAITING` message support for update prompts.
+- **Manifest refresh**: 4 shortcuts (`#dashboard`, `#callcenter`, `#myprogress`, `#accounting`), 192/512 icon entries, `start_url: ./index.html`, `orientation: any`, `categories: education/productivity/business/training`.
+- **Favicon v2**: 100×100 viewBox, `rx=22` squircle, dual-color stroke gradient (#66FCF1 → #4F46E5), brand mark, accent dot.
+- **a11y**: `Upg.focusTrap` for all modals, ESC-to-close standardized, `[data-close]` discovery, `focusTrap:escape` event for custom handlers, MutationObserver auto-attach.
+- **Lighthouse helpers**: lazy-loading hint on all `<img>`, decoding=async, pointer-enter prefetch markers on nav-items.
+- **Boot sanity v16**: verifies all 19 Upg.* modules; prints `🪞 ATELIER v16 — Cathedral v16 ready · 19/19 modules loaded` on success, warns with module list on miss.
+- **OG meta**: `og:description` bumped from "Cathedral v14" → "Cathedral v16 (ATELIER)".
+
+### Added — 100+ utility classes (Final Pack)
+- Width %: `.u-w-{0,10,11,15,16,18,22,25,35,36,40,61,72,75,88,92}`.
+- Bar fills: `.u-bar-{red,yellow,green,blue,violet}` + `.u-bar-grad-{red,blue,amber,green,red-pink,yellow-orange,green-cyan,violet-cyan,pink-violet,orange-yellow}`.
+- Chips: `.u-chip` + `.u-chip-{36,46,48}` + `.u-chip-{cyan,emerald,violet,pink,red,amber,emerald-soft,pink-soft,bicolor}`.
+- Callouts: `.u-callout` + `.u-callout-{cyan,green,orange,amber,pink,violet,soft}`.
+- Cards: `.u-card-{deep,tint,thin,row,tile}` × `.u-tint-{cyan,green,amber,violet,pink,red}` matrix.
+- Stats: `.u-stat-{36,28,26}`.
+- Info chips/boxes: `.u-info-{chip,box}` × `.u-info-{cyan,green,violet,pink,red,amber}` (+ `-soft` text variant).
+- Drag buttons: `.u-drag-btn` + `.u-drag-{accent,pink,amber,ghost}`.
+- Tinted buttons: `.u-btn-tinted` + `.u-btn-{accent,red}` + `.u-btn-grad-{emerald,violet}`.
+- Cells: `.u-cell` + `.u-cell-{amber,red,violet,green-soft,red-soft}`.
+- Pills: `.u-pill` + `.u-pill-{green,red,yellow,blue}`; `.u-pill-xs` + `.u-pill-{green,orange,pink,purple,violet}`.
+- Pad-cards: `.u-pad-card`, `.u-pad-card-{accent,violet}`, `.u-pad-card-row`.
+- Misc: `.u-track`, `.u-track-{120,200}`, `.u-stack-center`, `.u-max-600`, `.u-min-h-280`, `.u-th-meta`, `.u-dot`, `.u-dot-{accent,yellow,instagram}`, `.u-c-{emerald,purple,black,green,red,cyan,violet,pink,yellow,amber,blue,emerald-light,blue-light,violet-light,accent}`, `.u-bg-{accent-06,slate-on-white}`, `.u-grad-{amber-soft,cyan-violet-soft}`, `.u-mb-12`, `.u-mt-16`, `.u-mt-26`, `.u-tint-fill`, `.u-grid-span-full`, `.u-inline-mark`, `.u-inline-mark-accent`.
+- a11y / print:
+  - `@media print` — `.u-no-print`, `.u-print-block`, `.u-print-page-break`.
+  - `@media (forced-colors: active)` — borders forced for chips/callouts/cards/info chips/pills/buttons.
+
+### Preserved (final assertion)
+- 14 page sections, 391 qcalc references — unchanged.
+- All citations, Iraq blocks, salary tables — unchanged.
+- All Cairo + Reem Kufi + Readex Pro + IBM Plex Arabic + Aref Ruqaa fonts.
+- 15 identity tints (HSL values unchanged).
+- All Worker 11 / 12 / 13 IIFEs and `Upg.*` APIs untouched.
+- 19 Upg.* APIs total: theme, icons, gateway, calc, cmdk, state, production, type, scroll, nav, identity, greet, countup, motion, material, chrome, choreo, transition, focusTrap.
+
+### Files touched (Phase 6 only)
+- `platform/index.html` — 215 → 76 inline styles, og:description bump.
+- `platform/assets/style.css` — APPEND ~330 lines (Final Utilities Pack).
+- `platform/assets/app.js` — APPEND ~210 lines (focusTrap + auto-attach + Lighthouse helpers + sanity v16).
+- `platform/sw.js` — REPLACE (74 → 119 lines).
+- `platform/manifest.webmanifest` — REPLACE (shortcuts + icons array).
+- `platform/favicon.svg` — REPLACE (squircle v2).
+- `platform/offline.html` — CREATE.
+- `scripts/atelier-v16-purge.mjs` — CREATE.
+- `state/CHANGELOG.md` — APPEND v16 (this entry).
+- `state/PROGRESS.json` — Worker 14 marked complete.
+- `state/snapshots/worker-14-phase-6.json` — CREATE.
+
 ## v15.1 — AURORA Completion (Worker 13) — 2026-05
 
 ### Fixed (محتوى Worker 12 الناقص فعلياً)

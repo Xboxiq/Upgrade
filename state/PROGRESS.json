@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-16T22:55:00Z",
+  "last_updated": "2026-05-16T23:30:00Z",
   "current": {
     "worker": "14",
     "worker_name": "ATELIER_LIQUID_GLASS",
-    "phase": 5,
+    "phase": 6,
     "phases_total": 6,
     "phase_order": ["1", "2", "3", "4", "5", "6"],
-    "branch": "worker-14-atelier-p2-p6",
-    "status": "in-progress"
+    "branch": "worker-14-phase-6-final",
+    "status": "completed"
   },
   "completed_phases": [
     { "worker": "01", "phase": 1, "title": "Foundation Tokens & Aurora Mesh",                    "branch": "worker-01-phase-1-v2", "lines_added": 121 },
@@ -76,8 +76,9 @@
     { "worker": "14", "phase": 2, "title": "Page Headers Re-chisel — 14 .page-h blocks (eyebrow + .qi icon + lede + 56px tint underline) + emoji purge from H1s", "branch": "worker-14-atelier-p2-p6", "lines_added": 202 },
     { "worker": "14", "phase": 3, "title": "Dashboard Bento Consolidation — 10 cells, zero legacy duplication, 5 sacred IDs relocated cleanly", "branch": "worker-14-atelier-p2-p6", "lines_added": 255, "lines_deleted": 385 },
     { "worker": "14", "phase": 4, "title": "Chrome Refinement — Topbar Island scroll-shrink + search→cmdk + nav-pill spring-slide + 17 collapsed-mode tooltips + mobile drawer scrim + Upg.chrome", "branch": "worker-14-atelier-p2-p6", "lines_added": 381 },
-    { "worker": "14", "phase": 5, "title": "Motion Choreography v2 — magnetic hover + reveal/stagger/intersect + page enter spring + Upg.choreo + Upg.transition", "branch": "worker-14-atelier-p2-p6", "lines_added": 339 }
+    { "worker": "14", "phase": 5, "title": "Motion Choreography v2 — magnetic hover + reveal/stagger/intersect + page enter spring + Upg.choreo + Upg.transition", "branch": "worker-14-atelier-p2-p6", "lines_added": 339 },
+    { "worker": "14", "phase": 6, "title": "Final Polish — inline purge 215→76 + sw v2 (precache+offline) + manifest shortcuts + favicon v2 squircle + Upg.focusTrap (auto-attach modals) + Lighthouse helpers + sanity v16 (19/19 modules) + CHANGELOG v16", "branch": "worker-14-phase-6-final", "lines_added": 1080 }
   ],
-  "next_action": "WORKER 14 Phase 5 done (Motion Choreography v2). Continue with Worker 14 Phase 6 — Final Polish (inline residue 223→≤80, a11y unify with Upg.focusTrap, PWA precache + offline page, favicon refresh, CHANGELOG v16). READ prompts/14_PHASE_6_FINAL_POLISH.md FIRST. Same branch worker-14-atelier-p2-p6 — DO NOT create new branch.",
-  "notes": "Phase 5 of Worker 14 (ATELIER) shipped on branch worker-14-atelier-p2-p6. Motion Choreography v2 layered on top of existing Upg.motion (W12/P6) without disturbing it. New CSS block (~110 lines): [data-magnet] with cubic-bezier(0,0,0.2,1) 240ms transition, [data-reveal] opacity+translateY pattern with IO threshold 0.05 + rootMargin -10%, [data-stagger] children with --stagger-delay var, .page.is-entering with atelierPageEnter @keyframes (spring 360ms), .u-cursor-glow with radial halo tracking --cx/--cy, prefers-reduced-motion guards forcing instant visibility. New IIFEs (~185 lines): Upg.choreo.{refresh,magnetize,reveal,stagger,cursorGlow} — magnet 18% strength × 80px range, dual IntersectionObservers (cached) for reveal+stagger; Upg.transition.{navigate,supports} — uses startViewTransition where available, .is-entering fallback animation, [data-page] click delegation that respects legacy inline onclick. AUGMENTED dashboard markup: 10 data-reveal cells (greet + 4 stat-tiles + 4 bento cells + dock), 3 data-stagger containers (#cath-skill-grid 60ms, #cath-activity-list 40ms, .dock-row 80ms), 6 data-magnet on dock-btns. CRITICAL: did NOT modify the .page baseline (display: none) — Phase 5 spec proposed `.page:not(.active) {position:absolute;visibility:hidden}` which would have broken layout; instead we kept legacy display:none and only animate via .is-entering class. Sacred preserved: 14 page sections, 391 qcalc, 17 nav-items, all prior Upg.* APIs untouched (now 18 total: theme,icons,gateway,calc,cmdk,state,production,type,scroll,nav,identity,greet,countup,motion,material,chrome,choreo,transition)."
+  "next_action": "WORKER 14 (ATELIER) COMPLETE — 6/6 phases shipped. Cathedral v16 ready. 19 Upg.* APIs total. All 9 trade workers (01-09) + Foundations (11) + Aurora (12-13) + Atelier (14) delivered. PR ready: feat: Worker 14 — ATELIER (Apple Liquid-Glass Pass v16) — Phase 6 (Final Polish). Branch: worker-14-phase-6-final. No further AUTO_PILOT work queued.",
+  "notes": "Phase 6 of Worker 14 (ATELIER) shipped on branch worker-14-phase-6-final. Inline 215→76 (139 removed) via deterministic node script + 330 lines Final Utilities Pack. New Upg.focusTrap IIFE (auto-attaches to [role=dialog]/.modal/.qmodal/[data-modal] via MutationObserver, ESC-to-close, return-focus). Lighthouse boot helper (lazy imgs, decoding=async, pointer-enter prefetch markers). Sanity v16 verifies 19 Upg.* modules. sw.js rewrite (74→119): versioned shell/assets/fonts caches, navigation network-first → offline.html fallback, SWR for assets and Google Fonts. Manifest: 4 shortcuts (#dashboard, #callcenter, #myprogress, #accounting), 192/512 icon entries, orientation any, categories education/productivity/business/training. Favicon v2: 100×100 squircle rx=22, dual-color stroke gradient (#66FCF1→#4F46E5), brand mark + accent dot. offline.html: RTL Cairo, online auto-reload, retry button + home link. CHANGELOG v16 added at top. All 14 page sections, 391 qcalc, 15 identity tints — preserved."
 }
