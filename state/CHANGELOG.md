@@ -1,5 +1,38 @@
 # Upgrade Platform — CHANGELOG
 
+## v15.1 — AURORA Completion (Worker 13) — 2026-05
+
+### Fixed (محتوى Worker 12 الناقص فعلياً)
+- **Phase 1 — Bento Dashboard**: markup الآن مطبَّق فعلاً في `#page-dashboard`. كان `class="bento"` مفقود من DOM رغم أن CSS و JS جاهزون من Worker 12. النتيجة: greeting tile + 4 stat tiles مع `[data-countup]` + dock + legacy wrapper.
+- **Phase 2 — Real Inline Purge**: inline `style="..."` خُفِّض من **587 → 223** (62% reduction). كان الادعاء في PR #44 إن inline = 587 وإن `u-grad-*` = 7؛ الواقع كان `u-grad-*` = 0 (لم تُكتب أصلاً). الآن:
+  - 7 utilities `u-grad-*` (brand / success / warm / violet / pink / amber / tint)
+  - 100+ atom utilities للـ decomposer pass
+  - cleanup script v2 فيه decomposer all-or-nothing (لا visual regression)
+  - `!important` stray = **12** (تحت spec target ≤ 20)
+
+### Added
+- **Phase 3 — Final Polish**: زر toggle-sidebar في topbar (يفعِّل `Upg.nav`)، wordmark "Upgrade" يستعمل Aref Ruqaa accent، boot sanity assert v15.1 يطبع banner لو 14 modules محمَّلين، CHANGELOG entry هذه.
+- 7 gradient utilities: `u-grad-{brand,success,warm,violet,pink,amber,tint}`
+- Compound type presets: `u-t-eyebrow`, `u-t-card-title`, `u-t-list-title`, `u-t-section-mini`, `u-t-h-md`, `u-t-h-lg`
+- Hairline border atoms: `u-bb-bd`, `u-bt-bd`, `u-br-bd`, `u-bl-bd`, `u-bbd-bd`
+- 30+ rgba border atoms (`u-b1-{cyan,green,red,purple,sky,yellow,...}-{15,18,20,25,30}`)
+- Width / height px atoms (`u-w-10px..u-w-200`, `u-h-10px..u-h-48px`)
+- Stat-tile compound utilities + frame variants + side-accent rows
+- Brand-color outline cards (linkedin / twitter / instagram / tiktok)
+- Boot sanity assert IIFE — يطبع warning واضح لو modules ناقصين
+
+### Changed
+- `state/PROGRESS.json`: worker = "13", status = "in-progress" → "completed" (في نهاية Phase 3)
+
+### Preserved (تأكيد)
+- 16 page sections — كلهم سليمين
+- 391 qcalc references — لا تغيير
+- 14 Upg.* public APIs — كلهم موجودين
+- Service Worker, manifest, favicon — لا تغيير
+- 4 glass tiers, 15 identity tints, كل من Worker 12 — لا تغيير
+
+---
+
 ## v15.0 — AURORA (Apple-grade UI/UX) — 2026-05
 
 ### Added

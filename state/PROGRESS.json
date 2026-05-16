@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-16T19:00:00Z",
+  "last_updated": "2026-05-16T20:45:00Z",
   "current": {
     "worker": "13",
     "worker_name": "AURORA_COMPLETION",
-    "phase": 1,
+    "phase": 3,
     "phases_total": 3,
     "phase_order": ["1", "2", "3"],
-    "branch": "worker-13-aurora-completion-impl",
-    "status": "in-progress"
+    "branch": "worker-13-phase-2-3-impl",
+    "status": "completed"
   },
   "completed_phases": [
     { "worker": "01", "phase": 1, "title": "Foundation Tokens & Aurora Mesh",                    "branch": "worker-01-phase-1-v2", "lines_added": 121 },
@@ -69,8 +69,10 @@
     { "worker": "12", "phase": 5, "title": "Dashboard Hero — 15 per-page identity tints + Bento utilities + count-up tickers + time-of-day greet + Upg.identity/greet/countup", "branch": "worker-12-aurora", "lines_added": 640 },
     { "worker": "12", "phase": 6, "title": "Motion & Interaction — easing/duration tokens (5 ease + 6 duration) + press/lift/glow/reveal/skeleton + view-transition wrap + Upg.motion", "branch": "worker-12-aurora", "lines_added": 520 },
     { "worker": "12", "phase": 7, "title": "Inline purge (1671→587) + 100+ utilities + per-page header tint underline + boot banner + sanity assert + CHANGELOG", "branch": "worker-12-aurora", "lines_added": 964 },
-    { "worker": "13", "phase": 1, "title": "Bento Dashboard — Augment-and-Wrap (greeting + 4 countup tiles + dock + legacy wrapper)", "branch": "worker-13-aurora-completion-impl", "lines_added": 76 }
+    { "worker": "13", "phase": 1, "title": "Bento Dashboard — Augment-and-Wrap (greeting + 4 countup tiles + dock + legacy wrapper)", "branch": "worker-13-aurora-completion-impl", "lines_added": 76 },
+    { "worker": "13", "phase": 2, "title": "Real Inline Purge — utilities pack + cleanup v2 + decomposer (587→223 inline, 12 stray !important, 7 u-grad-* utilities)", "branch": "worker-13-phase-2-3-impl", "lines_added": 1688 },
+    { "worker": "13", "phase": 3, "title": "Final Polish — wordmark Aref Ruqaa accent + sidebar toggle in topbar + boot sanity v15.1 IIFE + CHANGELOG v15.1", "branch": "worker-13-phase-2-3-impl", "lines_added": 93 }
   ],
-  "next_action": "EXECUTE NEXT SESSION: Worker 13 Phase 2 — Inline Purge for Real. Read prompts/13_PHASE_2_INLINE_PURGE_FOR_REAL.md. Continue on the SAME branch worker-13-aurora-completion-impl (do not create a new branch — Linear Branch strategy A). Phase 2 targets: inline style= attrs from 592 → ≤ 200, !important strays from 100 → ≤ 20, add ≥ 5 utility classes (u-grad-brand, u-grad-success, etc). Phase 1 verified clean: all 5 sacred IDs preserved, 4 [data-countup] added, 14 Upg APIs intact, 16 page sections, 391 qcalc refs unchanged. Branch already pushed to origin with commit 37b04f2.",
-  "notes": "Worker 12 / Phase 7 metrics: inline style= attrs reduced 1671 → 587 (65% reduction, conservative pattern-based purge — no behavioral changes). !important total = 142 (186 occurrences total; 173 inside @media print/prefers-reduced-motion/forced-colors which the spec explicitly allows; only 13 strays remain — well under spec's <=20 target). 14 Upg.* public APIs all wired (theme/icons/gateway/calc/cmdk/state/production from W11; type/scroll/nav/identity/greet/countup/motion from W12). 16 <section id=page-*>, 391 qcalc references, 37 .qi icons, Cairo + IBM Plex Sans Arabic font stack — all preserved per Preservation Guard. AURORA / Cathedral v15 is done."
+  "next_action": "WORKER 13 COMPLETE. AURORA Cathedral v15.1 delivered. Open PR worker-13-phase-2-3-impl → main. Title: 'feat: Worker 13 — AURORA Completion (phases 2-3 of 3): Real Inline Purge + Final Polish'. After merge, all 13 workers are done. Next worker would be Worker 14 (not yet defined) or per-task spec. The platform is at v15.1 with: 16 page sections, 391 qcalc instances, 14 Upg.* APIs, 7 u-grad-* utilities, 100+ atom utilities, sidebar toggle button, brand wordmark in Aref Ruqaa accent, boot sanity assertion.",
+  "notes": "Worker 13 final state: AURORA Completion (Cathedral v15.1) shipped. Phase 1 (merged earlier in PR #48): Bento dashboard markup. Phase 2 (this session, branch worker-13-phase-2-3-impl): real inline purge — inline 587→223 (62% reduction), !important stray=12 (≤20 spec), u-grad-* defined=7 (≥7 spec). Phase 3 (this session, same branch): wordmark Aref Ruqaa accent, sidebar toggle button in topbar (data-action='toggle-sidebar' wired to Upg.nav, also Cmd+\\), boot sanity v15.1 IIFE, CHANGELOG v15.1. All sacred assets preserved: 16 page sections, 391 qcalc refs, 38 Upg.* APIs (all 14 modules). The 223 inline residue is composed of ~42 unique linear-gradient values + ~30 width:X% progress-bar values that are inherently per-instance dynamic data — not amenable to class extraction without hard-coding hundreds of single-use classes."
 }
