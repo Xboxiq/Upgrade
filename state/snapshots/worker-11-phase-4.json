@@ -1,0 +1,36 @@
+{
+  "worker": "11",
+  "worker_name": "PLATFORM_FOUNDATION",
+  "phase": 4,
+  "phases_total": 7,
+  "branch": "worker-11-phase-4-7",
+  "phase_completed": 4,
+  "lines_added_total": 1368,
+  "files_touched": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "tokens_introduced": [],
+  "icons_registered": 0,
+  "calculators_migrated": 8,
+  "calculators": [
+    { "name": "iraq-tax",         "page": "page-accounting",  "reference": "قانون 113 لسنة 1982 (IQ)" },
+    { "name": "salary-slip",      "page": "page-accounting",  "reference": "قانون 37 لسنة 2015 — العمل (IQ)" },
+    { "name": "sales-commission", "page": "page-fieldsales",  "reference": "Stripe sales comp guideline" },
+    { "name": "apindex",          "page": "page-callcenter",  "reference": "COPC CX Standard 6.2 + Genesys WFO 2024" },
+    { "name": "ab-test",          "page": "page-social",      "reference": "Kohavi/Tang/Xu — Trustworthy Online Controlled Experiments 2020" },
+    { "name": "batna",            "page": "page-negotiation", "reference": "Fisher/Ury — Getting to Yes (Harvard) + Voss" },
+    { "name": "bigo-cost",        "page": "page-programming", "reference": "Cormen/Leiserson/Rivest/Stein — CLRS 4th ed." },
+    { "name": "bigfive-score",    "page": "page-psych",       "reference": "McCrae & Costa NEO-PI-R + IPIP" }
+  ],
+  "commands_registered": 0,
+  "shortcuts_active": 0,
+  "inline_styles_remaining": null,
+  "lighthouse": null,
+  "next_action": "Phase 5 — Command Palette (Cmd+K) + 30 commands + shortcut cheat sheet",
+  "open_threads": [
+    "Verify reset action restores all numeric defaults across 8 calculators in browser",
+    "Phase 7 may want to consolidate calculators into page-myprogress as a gallery"
+  ]
+}

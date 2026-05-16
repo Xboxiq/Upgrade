@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-16T01:30:00Z",
+  "last_updated": "2026-05-16T02:30:00Z",
   "current": {
     "worker": "11",
     "worker_name": "PLATFORM_FOUNDATION",
-    "phase": 3,
+    "phase": 4,
     "phases_total": 7,
-    "branch": "worker-11-complete",
+    "branch": "worker-11-phase-4-7",
     "status": "in-progress"
   },
   "completed_phases": [
@@ -55,8 +55,9 @@
     { "worker": "09", "phase": 5, "title": "Therapist Bridge + Insights Engine + 16 Citations", "branch": "worker-09-complete", "lines_added": 365 },
     { "worker": "11", "phase": 1, "title": "Sovereign Theme System (tokens + bridge + 3-state toggle)", "branch": "worker-11-complete", "lines_added": 359 },
     { "worker": "11", "phase": 2, "title": "Lucide-style Icon System (95 symbols + .qi + migrator)", "branch": "worker-11-complete", "lines_added": 401 },
-    { "worker": "11", "phase": 3, "title": "Entry Gateway + Identity Lock + Onboarding 4-step", "branch": "worker-11-complete", "lines_added": 912 }
+    { "worker": "11", "phase": 3, "title": "Entry Gateway + Identity Lock + Onboarding 4-step", "branch": "worker-11-complete", "lines_added": 912 },
+    { "worker": "11", "phase": 4, "title": "Calculator Foundation Component (qcalc) + 8 migrations", "branch": "worker-11-phase-4-7", "lines_added": 1368 }
   ],
-  "next_action": "Continue Worker 11 Phase 4 — Calculator Framework (qcalc + 8 migrations)",
-  "notes": "Worker 11 Phase 3 complete. Added page-gateway with 6 stages (welcome / identity / goal / privacy / returning / locked). 4-step onboarding wizard collects name, role, avatar color (10 brand swatches), goal (4 options), and optional PIN (SHA-256 hashed with salt). Idle auto-lock at 30 min when upg_lock_on_idle === 'true'. PIN entry: numpad + keyboard + 5-attempt cooldown (60s). Returning user sees 3-stat welcome (units/hours/streak — populated by Phase 6 Upg.state). Topbar gained a lock button. Body gets data-gateway-open='true' to blur app behind. localStorage: upg_user_profile, upg_pin_hash, upg_onboarding_done, upg_lock_on_idle. sessionStorage: upg_unlocked."
+  "next_action": "Continue Worker 11 Phase 5 — Command Palette (Cmd+K) + 30 commands + cheat sheet",
+  "notes": "Worker 11 Phase 4 complete. qcalc framework registered with 8 calculators: iraq-tax (page-accounting), salary-slip (page-accounting), sales-commission (page-fieldsales), apindex (page-callcenter), ab-test (page-social), batna (page-negotiation), bigo-cost (page-programming), bigfive-score (page-psych). Each has reset/copy/export actions, live update, tabular-nums, Intl.NumberFormat('ar-IQ'), explain section with citations. Math kept 1:1 from Worker references (قانون 113 IQ tax, COPC CX 6.2 APIndex, two-proportion z-test for A/B, Harvard ZOPA, NEO-PI-R Big Five). NOTE: previous worker-11-complete branch had divergent stale ref on remote — this session uses worker-11-phase-4-7. PR will target main from this branch. Add classes: .qcalc, .qcalc-header/title/body/inputs/summary/result-card/explain/toast, .qcalc-meter, .qcalc-eyebrow. JS API: window.Upg.calc.{register, mount, init, format}. Auto-mounts on DOMContentLoaded and on upg:page-shown event. Toast UX for reset/copy/export feedback."
 }
