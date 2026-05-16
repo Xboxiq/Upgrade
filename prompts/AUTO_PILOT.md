@@ -58,9 +58,9 @@
   ح) commit ثاني: "state: phase N committed and pushed"
   ط) **🚨 PUSH ثاني فوراً** — حالة الـ progress محفوظة على remote
   ي) فحص ميزانية context قبل المتابعة:
-     - context_remaining > 35% → ابدأ Phase التالي
-     - context_remaining ≤ 35% → اطبع 🛑 SESSION CHECKPOINT وتوقف
-       (الـ Worker ناقص لكن الـ progress محفوظ — session جديد يكمل)
+     - **القاعدة الافتراضية:** session واحد = phase واحد. بعد إنجاز phase → اطبع 🛑 SESSION CHECKPOINT وتوقف.
+     - الاستثناء الوحيد: لو الـ phase كان خفيف جداً (≤ 200 سطر فعلي) **و** بقي ≥ 50% context → ممكن تبدأ phase ثاني.
+     - لو بديت phase ثاني ووصلت context_remaining ≤ 40% → توقّف فوراً حتى لو ما خلّصته.
 
 📌 PR الموحّد (في نهاية Worker كامل، أو نهاية session):
 - بعد آخر phase نُفّذ في هذا الـ session (سواء وصلت لـ phases_total أو توقفت بسبب context):
@@ -108,18 +108,43 @@
 ملاحظة Worker 04: حصل خطأ stacking conflicts فيه. تم إصلاحه يدوياً عبر طريقة B.
 احرص على استخدام طريقة A للـ Workers القادمة (05, 06, 07, 08, 09).
 
-📦 ميزانية الـ session:
-- خلال session واحد، نفّذ phases متتالية حتى يتحقق أحد:
-  أ) انتهى الـ Worker كله (وصلت phase = phases_total)
-  ب) context_remaining < 30% → اطبع 🛑 SESSION CHECKPOINT وتوقف
-  ج) ظهرت مشكلة blocking → سجلها في PROGRESS.json status="blocked"
+📦 ميزانية الـ session (مُحدّثة — أهم تعديل):
+
+⚠️ القاعدة الذهبية: **session واحد = phase واحد فقط** (أو phase واحد + push).
+- السبب: كل phase يحتاج ~600 سطر كود + قراءة ملفات + commits + pushes.
+  المحاولة لإنجاز 3-4 phases في session واحد تؤدي حتماً لـ "Context limit exceeded".
+- الاستثناء الوحيد: لو الـ phase خفيف جداً (≤ 200 سطر فعلي) **و** بقي ≥ 50% context
+  → ممكن تبدأ phase ثاني. لكن هذا نادر.
+
+⛔ لو وصلت context_remaining ≤ 40%:
+  → **توقّف فوراً** حتى لو ما خلّصت الـ phase الحالي.
+  → اطبع 🛑 SESSION CHECKPOINT.
+  → commit + push ما أنجزته (حتى لو نصف phase).
+  → حدّث state/PROGRESS.json: status = "in-progress", phase = نفس الرقم.
+  → الـ session الجديد يكمل من نفس النقطة.
+
+🎨 مساحة الإبداع:
+- بما إن session واحد = phase واحد → **لا يوجد ضغط على عدد السطور**.
+- خذ وقتك في كتابة CSS/JS بحرية واحترافية.
+- لا تختصر ولا تقطع utilities عشان "توفّر مساحة لـ phase قادم".
+- كل phase له الـ session بأكمله — استعمله لأقصى جودة.
+
+📊 الخلاصة العملية:
+  Session 1: Phase 1 (typography + spacing)     → commit + push → PR update
+  Session 2: Phase 1B (typeface soul)           → commit + push → PR update
+  Session 3: Phase 2 (off-white re-chisel)      → commit + push → PR update
+  Session 4: Phase 3 (materials & depth)        → commit + push → PR update
+  Session 5: Phase 4 (navigation chrome)        → commit + push → PR update
+  Session 6: Phase 5 (dashboard hero)           → commit + push → PR update
+  Session 7: Phase 6 (motion & interaction)     → commit + push → PR update
+  Session 8: Phase 7 (inline purge + lighthouse) → commit + push → final PR
 
 🚫 ممنوع منعاً باتاً:
 - طلب تأكيد المستخدم لكل phase
 - طباعة PRE-FLIGHT طويل
 - نسخ snapshots في chat (احفظها في الملف فقط)
 - لمس archive/ نهائياً
-- تجاوز 600 سطر كود لكل phase
+- تجاوز 600 سطر كود لكل phase (إلا لو الـ session كامل لـ phase واحد — عندها الحدّ يرتفع لـ 900 سطر)
 
 ✅ المخرج النهائي للسيشن (في آخر رد):
 ```
