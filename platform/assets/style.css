@@ -14627,3 +14627,416 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
     border:1px solid #999 !important;
   }
 }
+
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CATHEDRAL v14 — Entry Gateway (Worker 11 / Phase 3)
+   ═══════════════════════════════════════════════════════════════ */
+.gateway {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background: var(--color-bg);
+  overflow: hidden;
+  animation: gateway-fade-in 360ms ease-out;
+}
+.gateway[hidden] { display: none; }
+@keyframes gateway-fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+.gateway-aurora {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(ellipse at 20% 30%, color-mix(in oklch, var(--color-brand) 22%, transparent), transparent 60%),
+    radial-gradient(ellipse at 80% 70%, color-mix(in oklch, hsl(280 80% 60%) 18%, transparent), transparent 60%);
+  filter: blur(40px);
+  animation: gateway-aurora 24s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes gateway-aurora {
+  to { transform: translate3d(2%, -2%, 0) rotate(2deg); }
+}
+@media (prefers-reduced-motion: reduce) { .gateway-aurora { animation: none; } }
+
+.gateway-card {
+  position: relative;
+  z-index: 1;
+  width: min(560px, 92vw);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-c-xl);
+  -webkit-backdrop-filter: blur(24px);
+          backdrop-filter: blur(24px);
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+.gateway-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.gateway-logo {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  background: var(--color-brand);
+  color: var(--color-bg);
+  border-radius: var(--radius-md);
+  font-weight: 800;
+  font-size: 1.5rem;
+  box-shadow: 0 0 0 6px var(--color-brand-soft);
+}
+.gateway-wordmark {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+}
+
+.gateway-headline {
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0 0 1rem;
+  background: linear-gradient(180deg, var(--color-text), var(--color-text-muted));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+.gateway-sub-headline {
+  font-size: clamp(1.15rem, 2.6vw, 1.6rem);
+  font-weight: 700;
+  margin: 0 0 1.25rem;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.gateway-tagline {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin: 0 0 2rem;
+}
+
+.gateway-stage { display: block; animation: gateway-stage-in 280ms ease-out; }
+.gateway-stage[hidden] { display: none; }
+@keyframes gateway-stage-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) { .gateway-stage { animation: none; } }
+
+.gateway-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  background: var(--color-brand);
+  color: var(--color-bg);
+  border: 0;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: transform 180ms, box-shadow 180ms, background 180ms;
+  font-family: inherit;
+}
+.gateway-cta:hover {
+  background: var(--color-brand-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-c-md);
+}
+.gateway-cta:focus-visible { outline: none; box-shadow: var(--ring); }
+
+.gateway-btn-ghost {
+  background: transparent;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: background 180ms, color 180ms, border 180ms;
+}
+.gateway-btn-ghost:hover {
+  background: var(--color-surface-2);
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+}
+.gateway-btn-ghost:focus-visible { outline: none; box-shadow: var(--ring); }
+
+.gateway-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.gateway-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.gateway-field span {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+.gateway-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--color-surface-0);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font: inherit;
+  transition: border 180ms, box-shadow 180ms;
+}
+.gateway-input:focus {
+  outline: none;
+  border-color: var(--color-brand);
+  box-shadow: var(--ring);
+}
+
+.gateway-avatar-picker {
+  border: 0;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+.gateway-avatar-picker legend {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  padding: 0;
+}
+.gateway-avatar-grid {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+.gateway-avatar-grid button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 180ms, border-color 180ms;
+}
+.gateway-avatar-grid button:focus-visible { outline: none; box-shadow: var(--ring); }
+.gateway-avatar-grid button[aria-pressed="true"] {
+  border-color: var(--color-text);
+  transform: scale(1.1);
+}
+
+.gateway-goal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+@media (max-width: 540px) {
+  .gateway-goal-grid { grid-template-columns: 1fr; }
+}
+.gateway-goal {
+  position: relative;
+  cursor: pointer;
+}
+.gateway-goal input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.gateway-goal-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--color-surface-0);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border 180ms, background 180ms, transform 180ms;
+}
+.gateway-goal:hover .gateway-goal-card {
+  border-color: var(--color-border-strong);
+}
+.gateway-goal-card .qi { color: var(--color-brand); }
+.gateway-goal-card strong {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+.gateway-goal-card em {
+  font-style: normal;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+.gateway-goal input:checked + .gateway-goal-card {
+  border-color: var(--color-brand);
+  background: var(--color-brand-soft);
+}
+.gateway-goal input:focus-visible + .gateway-goal-card {
+  box-shadow: var(--ring);
+}
+
+.gateway-privacy {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.25rem;
+  margin: 1rem 0;
+  background: var(--color-surface-0);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+.gateway-privacy .qi {
+  color: var(--color-success);
+  flex-shrink: 0;
+  margin-top: 0.2em;
+}
+.gateway-privacy p {
+  margin: 0;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.gateway-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+.gateway-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-brand);
+  cursor: pointer;
+}
+
+.gateway-pin-setup {
+  padding-top: 0.5rem;
+}
+.gateway-pin-input {
+  letter-spacing: 0.5em;
+  font-size: 1.25rem;
+  text-align: center;
+}
+.gateway-hint {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin: 0.5rem 0 0;
+  min-height: 1.2em;
+}
+
+.gateway-pin-display {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin: 2rem 0 1.5rem;
+}
+.gateway-pin-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border-strong);
+  transition: background 180ms, border 180ms, transform 180ms;
+  background: transparent;
+}
+.gateway-pin-dot[data-filled="true"] {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  transform: scale(1.1);
+}
+
+.gateway-numpad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  max-width: 280px;
+  margin: 0 auto 1.5rem;
+}
+.gateway-numpad button {
+  aspect-ratio: 1;
+  font-size: 1.5rem;
+  font-weight: 600;
+  background: var(--color-surface-2);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 120ms, transform 120ms;
+  font-family: inherit;
+}
+.gateway-numpad button:hover { background: var(--color-surface-3); }
+.gateway-numpad button:active { transform: scale(0.96); }
+.gateway-numpad button:focus-visible { outline: none; box-shadow: var(--ring); }
+.gateway-numpad button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.gateway-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+@media (max-width: 540px) {
+  .gateway-stats-row { grid-template-columns: 1fr; }
+}
+.gateway-stat {
+  text-align: center;
+  padding: 1rem;
+  background: var(--color-surface-0);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+.gateway-stat strong {
+  display: block;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-brand);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+.gateway-stat span {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.gateway-username {
+  color: var(--color-brand);
+  font-weight: 800;
+}
+
+.gateway-footer {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--color-text-faint);
+  pointer-events: none;
+}
+
+/* When gateway is open, hide the rest of the UI for screen readers */
+body[data-gateway-open="true"] #app { filter: blur(2px); pointer-events: none; }
+@media (prefers-reduced-motion: reduce) {
+  body[data-gateway-open="true"] #app { filter: none; }
+}

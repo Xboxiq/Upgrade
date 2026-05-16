@@ -168,6 +168,183 @@
 <!-- Mobile sidebar overlay -->
 <div id="sidebar-overlay" onclick="closeMobileSidebar()"></div>
 
+<!-- ════════════════════════════════════════════════════════════
+     CATHEDRAL v14 — Entry Gateway (Worker 11 / Phase 3)
+     Lock screen, onboarding wizard, returning-user welcome.
+══════════════════════════════════════════════════════════════ -->
+<section id="page-gateway" class="gateway" hidden aria-hidden="true">
+  <div class="gateway-aurora" aria-hidden="true"></div>
+
+  <div class="gateway-card" role="dialog" aria-labelledby="gateway-title" aria-modal="true">
+
+    <div class="gateway-brand">
+      <span class="gateway-logo">U</span>
+      <span class="gateway-wordmark">Upgrade</span>
+    </div>
+
+    <!-- Stage: Welcome (first run / first stage) -->
+    <div class="gateway-stage" data-stage="welcome">
+      <h1 id="gateway-title" class="gateway-headline">منصة التطوير المهني الذاتي</h1>
+      <p class="gateway-tagline">
+        مصمَّمة بعقلية عراقية، بمعيار عالمي.<br>
+        9 مسارات تخصصية، تعلم تفاعلي، محتوى علمي عميق.
+      </p>
+      <button class="gateway-cta" type="button" data-action="next-stage">
+        <span>هيّا نبدأ</span>
+        <i class="qi" data-icon="chevron-left"></i>
+      </button>
+    </div>
+
+    <!-- Stage: Identity -->
+    <div class="gateway-stage" data-stage="identity" hidden>
+      <h2 class="gateway-sub-headline">كيف نناديك؟</h2>
+      <label class="gateway-field">
+        <span>اسمك</span>
+        <input type="text" class="gateway-input" id="gw-name" maxlength="40" placeholder="مثلاً: علي، نور، Sara…">
+      </label>
+      <label class="gateway-field">
+        <span>دورك (اختياري)</span>
+        <select class="gateway-input" id="gw-role">
+          <option value="">— اختر —</option>
+          <option value="sales">مبيعات</option>
+          <option value="callcenter">كول سنتر</option>
+          <option value="programming">مبرمج</option>
+          <option value="accounting">محاسبة</option>
+          <option value="hr">موارد بشرية</option>
+          <option value="social">تسويق سوشيال</option>
+          <option value="phonerepair">صيانة هواتف</option>
+          <option value="customercare">خدمة عملاء</option>
+          <option value="other">آخر</option>
+        </select>
+      </label>
+      <fieldset class="gateway-avatar-picker">
+        <legend>اختر لون رمزك</legend>
+        <div class="gateway-avatar-grid"></div>
+      </fieldset>
+      <div class="gateway-actions">
+        <button class="gateway-btn-ghost" type="button" data-action="prev-stage">رجوع</button>
+        <button class="gateway-cta" type="button" data-action="next-stage">التالي</button>
+      </div>
+    </div>
+
+    <!-- Stage: Goal -->
+    <div class="gateway-stage" data-stage="goal" hidden>
+      <h2 class="gateway-sub-headline">شنو هدفك الرئيسي؟</h2>
+      <div class="gateway-goal-grid" role="radiogroup">
+        <label class="gateway-goal">
+          <input type="radio" name="gw-goal" value="skill">
+          <span class="gateway-goal-card">
+            <i class="qi qi-lg" data-icon="target"></i>
+            <strong>تطوير مهارة محددة</strong>
+            <em>أركّز على وحدة واحدة بعمق</em>
+          </span>
+        </label>
+        <label class="gateway-goal">
+          <input type="radio" name="gw-goal" value="interview">
+          <span class="gateway-goal-card">
+            <i class="qi qi-lg" data-icon="briefcase"></i>
+            <strong>التحضير لمقابلة</strong>
+            <em>HR + تفاوض الراتب</em>
+          </span>
+        </label>
+        <label class="gateway-goal">
+          <input type="radio" name="gw-goal" value="culture">
+          <span class="gateway-goal-card">
+            <i class="qi qi-lg" data-icon="book-open"></i>
+            <strong>ثقافة عامة شاملة</strong>
+            <em>أتجوّل بين كل المسارات</em>
+          </span>
+        </label>
+        <label class="gateway-goal">
+          <input type="radio" name="gw-goal" value="lead">
+          <span class="gateway-goal-card">
+            <i class="qi qi-lg" data-icon="user-tie"></i>
+            <strong>قيادة فريقي</strong>
+            <em>أساعد مرؤوسي/زملائي</em>
+          </span>
+        </label>
+      </div>
+      <div class="gateway-actions">
+        <button class="gateway-btn-ghost" type="button" data-action="prev-stage">رجوع</button>
+        <button class="gateway-cta" type="button" data-action="next-stage">التالي</button>
+      </div>
+    </div>
+
+    <!-- Stage: Privacy / PIN -->
+    <div class="gateway-stage" data-stage="privacy" hidden>
+      <h2 class="gateway-sub-headline">خصوصيتك أولاً</h2>
+      <div class="gateway-privacy">
+        <i class="qi qi-xl" data-icon="shield"></i>
+        <p>
+          كل بياناتك تُحفظ <strong>محلياً على جهازك فقط</strong>.
+          لا server، لا cloud، لا tracking.
+          تستطيع تصدير/حذف بياناتك في أي وقت من Settings.
+        </p>
+      </div>
+      <label class="gateway-checkbox">
+        <input type="checkbox" id="gw-enable-pin">
+        <span>تفعيل قفل PIN رقمي (4 أرقام) — اختياري</span>
+      </label>
+      <div class="gateway-pin-setup" hidden>
+        <label class="gateway-field">
+          <span>أدخل PIN جديد</span>
+          <input type="password" inputmode="numeric" pattern="\d{4}" maxlength="4" class="gateway-input gateway-pin-input" id="gw-pin">
+        </label>
+        <label class="gateway-field">
+          <span>تأكيد PIN</span>
+          <input type="password" inputmode="numeric" pattern="\d{4}" maxlength="4" class="gateway-input gateway-pin-input" id="gw-pin-confirm">
+        </label>
+        <p class="gateway-hint" id="gw-pin-feedback" role="status"></p>
+      </div>
+      <div class="gateway-actions">
+        <button class="gateway-btn-ghost" type="button" data-action="prev-stage">رجوع</button>
+        <button class="gateway-cta" type="button" data-action="finish-onboarding">انطلق →</button>
+      </div>
+    </div>
+
+    <!-- Stage: Returning Welcome Back -->
+    <div class="gateway-stage" data-stage="returning" hidden>
+      <h2 class="gateway-sub-headline">
+        أهلاً، <span class="gateway-username" data-bind="profile.name">…</span>
+      </h2>
+      <div class="gateway-stats-row">
+        <div class="gateway-stat"><strong data-bind="stats.units">0</strong><span>وحدة هذا الأسبوع</span></div>
+        <div class="gateway-stat"><strong data-bind="stats.hours">0</strong><span>ساعة تدريب</span></div>
+        <div class="gateway-stat"><strong data-bind="stats.streak">0</strong><span>يوم streak</span></div>
+      </div>
+      <button class="gateway-cta" type="button" data-action="enter-platform">
+        متابعة <i class="qi" data-icon="chevron-left"></i>
+      </button>
+    </div>
+
+    <!-- Stage: Locked -->
+    <div class="gateway-stage" data-stage="locked" hidden>
+      <h2 class="gateway-sub-headline">
+        <i class="qi qi-lg" data-icon="lock"></i>
+        أدخل PIN
+      </h2>
+      <div class="gateway-pin-display" aria-live="polite">
+        <span class="gateway-pin-dot"></span>
+        <span class="gateway-pin-dot"></span>
+        <span class="gateway-pin-dot"></span>
+        <span class="gateway-pin-dot"></span>
+      </div>
+      <div class="gateway-numpad" role="group" aria-label="لوحة الأرقام"></div>
+      <p class="gateway-hint" id="gw-pin-error" role="status"></p>
+      <button class="gateway-btn-ghost" type="button" data-action="reset-data">
+        نسيت PIN — حذف كل البيانات
+      </button>
+    </div>
+
+  </div>
+
+  <footer class="gateway-footer">
+    <span>v14 Cathedral</span>
+    <span>·</span>
+    <span>Privacy by default</span>
+  </footer>
+</section>
+
 <div id="app">
 
   <!-- ============================================================
@@ -389,6 +566,10 @@
           <path d="M12 2v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 6.34l1.41-1.41"/>
           <path d="M2 12h2"/><path d="M20 12h2"/>
         </svg>
+      </button>
+
+      <button class="tb-btn" type="button" data-action="lock-platform" title="قفل المنصة" aria-label="قفل المنصة">
+        <i class="qi" data-icon="lock"></i>
       </button>
 
       <div class="tb-btn" title="الإشعارات">
