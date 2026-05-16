@@ -2,24 +2,28 @@
 <html lang="ar" dir="rtl" class="v13">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>منصة التدريب الاحترافية</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <meta name="theme-color" content="#0E1220" />
+  <meta name="theme-color" content="#0E1220" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#F7F5F1" media="(prefers-color-scheme: light)" />
+  <meta name="description" content="منصة التطوير المهني الذاتي بمعيار عالمي — 9 مسارات تخصصية، تعلم تفاعلي، محتوى علمي عميق." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Upgrade — منصة التطوير الذاتي" />
+  <meta property="og:description" content="9 مسارات تخصصية، تعلم تفاعلي، محتوى علمي عميق — Cathedral v14." />
+  <meta property="og:image" content="favicon.svg" />
+  <meta property="og:locale" content="ar_IQ" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+  <link rel="manifest" href="manifest.webmanifest" />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
-  <!-- moved to assets/style.css :: block #1 -->
-
-  <!-- ════════════════════════════════════════════════════════════
-       PHASE 1 · DASHBOARD VISUAL OVERHAUL — CSS
-       Scope: #page-dashboard, #sidebar (upgrade). No other page touched.
-       All new CSS uses logical properties (inline-start/end) for RTL.
-  ════════════════════════════════════════════════════════════ -->
-  <!-- moved to assets/style.css :: block #2 -->
 
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+<a href="#main" class="u-skip-link">تخطّي إلى المحتوى</a>
 
 <!-- ════════════════════════════════════════════════════════════
      CATHEDRAL v14 — Lucide-style Icon Sprite (Worker 11 / Phase 2)
@@ -648,7 +652,7 @@
   <!-- ============================================================
        MAIN CONTENT
   ============================================================ -->
-  <main id="main">
+  <main id="main" tabindex="-1">
 
     <!-- ===========================
          PAGE 1 — DASHBOARD
@@ -1111,7 +1115,7 @@
           <div class="lbl">جلسة مكتملة اليوم</div>
         </div>
         <div class="call-card">
-          <div class="num" style="color:var(--accent)">4.7</div>
+          <div class="num u-text-brand">4.7</div>
           <div class="lbl">متوسط التقييم</div>
         </div>
         <div class="call-card">
@@ -4377,7 +4381,7 @@
 
         <div class="cycle-detail-panel" id="cycleDetailPanel">
           <h3 id="cycleDetailTitle">← اضغط على مرحلة لعرض تفاصيلها</h3>
-          <div class="cycle-detail-grid" id="cycleDetailGrid" style="display:none;"></div>
+          <div class="cycle-detail-grid" id="cycleDetailGrid" class="u-hidden"></div>
         </div>
       </div>
 
@@ -4741,7 +4745,7 @@
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall</div>
             <span class="ql-recall-hint">ما الفرق بين Empathy و Sympathy في البيع؟</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">Sympathy</strong> = «مسكين، أنا حزين لأجلك» (يُضعفك). <strong style="color:var(--accent);">Tactical Empathy</strong> = «أفهم وجهة نظرك دون أن أتبناها» (يُقوّيك ويُقوّي العلاقة). Voss يسمّيها «التعاطف دون التنازل».</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">Sympathy</strong> = «مسكين، أنا حزين لأجلك» (يُضعفك). <strong class="u-text-brand">Tactical Empathy</strong> = «أفهم وجهة نظرك دون أن أتبناها» (يُقوّيك ويُقوّي العلاقة). Voss يسمّيها «التعاطف دون التنازل».</div>
           </div>
         </div>
 
@@ -4859,22 +4863,22 @@
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #1</div>
             <span class="ql-recall-hint">متى تستخدم Scarcity ومتى تتجنّبها؟</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">استخدم:</strong> عندما تكون الندرة حقيقية (3 مقاعد متبقية، السعر يرتفع فعلياً). <strong style="color:#EF4444;">تجنّب:</strong> الندرة المصطنعة — عميل واحد ذكي سيكتشف أنها كذبة، ويُدمّر ثقته للأبد. القاعدة: Scarcity صادقة تبيع، كاذبة تقتل السمعة.</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">استخدم:</strong> عندما تكون الندرة حقيقية (3 مقاعد متبقية، السعر يرتفع فعلياً). <strong style="color:#EF4444;">تجنّب:</strong> الندرة المصطنعة — عميل واحد ذكي سيكتشف أنها كذبة، ويُدمّر ثقته للأبد. القاعدة: Scarcity صادقة تبيع، كاذبة تقتل السمعة.</div>
           </div>
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #2</div>
             <span class="ql-recall-hint">ما خطوات HEAT للعميل الغاضب؟</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">H</strong>ear (استمع دون مقاطعة) → <strong style="color:var(--accent);">E</strong>mpathize (سمِّ المشاعر) → <strong style="color:var(--accent);">A</strong>pologize (اعتذر دون تبرير) → <strong style="color:var(--accent);">T</strong>ake action (خطوة ملموسة الآن). القفز للحل قبل HEA = إشعال الحريق.</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">H</strong>ear (استمع دون مقاطعة) → <strong class="u-text-brand">E</strong>mpathize (سمِّ المشاعر) → <strong class="u-text-brand">A</strong>pologize (اعتذر دون تبرير) → <strong class="u-text-brand">T</strong>ake action (خطوة ملموسة الآن). القفز للحل قبل HEA = إشعال الحريق.</div>
           </div>
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #3</div>
             <span class="ql-recall-hint">ما Foot-in-the-Door vs Door-in-the-Face؟</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">FITD:</strong> طلب صغير (نعم) → طلب كبير (نعم، لأنه ملتزم بالاتساق). <strong style="color:var(--accent);">DITF:</strong> طلب ضخم (لا) → طلب متوسط (نعم، لأنه يبدو معقولاً مقارنة). Cialdini أثبت فعالية الاثنين — اختر حسب السياق.</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">FITD:</strong> طلب صغير (نعم) → طلب كبير (نعم، لأنه ملتزم بالاتساق). <strong class="u-text-brand">DITF:</strong> طلب ضخم (لا) → طلب متوسط (نعم، لأنه يبدو معقولاً مقارنة). Cialdini أثبت فعالية الاثنين — اختر حسب السياق.</div>
           </div>
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #4</div>
             <span class="ql-recall-hint">ما DISC؟ وكيف تبيع لكل نوع؟</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">D</strong>ominant (سريع، نتائج) → تكلّم بأرقام ومباشرة. <strong style="color:var(--accent);">I</strong>nfluential (اجتماعي) → احكِ قصصاً. <strong style="color:var(--accent);">S</strong>teady (حذر) → اطمئنه بالضمانات. <strong style="color:var(--accent);">C</strong>onscientious (تحليلي) → قدّم بيانات ومواصفات. قراءة النوع في أول دقيقتين = مفتاح البيع.</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">D</strong>ominant (سريع، نتائج) → تكلّم بأرقام ومباشرة. <strong class="u-text-brand">I</strong>nfluential (اجتماعي) → احكِ قصصاً. <strong class="u-text-brand">S</strong>teady (حذر) → اطمئنه بالضمانات. <strong class="u-text-brand">C</strong>onscientious (تحليلي) → قدّم بيانات ومواصفات. قراءة النوع في أول دقيقتين = مفتاح البيع.</div>
           </div>
         </div>
       </div>
@@ -5596,7 +5600,7 @@
       <!-- Mix Ratio Visualizer -->
       <div class="card" style="margin-bottom:20px;">
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
-          <div class="card-title" style="margin:0;">توزيع المحتوى الأسبوعي — 7 منشورات</div>
+          <div class="card-title u-m-0">توزيع المحتوى الأسبوعي — 7 منشورات</div>
           <div style="display:flex; gap:10px; font-size:11px; color:var(--text-muted);">
             <span style="display:flex; align-items:center; gap:5px;"><span style="width:10px; height:10px; border-radius:3px; background:var(--accent); display:inline-block;"></span>تعليمي 70%</span>
             <span style="display:flex; align-items:center; gap:5px;"><span style="width:10px; height:10px; border-radius:3px; background:#EAB308; display:inline-block;"></span>ترفيهي 20%</span>
@@ -6089,7 +6093,7 @@
                   نتواصل معك بشأن طلبك رقم [X].<br><br>
                   نعلم إننا تجاوزنا الوقت المتوقع، ونعتذر عن هذا التأخير.<br>
                   السبب: <em>[اذكر سبباً حقيقياً — ولا تختلق واحداً]</em><br><br>
-                  الموعد الجديد المؤكد: <strong style="color:var(--accent);">[التاريخ / الوقت]</strong><br><br>
+                  الموعد الجديد المؤكد: <strong class="u-text-brand">[التاريخ / الوقت]</strong><br><br>
                   وكتعويض عن وقتك — سنضيف لك [خصم / خدمة إضافية / أولوية مستقبلية] 🎁<br><br>
                   شكراً على صبرك، ونتعهد إن هذا ما يتكرر معك.
                 </div>
@@ -6146,7 +6150,7 @@
       <div style="background:var(--surface); border:1px solid var(--border-hover); border-radius:var(--radius-md); padding:16px 20px; margin-top:16px; display:flex; align-items:flex-start; gap:12px;">
         <div style="font-size:20px; flex-shrink:0;">📌</div>
         <div style="font-size:12.5px; color:var(--text-muted); line-height:1.75;">
-          <strong style="color:var(--text);">القاعدة الختامية:</strong> المتجر الناجح لا يُقاس بغياب المشاكل — بل بطريقة تعامله معها أمام الجمهور. كل أزمة تُدار بذكاء = <strong style="color:var(--accent);">إعلان مجاني عن احترافيتك</strong> 💡
+          <strong style="color:var(--text);">القاعدة الختامية:</strong> المتجر الناجح لا يُقاس بغياب المشاكل — بل بطريقة تعامله معها أمام الجمهور. كل أزمة تُدار بذكاء = <strong class="u-text-brand">إعلان مجاني عن احترافيتك</strong> 💡
         </div>
       </div>
 
@@ -6577,9 +6581,9 @@
             <b style="color:var(--text);">الهدف:</b> أن يعرفوك. الجمهور هنا واسع، لا يعرف منتجك بعد.
           </div>
           <div style="background:rgba(102,252,241,0.06); border:1px solid rgba(102,252,241,0.18); border-radius:8px; padding:10px 12px; font-size:11.5px; line-height:1.75; color:var(--text);">
-            <b style="color:var(--accent);">KPIs:</b> Reach · Impressions · CPM · Brand Lift<br>
-            <b style="color:var(--accent);">المحتوى:</b> Reels تعليمية, hooks viral, infographics<br>
-            <b style="color:var(--accent);">CPM متوقع MENA:</b> $1.5 - $4 (Meta), $0.8 - $2 (TikTok)
+            <b class="u-text-brand">KPIs:</b> Reach · Impressions · CPM · Brand Lift<br>
+            <b class="u-text-brand">المحتوى:</b> Reels تعليمية, hooks viral, infographics<br>
+            <b class="u-text-brand">CPM متوقع MENA:</b> $1.5 - $4 (Meta), $0.8 - $2 (TikTok)
           </div>
         </div>
 
@@ -7056,7 +7060,7 @@
       <!-- Salary Table -->
       <div class="ql-glass" style="padding:18px 20px; border-radius:14px; margin-bottom:18px;">
         <div style="font-size:12px; font-weight:800; color:var(--accent); margin-bottom:12px;">💵 نطاقات الراتب — بغداد / أربيل / البصرة (IQD + USD)</div>
-        <div class="w6-iq-salary" style="overflow-x:auto;">
+        <div class="w6-iq-salary u-overflow-auto">
           <table style="width:100%; border-collapse:collapse; font-size:12px; min-width:540px;">
             <thead>
               <tr style="background:rgba(102,252,241,0.06);">
@@ -7257,7 +7261,7 @@
             <div class="lbl">سيناريو مكتمل</div>
           </div>
           <div class="call-card">
-            <div class="num" id="sim-stat-points" style="color:var(--accent);">0</div>
+            <div class="num" id="sim-stat-points" class="u-text-brand">0</div>
             <div class="lbl">مجموع النقاط</div>
           </div>
           <div class="call-card">
@@ -7290,7 +7294,7 @@
       </div><!-- /sim-lobby -->
 
       <!-- ============ SIMULATION ENGINE ============ -->
-      <div id="sim-engine" style="display:none;">
+      <div id="sim-engine" class="u-hidden">
 
         <!-- Top bar inside engine -->
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:12px;">
@@ -7338,7 +7342,7 @@
         </div>
 
         <!-- Feedback panel (hidden until choice) -->
-        <div id="eng-feedback-panel" style="display:none;">
+        <div id="eng-feedback-panel" class="u-hidden">
           <div class="card" id="eng-feedback-card" style="margin-bottom:16px;">
             <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
               <div id="eng-feedback-icon" style="font-size:28px;"></div>
@@ -7371,7 +7375,7 @@
       </div><!-- /sim-engine -->
 
       <!-- ============ ROUND REPORT ============ -->
-      <div id="sim-report" style="display:none;">
+      <div id="sim-report" class="u-hidden">
         <div class="card" style="max-width:600px; margin:0 auto; text-align:center; padding:40px 32px;">
           <div style="font-size:64px; margin-bottom:16px;" id="report-emoji"></div>
           <h2 style="font-size:24px; font-weight:900; color:var(--text); margin-bottom:8px;" id="report-title"></h2>
@@ -7514,7 +7518,7 @@
           <div style="font-size:13px;font-weight:800;color:var(--text);">⚡ تركيبات الأدوات الأعلى تأثيراً</div>
           <span class="tag accent">دليل فوري</span>
         </div>
-        <table class="matrix-ref-table" style="width:100%;">
+        <table class="matrix-ref-table u-w-full">
           <thead>
             <tr>
               <th>التركيبة</th>
@@ -7523,7 +7527,7 @@
           </thead>
           <tbody>
             <tr>
-              <td><strong style="color:var(--accent);">مرساة + نفور من الخسارة</strong></td>
+              <td><strong class="u-text-brand">مرساة + نفور من الخسارة</strong></td>
               <td style="color:var(--text-muted);font-size:12px;">يرى السعر رخيصاً ويخاف يخسر الفرصة</td>
             </tr>
             <tr>
@@ -7688,7 +7692,7 @@
             <div class="psych-acc-grid">
               <div class="psych-info-block full-width">
                 <div class="psych-info-label">الشرح العملي</div>
-                <div class="psych-info-text">الإنسان يبحث لا شعورياً عن المعلومات التي تُثبت قناعته الأصلية ويتجاهل ما يعارضها. مهما قدمت من منطق، لو يعتقد أنك "تريد تبيع بس" — سيُفسّر كل كلمة بهذا الإطار. <strong style="color:var(--accent);">الفكرة الذهبية: لا تواجه القناعة — اجعله يشكك فيها بسؤال.</strong></div>
+                <div class="psych-info-text">الإنسان يبحث لا شعورياً عن المعلومات التي تُثبت قناعته الأصلية ويتجاهل ما يعارضها. مهما قدمت من منطق، لو يعتقد أنك "تريد تبيع بس" — سيُفسّر كل كلمة بهذا الإطار. <strong class="u-text-brand">الفكرة الذهبية: لا تواجه القناعة — اجعله يشكك فيها بسؤال.</strong></div>
               </div>
 
               <div class="psych-info-block">
@@ -7842,7 +7846,7 @@
           </div>
         </div>
         <div style="font-size:12.5px;color:var(--text-muted);line-height:1.8;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);">
-          <strong style="color:var(--accent);">الدماغ لا يقاوم تركيبتين معاً</strong> — استخدم مرساة مع نفور من الخسارة فيرى السعر رخيصاً ويخاف الفرصة. ادمج إثباتاً اجتماعياً مع ندم استباقي فيدرك أن الآخرين فعلوا وأن التردد له ثمن. قلّل الخيارات مع الحِمل المعرفي فيريح دماغه ويُسلّم الأمر لخبير يثق به. ووجّه سؤالاً عكسياً يجعله يشكك في قناعته بنفسه دون أي مقاومة.
+          <strong class="u-text-brand">الدماغ لا يقاوم تركيبتين معاً</strong> — استخدم مرساة مع نفور من الخسارة فيرى السعر رخيصاً ويخاف الفرصة. ادمج إثباتاً اجتماعياً مع ندم استباقي فيدرك أن الآخرين فعلوا وأن التردد له ثمن. قلّل الخيارات مع الحِمل المعرفي فيريح دماغه ويُسلّم الأمر لخبير يثق به. ووجّه سؤالاً عكسياً يجعله يشكك في قناعته بنفسه دون أي مقاومة.
         </div>
       </div>
 
@@ -8231,7 +8235,7 @@
               <div style="font-size:11px;color:var(--text-muted);">أي نمط شخصية يستخدم أي دفاع أكثر — الربط بين DISC والدوافع السبعة</div>
             </div>
           </div>
-          <div style="overflow-x:auto;">
+          <div class="u-overflow-auto">
             <table class="matrix-ref-table" style="width:100%;min-width:600px;">
               <thead>
                 <tr>
@@ -8773,7 +8777,7 @@
           <div class="lbl">من الأداء الوظيفي يُحدده EQ</div>
         </div>
         <div class="call-card">
-          <div class="num" style="color:var(--accent);">5</div>
+          <div class="num u-text-brand">5</div>
           <div class="lbl">مجالات أساسية في نموذج Goleman</div>
         </div>
         <div class="call-card">
@@ -8842,7 +8846,7 @@
               </div>
               <div class="psych-info-block">
                 <div class="psych-info-label">🛠️ تقنية STOP</div>
-                <div class="psych-info-text"><strong style="color:var(--accent);">S</strong>top — توقف فوراً<br><strong style="color:var(--accent);">T</strong>ake breath — خذ نفس عميق<br><strong style="color:var(--accent);">O</strong>bserve — لاحظ ما تشعر<br><strong style="color:var(--accent);">P</strong>roceed — تصرف باختيار</div>
+                <div class="psych-info-text"><strong class="u-text-brand">S</strong>top — توقف فوراً<br><strong class="u-text-brand">T</strong>ake breath — خذ نفس عميق<br><strong class="u-text-brand">O</strong>bserve — لاحظ ما تشعر<br><strong class="u-text-brand">P</strong>roceed — تصرف باختيار</div>
               </div>
               <div class="psych-info-block">
                 <div class="psych-info-label">📞 سكريبت تحت الضغط</div>
@@ -8941,7 +8945,7 @@
               </div>
               <div class="psych-info-block">
                 <div class="psych-info-label">⚡ تقنية إدارة الصراع</div>
-                <div class="psych-info-text"><strong style="color:var(--accent);">1.</strong> اعترف بوجهة نظرهم أولاً<br><strong style="color:var(--accent);">2.</strong> ابحث عن النقطة المشتركة<br><strong style="color:var(--accent);">3.</strong> قدّم حلاً يُكسب الطرفين<br><strong style="color:var(--accent);">4.</strong> لا تجعلها "أنا vs أنت"</div>
+                <div class="psych-info-text"><strong class="u-text-brand">1.</strong> اعترف بوجهة نظرهم أولاً<br><strong class="u-text-brand">2.</strong> ابحث عن النقطة المشتركة<br><strong class="u-text-brand">3.</strong> قدّم حلاً يُكسب الطرفين<br><strong class="u-text-brand">4.</strong> لا تجعلها "أنا vs أنت"</div>
               </div>
             </div>
           </div>
@@ -8992,7 +8996,7 @@
             <input type="range" min="1" max="10" value="5" style="width:100%;margin-top:8px;accent-color:#22C55E;" oninput="updateEQBar(4,this.value)">
           </div>
           <div class="psych-info-block" style="grid-column:1/-1;">
-            <div class="psych-info-label" style="color:var(--accent);">المهارات الاجتماعية</div>
+            <div class="psych-info-label u-text-brand">المهارات الاجتماعية</div>
             <div style="display:flex;align-items:center;gap:10px;margin-top:8px;">
               <div class="progress-bar" style="flex:1;"><div class="progress-fill" id="eq-bar-5" style="width:0%;"></div></div>
               <span id="eq-val-5" style="font-size:12px;color:var(--text-muted);width:28px;">—</span>
@@ -9075,7 +9079,7 @@
             <div style="font-size:11.5px;color:var(--text-muted);">كيف يختلف استخدام الذكاء العاطفي بين كل دور</div>
           </div>
         </div>
-        <div style="overflow-x:auto;">
+        <div class="u-overflow-auto">
           <table class="matrix-ref-table" style="width:100%;min-width:700px;">
             <thead>
               <tr>
@@ -9420,7 +9424,7 @@
           <div class="lbl">أسلحة Cialdini للإقناع</div>
         </div>
         <div class="call-card">
-          <div class="num" style="color:var(--accent);">93%</div>
+          <div class="num u-text-brand">93%</div>
           <div class="lbl">من التواصل غير لفظي</div>
         </div>
         <div class="call-card">
@@ -9464,7 +9468,7 @@
               </div>
               <div class="psych-info-block full-width">
                 <div class="psych-info-label">🎯 تمرين BATNA — قبل أي مفاوضة</div>
-                <div class="psych-info-text">اكتب على ورقة: <strong style="color:var(--accent);">1)</strong> ما الذي أريده مثالياً؟ <strong style="color:var(--accent);">2)</strong> ما الذي أقبله كحد أدنى؟ <strong style="color:var(--accent);">3)</strong> ماذا سأفعل إذا فشلت المفاوضة؟ <strong style="color:var(--accent);">4)</strong> ما BATNA الطرف الآخر المحتمل؟</div>
+                <div class="psych-info-text">اكتب على ورقة: <strong class="u-text-brand">1)</strong> ما الذي أريده مثالياً؟ <strong class="u-text-brand">2)</strong> ما الذي أقبله كحد أدنى؟ <strong class="u-text-brand">3)</strong> ماذا سأفعل إذا فشلت المفاوضة؟ <strong class="u-text-brand">4)</strong> ما BATNA الطرف الآخر المحتمل؟</div>
               </div>
             </div>
           </div>
@@ -10052,7 +10056,7 @@
           <div class="lbl">أنماط Debugging احترافية</div>
         </div>
         <div class="call-card">
-          <div class="num" style="color:var(--accent);">10x</div>
+          <div class="num u-text-brand">10x</div>
           <div class="lbl">فرق الإنتاجية بين المبتدئ والخبير</div>
         </div>
         <div class="call-card">
@@ -10340,7 +10344,7 @@
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">🧠 Active Recall — قبل أن تقرأ الإجابة</div>
             <span class="ql-recall-hint">اضغط لاسترجاع المعلومة ذهنياً أولاً…</span>
-            <div class="ql-recall-a">نظام مثل Twitter: 300M DAU، ~6K tweets/sec. السؤال: هل الـ bottleneck في الكتابة أم القراءة؟<br><strong style="color:var(--accent);">الإجابة:</strong> القراءة. نسبة Read:Write تقارب 1000:1 — لذلك الحل = <em>Fan-out on Write</em> إلى Timeline Cache (Redis) لكل متابع. الـ storage المفضّل: Cassandra (write-heavy + eventually consistent) مع Redis للـ hot timelines.</div>
+            <div class="ql-recall-a">نظام مثل Twitter: 300M DAU، ~6K tweets/sec. السؤال: هل الـ bottleneck في الكتابة أم القراءة؟<br><strong class="u-text-brand">الإجابة:</strong> القراءة. نسبة Read:Write تقارب 1000:1 — لذلك الحل = <em>Fan-out on Write</em> إلى Timeline Cache (Redis) لكل متابع. الـ storage المفضّل: Cassandra (write-heavy + eventually consistent) مع Redis للـ hot timelines.</div>
           </div>
         </div>
 
@@ -10456,7 +10460,7 @@
               </div>
               <div class="psych-info-block">
                 <div class="psych-info-label">📌 مثال واقعي</div>
-                <div class="psych-info-text">PaymentGatewayFactory يُرجع Stripe أو PayPal أو Local بناءً على config. الكود المستدعي لا يعرف أيهم — فقط <code style="color:var(--accent);">gateway.charge()</code>.</div>
+                <div class="psych-info-text">PaymentGatewayFactory يُرجع Stripe أو PayPal أو Local بناءً على config. الكود المستدعي لا يعرف أيهم — فقط <code class="u-text-brand">gateway.charge()</code>.</div>
               </div>
               <div class="psych-info-block">
                 <div class="psych-info-label">⚠️ تحذير</div>
@@ -10480,7 +10484,7 @@
             <div class="psych-acc-grid">
               <div class="psych-info-block full-width">
                 <div class="psych-info-label">المشكلة مع الوراثة</div>
-                <div class="psych-info-text">لديك Coffee. تريد CoffeeWithMilk، CoffeeWithSugar، CoffeeWithMilkAndSugar، CoffeeWithMilkAndSugarAndCaramel… انفجار subclasses. <strong style="color:var(--text);">الحل:</strong> Decorator يُغلّف الكائن ويُضيف سلوكاً. <code style="color:var(--accent);">new Sugar(new Milk(new Coffee()))</code>. تركيب ديناميكي، لا شجرة ثابتة.</div>
+                <div class="psych-info-text">لديك Coffee. تريد CoffeeWithMilk، CoffeeWithSugar، CoffeeWithMilkAndSugar، CoffeeWithMilkAndSugarAndCaramel… انفجار subclasses. <strong style="color:var(--text);">الحل:</strong> Decorator يُغلّف الكائن ويُضيف سلوكاً. <code class="u-text-brand">new Sugar(new Milk(new Coffee()))</code>. تركيب ديناميكي، لا شجرة ثابتة.</div>
               </div>
               <div class="psych-info-block">
                 <div class="psych-info-label">🔥 حيث تراه يومياً</div>
@@ -10661,22 +10665,22 @@
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #1 — اذكر قبل القراءة</div>
             <span class="ql-recall-hint">ما الفرق بين Authentication و Authorization؟ استرجع ثم اضغط.</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">AuthN</strong> = من أنت (login). <strong style="color:var(--accent);">AuthZ</strong> = ماذا يحق لك (permissions). AuthN تأتي أولاً دائماً. JWT يحمل هوية (AuthN)، والأدوار داخله تُستخدم للـ AuthZ. اخلطهما = ثغرة أمنية.</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">AuthN</strong> = من أنت (login). <strong class="u-text-brand">AuthZ</strong> = ماذا يحق لك (permissions). AuthN تأتي أولاً دائماً. JWT يحمل هوية (AuthN)، والأدوار داخله تُستخدم للـ AuthZ. اخلطهما = ثغرة أمنية.</div>
           </div>
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #2 — اذكر قبل القراءة</div>
             <span class="ql-recall-hint">متى تستخدم SQL ومتى NoSQL؟ استرجع ثم اضغط.</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">SQL</strong>: علاقات معقدة، معاملات مالية، تكامل صارم (ACID). <strong style="color:var(--accent);">NoSQL</strong>: مقياس أفقي ضخم، schema متغير، read-heavy بصيغ document/key-value. القاعدة: ابدأ بـ SQL حتى تُثبت احتياجاً لـ NoSQL — ليس العكس.</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">SQL</strong>: علاقات معقدة، معاملات مالية، تكامل صارم (ACID). <strong class="u-text-brand">NoSQL</strong>: مقياس أفقي ضخم، schema متغير، read-heavy بصيغ document/key-value. القاعدة: ابدأ بـ SQL حتى تُثبت احتياجاً لـ NoSQL — ليس العكس.</div>
           </div>
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #3 — اذكر قبل القراءة</div>
             <span class="ql-recall-hint">ماذا يفعل Circuit Breaker؟ ومتى يكون مفتوحاً/مغلقاً/نصف؟</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">Closed</strong> = يمر الطلب طبيعي. بعد N فشل → <strong style="color:var(--accent);">Open</strong> = يرفض فوراً دون محاولة (يحمي الـ downstream من الإرهاق). بعد timeout → <strong style="color:var(--accent);">Half-Open</strong> = يسمح بطلب واحد تجريبي. إذا نجح → Closed. إذا فشل → Open مرة أخرى.</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">Closed</strong> = يمر الطلب طبيعي. بعد N فشل → <strong class="u-text-brand">Open</strong> = يرفض فوراً دون محاولة (يحمي الـ downstream من الإرهاق). بعد timeout → <strong class="u-text-brand">Half-Open</strong> = يسمح بطلب واحد تجريبي. إذا نجح → Closed. إذا فشل → Open مرة أخرى.</div>
           </div>
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #4 — اذكر قبل القراءة</div>
             <span class="ql-recall-hint">ما هو N+1 Query Problem؟ وكيف تحلّه؟</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">المشكلة:</strong> استعلام واحد يُرجع N صفوف، ثم تُنفّذ استعلاماً لكل صف (عادة داخل loop). النتيجة: N+1 استعلامات. <strong style="color:var(--accent);">الحل:</strong> JOIN أو eager loading (<code>.includes()</code> في Rails، <code>.prefetch_related()</code> في Django، populate في Mongoose). مؤشر الكشف: monitoring يُظهر استعلامات متشابهة بأعداد خطية مع حجم البيانات.</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">المشكلة:</strong> استعلام واحد يُرجع N صفوف، ثم تُنفّذ استعلاماً لكل صف (عادة داخل loop). النتيجة: N+1 استعلامات. <strong class="u-text-brand">الحل:</strong> JOIN أو eager loading (<code>.includes()</code> في Rails، <code>.prefetch_related()</code> في Django، populate في Mongoose). مؤشر الكشف: monitoring يُظهر استعلامات متشابهة بأعداد خطية مع حجم البيانات.</div>
           </div>
         </div>
       </div>
@@ -12203,7 +12207,7 @@ const bird = { ...canMove(), ...canFly() };
           <div class="lbl">إجراءات إقفال يومي</div>
         </div>
         <div class="call-card">
-          <div class="num" style="color:var(--accent);">0.00</div>
+          <div class="num u-text-brand">0.00</div>
           <div class="lbl">الفرق المقبول في التسوية</div>
         </div>
         <div class="call-card">
@@ -12690,7 +12694,7 @@ const bird = { ...canMove(), ...canFly() };
         <div style="font-size:12.5px;color:var(--text-muted);line-height:1.85;margin-bottom:14px;">في البيانات الطبيعية، الأرقام التي تبدأ بـ <strong>1</strong> تظهر بنسبة ~30.1%، بـ <strong>2</strong> ~17.6%، بـ <strong>9</strong> فقط 4.6%. حين يُلفّق البشر أرقاماً — يُوزّعونها «عادلة» (10% لكل رقم). <strong style="color:var(--text);">الفجوة عن القانون = جرس إنذار.</strong></div>
         <div style="padding:12px 14px;background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(239,68,68,0.05));border:1px solid rgba(245,158,11,0.22);border-radius:var(--radius-sm);">
           <div style="font-size:11px;font-weight:800;color:#F59E0B;margin-bottom:4px;letter-spacing:1.3px;text-transform:uppercase;">🧪 محاكاة: اكتشف الاحتيال</div>
-          <div style="font-size:12px;color:var(--text);line-height:1.8;">وصلتك 500 فاتورة من مورّد. الأرقام تبدأ بـ <code style="color:var(--accent);">1→12%</code>, <code style="color:var(--accent);">4→22%</code>, <code style="color:var(--accent);">5→19%</code>. هل تشك؟ <strong style="color:#EF4444;">نعم</strong> — التوزيع ضد بنفورد. الاحتمال: أرقام مُلفّقة للبقاء تحت حد الموافقة (4999 بدلاً من 5000).</div>
+          <div style="font-size:12px;color:var(--text);line-height:1.8;">وصلتك 500 فاتورة من مورّد. الأرقام تبدأ بـ <code class="u-text-brand">1→12%</code>, <code class="u-text-brand">4→22%</code>, <code class="u-text-brand">5→19%</code>. هل تشك؟ <strong style="color:#EF4444;">نعم</strong> — التوزيع ضد بنفورد. الاحتمال: أرقام مُلفّقة للبقاء تحت حد الموافقة (4999 بدلاً من 5000).</div>
         </div>
       </div>
 
@@ -12786,17 +12790,17 @@ const bird = { ...canMove(), ...canFly() };
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #1</div>
             <span class="ql-recall-hint">ما الفرق بين FIFO و Weighted Average للمخزون؟</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">FIFO:</strong> الأول يُصرَف أولاً. في تضخّم = تكلفة بضاعة مباعة منخفضة = ربح أعلى ظاهرياً + ضريبة أعلى. <strong style="color:var(--accent);">Weighted Avg:</strong> متوسط تكاليف فترة. أبسط وأقل تقلّباً. <strong style="color:var(--accent);">LIFO محظور</strong> في IFRS. اختيار الطريقة يجب أن يكون متّسقاً.</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">FIFO:</strong> الأول يُصرَف أولاً. في تضخّم = تكلفة بضاعة مباعة منخفضة = ربح أعلى ظاهرياً + ضريبة أعلى. <strong class="u-text-brand">Weighted Avg:</strong> متوسط تكاليف فترة. أبسط وأقل تقلّباً. <strong class="u-text-brand">LIFO محظور</strong> في IFRS. اختيار الطريقة يجب أن يكون متّسقاً.</div>
           </div>
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #2</div>
             <span class="ql-recall-hint">متى يُعترف بالإيراد في عقد 12 شهراً مدفوع مُقدماً؟</span>
-            <div class="ql-recall-a">ليس عند استلام النقد. IFRS 15: يُسجَّل النقد كـ <strong style="color:var(--accent);">Deferred Revenue (التزام)</strong> ثم يُعترف به كإيراد تدريجياً مع الوفاء بالالتزام (1/12 كل شهر). عكس ذلك = تضخيم الإيراد = خرق صريح.</div>
+            <div class="ql-recall-a">ليس عند استلام النقد. IFRS 15: يُسجَّل النقد كـ <strong class="u-text-brand">Deferred Revenue (التزام)</strong> ثم يُعترف به كإيراد تدريجياً مع الوفاء بالالتزام (1/12 كل شهر). عكس ذلك = تضخيم الإيراد = خرق صريح.</div>
           </div>
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #3</div>
             <span class="ql-recall-hint">Depreciation vs Amortization — ما الفرق؟</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">Depreciation</strong> = الأصول الملموسة (مباني، معدّات). <strong style="color:var(--accent);">Amortization</strong> = الأصول غير الملموسة (براءات، تراخيص). الاثنان يوزّعان التكلفة على العمر الإنتاجي. الأرض <em>لا</em> تُستهلك (عمر غير محدود).</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">Depreciation</strong> = الأصول الملموسة (مباني، معدّات). <strong class="u-text-brand">Amortization</strong> = الأصول غير الملموسة (براءات، تراخيص). الاثنان يوزّعان التكلفة على العمر الإنتاجي. الأرض <em>لا</em> تُستهلك (عمر غير محدود).</div>
           </div>
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #4</div>
@@ -16433,7 +16437,7 @@ const bird = { ...canMove(), ...canFly() };
       </div><!-- /hrmCommonQs -->
 
       <!-- Phase 1 marker (continue in subsequent phases) -->
-      <div id="hrm-phase-1-end" style="display:none;"></div>
+      <div id="hrm-phase-1-end" class="u-hidden"></div>
 
       <!-- ========== PHASE 2 START ========== -->
 
@@ -16850,7 +16854,7 @@ const bird = { ...canMove(), ...canFly() };
       </div>
 
       <!-- Phase 2 marker -->
-      <div id="hrm-phase-2-end" style="display:none;"></div>
+      <div id="hrm-phase-2-end" class="u-hidden"></div>
 
       <!-- ========== PHASE 3 START ========== -->
 
@@ -17033,7 +17037,7 @@ const bird = { ...canMove(), ...canFly() };
       </div>
 
       <!-- Phase 3 marker -->
-      <div id="hrm-phase-3-end" style="display:none;"></div>
+      <div id="hrm-phase-3-end" class="u-hidden"></div>
 
       <!-- ========== PHASE 4 START ========== -->
 
@@ -17047,7 +17051,7 @@ const bird = { ...canMove(), ...canFly() };
       <div class="hrm-scn-shell" id="hrmScnShell">
         <div class="hrm-scn-header">
           <div class="hrm-scn-counter">
-            <span id="hrmScnIdx">1</span> <span style="color:var(--text-faint);">/</span> <span>15</span>
+            <span id="hrmScnIdx">1</span> <span class="u-text-faint">/</span> <span>15</span>
           </div>
           <div class="hrm-scn-progress">
             <div class="hrm-scn-progress-fill" id="hrmScnPg"></div>
@@ -17055,7 +17059,7 @@ const bird = { ...canMove(), ...canFly() };
           <div class="hrm-scn-score">
             <span class="hrm-scn-score-label">الدرجة:</span>
             <span class="hrm-scn-score-val" id="hrmScnScore">0</span>
-            <span style="color:var(--text-faint);">/ 15</span>
+            <span class="u-text-faint">/ 15</span>
           </div>
         </div>
 
@@ -17209,7 +17213,7 @@ const bird = { ...canMove(), ...canFly() };
       </div>
 
       <!-- Phase 4 marker -->
-      <div id="hrm-phase-4-end" style="display:none;"></div>
+      <div id="hrm-phase-4-end" class="u-hidden"></div>
 
       <!-- ========== PHASE 5 START ========== -->
 
@@ -17231,7 +17235,7 @@ const bird = { ...canMove(), ...canFly() };
           </div>
         </div>
 
-        <div class="hrm-mock-stage" data-stage="play" style="display:none;">
+        <div class="hrm-mock-stage" data-stage="play" class="u-hidden">
           <div class="hrm-mock-top">
             <div class="hrm-mock-step">
               السؤال <span id="hrmMockNum">1</span> / 5
@@ -17252,7 +17256,7 @@ const bird = { ...canMove(), ...canFly() };
           </div>
         </div>
 
-        <div class="hrm-mock-stage" data-stage="report" style="display:none;">
+        <div class="hrm-mock-stage" data-stage="report" class="u-hidden">
           <div id="hrmMockReport"></div>
           <button class="hrm-mock-btn ghost" id="hrmMockRestart">إعادة المحاكاة 🔁</button>
         </div>
@@ -17491,7 +17495,7 @@ const bird = { ...canMove(), ...canFly() };
       </div>
 
       <!-- Phase 5 marker (FINAL) -->
-      <div id="hrm-phase-5-end" style="display:none;"></div>
+      <div id="hrm-phase-5-end" class="u-hidden"></div>
 
     </section><!-- /page-hrmastery -->
 
@@ -17503,7 +17507,7 @@ const bird = { ...canMove(), ...canFly() };
       <span id="footer-progress-text">جارٍ تحميل التقدم...</span>
     </div>
     <div class="footer-section" style="gap:12px;">
-      <span style="color:var(--text-faint);">اختصارات:</span>
+      <span class="u-text-faint">اختصارات:</span>
       <span><span class="footer-kbd">Ctrl</span> + <span class="footer-kbd">1</span> الرئيسية</span>
       <span class="footer-sep">·</span>
       <span><span class="footer-kbd">Ctrl</span> + <span class="footer-kbd">2</span> كول سنتر</span>
@@ -17517,7 +17521,7 @@ const bird = { ...canMove(), ...canFly() };
       <span><span class="footer-kbd">Ctrl</span> + <span class="footer-kbd">/</span> بحث</span>
     </div>
     <div class="footer-section">
-      <span id="footer-version" style="color:var(--text-faint);">v11.0</span>
+      <span id="footer-version" class="u-text-faint">v11.0</span>
       <span class="footer-sep">·</span>
       <span>منصة التدريب الاحترافية</span>
       <span class="footer-sep">·</span>
@@ -17636,7 +17640,7 @@ const bird = { ...canMove(), ...canFly() };
     animation: loadPulse 1s ease infinite alternate;
     font-size:28px;
   ">🎓</div>
-  <div style="text-align:center;">
+  <div class="u-text-center">
     <div style="font-size:18px; font-weight:800; color:var(--text); margin-bottom:6px;">منصة التدريب الاحترافية</div>
     <div style="font-size:13px; color:var(--text-muted);">جارٍ تحميل بيئة التدريب...</div>
   </div>
