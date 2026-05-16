@@ -56,35 +56,42 @@
 :root[data-theme="light"],
 html[data-theme="light"],
 body[data-theme="light"] {
-  --color-bg:           hsl(40 18% 97%);
-  --color-surface-0:    hsl(40 25% 99%);
-  --color-surface-1:    hsl(40 18% 96%);
-  --color-surface-2:    hsl(40 14% 93%);
-  --color-surface-3:    hsl(40 12% 89%);
+  /* AURORA v15 — Linen-Bone Off-White (Worker 12 / Phase 2)
+     Mood: warm linen + bone. Reference: macOS Sonoma + Apple Park reading rooms. */
+  --color-bg:           hsl(38 28% 96.5%);   /* linen */
+  --color-surface-0:    hsl(40 38% 99.2%);   /* paper-fresh */
+  --color-surface-1:    hsl(38 28% 97.5%);   /* card */
+  --color-surface-2:    hsl(36 22% 94.5%);   /* raised card */
+  --color-surface-3:    hsl(34 18% 91%);     /* sunk well */
 
-  --color-text:         hsl(220 35% 12%);
-  --color-text-muted:   hsl(220 18% 38%);
-  --color-text-faint:   hsl(220 12% 55%);
+  --color-text:         hsl(220 38% 11%);
+  --color-text-muted:   hsl(220 18% 36%);
+  --color-text-faint:   hsl(220 14% 54%);
 
-  --color-border:        hsl(220 14% 86%);
-  --color-border-strong: hsl(220 16% 76%);
+  --color-border:        hsl(36 16% 86%);
+  --color-border-strong: hsl(36 18% 76%);
 
-  --color-brand:        hsl(176 70% 38%);
-  --color-brand-hover:  hsl(176 75% 32%);
-  --color-brand-soft:   color-mix(in oklch, hsl(176 70% 38%) 12%, white);
-  --color-brand-strong: hsl(176 75% 30%);
+  --color-brand:        hsl(176 64% 34%);
+  --color-brand-hover:  hsl(176 70% 28%);
+  --color-brand-soft:   color-mix(in oklch, hsl(176 64% 34%) 9%, hsl(40 38% 99.2%));
+  --color-brand-strong: hsl(176 70% 26%);
 
-  --color-success:      hsl(152 65% 38%);
-  --color-warning:      hsl(38 88% 48%);
-  --color-danger:       hsl(0 72% 50%);
-  --color-info:         hsl(210 88% 48%);
+  --color-success:      hsl(152 56% 32%);
+  --color-warning:      hsl(34 92% 42%);
+  --color-danger:       hsl(0 70% 46%);
+  --color-info:         hsl(210 78% 42%);
 
-  --shadow-c-sm: 0 1px 2px hsl(220 30% 20% / 0.06);
-  --shadow-c-md: 0 4px 12px hsl(220 30% 20% / 0.08), 0 1px 2px hsl(220 30% 20% / 0.04);
-  --shadow-c-lg: 0 12px 32px hsl(220 30% 20% / 0.10), 0 2px 6px hsl(220 30% 20% / 0.05);
-  --shadow-c-xl: 0 24px 60px hsl(220 30% 20% / 0.12), 0 4px 12px hsl(220 30% 20% / 0.06);
+  /* Tinted shadows — azure + warm cocoa, never flat black */
+  --shadow-c-sm: 0 1px 2px hsl(220 30% 18% / 0.05),
+                 0 1px 1px hsl(36 28% 35% / 0.04);
+  --shadow-c-md: 0 4px 12px hsl(220 30% 18% / 0.08),
+                 0 2px 4px hsl(36 28% 35% / 0.05);
+  --shadow-c-lg: 0 14px 32px hsl(220 30% 18% / 0.10),
+                 0 4px 10px hsl(36 28% 35% / 0.06);
+  --shadow-c-xl: 0 28px 60px hsl(220 30% 18% / 0.13),
+                 0 8px 20px hsl(36 28% 35% / 0.07);
 
-  --ring: 0 0 0 3px color-mix(in oklch, hsl(176 70% 38%) 30%, transparent);
+  --ring: 0 0 0 3px color-mix(in oklch, var(--color-brand) 28%, transparent);
 
   color-scheme: light;
 }
@@ -4446,7 +4453,7 @@ body[data-theme="dark"] { color-scheme: dark; }
 
 /* ===== CSS block #10 (id: block-10) ===== */
 /* v12-ADD: Quiz System Styles */
-    .v12-quiz-trigger { display:flex;align-items:center;gap:4px;background:var(--accent-dim);border:1px solid var(--border-hover);border-radius:var(--radius-sm);padding:5px 10px !important;color:var(--accent) !important; }
+    .v12-quiz-trigger { display:flex;align-items:center;gap:4px;background:var(--accent-dim);border:1px solid var(--border-hover);border-radius:var(--radius-sm);padding:5px 10px;color:var(--accent); }
     .v12-quiz-trigger:hover { background:rgba(102,252,241,0.18); }
     .v12-quiz-trigger svg { width:16px;height:16px; }
     .v12-quiz-overlay { position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px; }
@@ -9053,7 +9060,7 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
   margin-block-start: 6px;
 }
 #page-accounting .acc-is-rows li.net em { font-size: 11px; color: rgba(255,255,255,0.75); margin-inline-start: 6px; font-style: normal; font-weight: 700; }
-#page-accounting .acc-is-rows li.negative b { color: #F87171 !important; }
+#page-accounting .acc-is-rows li.negative b { color: #F87171; }
 #page-accounting .acc-is-warnings {
   display: grid;
   gap: 6px;
@@ -16409,3 +16416,70 @@ body, .u-prose p {
    ════════════════════════════════════════════════════════════════════════════ */
 
 /* ─── End AURORA Phase 1B ─────────────────────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Phase 2 — Off-White Re-chisel (Worker 12 / Phase 2)
+   - Tonal elevation utilities (.elev-0..3)
+   - Nav-badge identity classes (replaces inline gradients)
+   - Welcome-badge identity classes
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Tonal elevation tint ────────────────────────────────────────────────── */
+:root { --tonal-tint: hsl(36 28% 35%); }            /* warm cocoa */
+:root[data-theme="dark"] { --tonal-tint: hsl(176 100% 70%); } /* brand glow */
+
+.elev-0 { background: var(--color-surface-0); }
+.elev-1 { background: color-mix(in oklch, var(--color-surface-1) 96%, var(--tonal-tint) 4%); }
+.elev-2 { background: color-mix(in oklch, var(--color-surface-2) 92%, var(--tonal-tint) 8%); }
+.elev-3 { background: color-mix(in oklch, var(--color-surface-3) 88%, var(--tonal-tint) 12%); }
+
+[data-theme="dark"] .elev-1 { background: color-mix(in oklch, var(--color-surface-1) 95%, var(--tonal-tint) 5%); }
+[data-theme="dark"] .elev-2 { background: color-mix(in oklch, var(--color-surface-2) 92%, var(--tonal-tint) 8%); }
+[data-theme="dark"] .elev-3 { background: color-mix(in oklch, var(--color-surface-3) 90%, var(--tonal-tint) 10%); }
+
+/* ─── Nav-badge identity classes ──────────────────────────────────────────── */
+.nav-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-full);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  line-height: 1.5;
+  color: hsl(40 60% 99%);
+  background: var(--color-brand);
+  white-space: nowrap;
+}
+.nav-badge--success { background: linear-gradient(135deg, var(--color-success), var(--color-info)); color: #fff; }
+.nav-badge--ember   { background: linear-gradient(135deg, hsl(20 92% 56%), hsl(0 80% 56%)); color: #fff; }
+.nav-badge--violet  { background: linear-gradient(135deg, hsl(265 70% 60%), hsl(210 90% 56%)); color: #fff; }
+.nav-badge--pink    { background: linear-gradient(135deg, hsl(330 80% 60%), hsl(265 70% 60%)); color: #fff; }
+.nav-badge--amber   { background: linear-gradient(135deg, hsl(20 92% 56%), hsl(45 92% 52%)); color: #fff; }
+.nav-badge--mint    { background: linear-gradient(135deg, var(--color-success), var(--color-info)); color: #fff; }
+.nav-badge--azure   { background: linear-gradient(135deg, hsl(186 80% 48%), hsl(265 70% 60%)); color: #fff; }
+.nav-badge--gold    { background: linear-gradient(135deg, hsl(36 92% 50%), hsl(152 60% 42%)); color: #fff; }
+.nav-badge--royal   { background: linear-gradient(135deg, hsl(265 80% 62%), hsl(330 80% 60%)); color: #fff; }
+
+/* ─── Welcome-badge / banner gradient identities ──────────────────────────── */
+.welcome-badge--gold {
+  background: linear-gradient(135deg,
+    color-mix(in oklch, var(--color-warning) 80%, white 10%),
+    var(--color-warning));
+}
+.welcome-badge--brand {
+  background: linear-gradient(135deg,
+    var(--color-brand),
+    var(--color-brand-strong));
+}
+.welcome-badge--success {
+  background: linear-gradient(135deg,
+    var(--color-success),
+    var(--color-info));
+}
+
+/* ─── End AURORA Phase 2 ──────────────────────────────────────────────────── */
