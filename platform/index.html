@@ -169,6 +169,48 @@
 <div id="sidebar-overlay" onclick="closeMobileSidebar()"></div>
 
 <!-- ════════════════════════════════════════════════════════════
+     CATHEDRAL v14 — Command Palette + Cheat Sheet (Worker 11 / Phase 5)
+     Cmd+K overlay; ?  for keyboard shortcuts cheat sheet.
+══════════════════════════════════════════════════════════════ -->
+<div id="cmdk-palette" class="cmdk-overlay" hidden role="presentation">
+  <div class="cmdk-modal" role="dialog" aria-label="لوحة الأوامر" aria-modal="true">
+    <div class="cmdk-search">
+      <i class="qi qi-md" data-icon="search"></i>
+      <input type="text" class="cmdk-input"
+             placeholder="ابحث أو نفّذ أمراً... (مثلاً: ضريبة، dashboard، lock)"
+             autocomplete="off" spellcheck="false" aria-label="البحث في الأوامر">
+      <kbd class="cmdk-kbd">ESC</kbd>
+    </div>
+    <div class="cmdk-results" role="listbox" aria-label="النتائج"></div>
+    <div class="cmdk-empty" hidden>
+      <i class="qi qi-xl" data-icon="search"></i>
+      <p>لم نجد نتائج.</p>
+      <span class="cmdk-empty-hint">جرّب: <kbd>tax</kbd> · <kbd>dashboard</kbd> · <kbd>lock</kbd></span>
+    </div>
+    <div class="cmdk-footer">
+      <span><kbd>↑</kbd><kbd>↓</kbd> للتنقل</span>
+      <span><kbd>↵</kbd> للتنفيذ</span>
+      <span><kbd>?</kbd> للمساعدة</span>
+    </div>
+  </div>
+</div>
+
+<div id="shortcut-cheatsheet" class="cmdk-overlay" hidden role="presentation">
+  <div class="cmdk-modal cmdk-modal-cheatsheet" role="dialog" aria-label="اختصارات لوحة المفاتيح" aria-modal="true">
+    <header class="cmdk-cheat-header">
+      <h2><i class="qi" data-icon="command"></i> اختصارات لوحة المفاتيح</h2>
+      <button class="cmdk-btn-close" type="button" data-action="close-cheatsheet" aria-label="إغلاق">
+        <i class="qi" data-icon="x"></i>
+      </button>
+    </header>
+    <div class="cmdk-cheat-body"></div>
+    <div class="cmdk-cheat-footer">
+      <span>اضغط <kbd>?</kbd> أو <kbd>Esc</kbd> للإغلاق</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════
      CATHEDRAL v14 — Entry Gateway (Worker 11 / Phase 3)
      Lock screen, onboarding wizard, returning-user welcome.
 ══════════════════════════════════════════════════════════════ -->
