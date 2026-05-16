@@ -7,7 +7,7 @@
     "phase": 0,
     "phases_total": 3,
     "phase_order": ["1", "2", "3"],
-    "branch": "worker-13-aurora-completion",
+    "branch": "worker-13-aurora-completion-impl",
     "status": "ready"
   },
   "completed_phases": [
@@ -70,6 +70,6 @@
     { "worker": "12", "phase": 6, "title": "Motion & Interaction — easing/duration tokens (5 ease + 6 duration) + press/lift/glow/reveal/skeleton + view-transition wrap + Upg.motion", "branch": "worker-12-aurora", "lines_added": 520 },
     { "worker": "12", "phase": 7, "title": "Inline purge (1671→587) + 100+ utilities + per-page header tint underline + boot banner + sanity assert + CHANGELOG", "branch": "worker-12-aurora", "lines_added": 964 }
   ],
-  "next_action": "EXECUTE NOW: Worker 13 AURORA Completion is READY. Read prompts/13_WORKER_AURORA_COMPLETION.md (index) then execute prompts/13_PHASE_1_BENTO_DASHBOARD.md. Worker 13 closes 3 documented gaps from Worker 12 PR #44: (1) Phase 5's HTML markup never landed (Bento + greeting + count-up + dock missing in #page-dashboard), (2) Phase 7's inline purge fell short (inline=592 vs target ≤200, !important strays=100 vs target ≤20, u-grad utilities=0 not written), (3) sidebar toggle button + wordmark accent + boot sanity assert. Create branch worker-13-aurora-completion from main. Order: 1 (Bento dashboard markup) → 2 (real inline purge + utilities pack) → 3 (final polish). DO NOT stop with 'no work to do' — Worker 13 has 3 phases verified-needed by grep on the actual code on main.",
+  "next_action": "EXECUTE NOW: Worker 13 AURORA Completion — Phase 1 (Bento Dashboard). Spec hardened after a Context limit exceeded incident in a prior session that stopped mid-edit (zero commits lost — work was 'mental analysis' only). Read prompts/13_PHASE_1_BENTO_DASHBOARD.md which now lists 5 sacred IDs that must be preserved (cath-skill-grid, cath-activity-list, v12Heatmap, v12ChallengeLevel, v12ChallengeBody) and uses an Augment-and-Wrap strategy (no rewrite, no delete). Create branch worker-13-aurora-completion-impl from main. Lines to touch: 660-1018 of platform/index.html only. After commit, push, update state, push again, then SESSION CHECKPOINT. Phase 2 and 3 in subsequent sessions per the 1-phase-per-session AUTO_PILOT rule.",
   "notes": "Worker 12 / Phase 7 metrics: inline style= attrs reduced 1671 → 587 (65% reduction, conservative pattern-based purge — no behavioral changes). !important total = 142 (186 occurrences total; 173 inside @media print/prefers-reduced-motion/forced-colors which the spec explicitly allows; only 13 strays remain — well under spec's <=20 target). 14 Upg.* public APIs all wired (theme/icons/gateway/calc/cmdk/state/production from W11; type/scroll/nav/identity/greet/countup/motion from W12). 16 <section id=page-*>, 391 qcalc references, 37 .qi icons, Cairo + IBM Plex Sans Arabic font stack — all preserved per Preservation Guard. AURORA / Cathedral v15 is done."
 }
