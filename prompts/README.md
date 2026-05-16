@@ -313,3 +313,58 @@ cp "arabic-training-platform-v12 (1) (4) (1) (1) (1).html" \
 | Easing tokens | 0 | ≥ 5 |
 | Per-page identity tints | 0 | 11 صفحة |
 | Lighthouse mobile (Perf / A11y) | ? | ≥ 90 / ≥ 95 |
+
+
+
+
+---
+
+## 🌅 Worker 13 — AURORA Completion (Cathedral v15.1)
+
+> أُضيف بعد Worker 12 لإنجاز ثلاث مهام بقيت ناقصة رغم أن PR #44 ادّعى اكتمالها. **لا rebuild، فقط ترميم محدَّد بأرقام مرجعية فعلية من grep**.
+
+### السبب
+
+فحص فعلي للكود بعد دمج Worker 12 كشف:
+
+| Phase 12 | الادعاء | الواقع |
+|---|---|---|
+| 5 — Dashboard Hero | ✓ | ❌ HTML لم يأخذ Bento markup (لا `class="bento"`, لا `data-greet-title`, لا `data-countup`) |
+| 7 — Inline Purge | "1671→587, !important 13" | ❌ inline=**592**، !important غير مبرّر=**100**، utilities `u-grad-*`=**0** |
+
+### ملفات Worker 13
+
+| الملف | الدور |
+|---|---|
+| `13_WORKER_AURORA_COMPLETION.md` | فهرس slim + Preservation Guard + Sacred Assets table |
+| `13_PHASE_1_BENTO_DASHBOARD.md` | تحويل `#page-dashboard` markup → Bento (الـ CSS و JS من Worker 12 جاهزون، فقط HTML ينقص) |
+| `13_PHASE_2_INLINE_PURGE_FOR_REAL.md` | utilities pack حقيقي + cleanup script V2 + inline 592→≤200 + !important 100→≤20 |
+| `13_PHASE_3_FINAL_POLISH.md` | wordmark Aref Ruqaa accent + sidebar toggle btn + boot sanity assert + CHANGELOG v15.1 |
+
+### نموذج الانطلاق
+
+نفس نمط Worker 11 و 12:
+1. ألصق `prompts/AUTO_PILOT.md` في session جديد.
+2. AUTO_PILOT يقرأ `state/PROGRESS.json` → `current.worker = "13"`, phase = 0, status = "ready".
+3. يفتح فهرس Worker 13 ثم `13_PHASE_1_*.md` → ينشئ branch `worker-13-aurora-completion`.
+4. **session واحد = phase واحد** (قاعدة AUTO_PILOT).
+5. PR واحد في النهاية: `feat: Worker 13 — AURORA Completion`.
+
+### مقاييس النجاح
+
+| المقياس | الواقع الحالي على main | الهدف بعد W13 |
+|---|---:|---:|
+| `class="bento"` في #page-dashboard | 0 | ≥ 1 |
+| `data-countup` | 0 | ≥ 4 |
+| inline `style="..."` | 592 | ≤ 200 |
+| `!important` غير مبرّر | 100 | ≤ 20 |
+| utilities `u-grad-*` | 0 | ≥ 7 |
+| 16 page sections | 16 | 16 (preserved) |
+| 391 qcalc references | 391 | 391 (preserved) |
+| 14 Upg.* APIs | 14 | 14 (preserved) |
+
+### الفلسفة المميِّزة لـ Worker 13
+
+> **Truth over claims. Verify before you ship.**
+>
+> Worker 12 / PR #44 ادّعى أرقاماً لم تتحقق. Worker 13 يرفض كتابة أي رقم في PR description بدون تحقق فعلي بـ `grep` على الكود بعد commit.
