@@ -16665,3 +16665,97 @@ body, .u-prose p {
 }
 
 /* ─── End AURORA Phase 3 ──────────────────────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Phase 4 — Navigation Chrome (Worker 12 / Phase 4)
+   Additive: layout tokens, sidebar collapse behavior, dynamic-island compact,
+   view-transition naming, mobile drawer hook. Existing sidebar/topbar rules
+   from Worker 11 remain authoritative — Aurora only enhances on opt-in attrs.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Layout tokens ───────────────────────────────────────────────────────── */
+:root {
+  --sidebar-w-expanded:  264px;
+  --sidebar-w-collapsed: 72px;
+  --sidebar-w:           var(--sidebar-w-expanded);
+  --topbar-h:            64px;
+  --topbar-h-compact:    52px;
+  --nav-item-h:          40px;
+  --nav-item-radius:     12px;
+}
+:root[data-sidebar="collapsed"] { --sidebar-w: var(--sidebar-w-collapsed); }
+
+/* ─── Sidebar collapse behavior (uses existing #sidebar markup) ───────────── */
+:root[data-sidebar="collapsed"] #sidebar {
+  width: var(--sidebar-w-collapsed);
+  transition: width 320ms cubic-bezier(.25, 1, .3, 1);
+}
+:root[data-sidebar="collapsed"] #sidebar .nav-label,
+:root[data-sidebar="collapsed"] #sidebar .nav-section-label,
+:root[data-sidebar="collapsed"] #sidebar .nav-badge,
+:root[data-sidebar="collapsed"] #sidebar .logo-text,
+:root[data-sidebar="collapsed"] #sidebar .user-info,
+:root[data-sidebar="collapsed"] #sidebar .user-status,
+:root[data-sidebar="collapsed"] #sidebar .sidebar-search-pill,
+:root[data-sidebar="collapsed"] #sidebar .nav-section-header span {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+:root[data-sidebar="collapsed"] #sidebar .nav-item {
+  justify-content: center;
+  padding-inline: var(--space-2);
+}
+:root[data-sidebar="collapsed"] #sidebar .nav-item.active::before {
+  inset-inline-start: 50%;
+  top: -3px;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 3px;
+  right: auto;
+}
+:root[data-sidebar="collapsed"] #sidebar .sidebar-logo {
+  justify-content: center;
+}
+
+/* ─── Dynamic-Island compact topbar (hooks existing data-scrolled) ────────── */
+#topbar {
+  transition: padding 240ms cubic-bezier(.25, 1, .3, 1),
+              gap     240ms cubic-bezier(.25, 1, .3, 1);
+}
+#topbar[data-scrolled="true"] {
+  padding-block: var(--space-1);
+}
+
+/* ─── View Transitions naming for active nav-item indicator ───────────────── */
+#sidebar .nav-item.active::before { view-transition-name: nav-pill; }
+::view-transition-old(nav-pill),
+::view-transition-new(nav-pill) {
+  animation-duration: 280ms;
+  animation-timing-function: cubic-bezier(.25, 1, .3, 1);
+}
+
+/* ─── Mobile drawer (only when JS toggles data-sidebar-mobile="open") ─────── */
+@media (max-width: 980px) {
+  :root:not([data-sidebar-mobile="open"]) #sidebar.aurora-drawer {
+    transform: translateX(100%);
+    transition: transform 280ms cubic-bezier(.25, 1, .3, 1);
+  }
+  :root[data-sidebar-mobile="open"] #sidebar.aurora-drawer {
+    transform: translateX(0);
+    transition: transform 280ms cubic-bezier(.25, 1, .3, 1);
+  }
+  [dir="ltr"] :root:not([data-sidebar-mobile="open"]) #sidebar.aurora-drawer {
+    transform: translateX(-100%);
+  }
+}
+
+/* ─── Search pill (topbar-search) — softer focus ring with new tokens ─────── */
+.topbar-search:focus-within {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+/* ─── End AURORA Phase 4 ──────────────────────────────────────────────────── */

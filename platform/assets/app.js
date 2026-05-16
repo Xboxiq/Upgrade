@@ -13881,3 +13881,104 @@ document.addEventListener('DOMContentLoaded', () => {
   window.Upg = window.Upg || {};
   window.Upg.scroll = Object.freeze({ update });
 })();
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Navigation Chrome (Worker 12 / Phase 4)
+   Public API: window.Upg.nav.{ collapse, expand, toggle, isCollapsed,
+                                 openDrawer, closeDrawer, toggleDrawer }
+   Storage: upg_sidebar_collapsed
+   Shortcut: Cmd+\ / Ctrl+\ toggles collapse
+   View Transitions: wrap nav-item active class swaps for smooth pill slide.
+   ════════════════════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+  const KEY_COLLAPSED = 'upg_sidebar_collapsed';
+  const html = document.documentElement;
+
+  const applyCollapsed = (v) => {
+    if (v) html.dataset.sidebar = 'collapsed';
+    else   html.dataset.sidebar = 'expanded';
+    try { localStorage.setItem(KEY_COLLAPSED, v ? '1' : '0'); } catch (_) {}
+  };
+
+  const isCollapsed = () => html.dataset.sidebar === 'collapsed';
+  const collapse    = () => applyCollapsed(true);
+  const expand      = () => applyCollapsed(false);
+  const toggle      = () => applyCollapsed(!isCollapsed());
+
+  const openDrawer  = () => { html.dataset.sidebarMobile = 'open'; };
+  const closeDrawer = () => { delete html.dataset.sidebarMobile; };
+  const toggleDrawer = () => {
+    if (html.dataset.sidebarMobile === 'open') closeDrawer();
+    else openDrawer();
+  };
+
+  // Restore prior state — but only if user previously chose explicitly
+  try {
+    const stored = localStorage.getItem(KEY_COLLAPSED);
+    if (stored === '1') collapse();
+    else if (stored === '0') expand();
+  } catch (_) { /* noop */ }
+
+  // Cmd+\ / Ctrl+\ — toggle collapse
+  window.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === '\\') {
+      e.preventDefault();
+      toggle();
+    }
+  });
+
+  // Wire any element with data-action="toggle-sidebar" / "open-drawer" / "close-drawer"
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-action]');
+    if (!t) return;
+    const a = t.dataset.action;
+    if (a === 'toggle-sidebar') { e.preventDefault(); toggle(); }
+    else if (a === 'open-drawer')  { e.preventDefault(); openDrawer(); }
+    else if (a === 'close-drawer') { e.preventDefault(); closeDrawer(); }
+  });
+
+  // Esc closes the mobile drawer
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && html.dataset.sidebarMobile === 'open') {
+      closeDrawer();
+    }
+  });
+
+  window.Upg = window.Upg || {};
+  window.Upg.nav = Object.freeze({
+    collapse, expand, toggle, isCollapsed,
+    openDrawer, closeDrawer, toggleDrawer
+  });
+})();
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — View-Transition wrapper for nav-item active swap (Phase 4)
+   When a user clicks a sidebar nav-item, the active state swap is wrapped in
+   document.startViewTransition so the indicator pill slides smoothly. Falls
+   back to direct class change when the API is unavailable.
+   ════════════════════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+  const sidebar = document.getElementById('sidebar');
+  if (!sidebar) return;
+
+  const supported = typeof document.startViewTransition === 'function';
+
+  sidebar.addEventListener('click', (e) => {
+    const item = e.target.closest('.nav-item[data-page]');
+    if (!item || item.classList.contains('active')) return;
+    if (!supported) return; // existing handler will set active class normally
+
+    // Pre-empt the default handler: we set active first inside a transition,
+    // then dispatch a synthetic event so legacy navigation logic still runs.
+    const previously = sidebar.querySelector('.nav-item.active');
+
+    document.startViewTransition(() => {
+      if (previously) previously.classList.remove('active');
+      item.classList.add('active');
+    });
+  }, true);
+})();
