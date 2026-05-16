@@ -16206,3 +16206,206 @@ html.v13 {
 body { font-size: calc(var(--text-base) * var(--type-zoom)); }
 
 /* ─── End AURORA Phase 1 ──────────────────────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Phase 1B — Typeface Soul (Worker 12 / Phase 1B)
+   Premium Arabic stack: Reem Kufi (display) + Readex Pro (text) +
+   IBM Plex Sans Arabic (numeric) + Aref Ruqaa (accent) + Thmanyah optional.
+   Cairo retained as guaranteed fallback in every stack.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Thmanyah self-hosted (optional premium) ─────────────────────────────── */
+@font-face {
+  font-family: "Thmanyah";
+  src: url("./fonts/thmanyah/Thmanyah-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+0020-007E;
+}
+@font-face {
+  font-family: "Thmanyah";
+  src: url("./fonts/thmanyah/Thmanyah-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+0020-007E;
+}
+@font-face {
+  font-family: "Thmanyah";
+  src: url("./fonts/thmanyah/Thmanyah-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+0020-007E;
+}
+@font-face {
+  font-family: "Thmanyah";
+  src: url("./fonts/thmanyah/Thmanyah-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+0020-007E;
+}
+
+/* ─── Voice mapping (overrides Phase 1 generic stack) ─────────────────────── */
+:root {
+  --font-display: "Thmanyah", "Reem Kufi", "Cairo",
+                  "SF Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI",
+                  Roboto, sans-serif;
+
+  --font-text:    "Readex Pro", "IBM Plex Sans Arabic", "Cairo",
+                  "SF Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI",
+                  Roboto, sans-serif;
+
+  --font-numeric: "IBM Plex Sans Arabic", "Readex Pro", "Cairo",
+                  ui-monospace, "SF Mono", monospace;
+
+  --font-accent:  "Aref Ruqaa", "Amiri", "Cairo",
+                  "Times New Roman", serif;
+
+  --font-mono:    "JetBrains Mono", "SF Mono", ui-monospace,
+                  "Cascadia Mono", "Fira Code", Menlo, Consolas, monospace;
+}
+
+/* ─── Global default — body uses TEXT voice ───────────────────────────────── */
+html.v13 { font-family: var(--font-text); }
+body     { font-family: var(--font-text); }
+
+/* ─── Voice bindings — semantic elements get the right voice ──────────────── */
+
+/* Display voice — large headings, hero, wordmark */
+.h-display,
+.h-title,
+.gateway-headline,
+.gateway-wordmark,
+.bento-greet h1,
+.page-header h1,
+.cath-page h1,
+h1, h2 {
+  font-family: var(--font-display);
+  letter-spacing: var(--tracking-tight);
+}
+
+/* Section voice — h3/h4 + card titles stay in text family for legibility */
+.h-section,
+.h-card,
+h3, h4 {
+  font-family: var(--font-text);
+  font-weight: var(--weight-semibold);
+}
+
+/* Numeric voice — every numeric display surface */
+.u-num,
+.cath-stat-value,
+.qcalc-value,
+.stat-tile-value,
+[data-cath-stat],
+[data-tabular],
+[data-countup] {
+  font-family: var(--font-numeric);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1, "kern" 1;
+  font-weight: var(--weight-semibold);
+}
+
+/* Accent voice — eyebrow, taglines, classical character */
+.h-eyebrow,
+.gateway-tagline,
+.h-quote,
+.h-signature,
+.font-accent,
+.u-font-accent {
+  font-family: var(--font-accent);
+  line-height: var(--leading-relaxed);
+  font-weight: var(--weight-regular);
+}
+
+/* Mono voice — preserved */
+.h-mono,
+.font-mono,
+.u-font-mono,
+code, kbd, pre {
+  font-family: var(--font-mono);
+}
+
+/* ─── Per-typeface micro-adjustments ──────────────────────────────────────── */
+
+/* Reem Kufi / Thmanyah — geometric display tightening */
+.h-display { font-weight: var(--weight-heavy); letter-spacing: var(--tracking-tighter); }
+.h-title   { font-weight: var(--weight-bold);  letter-spacing: var(--tracking-tight); }
+
+/* Readex Pro variable axis */
+body, .u-prose p {
+  font-variation-settings: "wght" 400;
+}
+.u-prose strong { font-variation-settings: "wght" 600; }
+.h-card         { font-variation-settings: "wght" 600; }
+
+/* IBM Plex Sans Arabic numerals — stylistic alternates */
+.u-num, .stat-tile-value, .cath-stat-value, .qcalc-value {
+  font-feature-settings: "tnum" 1, "lnum" 1, "ss01" 1;
+}
+
+/* Aref Ruqaa — needs vertical breathing room + slight upscale */
+.h-eyebrow,
+.gateway-tagline,
+.h-quote {
+  padding-block: 0.15em;
+}
+.gateway-tagline,
+.h-quote {
+  font-size: 1.08em;
+}
+
+/* ─── Quote and signature utilities ───────────────────────────────────────── */
+.h-quote {
+  font-family: var(--font-accent);
+  font-size: var(--text-xl);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-muted);
+  border-inline-start: 3px solid var(--color-tint, var(--color-brand));
+  padding-inline-start: var(--space-4);
+  margin-block: var(--space-5);
+}
+.h-quote::before {
+  content: "\201C";
+  color: var(--color-tint, var(--color-brand));
+  font-size: 1.4em;
+  vertical-align: -0.15em;
+  margin-inline-end: 0.1em;
+}
+.h-quote::after {
+  content: "\201D";
+  color: var(--color-tint, var(--color-brand));
+  font-size: 1.4em;
+  vertical-align: -0.15em;
+  margin-inline-start: 0.1em;
+}
+.h-signature {
+  font-family: var(--font-accent);
+  font-size: var(--text-base);
+  color: var(--color-text-faint);
+  text-align: end;
+  margin-top: var(--space-4);
+}
+
+/* ─── Family-binding utility classes ──────────────────────────────────────── */
+.u-font-display { font-family: var(--font-display); font-weight: var(--weight-heavy); }
+.u-font-text    { font-family: var(--font-text); }
+.u-font-numeric { font-family: var(--font-numeric); font-variant-numeric: tabular-nums lining-nums; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA Typeface Discipline — golden rules (AUTO_PILOT must obey):
+   1. Never set font-family directly. Always use one of --font-* tokens.
+   2. Aref Ruqaa ≤ 5% of any page text — for soul, not for body reading.
+   3. Numbers in calculators/stats must use var(--font-numeric).
+   4. Body text, UI labels, buttons → var(--font-text).
+   5. h1/h2/hero/wordmark → var(--font-display).
+   6. Never mix display and text on the same line.
+   7. No italic on Aref Ruqaa (the typeface is already cursive).
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ─── End AURORA Phase 1B ─────────────────────────────────────────────────── */
