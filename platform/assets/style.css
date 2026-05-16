@@ -18808,3 +18808,125 @@ body[data-material-density="high"] {
 }
 
 /* End ATELIER v16 / Phase 4 ─────────────────────────────────────────────── */
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ATELIER v16 — Motion Choreography v2 (Worker 14 / Phase 5)
+   - Magnetic hover (data-magnet)
+   - Reveal on intersect (data-reveal)
+   - Stagger children (data-stagger)
+   - Page enter spring (.is-entering)
+   - Cursor glow (.u-cursor-glow)
+   APPEND-only. Does NOT modify the .page baseline (display: none) — instead
+   adds an .is-entering animation class JS toggles per navigation.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* 1) Magnetic hover — base style; transform applied inline by JS ────────── */
+[data-magnet] {
+  transition: transform 240ms cubic-bezier(0, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* 2) Reveal on intersect ────────────────────────────────────────────────── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 480ms cubic-bezier(0.2, 0, 0, 1),
+    transform 480ms cubic-bezier(0.2, 0, 0, 1);
+  will-change: opacity, transform;
+}
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 3) Stagger children ───────────────────────────────────────────────────── */
+[data-stagger] > * {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity   380ms cubic-bezier(0.2, 0, 0, 1),
+    transform 380ms cubic-bezier(0.2, 0, 0, 1);
+  transition-delay: var(--stagger-delay, 0ms);
+}
+[data-stagger].is-staggered > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 4) Page enter spring — ONLY when JS adds .is-entering. Does NOT touch
+      the existing .page / .page.active display rules. ─────────────────── */
+@keyframes atelierPageEnter {
+  from {
+    opacity: 0;
+    transform: scale(1.02) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.page.is-entering {
+  animation: atelierPageEnter 360ms cubic-bezier(0.5, 1.5, 0.5, 1) both;
+  will-change: opacity, transform;
+}
+
+/* 5) Cursor glow — refined hover halo ─────────────────────────────────── */
+.u-cursor-glow {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.u-cursor-glow::before {
+  content: "";
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in oklch, var(--color-tint, var(--color-brand, var(--accent))) 14%, transparent),
+    transparent 70%
+  );
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 200ms ease;
+  left: var(--cx, 50%);
+  top: var(--cy, 50%);
+  z-index: -1;
+}
+.u-cursor-glow:hover::before { opacity: 1; }
+
+/* View Transitions — name the active page for cross-fade if browser supports
+   the API. JS Upg.transition checks support before using. ────────────── */
+.page.active { view-transition-name: page-active; }
+::view-transition-old(page-active),
+::view-transition-new(page-active) {
+  animation-duration: 320ms;
+  animation-timing-function: cubic-bezier(0.5, 1.5, 0.5, 1);
+}
+
+/* Reduced motion — respect user preference: kill transitions/animations ── */
+@media (prefers-reduced-motion: reduce) {
+  [data-magnet] {
+    transition: none !important;
+    transform: none !important;
+  }
+  [data-reveal] {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  [data-stagger] > * {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .page.is-entering { animation: none !important; }
+  .u-cursor-glow::before { display: none; }
+}
+
+/* End ATELIER v16 / Phase 5 ─────────────────────────────────────────────── */

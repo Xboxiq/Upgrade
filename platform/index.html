@@ -706,7 +706,7 @@
       <div class="bento" data-bento="dashboard" data-cath-dash aria-label="لوحة التحكم — إحصاءاتك الحقيقية">
 
         <!-- ══════════ Cell 1 — Greeting Hero (b-4x1) ══════════ -->
-        <article class="bento-greet b-4x1 material-regular">
+        <article class="bento-greet b-4x1 material-regular" data-reveal>
           <span class="h-eyebrow">لوحة التحكم</span>
           <h1 data-greet-title>أهلاً <span data-cath-bind="profile.name">صديقي</span></h1>
           <p data-greet-sub class="h-lede" data-cath-bind="profile.streakLine">تابع رحلتك التدريبية — اليوم خطوة جديدة بانتظارك.</p>
@@ -717,51 +717,51 @@
         </article>
 
         <!-- ══════════ Cells 2-5 — 4 count-up Stat Tiles (canonical, single instance) ══════════ -->
-        <article class="stat-tile b-1x1 material-regular">
+        <article class="stat-tile b-1x1 material-regular" data-reveal>
           <div class="stat-tile-icon"><i class="qi" data-icon="check-circle" aria-hidden="true"></i></div>
           <div class="stat-tile-value u-num"><span data-countup data-cath-stat="unitsCompleted">0</span></div>
           <div class="stat-tile-label">وحدة مُكتملة</div>
           <span class="stat-tile-trend is-up"><i class="qi" data-icon="trending-up" aria-hidden="true"></i> +3 هذا الأسبوع</span>
         </article>
 
-        <article class="stat-tile b-1x1 material-regular">
+        <article class="stat-tile b-1x1 material-regular" data-reveal>
           <div class="stat-tile-icon"><i class="qi" data-icon="bar-chart" aria-hidden="true"></i></div>
           <div class="stat-tile-value u-num"><span data-countup data-cath-stat="avgCompletionRate">0</span>%</div>
           <div class="stat-tile-label">معدل الإتمام</div>
           <span class="stat-tile-trend is-up"><i class="qi" data-icon="trending-up" aria-hidden="true"></i> +5%</span>
         </article>
 
-        <article class="stat-tile b-1x1 material-regular">
+        <article class="stat-tile b-1x1 material-regular" data-reveal>
           <div class="stat-tile-icon"><i class="qi" data-icon="clock" aria-hidden="true"></i></div>
           <div class="stat-tile-value u-num"><span data-countup data-cath-stat="trainingHours">0</span></div>
           <div class="stat-tile-label">ساعة تدريب</div>
         </article>
 
-        <article class="stat-tile b-1x1 material-regular">
+        <article class="stat-tile b-1x1 material-regular" data-reveal>
           <div class="stat-tile-icon"><i class="qi" data-icon="flame" aria-hidden="true"></i></div>
           <div class="stat-tile-value u-num"><span data-countup data-cath-stat="streak">0</span></div>
           <div class="stat-tile-label">يوم streak</div>
         </article>
 
         <!-- ══════════ Cell 6 — Skill Tree (b-2x2) — preserves #cath-skill-grid ══════════ -->
-        <article class="bento-skill b-2x2 material-regular">
+        <article class="bento-skill b-2x2 material-regular" data-reveal>
           <header class="bento-h">
             <h2><i class="qi" data-icon="layout-dashboard" aria-hidden="true"></i> شجرة المهارات</h2>
             <button class="bento-link" type="button" data-page="myprogress">عرض التفاصيل ←</button>
           </header>
-          <div class="cath-skill-grid" id="cath-skill-grid"></div>
+          <div class="cath-skill-grid" id="cath-skill-grid" data-stagger data-stagger-step="60"></div>
         </article>
 
         <!-- ══════════ Cell 7 — Activity Feed (b-2x2) — preserves #cath-activity-list ══════════ -->
-        <article class="bento-activity b-2x2 material-regular">
+        <article class="bento-activity b-2x2 material-regular" data-reveal>
           <header class="bento-h">
             <h2><i class="qi" data-icon="trending-up" aria-hidden="true"></i> آخر النشاط</h2>
           </header>
-          <ul class="cath-activity-list" id="cath-activity-list"></ul>
+          <ul class="cath-activity-list" id="cath-activity-list" data-stagger data-stagger-step="40"></ul>
         </article>
 
         <!-- ══════════ Cell 8 — Today's Challenge (b-2x1) — preserves #v12ChallengeLevel + #v12ChallengeBody ══════════ -->
-        <article class="bento-challenge b-2x1 material-regular">
+        <article class="bento-challenge b-2x1 material-regular" data-reveal>
           <header class="bento-h">
             <h2><i class="qi" data-icon="zap" aria-hidden="true"></i> تحدي اليوم</h2>
             <span id="v12ChallengeLevel" class="bento-pill">—</span>
@@ -772,7 +772,7 @@
         </article>
 
         <!-- ══════════ Cell 9 — Skills Heatmap (b-2x1) — preserves #v12Heatmap ══════════ -->
-        <article class="bento-heatmap b-2x1 material-regular">
+        <article class="bento-heatmap b-2x1 material-regular" data-reveal>
           <header class="bento-h">
             <h2><i class="qi" data-icon="calendar" aria-hidden="true"></i> خريطة مهاراتك</h2>
             <span class="bento-h-meta u-text-xs u-c-faint">اضغط على أي خلية لتقييم نفسك</span>
@@ -781,28 +781,28 @@
         </article>
 
         <!-- ══════════ Cell 10 — Quick Dock (b-4x1) ══════════ -->
-        <nav class="dock b-4x1 material-regular" aria-label="إجراءات سريعة">
+        <nav class="dock b-4x1 material-regular" aria-label="إجراءات سريعة" data-reveal>
           <header class="bento-h">
             <h2><i class="qi" data-icon="command" aria-hidden="true"></i> إجراءات سريعة</h2>
             <span class="bento-h-meta u-text-xs u-c-faint">Cmd+K للبحث الكامل</span>
           </header>
-          <div class="dock-row">
-            <button class="dock-btn" type="button" data-page="callcenter">
+          <div class="dock-row" data-stagger data-stagger-step="80">
+            <button class="dock-btn" type="button" data-page="callcenter" data-magnet>
               <i class="qi qi-lg" data-icon="phone" aria-hidden="true"></i><span>مكالمة تجريبية</span>
             </button>
-            <button class="dock-btn" type="button" data-page="hrmastery">
+            <button class="dock-btn" type="button" data-page="hrmastery" data-magnet>
               <i class="qi qi-lg" data-icon="briefcase" aria-hidden="true"></i><span>مقابلة وهمية</span>
             </button>
-            <button class="dock-btn" type="button" data-page="accounting">
+            <button class="dock-btn" type="button" data-page="accounting" data-magnet>
               <i class="qi qi-lg" data-icon="calculator" aria-hidden="true"></i><span>حاسبة راتب</span>
             </button>
-            <button class="dock-btn" type="button" data-page="psych">
+            <button class="dock-btn" type="button" data-page="psych" data-magnet>
               <i class="qi qi-lg" data-icon="brain" aria-hidden="true"></i><span>اختبار شخصية</span>
             </button>
-            <button class="dock-btn" type="button" data-page="lab">
+            <button class="dock-btn" type="button" data-page="lab" data-magnet>
               <i class="qi qi-lg" data-icon="flask-conical" aria-hidden="true"></i><span>سيناريو عشوائي</span>
             </button>
-            <button class="dock-btn" type="button" data-page="myprogress">
+            <button class="dock-btn" type="button" data-page="myprogress" data-magnet>
               <i class="qi qi-lg" data-icon="bar-chart" aria-hidden="true"></i><span>تقدمي الكامل</span>
             </button>
           </div>
