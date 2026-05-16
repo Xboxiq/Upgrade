@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-16T18:00:00Z",
+  "last_updated": "2026-05-16T19:00:00Z",
   "current": {
     "worker": "13",
     "worker_name": "AURORA_COMPLETION",
-    "phase": 0,
+    "phase": 1,
     "phases_total": 3,
     "phase_order": ["1", "2", "3"],
-    "branch": "worker-13-aurora-completion",
-    "status": "ready"
+    "branch": "worker-13-aurora-completion-v2",
+    "status": "in-progress"
   },
   "completed_phases": [
     { "worker": "01", "phase": 1, "title": "Foundation Tokens & Aurora Mesh",                    "branch": "worker-01-phase-1-v2", "lines_added": 121 },
@@ -68,8 +68,9 @@
     { "worker": "12", "phase": 4, "title": "Navigation Chrome — Source-List sidebar collapse (Cmd+\\) + Dynamic-Island compact topbar + View Transitions nav-pill + mobile drawer + Upg.nav", "branch": "worker-12-aurora", "lines_added": 620 },
     { "worker": "12", "phase": 5, "title": "Dashboard Hero — 15 per-page identity tints + Bento utilities + count-up tickers + time-of-day greet + Upg.identity/greet/countup", "branch": "worker-12-aurora", "lines_added": 640 },
     { "worker": "12", "phase": 6, "title": "Motion & Interaction — easing/duration tokens (5 ease + 6 duration) + press/lift/glow/reveal/skeleton + view-transition wrap + Upg.motion", "branch": "worker-12-aurora", "lines_added": 520 },
-    { "worker": "12", "phase": 7, "title": "Inline purge (1671→587) + 100+ utilities + per-page header tint underline + boot banner + sanity assert + CHANGELOG", "branch": "worker-12-aurora", "lines_added": 964 }
+    { "worker": "12", "phase": 7, "title": "Inline purge (1671→587) + 100+ utilities + per-page header tint underline + boot banner + sanity assert + CHANGELOG", "branch": "worker-12-aurora", "lines_added": 964 },
+    { "worker": "13", "phase": 1, "title": "Bento Dashboard markup — finishes Worker 12 / Phase 5 (data-greet-title, data-countup x4, dock, sacred IDs preserved)", "branch": "worker-13-aurora-completion-v2", "lines_added": 101 }
   ],
-  "next_action": "EXECUTE NOW: Worker 13 AURORA Completion is READY. Read prompts/13_WORKER_AURORA_COMPLETION.md (index) then execute prompts/13_PHASE_1_BENTO_DASHBOARD.md. Worker 13 closes 3 documented gaps from Worker 12 PR #44: (1) Phase 5's HTML markup never landed (Bento + greeting + count-up + dock missing in #page-dashboard), (2) Phase 7's inline purge fell short (inline=592 vs target ≤200, !important strays=100 vs target ≤20, u-grad utilities=0 not written), (3) sidebar toggle button + wordmark accent + boot sanity assert. Create branch worker-13-aurora-completion from main. Order: 1 (Bento dashboard markup) → 2 (real inline purge + utilities pack) → 3 (final polish). DO NOT stop with 'no work to do' — Worker 13 has 3 phases verified-needed by grep on the actual code on main.",
+  "next_action": "EXECUTE NOW: Worker 13 / Phase 2 — Inline Purge For Real. Read prompts/13_PHASE_2_INLINE_PURGE_FOR_REAL.md. Goals: append utilities pack to style.css (u-grad-* x7+, u-c-* x9+, compound type presets), extend scripts/cleanup-inline-styles.mjs mappings, run script + manual sweep until inline=587 → ≤200 and !important stray=100 → ≤20. Continue on branch worker-13-aurora-completion-v2.",
   "notes": "Worker 12 / Phase 7 metrics: inline style= attrs reduced 1671 → 587 (65% reduction, conservative pattern-based purge — no behavioral changes). !important total = 142 (186 occurrences total; 173 inside @media print/prefers-reduced-motion/forced-colors which the spec explicitly allows; only 13 strays remain — well under spec's <=20 target). 14 Upg.* public APIs all wired (theme/icons/gateway/calc/cmdk/state/production from W11; type/scroll/nav/identity/greet/countup/motion from W12). 16 <section id=page-*>, 391 qcalc references, 37 .qi icons, Cairo + IBM Plex Sans Arabic font stack — all preserved per Preservation Guard. AURORA / Cathedral v15 is done."
 }
