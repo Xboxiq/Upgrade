@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-16T03:15:00Z",
+  "last_updated": "2026-05-16T04:00:00Z",
   "current": {
     "worker": "11",
     "worker_name": "PLATFORM_FOUNDATION",
-    "phase": 5,
+    "phase": 6,
     "phases_total": 7,
     "branch": "worker-11-phase-4-7",
     "status": "in-progress"
@@ -57,8 +57,9 @@
     { "worker": "11", "phase": 2, "title": "Lucide-style Icon System (95 symbols + .qi + migrator)", "branch": "worker-11-complete", "lines_added": 401 },
     { "worker": "11", "phase": 3, "title": "Entry Gateway + Identity Lock + Onboarding 4-step", "branch": "worker-11-complete", "lines_added": 912 },
     { "worker": "11", "phase": 4, "title": "Calculator Foundation Component (qcalc) + 8 migrations", "branch": "worker-11-phase-4-7", "lines_added": 1368 },
-    { "worker": "11", "phase": 5, "title": "Command Palette + Keyboard Shortcuts (30+ commands)",     "branch": "worker-11-phase-4-7", "lines_added": 713 }
+    { "worker": "11", "phase": 5, "title": "Command Palette + Keyboard Shortcuts (30+ commands)",     "branch": "worker-11-phase-4-7", "lines_added": 713 },
+    { "worker": "11", "phase": 6, "title": "Real Dashboard + Unified State Layer + page-myprogress",   "branch": "worker-11-phase-4-7", "lines_added": 1039 }
   ],
-  "next_action": "Continue Worker 11 Phase 6 — Real Dashboard (Upg.state facade + activity feed + page-myprogress)",
-  "notes": "Worker 11 Phase 5 complete. Cmd+K palette opens in <100ms with 30+ commands across 5 groups: انتقال (14 pages), الثيم (4), حاسبات (8 qcalc shortcuts), البيانات (export/import/reset), النظام (lock/help/print/reload). Fuzzy search by title+tags+group. Arrow keys + Enter navigation, Esc closes. Cheat sheet via '?' key with 15 shortcuts in 4 categories. Global keyboard: Cmd/Ctrl+K, ?, T (theme), L (lock), G+{D,S,C,P,A,H,R,M,X,N,E,Y} for page jumps. Topbar search now opens palette (readonly + ⌘K hint). All shortcuts skip when input/textarea focused. Public API: window.Upg.cmdk.{open, close, register, getShortcuts}. Deep-links to qcalc instances scroll + focus first input."
+  "next_action": "Continue Worker 11 Phase 7 — Production Pass (manifest + service worker + favicon + a11y polish)",
+  "notes": "Worker 11 Phase 6 complete. Upg.state facade reads from 22+ existing upg_* keys without migration: progress(), scores(), drafts(), misc(), profile(), activity(), logActivity(), compute.{unitsCompleted, avgCompletionRate, trainingHours, streak, topScore, quizzesTaken, draftCount, moodAvg, workerStats}. Auto-hooks: navigation logging, lesson completion, session ticks every 5 min. Cross-tab sync via storage event. Cathedral dashboard block (additive, above legacy v12 dashboard) shows 4 live stats + skill tree (9 worker rings) + activity feed (10 items, relative time) + 6 quick-action buttons. New page-myprogress in nav (was data-page=none → myprogress) with full chart (canvas, 30 days, dpr-aware), drafts list, top scores list, and export/import/reset actions. navigateTo wrapped to dispatch upg:page-shown event for both cmdk and dashboard reactivity. animateNumber easing for stat counters. Tabular nums + Arabic numerals."
 }
