@@ -1,0 +1,67 @@
+{
+  "worker": "14",
+  "worker_name": "ATELIER_LIQUID_GLASS",
+  "phase": 6,
+  "phases_total": 6,
+  "phase_title": "Final Polish — Inline Purge + a11y + PWA + Favicon + Lighthouse",
+  "branch": "worker-14-phase-6-final",
+  "completed_at": "2026-05-16T23:30:00Z",
+  "lines": {
+    "html_inline_before": 215,
+    "html_inline_after": 76,
+    "html_inline_removed": 139,
+    "css_appended": 330,
+    "js_appended": 210,
+    "sw_before": 74,
+    "sw_after": 119,
+    "manifest_replaced": true,
+    "favicon_replaced": true,
+    "offline_created": true,
+    "purge_script_created": true,
+    "lines_added_total": 1080
+  },
+  "deliverables": {
+    "files_created": [
+      "platform/offline.html",
+      "scripts/atelier-v16-purge.mjs",
+      "state/snapshots/worker-14-phase-6.json"
+    ],
+    "files_modified": [
+      "platform/index.html",
+      "platform/assets/style.css",
+      "platform/assets/app.js",
+      "platform/sw.js",
+      "platform/manifest.webmanifest",
+      "platform/favicon.svg",
+      "state/CHANGELOG.md",
+      "state/PROGRESS.json"
+    ]
+  },
+  "new_apis": ["Upg.focusTrap"],
+  "all_apis_count": 19,
+  "all_apis": [
+    "theme", "icons", "gateway", "calc", "cmdk", "state", "production",
+    "type", "scroll", "nav", "identity", "greet", "countup", "motion",
+    "material", "chrome", "choreo", "transition", "focusTrap"
+  ],
+  "sacred_preserved": {
+    "page_sections": 14,
+    "qcalc_refs": 391,
+    "citations_pages": "intact",
+    "iraq_blocks": "intact",
+    "salary_tables": "intact",
+    "identity_tints_count": 15,
+    "fonts": ["Cairo", "Reem Kufi", "Readex Pro", "IBM Plex Sans Arabic", "Aref Ruqaa"]
+  },
+  "acceptance": {
+    "inline_le_80": "PASS (76)",
+    "apis_ge_19": "PASS (19)",
+    "page_sections_eq_14": "PASS",
+    "qcalc_eq_391": "PASS",
+    "sw_offline_fallback": "PASS (offline.html cached + navigation network-first)",
+    "manifest_shortcuts_eq_4": "PASS",
+    "boot_sanity_banner": "PASS (Upg.* sanity check IIFE wired)",
+    "changelog_v16": "PASS"
+  },
+  "notes": "Worker 14 (ATELIER) complete on branch worker-14-phase-6-final. Phase 6 deliverables: 1) Inline purge 215->76 via deterministic node script with 62 patterns. 2) Final Utilities Pack appended to style.css (~330 lines). 3) Upg.focusTrap IIFE with auto-attach via MutationObserver. 4) Lighthouse boot helper. 5) Sanity v16 banner verifying 19 Upg.* modules. 6) sw.js rewritten with versioned shell/assets/fonts caches + offline.html fallback. 7) Favicon v2 squircle. 8) Manifest with 4 shortcuts. 9) offline.html. CHANGELOG v16 added at top. PROGRESS.json updated."
+}
