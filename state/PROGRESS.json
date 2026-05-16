@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-16T01:30:00Z",
+  "last_updated": "2026-05-16T04:45:00Z",
   "current": {
     "worker": "11",
     "worker_name": "PLATFORM_FOUNDATION",
-    "phase": 3,
+    "phase": 7,
     "phases_total": 7,
-    "branch": "worker-11-complete",
-    "status": "in-progress"
+    "branch": "worker-11-phase-4-7",
+    "status": "completed"
   },
   "completed_phases": [
     { "worker": "01", "phase": 1, "title": "Foundation Tokens & Aurora Mesh",                    "branch": "worker-01-phase-1-v2", "lines_added": 121 },
@@ -55,8 +55,12 @@
     { "worker": "09", "phase": 5, "title": "Therapist Bridge + Insights Engine + 16 Citations", "branch": "worker-09-complete", "lines_added": 365 },
     { "worker": "11", "phase": 1, "title": "Sovereign Theme System (tokens + bridge + 3-state toggle)", "branch": "worker-11-complete", "lines_added": 359 },
     { "worker": "11", "phase": 2, "title": "Lucide-style Icon System (95 symbols + .qi + migrator)", "branch": "worker-11-complete", "lines_added": 401 },
-    { "worker": "11", "phase": 3, "title": "Entry Gateway + Identity Lock + Onboarding 4-step", "branch": "worker-11-complete", "lines_added": 912 }
+    { "worker": "11", "phase": 3, "title": "Entry Gateway + Identity Lock + Onboarding 4-step", "branch": "worker-11-complete", "lines_added": 912 },
+    { "worker": "11", "phase": 4, "title": "Calculator Foundation Component (qcalc) + 8 migrations", "branch": "worker-11-phase-4-7", "lines_added": 1368 },
+    { "worker": "11", "phase": 5, "title": "Command Palette + Keyboard Shortcuts (30+ commands)",     "branch": "worker-11-phase-4-7", "lines_added": 713 },
+    { "worker": "11", "phase": 6, "title": "Real Dashboard + Unified State Layer + page-myprogress",   "branch": "worker-11-phase-4-7", "lines_added": 1039 },
+    { "worker": "11", "phase": 7, "title": "Production Pass + PWA (manifest, sw, favicon, utilities, a11y)", "branch": "worker-11-phase-4-7", "lines_added": 531 }
   ],
-  "next_action": "Continue Worker 11 Phase 4 — Calculator Framework (qcalc + 8 migrations)",
-  "notes": "Worker 11 Phase 3 complete. Added page-gateway with 6 stages (welcome / identity / goal / privacy / returning / locked). 4-step onboarding wizard collects name, role, avatar color (10 brand swatches), goal (4 options), and optional PIN (SHA-256 hashed with salt). Idle auto-lock at 30 min when upg_lock_on_idle === 'true'. PIN entry: numpad + keyboard + 5-attempt cooldown (60s). Returning user sees 3-stat welcome (units/hours/streak — populated by Phase 6 Upg.state). Topbar gained a lock button. Body gets data-gateway-open='true' to blur app behind. localStorage: upg_user_profile, upg_pin_hash, upg_onboarding_done, upg_lock_on_idle. sessionStorage: upg_unlocked."
+  "next_action": "Worker 11 complete — open PR worker-11-phase-4-7 → main. Next worker: TBD by user.",
+  "notes": "Worker 11 PLATFORM_FOUNDATION (Cathedral v14) FULLY COMPLETE — 7/7 phases. This session executed phases 4-7 (1368 + 713 + 1039 + 531 = 3651 lines). Phase 7 added: PWA manifest.webmanifest + sw.js (cache-first same-origin, stale-while-revalidate fonts) + favicon.svg + Open Graph meta + apple-touch-icon + skip link (.u-skip-link) + main[tabindex=-1] + 70+ utility classes (.u-mt-*, .u-flex, .u-grid, .u-text-*, .u-bg-*, .u-border-*, .u-rounded-*, .u-shadow-*, .u-truncate, .u-sr-only, .u-skip-link) + console banner (one-shot) + service worker auto-register + focus trap (cmdk + cheatsheet + gateway) + lazy-mount event for heavy pages + reduced-motion guard + forced-colors fallback + print styles + scripts/cleanup-inline-styles.mjs (dev tool, 82 inline styles converted automatically). Inline styles 1763 → 1602 (target ≤400 not met — remaining ones are multi-decl complex backgrounds/gradients that risk regression to refactor). Public APIs: Upg.theme, Upg.icons, Upg.gateway, Upg.calc, Upg.cmdk, Upg.state, Upg.production. PR ready: worker-11-phase-4-7 (4 phase commits + 4 state commits = 8 total)."
 }

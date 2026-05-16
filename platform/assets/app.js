@@ -130,6 +130,23 @@ function togglePsychAcc(btn) {
           <line x1="11" y1="18" x2="13" y2="18"/>
           <path d="M9 6h6"/>
         </svg>`
+      },
+      hrmastery: {
+        title: 'إتقان HR والتفاوض على الراتب',
+        breadcrumb: 'الرئيسية / وحدات التدريب / مقابلات HR',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="7" width="20" height="14" rx="2"/>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+        </svg>`
+      },
+      myprogress: {
+        title: 'تقدمي',
+        breadcrumb: 'الرئيسية / تقدمي',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="12" y1="20" x2="12" y2="10"/>
+          <line x1="18" y1="20" x2="18" y2="4"/>
+          <line x1="6" y1="20" x2="6" y2="16"/>
+        </svg>`
       }
     };
 
@@ -12111,4 +12128,1634 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.Upg = window.Upg || {};
   window.Upg.gateway = { open, close, lock };
+})();
+
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CATHEDRAL v14 — qcalc Engine (Worker 11 / Phase 4)
+   Public API: window.Upg.calc.{ register, mount, init, format }
+   ═══════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+
+  const fmtNum   = new Intl.NumberFormat('ar-IQ', { maximumFractionDigits: 2 });
+  const fmtMoney = new Intl.NumberFormat('ar-IQ', { maximumFractionDigits: 0 });
+  const fmtInt   = new Intl.NumberFormat('ar-IQ', { maximumFractionDigits: 0 });
+  const fmtPct   = (v) => `${(Number(v) || 0).toFixed(1)}%`;
+  const clamp    = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+
+  const registry = new Map();
+
+  const toast = (msg) => {
+    document.querySelectorAll('.qcalc-toast').forEach(t => t.remove());
+    const t = document.createElement('div');
+    t.className = 'qcalc-toast';
+    t.setAttribute('role', 'status');
+    t.textContent = msg;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 1800);
+  };
+
+  const collectInputs = (el) => {
+    const data = {};
+    el.querySelectorAll('[name]').forEach(input => {
+      const v = input.value;
+      const name = input.name;
+      if (input.type === 'checkbox') data[name] = input.checked;
+      else if (input.type === 'radio') {
+        if (input.checked) data[name] = v;
+        else if (data[name] === undefined) data[name] = data[name] || null;
+      }
+      else if (input.type === 'number' || input.dataset.numeric === 'true') {
+        const n = parseFloat(v);
+        data[name] = Number.isFinite(n) ? n : 0;
+      }
+      else data[name] = v;
+    });
+    return data;
+  };
+
+  const formatValue = (raw, format) => {
+    if (raw === undefined || raw === null) return '—';
+    if (typeof raw !== 'number') return String(raw);
+    if (!Number.isFinite(raw)) return '—';
+    switch (format) {
+      case 'money': return fmtMoney.format(raw);
+      case 'pct':   return fmtPct(raw);
+      case 'int':   return fmtInt.format(Math.round(raw));
+      case 'num2':  return fmtNum.format(raw);
+      default:      return fmtNum.format(raw);
+    }
+  };
+
+  const mount = (el) => {
+    if (el.__qcalcMounted) return;
+    const name = el.dataset.calc;
+    const def = registry.get(name);
+    if (!def) {
+      // Defer: maybe registration runs after first init pass.
+      return;
+    }
+
+    const update = () => {
+      const data = collectInputs(el);
+      let result;
+      try { result = def.compute(data) || {}; }
+      catch (err) { console.error(`[qcalc:${name}] compute error`, err); return; }
+
+      el.querySelectorAll('[data-bind]').forEach(b => {
+        const key = b.dataset.bind;
+        if (key === 'explain') {
+          b.innerHTML = def.explain ? def.explain(data, result) : '';
+          return;
+        }
+        const meterFor = b.dataset.meter;
+        if (meterFor) {
+          const v = clamp(Number(result[meterFor]) || 0, 0, 100);
+          const i = b.querySelector('i') || (() => { const x = document.createElement('i'); b.appendChild(x); return x; })();
+          i.style.width = `${v}%`;
+          return;
+        }
+        const val = result[key];
+        b.textContent = formatValue(val, b.dataset.format);
+
+        // Optional class swap based on threshold-defined state
+        if (b.dataset.stateBind) {
+          const card = b.closest('.qcalc-result-card');
+          if (card) {
+            card.classList.remove('qcalc-result-good', 'qcalc-result-bad');
+            const cls = result[b.dataset.stateBind];
+            if (cls === 'good') card.classList.add('qcalc-result-good');
+            else if (cls === 'bad') card.classList.add('qcalc-result-bad');
+          }
+        }
+      });
+    };
+
+    el.querySelectorAll('input, select, textarea').forEach(input => {
+      input.addEventListener('input', update);
+      input.addEventListener('change', update);
+    });
+
+    el.querySelector('[data-action="reset"]')?.addEventListener('click', () => {
+      el.querySelectorAll('input').forEach(i => {
+        if (i.type === 'checkbox' || i.type === 'radio') i.checked = i.defaultChecked;
+        else i.value = i.defaultValue || '';
+      });
+      el.querySelectorAll('select').forEach(s => {
+        const def = s.querySelector('option[selected]');
+        s.value = def ? def.value : (s.options[0] ? s.options[0].value : '');
+      });
+      update();
+      toast('تمت إعادة التعيين');
+    });
+
+    el.querySelector('[data-action="copy"]')?.addEventListener('click', () => {
+      const lines = [...el.querySelectorAll('.qcalc-summary .qcalc-result-card')].map(card => {
+        const lbl = card.querySelector('.qcalc-result-label')?.textContent.trim() || '';
+        const val = card.querySelector('.qcalc-result-value')?.textContent.trim() || '';
+        const unit = card.querySelector('.qcalc-result-unit')?.textContent.trim() || '';
+        return `${lbl}: ${val}${unit ? ' ' + unit : ''}`;
+      });
+      const title = el.querySelector('.qcalc-title h3')?.textContent.trim() || name;
+      const text = `${title}\n` + lines.join('\n');
+      if (navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText(text).then(
+          () => toast('تم النسخ'),
+          () => toast('تعذّر النسخ')
+        );
+      } else {
+        toast('النسخ غير مدعوم');
+      }
+    });
+
+    el.querySelector('[data-action="export"]')?.addEventListener('click', () => {
+      const data = collectInputs(el);
+      let outputs = {};
+      try { outputs = def.compute(data) || {}; } catch (e) { /* noop */ }
+      const blob = new Blob(
+        [JSON.stringify({ calc: name, inputs: data, outputs, ts: new Date().toISOString() }, null, 2)],
+        { type: 'application/json' }
+      );
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${name}-${Date.now()}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      toast('تم التصدير');
+    });
+
+    update();
+    el.__qcalcMounted = true;
+  };
+
+  const register = (name, def) => {
+    if (typeof def?.compute !== 'function') {
+      console.warn(`[Upg.calc] register("${name}"): compute() function required`);
+      return;
+    }
+    registry.set(name, def);
+    // Mount any existing element waiting for this registration
+    document.querySelectorAll(`.qcalc[data-calc="${name}"]`).forEach(mount);
+  };
+
+  const init = (root = document) => {
+    root.querySelectorAll('.qcalc[data-calc]').forEach(mount);
+  };
+
+  const boot = () => init();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+
+  window.addEventListener('upg:page-shown', () => init());
+
+  window.Upg = window.Upg || {};
+  window.Upg.calc = { register, mount, init, format: formatValue };
+})();
+
+/* ═══════════════════════════════════════════════════════════════
+   CATHEDRAL v14 — qcalc Registrations (8 calculators)
+   Math is preserved 1:1 with Workers 02..09 originals.
+   ═══════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+  const ready = () => {
+    if (!window.Upg?.calc?.register) {
+      setTimeout(ready, 30);
+      return;
+    }
+    const C = window.Upg.calc;
+
+    /* 1) iraq-tax (Worker 04) — قانون 113/1982 + شرائح
+       Personal: 1,000,000 IQD/year ≈ 83,333/month
+       Married bonus, dependents allowance.
+       Brackets (annual taxable): 250k @3% / 250k @5% / 500k @10% / >1M @15%  */
+    C.register('iraq-tax', {
+      compute({ gross, dependents, status }) {
+        gross = Math.max(0, +gross || 0);
+        dependents = Math.max(0, Math.min(20, +dependents || 0));
+        const personalExempt   = 1_000_000 / 12;        // ~83,333/month
+        const marriedBonus     = status === 'married' ? 80_000 : 0;
+        const dependentExempt  = dependents * 50_000;
+        const totalExempt      = personalExempt + marriedBonus + dependentExempt;
+        const taxable          = Math.max(0, gross - totalExempt);
+
+        let tax = 0;
+        if (taxable > 0)         tax += Math.min(taxable, 250_000) * 0.03;
+        if (taxable > 250_000)   tax += Math.min(taxable - 250_000, 250_000) * 0.05;
+        if (taxable > 500_000)   tax += Math.min(taxable - 500_000, 500_000) * 0.10;
+        if (taxable > 1_000_000) tax += (taxable - 1_000_000) * 0.15;
+
+        const net = gross - tax;
+        const effRate = gross > 0 ? (tax / gross) * 100 : 0;
+        return { gross, tax, exemptions: totalExempt, taxable, net, effRate };
+      },
+      explain(d, r) {
+        return `
+          <strong>طريقة الحساب:</strong>
+          الإعفاءات الإجمالية = <code>${Math.round(r.exemptions).toLocaleString('ar-IQ')}</code> د.ع.
+          الراتب الخاضع = <code>${Math.round(r.taxable).toLocaleString('ar-IQ')}</code> د.ع.
+          تُطبَّق الشرائح التصاعدية (3% / 5% / 10% / 15%) → الضريبة = <code>${Math.round(r.tax).toLocaleString('ar-IQ')}</code> د.ع.
+          النسبة الفعلية ≈ <code>${r.effRate.toFixed(2)}%</code>.
+          <em>المرجع: قانون ضريبة الدخل العراقي رقم 113 لسنة 1982 وتعديلاته. الإعفاء الشخصي ~ 1,000,000 د.ع سنوياً.</em>
+        `;
+      }
+    });
+
+    /* 2) salary-slip (Worker 04) — gross / deductions / net */
+    C.register('salary-slip', {
+      compute({ gross, ssRate, taxRate, otherDeductions, allowances }) {
+        gross = Math.max(0, +gross || 0);
+        ssRate = clamp01(+ssRate / 100);
+        taxRate = clamp01(+taxRate / 100);
+        const allow = Math.max(0, +allowances || 0);
+        const others = Math.max(0, +otherDeductions || 0);
+        const totalGross = gross + allow;
+        const ss = gross * ssRate;
+        const taxable = Math.max(0, totalGross - ss);
+        const tax = taxable * taxRate;
+        const totalDeductions = ss + tax + others;
+        const net = totalGross - totalDeductions;
+        return { totalGross, ss, tax, others, totalDeductions, net, ssAndTax: ss + tax };
+      },
+      explain(d, r) {
+        return `
+          <strong>سلاسل الخصومات:</strong>
+          الضمان (5%) = <code>${Math.round(r.ss).toLocaleString('ar-IQ')}</code>،
+          ضريبة الدخل = <code>${Math.round(r.tax).toLocaleString('ar-IQ')}</code>،
+          خصومات أخرى = <code>${Math.round(r.others).toLocaleString('ar-IQ')}</code>.
+          <strong>الصافي =</strong> الإجمالي − الخصومات = <code>${Math.round(r.net).toLocaleString('ar-IQ')}</code> د.ع.
+          <em>المرجع: قانون العمل العراقي رقم 37 لسنة 2015 — اشتراك العامل في الضمان 5% (صاحب العمل 12%).</em>
+        `;
+      }
+    });
+
+    /* 3) sales-commission (Worker 02) — base + tier rates */
+    C.register('sales-commission', {
+      compute({ base, sales, target, tier1Rate, tier2Rate, kicker }) {
+        base = Math.max(0, +base || 0);
+        sales = Math.max(0, +sales || 0);
+        target = Math.max(1, +target || 1);
+        const t1 = (+tier1Rate / 100) || 0;
+        const t2 = (+tier2Rate / 100) || 0;
+        const kick = (+kicker / 100) || 0;
+
+        const attainment = (sales / target) * 100;
+        const upToTarget = Math.min(sales, target);
+        const overTarget = Math.max(0, sales - target);
+        const commissionT1 = upToTarget * t1;
+        const commissionT2 = overTarget * t2;
+        const kickerBonus  = attainment >= 110 ? sales * kick : 0;
+        const totalComm    = commissionT1 + commissionT2 + kickerBonus;
+        const ote          = base + totalComm;
+        return {
+          attainment, commissionT1, commissionT2, kickerBonus,
+          totalComm, base, ote,
+          attainmentMeter: clamp(attainment, 0, 100),
+          tierState: attainment >= 110 ? 'good' : (attainment < 70 ? 'bad' : null)
+        };
+      },
+      explain(d, r) {
+        return `
+          <strong>هيكل العمولة:</strong>
+          الأساسي = <code>${Math.round(r.base).toLocaleString('ar-IQ')}</code> +
+          عمولة حتى الهدف (${(d.tier1Rate||0)}%) = <code>${Math.round(r.commissionT1).toLocaleString('ar-IQ')}</code> +
+          عمولة فوق الهدف (${(d.tier2Rate||0)}%) = <code>${Math.round(r.commissionT2).toLocaleString('ar-IQ')}</code>
+          ${r.kickerBonus > 0 ? ` + Kicker (${(d.kicker||0)}%) = <code>${Math.round(r.kickerBonus).toLocaleString('ar-IQ')}</code>` : ''}.
+          <strong>OTE</strong> = <code>${Math.round(r.ote).toLocaleString('ar-IQ')}</code>. تحقيق الهدف ${r.attainment.toFixed(1)}%.
+          <em>Cron / Stripe Sales Compensation guideline: kicker يُفعَّل عند ≥ 110% attainment.</em>
+        `;
+      }
+    });
+
+    /* 4) apindex (Worker 03) — Agent Performance Index */
+    C.register('apindex', {
+      compute({ aht, fcr, csat, adh, qa, calls }) {
+        aht  = clamp(+aht || 5.2, 0.5, 30);
+        fcr  = clamp(+fcr || 72, 0, 100);
+        csat = clamp(+csat || 84, 0, 100);
+        adh  = clamp(+adh || 93, 0, 100);
+        qa   = clamp(+qa || 88, 0, 100);
+        calls= clamp(+calls || 60, 0, 500);
+
+        // Normalize to 0..100 (AHT inverse: 4 = 100, 8 = 0)
+        const ahtScore = clamp(((8 - aht) / (8 - 4)) * 100, 0, 100);
+        const callsScore = clamp((calls / 80) * 100, 0, 100);
+        const idx =
+          ahtScore   * 0.15 +
+          fcr        * 0.20 +
+          csat       * 0.25 +
+          adh        * 0.10 +
+          qa         * 0.20 +
+          callsScore * 0.10;
+
+        const tier =
+          idx >= 90 ? 'Top Performer' :
+          idx >= 80 ? 'Strong'        :
+          idx >= 70 ? 'Solid'         :
+          idx >= 60 ? 'Coaching'      : 'Action Plan';
+
+        return {
+          index: idx, tier,
+          ahtScore, fcr, csat, adh, qa, callsScore,
+          tierState: idx >= 80 ? 'good' : (idx < 70 ? 'bad' : null),
+          meter: idx
+        };
+      },
+      explain(d, r) {
+        return `
+          <strong>صيغة APIndex (موزونة):</strong>
+          <code>0.15·AHT + 0.20·FCR + 0.25·CSAT + 0.10·ADH + 0.20·QA + 0.10·Calls</code>.
+          النتيجة = <code>${r.index.toFixed(1)}</code>/100 → <strong>${r.tier}</strong>.
+          AHT يُعكس (أقل = أفضل). Calls يُعاير على 80 مكالمة/شفت.
+          <em>المرجع: COPC CX Standard 6.2 + Genesys Workforce Optimization 2024.</em>
+        `;
+      }
+    });
+
+    /* 5) ab-test (Worker 06) — Sample Size Calculator (per variant) */
+    C.register('ab-test', {
+      compute({ baseline, lift, alpha, power }) {
+        const p1 = clamp01(+baseline / 100);
+        const rel = (+lift / 100) || 0;
+        const p2 = clamp01(p1 * (1 + rel));
+        const a = (+alpha) || 0.05;
+        const pw = (+power) || 0.80;
+
+        // Z-scores
+        const Za = (a <= 0.01) ? 2.576 : (a <= 0.05 ? 1.96 : (a <= 0.10 ? 1.645 : 1.28));
+        const Zb = (pw >= 0.95) ? 1.645 : (pw >= 0.90 ? 1.282 : (pw >= 0.80 ? 0.842 : 0.524));
+
+        // Two-proportion sample size per arm
+        const pBar = (p1 + p2) / 2;
+        const num = Math.pow(Za * Math.sqrt(2 * pBar * (1 - pBar)) + Zb * Math.sqrt(p1*(1-p1) + p2*(1-p2)), 2);
+        const den = Math.pow(p1 - p2, 2) || 1e-9;
+        const nPerArm = Math.ceil(num / den);
+        const totalN = nPerArm * 2;
+        const detectable = (Math.abs(p2 - p1) * 100).toFixed(2);
+        return {
+          nPerArm, totalN, baselineRate: p1 * 100, variantRate: p2 * 100,
+          mde: parseFloat(detectable),
+          state: rel === 0 ? 'bad' : (Math.abs(rel) >= 0.10 ? 'good' : null)
+        };
+      },
+      explain(d, r) {
+        return `
+          <strong>أحجام العينة المطلوبة:</strong>
+          <code>${r.nPerArm.toLocaleString('ar-IQ')}</code> لكل ذراع، الإجمالي <code>${r.totalN.toLocaleString('ar-IQ')}</code>.
+          المعدل الأساس = <code>${r.baselineRate.toFixed(2)}%</code> → معدل المتغيّر = <code>${r.variantRate.toFixed(2)}%</code> (Δ = ${r.mde}pp).
+          ألفا (نسبة الخطأ النوع الأول) = ${(d.alpha*100).toFixed(1)}%، Power = ${(d.power*100).toFixed(0)}%.
+          <em>المرجع: Kohavi, Tang & Xu — <i>Trustworthy Online Controlled Experiments</i> (2020). الصيغة Two-proportion z-test.</em>
+        `;
+      }
+    });
+
+    /* 6) batna (Worker 08) — Negotiation: Reservation/Target/ZOPA */
+    C.register('batna', {
+      compute({ reservation, target, opening, theirAnchor, theirReservation }) {
+        const yourReservation = Math.max(0, +reservation || 0);
+        const yourTarget      = Math.max(0, +target || 0);
+        const yourOpening     = Math.max(0, +opening || 0);
+        const theirAnchorVal  = Math.max(0, +theirAnchor || 0);
+        const theirRes        = Math.max(0, +theirReservation || 0);
+
+        // ZOPA = overlap between your acceptable range [yourReservation .. yourTarget] and theirs.
+        // Buyer side assumed: lower price = better. Seller side assumed: higher price = better.
+        const zopaLow  = Math.max(yourReservation, theirRes);
+        const zopaHigh = Math.min(yourTarget,      theirAnchorVal);
+        const hasZopa  = zopaHigh >= zopaLow;
+        const zopaWidth = hasZopa ? (zopaHigh - zopaLow) : 0;
+        const midpoint = hasZopa ? (zopaLow + zopaHigh) / 2 : 0;
+        const askingMargin = yourOpening - yourTarget;
+        return {
+          yourReservation, yourTarget, yourOpening,
+          zopaLow, zopaHigh, zopaWidth, midpoint, askingMargin,
+          status: hasZopa ? 'متاحة' : 'غير متاحة',
+          state: hasZopa ? 'good' : 'bad'
+        };
+      },
+      explain(d, r) {
+        return `
+          <strong>منطقة الاتفاق المحتمل (ZOPA):</strong>
+          ${r.zopaWidth > 0
+            ? `موجودة بين <code>${Math.round(r.zopaLow).toLocaleString('ar-IQ')}</code>
+               و <code>${Math.round(r.zopaHigh).toLocaleString('ar-IQ')}</code>.
+               نقطة الوسط = <code>${Math.round(r.midpoint).toLocaleString('ar-IQ')}</code>.`
+            : `<strong style="color:var(--color-danger,#ff7a7a)">لا يوجد تداخل</strong> — فكّك الافتراضات أو ابحث عن BATNA أقوى.`
+          }
+          فجوة Anchoring: <code>${Math.round(r.askingMargin).toLocaleString('ar-IQ')}</code> فوق هدفك.
+          <em>المرجع: Fisher, Ury & Patton — <i>Getting to Yes</i> (Harvard Negotiation Project) + Voss, <i>Never Split the Difference</i>.</em>
+        `;
+      }
+    });
+
+    /* 7) bigo-cost (Worker 05) — Big-O operations estimator */
+    C.register('bigo-cost', {
+      compute({ n, complexity }) {
+        n = Math.max(1, +n || 1);
+        const map = {
+          'O(1)':       { ops: 1,                 label: 'ثابت' },
+          'O(log n)':   { ops: Math.log2(n),      label: 'لوغاريتمي' },
+          'O(n)':       { ops: n,                 label: 'خطي' },
+          'O(n log n)': { ops: n * Math.log2(n),  label: 'لوغاريتمي خطي' },
+          'O(n^2)':     { ops: n * n,             label: 'تربيعي' },
+          'O(n^3)':     { ops: n * n * n,         label: 'تكعيبي' },
+          'O(2^n)':     { ops: Math.pow(2, Math.min(n, 60)), label: 'أُسّي' },
+          'O(n!)':      { ops: factorial(Math.min(n, 18)),   label: 'عاملي' }
+        };
+        const entry = map[complexity] || map['O(n)'];
+        const ops = entry.ops;
+        // Assume 1e8 ops/sec
+        const seconds = ops / 1e8;
+        const human =
+          seconds < 1e-6 ? '< 1µs' :
+          seconds < 1    ? `${(seconds*1000).toFixed(2)} ms` :
+          seconds < 60   ? `${seconds.toFixed(1)} ث` :
+          seconds < 3600 ? `${(seconds/60).toFixed(1)} دقيقة` :
+          seconds < 86400? `${(seconds/3600).toFixed(1)} ساعة` :
+                            `${(seconds/86400).toFixed(1)} يوم`;
+        const state =
+          seconds < 0.1   ? 'good' :
+          seconds < 5     ? null   :
+          'bad';
+        return {
+          ops, opsHuman: ops.toExponential(2),
+          opsRounded: Math.min(ops, 1e15),
+          seconds, timeHuman: human,
+          label: entry.label,
+          state
+        };
+      },
+      explain(d, r) {
+        return `
+          <strong>تقدير العمليات:</strong>
+          <code>${d.complexity}</code> مع n = <code>${(+d.n).toLocaleString('ar-IQ')}</code>
+          → ≈ <code>${r.opsHuman}</code> عملية (${r.label}).
+          بافتراض جهاز يُنفّذ 10⁸ عملية/ثانية → الزمن المتوقع <strong>${r.timeHuman}</strong>.
+          <em>المرجع: Cormen, Leiserson, Rivest, Stein — <i>Introduction to Algorithms</i> (MIT, 4th ed.).</em>
+        `;
+      }
+    });
+
+    /* 8) bigfive-score (Worker 09) — Big Five OCEAN percentile */
+    C.register('bigfive-score', {
+      compute({ openness, conscientious, extraversion, agreeableness, neuroticism }) {
+        const O = clamp(+openness || 50, 0, 100);
+        const C2 = clamp(+conscientious || 50, 0, 100);
+        const E = clamp(+extraversion || 50, 0, 100);
+        const A = clamp(+agreeableness || 50, 0, 100);
+        const N = clamp(+neuroticism || 50, 0, 100);
+
+        const labelOf = (v) =>
+          v >= 80 ? 'مرتفع جداً' :
+          v >= 65 ? 'مرتفع'      :
+          v >= 45 ? 'متوسط'      :
+          v >= 30 ? 'منخفض'      : 'منخفض جداً';
+
+        const composite = (O*0.20 + C2*0.25 + E*0.20 + A*0.20 + (100 - N)*0.15);
+        return {
+          O, C2, E, A, N,
+          oLabel: labelOf(O), cLabel: labelOf(C2), eLabel: labelOf(E),
+          aLabel: labelOf(A), nLabel: labelOf(N),
+          composite,
+          state: composite >= 70 ? 'good' : (composite < 40 ? 'bad' : null)
+        };
+      },
+      explain(d, r) {
+        return `
+          <strong>تفسير مختصر:</strong>
+          الانفتاح (O) ${r.oLabel} · الضمير (C) ${r.cLabel} · الانبساط (E) ${r.eLabel}
+          · المقبولية (A) ${r.aLabel} · العصابية (N) ${r.nLabel}.
+          <strong>مؤشّر الأداء المركّب</strong> = <code>${r.composite.toFixed(1)}</code>/100
+          (يُعطي وزناً أعلى لـ Conscientiousness ويعكس Neuroticism).
+          <em>المرجع: McCrae & Costa, NEO-PI-R (1992) + Goldberg IPIP. النسب المئوية تخميني للتعليم — لا تستخدم في تقييم سريري.</em>
+        `;
+      }
+    });
+
+    // Helpers used in registrations
+    function clamp(v, lo, hi) { v = +v; if (!Number.isFinite(v)) v = 0; return Math.max(lo, Math.min(hi, v)); }
+    function clamp01(v) { return clamp(v, 0, 1); }
+    function factorial(n) {
+      n = Math.max(0, Math.min(170, Math.floor(n)));
+      let r = 1; for (let i = 2; i <= n; i++) r *= i; return r;
+    }
+  };
+  ready();
+})();
+
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CATHEDRAL v14 — Command Palette + Shortcuts (Worker 11 / Phase 5)
+   Public API: window.Upg.cmdk.{ open, close, register, getShortcuts }
+   ═══════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+
+  const init = () => {
+    const palette = document.getElementById('cmdk-palette');
+    const cheat   = document.getElementById('shortcut-cheatsheet');
+    if (!palette || !cheat) {
+      console.warn('[Upg.cmdk] overlays not present in DOM');
+      return;
+    }
+
+    const input = palette.querySelector('.cmdk-input');
+    const list  = palette.querySelector('.cmdk-results');
+    const empty = palette.querySelector('.cmdk-empty');
+
+    const isMac = (navigator.platform || '').toUpperCase().includes('MAC');
+    const Mod = isMac ? '⌘' : 'Ctrl';
+
+    // ─── Page registry (matches nav-item data-page values) ───
+    const PAGES = [
+      { id: 'dashboard',    title: 'لوحة التحكم',           icon: 'layout-dashboard' },
+      { id: 'callcenter',   title: 'الكول سنتر',            icon: 'phone' },
+      { id: 'fieldsales',   title: 'المبيعات الميدانية',    icon: 'briefcase' },
+      { id: 'accountmgr',   title: 'Account Manager',       icon: 'user-tie' },
+      { id: 'social',       title: 'السوشيال ميديا',        icon: 'megaphone' },
+      { id: 'lab',          title: 'مختبر السيناريوهات',    icon: 'flask-conical' },
+      { id: 'psych',        title: 'الدوافع النفسية',       icon: 'brain' },
+      { id: 'eq',           title: 'الذكاء العاطفي',        icon: 'heart-handshake' },
+      { id: 'customercare', title: 'خدمة العملاء',          icon: 'headphones' },
+      { id: 'programming',  title: 'البرمجة',               icon: 'code' },
+      { id: 'accounting',   title: 'المحاسبة',              icon: 'calculator' },
+      { id: 'phonerepair',  title: 'صيانة الهاتف',          icon: 'wrench' },
+      { id: 'negotiation',  title: 'المفاوضات',             icon: 'heart-handshake' },
+      { id: 'hrmastery',    title: 'إتقان مقابلات HR',      icon: 'briefcase' },
+    ];
+
+    const goCalc = (calcName, pageId) => () => {
+      window.navigateTo?.(pageId);
+      setTimeout(() => {
+        const el = document.querySelector(`[data-calc="${calcName}"]`);
+        el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        el?.querySelector('input')?.focus();
+      }, 220);
+    };
+
+    const commands = [
+      // Navigation
+      ...PAGES.map(p => ({
+        group: 'انتقال',
+        title: `الانتقال إلى ${p.title}`,
+        hint: `Go → ${p.id}`,
+        icon: p.icon,
+        tags: ['go', 'navigate', 'open', p.id, p.title, 'انتقال'],
+        action: () => window.navigateTo?.(p.id)
+      })),
+
+      // Theme
+      { group: 'الثيم', title: 'تبديل الثيم (دورة)',
+        icon: 'sun', tags: ['theme', 'toggle', 'اللون', 'ثيم', 'فاتح', 'مظلم'],
+        action: () => window.Upg?.theme?.cycle?.(), shortcut: ['T'] },
+      { group: 'الثيم', title: 'الثيم: تلقائي (Auto)',
+        icon: 'monitor', tags: ['theme', 'auto', 'system', 'تلقائي'],
+        action: () => window.Upg?.theme?.set?.('auto') },
+      { group: 'الثيم', title: 'الثيم: مظلم (Dark)',
+        icon: 'moon', tags: ['theme', 'dark', 'مظلم', 'ليلي'],
+        action: () => window.Upg?.theme?.set?.('dark') },
+      { group: 'الثيم', title: 'الثيم: فاتح (Light)',
+        icon: 'sun', tags: ['theme', 'light', 'فاتح', 'نهاري'],
+        action: () => window.Upg?.theme?.set?.('light') },
+
+      // Calculators (qcalc)
+      { group: 'حاسبات', title: 'حاسبة ضريبة الدخل العراقية',
+        icon: 'calculator', tags: ['tax', 'iraq', 'ضريبة', 'دخل', '113'],
+        action: goCalc('iraq-tax', 'accounting') },
+      { group: 'حاسبات', title: 'قسيمة الراتب الشهري',
+        icon: 'briefcase', tags: ['salary', 'payslip', 'راتب', 'قسيمة'],
+        action: goCalc('salary-slip', 'accounting') },
+      { group: 'حاسبات', title: 'حاسبة العمولة و الـ OTE',
+        icon: 'trending-up', tags: ['commission', 'sales', 'ote', 'عمولة'],
+        action: goCalc('sales-commission', 'fieldsales') },
+      { group: 'حاسبات', title: 'مؤشّر أداء الكول سنتر (APIndex)',
+        icon: 'gauge', tags: ['apindex', 'kpi', 'callcenter', 'مؤشر', 'أداء'],
+        action: goCalc('apindex', 'callcenter') },
+      { group: 'حاسبات', title: 'حاسبة حجم العينة لاختبار A/B',
+        icon: 'bar-chart', tags: ['ab', 'test', 'sample', 'experiment', 'تجربة'],
+        action: goCalc('ab-test', 'social') },
+      { group: 'حاسبات', title: 'محلّل ZOPA و BATNA',
+        icon: 'heart-handshake', tags: ['batna', 'zopa', 'تفاوض', 'مفاوضات', 'negotiation'],
+        action: goCalc('batna', 'negotiation') },
+      { group: 'حاسبات', title: 'مُقدِّر تكلفة Big-O',
+        icon: 'line-chart', tags: ['bigo', 'algorithm', 'complexity', 'تعقيد', 'برمجة'],
+        action: goCalc('bigo-cost', 'programming') },
+      { group: 'حاسبات', title: 'مؤشّر OCEAN — Big Five',
+        icon: 'brain', tags: ['bigfive', 'ocean', 'شخصية', 'psych'],
+        action: goCalc('bigfive-score', 'psych') },
+
+      // Data
+      { group: 'البيانات', title: 'تصدير كل التقدم (JSON)',
+        icon: 'download', tags: ['export', 'backup', 'json', 'تصدير', 'نسخ'],
+        action: () => exportAll() },
+      { group: 'البيانات', title: 'استيراد ملف تقدم (JSON)',
+        icon: 'upload', tags: ['import', 'restore', 'استعادة', 'استيراد'],
+        action: () => importAll() },
+      { group: 'البيانات', title: 'إعادة تعيين كل التقدم (حذف)',
+        icon: 'trash', tags: ['reset', 'clear', 'wipe', 'حذف', 'إعادة'],
+        action: () => resetAll() },
+
+      // System
+      { group: 'النظام', title: 'قفل المنصة',
+        icon: 'lock', tags: ['lock', 'logout', 'idle', 'قفل'],
+        action: () => { sessionStorage.removeItem('upg_unlocked'); window.Upg?.gateway?.lock?.(); },
+        shortcut: ['L'] },
+      { group: 'النظام', title: 'عرض الاختصارات',
+        icon: 'help-circle', tags: ['shortcuts', 'keyboard', 'help', 'اختصارات', '?'],
+        action: () => openCheat(), shortcut: ['?'] },
+      { group: 'النظام', title: 'طباعة الصفحة الحالية',
+        icon: 'download', tags: ['print', 'طباعة', 'pdf'],
+        action: () => window.print() },
+      { group: 'النظام', title: 'إعادة تحميل المنصة',
+        icon: 'refresh', tags: ['reload', 'refresh', 'تحديث'],
+        action: () => location.reload() },
+    ];
+
+    const SHORTCUTS = [
+      { cat: 'عام',      label: 'فتح Command Palette', keys: [Mod, 'K'] },
+      { cat: 'عام',      label: 'عرض الاختصارات',     keys: ['?'] },
+      { cat: 'عام',      label: 'إغلاق نافذة منبثقة',  keys: ['Esc'] },
+      { cat: 'عام',      label: 'طباعة',              keys: [Mod, 'P'] },
+      { cat: 'الانتقال', label: 'لوحة التحكم',        keys: ['G', 'D'] },
+      { cat: 'الانتقال', label: 'المبيعات',           keys: ['G', 'S'] },
+      { cat: 'الانتقال', label: 'الكول سنتر',         keys: ['G', 'C'] },
+      { cat: 'الانتقال', label: 'البرمجة',            keys: ['G', 'P'] },
+      { cat: 'الانتقال', label: 'المحاسبة',           keys: ['G', 'A'] },
+      { cat: 'الانتقال', label: 'مقابلات HR',         keys: ['G', 'H'] },
+      { cat: 'الانتقال', label: 'صيانة الهاتف',       keys: ['G', 'R'] },
+      { cat: 'الانتقال', label: 'السوشيال ميديا',     keys: ['G', 'M'] },
+      { cat: 'الانتقال', label: 'مختبر السيناريوهات', keys: ['G', 'X'] },
+      { cat: 'الثيم',    label: 'تبديل الثيم',        keys: ['T'] },
+      { cat: 'النظام',   label: 'قفل المنصة',         keys: ['L'] },
+    ];
+
+    // ─── Search / fuzzy ───
+    const score = (q, cmd) => {
+      q = (q || '').toLowerCase().trim();
+      if (!q) return 1;
+      const hay = (cmd.title + ' ' + (cmd.tags || []).join(' ') + ' ' + (cmd.group || '')).toLowerCase();
+      const idx = hay.indexOf(q);
+      if (idx >= 0) return 1000 - idx;
+      // Subsequence fuzzy
+      let qi = 0;
+      for (let i = 0; i < hay.length && qi < q.length; i++) {
+        if (hay[i] === q[qi]) qi++;
+      }
+      return qi === q.length ? 200 - (hay.length / Math.max(1, q.length)) : 0;
+    };
+
+    let filtered = [];
+    let active = 0;
+
+    const render = () => {
+      const q = input.value;
+      filtered = commands
+        .map(c => ({ c, s: score(q, c) }))
+        .filter(x => x.s > 0)
+        .sort((a, b) => b.s - a.s)
+        .slice(0, 80)
+        .map(x => x.c);
+
+      list.innerHTML = '';
+      empty.hidden = filtered.length > 0;
+      if (!filtered.length) return;
+
+      let lastGroup = null;
+      filtered.forEach((c, i) => {
+        if (c.group !== lastGroup) {
+          const h = document.createElement('div');
+          h.className = 'cmdk-group-heading';
+          h.textContent = c.group;
+          list.appendChild(h);
+          lastGroup = c.group;
+        }
+        const item = document.createElement('div');
+        item.className = 'cmdk-item';
+        item.setAttribute('role', 'option');
+        item.dataset.idx = String(i);
+        item.setAttribute('aria-selected', i === active ? 'true' : 'false');
+        item.innerHTML = `
+          <div class="cmdk-item-icon"><i class="qi" data-icon="${escapeAttr(c.icon || 'chevron-right')}"></i></div>
+          <div class="cmdk-item-body">
+            <div class="cmdk-item-title">${escapeHtml(c.title)}</div>
+            ${c.hint ? `<div class="cmdk-item-hint">${escapeHtml(c.hint)}</div>` : ''}
+          </div>
+          ${c.shortcut ? `<div class="cmdk-item-shortcut">${c.shortcut.map(k => `<kbd>${escapeHtml(k)}</kbd>`).join('')}</div>` : ''}
+        `;
+        item.addEventListener('click', () => execute(c));
+        item.addEventListener('mousemove', () => { if (active !== i) { active = i; refreshActive(); } });
+        list.appendChild(item);
+      });
+      // Re-render icon glyphs (Phase 2 sprite system reads data-icon)
+      window.Upg?.icons?.renderAll?.(list);
+    };
+
+    const refreshActive = () => {
+      list.querySelectorAll('.cmdk-item').forEach(el => {
+        const isActive = +el.dataset.idx === active;
+        el.setAttribute('aria-selected', String(isActive));
+        if (isActive) el.scrollIntoView({ block: 'nearest' });
+      });
+    };
+
+    const execute = (cmd) => {
+      close();
+      setTimeout(() => {
+        try { cmd.action(); }
+        catch (e) { console.error('[Upg.cmdk] command failed:', e); }
+      }, 60);
+    };
+
+    const open = (prefill = '') => {
+      // If gateway is open, don't open palette (lock-screen first)
+      if (document.body.dataset.gatewayOpen === 'true') return;
+      palette.hidden = false;
+      input.value = prefill || '';
+      active = 0;
+      render();
+      requestAnimationFrame(() => input.focus());
+    };
+    const close = () => {
+      palette.hidden = true;
+      input.value = '';
+    };
+
+    const openCheat = () => {
+      cheat.hidden = false;
+      renderCheatsheet();
+    };
+    const closeCheat = () => { cheat.hidden = true; };
+
+    const renderCheatsheet = () => {
+      const body = cheat.querySelector('.cmdk-cheat-body');
+      const cats = [...new Set(SHORTCUTS.map(s => s.cat))];
+      body.innerHTML = cats.map(cat => `
+        <div class="cmdk-cheat-cat">
+          <h3>${escapeHtml(cat)}</h3>
+          ${SHORTCUTS.filter(s => s.cat === cat).map(s => `
+            <div class="cmdk-cheat-row">
+              <span class="cmdk-cheat-label">${escapeHtml(s.label)}</span>
+              <span class="cmdk-cheat-keys">${s.keys.map(k => `<kbd>${escapeHtml(k)}</kbd>`).join(' ')}</span>
+            </div>`).join('')}
+        </div>`).join('');
+    };
+
+    // ─── Events ───
+    input.addEventListener('input', () => { active = 0; render(); });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown') { e.preventDefault(); active = Math.min(filtered.length - 1, active + 1); refreshActive(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); active = Math.max(0, active - 1); refreshActive(); }
+      else if (e.key === 'Enter') { e.preventDefault(); if (filtered[active]) execute(filtered[active]); }
+    });
+
+    palette.addEventListener('click', (e) => { if (e.target === palette) close(); });
+    cheat.addEventListener('click', (e) => {
+      if (e.target === cheat || e.target.closest('[data-action="close-cheatsheet"]')) closeCheat();
+    });
+
+    // ─── Global keyboard ───
+    let gPressed = false;
+    let gTimer = null;
+
+    const isInputFocused = () => {
+      const el = document.activeElement;
+      if (!el) return false;
+      if (el === input) return true; // palette input is fine
+      const tag = el.tagName;
+      return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || el.isContentEditable;
+    };
+
+    document.addEventListener('keydown', (e) => {
+      // Cmd/Ctrl+K — always
+      if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
+        e.preventDefault();
+        if (palette.hidden) open(); else close();
+        return;
+      }
+      // Esc — close any open overlay
+      if (e.key === 'Escape') {
+        if (!palette.hidden) { close(); return; }
+        if (!cheat.hidden)   { closeCheat(); return; }
+        return;
+      }
+
+      // If user is typing inside non-palette input, skip the rest
+      if (isInputFocused() && document.activeElement !== input) return;
+
+      // ? — cheat sheet
+      if (e.key === '?' && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        if (document.activeElement === input) return;
+        e.preventDefault();
+        if (cheat.hidden) openCheat(); else closeCheat();
+        return;
+      }
+      // T — theme
+      if ((e.key === 't' || e.key === 'T') && !gPressed && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        if (document.activeElement === input) return;
+        e.preventDefault();
+        window.Upg?.theme?.cycle?.();
+        return;
+      }
+      // L — lock
+      if ((e.key === 'l' || e.key === 'L') && !gPressed && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        if (document.activeElement === input) return;
+        e.preventDefault();
+        sessionStorage.removeItem('upg_unlocked');
+        window.Upg?.gateway?.lock?.();
+        return;
+      }
+
+      // G then X — page jumps
+      if (!gPressed && (e.key === 'g' || e.key === 'G') && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        if (document.activeElement === input) return;
+        gPressed = true;
+        clearTimeout(gTimer);
+        gTimer = setTimeout(() => { gPressed = false; }, 1200);
+        return;
+      }
+      if (gPressed) {
+        const map = {
+          d: 'dashboard', s: 'fieldsales', c: 'callcenter',
+          p: 'programming', a: 'accounting', h: 'hrmastery',
+          r: 'phonerepair', m: 'social', x: 'lab', n: 'negotiation',
+          e: 'eq', y: 'psych'
+        };
+        const target = map[e.key.toLowerCase()];
+        gPressed = false;
+        clearTimeout(gTimer);
+        if (target) {
+          e.preventDefault();
+          window.navigateTo?.(target);
+        }
+      }
+    });
+
+    // ─── Wire topbar search → palette ───
+    document.querySelectorAll('.topbar-search input, .topbar input[type="text"][placeholder*="بحث"]').forEach(inp => {
+      const handler = (e) => {
+        e.preventDefault();
+        const q = inp.value || '';
+        inp.blur();
+        open(q);
+      };
+      inp.addEventListener('focus', handler);
+      inp.addEventListener('click', handler);
+      inp.readOnly = true;
+    });
+
+    // ─── Helpers ───
+    function escapeHtml(s) {
+      return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+    function escapeAttr(s) { return escapeHtml(s).replace(/[\n\r]/g, ''); }
+
+    function exportAll() {
+      const data = {};
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && k.startsWith('upg_')) data[k] = localStorage.getItem(k);
+      }
+      const payload = {
+        exported_at: new Date().toISOString(),
+        version: 'cathedral-v14',
+        data
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `upgrade-progress-${new Date().toISOString().slice(0,10)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1500);
+    }
+
+    function importAll() {
+      const inp = document.createElement('input');
+      inp.type = 'file';
+      inp.accept = 'application/json,.json';
+      inp.addEventListener('change', () => {
+        const file = inp.files?.[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          try {
+            const parsed = JSON.parse(reader.result);
+            const data = parsed?.data || parsed;
+            if (typeof data !== 'object' || !data) throw new Error('Bad payload');
+            if (!confirm('سيتم استبدال بياناتك الحالية ببيانات الملف. متابعة؟')) return;
+            Object.entries(data).forEach(([k, v]) => {
+              if (k.startsWith('upg_')) localStorage.setItem(k, v);
+            });
+            location.reload();
+          } catch (e) {
+            alert('ملف غير صالح: ' + e.message);
+          }
+        };
+        reader.readAsText(file);
+      });
+      inp.click();
+    }
+
+    function resetAll() {
+      if (!confirm('سيتم حذف كل تقدمك ومسوّداتك ونتائجك. هل أنت متأكد؟')) return;
+      if (!confirm('تأكيد ثاني — هذا حذف نهائي ولا يمكن التراجع عنه.')) return;
+      Object.keys(localStorage).filter(k => k.startsWith('upg_')).forEach(k => localStorage.removeItem(k));
+      sessionStorage.clear();
+      location.reload();
+    }
+
+    // ─── Public API ───
+    window.Upg = window.Upg || {};
+    window.Upg.cmdk = {
+      open, close,
+      register: (cmd) => { if (cmd && typeof cmd.action === 'function') commands.push(cmd); },
+      getShortcuts: () => SHORTCUTS.slice()
+    };
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CATHEDRAL v14 — Unified State Layer + Real Dashboard (Worker 11 / Phase 6)
+   Facade over 22+ existing upg_* localStorage keys.
+   Public API: window.Upg.state.{ progress, scores, drafts, misc, profile,
+                                  activity, logActivity, compute, on }
+   ═══════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+
+  const _read = (k, fallback) => {
+    try {
+      const v = localStorage.getItem(k);
+      if (v == null) return fallback;
+      return JSON.parse(v);
+    } catch {
+      // Could be a non-JSON legacy string
+      const raw = localStorage.getItem(k);
+      return raw == null ? fallback : raw;
+    }
+  };
+  const _write = (k, v) => {
+    try {
+      localStorage.setItem(k, JSON.stringify(v));
+      notify(k, v);
+    } catch (e) {
+      console.warn('[Upg.state] write failed', k, e);
+    }
+  };
+
+  const listeners = new Map();
+  const on = (event, fn) => {
+    if (!listeners.has(event)) listeners.set(event, new Set());
+    listeners.get(event).add(fn);
+    return () => listeners.get(event)?.delete(fn);
+  };
+  const notify = (k, v) => {
+    listeners.get('change')?.forEach(fn => safe(fn, k, v));
+    listeners.get(`change:${k}`)?.forEach(fn => safe(fn, v));
+  };
+  const safe = (fn, ...args) => { try { fn(...args); } catch (e) { console.error('[Upg.state] listener', e); } };
+
+  // ─── Reading helpers (best-effort discovery) ───
+  const progress = () => ({
+    sales:        _read('upg_progress_sales', {}),
+    callcenter:   _read('upg_progress_callcenter', {}),
+    accounting:   _read('upg_progress_accounting', _read('upg_progress_acc', {})),
+    programming:  _read('upg_progress_prog', _read('upg_progress_programming', {})),
+    social:       _read('upg_progress_social', {}),
+    phonerepair:  _read('upg_progress_phonerepair', {}),
+    hrmastery:    _read('upg_progress_hr',  _read('upg_progress_hrmastery', {})),
+    psych:        _read('upg_progress_psych', {}),
+    eq:           _read('upg_progress_eq', {}),
+  });
+
+  const scores = () => ({
+    simulator:    _read('upg_simulator_scores', []),
+    objection:    _read('upg_objection_scores', []),
+    prLab:        _read('upg_pr_lab_scores', []),
+    psych:        _read('upg_psych_results', {}),
+    interviews:   _read('upg_interview_attempts', []),
+    interviewsHr: _read('upg_interview_attempts_hr', []),
+    bigfive:      _read('upg_bigfive_scores', []),
+  });
+
+  const drafts = () => ({
+    pitch:      _read('upg_pitch_drafts', []),
+    salary:     _read('upg_salary_drafts', []),
+    tax:        _read('upg_tax_drafts', []),
+    portfolio:  _read('upg_portfolio_drafts', []),
+    statements: _read('upg_statements_drafts', []),
+    pr:         _read('upg_pr_estimates', []),
+    calendar:   _read('upg_calendar_drafts', []),
+    campaigns:  _read('upg_campaigns', []),
+    objections: _read('upg_objections_drafts', []),
+  });
+
+  const misc = () => ({
+    moodLog:         _read('upg_mood_log', []),
+    pathChoice:      _read('upg_path_choice', null),
+    accCycleVisited: _read('upg_acc_cycle_visited', []),
+    accEqState:      _read('upg_acc_eq_state', {}),
+    voiceMeta:       _read('upg_voice_recordings_meta', []),
+  });
+
+  const profile  = () => _read('upg_user_profile', null);
+  const activity = () => _read('upg_activity_log', []);
+
+  const logActivity = (type, payload) => {
+    const log = activity();
+    log.unshift({ ts: Date.now(), type, payload: payload || null });
+    _write('upg_activity_log', log.slice(0, 200));
+  };
+
+  // ─── Computed metrics ───
+  const countDone = (dict) => {
+    if (!dict || typeof dict !== 'object') return 0;
+    return Object.values(dict).filter(v => v === true || (v && typeof v === 'object' && v.completed)).length;
+  };
+  const countTotal = (dict) => (dict && typeof dict === 'object') ? Object.keys(dict).length : 0;
+
+  const compute = {
+    unitsCompleted() {
+      return Object.values(progress()).reduce((sum, dict) => sum + countDone(dict), 0);
+    },
+    avgCompletionRate() {
+      const all = Object.values(progress());
+      const total = all.reduce((s, d) => s + countTotal(d), 0);
+      const done = compute.unitsCompleted();
+      if (total === 0) return 0;
+      return Math.round((done / total) * 100);
+    },
+    trainingHours() {
+      const log = activity().filter(a => a.type === 'session_end' || a.type === 'session_tick');
+      const minutes = log.reduce((sum, e) => sum + (e.payload?.minutes || 0), 0);
+      return Math.round(minutes / 6) / 10; // 1 decimal
+    },
+    streak() {
+      const dates = new Set(activity().map(a => new Date(a.ts).toDateString()));
+      let streak = 0;
+      const d = new Date();
+      while (dates.has(d.toDateString())) {
+        streak++;
+        d.setDate(d.getDate() - 1);
+      }
+      return streak;
+    },
+    topScore() {
+      const s = scores();
+      const all = [...(s.simulator || []), ...(s.objection || []), ...(s.prLab || []), ...(s.interviews || []), ...(s.interviewsHr || [])];
+      const nums = all.map(x => typeof x === 'number' ? x : (x?.score ?? x?.value ?? 0));
+      return nums.length ? Math.max(...nums) : 0;
+    },
+    quizzesTaken() {
+      const psych = scores().psych || {};
+      return Object.keys(psych).length;
+    },
+    draftCount() {
+      return Object.values(drafts()).reduce((s, arr) => s + (Array.isArray(arr) ? arr.length : 0), 0);
+    },
+    moodAvg(days = 7) {
+      const log = misc().moodLog || [];
+      const cutoff = Date.now() - days * 86400000;
+      const recent = log.filter(m => (m?.ts || 0) > cutoff);
+      if (!recent.length) return null;
+      const total = recent.reduce((s, m) => s + ((m.energy || 0) + (m.pleasantness || 0)) / 2, 0);
+      return total / recent.length;
+    },
+    workerStats() {
+      const p = progress();
+      const list = [
+        { id: 'fieldsales', key: 'sales',       name: 'المبيعات',     icon: 'briefcase' },
+        { id: 'callcenter', key: 'callcenter',  name: 'الكول سنتر',   icon: 'phone' },
+        { id: 'accounting', key: 'accounting',  name: 'المحاسبة',     icon: 'calculator' },
+        { id: 'programming', key: 'programming', name: 'البرمجة',      icon: 'code' },
+        { id: 'social',     key: 'social',      name: 'السوشيال',     icon: 'megaphone' },
+        { id: 'phonerepair', key: 'phonerepair', name: 'الصيانة',      icon: 'wrench' },
+        { id: 'hrmastery',  key: 'hrmastery',   name: 'HR',           icon: 'briefcase' },
+        { id: 'psych',      key: 'psych',       name: 'علم النفس',    icon: 'brain' },
+        { id: 'eq',         key: 'eq',          name: 'الذكاء العاطفي',icon: 'heart-handshake' },
+      ];
+      return list.map(w => {
+        const dict = p[w.key] || {};
+        const total = countTotal(dict);
+        const done  = countDone(dict);
+        return {
+          ...w,
+          total, done,
+          pct: total > 0 ? Math.round((done / total) * 100) : 0
+        };
+      });
+    }
+  };
+
+  // Public API
+  window.Upg = window.Upg || {};
+  window.Upg.state = {
+    progress, scores, drafts, misc, profile, activity, logActivity, compute, on,
+    _read, _write
+  };
+
+  // ─── Auto-hooks (passive logging) ───
+  document.addEventListener('click', (e) => {
+    const navItem = e.target.closest('[data-page]');
+    if (navItem) {
+      const p = navItem.dataset.page;
+      if (p && p !== 'none') logActivity('navigate', { page: p });
+    }
+    const completeBtn = e.target.closest('[data-action="mark-complete"]');
+    if (completeBtn) logActivity('lesson_complete', { ref: completeBtn.dataset.ref || completeBtn.id || null });
+  });
+
+  // Session ticks every 5 min, plus end-of-session
+  let sessionStart = Date.now();
+  let lastTick = sessionStart;
+  setInterval(() => {
+    const now = Date.now();
+    const minutes = Math.round((now - lastTick) / 60000);
+    if (minutes >= 5) {
+      logActivity('session_tick', { minutes });
+      lastTick = now;
+    }
+  }, 60000);
+  window.addEventListener('beforeunload', () => {
+    const minutes = Math.round((Date.now() - lastTick) / 60000);
+    if (minutes > 0) logActivity('session_end', { minutes });
+  });
+
+  // Storage cross-tab sync
+  window.addEventListener('storage', (e) => {
+    if (e.key && e.key.startsWith('upg_')) notify(e.key, e.newValue);
+  });
+})();
+
+/* ═══════════════════════════════════════════════════════════════
+   CATHEDRAL v14 — Dashboard Renderer + page-myprogress + navigateTo wrap
+   ═══════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+
+  // Dispatch upg:page-shown after navigateTo (so cmdk + dashboard can react)
+  const wrapNav = () => {
+    if (typeof window.navigateTo !== 'function') {
+      setTimeout(wrapNav, 50);
+      return;
+    }
+    if (window.navigateTo.__cathedralWrapped) return;
+    const orig = window.navigateTo;
+    const wrapped = function (pageId) {
+      orig.call(this, pageId);
+      try { window.dispatchEvent(new CustomEvent('upg:page-shown', { detail: { page: pageId } })); }
+      catch (e) { /* noop */ }
+    };
+    wrapped.__cathedralWrapped = true;
+    window.navigateTo = wrapped;
+  };
+  wrapNav();
+
+  // ─── Helpers ───
+  const animateNumber = (el, target, opts = {}) => {
+    target = +target || 0;
+    const start = +(el.textContent || '0').replace(/[^\d.-]/g, '') || 0;
+    const dur = opts.duration ?? 600;
+    const t0  = performance.now();
+    const isFloat = !Number.isInteger(target) || opts.float;
+    if (typeof requestAnimationFrame !== 'function') { el.textContent = isFloat ? target.toFixed(1) : Math.round(target); return; }
+    const step = (t) => {
+      const k = Math.min(1, (t - t0) / dur);
+      const eased = 1 - Math.pow(1 - k, 3);
+      const cur = start + (target - start) * eased;
+      el.textContent = isFloat ? cur.toFixed(1) : Math.round(cur);
+      if (k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const activityIcon = (t) => ({
+    navigate:        'chevron-right',
+    lesson_complete: 'check-circle',
+    session_end:     'check',
+    session_tick:    'trending-up',
+    quiz_finished:   'star',
+  })[t] || 'sparkles';
+  const activityLabel = (a) => {
+    if (a.type === 'navigate')        return `زيارة <strong>${escapeHtml(a.payload?.page || '—')}</strong>`;
+    if (a.type === 'lesson_complete') return `إكمال درس${a.payload?.ref ? ` <strong>${escapeHtml(a.payload.ref)}</strong>` : ''}`;
+    if (a.type === 'session_end')     return `انتهاء جلسة (${a.payload?.minutes || 0} دقيقة)`;
+    if (a.type === 'session_tick')    return `تدريب نشط (${a.payload?.minutes || 0} د)`;
+    if (a.type === 'quiz_finished')   return `إنهاء تقييم${a.payload?.score ? ` بـ ${a.payload.score}` : ''}`;
+    return escapeHtml(a.type);
+  };
+  const relTime = (ts) => {
+    const diff = Date.now() - ts;
+    if (diff < 0) return 'الآن';
+    if (diff < 60_000)        return 'الآن';
+    if (diff < 3_600_000)     return `قبل ${Math.round(diff/60000)} د`;
+    if (diff < 86_400_000)    return `قبل ${Math.round(diff/3600000)} س`;
+    if (diff < 30 * 86_400_000) return `قبل ${Math.round(diff/86400000)} يوم`;
+    return new Date(ts).toLocaleDateString('ar-IQ', { year:'numeric', month:'short', day:'numeric' });
+  };
+  function escapeHtml(s) {
+    return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  const profileInitial = (p) => {
+    if (!p?.name) return 'U';
+    return String(p.name).trim().charAt(0).toUpperCase() || 'U';
+  };
+
+  // ─── Stats / profile bindings (works across both pages) ───
+  const renderBindings = (root = document) => {
+    if (!window.Upg?.state) return;
+    const c = window.Upg.state.compute;
+    const p = window.Upg.state.profile();
+
+    root.querySelectorAll('[data-cath-stat]').forEach(el => {
+      const key = el.dataset.cathStat;
+      if (typeof c[key] === 'function') animateNumber(el, c[key]());
+    });
+    root.querySelectorAll('[data-cath-bind]').forEach(el => {
+      const key = el.dataset.cathBind;
+      if (key === 'profile.name')      el.textContent = p?.name || 'صديقي';
+      if (key === 'profile.initial')   el.textContent = profileInitial(p);
+      if (key === 'profile.role')      el.textContent = p?.role ? p.role : 'متدرّب';
+      if (key === 'profile.streakLine') {
+        const s = c.streak();
+        el.textContent = s > 0
+          ? `لديك streak من ${s} ${s === 1 ? 'يوم' : 'أيام'} 🔥 — استمر!`
+          : 'ابدأ اليوم وكوّن streak جديد!';
+      }
+    });
+  };
+
+  // ─── Skill grid ───
+  const renderSkillGrid = (containerId) => {
+    const grid = document.getElementById(containerId);
+    if (!grid || !window.Upg?.state) return;
+    const list = window.Upg.state.compute.workerStats();
+    grid.innerHTML = list.map(w => `
+      <button class="cath-skill" type="button" data-page="${escapeHtml(w.id)}" aria-label="${escapeHtml(w.name)} (${w.pct}%)">
+        <div class="cath-skill-ring" style="--p:${w.pct}">
+          <i class="qi qi-md" data-icon="${escapeHtml(w.icon)}"></i>
+        </div>
+        <span class="cath-skill-name">${escapeHtml(w.name)}</span>
+        <span class="cath-skill-pct">${w.pct}%</span>
+      </button>`).join('');
+    window.Upg?.icons?.renderAll?.(grid);
+  };
+
+  // ─── Activity list (dashboard) ───
+  const renderActivityList = (listId, limit = 10) => {
+    const list = document.getElementById(listId);
+    if (!list || !window.Upg?.state) return;
+    const items = window.Upg.state.activity().slice(0, limit);
+    if (!items.length) {
+      list.innerHTML = `<li class="cath-activity-empty">ابدأ التفاعل مع المنصة لتتبّع نشاطك.</li>`;
+      return;
+    }
+    list.innerHTML = items.map(a => `
+      <li>
+        <i class="qi" data-icon="${escapeHtml(activityIcon(a.type))}"></i>
+        <span>${activityLabel(a)}</span>
+        <time datetime="${new Date(a.ts).toISOString()}">${escapeHtml(relTime(a.ts))}</time>
+      </li>`).join('');
+    window.Upg?.icons?.renderAll?.(list);
+  };
+
+  // ─── Drafts list (myprogress) ───
+  const renderDraftsList = () => {
+    const list = document.getElementById('my-drafts-list');
+    if (!list || !window.Upg?.state) return;
+    const d = window.Upg.state.drafts();
+    const items = [];
+    Object.entries(d).forEach(([category, arr]) => {
+      if (!Array.isArray(arr)) return;
+      const count = arr.length;
+      if (count > 0) items.push({ category, count });
+    });
+    if (!items.length) {
+      list.innerHTML = `<li class="cath-activity-empty">لا توجد مسوّدات محفوظة بعد.</li>`;
+      return;
+    }
+    const labels = {
+      pitch:'عروض بيع', salary:'مفاوضات راتب', tax:'حسابات ضريبة',
+      portfolio:'بورتفوليو', statements:'قوائم مالية', pr:'حملات PR',
+      calendar:'تقاويم', campaigns:'حملات', objections:'اعتراضات'
+    };
+    list.innerHTML = items.map(it => `
+      <li>
+        <i class="qi" data-icon="bookmark"></i>
+        <span>${escapeHtml(labels[it.category] || it.category)}</span>
+        <time>${it.count}</time>
+      </li>`).join('');
+    window.Upg?.icons?.renderAll?.(list);
+  };
+
+  // ─── Achievements (top scores) ───
+  const renderAchievements = () => {
+    const list = document.getElementById('my-achievements-list');
+    if (!list || !window.Upg?.state) return;
+    const s = window.Upg.state.scores();
+    const flatten = (arr, label) => (arr || []).map(x => {
+      const score = typeof x === 'number' ? x : (x?.score ?? x?.value);
+      return Number.isFinite(score) ? { score, label, ts: x?.ts || 0 } : null;
+    }).filter(Boolean);
+    const all = [
+      ...flatten(s.simulator, 'محاكي مكالمة'),
+      ...flatten(s.objection, 'مدرب الاعتراض'),
+      ...flatten(s.prLab, 'مختبر PR'),
+      ...flatten(s.interviews, 'مقابلة عامة'),
+      ...flatten(s.interviewsHr, 'مقابلة HR'),
+    ].sort((a, b) => b.score - a.score).slice(0, 8);
+    if (!all.length) {
+      list.innerHTML = `<li class="cath-activity-empty">لا توجد درجات محفوظة بعد — جرّب المختبرات.</li>`;
+      return;
+    }
+    list.innerHTML = all.map(a => `
+      <li>
+        <i class="qi" data-icon="trending-up"></i>
+        <span>${escapeHtml(a.label)}</span>
+        <time>${a.score}</time>
+      </li>`).join('');
+    window.Upg?.icons?.renderAll?.(list);
+  };
+
+  // ─── Activity chart (canvas, 30 days) ───
+  const renderProgressChart = () => {
+    const canvas = document.getElementById('progress-chart');
+    if (!canvas || !window.Upg?.state) return;
+    const dpr = window.devicePixelRatio || 1;
+    const cssW = canvas.clientWidth || 600;
+    const cssH = 180;
+    canvas.width  = cssW * dpr;
+    canvas.height = cssH * dpr;
+    canvas.style.height = cssH + 'px';
+    const ctx = canvas.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, cssW, cssH);
+
+    const days = 30;
+    const buckets = new Array(days).fill(0);
+    const today = new Date(); today.setHours(0,0,0,0);
+    window.Upg.state.activity().forEach(a => {
+      const d = new Date(a.ts || 0); d.setHours(0,0,0,0);
+      const diff = Math.round((today.getTime() - d.getTime()) / 86_400_000);
+      if (diff >= 0 && diff < days) buckets[days - 1 - diff]++;
+    });
+    const max = Math.max(1, ...buckets);
+
+    const styles = getComputedStyle(document.documentElement);
+    const brandColor = styles.getPropertyValue('--color-brand').trim() || '#66FCF1';
+    const trackColor = styles.getPropertyValue('--color-surface-2').trim() || 'rgba(255,255,255,0.06)';
+    const axisColor  = styles.getPropertyValue('--color-text-faint').trim() || 'rgba(255,255,255,0.5)';
+
+    const padX = 8, padTop = 14, padBottom = 18;
+    const drawArea = cssH - padTop - padBottom;
+    const barW = (cssW - padX * 2) / days;
+
+    // Track + bars
+    buckets.forEach((v, i) => {
+      const x = padX + i * barW;
+      ctx.fillStyle = trackColor;
+      ctx.fillRect(x + 1, padTop, Math.max(1, barW - 2), drawArea);
+      const h = (v / max) * drawArea;
+      ctx.fillStyle = brandColor;
+      ctx.fillRect(x + 1, padTop + (drawArea - h), Math.max(1, barW - 2), h);
+    });
+
+    // X axis labels (every 5 days)
+    ctx.fillStyle = axisColor;
+    ctx.font = '10px ui-sans-serif, system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    for (let i = 0; i < days; i += 5) {
+      const x = padX + i * barW + barW / 2;
+      const d = new Date(today.getTime() - (days - 1 - i) * 86_400_000);
+      ctx.fillText(`${d.getDate()}/${d.getMonth() + 1}`, x, cssH - 4);
+    }
+    // Total label
+    ctx.textAlign = 'start';
+    const total = buckets.reduce((s,v) => s+v, 0);
+    ctx.fillText(`إجمالي: ${total} حدث`, padX, padTop - 4);
+  };
+
+  // ─── My-progress action handlers ───
+  const wireMyProgressActions = () => {
+    document.body.addEventListener('click', (e) => {
+      const t = e.target.closest('[data-action="export-progress"]');
+      if (t) { exportAllUpg(); }
+      const i = e.target.closest('[data-action="import-progress"]');
+      if (i) { importAllUpg(); }
+      const r = e.target.closest('[data-action="reset-progress"]');
+      if (r) { resetAllUpg(); }
+    });
+  };
+
+  function exportAllUpg() {
+    const data = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith('upg_')) data[k] = localStorage.getItem(k);
+    }
+    const payload = { exported_at: new Date().toISOString(), version: 'cathedral-v14', data };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `upgrade-progress-${new Date().toISOString().slice(0,10)}.json`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+  }
+  function importAllUpg() {
+    const inp = document.createElement('input');
+    inp.type = 'file';
+    inp.accept = 'application/json,.json';
+    inp.addEventListener('change', () => {
+      const file = inp.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const parsed = JSON.parse(reader.result);
+          const data = parsed?.data || parsed;
+          if (!data || typeof data !== 'object') throw new Error('bad payload');
+          if (!confirm('سيتم استبدال بياناتك الحالية. متابعة؟')) return;
+          Object.entries(data).forEach(([k, v]) => {
+            if (k.startsWith('upg_')) localStorage.setItem(k, v);
+          });
+          location.reload();
+        } catch (e) { alert('ملف غير صالح: ' + e.message); }
+      };
+      reader.readAsText(file);
+    });
+    inp.click();
+  }
+  function resetAllUpg() {
+    if (!confirm('سيتم حذف كل تقدمك وبياناتك. هل أنت متأكد؟')) return;
+    if (!confirm('تأكيد ثاني — هذا حذف نهائي.')) return;
+    Object.keys(localStorage).filter(k => k.startsWith('upg_')).forEach(k => localStorage.removeItem(k));
+    sessionStorage.clear();
+    location.reload();
+  }
+
+  // ─── Render functions ───
+  const renderDashboard = () => {
+    const root = document.getElementById('page-dashboard');
+    if (!root) return;
+    renderBindings(root);
+    renderSkillGrid('cath-skill-grid');
+    renderActivityList('cath-activity-list', 10);
+  };
+  const renderMyProgress = () => {
+    const root = document.getElementById('page-myprogress');
+    if (!root) return;
+    renderBindings(root);
+    renderSkillGrid('cath-skill-grid-progress');
+    renderDraftsList();
+    renderAchievements();
+    renderProgressChart();
+  };
+
+  const init = () => {
+    wireMyProgressActions();
+    renderDashboard();
+    renderMyProgress();
+
+    // Re-render on page navigation
+    window.addEventListener('upg:page-shown', (e) => {
+      const p = e.detail?.page;
+      if (p === 'dashboard') renderDashboard();
+      else if (p === 'myprogress') renderMyProgress();
+    });
+
+    // Re-render on profile/state changes
+    window.addEventListener('upg:profile-ready', renderDashboard);
+    window.Upg?.state?.on?.('change', () => {
+      // Throttle re-renders
+      cancelAnimationFrame(init.__rafId);
+      init.__rafId = requestAnimationFrame(() => {
+        renderDashboard();
+        renderMyProgress();
+      });
+    });
+
+    // Resize handler for chart
+    let rT;
+    window.addEventListener('resize', () => {
+      clearTimeout(rT);
+      rT = setTimeout(() => {
+        if (!document.getElementById('page-myprogress')?.hidden &&
+            document.getElementById('page-myprogress')?.classList.contains('active')) {
+          renderProgressChart();
+        }
+      }, 180);
+    });
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CATHEDRAL v14 — Production Pass (Worker 11 / Phase 7)
+   Service Worker reg + Focus trap + Console banner + a11y polish
+   ═══════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+
+  // ─── Console banner (only on first load, not on every navigation) ───
+  const SHOWN_KEY = '__upg_banner_shown';
+  if (!window[SHOWN_KEY]) {
+    window[SHOWN_KEY] = true;
+    try {
+      console.log(
+        '%cUpgrade Platform%c   Cathedral v14\n%cAll your data stays on your device. localStorage only.',
+        'background:#0E1220;color:#66FCF1;padding:6px 14px;border-radius:6px;font-size:14px;font-weight:700;',
+        'color:#999;font-size:12px;font-weight:500;',
+        'color:#666;font-size:11px;'
+      );
+    } catch (e) { /* IE/old console */ }
+  }
+
+  // ─── Service Worker registration ───
+  if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    const reg = () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(() => { /* registered */ })
+        .catch((err) => console.warn('[SW] registration failed:', err));
+    };
+    if (document.readyState === 'complete') reg();
+    else window.addEventListener('load', reg, { once: true });
+  }
+
+  // ─── Focus trap for overlays (cmdk, cheatsheet, gateway) ───
+  const trapFocus = (container) => {
+    if (!container || container.__focusTrapped) return;
+    const focusableSel = 'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    container.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab') return;
+      // Skip if container is hidden
+      if (container.hidden || container.getAttribute('aria-hidden') === 'true') return;
+      const nodes = Array.from(container.querySelectorAll(focusableSel))
+        .filter(n => !n.disabled && n.offsetParent !== null);
+      if (!nodes.length) return;
+      const first = nodes[0];
+      const last  = nodes[nodes.length - 1];
+      const cur   = document.activeElement;
+      if (e.shiftKey && cur === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && cur === last) { e.preventDefault(); first.focus(); }
+    });
+    container.__focusTrapped = true;
+  };
+  const wireTraps = () => {
+    ['#cmdk-palette', '#shortcut-cheatsheet', '#page-gateway'].forEach(sel => {
+      const el = document.querySelector(sel);
+      if (el) trapFocus(el);
+    });
+  };
+
+  // ─── Skip link → main focus ───
+  const wireSkipLink = () => {
+    const link = document.querySelector('.u-skip-link');
+    const main = document.getElementById('main');
+    if (link && main) {
+      link.addEventListener('click', (e) => {
+        // Allow default jump, but also focus the main programmatically
+        setTimeout(() => main.focus({ preventScroll: false }), 0);
+      });
+    }
+  };
+
+  // ─── Lazy-mount notification (Phase 7 spec optional hook) ───
+  const HEAVY_PAGES = new Set(['lab', 'callcenter']);
+  const _lazyMounted = new Set();
+  window.addEventListener('upg:page-shown', (e) => {
+    const page = e.detail?.page;
+    if (HEAVY_PAGES.has(page) && !_lazyMounted.has(page)) {
+      _lazyMounted.add(page);
+      try { window.dispatchEvent(new CustomEvent('upg:lazy-mount', { detail: { page } })); }
+      catch (err) { /* noop */ }
+    }
+  });
+
+  const init = () => { wireTraps(); wireSkipLink(); };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+
+  // Expose for debugging
+  window.Upg = window.Upg || {};
+  window.Upg.production = {
+    version: 'cathedral-v14',
+    cacheName: 'upgrade-cathedral-v14-1',
+    swActive: () => !!navigator.serviceWorker?.controller
+  };
 })();

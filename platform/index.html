@@ -2,24 +2,28 @@
 <html lang="ar" dir="rtl" class="v13">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>منصة التدريب الاحترافية</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <meta name="theme-color" content="#0E1220" />
+  <meta name="theme-color" content="#0E1220" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#F7F5F1" media="(prefers-color-scheme: light)" />
+  <meta name="description" content="منصة التطوير المهني الذاتي بمعيار عالمي — 9 مسارات تخصصية، تعلم تفاعلي، محتوى علمي عميق." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Upgrade — منصة التطوير الذاتي" />
+  <meta property="og:description" content="9 مسارات تخصصية، تعلم تفاعلي، محتوى علمي عميق — Cathedral v14." />
+  <meta property="og:image" content="favicon.svg" />
+  <meta property="og:locale" content="ar_IQ" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+  <link rel="manifest" href="manifest.webmanifest" />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
-  <!-- moved to assets/style.css :: block #1 -->
-
-  <!-- ════════════════════════════════════════════════════════════
-       PHASE 1 · DASHBOARD VISUAL OVERHAUL — CSS
-       Scope: #page-dashboard, #sidebar (upgrade). No other page touched.
-       All new CSS uses logical properties (inline-start/end) for RTL.
-  ════════════════════════════════════════════════════════════ -->
-  <!-- moved to assets/style.css :: block #2 -->
 
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+<a href="#main" class="u-skip-link">تخطّي إلى المحتوى</a>
 
 <!-- ════════════════════════════════════════════════════════════
      CATHEDRAL v14 — Lucide-style Icon Sprite (Worker 11 / Phase 2)
@@ -167,6 +171,48 @@
 
 <!-- Mobile sidebar overlay -->
 <div id="sidebar-overlay" onclick="closeMobileSidebar()"></div>
+
+<!-- ════════════════════════════════════════════════════════════
+     CATHEDRAL v14 — Command Palette + Cheat Sheet (Worker 11 / Phase 5)
+     Cmd+K overlay; ?  for keyboard shortcuts cheat sheet.
+══════════════════════════════════════════════════════════════ -->
+<div id="cmdk-palette" class="cmdk-overlay" hidden role="presentation">
+  <div class="cmdk-modal" role="dialog" aria-label="لوحة الأوامر" aria-modal="true">
+    <div class="cmdk-search">
+      <i class="qi qi-md" data-icon="search"></i>
+      <input type="text" class="cmdk-input"
+             placeholder="ابحث أو نفّذ أمراً... (مثلاً: ضريبة، dashboard، lock)"
+             autocomplete="off" spellcheck="false" aria-label="البحث في الأوامر">
+      <kbd class="cmdk-kbd">ESC</kbd>
+    </div>
+    <div class="cmdk-results" role="listbox" aria-label="النتائج"></div>
+    <div class="cmdk-empty" hidden>
+      <i class="qi qi-xl" data-icon="search"></i>
+      <p>لم نجد نتائج.</p>
+      <span class="cmdk-empty-hint">جرّب: <kbd>tax</kbd> · <kbd>dashboard</kbd> · <kbd>lock</kbd></span>
+    </div>
+    <div class="cmdk-footer">
+      <span><kbd>↑</kbd><kbd>↓</kbd> للتنقل</span>
+      <span><kbd>↵</kbd> للتنفيذ</span>
+      <span><kbd>?</kbd> للمساعدة</span>
+    </div>
+  </div>
+</div>
+
+<div id="shortcut-cheatsheet" class="cmdk-overlay" hidden role="presentation">
+  <div class="cmdk-modal cmdk-modal-cheatsheet" role="dialog" aria-label="اختصارات لوحة المفاتيح" aria-modal="true">
+    <header class="cmdk-cheat-header">
+      <h2><i class="qi" data-icon="command"></i> اختصارات لوحة المفاتيح</h2>
+      <button class="cmdk-btn-close" type="button" data-action="close-cheatsheet" aria-label="إغلاق">
+        <i class="qi" data-icon="x"></i>
+      </button>
+    </header>
+    <div class="cmdk-cheat-body"></div>
+    <div class="cmdk-cheat-footer">
+      <span>اضغط <kbd>?</kbd> أو <kbd>Esc</kbd> للإغلاق</span>
+    </div>
+  </div>
+</div>
 
 <!-- ════════════════════════════════════════════════════════════
      CATHEDRAL v14 — Entry Gateway (Worker 11 / Phase 3)
@@ -459,7 +505,7 @@
 
       <span class="nav-section-label">الإدارة</span>
 
-      <div class="nav-item" data-page="none">
+      <div class="nav-item" data-page="myprogress">
         <i class="qi qi-md nav-icon" data-icon="trending-up"></i>
         <span class="nav-label">تقدمي</span>
       </div>
@@ -606,7 +652,7 @@
   <!-- ============================================================
        MAIN CONTENT
   ============================================================ -->
-  <main id="main">
+  <main id="main" tabindex="-1">
 
     <!-- ===========================
          PAGE 1 — DASHBOARD
@@ -617,6 +663,80 @@
         <h1>مرحباً بك في لوحة التحكم 👋</h1>
         <p>نظرة عامة على مسيرتك التدريبية — تدريب ذاتي احترافي</p>
       </div>
+
+      <!-- ══════════════════ Cathedral v14 — Real Dashboard (Worker 11 / Phase 6) ══════════════════ -->
+      <section class="cath-dash" data-cath-dash aria-label="إحصاءاتك الحقيقية">
+        <header class="cath-dash-greeting">
+          <div class="cath-dash-greeting-avatar" data-cath-bind="profile.initial">U</div>
+          <div class="cath-dash-greeting-text">
+            <h2>أهلاً <span data-cath-bind="profile.name">صديقي</span> 👋</h2>
+            <p data-cath-bind="profile.streakLine">رحلتك تبدأ من هنا — تابع تقدّمك أدناه.</p>
+          </div>
+          <span class="cath-progress-pill" data-cath-bind="profile.role">—</span>
+        </header>
+
+        <div class="cath-dash-stats">
+          <article class="cath-stat">
+            <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="check-circle"></i></div>
+            <div class="cath-stat-body">
+              <div><span class="cath-stat-value" data-cath-stat="unitsCompleted">0</span></div>
+              <span class="cath-stat-label">وحدة مُكتملة</span>
+            </div>
+          </article>
+          <article class="cath-stat">
+            <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="bar-chart"></i></div>
+            <div class="cath-stat-body">
+              <div><span class="cath-stat-value" data-cath-stat="avgCompletionRate">0</span><span class="cath-stat-suffix">%</span></div>
+              <span class="cath-stat-label">معدل الإتمام</span>
+            </div>
+          </article>
+          <article class="cath-stat">
+            <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="trending-up"></i></div>
+            <div class="cath-stat-body">
+              <div><span class="cath-stat-value" data-cath-stat="trainingHours">0</span><span class="cath-stat-suffix">ساعة</span></div>
+              <span class="cath-stat-label">إجمالي التدريب</span>
+            </div>
+          </article>
+          <article class="cath-stat">
+            <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="alert-triangle"></i></div>
+            <div class="cath-stat-body">
+              <div><span class="cath-stat-value" data-cath-stat="streak">0</span><span class="cath-stat-suffix">يوم</span></div>
+              <span class="cath-stat-label">streak متتابع</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="cath-dash-grid">
+          <div class="cath-dash-card">
+            <header>
+              <h2><i class="qi" data-icon="layout-dashboard"></i> شجرة المهارات</h2>
+              <button class="cath-card-link" type="button" data-page="myprogress">عرض التفاصيل</button>
+            </header>
+            <div class="cath-skill-grid" id="cath-skill-grid"></div>
+          </div>
+          <div class="cath-dash-card">
+            <header>
+              <h2><i class="qi" data-icon="trending-up"></i> آخر النشاط</h2>
+            </header>
+            <ul class="cath-activity-list" id="cath-activity-list"></ul>
+          </div>
+        </div>
+
+        <div class="cath-dash-card">
+          <header>
+            <h2><i class="qi" data-icon="command"></i> إجراءات سريعة</h2>
+            <span style="font-size:.75rem;color:var(--color-text-faint,rgba(255,255,255,.5));">Cmd+K للبحث</span>
+          </header>
+          <div class="cath-quick-actions">
+            <button class="cath-quick-action" type="button" data-page="callcenter"><i class="qi qi-lg" data-icon="phone"></i><span>مكالمة تجريبية</span></button>
+            <button class="cath-quick-action" type="button" data-page="hrmastery"><i class="qi qi-lg" data-icon="briefcase"></i><span>مقابلة وهمية</span></button>
+            <button class="cath-quick-action" type="button" data-page="accounting"><i class="qi qi-lg" data-icon="calculator"></i><span>حاسبة الراتب</span></button>
+            <button class="cath-quick-action" type="button" data-page="psych"><i class="qi qi-lg" data-icon="brain"></i><span>اختبار شخصية</span></button>
+            <button class="cath-quick-action" type="button" data-page="lab"><i class="qi qi-lg" data-icon="flask-conical"></i><span>سيناريو عشوائي</span></button>
+            <button class="cath-quick-action" type="button" data-page="myprogress"><i class="qi qi-lg" data-icon="bar-chart"></i><span>تقدمي الكامل</span></button>
+          </div>
+        </div>
+      </section>
 
       <!-- Welcome Banner -->
       <div class="welcome-banner">
@@ -903,6 +1023,87 @@
         <p>تدريب متكامل على مهارات التواصل الهاتفي وخدمة العملاء — بالأساليب التي تنجح فعلاً على أرض الواقع</p>
       </div>
 
+      <!-- ══════════════════ Cathedral v14 — qcalc APIndex (Worker 11 / Phase 4) ══════════════════ -->
+      <div class="qcalc" data-calc="apindex">
+        <div class="qcalc-header">
+          <div class="qcalc-title">
+            <i class="qi qi-md" data-icon="gauge"></i>
+            <h3>مؤشر أداء العميل (APIndex)</h3>
+            <span class="qcalc-eyebrow">COPC CX 6.2</span>
+          </div>
+          <div class="qcalc-actions">
+            <button class="qcalc-btn-icon" type="button" data-action="reset" aria-label="إعادة تعيين"><i class="qi" data-icon="refresh"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="copy"  aria-label="نسخ النتيجة"><i class="qi" data-icon="copy"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="export" aria-label="تصدير JSON"><i class="qi" data-icon="download"></i></button>
+          </div>
+        </div>
+        <div class="qcalc-body">
+          <div class="qcalc-inputs qcalc-inputs-2col">
+            <label class="qcalc-field">
+              <span class="qcalc-label">AHT — متوسط مدة المكالمة</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="aht" min="0.5" max="30" step="0.1" value="5.2">
+                <span class="qcalc-suffix">دقيقة</span>
+              </div>
+              <span class="qcalc-hint">المرجع: 4–6 دقائق</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">FCR — حل من أول اتصال</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="fcr" min="0" max="100" step="1" value="72">
+                <span class="qcalc-suffix">%</span>
+              </div>
+              <span class="qcalc-hint">المرجع: 70–79%</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">CSAT — رضا العميل</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="csat" min="0" max="100" step="1" value="84">
+                <span class="qcalc-suffix">%</span>
+              </div>
+              <span class="qcalc-hint">المرجع: ≥ 85%</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">ADH — التزام بالجدول</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="adh" min="0" max="100" step="1" value="93">
+                <span class="qcalc-suffix">%</span>
+              </div>
+              <span class="qcalc-hint">المرجع: 92–95%</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">QA — تقييم الجودة</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="qa" min="0" max="100" step="1" value="88">
+                <span class="qcalc-suffix">%</span>
+              </div>
+              <span class="qcalc-hint">المرجع: ≥ 90%</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">Calls — مكالمات/شفت</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="calls" min="0" max="500" step="1" value="60">
+                <span class="qcalc-suffix">مكالمة</span>
+              </div>
+              <span class="qcalc-hint">معدل: 50–80</span>
+            </label>
+          </div>
+          <div class="qcalc-summary">
+            <div class="qcalc-result-card qcalc-result-primary">
+              <span class="qcalc-result-label">APIndex</span>
+              <span class="qcalc-result-value" data-bind="index" data-format="num2" data-state-bind="tierState">0</span>
+              <span class="qcalc-result-unit">/ 100</span>
+              <div class="qcalc-meter" data-bind="meter" data-meter="meter"><i style="width:0%"></i></div>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">المستوى</span>
+              <span class="qcalc-result-value" data-bind="tier">—</span>
+            </div>
+          </div>
+        </div>
+        <div class="qcalc-explain" data-bind="explain"></div>
+      </div>
+
       <!-- Call Stats -->
       <div class="call-stats-row">
         <div class="call-card">
@@ -914,7 +1115,7 @@
           <div class="lbl">جلسة مكتملة اليوم</div>
         </div>
         <div class="call-card">
-          <div class="num" style="color:var(--accent)">4.7</div>
+          <div class="num u-text-brand">4.7</div>
           <div class="lbl">متوسط التقييم</div>
         </div>
         <div class="call-card">
@@ -2712,6 +2913,87 @@
         <p>منهجيات عالمية بتطبيق عربي — أطر، اعتراضات، ودورة البيع السبعية</p>
       </div>
 
+      <!-- ══════════════════ Cathedral v14 — qcalc Sales Commission (Worker 11 / Phase 4) ══════════════════ -->
+      <div class="qcalc" data-calc="sales-commission">
+        <div class="qcalc-header">
+          <div class="qcalc-title">
+            <i class="qi qi-md" data-icon="trending-up"></i>
+            <h3>حاسبة العمولة و الـ OTE</h3>
+            <span class="qcalc-eyebrow">Tiered + Kicker</span>
+          </div>
+          <div class="qcalc-actions">
+            <button class="qcalc-btn-icon" type="button" data-action="reset" aria-label="إعادة تعيين"><i class="qi" data-icon="refresh"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="copy"  aria-label="نسخ النتيجة"><i class="qi" data-icon="copy"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="export" aria-label="تصدير JSON"><i class="qi" data-icon="download"></i></button>
+          </div>
+        </div>
+        <div class="qcalc-body">
+          <div class="qcalc-inputs qcalc-inputs-2col">
+            <label class="qcalc-field">
+              <span class="qcalc-label">الراتب الأساسي الشهري</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="base" min="0" step="50000" value="800000">
+                <span class="qcalc-suffix">د.ع</span>
+              </div>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">المبيعات المحققة</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="sales" min="0" step="100000" value="12000000">
+                <span class="qcalc-suffix">د.ع</span>
+              </div>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">الهدف الشهري (Quota)</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="target" min="1" step="100000" value="10000000">
+                <span class="qcalc-suffix">د.ع</span>
+              </div>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">معدل العمولة حتى الهدف</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="tier1Rate" min="0" max="100" step="0.5" value="3">
+                <span class="qcalc-suffix">%</span>
+              </div>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">معدل العمولة فوق الهدف</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="tier2Rate" min="0" max="100" step="0.5" value="6">
+                <span class="qcalc-suffix">%</span>
+              </div>
+              <span class="qcalc-hint">عادةً ضِعف tier 1 لتحفيز التجاوز</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">Kicker عند ≥ 110% (% من المبيعات)</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="kicker" min="0" max="100" step="0.5" value="2">
+                <span class="qcalc-suffix">%</span>
+              </div>
+            </label>
+          </div>
+          <div class="qcalc-summary">
+            <div class="qcalc-result-card qcalc-result-primary">
+              <span class="qcalc-result-label">إجمالي الأجر المتوقع (OTE)</span>
+              <span class="qcalc-result-value" data-bind="ote" data-format="money">0</span>
+              <span class="qcalc-result-unit">د.ع</span>
+            </div>
+            <div class="qcalc-result-card" data-bind-card>
+              <span class="qcalc-result-label">إجمالي العمولة</span>
+              <span class="qcalc-result-value" data-bind="totalComm" data-format="money" data-state-bind="tierState">0</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">تحقيق الهدف</span>
+              <span class="qcalc-result-value" data-bind="attainment" data-format="num2">0</span>
+              <span class="qcalc-result-unit">%</span>
+              <div class="qcalc-meter" data-bind="meter1" data-meter="attainmentMeter"><i style="width:0%"></i></div>
+            </div>
+          </div>
+        </div>
+        <div class="qcalc-explain" data-bind="explain"></div>
+      </div>
+
       <!-- ════════════════════════════════════════════════════════════════
            WORKER 02 · PHASE 1 — Sales Frameworks Comparison (Knowledge Spine)
            4 مدارس بيع عالمية، جدول مقارن + modals بأمثلة محادثة عربية كاملة.
@@ -4099,7 +4381,7 @@
 
         <div class="cycle-detail-panel" id="cycleDetailPanel">
           <h3 id="cycleDetailTitle">← اضغط على مرحلة لعرض تفاصيلها</h3>
-          <div class="cycle-detail-grid" id="cycleDetailGrid" style="display:none;"></div>
+          <div class="cycle-detail-grid" id="cycleDetailGrid" class="u-hidden"></div>
         </div>
       </div>
 
@@ -4463,7 +4745,7 @@
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall</div>
             <span class="ql-recall-hint">ما الفرق بين Empathy و Sympathy في البيع؟</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">Sympathy</strong> = «مسكين، أنا حزين لأجلك» (يُضعفك). <strong style="color:var(--accent);">Tactical Empathy</strong> = «أفهم وجهة نظرك دون أن أتبناها» (يُقوّيك ويُقوّي العلاقة). Voss يسمّيها «التعاطف دون التنازل».</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">Sympathy</strong> = «مسكين، أنا حزين لأجلك» (يُضعفك). <strong class="u-text-brand">Tactical Empathy</strong> = «أفهم وجهة نظرك دون أن أتبناها» (يُقوّيك ويُقوّي العلاقة). Voss يسمّيها «التعاطف دون التنازل».</div>
           </div>
         </div>
 
@@ -4581,22 +4863,22 @@
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #1</div>
             <span class="ql-recall-hint">متى تستخدم Scarcity ومتى تتجنّبها؟</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">استخدم:</strong> عندما تكون الندرة حقيقية (3 مقاعد متبقية، السعر يرتفع فعلياً). <strong style="color:#EF4444;">تجنّب:</strong> الندرة المصطنعة — عميل واحد ذكي سيكتشف أنها كذبة، ويُدمّر ثقته للأبد. القاعدة: Scarcity صادقة تبيع، كاذبة تقتل السمعة.</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">استخدم:</strong> عندما تكون الندرة حقيقية (3 مقاعد متبقية، السعر يرتفع فعلياً). <strong style="color:#EF4444;">تجنّب:</strong> الندرة المصطنعة — عميل واحد ذكي سيكتشف أنها كذبة، ويُدمّر ثقته للأبد. القاعدة: Scarcity صادقة تبيع، كاذبة تقتل السمعة.</div>
           </div>
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #2</div>
             <span class="ql-recall-hint">ما خطوات HEAT للعميل الغاضب؟</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">H</strong>ear (استمع دون مقاطعة) → <strong style="color:var(--accent);">E</strong>mpathize (سمِّ المشاعر) → <strong style="color:var(--accent);">A</strong>pologize (اعتذر دون تبرير) → <strong style="color:var(--accent);">T</strong>ake action (خطوة ملموسة الآن). القفز للحل قبل HEA = إشعال الحريق.</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">H</strong>ear (استمع دون مقاطعة) → <strong class="u-text-brand">E</strong>mpathize (سمِّ المشاعر) → <strong class="u-text-brand">A</strong>pologize (اعتذر دون تبرير) → <strong class="u-text-brand">T</strong>ake action (خطوة ملموسة الآن). القفز للحل قبل HEA = إشعال الحريق.</div>
           </div>
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #3</div>
             <span class="ql-recall-hint">ما Foot-in-the-Door vs Door-in-the-Face؟</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">FITD:</strong> طلب صغير (نعم) → طلب كبير (نعم، لأنه ملتزم بالاتساق). <strong style="color:var(--accent);">DITF:</strong> طلب ضخم (لا) → طلب متوسط (نعم، لأنه يبدو معقولاً مقارنة). Cialdini أثبت فعالية الاثنين — اختر حسب السياق.</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">FITD:</strong> طلب صغير (نعم) → طلب كبير (نعم، لأنه ملتزم بالاتساق). <strong class="u-text-brand">DITF:</strong> طلب ضخم (لا) → طلب متوسط (نعم، لأنه يبدو معقولاً مقارنة). Cialdini أثبت فعالية الاثنين — اختر حسب السياق.</div>
           </div>
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #4</div>
             <span class="ql-recall-hint">ما DISC؟ وكيف تبيع لكل نوع؟</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">D</strong>ominant (سريع، نتائج) → تكلّم بأرقام ومباشرة. <strong style="color:var(--accent);">I</strong>nfluential (اجتماعي) → احكِ قصصاً. <strong style="color:var(--accent);">S</strong>teady (حذر) → اطمئنه بالضمانات. <strong style="color:var(--accent);">C</strong>onscientious (تحليلي) → قدّم بيانات ومواصفات. قراءة النوع في أول دقيقتين = مفتاح البيع.</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">D</strong>ominant (سريع، نتائج) → تكلّم بأرقام ومباشرة. <strong class="u-text-brand">I</strong>nfluential (اجتماعي) → احكِ قصصاً. <strong class="u-text-brand">S</strong>teady (حذر) → اطمئنه بالضمانات. <strong class="u-text-brand">C</strong>onscientious (تحليلي) → قدّم بيانات ومواصفات. قراءة النوع في أول دقيقتين = مفتاح البيع.</div>
           </div>
         </div>
       </div>
@@ -4882,6 +5164,79 @@
       <div class="page-header">
         <h1>وحدة السوشيال ميديا</h1>
         <p>إتقان إدارة المنصات الرقمية وبناء المحتوى الجذاب</p>
+      </div>
+
+      <!-- ══════════════════ Cathedral v14 — qcalc A/B Test (Worker 11 / Phase 4) ══════════════════ -->
+      <div class="qcalc" data-calc="ab-test">
+        <div class="qcalc-header">
+          <div class="qcalc-title">
+            <i class="qi qi-md" data-icon="bar-chart"></i>
+            <h3>حاسبة حجم العينة لاختبار A/B</h3>
+            <span class="qcalc-eyebrow">Two-proportion z-test</span>
+          </div>
+          <div class="qcalc-actions">
+            <button class="qcalc-btn-icon" type="button" data-action="reset" aria-label="إعادة تعيين"><i class="qi" data-icon="refresh"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="copy"  aria-label="نسخ النتيجة"><i class="qi" data-icon="copy"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="export" aria-label="تصدير JSON"><i class="qi" data-icon="download"></i></button>
+          </div>
+        </div>
+        <div class="qcalc-body">
+          <div class="qcalc-inputs qcalc-inputs-2col">
+            <label class="qcalc-field">
+              <span class="qcalc-label">معدل التحويل الأساس (Baseline)</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="baseline" min="0.01" max="100" step="0.1" value="5">
+                <span class="qcalc-suffix">%</span>
+              </div>
+              <span class="qcalc-hint">CTR / CR / signup ratio حالي</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">التحسّن النسبي المراد كشفه (Lift)</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="lift" min="-90" max="500" step="1" value="10">
+                <span class="qcalc-suffix">%</span>
+              </div>
+              <span class="qcalc-hint">+10% يعني 5% → 5.5%</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">ألفا (مستوى الثقة)</span>
+              <div class="qcalc-input-wrap">
+                <select class="qcalc-input" name="alpha">
+                  <option value="0.05" selected>0.05 (95% ثقة)</option>
+                  <option value="0.01">0.01 (99% ثقة)</option>
+                  <option value="0.10">0.10 (90% ثقة)</option>
+                </select>
+              </div>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">القوة الإحصائية (Power)</span>
+              <div class="qcalc-input-wrap">
+                <select class="qcalc-input" name="power">
+                  <option value="0.80" selected>80%</option>
+                  <option value="0.90">90%</option>
+                  <option value="0.95">95%</option>
+                </select>
+              </div>
+            </label>
+          </div>
+          <div class="qcalc-summary">
+            <div class="qcalc-result-card qcalc-result-primary">
+              <span class="qcalc-result-label">حجم العينة لكل ذراع</span>
+              <span class="qcalc-result-value" data-bind="nPerArm" data-format="int">0</span>
+              <span class="qcalc-result-unit">مستخدم</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">إجمالي الاختبار</span>
+              <span class="qcalc-result-value" data-bind="totalN" data-format="int">0</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">معدل المتغيّر المتوقع</span>
+              <span class="qcalc-result-value" data-bind="variantRate" data-format="num2">0</span>
+              <span class="qcalc-result-unit">%</span>
+            </div>
+          </div>
+        </div>
+        <div class="qcalc-explain" data-bind="explain"></div>
       </div>
 
       <!-- ====================================================
@@ -5245,7 +5600,7 @@
       <!-- Mix Ratio Visualizer -->
       <div class="card" style="margin-bottom:20px;">
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
-          <div class="card-title" style="margin:0;">توزيع المحتوى الأسبوعي — 7 منشورات</div>
+          <div class="card-title u-m-0">توزيع المحتوى الأسبوعي — 7 منشورات</div>
           <div style="display:flex; gap:10px; font-size:11px; color:var(--text-muted);">
             <span style="display:flex; align-items:center; gap:5px;"><span style="width:10px; height:10px; border-radius:3px; background:var(--accent); display:inline-block;"></span>تعليمي 70%</span>
             <span style="display:flex; align-items:center; gap:5px;"><span style="width:10px; height:10px; border-radius:3px; background:#EAB308; display:inline-block;"></span>ترفيهي 20%</span>
@@ -5738,7 +6093,7 @@
                   نتواصل معك بشأن طلبك رقم [X].<br><br>
                   نعلم إننا تجاوزنا الوقت المتوقع، ونعتذر عن هذا التأخير.<br>
                   السبب: <em>[اذكر سبباً حقيقياً — ولا تختلق واحداً]</em><br><br>
-                  الموعد الجديد المؤكد: <strong style="color:var(--accent);">[التاريخ / الوقت]</strong><br><br>
+                  الموعد الجديد المؤكد: <strong class="u-text-brand">[التاريخ / الوقت]</strong><br><br>
                   وكتعويض عن وقتك — سنضيف لك [خصم / خدمة إضافية / أولوية مستقبلية] 🎁<br><br>
                   شكراً على صبرك، ونتعهد إن هذا ما يتكرر معك.
                 </div>
@@ -5795,7 +6150,7 @@
       <div style="background:var(--surface); border:1px solid var(--border-hover); border-radius:var(--radius-md); padding:16px 20px; margin-top:16px; display:flex; align-items:flex-start; gap:12px;">
         <div style="font-size:20px; flex-shrink:0;">📌</div>
         <div style="font-size:12.5px; color:var(--text-muted); line-height:1.75;">
-          <strong style="color:var(--text);">القاعدة الختامية:</strong> المتجر الناجح لا يُقاس بغياب المشاكل — بل بطريقة تعامله معها أمام الجمهور. كل أزمة تُدار بذكاء = <strong style="color:var(--accent);">إعلان مجاني عن احترافيتك</strong> 💡
+          <strong style="color:var(--text);">القاعدة الختامية:</strong> المتجر الناجح لا يُقاس بغياب المشاكل — بل بطريقة تعامله معها أمام الجمهور. كل أزمة تُدار بذكاء = <strong class="u-text-brand">إعلان مجاني عن احترافيتك</strong> 💡
         </div>
       </div>
 
@@ -6226,9 +6581,9 @@
             <b style="color:var(--text);">الهدف:</b> أن يعرفوك. الجمهور هنا واسع، لا يعرف منتجك بعد.
           </div>
           <div style="background:rgba(102,252,241,0.06); border:1px solid rgba(102,252,241,0.18); border-radius:8px; padding:10px 12px; font-size:11.5px; line-height:1.75; color:var(--text);">
-            <b style="color:var(--accent);">KPIs:</b> Reach · Impressions · CPM · Brand Lift<br>
-            <b style="color:var(--accent);">المحتوى:</b> Reels تعليمية, hooks viral, infographics<br>
-            <b style="color:var(--accent);">CPM متوقع MENA:</b> $1.5 - $4 (Meta), $0.8 - $2 (TikTok)
+            <b class="u-text-brand">KPIs:</b> Reach · Impressions · CPM · Brand Lift<br>
+            <b class="u-text-brand">المحتوى:</b> Reels تعليمية, hooks viral, infographics<br>
+            <b class="u-text-brand">CPM متوقع MENA:</b> $1.5 - $4 (Meta), $0.8 - $2 (TikTok)
           </div>
         </div>
 
@@ -6705,7 +7060,7 @@
       <!-- Salary Table -->
       <div class="ql-glass" style="padding:18px 20px; border-radius:14px; margin-bottom:18px;">
         <div style="font-size:12px; font-weight:800; color:var(--accent); margin-bottom:12px;">💵 نطاقات الراتب — بغداد / أربيل / البصرة (IQD + USD)</div>
-        <div class="w6-iq-salary" style="overflow-x:auto;">
+        <div class="w6-iq-salary u-overflow-auto">
           <table style="width:100%; border-collapse:collapse; font-size:12px; min-width:540px;">
             <thead>
               <tr style="background:rgba(102,252,241,0.06);">
@@ -6906,7 +7261,7 @@
             <div class="lbl">سيناريو مكتمل</div>
           </div>
           <div class="call-card">
-            <div class="num" id="sim-stat-points" style="color:var(--accent);">0</div>
+            <div class="num" id="sim-stat-points" class="u-text-brand">0</div>
             <div class="lbl">مجموع النقاط</div>
           </div>
           <div class="call-card">
@@ -6939,7 +7294,7 @@
       </div><!-- /sim-lobby -->
 
       <!-- ============ SIMULATION ENGINE ============ -->
-      <div id="sim-engine" style="display:none;">
+      <div id="sim-engine" class="u-hidden">
 
         <!-- Top bar inside engine -->
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:12px;">
@@ -6987,7 +7342,7 @@
         </div>
 
         <!-- Feedback panel (hidden until choice) -->
-        <div id="eng-feedback-panel" style="display:none;">
+        <div id="eng-feedback-panel" class="u-hidden">
           <div class="card" id="eng-feedback-card" style="margin-bottom:16px;">
             <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
               <div id="eng-feedback-icon" style="font-size:28px;"></div>
@@ -7020,7 +7375,7 @@
       </div><!-- /sim-engine -->
 
       <!-- ============ ROUND REPORT ============ -->
-      <div id="sim-report" style="display:none;">
+      <div id="sim-report" class="u-hidden">
         <div class="card" style="max-width:600px; margin:0 auto; text-align:center; padding:40px 32px;">
           <div style="font-size:64px; margin-bottom:16px;" id="report-emoji"></div>
           <h2 style="font-size:24px; font-weight:900; color:var(--text); margin-bottom:8px;" id="report-title"></h2>
@@ -7066,6 +7421,88 @@
         <p>دليل تطبيقي ميداني — موظف مبيعات · كول سنتر · أكونت منجر · تقنية</p>
       </div>
 
+      <!-- ══════════════════ Cathedral v14 — qcalc Big Five (Worker 11 / Phase 4) ══════════════════ -->
+      <div class="qcalc" data-calc="bigfive-score">
+        <div class="qcalc-header">
+          <div class="qcalc-title">
+            <i class="qi qi-md" data-icon="brain"></i>
+            <h3>مؤشّر OCEAN — Big Five</h3>
+            <span class="qcalc-eyebrow">NEO-PI-R / IPIP</span>
+          </div>
+          <div class="qcalc-actions">
+            <button class="qcalc-btn-icon" type="button" data-action="reset" aria-label="إعادة تعيين"><i class="qi" data-icon="refresh"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="copy"  aria-label="نسخ النتيجة"><i class="qi" data-icon="copy"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="export" aria-label="تصدير JSON"><i class="qi" data-icon="download"></i></button>
+          </div>
+        </div>
+        <div class="qcalc-body">
+          <div class="qcalc-inputs qcalc-inputs-2col">
+            <label class="qcalc-field">
+              <span class="qcalc-label">الانفتاح O — Openness</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="openness" min="0" max="100" step="1" value="55">
+                <span class="qcalc-suffix">/100</span>
+              </div>
+              <span class="qcalc-hint">الفضول، التخيّل، تقبّل التجارب</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">الضمير C — Conscientiousness</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="conscientious" min="0" max="100" step="1" value="65">
+                <span class="qcalc-suffix">/100</span>
+              </div>
+              <span class="qcalc-hint">التنظيم، الانضباط، المسؤولية</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">الانبساط E — Extraversion</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="extraversion" min="0" max="100" step="1" value="50">
+                <span class="qcalc-suffix">/100</span>
+              </div>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">المقبولية A — Agreeableness</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="agreeableness" min="0" max="100" step="1" value="60">
+                <span class="qcalc-suffix">/100</span>
+              </div>
+            </label>
+            <label class="qcalc-field" style="grid-column:1/-1;">
+              <span class="qcalc-label">العصابية N — Neuroticism (تذكّر: الأقل أفضل في بيئة العمل)</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="neuroticism" min="0" max="100" step="1" value="35">
+                <span class="qcalc-suffix">/100</span>
+              </div>
+              <span class="qcalc-hint">القلق، التقلّب، الحساسية للضغط</span>
+            </label>
+          </div>
+          <div class="qcalc-summary qcalc-summary-2col">
+            <div class="qcalc-result-card qcalc-result-primary">
+              <span class="qcalc-result-label">المؤشّر المركّب</span>
+              <span class="qcalc-result-value" data-bind="composite" data-format="num2" data-state-bind="state">0</span>
+              <span class="qcalc-result-unit">/100</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">الانفتاح</span>
+              <span class="qcalc-result-value" data-bind="oLabel">—</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">الضمير</span>
+              <span class="qcalc-result-value" data-bind="cLabel">—</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">الانبساط</span>
+              <span class="qcalc-result-value" data-bind="eLabel">—</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">العصابية</span>
+              <span class="qcalc-result-value" data-bind="nLabel">—</span>
+            </div>
+          </div>
+        </div>
+        <div class="qcalc-explain" data-bind="explain"></div>
+      </div>
+
       <!-- ── INTRO BANNER ── -->
       <div style="background:linear-gradient(135deg,rgba(139,92,246,0.12),rgba(102,252,241,0.08));border:1px solid rgba(139,92,246,0.25);border-radius:var(--radius-lg);padding:18px 22px;margin-bottom:26px;display:flex;align-items:flex-start;gap:16px;">
         <div style="font-size:28px;flex-shrink:0;margin-top:2px;">🎯</div>
@@ -7081,7 +7518,7 @@
           <div style="font-size:13px;font-weight:800;color:var(--text);">⚡ تركيبات الأدوات الأعلى تأثيراً</div>
           <span class="tag accent">دليل فوري</span>
         </div>
-        <table class="matrix-ref-table" style="width:100%;">
+        <table class="matrix-ref-table u-w-full">
           <thead>
             <tr>
               <th>التركيبة</th>
@@ -7090,7 +7527,7 @@
           </thead>
           <tbody>
             <tr>
-              <td><strong style="color:var(--accent);">مرساة + نفور من الخسارة</strong></td>
+              <td><strong class="u-text-brand">مرساة + نفور من الخسارة</strong></td>
               <td style="color:var(--text-muted);font-size:12px;">يرى السعر رخيصاً ويخاف يخسر الفرصة</td>
             </tr>
             <tr>
@@ -7255,7 +7692,7 @@
             <div class="psych-acc-grid">
               <div class="psych-info-block full-width">
                 <div class="psych-info-label">الشرح العملي</div>
-                <div class="psych-info-text">الإنسان يبحث لا شعورياً عن المعلومات التي تُثبت قناعته الأصلية ويتجاهل ما يعارضها. مهما قدمت من منطق، لو يعتقد أنك "تريد تبيع بس" — سيُفسّر كل كلمة بهذا الإطار. <strong style="color:var(--accent);">الفكرة الذهبية: لا تواجه القناعة — اجعله يشكك فيها بسؤال.</strong></div>
+                <div class="psych-info-text">الإنسان يبحث لا شعورياً عن المعلومات التي تُثبت قناعته الأصلية ويتجاهل ما يعارضها. مهما قدمت من منطق، لو يعتقد أنك "تريد تبيع بس" — سيُفسّر كل كلمة بهذا الإطار. <strong class="u-text-brand">الفكرة الذهبية: لا تواجه القناعة — اجعله يشكك فيها بسؤال.</strong></div>
               </div>
 
               <div class="psych-info-block">
@@ -7409,7 +7846,7 @@
           </div>
         </div>
         <div style="font-size:12.5px;color:var(--text-muted);line-height:1.8;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);">
-          <strong style="color:var(--accent);">الدماغ لا يقاوم تركيبتين معاً</strong> — استخدم مرساة مع نفور من الخسارة فيرى السعر رخيصاً ويخاف الفرصة. ادمج إثباتاً اجتماعياً مع ندم استباقي فيدرك أن الآخرين فعلوا وأن التردد له ثمن. قلّل الخيارات مع الحِمل المعرفي فيريح دماغه ويُسلّم الأمر لخبير يثق به. ووجّه سؤالاً عكسياً يجعله يشكك في قناعته بنفسه دون أي مقاومة.
+          <strong class="u-text-brand">الدماغ لا يقاوم تركيبتين معاً</strong> — استخدم مرساة مع نفور من الخسارة فيرى السعر رخيصاً ويخاف الفرصة. ادمج إثباتاً اجتماعياً مع ندم استباقي فيدرك أن الآخرين فعلوا وأن التردد له ثمن. قلّل الخيارات مع الحِمل المعرفي فيريح دماغه ويُسلّم الأمر لخبير يثق به. ووجّه سؤالاً عكسياً يجعله يشكك في قناعته بنفسه دون أي مقاومة.
         </div>
       </div>
 
@@ -7798,7 +8235,7 @@
               <div style="font-size:11px;color:var(--text-muted);">أي نمط شخصية يستخدم أي دفاع أكثر — الربط بين DISC والدوافع السبعة</div>
             </div>
           </div>
-          <div style="overflow-x:auto;">
+          <div class="u-overflow-auto">
             <table class="matrix-ref-table" style="width:100%;min-width:600px;">
               <thead>
                 <tr>
@@ -8340,7 +8777,7 @@
           <div class="lbl">من الأداء الوظيفي يُحدده EQ</div>
         </div>
         <div class="call-card">
-          <div class="num" style="color:var(--accent);">5</div>
+          <div class="num u-text-brand">5</div>
           <div class="lbl">مجالات أساسية في نموذج Goleman</div>
         </div>
         <div class="call-card">
@@ -8409,7 +8846,7 @@
               </div>
               <div class="psych-info-block">
                 <div class="psych-info-label">🛠️ تقنية STOP</div>
-                <div class="psych-info-text"><strong style="color:var(--accent);">S</strong>top — توقف فوراً<br><strong style="color:var(--accent);">T</strong>ake breath — خذ نفس عميق<br><strong style="color:var(--accent);">O</strong>bserve — لاحظ ما تشعر<br><strong style="color:var(--accent);">P</strong>roceed — تصرف باختيار</div>
+                <div class="psych-info-text"><strong class="u-text-brand">S</strong>top — توقف فوراً<br><strong class="u-text-brand">T</strong>ake breath — خذ نفس عميق<br><strong class="u-text-brand">O</strong>bserve — لاحظ ما تشعر<br><strong class="u-text-brand">P</strong>roceed — تصرف باختيار</div>
               </div>
               <div class="psych-info-block">
                 <div class="psych-info-label">📞 سكريبت تحت الضغط</div>
@@ -8508,7 +8945,7 @@
               </div>
               <div class="psych-info-block">
                 <div class="psych-info-label">⚡ تقنية إدارة الصراع</div>
-                <div class="psych-info-text"><strong style="color:var(--accent);">1.</strong> اعترف بوجهة نظرهم أولاً<br><strong style="color:var(--accent);">2.</strong> ابحث عن النقطة المشتركة<br><strong style="color:var(--accent);">3.</strong> قدّم حلاً يُكسب الطرفين<br><strong style="color:var(--accent);">4.</strong> لا تجعلها "أنا vs أنت"</div>
+                <div class="psych-info-text"><strong class="u-text-brand">1.</strong> اعترف بوجهة نظرهم أولاً<br><strong class="u-text-brand">2.</strong> ابحث عن النقطة المشتركة<br><strong class="u-text-brand">3.</strong> قدّم حلاً يُكسب الطرفين<br><strong class="u-text-brand">4.</strong> لا تجعلها "أنا vs أنت"</div>
               </div>
             </div>
           </div>
@@ -8559,7 +8996,7 @@
             <input type="range" min="1" max="10" value="5" style="width:100%;margin-top:8px;accent-color:#22C55E;" oninput="updateEQBar(4,this.value)">
           </div>
           <div class="psych-info-block" style="grid-column:1/-1;">
-            <div class="psych-info-label" style="color:var(--accent);">المهارات الاجتماعية</div>
+            <div class="psych-info-label u-text-brand">المهارات الاجتماعية</div>
             <div style="display:flex;align-items:center;gap:10px;margin-top:8px;">
               <div class="progress-bar" style="flex:1;"><div class="progress-fill" id="eq-bar-5" style="width:0%;"></div></div>
               <span id="eq-val-5" style="font-size:12px;color:var(--text-muted);width:28px;">—</span>
@@ -8642,7 +9079,7 @@
             <div style="font-size:11.5px;color:var(--text-muted);">كيف يختلف استخدام الذكاء العاطفي بين كل دور</div>
           </div>
         </div>
-        <div style="overflow-x:auto;">
+        <div class="u-overflow-auto">
           <table class="matrix-ref-table" style="width:100%;min-width:700px;">
             <thead>
               <tr>
@@ -8888,6 +9325,85 @@
         <p>منهج Harvard للتفاوض + أقوى أساليب الإقناع — من النظرية إلى الميدان المباشر</p>
       </div>
 
+      <!-- ══════════════════ Cathedral v14 — qcalc BATNA / ZOPA (Worker 11 / Phase 4) ══════════════════ -->
+      <div class="qcalc" data-calc="batna">
+        <div class="qcalc-header">
+          <div class="qcalc-title">
+            <i class="qi qi-md" data-icon="heart-handshake"></i>
+            <h3>محلّل ZOPA و BATNA</h3>
+            <span class="qcalc-eyebrow">Harvard Negotiation</span>
+          </div>
+          <div class="qcalc-actions">
+            <button class="qcalc-btn-icon" type="button" data-action="reset" aria-label="إعادة تعيين"><i class="qi" data-icon="refresh"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="copy"  aria-label="نسخ النتيجة"><i class="qi" data-icon="copy"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="export" aria-label="تصدير JSON"><i class="qi" data-icon="download"></i></button>
+          </div>
+        </div>
+        <div class="qcalc-body">
+          <div class="qcalc-inputs qcalc-inputs-2col">
+            <label class="qcalc-field">
+              <span class="qcalc-label">حدّك الأدنى (Reservation)</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="reservation" min="0" step="100000" value="1500000">
+                <span class="qcalc-suffix">د.ع</span>
+              </div>
+              <span class="qcalc-hint">أقل قيمة تقبلها قبل أن تنسحب</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">هدفك (Target)</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="target" min="0" step="100000" value="2200000">
+                <span class="qcalc-suffix">د.ع</span>
+              </div>
+              <span class="qcalc-hint">المخرَج المثالي لك</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">عرضك الافتتاحي (Anchor)</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="opening" min="0" step="100000" value="2500000">
+                <span class="qcalc-suffix">د.ع</span>
+              </div>
+              <span class="qcalc-hint">أعلى من الهدف بـ 10–20%</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">سقف الطرف الآخر</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="theirAnchor" min="0" step="100000" value="2300000">
+                <span class="qcalc-suffix">د.ع</span>
+              </div>
+            </label>
+            <label class="qcalc-field" style="grid-column:1/-1;">
+              <span class="qcalc-label">الحد الأدنى المفترض لهم</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="theirReservation" min="0" step="100000" value="1700000">
+                <span class="qcalc-suffix">د.ع</span>
+              </div>
+              <span class="qcalc-hint">من أبحاث السوق + إشارات المحادثة</span>
+            </label>
+          </div>
+          <div class="qcalc-summary qcalc-summary-2col">
+            <div class="qcalc-result-card qcalc-result-primary">
+              <span class="qcalc-result-label">منطقة الاتفاق المحتمل (ZOPA)</span>
+              <span class="qcalc-result-value" data-bind="status" data-state-bind="state">—</span>
+              <span class="qcalc-result-unit">عرض الـ ZOPA: <span data-bind="zopaWidth" data-format="money">0</span> د.ع</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">الحد الأدنى للـ ZOPA</span>
+              <span class="qcalc-result-value" data-bind="zopaLow" data-format="money">0</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">الحد الأعلى للـ ZOPA</span>
+              <span class="qcalc-result-value" data-bind="zopaHigh" data-format="money">0</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">نقطة الوسط المقترحة</span>
+              <span class="qcalc-result-value" data-bind="midpoint" data-format="money">0</span>
+            </div>
+          </div>
+        </div>
+        <div class="qcalc-explain" data-bind="explain"></div>
+      </div>
+
       <!-- Intro Banner -->
       <div style="background:linear-gradient(135deg,rgba(249,115,22,0.12),rgba(234,179,8,0.08));border:1px solid rgba(249,115,22,0.25);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:26px;display:flex;align-items:flex-start;gap:16px;">
         <div style="font-size:30px;flex-shrink:0;margin-top:2px;">⚖️</div>
@@ -8908,7 +9424,7 @@
           <div class="lbl">أسلحة Cialdini للإقناع</div>
         </div>
         <div class="call-card">
-          <div class="num" style="color:var(--accent);">93%</div>
+          <div class="num u-text-brand">93%</div>
           <div class="lbl">من التواصل غير لفظي</div>
         </div>
         <div class="call-card">
@@ -8952,7 +9468,7 @@
               </div>
               <div class="psych-info-block full-width">
                 <div class="psych-info-label">🎯 تمرين BATNA — قبل أي مفاوضة</div>
-                <div class="psych-info-text">اكتب على ورقة: <strong style="color:var(--accent);">1)</strong> ما الذي أريده مثالياً؟ <strong style="color:var(--accent);">2)</strong> ما الذي أقبله كحد أدنى؟ <strong style="color:var(--accent);">3)</strong> ماذا سأفعل إذا فشلت المفاوضة؟ <strong style="color:var(--accent);">4)</strong> ما BATNA الطرف الآخر المحتمل؟</div>
+                <div class="psych-info-text">اكتب على ورقة: <strong class="u-text-brand">1)</strong> ما الذي أريده مثالياً؟ <strong class="u-text-brand">2)</strong> ما الذي أقبله كحد أدنى؟ <strong class="u-text-brand">3)</strong> ماذا سأفعل إذا فشلت المفاوضة؟ <strong class="u-text-brand">4)</strong> ما BATNA الطرف الآخر المحتمل؟</div>
               </div>
             </div>
           </div>
@@ -9461,6 +9977,65 @@
         <p>التفكير الهندسي، جودة الكود، حل المشكلات، مراجعة الكود، والقرارات التقنية — من منظور الممارس لا المنظّر</p>
       </div>
 
+      <!-- ══════════════════ Cathedral v14 — qcalc Big-O Cost (Worker 11 / Phase 4) ══════════════════ -->
+      <div class="qcalc" data-calc="bigo-cost">
+        <div class="qcalc-header">
+          <div class="qcalc-title">
+            <i class="qi qi-md" data-icon="line-chart"></i>
+            <h3>مُقدِّر تكلفة Big-O</h3>
+            <span class="qcalc-eyebrow">Algorithmic Cost</span>
+          </div>
+          <div class="qcalc-actions">
+            <button class="qcalc-btn-icon" type="button" data-action="reset" aria-label="إعادة تعيين"><i class="qi" data-icon="refresh"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="copy"  aria-label="نسخ النتيجة"><i class="qi" data-icon="copy"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="export" aria-label="تصدير JSON"><i class="qi" data-icon="download"></i></button>
+          </div>
+        </div>
+        <div class="qcalc-body">
+          <div class="qcalc-inputs qcalc-inputs-2col">
+            <label class="qcalc-field">
+              <span class="qcalc-label">حجم المدخل (n)</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="n" min="1" max="1000000" step="1" value="10000">
+                <span class="qcalc-suffix">عنصر</span>
+              </div>
+              <span class="qcalc-hint">جرّب 100, 10,000, 1,000,000</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">تعقيد الخوارزمية</span>
+              <div class="qcalc-input-wrap">
+                <select class="qcalc-input" name="complexity">
+                  <option value="O(1)">O(1) — ثابت</option>
+                  <option value="O(log n)">O(log n) — ثنائي البحث</option>
+                  <option value="O(n)" selected>O(n) — مرور خطي</option>
+                  <option value="O(n log n)">O(n log n) — Quick / Merge sort</option>
+                  <option value="O(n^2)">O(n²) — Bubble sort / nested loop</option>
+                  <option value="O(n^3)">O(n³) — ضرب مصفوفات بسيط</option>
+                  <option value="O(2^n)">O(2ⁿ) — Subset / Fibonacci recursive</option>
+                  <option value="O(n!)">O(n!) — Travelling Salesman brute-force</option>
+                </select>
+              </div>
+            </label>
+          </div>
+          <div class="qcalc-summary">
+            <div class="qcalc-result-card qcalc-result-primary">
+              <span class="qcalc-result-label">عدد العمليات التقريبي</span>
+              <span class="qcalc-result-value" data-bind="opsHuman" data-state-bind="state">0</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">الزمن المتوقع</span>
+              <span class="qcalc-result-value" data-bind="timeHuman">—</span>
+              <span class="qcalc-result-unit">على 10⁸ ops/sec</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">التصنيف</span>
+              <span class="qcalc-result-value" data-bind="label">—</span>
+            </div>
+          </div>
+        </div>
+        <div class="qcalc-explain" data-bind="explain"></div>
+      </div>
+
       <!-- Intro Banner -->
       <div style="background:linear-gradient(135deg,rgba(6,182,212,0.12),rgba(139,92,246,0.08));border:1px solid rgba(6,182,212,0.25);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:26px;display:flex;align-items:flex-start;gap:16px;">
         <div style="font-size:30px;flex-shrink:0;margin-top:2px;">🧠</div>
@@ -9481,7 +10056,7 @@
           <div class="lbl">أنماط Debugging احترافية</div>
         </div>
         <div class="call-card">
-          <div class="num" style="color:var(--accent);">10x</div>
+          <div class="num u-text-brand">10x</div>
           <div class="lbl">فرق الإنتاجية بين المبتدئ والخبير</div>
         </div>
         <div class="call-card">
@@ -9769,7 +10344,7 @@
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">🧠 Active Recall — قبل أن تقرأ الإجابة</div>
             <span class="ql-recall-hint">اضغط لاسترجاع المعلومة ذهنياً أولاً…</span>
-            <div class="ql-recall-a">نظام مثل Twitter: 300M DAU، ~6K tweets/sec. السؤال: هل الـ bottleneck في الكتابة أم القراءة؟<br><strong style="color:var(--accent);">الإجابة:</strong> القراءة. نسبة Read:Write تقارب 1000:1 — لذلك الحل = <em>Fan-out on Write</em> إلى Timeline Cache (Redis) لكل متابع. الـ storage المفضّل: Cassandra (write-heavy + eventually consistent) مع Redis للـ hot timelines.</div>
+            <div class="ql-recall-a">نظام مثل Twitter: 300M DAU، ~6K tweets/sec. السؤال: هل الـ bottleneck في الكتابة أم القراءة؟<br><strong class="u-text-brand">الإجابة:</strong> القراءة. نسبة Read:Write تقارب 1000:1 — لذلك الحل = <em>Fan-out on Write</em> إلى Timeline Cache (Redis) لكل متابع. الـ storage المفضّل: Cassandra (write-heavy + eventually consistent) مع Redis للـ hot timelines.</div>
           </div>
         </div>
 
@@ -9885,7 +10460,7 @@
               </div>
               <div class="psych-info-block">
                 <div class="psych-info-label">📌 مثال واقعي</div>
-                <div class="psych-info-text">PaymentGatewayFactory يُرجع Stripe أو PayPal أو Local بناءً على config. الكود المستدعي لا يعرف أيهم — فقط <code style="color:var(--accent);">gateway.charge()</code>.</div>
+                <div class="psych-info-text">PaymentGatewayFactory يُرجع Stripe أو PayPal أو Local بناءً على config. الكود المستدعي لا يعرف أيهم — فقط <code class="u-text-brand">gateway.charge()</code>.</div>
               </div>
               <div class="psych-info-block">
                 <div class="psych-info-label">⚠️ تحذير</div>
@@ -9909,7 +10484,7 @@
             <div class="psych-acc-grid">
               <div class="psych-info-block full-width">
                 <div class="psych-info-label">المشكلة مع الوراثة</div>
-                <div class="psych-info-text">لديك Coffee. تريد CoffeeWithMilk، CoffeeWithSugar، CoffeeWithMilkAndSugar، CoffeeWithMilkAndSugarAndCaramel… انفجار subclasses. <strong style="color:var(--text);">الحل:</strong> Decorator يُغلّف الكائن ويُضيف سلوكاً. <code style="color:var(--accent);">new Sugar(new Milk(new Coffee()))</code>. تركيب ديناميكي، لا شجرة ثابتة.</div>
+                <div class="psych-info-text">لديك Coffee. تريد CoffeeWithMilk، CoffeeWithSugar، CoffeeWithMilkAndSugar، CoffeeWithMilkAndSugarAndCaramel… انفجار subclasses. <strong style="color:var(--text);">الحل:</strong> Decorator يُغلّف الكائن ويُضيف سلوكاً. <code class="u-text-brand">new Sugar(new Milk(new Coffee()))</code>. تركيب ديناميكي، لا شجرة ثابتة.</div>
               </div>
               <div class="psych-info-block">
                 <div class="psych-info-label">🔥 حيث تراه يومياً</div>
@@ -10090,22 +10665,22 @@
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #1 — اذكر قبل القراءة</div>
             <span class="ql-recall-hint">ما الفرق بين Authentication و Authorization؟ استرجع ثم اضغط.</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">AuthN</strong> = من أنت (login). <strong style="color:var(--accent);">AuthZ</strong> = ماذا يحق لك (permissions). AuthN تأتي أولاً دائماً. JWT يحمل هوية (AuthN)، والأدوار داخله تُستخدم للـ AuthZ. اخلطهما = ثغرة أمنية.</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">AuthN</strong> = من أنت (login). <strong class="u-text-brand">AuthZ</strong> = ماذا يحق لك (permissions). AuthN تأتي أولاً دائماً. JWT يحمل هوية (AuthN)، والأدوار داخله تُستخدم للـ AuthZ. اخلطهما = ثغرة أمنية.</div>
           </div>
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #2 — اذكر قبل القراءة</div>
             <span class="ql-recall-hint">متى تستخدم SQL ومتى NoSQL؟ استرجع ثم اضغط.</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">SQL</strong>: علاقات معقدة، معاملات مالية، تكامل صارم (ACID). <strong style="color:var(--accent);">NoSQL</strong>: مقياس أفقي ضخم، schema متغير، read-heavy بصيغ document/key-value. القاعدة: ابدأ بـ SQL حتى تُثبت احتياجاً لـ NoSQL — ليس العكس.</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">SQL</strong>: علاقات معقدة، معاملات مالية، تكامل صارم (ACID). <strong class="u-text-brand">NoSQL</strong>: مقياس أفقي ضخم، schema متغير، read-heavy بصيغ document/key-value. القاعدة: ابدأ بـ SQL حتى تُثبت احتياجاً لـ NoSQL — ليس العكس.</div>
           </div>
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #3 — اذكر قبل القراءة</div>
             <span class="ql-recall-hint">ماذا يفعل Circuit Breaker؟ ومتى يكون مفتوحاً/مغلقاً/نصف؟</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">Closed</strong> = يمر الطلب طبيعي. بعد N فشل → <strong style="color:var(--accent);">Open</strong> = يرفض فوراً دون محاولة (يحمي الـ downstream من الإرهاق). بعد timeout → <strong style="color:var(--accent);">Half-Open</strong> = يسمح بطلب واحد تجريبي. إذا نجح → Closed. إذا فشل → Open مرة أخرى.</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">Closed</strong> = يمر الطلب طبيعي. بعد N فشل → <strong class="u-text-brand">Open</strong> = يرفض فوراً دون محاولة (يحمي الـ downstream من الإرهاق). بعد timeout → <strong class="u-text-brand">Half-Open</strong> = يسمح بطلب واحد تجريبي. إذا نجح → Closed. إذا فشل → Open مرة أخرى.</div>
           </div>
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #4 — اذكر قبل القراءة</div>
             <span class="ql-recall-hint">ما هو N+1 Query Problem؟ وكيف تحلّه؟</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">المشكلة:</strong> استعلام واحد يُرجع N صفوف، ثم تُنفّذ استعلاماً لكل صف (عادة داخل loop). النتيجة: N+1 استعلامات. <strong style="color:var(--accent);">الحل:</strong> JOIN أو eager loading (<code>.includes()</code> في Rails، <code>.prefetch_related()</code> في Django، populate في Mongoose). مؤشر الكشف: monitoring يُظهر استعلامات متشابهة بأعداد خطية مع حجم البيانات.</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">المشكلة:</strong> استعلام واحد يُرجع N صفوف، ثم تُنفّذ استعلاماً لكل صف (عادة داخل loop). النتيجة: N+1 استعلامات. <strong class="u-text-brand">الحل:</strong> JOIN أو eager loading (<code>.includes()</code> في Rails، <code>.prefetch_related()</code> في Django، populate في Mongoose). مؤشر الكشف: monitoring يُظهر استعلامات متشابهة بأعداد خطية مع حجم البيانات.</div>
           </div>
         </div>
       </div>
@@ -11475,6 +12050,143 @@ const bird = { ...canMove(), ...canFly() };
         <p>دقة الأرقام، الإقفال، التسويات، الأخطاء البشرية، واتخاذ القرار تحت الضغط — تدريب ذاتي لبيئة العمل الواقعية</p>
       </div>
 
+      <!-- ══════════════════ Cathedral v14 — qcalc Gallery (Worker 11 / Phase 4) ══════════════════ -->
+      <div class="qcalc-gallery">
+        <!-- 1) Iraq Tax -->
+        <div class="qcalc" data-calc="iraq-tax">
+          <div class="qcalc-header">
+            <div class="qcalc-title">
+              <i class="qi qi-md" data-icon="calculator"></i>
+              <h3>حاسبة ضريبة الدخل العراقية</h3>
+              <span class="qcalc-eyebrow">قانون 113</span>
+            </div>
+            <div class="qcalc-actions">
+              <button class="qcalc-btn-icon" type="button" data-action="reset" aria-label="إعادة تعيين"><i class="qi" data-icon="refresh"></i></button>
+              <button class="qcalc-btn-icon" type="button" data-action="copy"  aria-label="نسخ النتيجة"><i class="qi" data-icon="copy"></i></button>
+              <button class="qcalc-btn-icon" type="button" data-action="export" aria-label="تصدير JSON"><i class="qi" data-icon="download"></i></button>
+            </div>
+          </div>
+          <div class="qcalc-body">
+            <div class="qcalc-inputs">
+              <label class="qcalc-field">
+                <span class="qcalc-label">الراتب الإجمالي الشهري</span>
+                <div class="qcalc-input-wrap">
+                  <input type="number" class="qcalc-input" name="gross" min="0" step="10000" value="1000000">
+                  <span class="qcalc-suffix">د.ع</span>
+                </div>
+                <span class="qcalc-hint">قبل أي خصومات</span>
+              </label>
+              <label class="qcalc-field">
+                <span class="qcalc-label">عدد المعالين</span>
+                <div class="qcalc-input-wrap">
+                  <input type="number" class="qcalc-input" name="dependents" min="0" max="20" step="1" value="0">
+                  <span class="qcalc-suffix">شخص</span>
+                </div>
+              </label>
+              <label class="qcalc-field">
+                <span class="qcalc-label">الحالة الاجتماعية</span>
+                <div class="qcalc-input-wrap">
+                  <select class="qcalc-input" name="status">
+                    <option value="single" selected>أعزب</option>
+                    <option value="married">متزوج</option>
+                  </select>
+                </div>
+              </label>
+            </div>
+            <div class="qcalc-summary">
+              <div class="qcalc-result-card qcalc-result-primary">
+                <span class="qcalc-result-label">الصافي الشهري</span>
+                <span class="qcalc-result-value" data-bind="net" data-format="money">0</span>
+                <span class="qcalc-result-unit">د.ع</span>
+              </div>
+              <div class="qcalc-result-card">
+                <span class="qcalc-result-label">إجمالي الضريبة</span>
+                <span class="qcalc-result-value" data-bind="tax" data-format="money">0</span>
+                <span class="qcalc-result-unit">د.ع · النسبة <span data-bind="effRate" data-format="num2">0</span>%</span>
+              </div>
+              <div class="qcalc-result-card">
+                <span class="qcalc-result-label">إجمالي الإعفاءات</span>
+                <span class="qcalc-result-value" data-bind="exemptions" data-format="money">0</span>
+                <span class="qcalc-result-unit">د.ع</span>
+              </div>
+            </div>
+          </div>
+          <div class="qcalc-explain" data-bind="explain"></div>
+        </div>
+
+        <!-- 2) Salary Slip -->
+        <div class="qcalc" data-calc="salary-slip">
+          <div class="qcalc-header">
+            <div class="qcalc-title">
+              <i class="qi qi-md" data-icon="briefcase"></i>
+              <h3>قسيمة الراتب الشهري</h3>
+              <span class="qcalc-eyebrow">Net Pay</span>
+            </div>
+            <div class="qcalc-actions">
+              <button class="qcalc-btn-icon" type="button" data-action="reset" aria-label="إعادة تعيين"><i class="qi" data-icon="refresh"></i></button>
+              <button class="qcalc-btn-icon" type="button" data-action="copy"  aria-label="نسخ النتيجة"><i class="qi" data-icon="copy"></i></button>
+              <button class="qcalc-btn-icon" type="button" data-action="export" aria-label="تصدير JSON"><i class="qi" data-icon="download"></i></button>
+            </div>
+          </div>
+          <div class="qcalc-body">
+            <div class="qcalc-inputs qcalc-inputs-2col">
+              <label class="qcalc-field">
+                <span class="qcalc-label">الراتب الأساسي</span>
+                <div class="qcalc-input-wrap">
+                  <input type="number" class="qcalc-input" name="gross" min="0" step="10000" value="1200000">
+                  <span class="qcalc-suffix">د.ع</span>
+                </div>
+              </label>
+              <label class="qcalc-field">
+                <span class="qcalc-label">البدلات (نقل/سكن)</span>
+                <div class="qcalc-input-wrap">
+                  <input type="number" class="qcalc-input" name="allowances" min="0" step="10000" value="200000">
+                  <span class="qcalc-suffix">د.ع</span>
+                </div>
+              </label>
+              <label class="qcalc-field">
+                <span class="qcalc-label">نسبة الضمان (% من الأساسي)</span>
+                <div class="qcalc-input-wrap">
+                  <input type="number" class="qcalc-input" name="ssRate" min="0" max="20" step="0.5" value="5">
+                  <span class="qcalc-suffix">%</span>
+                </div>
+                <span class="qcalc-hint">المعتاد: 5% (العامل) + 12% (صاحب العمل)</span>
+              </label>
+              <label class="qcalc-field">
+                <span class="qcalc-label">معدل ضريبة الدخل</span>
+                <div class="qcalc-input-wrap">
+                  <input type="number" class="qcalc-input" name="taxRate" min="0" max="50" step="0.5" value="7">
+                  <span class="qcalc-suffix">%</span>
+                </div>
+              </label>
+              <label class="qcalc-field" style="grid-column:1/-1;">
+                <span class="qcalc-label">خصومات أخرى (سُلَف/قروض/غيابات)</span>
+                <div class="qcalc-input-wrap">
+                  <input type="number" class="qcalc-input" name="otherDeductions" min="0" step="5000" value="0">
+                  <span class="qcalc-suffix">د.ع</span>
+                </div>
+              </label>
+            </div>
+            <div class="qcalc-summary">
+              <div class="qcalc-result-card qcalc-result-primary">
+                <span class="qcalc-result-label">صافي الراتب</span>
+                <span class="qcalc-result-value" data-bind="net" data-format="money">0</span>
+                <span class="qcalc-result-unit">د.ع</span>
+              </div>
+              <div class="qcalc-result-card">
+                <span class="qcalc-result-label">إجمالي ما قبل الخصم</span>
+                <span class="qcalc-result-value" data-bind="totalGross" data-format="money">0</span>
+              </div>
+              <div class="qcalc-result-card">
+                <span class="qcalc-result-label">الضمان + الضريبة</span>
+                <span class="qcalc-result-value" data-bind="ssAndTax" data-format="money">0</span>
+              </div>
+            </div>
+          </div>
+          <div class="qcalc-explain" data-bind="explain"></div>
+        </div>
+      </div>
+
       <!-- Intro Banner -->
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(16,185,129,0.08));border:1px solid rgba(245,158,11,0.25);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:26px;display:flex;align-items:flex-start;gap:16px;">
         <div style="font-size:30px;flex-shrink:0;margin-top:2px;">💰</div>
@@ -11495,7 +12207,7 @@ const bird = { ...canMove(), ...canFly() };
           <div class="lbl">إجراءات إقفال يومي</div>
         </div>
         <div class="call-card">
-          <div class="num" style="color:var(--accent);">0.00</div>
+          <div class="num u-text-brand">0.00</div>
           <div class="lbl">الفرق المقبول في التسوية</div>
         </div>
         <div class="call-card">
@@ -11982,7 +12694,7 @@ const bird = { ...canMove(), ...canFly() };
         <div style="font-size:12.5px;color:var(--text-muted);line-height:1.85;margin-bottom:14px;">في البيانات الطبيعية، الأرقام التي تبدأ بـ <strong>1</strong> تظهر بنسبة ~30.1%، بـ <strong>2</strong> ~17.6%، بـ <strong>9</strong> فقط 4.6%. حين يُلفّق البشر أرقاماً — يُوزّعونها «عادلة» (10% لكل رقم). <strong style="color:var(--text);">الفجوة عن القانون = جرس إنذار.</strong></div>
         <div style="padding:12px 14px;background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(239,68,68,0.05));border:1px solid rgba(245,158,11,0.22);border-radius:var(--radius-sm);">
           <div style="font-size:11px;font-weight:800;color:#F59E0B;margin-bottom:4px;letter-spacing:1.3px;text-transform:uppercase;">🧪 محاكاة: اكتشف الاحتيال</div>
-          <div style="font-size:12px;color:var(--text);line-height:1.8;">وصلتك 500 فاتورة من مورّد. الأرقام تبدأ بـ <code style="color:var(--accent);">1→12%</code>, <code style="color:var(--accent);">4→22%</code>, <code style="color:var(--accent);">5→19%</code>. هل تشك؟ <strong style="color:#EF4444;">نعم</strong> — التوزيع ضد بنفورد. الاحتمال: أرقام مُلفّقة للبقاء تحت حد الموافقة (4999 بدلاً من 5000).</div>
+          <div style="font-size:12px;color:var(--text);line-height:1.8;">وصلتك 500 فاتورة من مورّد. الأرقام تبدأ بـ <code class="u-text-brand">1→12%</code>, <code class="u-text-brand">4→22%</code>, <code class="u-text-brand">5→19%</code>. هل تشك؟ <strong style="color:#EF4444;">نعم</strong> — التوزيع ضد بنفورد. الاحتمال: أرقام مُلفّقة للبقاء تحت حد الموافقة (4999 بدلاً من 5000).</div>
         </div>
       </div>
 
@@ -12078,17 +12790,17 @@ const bird = { ...canMove(), ...canFly() };
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #1</div>
             <span class="ql-recall-hint">ما الفرق بين FIFO و Weighted Average للمخزون؟</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">FIFO:</strong> الأول يُصرَف أولاً. في تضخّم = تكلفة بضاعة مباعة منخفضة = ربح أعلى ظاهرياً + ضريبة أعلى. <strong style="color:var(--accent);">Weighted Avg:</strong> متوسط تكاليف فترة. أبسط وأقل تقلّباً. <strong style="color:var(--accent);">LIFO محظور</strong> في IFRS. اختيار الطريقة يجب أن يكون متّسقاً.</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">FIFO:</strong> الأول يُصرَف أولاً. في تضخّم = تكلفة بضاعة مباعة منخفضة = ربح أعلى ظاهرياً + ضريبة أعلى. <strong class="u-text-brand">Weighted Avg:</strong> متوسط تكاليف فترة. أبسط وأقل تقلّباً. <strong class="u-text-brand">LIFO محظور</strong> في IFRS. اختيار الطريقة يجب أن يكون متّسقاً.</div>
           </div>
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #2</div>
             <span class="ql-recall-hint">متى يُعترف بالإيراد في عقد 12 شهراً مدفوع مُقدماً؟</span>
-            <div class="ql-recall-a">ليس عند استلام النقد. IFRS 15: يُسجَّل النقد كـ <strong style="color:var(--accent);">Deferred Revenue (التزام)</strong> ثم يُعترف به كإيراد تدريجياً مع الوفاء بالالتزام (1/12 كل شهر). عكس ذلك = تضخيم الإيراد = خرق صريح.</div>
+            <div class="ql-recall-a">ليس عند استلام النقد. IFRS 15: يُسجَّل النقد كـ <strong class="u-text-brand">Deferred Revenue (التزام)</strong> ثم يُعترف به كإيراد تدريجياً مع الوفاء بالالتزام (1/12 كل شهر). عكس ذلك = تضخيم الإيراد = خرق صريح.</div>
           </div>
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #3</div>
             <span class="ql-recall-hint">Depreciation vs Amortization — ما الفرق؟</span>
-            <div class="ql-recall-a"><strong style="color:var(--accent);">Depreciation</strong> = الأصول الملموسة (مباني، معدّات). <strong style="color:var(--accent);">Amortization</strong> = الأصول غير الملموسة (براءات، تراخيص). الاثنان يوزّعان التكلفة على العمر الإنتاجي. الأرض <em>لا</em> تُستهلك (عمر غير محدود).</div>
+            <div class="ql-recall-a"><strong class="u-text-brand">Depreciation</strong> = الأصول الملموسة (مباني، معدّات). <strong class="u-text-brand">Amortization</strong> = الأصول غير الملموسة (براءات، تراخيص). الاثنان يوزّعان التكلفة على العمر الإنتاجي. الأرض <em>لا</em> تُستهلك (عمر غير محدود).</div>
           </div>
           <div class="ql-recall" onclick="this.classList.toggle('open')">
             <div class="ql-recall-q">⚡ Active Recall #4</div>
@@ -15725,7 +16437,7 @@ const bird = { ...canMove(), ...canFly() };
       </div><!-- /hrmCommonQs -->
 
       <!-- Phase 1 marker (continue in subsequent phases) -->
-      <div id="hrm-phase-1-end" style="display:none;"></div>
+      <div id="hrm-phase-1-end" class="u-hidden"></div>
 
       <!-- ========== PHASE 2 START ========== -->
 
@@ -16142,7 +16854,7 @@ const bird = { ...canMove(), ...canFly() };
       </div>
 
       <!-- Phase 2 marker -->
-      <div id="hrm-phase-2-end" style="display:none;"></div>
+      <div id="hrm-phase-2-end" class="u-hidden"></div>
 
       <!-- ========== PHASE 3 START ========== -->
 
@@ -16325,7 +17037,7 @@ const bird = { ...canMove(), ...canFly() };
       </div>
 
       <!-- Phase 3 marker -->
-      <div id="hrm-phase-3-end" style="display:none;"></div>
+      <div id="hrm-phase-3-end" class="u-hidden"></div>
 
       <!-- ========== PHASE 4 START ========== -->
 
@@ -16339,7 +17051,7 @@ const bird = { ...canMove(), ...canFly() };
       <div class="hrm-scn-shell" id="hrmScnShell">
         <div class="hrm-scn-header">
           <div class="hrm-scn-counter">
-            <span id="hrmScnIdx">1</span> <span style="color:var(--text-faint);">/</span> <span>15</span>
+            <span id="hrmScnIdx">1</span> <span class="u-text-faint">/</span> <span>15</span>
           </div>
           <div class="hrm-scn-progress">
             <div class="hrm-scn-progress-fill" id="hrmScnPg"></div>
@@ -16347,7 +17059,7 @@ const bird = { ...canMove(), ...canFly() };
           <div class="hrm-scn-score">
             <span class="hrm-scn-score-label">الدرجة:</span>
             <span class="hrm-scn-score-val" id="hrmScnScore">0</span>
-            <span style="color:var(--text-faint);">/ 15</span>
+            <span class="u-text-faint">/ 15</span>
           </div>
         </div>
 
@@ -16501,7 +17213,7 @@ const bird = { ...canMove(), ...canFly() };
       </div>
 
       <!-- Phase 4 marker -->
-      <div id="hrm-phase-4-end" style="display:none;"></div>
+      <div id="hrm-phase-4-end" class="u-hidden"></div>
 
       <!-- ========== PHASE 5 START ========== -->
 
@@ -16523,7 +17235,7 @@ const bird = { ...canMove(), ...canFly() };
           </div>
         </div>
 
-        <div class="hrm-mock-stage" data-stage="play" style="display:none;">
+        <div class="hrm-mock-stage" data-stage="play" class="u-hidden">
           <div class="hrm-mock-top">
             <div class="hrm-mock-step">
               السؤال <span id="hrmMockNum">1</span> / 5
@@ -16544,7 +17256,7 @@ const bird = { ...canMove(), ...canFly() };
           </div>
         </div>
 
-        <div class="hrm-mock-stage" data-stage="report" style="display:none;">
+        <div class="hrm-mock-stage" data-stage="report" class="u-hidden">
           <div id="hrmMockReport"></div>
           <button class="hrm-mock-btn ghost" id="hrmMockRestart">إعادة المحاكاة 🔁</button>
         </div>
@@ -16783,7 +17495,7 @@ const bird = { ...canMove(), ...canFly() };
       </div>
 
       <!-- Phase 5 marker (FINAL) -->
-      <div id="hrm-phase-5-end" style="display:none;"></div>
+      <div id="hrm-phase-5-end" class="u-hidden"></div>
 
     </section><!-- /page-hrmastery -->
 
@@ -16795,7 +17507,7 @@ const bird = { ...canMove(), ...canFly() };
       <span id="footer-progress-text">جارٍ تحميل التقدم...</span>
     </div>
     <div class="footer-section" style="gap:12px;">
-      <span style="color:var(--text-faint);">اختصارات:</span>
+      <span class="u-text-faint">اختصارات:</span>
       <span><span class="footer-kbd">Ctrl</span> + <span class="footer-kbd">1</span> الرئيسية</span>
       <span class="footer-sep">·</span>
       <span><span class="footer-kbd">Ctrl</span> + <span class="footer-kbd">2</span> كول سنتر</span>
@@ -16809,13 +17521,91 @@ const bird = { ...canMove(), ...canFly() };
       <span><span class="footer-kbd">Ctrl</span> + <span class="footer-kbd">/</span> بحث</span>
     </div>
     <div class="footer-section">
-      <span id="footer-version" style="color:var(--text-faint);">v11.0</span>
+      <span id="footer-version" class="u-text-faint">v11.0</span>
       <span class="footer-sep">·</span>
       <span>منصة التدريب الاحترافية</span>
       <span class="footer-sep">·</span>
       <span onclick="if(confirm('هل تريد مسح كل بيانات التقدم المحفوظة؟')){localStorage.clear();location.reload();}" style="cursor:pointer;color:var(--text-faint);font-size:10.5px;text-decoration:underline;text-decoration-color:var(--border-hover);" title="مسح البيانات المحفوظة">مسح البيانات</span>
     </div>
   </footer>
+
+  <!-- ══════════════════ Cathedral v14 — page-myprogress (Worker 11 / Phase 6) ══════════════════ -->
+  <section class="page" id="page-myprogress">
+    <div class="page-header">
+      <h1>تقدمي 📊</h1>
+      <p>صورة كاملة لكل ما أنجزته على المنصة — لا أرقام مزيّفة.</p>
+    </div>
+
+    <div class="cath-dash-stats">
+      <article class="cath-stat">
+        <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="check-circle"></i></div>
+        <div class="cath-stat-body">
+          <div><span class="cath-stat-value" data-cath-stat="unitsCompleted">0</span></div>
+          <span class="cath-stat-label">وحدة مُكتملة</span>
+        </div>
+      </article>
+      <article class="cath-stat">
+        <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="bar-chart"></i></div>
+        <div class="cath-stat-body">
+          <div><span class="cath-stat-value" data-cath-stat="quizzesTaken">0</span></div>
+          <span class="cath-stat-label">تقييمات نفسية</span>
+        </div>
+      </article>
+      <article class="cath-stat">
+        <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="bookmark"></i></div>
+        <div class="cath-stat-body">
+          <div><span class="cath-stat-value" data-cath-stat="draftCount">0</span></div>
+          <span class="cath-stat-label">مسوّدة محفوظة</span>
+        </div>
+      </article>
+      <article class="cath-stat">
+        <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="star"></i></div>
+        <div class="cath-stat-body">
+          <div><span class="cath-stat-value" data-cath-stat="topScore">0</span></div>
+          <span class="cath-stat-label">أعلى درجة لاب</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="progress-grid">
+      <div class="cath-dash-card">
+        <header>
+          <h2><i class="qi" data-icon="line-chart"></i> النشاط — آخر 30 يوم</h2>
+          <span style="font-size:.78rem;color:var(--color-text-faint,rgba(255,255,255,.5));">حدث / يوم</span>
+        </header>
+        <div class="progress-chart-wrap">
+          <canvas id="progress-chart" width="600" height="180"></canvas>
+        </div>
+      </div>
+      <div class="cath-dash-card">
+        <header><h2><i class="qi" data-icon="layout-dashboard"></i> شجرة المهارات</h2></header>
+        <div class="cath-skill-grid" id="cath-skill-grid-progress"></div>
+      </div>
+    </div>
+
+    <div class="progress-grid">
+      <div class="cath-dash-card">
+        <header><h2><i class="qi" data-icon="bookmark"></i> مسوّداتي</h2></header>
+        <ul class="cath-activity-list" id="my-drafts-list"></ul>
+      </div>
+      <div class="cath-dash-card">
+        <header><h2><i class="qi" data-icon="trending-up"></i> أعلى الدرجات</h2></header>
+        <ul class="cath-activity-list" id="my-achievements-list"></ul>
+      </div>
+    </div>
+
+    <div class="progress-footer">
+      <button class="cath-quick-action" type="button" data-action="export-progress">
+        <i class="qi qi-lg" data-icon="download"></i><span>تصدير كل البيانات (JSON)</span>
+      </button>
+      <button class="cath-quick-action" type="button" data-action="import-progress">
+        <i class="qi qi-lg" data-icon="upload"></i><span>استيراد ملف</span>
+      </button>
+      <button class="cath-quick-action cath-action-danger" type="button" data-action="reset-progress">
+        <i class="qi qi-lg" data-icon="trash"></i><span>حذف كل التقدم</span>
+      </button>
+    </div>
+  </section>
 
   </main><!-- /main -->
 
@@ -16850,7 +17640,7 @@ const bird = { ...canMove(), ...canFly() };
     animation: loadPulse 1s ease infinite alternate;
     font-size:28px;
   ">🎓</div>
-  <div style="text-align:center;">
+  <div class="u-text-center">
     <div style="font-size:18px; font-weight:800; color:var(--text); margin-bottom:6px;">منصة التدريب الاحترافية</div>
     <div style="font-size:13px; color:var(--text-muted);">جارٍ تحميل بيئة التدريب...</div>
   </div>

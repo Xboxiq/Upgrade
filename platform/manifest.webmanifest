@@ -1,0 +1,18 @@
+{
+  "name": "Upgrade — منصة التطوير المهني الذاتي",
+  "short_name": "Upgrade",
+  "description": "9 مسارات تخصصية، تعلم تفاعلي، محتوى علمي عميق — Cathedral v14.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "lang": "ar",
+  "dir": "rtl",
+  "background_color": "#0E1220",
+  "theme_color": "#0E1220",
+  "categories": ["education", "productivity", "training"],
+  "icons": [
+    { "src": "favicon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any" },
+    { "src": "favicon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "maskable" }
+  ]
+}
