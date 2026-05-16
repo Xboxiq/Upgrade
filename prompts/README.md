@@ -269,3 +269,47 @@ cp "arabic-training-platform-v12 (1) (4) (1) (1) (1).html" \
 ### نموذج الانطلاق
 
 ألصق `prompts/AUTO_PILOT.md` في سيشن جديد. AUTO_PILOT يقرأ `state/PROGRESS.json`، يكتشف أن Worker 09 منتهٍ → ينتقل لـ Worker 11 → يفتح ملف الـ Phase التالي حسب التقدم.
+
+
+
+---
+
+## 🌌 Worker 12 — AURORA (Apple-Grade UI/UX) — Cathedral v15
+
+> أُضيف بعد Worker 11. يرفع المنصة من "احترافي جيد" إلى **Apple-grade**: Linen-Bone off-white، 4-tier glass، Source-list sidebar، Dynamic-Island topbar، Bento dashboard، Apple easing، per-page identity tints.
+
+ملفات Worker 12 على نفس نسق Worker 11 — كل phase ملف مستقل لتجنّب context limit:
+
+| الملف | الحجم | الدور |
+|---|---|---|
+| `12_WORKER_AURORA_APPLE_GRADE.md`    | فهرس slim | overview + معايير + roadmap + بروتوكول |
+| `12_PHASE_1_TYPOGRAPHY_SPATIAL.md`   | ~520 سطر | Type scale (clamp) + 4pt spacing + reading rhythm |
+| `12_PHASE_1B_TYPEFACE_SOUL.md`       | ~480 سطر | **Premium Arabic stack: Reem Kufi + Readex Pro + IBM Plex Arabic + Aref Ruqaa + Thmanyah optional** |
+| `12_PHASE_2_OFFWHITE_RECHISEL.md`    | ~480 سطر | Linen-Bone palette + tinted shadows + `!important` purge ابتدائي |
+| `12_PHASE_3_MATERIALS_DEPTH.md`      | ~560 سطر | 4-tier glass + scroll elevation + edge-light + grain refresh |
+| `12_PHASE_4_NAVIGATION_CHROME.md`    | ~620 سطر | Source-list sidebar + Dynamic-Island topbar + badge tokens |
+| `12_PHASE_5_DASHBOARD_HERO.md`       | ~640 سطر | Bento dashboard + count-up + dock + per-page identity tints |
+| `12_PHASE_6_MOTION_INTERACTION.md`   | ~520 سطر | Apple easing + springs + cursor glow + view transitions |
+| `12_PHASE_7_INLINE_PURGE.md`         | ~580 سطر | inline → utilities + `!important` ≤20 + Lighthouse ≥90/95 |
+
+> **ترتيب التنفيذ المُلزِم:** `1 → 1B → 2 → 3 → 4 → 5 → 6 → 7`
+
+### نموذج الانطلاق
+
+نفس نمط Worker 11:
+1. ألصق `prompts/AUTO_PILOT.md` في سيشن جديد.
+2. AUTO_PILOT يقرأ `state/PROGRESS.json` → يجد `current.worker = "12"` ، `phase = 0` (ready).
+3. يفتح فهرس Worker 12 ثم `12_PHASE_1_*.md` → ينشئ branch `worker-12-aurora` → ينفّذ → push.
+4. كل phase: commit + push (كود) ثم commit + push (state) — قاعدة 2-push.
+5. في النهاية: PR واحد `feat: Worker 12 — AURORA (Apple-grade UI/UX)` → main.
+
+### مقاييس النجاح المستهدفة
+
+| المقياس | الحالي | الهدف |
+|---|---|---|
+| inline `style=` في index.html | 1602 | ≤ 200 |
+| `!important` في style.css | 144 | ≤ 20 |
+| Glass tiers | 1 | 4 (thin/regular/thick/chrome) |
+| Easing tokens | 0 | ≥ 5 |
+| Per-page identity tints | 0 | 11 صفحة |
+| Lighthouse mobile (Perf / A11y) | ? | ≥ 90 / ≥ 95 |
