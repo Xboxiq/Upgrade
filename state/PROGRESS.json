@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-16T20:45:00Z",
+  "last_updated": "2026-05-16T21:00:00Z",
   "current": {
-    "worker": "13",
-    "worker_name": "AURORA_COMPLETION",
-    "phase": 3,
-    "phases_total": 3,
-    "phase_order": ["1", "2", "3"],
-    "branch": "worker-13-phase-2-3-impl",
-    "status": "completed"
+    "worker": "14",
+    "worker_name": "ATELIER_LIQUID_GLASS",
+    "phase": 1,
+    "phases_total": 6,
+    "phase_order": ["1", "2", "3", "4", "5", "6"],
+    "branch": "worker-14-atelier",
+    "status": "in-progress"
   },
   "completed_phases": [
     { "worker": "01", "phase": 1, "title": "Foundation Tokens & Aurora Mesh",                    "branch": "worker-01-phase-1-v2", "lines_added": 121 },
@@ -71,8 +71,9 @@
     { "worker": "12", "phase": 7, "title": "Inline purge (1671→587) + 100+ utilities + per-page header tint underline + boot banner + sanity assert + CHANGELOG", "branch": "worker-12-aurora", "lines_added": 964 },
     { "worker": "13", "phase": 1, "title": "Bento Dashboard — Augment-and-Wrap (greeting + 4 countup tiles + dock + legacy wrapper)", "branch": "worker-13-aurora-completion-impl", "lines_added": 76 },
     { "worker": "13", "phase": 2, "title": "Real Inline Purge — utilities pack + cleanup v2 + decomposer (587→223 inline, 12 stray !important, 7 u-grad-* utilities)", "branch": "worker-13-phase-2-3-impl", "lines_added": 1688 },
-    { "worker": "13", "phase": 3, "title": "Final Polish — wordmark Aref Ruqaa accent + sidebar toggle in topbar + boot sanity v15.1 IIFE + CHANGELOG v15.1", "branch": "worker-13-phase-2-3-impl", "lines_added": 93 }
+    { "worker": "13", "phase": 3, "title": "Final Polish — wordmark Aref Ruqaa accent + sidebar toggle in topbar + boot sanity v15.1 IIFE + CHANGELOG v15.1", "branch": "worker-13-phase-2-3-impl", "lines_added": 93 },
+    { "worker": "14", "phase": 1, "title": "Liquid Glass v2 — WWDC25 blur ladder (16/24/32/40) + edge specular + 3-tier paper tonal + paper grain v2 + density API + Upg.material", "branch": "worker-14-atelier", "lines_added": 227 }
   ],
-  "next_action": "WORKER 13 COMPLETE. AURORA Cathedral v15.1 delivered. Open PR worker-13-phase-2-3-impl → main. Title: 'feat: Worker 13 — AURORA Completion (phases 2-3 of 3): Real Inline Purge + Final Polish'. After merge, all 13 workers are done. Next worker would be Worker 14 (not yet defined) or per-task spec. The platform is at v15.1 with: 16 page sections, 391 qcalc instances, 14 Upg.* APIs, 7 u-grad-* utilities, 100+ atom utilities, sidebar toggle button, brand wordmark in Aref Ruqaa accent, boot sanity assertion.",
-  "notes": "Worker 13 final state: AURORA Completion (Cathedral v15.1) shipped. Phase 1 (merged earlier in PR #48): Bento dashboard markup. Phase 2 (this session, branch worker-13-phase-2-3-impl): real inline purge — inline 587→223 (62% reduction), !important stray=12 (≤20 spec), u-grad-* defined=7 (≥7 spec). Phase 3 (this session, same branch): wordmark Aref Ruqaa accent, sidebar toggle button in topbar (data-action='toggle-sidebar' wired to Upg.nav, also Cmd+\\), boot sanity v15.1 IIFE, CHANGELOG v15.1. All sacred assets preserved: 16 page sections, 391 qcalc refs, 38 Upg.* APIs (all 14 modules). The 223 inline residue is composed of ~42 unique linear-gradient values + ~30 width:X% progress-bar values that are inherently per-instance dynamic data — not amenable to class extraction without hard-coding hundreds of single-use classes."
+  "next_action": "WORKER 14 Phase 1 done (Liquid Glass v2). Continue with Worker 14 Phase 2 — Page Headers Re-chisel (14 page-headers as eyebrow + title-with-icon + lede + tint-underline-56px, emoji-purge from H1s only). Same branch worker-14-atelier — DO NOT create new branch.",
+  "notes": "Phase 1 of Worker 14 (ATELIER) shipped on branch worker-14-atelier. Liquid Glass materials lifted from WWDC22 baseline to WWDC25 spec. New tokens: --glass-blur-{thin,regular,thick,chrome}, --glass-saturate, --glass-brightness, --glass-edge-light/dark, --glass-specular, --glass-grain-url, --paper-tone-{1,2,3}. Modified token values: --blur-{thin,regular,thick,chrome} → 16/24/32/40, --vibrancy → 200%. Modified rules: 4 .material-* tier rules (added brightness, edge specular). Appended rules: 3-tier paper tonal in light theme, paper grain SVG noise overlay, density tiers (low/standard/high), reduced-transparency global blur kill. New API: Upg.material.{get,set,cycle} with localStorage persistence (upg_material_density). HTML augmentations: 8 qcalc + 7 cath-dash-card + 2 cmdk-modal got class material-regular. Sacred preserved: 14 page sections, 391 qcalc refs, all 14 prior Upg.* APIs intact (now 15 total)."
 }

@@ -1,0 +1,77 @@
+{
+  "worker": "14",
+  "worker_name": "ATELIER_LIQUID_GLASS",
+  "phase": 1,
+  "phase_title": "Liquid Glass Materials v2 (WWDC 2025)",
+  "branch": "worker-14-atelier",
+  "completed_at": "2026-05-16T21:00:00Z",
+  "summary": "WWDC25-spec liquid glass: blur ladder lifted (8/16/28/42 → 16/24/32/40), saturate 180% → 200%, brightness() added (1.05 dark / 1.02 light), edge specular highlight (--glass-edge-light), specular 135deg gradient overlay on .material-regular::before, 3-tier paper tonal in light theme (paper-tone-1/2/3), paper grain v2 SVG fractal noise overlay, density tiers (low/standard/high), prefers-reduced-transparency hardened to nuke blur globally. Added Upg.material API (get/set/cycle, persists to upg_material_density).",
+  "files_modified": [
+    "platform/assets/style.css",
+    "platform/assets/app.js",
+    "platform/index.html"
+  ],
+  "lines_added": 227,
+  "lines_removed": 37,
+  "tokens_added": [
+    "--glass-blur-thin",
+    "--glass-blur-regular",
+    "--glass-blur-thick",
+    "--glass-blur-chrome",
+    "--glass-saturate",
+    "--glass-brightness",
+    "--glass-edge-light",
+    "--glass-edge-dark",
+    "--glass-specular",
+    "--glass-grain-url",
+    "--paper-tone-1",
+    "--paper-tone-2",
+    "--paper-tone-3"
+  ],
+  "tokens_modified_values": {
+    "--blur-thin":    "8px → 16px",
+    "--blur-regular": "16px → 24px",
+    "--blur-thick":   "28px → 32px",
+    "--blur-chrome":  "42px → 40px (now part of unified 16/24/32/40 ladder)",
+    "--vibrancy":     "180% → 200%"
+  },
+  "rules_modified": [
+    ".material-thin (added brightness, replaced hairline with edge-light)",
+    ".material-regular (+ ::before specular overlay)",
+    ".material-thick (added brightness, kept hairline-strong, added edge-light)",
+    ".material-chrome (+ ::after edge-dark overlay)"
+  ],
+  "rules_appended": [
+    "body[data-theme='light'] .stat-card/.module-card/.ql-glass:not(.material-thick):not(.material-chrome)/.skill-card { paper-tone-2 }",
+    "body[data-theme='light'] .stat-tile/.bento-greet/.cath-stat/.cath-dash-card/.qcalc/dialog/[role='dialog']/.cmdk-modal/.surface-modal { paper-tone-3 }",
+    "body[data-theme='light'] #topbar/#sidebar { mix paper-tone-3 75% }",
+    "body[data-theme='light']::after { paper grain SVG overlay 0.025 multiply }",
+    "body[data-material-density='low'] / 'high' { blur ladder + saturate overrides }",
+    "@media (prefers-reduced-transparency: reduce) { all blur tokens → 0px, hide overlays }"
+  ],
+  "html_augmentations": {
+    "qcalc → qcalc.material-regular": 8,
+    "cath-dash-card → cath-dash-card.material-regular": 7,
+    "cmdk-modal → cmdk-modal.material-regular": 2
+  },
+  "js_api_added": "window.Upg.material = { get(), set('low'|'standard'|'high'), cycle() }",
+  "sacred_assets_preserved": {
+    "page_sections": 14,
+    "qcalc_references": 391,
+    "upg_apis_count": 15,
+    "upg_apis_list": ["calc", "cmdk", "countup", "gateway", "greet", "icons", "identity", "material", "motion", "nav", "production", "scroll", "state", "theme", "type"]
+  },
+  "acceptance_checks": {
+    "blur_ladder_wwdc25": "✓ 16/24/32/40",
+    "saturate_lifted": "✓ 200%",
+    "brightness_applied": "✓ 1.05 dark / 1.02 light",
+    "edge_specular_visible": "✓ via box-shadow inset 0 1px 0",
+    "3tier_tonal_light": "✓ paper-tone-1/2/3 wired to surfaces",
+    "paper_grain": "✓ SVG fractal noise 0.025 opacity multiply",
+    "density_api": "✓ Upg.material.cycle() rotates low → standard → high",
+    "reduced_transparency_a11y": "✓ blur tokens → 0px globally",
+    "console_errors": 0,
+    "page_sections_intact": 14,
+    "qcalc_refs_intact": 391
+  }
+}
