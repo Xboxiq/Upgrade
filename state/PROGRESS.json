@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-16T11:30:00Z",
+  "last_updated": "2026-05-16T12:00:00Z",
   "current": {
     "worker": "12",
     "worker_name": "AURORA_APPLE_GRADE",
-    "phase": 5,
+    "phase": 6,
     "phases_total": 8,
     "phase_order": ["1", "1B", "2", "3", "4", "5", "6", "7"],
     "branch": "worker-12-aurora",
@@ -66,8 +66,9 @@
     { "worker": "12", "phase": 2, "title": "Linen-Bone off-white re-chisel + tinted shadows + tonal elevation + nav-badge identity classes (10 inline gradients purged)", "branch": "worker-12-aurora", "lines_added": 115 },
     { "worker": "12", "phase": 3, "title": "Materials & Depth — 4-tier glass (thin/regular/thick/chrome) + scroll-aware elevation + halos + grain refresh + Upg.scroll", "branch": "worker-12-aurora", "lines_added": 238 },
     { "worker": "12", "phase": 4, "title": "Navigation Chrome — Source-List sidebar collapse (Cmd+\\) + Dynamic-Island compact topbar + View Transitions nav-pill + mobile drawer + Upg.nav", "branch": "worker-12-aurora", "lines_added": 195 },
-    { "worker": "12", "phase": 5, "title": "Dashboard Hero — 15 per-page identity tints + Bento utilities + count-up tickers + time-of-day greet + Upg.identity/greet/countup", "branch": "worker-12-aurora", "lines_added": 429 }
+    { "worker": "12", "phase": 5, "title": "Dashboard Hero — 15 per-page identity tints + Bento utilities + count-up tickers + time-of-day greet + Upg.identity/greet/countup", "branch": "worker-12-aurora", "lines_added": 429 },
+    { "worker": "12", "phase": 6, "title": "Motion & Interaction — easing/duration tokens (5 ease + 6 duration) + press/lift/glow/reveal/skeleton + view-transition wrap + Upg.motion", "branch": "worker-12-aurora", "lines_added": 232 }
   ],
-  "next_action": "Continue Worker 12 Phase 6 — Motion & Interaction (Apple easing tokens + springs + cursor glow + page transitions).",
+  "next_action": "Continue Worker 12 Phase 7 — Inline Purge & Lighthouse Pass (inline styles 1592→≤200 + !important purge to ≤20).",
   "notes": "Worker 11 PLATFORM_FOUNDATION (Cathedral v14) FULLY COMPLETE — 7/7 phases. This session executed phases 4-7 (1368 + 713 + 1039 + 531 = 3651 lines). Phase 7 added: PWA manifest.webmanifest + sw.js (cache-first same-origin, stale-while-revalidate fonts) + favicon.svg + Open Graph meta + apple-touch-icon + skip link (.u-skip-link) + main[tabindex=-1] + 70+ utility classes (.u-mt-*, .u-flex, .u-grid, .u-text-*, .u-bg-*, .u-border-*, .u-rounded-*, .u-shadow-*, .u-truncate, .u-sr-only, .u-skip-link) + console banner (one-shot) + service worker auto-register + focus trap (cmdk + cheatsheet + gateway) + lazy-mount event for heavy pages + reduced-motion guard + forced-colors fallback + print styles + scripts/cleanup-inline-styles.mjs (dev tool, 82 inline styles converted automatically). Inline styles 1763 → 1602 (target ≤400 not met — remaining ones are multi-decl complex backgrounds/gradients that risk regression to refactor). Public APIs: Upg.theme, Upg.icons, Upg.gateway, Upg.calc, Upg.cmdk, Upg.state, Upg.production. PR ready: worker-11-phase-4-7 (4 phase commits + 4 state commits = 8 total)."
 }
