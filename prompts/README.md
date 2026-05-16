@@ -235,3 +235,37 @@ cp "arabic-training-platform-v12 (1) (4) (1) (1) (1).html" \
 ---
 
 **جاهز؟ ابدأ من `00_MASTER_PROMPT.md` ثم `01_WORKER_UI_UX.md`. التوفيق! 🚀**
+
+
+
+---
+
+## 🏛️ Worker 11 — Platform Foundation Refit (Cathedral v14)
+
+> أُضيف بعد إنجاز Workers 01..09 لمعالجة 6 ثغرات بنيوية. **هذا Worker معماري، ليس محتوى تدريبي**.
+
+ملفات Worker 11 مقسّمة لتجنّب ضغط الـ context — كل Phase ملف مستقل:
+
+| الملف | الحجم | الدور |
+|---|---|---|
+| `11_WORKER_PLATFORM_FOUNDATION.md` | فهرس slim | overview + معايير عالمية + roadmap |
+| `11_PHASE_1_THEME_SYSTEM.md`       | ~700 سطر | Sovereign Theme (tokens + bridge + auto/dark/light) |
+| `11_PHASE_2_ICON_SYSTEM.md`        | ~900 سطر | Lucide-style sprite + `.qi` + ≥350 استبدال |
+| `11_PHASE_3_ENTRY_GATEWAY.md`      | ~750 سطر | Onboarding 4-step + PIN + idle lock |
+| `11_PHASE_4_CALCULATOR_FRAMEWORK.md` | ~850 سطر | `qcalc` + ترحيل 8 حاسبات |
+| `11_PHASE_5_COMMAND_PALETTE.md`    | ~700 سطر | ⌘K + 30 command + shortcuts + cheat sheet |
+| `11_PHASE_6_REAL_DASHBOARD.md`     | ~750 سطر | `Upg.state` facade + dashboard live + page-myprogress |
+| `11_PHASE_7_PRODUCTION_PASS.md`    | ~600 سطر | Inline cleanup + PWA + favicon + a11y + Lighthouse |
+
+### كيف يستخدمه AUTO_PILOT
+
+```
+1. اقرأ prompts/11_WORKER_PLATFORM_FOUNDATION.md (الفهرس) — مرة واحدة.
+2. في كل Phase: اقرأ ملف الـ Phase الخاص فقط (ليس الكل).
+3. التزم بـ linear branch worker-11-complete + push بعد كل phase.
+4. لا تخلط ملفات الـ Phases — كل سيشن phase واحد.
+```
+
+### نموذج الانطلاق
+
+ألصق `prompts/AUTO_PILOT.md` في سيشن جديد. AUTO_PILOT يقرأ `state/PROGRESS.json`، يكتشف أن Worker 09 منتهٍ → ينتقل لـ Worker 11 → يفتح ملف الـ Phase التالي حسب التقدم.
