@@ -14484,6 +14484,29 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
 }
 
 </style>
+
+<style>
+  /* Loading overlay safety fallback — auto-fade after 3.5s no matter what */
+  #loading-overlay { animation: __upgFallbackFade 3.5s ease forwards; }
+  @keyframes __upgFallbackFade {
+    0%, 80%   { opacity: 1; pointer-events: auto; }
+    100%      { opacity: 0; pointer-events: none; visibility: hidden; }
+  }
+</style>
+<script>
+  // Hard-kill the overlay after 4s (covers any JS init failure on mobile)
+  setTimeout(function () {
+    var ov = document.getElementById('loading-overlay');
+    if (ov && ov.parentNode) ov.parentNode.removeChild(ov);
+  }, 4000);
+  // Also remove on first user interaction
+  ['click','touchstart','keydown'].forEach(function (e) {
+    window.addEventListener(e, function () {
+      var ov = document.getElementById('loading-overlay');
+      if (ov && ov.parentNode) ov.parentNode.removeChild(ov);
+    }, { once: true, passive: true });
+  });
+</script>
 </head>
 <body>
 
@@ -34794,7 +34817,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // swallowing the base codepoint of a compound emoji (e.g. "⚠️").
       const EMOJI_KEYS = Object.keys(EMOJI_MAP).sort((a,b) => b.length - a.length);
       const EMOJI_RE   = new RegExp(
-        '(' + EMOJI_KEYS.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\<script src="assets/app.js" defer></script>')).join('|') + ')',
+        '(' + EMOJI_KEYS.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')',
         'g'
       );
 
@@ -34925,7 +34948,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ───────── Utilities ───────── */
   const $  = (sel, root = document) => root.querySelector(sel);
-  const $ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
   const PHASE1 = {
     // Performance DNA axis config (Arabic labels + localStorage module keys)
@@ -35244,7 +35267,7 @@ document.addEventListener('DOMContentLoaded', () => {
     else        dash.insertAdjacentHTML('afterbegin', bentoHTML);
 
     // Wire quick-access buttons (click + keyboard)
-    $('#page-dashboard .p1-quick-btn').forEach(btn => {
+    $$('#page-dashboard .p1-quick-btn').forEach(btn => {
       const target = btn.getAttribute('data-quick-target');
       const go = () => {
         try {
@@ -35675,7 +35698,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.__qlAccountMgr = true;
 
   function $(sel){ return document.querySelector(sel); }
-  function $(sel){ return Array.prototype.slice.call(document.querySelectorAll(sel)); }
+  function $$(sel){ return Array.prototype.slice.call(document.querySelectorAll(sel)); }
   function fmt(n){ return (Number(n)||0).toLocaleString('en-US'); }
 
   /* ── NRR ─────────────────────────────────────────────────── */
@@ -35691,13 +35714,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var netOut = $('[data-nrr-out="net"]');
     var warn   = $('[data-nrr-warn]');
     if (nrrOut) nrrOut.textContent = nrr.toFixed(1) + '%';
-    if (netOut) netOut.textContent = (net >= 0 ? '+
-</body>
-</html>
- : '−
-</body>
-</html>
-) + fmt(Math.abs(Math.round(net)));
+    if (netOut) netOut.textContent = (net >= 0 ? '+$' : '−$') + fmt(Math.abs(Math.round(net)));
     if (warn) {
       if (s <= 0) { warn.hidden = true; }
       else if (nrr >= 110) {
@@ -35712,7 +35729,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
-  $('[data-nrr]').forEach(function(i){ i.addEventListener('input', recalcNRR); });
+  $$('[data-nrr]').forEach(function(i){ i.addEventListener('input', recalcNRR); });
   if ($('[data-lab="nrr"]')) recalcNRR();
 
   /* ── Health Score (weighted) ─────────────────────────────── */
@@ -35750,7 +35767,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
-  $('[data-hs]').forEach(function(i){ i.addEventListener('input', recalcHS); });
+  $$('[data-hs]').forEach(function(i){ i.addEventListener('input', recalcHS); });
   if ($('[data-lab="health"]')) recalcHS();
 })();
 
@@ -35840,7 +35857,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.__qlSalesLabs = true;
 
   function $(sel, root){ return (root || document).querySelector(sel); }
-  function $(sel, root){ return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+  function $$(sel, root){ return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
   function fmt(n){ return (Number(n)||0).toLocaleString('en-US'); }
   function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
 
@@ -35867,10 +35884,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setText('[data-funnel-label="won"]',   fmt(Math.round(won)));
 
     setText('[data-funnel-out="deals"]',   fmt(Math.round(won)));
-    setText('[data-funnel-out="revenue"]', '
-</body>
-</html>
- + fmt(Math.round(revenue)));
+    setText('[data-funnel-out="revenue"]', '$' + fmt(Math.round(revenue)));
     setText('[data-funnel-out="coverage"]', coverage.toFixed(2) + 'x');
 
     var warn = $('[data-funnel-warn]');
@@ -35894,7 +35908,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   function setText(sel, val){ var el = $(sel); if (el) el.textContent = val; }
 
-  $('[data-funnel]').forEach(function(input){
+  $$('[data-funnel]').forEach(function(input){
     input.addEventListener('input', recalcFunnel);
   });
   if ($('[data-lab="funnel"]')) recalcFunnel();
@@ -39742,10 +39756,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function $id(id){ return document.getElementById(id); }
   function num(id){ var v = parseFloat(($id(id)||{}).value); return isFinite(v) ? v : 0; }
 
-  function fmtMoney(v){ return '
-</body>
-</html>
- + (isFinite(v)?v.toFixed(2):'0.00'); }
+  function fmtMoney(v){ return '$' + (isFinite(v)?v.toFixed(2):'0.00'); }
   function fmtPct(v){ return (isFinite(v)?v.toFixed(2):'0.00') + '%'; }
   function fmtMul(v){ return (isFinite(v)?v.toFixed(2):'0.00') + 'x'; }
 
@@ -39963,10 +39974,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var commentRatio = likes > 0 ? (coms / likes) : 0;
 
     if ($id('w6InfER'))  $id('w6InfER').textContent  = er.toFixed(2) + '%';
-    if ($id('w6InfCPE')) $id('w6InfCPE').textContent = '
-</body>
-</html>
- + cpe.toFixed(2);
+    if ($id('w6InfCPE')) $id('w6InfCPE').textContent = '$' + cpe.toFixed(2);
     if ($id('w6InfCR'))  $id('w6InfCR').textContent  = (commentRatio*100).toFixed(1) + '%';
 
     var bands = ER_BANDS[tier] || ER_BANDS.micro;
@@ -40035,10 +40043,10 @@ document.addEventListener('DOMContentLoaded', () => {
 (function(){
   'use strict';
 
-  function $(sel, root){ return (root||document).querySelectorAll(sel); }
+  function $$(sel, root){ return (root||document).querySelectorAll(sel); }
 
   function bindElecToggles(){
-    var btns = $('#page-phonerepair .pr-card-toggle[data-pr-toggle]');
+    var btns = $$('#page-phonerepair .pr-card-toggle[data-pr-toggle]');
     btns.forEach(function(btn){
       if (btn.__pr_bound) return; btn.__pr_bound = true;
       btn.addEventListener('click', function(){
@@ -40860,10 +40868,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   function fmtUSD(n){
     var v = n / IQD_PER_USD;
-    return '~
-</body>
-</html>
- + Math.round(v).toLocaleString('en-US');
+    return '~$' + Math.round(v).toLocaleString('en-US');
   }
 
   function getChipsValue(container){
