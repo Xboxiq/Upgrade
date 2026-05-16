@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-16T00:50:00Z",
+  "last_updated": "2026-05-16T01:10:00Z",
   "current": {
     "worker": "11",
     "worker_name": "PLATFORM_FOUNDATION",
-    "phase": 1,
+    "phase": 2,
     "phases_total": 7,
     "branch": "worker-11-complete",
     "status": "in-progress"
@@ -53,8 +53,9 @@
     { "worker": "09", "phase": 3, "title": "Self-Diagnostic Suite — 6 tests + scoring engine", "branch": "worker-09-complete", "lines_added": 845 },
     { "worker": "09", "phase": 4, "title": "Psych Insets — cross-page micro-cards (7 pages × 3 insets)", "branch": "worker-09-complete", "lines_added": 232 },
     { "worker": "09", "phase": 5, "title": "Therapist Bridge + Insights Engine + 16 Citations", "branch": "worker-09-complete", "lines_added": 365 },
-    { "worker": "11", "phase": 1, "title": "Sovereign Theme System (tokens + bridge + 3-state toggle)", "branch": "worker-11-complete", "lines_added": 359 }
+    { "worker": "11", "phase": 1, "title": "Sovereign Theme System (tokens + bridge + 3-state toggle)", "branch": "worker-11-complete", "lines_added": 359 },
+    { "worker": "11", "phase": 2, "title": "Lucide-style Icon System (95 symbols + .qi + migrator)", "branch": "worker-11-complete", "lines_added": 401 }
   ],
-  "next_action": "Continue Worker 11 Phase 2 — Lucide-style Icon System (sprite + .qi component + emoji replacement)",
-  "notes": "Worker 11 Phase 1 complete. Added 5-level surface ladder, semantic tokens (color-bg/surface-0..3/text/brand/etc), tinted shadows, focus ring. Bridge layer: light-theme legacy tokens (--bg, --surface, --accent, --border) now redirect to semantic tokens via color-mix. Removed all 7 !important declarations from light-theme section (light-theme: 7 -> 0). Added Upg.theme module with auto/dark/light cycle, prefers-color-scheme listener, View Transitions API, meta theme-color sync, legacy migration from v12_theme. Wrapped legacy toggleTheme + applyTheme to keep onclick=\"toggleTheme()\" working. localStorage: upg_theme."
+  "next_action": "Continue Worker 11 Phase 3 — Entry Gateway + Onboarding 4-step + PIN lock",
+  "notes": "Worker 11 Phase 2 complete. Added 95-symbol Lucide-style sprite (Navigation 21 + Actions 23 + Feedback 10 + Data 10 + Media 7 + Social 7 + Misc 10 + Extras 7). Component .qi[data-icon] auto-mounts via Upg.icons.render. Migrator runs at boot: replaces 14 sidebar nav-icons + 14 page-header SVGs with .qi (theme-aware via currentColor + 1.75px stroke). Emoji-to-icon map handles leading emoji in .btn/.acc-eyebrow/.ql-eyebrow/.qcard-eyebrow/.filter-chip/.pill/.badge containers. MutationObserver covers dynamic UI additions. localStorage: upg_theme (Phase 1 only)."
 }
