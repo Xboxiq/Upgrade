@@ -414,11 +414,15 @@
     <!-- Navigation -->
     <nav class="sidebar-nav">
 
+      <!-- ATELIER v16 / Phase 4 — Spring-slide pill indicator (positioned floating) -->
+      <span class="nav-pill-indicator" aria-hidden="true"></span>
+
       <span class="nav-section-label">القائمة الرئيسية</span>
 
       <div class="nav-item active" data-page="dashboard">
         <i class="qi qi-md nav-icon" data-icon="layout-dashboard"></i>
         <span class="nav-label">لوحة التحكم</span>
+        <span class="nav-tooltip">لوحة التحكم</span>
       </div>
 
       <span class="nav-section-label">وحدات التدريب</span>
@@ -427,12 +431,14 @@
         <i class="qi qi-md nav-icon" data-icon="phone"></i>
         <span class="nav-label">وحدة كول سنتر</span>
         <span class="nav-badge">3</span>
+        <span class="nav-tooltip">وحدة كول سنتر</span>
       </div>
 
       <div class="nav-item" data-page="fieldsales">
         <i class="qi qi-md nav-icon" data-icon="briefcase"></i>
         <span class="nav-label">وحدة المبيعات</span>
         <span class="nav-badge">جديد</span>
+        <span class="nav-tooltip">وحدة المبيعات</span>
       </div>
 
 
@@ -441,66 +447,77 @@
         <i class="qi qi-md nav-icon" data-icon="user-tie"></i>
         <span class="nav-label">إدارة الحسابات</span>
         <span class="nav-badge nav-badge--success">KAM</span>
+        <span class="nav-tooltip">إدارة الحسابات</span>
       </div>
 
 
       <div class="nav-item" data-page="social">
         <i class="qi qi-md nav-icon" data-icon="megaphone"></i>
         <span class="nav-label">السوشيال ميديا</span>
+        <span class="nav-tooltip">السوشيال ميديا</span>
       </div>
 
       <div class="nav-item" data-page="lab">
         <i class="qi qi-md nav-icon" data-icon="flask-conical"></i>
         <span class="nav-label">مختبر السيناريوهات</span>
         <span class="nav-badge nav-badge--ember">75</span>
+        <span class="nav-tooltip">مختبر السيناريوهات</span>
       </div>
 
       <div class="nav-item" data-page="psych">
         <i class="qi qi-md nav-icon" data-icon="brain"></i>
         <span class="nav-label">الدوافع النفسية</span>
         <span class="nav-badge nav-badge--violet">7</span>
+        <span class="nav-tooltip">الدوافع النفسية</span>
       </div>
 
       <div class="nav-item" data-page="eq">
         <i class="qi qi-md nav-icon" data-icon="heart-handshake"></i>
         <span class="nav-label">الذكاء العاطفي</span>
         <span class="nav-badge nav-badge--pink">جديد</span>
+        <span class="nav-tooltip">الذكاء العاطفي</span>
       </div>
 
       <div class="nav-item" data-page="negotiation">
         <i class="qi qi-md nav-icon" data-icon="gauge"></i>
         <span class="nav-label">المفاوضات والإقناع</span>
         <span class="nav-badge nav-badge--amber">جديد</span>
+        <span class="nav-tooltip">المفاوضات والإقناع</span>
       </div>
 
       <div class="nav-item" data-page="customercare">
         <i class="qi qi-md nav-icon" data-icon="headphones"></i>
         <span class="nav-label">خدمة العملاء المتميزة</span>
         <span class="nav-badge nav-badge--mint">جديد</span>
+        <span class="nav-tooltip">خدمة العملاء المتميزة</span>
       </div>
 
       <div class="nav-item" data-page="programming">
         <i class="qi qi-md nav-icon" data-icon="code"></i>
         <span class="nav-label">البرمجة والهندسة</span>
         <span class="nav-badge nav-badge--azure">جديد</span>
+        <span class="nav-tooltip">البرمجة والهندسة</span>
       </div>
 
       <div class="nav-item" data-page="accounting">
         <i class="qi qi-md nav-icon" data-icon="calculator"></i>
         <span class="nav-label">المحاسبة والكاشير</span>
         <span class="nav-badge nav-badge--gold">جديد</span>
+        <span class="nav-tooltip">المحاسبة والكاشير</span>
       </div>
 
       <div class="nav-item" data-page="phonerepair">
         <i class="qi qi-md nav-icon" data-icon="wrench"></i>
         <span class="nav-label">صيانة الهواتف</span>
         <span class="nav-badge nav-badge--ember">جديد</span>
+        <span class="nav-tooltip">صيانة الهواتف</span>
       </div>
 
       <div class="nav-item" data-page="hrmastery">
         <i class="qi qi-md nav-icon" data-icon="briefcase"></i>
         <span class="nav-label">إتقان HR والتفاوض على الراتب</span>
         <span class="nav-badge nav-badge--royal">جديد</span>
+        <span class="nav-tooltip">إتقان HR والتفاوض على الراتب</span>
       </div>
 
       <span class="nav-section-label">الإدارة</span>
@@ -508,16 +525,19 @@
       <div class="nav-item" data-page="myprogress">
         <i class="qi qi-md nav-icon" data-icon="trending-up"></i>
         <span class="nav-label">تقدمي</span>
+        <span class="nav-tooltip">تقدمي</span>
       </div>
 
       <div class="nav-item" data-page="none">
         <i class="qi qi-md nav-icon" data-icon="line-chart"></i>
         <span class="nav-label">التقارير</span>
+        <span class="nav-tooltip">التقارير</span>
       </div>
 
       <div class="nav-item" data-page="none">
         <i class="qi qi-md nav-icon" data-icon="settings"></i>
         <span class="nav-label">الإعدادات</span>
+        <span class="nav-tooltip">الإعدادات</span>
       </div>
 
     </nav>
@@ -540,7 +560,7 @@
   <!-- ============================================================
        TOPBAR
   ============================================================ -->
-  <header id="topbar" class="material-chrome">
+  <header id="topbar" class="material-chrome island" data-island="topbar">
 
     <!-- Mobile menu toggle (visible only on small screens) -->
     <div id="mobile-menu-btn" onclick="toggleMobileSidebar()" title="القائمة">
@@ -562,12 +582,16 @@
       </div>
     </div>
 
-    <div class="topbar-search">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <button class="topbar-search-btn" type="button"
+            data-action="open-cmdk"
+            aria-label="فتح بحث المنصة (Cmd+K)"
+            title="بحث (Cmd+K)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
       </svg>
-      <input type="text" placeholder="ابحث في المنصة..." />
-    </div>
+      <span class="topbar-search-label">ابحث في المنصة...</span>
+      <kbd class="topbar-search-kbd">⌘K</kbd>
+    </button>
 
     <div class="topbar-actions">
 
@@ -17519,5 +17543,9 @@ const bird = { ...canMove(), ...canFly() };
 
 
 <script src="assets/app.js" defer></script>
+
+<!-- ATELIER v16 / Phase 4 — Mobile drawer scrim (clickable overlay, click/tap closes) -->
+<div class="drawer-scrim" data-action="close-drawer" aria-hidden="true"></div>
+
 </body>
 </html>
