@@ -13982,3 +13982,222 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, true);
 })();
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Per-Page Identity Tint (Worker 12 / Phase 5)
+   Public API: window.Upg.identity.{ setTint, getTint }
+   Sets [data-active-tint] on <html> when user navigates between pages.
+   Works by:
+     1. Observing .page.active mutations (mutation observer).
+     2. Wrapping window.navigateTo if present.
+     3. Reading initial active page on load.
+   ════════════════════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+  const html = document.documentElement;
+
+  const setTint = (page) => {
+    const slug = (page || 'dashboard').toString().replace(/^page-/, '');
+    if (html.dataset.activeTint !== slug) html.dataset.activeTint = slug;
+  };
+  const getTint = () => html.dataset.activeTint || 'dashboard';
+
+  const detectActive = () => {
+    const a = document.querySelector('.page.active');
+    if (a && a.id) setTint(a.id.replace(/^page-/, ''));
+  };
+
+  // Wrap window.navigateTo if defined
+  const tryWrap = () => {
+    if (typeof window.navigateTo !== 'function' || window.__auroraNavWrapped) return;
+    const original = window.navigateTo;
+    window.navigateTo = function (pageId, ...rest) {
+      try { setTint(pageId); } catch (_) {}
+      return original.call(this, pageId, ...rest);
+    };
+    window.__auroraNavWrapped = true;
+  };
+
+  // Mutation observer on main container watching for class="page active" toggles
+  const wireObserver = () => {
+    const main = document.getElementById('main') || document.body;
+    if (!main) return;
+    const obs = new MutationObserver((muts) => {
+      for (const m of muts) {
+        if (m.type === 'attributes' && m.attributeName === 'class') {
+          const t = m.target;
+          if (t && t.classList && t.classList.contains('page') && t.classList.contains('active')) {
+            setTint(t.id ? t.id.replace(/^page-/, '') : 'dashboard');
+            return;
+          }
+        }
+      }
+    });
+    obs.observe(main, { subtree: true, attributes: true, attributeFilter: ['class'] });
+  };
+
+  const init = () => {
+    detectActive();
+    tryWrap();
+    wireObserver();
+    // Retry wrap a few times because navigateTo may register after this IIFE
+    let tries = 0;
+    const retry = setInterval(() => {
+      tryWrap();
+      if (++tries > 10 || window.__auroraNavWrapped) clearInterval(retry);
+    }, 200);
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+
+  window.Upg = window.Upg || {};
+  window.Upg.identity = Object.freeze({ setTint, getTint });
+})();
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Time-of-Day Greeting (Worker 12 / Phase 5)
+   Public API: window.Upg.greet.{ refresh }
+   - Replaces "أهلاً" line in cath-dash-greeting with time-aware version.
+   - Uses Upg.state.profile() if available, else falls back to "صديقي".
+   - Re-runs every 30 minutes to keep greeting current.
+   ════════════════════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+
+  const getName = () => {
+    try {
+      const p = window.Upg && window.Upg.state && typeof window.Upg.state.profile === 'function'
+        ? window.Upg.state.profile() : null;
+      return (p && (p.name || p.displayName)) || 'صديقي';
+    } catch (_) { return 'صديقي'; }
+  };
+
+  const prefixForHour = (h) => {
+    if (h >= 4  && h < 12) return 'صباح الخير';
+    if (h >= 12 && h < 17) return 'يوم سعيد';
+    if (h >= 17 && h < 21) return 'مساء النور';
+    return 'مساء الخير';
+  };
+
+  const refresh = () => {
+    // primary: any [data-greet-title]
+    const target = document.querySelector('[data-greet-title]');
+    if (target) {
+      const name = getName();
+      target.textContent = `${prefixForHour(new Date().getHours())}، ${name} 👋`;
+    }
+    // also augment cath-dash greeting "أهلاً <name> 👋" with time-aware prefix
+    const cathH2 = document.querySelector('.cath-dash-greeting-text h2');
+    if (cathH2 && !cathH2.dataset.auroraGreet) {
+      cathH2.dataset.auroraGreet = '1';
+      const nameEl = cathH2.querySelector('[data-cath-bind="profile.name"]');
+      const before = cathH2.firstChild; // text node "أهلاً "
+      if (before && before.nodeType === 3) {
+        before.nodeValue = `${prefixForHour(new Date().getHours())} `;
+      }
+    }
+  };
+
+  const init = () => {
+    refresh();
+    // Refresh every 30 minutes to catch crossings (e.g., 11:55 → 12:05)
+    setInterval(refresh, 30 * 60 * 1000);
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+
+  window.Upg = window.Upg || {};
+  window.Upg.greet = Object.freeze({ refresh });
+})();
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Count-Up Tickers (Worker 12 / Phase 5)
+   Public API: window.Upg.countup.{ run, observe }
+   - Hooks any element with [data-countup] OR .cath-stat-value [data-cath-stat]
+   - Reads numeric target from element textContent (or data-countup="N")
+   - Tweens 0 → target over 1200ms with easeOutCubic
+   - Observes intersection so animation triggers on visibility, not page-load
+   ════════════════════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+
+  const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+  const formatValue = (v, decimals, locale) => {
+    if (decimals > 0) return v.toFixed(decimals);
+    return Math.round(v).toLocaleString(locale || 'ar-IQ');
+  };
+
+  const parseTarget = (el) => {
+    const raw = (el.dataset.countup && el.dataset.countup !== '' && el.dataset.countup !== '1')
+      ? el.dataset.countup
+      : el.textContent;
+    const num = parseFloat(String(raw).replace(/[^\d.\-]/g, ''));
+    return Number.isFinite(num) ? num : 0;
+  };
+
+  const run = (el, target, duration) => {
+    if (!el) return;
+    const tgt = (target == null) ? parseTarget(el) : Number(target);
+    const dur = Number(duration) || 1100;
+    const text = String(tgt);
+    const decimals = (text.split('.')[1] || '').length;
+
+    // Honor reduced-motion
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.textContent = formatValue(tgt, decimals);
+      el.dataset.countupDone = '1';
+      return;
+    }
+
+    const start = performance.now();
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / dur);
+      const v = tgt * easeOutCubic(t);
+      el.textContent = formatValue(v, decimals);
+      if (t < 1) requestAnimationFrame(tick);
+      else el.dataset.countupDone = '1';
+    };
+    requestAnimationFrame(tick);
+  };
+
+  const observe = () => {
+    const explicit = Array.from(document.querySelectorAll('[data-countup]'));
+    // Also opt-in for cath-stat-value automatically
+    const auto = Array.from(document.querySelectorAll('.cath-stat-value'))
+      .filter(el => !el.hasAttribute('data-countup'));
+    auto.forEach(el => el.setAttribute('data-countup', ''));
+    const all = explicit.concat(auto);
+    if (!all.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+      all.forEach(el => run(el));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (!en.isIntersecting || en.target.dataset.countupDone === '1') return;
+        run(en.target);
+        io.unobserve(en.target);
+      });
+    }, { threshold: 0.35 });
+    all.forEach(el => io.observe(el));
+  };
+
+  const init = () => {
+    observe();
+    // Re-observe whenever a new page becomes active (lazy mount, navigation)
+    window.addEventListener('upg:lazy-mount', observe);
+    window.addEventListener('upg:state-update', observe);
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else setTimeout(init, 100); // give Worker 11 state engine a moment to render
+
+  window.Upg = window.Upg || {};
+  window.Upg.countup = Object.freeze({ run, observe });
+})();
