@@ -1,5 +1,107 @@
 /* Auto-generated from arabic-training-platform-v12 (1) (4) (1) (1) (1).html — do not hand-edit */
 
+/* ═══════════════════════════════════════════════════════════════
+   CATHEDRAL v14 — Sovereign Theme Tokens (Worker 11 / Phase 1)
+   Layer: semantic tokens (5 surface levels + tinted shadows)
+   Compatibility: legacy --bg, --surface, --text, --accent kept via
+                  bridge layer (see below). Loaded BEFORE legacy :root
+                  so legacy values override at parse-time, then bridge
+                  rewires them when [data-theme] is set on body/root.
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  /* Surface ladder — 5 levels for genuine depth */
+  --color-bg:           hsl(225 30% 6%);
+  --color-surface-0:    hsl(225 26% 9%);
+  --color-surface-1:    hsl(225 22% 12%);
+  --color-surface-2:    hsl(225 20% 16%);
+  --color-surface-3:    hsl(225 18% 20%);
+
+  /* Text ladder */
+  --color-text:         hsl(220 20% 98%);
+  --color-text-muted:   hsl(220 15% 70%);
+  --color-text-faint:   hsl(220 12% 50%);
+
+  /* Borders */
+  --color-border:        hsl(225 18% 22%);
+  --color-border-strong: hsl(225 22% 32%);
+
+  /* Brand — same identity across both themes (only tonality shifts) */
+  --color-brand:        hsl(176 100% 70%);
+  --color-brand-hover:  hsl(176 100% 76%);
+  --color-brand-soft:   color-mix(in oklch, hsl(176 100% 70%) 14%, transparent);
+  --color-brand-strong: hsl(176 100% 60%);
+
+  /* Semantic state colors */
+  --color-success:      hsl(152 70% 55%);
+  --color-warning:      hsl(38 92% 60%);
+  --color-danger:       hsl(0 80% 65%);
+  --color-info:         hsl(210 90% 65%);
+
+  /* Tinted shadows (Refactoring UI principle — never pure black) */
+  --shadow-c-sm: 0 1px 2px hsl(225 40% 2% / 0.4);
+  --shadow-c-md: 0 4px 12px hsl(225 40% 2% / 0.5), 0 1px 2px hsl(225 40% 2% / 0.3);
+  --shadow-c-lg: 0 12px 32px hsl(225 40% 2% / 0.55), 0 2px 6px hsl(225 40% 2% / 0.35);
+  --shadow-c-xl: 0 24px 60px hsl(225 40% 2% / 0.6), 0 4px 12px hsl(225 40% 2% / 0.4);
+
+  /* Focus ring — unified across themes */
+  --ring: 0 0 0 3px color-mix(in oklch, var(--color-brand) 35%, transparent);
+  --ring-offset: 2px;
+
+  /* Geometry tokens */
+  --radius-xs:   4px;
+  --radius-full: 999px;
+}
+
+/* Off-White Premium (Stripe-grade — warm, not stark white) */
+:root[data-theme="light"],
+html[data-theme="light"],
+body[data-theme="light"] {
+  --color-bg:           hsl(40 18% 97%);
+  --color-surface-0:    hsl(40 25% 99%);
+  --color-surface-1:    hsl(40 18% 96%);
+  --color-surface-2:    hsl(40 14% 93%);
+  --color-surface-3:    hsl(40 12% 89%);
+
+  --color-text:         hsl(220 35% 12%);
+  --color-text-muted:   hsl(220 18% 38%);
+  --color-text-faint:   hsl(220 12% 55%);
+
+  --color-border:        hsl(220 14% 86%);
+  --color-border-strong: hsl(220 16% 76%);
+
+  --color-brand:        hsl(176 70% 38%);
+  --color-brand-hover:  hsl(176 75% 32%);
+  --color-brand-soft:   color-mix(in oklch, hsl(176 70% 38%) 12%, white);
+  --color-brand-strong: hsl(176 75% 30%);
+
+  --color-success:      hsl(152 65% 38%);
+  --color-warning:      hsl(38 88% 48%);
+  --color-danger:       hsl(0 72% 50%);
+  --color-info:         hsl(210 88% 48%);
+
+  --shadow-c-sm: 0 1px 2px hsl(220 30% 20% / 0.06);
+  --shadow-c-md: 0 4px 12px hsl(220 30% 20% / 0.08), 0 1px 2px hsl(220 30% 20% / 0.04);
+  --shadow-c-lg: 0 12px 32px hsl(220 30% 20% / 0.10), 0 2px 6px hsl(220 30% 20% / 0.05);
+  --shadow-c-xl: 0 24px 60px hsl(220 30% 20% / 0.12), 0 4px 12px hsl(220 30% 20% / 0.06);
+
+  --ring: 0 0 0 3px color-mix(in oklch, hsl(176 70% 38%) 30%, transparent);
+
+  color-scheme: light;
+}
+
+:root[data-theme="dark"],
+html[data-theme="dark"],
+body[data-theme="dark"] { color-scheme: dark; }
+
+/* Smooth view-transition between themes (graceful fallback if unsupported) */
+@supports (view-transition-name: root) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 280ms;
+    animation-timing-function: cubic-bezier(.4,0,.2,1);
+  }
+}
+
 /* ===== CSS block #1 (id: block-1) ===== */
 /* ============================================================
        CSS VARIABLES
@@ -3607,62 +3709,53 @@
 
     /* ============================================================
        LUMINESCENCE — Elite Light Mode (additive)
-       Activated via  <body data-theme="light">  through toggleTheme()
+       Refit (Cathedral v14 / Phase 1): legacy tokens now bridge into
+       semantic tokens (--color-*). Single source of truth.
+       Activated via <body data-theme="light"> through Upg.theme.set().
     ============================================================ */
     :root {
-      /* Light-mode palette tokens (consumed when theme is active) */
-      --bg-light:         #FAF9F6;
-      --bg-light-end:     #F5EBE0;
-      --surface-light:    rgba(255, 255, 255, 0.72);
-      --surface-light-2:  rgba(255, 255, 255, 0.55);
-      --surface-light-3:  rgba(253, 249, 243, 0.85);
-      --text-light:       #2D2424;
-      --text-light-muted: #5B4A43;
-      --text-light-faint: #9C8B83;
-      --border-light:     rgba(45, 36, 36, 0.08);
-      --border-light-hv:  rgba(45, 36, 36, 0.18);
-      --glass-light:      linear-gradient(140deg,
-                            rgba(255,255,255,0.78) 0%,
-                            rgba(255,255,255,0.55) 45%,
-                            rgba(250,240,228,0.68) 100%);
-      --glass-light-brd:  1px solid rgba(255, 255, 255, 0.55);
-      --glass-light-blur: saturate(180%) blur(15px);
-      --accent-warm:      #9C6B3F;
-      --accent-warm-dim:  rgba(156, 107, 63, 0.10);
-      --accent-warm-glow: rgba(156, 107, 63, 0.28);
+      /* Legacy aliases — kept for compatibility with old code paths */
+      --bg-light:         hsl(40 18% 97%);
+      --bg-light-end:     hsl(40 22% 92%);
+      --accent-warm:      hsl(176 70% 38%);
+      --accent-warm-dim:  color-mix(in oklch, hsl(176 70% 38%) 12%, transparent);
+      --accent-warm-glow: color-mix(in oklch, hsl(176 70% 38%) 26%, transparent);
     }
 
-    /* Theme activation — re-wire the global tokens */
+    /* Theme activation — bridge legacy tokens to semantic palette */
     body[data-theme="light"] {
-      --bg:            var(--bg-light);
-      --surface:       var(--surface-light);
-      --surface-2:     var(--surface-light-2);
-      --surface-3:     var(--surface-light-3);
-      --text:          var(--text-light);
-      --text-muted:    var(--text-light-muted);
-      --text-faint:    var(--text-light-faint);
-      --border:        var(--border-light);
-      --border-hover:  var(--border-light-hv);
-      --accent:        var(--accent-warm);
-      --accent-dim:    var(--accent-warm-dim);
-      --accent-glow:   var(--accent-warm-glow);
-      --accent-soft:   rgba(156, 107, 63, 0.06);
+      --bg:            var(--color-bg);
+      --surface:       var(--color-surface-1);
+      --surface-2:     var(--color-surface-2);
+      --surface-3:     var(--color-surface-3);
+      --text:          var(--color-text);
+      --text-muted:    var(--color-text-muted);
+      --text-faint:    var(--color-text-faint);
+      --border:        var(--color-border);
+      --border-hover:  var(--color-border-strong);
+      --accent:        var(--color-brand);
+      --accent-dim:    color-mix(in oklch, var(--color-brand) 12%, transparent);
+      --accent-glow:   color-mix(in oklch, var(--color-brand) 22%, transparent);
+      --accent-soft:   color-mix(in oklch, var(--color-brand) 8%, transparent);
 
-      --glass-bg:      var(--glass-light);
-      --glass-border:  var(--glass-light-brd);
-      --glass-blur:    var(--glass-light-blur);
-      --glass-shine:   linear-gradient(135deg, rgba(255,255,255,0.65), rgba(255,255,255,0) 40%);
+      --glass-bg:      linear-gradient(140deg,
+                          color-mix(in oklch, var(--color-surface-0) 92%, white) 0%,
+                          color-mix(in oklch, var(--color-surface-1) 86%, transparent) 45%,
+                          color-mix(in oklch, var(--color-surface-2) 88%, white) 100%);
+      --glass-border:  1px solid color-mix(in oklch, var(--color-border) 70%, white);
+      --glass-blur:    saturate(180%) blur(15px);
+      --glass-shine:   linear-gradient(135deg, hsl(0 0% 100% / 0.65), hsl(0 0% 100% / 0) 40%);
 
-      --shadow-sm:     0 1px 6px rgba(45,36,36,0.06);
-      --shadow-md:     0 6px 28px rgba(45,36,36,0.10);
-      --shadow-accent: 0 0 22px rgba(156,107,63,0.16);
+      --shadow-sm:     var(--shadow-c-sm);
+      --shadow-md:     var(--shadow-c-md);
+      --shadow-accent: 0 0 22px color-mix(in oklch, var(--color-brand) 22%, transparent);
 
-      --deep-gradient: radial-gradient(1200px 520px at 12% -10%, rgba(156,107,63,0.10), transparent 55%),
-                       radial-gradient(900px 500px at 95% 110%, rgba(200,160,110,0.12), transparent 50%),
-                       radial-gradient(700px 400px at 60% 50%, rgba(245,235,224,0.35), transparent 60%);
+      --deep-gradient: radial-gradient(1200px 520px at 12% -10%, color-mix(in oklch, var(--color-brand) 8%, transparent), transparent 55%),
+                       radial-gradient(900px 500px at 95% 110%, color-mix(in oklch, var(--color-warning) 12%, transparent), transparent 50%),
+                       radial-gradient(700px 400px at 60% 50%, color-mix(in oklch, var(--color-surface-2) 30%, transparent), transparent 60%);
 
-      background: linear-gradient(160deg, var(--bg-light) 0%, var(--bg-light-end) 100%);
-      color: var(--text-light);
+      background: linear-gradient(160deg, var(--color-bg) 0%, var(--color-surface-2) 100%);
+      color: var(--color-text);
     }
 
     /* Main canvas — transparent so body gradient shows through */
@@ -3675,7 +3768,7 @@
     }
     body[data-theme="light"]::before { opacity: 0.55; }
 
-    /* Glassmorphism surfaces — white-translucent + blur(15px) */
+    /* Glassmorphism surfaces — token-driven, no !important needed */
     body[data-theme="light"] .card,
     body[data-theme="light"] .stat-card,
     body[data-theme="light"] .module-card,
@@ -3686,14 +3779,14 @@
     body[data-theme="light"] .skill-card,
     body[data-theme="light"] .welcome-banner,
     body[data-theme="light"] .user-card {
-      background: var(--glass-light) !important;
-      border: 1px solid rgba(255,255,255,0.55) !important;
+      background: var(--glass-bg);
+      border: 1px solid color-mix(in oklch, var(--color-border) 70%, white);
       -webkit-backdrop-filter: blur(15px) saturate(180%);
               backdrop-filter: blur(15px) saturate(180%);
-      box-shadow: 0 8px 32px rgba(45,36,36,0.06), inset 0 1px 0 rgba(255,255,255,0.9);
+      box-shadow: var(--shadow-c-md), inset 0 1px 0 hsl(0 0% 100% / 0.9);
     }
 
-    /* Deep readable text on creamy background */
+    /* Deep readable text on creamy background — token cascade handles it */
     body[data-theme="light"] h1,
     body[data-theme="light"] h2,
     body[data-theme="light"] h3,
@@ -3704,85 +3797,86 @@
     body[data-theme="light"] #topbar-title,
     body[data-theme="light"] .logo-title,
     body[data-theme="light"] .user-name {
-      color: #2D2424 !important;
+      color: var(--color-text);
     }
     body[data-theme="light"] .page-header p,
     body[data-theme="light"] .stat-label,
     body[data-theme="light"] #topbar-breadcrumb,
     body[data-theme="light"] .user-role,
     body[data-theme="light"] .nav-section-label {
-      color: #5B4A43 !important;
+      color: var(--color-text-muted);
     }
 
     /* Topbar / sidebar structural borders */
     body[data-theme="light"] #topbar,
     body[data-theme="light"] #sidebar {
-      border-color: rgba(45,36,36,0.08) !important;
+      border-color: var(--color-border);
     }
     body[data-theme="light"] #sidebar::after {
-      background: linear-gradient(to bottom, transparent, rgba(156,107,63,0.35), transparent);
+      background: linear-gradient(to bottom, transparent, color-mix(in oklch, var(--color-brand) 35%, transparent), transparent);
     }
 
     /* Sidebar navigation */
-    body[data-theme="light"] .nav-item { color: #5B4A43; }
+    body[data-theme="light"] .nav-item { color: var(--color-text-muted); }
     body[data-theme="light"] .nav-item:hover {
-      background: rgba(156,107,63,0.06);
-      color: #2D2424;
-      border-color: rgba(156,107,63,0.14);
+      background: color-mix(in oklch, var(--color-brand) 6%, transparent);
+      color: var(--color-text);
+      border-color: color-mix(in oklch, var(--color-brand) 14%, transparent);
     }
     body[data-theme="light"] .nav-item.active {
-      background: linear-gradient(135deg, rgba(156,107,63,0.14), rgba(245,235,224,0.7));
-      color: #7A4F2E;
-      border-color: rgba(156,107,63,0.22);
-      box-shadow: 0 4px 14px rgba(156,107,63,0.12);
+      background: linear-gradient(135deg, color-mix(in oklch, var(--color-brand) 14%, transparent), color-mix(in oklch, var(--color-surface-2) 70%, white));
+      color: var(--color-brand-strong);
+      border-color: color-mix(in oklch, var(--color-brand) 22%, transparent);
+      box-shadow: 0 4px 14px color-mix(in oklch, var(--color-brand) 14%, transparent);
     }
-    body[data-theme="light"] .nav-item.active .nav-icon { color: #9C6B3F; }
+    body[data-theme="light"] .nav-item.active .nav-icon { color: var(--color-brand); }
     body[data-theme="light"] .nav-item.active::before {
-      background: #9C6B3F;
-      box-shadow: 0 0 10px rgba(156,107,63,0.45);
+      background: var(--color-brand);
+      box-shadow: 0 0 10px color-mix(in oklch, var(--color-brand) 45%, transparent);
     }
 
     /* Topbar controls */
     body[data-theme="light"] .tb-btn {
-      background: rgba(255,255,255,0.55);
-      border-color: rgba(45,36,36,0.08);
-      color: #5B4A43;
+      background: color-mix(in oklch, white 70%, var(--color-surface-1));
+      border-color: var(--color-border);
+      color: var(--color-text-muted);
     }
     body[data-theme="light"] .tb-btn:hover {
-      background: rgba(255,255,255,0.85);
-      color: #2D2424;
-      box-shadow: 0 0 12px rgba(156,107,63,0.18);
+      background: white;
+      color: var(--color-text);
+      box-shadow: 0 0 12px color-mix(in oklch, var(--color-brand) 18%, transparent);
     }
     body[data-theme="light"] .topbar-search {
-      background: rgba(255,255,255,0.6);
-      border-color: rgba(45,36,36,0.08);
+      background: color-mix(in oklch, white 75%, var(--color-surface-1));
+      border-color: var(--color-border);
     }
-    body[data-theme="light"] .topbar-search input { color: #2D2424; }
-    body[data-theme="light"] .topbar-search input::placeholder { color: #9C8B83; }
+    body[data-theme="light"] .topbar-search input { color: var(--color-text); }
+    body[data-theme="light"] .topbar-search input::placeholder { color: var(--color-text-faint); }
 
     body[data-theme="light"] .page-icon-wrap {
-      background: rgba(156,107,63,0.10);
-      border-color: rgba(156,107,63,0.22);
+      background: color-mix(in oklch, var(--color-brand) 10%, transparent);
+      border-color: color-mix(in oklch, var(--color-brand) 22%, transparent);
     }
-    body[data-theme="light"] .page-icon-wrap svg { color: #9C6B3F; }
+    body[data-theme="light"] .page-icon-wrap svg { color: var(--color-brand); }
 
     /* Tables */
     body[data-theme="light"] .data-table th,
     body[data-theme="light"] .data-table td {
-      border-color: rgba(45,36,36,0.08) !important;
+      border-color: var(--color-border);
     }
     body[data-theme="light"] .data-table tbody tr:hover td {
-      background: rgba(156,107,63,0.05) !important;
+      background: color-mix(in oklch, var(--color-brand) 5%, transparent);
     }
 
     /* Progress / accent bars */
-    body[data-theme="light"] .progress-bar { background: rgba(45,36,36,0.06); }
+    body[data-theme="light"] .progress-bar { background: color-mix(in oklch, var(--color-text) 6%, transparent); }
     body[data-theme="light"] .progress-fill {
-      background: linear-gradient(90deg, #9C6B3F, #C89B6E);
+      background: linear-gradient(90deg, var(--color-brand), var(--color-brand-hover));
     }
 
     /* ============================================================
-       LUMINESCENCE TOGGLE BUTTON (Lamp/Lightbulb)
+       SOVEREIGN THEME TOGGLE — 3-state (Auto / Dark / Light)
+       Cathedral v14 / Phase 1
     ============================================================ */
     .theme-toggle {
       width: 36px; height: 36px;
@@ -3804,20 +3898,36 @@
       transform: translateY(-1px);
       box-shadow: 0 0 14px var(--accent-glow);
     }
+    .theme-toggle:focus-visible {
+      outline: none;
+      box-shadow: var(--ring);
+    }
     .theme-toggle svg { width: 16px; height: 16px; }
+
+    /* 3-state icon swap — driven by body[data-theme-mode] */
+    .theme-toggle .theme-toggle-icon { display: none; align-items: center; justify-content: center; }
+    body[data-theme-mode="auto"]  .theme-toggle .theme-toggle-icon[data-theme-state="auto"]  { display: inline-flex; }
+    body[data-theme-mode="dark"]  .theme-toggle .theme-toggle-icon[data-theme-state="dark"]  { display: inline-flex; }
+    body[data-theme-mode="light"] .theme-toggle .theme-toggle-icon[data-theme-state="light"] { display: inline-flex; }
+
+    /* Legacy lamp icons — fallback when mode attribute missing */
     .theme-toggle .icon-lamp-on  { display: none; }
     .theme-toggle .icon-lamp-off { display: block; }
     body[data-theme="light"] .theme-toggle .icon-lamp-on  { display: block; }
     body[data-theme="light"] .theme-toggle .icon-lamp-off { display: none; }
+    /* Hide legacy lamp when 3-state mode markup is present */
+    body[data-theme-mode] .theme-toggle .icon-lamp-on,
+    body[data-theme-mode] .theme-toggle .icon-lamp-off { display: none; }
+
     body[data-theme="light"] .theme-toggle {
-      background: rgba(255, 235, 200, 0.75);
-      border-color: rgba(230, 160, 80, 0.40);
-      color: #B86B1F;
-      box-shadow: 0 0 16px rgba(255, 200, 120, 0.40);
+      background: color-mix(in oklch, var(--color-warning) 18%, white);
+      border-color: color-mix(in oklch, var(--color-warning) 35%, transparent);
+      color: var(--color-warning);
+      box-shadow: 0 0 16px color-mix(in oklch, var(--color-warning) 28%, transparent);
     }
     body[data-theme="light"] .theme-toggle:hover {
-      background: rgba(255, 225, 180, 0.95);
-      box-shadow: 0 0 22px rgba(255, 180, 90, 0.55);
+      background: color-mix(in oklch, var(--color-warning) 28%, white);
+      box-shadow: 0 0 22px color-mix(in oklch, var(--color-warning) 38%, transparent);
     }
 
     /* ============================================================

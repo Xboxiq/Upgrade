@@ -6,6 +6,7 @@
   <title>منصة التدريب الاحترافية</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <meta name="theme-color" content="#0E1220" />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
   <!-- moved to assets/style.css :: block #1 -->
 
@@ -279,19 +280,41 @@
 
     <div class="topbar-actions">
 
-      <!-- LUMINESCENCE TOGGLE — Dark <-> Elite Light -->
+      <!-- LUMINESCENCE TOGGLE — 3-state (Auto / Dark / Light) — Cathedral v14 / Phase 1 -->
       <button class="theme-toggle" type="button"
-              title="تبديل الثيم (فاتح / داكن)"
-              aria-label="Toggle theme"
+              data-action="toggle-theme"
+              title="تبديل الثيم — Auto / Dark / Light"
+              aria-label="تبديل الثيم — Auto / Dark / Light"
               onclick="toggleTheme()">
-        <!-- Lamp OFF (shown in Dark mode) -->
-        <svg class="icon-lamp-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Auto state (system preference) -->
+        <span class="theme-toggle-icon" data-theme-state="auto" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+        </span>
+        <!-- Dark state (moon) -->
+        <span class="theme-toggle-icon" data-theme-state="dark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </span>
+        <!-- Light state (sun) -->
+        <span class="theme-toggle-icon" data-theme-state="light" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+            <circle cx="12" cy="12" r="4"/>
+            <line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>
+            <line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/>
+            <line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>
+            <line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/>
+          </svg>
+        </span>
+        <!-- Legacy lamp icons (kept as fallback when JS can't set data-theme-mode) -->
+        <svg class="icon-lamp-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/>
           <path d="M9 18h6"/>
           <path d="M10 22h4"/>
         </svg>
-        <!-- Lamp ON (shown in Light mode) -->
-        <svg class="icon-lamp-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="icon-lamp-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/>
           <path d="M9 18h6"/>
           <path d="M10 22h4"/>
