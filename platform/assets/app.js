@@ -14360,3 +14360,35 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(runSanity, 0);
   }
 })();
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15.1 — Universal data-page click delegation (Worker 13 / Phase 1)
+   Bridges the new Bento dashboard's .dock-btn and .cath-card-link buttons
+   (which use data-page) to navigateTo. Pre-existing .nav-item[data-page]
+   already has its own click handler — this delegation excludes those to
+   avoid double-fire and only acts on buttons outside the sidebar.
+   ════════════════════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest && e.target.closest('[data-page]');
+    if (!t) return;
+    // Sidebar nav-items already have their own listener — don't double-fire.
+    if (t.classList && t.classList.contains('nav-item')) return;
+    // Only handle buttons / interactive controls in the bento dashboard area.
+    if (t.tagName !== 'BUTTON' && t.getAttribute('role') !== 'button') return;
+    const page = t.dataset.page;
+    if (!page || page === 'none') return;
+    e.preventDefault();
+    try {
+      if (typeof window.navigateTo === 'function')          window.navigateTo(page);
+      else if (typeof window.navigatePage === 'function')    window.navigatePage(page);
+      else {
+        const navEl = document.querySelector('.nav-item[data-page="' + page + '"]');
+        if (navEl) navEl.click();
+      }
+    } catch (_) { /* fail silent */ }
+  });
+})();

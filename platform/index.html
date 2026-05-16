@@ -659,355 +659,108 @@
     =========================== -->
     <section class="page active" id="page-dashboard">
 
-      <div class="page-header">
-        <h1>مرحباً بك في لوحة التحكم 👋</h1>
-        <p>نظرة عامة على مسيرتك التدريبية — تدريب ذاتي احترافي</p>
-      </div>
+      <!-- ══════════════════ AURORA v15.1 — Bento Dashboard (Worker 13 / Phase 1) ══════════════════
+           bridges Worker 12 / Phase 5 markup to existing CSS (.bento, .stat-tile, .dock)
+           and JS APIs (Upg.greet, Upg.countup, Upg.identity, Upg.state).
+           Sacred preservation: #cath-skill-grid, #cath-activity-list, all [data-cath-stat]
+           are kept inside bento children so Worker 11 state engine continues to update them.
+      ═══════════════════════════════════════════════════════════════════════════════════════════ -->
+      <div class="bento">
 
-      <!-- ══════════════════ Cathedral v14 — Real Dashboard (Worker 11 / Phase 6) ══════════════════ -->
-      <section class="cath-dash" data-cath-dash aria-label="إحصاءاتك الحقيقية">
-        <header class="cath-dash-greeting">
-          <div class="cath-dash-greeting-avatar" data-cath-bind="profile.initial">U</div>
-          <div class="cath-dash-greeting-text">
-            <h2>أهلاً <span data-cath-bind="profile.name">صديقي</span> 👋</h2>
-            <p data-cath-bind="profile.streakLine">رحلتك تبدأ من هنا — تابع تقدّمك أدناه.</p>
-          </div>
-          <span class="cath-progress-pill" data-cath-bind="profile.role">—</span>
-        </header>
+        <!-- Hero Greet — 2x1 (Upg.greet writes time-of-day greeting + name into [data-greet-title]) -->
+        <article class="bento-greet b-2x1">
+          <span class="h-eyebrow">لوحة التحكم</span>
+          <h1 data-greet-title>أهلاً بعودتك</h1>
+          <p data-greet-sub>تابع رحلتك التدريبية — اليوم خطوة جديدة بانتظارك.</p>
+        </article>
 
-        <div class="cath-dash-stats">
-          <article class="cath-stat">
-            <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="check-circle"></i></div>
-            <div class="cath-stat-body">
-              <div><span class="cath-stat-value" data-cath-stat="unitsCompleted">0</span></div>
-              <span class="cath-stat-label">وحدة مُكتملة</span>
-            </div>
-          </article>
-          <article class="cath-stat">
-            <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="bar-chart"></i></div>
-            <div class="cath-stat-body">
-              <div><span class="cath-stat-value" data-cath-stat="avgCompletionRate">0</span><span class="cath-stat-suffix">%</span></div>
-              <span class="cath-stat-label">معدل الإتمام</span>
-            </div>
-          </article>
-          <article class="cath-stat">
-            <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="trending-up"></i></div>
-            <div class="cath-stat-body">
-              <div><span class="cath-stat-value" data-cath-stat="trainingHours">0</span><span class="cath-stat-suffix">ساعة</span></div>
-              <span class="cath-stat-label">إجمالي التدريب</span>
-            </div>
-          </article>
-          <article class="cath-stat">
-            <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="alert-triangle"></i></div>
-            <div class="cath-stat-body">
-              <div><span class="cath-stat-value" data-cath-stat="streak">0</span><span class="cath-stat-suffix">يوم</span></div>
-              <span class="cath-stat-label">streak متتابع</span>
-            </div>
-          </article>
-        </div>
+        <!-- Stat tile #1 — Units completed (Worker 11 [data-cath-stat] preserved) -->
+        <article class="stat-tile b-1x1">
+          <div class="stat-tile-icon"><i class="qi" data-icon="check-circle"></i></div>
+          <div class="stat-tile-value u-num" data-countup data-cath-stat="unitsCompleted">0</div>
+          <div class="stat-tile-label">وحدة مُكتملة</div>
+          <span class="stat-tile-trend is-up"><i class="qi" data-icon="trending-up"></i> +3 هذا الأسبوع</span>
+        </article>
 
-        <div class="cath-dash-grid">
-          <div class="cath-dash-card">
-            <header>
-              <h2><i class="qi" data-icon="layout-dashboard"></i> شجرة المهارات</h2>
-              <button class="cath-card-link" type="button" data-page="myprogress">عرض التفاصيل</button>
-            </header>
-            <div class="cath-skill-grid" id="cath-skill-grid"></div>
-          </div>
-          <div class="cath-dash-card">
-            <header>
-              <h2><i class="qi" data-icon="trending-up"></i> آخر النشاط</h2>
-            </header>
-            <ul class="cath-activity-list" id="cath-activity-list"></ul>
-          </div>
-        </div>
+        <!-- Stat tile #2 — Avg completion rate (Worker 11 [data-cath-stat] preserved) -->
+        <article class="stat-tile b-1x1">
+          <div class="stat-tile-icon"><i class="qi" data-icon="bar-chart"></i></div>
+          <div class="stat-tile-value u-num"><span data-countup data-cath-stat="avgCompletionRate">0</span>%</div>
+          <div class="stat-tile-label">معدل الإتمام</div>
+          <span class="stat-tile-trend is-up"><i class="qi" data-icon="trending-up"></i> +5%</span>
+        </article>
 
-        <div class="cath-dash-card">
-          <header>
-            <h2><i class="qi" data-icon="command"></i> إجراءات سريعة</h2>
-            <span style="font-size:.75rem;color:var(--color-text-faint,rgba(255,255,255,.5));">Cmd+K للبحث</span>
-          </header>
-          <div class="cath-quick-actions">
-            <button class="cath-quick-action" type="button" data-page="callcenter"><i class="qi qi-lg" data-icon="phone"></i><span>مكالمة تجريبية</span></button>
-            <button class="cath-quick-action" type="button" data-page="hrmastery"><i class="qi qi-lg" data-icon="briefcase"></i><span>مقابلة وهمية</span></button>
-            <button class="cath-quick-action" type="button" data-page="accounting"><i class="qi qi-lg" data-icon="calculator"></i><span>حاسبة الراتب</span></button>
-            <button class="cath-quick-action" type="button" data-page="psych"><i class="qi qi-lg" data-icon="brain"></i><span>اختبار شخصية</span></button>
-            <button class="cath-quick-action" type="button" data-page="lab"><i class="qi qi-lg" data-icon="flask-conical"></i><span>سيناريو عشوائي</span></button>
-            <button class="cath-quick-action" type="button" data-page="myprogress"><i class="qi qi-lg" data-icon="bar-chart"></i><span>تقدمي الكامل</span></button>
+        <!-- Skill tree — 2x1 (Worker 11 fills #cath-skill-grid) -->
+        <article class="b-2x1 dashboard-skills">
+          <div class="dashboard-card-header">
+            <h2 class="h-card"><i class="qi" data-icon="layout-dashboard"></i> شجرة المهارات</h2>
+            <button class="cath-card-link" type="button" data-page="myprogress">عرض التفاصيل ←</button>
           </div>
-        </div>
-      </section>
+          <div class="cath-skill-grid" id="cath-skill-grid"></div>
+        </article>
 
-      <!-- Welcome Banner -->
-      <div class="welcome-banner">
-        <div class="welcome-text">
-          <h2>استمر في رحلة التدريب</h2>
-          <p>لديك 3 وحدات تدريبية مفتوحة و4 مهارات قيد التطوير</p>
-        </div>
-        <div class="welcome-badge">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
-          <span>المستوى الذهبي</span>
-        </div>
-      </div>
+        <!-- Activity feed — 2x1 (Worker 11 fills #cath-activity-list) -->
+        <article class="b-2x1 dashboard-activity">
+          <h2 class="h-card dashboard-card-title">
+            <i class="qi" data-icon="trending-up"></i> آخر النشاط
+          </h2>
+          <ul class="cath-activity-list" id="cath-activity-list"></ul>
+        </article>
 
-      <!-- Stats -->
-      <div class="grid-4 mb-16">
-        <div class="stat-card">
-          <div class="stat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-            </svg>
-          </div>
-          <div>
-            <div class="stat-value">248</div>
-            <div class="stat-label">إجمالي الوحدات المُتقَنة</div>
-          </div>
-          <span class="stat-delta up">↑ 12%</span>
-        </div>
+        <!-- Stat tile #3 — Training hours (Worker 11 [data-cath-stat] preserved) -->
+        <article class="stat-tile b-1x1">
+          <div class="stat-tile-icon"><i class="qi" data-icon="clock"></i></div>
+          <div class="stat-tile-value u-num" data-countup data-cath-stat="trainingHours">0</div>
+          <div class="stat-tile-label">ساعة تدريب</div>
+        </article>
 
-        <div class="stat-card">
-          <div class="stat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-            </svg>
-          </div>
-          <div>
-            <div class="stat-value">87<span style="font-size:16px; color:var(--text-muted)">%</span></div>
-            <div class="stat-label">معدل الإتمام</div>
-          </div>
-          <span class="stat-delta up">↑ 5%</span>
-        </div>
+        <!-- Stat tile #4 — Streak (Worker 11 [data-cath-stat] preserved) -->
+        <article class="stat-tile b-1x1">
+          <div class="stat-tile-icon"><i class="qi" data-icon="flame"></i></div>
+          <div class="stat-tile-value u-num" data-countup data-cath-stat="streak">0</div>
+          <div class="stat-tile-label">يوم streak</div>
+        </article>
 
-        <div class="stat-card">
-          <div class="stat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/>
-              <polyline points="12 6 12 12 16 14"/>
-            </svg>
-          </div>
-          <div>
-            <div class="stat-value">1,430</div>
-            <div class="stat-label">ساعات تدريب هذا الشهر</div>
-          </div>
-          <span class="stat-delta down">↓ 3%</span>
-        </div>
+        <!-- Dock — 6 quick actions, full-width row -->
+        <nav class="dock b-4x1" aria-label="إجراءات سريعة">
+          <button class="dock-btn" type="button" data-page="callcenter">
+            <i class="qi" data-icon="phone"></i><span>مكالمة</span>
+          </button>
+          <button class="dock-btn" type="button" data-page="hrmastery">
+            <i class="qi" data-icon="briefcase"></i><span>مقابلة</span>
+          </button>
+          <button class="dock-btn" type="button" data-page="accounting">
+            <i class="qi" data-icon="calculator"></i><span>حاسبة راتب</span>
+          </button>
+          <button class="dock-btn" type="button" data-page="psych">
+            <i class="qi" data-icon="brain"></i><span>اختبار</span>
+          </button>
+          <button class="dock-btn" type="button" data-page="lab">
+            <i class="qi" data-icon="flask-conical"></i><span>سيناريو</span>
+          </button>
+          <button class="dock-btn" type="button" data-page="myprogress">
+            <i class="qi" data-icon="bar-chart"></i><span>تقدمي</span>
+          </button>
+        </nav>
 
-        <div class="stat-card">
-          <div class="stat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-            </svg>
+        <!-- Preserved feature: Skill heatmap (v12) — JS hook #v12Heatmap kept intact -->
+        <article class="b-4x1 dashboard-heatmap">
+          <div class="dashboard-card-header">
+            <h2 class="h-card"><i class="qi" data-icon="layout-dashboard"></i> خريطة مهاراتك الحرارية</h2>
+            <span class="h-eyebrow">اضغط أي خلية لتقييم نفسك — الألوان تتغير تلقائياً</span>
           </div>
-          <div>
-            <div class="stat-value">4.8</div>
-            <div class="stat-label">متوسط التقييم</div>
-          </div>
-          <span class="stat-delta up">↑ 0.2</span>
-        </div>
-      </div>
-
-      <!-- Two column -->
-      <div class="grid-2">
-
-        <!-- Quick modules -->
-        <div class="card">
-          <div class="card-title">الوحدات التدريبية</div>
-          <div class="modules-grid">
-            <div class="module-card">
-              <div class="module-icon" style="background:rgba(102,252,241,0.1);">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#66FCF1" stroke-width="2">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.94a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-                </svg>
-              </div>
-              <div class="module-info">
-                <h4>كول سنتر</h4>
-                <p>مهارات الاتصال</p>
-              </div>
-            </div>
-            <div class="module-card">
-              <div class="module-icon" style="background:rgba(139,92,246,0.1);">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2">
-                  <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
-                </svg>
-              </div>
-              <div class="module-info">
-                <h4>مبيعات ميدانية</h4>
-                <p>مهارات البيع</p>
-              </div>
-            </div>
-            <div class="module-card">
-              <div class="module-icon" style="background:rgba(14,165,233,0.1);">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2">
-                  <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
-                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
-                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-                </svg>
-              </div>
-              <div class="module-info">
-                <h4>سوشيال ميديا</h4>
-                <p>مهارات التأثير</p>
-              </div>
-            </div>
-            <div class="module-card">
-              <div class="module-icon" style="background:rgba(234,179,8,0.1);">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#EAB308" stroke-width="2">
-                  <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>
-                </svg>
-              </div>
-              <div class="module-info">
-                <h4>مختبر السيناريوهات</h4>
-                <p>مهارات التحليل</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Activity feed -->
-        <div class="card">
-          <div class="card-title">آخر النشاطات</div>
-          <div class="activity-item">
-            <div class="activity-dot" style="background:#22C55E;"></div>
-            <div class="activity-content">
-              <p><strong>محمد علي</strong> أتم وحدة كول سنتر — المستوى 3</p>
-              <div class="activity-time">منذ 12 دقيقة</div>
-            </div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-dot" style="background:#0EA5E9;"></div>
-            <div class="activity-content">
-              <p><strong>سارة أحمد</strong> بدأت سيناريو "التعامل مع العميل الصعب"</p>
-              <div class="activity-time">منذ 28 دقيقة</div>
-            </div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-dot" style="background:#EAB308;"></div>
-            <div class="activity-content">
-              <p>تم إكمال <strong>قسم جديد</strong> في وحدة السوشيال ميديا</p>
-              <div class="activity-time">منذ ساعة</div>
-            </div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-dot" style="background:#8B5CF6;"></div>
-            <div class="activity-content">
-              <p><strong>خالد عمر</strong> حقق أعلى درجة في اختبار المبيعات الميدانية</p>
-              <div class="activity-time">منذ ساعتين</div>
-            </div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-dot" style="background:var(--accent);"></div>
-            <div class="activity-content">
-              <p>تم تحديث <strong>سيناريوهات الرد على الاعتراضات</strong></p>
-              <div class="activity-time">منذ 3 ساعات</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Progress by unit -->
-      <div class="card mt-22">
-        <div class="card-title">تقدم الوحدات التدريبية</div>
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>الوحدة</th>
-              <th>التقدم</th>
-              <th>الإتمام</th>
-              <th>التقييم</th>
-              <th>الحالة</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="fw-700 u-c-text">كول سنتر</td>
-              <td>64</td>
-              <td>
-                <div class="u-row">
-                  <div class="progress-bar u-w-120"><div class="progress-fill" style="width:78%"></div></div>
-                  <span>78%</span>
-                </div>
-              </td>
-              <td class="text-accent">4.7 ★</td>
-              <td><span class="tag green">نشط</span></td>
-            </tr>
-            <tr>
-              <td class="fw-700 u-c-text">المبيعات الميدانية</td>
-              <td>91</td>
-              <td>
-                <div class="u-row">
-                  <div class="progress-bar u-w-120"><div class="progress-fill" style="width:65%"></div></div>
-                  <span>65%</span>
-                </div>
-              </td>
-              <td class="text-accent">4.5 ★</td>
-              <td><span class="tag green">نشط</span></td>
-            </tr>
-            <tr>
-              <td class="fw-700 u-c-text">السوشيال ميديا</td>
-              <td>55</td>
-              <td>
-                <div class="u-row">
-                  <div class="progress-bar u-w-120"><div class="progress-fill" style="width:90%"></div></div>
-                  <span>90%</span>
-                </div>
-              </td>
-              <td class="text-accent">4.9 ★</td>
-              <td><span class="tag blue">مراجعة</span></td>
-            </tr>
-            <tr>
-              <td class="fw-700 u-c-text">مختبر السيناريوهات</td>
-              <td>38</td>
-              <td>
-                <div class="u-row">
-                  <div class="progress-bar u-w-120"><div class="progress-fill" style="width:45%"></div></div>
-                  <span>45%</span>
-                </div>
-              </td>
-              <td class="text-accent">4.6 ★</td>
-              <td><span class="tag accent">28 سيناريو</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-
-      <!-- v12-ADD: خريطة مهاراتك الحرارية -->
-      <div class="card u-frame-clip-top">
-        <div style="padding:16px 22px 14px;border-bottom:1px solid var(--border);background:var(--surface-2);display:flex;align-items:center;justify-content:space-between;">
-          <div style="display:flex;align-items:center;gap:12px;">
-            <span class="u-fz-22">&#x1F5FA;&#xFE0F;</span>
-            <div>
-              <div class="u-h4">خريطة مهاراتك الحرارية</div>
-              <div class="u-meta">اضغط على أي خلية لتقييم نفسك — الألوان تتغير تلقائياً</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:8px;align-items:center;font-size:10px;color:var(--text-faint);">
-            <span style="width:12px;height:12px;border-radius:3px;background:#166534;display:inline-block;"></span> متقن
-            <span style="width:12px;height:12px;border-radius:3px;background:#EAB308;display:inline-block;margin-right:8px;"></span> متوسط
-            <span style="width:12px;height:12px;border-radius:3px;background:#DC2626;display:inline-block;margin-right:8px;"></span> يحتاج عمل
-          </div>
-        </div>
-        <div style="padding:18px;overflow-x:auto;">
           <div class="v12-heatmap" id="v12Heatmap"></div>
-        </div>
-      </div>
+        </article>
 
-      <!-- v12-ADD: تحدي اليوم -->
-      <div class="card u-frame-clip-top">
-        <div style="padding:16px 22px 14px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(102,252,241,0.06),rgba(139,92,246,0.06));display:flex;align-items:center;justify-content:space-between;">
-          <div style="display:flex;align-items:center;gap:12px;">
-            <span style="font-size:24px;">&#x1F3AF;</span>
-            <div>
-              <div class="u-h4">تحدي اليوم</div>
-              <div class="u-meta">مهمة يومية مبنية على مسارك التدريبي</div>
-            </div>
+        <!-- Preserved feature: Daily challenge (v12) — JS hooks #v12ChallengeLevel + #v12ChallengeBody kept -->
+        <article class="b-4x1 dashboard-challenge">
+          <div class="dashboard-card-header">
+            <h2 class="h-card"><i class="qi" data-icon="flame"></i> تحدي اليوم</h2>
+            <div class="v12-challenge-level" id="v12ChallengeLevel"></div>
           </div>
-          <div class="v12-challenge-level" id="v12ChallengeLevel"></div>
-        </div>
-        <div class="u-p-22" id="v12ChallengeBody"></div>
+          <div id="v12ChallengeBody"></div>
+        </article>
+
       </div>
 
     </section><!-- /page-dashboard -->

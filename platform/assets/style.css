@@ -17542,3 +17542,55 @@ body, .u-prose p {
 .u-meta-md-loose { font-size: 12px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.75; }
 
 /* End of AURORA v15 — Phase 7 round-4 utilities ─────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15.1 — Dashboard Card Utilities (Worker 13 / Phase 1)
+   Bridge classes for Bento dashboard children built on top of Worker 12 CSS.
+   ════════════════════════════════════════════════════════════════════════════ */
+.dashboard-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+.dashboard-card-title {
+  margin: 0 0 var(--space-4) 0;
+}
+.dashboard-skills .cath-skill-grid,
+.dashboard-activity .cath-activity-list {
+  margin-top: 0;
+}
+.dashboard-skills,
+.dashboard-activity,
+.dashboard-heatmap,
+.dashboard-challenge {
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-c-sm), var(--hairline-light);
+}
+.dashboard-heatmap .v12-heatmap,
+.dashboard-challenge #v12ChallengeBody {
+  margin-top: var(--space-3);
+}
+.cath-card-link {
+  background: transparent;
+  border: 1px solid var(--color-border, rgba(255,255,255,0.08));
+  color: var(--color-tint, var(--color-brand, var(--accent)));
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 180ms, background 180ms;
+  font-family: inherit;
+}
+.cath-card-link:hover {
+  border-color: var(--color-tint, var(--color-brand, var(--accent)));
+  background: color-mix(in oklch, var(--color-tint, var(--color-brand)) 10%, transparent);
+}
+/* End AURORA v15.1 — Phase 1 Bento bridge ─────────────────────────────────── */
