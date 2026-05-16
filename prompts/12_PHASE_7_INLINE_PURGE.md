@@ -1,6 +1,34 @@
 # 🧹 WORKER 12 — Phase 7/7 — Inline Purge & Production Polish
 > **يختم:** Worker 12 (AURORA / Cathedral v15).
+> **يبني فوق:** كل الـ phases السابقة (1, 1B, 2-6).
+> **اقرأ أولاً:** `prompts/12_WORKER_AURORA_APPLE_GRADE.md` — قسم **Preservation Guard** (إجباري).
 > **الفلسفة:** الـ phase الأخير لا يضيف بريقاً، بل يحذف الضوضاء. الواجهة الاحترافية = ملف نظيف يقرأ مرة واحدة.
+
+---
+
+## 🛡️ Preservation Contract (Phase 7) — تنظيف، لا هدم
+
+هذا الـ phase الوحيد الذي **يحذف بكثرة** — لكن الحذف محصور حصراً في:
+
+| النوع | المسموح حذفه | الممنوع حذفه |
+|---|---|---|
+| inline `style="..."` | كل style ينقل إلى class equivalent بدون تغيير سلوك | أي style على عنصر فيه behavior critical (مثل `display:none` على overlay مغلق — استبدل بـ `hidden` attribute) |
+| `!important` | كل important غير مبرّر | important داخل `@media print`, `@media (forced-colors: active)`, `@media (prefers-reduced-motion: reduce)` (هذي شرعية) |
+| HTML elements | **لا تحذف أي عنصر HTML أبداً** — phase 7 = CSS/inline cleanup فقط | أي عنصر بنيوي |
+| CSS rules | لا تحذف أي rule كاملة (إلا rules مكرّرة 100%) | أي rule فيها semantics |
+
+**قبل تشغيل `cleanup-inline-styles.mjs`:**
+1. backup: `cp platform/index.html platform/index.html.before-purge.bak`
+2. شغّل السكربت
+3. **اختبر يدوياً 3 صفحات على الأقل** بصرياً قبل الـ commit.
+4. لو شي ينكسر بصرياً → rollback من الـ .bak.
+
+**Sacred preserved:**
+- 14 page موجودة وتعمل.
+- 8 qcalc instances mounted.
+- جميع Upg.* APIs (الآن 13 module).
+- Service Worker, manifest, favicon, focus traps, lazy mounts.
+- console errors = 0.
 
 ---
 

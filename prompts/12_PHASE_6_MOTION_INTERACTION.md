@@ -1,6 +1,22 @@
 # 🎞️ WORKER 12 — Phase 6/7 — Motion & Interaction (Apple Springs + Cursor Glow)
-> **يبني فوق:** Phase 1-5.
+> **يبني فوق:** Phase 1 + 1B + 2 + 3 + 4 + 5.
+> **اقرأ أولاً:** `prompts/12_WORKER_AURORA_APPLE_GRADE.md` — قسم **Preservation Guard** (إجباري).
 > **الفلسفة:** الحركة لها وزن. لا تفصل، لا تستعرض. الـ easing الصحيح يجعل الواجهة تبدو **مفهومة قبل أن تُقرأ**.
+
+---
+
+## 🛡️ Preservation Contract (Phase 6)
+
+| العملية | المسموح | الممنوع |
+|---|---|---|
+| `style.css` | **APPEND** motion tokens + utilities (`.u-press`, `.u-lift`, `.u-card-glow`, `[data-reveal]`). إضافة قاعدة `prefers-reduced-motion` shadow rule على `*` | تعديل أي keyframes موجودة من Worker 01 (Aurora Mesh) أو Worker 11 |
+| `app.js` | **APPEND** IIFE: `Upg.motion` + cursor glow handler. **لفّ** `navigateTo` بـ View Transitions wrapper (لا تعيد كتابتها) | تعديل أي IIFE قائم. كسر أي event listener موجود |
+| Bento children | **AUGMENT**: إضافة `data-reveal` و class `u-card-glow u-lift` على عناصر Bento (الـJS يفعل هذا تلقائياً، لا لمس HTML) | تعديل markup Bento الذي وُضع في Phase 5 |
+
+**Sacred preserved:**
+- كل existing animations من Worker 01 (Aurora Mesh, Conic Halo, magnetic cursor) تستمر.
+- `prefers-reduced-motion` يلغي الحركات الجديدة لكن لا يلغي الفنية القديمة الـessential.
+- View Transitions wrapper graceful: لو غير مدعوم، `navigateTo` يعمل بطريقته القديمة.
 
 ---
 

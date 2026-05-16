@@ -1,6 +1,22 @@
 # 🅰️ WORKER 12 — Phase 1B/8 — Typeface Soul (Premium Arabic Stack)
 > **يُنفّذ مباشرة بعد:** Phase 1 (Type scale + spacing).
-> **الفلسفة:** الـ Type Scale لا قيمة لها لو الخط نفسه عادي. هذا الـ phase يستبدل **Cairo الواحد** بـ **نظام 4 أصوات** عربية فاخرة، كل واحد له دور محدد.
+> **اقرأ أولاً:** `prompts/12_WORKER_AURORA_APPLE_GRADE.md` — قسم **Preservation Guard** (إجباري).
+> **الفلسفة:** الـ Type Scale لا قيمة لها لو الخط نفسه عادي. هذا الـ phase **لا يحذف Cairo**، يضيف فوقه 4 خطوط جديدة بحيث Cairo يصير fallback ضامن، والخطوط الجديدة هي الـ primary voice.
+
+---
+
+## 🛡️ Preservation Contract (Phase 1B)
+
+| العملية | المسموح | الممنوع |
+|---|---|---|
+| `platform/index.html` | **استبدال سطر واحد** فقط: `<link href="...Cairo...">` بـ link جديد يحوي **Cairo + الخطوط الـ4 الجديدة** | حذف Cairo نهائياً. حذف preconnect. تعديل أي شيء غير الـ link |
+| `platform/assets/style.css` | **تعديل قيم** `--font-display`, `--font-text`, `--font-numeric` (إضافة الخطوط الجديدة في **بداية** الـ stack، Cairo يبقى في الذيل). **APPEND** قواعد voice-bindings جديدة | تعديل أي قاعدة CSS قديمة في القسم القديم. حذف أي token من Phase 1 |
+| `platform/assets/fonts/thmanyah/` | **إنشاء** المجلد + إضافة @font-face declarations (يفشلون صامتاً لو الملفات غير موجودة) | جعل تحميل Thmanyah إلزامياً — لازم يكون optional |
+
+**Sacred preserved:**
+- Cairo يبقى في كل font-family stack كـ آخر fallback.
+- `--font-mono` يبقى كما هو (لا نلمس monospace).
+- كل العناصر اللي تستعمل `font-family: inherit` (الافتراضي) لا تتأثر مباشرة — ترث من body اللي يستعمل `--font-text` المحدّث.
 
 ---
 

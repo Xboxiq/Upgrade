@@ -1,6 +1,25 @@
 # 🍱 WORKER 12 — Phase 5/7 — Dashboard Hero (Bento Grid + Identity Tints)
-> **يبني فوق:** Phase 1-4.
+> **يبني فوق:** Phase 1 + 1B + 2 + 3 + 4.
+> **اقرأ أولاً:** `prompts/12_WORKER_AURORA_APPLE_GRADE.md` — قسم **Preservation Guard** (إجباري).
 > **الفلسفة:** صفحة البداية = منصة بأكملها مكثّفة. لو ضربت في 5 ثوان، خسرت الزائر.
+
+---
+
+## 🛡️ Preservation Contract (Phase 5) — حساس جداً
+
+هذا الـ phase الوحيد المسموح فيه **استبدال محتوى section كاملة** — لكن **section واحدة فقط: `#page-dashboard`**. وحتى داخلها، نحتفظ بكل العناصر التي تربط بالـ Worker 11 state.
+
+| العملية | المسموح | الممنوع |
+|---|---|---|
+| `<section id="page-dashboard">` | **استبدال كامل** للمحتوى الداخلي. الناتج لازم يحتوي **بالضرورة** على: <br>• `#cath-skill-grid` (Worker 11 يحدّثها) <br>• `#cath-activity-list` (Worker 11 يحدّثها) <br>• كل عناصر `[data-cath-stat="..."]` المستعملة من Worker 11 (unitsCompleted, avgCompletionRate, trainingHours, streak) | حذف `id="page-dashboard"` أو `class="page active"`. حذف أي عنصر يحمل `data-cath-stat` بدون استبدال مكافئ. تجاهل أن الـ JS من Worker 11 يستعلم عن هذي العناصر |
+| كل الـ 13 صفحة الأخرى | **لا تلمس** | أي تعديل على بقية الـ pages |
+| `style.css` | **APPEND** قواعد bento + per-page tints + count-up CSS | تعديل قواعد قديمة من cath-dash. حذف الكود القديم — Phase 7 سيتولّى التنظيف |
+| `app.js` | **APPEND** IIFE: `Upg.identity` (per-page tint setter) + `Upg.greet` + `Upg.countup` | تعديل `Upg.state` أو `navigateTo` الموجودة. الحل: نُلفّها |
+
+**Sacred preserved:**
+- `Upg.state.compute.workerStats()` لازم يستمر يحدّث `#cath-skill-grid` بنجاح بعد التعديل.
+- `Upg.state.activity()` لازم يستمر يحدّث `#cath-activity-list`.
+- Count-up animation **لا تستبدل** الـ data binding — تُضيف نفسها فوقه.
 
 ---
 

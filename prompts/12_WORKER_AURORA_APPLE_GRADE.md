@@ -6,6 +6,100 @@
 
 ---
 
+## 🛡️ Preservation Guard — اقرأ هذا قبل أي شيء آخر
+
+> هذا أهم قسم في كامل Worker 12. لو تجاهلته، الـ Worker سيفشل ولو كل phase نُفّذ بشكل صحيح فردياً.
+
+### ⛔ القاعدة الذهبية الواحدة
+
+> **AURORA يُطوّر، لا يُعيد البناء.**
+> كل phase هو **layer إضافي** فوق المنصة الموجودة. **ممنوع منعاً باتاً** إعادة كتابة أي ملف من الصفر، أو حذف feature موجود، أو "تنظيف" كود سابق ما طلب أحد تنظيفه.
+
+### 🚫 الأخطاء القاتلة الستة (إذا حصل أحدها → توقّف فوراً)
+
+1. ❌ **rewrite-from-scratch** — كتابة `platform/index.html` أو `style.css` أو `app.js` من البداية.
+2. ❌ **delete-existing-feature** — حذف صفحة، حذف صفحة، حذف وحدة تدريبية، حذف لوحة، حذف حاسبة، حذف lab.
+3. ❌ **break-Upg-API** — تغيير أو حذف أي من: `Upg.theme`, `Upg.icons`, `Upg.gateway`, `Upg.calc`, `Upg.cmdk`, `Upg.state`, `Upg.production`.
+4. ❌ **replace-instead-of-extend** — تغيير قاعدة CSS قديمة بدل ما تضيف قاعدة جديدة. (الاستثناء الوحيد: حذف `!important` أو استبدال inline gradient بـ class — وفقط حسب ما هو محدّد في كل phase).
+5. ❌ **collapse-pages** — دمج صفحتين موجودتين بحجة "التنظيف". الـ 14 nav-item كلهم مقدّسون.
+6. ❌ **mass-refactor** — أي تعديل يلمس >150 سطر موجود في تعديل واحد بدون phase-spec يأمر به صراحة.
+
+### 📦 الأصول المُقدّسة (Sacred Assets) — تُحفظ كما هي
+
+| ما يجب الحفاظ عليه 100% | الوضع المتوقّع بعد Worker 12 |
+|---|---|
+| 14 صفحة في `<main>` (dashboard, callcenter, fieldsales, accountmgr, social, lab, psych, eq, negotiation, customercare, programming, accounting, phonerepair, hrmastery, myprogress) | كلها موجودة، نفس IDs، تشتغل |
+| 8 calculators المُهاجرة لـ `qcalc` (Worker 11 / Phase 4) | تشتغل بدون لمس |
+| Sidebar nav-items 14 (نفس الترتيب، نفس النصوص العربية) | الستايل يتغيّر، لكن المحتوى ثابت |
+| Topbar widgets (theme toggle, lock, search, quiz, notifications, avatar) | نفس الوظائف، الشكل يصير island |
+| Gateway (welcome / identity / goal / privacy / returning / locked) | يبقى — نُجمّل فقط |
+| Command Palette مع 30+ command | يبقى — يصير surface-modal فقط |
+| Service Worker + manifest.webmanifest + favicon | يبقى — لا تلمس |
+| `state/PROGRESS.json` و `state/snapshots/*.json` | تتم الإضافة فقط، لا حذف |
+| كل citations العلمية في الصفحات (Worker 09, etc.) | تبقى مكانها 100% |
+| كل الـ Iraq blocks وجداول الرواتب | تبقى |
+| الـ font Cairo في الـ stack | يبقى كـ fallback (حتى بعد Phase 1B) |
+
+### ✅ ماذا يفعل Worker 12 فعلاً (الجواب الدقيق)
+
+في كل phase، **ثلاث عمليات فقط مسموح بها**:
+
+1. **ADD** — إضافة tokens جديدة، utilities جديدة، @font-face جديدة، classes جديدة، IIFEs جديدة في app.js.
+2. **AUGMENT** — إضافة class إضافي على عنصر موجود (`<header id="topbar">` → `<header id="topbar" class="material-chrome">`)، إضافة data-attribute، إضافة aria-attribute.
+3. **NEUTRALIZE** — استبدال inline `style="..."` بـ class، أو حذف `!important` غير المبرّر — **بشرط** التأكد إن السلوك البصري لم يتغيّر.
+
+> أي عملية رابعة (delete, rewrite, replace logic, restructure)؟ → **ممنوعة بدون phase-spec يأمر بها صراحة**.
+
+### 🔍 Pre-Flight Inspection Protocol — يُنفّذ قبل بدء كل phase
+
+قبل لمس أي ملف، AUTO_PILOT يطبع هذا التقرير:
+
+```
+🔍 PRESERVATION INSPECTION (Phase N)
+├─ Files I will TOUCH:
+│   - platform/index.html       (operations: ADD class to {{N}} elements)
+│   - platform/assets/style.css (operations: APPEND {{N}} new rules)
+│   - platform/assets/app.js    (operations: APPEND new IIFE)
+├─ Files I will NEVER TOUCH:
+│   - archive/*                 (read-only)
+│   - prompts/*                 (read-only)
+│   - state/PROGRESS.json       (write only after phase done)
+├─ Sacred Assets check:
+│   - [✓] 14 pages still present in DOM
+│   - [✓] 8 qcalc instances mounted
+│   - [✓] Upg.{theme,icons,gateway,calc,cmdk,state,production} all defined
+│   - [✓] Service Worker registered
+├─ Estimated lines:
+│   - ADD:        ~520
+│   - AUGMENT:    ~80   (class additions on existing elements)
+│   - NEUTRALIZE: ~0    (this phase doesn't purge inline)
+│   - DELETE:     0     (forbidden by phase spec)
+└─ Awaiting confirmation: proceed? (y/n)
+```
+
+### 🧪 Post-Phase Sanity Probe — يُنفّذ بعد الـ commit
+
+```
+🧪 SANITY AFTER PHASE N
+├─ Pages count:        14 (was 14)        ✓
+├─ qcalc instances:    8  (was 8)         ✓
+├─ Upg APIs present:   {{count}}/13       ✓
+├─ Console errors:     0                  ✓
+├─ Cairo still loads:  yes                ✓
+├─ Sidebar items:      14 (was 14)        ✓
+├─ State file intact:  yes                ✓
+└─ Visual regression:  none reported     ✓
+```
+
+لو أي ✗ → **rollback فوراً** (`git reset --hard HEAD~1`) + توقّف + اطلب من المستخدم تعليمات.
+
+### 🪶 الفلسفة بكلمة واحدة
+
+> AURORA = **Patina** على الخشب الموجود، ليس خشب جديد.
+> نحن نلمّع، نُغذّي، نُضيف طبقة، نلمح روح. لا نكسر، لا نُفرّغ، لا نُعيد البناء.
+
+---
+
 ## 🧭 لمَ AURORA الآن؟
 
 Worker 11 أعطانا **العمود الفقري** (tokens, icons, gateway, calc, cmdk, state, PWA). لكن الواجهة لا تزال تحمل بصمة **v12 الأولى**: عناوين ثابتة، tints مدمَجة inline، ثيم off-white بارد، حركة شحيحة، سايدبار ثقيل، Topbar مسطّح، ولوحة تحكم فيها هيرو مكرر.

@@ -1,7 +1,19 @@
 # ✍️ WORKER 12 — Phase 1/7 — Typography & Spatial System
-> **اقرأ أولاً:** `prompts/12_WORKER_AURORA_APPLE_GRADE.md` (الفهرس).
+> **اقرأ أولاً:** `prompts/12_WORKER_AURORA_APPLE_GRADE.md` — قسم **Preservation Guard** (إجباري).
 > **متطلب:** MASTER PROMPT محمّل + Worker 11 منتهٍ + `state/PROGRESS.json` يشير لبداية Worker 12.
 > **الفلسفة:** الخط والمسافة قبل اللون. لو الإيقاع البصري سليم، النصف الباقي يلحق طبيعياً.
+
+---
+
+## 🛡️ Preservation Contract (Phase 1)
+
+| العملية | المسموح | الممنوع |
+|---|---|---|
+| `platform/assets/style.css` | **APPEND** فقط: kتلة جديدة في النهاية بعنوان `/* AURORA v15 — Phase 1 */` | تعديل أي قاعدة قديمة، حذف tokens موجودة في `:root`، حذف Cairo من font-family |
+| `platform/index.html` | تعديل **سطر واحد** فقط: `<link>` خط Google Fonts | حذف أو نقل أي `<section class="page">` أو `<aside>` أو `<header>`. لا تلمس الـ DOM |
+| `platform/assets/app.js` | **APPEND** IIFE واحد جديد (Upg.type) في النهاية | تعديل أي IIFE موجود (Upg.theme/icons/gateway/calc/cmdk/state/production) |
+
+**Sacred preserved:** كل tokens Worker 11 (`--bg`, `--accent`, `--surface`, `--shadow-md`, `--radius-md`, إلخ) — تبقى. tokens AURORA الجديدة تُضاف **بجانبها**، لا تستبدلها.
 
 ---
 

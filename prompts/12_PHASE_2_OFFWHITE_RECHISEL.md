@@ -1,6 +1,20 @@
 # 🪶 WORKER 12 — Phase 2/7 — Off-White Re-chisel (Linen-Bone Material)
-> **يبني فوق:** Phase 1 (الـ tokens والـ spacing).
+> **يبني فوق:** Phase 1 + Phase 1B.
+> **اقرأ أولاً:** `prompts/12_WORKER_AURORA_APPLE_GRADE.md` — قسم **Preservation Guard** (إجباري).
 > **الفلسفة:** الـ off-white الحالي بارد و"مكتبي". نريده **دافئاً، طبقياً، بمزاج كتاب من Apple Park** — ليس أبيض ساطعاً، وليس بيج تجاري.
+
+---
+
+## 🛡️ Preservation Contract (Phase 2)
+
+| العملية | المسموح | الممنوع |
+|---|---|---|
+| `style.css` — palette الفاتح | **استبدال قيم HSL** داخل `:root[data-theme="light"]` فقط. لا تحذف ولا تضف tokens | حذف أي token موجود (مثلاً `--text-muted` لو موجود في legacy). إضافة tokens غير معرّفة في الفهرس |
+| `style.css` — `!important` purge | حذف `!important` **بشرط** أن السلوك البصري ما يتغير. اختبر بعد كل دفعة 20. الهدف: من 144 → ≤ 60 (Phase 7 يكمل للـ ≤ 20) | حذف `!important` من قواعد print, forced-colors, prefers-reduced-motion (هذي مشروعة) |
+| `index.html` — nav-badge inline gradients | تحويل `style="background:linear-gradient(...)"` على nav-badges إلى `class="nav-badge nav-badge--success"` (مثلاً) | تغيير نص الـ badge، تغيير ترتيب nav-items، حذف أي nav-item |
+| الثيم الداكن | **لا تلمسه نهائياً** | أي تعديل على `:root` الداكن أو على الـ Worker 11 dark tokens |
+
+**Sacred preserved:** كل nav-items الـ14، نصوصهم، ترتيبهم، أيقوناتهم، روابطهم data-page. الـ palette الجديد يطبّق بصرياً، لكن المحتوى ثابت.
 
 ---
 

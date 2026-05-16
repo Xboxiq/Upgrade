@@ -1,6 +1,20 @@
 # 🪟 WORKER 12 — Phase 3/7 — Materials & Depth (Glass Hierarchy)
-> **يبني فوق:** Phase 1+2.
+> **يبني فوق:** Phase 1 + 1B + 2.
+> **اقرأ أولاً:** `prompts/12_WORKER_AURORA_APPLE_GRADE.md` — قسم **Preservation Guard** (إجباري).
 > **الفلسفة:** Glass واحد ≠ glass مناسب لكل مكان. كما `UIVisualEffectView` في iOS يقدّم **Thin / Regular / Thick / Chrome / Prominent**، نقدم 4 طبقات mع stack مناسب للحدود والظلال والنويز.
+
+---
+
+## 🛡️ Preservation Contract (Phase 3)
+
+| العملية | المسموح | الممنوع |
+|---|---|---|
+| `style.css` | **APPEND** كتلة جديدة `/* AURORA v15 — Phase 3 Materials */`. إضافة tokens `--glass-*`, `--blur-*`, `--vibrancy`, `--hairline-*`, `--halo-*`. إضافة utility classes `.material-thin/regular/thick/chrome`, `.surface-card/popover/modal` | تعديل أي قاعدة `.cmdk-modal`, `.gateway-card`, `.cath-stat` موجودة. تغيير backdrop-filter القديم (Worker 11) |
+| `index.html` | **AUGMENT** فقط: إضافة class جديد `material-chrome` على `#topbar`, `material-chrome` على `#sidebar`, `surface-modal` على `.cmdk-modal` و `.gateway-card`, `surface-card` على stat cards. **لا تستبدل** classes موجودة | تعديل DOM hierarchy. حذف أو نقل عناصر |
+| `app.js` | **APPEND** IIFE جديد للـ scroll observer (`Upg.scroll`) | تعديل أي IIFE قائم |
+| Grain SVG | **استبدال كامل** للـ `<filter id="grainFilter">` لأنه مقطوع/معطوب حالياً (تحقّق أولاً: `grep -c "feTurbule" platform/index.html`) | لمس أي SVG defs آخر |
+
+**Sacred preserved:** Service Worker، manifest، favicon، كل الـ structures الموجودة (sidebar items, topbar widgets, page sections).
 
 ---
 

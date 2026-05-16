@@ -1,6 +1,26 @@
 # 🧭 WORKER 12 — Phase 4/7 — Navigation Chrome (Source-List Sidebar + Dynamic-Island Topbar)
-> **يبني فوق:** Phase 1-3.
+> **يبني فوق:** Phase 1 + 1B + 2 + 3.
+> **اقرأ أولاً:** `prompts/12_WORKER_AURORA_APPLE_GRADE.md` — قسم **Preservation Guard** (إجباري).
 > **الفلسفة:** الـ chrome (السايدبار + التوب بار) هو أول وآخر شيء يلمسه المستخدم. لازم يكون **بصري هادئ، وظيفي صارم، حركة دقيقة**.
+
+---
+
+## 🛡️ Preservation Contract (Phase 4) — أعلى مستوى احتراز
+
+هذا أكثر phase خطر على الـ structure. **اقرأ بعناية مضاعفة.**
+
+| العملية | المسموح | الممنوع |
+|---|---|---|
+| `#sidebar` HTML | **AUGMENT فقط**: لا تعديل على ترتيب `.nav-item` ولا على `data-page` ولا على `.nav-section-label`. **لا تستبدل** الـ markup. الـ classes الجديدة (لو احتجنا) تُضاف عبر JS أو عبر CSS selector ينطبق على markup الموجود | حذف أو نقل أي `.nav-item`. تغيير ترتيب الأقسام. تغيير `data-page` attribute. حذف `.user-card` أو `.sidebar-footer` |
+| `#topbar` HTML | **AUGMENT فقط**: ممكن إضافة class جديد على `<header>`. ممكن إضافة زر `data-action="toggle-sidebar"` **في بداية** `.topbar-actions` (لا يستبدل أي زر آخر) | حذف theme-toggle, lock button, search, quiz button, notifications, messages, avatar |
+| `style.css` | **APPEND** قواعد جديدة بـ specificity عالية (مثلاً `[data-sidebar="collapsed"] .nav-item`). تعديل قواعد سايدبار قديمة **مسموح فقط لو القاعدة تحتوي `!important` أو inline-style equivalent** | إعادة كتابة `#sidebar` selector من الصفر. حذف أي transitions موجودة |
+| `app.js` | **APPEND** IIFE جديدة `Upg.nav` + IIFE صغير لـ View Transitions wrapper | تعديل دالة `navigateTo` الموجودة. الحلّ: نلفّها (wrap) بدالة جديدة تستدعيها — لا نعيد كتابتها |
+
+**Sacred preserved (تحقّق بعد phase):**
+- `document.querySelectorAll('.nav-item[data-page]').length === 14`
+- كل `.nav-item.active` على الصفحة الحالية يصير active بنفس الطريقة القديمة (data-page → page-XXX).
+- كل أزرار topbar الـ7 (theme/lock/search/quiz/notif/msg/avatar) موجودة وتعمل.
+- mobile drawer لا يكسر desktop layout.
 
 ---
 
