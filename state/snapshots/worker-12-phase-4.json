@@ -1,0 +1,52 @@
+{
+  "worker": "12",
+  "worker_name": "AURORA_APPLE_GRADE",
+  "phase": 4,
+  "phase_title": "Navigation Chrome — Source-List + Dynamic Island",
+  "phases_total": 8,
+  "branch": "worker-12-aurora",
+  "commit_message": "phase 4 (aurora): source-list sidebar + dynamic-island topbar + Upg.nav",
+  "lines_added": 195,
+  "files_touched": [
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "tokens_added": [
+    "--sidebar-w-expanded (264px)",
+    "--sidebar-w-collapsed (72px)",
+    "--sidebar-w (current)",
+    "--topbar-h (64px)",
+    "--topbar-h-compact (52px)",
+    "--nav-item-h (40px)",
+    "--nav-item-radius (12px)"
+  ],
+  "behaviors_added": [
+    "Cmd+\\ / Ctrl+\\ — toggles sidebar collapse",
+    "Esc — closes mobile drawer",
+    "data-action=\"toggle-sidebar\" / open-drawer / close-drawer wiring",
+    "data-sidebar=\"collapsed\" — hides labels, centers icons, shifts indicator pill to top edge",
+    "data-sidebar-mobile=\"open\" — slides drawer in",
+    "View Transitions API wraps nav-item active-class swap (animation-duration 280ms)",
+    "Topbar gains compact padding on data-scrolled=\"true\""
+  ],
+  "css_strategy": "Additive — all rules scoped under :root[data-sidebar=...] / :root[data-sidebar-mobile=...] / data-scrolled — never overrides existing Worker 11 sidebar/topbar rules without an explicit attribute trigger.",
+  "public_apis_added": [
+    "Upg.nav.collapse()", "Upg.nav.expand()", "Upg.nav.toggle()", "Upg.nav.isCollapsed()",
+    "Upg.nav.openDrawer()", "Upg.nav.closeDrawer()", "Upg.nav.toggleDrawer()"
+  ],
+  "storage_keys_added": ["upg_sidebar_collapsed"],
+  "preservation_check": {
+    "pages_count": 14,
+    "qcalc_instances": 8,
+    "nav_items_count": 16,
+    "nav_items_with_data_page": 16,
+    "topbar_widgets_intact": true,
+    "no_dom_restructure": true,
+    "upg_apis_intact": ["theme", "icons", "gateway", "calc", "cmdk", "state", "production", "type", "scroll", "nav"]
+  },
+  "metrics": {
+    "inline_styles_html": 1592,
+    "important_count_css": 142
+  },
+  "next_phase": "5 — Dashboard Hero & Bento (count-up + per-page tint + 12-col grid + dock)"
+}

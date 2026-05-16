@@ -1,0 +1,64 @@
+{
+  "worker": "12",
+  "worker_name": "AURORA_APPLE_GRADE",
+  "phase": 3,
+  "phase_title": "Materials & Depth — 4-Tier Glass Hierarchy",
+  "phases_total": 8,
+  "branch": "worker-12-aurora",
+  "commit_message": "phase 3 (aurora): materials & depth — 4-tier glass + scroll elevation",
+  "lines_added": 238,
+  "files_touched": [
+    "platform/assets/style.css",
+    "platform/assets/app.js",
+    "platform/index.html"
+  ],
+  "tokens_added": {
+    "blur": ["--blur-thin (8px)", "--blur-regular (16px)", "--blur-thick (28px)", "--blur-chrome (42px)"],
+    "vibrancy": ["--vibrancy (180%)"],
+    "hairlines": ["--hairline-light", "--hairline-strong", "--hairline-dark"],
+    "halos": ["--halo-brand", "--halo-warm"],
+    "glass_tiers": [
+      "--glass-thin-bg/border/blur",
+      "--glass-regular-bg/border/blur",
+      "--glass-thick-bg/border/blur",
+      "--glass-chrome-bg/border/blur"
+    ]
+  },
+  "utilities_added": [
+    ".material-thin", ".material-regular", ".material-thick", ".material-chrome",
+    ".surface-card", ".surface-card.is-elevated", ".surface-popover", ".surface-modal"
+  ],
+  "elements_augmented": [
+    "<header id=\"topbar\"> + class=\"material-chrome\"",
+    "<aside id=\"sidebar\"> + class=\"material-chrome\"",
+    ".cmdk-modal + class=\"surface-modal\"",
+    ".gateway-card + class=\"surface-modal\""
+  ],
+  "scroll_observer": {
+    "module": "Upg.scroll",
+    "trigger_threshold_px": 4,
+    "data_attribute": "data-scrolled",
+    "applied_to": ["#topbar", "#sidebar"],
+    "rAF_throttled": true,
+    "respects_reduced_transparency": true
+  },
+  "accessibility": [
+    "@media (prefers-reduced-transparency: reduce) — disables backdrop-filter, falls back to solid surface",
+    "Hairlines work on dark + light independently",
+    "No layout shift on scroll (only box-shadow + bg + backdrop-filter transitions)"
+  ],
+  "preservation_check": {
+    "pages_count": 14,
+    "qcalc_instances": 8,
+    "upg_apis_intact": ["theme", "icons", "gateway", "calc", "cmdk", "state", "production", "type", "scroll"],
+    "phase_1_2_1B_tokens_unchanged": true,
+    "no_dom_restructure": true,
+    "rules_modified": 0,
+    "rules_appended": 28
+  },
+  "metrics": {
+    "inline_styles_html": 1592,
+    "important_count_css": 142
+  },
+  "next_phase": "4 — Navigation Chrome (Source-List sidebar + Dynamic-Island topbar)"
+}

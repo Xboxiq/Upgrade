@@ -1,0 +1,59 @@
+{
+  "worker": "12",
+  "worker_name": "AURORA_APPLE_GRADE",
+  "phase": 6,
+  "phase_title": "Motion & Interaction — Apple Springs + Cursor Glow",
+  "phases_total": 8,
+  "branch": "worker-12-aurora",
+  "commit_message": "phase 6 (aurora): motion tokens + springs + cursor glow + view transitions",
+  "lines_added": 232,
+  "files_touched": [
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "tokens_added": {
+    "easing": [
+      "--ease-linear", "--ease-emphasized", "--ease-decelerate", "--ease-accelerate",
+      "--ease-spring-soft", "--ease-spring-snappy", "--ease-spring (alias)", "--ease-overshoot"
+    ],
+    "duration": [
+      "--duration-instant (80ms)", "--duration-quick (120ms)", "--duration-base (220ms)",
+      "--duration-medium (320ms)", "--duration-long (480ms)", "--duration-page (360ms)"
+    ]
+  },
+  "utilities_added": [
+    ".u-press", ".u-lift", ".u-card-glow",
+    "[data-reveal]", "[data-revealed=\"true\"]",
+    ".skeleton (shimmer animation)"
+  ],
+  "behaviors_added": [
+    "Press feedback — scale(0.96) on click for buttons, dock-btn, tb-btn, gateway-cta, theme-toggle",
+    "Hover lift — translateY(-3px) + shadow-c-lg on .u-lift",
+    "Cursor glow — radial gradient follows pointer on .u-card-glow (uses --color-tint)",
+    "Stagger reveal — IntersectionObserver triggers translateY(8px→0) + opacity(0→1) with 35ms delay between siblings",
+    "Auto-tagging — Bento children, cath-stat, cath-dash-card, stat-tile, surface-card all get u-lift + u-card-glow on init and on lazy-mount/state-update",
+    "Quick action buttons get u-press auto-applied",
+    "navigateTo wrapped with document.startViewTransition (graceful fallback when unsupported)",
+    "All new motion respects prefers-reduced-motion (zero animations + no glow)"
+  ],
+  "public_apis_added": [
+    "Upg.motion.reveal(root?)",
+    "Upg.motion.refreshGlow(root?)"
+  ],
+  "preservation_check": {
+    "pages_count": 15,
+    "qcalc_instances": 8,
+    "no_html_changes": true,
+    "existing_keyframes_untouched": true,
+    "existing_iifes_untouched": true,
+    "upg_apis_intact": [
+      "theme", "icons", "gateway", "calc", "cmdk", "state", "production",
+      "type", "scroll", "nav", "identity", "greet", "countup", "motion"
+    ]
+  },
+  "metrics": {
+    "inline_styles_html": 1592,
+    "important_count_css": 142
+  },
+  "next_phase": "7 — Inline Purge & Lighthouse Pass (target inline ≤200, !important ≤60)"
+}

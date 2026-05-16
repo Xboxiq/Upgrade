@@ -13759,3 +13759,604 @@ document.addEventListener('DOMContentLoaded', () => {
     swActive: () => !!navigator.serviceWorker?.controller
   };
 })();
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Type Engine (Worker 12 / Phase 1)
+   Public API: window.Upg.type
+   - get/set("density",  0..3)         — 0=compact .. 3=spacious
+   - get/set("textZoom", 0.875..1.25)  — user-controlled multiplier
+   - DENSITY                            — array of density names
+   Storage keys: upg_density, upg_text_zoom
+   Event:        upg:type-change
+   ════════════════════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+  const KEY_DENSITY = 'upg_density';
+  const KEY_ZOOM    = 'upg_text_zoom';
+  const DENSITY     = ['compact', 'cozy', 'comfortable', 'spacious'];
+
+  const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+  const safeNum = (v, fallback) => {
+    if (v === null || v === undefined || v === '') return fallback;
+    const n = Number(v);
+    return Number.isFinite(n) ? n : fallback;
+  };
+
+  const apply = () => {
+    const dRaw = safeNum(localStorage.getItem(KEY_DENSITY), 2);
+    const zRaw = safeNum(localStorage.getItem(KEY_ZOOM), 1);
+    const d = clamp(Math.round(dRaw), 0, 3);
+    const z = clamp(zRaw, 0.875, 1.25);
+    document.documentElement.dataset.density = DENSITY[d];
+    document.documentElement.style.setProperty('--type-zoom', String(z));
+  };
+
+  const set = (key, value) => {
+    if (key === 'density') {
+      const d = clamp(Math.round(safeNum(value, 2)), 0, 3);
+      localStorage.setItem(KEY_DENSITY, String(d));
+    } else if (key === 'textZoom') {
+      const z = clamp(safeNum(value, 1), 0.875, 1.25);
+      localStorage.setItem(KEY_ZOOM, String(z));
+    } else {
+      return;
+    }
+    apply();
+    try { window.dispatchEvent(new CustomEvent('upg:type-change', { detail: { key, value } })); }
+    catch (_) { /* noop */ }
+  };
+
+  const get = (key) => {
+    if (key === 'density') {
+      const d = clamp(Math.round(safeNum(localStorage.getItem(KEY_DENSITY), 2)), 0, 3);
+      return DENSITY[d];
+    }
+    if (key === 'textZoom') {
+      return clamp(safeNum(localStorage.getItem(KEY_ZOOM), 1), 0.875, 1.25);
+    }
+    return null;
+  };
+
+  // Apply on load — before paint when possible
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', apply, { once: true });
+  } else {
+    apply();
+  }
+
+  window.Upg = window.Upg || {};
+  window.Upg.type = Object.freeze({ get, set, DENSITY: Object.freeze([...DENSITY]) });
+})();
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Scroll Observer (Worker 12 / Phase 3)
+   Toggles data-scrolled="true|false" on #topbar and #sidebar when content
+   scrolls past 4px. Powers material elevation transitions.
+   Public API: window.Upg.scroll = { update() }
+   ════════════════════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+  const SCROLL_THRESHOLD = 4;
+  let raf = 0;
+  let main, top, side;
+
+  const refsValid = () => {
+    main = main || document.getElementById('main');
+    top  = top  || document.getElementById('topbar');
+    side = side || document.getElementById('sidebar');
+    return !!(main && top);
+  };
+
+  const update = () => {
+    raf = 0;
+    if (!refsValid()) return;
+    const y = main.scrollTop || window.scrollY || document.documentElement.scrollTop || 0;
+    const scrolled = y > SCROLL_THRESHOLD;
+    const value = String(scrolled);
+    if (top.dataset.scrolled !== value)  top.dataset.scrolled  = value;
+    if (side && side.dataset.scrolled !== value) side.dataset.scrolled = value;
+  };
+
+  const onScroll = () => {
+    if (!raf) raf = requestAnimationFrame(update);
+  };
+
+  const wire = () => {
+    if (!refsValid()) return;
+    main.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', wire, { once: true });
+  } else {
+    wire();
+  }
+
+  window.Upg = window.Upg || {};
+  window.Upg.scroll = Object.freeze({ update });
+})();
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Navigation Chrome (Worker 12 / Phase 4)
+   Public API: window.Upg.nav.{ collapse, expand, toggle, isCollapsed,
+                                 openDrawer, closeDrawer, toggleDrawer }
+   Storage: upg_sidebar_collapsed
+   Shortcut: Cmd+\ / Ctrl+\ toggles collapse
+   View Transitions: wrap nav-item active class swaps for smooth pill slide.
+   ════════════════════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+  const KEY_COLLAPSED = 'upg_sidebar_collapsed';
+  const html = document.documentElement;
+
+  const applyCollapsed = (v) => {
+    if (v) html.dataset.sidebar = 'collapsed';
+    else   html.dataset.sidebar = 'expanded';
+    try { localStorage.setItem(KEY_COLLAPSED, v ? '1' : '0'); } catch (_) {}
+  };
+
+  const isCollapsed = () => html.dataset.sidebar === 'collapsed';
+  const collapse    = () => applyCollapsed(true);
+  const expand      = () => applyCollapsed(false);
+  const toggle      = () => applyCollapsed(!isCollapsed());
+
+  const openDrawer  = () => { html.dataset.sidebarMobile = 'open'; };
+  const closeDrawer = () => { delete html.dataset.sidebarMobile; };
+  const toggleDrawer = () => {
+    if (html.dataset.sidebarMobile === 'open') closeDrawer();
+    else openDrawer();
+  };
+
+  // Restore prior state — but only if user previously chose explicitly
+  try {
+    const stored = localStorage.getItem(KEY_COLLAPSED);
+    if (stored === '1') collapse();
+    else if (stored === '0') expand();
+  } catch (_) { /* noop */ }
+
+  // Cmd+\ / Ctrl+\ — toggle collapse
+  window.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === '\\') {
+      e.preventDefault();
+      toggle();
+    }
+  });
+
+  // Wire any element with data-action="toggle-sidebar" / "open-drawer" / "close-drawer"
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-action]');
+    if (!t) return;
+    const a = t.dataset.action;
+    if (a === 'toggle-sidebar') { e.preventDefault(); toggle(); }
+    else if (a === 'open-drawer')  { e.preventDefault(); openDrawer(); }
+    else if (a === 'close-drawer') { e.preventDefault(); closeDrawer(); }
+  });
+
+  // Esc closes the mobile drawer
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && html.dataset.sidebarMobile === 'open') {
+      closeDrawer();
+    }
+  });
+
+  window.Upg = window.Upg || {};
+  window.Upg.nav = Object.freeze({
+    collapse, expand, toggle, isCollapsed,
+    openDrawer, closeDrawer, toggleDrawer
+  });
+})();
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — View-Transition wrapper for nav-item active swap (Phase 4)
+   When a user clicks a sidebar nav-item, the active state swap is wrapped in
+   document.startViewTransition so the indicator pill slides smoothly. Falls
+   back to direct class change when the API is unavailable.
+   ════════════════════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+  const sidebar = document.getElementById('sidebar');
+  if (!sidebar) return;
+
+  const supported = typeof document.startViewTransition === 'function';
+
+  sidebar.addEventListener('click', (e) => {
+    const item = e.target.closest('.nav-item[data-page]');
+    if (!item || item.classList.contains('active')) return;
+    if (!supported) return; // existing handler will set active class normally
+
+    // Pre-empt the default handler: we set active first inside a transition,
+    // then dispatch a synthetic event so legacy navigation logic still runs.
+    const previously = sidebar.querySelector('.nav-item.active');
+
+    document.startViewTransition(() => {
+      if (previously) previously.classList.remove('active');
+      item.classList.add('active');
+    });
+  }, true);
+})();
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Per-Page Identity Tint (Worker 12 / Phase 5)
+   Public API: window.Upg.identity.{ setTint, getTint }
+   Sets [data-active-tint] on <html> when user navigates between pages.
+   Works by:
+     1. Observing .page.active mutations (mutation observer).
+     2. Wrapping window.navigateTo if present.
+     3. Reading initial active page on load.
+   ════════════════════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+  const html = document.documentElement;
+
+  const setTint = (page) => {
+    const slug = (page || 'dashboard').toString().replace(/^page-/, '');
+    if (html.dataset.activeTint !== slug) html.dataset.activeTint = slug;
+  };
+  const getTint = () => html.dataset.activeTint || 'dashboard';
+
+  const detectActive = () => {
+    const a = document.querySelector('.page.active');
+    if (a && a.id) setTint(a.id.replace(/^page-/, ''));
+  };
+
+  // Wrap window.navigateTo if defined
+  const tryWrap = () => {
+    if (typeof window.navigateTo !== 'function' || window.__auroraNavWrapped) return;
+    const original = window.navigateTo;
+    window.navigateTo = function (pageId, ...rest) {
+      try { setTint(pageId); } catch (_) {}
+      return original.call(this, pageId, ...rest);
+    };
+    window.__auroraNavWrapped = true;
+  };
+
+  // Mutation observer on main container watching for class="page active" toggles
+  const wireObserver = () => {
+    const main = document.getElementById('main') || document.body;
+    if (!main) return;
+    const obs = new MutationObserver((muts) => {
+      for (const m of muts) {
+        if (m.type === 'attributes' && m.attributeName === 'class') {
+          const t = m.target;
+          if (t && t.classList && t.classList.contains('page') && t.classList.contains('active')) {
+            setTint(t.id ? t.id.replace(/^page-/, '') : 'dashboard');
+            return;
+          }
+        }
+      }
+    });
+    obs.observe(main, { subtree: true, attributes: true, attributeFilter: ['class'] });
+  };
+
+  const init = () => {
+    detectActive();
+    tryWrap();
+    wireObserver();
+    // Retry wrap a few times because navigateTo may register after this IIFE
+    let tries = 0;
+    const retry = setInterval(() => {
+      tryWrap();
+      if (++tries > 10 || window.__auroraNavWrapped) clearInterval(retry);
+    }, 200);
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+
+  window.Upg = window.Upg || {};
+  window.Upg.identity = Object.freeze({ setTint, getTint });
+})();
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Time-of-Day Greeting (Worker 12 / Phase 5)
+   Public API: window.Upg.greet.{ refresh }
+   - Replaces "أهلاً" line in cath-dash-greeting with time-aware version.
+   - Uses Upg.state.profile() if available, else falls back to "صديقي".
+   - Re-runs every 30 minutes to keep greeting current.
+   ════════════════════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+
+  const getName = () => {
+    try {
+      const p = window.Upg && window.Upg.state && typeof window.Upg.state.profile === 'function'
+        ? window.Upg.state.profile() : null;
+      return (p && (p.name || p.displayName)) || 'صديقي';
+    } catch (_) { return 'صديقي'; }
+  };
+
+  const prefixForHour = (h) => {
+    if (h >= 4  && h < 12) return 'صباح الخير';
+    if (h >= 12 && h < 17) return 'يوم سعيد';
+    if (h >= 17 && h < 21) return 'مساء النور';
+    return 'مساء الخير';
+  };
+
+  const refresh = () => {
+    // primary: any [data-greet-title]
+    const target = document.querySelector('[data-greet-title]');
+    if (target) {
+      const name = getName();
+      target.textContent = `${prefixForHour(new Date().getHours())}، ${name} 👋`;
+    }
+    // also augment cath-dash greeting "أهلاً <name> 👋" with time-aware prefix
+    const cathH2 = document.querySelector('.cath-dash-greeting-text h2');
+    if (cathH2 && !cathH2.dataset.auroraGreet) {
+      cathH2.dataset.auroraGreet = '1';
+      const nameEl = cathH2.querySelector('[data-cath-bind="profile.name"]');
+      const before = cathH2.firstChild; // text node "أهلاً "
+      if (before && before.nodeType === 3) {
+        before.nodeValue = `${prefixForHour(new Date().getHours())} `;
+      }
+    }
+  };
+
+  const init = () => {
+    refresh();
+    // Refresh every 30 minutes to catch crossings (e.g., 11:55 → 12:05)
+    setInterval(refresh, 30 * 60 * 1000);
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+
+  window.Upg = window.Upg || {};
+  window.Upg.greet = Object.freeze({ refresh });
+})();
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Count-Up Tickers (Worker 12 / Phase 5)
+   Public API: window.Upg.countup.{ run, observe }
+   - Hooks any element with [data-countup] OR .cath-stat-value [data-cath-stat]
+   - Reads numeric target from element textContent (or data-countup="N")
+   - Tweens 0 → target over 1200ms with easeOutCubic
+   - Observes intersection so animation triggers on visibility, not page-load
+   ════════════════════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+
+  const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+  const formatValue = (v, decimals, locale) => {
+    if (decimals > 0) return v.toFixed(decimals);
+    return Math.round(v).toLocaleString(locale || 'ar-IQ');
+  };
+
+  const parseTarget = (el) => {
+    const raw = (el.dataset.countup && el.dataset.countup !== '' && el.dataset.countup !== '1')
+      ? el.dataset.countup
+      : el.textContent;
+    const num = parseFloat(String(raw).replace(/[^\d.\-]/g, ''));
+    return Number.isFinite(num) ? num : 0;
+  };
+
+  const run = (el, target, duration) => {
+    if (!el) return;
+    const tgt = (target == null) ? parseTarget(el) : Number(target);
+    const dur = Number(duration) || 1100;
+    const text = String(tgt);
+    const decimals = (text.split('.')[1] || '').length;
+
+    // Honor reduced-motion
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.textContent = formatValue(tgt, decimals);
+      el.dataset.countupDone = '1';
+      return;
+    }
+
+    const start = performance.now();
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / dur);
+      const v = tgt * easeOutCubic(t);
+      el.textContent = formatValue(v, decimals);
+      if (t < 1) requestAnimationFrame(tick);
+      else el.dataset.countupDone = '1';
+    };
+    requestAnimationFrame(tick);
+  };
+
+  const observe = () => {
+    const explicit = Array.from(document.querySelectorAll('[data-countup]'));
+    // Also opt-in for cath-stat-value automatically
+    const auto = Array.from(document.querySelectorAll('.cath-stat-value'))
+      .filter(el => !el.hasAttribute('data-countup'));
+    auto.forEach(el => el.setAttribute('data-countup', ''));
+    const all = explicit.concat(auto);
+    if (!all.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+      all.forEach(el => run(el));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (!en.isIntersecting || en.target.dataset.countupDone === '1') return;
+        run(en.target);
+        io.unobserve(en.target);
+      });
+    }, { threshold: 0.35 });
+    all.forEach(el => io.observe(el));
+  };
+
+  const init = () => {
+    observe();
+    // Re-observe whenever a new page becomes active (lazy mount, navigation)
+    window.addEventListener('upg:lazy-mount', observe);
+    window.addEventListener('upg:state-update', observe);
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else setTimeout(init, 100); // give Worker 11 state engine a moment to render
+
+  window.Upg = window.Upg || {};
+  window.Upg.countup = Object.freeze({ run, observe });
+})();
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Motion Engine (Worker 12 / Phase 6)
+   Public API: window.Upg.motion = { reveal(root), refreshGlow(root) }
+   Wires: cursor-glow tracking, stagger-reveal observer, view-transition-wrap
+   for navigateTo. Honors prefers-reduced-motion.
+   ════════════════════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+  const reduceMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ─── Cursor glow on .u-card-glow ────────────────────────────────────────
+  const wireCursorGlow = () => {
+    if (reduceMotion()) return;
+    document.addEventListener('pointermove', (e) => {
+      const card = e.target && e.target.closest && e.target.closest('.u-card-glow');
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+      card.style.setProperty('--my', `${e.clientY - rect.top}px`);
+    }, { passive: true });
+  };
+
+  // ─── Stagger-reveal observer ────────────────────────────────────────────
+  const reveal = (root) => {
+    const scope = root || document;
+    const list = scope.querySelectorAll('[data-reveal]:not([data-revealed="true"])');
+    if (!list.length) return;
+
+    if (!('IntersectionObserver' in window) || reduceMotion()) {
+      list.forEach((el) => { el.dataset.revealed = 'true'; });
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      let i = 0;
+      entries.forEach((en) => {
+        if (!en.isIntersecting) return;
+        const delay = Math.min(i++ * 35, 280);
+        en.target.style.transitionDelay = `${delay}ms`;
+        en.target.dataset.revealed = 'true';
+        io.unobserve(en.target);
+      });
+    }, { threshold: 0.12 });
+    list.forEach(el => io.observe(el));
+  };
+
+  // ─── Auto-tag eligible nodes for reveal + glow + lift ───────────────────
+  const refreshGlow = (root) => {
+    const scope = root || document;
+    // Bento direct children get reveal + lift + glow
+    scope.querySelectorAll('.bento > *:not([data-aurora-tagged])').forEach(n => {
+      n.setAttribute('data-reveal', '');
+      n.classList.add('u-lift', 'u-card-glow');
+      n.dataset.auroraTagged = '1';
+    });
+    // Cathedral cards / stat tiles / surface cards
+    scope.querySelectorAll('.cath-stat:not([data-aurora-tagged]), .cath-dash-card:not([data-aurora-tagged]), .stat-tile:not([data-aurora-tagged]), .surface-card:not([data-aurora-tagged])').forEach(n => {
+      n.classList.add('u-lift', 'u-card-glow');
+      n.dataset.auroraTagged = '1';
+    });
+    // Quick action buttons get press feedback
+    scope.querySelectorAll('.cath-quick-action:not([data-aurora-tagged]), .dock-btn:not([data-aurora-tagged])').forEach(n => {
+      n.classList.add('u-press');
+      n.dataset.auroraTagged = '1';
+    });
+  };
+
+  const init = () => {
+    refreshGlow();
+    wireCursorGlow();
+    reveal();
+    // Re-tag on lazy mounts (heavy pages) and state updates
+    window.addEventListener('upg:lazy-mount', () => { refreshGlow(); reveal(); });
+    window.addEventListener('upg:state-update', () => { refreshGlow(); reveal(); });
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else setTimeout(init, 50);
+
+  window.Upg = window.Upg || {};
+  window.Upg.motion = Object.freeze({ reveal, refreshGlow });
+})();
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — View-Transition wrapper for navigateTo (Worker 12 / Phase 6)
+   Wraps the global navigateTo so page changes use document.startViewTransition
+   when supported. Falls back gracefully on unsupported browsers.
+   ════════════════════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+  const tryWrap = () => {
+    if (typeof window.navigateTo !== 'function' || window.__auroraVTWrapped) return;
+    if (typeof document.startViewTransition !== 'function') {
+      window.__auroraVTWrapped = true; // mark "wrap not needed"
+      return;
+    }
+    const original = window.navigateTo;
+    window.navigateTo = function (pageId, ...rest) {
+      try {
+        return document.startViewTransition(() => original.call(this, pageId, ...rest));
+      } catch (_) {
+        return original.call(this, pageId, ...rest);
+      }
+    };
+    window.__auroraVTWrapped = true;
+  };
+
+  let tries = 0;
+  const t = setInterval(() => {
+    tryWrap();
+    if (++tries > 12 || window.__auroraVTWrapped) clearInterval(t);
+  }, 200);
+  tryWrap();
+})();
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Phase 7: Boot Banner + Sanity Assert (Worker 12)
+   - One-shot banner per session.
+   - Sanity-checks every Upg.* module is wired.
+   - Reports any missing module via console.warn (non-fatal).
+   ════════════════════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+  const REQUIRED = [
+    'theme', 'icons', 'gateway', 'calc', 'cmdk', 'state', 'production',
+    'type', 'scroll', 'nav', 'identity', 'greet', 'countup', 'motion'
+  ];
+
+  const runSanity = () => {
+    const upg = window.Upg || {};
+    const missing = REQUIRED.filter((k) => !upg[k]);
+    if (missing.length) {
+      console.warn('[AURORA] missing Upg.* modules:', missing);
+    }
+    try {
+      if (!sessionStorage.getItem('upg_aurora_banner')) {
+        sessionStorage.setItem('upg_aurora_banner', '1');
+        const present = REQUIRED.length - missing.length;
+        const bg = 'background:#0E1220;color:#66FCF1;padding:4px 10px;border-radius:6px;font-weight:bold;';
+        const dim = 'color:#94A3B8;';
+        console.log(
+          '%c AURORA v15 %c  منصة Upgrade — Apple-grade UI/UX  %c(%d/%d modules)',
+          bg, '', dim, present, REQUIRED.length
+        );
+      }
+    } catch (_) { /* sessionStorage may be blocked */ }
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runSanity, { once: true });
+  } else {
+    // Defer slightly to allow other IIFEs to register before we measure.
+    setTimeout(runSanity, 0);
+  }
+})();

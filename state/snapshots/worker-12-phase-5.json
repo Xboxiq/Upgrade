@@ -1,0 +1,60 @@
+{
+  "worker": "12",
+  "worker_name": "AURORA_APPLE_GRADE",
+  "phase": 5,
+  "phase_title": "Dashboard Hero — Identity Tints + Bento + Count-up",
+  "phases_total": 8,
+  "branch": "worker-12-aurora",
+  "commit_message": "phase 5 (aurora): per-page identity tints + bento + count-up + greet",
+  "lines_added": 429,
+  "files_touched": [
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "approach": "Preservation-first augmentation: did NOT replace #page-dashboard markup. Instead added (a) tint tokens that activate via [data-active-tint] on <html>, (b) bento + dock + stat-tile utility classes for future content surfaces, and (c) JS observers that automatically opt-in existing .cath-stat-value elements into count-up animation without changing their HTML.",
+  "tokens_added": [
+    "--tint-dashboard / callcenter / fieldsales / accountmgr / social / lab / psych / eq / negotiation / customercare / programming / accounting / phonerepair / hrmastery / myprogress (15 identity tints)",
+    "--color-tint (active-tint propagator)"
+  ],
+  "utilities_added": [
+    ".bento", ".bento-cell", ".b-1x1", ".b-2x1", ".b-3x1", ".b-4x1", ".b-1x2", ".b-2x2",
+    ".bento-greet",
+    ".stat-tile", ".stat-tile-icon", ".stat-tile-value", ".stat-tile-label", ".stat-tile-trend",
+    ".dock", ".dock-btn"
+  ],
+  "css_hooks_to_existing": [
+    ".page-icon-wrap → background+color now use --color-tint",
+    "#sidebar .nav-item.active::before → background+box-shadow use --color-tint"
+  ],
+  "public_apis_added": [
+    "Upg.identity.setTint(page)", "Upg.identity.getTint()",
+    "Upg.greet.refresh()",
+    "Upg.countup.run(el, target?, duration?)", "Upg.countup.observe()"
+  ],
+  "behaviors_added": [
+    "navigateTo wrapped — auto-sets [data-active-tint] on every page change",
+    "MutationObserver on .page.active class — fallback for any other navigation path",
+    "Time-of-day greeting (4-band: morning, afternoon, evening, night) refreshes every 30 min",
+    "IntersectionObserver-driven count-up triggers on 35% visibility, respects prefers-reduced-motion",
+    "Cath-stat-value elements auto-opted-in to count-up without HTML changes",
+    "Re-observation on upg:lazy-mount and upg:state-update events"
+  ],
+  "preservation_check": {
+    "pages_count": 15,
+    "qcalc_instances": 8,
+    "no_dom_restructure": true,
+    "cath_dash_intact": true,
+    "cath_skill_grid_id_intact": true,
+    "cath_activity_list_id_intact": true,
+    "data_cath_stat_attrs_intact": true,
+    "upg_apis_intact": [
+      "theme", "icons", "gateway", "calc", "cmdk", "state", "production",
+      "type", "scroll", "nav", "identity", "greet", "countup"
+    ]
+  },
+  "metrics": {
+    "inline_styles_html": 1592,
+    "important_count_css": 142
+  },
+  "next_phase": "6 — Motion & Interaction (easing tokens, springs, cursor glow, page transitions)"
+}

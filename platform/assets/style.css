@@ -56,35 +56,42 @@
 :root[data-theme="light"],
 html[data-theme="light"],
 body[data-theme="light"] {
-  --color-bg:           hsl(40 18% 97%);
-  --color-surface-0:    hsl(40 25% 99%);
-  --color-surface-1:    hsl(40 18% 96%);
-  --color-surface-2:    hsl(40 14% 93%);
-  --color-surface-3:    hsl(40 12% 89%);
+  /* AURORA v15 — Linen-Bone Off-White (Worker 12 / Phase 2)
+     Mood: warm linen + bone. Reference: macOS Sonoma + Apple Park reading rooms. */
+  --color-bg:           hsl(38 28% 96.5%);   /* linen */
+  --color-surface-0:    hsl(40 38% 99.2%);   /* paper-fresh */
+  --color-surface-1:    hsl(38 28% 97.5%);   /* card */
+  --color-surface-2:    hsl(36 22% 94.5%);   /* raised card */
+  --color-surface-3:    hsl(34 18% 91%);     /* sunk well */
 
-  --color-text:         hsl(220 35% 12%);
-  --color-text-muted:   hsl(220 18% 38%);
-  --color-text-faint:   hsl(220 12% 55%);
+  --color-text:         hsl(220 38% 11%);
+  --color-text-muted:   hsl(220 18% 36%);
+  --color-text-faint:   hsl(220 14% 54%);
 
-  --color-border:        hsl(220 14% 86%);
-  --color-border-strong: hsl(220 16% 76%);
+  --color-border:        hsl(36 16% 86%);
+  --color-border-strong: hsl(36 18% 76%);
 
-  --color-brand:        hsl(176 70% 38%);
-  --color-brand-hover:  hsl(176 75% 32%);
-  --color-brand-soft:   color-mix(in oklch, hsl(176 70% 38%) 12%, white);
-  --color-brand-strong: hsl(176 75% 30%);
+  --color-brand:        hsl(176 64% 34%);
+  --color-brand-hover:  hsl(176 70% 28%);
+  --color-brand-soft:   color-mix(in oklch, hsl(176 64% 34%) 9%, hsl(40 38% 99.2%));
+  --color-brand-strong: hsl(176 70% 26%);
 
-  --color-success:      hsl(152 65% 38%);
-  --color-warning:      hsl(38 88% 48%);
-  --color-danger:       hsl(0 72% 50%);
-  --color-info:         hsl(210 88% 48%);
+  --color-success:      hsl(152 56% 32%);
+  --color-warning:      hsl(34 92% 42%);
+  --color-danger:       hsl(0 70% 46%);
+  --color-info:         hsl(210 78% 42%);
 
-  --shadow-c-sm: 0 1px 2px hsl(220 30% 20% / 0.06);
-  --shadow-c-md: 0 4px 12px hsl(220 30% 20% / 0.08), 0 1px 2px hsl(220 30% 20% / 0.04);
-  --shadow-c-lg: 0 12px 32px hsl(220 30% 20% / 0.10), 0 2px 6px hsl(220 30% 20% / 0.05);
-  --shadow-c-xl: 0 24px 60px hsl(220 30% 20% / 0.12), 0 4px 12px hsl(220 30% 20% / 0.06);
+  /* Tinted shadows — azure + warm cocoa, never flat black */
+  --shadow-c-sm: 0 1px 2px hsl(220 30% 18% / 0.05),
+                 0 1px 1px hsl(36 28% 35% / 0.04);
+  --shadow-c-md: 0 4px 12px hsl(220 30% 18% / 0.08),
+                 0 2px 4px hsl(36 28% 35% / 0.05);
+  --shadow-c-lg: 0 14px 32px hsl(220 30% 18% / 0.10),
+                 0 4px 10px hsl(36 28% 35% / 0.06);
+  --shadow-c-xl: 0 28px 60px hsl(220 30% 18% / 0.13),
+                 0 8px 20px hsl(36 28% 35% / 0.07);
 
-  --ring: 0 0 0 3px color-mix(in oklch, hsl(176 70% 38%) 30%, transparent);
+  --ring: 0 0 0 3px color-mix(in oklch, var(--color-brand) 28%, transparent);
 
   color-scheme: light;
 }
@@ -4446,7 +4453,7 @@ body[data-theme="dark"] { color-scheme: dark; }
 
 /* ===== CSS block #10 (id: block-10) ===== */
 /* v12-ADD: Quiz System Styles */
-    .v12-quiz-trigger { display:flex;align-items:center;gap:4px;background:var(--accent-dim);border:1px solid var(--border-hover);border-radius:var(--radius-sm);padding:5px 10px !important;color:var(--accent) !important; }
+    .v12-quiz-trigger { display:flex;align-items:center;gap:4px;background:var(--accent-dim);border:1px solid var(--border-hover);border-radius:var(--radius-sm);padding:5px 10px;color:var(--accent); }
     .v12-quiz-trigger:hover { background:rgba(102,252,241,0.18); }
     .v12-quiz-trigger svg { width:16px;height:16px; }
     .v12-quiz-overlay { position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px; }
@@ -9053,7 +9060,7 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
   margin-block-start: 6px;
 }
 #page-accounting .acc-is-rows li.net em { font-size: 11px; color: rgba(255,255,255,0.75); margin-inline-start: 6px; font-style: normal; font-weight: 700; }
-#page-accounting .acc-is-rows li.negative b { color: #F87171 !important; }
+#page-accounting .acc-is-rows li.negative b { color: #F87171; }
 #page-accounting .acc-is-warnings {
   display: grid;
   gap: 6px;
@@ -15984,3 +15991,1554 @@ select.qcalc-input { text-align: start; }
   .page { display: none; }
   .page.active { display: block !important; }
 }
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Phase 1 — Typography & Spatial System (Worker 12 / Phase 1)
+   Additive layer over Cathedral v14. NO existing rule is modified — all new.
+   Tokens exposed: --font-*, --text-*, --leading-*, --tracking-*, --weight-*,
+                   --space-0..12, --density-*, --container-*, --z-*.
+   Utilities exposed: .h-display .h-title .h-section .h-card .h-eyebrow .h-label .h-mono
+                      .u-prose .u-stack .u-stack-sm .u-stack-lg .u-cluster
+                      .u-pad .u-pad-sm .u-pad-lg .u-pad-xl .u-num
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Typographic Tokens ──────────────────────────────────────────────────── */
+:root {
+  /* Font families — Cairo first, IBM Plex Arabic fallback for Apple-like rendering */
+  --font-display: "Cairo", "IBM Plex Sans Arabic", "SF Arabic",
+                  -apple-system, BlinkMacSystemFont, "Segoe UI",
+                  Roboto, Helvetica, Arial, sans-serif;
+  --font-text:    var(--font-display);
+  --font-mono:    "SF Mono", ui-monospace, "Cascadia Mono",
+                  "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
+  --font-numeric: var(--font-display);
+
+  /* Type scale — clamp(min, fluid, max). Major Third (1.25) ratio. */
+  --text-2xs:     clamp(0.6875rem, 0.66rem + 0.15vw, 0.75rem);   /* 11..12 */
+  --text-xs:      clamp(0.75rem, 0.72rem + 0.18vw, 0.8125rem);   /* 12..13 */
+  --text-sm:      clamp(0.875rem, 0.84rem + 0.2vw, 0.9375rem);   /* 14..15 */
+  --text-base:    clamp(1rem, 0.95rem + 0.25vw, 1.0625rem);      /* 16..17 */
+  --text-lg:      clamp(1.125rem, 1.06rem + 0.3vw, 1.1875rem);   /* 18..19 */
+  --text-xl:      clamp(1.25rem, 1.16rem + 0.45vw, 1.375rem);    /* 20..22 */
+  --text-2xl:     clamp(1.5rem, 1.36rem + 0.7vw, 1.75rem);       /* 24..28 */
+  --text-3xl:     clamp(1.875rem, 1.66rem + 1.05vw, 2.25rem);    /* 30..36 */
+  --text-4xl:     clamp(2.25rem, 1.96rem + 1.5vw, 3rem);         /* 36..48 */
+  --text-display: clamp(2.75rem, 2.2rem + 2.8vw, 4.5rem);        /* 44..72 */
+
+  /* Line-height ladder */
+  --leading-tight:   1.18;
+  --leading-snug:    1.32;
+  --leading-normal:  1.55;
+  --leading-relaxed: 1.7;
+  --leading-loose:   1.85;
+
+  /* Tracking (letter-spacing) — Arabic prefers tighter values */
+  --tracking-tighter: -0.025em;
+  --tracking-tight:   -0.012em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.012em;
+  --tracking-wider:   0.05em;
+
+  /* Font weights — Cairo full ladder */
+  --weight-light:     300;
+  --weight-regular:   400;
+  --weight-medium:    500;
+  --weight-semibold:  600;
+  --weight-bold:      700;
+  --weight-heavy:     800;
+  --weight-black:     900;
+}
+
+/* ─── Spatial Grid (4pt base) ─────────────────────────────────────────────── */
+:root {
+  --space-0:  0;
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-7:  32px;
+  --space-8:  40px;
+  --space-9:  48px;
+  --space-10: 64px;
+  --space-11: 80px;
+  --space-12: 96px;
+
+  /* Density presets (consumed by Phases 4+ via [data-density]) */
+  --density-compact:     var(--space-2);
+  --density-cozy:        var(--space-3);
+  --density-comfortable: var(--space-4);
+  --density-spacious:    var(--space-6);
+
+  /* Container widths */
+  --container-narrow: 720px;
+  --container-text:   880px;
+  --container-base:   1180px;
+  --container-wide:   1360px;
+  --container-fluid:  100%;
+
+  /* Z-index ladder — unified across overlays */
+  --z-base:     0;
+  --z-raised:   10;
+  --z-sticky:   30;
+  --z-dropdown: 200;
+  --z-sidebar:  500;
+  --z-topbar:   600;
+  --z-overlay:  900;
+  --z-modal:    1000;
+  --z-toast:    1100;
+  --z-cmdk:     1200;
+
+  /* User-controlled type zoom multiplier (0.875..1.25) */
+  --type-zoom: 1;
+}
+
+/* ─── Density-aware ladder ────────────────────────────────────────────────── */
+:root[data-density="compact"]     { --density-current: var(--density-compact); }
+:root[data-density="cozy"]        { --density-current: var(--density-cozy); }
+:root[data-density="comfortable"] { --density-current: var(--density-comfortable); }
+:root[data-density="spacious"]    { --density-current: var(--density-spacious); }
+:root:not([data-density])         { --density-current: var(--density-comfortable); }
+
+/* ─── Typographic Reset (additive — only adds smoothing & ligatures) ──────── */
+html.v13 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "ss01" 1;
+  font-variant-ligatures: common-ligatures contextual;
+}
+
+/* Tabular numerals — for stats and calculator displays */
+.u-num,
+.cath-stat-value,
+.qcalc-value,
+[data-cath-stat],
+[data-tabular] {
+  font-family: var(--font-numeric);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+/* ─── Heading Utility Classes ─────────────────────────────────────────────── */
+.h-display {
+  font-size: var(--text-display);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tighter);
+  font-weight: var(--weight-heavy);
+}
+.h-title {
+  font-size: var(--text-4xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  font-weight: var(--weight-bold);
+}
+.h-section {
+  font-size: var(--text-2xl);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  font-weight: var(--weight-semibold);
+}
+.h-card {
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+  font-weight: var(--weight-semibold);
+}
+.h-eyebrow {
+  font-size: var(--text-2xs);
+  line-height: 1;
+  letter-spacing: var(--tracking-wider);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.h-label {
+  font-size: var(--text-xs);
+  line-height: var(--leading-snug);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+}
+.h-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-feature-settings: "tnum" 1;
+}
+
+/* ─── Reading rhythm ──────────────────────────────────────────────────────── */
+.u-prose {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  max-width: var(--container-text);
+}
+.u-prose > * + * { margin-top: var(--space-4); }
+.u-prose h2     { margin-top: var(--space-7); margin-bottom: var(--space-3); font-size: var(--text-2xl); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-tight); }
+.u-prose h3     { margin-top: var(--space-6); margin-bottom: var(--space-2); font-size: var(--text-xl); font-weight: var(--weight-semibold); }
+.u-prose p      { line-height: var(--leading-relaxed); }
+.u-prose strong { font-weight: var(--weight-semibold); color: var(--color-text); }
+.u-prose code   {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--color-surface-2);
+}
+.u-prose ul, .u-prose ol { padding-inline-start: var(--space-6); }
+.u-prose li + li         { margin-top: var(--space-2); }
+.u-prose blockquote      {
+  border-inline-start: 3px solid var(--color-brand);
+  padding-inline-start: var(--space-4);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ─── Spacing utilities (minimum needed for Phase 1) ──────────────────────── */
+.u-stack    > * + * { margin-top: var(--space-4); }
+.u-stack-sm > * + * { margin-top: var(--space-2); }
+.u-stack-lg > * + * { margin-top: var(--space-6); }
+.u-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+}
+.u-pad-sm  { padding: var(--space-3); }
+.u-pad     { padding: var(--space-4); }
+.u-pad-lg  { padding: var(--space-6); }
+.u-pad-xl  { padding: var(--space-7); }
+
+/* User text-zoom multiplier — affects body sizing without breaking clamp() */
+body { font-size: calc(var(--text-base) * var(--type-zoom)); }
+
+/* ─── End AURORA Phase 1 ──────────────────────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Phase 1B — Typeface Soul (Worker 12 / Phase 1B)
+   Premium Arabic stack: Reem Kufi (display) + Readex Pro (text) +
+   IBM Plex Sans Arabic (numeric) + Aref Ruqaa (accent) + Thmanyah optional.
+   Cairo retained as guaranteed fallback in every stack.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Thmanyah self-hosted (optional premium) ─────────────────────────────── */
+@font-face {
+  font-family: "Thmanyah";
+  src: url("./fonts/thmanyah/Thmanyah-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+0020-007E;
+}
+@font-face {
+  font-family: "Thmanyah";
+  src: url("./fonts/thmanyah/Thmanyah-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+0020-007E;
+}
+@font-face {
+  font-family: "Thmanyah";
+  src: url("./fonts/thmanyah/Thmanyah-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+0020-007E;
+}
+@font-face {
+  font-family: "Thmanyah";
+  src: url("./fonts/thmanyah/Thmanyah-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+0020-007E;
+}
+
+/* ─── Voice mapping (overrides Phase 1 generic stack) ─────────────────────── */
+:root {
+  --font-display: "Thmanyah", "Reem Kufi", "Cairo",
+                  "SF Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI",
+                  Roboto, sans-serif;
+
+  --font-text:    "Readex Pro", "IBM Plex Sans Arabic", "Cairo",
+                  "SF Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI",
+                  Roboto, sans-serif;
+
+  --font-numeric: "IBM Plex Sans Arabic", "Readex Pro", "Cairo",
+                  ui-monospace, "SF Mono", monospace;
+
+  --font-accent:  "Aref Ruqaa", "Amiri", "Cairo",
+                  "Times New Roman", serif;
+
+  --font-mono:    "JetBrains Mono", "SF Mono", ui-monospace,
+                  "Cascadia Mono", "Fira Code", Menlo, Consolas, monospace;
+}
+
+/* ─── Global default — body uses TEXT voice ───────────────────────────────── */
+html.v13 { font-family: var(--font-text); }
+body     { font-family: var(--font-text); }
+
+/* ─── Voice bindings — semantic elements get the right voice ──────────────── */
+
+/* Display voice — large headings, hero, wordmark */
+.h-display,
+.h-title,
+.gateway-headline,
+.gateway-wordmark,
+.bento-greet h1,
+.page-header h1,
+.cath-page h1,
+h1, h2 {
+  font-family: var(--font-display);
+  letter-spacing: var(--tracking-tight);
+}
+
+/* Section voice — h3/h4 + card titles stay in text family for legibility */
+.h-section,
+.h-card,
+h3, h4 {
+  font-family: var(--font-text);
+  font-weight: var(--weight-semibold);
+}
+
+/* Numeric voice — every numeric display surface */
+.u-num,
+.cath-stat-value,
+.qcalc-value,
+.stat-tile-value,
+[data-cath-stat],
+[data-tabular],
+[data-countup] {
+  font-family: var(--font-numeric);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1, "kern" 1;
+  font-weight: var(--weight-semibold);
+}
+
+/* Accent voice — eyebrow, taglines, classical character */
+.h-eyebrow,
+.gateway-tagline,
+.h-quote,
+.h-signature,
+.font-accent,
+.u-font-accent {
+  font-family: var(--font-accent);
+  line-height: var(--leading-relaxed);
+  font-weight: var(--weight-regular);
+}
+
+/* Mono voice — preserved */
+.h-mono,
+.font-mono,
+.u-font-mono,
+code, kbd, pre {
+  font-family: var(--font-mono);
+}
+
+/* ─── Per-typeface micro-adjustments ──────────────────────────────────────── */
+
+/* Reem Kufi / Thmanyah — geometric display tightening */
+.h-display { font-weight: var(--weight-heavy); letter-spacing: var(--tracking-tighter); }
+.h-title   { font-weight: var(--weight-bold);  letter-spacing: var(--tracking-tight); }
+
+/* Readex Pro variable axis */
+body, .u-prose p {
+  font-variation-settings: "wght" 400;
+}
+.u-prose strong { font-variation-settings: "wght" 600; }
+.h-card         { font-variation-settings: "wght" 600; }
+
+/* IBM Plex Sans Arabic numerals — stylistic alternates */
+.u-num, .stat-tile-value, .cath-stat-value, .qcalc-value {
+  font-feature-settings: "tnum" 1, "lnum" 1, "ss01" 1;
+}
+
+/* Aref Ruqaa — needs vertical breathing room + slight upscale */
+.h-eyebrow,
+.gateway-tagline,
+.h-quote {
+  padding-block: 0.15em;
+}
+.gateway-tagline,
+.h-quote {
+  font-size: 1.08em;
+}
+
+/* ─── Quote and signature utilities ───────────────────────────────────────── */
+.h-quote {
+  font-family: var(--font-accent);
+  font-size: var(--text-xl);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-muted);
+  border-inline-start: 3px solid var(--color-tint, var(--color-brand));
+  padding-inline-start: var(--space-4);
+  margin-block: var(--space-5);
+}
+.h-quote::before {
+  content: "\201C";
+  color: var(--color-tint, var(--color-brand));
+  font-size: 1.4em;
+  vertical-align: -0.15em;
+  margin-inline-end: 0.1em;
+}
+.h-quote::after {
+  content: "\201D";
+  color: var(--color-tint, var(--color-brand));
+  font-size: 1.4em;
+  vertical-align: -0.15em;
+  margin-inline-start: 0.1em;
+}
+.h-signature {
+  font-family: var(--font-accent);
+  font-size: var(--text-base);
+  color: var(--color-text-faint);
+  text-align: end;
+  margin-top: var(--space-4);
+}
+
+/* ─── Family-binding utility classes ──────────────────────────────────────── */
+.u-font-display { font-family: var(--font-display); font-weight: var(--weight-heavy); }
+.u-font-text    { font-family: var(--font-text); }
+.u-font-numeric { font-family: var(--font-numeric); font-variant-numeric: tabular-nums lining-nums; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA Typeface Discipline — golden rules (AUTO_PILOT must obey):
+   1. Never set font-family directly. Always use one of --font-* tokens.
+   2. Aref Ruqaa ≤ 5% of any page text — for soul, not for body reading.
+   3. Numbers in calculators/stats must use var(--font-numeric).
+   4. Body text, UI labels, buttons → var(--font-text).
+   5. h1/h2/hero/wordmark → var(--font-display).
+   6. Never mix display and text on the same line.
+   7. No italic on Aref Ruqaa (the typeface is already cursive).
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ─── End AURORA Phase 1B ─────────────────────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Phase 2 — Off-White Re-chisel (Worker 12 / Phase 2)
+   - Tonal elevation utilities (.elev-0..3)
+   - Nav-badge identity classes (replaces inline gradients)
+   - Welcome-badge identity classes
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Tonal elevation tint ────────────────────────────────────────────────── */
+:root { --tonal-tint: hsl(36 28% 35%); }            /* warm cocoa */
+:root[data-theme="dark"] { --tonal-tint: hsl(176 100% 70%); } /* brand glow */
+
+.elev-0 { background: var(--color-surface-0); }
+.elev-1 { background: color-mix(in oklch, var(--color-surface-1) 96%, var(--tonal-tint) 4%); }
+.elev-2 { background: color-mix(in oklch, var(--color-surface-2) 92%, var(--tonal-tint) 8%); }
+.elev-3 { background: color-mix(in oklch, var(--color-surface-3) 88%, var(--tonal-tint) 12%); }
+
+[data-theme="dark"] .elev-1 { background: color-mix(in oklch, var(--color-surface-1) 95%, var(--tonal-tint) 5%); }
+[data-theme="dark"] .elev-2 { background: color-mix(in oklch, var(--color-surface-2) 92%, var(--tonal-tint) 8%); }
+[data-theme="dark"] .elev-3 { background: color-mix(in oklch, var(--color-surface-3) 90%, var(--tonal-tint) 10%); }
+
+/* ─── Nav-badge identity classes ──────────────────────────────────────────── */
+.nav-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-full);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  line-height: 1.5;
+  color: hsl(40 60% 99%);
+  background: var(--color-brand);
+  white-space: nowrap;
+}
+.nav-badge--success { background: linear-gradient(135deg, var(--color-success), var(--color-info)); color: #fff; }
+.nav-badge--ember   { background: linear-gradient(135deg, hsl(20 92% 56%), hsl(0 80% 56%)); color: #fff; }
+.nav-badge--violet  { background: linear-gradient(135deg, hsl(265 70% 60%), hsl(210 90% 56%)); color: #fff; }
+.nav-badge--pink    { background: linear-gradient(135deg, hsl(330 80% 60%), hsl(265 70% 60%)); color: #fff; }
+.nav-badge--amber   { background: linear-gradient(135deg, hsl(20 92% 56%), hsl(45 92% 52%)); color: #fff; }
+.nav-badge--mint    { background: linear-gradient(135deg, var(--color-success), var(--color-info)); color: #fff; }
+.nav-badge--azure   { background: linear-gradient(135deg, hsl(186 80% 48%), hsl(265 70% 60%)); color: #fff; }
+.nav-badge--gold    { background: linear-gradient(135deg, hsl(36 92% 50%), hsl(152 60% 42%)); color: #fff; }
+.nav-badge--royal   { background: linear-gradient(135deg, hsl(265 80% 62%), hsl(330 80% 60%)); color: #fff; }
+
+/* ─── Welcome-badge / banner gradient identities ──────────────────────────── */
+.welcome-badge--gold {
+  background: linear-gradient(135deg,
+    color-mix(in oklch, var(--color-warning) 80%, white 10%),
+    var(--color-warning));
+}
+.welcome-badge--brand {
+  background: linear-gradient(135deg,
+    var(--color-brand),
+    var(--color-brand-strong));
+}
+.welcome-badge--success {
+  background: linear-gradient(135deg,
+    var(--color-success),
+    var(--color-info));
+}
+
+/* ─── End AURORA Phase 2 ──────────────────────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Phase 3 — Materials & Depth (Worker 12 / Phase 3)
+   - 4 glass tiers: thin / regular / thick / chrome
+   - Edge-light hairline + halos
+   - Scroll-aware elevation for topbar / sidebar
+   - Grain refinement
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Material tokens (dark-default; light overrides below) ───────────────── */
+:root {
+  /* Backdrop blur ladder */
+  --blur-thin:    8px;
+  --blur-regular: 16px;
+  --blur-thick:   28px;
+  --blur-chrome:  42px;
+
+  /* Saturation lift — iOS-style vibrancy */
+  --vibrancy:     180%;
+
+  /* Hairline (specular highlight on top edge) */
+  --hairline-light:  inset 0 1px 0 hsl(220 30% 100% / 0.06);
+  --hairline-strong: inset 0 1px 0 hsl(220 30% 100% / 0.12);
+  --hairline-dark:   inset 0 1px 0 hsl(220 30% 100% / 0.06);
+
+  /* Halo — soft backlight on important surfaces */
+  --halo-brand: 0 0 0 1px var(--color-brand-soft),
+                0 12px 40px color-mix(in oklch, var(--color-brand) 22%, transparent);
+  --halo-warm:  0 0 0 1px hsl(36 80% 85% / 0.4),
+                0 12px 40px hsl(36 80% 60% / 0.18);
+
+  /* Glass — Thin (chips, tooltips) */
+  --glass-thin-bg:     color-mix(in oklch, var(--color-surface-1) 65%, transparent);
+  --glass-thin-border: color-mix(in oklch, var(--color-border) 60%, transparent);
+  --glass-thin-blur:   var(--blur-thin);
+
+  /* Glass — Regular (cards, popovers) */
+  --glass-regular-bg:     color-mix(in oklch, var(--color-surface-1) 78%, transparent);
+  --glass-regular-border: color-mix(in oklch, var(--color-border) 80%, transparent);
+  --glass-regular-blur:   var(--blur-regular);
+
+  /* Glass — Thick (modals, gateway) */
+  --glass-thick-bg:     color-mix(in oklch, var(--color-surface-2) 85%, transparent);
+  --glass-thick-border: color-mix(in oklch, var(--color-border-strong) 80%, transparent);
+  --glass-thick-blur:   var(--blur-thick);
+
+  /* Glass — Chrome (topbar, sidebar — highest blur) */
+  --glass-chrome-bg:     color-mix(in oklch, var(--color-bg) 78%, transparent);
+  --glass-chrome-border: color-mix(in oklch, var(--color-border) 70%, transparent);
+  --glass-chrome-blur:   var(--blur-chrome);
+}
+
+/* Light theme — warm, brighter highlights */
+:root[data-theme="light"] {
+  --hairline-light:  inset 0 1px 0 hsl(40 60% 100% / 0.95);
+  --hairline-strong: inset 0 1px 0 hsl(40 60% 100% / 1);
+  --halo-brand:      0 0 0 1px var(--color-brand-soft),
+                     0 12px 32px color-mix(in oklch, var(--color-brand) 14%, transparent);
+
+  --glass-thin-bg:     color-mix(in oklch, var(--color-surface-1) 70%, white 30%);
+  --glass-regular-bg:  color-mix(in oklch, var(--color-surface-1) 84%, white 16%);
+  --glass-thick-bg:    color-mix(in oklch, var(--color-surface-2) 90%, white 10%);
+  --glass-chrome-bg:   color-mix(in oklch, var(--color-bg) 85%, white 15%);
+}
+
+/* ─── Material utility classes ────────────────────────────────────────────── */
+.material-thin,
+.material-regular,
+.material-thick,
+.material-chrome {
+  isolation: isolate;
+  position: relative;
+}
+.material-thin {
+  background: var(--glass-thin-bg);
+  border: 1px solid var(--glass-thin-border);
+  backdrop-filter: blur(var(--glass-thin-blur)) saturate(var(--vibrancy));
+  -webkit-backdrop-filter: blur(var(--glass-thin-blur)) saturate(var(--vibrancy));
+  box-shadow: var(--shadow-c-sm), var(--hairline-light);
+}
+.material-regular {
+  background: var(--glass-regular-bg);
+  border: 1px solid var(--glass-regular-border);
+  backdrop-filter: blur(var(--glass-regular-blur)) saturate(var(--vibrancy));
+  -webkit-backdrop-filter: blur(var(--glass-regular-blur)) saturate(var(--vibrancy));
+  box-shadow: var(--shadow-c-md), var(--hairline-light);
+}
+.material-thick {
+  background: var(--glass-thick-bg);
+  border: 1px solid var(--glass-thick-border);
+  backdrop-filter: blur(var(--glass-thick-blur)) saturate(var(--vibrancy));
+  -webkit-backdrop-filter: blur(var(--glass-thick-blur)) saturate(var(--vibrancy));
+  box-shadow: var(--shadow-c-lg), var(--hairline-strong);
+}
+.material-chrome {
+  background: var(--glass-chrome-bg);
+  border: 1px solid var(--glass-chrome-border);
+  backdrop-filter: blur(var(--glass-chrome-blur)) saturate(var(--vibrancy));
+  -webkit-backdrop-filter: blur(var(--glass-chrome-blur)) saturate(var(--vibrancy));
+  box-shadow: var(--shadow-c-md), var(--hairline-light);
+}
+
+/* ─── Surface utilities (semantic shortcuts) ──────────────────────────────── */
+.surface-card {
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-c-md);
+}
+.surface-card.is-elevated {
+  background: color-mix(in oklch, var(--color-surface-1) 92%, var(--tonal-tint) 8%);
+  box-shadow: var(--shadow-c-lg), var(--hairline-light);
+}
+.surface-popover {
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  background: var(--glass-regular-bg);
+  border: 1px solid var(--glass-regular-border);
+  backdrop-filter: blur(var(--glass-regular-blur)) saturate(var(--vibrancy));
+  -webkit-backdrop-filter: blur(var(--glass-regular-blur)) saturate(var(--vibrancy));
+  box-shadow: var(--shadow-c-lg), var(--hairline-light);
+}
+.surface-modal {
+  border-radius: var(--radius-xl);
+  padding: var(--space-7);
+  background: var(--glass-thick-bg);
+  border: 1px solid var(--glass-thick-border);
+  backdrop-filter: blur(var(--glass-thick-blur)) saturate(var(--vibrancy));
+  -webkit-backdrop-filter: blur(var(--glass-thick-blur)) saturate(var(--vibrancy));
+  box-shadow: var(--shadow-c-xl), var(--hairline-strong);
+}
+
+/* ─── Reduced transparency (system pref) ──────────────────────────────────── */
+@media (prefers-reduced-transparency: reduce) {
+  .material-thin,
+  .material-regular,
+  .material-thick,
+  .material-chrome,
+  .surface-popover,
+  .surface-modal {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--color-surface-2);
+  }
+}
+
+/* ─── Scroll-aware elevation ──────────────────────────────────────────────── */
+#topbar.material-chrome,
+#sidebar.material-chrome {
+  transition: box-shadow 240ms ease-out,
+              backdrop-filter 240ms ease-out,
+              background 240ms ease-out;
+}
+#topbar.material-chrome[data-scrolled="true"] {
+  background: var(--glass-chrome-bg);
+  backdrop-filter: blur(var(--blur-chrome)) saturate(var(--vibrancy));
+  -webkit-backdrop-filter: blur(var(--blur-chrome)) saturate(var(--vibrancy));
+  box-shadow: var(--shadow-c-md), var(--hairline-light);
+}
+#sidebar.material-chrome[data-scrolled="true"] {
+  box-shadow: 1px 0 0 var(--color-border), var(--shadow-c-sm);
+}
+
+/* ─── Grain refinement ────────────────────────────────────────────────────── */
+.ql-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-base);
+  opacity: 0.5;
+  filter: url(#grainFilter);
+  mix-blend-mode: overlay;
+}
+[data-theme="light"] .ql-grain {
+  mix-blend-mode: multiply;
+  opacity: 0.32;
+}
+
+/* ─── End AURORA Phase 3 ──────────────────────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Phase 4 — Navigation Chrome (Worker 12 / Phase 4)
+   Additive: layout tokens, sidebar collapse behavior, dynamic-island compact,
+   view-transition naming, mobile drawer hook. Existing sidebar/topbar rules
+   from Worker 11 remain authoritative — Aurora only enhances on opt-in attrs.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Layout tokens ───────────────────────────────────────────────────────── */
+:root {
+  --sidebar-w-expanded:  264px;
+  --sidebar-w-collapsed: 72px;
+  --sidebar-w:           var(--sidebar-w-expanded);
+  --topbar-h:            64px;
+  --topbar-h-compact:    52px;
+  --nav-item-h:          40px;
+  --nav-item-radius:     12px;
+}
+:root[data-sidebar="collapsed"] { --sidebar-w: var(--sidebar-w-collapsed); }
+
+/* ─── Sidebar collapse behavior (uses existing #sidebar markup) ───────────── */
+:root[data-sidebar="collapsed"] #sidebar {
+  width: var(--sidebar-w-collapsed);
+  transition: width 320ms cubic-bezier(.25, 1, .3, 1);
+}
+:root[data-sidebar="collapsed"] #sidebar .nav-label,
+:root[data-sidebar="collapsed"] #sidebar .nav-section-label,
+:root[data-sidebar="collapsed"] #sidebar .nav-badge,
+:root[data-sidebar="collapsed"] #sidebar .logo-text,
+:root[data-sidebar="collapsed"] #sidebar .user-info,
+:root[data-sidebar="collapsed"] #sidebar .user-status,
+:root[data-sidebar="collapsed"] #sidebar .sidebar-search-pill,
+:root[data-sidebar="collapsed"] #sidebar .nav-section-header span {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+:root[data-sidebar="collapsed"] #sidebar .nav-item {
+  justify-content: center;
+  padding-inline: var(--space-2);
+}
+:root[data-sidebar="collapsed"] #sidebar .nav-item.active::before {
+  inset-inline-start: 50%;
+  top: -3px;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 3px;
+  right: auto;
+}
+:root[data-sidebar="collapsed"] #sidebar .sidebar-logo {
+  justify-content: center;
+}
+
+/* ─── Dynamic-Island compact topbar (hooks existing data-scrolled) ────────── */
+#topbar {
+  transition: padding 240ms cubic-bezier(.25, 1, .3, 1),
+              gap     240ms cubic-bezier(.25, 1, .3, 1);
+}
+#topbar[data-scrolled="true"] {
+  padding-block: var(--space-1);
+}
+
+/* ─── View Transitions naming for active nav-item indicator ───────────────── */
+#sidebar .nav-item.active::before { view-transition-name: nav-pill; }
+::view-transition-old(nav-pill),
+::view-transition-new(nav-pill) {
+  animation-duration: 280ms;
+  animation-timing-function: cubic-bezier(.25, 1, .3, 1);
+}
+
+/* ─── Mobile drawer (only when JS toggles data-sidebar-mobile="open") ─────── */
+@media (max-width: 980px) {
+  :root:not([data-sidebar-mobile="open"]) #sidebar.aurora-drawer {
+    transform: translateX(100%);
+    transition: transform 280ms cubic-bezier(.25, 1, .3, 1);
+  }
+  :root[data-sidebar-mobile="open"] #sidebar.aurora-drawer {
+    transform: translateX(0);
+    transition: transform 280ms cubic-bezier(.25, 1, .3, 1);
+  }
+  [dir="ltr"] :root:not([data-sidebar-mobile="open"]) #sidebar.aurora-drawer {
+    transform: translateX(-100%);
+  }
+}
+
+/* ─── Search pill (topbar-search) — softer focus ring with new tokens ─────── */
+.topbar-search:focus-within {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+/* ─── End AURORA Phase 4 ──────────────────────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Phase 5 — Dashboard Hero + Per-Page Identity Tints
+   (Worker 12 / Phase 5)
+   - Per-page tint tokens + activation via [data-active-tint]
+   - Bento grid utilities (.bento, .b-1x1..b-4x1, b-1x2, b-2x2)
+   - Stat-tile + dock + count-up utilities
+   - Augments existing #page-dashboard cath-dash without restructuring it
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Per-Page Identity Tint Tokens ───────────────────────────────────────── */
+:root {
+  --tint-dashboard:    var(--color-brand);
+  --tint-callcenter:   hsl(186 80% 45%);
+  --tint-fieldsales:   hsl(152 60% 38%);
+  --tint-accountmgr:   hsl(176 70% 38%);
+  --tint-social:       hsl(265 70% 56%);
+  --tint-lab:          hsl(330 80% 56%);
+  --tint-psych:        hsl(35 90% 50%);
+  --tint-eq:           hsl(0 75% 56%);
+  --tint-negotiation:  hsl(220 80% 56%);
+  --tint-customercare: hsl(190 60% 48%);
+  --tint-programming:  hsl(210 90% 56%);
+  --tint-accounting:   hsl(45 92% 50%);
+  --tint-phonerepair:  hsl(15 80% 56%);
+  --tint-hrmastery:    hsl(280 70% 56%);
+  --tint-myprogress:   var(--color-success);
+}
+
+[data-active-tint="dashboard"]    { --color-tint: var(--tint-dashboard); }
+[data-active-tint="callcenter"]   { --color-tint: var(--tint-callcenter); }
+[data-active-tint="fieldsales"]   { --color-tint: var(--tint-fieldsales); }
+[data-active-tint="accountmgr"]   { --color-tint: var(--tint-accountmgr); }
+[data-active-tint="social"]       { --color-tint: var(--tint-social); }
+[data-active-tint="lab"]          { --color-tint: var(--tint-lab); }
+[data-active-tint="psych"]        { --color-tint: var(--tint-psych); }
+[data-active-tint="eq"]           { --color-tint: var(--tint-eq); }
+[data-active-tint="negotiation"]  { --color-tint: var(--tint-negotiation); }
+[data-active-tint="customercare"] { --color-tint: var(--tint-customercare); }
+[data-active-tint="programming"]  { --color-tint: var(--tint-programming); }
+[data-active-tint="accounting"]   { --color-tint: var(--tint-accounting); }
+[data-active-tint="phonerepair"]  { --color-tint: var(--tint-phonerepair); }
+[data-active-tint="hrmastery"]    { --color-tint: var(--tint-hrmastery); }
+[data-active-tint="myprogress"]   { --color-tint: var(--tint-myprogress); }
+:root:not([data-active-tint])     { --color-tint: var(--color-brand); }
+
+/* Existing page-icon-wrap (topbar) picks up active tint */
+.page-icon-wrap {
+  background: color-mix(in oklch, var(--color-tint, var(--color-brand)) 14%, transparent);
+  color: var(--color-tint, var(--color-brand));
+  transition: background 240ms ease-out, color 240ms ease-out;
+}
+
+/* nav-item active also borrows tint accent */
+#sidebar .nav-item.active::before {
+  background: var(--color-tint, var(--color-brand));
+  box-shadow: 0 0 12px var(--color-tint, var(--color-brand));
+}
+
+/* ─── Bento Grid Utilities ────────────────────────────────────────────────── */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-4);
+}
+.bento > .bento-cell {
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-c-sm), var(--hairline-light);
+  position: relative;
+  overflow: hidden;
+  transition: transform 320ms cubic-bezier(.25,1,.3,1),
+              box-shadow 320ms cubic-bezier(.25,1,.3,1);
+}
+.bento > .bento-cell:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-c-lg), var(--hairline-light);
+}
+.b-1x1 { grid-column: span 3; }
+.b-2x1 { grid-column: span 6; }
+.b-3x1 { grid-column: span 9; }
+.b-4x1 { grid-column: span 12; }
+.b-1x2 { grid-column: span 3; grid-row: span 2; }
+.b-2x2 { grid-column: span 6; grid-row: span 2; }
+
+@media (max-width: 980px) {
+  .b-1x1, .b-2x1, .b-3x1, .b-4x1 { grid-column: 1 / -1; }
+  .b-1x2, .b-2x2 { grid-column: 1 / -1; grid-row: span 1; }
+}
+
+/* ─── Bento Greet Hero ────────────────────────────────────────────────────── */
+.bento-greet {
+  background: linear-gradient(135deg,
+    color-mix(in oklch, var(--color-tint, var(--color-brand)) 12%, var(--color-surface-1)),
+    var(--color-surface-1));
+  padding: var(--space-8) var(--space-7);
+}
+.bento-greet .h-eyebrow { color: var(--color-tint, var(--color-brand)); }
+.bento-greet h1 {
+  font-size: var(--text-3xl);
+  line-height: var(--leading-tight);
+  margin: var(--space-2) 0 var(--space-3);
+  letter-spacing: var(--tracking-tight);
+  font-family: var(--font-display);
+  font-weight: var(--weight-heavy);
+}
+.bento-greet p {
+  color: var(--color-text-muted);
+  font-size: var(--text-base);
+  max-width: 60ch;
+}
+
+/* ─── Stat Tile (count-up source) ─────────────────────────────────────────── */
+.stat-tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.stat-tile-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: color-mix(in oklch, var(--color-tint, var(--color-brand)) 14%, transparent);
+  color: var(--color-tint, var(--color-brand));
+  margin-bottom: var(--space-2);
+}
+.stat-tile-value {
+  font-family: var(--font-numeric);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-heavy);
+  line-height: 1;
+  letter-spacing: var(--tracking-tighter);
+}
+.stat-tile-label {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  letter-spacing: var(--tracking-wide);
+}
+.stat-tile-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: var(--space-1);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+}
+.stat-tile-trend.is-up   { color: var(--color-success); }
+.stat-tile-trend.is-down { color: var(--color-danger); }
+
+/* ─── Quick Dock ──────────────────────────────────────────────────────────── */
+.dock {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-xl);
+  background: var(--glass-thin-bg);
+  border: 1px solid var(--glass-thin-border);
+  backdrop-filter: blur(var(--blur-thin)) saturate(var(--vibrancy));
+  -webkit-backdrop-filter: blur(var(--blur-thin)) saturate(var(--vibrancy));
+}
+.dock-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  transition: transform 220ms cubic-bezier(.25,1,.3,1),
+              background 200ms,
+              color 200ms;
+  font-family: inherit;
+}
+.dock-btn:hover {
+  background: color-mix(in oklch, var(--color-surface-2) 90%, transparent);
+  color: var(--color-text);
+  transform: translateY(-2px);
+}
+.dock-btn:active { transform: scale(.96); }
+.dock-btn .qi { font-size: 1.5rem; color: var(--color-tint, var(--color-brand)); }
+.dock-btn span { font-size: var(--text-xs); }
+
+@media (max-width: 720px) {
+  .dock { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ─── Count-up subtle reveal ──────────────────────────────────────────────── */
+[data-countup][data-countup-done="1"] {
+  animation: aurora-tile-pop 320ms cubic-bezier(.25,1,.3,1) both;
+}
+@keyframes aurora-tile-pop {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-countup][data-countup-done="1"] { animation: none; }
+}
+
+/* ─── End AURORA Phase 5 ──────────────────────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Phase 6 — Motion & Interaction (Worker 12 / Phase 6)
+   Easing tokens + duration tokens + press/lift/glow + reveal + skeletons
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Motion tokens ───────────────────────────────────────────────────────── */
+:root {
+  --ease-linear:        linear;
+  --ease-emphasized:    cubic-bezier(0.2, 0, 0, 1);
+  --ease-decelerate:    cubic-bezier(0, 0, 0.2, 1);
+  --ease-accelerate:    cubic-bezier(0.3, 0, 1, 1);
+  --ease-spring-soft:   cubic-bezier(0.34, 1.36, 0.64, 1);
+  --ease-spring-snappy: cubic-bezier(0.5, 1.5, 0.4, 1);
+  --ease-spring:        cubic-bezier(0.34, 1.36, 0.64, 1);
+  --ease-overshoot:     cubic-bezier(0.32, 1.6, 0.6, 1);
+
+  --duration-instant: 80ms;
+  --duration-quick:   120ms;
+  --duration-base:    220ms;
+  --duration-medium:  320ms;
+  --duration-long:    480ms;
+  --duration-page:    360ms;
+}
+
+/* ─── Press feedback (additive — uses :where to keep specificity flat) ───── */
+:where(.u-press, .dock-btn, .tb-btn, .gateway-cta, .theme-toggle) {
+  transition:
+    transform var(--duration-quick) var(--ease-spring-soft),
+    background-color var(--duration-base) var(--ease-decelerate),
+    color var(--duration-base) var(--ease-decelerate),
+    box-shadow var(--duration-base) var(--ease-decelerate),
+    border-color var(--duration-base) var(--ease-decelerate);
+}
+:where(.u-press, .dock-btn, .tb-btn, .gateway-cta, .theme-toggle):active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+/* ─── Hover lift utility ──────────────────────────────────────────────────── */
+.u-lift {
+  will-change: transform, box-shadow;
+  transition:
+    transform var(--duration-base) var(--ease-emphasized),
+    box-shadow var(--duration-base) var(--ease-emphasized);
+}
+.u-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-c-lg), var(--hairline-light);
+}
+.u-lift:active { transform: translateY(0); }
+
+/* ─── Stagger reveal ──────────────────────────────────────────────────────── */
+[data-reveal]:not([data-revealed="true"]) {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity var(--duration-medium) var(--ease-decelerate),
+    transform var(--duration-medium) var(--ease-decelerate);
+}
+[data-reveal][data-revealed="true"] { opacity: 1; transform: none; }
+
+/* ─── Cursor glow utility ─────────────────────────────────────────────────── */
+.u-card-glow { position: relative; isolation: isolate; }
+.u-card-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%),
+      color-mix(in oklch, var(--color-tint, var(--color-brand)) 22%, transparent),
+      transparent 60%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-base) var(--ease-decelerate);
+  z-index: 0;
+}
+.u-card-glow > * { position: relative; z-index: 1; }
+.u-card-glow:hover::after { opacity: 1; }
+
+/* ─── Page transition (View Transitions API name) ─────────────────────────── */
+@supports (view-transition-name: root) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: var(--duration-page);
+    animation-timing-function: var(--ease-emphasized);
+  }
+}
+
+/* ─── Skeleton shimmer ────────────────────────────────────────────────────── */
+@keyframes aurora-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+.skeleton {
+  border-radius: var(--radius-md);
+  background: linear-gradient(90deg,
+    var(--color-surface-2) 0%,
+    color-mix(in oklch, var(--color-surface-2) 60%, var(--color-surface-3)) 50%,
+    var(--color-surface-2) 100%);
+  background-size: 200% 100%;
+  animation: aurora-shimmer 1.4s linear infinite;
+}
+
+/* ─── Reduced motion: zero out aurora-specific animations ─────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .u-lift:hover { transform: none; }
+  .u-card-glow::after { display: none; }
+  .skeleton { animation: none; }
+  /* Existing global rule (Cathedral final guard) handles broader transitions */
+}
+
+/* ─── End AURORA Phase 6 ──────────────────────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   ╔═══════════════════════════════════════════════════════════════════════╗
+   ║  AURORA v15 — Phase 7: Final Utilities Pack & Production Polish      ║
+   ║  Worker 12 / Phase 7 — purges inline styles via class equivalents.   ║
+   ║  Layer: additive only. Uses tokens established in Phases 1..6.       ║
+   ╚═══════════════════════════════════════════════════════════════════════╝
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Color & weight utilities — purge "color:var(--text);" inlines ────── */
+.u-c-text       { color: var(--color-text, var(--text)); }
+.u-c-muted      { color: var(--color-text-muted, var(--text-muted)); }
+.u-c-faint      { color: var(--color-text-faint, var(--text-faint, var(--text-muted))); }
+.u-c-brand      { color: var(--color-brand, var(--accent)); }
+.u-c-tint       { color: var(--color-tint, var(--color-brand, var(--accent))); }
+.u-c-success    { color: var(--color-success, #22C55E); }
+.u-c-warning    { color: var(--color-warning, #F59E0B); }
+.u-c-danger     { color: var(--color-danger, #EF4444); }
+.u-c-info       { color: var(--color-info, #3B82F6); }
+.u-c-violet     { color: hsl(265 70% 56%); }
+
+/* Common literal hex used heavily inline → utility tokens */
+.u-c-green      { color: #22C55E; }
+.u-c-red        { color: #EF4444; }
+.u-c-purple     { color: #8B5CF6; }
+.u-c-amber      { color: #F59E0B; }
+.u-c-blue       { color: #3B82F6; }
+.u-c-pink       { color: #EC4899; }
+.u-c-cyan       { color: var(--accent, #66FCF1); }
+
+/* ── 2. Font-size utilities — purge "font-size:Xpx" inlines ───────────────
+   Matches the legacy px values used throughout v12 content. Non-fluid by
+   design (the legacy content was authored for these exact sizes). */
+.u-fz-10  { font-size: 10px; }
+.u-fz-11  { font-size: 11px; }
+.u-fz-115 { font-size: 11.5px; }
+.u-fz-12  { font-size: 12px; }
+.u-fz-125 { font-size: 12.5px; }
+.u-fz-13  { font-size: 13px; }
+.u-fz-135 { font-size: 13.5px; }
+.u-fz-14  { font-size: 14px; }
+.u-fz-15  { font-size: 15px; }
+.u-fz-16  { font-size: 16px; }
+.u-fz-17  { font-size: 17px; }
+.u-fz-18  { font-size: 18px; }
+.u-fz-20  { font-size: 20px; }
+.u-fz-22  { font-size: 22px; }
+.u-fz-24  { font-size: 24px; }
+
+/* Weights (purge "font-weight:N" inlines) */
+.u-fw-500 { font-weight: 500; }
+.u-fw-600 { font-weight: 600; }
+.u-fw-700 { font-weight: 700; }
+.u-fw-800 { font-weight: 800; }
+.u-fw-900 { font-weight: 900; }
+
+/* Style toggles */
+.u-italic   { font-style: italic; }
+.u-uppercase{ text-transform: uppercase; letter-spacing: 0.05em; }
+.u-lh-tight { line-height: 1.3; }
+.u-lh-snug  { line-height: 1.5; }
+.u-lh-norm  { line-height: 1.65; }
+.u-lh-relax { line-height: 1.7; }
+.u-lh-loose { line-height: 1.85; }
+
+/* ── 3. Margin utilities — purge "margin-*" inlines ─────────────────────── */
+.u-m-0   { margin: 0; }
+.u-mt-0  { margin-top: 0; }
+.u-mt-1  { margin-top: 4px; }
+.u-mt-2  { margin-top: 8px; }
+.u-mt-3  { margin-top: 12px; }
+.u-mt-4  { margin-top: 16px; }
+.u-mt-5  { margin-top: 20px; }
+.u-mt-6  { margin-top: 24px; }
+.u-mt-7  { margin-top: 32px; }
+.u-mt-8  { margin-top: 40px; }
+.u-mt-9  { margin-top: 48px; }
+.u-mt-10 { margin-top: 64px; }
+
+.u-mb-0  { margin-bottom: 0; }
+.u-mb-1  { margin-bottom: 4px; }
+.u-mb-2  { margin-bottom: 8px; }
+.u-mb-3  { margin-bottom: 12px; }
+.u-mb-4  { margin-bottom: 16px; }
+.u-mb-5  { margin-bottom: 20px; }
+.u-mb-6  { margin-bottom: 24px; }
+.u-mb-65 { margin-bottom: 26px; }
+.u-mb-7  { margin-bottom: 28px; }
+.u-mb-8  { margin-bottom: 32px; }
+
+/* Combined "section-spacing" patterns common in v12 content */
+.u-section-gap     { margin: 28px 0 14px; }
+.u-section-gap-lg  { margin-top: 48px; margin-bottom: 20px; }
+.u-section-gap-md  { margin-top: 32px; margin-bottom: 16px; }
+.u-section-gap-sm  { margin-top: 24px; margin-bottom: 12px; }
+
+/* ── 4. Padding utilities — purge "padding:Xpx Ypx" inlines ─────────────── */
+.u-p-0      { padding: 0; }
+.u-p-12     { padding: 12px; }
+.u-p-14     { padding: 14px; }
+.u-p-16     { padding: 16px; }
+.u-p-card   { padding: 22px 24px; }
+.u-p-card-sm{ padding: 16px 18px; }
+.u-p-row    { padding: 9px 14px; }
+.u-p-pill   { padding: 9px 12px; }
+
+/* ── 5. Compound text presets — purge huge multi-decl inlines ────────────
+   These exact patterns appear ≥10 times each in the legacy v12 HTML. */
+
+/* "font-size:17px; font-weight:800; color:var(--text); margin-bottom:4px;" */
+.u-card-title { font-size: 17px; font-weight: 800; color: var(--color-text, var(--text)); margin-bottom: 4px; }
+
+/* "font-size:18px;font-weight:800;color:var(--text);margin-bottom:4px;" */
+.u-card-title-lg { font-size: 18px; font-weight: 800; color: var(--color-text, var(--text)); margin-bottom: 4px; }
+
+/* "font-size:13px;font-weight:800;color:var(--text);margin-bottom:6px;" */
+.u-card-title-sm { font-size: 13px; font-weight: 800; color: var(--color-text, var(--text)); margin-bottom: 6px; }
+
+/* "font-size:14px;font-weight:800;color:var(--text);margin-bottom:8px;" */
+.u-card-title-md { font-size: 14px; font-weight: 800; color: var(--color-text, var(--text)); margin-bottom: 8px; }
+
+/* "font-size:20px;font-weight:900;color:var(--text);letter-spacing:-0.3px;" */
+.u-section-title { font-size: 20px; font-weight: 900; color: var(--color-text, var(--text)); letter-spacing: -0.3px; }
+
+/* "font-size:16px;font-weight:800;color:var(--text);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);" */
+.u-section-divider {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--color-text, var(--text));
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border, var(--border));
+}
+
+/* "font-size:11.5px;color:var(--text-muted);" + variants with line-height */
+.u-meta       { font-size: 11.5px; color: var(--color-text-muted, var(--text-muted)); }
+.u-meta-lh    { font-size: 11.5px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.7; }
+.u-meta-lh-md { font-size: 12px;   color: var(--color-text-muted, var(--text-muted)); line-height: 1.7; }
+.u-meta-lh-lg { font-size: 12.5px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.85; }
+.u-meta-lh-xl { font-size: 12.5px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.85; max-width: 780px; }
+.u-meta-sm    { font-size: 11px;   color: var(--color-text-muted, var(--text-muted)); }
+.u-meta-md    { font-size: 12px;   color: var(--color-text-muted, var(--text-muted)); }
+.u-meta-lg    { font-size: 12.5px; color: var(--color-text-muted, var(--text-muted)); }
+.u-meta-loose { font-size: 12.5px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.65; }
+.u-meta-loose-mb { font-size: 11.5px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.7; margin-bottom: 10px; }
+.u-meta-tight { font-size: 12.5px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.7; }
+
+/* "color:var(--text);font-weight:600;" */
+.u-text-strong { color: var(--color-text, var(--text)); font-weight: 600; }
+
+/* Citation / scientific-quote box (the "background:rgba(102,252,241,0.05)..." pattern) */
+.u-quote-box {
+  background: color-mix(in oklch, var(--color-brand, var(--accent)) 5%, transparent);
+  border: 1px solid var(--color-border-strong, var(--border-hover, var(--border)));
+  border-radius: var(--radius-sm, 8px);
+  padding: 11px 13px;
+  font-size: 12px;
+  color: var(--color-text, var(--text));
+  line-height: 1.7;
+  font-style: italic;
+}
+
+/* Generic surface-2 framed card (high-frequency pattern) */
+.u-frame-card {
+  background: var(--color-surface-2, var(--surface-2));
+  border: 1px solid var(--color-border, var(--border));
+  border-radius: var(--radius-md, 12px);
+  padding: 16px;
+}
+
+/* ── 6. Layout shortcut utilities — purge "display:flex;align-items..." ──
+   Note: bare display utilities (.u-flex, .u-grid, .u-block, .u-hidden, etc.)
+   already exist from Worker 11 Phase 7. We only add what isn't there.        */
+.u-iflex            { display: inline-flex; }
+.u-iblock           { display: inline-block; }
+.u-items-start      { align-items: flex-start; }
+.u-justify-end      { justify-content: flex-end; }
+
+/* "display:flex;align-items:center;gap:10px;padding:12px;background:var(--surface-2);..." */
+.u-row-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: var(--color-surface-2, var(--surface-2));
+  border-radius: var(--radius-sm, 8px);
+  border: 1px solid var(--color-border, var(--border));
+  cursor: pointer;
+  font-size: 12.5px;
+  color: var(--color-text-muted, var(--text-muted));
+}
+
+/* ── 7. Width / text utilities ──────────────────────────────────────────── */
+/* (.u-w-full, .u-w-fit, .u-text-center, .u-text-end, .u-text-start already
+    defined in Worker 11 Phase 7 — kept there.) */
+.u-mw-text      { max-width: var(--container-text); }
+
+/* Padding-right shim used in lists */
+.u-pr-4 { padding-right: 16px; margin: 0; }
+
+/* Status badges (commonly inlined as color:#22C55E + font-size:12px) */
+.u-badge-ok    { color: #22C55E; font-size: 12px; }
+.u-badge-fail  { color: #EF4444; font-size: 12px; }
+.u-badge-info  { color: #3B82F6; font-size: 12px; }
+.u-badge-warn  { color: #F59E0B; font-size: 12px; }
+
+/* ── 8. Per-page header tint underline (Phase 7 spec § Step 4) ──────────
+   Adds a 56px brand-tinted underline to the H1 inside each .page-header.
+   Uses --color-tint (set by Upg.identity in Phase 5) with brand fallback. */
+.page-header h1::after,
+.page-header .h-title::after {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin-top: 8px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--color-tint, var(--color-brand, var(--accent))),
+    transparent
+  );
+}
+.page-header .page-eyebrow,
+.page-header .h-eyebrow {
+  color: var(--color-tint, var(--color-brand, var(--accent)));
+}
+
+/* End of AURORA v15 — Phase 7 ──────────────────────────────────────────── */
+
+
+
+/* ── 9. Additional purge utilities (round-2) ─────────────────────────── */
+
+/* checkbox/radio accent (8 copies) */
+.u-form-accent { accent-color: var(--color-brand, var(--accent)); width: 16px; height: 16px; }
+
+/* "padding:9px 12px; border-bottom:1px dashed var(--border);" + variants */
+.u-row-dashed     { padding: 9px 12px; border-bottom: 1px dashed var(--color-border, var(--border)); }
+.u-row-dashed-num { padding: 9px 12px; border-bottom: 1px dashed var(--color-border, var(--border)); font-variant-numeric: tabular-nums; }
+.u-row-dashed-mut { padding: 9px 12px; border-bottom: 1px dashed var(--color-border, var(--border)); color: var(--color-text-muted, var(--text-muted)); }
+.u-row-dashed-ok  { padding: 9px 12px; border-bottom: 1px dashed var(--color-border, var(--border)); color: #22C55E; font-variant-numeric: tabular-nums; }
+
+/* Card padding 18px / border-radius 14 (used 6×) */
+.u-p-18-r14       { padding: 18px; border-radius: 14px; }
+
+/* Frame card with overflow hidden, mb 26 (used 6×) */
+.u-frame-clip     { margin-bottom: 26px; padding: 0; overflow: hidden; }
+
+/* font-size:14px;font-weight:800;color:var(--text); — bare (no margin) */
+.u-h4 { font-size: 14px; font-weight: 800; color: var(--color-text, var(--text)); }
+.u-h4-mb-1 { font-size: 14px; font-weight: 800; color: var(--color-text, var(--text)); margin-bottom: 7px; }
+
+/* font-size:12px;color:var(--text-muted);line-height:1.75;margin-bottom:10px; */
+.u-meta-md-mb { font-size: 12px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.75; margin-bottom: 10px; }
+
+/* font-size:10.5px;color:var(--text-faint);margin-top:8px; (and ;margin-top:1px;) */
+.u-meta-faint    { font-size: 10.5px; color: var(--color-text-faint, var(--text-faint, var(--text-muted))); margin-top: 8px; }
+.u-meta-faint-1  { font-size: 10.5px; color: var(--color-text-faint, var(--text-faint, var(--text-muted))); margin-top: 1px; }
+
+/* "display:flex; align-items:center; gap:10px; margin-bottom:10px;" */
+.u-row-tight { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+
+/* green badge fill */
+.u-pill-ok { background: rgba(34,197,94,0.12); color: #22C55E; }
+
+/* zero-width progress (template default — JS will set width directly) */
+.u-pb-0 { width: 0%; }
+
+/* Tile centerpiece (5×) */
+.u-tile-card {
+  text-align: center;
+  padding: 18px 12px;
+  background: var(--color-surface-1, var(--surface));
+  border: 1px solid var(--color-border, var(--border));
+  border-radius: var(--radius-md, 12px);
+}
+
+/* Common "font-weight:700;color:var(--text);" */
+.u-fw7-text { font-weight: 700; color: var(--color-text, var(--text)); }
+
+/* Big stat cluster (font-size:30px;flex-shrink:0;margin-top:2px;) */
+.u-stat-30 { font-size: 30px; flex-shrink: 0; margin-top: 2px; }
+
+/* Display heads */
+.u-h1-card { font-size: 24px; font-weight: 900; color: var(--color-text, var(--text)); margin-bottom: 6px; }
+.u-h2-card { font-size: 22px; margin-bottom: 6px; }
+.u-h3-card { font-size: 18px; margin-bottom: 6px; }
+
+/* "font-size:15px; font-weight:800; color:var(--text); margin-top:2px;" */
+.u-h5 { font-size: 15px; font-weight: 800; color: var(--color-text, var(--text)); margin-top: 2px; }
+
+/* "font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px;" */
+.u-h6 { font-size: 12px; font-weight: 700; color: var(--color-text, var(--text)); margin-bottom: 4px; }
+.u-h6-sm { font-size: 11px; font-weight: 700; color: var(--color-text, var(--text)); margin-bottom: 4px; }
+
+/* metric column muted (28px) */
+.u-meta-col-28 { font-size: 12px; color: var(--color-text-muted, var(--text-muted)); width: 28px; }
+
+/* small lh-1.5 muted/faint */
+.u-meta-mini      { font-size: 11px;   color: var(--color-text-muted, var(--text-muted)); line-height: 1.5; }
+.u-meta-mini-faint{ font-size: 10.5px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.5; }
+
+/* flex:1 helper */
+.u-flex-1 { flex: 1; }
+
+/* End of AURORA v15 — Phase 7 round-2 utilities ─────────────────────────── */
+
+
+/* ── 10. Round-3 utilities ───────────────────────────────────────────── */
+
+/* Yellow color (used 5×) */
+.u-c-yellow { color: #EAB308; }
+
+/* Orange color (used 4×) */
+.u-c-orange { color: #F97316; }
+
+/* Purple pill (rgba(168,85,247,.12)) */
+.u-pill-purple { background: rgba(168,85,247,0.12); color: #A855F7; }
+
+/* "display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;" */
+.u-row-between { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+
+/* "display:flex;align-items:center;gap:10px;margin-top:8px;" */
+.u-row-mt { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+
+/* Width helpers */
+.u-w-30   { width: 30%; }
+.u-w-120  { width: 120px; }
+
+/* Table-row eyebrow (4×) */
+.u-th-eyebrow {
+  text-align: right;
+  padding: 10px 12px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-text-faint, var(--text-faint, var(--text-muted)));
+  border-bottom: 1px solid var(--color-border, var(--border));
+}
+
+/* Card head bar (4×) */
+.u-card-head {
+  padding: 16px 22px 14px;
+  border-bottom: 1px solid var(--color-border, var(--border));
+  background: var(--color-surface-2, var(--surface-2));
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Padding 22px */
+.u-p-22 { padding: 22px; }
+
+/* Padding 16-18 + radius 14 */
+.u-p-card-md { padding: 16px 18px; border-radius: 14px; }
+
+/* Frame clip top */
+.u-frame-clip-top { margin-top: 22px; padding: 0; overflow: hidden; }
+
+/* Grid full-row */
+.u-col-full { grid-column: 1 / -1; }
+
+/* Eyebrow tags (orange / green) — uppercase letter-spacing tags */
+.u-tag-orange {
+  font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+  color: #F97316; margin-bottom: 8px;
+}
+.u-tag-green {
+  font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+  color: #22C55E; margin-bottom: 8px;
+}
+
+/* Heading 20px with margin */
+.u-h-20 { font-size: 20px; margin-bottom: 8px; }
+
+/* Danger text 12px */
+.u-c-red-12 { font-size: 12px; color: #EF4444; }
+
+/* List meta 11.5 muted line-height 1.85 */
+.u-list-meta {
+  font-size: 11.5px; color: var(--color-text-muted, var(--text-muted));
+  line-height: 1.85; padding-inline-start: 18px; margin: 0;
+}
+.u-list-meta-tight { font-size: 11.5px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.6; }
+
+/* Cyan 11.5 */
+.u-c-cyan-115 { font-size: 11.5px; color: var(--color-brand, var(--accent)); }
+
+/* Danger pill (rgba(239,68,68,0.07)) */
+.u-pill-danger {
+  font-size: 10.5px; color: #EF4444;
+  background: rgba(239,68,68,0.07);
+  border: 1px solid rgba(239,68,68,0.15);
+  border-radius: 6px;
+  padding: 7px 9px;
+}
+
+/* End of AURORA v15 — Phase 7 round-3 utilities ─────────────────────────── */
+
+
+/* ── 11. Round-4 utilities ───────────────────────────────────────────── */
+
+.u-row              { display: flex; align-items: center; gap: 10px; }
+.u-row-sm           { display: flex; align-items: center; gap: 5px; }
+.u-col              { display: flex; flex-direction: column; gap: 8px; }
+.u-grid-2-1fr      { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.u-grid-2-sm        { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+.u-pill-danger-fill { background: rgba(239,68,68,0.12); color: #EF4444; }
+
+.u-meta-rev    { color: var(--color-text-muted, var(--text-muted)); font-size: 12.5px; }
+.u-mt-rh       { margin-top: 36px; margin-bottom: 20px; }
+.u-mt-9b       { margin-top: 36px; }
+.u-mt-7b       { margin-top: 28px; }
+.u-mb-7b       { margin-bottom: 22px; }
+.u-frame-clip-mt { margin-top: 28px; padding: 0; overflow: hidden; }
+.u-lh-2        { line-height: 2; }
+
+.u-p-20-r14    { padding: 20px; border-radius: 14px; }
+.u-p-card-lg   { padding: 18px 20px; border-radius: 14px; margin-bottom: 18px; }
+.u-cyan-info-box {
+  padding: 12px 14px;
+  background: rgba(6,182,212,0.06);
+  border: 1px solid rgba(6,182,212,0.2);
+  border-radius: var(--radius-sm, 8px);
+}
+
+/* Eyebrow tags with letter-spacing 1.6 (variants per color) */
+.u-eyebrow-tag      { font-size: 11px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; margin-bottom: 8px; }
+.u-eyebrow-amber    { font-size: 11px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: #F59E0B; margin-bottom: 8px; }
+.u-eyebrow-purple   { font-size: 11px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; }
+.u-eyebrow-green    { font-size: 11px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: #22C55E; margin-bottom: 8px; }
+.u-eyebrow-cyan     { font-size: 11px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: #06B6D4; margin-bottom: 8px; }
+
+.u-h7-cyan { font-size: 11px; font-weight: 800; color: #06B6D4; margin-bottom: 4px; }
+
+.u-meta-tiny { font-size: 11px; color: var(--color-text-muted, var(--text-muted)); margin-top: 4px; }
+
+.u-faint-105 { font-size: 10.5px; color: var(--color-text-faint, var(--text-faint, var(--text-muted))); }
+
+.u-row-spread {
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: var(--color-text-muted, var(--text-muted));
+  margin-bottom: 4px;
+}
+
+.u-c-red-bold    { color: #EF4444; font-weight: 700; }
+.u-c-green-bold  { color: #22C55E; font-weight: 700; }
+.u-c-cyan6       { color: #06B6D4; }
+
+.u-meta-md-narr  { font-size: 12px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.7; margin-bottom: 8px; }
+.u-meta-md-loose { font-size: 12px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.75; }
+
+/* End of AURORA v15 — Phase 7 round-4 utilities ─────────────────────────── */

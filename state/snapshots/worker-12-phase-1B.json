@@ -1,0 +1,63 @@
+{
+  "worker": "12",
+  "worker_name": "AURORA_APPLE_GRADE",
+  "phase": "1B",
+  "phase_title": "Typeface Soul — Premium Arabic Stack",
+  "phases_total": 8,
+  "branch": "worker-12-aurora",
+  "commit_message": "phase 1B (aurora): premium Arabic typeface stack (Reem Kufi + Readex Pro + IBM Plex Arabic + Aref Ruqaa)",
+  "lines_added": 230,
+  "files_touched": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/fonts/thmanyah/README.md"
+  ],
+  "fonts_loaded_via_google": [
+    "Reem Kufi 400/500/600/700",
+    "Readex Pro variable 200..700",
+    "IBM Plex Sans Arabic 300/400/500/600/700",
+    "Aref Ruqaa 400/700",
+    "Cairo 400/600/700 (fallback only)"
+  ],
+  "fonts_self_hosted_optional": [
+    "Thmanyah 400/500/700/900 (graceful fallback to Reem Kufi when files absent)"
+  ],
+  "voice_mapping": {
+    "display": "Thmanyah → Reem Kufi → Cairo → SF Arabic",
+    "text":    "Readex Pro → IBM Plex Sans Arabic → Cairo → SF Arabic",
+    "numeric": "IBM Plex Sans Arabic → Readex Pro → Cairo → mono",
+    "accent":  "Aref Ruqaa → Amiri → Cairo → serif",
+    "mono":    "JetBrains Mono → SF Mono → ui-monospace"
+  },
+  "voice_bindings_added": [
+    "h1, h2, .h-display, .h-title, .gateway-headline, .gateway-wordmark → display",
+    "h3, h4, .h-section, .h-card → text (semibold)",
+    ".u-num, .cath-stat-value, .qcalc-value, .stat-tile-value, [data-tabular], [data-countup] → numeric (tabular)",
+    ".h-eyebrow, .gateway-tagline, .h-quote, .h-signature → accent",
+    "code, kbd, pre, .h-mono → mono"
+  ],
+  "utilities_added": [
+    ".u-font-display", ".u-font-text", ".u-font-numeric", ".u-font-accent", ".u-font-mono",
+    ".h-quote", ".h-signature"
+  ],
+  "preservation_check": {
+    "pages_count_before": 14,
+    "pages_count_after": 14,
+    "qcalc_instances_before": 8,
+    "qcalc_instances_after": 8,
+    "upg_apis_intact": ["theme", "icons", "gateway", "calc", "cmdk", "state", "production", "type"],
+    "phase_1_tokens_unchanged": true,
+    "cairo_retained_in_fallback": true,
+    "thmanyah_graceful_when_missing": true
+  },
+  "discipline_rules": [
+    "Never set font-family directly — always use --font-* tokens.",
+    "Aref Ruqaa ≤ 5% of any page text.",
+    "Numbers in calculators/stats → var(--font-numeric).",
+    "Body text, UI, buttons → var(--font-text).",
+    "h1/h2/hero/wordmark → var(--font-display).",
+    "Never mix display and text on the same line.",
+    "No italic on Aref Ruqaa."
+  ],
+  "next_phase": "2 — Linen-Bone off-white re-chisel + tinted shadows + !important purge"
+}
