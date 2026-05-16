@@ -16496,14 +16496,24 @@ body, .u-prose p {
 
 /* ─── Material tokens (dark-default; light overrides below) ───────────────── */
 :root {
-  /* Backdrop blur ladder */
-  --blur-thin:    8px;
-  --blur-regular: 16px;
-  --blur-thick:   28px;
-  --blur-chrome:  42px;
+  /* ATELIER v16 — Liquid Glass v2 (Worker 14 / Phase 1)
+     Blur ladder lifted from WWDC22 baseline (8/16/28/42) → WWDC25 spec (16/24/32/40).
+     Saturate 180% → 200%. Adds brightness() to mimic iOS 26 "pop". */
+  --blur-thin:    16px;
+  --blur-regular: 24px;
+  --blur-thick:   32px;
+  --blur-chrome:  40px;
 
-  /* Saturation lift — iOS-style vibrancy */
-  --vibrancy:     180%;
+  /* Aliases (new tokens, keep old names too — no rename) */
+  --glass-blur-thin:    var(--blur-thin);
+  --glass-blur-regular: var(--blur-regular);
+  --glass-blur-thick:   var(--blur-thick);
+  --glass-blur-chrome:  var(--blur-chrome);
+
+  /* Saturation lift — iOS-style vibrancy (WWDC25: 200%) */
+  --vibrancy:        200%;
+  --glass-saturate:  var(--vibrancy);
+  --glass-brightness: 1.05;   /* dark mode default */
 
   /* Hairline (specular highlight on top edge) */
   --hairline-light:  inset 0 1px 0 hsl(220 30% 100% / 0.06);
@@ -16535,6 +16545,24 @@ body, .u-prose p {
   --glass-chrome-bg:     color-mix(in oklch, var(--color-bg) 78%, transparent);
   --glass-chrome-border: color-mix(in oklch, var(--color-border) 70%, transparent);
   --glass-chrome-blur:   var(--blur-chrome);
+
+  /* ATELIER v16 — Edge specular highlight (rim of light along top edge) */
+  --glass-edge-light:    inset 0 1px 0 hsl(0 0% 100% / 0.16);
+  --glass-edge-dark:     inset 0 -1px 0 hsl(0 0% 0% / 0.18);
+
+  /* Specular sheen — gradient overlay 135deg */
+  --glass-specular:      linear-gradient(135deg,
+                            hsl(0 0% 100% / 0.06) 0%,
+                            hsl(0 0% 100% / 0) 35%,
+                            hsl(0 0% 100% / 0) 100%);
+
+  /* Paper grain — fractal noise data-URI */
+  --glass-grain-url:     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.5'/></svg>");
+
+  /* 3-tier paper hierarchy (dark defaults — overridden in light) */
+  --paper-tone-1: var(--color-bg);
+  --paper-tone-2: var(--color-surface-1);
+  --paper-tone-3: var(--color-surface-2);
 }
 
 /* Light theme — warm, brighter highlights */
@@ -16548,6 +16576,20 @@ body, .u-prose p {
   --glass-regular-bg:  color-mix(in oklch, var(--color-surface-1) 84%, white 16%);
   --glass-thick-bg:    color-mix(in oklch, var(--color-surface-2) 90%, white 10%);
   --glass-chrome-bg:   color-mix(in oklch, var(--color-bg) 85%, white 15%);
+
+  /* ATELIER v16 — Light theme glass adjustments */
+  --glass-brightness: 1.02;
+  --glass-edge-light: inset 0 1px 0 hsl(0 0% 100% / 0.85);
+  --glass-edge-dark:  inset 0 -1px 0 hsl(220 20% 30% / 0.06);
+  --glass-specular:   linear-gradient(135deg,
+                         hsl(0 0% 100% / 0.55) 0%,
+                         hsl(0 0% 100% / 0) 40%,
+                         hsl(0 0% 100% / 0) 100%);
+
+  /* 3-tier paper tonal — linen → bone → fresh paper */
+  --paper-tone-1: hsl(38 28% 96.5%);   /* bg */
+  --paper-tone-2: hsl(38 28% 97.5%);   /* card */
+  --paper-tone-3: hsl(40 38% 99.2%);   /* raised */
 }
 
 /* ─── Material utility classes ────────────────────────────────────────────── */
@@ -16561,30 +16603,43 @@ body, .u-prose p {
 .material-thin {
   background: var(--glass-thin-bg);
   border: 1px solid var(--glass-thin-border);
-  backdrop-filter: blur(var(--glass-thin-blur)) saturate(var(--vibrancy));
-  -webkit-backdrop-filter: blur(var(--glass-thin-blur)) saturate(var(--vibrancy));
-  box-shadow: var(--shadow-c-sm), var(--hairline-light);
+  backdrop-filter: blur(var(--glass-thin-blur)) saturate(var(--vibrancy)) brightness(var(--glass-brightness));
+  -webkit-backdrop-filter: blur(var(--glass-thin-blur)) saturate(var(--vibrancy)) brightness(var(--glass-brightness));
+  box-shadow: var(--shadow-c-sm), var(--glass-edge-light);
 }
 .material-regular {
   background: var(--glass-regular-bg);
   border: 1px solid var(--glass-regular-border);
-  backdrop-filter: blur(var(--glass-regular-blur)) saturate(var(--vibrancy));
-  -webkit-backdrop-filter: blur(var(--glass-regular-blur)) saturate(var(--vibrancy));
-  box-shadow: var(--shadow-c-md), var(--hairline-light);
+  backdrop-filter: blur(var(--glass-regular-blur)) saturate(var(--vibrancy)) brightness(var(--glass-brightness));
+  -webkit-backdrop-filter: blur(var(--glass-regular-blur)) saturate(var(--vibrancy)) brightness(var(--glass-brightness));
+  box-shadow: var(--shadow-c-md), var(--glass-edge-light);
+}
+.material-regular::before {
+  content: ""; position: absolute; inset: 0;
+  background: var(--glass-specular);
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
 }
 .material-thick {
   background: var(--glass-thick-bg);
   border: 1px solid var(--glass-thick-border);
-  backdrop-filter: blur(var(--glass-thick-blur)) saturate(var(--vibrancy));
-  -webkit-backdrop-filter: blur(var(--glass-thick-blur)) saturate(var(--vibrancy));
-  box-shadow: var(--shadow-c-lg), var(--hairline-strong);
+  backdrop-filter: blur(var(--glass-thick-blur)) saturate(var(--vibrancy)) brightness(var(--glass-brightness));
+  -webkit-backdrop-filter: blur(var(--glass-thick-blur)) saturate(var(--vibrancy)) brightness(var(--glass-brightness));
+  box-shadow: var(--shadow-c-lg), var(--hairline-strong), var(--glass-edge-light);
 }
 .material-chrome {
   background: var(--glass-chrome-bg);
   border: 1px solid var(--glass-chrome-border);
-  backdrop-filter: blur(var(--glass-chrome-blur)) saturate(var(--vibrancy));
-  -webkit-backdrop-filter: blur(var(--glass-chrome-blur)) saturate(var(--vibrancy));
-  box-shadow: var(--shadow-c-md), var(--hairline-light);
+  backdrop-filter: blur(var(--glass-chrome-blur)) saturate(var(--vibrancy)) brightness(var(--glass-brightness));
+  -webkit-backdrop-filter: blur(var(--glass-chrome-blur)) saturate(var(--vibrancy)) brightness(var(--glass-brightness));
+  box-shadow: var(--shadow-c-md), var(--glass-edge-light);
+}
+.material-chrome::after {
+  content: ""; position: absolute; inset: 0;
+  border-radius: inherit;
+  box-shadow: var(--glass-edge-dark);
+  pointer-events: none;
 }
 
 /* ─── Surface utilities (semantic shortcuts) ──────────────────────────────── */
@@ -18161,3 +18216,91 @@ body, .u-prose p {
 .u-gap-3px { gap: 3px; }
 
 /* End AURORA v15.1 round-5 supplements ─────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   ATELIER v16 — Phase 1 — Liquid Glass v2 (Worker 14 / Phase 1)
+   Apple Liquid-Glass spec (WWDC 2025+): deeper blur ladder, edge specular,
+   3-tier paper tonal in light theme, paper grain v2, density API.
+   All additions are tokens + utilities — no existing rule is removed.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ─── 3-Tier Paper Tonal — light theme only ───────────────────────────────── */
+body[data-theme="light"] .stat-card,
+body[data-theme="light"] .module-card,
+body[data-theme="light"] .ql-glass:not(.material-thick):not(.material-chrome),
+body[data-theme="light"] .skill-card {
+  background: var(--paper-tone-2);
+  box-shadow: var(--shadow-c-sm), var(--glass-edge-light);
+}
+
+body[data-theme="light"] .stat-tile,
+body[data-theme="light"] .bento-greet,
+body[data-theme="light"] .cath-stat,
+body[data-theme="light"] .cath-dash-card,
+body[data-theme="light"] .qcalc,
+body[data-theme="light"] dialog,
+body[data-theme="light"] [role="dialog"],
+body[data-theme="light"] .cmdk-modal,
+body[data-theme="light"] .surface-modal {
+  background: var(--paper-tone-3);
+  box-shadow: var(--shadow-c-md), var(--glass-edge-light);
+}
+
+/* Sticky chrome surfaces in light — slightly more transparent paper tone */
+body[data-theme="light"] #topbar,
+body[data-theme="light"] #sidebar {
+  background: color-mix(in oklch, var(--paper-tone-3) 75%, transparent);
+}
+
+/* ─── Paper Grain v2 — fine fractal noise overlay (light only) ────────────── */
+body[data-theme="light"]::after {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: var(--glass-grain-url);
+  background-size: 160px 160px;
+  opacity: 0.025;
+  mix-blend-mode: multiply;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-theme="light"]::after { opacity: 0.015; }
+}
+
+/* ─── Material density tiers (low / standard / high) ──────────────────────── */
+body[data-material-density="low"] {
+  --blur-thin:    8px;
+  --blur-regular: 14px;
+  --blur-thick:   20px;
+  --blur-chrome:  26px;
+  --vibrancy:     160%;
+}
+body[data-material-density="high"] {
+  --blur-thin:    22px;
+  --blur-regular: 32px;
+  --blur-thick:   44px;
+  --blur-chrome:  56px;
+  --vibrancy:     220%;
+}
+
+/* ─── Reduced transparency (a11y system pref) — global blur kill ──────────── */
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --blur-thin:    0px;
+    --blur-regular: 0px;
+    --blur-thick:   0px;
+    --blur-chrome:  0px;
+    --glass-blur-thin:    0px;
+    --glass-blur-regular: 0px;
+    --glass-blur-thick:   0px;
+    --glass-blur-chrome:  0px;
+  }
+  .material-regular::before,
+  .material-chrome::after,
+  body[data-theme="light"]::after { display: none; }
+}
+
+/* ─── End ATELIER v16 / Phase 1 ───────────────────────────────────────────── */
