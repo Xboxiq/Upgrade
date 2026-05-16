@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "worker": "13",
+  "worker_name": "AURORA_COMPLETION",
+  "phase": 1,
+  "phases_total": 3,
+  "title": "Bento Dashboard markup — bridges Upg.greet/countup/identity to DOM",
+  "branch": "worker-13-aurora-completion",
+  "lines_changed": {
+    "insertions": 173,
+    "deletions": 336,
+    "net": -163,
+    "note": "Net negative because we collapsed legacy welcome-banner + module-grid + activity-feed + data-table into a tighter Bento layout. Phase 1 spec estimate was ~520 lines added; the final markup is leaner because we delegated visuals to Worker 12 utility classes already present in style.css."
+  },
+  "files_touched": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "metrics_after_phase": {
+    "bento_class_count": 1,
+    "data_greet_title_count": 1,
+    "data_countup_count": 4,
+    "dock_class_count": 1,
+    "data_cath_stat_dashboard_count": 4,
+    "cath_skill_grid_id_count": 1,
+    "cath_activity_list_id_count": 1,
+    "page_section_count": 15,
+    "page_id_count_with_gateway": 16,
+    "qcalc_references": 391,
+    "upg_apis_count": 14
+  },
+  "preservation_check": {
+    "sacred_ids_intact": true,
+    "v12_features_preserved": ["v12Heatmap", "v12ChallengeLevel", "v12ChallengeBody"],
+    "upg_api_signatures_unchanged": true,
+    "console_errors_expected": 0
+  },
+  "next_phase": {
+    "id": 2,
+    "title": "Real Inline Purge — utilities pack + cleanup script V2",
+    "spec": "prompts/13_PHASE_2_INLINE_PURGE_FOR_REAL.md",
+    "targets": {
+      "inline_style_attrs": "≤200 (currently 592)",
+      "stray_important": "≤20 (currently 100)",
+      "u_grad_utilities": "≥5 (currently 0)"
+    }
+  }
+}
