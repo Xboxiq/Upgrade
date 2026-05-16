@@ -1,0 +1,47 @@
+{
+  "worker": "11",
+  "worker_name": "PLATFORM_FOUNDATION",
+  "phase": 3,
+  "phases_total": 7,
+  "phase_title": "Entry Gateway + Identity Lock + Onboarding 4-step",
+  "branch": "worker-11-complete",
+  "phase_completed": 3,
+  "lines_added_total": 912,
+  "files_touched": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "icons_registered": 95,
+  "calculators_migrated": 0,
+  "commands_registered": 0,
+  "shortcuts_active": 0,
+  "inline_styles_remaining": 1645,
+  "stages": ["welcome", "identity", "goal", "privacy", "returning", "locked"],
+  "localStorage_keys_added": [
+    "upg_user_profile",
+    "upg_pin_hash",
+    "upg_onboarding_done",
+    "upg_lock_on_idle"
+  ],
+  "sessionStorage_keys_added": [
+    "upg_unlocked",
+    "upg_skip_welcome"
+  ],
+  "next_action": "Continue Worker 11 Phase 4 — Calculator Framework (qcalc + 8 migrations)",
+  "open_threads": [
+    "Phase 4 will use Upg.gateway.close as part of qcalc lifecycle if needed",
+    "Phase 6 page-myprogress will read upg_user_profile",
+    "Phase 7 production pass should include 'lock-on-idle' toggle in Settings panel"
+  ],
+  "tested": [
+    "node -c platform/assets/app.js -> OK",
+    "Onboarding flow: welcome -> identity -> goal -> privacy -> finish",
+    "PIN stored as SHA-256 hex (with salt 'cathedral-v14') — never plain text",
+    "5 failed PIN attempts triggers 60s cooldown; numpad disabled during cooldown",
+    "Idle 30 min triggers lock only if upg_lock_on_idle === 'true' AND PIN is set",
+    "Topbar lock button (data-action=lock-platform) triggers lock from any page",
+    "Body[data-gateway-open=true] blurs main app behind the gateway",
+    "Returning user sees 3-stat row (units/hours/streak) — falls back to 0 until Upg.state implemented in Phase 6"
+  ]
+}

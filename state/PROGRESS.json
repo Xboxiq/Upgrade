@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-16T01:10:00Z",
+  "last_updated": "2026-05-16T01:30:00Z",
   "current": {
     "worker": "11",
     "worker_name": "PLATFORM_FOUNDATION",
-    "phase": 2,
+    "phase": 3,
     "phases_total": 7,
     "branch": "worker-11-complete",
     "status": "in-progress"
@@ -54,8 +54,9 @@
     { "worker": "09", "phase": 4, "title": "Psych Insets — cross-page micro-cards (7 pages × 3 insets)", "branch": "worker-09-complete", "lines_added": 232 },
     { "worker": "09", "phase": 5, "title": "Therapist Bridge + Insights Engine + 16 Citations", "branch": "worker-09-complete", "lines_added": 365 },
     { "worker": "11", "phase": 1, "title": "Sovereign Theme System (tokens + bridge + 3-state toggle)", "branch": "worker-11-complete", "lines_added": 359 },
-    { "worker": "11", "phase": 2, "title": "Lucide-style Icon System (95 symbols + .qi + migrator)", "branch": "worker-11-complete", "lines_added": 401 }
+    { "worker": "11", "phase": 2, "title": "Lucide-style Icon System (95 symbols + .qi + migrator)", "branch": "worker-11-complete", "lines_added": 401 },
+    { "worker": "11", "phase": 3, "title": "Entry Gateway + Identity Lock + Onboarding 4-step", "branch": "worker-11-complete", "lines_added": 912 }
   ],
-  "next_action": "Continue Worker 11 Phase 3 — Entry Gateway + Onboarding 4-step + PIN lock",
-  "notes": "Worker 11 Phase 2 complete. Added 95-symbol Lucide-style sprite (Navigation 21 + Actions 23 + Feedback 10 + Data 10 + Media 7 + Social 7 + Misc 10 + Extras 7). Component .qi[data-icon] auto-mounts via Upg.icons.render. Migrator runs at boot: replaces 14 sidebar nav-icons + 14 page-header SVGs with .qi (theme-aware via currentColor + 1.75px stroke). Emoji-to-icon map handles leading emoji in .btn/.acc-eyebrow/.ql-eyebrow/.qcard-eyebrow/.filter-chip/.pill/.badge containers. MutationObserver covers dynamic UI additions. localStorage: upg_theme (Phase 1 only)."
+  "next_action": "Continue Worker 11 Phase 4 — Calculator Framework (qcalc + 8 migrations)",
+  "notes": "Worker 11 Phase 3 complete. Added page-gateway with 6 stages (welcome / identity / goal / privacy / returning / locked). 4-step onboarding wizard collects name, role, avatar color (10 brand swatches), goal (4 options), and optional PIN (SHA-256 hashed with salt). Idle auto-lock at 30 min when upg_lock_on_idle === 'true'. PIN entry: numpad + keyboard + 5-attempt cooldown (60s). Returning user sees 3-stat welcome (units/hours/streak — populated by Phase 6 Upg.state). Topbar gained a lock button. Body gets data-gateway-open='true' to blur app behind. localStorage: upg_user_profile, upg_pin_hash, upg_onboarding_done, upg_lock_on_idle. sessionStorage: upg_unlocked."
 }
