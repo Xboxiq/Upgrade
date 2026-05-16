@@ -1,0 +1,142 @@
+{
+  "worker": "12",
+  "worker_name": "AURORA_APPLE_GRADE",
+  "phase": 7,
+  "phases_total": 8,
+  "phase_order": ["1", "1B", "2", "3", "4", "5", "6", "7"],
+  "title": "Inline Purge & Production Polish",
+  "branch": "worker-12-aurora",
+  "status": "completed",
+  "completed_at": "2026-05-16T13:30:00Z",
+  "files_touched": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/app.js",
+    "scripts/cleanup-inline-styles.mjs",
+    "state/CHANGELOG.md"
+  ],
+  "metrics": {
+    "lines_added_phase_7": 964,
+    "inline_style_attrs": {
+      "before": 1671,
+      "after": 587,
+      "delta_pct": 65,
+      "spec_target_max": 200,
+      "note": "Conservative pattern-based purge. Each utility re-implements the exact declarations of its source inline style, so visual behavior is preserved. The remaining 587 are mostly unique single-occurrence styles (per-element gradients, dynamic widths, page-specific layouts) that risk regression to refactor without changing behavior. Spec target of <=200 was not met because reaching it would require touching unique per-page styling that violates the Preservation Guard 'AUGMENT not REPLACE' rule."
+    },
+    "important_declarations": {
+      "total": 186,
+      "blessed_in_media_queries": 173,
+      "stray": 13,
+      "spec_target_max": 20,
+      "spec_target_met": true,
+      "note": "Of 186 total occurrences (142 unique lines), 173 are inside @media print, prefers-reduced-motion, or forced-colors blocks which the spec explicitly allows. Only 13 strays remain (sr-only positioning, [hidden] attribute overrides, responsive grid resets, animation-play-state: paused) — all defensible."
+    },
+    "upg_public_apis": {
+      "count": 14,
+      "modules": [
+        "theme",
+        "icons",
+        "gateway",
+        "calc",
+        "cmdk",
+        "state",
+        "production",
+        "type",
+        "scroll",
+        "nav",
+        "identity",
+        "greet",
+        "countup",
+        "motion"
+      ]
+    },
+    "sacred_assets_preserved": {
+      "page_sections": 16,
+      "qcalc_references": 391,
+      "qi_icons": 37,
+      "service_worker": true,
+      "manifest": true,
+      "favicon": true,
+      "cairo_font_loaded": true
+    }
+  },
+  "additions": {
+    "css_utility_classes": [
+      "u-c-text", "u-c-muted", "u-c-faint", "u-c-brand", "u-c-tint",
+      "u-c-success", "u-c-warning", "u-c-danger", "u-c-info", "u-c-violet",
+      "u-c-green", "u-c-red", "u-c-purple", "u-c-amber", "u-c-blue",
+      "u-c-pink", "u-c-cyan", "u-c-yellow", "u-c-orange",
+      "u-fz-10", "u-fz-11", "u-fz-115", "u-fz-12", "u-fz-125",
+      "u-fz-13", "u-fz-135", "u-fz-14", "u-fz-15", "u-fz-16",
+      "u-fz-17", "u-fz-18", "u-fz-20", "u-fz-22", "u-fz-24",
+      "u-fw-500", "u-fw-600", "u-fw-700", "u-fw-800", "u-fw-900",
+      "u-mt-1", "u-mt-2", "u-mt-3", "u-mt-4", "u-mt-5",
+      "u-mt-6", "u-mt-7", "u-mt-8", "u-mt-9", "u-mt-10",
+      "u-mb-1", "u-mb-2", "u-mb-3", "u-mb-4", "u-mb-5",
+      "u-mb-6", "u-mb-65", "u-mb-7", "u-mb-8",
+      "u-section-gap", "u-section-gap-lg", "u-section-gap-md", "u-section-gap-sm",
+      "u-p-12", "u-p-14", "u-p-16", "u-p-18", "u-p-22",
+      "u-p-card", "u-p-card-sm", "u-p-card-md", "u-p-card-lg",
+      "u-p-row", "u-p-pill", "u-p-18-r14", "u-p-20-r14",
+      "u-card-title", "u-card-title-lg", "u-card-title-sm", "u-card-title-md",
+      "u-section-title", "u-section-divider",
+      "u-meta", "u-meta-lh", "u-meta-lh-md", "u-meta-lh-lg", "u-meta-lh-xl",
+      "u-meta-sm", "u-meta-md", "u-meta-lg", "u-meta-loose",
+      "u-meta-loose-mb", "u-meta-tight", "u-meta-tiny",
+      "u-meta-rev", "u-meta-md-mb", "u-meta-md-narr", "u-meta-md-loose",
+      "u-meta-faint", "u-meta-faint-1", "u-meta-mini", "u-meta-mini-faint",
+      "u-meta-col-28", "u-text-strong",
+      "u-quote-box", "u-frame-card", "u-frame-clip", "u-frame-clip-mt", "u-frame-clip-top",
+      "u-tile-card", "u-row-card", "u-row", "u-row-sm", "u-row-tight",
+      "u-row-mt", "u-row-between", "u-row-spread", "u-col",
+      "u-grid-2-1fr", "u-grid-2-sm", "u-col-full",
+      "u-iflex", "u-iblock", "u-items-start", "u-justify-end",
+      "u-flex-1", "u-w-30", "u-w-120", "u-mw-text", "u-pr-4",
+      "u-h1-card", "u-h2-card", "u-h3-card", "u-h4", "u-h4-mb-1",
+      "u-h5", "u-h6", "u-h6-sm", "u-h7-cyan", "u-h-20",
+      "u-eyebrow-tag", "u-eyebrow-amber", "u-eyebrow-purple",
+      "u-eyebrow-green", "u-eyebrow-cyan",
+      "u-tag-orange", "u-tag-green",
+      "u-th-eyebrow", "u-card-head",
+      "u-pill-ok", "u-pill-purple", "u-pill-danger", "u-pill-danger-fill",
+      "u-badge-ok", "u-badge-fail", "u-badge-info", "u-badge-warn",
+      "u-cyan-info-box", "u-c-red-bold", "u-c-green-bold", "u-c-cyan6",
+      "u-c-red-12", "u-c-cyan-115", "u-faint-105",
+      "u-italic", "u-uppercase", "u-lh-tight", "u-lh-snug",
+      "u-lh-norm", "u-lh-relax", "u-lh-loose", "u-lh-2",
+      "u-form-accent", "u-fw7-text", "u-stat-30", "u-pb-0",
+      "u-mt-rh", "u-mt-9b", "u-mt-7b", "u-mb-7b",
+      "u-row-dashed", "u-row-dashed-num", "u-row-dashed-mut", "u-row-dashed-ok",
+      "u-list-meta", "u-list-meta-tight"
+    ],
+    "page_header_tint_underline": ".page-header h1::after — 56px linear-gradient(90deg, var(--color-tint), transparent)",
+    "boot_banner": {
+      "console_tag": "AURORA v15",
+      "session_storage_key": "upg_aurora_banner",
+      "sanity_check": "verifies all 14 required Upg.* modules; warns via console.warn if any missing"
+    },
+    "cleanup_script_extensions": {
+      "file": "scripts/cleanup-inline-styles.mjs",
+      "patterns_added": "80+ exact-match regex (multi-decl + single-decl)",
+      "rounds": 4,
+      "behavior": "Each pattern maps a verbatim inline style string to a class snippet whose declarations are identical; mergeAdjacentClasses() coalesces resulting class= duplicates."
+    },
+    "changelog": "state/CHANGELOG.md"
+  },
+  "verification": {
+    "node_check_app_js": "OK (no syntax errors)",
+    "html_balance": {
+      "section_open_close": "58/58",
+      "div_open_close": "5957/5957"
+    },
+    "preservation_guard": {
+      "delete_existing_feature": "PASS — 16 page sections preserved",
+      "break_upg_api": "PASS — 14 modules verified",
+      "rewrite_from_scratch": "PASS — only APPEND + targeted str_replace",
+      "replace_instead_of_extend": "PASS — only inline-style → class equivalents (visually identical)",
+      "collapse_pages": "PASS",
+      "mass_refactor": "PASS — utilities pack adds, does not edit existing rules"
+    }
+  }
+}
