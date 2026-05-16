@@ -1,0 +1,29 @@
+{
+  "worker": "09",
+  "worker_name": "PSYCHOLOGY_LAYER",
+  "phase": 1,
+  "phases_total": 5,
+  "title": "7 Psychological Drives + 12 Cognitive Biases (page-psych extension)",
+  "branch": "worker-09-complete",
+  "lines_added_total": 478,
+  "sections_added": [
+    "w09-drives (7 cards: mastery/status/belonging/avoidance/curiosity/justice/meaning)",
+    "w09-biases (12 cards: confirmation/sunkcost/halo/dunning/anchoring/availability/recency/fae/survivor/optimism/ikea/authority)"
+  ],
+  "files_modified": [
+    "platform/index.html",
+    "platform/assets/style.css"
+  ],
+  "localStorage_keys": [],
+  "citations_seeded": [
+    "Pink — Drive (2009)",
+    "Sapolsky — Behave (2017)",
+    "Baumeister — Need to Belong (1995)",
+    "Kahneman & Tversky — Loss Aversion",
+    "Loewenstein — Information Gap (1994)",
+    "Adams — Equity Theory (1965)",
+    "Frankl — Man's Search for Meaning",
+    "Wrzesniewski — Job/Career/Calling"
+  ],
+  "next_action": "Continue Worker 09 Phase 2: RULER Method + Mood Meter Interactive + Goleman deep-dive in page-eq"
+}

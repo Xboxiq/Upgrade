@@ -1,0 +1,22 @@
+{
+  "worker": "09",
+  "worker_name": "PSYCHOLOGY_LAYER",
+  "phase": 5,
+  "phases_total": 5,
+  "title": "Therapist Bridge + Insights Engine + 16 Citations",
+  "branch": "worker-09-complete",
+  "lines_added_total": 365,
+  "sections_added": [
+    "w09f-bridge: Self-Report Snapshot generator + 30 powerful questions for therapist",
+    "w09f-insights: Pattern detection across BFI/DISC/EQ/Anchors/Stress/Strengths/Mood with cross-test alerts",
+    "w09f-citations: 16 academic references"
+  ],
+  "files_modified": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "localStorage_consumed": ["upg_psych_results", "upg_mood_log"],
+  "ux_features": ["snapshot textarea (read-only)", "copy-to-clipboard fallback", "pattern badges (strength/growth/match)", "cross-test alert (high N + low SM)"],
+  "next_action": "Worker 09 COMPLETE. Open consolidated PR for worker-09-complete branch."
+}

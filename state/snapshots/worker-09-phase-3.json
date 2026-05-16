@@ -1,0 +1,25 @@
+{
+  "worker": "09",
+  "worker_name": "PSYCHOLOGY_LAYER",
+  "phase": 3,
+  "phases_total": 5,
+  "title": "Self-Diagnostic Suite — 6 tests + scoring engine",
+  "branch": "worker-09-complete",
+  "lines_added_total": 845,
+  "tests_added": [
+    "BFI Big Five (20 items, 5 dims, reverse-scored)",
+    "DISC Behavioral (12 forced-choice)",
+    "EQ Quotient (16 items, 4 axes — Bar-On inspired)",
+    "Career Anchors (16 items, 8 anchors — Schein)",
+    "Stress Style (12 items, 4 patterns — Fight/Flight/Freeze/Fawn)",
+    "Strengths Quick-Scan (12 items, 12 themes — Clifton-style)"
+  ],
+  "files_modified": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "localStorage_keys": ["upg_psych_results"],
+  "ux_features": ["progress bar", "submit disabled until complete", "scrollIntoView on result", "tab switching", "export-to-clipboard summary", "reset all"],
+  "next_action": "Continue Worker 09 Phase 4 — Psych Insets component + injection in 6 functional pages"
+}

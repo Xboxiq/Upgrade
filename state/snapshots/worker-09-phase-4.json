@@ -1,0 +1,24 @@
+{
+  "worker": "09",
+  "worker_name": "PSYCHOLOGY_LAYER",
+  "phase": 4,
+  "phases_total": 5,
+  "title": "Psych Insets — cross-page micro-cards",
+  "branch": "worker-09-complete",
+  "lines_added_total": 232,
+  "files_modified": [
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "pages_targeted": [
+    "page-fieldsales (3 insets: Reciprocity / Anchoring / Loss Aversion)",
+    "page-callcenter (3 insets: Active Listening / Mirror Neurons / Empathy Loop)",
+    "page-hrmastery (3 insets: BATNA / Salary Anchoring / Strategic Silence)",
+    "page-programming (3 insets: Imposter / Flow / Cognitive Load)",
+    "page-accounting (3 insets: Cognitive Load / Attention Residue / Anchoring)",
+    "page-phonerepair (3 insets: Customer Anger / Trust by Transparency / Reactance)",
+    "page-social (3 insets: Variable Reward / Information Gap / Negativity Bias)"
+  ],
+  "ux_features": ["JS-driven injection (no HTML changes per page)", "idempotent (data-w09Insets flag)", "click-through link to page-psych", "responsive 3-column grid"],
+  "next_action": "Continue Worker 09 Phase 5 — Therapist Bridge + Insights System + Citations"
+}

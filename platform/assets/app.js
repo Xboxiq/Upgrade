@@ -10576,3 +10576,893 @@ document.addEventListener('DOMContentLoaded', () => {
     if (t) setTimeout(init, 80);
   });
 })();
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   WORKER 09 · PHASE 2 — Mood Meter Interactive (Yale model)
+   localStorage key: upg_mood_log (array, last 50)
+═══════════════════════════════════════════════════════════════════════ */
+(function(){
+  'use strict';
+  var STORAGE_KEY = 'upg_mood_log';
+  var MAX_LOG = 50;
+
+  var WORDS = {
+    'red':    ['غاضب','مُحبَط','قلِق','مُتوتّر','ثائر','مُمتعض','مهان','منزعج','محتقن'],
+    'yellow': ['متحمس','مُلهَم','مبتهج','مُنجِز','واثق','فخور','نشِط','طموح','متفائل'],
+    'blue':   ['حزين','مُنهَك','كئيب','مُمل','يائس','وحيد','خامل','فارغ','مُكتئب'],
+    'green':  ['هادئ','راضٍ','مرتاح','آمِن','مُطمئن','صافي الذهن','مستقر','مُتقَبِّل','شاكر']
+  };
+
+  var SUGGEST = {
+    'red':    'تنفّس Box (4·4·4·4) ٤ دورات. لا تتخذ قراراً قبل ١٠ دقائق. اكتب ما يستفزّك.',
+    'yellow': 'استثمر هذه الطاقة في أصعب مهمة اليوم. شارك زميلاً حماسك (مرآة).',
+    'blue':   'تحرّك جسدياً ٥ دقائق. اشرب ماءً. اكتب ٣ أشياء ممتنّ لها (Gratitude).',
+    'green':  'وقت ممتاز للتفكير الاستراتيجي والتخطيط. لا تُهدره في reactivity.'
+  };
+
+  function getZone(x, y){
+    // x: -1..+1 (pleasantness), y: -1..+1 (energy)
+    if (y >= 0 && x < 0) return 'red';
+    if (y >= 0 && x >= 0) return 'yellow';
+    if (y < 0 && x < 0) return 'blue';
+    return 'green';
+  }
+
+  function loadLog(){
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch(e){ return []; }
+  }
+  function saveLog(arr){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(arr.slice(0, MAX_LOG))); } catch(e){}
+  }
+
+  function init(){
+    var canvas = document.getElementById('w09eMoodCanvas');
+    if (!canvas) return;
+    if (canvas.dataset.w09Inited === '1') return;
+    canvas.dataset.w09Inited = '1';
+
+    var marker  = document.getElementById('w09eMoodMarker');
+    var coordEl = document.getElementById('w09eMoodCoord');
+    var zoneEl  = document.getElementById('w09eMoodZone');
+    var wordSel = document.getElementById('w09eMoodWord');
+    var causeEl = document.getElementById('w09eMoodCause');
+    var sugEl   = document.getElementById('w09eMoodSuggest').querySelector('span');
+    var saveBtn = document.getElementById('w09eMoodSave');
+    var clrBtn  = document.getElementById('w09eMoodClear');
+    var histUl  = document.getElementById('w09eMoodHistory');
+
+    var current = { x: null, y: null, zone: null };
+
+    function paintWords(zone){
+      wordSel.innerHTML = '<option value="">— اختر —</option>';
+      (WORDS[zone] || []).forEach(function(w){
+        var o = document.createElement('option');
+        o.value = w; o.textContent = w;
+        wordSel.appendChild(o);
+      });
+    }
+
+    function place(clientX, clientY){
+      var rect = canvas.getBoundingClientRect();
+      var px = clientX - rect.left;
+      var py = clientY - rect.top;
+      px = Math.max(0, Math.min(rect.width,  px));
+      py = Math.max(0, Math.min(rect.height, py));
+      var nx = (px / rect.width) * 2 - 1;          // -1..+1 (left=-1)
+      var ny = 1 - (py / rect.height) * 2;          // -1..+1 (top=+1)
+      // RTL: flip x so right side = ممتع (+x)
+      nx = -nx;
+      current.x = +nx.toFixed(2);
+      current.y = +ny.toFixed(2);
+      current.zone = getZone(current.x, current.y);
+
+      marker.hidden = false;
+      // Position marker in canvas coordinates (visual)
+      marker.style.right = (px / rect.width * 100) + '%';
+      marker.style.top   = (py / rect.height * 100) + '%';
+
+      coordEl.textContent = 'x=' + current.x + ' · y=' + current.y;
+      var zoneName = ({red:'حمراء',yellow:'صفراء',blue:'زرقاء',green:'خضراء'})[current.zone];
+      zoneEl.textContent = zoneName;
+      paintWords(current.zone);
+      sugEl.textContent = SUGGEST[current.zone];
+    }
+
+    canvas.addEventListener('click', function(e){ place(e.clientX, e.clientY); });
+    canvas.addEventListener('keydown', function(e){
+      // basic keyboard nudge if focused
+      if (current.x === null) { place(canvas.getBoundingClientRect().left + 50, canvas.getBoundingClientRect().top + 50); return; }
+    });
+
+    function renderHistory(){
+      var arr = loadLog();
+      if (!arr.length){
+        histUl.innerHTML = '<li class="empty">لا تسجيلات بعد</li>';
+        return;
+      }
+      histUl.innerHTML = arr.slice(0, 5).map(function(e){
+        var d = new Date(e.t);
+        var time = d.toLocaleString('ar', { hour: '2-digit', minute: '2-digit', day:'2-digit', month:'2-digit' });
+        return '<li><b>' + (e.word || '—') + '</b> · ' + time + (e.cause ? ' — ' + e.cause.slice(0,40) : '') + '</li>';
+      }).join('');
+    }
+
+    saveBtn.addEventListener('click', function(){
+      if (current.x === null){ alert('اختر نقطة على الشبكة أولاً'); return; }
+      var entry = {
+        t: Date.now(),
+        x: current.x, y: current.y, zone: current.zone,
+        word: wordSel.value || null,
+        cause: (causeEl.value || '').slice(0, 280)
+      };
+      var arr = loadLog();
+      arr.unshift(entry);
+      saveLog(arr);
+      causeEl.value = '';
+      renderHistory();
+      saveBtn.textContent = '✅ محفوظ';
+      setTimeout(function(){ saveBtn.textContent = '💾 حفظ'; }, 1400);
+    });
+
+    clrBtn.addEventListener('click', function(){
+      if (!confirm('مسح كل تسجيلات Mood Meter محلياً؟')) return;
+      try { localStorage.removeItem(STORAGE_KEY); } catch(e){}
+      renderHistory();
+    });
+
+    renderHistory();
+  }
+
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+
+  document.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('[data-page="eq"]');
+    if (t) setTimeout(init, 80);
+  });
+})();
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   WORKER 09 · PHASE 3 — Self-Diagnostic Suite (6 tests)
+   localStorage key: upg_psych_results (object keyed by test id)
+═══════════════════════════════════════════════════════════════════════ */
+(function(){
+  'use strict';
+  var STORAGE = 'upg_psych_results';
+
+  function load(){ try { return JSON.parse(localStorage.getItem(STORAGE) || '{}'); } catch(e){ return {}; } }
+  function save(o){ try { localStorage.setItem(STORAGE, JSON.stringify(o)); } catch(e){} }
+
+  // ── Big Five (BFI-2-S inspired, shortened to 20 items, 5 traits × 4) ──
+  var BFI = {
+    id: 'bfi', label: 'Big Five (OCEAN — 20 سؤال)',
+    intro: 'Soto &amp; John (BFI-2). الأبعاد: Openness · Conscientiousness · Extraversion · Agreeableness · Neuroticism.',
+    likert: ['أعارض بشدة','أعارض','محايد','أوافق','أوافق بشدة'],
+    items: [
+      {t:'O', q:'أحبّ التفكير في الأفكار النظرية والمجرّدة', r:false},
+      {t:'O', q:'أرى الجمال في الفن والشعر', r:false},
+      {t:'O', q:'أبحث عن تجارب جديدة بانتظام', r:false},
+      {t:'O', q:'أُفضّل المألوف على المغامرة', r:true},
+      {t:'C', q:'أُتمّ ما أبدأه دون تأجيل', r:false},
+      {t:'C', q:'أحافظ على ترتيب أغراضي وملفاتي', r:false},
+      {t:'C', q:'أُخطّط بدقة قبل التنفيذ', r:false},
+      {t:'C', q:'أتأخر عن المواعيد كثيراً', r:true},
+      {t:'E', q:'أبادر بالحديث في الاجتماعات', r:false},
+      {t:'E', q:'أستمد طاقتي من التواجد مع الناس', r:false},
+      {t:'E', q:'أبقى صامتاً في المجموعات الكبيرة', r:true},
+      {t:'E', q:'أُحب أن أكون مركز الانتباه أحياناً', r:false},
+      {t:'A', q:'أُسامح بسرعة', r:false},
+      {t:'A', q:'أهتم برفاه الآخرين قبل نفسي أحياناً', r:false},
+      {t:'A', q:'أنتقد الآخرين كثيراً', r:true},
+      {t:'A', q:'أتعاطف مع مشاعر زملائي', r:false},
+      {t:'N', q:'أقلق بشأن أشياء كثيرة', r:false},
+      {t:'N', q:'أنفعل بسرعة عند الضغط', r:false},
+      {t:'N', q:'أشعر بالأمان والهدوء عموماً', r:true},
+      {t:'N', q:'تنتابني تقلبات مزاجية مفاجئة', r:false}
+    ],
+    score: function(answers){
+      var s = {O:0,C:0,E:0,A:0,N:0}, n = {O:0,C:0,E:0,A:0,N:0};
+      this.items.forEach(function(it,i){
+        var v = answers[i]; if (v==null) return;
+        var val = it.r ? (6 - v) : v; // reverse if needed (1..5)
+        s[it.t] += val; n[it.t] += 1;
+      });
+      var labels = {O:'الانفتاح',C:'الضمير',E:'الانبساط',A:'القبول',N:'العصابية'};
+      return {
+        bars: Object.keys(s).map(function(k){
+          var pct = n[k] ? Math.round((s[k] / (n[k]*5))*100) : 0;
+          return { key: labels[k], pct: pct };
+        }),
+        recos: function(){
+          var pcts = {}; Object.keys(s).forEach(function(k){ pcts[k] = n[k]?Math.round((s[k]/(n[k]*5))*100):0; });
+          var top = Object.keys(pcts).sort(function(a,b){return pcts[b]-pcts[a];})[0];
+          var map = {
+            O:'انفتاحك العالي يلائم أدواراً إبداعية واستكشافية (تسويق، تصميم، استراتيجية).',
+            C:'ضميرك العالي يلائم أدواراً تحتاج دقة (محاسبة، QA، إدارة مشاريع).',
+            E:'انبساطك العالي يلائم أدوار العملاء (مبيعات، أكونت منجر، ريادة).',
+            A:'قبولك العالي يلائم أدوار الفريق والوساطة (HR، خدمة عملاء، تيسير).',
+            N:'عصابيتك العالية مؤشّر للحاجة لتقنيات تنظيم (Box Breathing, Reappraisal).'
+          };
+          return '<b>أعلى بُعد:</b> ' + labels[top] + ' (' + pcts[top] + '%) — ' + map[top];
+        }()
+      };
+    }
+  };
+
+  // ── DISC (12 forced-choice items, MOST/LEAST style simplified to MOST only) ──
+  var DISC = {
+    id: 'disc', label: 'DISC Behavioral (12 سؤال)',
+    intro: 'Marston (1928). الأبعاد: <b>D</b>ominance · <b>I</b>nfluence · <b>S</b>teadiness · <b>C</b>onscientiousness.',
+    forced: true,
+    items: [
+      [['D','أتولّى القيادة بسرعة'],['I','أُحرّك الناس بحماستي'],['S','أُحافظ على الاستقرار'],['C','أُحلّل قبل القرار']],
+      [['D','أحب المنافسة'],['I','أحب التعارف'],['S','أحب الروتين'],['C','أحب الدقة']],
+      [['D','مباشر وصريح'],['I','اجتماعي ومرح'],['S','صبور ومستمع'],['C','منهجي ودقيق']],
+      [['D','أتحمّل المخاطر'],['I','أُلهم'],['S','أدعم'],['C','أُحقّق']],
+      [['D','أطلب نتائج'],['I','أطلب تأثيراً'],['S','أطلب وفاقاً'],['C','أطلب صحّة']],
+      [['D','نفاد صبر مع البطء'],['I','أتشتّت بالتفاصيل'],['S','أكره التغيير المفاجئ'],['C','أُفرط في التحليل']],
+      [['D','أسرع لاتخاذ القرار'],['I','أتأقلم بسرعة'],['S','أبني علاقات طويلة'],['C','أطلب البيانات']],
+      [['D','مُحرِّك المهام'],['I','مُحرِّك الناس'],['S','مُحافظ على السلام'],['C','حارس الجودة']],
+      [['D','أُفضّل الاستقلالية'],['I','أُفضّل العمل الجماعي'],['S','أُفضّل بيئة هادئة'],['C','أُفضّل القواعد الواضحة']],
+      [['D','أتحدّى الوضع القائم'],['I','أتحدّث بصوت عالٍ'],['S','أتجنّب الصراع'],['C','أتحقّق من الحقائق']],
+      [['D','جريء في القرارات'],['I','مقنع في الكلام'],['S','ودود في التواصل'],['C','حذِر في الالتزامات']],
+      [['D','أحبّ التحدي'],['I','أحبّ التشجيع'],['S','أحبّ التقدير الهادئ'],['C','أحبّ الصواب']]
+    ],
+    score: function(answers){
+      var s = {D:0,I:0,S:0,C:0};
+      answers.forEach(function(v){ if (v) s[v] += 1; });
+      var total = s.D+s.I+s.S+s.C || 1;
+      var labels = {D:'D · المسيطر',I:'I · المُعبِّر',S:'S · المستقر',C:'C · الدقيق'};
+      var bars = Object.keys(s).map(function(k){
+        return { key: labels[k], pct: Math.round((s[k]/total)*100) };
+      });
+      var top = Object.keys(s).sort(function(a,b){return s[b]-s[a];})[0];
+      var tips = {
+        D:'تواصل: مباشر، نتائج، ملخص أولاً. تجنّب: المقدمات الطويلة.',
+        I:'تواصل: حماسي، قصصي، علاقات. تجنّب: تجاهل العاطفة.',
+        S:'تواصل: هادئ، تدريجي، آمن. تجنّب: الضغط المفاجئ.',
+        C:'تواصل: بيانات، تفاصيل، أدلة. تجنّب: العاطفة بدون أرقام.'
+      };
+      return { bars: bars, recos: '<b>نمطك السائد:</b> ' + labels[top] + '. ' + tips[top] };
+    }
+  };
+
+  // ── EQ Quotient (16 items, 4 axes) ──
+  var EQ = {
+    id: 'eq', label: 'EQ Quotient (16 سؤال)',
+    intro: 'مستوحى من Bar-On EQ-i. المحاور: Self-awareness · Self-management · Social-awareness · Relationships.',
+    likert: ['نادراً','أحياناً','بانتظام','غالباً','دائماً'],
+    items: [
+      {t:'SA', q:'أُلاحظ مشاعري لحظياً وأُسمّيها بدقة'},
+      {t:'SA', q:'أعرف ما يستفزّني قبل أن ينفجر'},
+      {t:'SA', q:'أُدرك تأثير مزاجي على الآخرين'},
+      {t:'SA', q:'أعترف بأخطائي بصدق'},
+      {t:'SM', q:'أتنفّس قبل الردّ على ما يستفزّني'},
+      {t:'SM', q:'أُدير غضبي دون كبت أو انفجار'},
+      {t:'SM', q:'أبقى مُنتجاً تحت الضغط'},
+      {t:'SM', q:'أُغيّر تفسيري للموقف لأُحسّن مزاجي'},
+      {t:'SOA', q:'أقرأ مشاعر الآخرين من تعابيرهم'},
+      {t:'SOA', q:'أُلاحظ ديناميكية المجموعة وغير المعلَن'},
+      {t:'SOA', q:'أتعاطف مع وجهة نظر مَن أختلف معه'},
+      {t:'SOA', q:'أنتبه لتغيّر نبرة الزملاء وأسأل عنها'},
+      {t:'REL', q:'أبني ثقة بسرعة مع الجدد'},
+      {t:'REL', q:'أُحلّ الصراعات دون كسر العلاقة'},
+      {t:'REL', q:'أُلهم الآخرين دون أوامر'},
+      {t:'REL', q:'أُعطي ملاحظات صعبة بطريقة محترمة'}
+    ],
+    score: function(answers){
+      var s = {SA:0,SM:0,SOA:0,REL:0}, n = {SA:0,SM:0,SOA:0,REL:0};
+      this.items.forEach(function(it,i){
+        var v = answers[i]; if (v==null) return;
+        s[it.t] += v; n[it.t] += 1;
+      });
+      var labels = {SA:'الوعي الذاتي', SM:'إدارة الذات', SOA:'الوعي الاجتماعي', REL:'إدارة العلاقات'};
+      var bars = Object.keys(s).map(function(k){
+        var pct = n[k] ? Math.round((s[k]/(n[k]*5))*100) : 0;
+        return { key: labels[k], pct: pct };
+      });
+      var weakest = bars.slice().sort(function(a,b){return a.pct-b.pct;})[0];
+      return { bars: bars, recos: '<b>منطقة النموّ:</b> ' + weakest.key + ' (' + weakest.pct + '%). جرّب تمارين STOP و RULER في صفحة EQ.' };
+    }
+  };
+
+  // ── Career Anchors (Schein, 16 items, 8 anchors) ──
+  var ANCHORS = {
+    id: 'anch', label: 'Career Anchors (16 سؤال)',
+    intro: 'Edgar Schein (1990). ٨ مرابط: تقني/إداري/استقلال/أمان/ريادة/خدمة/تحدٍّ/أسلوب حياة.',
+    likert: ['غير مهم','قليل الأهمية','محايد','مهم','حاسم'],
+    items: [
+      {t:'TF', q:'أن أكون مرجعاً تقنياً في تخصصي'},
+      {t:'TF', q:'حلّ مشاكل تقنية يستمتع بها قليلون'},
+      {t:'GM', q:'قيادة فريق كبير وتنسيق جهود متعددة'},
+      {t:'GM', q:'الترقي إلى منصب إداري عالٍ'},
+      {t:'AU', q:'أن أعمل بحريّة دون رقابة لصيقة'},
+      {t:'AU', q:'أن أُحدّد أوقات عملي وطرائقي'},
+      {t:'SE', q:'أمان وظيفي طويل مع راتب ثابت'},
+      {t:'SE', q:'بيئة عمل مستقرة وقابلة للتنبؤ'},
+      {t:'EN', q:'بناء شيء من الصفر يحمل اسمي'},
+      {t:'EN', q:'تحمّل مخاطرة عالية لعائد كبير'},
+      {t:'SV', q:'إحداث أثر إيجابي في المجتمع'},
+      {t:'SV', q:'قِيَم العمل تُعنيني أكثر من الراتب'},
+      {t:'CH', q:'مواجهة تحديات صعبة باستمرار'},
+      {t:'CH', q:'الفوز على منافسين أقوياء'},
+      {t:'LS', q:'توازن واضح بين العمل والحياة'},
+      {t:'LS', q:'مرونة لخدمة عائلتي وصحتي'}
+    ],
+    score: function(answers){
+      var labels = {
+        TF:'تقني/وظيفي', GM:'إداري', AU:'استقلالية', SE:'أمان',
+        EN:'ريادة', SV:'خدمة', CH:'تحدٍّ', LS:'أسلوب حياة'
+      };
+      var s = {}; Object.keys(labels).forEach(function(k){ s[k]=0; });
+      this.items.forEach(function(it,i){
+        var v = answers[i]; if (v==null) return;
+        s[it.t] += v;
+      });
+      var arr = Object.keys(s).map(function(k){
+        return { key: labels[k], pct: Math.round((s[k]/(2*5))*100), code:k };
+      }).sort(function(a,b){return b.pct-a.pct;});
+      var top2 = arr.slice(0,2).map(function(a){return a.key;}).join(' + ');
+      var jobMap = {
+        TF:'مهندس Senior · أخصائي تقني',
+        GM:'مدير منتج · مدير عمليات',
+        AU:'فريلانسر · استشاري',
+        SE:'موظف حكومي · شركات كبرى مستقرة',
+        EN:'مؤسس · شريك مؤسس',
+        SV:'منظمة غير ربحية · تعليم · صحة',
+        CH:'مبيعات صعبة · تقنية ناشئة',
+        LS:'دور Hybrid · شركات Family-friendly'
+      };
+      var topCodes = arr.slice(0,2).map(function(a){return a.code;});
+      return {
+        bars: arr,
+        recos: '<b>أعلى مرابطك:</b> ' + top2 + '. <br><b>وظائف ملائمة:</b> ' + topCodes.map(function(c){return jobMap[c];}).join(' / ')
+      };
+    }
+  };
+
+  // ── Stress Response Style (12 items, 4 patterns) ──
+  var STRESS = {
+    id: 'stress', label: 'Stress Style (12 سؤال)',
+    intro: 'Cannon (1932) Fight/Flight + extensions. الأنماط: Fight · Flight · Freeze · Fawn.',
+    likert: ['أبداً','نادراً','أحياناً','كثيراً','دائماً'],
+    items: [
+      {t:'FT', q:'تحت الضغط أُواجه وأرفع صوتي'},
+      {t:'FT', q:'أتحدّى المسؤول إن شعرت بالظلم'},
+      {t:'FT', q:'أحياناً أنفجر ثم أندم'},
+      {t:'FL', q:'أتجنّب الصراعات بالانسحاب'},
+      {t:'FL', q:'أُغلق هاتفي عند الضغط الشديد'},
+      {t:'FL', q:'أبدأ بحثاً عن وظيفة أخرى عند أول مشكلة'},
+      {t:'FZ', q:'أتجمّد ولا أعرف ماذا أفعل'},
+      {t:'FZ', q:'أُؤجّل قرارات صعبة لفترات طويلة'},
+      {t:'FZ', q:'أصمت تحت الضغط ولا أُعبّر'},
+      {t:'FW', q:'أُوافق لأتجنّب إغضاب الآخرين'},
+      {t:'FW', q:'أُهمل احتياجاتي لإرضاء فريقي'},
+      {t:'FW', q:'أعتذر حتى لو لم أُخطئ'}
+    ],
+    score: function(answers){
+      var s = {FT:0,FL:0,FZ:0,FW:0};
+      this.items.forEach(function(it,i){
+        var v = answers[i]; if (v==null) return;
+        s[it.t] += v;
+      });
+      var labels = {FT:'Fight (مواجهة)', FL:'Flight (هروب)', FZ:'Freeze (تجمّد)', FW:'Fawn (إرضاء)'};
+      var arr = Object.keys(s).map(function(k){
+        return { key: labels[k], pct: Math.round((s[k]/(3*5))*100), code: k };
+      }).sort(function(a,b){return b.pct-a.pct;});
+      var top = arr[0].code;
+      var coping = {
+        FT:'تنفّس قبل الردّ. اسأل "هل هذا يستحق علاقة؟". اكتب قبل الإرسال.',
+        FL:'لا تُغادر فوراً. حدد مهلة قبل القرار. ناقش مع شخص محايد.',
+        FZ:'حرّك جسدك. اكتب الخيارات. اطلب وقتاً للرد لاحقاً.',
+        FW:'تدرّب على "لا" بسيطة. ميّز بين الكرم والخوف.'
+      };
+      return { bars: arr, recos: '<b>نمطك السائد:</b> ' + labels[top] + '. <b>أداة coping:</b> ' + coping[top] };
+    }
+  };
+
+  // ── Strengths Quick-Scan (12 items → top 3 of 12 themes) ──
+  var STRENGTHS = {
+    id: 'str', label: 'Strengths Quick-Scan (12 سؤال)',
+    intro: 'مستوحى من Clifton/StrengthsFinder. كل سؤال يكشف نقطة قوة محتملة.',
+    likert: ['لا تشبهني','قليلاً','محايد','كثيراً','تشبهني تماماً'],
+    items: [
+      {t:'ANALYZER',  q:'أُحلّل البيانات قبل أن أُقرّر'},
+      {t:'ACHIEVER',  q:'أشعر بحاجة دائمة لإنهاء قائمة المهام'},
+      {t:'STRATEGIC', q:'أرى أنماطاً وبدائل لا يراها الآخرون'},
+      {t:'EMPATHY',   q:'أشعر بمشاعر الآخرين كأنها ملكي'},
+      {t:'COMMUNICATOR', q:'أُحوّل الأفكار المعقدة إلى قصص مفهومة'},
+      {t:'LEARNER',   q:'أستمتع باكتساب مهارات جديدة باستمرار'},
+      {t:'POSITIVITY',q:'أُلهم الآخرين بحماستي وتفاؤلي'},
+      {t:'RESPONSIBILITY', q:'أتحمّل ما أعد به حرفياً'},
+      {t:'INCLUDER',  q:'أحرص على إشراك المُستبعَدين في فريقي'},
+      {t:'COMMAND',   q:'أتولّى زمام المبادرة بسرعة'},
+      {t:'HARMONY',   q:'أبحث عن نقاط الاتفاق وأُجنّب الصراع'},
+      {t:'IDEATION',  q:'أُولّد أفكاراً جديدة باستمرار'}
+    ],
+    score: function(answers){
+      var labels = {
+        ANALYZER:'Analyzer · مُحلِّل',
+        ACHIEVER:'Achiever · مُنجِز',
+        STRATEGIC:'Strategic · استراتيجي',
+        EMPATHY:'Empathy · مُتعاطف',
+        COMMUNICATOR:'Communicator · مُتواصِل',
+        LEARNER:'Learner · مُتعلِّم',
+        POSITIVITY:'Positivity · إيجابي',
+        RESPONSIBILITY:'Responsibility · مُلتزم',
+        INCLUDER:'Includer · جامع',
+        COMMAND:'Command · قائد',
+        HARMONY:'Harmony · مُنسجم',
+        IDEATION:'Ideation · مُبدع'
+      };
+      var s = {};
+      this.items.forEach(function(it,i){
+        var v = answers[i]; if (v==null) return;
+        s[it.t] = v;
+      });
+      var arr = Object.keys(s).map(function(k){
+        return { key: labels[k], pct: Math.round((s[k]/5)*100), code: k };
+      }).sort(function(a,b){return b.pct-a.pct;});
+      var top3 = arr.slice(0,3).map(function(a){return a.key;});
+      return { bars: arr.slice(0,5), recos: '<b>أعلى ٣ نقاط قوة:</b> ' + top3.join(' · ') + '. <br><b>كيف تستخدمها:</b> اربط مهامك اليومية بنقطتك الأقوى.' };
+    }
+  };
+
+  var TESTS = { bfi: BFI, disc: DISC, eq: EQ, anch: ANCHORS, stress: STRESS, str: STRENGTHS };
+
+  function renderTest(t){
+    var host = document.getElementById('w09tHost');
+    if (!host) return;
+    host.dataset.testActive = t.id;
+    var likertHTML = function(idx){
+      return '<div class="w09t-likert">' + t.likert.map(function(lab,j){
+        return '<label><input type="radio" name="w09t_'+t.id+'_'+idx+'" value="'+(j+1)+'"> '+lab+'</label>';
+      }).join('') + '</div>';
+    };
+    var fcHTML = function(opts, idx){
+      return '<div class="w09t-fc">' + opts.map(function(o){
+        return '<label class="w09t-fc-opt"><input type="radio" name="w09t_'+t.id+'_'+idx+'" value="'+o[0]+'"> '+o[1]+'</label>';
+      }).join('') + '</div>';
+    };
+    var qHTML = (t.forced ? t.items : t.items).map(function(it, i){
+      var qText = t.forced ? 'اختر الخيار الأقرب لك:' : it.q;
+      var body = t.forced ? fcHTML(it, i) : likertHTML(i);
+      return '<div class="w09t-q">'
+        + '<div class="w09t-q-text"><small>'+(i+1)+'.</small>'+qText+'</div>'
+        + body
+        + '</div>';
+    }).join('');
+
+    host.innerHTML = ''
+      + '<div class="w09t-intro">'
+      +   '<h3>'+t.label+'</h3>'
+      +   '<p>'+t.intro+'</p>'
+      +   '<div class="w09t-meta"><span><b>عدد الأسئلة:</b>'+t.items.length+'</span><span><b>الزمن المتوقع:</b>~'+(Math.round(t.items.length*0.5))+' دقيقة</span></div>'
+      + '</div>'
+      + '<form id="w09tForm">'
+      +   qHTML
+      +   '<div class="w09t-progress"><div id="w09tBar"></div></div>'
+      +   '<button type="submit" class="w09t-submit" id="w09tSubmit" disabled>احسب النتيجة</button>'
+      + '</form>'
+      + '<div id="w09tOut"></div>';
+
+    var form = host.querySelector('#w09tForm');
+    var bar  = host.querySelector('#w09tBar');
+    var btn  = host.querySelector('#w09tSubmit');
+    var out  = host.querySelector('#w09tOut');
+
+    form.addEventListener('change', function(){
+      var fd = new FormData(form);
+      var n = 0;
+      for (var k of fd.keys()){
+        if (k.indexOf('w09t_'+t.id+'_') === 0){
+          // count distinct names
+        }
+      }
+      // proper counting:
+      var answered = new Set();
+      Array.from(fd.entries()).forEach(function(e){ answered.add(e[0]); });
+      var total = t.items.length;
+      var pct = Math.round((answered.size / total) * 100);
+      bar.style.width = pct + '%';
+      btn.disabled = answered.size < total;
+    });
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var fd = new FormData(form);
+      var answers = [];
+      for (var i=0;i<t.items.length;i++){
+        var v = fd.get('w09t_'+t.id+'_'+i);
+        answers[i] = v == null ? null : (t.forced ? v : parseInt(v,10));
+      }
+      var res = t.score(answers);
+      var bars = res.bars.map(function(b){
+        return '<div class="w09t-bar-row">'
+          + '<label>'+b.key+'</label>'
+          + '<div class="w09t-bar"><div style="width:'+Math.max(2,b.pct)+'%;"></div></div>'
+          + '<b>'+b.pct+'%</b>'
+          + '</div>';
+      }).join('');
+      out.innerHTML = ''
+        + '<div class="w09t-result">'
+        +   '<h4>📊 نتيجة '+t.label+'</h4>'
+        +   '<div class="w09t-bars">'+bars+'</div>'
+        +   '<div class="w09t-recos">'+res.recos+'</div>'
+        + '</div>';
+
+      var all = load();
+      all[t.id] = { ts: Date.now(), label: t.label, bars: res.bars, recos: res.recos };
+      save(all);
+      out.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  }
+
+  function init(){
+    var tabs = document.getElementById('w09tTabs');
+    if (!tabs) return;
+    if (tabs.dataset.w09Inited === '1') return;
+    tabs.dataset.w09Inited = '1';
+
+    renderTest(TESTS.bfi);
+
+    tabs.addEventListener('click', function(e){
+      var t = e.target.closest('.w09t-tab'); if (!t) return;
+      tabs.querySelectorAll('.w09t-tab').forEach(function(x){ x.classList.remove('active'); });
+      t.classList.add('active');
+      var id = t.getAttribute('data-test');
+      if (TESTS[id]) renderTest(TESTS[id]);
+    });
+
+    var resetBtn = document.getElementById('w09tReset');
+    var exportBtn = document.getElementById('w09tExport');
+    var sumBox = document.getElementById('w09tSummary');
+    var sumBody = document.getElementById('w09tSummaryBody');
+
+    resetBtn.addEventListener('click', function(){
+      if (!confirm('مسح جميع نتائج الاختبارات النفسية محلياً؟')) return;
+      try { localStorage.removeItem(STORAGE); } catch(e){}
+      sumBox.hidden = true;
+      alert('تم المسح.');
+    });
+
+    exportBtn.addEventListener('click', function(){
+      var all = load();
+      if (!Object.keys(all).length){ alert('لا توجد نتائج محفوظة بعد.'); return; }
+      var lines = ['📋 ملخص نتائج Self-Diagnostic Suite — ' + new Date().toLocaleString('ar')];
+      Object.keys(all).forEach(function(k){
+        var r = all[k];
+        lines.push('');
+        lines.push('· ' + r.label);
+        r.bars.forEach(function(b){ lines.push('  - ' + b.key + ': ' + b.pct + '%'); });
+      });
+      var txt = lines.join('\n');
+      sumBody.textContent = txt;
+      sumBox.hidden = false;
+      try {
+        navigator.clipboard.writeText(txt).then(function(){
+          exportBtn.textContent = '✅ نُسخ للحافظة';
+          setTimeout(function(){ exportBtn.textContent = '📋 نسخ ملخص النتائج'; }, 1600);
+        });
+      } catch(e){}
+    });
+  }
+
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+
+  document.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('[data-page="psych"]');
+    if (t) setTimeout(init, 80);
+  });
+})();
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   WORKER 09 · PHASE 4 — Psych Insets (cross-page micro-cards)
+   Injects 3 insets per target page after its .page-header (idempotent).
+═══════════════════════════════════════════════════════════════════════ */
+(function(){
+  'use strict';
+
+  var INSETS = {
+    'page-fieldsales': [
+      { name:'Reciprocity', src:'Cialdini · Influence (1984)',
+        apply:'يطبّق هنا في: <b>عرض عينة مجانية أو نصيحة قبل الطلب</b>.',
+        warn:'لا تحوّله manipulation — العطاء بشرط = ابتزاز ناعم.' },
+      { name:'Anchoring', src:'Tversky &amp; Kahneman (1974)',
+        apply:'يطبّق هنا في: <b>عرض السعر الأعلى أولاً ثم النزول</b>.',
+        warn:'لا تستخدم أرقاماً وهمية — يكشف العميل ويفقد الثقة دائماً.' },
+      { name:'Loss Aversion', src:'Kahneman · Thinking Fast and Slow',
+        apply:'يطبّق هنا في: <b>تأطير الفرصة كخسارة لو لم يقرر</b>.',
+        warn:'الإفراط في "إذا لم تشترِ ستخسر" يخلق scarcity سامّ.' }
+    ],
+    'page-callcenter': [
+      { name:'Active Listening', src:'Carl Rogers · Client-Centered Therapy',
+        apply:'يطبّق هنا في: <b>إعادة الصياغة قبل الردّ — Mirror &amp; Label</b>.',
+        warn:'تكرار حرفي يصبح مزعجاً — أعد صياغة بكلماتك.' },
+      { name:'Mirror Neurons', src:'Rizzolatti (1996)',
+        apply:'يطبّق هنا في: <b>نبرتك الهادئة تُعدي العميل الغاضب</b>.',
+        warn:'إذا تشاركت غضبه — تُضاعفه.' },
+      { name:'Empathy Loop', src:'Brené Brown · Atlas of the Heart',
+        apply:'يطبّق هنا في: <b>أُسمّي شعوره قبل أن أحلّ مشكلته</b>.',
+        warn:'حلّ بدون تعاطف = إهانة في نظر العميل.' }
+    ],
+    'page-hrmastery': [
+      { name:'BATNA', src:'Fisher &amp; Ury · Getting to Yes',
+        apply:'يطبّق هنا في: <b>أعرف بديلي قبل دخول المفاوضة — قوّة صامتة</b>.',
+        warn:'لا تكشف BATNA إلا في اللحظة الحرجة.' },
+      { name:'Anchoring (Salary)', src:'Galinsky · First Offer Effect',
+        apply:'يطبّق هنا في: <b>اطرح رقمك أولاً عند تساوي المعلومات</b>.',
+        warn:'كن مستعداً بالتبرير — رقم بلا سرد ضعيف.' },
+      { name:'Strategic Silence', src:'Voss · Never Split the Difference',
+        apply:'يطبّق هنا في: <b>اصمت بعد عرضك — يملأ المُحاوِر الفراغ بقربك أنت</b>.',
+        warn:'الصمت > 8 ثوانٍ يُصبح غير مريح — استخدم 4-6 ثوانٍ.' }
+    ],
+    'page-programming': [
+      { name:'Imposter Syndrome', src:'Clance &amp; Imes (1978)',
+        apply:'يطبّق هنا في: <b>"سيكتشفون أني لا أستحق" — اكتب ٣ إنجازات حقيقية</b>.',
+        warn:'الاعتقاد بأنه شخصي — ٧٠٪+ من المهنيين يعيشونه.' },
+      { name:'Flow State', src:'Csikszentmihalyi · Flow (1990)',
+        apply:'يطبّق هنا في: <b>كتلة وقت 90 دقيقة بلا إشعارات = إنتاجية ٣x</b>.',
+        warn:'الانقطاع المتكرر يكسر flow — يحتاج 23 دقيقة لعودته.' },
+      { name:'Cognitive Load', src:'Sweller (1988)',
+        apply:'يطبّق هنا في: <b>قسّم المهمة لخطوات ≤ 7 — حدّ الذاكرة العاملة</b>.',
+        warn:'لا تخلط بين تعلّم مفهوم جديد وكتابة كود إنتاجي.' }
+    ],
+    'page-accounting': [
+      { name:'Cognitive Load', src:'Sweller (1988)',
+        apply:'يطبّق هنا في: <b>افصل بين تسجيل القيد والتحقق من الميزان</b>.',
+        warn:'الخلط بين المهمتين يضاعف الأخطاء البسيطة.' },
+      { name:'Attention Residue', src:'Leroy (2009)',
+        apply:'يطبّق هنا في: <b>أنهِ تقرير قبل بدء آخر — تركيز كامل</b>.',
+        warn:'التنقل بين 3 ملفات Excel = خطأ يومي على الأقل.' },
+      { name:'Anchoring', src:'Kahneman &amp; Tversky',
+        apply:'يطبّق هنا في: <b>أرقام السنة الماضية تُلوّن توقعات السنة الحالية</b>.',
+        warn:'استخدم zero-based budgeting كل سنتين لكسر المرساة.' }
+    ],
+    'page-phonerepair': [
+      { name:'Customer Anger', src:'McKee · The Story Brand',
+        apply:'يطبّق هنا في: <b>الزبون لا يكره الإصلاح — يكره الفقد</b>.',
+        warn:'لا تشرح تقنياً قبل تعاطف — يزيد الغضب.' },
+      { name:'Trust by Transparency', src:'Mayer · Trust Model',
+        apply:'يطبّق هنا في: <b>أوضح قطعة الغيار + سعرها قبل البدء</b>.',
+        warn:'الشفافية الناقصة = شك دائم حتى بعد الإصلاح الجيد.' },
+      { name:'Reactance', src:'Brehm (1966)',
+        apply:'يطبّق هنا في: <b>لا تُجبر الزبون — قدّم خيارين</b>.',
+        warn:'كل أمر مباشر يُولّد مقاومة — حتى لو كان الأفضل له.' }
+    ],
+    'page-social': [
+      { name:'Variable Reward', src:'Skinner · Operant Conditioning',
+        apply:'يطبّق هنا في: <b>التطبيقات تُكافئ بشكل عشوائي — يُدمن الفحص</b>.',
+        warn:'عند صنع المحتوى — استخدمها بأخلاق، لا تستغل ضعف الناس.' },
+      { name:'Information Gap', src:'Loewenstein (1994)',
+        apply:'يطبّق هنا في: <b>عناوين تخلق فجوة معرفية = نقرات</b>.',
+        warn:'إذا لم تسدّ الفجوة في المحتوى = clickbait يُفقد ثقة.' },
+      { name:'Negativity Bias', src:'Baumeister · Bad is Stronger Than Good',
+        apply:'يطبّق هنا في: <b>محتوى سلبي ينتشر أسرع — مسؤولية أخلاقية</b>.',
+        warn:'إساءة استخدامه = مساهمة في تسميم الفضاء العام.' }
+    ]
+  };
+
+  function buildCard(inset){
+    var d = document.createElement('div');
+    d.className = 'w09i-card';
+    d.innerHTML = ''
+      + '<div class="w09i-card-head">PSYCH INSET</div>'
+      + '<h5>' + inset.name + '</h5>'
+      + '<div class="w09i-card-src">' + inset.src + '</div>'
+      + '<div class="w09i-card-apply">' + inset.apply + '</div>'
+      + '<div class="w09i-card-warn">⚠️ ' + inset.warn + '</div>'
+      + '<a href="#" class="w09i-card-link" data-w09i-link>اقرأ المزيد في صفحة Psychology</a>';
+    return d;
+  }
+
+  function injectInto(pageId){
+    var page = document.getElementById(pageId);
+    if (!page) return;
+    if (page.dataset.w09Insets === '1') return;
+    var list = INSETS[pageId];
+    if (!list || !list.length) return;
+
+    var header = page.querySelector('.page-header');
+    var mount = document.createElement('div');
+    mount.className = 'w09i-mount';
+    mount.setAttribute('data-w09-inset-mount', pageId);
+    list.forEach(function(it){ mount.appendChild(buildCard(it)); });
+
+    if (header && header.nextSibling){
+      header.parentNode.insertBefore(mount, header.nextSibling);
+    } else {
+      page.insertBefore(mount, page.firstChild);
+    }
+    page.dataset.w09Insets = '1';
+  }
+
+  function injectAll(){
+    Object.keys(INSETS).forEach(injectInto);
+  }
+
+  // Cross-link: clicking inset opens psych page
+  document.addEventListener('click', function(e){
+    var lnk = e.target.closest && e.target.closest('[data-w09i-link]');
+    if (lnk){
+      e.preventDefault();
+      if (typeof window.navigateTo === 'function'){
+        window.navigateTo('psych');
+      } else {
+        var p = document.getElementById('page-psych');
+        if (p) p.scrollIntoView({behavior:'smooth'});
+      }
+    }
+  });
+
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', injectAll);
+  } else { injectAll(); }
+})();
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   WORKER 09 · PHASE 5 — Therapist Bridge + Insights Engine
+═══════════════════════════════════════════════════════════════════════ */
+(function(){
+  'use strict';
+  var STORAGE = 'upg_psych_results';
+  var MOOD = 'upg_mood_log';
+
+  function load(){ try { return JSON.parse(localStorage.getItem(STORAGE) || '{}'); } catch(e){ return {}; } }
+  function loadMood(){ try { return JSON.parse(localStorage.getItem(MOOD) || '[]'); } catch(e){ return []; } }
+
+  function genSnapshot(){
+    var all = load();
+    var mood = loadMood();
+    if (!Object.keys(all).length && !mood.length){
+      return '⚠️ لا توجد نتائج محفوظة بعد. أكمل اختباراً واحداً على الأقل من Self-Diagnostic Suite، ثم عُد.';
+    }
+    var d = new Date();
+    var lines = [];
+    lines.push('📋 Self-Report Snapshot — ' + d.toLocaleDateString('ar') + ' ' + d.toLocaleTimeString('ar', {hour:'2-digit', minute:'2-digit'}));
+    lines.push('═'.repeat(40));
+    Object.keys(all).forEach(function(k){
+      var r = all[k];
+      lines.push('');
+      lines.push('• ' + r.label);
+      r.bars.slice(0,5).forEach(function(b){ lines.push('  - ' + b.key + ': ' + b.pct + '%'); });
+    });
+    if (mood.length){
+      var last7 = mood.filter(function(m){ return (Date.now() - m.t) < 7*24*60*60*1000; });
+      var zoneCounts = {red:0, yellow:0, blue:0, green:0};
+      last7.forEach(function(m){ zoneCounts[m.zone] = (zoneCounts[m.zone] || 0) + 1; });
+      lines.push('');
+      lines.push('• Mood Meter — آخر ٧ أيام (' + last7.length + ' تسجيل)');
+      Object.keys(zoneCounts).forEach(function(z){
+        var name = ({red:'حمراء',yellow:'صفراء',blue:'زرقاء',green:'خضراء'})[z];
+        if (zoneCounts[z]) lines.push('  - ' + name + ': ' + zoneCounts[z]);
+      });
+    }
+    lines.push('');
+    lines.push('— أسئلة لجلستك القادمة:');
+    lines.push('  1) أي نمط يراه اختصاصيك في النتائج؟');
+    lines.push('  2) أين تتعارض القيم مع السلوك؟');
+    lines.push('  3) ما الفعل الصغير الذي يُحدِث فرقاً هذا الأسبوع؟');
+    return lines.join('\n');
+  }
+
+  function analyze(){
+    var all = load();
+    var mood = loadMood();
+    var out = document.getElementById('w09fInsightsOut');
+    if (!out) return;
+    if (!Object.keys(all).length){
+      out.innerHTML = '<p class="w09f-empty">لا توجد نتائج بعد. ابدأ باختبار Big Five.</p>';
+      return;
+    }
+    var html = '';
+
+    // Pattern: highest dim across BFI
+    if (all.bfi && all.bfi.bars){
+      var top = all.bfi.bars.slice().sort(function(a,b){return b.pct - a.pct;})[0];
+      html += '<div class="w09f-pattern strength"><b>قوّة بارزة:</b> ' + top.key + ' (' + top.pct + '%) — استثمرها في الأدوار التي تُكثر استخدامها.</div>';
+    }
+    // Match: top DISC
+    if (all.disc && all.disc.bars){
+      var topD = all.disc.bars.slice().sort(function(a,b){return b.pct-a.pct;})[0];
+      html += '<div class="w09f-pattern match"><b>نمط تواصل:</b> ' + topD.key + '. تواصل مع زملائك بطريقة تُلائم نمطهم لا نمطك فقط.</div>';
+    }
+    // Growth: weakest EQ axis
+    if (all.eq && all.eq.bars){
+      var lowE = all.eq.bars.slice().sort(function(a,b){return a.pct-b.pct;})[0];
+      html += '<div class="w09f-pattern growth"><b>منطقة نموّ:</b> ' + lowE.key + ' (' + lowE.pct + '%). جرّب تمارين RULER يومياً لمدة أسبوعين.</div>';
+    }
+    // Career match
+    if (all.anch && all.anch.bars){
+      var topA = all.anch.bars.slice(0,2).map(function(a){return a.key;}).join(' + ');
+      html += '<div class="w09f-pattern match"><b>توافق وظيفي:</b> ' + topA + '. اختر فرصاً تُغذّي هذين المرسَيَين معاً.</div>';
+    }
+    // Stress
+    if (all.stress && all.stress.bars){
+      var topS = all.stress.bars[0];
+      html += '<div class="w09f-pattern growth"><b>نمط الضغط:</b> ' + topS.key + '. تعرّف على إشاراتك المبكرة قبل أن تتصاعد.</div>';
+    }
+    // Strengths combo
+    if (all.str && all.str.bars){
+      var top3 = all.str.bars.slice(0,3).map(function(b){return b.key;}).join(' · ');
+      html += '<div class="w09f-pattern strength"><b>أعلى ٣ نقاط قوة:</b> ' + top3 + '. اربط أهم مهامك بهذه القوى.</div>';
+    }
+    // Mood pattern
+    if (mood && mood.length >= 3){
+      var last7 = mood.filter(function(m){ return (Date.now() - m.t) < 7*24*60*60*1000; });
+      if (last7.length){
+        var zCount = {red:0, yellow:0, blue:0, green:0};
+        last7.forEach(function(m){ zCount[m.zone] = (zCount[m.zone] || 0) + 1; });
+        var domZone = Object.keys(zCount).sort(function(a,b){return zCount[b]-zCount[a];})[0];
+        var zMap = {
+          red:'الأسبوع كان مشحوناً بمشاعر مرتفعة الطاقة سلبية. جرّب Box Breathing يومياً.',
+          yellow:'أسبوع نشِط إيجابي. حافظ عليه عبر النوم المنتظم.',
+          blue:'أسبوع يميل للهبوط — راجع نومك ونشاطك البدني.',
+          green:'أسبوع هادئ راضٍ — استثمره في تخطيط استراتيجي.'
+        };
+        html += '<div class="w09f-pattern"><b>نمط مزاج الأسبوع:</b> ' + zMap[domZone] + '</div>';
+      }
+    }
+    // Cross pattern: high N + low SM = high overwhelm risk
+    if (all.bfi && all.eq){
+      var nObj = all.bfi.bars.find(function(b){return b.key.indexOf('عصابية')>-1;});
+      var smObj = all.eq.bars.find(function(b){return b.key.indexOf('إدارة الذات')>-1;});
+      if (nObj && smObj && nObj.pct > 65 && smObj.pct < 55){
+        html += '<div class="w09f-pattern growth"><b>تنبيه نمطي:</b> عصابية مرتفعة + إدارة ذات منخفضة = خطر إجهاد. ركّز على RULER وممارسة يومية.</div>';
+      }
+    }
+
+    if (!html) html = '<p class="w09f-empty">أكمِل المزيد من الاختبارات لتفعيل تحليل أعمق.</p>';
+    out.innerHTML = html;
+  }
+
+  function init(){
+    var gen = document.getElementById('w09fGen');
+    if (!gen || gen.dataset.w09Inited === '1') return;
+    gen.dataset.w09Inited = '1';
+
+    var ta = document.getElementById('w09fSnapshot');
+    var copy = document.getElementById('w09fCopy');
+    var analyze1 = document.getElementById('w09fAnalyze');
+
+    gen.addEventListener('click', function(){ ta.value = genSnapshot(); });
+    copy.addEventListener('click', function(){
+      if (!ta.value || ta.value.indexOf('اضغط') === 0){ alert('ولّد الملخص أولاً.'); return; }
+      try {
+        navigator.clipboard.writeText(ta.value).then(function(){
+          copy.textContent = '✅ نُسخ';
+          setTimeout(function(){ copy.textContent = '📋 نسخ'; }, 1400);
+        });
+      } catch(e){
+        ta.select();
+        document.execCommand('copy');
+        copy.textContent = '✅ نُسخ';
+        setTimeout(function(){ copy.textContent = '📋 نسخ'; }, 1400);
+      }
+    });
+    if (analyze1) analyze1.addEventListener('click', analyze);
+  }
+
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+
+  document.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('[data-page="psych"]');
+    if (t) setTimeout(init, 80);
+  });
+})();
