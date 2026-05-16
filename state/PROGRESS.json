@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-16T21:45:00Z",
+  "last_updated": "2026-05-16T22:10:00Z",
   "current": {
     "worker": "14",
     "worker_name": "ATELIER_LIQUID_GLASS",
-    "phase": 2,
+    "phase": 3,
     "phases_total": 6,
     "phase_order": ["1", "2", "3", "4", "5", "6"],
     "branch": "worker-14-atelier-p2-p6",
@@ -73,8 +73,9 @@
     { "worker": "13", "phase": 2, "title": "Real Inline Purge — utilities pack + cleanup v2 + decomposer (587→223 inline, 12 stray !important, 7 u-grad-* utilities)", "branch": "worker-13-phase-2-3-impl", "lines_added": 1688 },
     { "worker": "13", "phase": 3, "title": "Final Polish — wordmark Aref Ruqaa accent + sidebar toggle in topbar + boot sanity v15.1 IIFE + CHANGELOG v15.1", "branch": "worker-13-phase-2-3-impl", "lines_added": 93 },
     { "worker": "14", "phase": 1, "title": "Liquid Glass v2 — WWDC25 blur ladder (16/24/32/40) + edge specular + 3-tier paper tonal + paper grain v2 + density API + Upg.material", "branch": "worker-14-atelier", "lines_added": 227 },
-    { "worker": "14", "phase": 2, "title": "Page Headers Re-chisel — 14 .page-h blocks (eyebrow + .qi icon + lede + 56px tint underline) + emoji purge from H1s", "branch": "worker-14-atelier-p2-p6", "lines_added": 202 }
+    { "worker": "14", "phase": 2, "title": "Page Headers Re-chisel — 14 .page-h blocks (eyebrow + .qi icon + lede + 56px tint underline) + emoji purge from H1s", "branch": "worker-14-atelier-p2-p6", "lines_added": 202 },
+    { "worker": "14", "phase": 3, "title": "Dashboard Bento Consolidation — 10 cells, zero legacy duplication, 5 sacred IDs relocated cleanly", "branch": "worker-14-atelier-p2-p6", "lines_added": 255, "lines_deleted": 385 }
   ],
-  "next_action": "WORKER 14 Phase 2 done (Page Headers Re-chisel). Continue with Worker 14 Phase 3 — Dashboard Bento Consolidation (8-10 bento cells, all 9 sacred IDs preserved: 4 data-cath-stat keys, #cath-skill-grid, #cath-activity-list, #v12Heatmap, #v12ChallengeLevel, #v12ChallengeBody). Same branch worker-14-atelier-p2-p6 — DO NOT create new branch.",
-  "notes": "Phase 2 of Worker 14 (ATELIER) shipped on branch worker-14-atelier-p2-p6 (Phase 1 already merged via PR #51). New CSS class system: .page-h with .h-eyebrow + h1 (with inline .qi icon) + .h-lede + .page-h::after (56px tint gradient underline). 14 page sections re-chiseled — emoji purged from H1s and replaced with monoline .qi icons in tint color. Each .page-h carries data-tint that resolves to existing --tint-* token. Legacy .page-header rules untouched (page-dashboard still uses legacy wrapper, deferred to Phase 3 Bento consolidation). Sacred preserved: 14 page sections, 391 qcalc refs, 77 Upg.* references, all 4 data-cath-stat keys, all v12 legacy IDs, all .qi icons. Mobile @720px: smaller display + 40px underline. prefers-reduced-motion guard applied."
+  "next_action": "WORKER 14 Phase 3 done (Dashboard Bento Consolidation). Continue with Worker 14 Phase 4 — Chrome Refinement (Topbar Island scroll-shrink 64→48px + search→cmdk + nav-pill spring 320ms slide + sidebar collapsed-mode tooltips + mobile drawer scrim + Upg.chrome API). Same branch worker-14-atelier-p2-p6 — DO NOT create new branch.",
+  "notes": "Phase 3 of Worker 14 (ATELIER) shipped on branch worker-14-atelier-p2-p6 (Phase 1 already merged via PR #51, Phase 2+3 pending unified PR). Dashboard #page-dashboard fully consolidated: ~388 lines of duplicated/placeholder markup removed, replaced with 10-cell single .bento grid. All sacred IDs preserved in dedicated cells: #cath-skill-grid → .bento-skill (b-2x2), #cath-activity-list → .bento-activity (b-2x2), #v12Heatmap → .bento-heatmap (b-2x1), #v12ChallengeLevel + #v12ChallengeBody → .bento-challenge (b-2x1). 4 data-cath-stat now canonical-once in dashboard (countup tiles), still mirrored in myprogress page (cath-stat). Removed: .dashboard-legacy wrapper, .welcome-banner, fake .grid-4 stats, fake .grid-2 modules+activity (placeholder content with fake names), fake .data-table progress, legacy v12-card wrappers. New CSS: .bento-h, .bento-link, .bento-pill, .bento-body, .bento-greet-meta+avatar, .bento-skill, .bento-activity, .bento-challenge, .bento-heatmap, .dock layout refinement (header + dock-row responsive 6/3/2 cols). Sacred preserved: 14 page sections, 391 qcalc refs, all Upg.* APIs untouched, all v12 legacy JS hooks (app.js:3379/3450/3451) still resolve via getElementById."
 }
