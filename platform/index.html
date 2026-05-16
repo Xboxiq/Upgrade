@@ -659,6 +659,45 @@
     =========================== -->
     <section class="page active" id="page-dashboard">
 
+      <div class="bento">
+
+        <!-- ══════════ W13/Phase 1: Bento Greeting Hero ══════════ -->
+        <article class="bento-greet b-2x1">
+          <span class="h-eyebrow">لوحة التحكم</span>
+          <h1 data-greet-title>أهلاً بعودتك</h1>
+          <p data-greet-sub>تابع رحلتك التدريبية — اليوم خطوة جديدة بانتظارك.</p>
+        </article>
+
+        <!-- ══════════ W13/Phase 1: 4 count-up stat tiles (mirror cath-stat bindings) ══════════ -->
+        <article class="stat-tile b-1x1">
+          <div class="stat-tile-icon"><i class="qi" data-icon="check-circle"></i></div>
+          <div class="stat-tile-value u-num"><span data-countup data-cath-stat="unitsCompleted">0</span></div>
+          <div class="stat-tile-label">وحدة مُكتملة</div>
+          <span class="stat-tile-trend is-up"><i class="qi" data-icon="trending-up"></i> +3 هذا الأسبوع</span>
+        </article>
+
+        <article class="stat-tile b-1x1">
+          <div class="stat-tile-icon"><i class="qi" data-icon="bar-chart"></i></div>
+          <div class="stat-tile-value u-num"><span data-countup data-cath-stat="avgCompletionRate">0</span>%</div>
+          <div class="stat-tile-label">معدل الإتمام</div>
+          <span class="stat-tile-trend is-up"><i class="qi" data-icon="trending-up"></i> +5%</span>
+        </article>
+
+        <article class="stat-tile b-1x1">
+          <div class="stat-tile-icon"><i class="qi" data-icon="clock"></i></div>
+          <div class="stat-tile-value u-num"><span data-countup data-cath-stat="trainingHours">0</span></div>
+          <div class="stat-tile-label">ساعة تدريب</div>
+        </article>
+
+        <article class="stat-tile b-1x1">
+          <div class="stat-tile-icon"><i class="qi" data-icon="alert-triangle"></i></div>
+          <div class="stat-tile-value u-num"><span data-countup data-cath-stat="streak">0</span></div>
+          <div class="stat-tile-label">يوم streak</div>
+        </article>
+
+        <!-- ══════════ W13/Phase 1: Legacy wrapper (preserves all sacred IDs) ══════════ -->
+        <article class="b-4x1 dashboard-legacy">
+
       <div class="page-header">
         <h1>مرحباً بك في لوحة التحكم 👋</h1>
         <p>نظرة عامة على مسيرتك التدريبية — تدريب ذاتي احترافي</p>
@@ -1009,6 +1048,32 @@
         </div>
         <div class="u-p-22" id="v12ChallengeBody"></div>
       </div>
+
+        </article><!-- /.dashboard-legacy -->
+
+        <!-- ══════════ W13/Phase 1: Quick Dock (6 actions) ══════════ -->
+        <nav class="dock b-4x1" aria-label="إجراءات سريعة">
+          <button class="dock-btn" type="button" data-page="callcenter">
+            <i class="qi" data-icon="phone"></i><span>مكالمة</span>
+          </button>
+          <button class="dock-btn" type="button" data-page="hrmastery">
+            <i class="qi" data-icon="briefcase"></i><span>مقابلة</span>
+          </button>
+          <button class="dock-btn" type="button" data-page="accounting">
+            <i class="qi" data-icon="calculator"></i><span>حاسبة راتب</span>
+          </button>
+          <button class="dock-btn" type="button" data-page="psych">
+            <i class="qi" data-icon="brain"></i><span>اختبار</span>
+          </button>
+          <button class="dock-btn" type="button" data-page="lab">
+            <i class="qi" data-icon="flask-conical"></i><span>سيناريو</span>
+          </button>
+          <button class="dock-btn" type="button" data-page="myprogress">
+            <i class="qi" data-icon="bar-chart"></i><span>تقدمي</span>
+          </button>
+        </nav>
+
+      </div><!-- /.bento -->
 
     </section><!-- /page-dashboard -->
 
