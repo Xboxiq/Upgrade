@@ -17542,3 +17542,14 @@ body, .u-prose p {
 .u-meta-md-loose { font-size: 12px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.75; }
 
 /* End of AURORA v15 — Phase 7 round-4 utilities ─────────────────────────── */
+
+
+/* ─────────────────────────────────────────────────────────────────────────
+   W13/Phase 1: Bento Dashboard — hide legacy duplicate stat row
+   The Bento stat-tiles up top now show countup values bound to the same
+   [data-cath-stat] keys; the legacy .cath-dash-stats row is preserved in
+   the DOM (Upg.state still updates it) but visually hidden to avoid the
+   visual duplication. Removing the row from DOM would break any future
+   selector relying on it; hiding is the safe, reversible operation.
+   ───────────────────────────────────────────────────────────────────── */
+.dashboard-legacy .cath-dash-stats { display: none; }
