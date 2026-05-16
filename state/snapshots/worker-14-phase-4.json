@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "worker": "14",
+  "worker_name": "ATELIER_LIQUID_GLASS",
+  "phase": 4,
+  "phase_title": "Chrome Refinement — Topbar Island + Search→cmdk + Nav Pill + Tooltips + Drawer Scrim",
+  "branch": "worker-14-atelier-p2-p6",
+  "commit_sha": "49f79ba",
+  "completed_at": "2026-05-16T22:35:00Z",
+  "lines_added": 381,
+  "lines_deleted": 5,
+  "files_touched": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "operations": {
+    "AUGMENT_topbar_class": "added 'island' + data-island='topbar'",
+    "REPLACE_topbar_search": "replaced .topbar-search div+input with .topbar-search-btn (data-action=open-cmdk + svg + label + ⌘K kbd)",
+    "ADD_nav_pill_indicator": 1,
+    "AUGMENT_nav_tooltips": 17,
+    "ADD_drawer_scrim": 1,
+    "ADD_css_atelier_p4_block": "~200 lines (topbar island compaction, search button, pill indicator with spring transform, tooltip system, drawer scrim)",
+    "ADD_iife_upg_chrome": "~120 lines (search→cmdk delegation, MutationObserver pill follower, swipe-to-close drawer, resize/theme/collapse re-position hooks)"
+  },
+  "sacred_assets_check": {
+    "page_sections_count": 14,
+    "qcalc_references": 391,
+    "nav_items_count": 17,
+    "upg_apis_intact": ["theme", "icons", "gateway", "calc", "cmdk", "state", "production", "type", "scroll", "nav", "identity", "greet", "countup", "motion", "material", "chrome (NEW)"],
+    "console_errors_expected": 0
+  },
+  "behaviors_added": [
+    "Topbar shrinks visually (label + kbd hide, breadcrumb fades, page-icon scales 88%) when document scrolls past 4px (uses existing data-scrolled hook)",
+    "Click anywhere on topbar search button (or focus + Enter) opens command palette",
+    "Active nav-item has a 3px spring-slide pill indicator on the inline-end edge (hidden in collapsed mode)",
+    "When sidebar is collapsed (Cmd+\\), each nav-item shows a tooltip on hover with the original label",
+    "Mobile drawer (≤980px) shows scrim overlay; clicking scrim closes drawer (via existing data-action='close-drawer' delegation in Upg.nav)",
+    "Touch swipe of >60px horizontal on mobile drawer closes it (independent of scrim click)",
+    "All transitions respect prefers-reduced-motion (instant fallbacks)"
+  ],
+  "next_action": "Continue Worker 14 Phase 5 — Motion Choreography (read prompts/14_PHASE_5_MOTION_CHOREOGRAPHY.md first). Same branch worker-14-atelier-p2-p6."
+}
