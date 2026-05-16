@@ -13829,3 +13829,55 @@ document.addEventListener('DOMContentLoaded', () => {
   window.Upg = window.Upg || {};
   window.Upg.type = Object.freeze({ get, set, DENSITY: Object.freeze([...DENSITY]) });
 })();
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Scroll Observer (Worker 12 / Phase 3)
+   Toggles data-scrolled="true|false" on #topbar and #sidebar when content
+   scrolls past 4px. Powers material elevation transitions.
+   Public API: window.Upg.scroll = { update() }
+   ════════════════════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+  const SCROLL_THRESHOLD = 4;
+  let raf = 0;
+  let main, top, side;
+
+  const refsValid = () => {
+    main = main || document.getElementById('main');
+    top  = top  || document.getElementById('topbar');
+    side = side || document.getElementById('sidebar');
+    return !!(main && top);
+  };
+
+  const update = () => {
+    raf = 0;
+    if (!refsValid()) return;
+    const y = main.scrollTop || window.scrollY || document.documentElement.scrollTop || 0;
+    const scrolled = y > SCROLL_THRESHOLD;
+    const value = String(scrolled);
+    if (top.dataset.scrolled !== value)  top.dataset.scrolled  = value;
+    if (side && side.dataset.scrolled !== value) side.dataset.scrolled = value;
+  };
+
+  const onScroll = () => {
+    if (!raf) raf = requestAnimationFrame(update);
+  };
+
+  const wire = () => {
+    if (!refsValid()) return;
+    main.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', wire, { once: true });
+  } else {
+    wire();
+  }
+
+  window.Upg = window.Upg || {};
+  window.Upg.scroll = Object.freeze({ update });
+})();

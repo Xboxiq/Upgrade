@@ -16483,3 +16483,185 @@ body, .u-prose p {
 }
 
 /* ─── End AURORA Phase 2 ──────────────────────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AURORA v15 — Phase 3 — Materials & Depth (Worker 12 / Phase 3)
+   - 4 glass tiers: thin / regular / thick / chrome
+   - Edge-light hairline + halos
+   - Scroll-aware elevation for topbar / sidebar
+   - Grain refinement
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Material tokens (dark-default; light overrides below) ───────────────── */
+:root {
+  /* Backdrop blur ladder */
+  --blur-thin:    8px;
+  --blur-regular: 16px;
+  --blur-thick:   28px;
+  --blur-chrome:  42px;
+
+  /* Saturation lift — iOS-style vibrancy */
+  --vibrancy:     180%;
+
+  /* Hairline (specular highlight on top edge) */
+  --hairline-light:  inset 0 1px 0 hsl(220 30% 100% / 0.06);
+  --hairline-strong: inset 0 1px 0 hsl(220 30% 100% / 0.12);
+  --hairline-dark:   inset 0 1px 0 hsl(220 30% 100% / 0.06);
+
+  /* Halo — soft backlight on important surfaces */
+  --halo-brand: 0 0 0 1px var(--color-brand-soft),
+                0 12px 40px color-mix(in oklch, var(--color-brand) 22%, transparent);
+  --halo-warm:  0 0 0 1px hsl(36 80% 85% / 0.4),
+                0 12px 40px hsl(36 80% 60% / 0.18);
+
+  /* Glass — Thin (chips, tooltips) */
+  --glass-thin-bg:     color-mix(in oklch, var(--color-surface-1) 65%, transparent);
+  --glass-thin-border: color-mix(in oklch, var(--color-border) 60%, transparent);
+  --glass-thin-blur:   var(--blur-thin);
+
+  /* Glass — Regular (cards, popovers) */
+  --glass-regular-bg:     color-mix(in oklch, var(--color-surface-1) 78%, transparent);
+  --glass-regular-border: color-mix(in oklch, var(--color-border) 80%, transparent);
+  --glass-regular-blur:   var(--blur-regular);
+
+  /* Glass — Thick (modals, gateway) */
+  --glass-thick-bg:     color-mix(in oklch, var(--color-surface-2) 85%, transparent);
+  --glass-thick-border: color-mix(in oklch, var(--color-border-strong) 80%, transparent);
+  --glass-thick-blur:   var(--blur-thick);
+
+  /* Glass — Chrome (topbar, sidebar — highest blur) */
+  --glass-chrome-bg:     color-mix(in oklch, var(--color-bg) 78%, transparent);
+  --glass-chrome-border: color-mix(in oklch, var(--color-border) 70%, transparent);
+  --glass-chrome-blur:   var(--blur-chrome);
+}
+
+/* Light theme — warm, brighter highlights */
+:root[data-theme="light"] {
+  --hairline-light:  inset 0 1px 0 hsl(40 60% 100% / 0.95);
+  --hairline-strong: inset 0 1px 0 hsl(40 60% 100% / 1);
+  --halo-brand:      0 0 0 1px var(--color-brand-soft),
+                     0 12px 32px color-mix(in oklch, var(--color-brand) 14%, transparent);
+
+  --glass-thin-bg:     color-mix(in oklch, var(--color-surface-1) 70%, white 30%);
+  --glass-regular-bg:  color-mix(in oklch, var(--color-surface-1) 84%, white 16%);
+  --glass-thick-bg:    color-mix(in oklch, var(--color-surface-2) 90%, white 10%);
+  --glass-chrome-bg:   color-mix(in oklch, var(--color-bg) 85%, white 15%);
+}
+
+/* ─── Material utility classes ────────────────────────────────────────────── */
+.material-thin,
+.material-regular,
+.material-thick,
+.material-chrome {
+  isolation: isolate;
+  position: relative;
+}
+.material-thin {
+  background: var(--glass-thin-bg);
+  border: 1px solid var(--glass-thin-border);
+  backdrop-filter: blur(var(--glass-thin-blur)) saturate(var(--vibrancy));
+  -webkit-backdrop-filter: blur(var(--glass-thin-blur)) saturate(var(--vibrancy));
+  box-shadow: var(--shadow-c-sm), var(--hairline-light);
+}
+.material-regular {
+  background: var(--glass-regular-bg);
+  border: 1px solid var(--glass-regular-border);
+  backdrop-filter: blur(var(--glass-regular-blur)) saturate(var(--vibrancy));
+  -webkit-backdrop-filter: blur(var(--glass-regular-blur)) saturate(var(--vibrancy));
+  box-shadow: var(--shadow-c-md), var(--hairline-light);
+}
+.material-thick {
+  background: var(--glass-thick-bg);
+  border: 1px solid var(--glass-thick-border);
+  backdrop-filter: blur(var(--glass-thick-blur)) saturate(var(--vibrancy));
+  -webkit-backdrop-filter: blur(var(--glass-thick-blur)) saturate(var(--vibrancy));
+  box-shadow: var(--shadow-c-lg), var(--hairline-strong);
+}
+.material-chrome {
+  background: var(--glass-chrome-bg);
+  border: 1px solid var(--glass-chrome-border);
+  backdrop-filter: blur(var(--glass-chrome-blur)) saturate(var(--vibrancy));
+  -webkit-backdrop-filter: blur(var(--glass-chrome-blur)) saturate(var(--vibrancy));
+  box-shadow: var(--shadow-c-md), var(--hairline-light);
+}
+
+/* ─── Surface utilities (semantic shortcuts) ──────────────────────────────── */
+.surface-card {
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-c-md);
+}
+.surface-card.is-elevated {
+  background: color-mix(in oklch, var(--color-surface-1) 92%, var(--tonal-tint) 8%);
+  box-shadow: var(--shadow-c-lg), var(--hairline-light);
+}
+.surface-popover {
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  background: var(--glass-regular-bg);
+  border: 1px solid var(--glass-regular-border);
+  backdrop-filter: blur(var(--glass-regular-blur)) saturate(var(--vibrancy));
+  -webkit-backdrop-filter: blur(var(--glass-regular-blur)) saturate(var(--vibrancy));
+  box-shadow: var(--shadow-c-lg), var(--hairline-light);
+}
+.surface-modal {
+  border-radius: var(--radius-xl);
+  padding: var(--space-7);
+  background: var(--glass-thick-bg);
+  border: 1px solid var(--glass-thick-border);
+  backdrop-filter: blur(var(--glass-thick-blur)) saturate(var(--vibrancy));
+  -webkit-backdrop-filter: blur(var(--glass-thick-blur)) saturate(var(--vibrancy));
+  box-shadow: var(--shadow-c-xl), var(--hairline-strong);
+}
+
+/* ─── Reduced transparency (system pref) ──────────────────────────────────── */
+@media (prefers-reduced-transparency: reduce) {
+  .material-thin,
+  .material-regular,
+  .material-thick,
+  .material-chrome,
+  .surface-popover,
+  .surface-modal {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--color-surface-2);
+  }
+}
+
+/* ─── Scroll-aware elevation ──────────────────────────────────────────────── */
+#topbar.material-chrome,
+#sidebar.material-chrome {
+  transition: box-shadow 240ms ease-out,
+              backdrop-filter 240ms ease-out,
+              background 240ms ease-out;
+}
+#topbar.material-chrome[data-scrolled="true"] {
+  background: var(--glass-chrome-bg);
+  backdrop-filter: blur(var(--blur-chrome)) saturate(var(--vibrancy));
+  -webkit-backdrop-filter: blur(var(--blur-chrome)) saturate(var(--vibrancy));
+  box-shadow: var(--shadow-c-md), var(--hairline-light);
+}
+#sidebar.material-chrome[data-scrolled="true"] {
+  box-shadow: 1px 0 0 var(--color-border), var(--shadow-c-sm);
+}
+
+/* ─── Grain refinement ────────────────────────────────────────────────────── */
+.ql-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-base);
+  opacity: 0.5;
+  filter: url(#grainFilter);
+  mix-blend-mode: overlay;
+}
+[data-theme="light"] .ql-grain {
+  mix-blend-mode: multiply;
+  opacity: 0.32;
+}
+
+/* ─── End AURORA Phase 3 ──────────────────────────────────────────────────── */
