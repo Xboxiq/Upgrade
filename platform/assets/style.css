@@ -17085,3 +17085,460 @@ body, .u-prose p {
 }
 
 /* ─── End AURORA Phase 6 ──────────────────────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   ╔═══════════════════════════════════════════════════════════════════════╗
+   ║  AURORA v15 — Phase 7: Final Utilities Pack & Production Polish      ║
+   ║  Worker 12 / Phase 7 — purges inline styles via class equivalents.   ║
+   ║  Layer: additive only. Uses tokens established in Phases 1..6.       ║
+   ╚═══════════════════════════════════════════════════════════════════════╝
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Color & weight utilities — purge "color:var(--text);" inlines ────── */
+.u-c-text       { color: var(--color-text, var(--text)); }
+.u-c-muted      { color: var(--color-text-muted, var(--text-muted)); }
+.u-c-faint      { color: var(--color-text-faint, var(--text-faint, var(--text-muted))); }
+.u-c-brand      { color: var(--color-brand, var(--accent)); }
+.u-c-tint       { color: var(--color-tint, var(--color-brand, var(--accent))); }
+.u-c-success    { color: var(--color-success, #22C55E); }
+.u-c-warning    { color: var(--color-warning, #F59E0B); }
+.u-c-danger     { color: var(--color-danger, #EF4444); }
+.u-c-info       { color: var(--color-info, #3B82F6); }
+.u-c-violet     { color: hsl(265 70% 56%); }
+
+/* Common literal hex used heavily inline → utility tokens */
+.u-c-green      { color: #22C55E; }
+.u-c-red        { color: #EF4444; }
+.u-c-purple     { color: #8B5CF6; }
+.u-c-amber      { color: #F59E0B; }
+.u-c-blue       { color: #3B82F6; }
+.u-c-pink       { color: #EC4899; }
+.u-c-cyan       { color: var(--accent, #66FCF1); }
+
+/* ── 2. Font-size utilities — purge "font-size:Xpx" inlines ───────────────
+   Matches the legacy px values used throughout v12 content. Non-fluid by
+   design (the legacy content was authored for these exact sizes). */
+.u-fz-10  { font-size: 10px; }
+.u-fz-11  { font-size: 11px; }
+.u-fz-115 { font-size: 11.5px; }
+.u-fz-12  { font-size: 12px; }
+.u-fz-125 { font-size: 12.5px; }
+.u-fz-13  { font-size: 13px; }
+.u-fz-135 { font-size: 13.5px; }
+.u-fz-14  { font-size: 14px; }
+.u-fz-15  { font-size: 15px; }
+.u-fz-16  { font-size: 16px; }
+.u-fz-17  { font-size: 17px; }
+.u-fz-18  { font-size: 18px; }
+.u-fz-20  { font-size: 20px; }
+.u-fz-22  { font-size: 22px; }
+.u-fz-24  { font-size: 24px; }
+
+/* Weights (purge "font-weight:N" inlines) */
+.u-fw-500 { font-weight: 500; }
+.u-fw-600 { font-weight: 600; }
+.u-fw-700 { font-weight: 700; }
+.u-fw-800 { font-weight: 800; }
+.u-fw-900 { font-weight: 900; }
+
+/* Style toggles */
+.u-italic   { font-style: italic; }
+.u-uppercase{ text-transform: uppercase; letter-spacing: 0.05em; }
+.u-lh-tight { line-height: 1.3; }
+.u-lh-snug  { line-height: 1.5; }
+.u-lh-norm  { line-height: 1.65; }
+.u-lh-relax { line-height: 1.7; }
+.u-lh-loose { line-height: 1.85; }
+
+/* ── 3. Margin utilities — purge "margin-*" inlines ─────────────────────── */
+.u-m-0   { margin: 0; }
+.u-mt-0  { margin-top: 0; }
+.u-mt-1  { margin-top: 4px; }
+.u-mt-2  { margin-top: 8px; }
+.u-mt-3  { margin-top: 12px; }
+.u-mt-4  { margin-top: 16px; }
+.u-mt-5  { margin-top: 20px; }
+.u-mt-6  { margin-top: 24px; }
+.u-mt-7  { margin-top: 32px; }
+.u-mt-8  { margin-top: 40px; }
+.u-mt-9  { margin-top: 48px; }
+.u-mt-10 { margin-top: 64px; }
+
+.u-mb-0  { margin-bottom: 0; }
+.u-mb-1  { margin-bottom: 4px; }
+.u-mb-2  { margin-bottom: 8px; }
+.u-mb-3  { margin-bottom: 12px; }
+.u-mb-4  { margin-bottom: 16px; }
+.u-mb-5  { margin-bottom: 20px; }
+.u-mb-6  { margin-bottom: 24px; }
+.u-mb-65 { margin-bottom: 26px; }
+.u-mb-7  { margin-bottom: 28px; }
+.u-mb-8  { margin-bottom: 32px; }
+
+/* Combined "section-spacing" patterns common in v12 content */
+.u-section-gap     { margin: 28px 0 14px; }
+.u-section-gap-lg  { margin-top: 48px; margin-bottom: 20px; }
+.u-section-gap-md  { margin-top: 32px; margin-bottom: 16px; }
+.u-section-gap-sm  { margin-top: 24px; margin-bottom: 12px; }
+
+/* ── 4. Padding utilities — purge "padding:Xpx Ypx" inlines ─────────────── */
+.u-p-0      { padding: 0; }
+.u-p-12     { padding: 12px; }
+.u-p-14     { padding: 14px; }
+.u-p-16     { padding: 16px; }
+.u-p-card   { padding: 22px 24px; }
+.u-p-card-sm{ padding: 16px 18px; }
+.u-p-row    { padding: 9px 14px; }
+.u-p-pill   { padding: 9px 12px; }
+
+/* ── 5. Compound text presets — purge huge multi-decl inlines ────────────
+   These exact patterns appear ≥10 times each in the legacy v12 HTML. */
+
+/* "font-size:17px; font-weight:800; color:var(--text); margin-bottom:4px;" */
+.u-card-title { font-size: 17px; font-weight: 800; color: var(--color-text, var(--text)); margin-bottom: 4px; }
+
+/* "font-size:18px;font-weight:800;color:var(--text);margin-bottom:4px;" */
+.u-card-title-lg { font-size: 18px; font-weight: 800; color: var(--color-text, var(--text)); margin-bottom: 4px; }
+
+/* "font-size:13px;font-weight:800;color:var(--text);margin-bottom:6px;" */
+.u-card-title-sm { font-size: 13px; font-weight: 800; color: var(--color-text, var(--text)); margin-bottom: 6px; }
+
+/* "font-size:14px;font-weight:800;color:var(--text);margin-bottom:8px;" */
+.u-card-title-md { font-size: 14px; font-weight: 800; color: var(--color-text, var(--text)); margin-bottom: 8px; }
+
+/* "font-size:20px;font-weight:900;color:var(--text);letter-spacing:-0.3px;" */
+.u-section-title { font-size: 20px; font-weight: 900; color: var(--color-text, var(--text)); letter-spacing: -0.3px; }
+
+/* "font-size:16px;font-weight:800;color:var(--text);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);" */
+.u-section-divider {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--color-text, var(--text));
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border, var(--border));
+}
+
+/* "font-size:11.5px;color:var(--text-muted);" + variants with line-height */
+.u-meta       { font-size: 11.5px; color: var(--color-text-muted, var(--text-muted)); }
+.u-meta-lh    { font-size: 11.5px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.7; }
+.u-meta-lh-md { font-size: 12px;   color: var(--color-text-muted, var(--text-muted)); line-height: 1.7; }
+.u-meta-lh-lg { font-size: 12.5px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.85; }
+.u-meta-lh-xl { font-size: 12.5px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.85; max-width: 780px; }
+.u-meta-sm    { font-size: 11px;   color: var(--color-text-muted, var(--text-muted)); }
+.u-meta-md    { font-size: 12px;   color: var(--color-text-muted, var(--text-muted)); }
+.u-meta-lg    { font-size: 12.5px; color: var(--color-text-muted, var(--text-muted)); }
+.u-meta-loose { font-size: 12.5px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.65; }
+.u-meta-loose-mb { font-size: 11.5px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.7; margin-bottom: 10px; }
+.u-meta-tight { font-size: 12.5px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.7; }
+
+/* "color:var(--text);font-weight:600;" */
+.u-text-strong { color: var(--color-text, var(--text)); font-weight: 600; }
+
+/* Citation / scientific-quote box (the "background:rgba(102,252,241,0.05)..." pattern) */
+.u-quote-box {
+  background: color-mix(in oklch, var(--color-brand, var(--accent)) 5%, transparent);
+  border: 1px solid var(--color-border-strong, var(--border-hover, var(--border)));
+  border-radius: var(--radius-sm, 8px);
+  padding: 11px 13px;
+  font-size: 12px;
+  color: var(--color-text, var(--text));
+  line-height: 1.7;
+  font-style: italic;
+}
+
+/* Generic surface-2 framed card (high-frequency pattern) */
+.u-frame-card {
+  background: var(--color-surface-2, var(--surface-2));
+  border: 1px solid var(--color-border, var(--border));
+  border-radius: var(--radius-md, 12px);
+  padding: 16px;
+}
+
+/* ── 6. Layout shortcut utilities — purge "display:flex;align-items..." ──
+   Note: bare display utilities (.u-flex, .u-grid, .u-block, .u-hidden, etc.)
+   already exist from Worker 11 Phase 7. We only add what isn't there.        */
+.u-iflex            { display: inline-flex; }
+.u-iblock           { display: inline-block; }
+.u-items-start      { align-items: flex-start; }
+.u-justify-end      { justify-content: flex-end; }
+
+/* "display:flex;align-items:center;gap:10px;padding:12px;background:var(--surface-2);..." */
+.u-row-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: var(--color-surface-2, var(--surface-2));
+  border-radius: var(--radius-sm, 8px);
+  border: 1px solid var(--color-border, var(--border));
+  cursor: pointer;
+  font-size: 12.5px;
+  color: var(--color-text-muted, var(--text-muted));
+}
+
+/* ── 7. Width / text utilities ──────────────────────────────────────────── */
+/* (.u-w-full, .u-w-fit, .u-text-center, .u-text-end, .u-text-start already
+    defined in Worker 11 Phase 7 — kept there.) */
+.u-mw-text      { max-width: var(--container-text); }
+
+/* Padding-right shim used in lists */
+.u-pr-4 { padding-right: 16px; margin: 0; }
+
+/* Status badges (commonly inlined as color:#22C55E + font-size:12px) */
+.u-badge-ok    { color: #22C55E; font-size: 12px; }
+.u-badge-fail  { color: #EF4444; font-size: 12px; }
+.u-badge-info  { color: #3B82F6; font-size: 12px; }
+.u-badge-warn  { color: #F59E0B; font-size: 12px; }
+
+/* ── 8. Per-page header tint underline (Phase 7 spec § Step 4) ──────────
+   Adds a 56px brand-tinted underline to the H1 inside each .page-header.
+   Uses --color-tint (set by Upg.identity in Phase 5) with brand fallback. */
+.page-header h1::after,
+.page-header .h-title::after {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin-top: 8px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--color-tint, var(--color-brand, var(--accent))),
+    transparent
+  );
+}
+.page-header .page-eyebrow,
+.page-header .h-eyebrow {
+  color: var(--color-tint, var(--color-brand, var(--accent)));
+}
+
+/* End of AURORA v15 — Phase 7 ──────────────────────────────────────────── */
+
+
+
+/* ── 9. Additional purge utilities (round-2) ─────────────────────────── */
+
+/* checkbox/radio accent (8 copies) */
+.u-form-accent { accent-color: var(--color-brand, var(--accent)); width: 16px; height: 16px; }
+
+/* "padding:9px 12px; border-bottom:1px dashed var(--border);" + variants */
+.u-row-dashed     { padding: 9px 12px; border-bottom: 1px dashed var(--color-border, var(--border)); }
+.u-row-dashed-num { padding: 9px 12px; border-bottom: 1px dashed var(--color-border, var(--border)); font-variant-numeric: tabular-nums; }
+.u-row-dashed-mut { padding: 9px 12px; border-bottom: 1px dashed var(--color-border, var(--border)); color: var(--color-text-muted, var(--text-muted)); }
+.u-row-dashed-ok  { padding: 9px 12px; border-bottom: 1px dashed var(--color-border, var(--border)); color: #22C55E; font-variant-numeric: tabular-nums; }
+
+/* Card padding 18px / border-radius 14 (used 6×) */
+.u-p-18-r14       { padding: 18px; border-radius: 14px; }
+
+/* Frame card with overflow hidden, mb 26 (used 6×) */
+.u-frame-clip     { margin-bottom: 26px; padding: 0; overflow: hidden; }
+
+/* font-size:14px;font-weight:800;color:var(--text); — bare (no margin) */
+.u-h4 { font-size: 14px; font-weight: 800; color: var(--color-text, var(--text)); }
+.u-h4-mb-1 { font-size: 14px; font-weight: 800; color: var(--color-text, var(--text)); margin-bottom: 7px; }
+
+/* font-size:12px;color:var(--text-muted);line-height:1.75;margin-bottom:10px; */
+.u-meta-md-mb { font-size: 12px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.75; margin-bottom: 10px; }
+
+/* font-size:10.5px;color:var(--text-faint);margin-top:8px; (and ;margin-top:1px;) */
+.u-meta-faint    { font-size: 10.5px; color: var(--color-text-faint, var(--text-faint, var(--text-muted))); margin-top: 8px; }
+.u-meta-faint-1  { font-size: 10.5px; color: var(--color-text-faint, var(--text-faint, var(--text-muted))); margin-top: 1px; }
+
+/* "display:flex; align-items:center; gap:10px; margin-bottom:10px;" */
+.u-row-tight { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+
+/* green badge fill */
+.u-pill-ok { background: rgba(34,197,94,0.12); color: #22C55E; }
+
+/* zero-width progress (template default — JS will set width directly) */
+.u-pb-0 { width: 0%; }
+
+/* Tile centerpiece (5×) */
+.u-tile-card {
+  text-align: center;
+  padding: 18px 12px;
+  background: var(--color-surface-1, var(--surface));
+  border: 1px solid var(--color-border, var(--border));
+  border-radius: var(--radius-md, 12px);
+}
+
+/* Common "font-weight:700;color:var(--text);" */
+.u-fw7-text { font-weight: 700; color: var(--color-text, var(--text)); }
+
+/* Big stat cluster (font-size:30px;flex-shrink:0;margin-top:2px;) */
+.u-stat-30 { font-size: 30px; flex-shrink: 0; margin-top: 2px; }
+
+/* Display heads */
+.u-h1-card { font-size: 24px; font-weight: 900; color: var(--color-text, var(--text)); margin-bottom: 6px; }
+.u-h2-card { font-size: 22px; margin-bottom: 6px; }
+.u-h3-card { font-size: 18px; margin-bottom: 6px; }
+
+/* "font-size:15px; font-weight:800; color:var(--text); margin-top:2px;" */
+.u-h5 { font-size: 15px; font-weight: 800; color: var(--color-text, var(--text)); margin-top: 2px; }
+
+/* "font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px;" */
+.u-h6 { font-size: 12px; font-weight: 700; color: var(--color-text, var(--text)); margin-bottom: 4px; }
+.u-h6-sm { font-size: 11px; font-weight: 700; color: var(--color-text, var(--text)); margin-bottom: 4px; }
+
+/* metric column muted (28px) */
+.u-meta-col-28 { font-size: 12px; color: var(--color-text-muted, var(--text-muted)); width: 28px; }
+
+/* small lh-1.5 muted/faint */
+.u-meta-mini      { font-size: 11px;   color: var(--color-text-muted, var(--text-muted)); line-height: 1.5; }
+.u-meta-mini-faint{ font-size: 10.5px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.5; }
+
+/* flex:1 helper */
+.u-flex-1 { flex: 1; }
+
+/* End of AURORA v15 — Phase 7 round-2 utilities ─────────────────────────── */
+
+
+/* ── 10. Round-3 utilities ───────────────────────────────────────────── */
+
+/* Yellow color (used 5×) */
+.u-c-yellow { color: #EAB308; }
+
+/* Orange color (used 4×) */
+.u-c-orange { color: #F97316; }
+
+/* Purple pill (rgba(168,85,247,.12)) */
+.u-pill-purple { background: rgba(168,85,247,0.12); color: #A855F7; }
+
+/* "display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;" */
+.u-row-between { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+
+/* "display:flex;align-items:center;gap:10px;margin-top:8px;" */
+.u-row-mt { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+
+/* Width helpers */
+.u-w-30   { width: 30%; }
+.u-w-120  { width: 120px; }
+
+/* Table-row eyebrow (4×) */
+.u-th-eyebrow {
+  text-align: right;
+  padding: 10px 12px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-text-faint, var(--text-faint, var(--text-muted)));
+  border-bottom: 1px solid var(--color-border, var(--border));
+}
+
+/* Card head bar (4×) */
+.u-card-head {
+  padding: 16px 22px 14px;
+  border-bottom: 1px solid var(--color-border, var(--border));
+  background: var(--color-surface-2, var(--surface-2));
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Padding 22px */
+.u-p-22 { padding: 22px; }
+
+/* Padding 16-18 + radius 14 */
+.u-p-card-md { padding: 16px 18px; border-radius: 14px; }
+
+/* Frame clip top */
+.u-frame-clip-top { margin-top: 22px; padding: 0; overflow: hidden; }
+
+/* Grid full-row */
+.u-col-full { grid-column: 1 / -1; }
+
+/* Eyebrow tags (orange / green) — uppercase letter-spacing tags */
+.u-tag-orange {
+  font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+  color: #F97316; margin-bottom: 8px;
+}
+.u-tag-green {
+  font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+  color: #22C55E; margin-bottom: 8px;
+}
+
+/* Heading 20px with margin */
+.u-h-20 { font-size: 20px; margin-bottom: 8px; }
+
+/* Danger text 12px */
+.u-c-red-12 { font-size: 12px; color: #EF4444; }
+
+/* List meta 11.5 muted line-height 1.85 */
+.u-list-meta {
+  font-size: 11.5px; color: var(--color-text-muted, var(--text-muted));
+  line-height: 1.85; padding-inline-start: 18px; margin: 0;
+}
+.u-list-meta-tight { font-size: 11.5px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.6; }
+
+/* Cyan 11.5 */
+.u-c-cyan-115 { font-size: 11.5px; color: var(--color-brand, var(--accent)); }
+
+/* Danger pill (rgba(239,68,68,0.07)) */
+.u-pill-danger {
+  font-size: 10.5px; color: #EF4444;
+  background: rgba(239,68,68,0.07);
+  border: 1px solid rgba(239,68,68,0.15);
+  border-radius: 6px;
+  padding: 7px 9px;
+}
+
+/* End of AURORA v15 — Phase 7 round-3 utilities ─────────────────────────── */
+
+
+/* ── 11. Round-4 utilities ───────────────────────────────────────────── */
+
+.u-row              { display: flex; align-items: center; gap: 10px; }
+.u-row-sm           { display: flex; align-items: center; gap: 5px; }
+.u-col              { display: flex; flex-direction: column; gap: 8px; }
+.u-grid-2-1fr      { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.u-grid-2-sm        { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+.u-pill-danger-fill { background: rgba(239,68,68,0.12); color: #EF4444; }
+
+.u-meta-rev    { color: var(--color-text-muted, var(--text-muted)); font-size: 12.5px; }
+.u-mt-rh       { margin-top: 36px; margin-bottom: 20px; }
+.u-mt-9b       { margin-top: 36px; }
+.u-mt-7b       { margin-top: 28px; }
+.u-mb-7b       { margin-bottom: 22px; }
+.u-frame-clip-mt { margin-top: 28px; padding: 0; overflow: hidden; }
+.u-lh-2        { line-height: 2; }
+
+.u-p-20-r14    { padding: 20px; border-radius: 14px; }
+.u-p-card-lg   { padding: 18px 20px; border-radius: 14px; margin-bottom: 18px; }
+.u-cyan-info-box {
+  padding: 12px 14px;
+  background: rgba(6,182,212,0.06);
+  border: 1px solid rgba(6,182,212,0.2);
+  border-radius: var(--radius-sm, 8px);
+}
+
+/* Eyebrow tags with letter-spacing 1.6 (variants per color) */
+.u-eyebrow-tag      { font-size: 11px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; margin-bottom: 8px; }
+.u-eyebrow-amber    { font-size: 11px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: #F59E0B; margin-bottom: 8px; }
+.u-eyebrow-purple   { font-size: 11px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: #8B5CF6; margin-bottom: 8px; }
+.u-eyebrow-green    { font-size: 11px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: #22C55E; margin-bottom: 8px; }
+.u-eyebrow-cyan     { font-size: 11px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: #06B6D4; margin-bottom: 8px; }
+
+.u-h7-cyan { font-size: 11px; font-weight: 800; color: #06B6D4; margin-bottom: 4px; }
+
+.u-meta-tiny { font-size: 11px; color: var(--color-text-muted, var(--text-muted)); margin-top: 4px; }
+
+.u-faint-105 { font-size: 10.5px; color: var(--color-text-faint, var(--text-faint, var(--text-muted))); }
+
+.u-row-spread {
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: var(--color-text-muted, var(--text-muted));
+  margin-bottom: 4px;
+}
+
+.u-c-red-bold    { color: #EF4444; font-weight: 700; }
+.u-c-green-bold  { color: #22C55E; font-weight: 700; }
+.u-c-cyan6       { color: #06B6D4; }
+
+.u-meta-md-narr  { font-size: 12px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.7; margin-bottom: 8px; }
+.u-meta-md-loose { font-size: 12px; color: var(--color-text-muted, var(--text-muted)); line-height: 1.75; }
+
+/* End of AURORA v15 — Phase 7 round-4 utilities ─────────────────────────── */
