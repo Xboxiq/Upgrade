@@ -903,6 +903,87 @@
         <p>تدريب متكامل على مهارات التواصل الهاتفي وخدمة العملاء — بالأساليب التي تنجح فعلاً على أرض الواقع</p>
       </div>
 
+      <!-- ══════════════════ Cathedral v14 — qcalc APIndex (Worker 11 / Phase 4) ══════════════════ -->
+      <div class="qcalc" data-calc="apindex">
+        <div class="qcalc-header">
+          <div class="qcalc-title">
+            <i class="qi qi-md" data-icon="gauge"></i>
+            <h3>مؤشر أداء العميل (APIndex)</h3>
+            <span class="qcalc-eyebrow">COPC CX 6.2</span>
+          </div>
+          <div class="qcalc-actions">
+            <button class="qcalc-btn-icon" type="button" data-action="reset" aria-label="إعادة تعيين"><i class="qi" data-icon="refresh"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="copy"  aria-label="نسخ النتيجة"><i class="qi" data-icon="copy"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="export" aria-label="تصدير JSON"><i class="qi" data-icon="download"></i></button>
+          </div>
+        </div>
+        <div class="qcalc-body">
+          <div class="qcalc-inputs qcalc-inputs-2col">
+            <label class="qcalc-field">
+              <span class="qcalc-label">AHT — متوسط مدة المكالمة</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="aht" min="0.5" max="30" step="0.1" value="5.2">
+                <span class="qcalc-suffix">دقيقة</span>
+              </div>
+              <span class="qcalc-hint">المرجع: 4–6 دقائق</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">FCR — حل من أول اتصال</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="fcr" min="0" max="100" step="1" value="72">
+                <span class="qcalc-suffix">%</span>
+              </div>
+              <span class="qcalc-hint">المرجع: 70–79%</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">CSAT — رضا العميل</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="csat" min="0" max="100" step="1" value="84">
+                <span class="qcalc-suffix">%</span>
+              </div>
+              <span class="qcalc-hint">المرجع: ≥ 85%</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">ADH — التزام بالجدول</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="adh" min="0" max="100" step="1" value="93">
+                <span class="qcalc-suffix">%</span>
+              </div>
+              <span class="qcalc-hint">المرجع: 92–95%</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">QA — تقييم الجودة</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="qa" min="0" max="100" step="1" value="88">
+                <span class="qcalc-suffix">%</span>
+              </div>
+              <span class="qcalc-hint">المرجع: ≥ 90%</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">Calls — مكالمات/شفت</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="calls" min="0" max="500" step="1" value="60">
+                <span class="qcalc-suffix">مكالمة</span>
+              </div>
+              <span class="qcalc-hint">معدل: 50–80</span>
+            </label>
+          </div>
+          <div class="qcalc-summary">
+            <div class="qcalc-result-card qcalc-result-primary">
+              <span class="qcalc-result-label">APIndex</span>
+              <span class="qcalc-result-value" data-bind="index" data-format="num2" data-state-bind="tierState">0</span>
+              <span class="qcalc-result-unit">/ 100</span>
+              <div class="qcalc-meter" data-bind="meter" data-meter="meter"><i style="width:0%"></i></div>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">المستوى</span>
+              <span class="qcalc-result-value" data-bind="tier">—</span>
+            </div>
+          </div>
+        </div>
+        <div class="qcalc-explain" data-bind="explain"></div>
+      </div>
+
       <!-- Call Stats -->
       <div class="call-stats-row">
         <div class="call-card">
@@ -2710,6 +2791,87 @@
       <div class="page-header">
         <h1>وحدة المبيعات</h1>
         <p>منهجيات عالمية بتطبيق عربي — أطر، اعتراضات، ودورة البيع السبعية</p>
+      </div>
+
+      <!-- ══════════════════ Cathedral v14 — qcalc Sales Commission (Worker 11 / Phase 4) ══════════════════ -->
+      <div class="qcalc" data-calc="sales-commission">
+        <div class="qcalc-header">
+          <div class="qcalc-title">
+            <i class="qi qi-md" data-icon="trending-up"></i>
+            <h3>حاسبة العمولة و الـ OTE</h3>
+            <span class="qcalc-eyebrow">Tiered + Kicker</span>
+          </div>
+          <div class="qcalc-actions">
+            <button class="qcalc-btn-icon" type="button" data-action="reset" aria-label="إعادة تعيين"><i class="qi" data-icon="refresh"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="copy"  aria-label="نسخ النتيجة"><i class="qi" data-icon="copy"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="export" aria-label="تصدير JSON"><i class="qi" data-icon="download"></i></button>
+          </div>
+        </div>
+        <div class="qcalc-body">
+          <div class="qcalc-inputs qcalc-inputs-2col">
+            <label class="qcalc-field">
+              <span class="qcalc-label">الراتب الأساسي الشهري</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="base" min="0" step="50000" value="800000">
+                <span class="qcalc-suffix">د.ع</span>
+              </div>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">المبيعات المحققة</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="sales" min="0" step="100000" value="12000000">
+                <span class="qcalc-suffix">د.ع</span>
+              </div>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">الهدف الشهري (Quota)</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="target" min="1" step="100000" value="10000000">
+                <span class="qcalc-suffix">د.ع</span>
+              </div>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">معدل العمولة حتى الهدف</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="tier1Rate" min="0" max="100" step="0.5" value="3">
+                <span class="qcalc-suffix">%</span>
+              </div>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">معدل العمولة فوق الهدف</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="tier2Rate" min="0" max="100" step="0.5" value="6">
+                <span class="qcalc-suffix">%</span>
+              </div>
+              <span class="qcalc-hint">عادةً ضِعف tier 1 لتحفيز التجاوز</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">Kicker عند ≥ 110% (% من المبيعات)</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="kicker" min="0" max="100" step="0.5" value="2">
+                <span class="qcalc-suffix">%</span>
+              </div>
+            </label>
+          </div>
+          <div class="qcalc-summary">
+            <div class="qcalc-result-card qcalc-result-primary">
+              <span class="qcalc-result-label">إجمالي الأجر المتوقع (OTE)</span>
+              <span class="qcalc-result-value" data-bind="ote" data-format="money">0</span>
+              <span class="qcalc-result-unit">د.ع</span>
+            </div>
+            <div class="qcalc-result-card" data-bind-card>
+              <span class="qcalc-result-label">إجمالي العمولة</span>
+              <span class="qcalc-result-value" data-bind="totalComm" data-format="money" data-state-bind="tierState">0</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">تحقيق الهدف</span>
+              <span class="qcalc-result-value" data-bind="attainment" data-format="num2">0</span>
+              <span class="qcalc-result-unit">%</span>
+              <div class="qcalc-meter" data-bind="meter1" data-meter="attainmentMeter"><i style="width:0%"></i></div>
+            </div>
+          </div>
+        </div>
+        <div class="qcalc-explain" data-bind="explain"></div>
       </div>
 
       <!-- ════════════════════════════════════════════════════════════════
@@ -4882,6 +5044,79 @@
       <div class="page-header">
         <h1>وحدة السوشيال ميديا</h1>
         <p>إتقان إدارة المنصات الرقمية وبناء المحتوى الجذاب</p>
+      </div>
+
+      <!-- ══════════════════ Cathedral v14 — qcalc A/B Test (Worker 11 / Phase 4) ══════════════════ -->
+      <div class="qcalc" data-calc="ab-test">
+        <div class="qcalc-header">
+          <div class="qcalc-title">
+            <i class="qi qi-md" data-icon="bar-chart"></i>
+            <h3>حاسبة حجم العينة لاختبار A/B</h3>
+            <span class="qcalc-eyebrow">Two-proportion z-test</span>
+          </div>
+          <div class="qcalc-actions">
+            <button class="qcalc-btn-icon" type="button" data-action="reset" aria-label="إعادة تعيين"><i class="qi" data-icon="refresh"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="copy"  aria-label="نسخ النتيجة"><i class="qi" data-icon="copy"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="export" aria-label="تصدير JSON"><i class="qi" data-icon="download"></i></button>
+          </div>
+        </div>
+        <div class="qcalc-body">
+          <div class="qcalc-inputs qcalc-inputs-2col">
+            <label class="qcalc-field">
+              <span class="qcalc-label">معدل التحويل الأساس (Baseline)</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="baseline" min="0.01" max="100" step="0.1" value="5">
+                <span class="qcalc-suffix">%</span>
+              </div>
+              <span class="qcalc-hint">CTR / CR / signup ratio حالي</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">التحسّن النسبي المراد كشفه (Lift)</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="lift" min="-90" max="500" step="1" value="10">
+                <span class="qcalc-suffix">%</span>
+              </div>
+              <span class="qcalc-hint">+10% يعني 5% → 5.5%</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">ألفا (مستوى الثقة)</span>
+              <div class="qcalc-input-wrap">
+                <select class="qcalc-input" name="alpha">
+                  <option value="0.05" selected>0.05 (95% ثقة)</option>
+                  <option value="0.01">0.01 (99% ثقة)</option>
+                  <option value="0.10">0.10 (90% ثقة)</option>
+                </select>
+              </div>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">القوة الإحصائية (Power)</span>
+              <div class="qcalc-input-wrap">
+                <select class="qcalc-input" name="power">
+                  <option value="0.80" selected>80%</option>
+                  <option value="0.90">90%</option>
+                  <option value="0.95">95%</option>
+                </select>
+              </div>
+            </label>
+          </div>
+          <div class="qcalc-summary">
+            <div class="qcalc-result-card qcalc-result-primary">
+              <span class="qcalc-result-label">حجم العينة لكل ذراع</span>
+              <span class="qcalc-result-value" data-bind="nPerArm" data-format="int">0</span>
+              <span class="qcalc-result-unit">مستخدم</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">إجمالي الاختبار</span>
+              <span class="qcalc-result-value" data-bind="totalN" data-format="int">0</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">معدل المتغيّر المتوقع</span>
+              <span class="qcalc-result-value" data-bind="variantRate" data-format="num2">0</span>
+              <span class="qcalc-result-unit">%</span>
+            </div>
+          </div>
+        </div>
+        <div class="qcalc-explain" data-bind="explain"></div>
       </div>
 
       <!-- ====================================================
@@ -7066,6 +7301,88 @@
         <p>دليل تطبيقي ميداني — موظف مبيعات · كول سنتر · أكونت منجر · تقنية</p>
       </div>
 
+      <!-- ══════════════════ Cathedral v14 — qcalc Big Five (Worker 11 / Phase 4) ══════════════════ -->
+      <div class="qcalc" data-calc="bigfive-score">
+        <div class="qcalc-header">
+          <div class="qcalc-title">
+            <i class="qi qi-md" data-icon="brain"></i>
+            <h3>مؤشّر OCEAN — Big Five</h3>
+            <span class="qcalc-eyebrow">NEO-PI-R / IPIP</span>
+          </div>
+          <div class="qcalc-actions">
+            <button class="qcalc-btn-icon" type="button" data-action="reset" aria-label="إعادة تعيين"><i class="qi" data-icon="refresh"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="copy"  aria-label="نسخ النتيجة"><i class="qi" data-icon="copy"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="export" aria-label="تصدير JSON"><i class="qi" data-icon="download"></i></button>
+          </div>
+        </div>
+        <div class="qcalc-body">
+          <div class="qcalc-inputs qcalc-inputs-2col">
+            <label class="qcalc-field">
+              <span class="qcalc-label">الانفتاح O — Openness</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="openness" min="0" max="100" step="1" value="55">
+                <span class="qcalc-suffix">/100</span>
+              </div>
+              <span class="qcalc-hint">الفضول، التخيّل، تقبّل التجارب</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">الضمير C — Conscientiousness</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="conscientious" min="0" max="100" step="1" value="65">
+                <span class="qcalc-suffix">/100</span>
+              </div>
+              <span class="qcalc-hint">التنظيم، الانضباط، المسؤولية</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">الانبساط E — Extraversion</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="extraversion" min="0" max="100" step="1" value="50">
+                <span class="qcalc-suffix">/100</span>
+              </div>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">المقبولية A — Agreeableness</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="agreeableness" min="0" max="100" step="1" value="60">
+                <span class="qcalc-suffix">/100</span>
+              </div>
+            </label>
+            <label class="qcalc-field" style="grid-column:1/-1;">
+              <span class="qcalc-label">العصابية N — Neuroticism (تذكّر: الأقل أفضل في بيئة العمل)</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="neuroticism" min="0" max="100" step="1" value="35">
+                <span class="qcalc-suffix">/100</span>
+              </div>
+              <span class="qcalc-hint">القلق، التقلّب، الحساسية للضغط</span>
+            </label>
+          </div>
+          <div class="qcalc-summary qcalc-summary-2col">
+            <div class="qcalc-result-card qcalc-result-primary">
+              <span class="qcalc-result-label">المؤشّر المركّب</span>
+              <span class="qcalc-result-value" data-bind="composite" data-format="num2" data-state-bind="state">0</span>
+              <span class="qcalc-result-unit">/100</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">الانفتاح</span>
+              <span class="qcalc-result-value" data-bind="oLabel">—</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">الضمير</span>
+              <span class="qcalc-result-value" data-bind="cLabel">—</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">الانبساط</span>
+              <span class="qcalc-result-value" data-bind="eLabel">—</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">العصابية</span>
+              <span class="qcalc-result-value" data-bind="nLabel">—</span>
+            </div>
+          </div>
+        </div>
+        <div class="qcalc-explain" data-bind="explain"></div>
+      </div>
+
       <!-- ── INTRO BANNER ── -->
       <div style="background:linear-gradient(135deg,rgba(139,92,246,0.12),rgba(102,252,241,0.08));border:1px solid rgba(139,92,246,0.25);border-radius:var(--radius-lg);padding:18px 22px;margin-bottom:26px;display:flex;align-items:flex-start;gap:16px;">
         <div style="font-size:28px;flex-shrink:0;margin-top:2px;">🎯</div>
@@ -8888,6 +9205,85 @@
         <p>منهج Harvard للتفاوض + أقوى أساليب الإقناع — من النظرية إلى الميدان المباشر</p>
       </div>
 
+      <!-- ══════════════════ Cathedral v14 — qcalc BATNA / ZOPA (Worker 11 / Phase 4) ══════════════════ -->
+      <div class="qcalc" data-calc="batna">
+        <div class="qcalc-header">
+          <div class="qcalc-title">
+            <i class="qi qi-md" data-icon="heart-handshake"></i>
+            <h3>محلّل ZOPA و BATNA</h3>
+            <span class="qcalc-eyebrow">Harvard Negotiation</span>
+          </div>
+          <div class="qcalc-actions">
+            <button class="qcalc-btn-icon" type="button" data-action="reset" aria-label="إعادة تعيين"><i class="qi" data-icon="refresh"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="copy"  aria-label="نسخ النتيجة"><i class="qi" data-icon="copy"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="export" aria-label="تصدير JSON"><i class="qi" data-icon="download"></i></button>
+          </div>
+        </div>
+        <div class="qcalc-body">
+          <div class="qcalc-inputs qcalc-inputs-2col">
+            <label class="qcalc-field">
+              <span class="qcalc-label">حدّك الأدنى (Reservation)</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="reservation" min="0" step="100000" value="1500000">
+                <span class="qcalc-suffix">د.ع</span>
+              </div>
+              <span class="qcalc-hint">أقل قيمة تقبلها قبل أن تنسحب</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">هدفك (Target)</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="target" min="0" step="100000" value="2200000">
+                <span class="qcalc-suffix">د.ع</span>
+              </div>
+              <span class="qcalc-hint">المخرَج المثالي لك</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">عرضك الافتتاحي (Anchor)</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="opening" min="0" step="100000" value="2500000">
+                <span class="qcalc-suffix">د.ع</span>
+              </div>
+              <span class="qcalc-hint">أعلى من الهدف بـ 10–20%</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">سقف الطرف الآخر</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="theirAnchor" min="0" step="100000" value="2300000">
+                <span class="qcalc-suffix">د.ع</span>
+              </div>
+            </label>
+            <label class="qcalc-field" style="grid-column:1/-1;">
+              <span class="qcalc-label">الحد الأدنى المفترض لهم</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="theirReservation" min="0" step="100000" value="1700000">
+                <span class="qcalc-suffix">د.ع</span>
+              </div>
+              <span class="qcalc-hint">من أبحاث السوق + إشارات المحادثة</span>
+            </label>
+          </div>
+          <div class="qcalc-summary qcalc-summary-2col">
+            <div class="qcalc-result-card qcalc-result-primary">
+              <span class="qcalc-result-label">منطقة الاتفاق المحتمل (ZOPA)</span>
+              <span class="qcalc-result-value" data-bind="status" data-state-bind="state">—</span>
+              <span class="qcalc-result-unit">عرض الـ ZOPA: <span data-bind="zopaWidth" data-format="money">0</span> د.ع</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">الحد الأدنى للـ ZOPA</span>
+              <span class="qcalc-result-value" data-bind="zopaLow" data-format="money">0</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">الحد الأعلى للـ ZOPA</span>
+              <span class="qcalc-result-value" data-bind="zopaHigh" data-format="money">0</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">نقطة الوسط المقترحة</span>
+              <span class="qcalc-result-value" data-bind="midpoint" data-format="money">0</span>
+            </div>
+          </div>
+        </div>
+        <div class="qcalc-explain" data-bind="explain"></div>
+      </div>
+
       <!-- Intro Banner -->
       <div style="background:linear-gradient(135deg,rgba(249,115,22,0.12),rgba(234,179,8,0.08));border:1px solid rgba(249,115,22,0.25);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:26px;display:flex;align-items:flex-start;gap:16px;">
         <div style="font-size:30px;flex-shrink:0;margin-top:2px;">⚖️</div>
@@ -9459,6 +9855,65 @@
       <div class="page-header">
         <h1>البرمجة والهندسة البرمجية 💻</h1>
         <p>التفكير الهندسي، جودة الكود، حل المشكلات، مراجعة الكود، والقرارات التقنية — من منظور الممارس لا المنظّر</p>
+      </div>
+
+      <!-- ══════════════════ Cathedral v14 — qcalc Big-O Cost (Worker 11 / Phase 4) ══════════════════ -->
+      <div class="qcalc" data-calc="bigo-cost">
+        <div class="qcalc-header">
+          <div class="qcalc-title">
+            <i class="qi qi-md" data-icon="line-chart"></i>
+            <h3>مُقدِّر تكلفة Big-O</h3>
+            <span class="qcalc-eyebrow">Algorithmic Cost</span>
+          </div>
+          <div class="qcalc-actions">
+            <button class="qcalc-btn-icon" type="button" data-action="reset" aria-label="إعادة تعيين"><i class="qi" data-icon="refresh"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="copy"  aria-label="نسخ النتيجة"><i class="qi" data-icon="copy"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="export" aria-label="تصدير JSON"><i class="qi" data-icon="download"></i></button>
+          </div>
+        </div>
+        <div class="qcalc-body">
+          <div class="qcalc-inputs qcalc-inputs-2col">
+            <label class="qcalc-field">
+              <span class="qcalc-label">حجم المدخل (n)</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="n" min="1" max="1000000" step="1" value="10000">
+                <span class="qcalc-suffix">عنصر</span>
+              </div>
+              <span class="qcalc-hint">جرّب 100, 10,000, 1,000,000</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">تعقيد الخوارزمية</span>
+              <div class="qcalc-input-wrap">
+                <select class="qcalc-input" name="complexity">
+                  <option value="O(1)">O(1) — ثابت</option>
+                  <option value="O(log n)">O(log n) — ثنائي البحث</option>
+                  <option value="O(n)" selected>O(n) — مرور خطي</option>
+                  <option value="O(n log n)">O(n log n) — Quick / Merge sort</option>
+                  <option value="O(n^2)">O(n²) — Bubble sort / nested loop</option>
+                  <option value="O(n^3)">O(n³) — ضرب مصفوفات بسيط</option>
+                  <option value="O(2^n)">O(2ⁿ) — Subset / Fibonacci recursive</option>
+                  <option value="O(n!)">O(n!) — Travelling Salesman brute-force</option>
+                </select>
+              </div>
+            </label>
+          </div>
+          <div class="qcalc-summary">
+            <div class="qcalc-result-card qcalc-result-primary">
+              <span class="qcalc-result-label">عدد العمليات التقريبي</span>
+              <span class="qcalc-result-value" data-bind="opsHuman" data-state-bind="state">0</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">الزمن المتوقع</span>
+              <span class="qcalc-result-value" data-bind="timeHuman">—</span>
+              <span class="qcalc-result-unit">على 10⁸ ops/sec</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">التصنيف</span>
+              <span class="qcalc-result-value" data-bind="label">—</span>
+            </div>
+          </div>
+        </div>
+        <div class="qcalc-explain" data-bind="explain"></div>
       </div>
 
       <!-- Intro Banner -->
@@ -11473,6 +11928,143 @@ const bird = { ...canMove(), ...canFly() };
       <div class="page-header">
         <h1>المحاسبة والكاشير 🧮</h1>
         <p>دقة الأرقام، الإقفال، التسويات، الأخطاء البشرية، واتخاذ القرار تحت الضغط — تدريب ذاتي لبيئة العمل الواقعية</p>
+      </div>
+
+      <!-- ══════════════════ Cathedral v14 — qcalc Gallery (Worker 11 / Phase 4) ══════════════════ -->
+      <div class="qcalc-gallery">
+        <!-- 1) Iraq Tax -->
+        <div class="qcalc" data-calc="iraq-tax">
+          <div class="qcalc-header">
+            <div class="qcalc-title">
+              <i class="qi qi-md" data-icon="calculator"></i>
+              <h3>حاسبة ضريبة الدخل العراقية</h3>
+              <span class="qcalc-eyebrow">قانون 113</span>
+            </div>
+            <div class="qcalc-actions">
+              <button class="qcalc-btn-icon" type="button" data-action="reset" aria-label="إعادة تعيين"><i class="qi" data-icon="refresh"></i></button>
+              <button class="qcalc-btn-icon" type="button" data-action="copy"  aria-label="نسخ النتيجة"><i class="qi" data-icon="copy"></i></button>
+              <button class="qcalc-btn-icon" type="button" data-action="export" aria-label="تصدير JSON"><i class="qi" data-icon="download"></i></button>
+            </div>
+          </div>
+          <div class="qcalc-body">
+            <div class="qcalc-inputs">
+              <label class="qcalc-field">
+                <span class="qcalc-label">الراتب الإجمالي الشهري</span>
+                <div class="qcalc-input-wrap">
+                  <input type="number" class="qcalc-input" name="gross" min="0" step="10000" value="1000000">
+                  <span class="qcalc-suffix">د.ع</span>
+                </div>
+                <span class="qcalc-hint">قبل أي خصومات</span>
+              </label>
+              <label class="qcalc-field">
+                <span class="qcalc-label">عدد المعالين</span>
+                <div class="qcalc-input-wrap">
+                  <input type="number" class="qcalc-input" name="dependents" min="0" max="20" step="1" value="0">
+                  <span class="qcalc-suffix">شخص</span>
+                </div>
+              </label>
+              <label class="qcalc-field">
+                <span class="qcalc-label">الحالة الاجتماعية</span>
+                <div class="qcalc-input-wrap">
+                  <select class="qcalc-input" name="status">
+                    <option value="single" selected>أعزب</option>
+                    <option value="married">متزوج</option>
+                  </select>
+                </div>
+              </label>
+            </div>
+            <div class="qcalc-summary">
+              <div class="qcalc-result-card qcalc-result-primary">
+                <span class="qcalc-result-label">الصافي الشهري</span>
+                <span class="qcalc-result-value" data-bind="net" data-format="money">0</span>
+                <span class="qcalc-result-unit">د.ع</span>
+              </div>
+              <div class="qcalc-result-card">
+                <span class="qcalc-result-label">إجمالي الضريبة</span>
+                <span class="qcalc-result-value" data-bind="tax" data-format="money">0</span>
+                <span class="qcalc-result-unit">د.ع · النسبة <span data-bind="effRate" data-format="num2">0</span>%</span>
+              </div>
+              <div class="qcalc-result-card">
+                <span class="qcalc-result-label">إجمالي الإعفاءات</span>
+                <span class="qcalc-result-value" data-bind="exemptions" data-format="money">0</span>
+                <span class="qcalc-result-unit">د.ع</span>
+              </div>
+            </div>
+          </div>
+          <div class="qcalc-explain" data-bind="explain"></div>
+        </div>
+
+        <!-- 2) Salary Slip -->
+        <div class="qcalc" data-calc="salary-slip">
+          <div class="qcalc-header">
+            <div class="qcalc-title">
+              <i class="qi qi-md" data-icon="briefcase"></i>
+              <h3>قسيمة الراتب الشهري</h3>
+              <span class="qcalc-eyebrow">Net Pay</span>
+            </div>
+            <div class="qcalc-actions">
+              <button class="qcalc-btn-icon" type="button" data-action="reset" aria-label="إعادة تعيين"><i class="qi" data-icon="refresh"></i></button>
+              <button class="qcalc-btn-icon" type="button" data-action="copy"  aria-label="نسخ النتيجة"><i class="qi" data-icon="copy"></i></button>
+              <button class="qcalc-btn-icon" type="button" data-action="export" aria-label="تصدير JSON"><i class="qi" data-icon="download"></i></button>
+            </div>
+          </div>
+          <div class="qcalc-body">
+            <div class="qcalc-inputs qcalc-inputs-2col">
+              <label class="qcalc-field">
+                <span class="qcalc-label">الراتب الأساسي</span>
+                <div class="qcalc-input-wrap">
+                  <input type="number" class="qcalc-input" name="gross" min="0" step="10000" value="1200000">
+                  <span class="qcalc-suffix">د.ع</span>
+                </div>
+              </label>
+              <label class="qcalc-field">
+                <span class="qcalc-label">البدلات (نقل/سكن)</span>
+                <div class="qcalc-input-wrap">
+                  <input type="number" class="qcalc-input" name="allowances" min="0" step="10000" value="200000">
+                  <span class="qcalc-suffix">د.ع</span>
+                </div>
+              </label>
+              <label class="qcalc-field">
+                <span class="qcalc-label">نسبة الضمان (% من الأساسي)</span>
+                <div class="qcalc-input-wrap">
+                  <input type="number" class="qcalc-input" name="ssRate" min="0" max="20" step="0.5" value="5">
+                  <span class="qcalc-suffix">%</span>
+                </div>
+                <span class="qcalc-hint">المعتاد: 5% (العامل) + 12% (صاحب العمل)</span>
+              </label>
+              <label class="qcalc-field">
+                <span class="qcalc-label">معدل ضريبة الدخل</span>
+                <div class="qcalc-input-wrap">
+                  <input type="number" class="qcalc-input" name="taxRate" min="0" max="50" step="0.5" value="7">
+                  <span class="qcalc-suffix">%</span>
+                </div>
+              </label>
+              <label class="qcalc-field" style="grid-column:1/-1;">
+                <span class="qcalc-label">خصومات أخرى (سُلَف/قروض/غيابات)</span>
+                <div class="qcalc-input-wrap">
+                  <input type="number" class="qcalc-input" name="otherDeductions" min="0" step="5000" value="0">
+                  <span class="qcalc-suffix">د.ع</span>
+                </div>
+              </label>
+            </div>
+            <div class="qcalc-summary">
+              <div class="qcalc-result-card qcalc-result-primary">
+                <span class="qcalc-result-label">صافي الراتب</span>
+                <span class="qcalc-result-value" data-bind="net" data-format="money">0</span>
+                <span class="qcalc-result-unit">د.ع</span>
+              </div>
+              <div class="qcalc-result-card">
+                <span class="qcalc-result-label">إجمالي ما قبل الخصم</span>
+                <span class="qcalc-result-value" data-bind="totalGross" data-format="money">0</span>
+              </div>
+              <div class="qcalc-result-card">
+                <span class="qcalc-result-label">الضمان + الضريبة</span>
+                <span class="qcalc-result-value" data-bind="ssAndTax" data-format="money">0</span>
+              </div>
+            </div>
+          </div>
+          <div class="qcalc-explain" data-bind="explain"></div>
+        </div>
       </div>
 
       <!-- Intro Banner -->
