@@ -414,11 +414,15 @@
     <!-- Navigation -->
     <nav class="sidebar-nav">
 
+      <!-- ATELIER v16 / Phase 4 — Spring-slide pill indicator (positioned floating) -->
+      <span class="nav-pill-indicator" aria-hidden="true"></span>
+
       <span class="nav-section-label">القائمة الرئيسية</span>
 
       <div class="nav-item active" data-page="dashboard">
         <i class="qi qi-md nav-icon" data-icon="layout-dashboard"></i>
         <span class="nav-label">لوحة التحكم</span>
+        <span class="nav-tooltip">لوحة التحكم</span>
       </div>
 
       <span class="nav-section-label">وحدات التدريب</span>
@@ -427,12 +431,14 @@
         <i class="qi qi-md nav-icon" data-icon="phone"></i>
         <span class="nav-label">وحدة كول سنتر</span>
         <span class="nav-badge">3</span>
+        <span class="nav-tooltip">وحدة كول سنتر</span>
       </div>
 
       <div class="nav-item" data-page="fieldsales">
         <i class="qi qi-md nav-icon" data-icon="briefcase"></i>
         <span class="nav-label">وحدة المبيعات</span>
         <span class="nav-badge">جديد</span>
+        <span class="nav-tooltip">وحدة المبيعات</span>
       </div>
 
 
@@ -441,66 +447,77 @@
         <i class="qi qi-md nav-icon" data-icon="user-tie"></i>
         <span class="nav-label">إدارة الحسابات</span>
         <span class="nav-badge nav-badge--success">KAM</span>
+        <span class="nav-tooltip">إدارة الحسابات</span>
       </div>
 
 
       <div class="nav-item" data-page="social">
         <i class="qi qi-md nav-icon" data-icon="megaphone"></i>
         <span class="nav-label">السوشيال ميديا</span>
+        <span class="nav-tooltip">السوشيال ميديا</span>
       </div>
 
       <div class="nav-item" data-page="lab">
         <i class="qi qi-md nav-icon" data-icon="flask-conical"></i>
         <span class="nav-label">مختبر السيناريوهات</span>
         <span class="nav-badge nav-badge--ember">75</span>
+        <span class="nav-tooltip">مختبر السيناريوهات</span>
       </div>
 
       <div class="nav-item" data-page="psych">
         <i class="qi qi-md nav-icon" data-icon="brain"></i>
         <span class="nav-label">الدوافع النفسية</span>
         <span class="nav-badge nav-badge--violet">7</span>
+        <span class="nav-tooltip">الدوافع النفسية</span>
       </div>
 
       <div class="nav-item" data-page="eq">
         <i class="qi qi-md nav-icon" data-icon="heart-handshake"></i>
         <span class="nav-label">الذكاء العاطفي</span>
         <span class="nav-badge nav-badge--pink">جديد</span>
+        <span class="nav-tooltip">الذكاء العاطفي</span>
       </div>
 
       <div class="nav-item" data-page="negotiation">
         <i class="qi qi-md nav-icon" data-icon="gauge"></i>
         <span class="nav-label">المفاوضات والإقناع</span>
         <span class="nav-badge nav-badge--amber">جديد</span>
+        <span class="nav-tooltip">المفاوضات والإقناع</span>
       </div>
 
       <div class="nav-item" data-page="customercare">
         <i class="qi qi-md nav-icon" data-icon="headphones"></i>
         <span class="nav-label">خدمة العملاء المتميزة</span>
         <span class="nav-badge nav-badge--mint">جديد</span>
+        <span class="nav-tooltip">خدمة العملاء المتميزة</span>
       </div>
 
       <div class="nav-item" data-page="programming">
         <i class="qi qi-md nav-icon" data-icon="code"></i>
         <span class="nav-label">البرمجة والهندسة</span>
         <span class="nav-badge nav-badge--azure">جديد</span>
+        <span class="nav-tooltip">البرمجة والهندسة</span>
       </div>
 
       <div class="nav-item" data-page="accounting">
         <i class="qi qi-md nav-icon" data-icon="calculator"></i>
         <span class="nav-label">المحاسبة والكاشير</span>
         <span class="nav-badge nav-badge--gold">جديد</span>
+        <span class="nav-tooltip">المحاسبة والكاشير</span>
       </div>
 
       <div class="nav-item" data-page="phonerepair">
         <i class="qi qi-md nav-icon" data-icon="wrench"></i>
         <span class="nav-label">صيانة الهواتف</span>
         <span class="nav-badge nav-badge--ember">جديد</span>
+        <span class="nav-tooltip">صيانة الهواتف</span>
       </div>
 
       <div class="nav-item" data-page="hrmastery">
         <i class="qi qi-md nav-icon" data-icon="briefcase"></i>
         <span class="nav-label">إتقان HR والتفاوض على الراتب</span>
         <span class="nav-badge nav-badge--royal">جديد</span>
+        <span class="nav-tooltip">إتقان HR والتفاوض على الراتب</span>
       </div>
 
       <span class="nav-section-label">الإدارة</span>
@@ -508,16 +525,19 @@
       <div class="nav-item" data-page="myprogress">
         <i class="qi qi-md nav-icon" data-icon="trending-up"></i>
         <span class="nav-label">تقدمي</span>
+        <span class="nav-tooltip">تقدمي</span>
       </div>
 
       <div class="nav-item" data-page="none">
         <i class="qi qi-md nav-icon" data-icon="line-chart"></i>
         <span class="nav-label">التقارير</span>
+        <span class="nav-tooltip">التقارير</span>
       </div>
 
       <div class="nav-item" data-page="none">
         <i class="qi qi-md nav-icon" data-icon="settings"></i>
         <span class="nav-label">الإعدادات</span>
+        <span class="nav-tooltip">الإعدادات</span>
       </div>
 
     </nav>
@@ -540,7 +560,7 @@
   <!-- ============================================================
        TOPBAR
   ============================================================ -->
-  <header id="topbar" class="material-chrome">
+  <header id="topbar" class="material-chrome island" data-island="topbar">
 
     <!-- Mobile menu toggle (visible only on small screens) -->
     <div id="mobile-menu-btn" onclick="toggleMobileSidebar()" title="القائمة">
@@ -562,12 +582,16 @@
       </div>
     </div>
 
-    <div class="topbar-search">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <button class="topbar-search-btn" type="button"
+            data-action="open-cmdk"
+            aria-label="فتح بحث المنصة (Cmd+K)"
+            title="بحث (Cmd+K)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
       </svg>
-      <input type="text" placeholder="ابحث في المنصة..." />
-    </div>
+      <span class="topbar-search-label">ابحث في المنصة...</span>
+      <kbd class="topbar-search-kbd">⌘K</kbd>
+    </button>
 
     <div class="topbar-actions">
 
@@ -671,418 +695,117 @@
     =========================== -->
     <section class="page active" id="page-dashboard">
 
-      <div class="bento">
+      <!-- ══════════════════════════════════════════════════════════════════
+           ATELIER v16 / Worker 14 / Phase 3 — Bento Consolidation
+           Single .bento grid. Zero legacy duplication.
+           Sacred IDs preserved (relocated, not removed):
+             #cath-skill-grid, #cath-activity-list,
+             #v12Heatmap, #v12ChallengeLevel, #v12ChallengeBody,
+             4× data-cath-stat (unitsCompleted/avgCompletionRate/trainingHours/streak)
+           ══════════════════════════════════════════════════════════════ -->
+      <div class="bento" data-bento="dashboard" data-cath-dash aria-label="لوحة التحكم — إحصاءاتك الحقيقية">
 
-        <!-- ══════════ W13/Phase 1: Bento Greeting Hero ══════════ -->
-        <article class="bento-greet b-2x1">
+        <!-- ══════════ Cell 1 — Greeting Hero (b-4x1) ══════════ -->
+        <article class="bento-greet b-4x1 material-regular" data-reveal>
           <span class="h-eyebrow">لوحة التحكم</span>
-          <h1 data-greet-title>أهلاً بعودتك</h1>
-          <p data-greet-sub>تابع رحلتك التدريبية — اليوم خطوة جديدة بانتظارك.</p>
+          <h1 data-greet-title>أهلاً <span data-cath-bind="profile.name">صديقي</span></h1>
+          <p data-greet-sub class="h-lede" data-cath-bind="profile.streakLine">تابع رحلتك التدريبية — اليوم خطوة جديدة بانتظارك.</p>
+          <div class="bento-greet-meta">
+            <span class="cath-progress-pill" data-cath-bind="profile.role">—</span>
+            <span class="bento-greet-avatar" data-cath-bind="profile.initial" aria-hidden="true">U</span>
+          </div>
         </article>
 
-        <!-- ══════════ W13/Phase 1: 4 count-up stat tiles (mirror cath-stat bindings) ══════════ -->
-        <article class="stat-tile b-1x1">
-          <div class="stat-tile-icon"><i class="qi" data-icon="check-circle"></i></div>
+        <!-- ══════════ Cells 2-5 — 4 count-up Stat Tiles (canonical, single instance) ══════════ -->
+        <article class="stat-tile b-1x1 material-regular" data-reveal>
+          <div class="stat-tile-icon"><i class="qi" data-icon="check-circle" aria-hidden="true"></i></div>
           <div class="stat-tile-value u-num"><span data-countup data-cath-stat="unitsCompleted">0</span></div>
           <div class="stat-tile-label">وحدة مُكتملة</div>
-          <span class="stat-tile-trend is-up"><i class="qi" data-icon="trending-up"></i> +3 هذا الأسبوع</span>
+          <span class="stat-tile-trend is-up"><i class="qi" data-icon="trending-up" aria-hidden="true"></i> +3 هذا الأسبوع</span>
         </article>
 
-        <article class="stat-tile b-1x1">
-          <div class="stat-tile-icon"><i class="qi" data-icon="bar-chart"></i></div>
+        <article class="stat-tile b-1x1 material-regular" data-reveal>
+          <div class="stat-tile-icon"><i class="qi" data-icon="bar-chart" aria-hidden="true"></i></div>
           <div class="stat-tile-value u-num"><span data-countup data-cath-stat="avgCompletionRate">0</span>%</div>
           <div class="stat-tile-label">معدل الإتمام</div>
-          <span class="stat-tile-trend is-up"><i class="qi" data-icon="trending-up"></i> +5%</span>
+          <span class="stat-tile-trend is-up"><i class="qi" data-icon="trending-up" aria-hidden="true"></i> +5%</span>
         </article>
 
-        <article class="stat-tile b-1x1">
-          <div class="stat-tile-icon"><i class="qi" data-icon="clock"></i></div>
+        <article class="stat-tile b-1x1 material-regular" data-reveal>
+          <div class="stat-tile-icon"><i class="qi" data-icon="clock" aria-hidden="true"></i></div>
           <div class="stat-tile-value u-num"><span data-countup data-cath-stat="trainingHours">0</span></div>
           <div class="stat-tile-label">ساعة تدريب</div>
         </article>
 
-        <article class="stat-tile b-1x1">
-          <div class="stat-tile-icon"><i class="qi" data-icon="alert-triangle"></i></div>
+        <article class="stat-tile b-1x1 material-regular" data-reveal>
+          <div class="stat-tile-icon"><i class="qi" data-icon="flame" aria-hidden="true"></i></div>
           <div class="stat-tile-value u-num"><span data-countup data-cath-stat="streak">0</span></div>
           <div class="stat-tile-label">يوم streak</div>
         </article>
 
-        <!-- ══════════ W13/Phase 1: Legacy wrapper (preserves all sacred IDs) ══════════ -->
-        <article class="b-4x1 dashboard-legacy">
-
-      <div class="page-header">
-        <h1>مرحباً بك في لوحة التحكم 👋</h1>
-        <p>نظرة عامة على مسيرتك التدريبية — تدريب ذاتي احترافي</p>
-      </div>
-
-      <!-- ══════════════════ Cathedral v14 — Real Dashboard (Worker 11 / Phase 6) ══════════════════ -->
-      <section class="cath-dash" data-cath-dash aria-label="إحصاءاتك الحقيقية">
-        <header class="cath-dash-greeting">
-          <div class="cath-dash-greeting-avatar" data-cath-bind="profile.initial">U</div>
-          <div class="cath-dash-greeting-text">
-            <h2>أهلاً <span data-cath-bind="profile.name">صديقي</span> 👋</h2>
-            <p data-cath-bind="profile.streakLine">رحلتك تبدأ من هنا — تابع تقدّمك أدناه.</p>
-          </div>
-          <span class="cath-progress-pill" data-cath-bind="profile.role">—</span>
-        </header>
-
-        <div class="cath-dash-stats">
-          <article class="cath-stat">
-            <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="check-circle"></i></div>
-            <div class="cath-stat-body">
-              <div><span class="cath-stat-value" data-cath-stat="unitsCompleted">0</span></div>
-              <span class="cath-stat-label">وحدة مُكتملة</span>
-            </div>
-          </article>
-          <article class="cath-stat">
-            <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="bar-chart"></i></div>
-            <div class="cath-stat-body">
-              <div><span class="cath-stat-value" data-cath-stat="avgCompletionRate">0</span><span class="cath-stat-suffix">%</span></div>
-              <span class="cath-stat-label">معدل الإتمام</span>
-            </div>
-          </article>
-          <article class="cath-stat">
-            <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="trending-up"></i></div>
-            <div class="cath-stat-body">
-              <div><span class="cath-stat-value" data-cath-stat="trainingHours">0</span><span class="cath-stat-suffix">ساعة</span></div>
-              <span class="cath-stat-label">إجمالي التدريب</span>
-            </div>
-          </article>
-          <article class="cath-stat">
-            <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="alert-triangle"></i></div>
-            <div class="cath-stat-body">
-              <div><span class="cath-stat-value" data-cath-stat="streak">0</span><span class="cath-stat-suffix">يوم</span></div>
-              <span class="cath-stat-label">streak متتابع</span>
-            </div>
-          </article>
-        </div>
-
-        <div class="cath-dash-grid">
-          <div class="cath-dash-card material-regular">
-            <header>
-              <h2><i class="qi" data-icon="layout-dashboard"></i> شجرة المهارات</h2>
-              <button class="cath-card-link" type="button" data-page="myprogress">عرض التفاصيل</button>
-            </header>
-            <div class="cath-skill-grid" id="cath-skill-grid"></div>
-          </div>
-          <div class="cath-dash-card material-regular">
-            <header>
-              <h2><i class="qi" data-icon="trending-up"></i> آخر النشاط</h2>
-            </header>
-            <ul class="cath-activity-list" id="cath-activity-list"></ul>
-          </div>
-        </div>
-
-        <div class="cath-dash-card material-regular">
-          <header>
-            <h2><i class="qi" data-icon="command"></i> إجراءات سريعة</h2>
-            <span class="u-text-xs u-c-faint">Cmd+K للبحث</span>
+        <!-- ══════════ Cell 6 — Skill Tree (b-2x2) — preserves #cath-skill-grid ══════════ -->
+        <article class="bento-skill b-2x2 material-regular" data-reveal>
+          <header class="bento-h">
+            <h2><i class="qi" data-icon="layout-dashboard" aria-hidden="true"></i> شجرة المهارات</h2>
+            <button class="bento-link" type="button" data-page="myprogress">عرض التفاصيل ←</button>
           </header>
-          <div class="cath-quick-actions">
-            <button class="cath-quick-action" type="button" data-page="callcenter"><i class="qi qi-lg" data-icon="phone"></i><span>مكالمة تجريبية</span></button>
-            <button class="cath-quick-action" type="button" data-page="hrmastery"><i class="qi qi-lg" data-icon="briefcase"></i><span>مقابلة وهمية</span></button>
-            <button class="cath-quick-action" type="button" data-page="accounting"><i class="qi qi-lg" data-icon="calculator"></i><span>حاسبة الراتب</span></button>
-            <button class="cath-quick-action" type="button" data-page="psych"><i class="qi qi-lg" data-icon="brain"></i><span>اختبار شخصية</span></button>
-            <button class="cath-quick-action" type="button" data-page="lab"><i class="qi qi-lg" data-icon="flask-conical"></i><span>سيناريو عشوائي</span></button>
-            <button class="cath-quick-action" type="button" data-page="myprogress"><i class="qi qi-lg" data-icon="bar-chart"></i><span>تقدمي الكامل</span></button>
-          </div>
-        </div>
-      </section>
+          <div class="cath-skill-grid" id="cath-skill-grid" data-stagger data-stagger-step="60"></div>
+        </article>
 
-      <!-- Welcome Banner -->
-      <div class="welcome-banner">
-        <div class="welcome-text">
-          <h2>استمر في رحلة التدريب</h2>
-          <p>لديك 3 وحدات تدريبية مفتوحة و4 مهارات قيد التطوير</p>
-        </div>
-        <div class="welcome-badge">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
-          <span>المستوى الذهبي</span>
-        </div>
-      </div>
+        <!-- ══════════ Cell 7 — Activity Feed (b-2x2) — preserves #cath-activity-list ══════════ -->
+        <article class="bento-activity b-2x2 material-regular" data-reveal>
+          <header class="bento-h">
+            <h2><i class="qi" data-icon="trending-up" aria-hidden="true"></i> آخر النشاط</h2>
+          </header>
+          <ul class="cath-activity-list" id="cath-activity-list" data-stagger data-stagger-step="40"></ul>
+        </article>
 
-      <!-- Stats -->
-      <div class="grid-4 mb-16">
-        <div class="stat-card">
-          <div class="stat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-            </svg>
+        <!-- ══════════ Cell 8 — Today's Challenge (b-2x1) — preserves #v12ChallengeLevel + #v12ChallengeBody ══════════ -->
+        <article class="bento-challenge b-2x1 material-regular" data-reveal>
+          <header class="bento-h">
+            <h2><i class="qi" data-icon="zap" aria-hidden="true"></i> تحدي اليوم</h2>
+            <span id="v12ChallengeLevel" class="bento-pill">—</span>
+          </header>
+          <div id="v12ChallengeBody" class="bento-body">
+            <p class="u-c-muted">جاري تحميل تحدي اليوم…</p>
           </div>
-          <div>
-            <div class="stat-value">248</div>
-            <div class="stat-label">إجمالي الوحدات المُتقَنة</div>
-          </div>
-          <span class="stat-delta up">↑ 12%</span>
-        </div>
+        </article>
 
-        <div class="stat-card">
-          <div class="stat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-            </svg>
-          </div>
-          <div>
-            <div class="stat-value">87<span class="u-fz-16 u-c-muted">%</span></div>
-            <div class="stat-label">معدل الإتمام</div>
-          </div>
-          <span class="stat-delta up">↑ 5%</span>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/>
-              <polyline points="12 6 12 12 16 14"/>
-            </svg>
-          </div>
-          <div>
-            <div class="stat-value">1,430</div>
-            <div class="stat-label">ساعات تدريب هذا الشهر</div>
-          </div>
-          <span class="stat-delta down">↓ 3%</span>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-            </svg>
-          </div>
-          <div>
-            <div class="stat-value">4.8</div>
-            <div class="stat-label">متوسط التقييم</div>
-          </div>
-          <span class="stat-delta up">↑ 0.2</span>
-        </div>
-      </div>
-
-      <!-- Two column -->
-      <div class="grid-2">
-
-        <!-- Quick modules -->
-        <div class="card">
-          <div class="card-title">الوحدات التدريبية</div>
-          <div class="modules-grid">
-            <div class="module-card">
-              <div class="module-icon u-bg-tint-cyan">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#66FCF1" stroke-width="2">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.94a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-                </svg>
-              </div>
-              <div class="module-info">
-                <h4>كول سنتر</h4>
-                <p>مهارات الاتصال</p>
-              </div>
-            </div>
-            <div class="module-card">
-              <div class="module-icon u-bg-tint-purple">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2">
-                  <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
-                </svg>
-              </div>
-              <div class="module-info">
-                <h4>مبيعات ميدانية</h4>
-                <p>مهارات البيع</p>
-              </div>
-            </div>
-            <div class="module-card">
-              <div class="module-icon u-bg-tint-sky">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2">
-                  <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
-                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
-                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-                </svg>
-              </div>
-              <div class="module-info">
-                <h4>سوشيال ميديا</h4>
-                <p>مهارات التأثير</p>
-              </div>
-            </div>
-            <div class="module-card">
-              <div class="module-icon u-bg-tint-yellow">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#EAB308" stroke-width="2">
-                  <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>
-                </svg>
-              </div>
-              <div class="module-info">
-                <h4>مختبر السيناريوهات</h4>
-                <p>مهارات التحليل</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Activity feed -->
-        <div class="card">
-          <div class="card-title">آخر النشاطات</div>
-          <div class="activity-item">
-            <div class="activity-dot u-bg-green"></div>
-            <div class="activity-content">
-              <p><strong>محمد علي</strong> أتم وحدة كول سنتر — المستوى 3</p>
-              <div class="activity-time">منذ 12 دقيقة</div>
-            </div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-dot u-bg-sky"></div>
-            <div class="activity-content">
-              <p><strong>سارة أحمد</strong> بدأت سيناريو "التعامل مع العميل الصعب"</p>
-              <div class="activity-time">منذ 28 دقيقة</div>
-            </div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-dot u-bg-yellow"></div>
-            <div class="activity-content">
-              <p>تم إكمال <strong>قسم جديد</strong> في وحدة السوشيال ميديا</p>
-              <div class="activity-time">منذ ساعة</div>
-            </div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-dot u-bg-purple"></div>
-            <div class="activity-content">
-              <p><strong>خالد عمر</strong> حقق أعلى درجة في اختبار المبيعات الميدانية</p>
-              <div class="activity-time">منذ ساعتين</div>
-            </div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-dot u-bg-accent"></div>
-            <div class="activity-content">
-              <p>تم تحديث <strong>سيناريوهات الرد على الاعتراضات</strong></p>
-              <div class="activity-time">منذ 3 ساعات</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Progress by unit -->
-      <div class="card mt-22">
-        <div class="card-title">تقدم الوحدات التدريبية</div>
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>الوحدة</th>
-              <th>التقدم</th>
-              <th>الإتمام</th>
-              <th>التقييم</th>
-              <th>الحالة</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="fw-700 u-c-text">كول سنتر</td>
-              <td>64</td>
-              <td>
-                <div class="u-row">
-                  <div class="progress-bar u-w-120"><div class="progress-fill" style="width:78%"></div></div>
-                  <span>78%</span>
-                </div>
-              </td>
-              <td class="text-accent">4.7 ★</td>
-              <td><span class="tag green">نشط</span></td>
-            </tr>
-            <tr>
-              <td class="fw-700 u-c-text">المبيعات الميدانية</td>
-              <td>91</td>
-              <td>
-                <div class="u-row">
-                  <div class="progress-bar u-w-120"><div class="progress-fill" style="width:65%"></div></div>
-                  <span>65%</span>
-                </div>
-              </td>
-              <td class="text-accent">4.5 ★</td>
-              <td><span class="tag green">نشط</span></td>
-            </tr>
-            <tr>
-              <td class="fw-700 u-c-text">السوشيال ميديا</td>
-              <td>55</td>
-              <td>
-                <div class="u-row">
-                  <div class="progress-bar u-w-120"><div class="progress-fill" style="width:90%"></div></div>
-                  <span>90%</span>
-                </div>
-              </td>
-              <td class="text-accent">4.9 ★</td>
-              <td><span class="tag blue">مراجعة</span></td>
-            </tr>
-            <tr>
-              <td class="fw-700 u-c-text">مختبر السيناريوهات</td>
-              <td>38</td>
-              <td>
-                <div class="u-row">
-                  <div class="progress-bar u-w-120"><div class="progress-fill" style="width:45%"></div></div>
-                  <span>45%</span>
-                </div>
-              </td>
-              <td class="text-accent">4.6 ★</td>
-              <td><span class="tag accent">28 سيناريو</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-
-      <!-- v12-ADD: خريطة مهاراتك الحرارية -->
-      <div class="card u-frame-clip-top">
-        <div class="u-card-head-bar">
-          <div class="u-row-12">
-            <span class="u-fz-22">&#x1F5FA;&#xFE0F;</span>
-            <div>
-              <div class="u-h4">خريطة مهاراتك الحرارية</div>
-              <div class="u-meta">اضغط على أي خلية لتقييم نفسك — الألوان تتغير تلقائياً</div>
-            </div>
-          </div>
-          <div class="u-flex u-gap-2 u-items-center u-fz-10 u-c-faint">
-            <span style="width:12px;height:12px;border-radius:3px;background:#166534;display:inline-block;"></span> متقن
-            <span style="width:12px;height:12px;border-radius:3px;background:#EAB308;display:inline-block;margin-right:8px;"></span> متوسط
-            <span style="width:12px;height:12px;border-radius:3px;background:#DC2626;display:inline-block;margin-right:8px;"></span> يحتاج عمل
-          </div>
-        </div>
-        <div class="u-p-18 u-overflow-auto">
+        <!-- ══════════ Cell 9 — Skills Heatmap (b-2x1) — preserves #v12Heatmap ══════════ -->
+        <article class="bento-heatmap b-2x1 material-regular" data-reveal>
+          <header class="bento-h">
+            <h2><i class="qi" data-icon="calendar" aria-hidden="true"></i> خريطة مهاراتك</h2>
+            <span class="bento-h-meta u-text-xs u-c-faint">اضغط على أي خلية لتقييم نفسك</span>
+          </header>
           <div class="v12-heatmap" id="v12Heatmap"></div>
-        </div>
-      </div>
+        </article>
 
-      <!-- v12-ADD: تحدي اليوم -->
-      <div class="card u-frame-clip-top">
-        <div style="padding:16px 22px 14px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(102,252,241,0.06),rgba(139,92,246,0.06));display:flex;align-items:center;justify-content:space-between;">
-          <div class="u-row-12">
-            <span class="u-t-h-lg">&#x1F3AF;</span>
-            <div>
-              <div class="u-h4">تحدي اليوم</div>
-              <div class="u-meta">مهمة يومية مبنية على مسارك التدريبي</div>
-            </div>
+        <!-- ══════════ Cell 10 — Quick Dock (b-4x1) ══════════ -->
+        <nav class="dock b-4x1 material-regular" aria-label="إجراءات سريعة" data-reveal>
+          <header class="bento-h">
+            <h2><i class="qi" data-icon="command" aria-hidden="true"></i> إجراءات سريعة</h2>
+            <span class="bento-h-meta u-text-xs u-c-faint">Cmd+K للبحث الكامل</span>
+          </header>
+          <div class="dock-row" data-stagger data-stagger-step="80">
+            <button class="dock-btn" type="button" data-page="callcenter" data-magnet>
+              <i class="qi qi-lg" data-icon="phone" aria-hidden="true"></i><span>مكالمة تجريبية</span>
+            </button>
+            <button class="dock-btn" type="button" data-page="hrmastery" data-magnet>
+              <i class="qi qi-lg" data-icon="briefcase" aria-hidden="true"></i><span>مقابلة وهمية</span>
+            </button>
+            <button class="dock-btn" type="button" data-page="accounting" data-magnet>
+              <i class="qi qi-lg" data-icon="calculator" aria-hidden="true"></i><span>حاسبة راتب</span>
+            </button>
+            <button class="dock-btn" type="button" data-page="psych" data-magnet>
+              <i class="qi qi-lg" data-icon="brain" aria-hidden="true"></i><span>اختبار شخصية</span>
+            </button>
+            <button class="dock-btn" type="button" data-page="lab" data-magnet>
+              <i class="qi qi-lg" data-icon="flask-conical" aria-hidden="true"></i><span>سيناريو عشوائي</span>
+            </button>
+            <button class="dock-btn" type="button" data-page="myprogress" data-magnet>
+              <i class="qi qi-lg" data-icon="bar-chart" aria-hidden="true"></i><span>تقدمي الكامل</span>
+            </button>
           </div>
-          <div class="v12-challenge-level" id="v12ChallengeLevel"></div>
-        </div>
-        <div class="u-p-22" id="v12ChallengeBody"></div>
-      </div>
-
-        </article><!-- /.dashboard-legacy -->
-
-        <!-- ══════════ W13/Phase 1: Quick Dock (6 actions) ══════════ -->
-        <nav class="dock b-4x1" aria-label="إجراءات سريعة">
-          <button class="dock-btn" type="button" data-page="callcenter">
-            <i class="qi" data-icon="phone"></i><span>مكالمة</span>
-          </button>
-          <button class="dock-btn" type="button" data-page="hrmastery">
-            <i class="qi" data-icon="briefcase"></i><span>مقابلة</span>
-          </button>
-          <button class="dock-btn" type="button" data-page="accounting">
-            <i class="qi" data-icon="calculator"></i><span>حاسبة راتب</span>
-          </button>
-          <button class="dock-btn" type="button" data-page="psych">
-            <i class="qi" data-icon="brain"></i><span>اختبار</span>
-          </button>
-          <button class="dock-btn" type="button" data-page="lab">
-            <i class="qi" data-icon="flask-conical"></i><span>سيناريو</span>
-          </button>
-          <button class="dock-btn" type="button" data-page="myprogress">
-            <i class="qi" data-icon="bar-chart"></i><span>تقدمي</span>
-          </button>
         </nav>
 
       </div><!-- /.bento -->
@@ -1095,10 +818,11 @@
     =========================== -->
     <section class="page" id="page-callcenter">
 
-      <div class="page-header">
-        <h1>وحدة الكول سنتر</h1>
-        <p>تدريب متكامل على مهارات التواصل الهاتفي وخدمة العملاء — بالأساليب التي تنجح فعلاً على أرض الواقع</p>
-      </div>
+      <header class="page-h" data-tint="callcenter">
+        <span class="h-eyebrow">وحدة تخصصية</span>
+        <h1><i class="qi qi-lg" data-icon="phone" aria-hidden="true"></i> وحدة الكول سنتر</h1>
+        <p class="h-lede">تدريب متكامل على مهارات التواصل الهاتفي وخدمة العملاء — بالأساليب التي تنجح فعلاً على أرض الواقع</p>
+      </header>
 
       <!-- ══════════════════ Cathedral v14 — qcalc APIndex (Worker 11 / Phase 4) ══════════════════ -->
       <div class="qcalc material-regular" data-calc="apindex">
@@ -2985,10 +2709,11 @@
     =========================== -->
     <section class="page" id="page-fieldsales">
 
-      <div class="page-header">
-        <h1>وحدة المبيعات</h1>
-        <p>منهجيات عالمية بتطبيق عربي — أطر، اعتراضات، ودورة البيع السبعية</p>
-      </div>
+      <header class="page-h" data-tint="fieldsales">
+        <span class="h-eyebrow">وحدة تخصصية</span>
+        <h1><i class="qi qi-lg" data-icon="briefcase" aria-hidden="true"></i> وحدة المبيعات</h1>
+        <p class="h-lede">منهجيات عالمية بتطبيق عربي — أطر، اعتراضات، ودورة البيع السبعية</p>
+      </header>
 
       <!-- ══════════════════ Cathedral v14 — qcalc Sales Commission (Worker 11 / Phase 4) ══════════════════ -->
       <div class="qcalc material-regular" data-calc="sales-commission">
@@ -5053,10 +4778,11 @@
     ════════════════════════════════════════════════════════════════ -->
     <section class="page" id="page-accountmgr">
 
-      <div class="page-header">
-        <h1>إدارة الحسابات الكبيرة (KAM)</h1>
-        <p>من Hunter إلى Farmer — دورة حياة الحساب، خريطة أصحاب القرار، QBR، NRR، Health Score، وكتاب التجديد.</p>
-      </div>
+      <header class="page-h" data-tint="accountmgr">
+        <span class="h-eyebrow">KAM</span>
+        <h1><i class="qi qi-lg" data-icon="user-tie" aria-hidden="true"></i> إدارة الحسابات الكبيرة (KAM)</h1>
+        <p class="h-lede">من Hunter إلى Farmer — دورة حياة الحساب، خريطة أصحاب القرار، QBR، NRR، Health Score، وكتاب التجديد.</p>
+      </header>
 
       <!-- ── A. Hunter vs Farmer ─────────────────────────────────── -->
       <div class="sales-section-header">
@@ -5238,10 +4964,11 @@
     =========================== -->
     <section class="page" id="page-social">
 
-      <div class="page-header">
-        <h1>وحدة السوشيال ميديا</h1>
-        <p>إتقان إدارة المنصات الرقمية وبناء المحتوى الجذاب</p>
-      </div>
+      <header class="page-h" data-tint="social">
+        <span class="h-eyebrow">وحدة تخصصية</span>
+        <h1><i class="qi qi-lg" data-icon="megaphone" aria-hidden="true"></i> وحدة السوشيال ميديا</h1>
+        <p class="h-lede">إتقان إدارة المنصات الرقمية وبناء المحتوى الجذاب</p>
+      </header>
 
       <!-- ══════════════════ Cathedral v14 — qcalc A/B Test (Worker 11 / Phase 4) ══════════════════ -->
       <div class="qcalc material-regular" data-calc="ab-test">
@@ -7323,10 +7050,11 @@
     =========================== -->
     <section class="page" id="page-lab">
 
-      <div class="page-header">
-        <h1>مختبر السيناريوهات 🧪</h1>
-        <p>بيئة محاكاة تفاعلية — اختر، تصرّف، وتعلّم من الخبراء</p>
-      </div>
+      <header class="page-h" data-tint="lab">
+        <span class="h-eyebrow">Sandbox</span>
+        <h1><i class="qi qi-lg" data-icon="flask-conical" aria-hidden="true"></i> مختبر السيناريوهات</h1>
+        <p class="h-lede">بيئة محاكاة تفاعلية — اختر، تصرّف، وتعلّم من الخبراء</p>
+      </header>
 
       <!-- ============ LAB LOBBY ============ -->
       <div id="sim-lobby">
@@ -7493,10 +7221,11 @@
     =========================== -->
     <section class="page" id="page-psych">
 
-      <div class="page-header">
-        <h1>الدوافع النفسية الخفية 🧠</h1>
-        <p>دليل تطبيقي ميداني — موظف مبيعات · كول سنتر · أكونت منجر · تقنية</p>
-      </div>
+      <header class="page-h" data-tint="psych">
+        <span class="h-eyebrow">Behavioral Science</span>
+        <h1><i class="qi qi-lg" data-icon="brain" aria-hidden="true"></i> الدوافع النفسية الخفية</h1>
+        <p class="h-lede">دليل تطبيقي ميداني — موظف مبيعات · كول سنتر · أكونت منجر · تقنية</p>
+      </header>
 
       <!-- ══════════════════ Cathedral v14 — qcalc Big Five (Worker 11 / Phase 4) ══════════════════ -->
       <div class="qcalc material-regular" data-calc="bigfive-score">
@@ -8829,10 +8558,11 @@
          PAGE 7 — الذكاء العاطفي
     =========================== -->
     <section class="page" id="page-eq">
-      <div class="page-header">
-        <h1>الذكاء العاطفي — EQ ❤️</h1>
-        <p>المهارة الخفية التي تفرّق بين موظف عادي وموظف استثنائي — نموذج Goleman والتطبيق الميداني</p>
-      </div>
+      <header class="page-h" data-tint="eq">
+        <span class="h-eyebrow">Emotional Intelligence</span>
+        <h1><i class="qi qi-lg" data-icon="heart-handshake" aria-hidden="true"></i> الذكاء العاطفي — EQ</h1>
+        <p class="h-lede">المهارة الخفية التي تفرّق بين موظف عادي وموظف استثنائي — نموذج Goleman والتطبيق الميداني</p>
+      </header>
 
       <!-- Intro Banner -->
       <div style="background:linear-gradient(135deg,rgba(236,72,153,0.12),rgba(139,92,246,0.08));border:1px solid rgba(236,72,153,0.25);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:26px;display:flex;align-items:flex-start;gap:16px;">
@@ -9397,10 +9127,11 @@
          PAGE 8 — المفاوضات والإقناع
     =========================== -->
     <section class="page" id="page-negotiation">
-      <div class="page-header">
-        <h1>المفاوضات والإقناع 🤝</h1>
-        <p>منهج Harvard للتفاوض + أقوى أساليب الإقناع — من النظرية إلى الميدان المباشر</p>
-      </div>
+      <header class="page-h" data-tint="negotiation">
+        <span class="h-eyebrow">Influence & Negotiation</span>
+        <h1><i class="qi qi-lg" data-icon="gauge" aria-hidden="true"></i> المفاوضات والإقناع</h1>
+        <p class="h-lede">منهج Harvard للتفاوض + أقوى أساليب الإقناع — من النظرية إلى الميدان المباشر</p>
+      </header>
 
       <!-- ══════════════════ Cathedral v14 — qcalc BATNA / ZOPA (Worker 11 / Phase 4) ══════════════════ -->
       <div class="qcalc material-regular" data-calc="batna">
@@ -9805,10 +9536,11 @@
          PAGE 9 — خدمة العملاء المتميزة
     =========================== -->
     <section class="page" id="page-customercare">
-      <div class="page-header">
-        <h1>خدمة العملاء المتميزة ✅</h1>
-        <p>من الكفاءة إلى الإبهار — معايير CSAT وNPS وتقنية LAST وسيناريوهات الشكاوى الحقيقية</p>
-      </div>
+      <header class="page-h" data-tint="customercare">
+        <span class="h-eyebrow">Service Excellence</span>
+        <h1><i class="qi qi-lg" data-icon="headphones" aria-hidden="true"></i> خدمة العملاء المتميزة</h1>
+        <p class="h-lede">من الكفاءة إلى الإبهار — معايير CSAT وNPS وتقنية LAST وسيناريوهات الشكاوى الحقيقية</p>
+      </header>
 
       <!-- Intro Banner -->
       <div style="background:linear-gradient(135deg,rgba(34,197,94,0.12),rgba(14,165,233,0.08));border:1px solid rgba(34,197,94,0.25);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:26px;display:flex;align-items:flex-start;gap:16px;">
@@ -10049,10 +9781,11 @@
          PAGE 10 — البرمجة والهندسة
     =========================== -->
     <section class="page" id="page-programming">
-      <div class="page-header">
-        <h1>البرمجة والهندسة البرمجية 💻</h1>
-        <p>التفكير الهندسي، جودة الكود، حل المشكلات، مراجعة الكود، والقرارات التقنية — من منظور الممارس لا المنظّر</p>
-      </div>
+      <header class="page-h" data-tint="programming">
+        <span class="h-eyebrow">Software Engineering</span>
+        <h1><i class="qi qi-lg" data-icon="code" aria-hidden="true"></i> البرمجة والهندسة البرمجية</h1>
+        <p class="h-lede">التفكير الهندسي، جودة الكود، حل المشكلات، مراجعة الكود، والقرارات التقنية — من منظور الممارس لا المنظّر</p>
+      </header>
 
       <!-- ══════════════════ Cathedral v14 — qcalc Big-O Cost (Worker 11 / Phase 4) ══════════════════ -->
       <div class="qcalc material-regular" data-calc="bigo-cost">
@@ -12122,10 +11855,11 @@ const bird = { ...canMove(), ...canFly() };
          PAGE 11 — المحاسبة والكاشير
     =========================== -->
     <section class="page" id="page-accounting">
-      <div class="page-header">
-        <h1>المحاسبة والكاشير 🧮</h1>
-        <p>دقة الأرقام، الإقفال، التسويات، الأخطاء البشرية، واتخاذ القرار تحت الضغط — تدريب ذاتي لبيئة العمل الواقعية</p>
-      </div>
+      <header class="page-h" data-tint="accounting">
+        <span class="h-eyebrow">Accounting & Cashier</span>
+        <h1><i class="qi qi-lg" data-icon="calculator" aria-hidden="true"></i> المحاسبة والكاشير</h1>
+        <p class="h-lede">دقة الأرقام، الإقفال، التسويات، الأخطاء البشرية، واتخاذ القرار تحت الضغط — تدريب ذاتي لبيئة العمل الواقعية</p>
+      </header>
 
       <!-- ══════════════════ Cathedral v14 — qcalc Gallery (Worker 11 / Phase 4) ══════════════════ -->
       <div class="qcalc-gallery">
@@ -13956,10 +13690,11 @@ const bird = { ...canMove(), ...canFly() };
     ============================================================ -->
     <section class="page" id="page-phonerepair">
 
-      <div class="page-header">
-        <h1>📱🔧 صيانة الهواتف الذكية — Mastery</h1>
-        <p>من الإلكترونيات الأساسية حتى Logic Board Repair — مع سوق العراق الحقيقي.</p>
-      </div>
+      <header class="page-h" data-tint="phonerepair">
+        <span class="h-eyebrow">Repair Mastery</span>
+        <h1><i class="qi qi-lg" data-icon="wrench" aria-hidden="true"></i> صيانة الهواتف الذكية — Mastery</h1>
+        <p class="h-lede">من الإلكترونيات الأساسية حتى Logic Board Repair — مع سوق العراق الحقيقي.</p>
+      </header>
 
       <!-- ============================================================
            PHASE 1 · A — Electronics Fundamentals (Knowledge Spine)
@@ -15652,10 +15387,11 @@ const bird = { ...canMove(), ...canFly() };
          Scope: #page-hrmastery only. Additive. Vanilla.
     =========================== -->
     <section class="page" id="page-hrmastery">
-      <div class="page-header">
-        <h1>إتقان HR والتفاوض على الراتب 🤝</h1>
-        <p>كيف تُمسك بزمام المقابلة + كيف تتفاوض على راتبك بثقة — علم نفس HR، 45 سؤال مشروح، وأقوى Calculator راتب في العراق</p>
-      </div>
+      <header class="page-h" data-tint="hrmastery">
+        <span class="h-eyebrow">HR & Salary Negotiation</span>
+        <h1><i class="qi qi-lg" data-icon="briefcase" aria-hidden="true"></i> إتقان HR والتفاوض على الراتب</h1>
+        <p class="h-lede">كيف تُمسك بزمام المقابلة + كيف تتفاوض على راتبك بثقة — علم نفس HR، 45 سؤال مشروح، وأقوى Calculator راتب في العراق</p>
+      </header>
 
       <!-- Intro Banner -->
       <div class="hrm-banner">
@@ -17608,10 +17344,11 @@ const bird = { ...canMove(), ...canFly() };
 
   <!-- ══════════════════ Cathedral v14 — page-myprogress (Worker 11 / Phase 6) ══════════════════ -->
   <section class="page" id="page-myprogress">
-    <div class="page-header">
-      <h1>تقدمي 📊</h1>
-      <p>صورة كاملة لكل ما أنجزته على المنصة — لا أرقام مزيّفة.</p>
-    </div>
+    <header class="page-h" data-tint="myprogress">
+      <span class="h-eyebrow">Personal Progress</span>
+      <h1><i class="qi qi-lg" data-icon="trending-up" aria-hidden="true"></i> تقدمي</h1>
+      <p class="h-lede">صورة كاملة لكل ما أنجزته على المنصة — لا أرقام مزيّفة.</p>
+    </header>
 
     <div class="cath-dash-stats">
       <article class="cath-stat">
@@ -17806,5 +17543,9 @@ const bird = { ...canMove(), ...canFly() };
 
 
 <script src="assets/app.js" defer></script>
+
+<!-- ATELIER v16 / Phase 4 — Mobile drawer scrim (clickable overlay, click/tap closes) -->
+<div class="drawer-scrim" data-action="close-drawer" aria-hidden="true"></div>
+
 </body>
 </html>

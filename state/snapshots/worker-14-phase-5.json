@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "worker": "14",
+  "worker_name": "ATELIER_LIQUID_GLASS",
+  "phase": 5,
+  "phase_title": "Motion Choreography v2 — Magnetic + Reveal + Stagger + Page Spring",
+  "branch": "worker-14-atelier-p2-p6",
+  "commit_sha": "5271bb6",
+  "completed_at": "2026-05-16T22:55:00Z",
+  "lines_added": 339,
+  "lines_deleted": 19,
+  "files_touched": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "operations": {
+    "ADD_css_atelier_p5_block": "~110 lines (data-magnet, data-reveal, data-stagger, .page.is-entering @keyframes atelierPageEnter, .u-cursor-glow, view-transition-name page-active, prefers-reduced-motion guards)",
+    "ADD_iife_upg_choreo": "~115 lines (magnetize, reveal IO, stagger IO, cursorGlow, refresh)",
+    "ADD_iife_upg_transition": "~70 lines (View Transitions API support detection, fallback .is-entering animation, [data-page] click delegation respecting legacy onclick)",
+    "AUGMENT_html": "10 data-reveal cells (1 greet + 4 stat-tiles + 4 bento cells + 1 dock), 3 data-stagger containers (skill-grid, activity-list, dock-row), 6 data-magnet on dock-btns"
+  },
+  "sacred_assets_check": {
+    "page_sections_count": 14,
+    "qcalc_references": 391,
+    "nav_items_count": 17,
+    "page_baseline_display_rule_untouched": true,
+    "navigateTo_function_untouched": true,
+    "upg_apis_intact": ["theme", "icons", "gateway", "calc", "cmdk", "state", "production", "type", "scroll", "nav", "identity", "greet", "countup", "motion", "material", "chrome", "choreo (NEW)", "transition (NEW)"]
+  },
+  "behaviors_added": [
+    "Hover on .dock-btn → button magnetically pulls toward cursor up to ~14px (0.18 strength × 80px range)",
+    "Bento greet + 4 stat-tiles + 4 bento cells + dock animate from opacity 0/translateY(12px) to visible when entering viewport (IntersectionObserver, threshold 0.05)",
+    "Skill grid (#cath-skill-grid) staggers children with 60ms step; activity list with 40ms step; dock row with 80ms step",
+    "Click on any [data-page] without inline onclick triggers Upg.transition.navigate → uses View Transitions API where supported, falls back to .is-entering CSS animation (atelierPageEnter spring 360ms)",
+    "Legacy onclick='navigateTo(...)' nav-items continue to work (delegation skips them to avoid double-fire)",
+    "After page transition, Upg.choreo.refresh() re-applies magnet/reveal/stagger to the newly visible page",
+    "All motion is gated by prefers-reduced-motion; reduced users see content instantly"
+  ],
+  "next_action": "Continue Worker 14 Phase 6 — Final Polish (read prompts/14_PHASE_6_FINAL_POLISH.md first). Same branch worker-14-atelier-p2-p6."
+}

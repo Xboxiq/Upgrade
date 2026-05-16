@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "worker": "14",
+  "worker_name": "ATELIER_LIQUID_GLASS",
+  "phase": 2,
+  "phase_title": "Page Headers Re-chisel + Emoji Purge",
+  "branch": "worker-14-atelier-p2-p6",
+  "commit_sha": "7c30bad",
+  "completed_at": "2026-05-16T21:45:00Z",
+  "lines_added": 202,
+  "lines_deleted": 56,
+  "files_touched": [
+    "platform/index.html",
+    "platform/assets/style.css"
+  ],
+  "operations": {
+    "ADD_css_rules": 16,
+    "REPLACE_IN_PLACE_html_blocks": 14,
+    "MODIFY_existing_rules": 0,
+    "DELETE_features": 0
+  },
+  "sacred_assets_check": {
+    "page_sections_count": 14,
+    "qcalc_references": 391,
+    "upg_apis_count": 77,
+    "data_cath_stat_keys": ["unitsCompleted", "avgCompletionRate", "trainingHours", "streak"],
+    "v12_legacy_ids": ["v12Heatmap", "v12ChallengeLevel", "v12ChallengeBody"],
+    "all_intact": true
+  },
+  "deliverables": {
+    "page_h_blocks_count": 14,
+    "page_header_legacy_remaining": 1,
+    "page_header_legacy_note": "Only #page-dashboard retains <div class=\"page-header\"> — Phase 3 will consolidate dashboard separately as specified",
+    "h1_emojis_in_page_h": 0,
+    "tint_underline_56px": true,
+    "icon_replacement_via_qi": true,
+    "tints_wired": [
+      "callcenter (cyan)", "fieldsales (emerald)", "accountmgr (teal)",
+      "social (violet)", "lab (magenta)", "psych (amber)",
+      "eq (red)", "negotiation (blue)", "customercare (sky)",
+      "programming (azure)", "accounting (gold)", "phonerepair (orange)",
+      "hrmastery (purple)", "myprogress (green)"
+    ]
+  },
+  "css_appended_block": ".page-h system: container + ::after underline + .h-eyebrow + h1 (with .qi) + .h-lede + 15 data-tint mappings + 720px + reduced-motion guards",
+  "html_pages_rechiseled": [
+    "page-callcenter", "page-fieldsales", "page-accountmgr", "page-social",
+    "page-lab", "page-psych", "page-eq", "page-negotiation",
+    "page-customercare", "page-programming", "page-accounting",
+    "page-phonerepair", "page-hrmastery", "page-myprogress"
+  ],
+  "deferred_to_phase_3": ["page-dashboard (full Bento consolidation)"],
+  "next_action": "Continue Worker 14 Phase 3 — Dashboard Bento Consolidation. Same branch worker-14-atelier-p2-p6."
+}

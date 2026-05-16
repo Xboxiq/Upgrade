@@ -18304,3 +18304,629 @@ body[data-material-density="high"] {
 }
 
 /* ─── End ATELIER v16 / Phase 1 ───────────────────────────────────────────── */
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ATELIER v16 — Page Header System (Worker 14 / Phase 2)
+   Block ثلاثي على نسق Apple/Stripe/Linear:
+     eyebrow (uppercase tinted) + title-with-icon (.qi) + lede (muted)
+     + 56px tint underline (gradient → transparent, RTL-safe)
+   APPEND-only. Coexists with legacy `.page-header` rules; new class is `.page-h`.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* The block container ────────────────────────────────────────────────────── */
+.page-h {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 8px);
+  padding-block: var(--space-6, 32px) var(--space-5, 24px);
+  margin-block-end: var(--space-6, 32px);
+  border-block-end: 1px solid var(--color-border);
+}
+
+/* Tint underline — 56px segment under the bottom border */
+.page-h::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-end: -1px;
+  width: 56px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--color-tint, var(--color-brand, var(--accent))) 0%,
+    color-mix(in oklch, var(--color-tint, var(--color-brand, var(--accent))) 30%, transparent) 100%
+  );
+  border-radius: 2px;
+}
+
+/* Eyebrow — small tinted uppercase tag with leading dash glyph */
+.page-h .h-eyebrow {
+  font-family: var(--font-text);
+  font-size: var(--text-xs, 0.78rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-tint, var(--color-brand, var(--accent)));
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  line-height: 1.2;
+}
+.page-h .h-eyebrow::before {
+  content: "";
+  width: 12px;
+  height: 1.5px;
+  background: currentColor;
+  border-radius: 1px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* H1 — display ladder + monoline icon */
+.page-h h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-display, clamp(2rem, 5vw, 3.25rem));
+  font-weight: var(--weight-heavy, 800);
+  line-height: var(--leading-tight, 1.18);
+  letter-spacing: var(--tracking-tight, -0.012em);
+  color: var(--color-text);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+.page-h h1 .qi {
+  color: var(--color-tint, var(--color-brand, var(--accent)));
+  font-size: 0.78em;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* Suppress the legacy 56px H1::after underline INSIDE .page-h
+   so we don't get a double-underline; the .page-h::after is canonical. */
+.page-h h1::after { content: none; display: none; }
+
+/* Lede — body-large muted, max 68ch for readability */
+.page-h .h-lede {
+  font-family: var(--font-text);
+  font-size: var(--text-lg, 1.125rem);
+  line-height: var(--leading-relaxed, 1.65);
+  color: var(--color-text-muted);
+  max-width: 68ch;
+  margin: 0;
+}
+
+/* Identity tints per data-tint — wires to existing --tint-* tokens */
+.page-h[data-tint="dashboard"]    { --color-tint: var(--tint-dashboard); }
+.page-h[data-tint="callcenter"]   { --color-tint: var(--tint-callcenter); }
+.page-h[data-tint="fieldsales"]   { --color-tint: var(--tint-fieldsales); }
+.page-h[data-tint="accountmgr"]   { --color-tint: var(--tint-accountmgr); }
+.page-h[data-tint="social"]       { --color-tint: var(--tint-social); }
+.page-h[data-tint="lab"]          { --color-tint: var(--tint-lab); }
+.page-h[data-tint="psych"]        { --color-tint: var(--tint-psych); }
+.page-h[data-tint="eq"]           { --color-tint: var(--tint-eq); }
+.page-h[data-tint="negotiation"]  { --color-tint: var(--tint-negotiation); }
+.page-h[data-tint="customercare"] { --color-tint: var(--tint-customercare); }
+.page-h[data-tint="programming"]  { --color-tint: var(--tint-programming); }
+.page-h[data-tint="accounting"]   { --color-tint: var(--tint-accounting); }
+.page-h[data-tint="phonerepair"]  { --color-tint: var(--tint-phonerepair); }
+.page-h[data-tint="hrmastery"]    { --color-tint: var(--tint-hrmastery); }
+.page-h[data-tint="myprogress"]   { --color-tint: var(--tint-myprogress); }
+
+/* Mobile — smaller display + shorter underline */
+@media (max-width: 720px) {
+  .page-h {
+    padding-block: var(--space-5, 24px) var(--space-4, 16px);
+    margin-block-end: var(--space-5, 24px);
+  }
+  .page-h h1 {
+    font-size: var(--text-3xl, clamp(1.75rem, 5vw, 2.25rem));
+    gap: 0.35em;
+  }
+  .page-h .h-lede { font-size: var(--text-base, 1rem); }
+  .page-h::after { width: 40px; }
+}
+
+/* Reduced motion — keep the static underline (no animation needed) */
+@media (prefers-reduced-motion: reduce) {
+  .page-h::after { transition: none; }
+}
+
+/* End ATELIER v16 / Phase 2 ─────────────────────────────────────────────── */
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ATELIER v16 — Bento Cells & Section Headers (Worker 14 / Phase 3)
+   New cell types: .bento-skill, .bento-activity, .bento-challenge, .bento-heatmap
+   New chrome:     .bento-h (cell header), .bento-link, .bento-pill, .bento-h-meta
+   APPEND-only. Builds on Worker 13/Phase 1 .bento + .stat-tile + .dock baseline.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Section header inside any bento cell ─────────────────────────────────── */
+.bento-h {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3, 12px);
+  margin-block-end: var(--space-4, 16px);
+  padding-block-end: var(--space-3, 12px);
+  border-block-end: 1px solid var(--color-border);
+}
+.bento-h h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-lg, 1.125rem);
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  letter-spacing: var(--tracking-tight, -0.012em);
+}
+.bento-h h2 .qi { color: var(--color-tint, var(--color-brand)); }
+
+.bento-h-meta {
+  color: var(--color-text-faint, var(--color-text-muted));
+  white-space: nowrap;
+}
+
+/* Action link — text button with tinted hover */
+.bento-link {
+  background: transparent;
+  border: 0;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm, 6px);
+  color: var(--color-tint, var(--color-brand));
+  font-family: var(--font-text);
+  font-size: var(--text-sm, 0.875rem);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 200ms var(--ease-standard, ease),
+              transform  150ms var(--ease-standard, ease);
+}
+.bento-link:hover {
+  background: color-mix(in oklch, var(--color-tint, var(--color-brand)) 12%, transparent);
+}
+.bento-link:active { transform: scale(0.96); }
+
+/* Status pill — tinted micro-badge for headers */
+.bento-pill {
+  font-family: var(--font-numeric, var(--font-text));
+  font-size: var(--text-xs, 0.78rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 2px 10px;
+  border-radius: var(--radius-full, 999px);
+  background: color-mix(in oklch, var(--color-tint, var(--color-brand)) 12%, transparent);
+  color: var(--color-tint, var(--color-brand));
+  white-space: nowrap;
+}
+
+/* Body wrapper for free-form content */
+.bento-body {
+  font-size: var(--text-base, 1rem);
+  line-height: var(--leading-relaxed, 1.65);
+  color: var(--color-text);
+}
+.bento-body > p:first-child { margin-block-start: 0; }
+.bento-body > p:last-child  { margin-block-end:   0; }
+
+/* Greeting hero — meta strip (avatar + role pill) ─────────────────────── */
+.bento-greet { padding: var(--space-6, 32px) var(--space-6, 32px) var(--space-5, 24px); }
+.bento-greet-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, 12px);
+  margin-block-start: var(--space-4, 16px);
+}
+.bento-greet-avatar {
+  width: 36px; height: 36px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: color-mix(in oklch, var(--color-tint, var(--color-brand)) 15%, transparent);
+  color: var(--color-tint, var(--color-brand));
+  border-radius: var(--radius-full, 999px);
+  border: 1px solid color-mix(in oklch, var(--color-tint, var(--color-brand)) 30%, transparent);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-base, 1rem);
+}
+
+/* Cell — Skill Tree (b-2x2) ───────────────────────────────────────────── */
+.bento-skill { padding: var(--space-5, 20px); }
+.bento-skill .cath-skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--space-3, 12px);
+}
+
+/* Cell — Activity Feed (b-2x2) ─────────────────────────────────────────── */
+.bento-activity { padding: var(--space-5, 20px); }
+.bento-activity .cath-activity-list {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 8px);
+  max-height: 320px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+.bento-activity .cath-activity-list::-webkit-scrollbar { width: 6px; }
+.bento-activity .cath-activity-list::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+/* Cell — Today's Challenge (b-2x1) ─────────────────────────────────────── */
+.bento-challenge { padding: var(--space-5, 20px); display: flex; flex-direction: column; }
+.bento-challenge .bento-body { flex: 1; min-height: 80px; }
+
+/* Cell — Skills Heatmap (b-2x1) ────────────────────────────────────────── */
+.bento-heatmap { padding: var(--space-5, 20px); display: flex; flex-direction: column; }
+.bento-heatmap .v12-heatmap {
+  flex: 1;
+  min-height: 100px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+/* Dock — header + row layout (refines Worker 13/P1 baseline) ──────────── */
+.dock {
+  display: flex !important;
+  flex-direction: column;
+  padding: var(--space-5, 20px) !important;
+  gap: var(--space-4, 16px);
+  grid-template-columns: none !important;
+}
+.dock .dock-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-3, 12px);
+}
+.dock .bento-h { margin-block-end: 0; padding-block-end: var(--space-3, 12px); }
+
+/* Tablet — 3 columns of dock buttons */
+@media (max-width: 980px) {
+  .dock .dock-row { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Mobile — 2 columns of dock buttons */
+@media (max-width: 480px) {
+  .dock .dock-row { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Bento responsive — keep b-2x2 from collapsing too narrow on tablet */
+@media (max-width: 1100px) and (min-width: 721px) {
+  .bento-skill.b-2x2,
+  .bento-activity.b-2x2 { grid-row: span 1; }
+}
+
+/* End ATELIER v16 / Phase 3 ─────────────────────────────────────────────── */
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ATELIER v16 — Chrome Refinement (Worker 14 / Phase 4)
+   - Topbar Dynamic-Island scroll-shrink (extends existing data-scrolled hook)
+   - Search → Command Palette (.topbar-search-btn replaces input)
+   - Sidebar pill spring-slide indicator (.nav-pill-indicator)
+   - Collapsed-mode tooltips (.nav-tooltip)
+   - Mobile drawer scrim (.drawer-scrim)
+   APPEND-only. Existing rules untouched.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* 1) Topbar Island — extended scroll-shrink behavior ─────────────────────── */
+#topbar.island {
+  transition:
+    height          280ms cubic-bezier(0.2, 0, 0, 1),
+    padding-block   280ms cubic-bezier(0.2, 0, 0, 1),
+    backdrop-filter 200ms ease,
+    box-shadow      200ms ease;
+  will-change: height, padding-block;
+}
+#topbar.island[data-scrolled="true"] {
+  box-shadow: var(--shadow-c-lg, 0 12px 28px hsl(225 30% 6% / 0.32));
+}
+#topbar.island[data-scrolled="true"] #topbar-breadcrumb { opacity: 0.6; font-size: 11px; }
+#topbar.island[data-scrolled="true"] .page-icon-wrap { transform: scale(0.88); }
+#topbar.island[data-scrolled="true"] .topbar-search-label { opacity: 0; max-width: 0; padding: 0; }
+#topbar.island[data-scrolled="true"] .topbar-search-kbd { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  #topbar.island { transition: none; }
+}
+
+/* 2) Search button — opens cmdk; replaces non-functional input ───────────── */
+.topbar-search-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2, 8px);
+  padding: 8px 14px;
+  height: 38px;
+  min-width: 240px;
+  max-width: 420px;
+  flex: 1;
+  background: color-mix(in oklch, var(--color-surface-2, var(--surface-2)) 60%, transparent);
+  border: 1px solid var(--color-border, var(--border));
+  border-radius: var(--radius-full, 999px);
+  color: var(--color-text-faint, var(--text-faint));
+  cursor: pointer;
+  font-family: var(--font-text);
+  font-size: var(--text-sm, 0.875rem);
+  text-align: start;
+  transition:
+    background    200ms cubic-bezier(0.2, 0, 0, 1),
+    border-color  200ms cubic-bezier(0.2, 0, 0, 1),
+    box-shadow    200ms cubic-bezier(0.2, 0, 0, 1),
+    color         200ms cubic-bezier(0.2, 0, 0, 1);
+}
+.topbar-search-btn:hover,
+.topbar-search-btn:focus-visible {
+  background: var(--color-surface-2, var(--surface-2));
+  border-color: var(--color-brand, var(--accent));
+  color: var(--color-text);
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-brand, var(--accent)) 22%, transparent);
+}
+.topbar-search-btn:active { transform: scale(0.985); }
+.topbar-search-btn svg {
+  width: 16px; height: 16px;
+  flex-shrink: 0;
+  color: var(--color-text-muted, var(--text-muted));
+}
+.topbar-search-btn .topbar-search-label {
+  flex: 1;
+  text-align: start;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: opacity 200ms ease, max-width 280ms cubic-bezier(0.2, 0, 0, 1), padding 200ms ease;
+  max-width: 320px;
+}
+.topbar-search-btn .topbar-search-kbd {
+  font-family: var(--font-mono, ui-monospace, "SF Mono", monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  background: var(--color-surface-3, var(--surface-3, var(--surface-2)));
+  border: 1px solid var(--color-border, var(--border));
+  border-radius: var(--radius-xs, 4px);
+  color: var(--color-text-muted, var(--text-muted));
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+  transition: opacity 180ms ease;
+}
+
+@media (max-width: 980px) {
+  .topbar-search-btn { min-width: 0; padding: 8px 10px; }
+  .topbar-search-btn .topbar-search-label,
+  .topbar-search-btn .topbar-search-kbd { display: none; }
+}
+
+/* 3) Sidebar pill indicator — absolute positioned, spring transform ──────── */
+#sidebar { position: relative; }
+#sidebar .sidebar-nav { position: relative; }
+
+.nav-pill-indicator {
+  position: absolute;
+  inset-inline-end: 0;
+  inset-block-start: 0;
+  width: 3px;
+  height: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--color-tint, var(--color-brand, var(--accent))),
+    color-mix(in oklch, var(--color-tint, var(--color-brand, var(--accent))) 35%, transparent)
+  );
+  border-radius: 2px 0 0 2px;
+  transform: translateY(0);
+  transition:
+    transform 320ms cubic-bezier(0.5, 1.5, 0.5, 1),
+    height    280ms cubic-bezier(0.5, 1.5, 0.5, 1),
+    background 200ms ease,
+    opacity   180ms ease;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1;
+}
+.nav-pill-indicator.is-active { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-pill-indicator { transition: opacity 100ms linear, height 100ms linear; }
+}
+
+/* Make sure native ::before pill on .nav-item.active stays for backward-compat
+   — it's hidden when JS pill indicator is active to avoid double pill */
+:root[data-sidebar-pill="js"] #sidebar .nav-item.active::before { display: none; }
+
+/* 4) Collapsed-mode tooltips ─────────────────────────────────────────────── */
+#sidebar .nav-item { position: relative; }
+
+.nav-tooltip {
+  position: absolute;
+  inset-inline-start: calc(100% + 10px);
+  inset-block-start: 50%;
+  transform: translateY(-50%) translateX(-4px);
+  background: var(--color-surface-3, var(--surface-3, var(--surface-2)));
+  color: var(--color-text);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm, 6px);
+  font-family: var(--font-text);
+  font-size: var(--text-sm, 0.875rem);
+  font-weight: 500;
+  white-space: nowrap;
+  border: 1px solid var(--color-border, var(--border));
+  box-shadow: var(--shadow-c-md, 0 6px 18px hsl(225 30% 6% / 0.22));
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1000;
+  transition:
+    opacity   180ms cubic-bezier(0.2, 0, 0, 1),
+    transform 180ms cubic-bezier(0.2, 0, 0, 1);
+  display: none;
+}
+:root[data-sidebar="collapsed"] .nav-tooltip { display: block; }
+:root[data-sidebar="collapsed"] #sidebar .nav-item:hover .nav-tooltip,
+:root[data-sidebar="collapsed"] #sidebar .nav-item:focus-within .nav-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Hide tooltips on mobile where labels are visible */
+@media (max-width: 980px) {
+  .nav-tooltip { display: none !important; }
+}
+
+/* 5) Mobile drawer scrim ─────────────────────────────────────────────────── */
+.drawer-scrim {
+  position: fixed;
+  inset: 0;
+  background: hsl(225 30% 6% / 0.45);
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  z-index: 99;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 240ms cubic-bezier(0.2, 0, 0, 1);
+}
+:root[data-sidebar-mobile="open"] .drawer-scrim {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (min-width: 981px) {
+  .drawer-scrim { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer-scrim { transition: opacity 100ms linear; }
+}
+
+/* End ATELIER v16 / Phase 4 ─────────────────────────────────────────────── */
+
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ATELIER v16 — Motion Choreography v2 (Worker 14 / Phase 5)
+   - Magnetic hover (data-magnet)
+   - Reveal on intersect (data-reveal)
+   - Stagger children (data-stagger)
+   - Page enter spring (.is-entering)
+   - Cursor glow (.u-cursor-glow)
+   APPEND-only. Does NOT modify the .page baseline (display: none) — instead
+   adds an .is-entering animation class JS toggles per navigation.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* 1) Magnetic hover — base style; transform applied inline by JS ────────── */
+[data-magnet] {
+  transition: transform 240ms cubic-bezier(0, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* 2) Reveal on intersect ────────────────────────────────────────────────── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 480ms cubic-bezier(0.2, 0, 0, 1),
+    transform 480ms cubic-bezier(0.2, 0, 0, 1);
+  will-change: opacity, transform;
+}
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 3) Stagger children ───────────────────────────────────────────────────── */
+[data-stagger] > * {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity   380ms cubic-bezier(0.2, 0, 0, 1),
+    transform 380ms cubic-bezier(0.2, 0, 0, 1);
+  transition-delay: var(--stagger-delay, 0ms);
+}
+[data-stagger].is-staggered > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 4) Page enter spring — ONLY when JS adds .is-entering. Does NOT touch
+      the existing .page / .page.active display rules. ─────────────────── */
+@keyframes atelierPageEnter {
+  from {
+    opacity: 0;
+    transform: scale(1.02) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.page.is-entering {
+  animation: atelierPageEnter 360ms cubic-bezier(0.5, 1.5, 0.5, 1) both;
+  will-change: opacity, transform;
+}
+
+/* 5) Cursor glow — refined hover halo ─────────────────────────────────── */
+.u-cursor-glow {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.u-cursor-glow::before {
+  content: "";
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in oklch, var(--color-tint, var(--color-brand, var(--accent))) 14%, transparent),
+    transparent 70%
+  );
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 200ms ease;
+  left: var(--cx, 50%);
+  top: var(--cy, 50%);
+  z-index: -1;
+}
+.u-cursor-glow:hover::before { opacity: 1; }
+
+/* View Transitions — name the active page for cross-fade if browser supports
+   the API. JS Upg.transition checks support before using. ────────────── */
+.page.active { view-transition-name: page-active; }
+::view-transition-old(page-active),
+::view-transition-new(page-active) {
+  animation-duration: 320ms;
+  animation-timing-function: cubic-bezier(0.5, 1.5, 0.5, 1);
+}
+
+/* Reduced motion — respect user preference: kill transitions/animations ── */
+@media (prefers-reduced-motion: reduce) {
+  [data-magnet] {
+    transition: none !important;
+    transform: none !important;
+  }
+  [data-reveal] {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  [data-stagger] > * {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .page.is-entering { animation: none !important; }
+  .u-cursor-glow::before { display: none; }
+}
+
+/* End ATELIER v16 / Phase 5 ─────────────────────────────────────────────── */

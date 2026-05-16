@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "worker": "14",
+  "worker_name": "ATELIER_LIQUID_GLASS",
+  "phase": 3,
+  "phase_title": "Dashboard Bento Consolidation",
+  "branch": "worker-14-atelier-p2-p6",
+  "commit_sha": "3e1ffb3",
+  "completed_at": "2026-05-16T22:10:00Z",
+  "lines_added": 255,
+  "lines_deleted": 385,
+  "net_lines": -130,
+  "files_touched": [
+    "platform/index.html",
+    "platform/assets/style.css"
+  ],
+  "operations": {
+    "REPLACE_IN_PLACE_dashboard_inner": 1,
+    "ADD_css_rules": 18,
+    "DELETE_legacy_features": 0,
+    "DELETE_redundant_markup": "dashboard-legacy wrapper, welcome-banner, fake grid-4 stats, fake grid-2 cards, fake progress data-table, redundant cath-dash inner duplication"
+  },
+  "sacred_assets_check": {
+    "page_sections_count": 14,
+    "qcalc_references": 391,
+    "data_cath_stat_canonical": {
+      "unitsCompleted": "1 in dashboard (countup) + 1 in myprogress (cath-stat) = 2 total, both legitimate page-specific instances",
+      "avgCompletionRate": 1,
+      "trainingHours": 1,
+      "streak": 1
+    },
+    "unique_ids_preserved": {
+      "cath-skill-grid": 1,
+      "cath-activity-list": 1,
+      "v12Heatmap": 1,
+      "v12ChallengeLevel": 1,
+      "v12ChallengeBody": 1
+    },
+    "all_intact": true
+  },
+  "dashboard_structure_after": {
+    "wrapper": ".bento[data-bento=dashboard][data-cath-dash]",
+    "cells": [
+      "1: .bento-greet b-4x1 (greeting hero with name + role + initial avatar)",
+      "2: .stat-tile b-1x1 (unitsCompleted)",
+      "3: .stat-tile b-1x1 (avgCompletionRate)",
+      "4: .stat-tile b-1x1 (trainingHours)",
+      "5: .stat-tile b-1x1 (streak)",
+      "6: .bento-skill b-2x2 (#cath-skill-grid)",
+      "7: .bento-activity b-2x2 (#cath-activity-list)",
+      "8: .bento-challenge b-2x1 (#v12ChallengeLevel + #v12ChallengeBody)",
+      "9: .bento-heatmap b-2x1 (#v12Heatmap)",
+      "10: .dock b-4x1 (6 quick actions)"
+    ],
+    "removed": [
+      ".dashboard-legacy article wrapper",
+      ".welcome-banner div",
+      ".grid-4 with 4 fake stat-cards",
+      ".grid-2 with modules-grid + activity-feed (placeholder content)",
+      ".card with fake data-table progress",
+      "Two v12-card wrappers around heatmap/challenge (sacred IDs moved into proper bento cells)"
+    ]
+  },
+  "css_appended_block": ".bento-h, .bento-link, .bento-pill, .bento-h-meta, .bento-body, .bento-greet-meta, .bento-greet-avatar, .bento-skill, .bento-activity, .bento-challenge, .bento-heatmap, .dock layout refinement (header + dock-row 6/3/2 cols), responsive guards @1100/980/480",
+  "next_action": "Continue Worker 14 Phase 4 — Chrome Refinement (Topbar Island scroll-shrink + search→cmdk + nav-pill spring + sidebar tooltips + mobile drawer scrim). Same branch worker-14-atelier-p2-p6."
+}

@@ -14454,3 +14454,348 @@ document.addEventListener('DOMContentLoaded', () => {
   window.Upg = window.Upg || {};
   window.Upg.material = { get, set, cycle };
 })();
+
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   ATELIER v16 — Chrome Coordinator (Worker 14 / Phase 4)
+   Public API: window.Upg.chrome.{ init, movePill, openSearch, closeDrawer }
+   Wires:
+     - data-action="open-cmdk" → Upg.cmdk.open()
+     - active nav-item changes → spring slide of .nav-pill-indicator
+     - Mobile drawer: swipe-to-close + scrim click (close-drawer already handled
+       by Upg.nav delegation, this adds touch swipe)
+   Sacred: Upg.scroll, Upg.nav, Upg.cmdk untouched. Read-only consumers.
+   ════════════════════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+
+  const html = document.documentElement;
+  let sidebar = null;
+  let pill    = null;
+
+  const ensureRefs = () => {
+    sidebar = sidebar || document.getElementById('sidebar');
+    pill    = pill    || (sidebar && sidebar.querySelector('.nav-pill-indicator'));
+    return !!sidebar;
+  };
+
+  // 1) Search button → command palette --------------------------------------
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-action="open-cmdk"]');
+    if (!btn) return;
+    e.preventDefault();
+    if (window.Upg && window.Upg.cmdk && typeof window.Upg.cmdk.open === 'function') {
+      window.Upg.cmdk.open();
+    }
+  });
+
+  // 2) Pill indicator — slide to active nav-item ----------------------------
+  const movePill = (targetItem) => {
+    if (!ensureRefs() || !pill || !targetItem) return;
+    const sb = sidebar.getBoundingClientRect();
+    const it = targetItem.getBoundingClientRect();
+    const top = (it.top - sb.top) + (sidebar.scrollTop || 0);
+    pill.style.height    = it.height + 'px';
+    pill.style.transform = 'translateY(' + top + 'px)';
+    pill.classList.add('is-active');
+    // Tell CSS to suppress the legacy ::before pill while JS pill is active
+    html.dataset.sidebarPill = 'js';
+  };
+
+  const updatePillFromActive = () => {
+    if (!ensureRefs()) return;
+    const active = sidebar.querySelector('.nav-item.active');
+    if (active) movePill(active);
+  };
+
+  // Watch for active class changes on nav-items
+  const initPillObserver = () => {
+    if (!ensureRefs() || !('MutationObserver' in window)) return;
+    const items = sidebar.querySelectorAll('.nav-item');
+    if (!items.length) return;
+    const mo = new MutationObserver(updatePillFromActive);
+    items.forEach((it) => {
+      mo.observe(it, { attributes: true, attributeFilter: ['class'] });
+    });
+  };
+
+  // Re-position pill on resize, theme change, sidebar collapse toggle
+  const repositionEvents = ['resize'];
+  repositionEvents.forEach((ev) =>
+    window.addEventListener(ev, () => requestAnimationFrame(updatePillFromActive), { passive: true })
+  );
+  // Also reposition when sidebar collapse state attribute flips
+  if ('MutationObserver' in window) {
+    const htmlObs = new MutationObserver((muts) => {
+      for (const m of muts) {
+        if (m.attributeName === 'data-sidebar' || m.attributeName === 'data-theme') {
+          // Wait for CSS transition to settle, then snap pill position
+          setTimeout(updatePillFromActive, 320);
+          break;
+        }
+      }
+    });
+    htmlObs.observe(html, { attributes: true });
+  }
+
+  // 3) Mobile drawer — swipe-to-close (Upg.nav handles open/close core) -----
+  let touchStartX = null;
+  let touchStartY = null;
+  const onTouchStart = (e) => {
+    if (window.innerWidth > 980) return;
+    if (html.dataset.sidebarMobile !== 'open') return;
+    const t = e.touches && e.touches[0];
+    if (!t) return;
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+  };
+  const onTouchEnd = (e) => {
+    if (touchStartX === null) return;
+    const t = e.changedTouches && e.changedTouches[0];
+    if (!t) { touchStartX = null; return; }
+    const dx = t.clientX - touchStartX;
+    const dy = Math.abs(t.clientY - touchStartY);
+    // Treat as horizontal swipe only (ignore mostly-vertical)
+    if (dy < 40 && Math.abs(dx) > 60) {
+      if (window.Upg && window.Upg.nav && typeof window.Upg.nav.closeDrawer === 'function') {
+        window.Upg.nav.closeDrawer();
+      } else {
+        delete html.dataset.sidebarMobile;
+      }
+    }
+    touchStartX = null;
+    touchStartY = null;
+  };
+
+  const wireSwipe = () => {
+    if (!ensureRefs()) return;
+    sidebar.addEventListener('touchstart', onTouchStart, { passive: true });
+    sidebar.addEventListener('touchend',   onTouchEnd,   { passive: true });
+  };
+
+  // 4) Boot -----------------------------------------------------------------
+  const boot = () => {
+    ensureRefs();
+    initPillObserver();
+    wireSwipe();
+    // Initial pill placement after layout settles
+    setTimeout(updatePillFromActive, 80);
+    // Second pass once fonts/icons fully loaded (avoids early mis-measure)
+    setTimeout(updatePillFromActive, 320);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+
+  // Public API ---------------------------------------------------------------
+  window.Upg = window.Upg || {};
+  window.Upg.chrome = Object.freeze({
+    init: boot,
+    movePill: updatePillFromActive,
+    openSearch: () => (window.Upg && window.Upg.cmdk && window.Upg.cmdk.open && window.Upg.cmdk.open()),
+    closeDrawer: () => (window.Upg && window.Upg.nav && window.Upg.nav.closeDrawer && window.Upg.nav.closeDrawer())
+  });
+})();
+
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   ATELIER v16 — Choreography Engine (Worker 14 / Phase 5)
+   Public API: window.Upg.choreo.{ refresh, magnetize, reveal, stagger, cursorGlow }
+   - Magnetic hover for [data-magnet] (≤6px pull within 80px range)
+   - Reveal on intersect for [data-reveal]
+   - Stagger children for [data-stagger] (60ms default step, override with data-stagger-step)
+   - Cursor glow tracking for .u-cursor-glow
+   Sacred: untouched APIs (Upg.motion, Upg.countup, navigateTo).
+   prefers-reduced-motion → all motion disabled, content shown instantly.
+   ════════════════════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 1) Magnetic hover ------------------------------------------------------
+  const MAGNET_RANGE = 80;
+  const MAGNET_STRENGTH = 0.18;
+
+  const magnetize = (el) => {
+    if (!el || reduced || el.dataset.magnetized === 'true') return;
+    let raf = 0;
+    const onMove = (e) => {
+      const r = el.getBoundingClientRect();
+      const cx = r.left + r.width / 2;
+      const cy = r.top + r.height / 2;
+      const dx = e.clientX - cx;
+      const dy = e.clientY - cy;
+      const dist = Math.hypot(dx, dy);
+      if (dist > MAGNET_RANGE) return;
+      const factor = (1 - dist / MAGNET_RANGE) * MAGNET_STRENGTH;
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        el.style.transform = 'translate(' + (dx * factor).toFixed(2) + 'px, ' + (dy * factor).toFixed(2) + 'px)';
+      });
+    };
+    const onLeave = () => {
+      cancelAnimationFrame(raf);
+      el.style.transform = '';
+    };
+    el.addEventListener('mousemove', onMove);
+    el.addEventListener('mouseleave', onLeave);
+    el.dataset.magnetized = 'true';
+  };
+
+  // 2) Reveal on intersect -------------------------------------------------
+  let revealIO = null;
+  const reveal = () => {
+    const els = document.querySelectorAll('[data-reveal]:not(.is-revealed)');
+    if (!els.length) return;
+    if (reduced || !('IntersectionObserver' in window)) {
+      els.forEach((el) => el.classList.add('is-revealed'));
+      return;
+    }
+    if (!revealIO) {
+      revealIO = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-revealed');
+            revealIO.unobserve(e.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+    }
+    els.forEach((el) => revealIO.observe(el));
+  };
+
+  // 3) Stagger children ---------------------------------------------------
+  let staggerIO = null;
+  const stagger = () => {
+    const els = document.querySelectorAll('[data-stagger]:not(.is-staggered)');
+    if (!els.length) return;
+    if (reduced || !('IntersectionObserver' in window)) {
+      els.forEach((el) => el.classList.add('is-staggered'));
+      return;
+    }
+    if (!staggerIO) {
+      staggerIO = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          const step = parseInt(e.target.dataset.staggerStep || '60', 10);
+          Array.from(e.target.children).forEach((child, i) => {
+            child.style.setProperty('--stagger-delay', (i * step) + 'ms');
+          });
+          e.target.classList.add('is-staggered');
+          staggerIO.unobserve(e.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+    }
+    els.forEach((el) => staggerIO.observe(el));
+  };
+
+  // 4) Cursor glow --------------------------------------------------------
+  const cursorGlow = () => {
+    if (reduced) return;
+    document.addEventListener('mousemove', (e) => {
+      const el = e.target.closest && e.target.closest('.u-cursor-glow');
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--cx', (e.clientX - r.left) + 'px');
+      el.style.setProperty('--cy', (e.clientY - r.top) + 'px');
+    }, { passive: true });
+  };
+
+  // 5) Refresh — re-applies all hooks for new DOM (post-navigation) -------
+  const refresh = () => {
+    document.querySelectorAll('[data-magnet]').forEach(magnetize);
+    reveal();
+    stagger();
+  };
+
+  // Boot
+  const boot = () => { refresh(); cursorGlow(); };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+
+  // Public API
+  window.Upg = window.Upg || {};
+  window.Upg.choreo = Object.freeze({ refresh, magnetize, reveal, stagger, cursorGlow });
+})();
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   ATELIER v16 — Page Transition Wrap (Worker 14 / Phase 5)
+   Public API: window.Upg.transition.{ navigate, supports }
+   Wraps existing window.navigateTo() with View Transitions API where
+   available, otherwise applies an .is-entering CSS animation as fallback.
+   Listens to [data-page] click delegation; respects existing onclick handlers
+   for backward compatibility (legacy v12 nav-items use onclick="navigateTo(…)").
+   ════════════════════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+
+  const supports = typeof document.startViewTransition === 'function';
+
+  const playFallback = () => {
+    requestAnimationFrame(() => {
+      const target = document.querySelector('.page.active');
+      if (!target) return;
+      target.classList.remove('is-entering');
+      // Force reflow so we can re-add the class and trigger animation
+      // eslint-disable-next-line no-unused-expressions
+      void target.offsetWidth;
+      target.classList.add('is-entering');
+      target.addEventListener('animationend', () => {
+        target.classList.remove('is-entering');
+      }, { once: true });
+    });
+  };
+
+  const navigate = (pageId) => {
+    if (typeof window.navigateTo !== 'function' || !pageId) return;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (supports && !reduced) {
+      try {
+        const vt = document.startViewTransition(() => { window.navigateTo(pageId); });
+        if (vt && vt.finished && typeof vt.finished.finally === 'function') {
+          vt.finished.finally(() => {
+            if (window.Upg && window.Upg.choreo && window.Upg.choreo.refresh) {
+              window.Upg.choreo.refresh();
+            }
+          });
+        }
+        return;
+      } catch (_) { /* fall through to fallback */ }
+    }
+
+    window.navigateTo(pageId);
+    if (!reduced) playFallback();
+    if (window.Upg && window.Upg.choreo && window.Upg.choreo.refresh) {
+      window.Upg.choreo.refresh();
+    }
+  };
+
+  // Click delegation for [data-page] elements without inline onclick.
+  // We do NOT preventDefault on the legacy onclick path — it self-handles.
+  document.addEventListener('click', (e) => {
+    const el = e.target.closest && e.target.closest('[data-page]');
+    if (!el) return;
+    const page = el.dataset.page;
+    if (!page || page === 'none' || page === '') return;
+    if (el.hasAttribute('onclick')) return; // legacy path
+    e.preventDefault();
+    navigate(page);
+  });
+
+  // Public API
+  window.Upg = window.Upg || {};
+  window.Upg.transition = Object.freeze({ navigate, supports });
+})();
