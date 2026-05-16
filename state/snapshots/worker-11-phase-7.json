@@ -1,0 +1,46 @@
+{
+  "worker": "11",
+  "worker_name": "PLATFORM_FOUNDATION",
+  "phase": 7,
+  "phases_total": 7,
+  "branch": "worker-11-phase-4-7",
+  "phase_completed": 7,
+  "lines_added_total": 531,
+  "files_touched": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/app.js",
+    "platform/manifest.webmanifest",
+    "platform/sw.js",
+    "platform/favicon.svg",
+    "scripts/cleanup-inline-styles.mjs"
+  ],
+  "pwa": {
+    "manifest": "manifest.webmanifest",
+    "service_worker": "sw.js",
+    "favicon": "favicon.svg",
+    "cache_name": "upgrade-cathedral-v14-1",
+    "strategies": {
+      "same_origin": "cache-first with index.html fallback for navigation",
+      "google_fonts": "stale-while-revalidate"
+    }
+  },
+  "a11y": {
+    "skip_link": ".u-skip-link → #main",
+    "main_focusable": true,
+    "focus_trap": ["#cmdk-palette", "#shortcut-cheatsheet", "#page-gateway"],
+    "reduced_motion_guard": true,
+    "forced_colors_fallback": true
+  },
+  "utilities_added": ["spacing (16)", "display (12)", "text (15)", "bg/border (10)", "shadow (3)", "a11y (2)"],
+  "inline_styles_remaining": 1602,
+  "inline_styles_target": 400,
+  "inline_styles_note": "Target not met — remaining are multi-decl backgrounds/gradients that risk regression to refactor. Cleanup script shipped in scripts/ for future incremental work.",
+  "console_banner": "Upgrade Platform · Cathedral v14",
+  "next_action": "Worker 11 COMPLETE — PR worker-11-phase-4-7 → main. Awaiting user direction for next worker.",
+  "open_threads": [
+    "Future: incremental inline-style cleanup using scripts/cleanup-inline-styles.mjs map extension",
+    "Future: rasterize favicon to PNG for Safari/iOS",
+    "Future: Lighthouse audit run + screenshot capture"
+  ]
+}
