@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-05-16T10:00:00Z",
+  "last_updated": "2026-05-16T10:30:00Z",
   "current": {
     "worker": "12",
     "worker_name": "AURORA_APPLE_GRADE",
-    "phase": 2,
+    "phase": 3,
     "phases_total": 8,
     "phase_order": ["1", "1B", "2", "3", "4", "5", "6", "7"],
     "branch": "worker-12-aurora",
@@ -63,8 +63,9 @@
     { "worker": "11", "phase": 7, "title": "Production Pass + PWA (manifest, sw, favicon, utilities, a11y)", "branch": "worker-11-phase-4-7", "lines_added": 531 },
     { "worker": "12", "phase": 1, "title": "Typography & Spatial System (10 text-sizes, 13 spaces, leading/tracking/weight, prose, Upg.type)", "branch": "worker-12-aurora", "lines_added": 293 },
     { "worker": "12", "phase": "1B", "title": "Typeface Soul — premium Arabic stack (Reem Kufi + Readex Pro + IBM Plex Arabic + Aref Ruqaa + Thmanyah optional)", "branch": "worker-12-aurora", "lines_added": 230 },
-    { "worker": "12", "phase": 2, "title": "Linen-Bone off-white re-chisel + tinted shadows + tonal elevation + nav-badge identity classes (10 inline gradients purged)", "branch": "worker-12-aurora", "lines_added": 115 }
+    { "worker": "12", "phase": 2, "title": "Linen-Bone off-white re-chisel + tinted shadows + tonal elevation + nav-badge identity classes (10 inline gradients purged)", "branch": "worker-12-aurora", "lines_added": 115 },
+    { "worker": "12", "phase": 3, "title": "Materials & Depth — 4-tier glass (thin/regular/thick/chrome) + scroll-aware elevation + halos + grain refresh + Upg.scroll", "branch": "worker-12-aurora", "lines_added": 238 }
   ],
-  "next_action": "Continue Worker 12 Phase 3 — Materials & Depth (4-tier glass: thin/regular/thick/chrome + scroll elevation + edge-light + grain refresh).",
+  "next_action": "Continue Worker 12 Phase 4 — Navigation Chrome (Source-List sidebar + Dynamic-Island topbar + badge tokens).",
   "notes": "Worker 11 PLATFORM_FOUNDATION (Cathedral v14) FULLY COMPLETE — 7/7 phases. This session executed phases 4-7 (1368 + 713 + 1039 + 531 = 3651 lines). Phase 7 added: PWA manifest.webmanifest + sw.js (cache-first same-origin, stale-while-revalidate fonts) + favicon.svg + Open Graph meta + apple-touch-icon + skip link (.u-skip-link) + main[tabindex=-1] + 70+ utility classes (.u-mt-*, .u-flex, .u-grid, .u-text-*, .u-bg-*, .u-border-*, .u-rounded-*, .u-shadow-*, .u-truncate, .u-sr-only, .u-skip-link) + console banner (one-shot) + service worker auto-register + focus trap (cmdk + cheatsheet + gateway) + lazy-mount event for heavy pages + reduced-motion guard + forced-colors fallback + print styles + scripts/cleanup-inline-styles.mjs (dev tool, 82 inline styles converted automatically). Inline styles 1763 → 1602 (target ≤400 not met — remaining ones are multi-decl complex backgrounds/gradients that risk regression to refactor). Public APIs: Upg.theme, Upg.icons, Upg.gateway, Upg.calc, Upg.cmdk, Upg.state, Upg.production. PR ready: worker-11-phase-4-7 (4 phase commits + 4 state commits = 8 total)."
 }
