@@ -1,5 +1,52 @@
 # Upgrade Platform — CHANGELOG
 
+## v17-scaffold — Pack v2 RESONANCE (Prompt System) — 2026-05-19
+
+### Added — Pack v2 RESONANCE prompt system
+- New folder `prompts/v2/` with 15 markdown files (~252 KB total).
+- **Meta files (7):**
+  - `00_MASTER_PROMPT_v2.md` — constitution v2 (RESONANCE doctrine, Cathedral v16 baseline, PROVE-IT-RESONATE).
+  - `README_v2.md` — pack overview + roadmap.
+  - `AUTO_PILOT_v2.md` — autonomous executor for Workers 15–19 + 2-push rule.
+  - `COMPACT_MASTER_v2.md` — context-tight version (~3.5 KB).
+  - `10_RESUME_PROTOCOL_v2.md` — session-resume v2 schema + recovery scenarios.
+  - `CONTEXT_LIMIT_FIX_v2.md` — 7 root causes + fixes for Cathedral v16 size constraints.
+  - `MOBILE_KIRO_v2.md` — Kiro Mobile playbook for Pack v2.
+- **Worker 15 — TYPOGRAPHY SOUL (8 files):**
+  - `15_WORKER_TYPOGRAPHY_SOUL.md` — index + Preservation Guard.
+  - `15_PHASE_1_TYPE_AUDIT_CASTING.md` — 9 voice tokens + 22 utility classes.
+  - `15_PHASE_2_ARABIC_DISPLAY.md` — Aref Ruqaa wordmark + Reem Kufi expansion.
+  - `15_PHASE_3_ARABIC_BODY.md` — Tajawal UI + Readex Pro body + Cairo fallback.
+  - `15_PHASE_4_LATIN_NUMERIC.md` — Inter + JetBrains Mono + Fraunces + tabular nums + bidi-isolate.
+  - `15_PHASE_5_SCALE_RHYTHM.md` — perfect-fourth scale + 8pt baseline + leading/tracking/rhythm/measure tokens.
+  - `15_PHASE_6_PER_PAGE_PERSONALITY.md` — 14 type signatures + `Upg.type2` API.
+- **Special Ritual (1):**
+  - `CONTENT_REORDER_RITUAL.md` — pedagogical reorder + page-curriculum + `Upg.curriculum` API.
+
+### Workers 16-19 (deferred to subsequent sessions per user-approved Path C)
+- Worker 16 — VITAL UI (6 phases) — living surfaces, tactile micro-interactions, cinematic transitions.
+- Worker 17 — CONTENT REVIVAL (6 phases) — forensic inventory, difficulty scoring, pedagogical reorder, enrichment, citation hardening, cross-linking.
+- Worker 18 — LEARNING SHELL (4 phases) — progress markers, reading mode, cheat sheet generator, personal notes.
+- Worker 19 — MICRO POLISH (4 phases) — mobile mastery, print atelier, detail shop, final audit sweep.
+
+### Philosophy
+- **RESONANCE doctrine:** "Resonance over noise. Soul over shine."
+- **Scope locked:** personal training platform, single offline HTML file. NO data layer, NO telemetry, NO governance, NO CI.
+- **Focus:** typography craft + UI breathing life + content pedagogical reorder + light learning shell + final polish.
+
+### Preserved
+- All Pack v1 prompts under `prompts/` (root) — untouched, kept as forensic reference library.
+- Cathedral v16 baseline (PR #53) — 14 pages, 391 qcalc, 19 Upg.* APIs, 15 identity tints — fully respected.
+
+### State
+- `state/PROGRESS.json` schema bumped to v2: added `pack`, `pack_status`, `previous`, `pack_v2_scaffold` fields. JSON validated.
+
+### Branch & PR
+- Branch: `feat/prompts-pack-v2-resonance`.
+- PR: `feat: Pack v2 RESONANCE — prompt system (Workers 15-19 + Ritual)`.
+
+---
+
 ## v16 — ATELIER (Apple Liquid-Glass Pass) — Worker 14 — 2026-05
 
 ### Added — 5 new Upg.* APIs (total 19)
