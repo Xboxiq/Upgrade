@@ -1,15 +1,22 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-19T23:45:00Z",
+  "last_updated": "2026-05-19T22:22:55Z",
   "pack": "v2-resonance",
   "pack_status": "in-progress",
   "current": {
     "pack": "v2",
     "worker": "15",
     "worker_name": "TYPOGRAPHY_SOUL",
-    "phase": 4,
+    "phase": 5,
     "phases_total": 6,
-    "phase_order": ["1", "2", "3", "4", "5", "6"],
+    "phase_order": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
     "branch": "worker-15-resonance",
     "status": "in-progress"
   },
@@ -24,79 +31,513 @@
     "merged_pr": 53
   },
   "completed_phases": [
-    { "worker": "01", "phase": 1, "title": "Foundation Tokens & Aurora Mesh",                    "branch": "worker-01-phase-1-v2", "lines_added": 121 },
-    { "worker": "01", "phase": 2, "title": "Conic Halo + Magnetic Cursor Aura",                  "branch": "worker-01-phase-2",   "lines_added": 204 },
-    { "worker": "01", "phase": 3, "title": "Living Numerals + Sectional Identity Tint",          "branch": "worker-01-phase-3",   "lines_added": 193 },
-    { "worker": "01", "phase": 4, "title": "Polish: reduced-motion, print, View Transitions, visibility-pause", "branch": "worker-01-phase-4", "lines_added": 145 },
-    { "worker": "02", "phase": 1, "title": "Sales Frameworks Comparison (4 schools)",            "branch": "worker-02-phase-1",   "lines_added": 564 },
-    { "worker": "02", "phase": 2, "title": "Discovery Library + Closing + Iraqi Objections",     "branch": "worker-02-phase-2",   "lines_added": 440 },
-    { "worker": "02", "phase": 3, "title": "3 Interactive Labs",                                  "branch": "worker-02-phase-3",   "lines_added": 550 },
-    { "worker": "02", "phase": 4, "title": "page-accountmgr (KAM)",                               "branch": "worker-02-phase-4",   "lines_added": 515 },
-    { "worker": "02", "phase": 5, "title": "Iraq Salary + Career Ladder + Cheat Sheet + Citations + Progress", "branch": "worker-02-phase-5", "lines_added": 386 },
-    { "worker": "03", "phase": 1, "title": "Voice Profile (5 dims) + Empathy Loop + 14 Archetypes", "branch": "worker-03-phase-1", "lines_added": 895 },
-    { "worker": "03", "phase": 2, "title": "KPI Deep-Dive + APIndex Calculator + Call Anatomy 7 Stages", "branch": "worker-03-phase-2", "lines_added": 828 },
-    { "worker": "03", "phase": 3, "title": "Voice Self-Assessment Studio (Web Audio + Web Speech)", "branch": "worker-03-phase-3", "lines_added": 979 },
-    { "worker": "03", "phase": 4, "title": "Simulator + Iraq Block + Cheat Sheet + 12 Citations", "branch": "worker-03-phase-4", "lines_added": 1002 },
-    { "worker": "04", "phase": 1, "title": "Accounting Foundations (Equation + T-Account + 9-Step Cycle)", "branch": "worker-04-phase-1", "lines_added": 1180 },
-    { "worker": "04", "phase": 2, "title": "Iraqi COA + IFRS vs Local + 10 Ratios", "branch": "worker-04-phase-2", "lines_added": 639 },
-    { "worker": "04", "phase": 3, "title": "Iraqi Tax Calculator + Salary Slip", "branch": "worker-04-phase-3", "lines_added": 685 },
-    { "worker": "04", "phase": 4, "title": "Income Statement + Balance Sheet Builders + Cash Flow + Equity Change", "branch": "worker-04-phase-4", "lines_added": 812 },
-    { "worker": "04", "phase": 5, "title": "Cashier Track + Iraq Salary + Cheat Sheet + 12 Citations", "branch": "worker-04-phase-5", "lines_added": 680 },
-    { "worker": "05", "phase": 1, "title": "Fundamentals Gate (8 cards + Quiz) + Path Decision Tree", "branch": "worker-05-complete", "lines_added": 874 },
-    { "worker": "05", "phase": 2, "title": "FE + BE 12-week Roadmaps + Git Survival Kit",            "branch": "worker-05-complete", "lines_added": 714 },
-    { "worker": "05", "phase": 3, "title": "Clean Code Pillars + Code Review Etiquette + Soft Skills","branch": "worker-05-complete", "lines_added": 482 },
-    { "worker": "05", "phase": 4, "title": "5 Interactive Labs — Trace, Big-O, Git Sandbox, Interview Sim, Portfolio Gen", "branch": "worker-05-complete", "lines_added": 1353 },
-    { "worker": "05", "phase": 5, "title": "Iraq Salary + Companies + First-Job Strategy + Cheat Sheet + 12 Citations", "branch": "worker-05-complete", "lines_added": 445 },
-    { "worker": "06", "phase": 1, "title": "Attention Psychology (6 axes) + Algo Anatomy (7 platforms)", "branch": "worker-06-complete", "lines_added": 660 },
-    { "worker": "06", "phase": 2, "title": "Content Pillars + 15 Hook Frameworks + 30-day Calendar Builder", "branch": "worker-06-complete", "lines_added": 580 },
-    { "worker": "06", "phase": 3, "title": "Marketing Funnel (5 stages) + Performance Math Calculator + A/B Test Designer", "branch": "worker-06-complete", "lines_added": 508 },
-    { "worker": "06", "phase": 4, "title": "Email + WhatsApp + Influencer Vetting Tool", "branch": "worker-06-complete", "lines_added": 368 },
-    { "worker": "06", "phase": 5, "title": "Iraq Salary + Companies + Iraqi Hooks + Cheat Sheet + 12 Citations", "branch": "worker-06-complete", "lines_added": 230 },
-    { "worker": "07", "phase": 1, "title": "nav-item + page skeleton + Electronics Fundamentals + Tools Gallery", "branch": "worker-07-complete", "lines_added": 478 },
-    { "worker": "07", "phase": 2, "title": "Mainboard Anatomy interactive + 10 Repair Cards (1-10)", "branch": "worker-07-complete", "lines_added": 582 },
-    { "worker": "07", "phase": 3, "title": "Repair Cards 11-20 + 3 Decision Trees + Software Side", "branch": "worker-07-complete", "lines_added": 572 },
-    { "worker": "07", "phase": 4, "title": "Micro-Solder Intro + Customer Service + Ethics + Iraq Block", "branch": "worker-07-complete", "lines_added": 481 },
-    { "worker": "07", "phase": 5, "title": "6 Interactive Labs + Career Path + Cheat Sheet + 12 Citations", "branch": "worker-07-complete", "lines_added": 1206 },
-    { "worker": "08", "phase": 1, "title": "HR psychology (5 dims) + STAR framework + 15 Common Questions", "branch": "worker-08-complete", "lines_added": 1202 },
-    { "worker": "08", "phase": 2, "title": "30 Trap Questions + Pre-Interview Toolkit + Post-Interview Playbook", "branch": "worker-08-complete", "lines_added": 660 },
-    { "worker": "08", "phase": 3, "title": "Salary Negotiation Calculator IQ + 6 principles + Iraq Salary table", "branch": "worker-08-complete", "lines_added": 672 },
-    { "worker": "08", "phase": 4, "title": "15 Scenarios Player + Job Ad Decoder + 12 HR Red Flags", "branch": "worker-08-complete", "lines_added": 920 },
-    { "worker": "08", "phase": 5, "title": "Mock Screen Timer + Offer Compare + Iraq Labor Law + Cheat Sheet + 14 Citations", "branch": "worker-08-complete", "lines_added": 977 },
-    { "worker": "09", "phase": 1, "title": "7 Drives + 12 Biases in page-psych", "branch": "worker-09-complete", "lines_added": 478 },
-    { "worker": "09", "phase": 2, "title": "Goleman 5 + RULER + Mood Meter Interactive in page-eq", "branch": "worker-09-complete", "lines_added": 612 },
-    { "worker": "09", "phase": 3, "title": "Self-Diagnostic Suite — 6 tests + scoring engine", "branch": "worker-09-complete", "lines_added": 845 },
-    { "worker": "09", "phase": 4, "title": "Psych Insets — cross-page micro-cards (7 pages × 3 insets)", "branch": "worker-09-complete", "lines_added": 232 },
-    { "worker": "09", "phase": 5, "title": "Therapist Bridge + Insights Engine + 16 Citations", "branch": "worker-09-complete", "lines_added": 365 },
-    { "worker": "11", "phase": 1, "title": "Sovereign Theme System (tokens + bridge + 3-state toggle)", "branch": "worker-11-complete", "lines_added": 359 },
-    { "worker": "11", "phase": 2, "title": "Lucide-style Icon System (95 symbols + .qi + migrator)", "branch": "worker-11-complete", "lines_added": 401 },
-    { "worker": "11", "phase": 3, "title": "Entry Gateway + Identity Lock + Onboarding 4-step", "branch": "worker-11-complete", "lines_added": 912 },
-    { "worker": "11", "phase": 4, "title": "Calculator Foundation Component (qcalc) + 8 migrations", "branch": "worker-11-phase-4-7", "lines_added": 1368 },
-    { "worker": "11", "phase": 5, "title": "Command Palette + Keyboard Shortcuts (30+ commands)",     "branch": "worker-11-phase-4-7", "lines_added": 713 },
-    { "worker": "11", "phase": 6, "title": "Real Dashboard + Unified State Layer + page-myprogress",   "branch": "worker-11-phase-4-7", "lines_added": 1039 },
-    { "worker": "11", "phase": 7, "title": "Production Pass + PWA (manifest, sw, favicon, utilities, a11y)", "branch": "worker-11-phase-4-7", "lines_added": 531 },
-    { "worker": "12", "phase": 1, "title": "Typography & Spatial System (10 text-sizes, 13 spaces, leading/tracking/weight, prose, Upg.type)", "branch": "worker-12-aurora", "lines_added": 415 },
-    { "worker": "12", "phase": "1B", "title": "Typeface Soul — premium Arabic stack (Reem Kufi + Readex Pro + IBM Plex Arabic + Aref Ruqaa + Thmanyah optional)", "branch": "worker-12-aurora", "lines_added": 480 },
-    { "worker": "12", "phase": 2, "title": "Linen-Bone off-white re-chisel + tinted shadows + tonal elevation + nav-badge identity classes (10 inline gradients purged)", "branch": "worker-12-aurora", "lines_added": 480 },
-    { "worker": "12", "phase": 3, "title": "Materials & Depth — 4-tier glass (thin/regular/thick/chrome) + scroll-aware elevation + halos + grain refresh + Upg.scroll", "branch": "worker-12-aurora", "lines_added": 560 },
-    { "worker": "12", "phase": 4, "title": "Navigation Chrome — Source-List sidebar collapse (Cmd+\\) + Dynamic-Island compact topbar + View Transitions nav-pill + mobile drawer + Upg.nav", "branch": "worker-12-aurora", "lines_added": 620 },
-    { "worker": "12", "phase": 5, "title": "Dashboard Hero — 15 per-page identity tints + Bento utilities + count-up tickers + time-of-day greet + Upg.identity/greet/countup", "branch": "worker-12-aurora", "lines_added": 640 },
-    { "worker": "12", "phase": 6, "title": "Motion & Interaction — easing/duration tokens (5 ease + 6 duration) + press/lift/glow/reveal/skeleton + view-transition wrap + Upg.motion", "branch": "worker-12-aurora", "lines_added": 520 },
-    { "worker": "12", "phase": 7, "title": "Inline purge (1671→587) + 100+ utilities + per-page header tint underline + boot banner + sanity assert + CHANGELOG", "branch": "worker-12-aurora", "lines_added": 964 },
-    { "worker": "13", "phase": 1, "title": "Bento Dashboard — Augment-and-Wrap (greeting + 4 countup tiles + dock + legacy wrapper)", "branch": "worker-13-aurora-completion-impl", "lines_added": 76 },
-    { "worker": "13", "phase": 2, "title": "Real Inline Purge — utilities pack + cleanup v2 + decomposer (587→223 inline, 12 stray !important, 7 u-grad-* utilities)", "branch": "worker-13-phase-2-3-impl", "lines_added": 1688 },
-    { "worker": "13", "phase": 3, "title": "Final Polish — wordmark Aref Ruqaa accent + sidebar toggle in topbar + boot sanity v15.1 IIFE + CHANGELOG v15.1", "branch": "worker-13-phase-2-3-impl", "lines_added": 93 },
-    { "worker": "14", "phase": 1, "title": "Liquid Glass v2 — WWDC25 blur ladder (16/24/32/40) + edge specular + 3-tier paper tonal + paper grain v2 + density API + Upg.material", "branch": "worker-14-atelier", "lines_added": 227 },
-    { "worker": "14", "phase": 2, "title": "Page Headers Re-chisel — 14 .page-h blocks (eyebrow + .qi icon + lede + 56px tint underline) + emoji purge from H1s", "branch": "worker-14-atelier-p2-p6", "lines_added": 202 },
-    { "worker": "14", "phase": 3, "title": "Dashboard Bento Consolidation — 10 cells, zero legacy duplication, 5 sacred IDs relocated cleanly", "branch": "worker-14-atelier-p2-p6", "lines_added": 255, "lines_deleted": 385 },
-    { "worker": "14", "phase": 4, "title": "Chrome Refinement — Topbar Island scroll-shrink + search→cmdk + nav-pill spring-slide + 17 collapsed-mode tooltips + mobile drawer scrim + Upg.chrome", "branch": "worker-14-atelier-p2-p6", "lines_added": 381 },
-    { "worker": "14", "phase": 5, "title": "Motion Choreography v2 — magnetic hover + reveal/stagger/intersect + page enter spring + Upg.choreo + Upg.transition", "branch": "worker-14-atelier-p2-p6", "lines_added": 339 },
-    { "worker": "14", "phase": 6, "title": "Final Polish — inline purge 215→76 + sw v2 (precache+offline) + manifest shortcuts + favicon v2 squircle + Upg.focusTrap (auto-attach modals) + Lighthouse helpers + sanity v16 (19/19 modules) + CHANGELOG v16", "branch": "worker-14-phase-6-final", "lines_added": 1080 },
-    { "worker": "15", "phase": 1, "title": "Type Audit & Casting — 9 voice tokens (--type-voice-*) + 21 utility classes (.type-*) + 9 [data-type-voice] selectors + 11 sample augmentations across 4 pages",                  "branch": "worker-15-resonance",     "lines_added": 322 },
-    { "worker": "15", "phase": 2, "title": "Arabic Display Crown — --font-wordmark/--font-hero stacks + 4 display utilities (.type-wordmark/.type-hero[--xl/--lg/--md]/.type-display[-h/-l]) + 5 weight variants + Aref Ruqaa/Reem Kufi micro-tuning + 14 page-h1 augmented (11 type-display + 3 type-hero literary) + dashboard greeting type-hero + 2 wordmarks (gateway + sidebar)", "branch": "worker-15-resonance",     "lines_added": 195 },
-    { "worker": "15", "phase": 3, "title": "Arabic Body & UI Layer — Google Fonts +Tajawal (300/400/500/700/900) + --font-ui token (Tajawal-primary) + --font-text reroute (Readex Pro→Tajawal→IBM Plex→Cairo) + 18 UI utilities (.type-body/.type-body-lead/.type-body-lg/.type-body-sm + .type-ui-label[--sm] + .type-button[--lg/--sm] + .type-tab[--active] + .type-breadcrumb[--current] + .type-hint + .type-caption + .type-form-label + .type-input + .type-cta-heavy) + Cairo fallback hardening (@supports not variable) + mobile <480px small-button Readex fallback + 23 sample augmentations (10 buttons + 5 lab-eyebrow tabs + 4 form-labels + 3 inputs + 1 hint)", "branch": "worker-15-resonance",     "lines_added": 245 },
-    { "worker": "15", "phase": 4, "title": "Latin & Numeric Layer — Google Fonts +Inter(300..700) +JetBrains Mono(400/500/700) +Fraunces(ital,opsz,wght) + --font-latin token (Inter-primary) + --font-quote-literary token (Fraunces-primary) + --font-num-display token (JetBrains-primary) + --font-numeric updated (IBM Plex+JetBrains second-tier) + 4 voice token reroutes + 18 deepened utilities (.type-num/.type-num-tabular/.type-num-display/.type-num-inline/.type-num-currency + .type-code/.type-code-inline/.type-kbd + .type-latin/.type-latin-ui/.type-latin-num/.type-latin-brand/.type-mixed-harmony + .type-quote-literary-en/.type-quote-block(::before/::after)/.type-citation) + Latin-Arabic mixing rules (lang=en/.latin/.num/.brand/.currency in u-prose|type-body) + auto-tabular on cath-stat-value/bento-stat-value/qcalc-value/stat-tile-value/data-countup/data-tabular + 7 sample augmentations (4 stat-tile spans → type-num-display + 3 pre blocks → type-code) + unicode-bidi: isolate hardened (25 instances)", "branch": "worker-15-resonance",     "lines_added": 281 }
+    {
+      "worker": "01",
+      "phase": 1,
+      "title": "Foundation Tokens & Aurora Mesh",
+      "branch": "worker-01-phase-1-v2",
+      "lines_added": 121
+    },
+    {
+      "worker": "01",
+      "phase": 2,
+      "title": "Conic Halo + Magnetic Cursor Aura",
+      "branch": "worker-01-phase-2",
+      "lines_added": 204
+    },
+    {
+      "worker": "01",
+      "phase": 3,
+      "title": "Living Numerals + Sectional Identity Tint",
+      "branch": "worker-01-phase-3",
+      "lines_added": 193
+    },
+    {
+      "worker": "01",
+      "phase": 4,
+      "title": "Polish: reduced-motion, print, View Transitions, visibility-pause",
+      "branch": "worker-01-phase-4",
+      "lines_added": 145
+    },
+    {
+      "worker": "02",
+      "phase": 1,
+      "title": "Sales Frameworks Comparison (4 schools)",
+      "branch": "worker-02-phase-1",
+      "lines_added": 564
+    },
+    {
+      "worker": "02",
+      "phase": 2,
+      "title": "Discovery Library + Closing + Iraqi Objections",
+      "branch": "worker-02-phase-2",
+      "lines_added": 440
+    },
+    {
+      "worker": "02",
+      "phase": 3,
+      "title": "3 Interactive Labs",
+      "branch": "worker-02-phase-3",
+      "lines_added": 550
+    },
+    {
+      "worker": "02",
+      "phase": 4,
+      "title": "page-accountmgr (KAM)",
+      "branch": "worker-02-phase-4",
+      "lines_added": 515
+    },
+    {
+      "worker": "02",
+      "phase": 5,
+      "title": "Iraq Salary + Career Ladder + Cheat Sheet + Citations + Progress",
+      "branch": "worker-02-phase-5",
+      "lines_added": 386
+    },
+    {
+      "worker": "03",
+      "phase": 1,
+      "title": "Voice Profile (5 dims) + Empathy Loop + 14 Archetypes",
+      "branch": "worker-03-phase-1",
+      "lines_added": 895
+    },
+    {
+      "worker": "03",
+      "phase": 2,
+      "title": "KPI Deep-Dive + APIndex Calculator + Call Anatomy 7 Stages",
+      "branch": "worker-03-phase-2",
+      "lines_added": 828
+    },
+    {
+      "worker": "03",
+      "phase": 3,
+      "title": "Voice Self-Assessment Studio (Web Audio + Web Speech)",
+      "branch": "worker-03-phase-3",
+      "lines_added": 979
+    },
+    {
+      "worker": "03",
+      "phase": 4,
+      "title": "Simulator + Iraq Block + Cheat Sheet + 12 Citations",
+      "branch": "worker-03-phase-4",
+      "lines_added": 1002
+    },
+    {
+      "worker": "04",
+      "phase": 1,
+      "title": "Accounting Foundations (Equation + T-Account + 9-Step Cycle)",
+      "branch": "worker-04-phase-1",
+      "lines_added": 1180
+    },
+    {
+      "worker": "04",
+      "phase": 2,
+      "title": "Iraqi COA + IFRS vs Local + 10 Ratios",
+      "branch": "worker-04-phase-2",
+      "lines_added": 639
+    },
+    {
+      "worker": "04",
+      "phase": 3,
+      "title": "Iraqi Tax Calculator + Salary Slip",
+      "branch": "worker-04-phase-3",
+      "lines_added": 685
+    },
+    {
+      "worker": "04",
+      "phase": 4,
+      "title": "Income Statement + Balance Sheet Builders + Cash Flow + Equity Change",
+      "branch": "worker-04-phase-4",
+      "lines_added": 812
+    },
+    {
+      "worker": "04",
+      "phase": 5,
+      "title": "Cashier Track + Iraq Salary + Cheat Sheet + 12 Citations",
+      "branch": "worker-04-phase-5",
+      "lines_added": 680
+    },
+    {
+      "worker": "05",
+      "phase": 1,
+      "title": "Fundamentals Gate (8 cards + Quiz) + Path Decision Tree",
+      "branch": "worker-05-complete",
+      "lines_added": 874
+    },
+    {
+      "worker": "05",
+      "phase": 2,
+      "title": "FE + BE 12-week Roadmaps + Git Survival Kit",
+      "branch": "worker-05-complete",
+      "lines_added": 714
+    },
+    {
+      "worker": "05",
+      "phase": 3,
+      "title": "Clean Code Pillars + Code Review Etiquette + Soft Skills",
+      "branch": "worker-05-complete",
+      "lines_added": 482
+    },
+    {
+      "worker": "05",
+      "phase": 4,
+      "title": "5 Interactive Labs — Trace, Big-O, Git Sandbox, Interview Sim, Portfolio Gen",
+      "branch": "worker-05-complete",
+      "lines_added": 1353
+    },
+    {
+      "worker": "05",
+      "phase": 5,
+      "title": "Iraq Salary + Companies + First-Job Strategy + Cheat Sheet + 12 Citations",
+      "branch": "worker-05-complete",
+      "lines_added": 445
+    },
+    {
+      "worker": "06",
+      "phase": 1,
+      "title": "Attention Psychology (6 axes) + Algo Anatomy (7 platforms)",
+      "branch": "worker-06-complete",
+      "lines_added": 660
+    },
+    {
+      "worker": "06",
+      "phase": 2,
+      "title": "Content Pillars + 15 Hook Frameworks + 30-day Calendar Builder",
+      "branch": "worker-06-complete",
+      "lines_added": 580
+    },
+    {
+      "worker": "06",
+      "phase": 3,
+      "title": "Marketing Funnel (5 stages) + Performance Math Calculator + A/B Test Designer",
+      "branch": "worker-06-complete",
+      "lines_added": 508
+    },
+    {
+      "worker": "06",
+      "phase": 4,
+      "title": "Email + WhatsApp + Influencer Vetting Tool",
+      "branch": "worker-06-complete",
+      "lines_added": 368
+    },
+    {
+      "worker": "06",
+      "phase": 5,
+      "title": "Iraq Salary + Companies + Iraqi Hooks + Cheat Sheet + 12 Citations",
+      "branch": "worker-06-complete",
+      "lines_added": 230
+    },
+    {
+      "worker": "07",
+      "phase": 1,
+      "title": "nav-item + page skeleton + Electronics Fundamentals + Tools Gallery",
+      "branch": "worker-07-complete",
+      "lines_added": 478
+    },
+    {
+      "worker": "07",
+      "phase": 2,
+      "title": "Mainboard Anatomy interactive + 10 Repair Cards (1-10)",
+      "branch": "worker-07-complete",
+      "lines_added": 582
+    },
+    {
+      "worker": "07",
+      "phase": 3,
+      "title": "Repair Cards 11-20 + 3 Decision Trees + Software Side",
+      "branch": "worker-07-complete",
+      "lines_added": 572
+    },
+    {
+      "worker": "07",
+      "phase": 4,
+      "title": "Micro-Solder Intro + Customer Service + Ethics + Iraq Block",
+      "branch": "worker-07-complete",
+      "lines_added": 481
+    },
+    {
+      "worker": "07",
+      "phase": 5,
+      "title": "6 Interactive Labs + Career Path + Cheat Sheet + 12 Citations",
+      "branch": "worker-07-complete",
+      "lines_added": 1206
+    },
+    {
+      "worker": "08",
+      "phase": 1,
+      "title": "HR psychology (5 dims) + STAR framework + 15 Common Questions",
+      "branch": "worker-08-complete",
+      "lines_added": 1202
+    },
+    {
+      "worker": "08",
+      "phase": 2,
+      "title": "30 Trap Questions + Pre-Interview Toolkit + Post-Interview Playbook",
+      "branch": "worker-08-complete",
+      "lines_added": 660
+    },
+    {
+      "worker": "08",
+      "phase": 3,
+      "title": "Salary Negotiation Calculator IQ + 6 principles + Iraq Salary table",
+      "branch": "worker-08-complete",
+      "lines_added": 672
+    },
+    {
+      "worker": "08",
+      "phase": 4,
+      "title": "15 Scenarios Player + Job Ad Decoder + 12 HR Red Flags",
+      "branch": "worker-08-complete",
+      "lines_added": 920
+    },
+    {
+      "worker": "08",
+      "phase": 5,
+      "title": "Mock Screen Timer + Offer Compare + Iraq Labor Law + Cheat Sheet + 14 Citations",
+      "branch": "worker-08-complete",
+      "lines_added": 977
+    },
+    {
+      "worker": "09",
+      "phase": 1,
+      "title": "7 Drives + 12 Biases in page-psych",
+      "branch": "worker-09-complete",
+      "lines_added": 478
+    },
+    {
+      "worker": "09",
+      "phase": 2,
+      "title": "Goleman 5 + RULER + Mood Meter Interactive in page-eq",
+      "branch": "worker-09-complete",
+      "lines_added": 612
+    },
+    {
+      "worker": "09",
+      "phase": 3,
+      "title": "Self-Diagnostic Suite — 6 tests + scoring engine",
+      "branch": "worker-09-complete",
+      "lines_added": 845
+    },
+    {
+      "worker": "09",
+      "phase": 4,
+      "title": "Psych Insets — cross-page micro-cards (7 pages × 3 insets)",
+      "branch": "worker-09-complete",
+      "lines_added": 232
+    },
+    {
+      "worker": "09",
+      "phase": 5,
+      "title": "Therapist Bridge + Insights Engine + 16 Citations",
+      "branch": "worker-09-complete",
+      "lines_added": 365
+    },
+    {
+      "worker": "11",
+      "phase": 1,
+      "title": "Sovereign Theme System (tokens + bridge + 3-state toggle)",
+      "branch": "worker-11-complete",
+      "lines_added": 359
+    },
+    {
+      "worker": "11",
+      "phase": 2,
+      "title": "Lucide-style Icon System (95 symbols + .qi + migrator)",
+      "branch": "worker-11-complete",
+      "lines_added": 401
+    },
+    {
+      "worker": "11",
+      "phase": 3,
+      "title": "Entry Gateway + Identity Lock + Onboarding 4-step",
+      "branch": "worker-11-complete",
+      "lines_added": 912
+    },
+    {
+      "worker": "11",
+      "phase": 4,
+      "title": "Calculator Foundation Component (qcalc) + 8 migrations",
+      "branch": "worker-11-phase-4-7",
+      "lines_added": 1368
+    },
+    {
+      "worker": "11",
+      "phase": 5,
+      "title": "Command Palette + Keyboard Shortcuts (30+ commands)",
+      "branch": "worker-11-phase-4-7",
+      "lines_added": 713
+    },
+    {
+      "worker": "11",
+      "phase": 6,
+      "title": "Real Dashboard + Unified State Layer + page-myprogress",
+      "branch": "worker-11-phase-4-7",
+      "lines_added": 1039
+    },
+    {
+      "worker": "11",
+      "phase": 7,
+      "title": "Production Pass + PWA (manifest, sw, favicon, utilities, a11y)",
+      "branch": "worker-11-phase-4-7",
+      "lines_added": 531
+    },
+    {
+      "worker": "12",
+      "phase": 1,
+      "title": "Typography & Spatial System (10 text-sizes, 13 spaces, leading/tracking/weight, prose, Upg.type)",
+      "branch": "worker-12-aurora",
+      "lines_added": 415
+    },
+    {
+      "worker": "12",
+      "phase": "1B",
+      "title": "Typeface Soul — premium Arabic stack (Reem Kufi + Readex Pro + IBM Plex Arabic + Aref Ruqaa + Thmanyah optional)",
+      "branch": "worker-12-aurora",
+      "lines_added": 480
+    },
+    {
+      "worker": "12",
+      "phase": 2,
+      "title": "Linen-Bone off-white re-chisel + tinted shadows + tonal elevation + nav-badge identity classes (10 inline gradients purged)",
+      "branch": "worker-12-aurora",
+      "lines_added": 480
+    },
+    {
+      "worker": "12",
+      "phase": 3,
+      "title": "Materials & Depth — 4-tier glass (thin/regular/thick/chrome) + scroll-aware elevation + halos + grain refresh + Upg.scroll",
+      "branch": "worker-12-aurora",
+      "lines_added": 560
+    },
+    {
+      "worker": "12",
+      "phase": 4,
+      "title": "Navigation Chrome — Source-List sidebar collapse (Cmd+\\) + Dynamic-Island compact topbar + View Transitions nav-pill + mobile drawer + Upg.nav",
+      "branch": "worker-12-aurora",
+      "lines_added": 620
+    },
+    {
+      "worker": "12",
+      "phase": 5,
+      "title": "Dashboard Hero — 15 per-page identity tints + Bento utilities + count-up tickers + time-of-day greet + Upg.identity/greet/countup",
+      "branch": "worker-12-aurora",
+      "lines_added": 640
+    },
+    {
+      "worker": "12",
+      "phase": 6,
+      "title": "Motion & Interaction — easing/duration tokens (5 ease + 6 duration) + press/lift/glow/reveal/skeleton + view-transition wrap + Upg.motion",
+      "branch": "worker-12-aurora",
+      "lines_added": 520
+    },
+    {
+      "worker": "12",
+      "phase": 7,
+      "title": "Inline purge (1671→587) + 100+ utilities + per-page header tint underline + boot banner + sanity assert + CHANGELOG",
+      "branch": "worker-12-aurora",
+      "lines_added": 964
+    },
+    {
+      "worker": "13",
+      "phase": 1,
+      "title": "Bento Dashboard — Augment-and-Wrap (greeting + 4 countup tiles + dock + legacy wrapper)",
+      "branch": "worker-13-aurora-completion-impl",
+      "lines_added": 76
+    },
+    {
+      "worker": "13",
+      "phase": 2,
+      "title": "Real Inline Purge — utilities pack + cleanup v2 + decomposer (587→223 inline, 12 stray !important, 7 u-grad-* utilities)",
+      "branch": "worker-13-phase-2-3-impl",
+      "lines_added": 1688
+    },
+    {
+      "worker": "13",
+      "phase": 3,
+      "title": "Final Polish — wordmark Aref Ruqaa accent + sidebar toggle in topbar + boot sanity v15.1 IIFE + CHANGELOG v15.1",
+      "branch": "worker-13-phase-2-3-impl",
+      "lines_added": 93
+    },
+    {
+      "worker": "14",
+      "phase": 1,
+      "title": "Liquid Glass v2 — WWDC25 blur ladder (16/24/32/40) + edge specular + 3-tier paper tonal + paper grain v2 + density API + Upg.material",
+      "branch": "worker-14-atelier",
+      "lines_added": 227
+    },
+    {
+      "worker": "14",
+      "phase": 2,
+      "title": "Page Headers Re-chisel — 14 .page-h blocks (eyebrow + .qi icon + lede + 56px tint underline) + emoji purge from H1s",
+      "branch": "worker-14-atelier-p2-p6",
+      "lines_added": 202
+    },
+    {
+      "worker": "14",
+      "phase": 3,
+      "title": "Dashboard Bento Consolidation — 10 cells, zero legacy duplication, 5 sacred IDs relocated cleanly",
+      "branch": "worker-14-atelier-p2-p6",
+      "lines_added": 255,
+      "lines_deleted": 385
+    },
+    {
+      "worker": "14",
+      "phase": 4,
+      "title": "Chrome Refinement — Topbar Island scroll-shrink + search→cmdk + nav-pill spring-slide + 17 collapsed-mode tooltips + mobile drawer scrim + Upg.chrome",
+      "branch": "worker-14-atelier-p2-p6",
+      "lines_added": 381
+    },
+    {
+      "worker": "14",
+      "phase": 5,
+      "title": "Motion Choreography v2 — magnetic hover + reveal/stagger/intersect + page enter spring + Upg.choreo + Upg.transition",
+      "branch": "worker-14-atelier-p2-p6",
+      "lines_added": 339
+    },
+    {
+      "worker": "14",
+      "phase": 6,
+      "title": "Final Polish — inline purge 215→76 + sw v2 (precache+offline) + manifest shortcuts + favicon v2 squircle + Upg.focusTrap (auto-attach modals) + Lighthouse helpers + sanity v16 (19/19 modules) + CHANGELOG v16",
+      "branch": "worker-14-phase-6-final",
+      "lines_added": 1080
+    },
+    {
+      "worker": "15",
+      "phase": 1,
+      "title": "Type Audit & Casting — 9 voice tokens (--type-voice-*) + 21 utility classes (.type-*) + 9 [data-type-voice] selectors + 11 sample augmentations across 4 pages",
+      "branch": "worker-15-resonance",
+      "lines_added": 322
+    },
+    {
+      "worker": "15",
+      "phase": 2,
+      "title": "Arabic Display Crown — --font-wordmark/--font-hero stacks + 4 display utilities (.type-wordmark/.type-hero[--xl/--lg/--md]/.type-display[-h/-l]) + 5 weight variants + Aref Ruqaa/Reem Kufi micro-tuning + 14 page-h1 augmented (11 type-display + 3 type-hero literary) + dashboard greeting type-hero + 2 wordmarks (gateway + sidebar)",
+      "branch": "worker-15-resonance",
+      "lines_added": 195
+    },
+    {
+      "worker": "15",
+      "phase": 3,
+      "title": "Arabic Body & UI Layer — Google Fonts +Tajawal (300/400/500/700/900) + --font-ui token (Tajawal-primary) + --font-text reroute (Readex Pro→Tajawal→IBM Plex→Cairo) + 18 UI utilities (.type-body/.type-body-lead/.type-body-lg/.type-body-sm + .type-ui-label[--sm] + .type-button[--lg/--sm] + .type-tab[--active] + .type-breadcrumb[--current] + .type-hint + .type-caption + .type-form-label + .type-input + .type-cta-heavy) + Cairo fallback hardening (@supports not variable) + mobile <480px small-button Readex fallback + 23 sample augmentations (10 buttons + 5 lab-eyebrow tabs + 4 form-labels + 3 inputs + 1 hint)",
+      "branch": "worker-15-resonance",
+      "lines_added": 245
+    },
+    {
+      "worker": "15",
+      "phase": 4,
+      "title": "Latin & Numeric Layer — Google Fonts +Inter(300..700) +JetBrains Mono(400/500/700) +Fraunces(ital,opsz,wght) + --font-latin token (Inter-primary) + --font-quote-literary token (Fraunces-primary) + --font-num-display token (JetBrains-primary) + --font-numeric updated (IBM Plex+JetBrains second-tier) + 4 voice token reroutes + 18 deepened utilities (.type-num/.type-num-tabular/.type-num-display/.type-num-inline/.type-num-currency + .type-code/.type-code-inline/.type-kbd + .type-latin/.type-latin-ui/.type-latin-num/.type-latin-brand/.type-mixed-harmony + .type-quote-literary-en/.type-quote-block(::before/::after)/.type-citation) + Latin-Arabic mixing rules (lang=en/.latin/.num/.brand/.currency in u-prose|type-body) + auto-tabular on cath-stat-value/bento-stat-value/qcalc-value/stat-tile-value/data-countup/data-tabular + 7 sample augmentations (4 stat-tile spans → type-num-display + 3 pre blocks → type-code) + unicode-bidi: isolate hardened (25 instances)",
+      "branch": "worker-15-resonance",
+      "lines_added": 281
+    },
+    {
+      "worker": "15",
+      "phase": 5,
+      "title": "Modular Scale & Rhythm — type scale REPLACE-IN-PLACE (Major-Third 1.25 → Perfect-Fourth 1.333 with clamp() fluid steps xs..5xl) + --text-display-1/-2 ceremonial sizes + --leading-* refined (none/tight/snug/normal/relaxed/loose, 6 tokens) + --tracking-* expanded (tightest/tighter/tight/snug/normal/wide/wider/widest, 8 tokens) + --rhythm-* 8pt baseline grid (rhythm-1..16 + h-to-body/h-to-h/section/page semantic aliases, 15 tokens) + --measure-* reading width (narrow/normal/wide × Latin+Arabic, 6 tokens) + reading-rhythm bindings on every type-* voice (leading + tracking via tokens) + font-optical-sizing: auto on hero/display/body/quote/latin (6 selectors) + .u-rhythm-reading/.u-rhythm-card/.u-rhythm-tight/.u-rhythm-loose container utilities + .u-measure-narrow/.u-measure-normal/.u-measure-wide with :lang(en) Latin overrides + .u-prose default cascade (h1/h2/h3/h4/p/ul/ol/li/blockquote/code/pre) + hyphenation rules (auto for body, none for headings, pre for code blocks) + Phase 5 discipline comment. --text-2xs and --text-display preserved for legacy callers.",
+      "branch": "worker-15-resonance",
+      "lines_added": 365
+    }
   ],
-  "next_action": "Continue Worker 15 Phase 5 — Modular Scale & Rhythm (perfect-fourth 1.333 + 8pt baseline grid + vertical rhythm tokens + leading bindings + optical-size refinement for variable fonts)",
+  "next_action": "Continue Worker 15 Phase 6 — Per-Page Personality (14 type signatures: callcenter sharp / psych literary / accounting precise / social vibrant / programming mono-emphatic / phonerepair technical / hrmastery formal / negotiation persuasive / customercare warm / eq emotional / lab experimental / fieldsales energetic / accountmgr executive / dashboard elegant / myprogress reflective) + Upg.type2 API",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
@@ -119,14 +560,43 @@
       "prompts/v2/CONTENT_REORDER_RITUAL.md"
     ],
     "workers_planned": [
-      { "id": "15", "name": "TYPOGRAPHY_SOUL",  "phases": 6, "status": "in-progress" },
-      { "id": "16", "name": "VITAL_UI",         "phases": 6, "status": "deferred" },
-      { "id": "17", "name": "CONTENT_REVIVAL",  "phases": 6, "status": "deferred" },
-      { "id": "18", "name": "LEARNING_SHELL",   "phases": 4, "status": "deferred" },
-      { "id": "19", "name": "MICRO_POLISH",     "phases": 4, "status": "deferred" }
+      {
+        "id": "15",
+        "name": "TYPOGRAPHY_SOUL",
+        "phases": 6,
+        "status": "in-progress"
+      },
+      {
+        "id": "16",
+        "name": "VITAL_UI",
+        "phases": 6,
+        "status": "deferred"
+      },
+      {
+        "id": "17",
+        "name": "CONTENT_REVIVAL",
+        "phases": 6,
+        "status": "deferred"
+      },
+      {
+        "id": "18",
+        "name": "LEARNING_SHELL",
+        "phases": 4,
+        "status": "deferred"
+      },
+      {
+        "id": "19",
+        "name": "MICRO_POLISH",
+        "phases": 4,
+        "status": "deferred"
+      }
     ],
     "rituals": [
-      { "name": "CONTENT_REORDER_RITUAL", "scope": "post-Worker-17", "status": "scaffolded" }
+      {
+        "name": "CONTENT_REORDER_RITUAL",
+        "scope": "post-Worker-17",
+        "status": "scaffolded"
+      }
     ]
   },
   "notes": "Pack v2 RESONANCE scaffolded under prompts/v2/. Path C selected by user: Meta + Worker 15 (full 6 phases) + Ritual = 15 files. Workers 16-19 + Ritual execution to follow in subsequent sessions. Cathedral v16 baseline preserved. All 19 Upg.* APIs, 14 pages, 391 qcalc references preserved. Previous Pack v1 history (v16 ATELIER): Phase 6 of Worker 14 shipped on branch worker-14-phase-6-final via PR #53. Inline 215->76 (139 removed) via deterministic node script + 330 lines Final Utilities Pack. New Upg.focusTrap IIFE auto-attaches to dialog/modal/qmodal/data-modal via MutationObserver, ESC-to-close, return-focus. Lighthouse boot helper (lazy imgs, decoding=async, pointer-enter prefetch markers). Sanity v16 verifies 19 Upg.* modules. sw.js rewrite (74->119 lines) versioned shell/assets/fonts caches, navigation network-first then offline.html fallback, SWR for assets and Google Fonts. Manifest 4 shortcuts (#dashboard, #callcenter, #myprogress, #accounting), 192/512 icon entries. Favicon v2 100x100 squircle rx=22, dual-color stroke gradient (#66FCF1 to #4F46E5). offline.html RTL Cairo, online auto-reload, retry button + home link. CHANGELOG v16 added at top. All 14 page sections, 391 qcalc, 15 identity tints preserved."
