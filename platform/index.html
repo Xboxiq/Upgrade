@@ -225,7 +225,7 @@
 
     <div class="gateway-brand">
       <span class="gateway-logo">U</span>
-      <span class="gateway-wordmark u-font-accent">Upgrade</span>
+      <span class="gateway-wordmark u-font-accent" data-type-voice="hero">Upgrade</span>
     </div>
 
     <!-- Stage: Welcome (first run / first stage) -->
@@ -578,7 +578,7 @@
       </div>
       <div>
         <div id="topbar-title">لوحة التحكم</div>
-        <div id="topbar-breadcrumb">الرئيسية / لوحة التحكم</div>
+        <div id="topbar-breadcrumb" data-type-voice="ui">الرئيسية / لوحة التحكم</div>
       </div>
     </div>
 
@@ -819,9 +819,9 @@
     <section class="page" id="page-callcenter">
 
       <header class="page-h" data-tint="callcenter">
-        <span class="h-eyebrow">وحدة تخصصية</span>
-        <h1><i class="qi qi-lg" data-icon="phone" aria-hidden="true"></i> وحدة الكول سنتر</h1>
-        <p class="h-lede">تدريب متكامل على مهارات التواصل الهاتفي وخدمة العملاء — بالأساليب التي تنجح فعلاً على أرض الواقع</p>
+        <span class="h-eyebrow" data-type-voice="accent">وحدة تخصصية</span>
+        <h1 data-type-voice="display"><i class="qi qi-lg" data-icon="phone" aria-hidden="true"></i> وحدة الكول سنتر</h1>
+        <p class="h-lede" data-type-voice="body">تدريب متكامل على مهارات التواصل الهاتفي وخدمة العملاء — بالأساليب التي تنجح فعلاً على أرض الواقع</p>
       </header>
 
       <!-- ══════════════════ Cathedral v14 — qcalc APIndex (Worker 11 / Phase 4) ══════════════════ -->
@@ -3708,7 +3708,7 @@
           <div class="objection-header" onclick="toggleObj('obj-1')">
             <div class="obj-num">1</div>
             <div class="obj-title">
-              <div class="obj-quote">«السعر غالي»</div>
+              <div class="obj-quote" data-type-voice="quote">«السعر غالي»</div>
               <div class="obj-subtitle">الاعتراض الأكثر شيوعاً — وغالباً ليس عن السعر فعلاً</div>
             </div>
             <svg class="obj-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
@@ -10561,7 +10561,7 @@
           <article class="prog-fund-card" data-fund-card="1">
             <header><span class="prog-fund-num">01</span><h3>Variables &amp; Types</h3><span class="prog-fund-tag">core</span></header>
             <p>الفرق بين قيمة <code>primitive</code> (رقم، نص، boolean — تُنسخ) وقيمة <code>reference</code> (object، array، function — تُمرَّر بالعنوان). فهم هذا يُجنّبك أغرب bugs الـ mutation.</p>
-            <pre><code>let a = 5; let b = a; b = 9;        // a = 5
+            <pre data-type-voice="code"><code>let a = 5; let b = a; b = 9;        // a = 5
 let o = {x:1}; let p = o; p.x = 9;  // o.x = 9 (نفس المرجع)</code></pre>
             <div class="prog-fund-foot">
               <span class="prog-fund-mini">تمرين: ما قيمة <code>a</code> و<code>o.x</code>؟</span>
@@ -17354,28 +17354,28 @@ const bird = { ...canMove(), ...canFly() };
       <article class="cath-stat">
         <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="check-circle"></i></div>
         <div class="cath-stat-body">
-          <div><span class="cath-stat-value" data-cath-stat="unitsCompleted">0</span></div>
+          <div><span class="cath-stat-value" data-cath-stat="unitsCompleted" data-type-voice="numeric">0</span></div>
           <span class="cath-stat-label">وحدة مُكتملة</span>
         </div>
       </article>
       <article class="cath-stat">
         <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="bar-chart"></i></div>
         <div class="cath-stat-body">
-          <div><span class="cath-stat-value" data-cath-stat="quizzesTaken">0</span></div>
+          <div><span class="cath-stat-value" data-cath-stat="quizzesTaken" data-type-voice="numeric">0</span></div>
           <span class="cath-stat-label">تقييمات نفسية</span>
         </div>
       </article>
       <article class="cath-stat">
         <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="bookmark"></i></div>
         <div class="cath-stat-body">
-          <div><span class="cath-stat-value" data-cath-stat="draftCount">0</span></div>
+          <div><span class="cath-stat-value" data-cath-stat="draftCount" data-type-voice="numeric">0</span></div>
           <span class="cath-stat-label">مسوّدة محفوظة</span>
         </div>
       </article>
       <article class="cath-stat">
         <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="star"></i></div>
         <div class="cath-stat-body">
-          <div><span class="cath-stat-value" data-cath-stat="topScore">0</span></div>
+          <div><span class="cath-stat-value" data-cath-stat="topScore" data-type-voice="numeric">0</span></div>
           <span class="cath-stat-label">أعلى درجة لاب</span>
         </div>
       </article>
