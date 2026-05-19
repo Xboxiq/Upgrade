@@ -16263,7 +16263,7 @@ body { font-size: calc(var(--text-base) * var(--type-zoom)); }
                   "SF Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI",
                   Roboto, sans-serif;
 
-  --font-text:    "Readex Pro", "IBM Plex Sans Arabic", "Cairo",
+  --font-text:    "Readex Pro", "Tajawal", "IBM Plex Sans Arabic", "Cairo",
                   "SF Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI",
                   Roboto, sans-serif;
 
@@ -19861,3 +19861,246 @@ body[data-material-density="high"] {
    ════════════════════════════════════════════════════════════════ */
 
 /* End RESONANCE v2 — Worker 15 / Phase 2 ─────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   ██████╗  ██████╗ ██████╗ ██╗   ██╗    ██╗   ██╗██╗
+   ██╔══██╗██╔═══██╗██╔══██╗╚██╗ ██╔╝    ██║   ██║██║
+   ██████╔╝██║   ██║██║  ██║ ╚████╔╝     ██║   ██║██║
+   ██╔══██╗██║   ██║██║  ██║  ╚██╔╝      ██║   ██║██║
+   ██████╔╝╚██████╔╝██████╔╝   ██║       ╚██████╔╝██║
+   ╚═════╝  ╚═════╝ ╚═════╝    ╚═╝        ╚═════╝ ╚═╝
+
+   RESONANCE v2 — Worker 15 / Phase 3 — Arabic Body & UI Layer
+   ────────────────────────────────────────────────────────────────────────────
+   Cathedral v16 cast every text in Readex Pro. Excellent for paragraphs,
+   "lazy" for short UI labels. Phase 3 introduces Tajawal for the UI layer
+   (buttons, tabs, breadcrumbs, form labels), keeping Readex Pro for body
+   paragraphs and Cairo as the guaranteed final fallback.
+
+   Voice routing after Phase 3:
+     Body paragraph (>40 words)  →  Readex Pro 400  (sustained reading)
+     UI label / button / tab     →  Tajawal 500-700 (alert, confident)
+     Form input content          →  Readex Pro 400  (readability)
+     Form label                  →  Tajawal 500     (scanability)
+     Hint / caption              →  Readex Pro 400  (calm, fine-print)
+     Final fallback              →  Cairo           (universal coverage)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── New UI stack — Tajawal-primary, Cairo-final ─────────────────────────── */
+:root {
+  --font-ui:      "Tajawal", "Readex Pro", "IBM Plex Sans Arabic", "Cairo",
+                  "SF Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI",
+                  Roboto, sans-serif;
+}
+
+/* ── Voice token reroute — body keeps text, UI takes new ui stack ────────── */
+:root {
+  --type-voice-body:  var(--font-text);    /* Readex Pro primary, Tajawal 2nd */
+  --type-voice-ui:    var(--font-ui);      /* Tajawal primary, Readex Pro 2nd */
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   Body Utilities (Phase 3 spec — supersedes Phase 1 minimal version)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.type-body,
+[data-type-voice="body"] {
+  font-family: var(--type-voice-body);
+  font-weight: 400;
+  font-variation-settings: "wght" 400;
+  letter-spacing: 0;
+  line-height: 1.7;
+  color: var(--color-text, var(--text-1));
+}
+
+.type-body-lead {
+  font-family: var(--type-voice-body);
+  font-weight: 500;
+  font-variation-settings: "wght" 500;
+  letter-spacing: -0.005em;
+  line-height: 1.55;
+  color: var(--color-text, var(--text-1));
+}
+
+.type-body-lg {
+  font-family: var(--type-voice-body);
+  font-size: var(--text-lg);
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.type-body-sm {
+  font-family: var(--type-voice-body);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Emphasis inside body: bold pulls weight without switching voice */
+.type-body strong,
+.u-prose strong {
+  font-weight: 600;
+  font-variation-settings: "wght" 600;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   UI Layer Utilities — Tajawal as primary
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* Generic UI label (sidebar items, list labels, chips) */
+.type-ui-label,
+[data-type-voice="ui"] {
+  font-family: var(--type-voice-ui);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+
+.type-ui-label--sm {
+  font-family: var(--type-voice-ui);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  letter-spacing: 0.015em;
+  line-height: 1.35;
+}
+
+/* Buttons — strongest UI voice */
+.type-button {
+  font-family: var(--type-voice-ui);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.type-button--lg {
+  font-family: var(--type-voice-ui);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  letter-spacing: 0.025em;
+  line-height: 1.2;
+}
+
+.type-button--sm {
+  font-family: var(--type-voice-ui);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+/* Tabs — segmented navigation */
+.type-tab {
+  font-family: var(--type-voice-ui);
+  font-weight: 500;
+  letter-spacing: 0.015em;
+  line-height: 1.3;
+  font-size: var(--text-sm);
+}
+
+.type-tab--active {
+  font-weight: 600;
+}
+
+/* Breadcrumbs — compact nav trails */
+.type-breadcrumb {
+  font-family: var(--type-voice-ui);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted, var(--text-2));
+}
+
+.type-breadcrumb--current {
+  color: var(--color-text, var(--text-1));
+  font-weight: 500;
+}
+
+/* Hints & captions — Readex Pro for calm fineprint */
+.type-hint,
+.type-caption {
+  font-family: var(--type-voice-body);
+  font-weight: 400;
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  color: var(--color-text-faint, var(--text-3));
+  letter-spacing: 0.005em;
+}
+
+/* Form labels — Tajawal for scanability */
+.type-form-label {
+  font-family: var(--type-voice-ui);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: var(--color-text, var(--text-1));
+  display: block;
+  margin-block-end: 0.4rem;
+}
+
+/* Input content — Readex Pro for readability */
+.type-input {
+  font-family: var(--type-voice-body);
+  font-weight: 400;
+  font-size: var(--text-base);
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   Cairo Fallback Hardening (final guarantee)
+   ════════════════════════════════════════════════════════════════════════════ */
+:root {
+  --font-cairo-fallback: "Cairo", "SF Arabic", sans-serif;
+}
+
+/* Ancient browser fallback — variable fonts unsupported */
+@supports not (font-variation-settings: "wght" 500) {
+  .type-body,
+  .type-body-lead,
+  .u-prose {
+    font-family: "Cairo", "SF Arabic", sans-serif;
+    font-weight: 400;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   Tajawal Micro-tuning — geometric, needs open tracking at small sizes
+   ════════════════════════════════════════════════════════════════════════════ */
+.type-tab,
+.type-breadcrumb,
+.type-hint {
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+/* Tajawal Black 900 — for heaviest CTAs (rare use) */
+.type-cta-heavy {
+  font-family: var(--type-voice-ui);
+  font-weight: 900;
+  letter-spacing: -0.005em;
+  line-height: 1.1;
+}
+
+/* Mobile <480px: tiny buttons fall back to Readex Pro for clarity at 12-14px */
+@media (max-width: 480px) {
+  .type-button--sm {
+    font-family: var(--type-voice-body);
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   Phase 3 Discipline:
+   1. Body paragraphs (>40 words)  →  var(--type-voice-body)  [Readex Pro].
+   2. UI labels (<8 words)         →  var(--type-voice-ui)    [Tajawal].
+   3. Buttons + CTAs               →  var(--type-voice-ui)    [Tajawal] always.
+   4. Form input content           →  var(--type-voice-body)  [readability].
+   5. Form label                   →  var(--type-voice-ui)    [scanability].
+   6. Cairo يبقى آخر fallback في كل stack — لا تحذفه.
+   7. لا تخلط Tajawal و Readex Pro في نفس الكتلة الواحدة (eye fatigue).
+   8. Mobile <480px: buttons صغيرة تتحوّل إلى Readex Pro fallback.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* End RESONANCE v2 — Worker 15 / Phase 3 ─────────────────────────────────── */

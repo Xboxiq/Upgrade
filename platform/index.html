@@ -18,7 +18,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="favicon.svg" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Readex+Pro:wght@200..700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Readex+Pro:wght@200..700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@300;400;500;700;900&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
 
 <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -245,11 +245,11 @@
     <div class="gateway-stage" data-stage="identity" hidden>
       <h2 class="gateway-sub-headline">كيف نناديك؟</h2>
       <label class="gateway-field">
-        <span>اسمك</span>
-        <input type="text" class="gateway-input" id="gw-name" maxlength="40" placeholder="مثلاً: علي، نور، Sara…">
+        <span class="type-form-label">اسمك</span>
+        <input type="text" class="gateway-input type-input" id="gw-name" maxlength="40" placeholder="مثلاً: علي، نور، Sara…">
       </label>
       <label class="gateway-field">
-        <span>دورك (اختياري)</span>
+        <span class="type-form-label">دورك (اختياري)</span>
         <select class="gateway-input" id="gw-role">
           <option value="">— اختر —</option>
           <option value="sales">مبيعات</option>
@@ -268,8 +268,8 @@
         <div class="gateway-avatar-grid"></div>
       </fieldset>
       <div class="gateway-actions">
-        <button class="gateway-btn-ghost" type="button" data-action="prev-stage">رجوع</button>
-        <button class="gateway-cta" type="button" data-action="next-stage">التالي</button>
+        <button class="gateway-btn-ghost type-button" type="button" data-action="prev-stage">رجوع</button>
+        <button class="gateway-cta type-button" type="button" data-action="next-stage">التالي</button>
       </div>
     </div>
 
@@ -311,8 +311,8 @@
         </label>
       </div>
       <div class="gateway-actions">
-        <button class="gateway-btn-ghost" type="button" data-action="prev-stage">رجوع</button>
-        <button class="gateway-cta" type="button" data-action="next-stage">التالي</button>
+        <button class="gateway-btn-ghost type-button" type="button" data-action="prev-stage">رجوع</button>
+        <button class="gateway-cta type-button" type="button" data-action="next-stage">التالي</button>
       </div>
     </div>
 
@@ -333,18 +333,18 @@
       </label>
       <div class="gateway-pin-setup" hidden>
         <label class="gateway-field">
-          <span>أدخل PIN جديد</span>
-          <input type="password" inputmode="numeric" pattern="\d{4}" maxlength="4" class="gateway-input gateway-pin-input" id="gw-pin">
+          <span class="type-form-label">أدخل PIN جديد</span>
+          <input type="password" inputmode="numeric" pattern="\d{4}" maxlength="4" class="gateway-input gateway-pin-input type-input" id="gw-pin">
         </label>
         <label class="gateway-field">
-          <span>تأكيد PIN</span>
-          <input type="password" inputmode="numeric" pattern="\d{4}" maxlength="4" class="gateway-input gateway-pin-input" id="gw-pin-confirm">
+          <span class="type-form-label">تأكيد PIN</span>
+          <input type="password" inputmode="numeric" pattern="\d{4}" maxlength="4" class="gateway-input gateway-pin-input type-input" id="gw-pin-confirm">
         </label>
-        <p class="gateway-hint" id="gw-pin-feedback" role="status"></p>
+        <p class="gateway-hint type-hint" id="gw-pin-feedback" role="status"></p>
       </div>
       <div class="gateway-actions">
-        <button class="gateway-btn-ghost" type="button" data-action="prev-stage">رجوع</button>
-        <button class="gateway-cta" type="button" data-action="finish-onboarding">انطلق →</button>
+        <button class="gateway-btn-ghost type-button" type="button" data-action="prev-stage">رجوع</button>
+        <button class="gateway-cta type-button--lg" type="button" data-action="finish-onboarding">انطلق →</button>
       </div>
     </div>
 
@@ -747,7 +747,7 @@
         <article class="bento-skill b-2x2 material-regular" data-reveal>
           <header class="bento-h">
             <h2><i class="qi" data-icon="layout-dashboard" aria-hidden="true"></i> شجرة المهارات</h2>
-            <button class="bento-link" type="button" data-page="myprogress">عرض التفاصيل ←</button>
+            <button class="bento-link type-button" type="button" data-page="myprogress">عرض التفاصيل ←</button>
           </header>
           <div class="cath-skill-grid" id="cath-skill-grid" data-stagger data-stagger-step="60"></div>
         </article>
@@ -2230,7 +2230,7 @@
           </div>
         </div>
 
-        <button class="kc-btn" type="button" data-kc-run>احسب الـ APIndex</button>
+        <button class="kc-btn type-button--lg" type="button" data-kc-run>احسب الـ APIndex</button>
 
         <div class="kc-out" data-kc-out hidden>
           <div class="kc-score">
@@ -2385,7 +2385,7 @@
             <span class="vs-progress-time" data-vs-time>0.0s / 30.0s</span>
           </div>
 
-          <button type="button" class="vs-stop-btn" data-vs-stop disabled aria-label="إيقاف التسجيل">⏹ إيقاف</button>
+          <button type="button" class="vs-stop-btn type-button" data-vs-stop disabled aria-label="إيقاف التسجيل">⏹ إيقاف</button>
         </div>
 
         <!-- Live spectrogram canvas -->
@@ -2448,7 +2448,7 @@
           <ol class="vs-hist-list" data-vs-history>
             <li class="vs-hist-empty">لا توجد محاولات سابقة بعد.</li>
           </ol>
-          <button type="button" class="vs-hist-clear" data-vs-clear>🗑️ مسح السجل</button>
+          <button type="button" class="vs-hist-clear type-button--sm" data-vs-clear>🗑️ مسح السجل</button>
         </div>
 
       </section>
@@ -3270,7 +3270,7 @@
       <!-- ── Lab 1: Funnel Calculator ────────────────────────────── -->
       <div class="lab-card ql-glass" data-lab="funnel">
         <div class="lab-head">
-          <div class="lab-eyebrow">Lab 1</div>
+          <div class="lab-eyebrow type-tab">Lab 1</div>
           <h3>حاسبة قمع المبيعات (Funnel Calculator)</h3>
           <p>أدخل أرقامك → احسب live: صفقات متوقعة، Pipeline Coverage، تحذير لو &lt; 2.5x من الـ quota.</p>
         </div>
@@ -3314,7 +3314,7 @@
       <!-- ── Lab 2: Objection Trainer ────────────────────────────── -->
       <div class="lab-card ql-glass" data-lab="objection">
         <div class="lab-head">
-          <div class="lab-eyebrow">Lab 2</div>
+          <div class="lab-eyebrow type-tab">Lab 2</div>
           <h3>مدرّب الاعتراضات (Objection Trainer)</h3>
           <p>اعتراض عشوائي عراقي → اكتب ردّك → تقييم rule-based على 4 أبعاد (Empathy · Reframe · Specificity · Forward motion).</p>
         </div>
@@ -3336,7 +3336,7 @@
       <!-- ── Lab 3: Pitch Builder ────────────────────────────────── -->
       <div class="lab-card ql-glass" data-lab="pitch">
         <div class="lab-head">
-          <div class="lab-eyebrow">Lab 3</div>
+          <div class="lab-eyebrow type-tab">Lab 3</div>
           <h3>مولّد عرض 60 ثانية (Pitch Builder)</h3>
           <p>أدخل التفاصيل → ينتج pitch منظّم: Hook 10s → Problem 15s → Solution 20s → Proof 10s → CTA 5s.</p>
         </div>
@@ -4897,7 +4897,7 @@
 
       <div class="lab-card ql-glass" data-lab="nrr">
         <div class="lab-head">
-          <div class="lab-eyebrow">NRR Calculator</div>
+          <div class="lab-eyebrow type-tab">NRR Calculator</div>
           <h3>حاسبة Net Revenue Retention</h3>
           <p>صيغة معيار SaaS: <code>(Starting MRR + Expansion − Downgrades − Churned) / Starting MRR</code>. الهدف: &gt; 110%.</p>
         </div>
@@ -4920,7 +4920,7 @@
 
       <div class="lab-card ql-glass" data-lab="health">
         <div class="lab-head">
-          <div class="lab-eyebrow">Health Score</div>
+          <div class="lab-eyebrow type-tab">Health Score</div>
           <h3>مؤشر صحة الحساب (6 عوامل موزونة)</h3>
           <p>نتيجة من 0-100. &lt; 50 = خطر churn. &gt; 80 = جاهز للـ expansion.</p>
         </div>
