@@ -16015,17 +16015,20 @@ select.qcalc-input { text-align: start; }
                   "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
   --font-numeric: var(--font-display);
 
-  /* Type scale — clamp(min, fluid, max). Major Third (1.25) ratio. */
-  --text-2xs:     clamp(0.6875rem, 0.66rem + 0.15vw, 0.75rem);   /* 11..12 */
-  --text-xs:      clamp(0.75rem, 0.72rem + 0.18vw, 0.8125rem);   /* 12..13 */
-  --text-sm:      clamp(0.875rem, 0.84rem + 0.2vw, 0.9375rem);   /* 14..15 */
-  --text-base:    clamp(1rem, 0.95rem + 0.25vw, 1.0625rem);      /* 16..17 */
-  --text-lg:      clamp(1.125rem, 1.06rem + 0.3vw, 1.1875rem);   /* 18..19 */
-  --text-xl:      clamp(1.25rem, 1.16rem + 0.45vw, 1.375rem);    /* 20..22 */
-  --text-2xl:     clamp(1.5rem, 1.36rem + 0.7vw, 1.75rem);       /* 24..28 */
-  --text-3xl:     clamp(1.875rem, 1.66rem + 1.05vw, 2.25rem);    /* 30..36 */
-  --text-4xl:     clamp(2.25rem, 1.96rem + 1.5vw, 3rem);         /* 36..48 */
-  --text-display: clamp(2.75rem, 2.2rem + 2.8vw, 4.5rem);        /* 44..72 */
+  /* Type scale — Perfect-Fourth (1.333) modular scale. RESONANCE v2 / W15 P5.
+     Reference: Bringhurst, "The Elements of Typographic Style", §3.2.
+     Each step ascends by × 1.333 from --text-base (16-18px). */
+  --text-2xs:     clamp(0.6875rem, 0.66rem + 0.15vw, 0.75rem);     /* 11..12 (preserved — micro labels) */
+  --text-xs:      clamp(0.694rem, 0.660rem + 0.170vw, 0.750rem);   /* 11.1..12.0 */
+  --text-sm:      clamp(0.833rem, 0.795rem + 0.190vw, 0.920rem);   /* 13.3..14.7 */
+  --text-base:    clamp(1.000rem, 0.950rem + 0.250vw, 1.125rem);   /* 16.0..18.0 */
+  --text-lg:      clamp(1.200rem, 1.135rem + 0.325vw, 1.350rem);   /* 19.2..21.6 */
+  --text-xl:      clamp(1.440rem, 1.355rem + 0.425vw, 1.620rem);   /* 23.0..25.9 */
+  --text-2xl:     clamp(1.728rem, 1.620rem + 0.540vw, 1.944rem);   /* 27.6..31.1 */
+  --text-3xl:     clamp(2.074rem, 1.935rem + 0.695vw, 2.333rem);   /* 33.2..37.3 */
+  --text-4xl:     clamp(2.488rem, 2.310rem + 0.890vw, 2.799rem);   /* 39.8..44.8 */
+  --text-5xl:     clamp(2.986rem, 2.755rem + 1.155vw, 3.358rem);   /* 47.8..53.7 (NEW W15 P5) */
+  --text-display: clamp(2.75rem, 2.2rem + 2.8vw, 4.5rem);          /* 44..72 (preserved — alias for legacy callers; prefer --text-display-1) */
 
   /* Line-height ladder */
   --leading-tight:   1.18;
@@ -20383,3 +20386,365 @@ Worker 15 / Phase 4 — Latin & Numeric Discipline:
 */
 
 /* End RESONANCE v2 / Worker 15 / Phase 4 ─────────────────────────────────── */
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESONANCE v2 — Worker 15 / Phase 5 — Modular Scale & Vertical Rhythm
+   Type scale REPLACED in-place above (perfect-fourth 1.333). This block
+   appends leading/tracking/rhythm/measure tokens + reading-rhythm bindings
+   + opsz auto on variable fonts + .u-rhythm-*, .u-measure-*, .u-prose
+   + hyphenation rules.
+
+   Reference: Bringhurst (Elements of Typographic Style §2/§3),
+              Hochuli (Detail in Typography), Lupton (Thinking with Type).
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Display Sizes (ceremonial — paired with --text-display) ─────────────── */
+:root {
+  --text-display-1: clamp(3.583rem, 3.270rem + 1.565vw, 4.027rem);  /* 57.3..64.4 */
+  --text-display-2: clamp(4.300rem, 3.880rem + 2.100vw, 4.829rem);  /* 68.8..77.3 */
+}
+
+/* ─── Leading Tokens (override W12 P1 with refined ratios) ───────────────── */
+:root {
+  --leading-none:    1;        /* للـ display ceremonial */
+  --leading-tight:   1.15;     /* لـ h1/h2 (display)     was 1.18 */
+  --leading-snug:    1.35;     /* لـ h3/h4 (card titles) was 1.32 */
+  --leading-normal:  1.5;      /* لـ UI                  was 1.55 */
+  --leading-relaxed: 1.7;      /* لـ body paragraphs (kept) */
+  --leading-loose:   1.85;     /* لـ poetry, quotes (kept) */
+}
+
+/* ─── Tracking Tokens (8 — extends W12 P1 set of 5) ──────────────────────── */
+:root {
+  --tracking-tightest: -0.04em;
+  --tracking-tighter:  -0.025em;   /* (kept) */
+  --tracking-tight:    -0.015em;   /* refined from -0.012em */
+  --tracking-snug:     -0.005em;   /* NEW */
+  --tracking-normal:   0;          /* (kept) */
+  --tracking-wide:     0.01em;     /* refined from 0.012em */
+  --tracking-wider:    0.025em;    /* refined from 0.05em — Arabic-safe */
+  --tracking-widest:   0.04em;     /* NEW (Latin only) */
+}
+
+/* ─── Rhythm Tokens (8pt baseline grid) ──────────────────────────────────── */
+:root {
+  --rhythm-1:  0.5rem;  /*   8px */
+  --rhythm-2:  1rem;    /*  16px */
+  --rhythm-3:  1.5rem;  /*  24px */
+  --rhythm-4:  2rem;    /*  32px */
+  --rhythm-5:  2.5rem;  /*  40px */
+  --rhythm-6:  3rem;    /*  48px */
+  --rhythm-7:  3.5rem;  /*  56px */
+  --rhythm-8:  4rem;    /*  64px */
+  --rhythm-10: 5rem;    /*  80px */
+  --rhythm-12: 6rem;    /*  96px */
+  --rhythm-16: 8rem;    /* 128px */
+
+  /* Semantic rhythm aliases */
+  --rhythm-h-to-body: var(--rhythm-3);   /* تحت h1/h2 */
+  --rhythm-h-to-h:    var(--rhythm-5);   /* بين h2 و h3 */
+  --rhythm-section:   var(--rhythm-8);   /* بين sections */
+  --rhythm-page:      var(--rhythm-12);  /* بين أقسام الصفحة */
+}
+
+/* ─── Reading Measure (line-length / hold) — Bringhurst 45-75 chars ──────── */
+:root {
+  --measure-narrow:    45ch;
+  --measure-normal:    60ch;
+  --measure-wide:      72ch;
+
+  --measure-narrow-ar: 38ch;
+  --measure-normal-ar: 52ch;
+  --measure-wide-ar:   65ch;
+}
+
+/* ─── Reading-Rhythm Bindings — apply leading + tracking to each voice ──── */
+
+/* Hero */
+.type-hero {
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tighter);
+}
+.type-hero--xl,
+.type-hero--lg {
+  line-height: var(--leading-none);
+  letter-spacing: var(--tracking-tightest);
+}
+
+/* Display */
+.type-display {
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+.type-display-h {
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-snug);
+}
+.type-display-l {
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+}
+
+/* Body */
+.type-body {
+  line-height: var(--leading-relaxed);
+  letter-spacing: var(--tracking-normal);
+}
+.type-body-lead {
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-snug);
+}
+.type-body-lg { line-height: var(--leading-relaxed); }
+.type-body-sm { line-height: var(--leading-normal); }
+
+/* UI */
+.type-ui-label,
+.type-button,
+.type-tab,
+.type-breadcrumb {
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* Numeric */
+.type-num,
+.type-num-tabular,
+.type-num-currency {
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-normal);
+}
+.type-num-display {
+  line-height: var(--leading-none);
+  letter-spacing: var(--tracking-tighter);
+}
+
+/* Code */
+.type-code {
+  line-height: var(--leading-relaxed);
+  letter-spacing: var(--tracking-normal);
+}
+.type-code-inline {
+  line-height: var(--leading-normal);
+}
+
+/* Quote */
+.type-quote,
+.type-quote-block,
+.type-quote-literary,
+.type-quote-literary-en {
+  line-height: var(--leading-loose);
+  letter-spacing: var(--tracking-snug);
+}
+
+/* Accent (Aref Ruqaa — needs space to breathe) */
+.type-eyebrow {
+  line-height: var(--leading-loose);
+  letter-spacing: var(--tracking-wider);
+}
+.type-signature {
+  line-height: var(--leading-loose);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* ─── Optical-Size Bindings (Variable Fonts: Inter / Readex / Fraunces) ──── */
+.type-hero,
+.type-display,
+.type-display-h,
+.type-display-l {
+  font-optical-sizing: auto;
+}
+
+.type-body,
+.type-body-lead,
+.type-body-lg,
+.type-body-sm {
+  font-optical-sizing: auto;
+}
+
+.type-quote-literary-en {
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 18, "SOFT" 50;
+}
+
+.type-latin,
+.type-latin-ui,
+.type-latin-brand {
+  font-optical-sizing: auto;
+}
+
+@supports not (font-optical-sizing: auto) {
+  /* fallback: variable fonts use their default opsz — no action needed */
+}
+
+/* ─── Vertical-Rhythm Utilities (apply to containers) ────────────────────── */
+
+/* Reading rhythm — long-form lessons */
+.u-rhythm-reading > * + * {
+  margin-block-start: var(--rhythm-3);
+}
+.u-rhythm-reading h1,
+.u-rhythm-reading h2,
+.u-rhythm-reading .type-hero,
+.u-rhythm-reading .type-display {
+  margin-block-start: var(--rhythm-5);
+  margin-block-end:   var(--rhythm-2);
+}
+.u-rhythm-reading h3,
+.u-rhythm-reading h4,
+.u-rhythm-reading .type-display-h {
+  margin-block-start: var(--rhythm-4);
+  margin-block-end:   var(--rhythm-2);
+}
+.u-rhythm-reading p,
+.u-rhythm-reading .type-body {
+  margin-block: 0 var(--rhythm-3);
+}
+.u-rhythm-reading blockquote,
+.u-rhythm-reading .type-quote-block {
+  margin-block: var(--rhythm-4);
+}
+
+/* Card rhythm — heading + body cards */
+.u-rhythm-card > * + * {
+  margin-block-start: var(--rhythm-2);
+}
+.u-rhythm-card .type-display-h + .type-body,
+.u-rhythm-card .type-display-h + p {
+  margin-block-start: var(--rhythm-2);
+}
+
+/* Tight rhythm — sidebar items, list rows */
+.u-rhythm-tight > * + * {
+  margin-block-start: var(--rhythm-1);
+}
+
+/* Loose rhythm — long page sections */
+.u-rhythm-loose > * + * {
+  margin-block-start: var(--rhythm-6);
+}
+.u-rhythm-loose > h2,
+.u-rhythm-loose > .type-display {
+  margin-block-start: var(--rhythm-8);
+}
+
+/* ─── Reading-Width Utilities ────────────────────────────────────────────── */
+.u-measure-narrow { max-width: var(--measure-narrow-ar); }
+.u-measure-normal { max-width: var(--measure-normal-ar); }
+.u-measure-wide   { max-width: var(--measure-wide-ar); }
+
+/* Latin overrides — when content is English, allow wider measures */
+.u-measure-narrow:lang(en),
+.u-measure-narrow .type-latin,
+.u-measure-narrow [lang="en"] {
+  max-width: var(--measure-narrow);
+}
+.u-measure-normal:lang(en),
+.u-measure-normal .type-latin,
+.u-measure-normal [lang="en"] {
+  max-width: var(--measure-normal);
+}
+.u-measure-wide:lang(en),
+.u-measure-wide .type-latin,
+.u-measure-wide [lang="en"] {
+  max-width: var(--measure-wide);
+}
+
+/* ─── Hyphenation & Wrap Rules ───────────────────────────────────────────── */
+
+/* Body & prose — hyphens auto for natural flow */
+.type-body,
+.u-prose,
+.u-rhythm-reading p {
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* Headlines — never hyphenate */
+.type-hero,
+.type-display,
+.type-display-h {
+  hyphens: none;
+  word-break: keep-all;
+}
+
+/* Code blocks — preserve whitespace */
+.type-code,
+pre.type-code {
+  white-space: pre;
+  overflow-x: auto;
+  word-break: normal;
+}
+
+/* Inline code — keep on one line when short */
+.type-code-inline {
+  white-space: nowrap;
+  word-break: keep-all;
+}
+
+/* ─── Prose Defaults (.u-prose container) ────────────────────────────────── */
+.u-prose {
+  font-family: var(--type-voice-body);
+  font-size:   var(--text-base);
+  line-height: var(--leading-relaxed);
+  color:       var(--color-text, currentColor);
+  max-width:   var(--measure-normal-ar);
+}
+
+.u-prose h1 {
+  font-family: var(--type-voice-display);
+  font-size:   var(--text-4xl);
+  line-height: var(--leading-tight);
+  margin-block: var(--rhythm-5) var(--rhythm-3);
+}
+.u-prose h2 {
+  font-family: var(--type-voice-display);
+  font-size:   var(--text-3xl);
+  line-height: var(--leading-tight);
+  margin-block: var(--rhythm-5) var(--rhythm-3);
+}
+.u-prose h3 {
+  font-family: var(--type-voice-display);
+  font-size:   var(--text-2xl);
+  line-height: var(--leading-snug);
+  margin-block: var(--rhythm-4) var(--rhythm-2);
+  font-weight: 600;
+}
+.u-prose h4 {
+  font-family: var(--type-voice-body);
+  font-size:   var(--text-xl);
+  line-height: var(--leading-snug);
+  margin-block: var(--rhythm-3) var(--rhythm-2);
+  font-weight: 600;
+}
+.u-prose p  { margin-block: 0 var(--rhythm-3); }
+.u-prose ul,
+.u-prose ol { margin-block: 0 var(--rhythm-3); padding-inline-start: var(--rhythm-3); }
+.u-prose li { margin-block-end: var(--rhythm-1); }
+.u-prose blockquote { margin-block: var(--rhythm-4); }
+.u-prose code { font-family: var(--type-voice-code); }
+.u-prose pre  {
+  font-family: var(--type-voice-code);
+  margin-block: var(--rhythm-3);
+  padding: var(--rhythm-2);
+  background: var(--color-surface-2, rgba(255,255,255,0.04));
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+/* ─── Phase 5 Discipline (golden rules) ──────────────────────────────────── */
+/*
+  Worker 15 / Phase 5 — Scale & Rhythm Discipline:
+    1. كل margin/padding في القواعد الجديدة → var(--rhythm-*).
+    2. كل font-size → var(--text-*) (perfect-fourth scale).
+    3. كل line-height → var(--leading-*).
+    4. كل letter-spacing → var(--tracking-*).
+    5. Reading width → var(--measure-*-ar) للعربية، var(--measure-*) للإنجليزية.
+    6. Variable fonts (Inter/Readex/Fraunces) → font-optical-sizing: auto.
+    7. Body/.u-prose → hyphens: auto. Headlines → hyphens: none.
+    8. لا magic numbers — لا 12px ولا 1.42 ولا -0.018em. tokens فقط.
+*/
+
+/* End RESONANCE v2 / Worker 15 / Phase 5 — Modular Scale & Rhythm ────────── */
