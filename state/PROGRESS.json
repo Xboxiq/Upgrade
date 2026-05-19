@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-19T23:45:00Z",
+  "last_updated": "2026-05-19T23:55:00Z",
   "pack": "v2-resonance",
-  "pack_status": "in-progress",
+  "pack_status": "blocked",
   "current": {
     "pack": "v2",
-    "worker": "15",
-    "worker_name": "TYPOGRAPHY_SOUL",
-    "phase": 6,
+    "worker": "16",
+    "worker_name": "VITAL_UI",
+    "phase": 1,
     "phases_total": 6,
     "phase_order": [
       "1",
@@ -17,18 +17,42 @@
       "5",
       "6"
     ],
-    "branch": "worker-15-resonance",
-    "status": "done"
+    "branch": null,
+    "status": "blocked",
+    "blocker": {
+      "code": "MISSING_PHASE_SPEC",
+      "summary": "Worker 16-19 phase prompt files do not exist under prompts/v2/. Path C scaffold (2026-05-19) intentionally deferred them. AUTO_PILOT v2 forbids modifying prompts/v2/* without explicit user request, so phase scaffolds cannot be auto-generated mid-session.",
+      "missing_files": [
+        "prompts/v2/16_WORKER_VITAL_UI.md",
+        "prompts/v2/16_PHASE_1_LIVING_SURFACES.md",
+        "prompts/v2/16_PHASE_2_TACTILE_MICROINTERACTIONS.md",
+        "prompts/v2/16_PHASE_3_CINEMATIC_TRANSITIONS.md",
+        "prompts/v2/16_PHASE_4_POINTER_COMPANION.md",
+        "prompts/v2/16_PHASE_5_SOUND_DESIGN.md",
+        "prompts/v2/16_PHASE_6_IDENTITY_AURAS.md",
+        "prompts/v2/17_WORKER_CONTENT_REVIVAL.md",
+        "prompts/v2/17_PHASE_1..6_*.md",
+        "prompts/v2/18_WORKER_LEARNING_SHELL.md",
+        "prompts/v2/18_PHASE_1..4_*.md",
+        "prompts/v2/19_WORKER_MICRO_POLISH.md",
+        "prompts/v2/19_PHASE_1..4_*.md"
+      ],
+      "unblock_options": [
+        "A) User pastes/authors Worker 16 index + Phase 1 spec, then re-runs AUTO_PILOT v2.",
+        "B) User explicitly authorizes AI to scaffold Workers 16-19 phase specs under prompts/v2/ as a separate dedicated session (modify prompts/v2/* permission granted).",
+        "C) User chooses to skip the missing scaffolds and asks AI to author + execute Worker 16 Phase 1 directly in this session (single explicit grant)."
+      ]
+    }
   },
   "previous": {
-    "pack": "v1",
-    "worker": "14",
-    "worker_name": "ATELIER_LIQUID_GLASS",
+    "pack": "v2",
+    "worker": "15",
+    "worker_name": "TYPOGRAPHY_SOUL",
     "phase": 6,
     "phases_total": 6,
-    "branch": "worker-14-phase-6-final",
+    "branch": "worker-15-resonance",
     "status": "completed",
-    "merged_pr": 53
+    "merged_pr": 57
   },
   "completed_phases": [
     {
@@ -544,7 +568,7 @@
       "lines_added": 380
     }
   ],
-  "next_action": "Open PR for Worker 15 (worker-15-resonance → main). After merge, start Worker 16 — VITAL UI Phase 1.",
+  "next_action": "BLOCKED — Worker 16-19 phase specs do not exist under prompts/v2/. User must choose unblock option (A/B/C) listed in current.blocker.unblock_options.",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
