@@ -16267,7 +16267,7 @@ body { font-size: calc(var(--text-base) * var(--type-zoom)); }
                   "SF Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI",
                   Roboto, sans-serif;
 
-  --font-numeric: "IBM Plex Sans Arabic", "Readex Pro", "Cairo",
+  --font-numeric: "IBM Plex Sans Arabic", "JetBrains Mono", "Readex Pro", "Cairo",
                   ui-monospace, "SF Mono", monospace;
 
   --font-accent:  "Aref Ruqaa", "Amiri", "Cairo",
@@ -20104,3 +20104,282 @@ body[data-material-density="high"] {
    ════════════════════════════════════════════════════════════════════════════ */
 
 /* End RESONANCE v2 — Worker 15 / Phase 3 ─────────────────────────────────── */
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   RESONANCE v2 — Worker 15 / Phase 4 — Latin & Numeric Layer
+   ────────────────────────────────────────────────────────────────────────────
+   Loads Inter (Latin UI), JetBrains Mono (code + numeric mono), Fraunces
+   (literary serif italic). Deepens specs of .type-num*, .type-code*,
+   .type-latin*, .type-quote* utilities (Phase 1 versions remain; later
+   rules in cascade win).
+
+   PRESERVATION CONTRACT (Worker 15 / Phase 4):
+   • DOES NOT remove any font from any --font-* stack.
+   • DOES NOT modify .u-num from W12 P1B.
+   • DOES NOT change values inside any qcalc / cath-stat-value / data-countup.
+   • REPLACE-IN-PLACE only on --font-numeric (added JetBrains Mono as 2nd tier).
+   • AUGMENT only on existing HTML elements (no deletions).
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── 1) New stack tokens (APPEND) ─────────────────────────────────────────── */
+:root {
+  /* Latin UI font for mixed-script segments (USD, brand names, abbreviations) */
+  --font-latin: "Inter", "Readex Pro", "SF Pro Text", -apple-system,
+                BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Literary serif italic for English citations (psych/eq pages) */
+  --font-quote-literary: "Fraunces", "Readex Pro", "Times New Roman",
+                         Georgia, serif;
+
+  /* Display numerals — large hero numbers, prefer JetBrains Mono shape */
+  --font-num-display: "JetBrains Mono", "IBM Plex Sans Arabic",
+                      "SF Mono", monospace;
+
+  /* Voice token reroutes (P4) — aliases over the new stacks */
+  --type-voice-numeric:        var(--font-numeric);          /* updated stack */
+  --type-voice-code:           var(--font-mono);             /* JetBrains real */
+  --type-voice-latin:          var(--font-latin);            /* new */
+  --type-voice-quote-literary: var(--font-quote-literary);   /* Fraunces */
+}
+
+/* ── 2) Numeric Layer — tabular nums locked, JetBrains shape for displays ─── */
+.type-num,
+[data-type-voice="numeric"] {
+  font-family: var(--type-voice-numeric);
+  font-weight: 600;
+  font-feature-settings: "tnum" 1, "lnum" 1, "kern" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: 0;
+  unicode-bidi: isolate;
+}
+
+.type-num-tabular {
+  font-family: var(--type-voice-numeric);
+  font-weight: 600;
+  font-feature-settings: "tnum" 1, "lnum" 1, "kern" 1, "ss01" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: 0;
+  unicode-bidi: isolate;
+}
+
+.type-num-display {
+  font-family: var(--font-num-display);
+  font-weight: 700;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  unicode-bidi: isolate;
+}
+
+.type-num-inline {
+  font-family: var(--type-voice-numeric);
+  font-feature-settings: "tnum" 1, "lnum" 1, "kern" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  unicode-bidi: isolate;
+}
+
+.type-num-currency {
+  font-family: var(--type-voice-numeric);
+  font-weight: 600;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  unicode-bidi: isolate;
+  padding-inline: 0.1em;
+  white-space: nowrap;
+}
+
+/* ── 3) Code Layer — JetBrains Mono with ligatures + tab stops ────────────── */
+.type-code,
+[data-type-voice="code"] {
+  font-family: var(--type-voice-code);
+  font-weight: 400;
+  font-feature-settings: "calt" 1, "liga" 1;
+  line-height: 1.6;
+  letter-spacing: 0;
+  unicode-bidi: isolate;
+  tab-size: 2;
+  -moz-tab-size: 2;
+}
+
+.type-code-inline {
+  font-family: var(--type-voice-code);
+  font-weight: 500;
+  font-size: 0.9em;
+  padding: 0.1em 0.35em;
+  background: color-mix(in oklch, var(--color-surface-2) 60%, transparent);
+  border-radius: 0.25em;
+  unicode-bidi: isolate;
+}
+
+.type-kbd,
+kbd.type-kbd {
+  font-family: var(--type-voice-code);
+  font-weight: 600;
+  font-size: 0.85em;
+  padding: 0.15em 0.5em;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-text-faint);
+  border-radius: 0.25em;
+  box-shadow: 0 1px 0 var(--color-text-faint);
+  unicode-bidi: isolate;
+}
+
+/* ── 4) Latin Layer — Inter for mixed-script segments ─────────────────────── */
+.type-latin,
+[data-type-voice="latin"] {
+  font-family: var(--type-voice-latin);
+  unicode-bidi: isolate;
+}
+
+.type-latin-ui {
+  font-family: var(--type-voice-latin);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  line-height: 1.4;
+  unicode-bidi: isolate;
+}
+
+.type-latin-num {
+  font-family: var(--type-voice-latin);
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  unicode-bidi: isolate;
+}
+
+.type-latin-brand {
+  font-family: var(--type-voice-latin);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  unicode-bidi: isolate;
+}
+
+.type-mixed-harmony {
+  unicode-bidi: isolate;
+  font-feature-settings: "kern" 1;
+}
+
+/* ── 5) Literary Quote Layer — Fraunces italic for EN, Aref Ruqaa for AR ──── */
+.type-quote-literary-en {
+  font-family: var(--type-voice-quote-literary);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0;
+  line-height: 1.65;
+  font-variation-settings: "opsz" 18, "SOFT" 50;
+  unicode-bidi: isolate;
+}
+
+.type-quote-block {
+  font-family: var(--type-voice-quote);
+  font-weight: 400;
+  font-size: var(--text-xl);
+  line-height: 1.65;
+  color: var(--color-text-muted);
+  border-inline-start: 3px solid var(--color-tint, var(--color-brand));
+  padding-inline-start: var(--space-4);
+  margin-block: var(--space-5);
+  position: relative;
+}
+
+.type-quote-block::before {
+  content: "\201C"; /* left double quotation mark */
+  color: var(--color-tint, var(--color-brand));
+  font-size: 1.4em;
+  font-family: var(--font-quote-literary);
+  vertical-align: -0.15em;
+  margin-inline-end: 0.1em;
+}
+
+.type-quote-block::after {
+  content: "\201D"; /* right double quotation mark */
+  color: var(--color-tint, var(--color-brand));
+  font-size: 1.4em;
+  font-family: var(--font-quote-literary);
+  vertical-align: -0.15em;
+  margin-inline-start: 0.1em;
+}
+
+.type-citation {
+  font-family: var(--type-voice-body);
+  font-weight: 400;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--color-text-faint);
+  font-style: italic;
+  font-feature-settings: "lnum" 1;
+}
+
+/* ── 6) Latin-Arabic Mixing Rules ─────────────────────────────────────────── */
+/*
+   عند مزج العربية والإنجليزية في نفس النص:
+   1. unicode-bidi: isolate على الـ Latin segment
+   2. .type-latin على الـ Latin part
+   3. تجنّب letter-spacing على mixed lines (يكسر باعدي)
+*/
+.u-prose [lang="en"],
+.u-prose .latin,
+.type-body [lang="en"] {
+  font-family: var(--type-voice-latin);
+  unicode-bidi: isolate;
+}
+
+.u-prose .num,
+.type-body .num {
+  font-family: var(--type-voice-numeric);
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  unicode-bidi: isolate;
+}
+
+.u-prose .brand,
+.type-body .brand {
+  font-family: var(--type-voice-latin);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  unicode-bidi: isolate;
+}
+
+.u-prose .currency,
+.type-body .currency {
+  font-family: var(--type-voice-numeric);
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  unicode-bidi: isolate;
+  white-space: nowrap;
+}
+
+/* ── 7) Auto-apply tabular numerals on critical surfaces ─────────────────── */
+[data-cath-stat],
+.cath-stat-value,
+.bento-stat-value,
+.qcalc-value,
+.stat-tile-value,
+[data-countup],
+[data-tabular] {
+  font-family: var(--type-voice-numeric);
+  font-feature-settings: "tnum" 1, "lnum" 1, "kern" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  unicode-bidi: isolate;
+}
+
+table.numeric-cols td,
+table.numeric-cols th {
+  font-family: var(--type-voice-numeric);
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+/* ── 8) Discipline Comment ───────────────────────────────────────────────── */
+/*
+Worker 15 / Phase 4 — Latin & Numeric Discipline:
+  1. Stat values + qcalc values → var(--type-voice-numeric) [IBM Plex + JetBrains].
+  2. Code blocks → var(--type-voice-code) [JetBrains Mono ligatures on].
+  3. Latin segments في عربي → .type-latin + unicode-bidi: isolate.
+  4. Currency (IQD/USD) → .type-num-currency + nowrap.
+  5. Brand names → .type-latin-brand.
+  6. Arabic literary quotes → .type-quote (Aref Ruqaa).
+  7. English literary quotes → .type-quote-literary-en (Fraunces italic).
+  8. Academic citations → .type-citation.
+  9. لا italic على Aref Ruqaa أبداً (يقطع الذوق).
+*/
+
+/* End RESONANCE v2 / Worker 15 / Phase 4 ─────────────────────────────────── */

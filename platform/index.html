@@ -18,7 +18,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="favicon.svg" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Readex+Pro:wght@200..700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@300;400;500;700;900&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Readex+Pro:wght@200..700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@300;400;500;700;900&family=Cairo:wght@400;600;700&family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&display=swap" rel="stylesheet" />
 
 <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -719,27 +719,27 @@
         <!-- ══════════ Cells 2-5 — 4 count-up Stat Tiles (canonical, single instance) ══════════ -->
         <article class="stat-tile b-1x1 material-regular" data-reveal>
           <div class="stat-tile-icon"><i class="qi" data-icon="check-circle" aria-hidden="true"></i></div>
-          <div class="stat-tile-value u-num"><span data-countup data-cath-stat="unitsCompleted">0</span></div>
+          <div class="stat-tile-value u-num"><span class="type-num-display" data-countup data-cath-stat="unitsCompleted">0</span></div>
           <div class="stat-tile-label">وحدة مُكتملة</div>
           <span class="stat-tile-trend is-up"><i class="qi" data-icon="trending-up" aria-hidden="true"></i> +3 هذا الأسبوع</span>
         </article>
 
         <article class="stat-tile b-1x1 material-regular" data-reveal>
           <div class="stat-tile-icon"><i class="qi" data-icon="bar-chart" aria-hidden="true"></i></div>
-          <div class="stat-tile-value u-num"><span data-countup data-cath-stat="avgCompletionRate">0</span>%</div>
+          <div class="stat-tile-value u-num"><span class="type-num-display" data-countup data-cath-stat="avgCompletionRate">0</span>%</div>
           <div class="stat-tile-label">معدل الإتمام</div>
           <span class="stat-tile-trend is-up"><i class="qi" data-icon="trending-up" aria-hidden="true"></i> +5%</span>
         </article>
 
         <article class="stat-tile b-1x1 material-regular" data-reveal>
           <div class="stat-tile-icon"><i class="qi" data-icon="clock" aria-hidden="true"></i></div>
-          <div class="stat-tile-value u-num"><span data-countup data-cath-stat="trainingHours">0</span></div>
+          <div class="stat-tile-value u-num"><span class="type-num-display" data-countup data-cath-stat="trainingHours">0</span></div>
           <div class="stat-tile-label">ساعة تدريب</div>
         </article>
 
         <article class="stat-tile b-1x1 material-regular" data-reveal>
           <div class="stat-tile-icon"><i class="qi" data-icon="flame" aria-hidden="true"></i></div>
-          <div class="stat-tile-value u-num"><span data-countup data-cath-stat="streak">0</span></div>
+          <div class="stat-tile-value u-num"><span class="type-num-display" data-countup data-cath-stat="streak">0</span></div>
           <div class="stat-tile-label">يوم streak</div>
         </article>
 
@@ -10573,7 +10573,7 @@ let o = {x:1}; let p = o; p.x = 9;  // o.x = 9 (نفس المرجع)</code></pre
           <article class="prog-fund-card" data-fund-card="2">
             <header><span class="prog-fund-num">02</span><h3>Control Flow</h3><span class="prog-fund-tag">core</span></header>
             <p><code>if/else</code>، الحلقات (<code>for</code>, <code>while</code>, <code>for…of</code>)، والـ recursion. اختيار البنية الصحيحة يجعل الكود يُقرأ كنص — لا كلغز.</p>
-            <pre><code>function sum(n){ return n &lt;= 0 ? 0 : n + sum(n - 1); }  // recursion
+            <pre class="type-code"><code>function sum(n){ return n &lt;= 0 ? 0 : n + sum(n - 1); }  // recursion
 for (const item of list) { if (item.skip) continue; handle(item); }</code></pre>
             <div class="prog-fund-foot">
               <span class="prog-fund-mini">تمرين: حوّل <code>sum</code> إلى loop.</span>
@@ -10585,7 +10585,7 @@ for (const item of list) { if (item.skip) continue; handle(item); }</code></pre>
           <article class="prog-fund-card" data-fund-card="3">
             <header><span class="prog-fund-num">03</span><h3>Functions</h3><span class="prog-fund-tag">core</span></header>
             <p>الدالة النقية (<em>pure</em>) لا تعتمد على شيء خارجي ولا تُغيّره — لذلك يسهل اختبارها. الدالة العالية (<em>higher-order</em>) تأخذ أو تُرجع دالة.</p>
-            <pre><code>const double = x =&gt; x * 2;                  // pure
+            <pre class="type-code"><code>const double = x =&gt; x * 2;                  // pure
 const map = (arr, fn) =&gt; arr.map(fn);       // higher-order
 map([1,2,3], double);                       // [2,4,6]</code></pre>
             <div class="prog-fund-foot">
@@ -10598,7 +10598,7 @@ map([1,2,3], double);                       // [2,4,6]</code></pre>
           <article class="prog-fund-card" data-fund-card="4">
             <header><span class="prog-fund-num">04</span><h3>Scope &amp; Closures</h3><span class="prog-fund-tag">deep</span></header>
             <p>الـ scope هو "أين تُرى هذه المتغيّرات". الـ closure هو دالة تتذكر متغيّرات بيئتها حتى بعد انتهاء تلك البيئة.</p>
-            <pre><code>function counter(){ let n = 0; return () =&gt; ++n; }
+            <pre class="type-code"><code>function counter(){ let n = 0; return () =&gt; ++n; }
 const c = counter(); c(); c(); c();   // 3 — n محفوظ في closure</code></pre>
             <div class="prog-fund-foot">
               <span class="prog-fund-mini">تمرين: اصنع دالة <code>once(fn)</code> تشغّل <code>fn</code> مرة واحدة فقط.</span>
