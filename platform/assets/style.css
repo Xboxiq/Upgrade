@@ -20748,3 +20748,291 @@ pre.type-code {
 */
 
 /* End RESONANCE v2 / Worker 15 / Phase 5 — Modular Scale & Rhythm ────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   RESONANCE v2 — Worker 15 / Phase 6 — Per-Page Type Personality
+   Builds on: Phases 1-5 (voices, fonts, scale, rhythm).
+   Adds: 15 page personalities × 4 type tokens + generic bindings.
+   Philosophy: كل صفحة لها روح — typography ترن مع روح المحتوى.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ──────────── Default page-personality fallback (no override) */
+.page {
+  --type-page-h1-family:    var(--type-voice-display);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-tight);
+  --type-page-h1-leading:   var(--leading-tight);
+
+  --type-page-body-family:  var(--type-voice-body);
+  --type-page-body-weight:  400;
+
+  --type-page-num-family:   var(--type-voice-numeric);
+  --type-page-accent-vis:   0.05;
+}
+
+/* ──────────── 15 Page Personalities ──────────────────────────────────────── */
+
+/* 1. Dashboard — Elegant (Aref Ruqaa hero + Reem Kufi stats) */
+.page[data-page-personality="dashboard"] {
+  --type-page-h1-family:    var(--font-hero);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-snug);
+  --type-page-h1-leading:   var(--leading-tight);
+  --type-page-accent-vis:   0.10;
+}
+
+/* 2. Callcenter — Sharp (Reem Kufi 700 + Tajawal heavy buttons) */
+.page[data-page-personality="callcenter"] {
+  --type-page-h1-family:    var(--font-display);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-tight);
+  --type-page-h1-leading:   var(--leading-tight);
+  --type-page-body-weight:  500;
+  --type-page-accent-vis:   0.02;
+}
+.page[data-page-personality="callcenter"] .type-button,
+.page[data-page-personality="callcenter"] .ql-btn {
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* 3. Fieldsales — Energetic (Tajawal Black CTAs) */
+.page[data-page-personality="fieldsales"] {
+  --type-page-h1-family:    var(--font-display);
+  --type-page-h1-weight:    800;
+  --type-page-h1-tracking:  var(--tracking-tighter);
+  --type-page-accent-vis:   0.05;
+}
+.page[data-page-personality="fieldsales"] .type-button--lg,
+.page[data-page-personality="fieldsales"] .ql-btn-primary {
+  font-family: var(--font-ui);
+  font-weight: 900;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* 4. Accountmgr — Executive (Reem Kufi + Inter for KPIs) */
+.page[data-page-personality="accountmgr"] {
+  --type-page-h1-family:    var(--font-display);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-tight);
+  --type-page-accent-vis:   0.03;
+}
+.page[data-page-personality="accountmgr"] .type-num,
+.page[data-page-personality="accountmgr"] [data-cath-stat] {
+  font-family: var(--font-latin);
+  font-weight: 600;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+/* 5. Social — Vibrant (Tajawal 900 metrics + Aref Ruqaa taglines) */
+.page[data-page-personality="social"] {
+  --type-page-h1-family:    var(--font-display);
+  --type-page-h1-weight:    800;
+  --type-page-h1-tracking:  var(--tracking-tighter);
+  --type-page-accent-vis:   0.12;
+}
+.page[data-page-personality="social"] .type-num-display,
+.page[data-page-personality="social"] [data-countup] {
+  font-family: var(--font-ui);
+  font-weight: 900;
+  letter-spacing: var(--tracking-tighter);
+}
+
+/* 6. Lab — Experimental (JetBrains Mono ribbons) */
+.page[data-page-personality="lab"] {
+  --type-page-h1-family:    var(--font-display);
+  --type-page-h1-weight:    600;
+  --type-page-h1-tracking:  var(--tracking-snug);
+  --type-page-accent-vis:   0.04;
+}
+.page[data-page-personality="lab"] .scenario-id,
+.page[data-page-personality="lab"] .lab-badge {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-feature-settings: "tnum" 1, "calt" 1;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* 7. Psych — Literary (Aref Ruqaa wisdom + Fraunces Latin) */
+.page[data-page-personality="psych"] {
+  --type-page-h1-family:    var(--font-hero);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-snug);
+  --type-page-h1-leading:   var(--leading-relaxed);
+  --type-page-body-family:  var(--font-text);
+  --type-page-accent-vis:   0.20;
+}
+.page[data-page-personality="psych"] blockquote,
+.page[data-page-personality="psych"] .type-quote-block,
+.page[data-page-personality="psych"] .type-quote-literary {
+  font-family: var(--font-accent);
+  line-height: var(--leading-loose);
+}
+.page[data-page-personality="psych"] [lang="en"] {
+  font-family: var(--font-quote-literary);
+  font-style: italic;
+}
+
+/* 8. EQ — Emotional (Aref Ruqaa hero + soft body) */
+.page[data-page-personality="eq"] {
+  --type-page-h1-family:    var(--font-hero);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-snug);
+  --type-page-accent-vis:   0.15;
+  --type-page-body-weight:  400;
+}
+.page[data-page-personality="eq"] .type-body-lead {
+  font-style: normal;
+  line-height: var(--leading-loose);
+  letter-spacing: var(--tracking-snug);
+}
+
+/* 9. Negotiation — Persuasive (tight rhythm) */
+.page[data-page-personality="negotiation"] {
+  --type-page-h1-family:    var(--font-display);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-tight);
+  --type-page-accent-vis:   0.04;
+}
+.page[data-page-personality="negotiation"] .type-button {
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* 10. Customercare — Warm (Aref empathy quotes + relaxed body) */
+.page[data-page-personality="customercare"] {
+  --type-page-h1-family:    var(--font-hero);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-snug);
+  --type-page-accent-vis:   0.12;
+  --type-page-body-weight:  400;
+}
+.page[data-page-personality="customercare"] .type-body {
+  line-height: var(--leading-relaxed);
+  letter-spacing: var(--tracking-snug);
+}
+
+/* 11. Programming — Technical (mono-emphatic + Inter for Latin terms) */
+.page[data-page-personality="programming"] {
+  --type-page-h1-family:    var(--font-display);
+  --type-page-h1-weight:    600;
+  --type-page-h1-tracking:  var(--tracking-snug);
+  --type-page-accent-vis:   0.02;
+}
+.page[data-page-personality="programming"] [lang="en"],
+.page[data-page-personality="programming"] .term-en {
+  font-family: var(--font-latin);
+  font-weight: 500;
+}
+.page[data-page-personality="programming"] code,
+.page[data-page-personality="programming"] pre {
+  font-family: var(--font-mono);
+  font-feature-settings: "calt" 1, "liga" 1;
+}
+
+/* 12. Accounting — Precise (IBM Plex tabular lock) */
+.page[data-page-personality="accounting"] {
+  --type-page-h1-family:    var(--font-display);
+  --type-page-h1-weight:    600;
+  --type-page-h1-tracking:  var(--tracking-tight);
+  --type-page-accent-vis:   0.02;
+  --type-page-num-family:   var(--type-voice-numeric);
+}
+.page[data-page-personality="accounting"] .type-num,
+.page[data-page-personality="accounting"] td.numeric,
+.page[data-page-personality="accounting"] [data-cath-stat] {
+  font-family: var(--type-page-num-family);
+  font-feature-settings: "tnum" 1, "lnum" 1, "ss01" 1;
+}
+
+/* 13. Phonerepair — Industrial (Tajawal headings + JetBrains parts) */
+.page[data-page-personality="phonerepair"] {
+  --type-page-h1-family:    var(--font-display);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-tight);
+  --type-page-accent-vis:   0.02;
+}
+.page[data-page-personality="phonerepair"] .part-number,
+.page[data-page-personality="phonerepair"] .ic-id,
+.page[data-page-personality="phonerepair"] .model-code {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-feature-settings: "tnum" 1;
+  letter-spacing: var(--tracking-normal);
+}
+
+/* 14. HRmastery — Formal (Aref ceremonial + Inter companies) */
+.page[data-page-personality="hrmastery"] {
+  --type-page-h1-family:    var(--font-hero);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-snug);
+  --type-page-accent-vis:   0.10;
+}
+.page[data-page-personality="hrmastery"] .company-name,
+.page[data-page-personality="hrmastery"] [data-company] {
+  font-family: var(--font-latin);
+  font-weight: 600;
+  letter-spacing: var(--tracking-tight);
+}
+.page[data-page-personality="hrmastery"] .position-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+}
+
+/* 15. Myprogress — Reflective (Aref milestones + Tajawal stats) */
+.page[data-page-personality="myprogress"] {
+  --type-page-h1-family:    var(--font-hero);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-snug);
+  --type-page-h1-leading:   var(--leading-relaxed);
+  --type-page-accent-vis:   0.18;
+}
+.page[data-page-personality="myprogress"] .milestone-title {
+  font-family: var(--font-accent);
+  font-weight: 700;
+  line-height: var(--leading-loose);
+}
+.page[data-page-personality="myprogress"] [data-cath-stat] {
+  font-family: var(--font-ui);
+  font-weight: 500;
+}
+
+/* ──────────── Generic page-personality bindings ──────────────────────────── */
+
+/* H1 inherits page-personality cast */
+.page[data-page-personality] .page-h h1,
+.page[data-page-personality] > h1 {
+  font-family: var(--type-page-h1-family);
+  font-weight: var(--type-page-h1-weight);
+  letter-spacing: var(--type-page-h1-tracking);
+  line-height: var(--type-page-h1-leading);
+}
+
+/* Body inherits */
+.page[data-page-personality] .type-body,
+.page[data-page-personality] .u-prose p {
+  font-family: var(--type-page-body-family, var(--type-voice-body));
+  font-weight: var(--type-page-body-weight, 400);
+}
+
+/* Numerics inherit */
+.page[data-page-personality] .type-num,
+.page[data-page-personality] .type-num-tabular {
+  font-family: var(--type-page-num-family, var(--type-voice-numeric));
+}
+
+/* ──────────── RESONANCE v2 / Worker 15 — COMPLETE ─────────────────────────
+   9 voices × 15 page personalities × 5 weights ≈ 675 type combinations.
+   كل واحدة موزونة pedagogically لتعكس روح المحتوى.
+
+   Discipline final reminder:
+   1. لا تخلط personalities داخل صفحة واحدة.
+   2. .page[data-page-personality="..."] هو الـ scope الوحيد للـ overrides.
+   3. لا تضف personality جديدة إلا بعد تعديل Upg.type2.list().
+   4. --type-page-accent-vis تذكير بالنسبة المرئية لـ Aref Ruqaa، ليس enforcement.
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* End RESONANCE v2 / Worker 15 / Phase 6 ──────────────────────────────────── */
