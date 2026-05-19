@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-19T22:22:55Z",
+  "last_updated": "2026-05-19T23:45:00Z",
   "pack": "v2-resonance",
   "pack_status": "in-progress",
   "current": {
     "pack": "v2",
     "worker": "15",
     "worker_name": "TYPOGRAPHY_SOUL",
-    "phase": 5,
+    "phase": 6,
     "phases_total": 6,
     "phase_order": [
       "1",
@@ -18,7 +18,7 @@
       "6"
     ],
     "branch": "worker-15-resonance",
-    "status": "in-progress"
+    "status": "done"
   },
   "previous": {
     "pack": "v1",
@@ -535,9 +535,16 @@
       "title": "Modular Scale & Rhythm — type scale REPLACE-IN-PLACE (Major-Third 1.25 → Perfect-Fourth 1.333 with clamp() fluid steps xs..5xl) + --text-display-1/-2 ceremonial sizes + --leading-* refined (none/tight/snug/normal/relaxed/loose, 6 tokens) + --tracking-* expanded (tightest/tighter/tight/snug/normal/wide/wider/widest, 8 tokens) + --rhythm-* 8pt baseline grid (rhythm-1..16 + h-to-body/h-to-h/section/page semantic aliases, 15 tokens) + --measure-* reading width (narrow/normal/wide × Latin+Arabic, 6 tokens) + reading-rhythm bindings on every type-* voice (leading + tracking via tokens) + font-optical-sizing: auto on hero/display/body/quote/latin (6 selectors) + .u-rhythm-reading/.u-rhythm-card/.u-rhythm-tight/.u-rhythm-loose container utilities + .u-measure-narrow/.u-measure-normal/.u-measure-wide with :lang(en) Latin overrides + .u-prose default cascade (h1/h2/h3/h4/p/ul/ol/li/blockquote/code/pre) + hyphenation rules (auto for body, none for headings, pre for code blocks) + Phase 5 discipline comment. --text-2xs and --text-display preserved for legacy callers.",
       "branch": "worker-15-resonance",
       "lines_added": 365
+    },
+    {
+      "worker": "15",
+      "phase": 6,
+      "title": "Per-Page Type Personality — 15 page personalities (dashboard elegant / callcenter sharp / fieldsales energetic / accountmgr executive / social vibrant / lab experimental / psych literary / eq emotional / negotiation persuasive / customercare warm / programming technical / accounting precise / phonerepair industrial / hrmastery formal / myprogress reflective) + 4 --type-page-* tokens (h1-family/weight/tracking/leading + body-family/weight + num-family + accent-vis) × 15 pages + generic page-personality bindings on h1/.type-body/.u-prose p/.type-num + 15 data-page-personality augmentations on every page section + Upg.type2 API (get/set/list/observe) with PERSONALITIES const + upg:type:change CustomEvent fired on upg:nav:change + hashchange fallback. 20th Upg.* API. Sacred preserved (15 pages / 391 qcalc / Cairo).",
+      "branch": "worker-15-resonance",
+      "lines_added": 380
     }
   ],
-  "next_action": "Continue Worker 15 Phase 6 — Per-Page Personality (14 type signatures: callcenter sharp / psych literary / accounting precise / social vibrant / programming mono-emphatic / phonerepair technical / hrmastery formal / negotiation persuasive / customercare warm / eq emotional / lab experimental / fieldsales energetic / accountmgr executive / dashboard elegant / myprogress reflective) + Upg.type2 API",
+  "next_action": "Open PR for Worker 15 (worker-15-resonance → main). After merge, start Worker 16 — VITAL UI Phase 1.",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
@@ -564,7 +571,7 @@
         "id": "15",
         "name": "TYPOGRAPHY_SOUL",
         "phases": 6,
-        "status": "in-progress"
+        "status": "completed"
       },
       {
         "id": "16",
