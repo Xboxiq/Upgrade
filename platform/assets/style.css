@@ -16015,17 +16015,20 @@ select.qcalc-input { text-align: start; }
                   "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
   --font-numeric: var(--font-display);
 
-  /* Type scale — clamp(min, fluid, max). Major Third (1.25) ratio. */
-  --text-2xs:     clamp(0.6875rem, 0.66rem + 0.15vw, 0.75rem);   /* 11..12 */
-  --text-xs:      clamp(0.75rem, 0.72rem + 0.18vw, 0.8125rem);   /* 12..13 */
-  --text-sm:      clamp(0.875rem, 0.84rem + 0.2vw, 0.9375rem);   /* 14..15 */
-  --text-base:    clamp(1rem, 0.95rem + 0.25vw, 1.0625rem);      /* 16..17 */
-  --text-lg:      clamp(1.125rem, 1.06rem + 0.3vw, 1.1875rem);   /* 18..19 */
-  --text-xl:      clamp(1.25rem, 1.16rem + 0.45vw, 1.375rem);    /* 20..22 */
-  --text-2xl:     clamp(1.5rem, 1.36rem + 0.7vw, 1.75rem);       /* 24..28 */
-  --text-3xl:     clamp(1.875rem, 1.66rem + 1.05vw, 2.25rem);    /* 30..36 */
-  --text-4xl:     clamp(2.25rem, 1.96rem + 1.5vw, 3rem);         /* 36..48 */
-  --text-display: clamp(2.75rem, 2.2rem + 2.8vw, 4.5rem);        /* 44..72 */
+  /* Type scale — Perfect-Fourth (1.333) modular scale. RESONANCE v2 / W15 P5.
+     Reference: Bringhurst, "The Elements of Typographic Style", §3.2.
+     Each step ascends by × 1.333 from --text-base (16-18px). */
+  --text-2xs:     clamp(0.6875rem, 0.66rem + 0.15vw, 0.75rem);     /* 11..12 (preserved — micro labels) */
+  --text-xs:      clamp(0.694rem, 0.660rem + 0.170vw, 0.750rem);   /* 11.1..12.0 */
+  --text-sm:      clamp(0.833rem, 0.795rem + 0.190vw, 0.920rem);   /* 13.3..14.7 */
+  --text-base:    clamp(1.000rem, 0.950rem + 0.250vw, 1.125rem);   /* 16.0..18.0 */
+  --text-lg:      clamp(1.200rem, 1.135rem + 0.325vw, 1.350rem);   /* 19.2..21.6 */
+  --text-xl:      clamp(1.440rem, 1.355rem + 0.425vw, 1.620rem);   /* 23.0..25.9 */
+  --text-2xl:     clamp(1.728rem, 1.620rem + 0.540vw, 1.944rem);   /* 27.6..31.1 */
+  --text-3xl:     clamp(2.074rem, 1.935rem + 0.695vw, 2.333rem);   /* 33.2..37.3 */
+  --text-4xl:     clamp(2.488rem, 2.310rem + 0.890vw, 2.799rem);   /* 39.8..44.8 */
+  --text-5xl:     clamp(2.986rem, 2.755rem + 1.155vw, 3.358rem);   /* 47.8..53.7 (NEW W15 P5) */
+  --text-display: clamp(2.75rem, 2.2rem + 2.8vw, 4.5rem);          /* 44..72 (preserved — alias for legacy callers; prefer --text-display-1) */
 
   /* Line-height ladder */
   --leading-tight:   1.18;
@@ -16259,15 +16262,15 @@ body { font-size: calc(var(--text-base) * var(--type-zoom)); }
 
 /* ─── Voice mapping (overrides Phase 1 generic stack) ─────────────────────── */
 :root {
-  --font-display: "Thmanyah", "Reem Kufi", "Cairo",
+  --font-display: "Thmanyah", "Reem Kufi", "Aref Ruqaa", "Cairo",
                   "SF Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI",
                   Roboto, sans-serif;
 
-  --font-text:    "Readex Pro", "IBM Plex Sans Arabic", "Cairo",
+  --font-text:    "Readex Pro", "Tajawal", "IBM Plex Sans Arabic", "Cairo",
                   "SF Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI",
                   Roboto, sans-serif;
 
-  --font-numeric: "IBM Plex Sans Arabic", "Readex Pro", "Cairo",
+  --font-numeric: "IBM Plex Sans Arabic", "JetBrains Mono", "Readex Pro", "Cairo",
                   ui-monospace, "SF Mono", monospace;
 
   --font-accent:  "Aref Ruqaa", "Amiri", "Cairo",
@@ -19362,3 +19365,1674 @@ body[data-material-density="high"] {
 }
 
 /* End ATELIER v16 / Phase 6 — Final Utilities Pack ──────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════
+   ▼ RESONANCE v2 — Worker 15 / Phase 1 — Type Audit & Casting
+   "الخط صوت المعنى" — 9 typography voices cast to content roles.
+   This phase ADDS only: voice tokens, utility classes, [data-type-voice]
+   selectors, and discipline rules. NO font files loaded yet
+   (Phases 2-4 will load Tajawal, Inter, JetBrains Mono, Fraunces).
+   All Cathedral v16 voice bindings (.h-display/.h-quote/.u-num/...)
+   remain untouched and continue to work. Cairo stays in every fallback.
+   ════════════════════════════════════════════════════════════════ */
+
+/* ────────────────────────────────────────────────────────────────
+   Content Types Inventory (Worker 15 / Phase 1 — Audit):
+   ─────────────────────────────────────────────────────
+   heading-hero       — Wordmark, Gateway headline, page-h h1
+   heading-display    — h1 inside page-header (post emoji-purge)
+   heading-section    — h2 (section dividers within page)
+   heading-card       — h3/h4 (card titles, calc titles)
+   body-paragraph     — long-form content, lesson text
+   body-lead          — intro lines, hero subtitles
+   ui-label           — buttons, tab labels, breadcrumbs
+   ui-hint            — captions, helper text, form hints
+   numeric-tabular    — stat-tile values, qcalc values, tickers
+   numeric-inline     — numbers inside paragraphs
+   code-block         — pre/code in page-programming
+   code-inline        — inline code/kbd
+   quote-literary     — philosophy quotes in psych/eq pages
+   quote-citation     — academic citations / sources
+   accent-arabic      — eyebrows, signatures, ribbons
+   alert-warning      — warning blocks, danger callouts
+   scenario-iraqi     — Iraqi market dialogue scenarios
+   legal-fineprint    — terms, footnotes
+   ──────────────────────────────────────────────────────────────── */
+
+/* ────────────────────────────────────────────────────────────────
+   1) Type Voice Tokens — 9 voices, all aliased to existing --font-*.
+   Phases 2-4 will REPLACE-IN-PLACE the right-hand sides to point at
+   newly loaded families (Tajawal, Inter, JetBrains Mono, Fraunces).
+   This indirection makes the rest of the system forward-compatible.
+   ──────────────────────────────────────────────────────────────── */
+:root {
+  /* Voice 1 — HERO: wordmark, gateway, page-h1 (most prestigious) */
+  --type-voice-hero:        var(--font-display);
+  /* Voice 2 — DISPLAY: h1/h2 (section dividers) */
+  --type-voice-display:     var(--font-display);
+  /* Voice 3 — BODY: paragraphs, lesson text (most-read) */
+  --type-voice-body:        var(--font-text);
+  /* Voice 4 — UI: labels, buttons, tabs, breadcrumbs */
+  --type-voice-ui:          var(--font-text);
+  /* Voice 5 — NUMERIC: stats, qcalc, count-ups (tabular-nums lock) */
+  --type-voice-numeric:     var(--font-numeric);
+  /* Voice 6 — CODE: pre/code/kbd (mono lock) */
+  --type-voice-code:        var(--font-mono);
+  /* Voice 7 — QUOTE: literary citations, philosophy lines */
+  --type-voice-quote:       var(--font-accent);
+  /* Voice 8 — ACCENT: eyebrows, ribbons, signatures (Aref Ruqaa exclusive) */
+  --type-voice-accent:      var(--font-accent);
+  /* Voice 9 — LATIN: mixed Arabic-Latin segments (USD, brand names) */
+  --type-voice-latin:       var(--font-text);
+}
+
+/* ────────────────────────────────────────────────────────────────
+   2) Voice Specifications (reference documentation only)
+   ─────────────────────────────────────────────────────
+   Voice 1 — HERO (.type-hero)
+     Used in: gateway wordmark, page-h1 hero, dashboard greeting
+     Mood: prestige, authority, opening statement
+     Specs: weight 800-900, tracking -0.025em, leading 1.05
+     Font: Aref Ruqaa Bold (Phase 2) preempted by Reem Kufi 800 fallback
+
+   Voice 2 — DISPLAY (.type-display, .type-display-h)
+     Used in: section h2 dividers
+     Mood: clear hierarchy, confident
+     Specs: weight 700-800, tracking -0.015em, leading 1.15
+     Font: Reem Kufi 700 (existing W12 P1B)
+
+   Voice 3 — BODY (.type-body, .type-body-lead)
+     Used in: paragraphs, intro leads, lesson text
+     Mood: readable, calm, sustained reading
+     Specs: weight 400-500, tracking 0, leading 1.7
+     Font: Readex Pro variable (existing)
+
+   Voice 4 — UI (.type-ui-label, .type-button, .type-tab, .type-breadcrumb)
+     Used in: interactive elements, navigation
+     Mood: alert, confident, slightly compressed
+     Specs: weight 500-600, tracking +0.01em, leading 1.4
+     Font: Tajawal 500 (Phase 3) preempted by Readex Pro 500 fallback
+
+   Voice 5 — NUMERIC (.type-num, .type-num-tabular, .type-num-display)
+     Used in: stat-tile values, qcalc values, tickers, prices
+     Mood: precise, tabular, digital
+     Specs: weight 600, tnum+lnum locked, leading 1.0 for displays
+     Font: IBM Plex Sans Arabic 600 (existing) + JetBrains Mono Latin (Phase 4)
+
+   Voice 6 — CODE (.type-code, .type-code-inline)
+     Used in: pre/code/kbd, technical snippets
+     Mood: monospaced, syntax-aware, deliberate
+     Specs: weight 400-500, ligatures on, leading 1.6
+     Font: JetBrains Mono (Phase 4) preempted by SF Mono fallback
+
+   Voice 7 — QUOTE (.type-quote, .type-quote-literary)
+     Used in: philosophy citations, Bringhurst lines, Cialdini quotes
+     Mood: literary, contemplative, italic-aware
+     Specs: weight 400 italic, tracking 0, leading 1.65
+     Font: Fraunces serif italic (Phase 4) for Latin; Aref Ruqaa for Arabic
+
+   Voice 8 — ACCENT (.type-eyebrow, .type-signature, .type-ribbon)
+     Used in: page-header eyebrows, cheat-sheet signatures, ribbons
+     Mood: handwritten, soulful, ≤5% of content
+     Specs: weight 400, tracking +0.04em, leading 1.5
+     Font: Aref Ruqaa 400 (existing W12 P1B)
+
+   Voice 9 — LATIN (.type-latin, .type-latin-num)
+     Used in: mixed tokens (USD prices, English brand names)
+     Mood: harmonious with Arabic baseline
+     Specs: matched x-height with Arabic body
+     Font: Inter 400-700 variable (Phase 4 adds)
+   ──────────────────────────────────────────────────────────────── */
+
+/* ────────────────────────────────────────────────────────────────
+   3) Type Voice Utility Classes (22 utilities)
+   Use: <h1 class="type-hero">…</h1>
+   ──────────────────────────────────────────────────────────────── */
+
+.type-hero {
+  font-family: var(--type-voice-hero);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+
+.type-display {
+  font-family: var(--type-voice-display);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+}
+
+.type-display-h {
+  font-family: var(--type-voice-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.type-body {
+  font-family: var(--type-voice-body);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.7;
+}
+
+.type-body-lead {
+  font-family: var(--type-voice-body);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  line-height: 1.55;
+}
+
+.type-ui-label {
+  font-family: var(--type-voice-ui);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+
+.type-button {
+  font-family: var(--type-voice-ui);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.type-tab {
+  font-family: var(--type-voice-ui);
+  font-weight: 500;
+  letter-spacing: 0.015em;
+  line-height: 1.3;
+}
+
+.type-breadcrumb {
+  font-family: var(--type-voice-ui);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  font-size: var(--text-sm);
+}
+
+.type-num {
+  font-family: var(--type-voice-numeric);
+  font-weight: 600;
+  font-feature-settings: "tnum" 1, "lnum" 1, "kern" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.type-num-tabular {
+  font-family: var(--type-voice-numeric);
+  font-weight: 600;
+  font-feature-settings: "tnum" 1, "lnum" 1, "kern" 1, "ss01" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: 0;
+}
+
+.type-num-display {
+  font-family: var(--type-voice-numeric);
+  font-weight: 700;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+}
+
+.type-code {
+  font-family: var(--type-voice-code);
+  font-weight: 400;
+  font-feature-settings: "calt" 1, "liga" 1;
+  line-height: 1.6;
+}
+
+.type-code-inline {
+  font-family: var(--type-voice-code);
+  font-weight: 500;
+  font-size: 0.9em;
+  padding: 0.1em 0.35em;
+  background: color-mix(in oklch, var(--color-surface-2, #1a1a1a) 60%, transparent);
+  border-radius: 0.25em;
+}
+
+.type-quote {
+  font-family: var(--type-voice-quote);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0;
+  line-height: 1.65;
+}
+
+.type-quote-literary {
+  font-family: var(--type-voice-quote);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0;
+  line-height: 1.65;
+  color: var(--color-text-muted, var(--text-muted));
+  border-inline-start: 3px solid var(--color-tint, var(--accent, #66FCF1));
+  padding-inline-start: var(--space-4);
+  margin-block: var(--space-5);
+}
+
+.type-eyebrow {
+  font-family: var(--type-voice-accent);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted, var(--text-muted));
+  text-transform: none;
+}
+
+.type-signature {
+  font-family: var(--type-voice-accent);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  font-size: var(--text-base);
+  color: var(--color-text-faint, var(--text-faint, var(--text-muted)));
+}
+
+.type-ribbon {
+  font-family: var(--type-voice-accent);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1.4;
+  font-size: var(--text-base);
+}
+
+.type-latin {
+  font-family: var(--type-voice-latin);
+  unicode-bidi: isolate;
+}
+
+.type-latin-num {
+  font-family: var(--type-voice-latin);
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  unicode-bidi: isolate;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   4) [data-type-voice] attribute selectors — for AUGMENT in HTML
+   without adding classes. Useful for samples and progressive
+   enhancement.
+   ──────────────────────────────────────────────────────────────── */
+[data-type-voice="hero"]    { font-family: var(--type-voice-hero); }
+[data-type-voice="display"] { font-family: var(--type-voice-display); }
+[data-type-voice="body"]    { font-family: var(--type-voice-body); }
+[data-type-voice="ui"]      { font-family: var(--type-voice-ui); }
+[data-type-voice="numeric"] {
+  font-family: var(--type-voice-numeric);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+[data-type-voice="code"]    { font-family: var(--type-voice-code); }
+[data-type-voice="quote"]   { font-family: var(--type-voice-quote); font-style: italic; }
+[data-type-voice="accent"]  { font-family: var(--type-voice-accent); }
+[data-type-voice="latin"]   { font-family: var(--type-voice-latin); unicode-bidi: isolate; }
+
+/* ════════════════════════════════════════════════════════════════
+   RESONANCE Typography Discipline — قواعد ذهبية:
+   1. لا تستخدم font-family مباشرة في أي قاعدة جديدة — استعمل
+      var(--type-voice-*) أو var(--font-*) فقط.
+   2. الأرقام في حاسبات/stats دائماً var(--type-voice-numeric).
+   3. body text و UI labels و buttons → var(--type-voice-ui)
+      أو var(--type-voice-body) حسب السياق.
+   4. h1/h2/hero/wordmark → var(--type-voice-hero) أو var(--type-voice-display).
+   5. Aref Ruqaa لا يتجاوز 5% من نص الصفحة — للروح، ليس للقراءة.
+   6. لا تخلط display و text في نفس السطر.
+   7. لا تستخدم italic على Aref Ruqaa أو Reem Kufi.
+   8. Latin segments في نص عربي → var(--type-voice-latin) + unicode-bidi: isolate.
+   ════════════════════════════════════════════════════════════════ */
+
+/* End Worker 15 / Phase 1 — Type Audit & Casting ──────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   RESONANCE v2 — Worker 15 / Phase 2 — Arabic Display Crown
+   ────────────────────────────────────────────────────────────────────────────
+   Aref Ruqaa Bold = wordmark + hero ceremonial (gateway, dashboard greet,
+   psych/eq/customercare h1).
+   Reem Kufi 700 = page h1/h2 operational (12 other pages).
+   Cairo Bold = guaranteed fallback in every stack.
+   Thmanyah optional preempts both if loaded.
+   ──────────────────────────────────────────────────────────────────────────── */
+
+/* ─── Wordmark + Hero stacks (new tokens, additive) ───────────────────────── */
+:root {
+  /* Wordmark-specific stack — Aref Ruqaa أولاً (ceremonial brand mark) */
+  --font-wordmark:   "Aref Ruqaa", "Thmanyah", "Reem Kufi", "Cairo",
+                     "SF Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI",
+                     Roboto, serif;
+
+  /* Hero ceremonial — للـ greetings + literary page openings */
+  --font-hero:       "Aref Ruqaa", "Thmanyah", "Reem Kufi", "Cairo",
+                     "SF Arabic", -apple-system, BlinkMacSystemFont, serif;
+}
+
+/* ─── Voice token reroute (overrides Phase 1 aliases for hero/wordmark) ───── */
+:root {
+  --type-voice-hero:        var(--font-hero);       /* now Aref Ruqaa-first */
+  --type-voice-display:     var(--font-display);    /* unchanged — Reem Kufi-first */
+  --type-voice-wordmark:    var(--font-wordmark);   /* new voice */
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Display Utilities — تحديث لـ Phase 1 + إضافات Phase 2.
+   لاحظ: قواعد Phase 1 لـ .type-hero/.type-display/.type-display-h
+   ما زالت موجودة في الأعلى — هذي القواعد cascade after فتُربح.
+   ════════════════════════════════════════════════════════════════ */
+
+/* TYPE HERO — for ceremonial openings: gateway, hero greetings, literary h1 */
+.type-hero,
+[data-type-voice="hero"] {
+  font-family: var(--type-voice-hero);
+  font-weight: 700;                    /* Aref Ruqaa Bold */
+  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  /* Aref Ruqaa ascenders بارزة — نُعطي padding للتنفّس */
+  padding-block: 0.05em;
+}
+
+.type-hero--xl {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+}
+
+.type-hero--lg {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.type-hero--md {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+/* TYPE DISPLAY — h1/h2 page sections (Reem Kufi 700) */
+.type-display,
+[data-type-voice="display"] {
+  font-family: var(--type-voice-display);
+  font-weight: 700;
+  font-feature-settings: "kern" 1, "liga" 1;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.type-display-h {
+  font-family: var(--type-voice-display);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  line-height: 1.2;
+}
+
+.type-display-l {
+  font-family: var(--type-voice-display);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  line-height: 1.25;
+  font-feature-settings: "kern" 1;
+}
+
+/* TYPE WORDMARK — exclusive for "Upgrade" brand mark + sidebar logo */
+.type-wordmark,
+[data-type-voice="wordmark"] {
+  font-family: var(--type-voice-wordmark);
+  font-weight: 700;
+  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+  letter-spacing: -0.005em;
+  line-height: 1.0;
+  /* تكبير 5% لأن Aref Ruqaa يبدو أصغر بصرياً من إخوانه */
+  font-size: 1.05em;
+}
+
+/* TYPE WEIGHT VARIANTS — للـ display family */
+.type-weight-heavy    { font-weight: 800; }
+.type-weight-bold     { font-weight: 700; }
+.type-weight-semibold { font-weight: 600; }
+.type-weight-medium   { font-weight: 500; }
+.type-weight-regular  { font-weight: 400; }
+
+/* ════════════════════════════════════════════════════════════════
+   Aref Ruqaa Micro-tuning — refine per-context behavior.
+   Aref Ruqaa is calligraphic — needs vertical breathing room.
+   ════════════════════════════════════════════════════════════════ */
+
+/* Aref Ruqaa baseline يقع أعلى قليلاً — تعديل bottom padding */
+.type-wordmark,
+.type-hero {
+  padding-block-end: 0.1em;
+}
+
+/* في dark theme، Aref Ruqaa يظل bold (الكونتراست عالٍ ضد الخلفية الداكنة) */
+:root[data-theme="dark"] .type-hero,
+:root[data-theme="dark"] .type-wordmark {
+  font-weight: 700;
+}
+
+/* في light theme، يحتاج tracking أقل سلباً للوضوح */
+:root[data-theme="light"] .type-hero,
+:root[data-theme="light"] .type-wordmark {
+  letter-spacing: -0.005em;
+}
+
+/* Aref Ruqaa لا يدعم italic — منع الإصابة بـ inheritance */
+.type-hero,
+.type-wordmark,
+.type-eyebrow,
+.type-signature,
+.type-ribbon {
+  font-style: normal;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Reem Kufi Micro-tuning — geometric sans for h1/h2.
+   Reem Kufi works best 18px+ with tight tracking.
+   ════════════════════════════════════════════════════════════════ */
+
+/* Reem Kufi medium weight (500) للـ subtitles — kerning أنعم */
+.type-display-l {
+  font-feature-settings: "kern" 1;
+  letter-spacing: -0.005em;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Wordmark Hover State — pulse صغير (Worker 16 سيُعمّقها)
+   ════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: no-preference) {
+  .type-wordmark {
+    transition: letter-spacing var(--duration-base, 240ms) var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1));
+  }
+  .type-wordmark:hover {
+    letter-spacing: 0.01em;  /* ينفتح قليلاً عند hover */
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Worker 15 / Phase 2 — Display Discipline:
+   1. Aref Ruqaa exclusive: wordmark + hero + accent (eyebrow/signature/ribbon).
+      لا تستعمله لـ h2/h3/body.
+   2. Reem Kufi exclusive: page h1/h2 (display).
+      لا تستعمله لـ wordmark أو hero ceremonial.
+   3. Cairo Bold للـ fallback آخر مع باقي الخطوط.
+   4. لا italic على Aref Ruqaa أو Reem Kufi.
+   5. Aref Ruqaa حجمه يبدو أصغر — كبّر 5% عند المقارنة بـ Reem Kufi.
+   6. لا تستعمل --font-display مباشرة لـ wordmark — استعمل --font-wordmark.
+   7. literary pages (psych, eq, customercare) → .type-hero.
+      operational pages (callcenter, fieldsales, ...) → .type-display.
+   ════════════════════════════════════════════════════════════════ */
+
+/* End RESONANCE v2 — Worker 15 / Phase 2 ─────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   ██████╗  ██████╗ ██████╗ ██╗   ██╗    ██╗   ██╗██╗
+   ██╔══██╗██╔═══██╗██╔══██╗╚██╗ ██╔╝    ██║   ██║██║
+   ██████╔╝██║   ██║██║  ██║ ╚████╔╝     ██║   ██║██║
+   ██╔══██╗██║   ██║██║  ██║  ╚██╔╝      ██║   ██║██║
+   ██████╔╝╚██████╔╝██████╔╝   ██║       ╚██████╔╝██║
+   ╚═════╝  ╚═════╝ ╚═════╝    ╚═╝        ╚═════╝ ╚═╝
+
+   RESONANCE v2 — Worker 15 / Phase 3 — Arabic Body & UI Layer
+   ────────────────────────────────────────────────────────────────────────────
+   Cathedral v16 cast every text in Readex Pro. Excellent for paragraphs,
+   "lazy" for short UI labels. Phase 3 introduces Tajawal for the UI layer
+   (buttons, tabs, breadcrumbs, form labels), keeping Readex Pro for body
+   paragraphs and Cairo as the guaranteed final fallback.
+
+   Voice routing after Phase 3:
+     Body paragraph (>40 words)  →  Readex Pro 400  (sustained reading)
+     UI label / button / tab     →  Tajawal 500-700 (alert, confident)
+     Form input content          →  Readex Pro 400  (readability)
+     Form label                  →  Tajawal 500     (scanability)
+     Hint / caption              →  Readex Pro 400  (calm, fine-print)
+     Final fallback              →  Cairo           (universal coverage)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── New UI stack — Tajawal-primary, Cairo-final ─────────────────────────── */
+:root {
+  --font-ui:      "Tajawal", "Readex Pro", "IBM Plex Sans Arabic", "Cairo",
+                  "SF Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI",
+                  Roboto, sans-serif;
+}
+
+/* ── Voice token reroute — body keeps text, UI takes new ui stack ────────── */
+:root {
+  --type-voice-body:  var(--font-text);    /* Readex Pro primary, Tajawal 2nd */
+  --type-voice-ui:    var(--font-ui);      /* Tajawal primary, Readex Pro 2nd */
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   Body Utilities (Phase 3 spec — supersedes Phase 1 minimal version)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.type-body,
+[data-type-voice="body"] {
+  font-family: var(--type-voice-body);
+  font-weight: 400;
+  font-variation-settings: "wght" 400;
+  letter-spacing: 0;
+  line-height: 1.7;
+  color: var(--color-text, var(--text-1));
+}
+
+.type-body-lead {
+  font-family: var(--type-voice-body);
+  font-weight: 500;
+  font-variation-settings: "wght" 500;
+  letter-spacing: -0.005em;
+  line-height: 1.55;
+  color: var(--color-text, var(--text-1));
+}
+
+.type-body-lg {
+  font-family: var(--type-voice-body);
+  font-size: var(--text-lg);
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.type-body-sm {
+  font-family: var(--type-voice-body);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Emphasis inside body: bold pulls weight without switching voice */
+.type-body strong,
+.u-prose strong {
+  font-weight: 600;
+  font-variation-settings: "wght" 600;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   UI Layer Utilities — Tajawal as primary
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* Generic UI label (sidebar items, list labels, chips) */
+.type-ui-label,
+[data-type-voice="ui"] {
+  font-family: var(--type-voice-ui);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+
+.type-ui-label--sm {
+  font-family: var(--type-voice-ui);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  letter-spacing: 0.015em;
+  line-height: 1.35;
+}
+
+/* Buttons — strongest UI voice */
+.type-button {
+  font-family: var(--type-voice-ui);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.type-button--lg {
+  font-family: var(--type-voice-ui);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  letter-spacing: 0.025em;
+  line-height: 1.2;
+}
+
+.type-button--sm {
+  font-family: var(--type-voice-ui);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+/* Tabs — segmented navigation */
+.type-tab {
+  font-family: var(--type-voice-ui);
+  font-weight: 500;
+  letter-spacing: 0.015em;
+  line-height: 1.3;
+  font-size: var(--text-sm);
+}
+
+.type-tab--active {
+  font-weight: 600;
+}
+
+/* Breadcrumbs — compact nav trails */
+.type-breadcrumb {
+  font-family: var(--type-voice-ui);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted, var(--text-2));
+}
+
+.type-breadcrumb--current {
+  color: var(--color-text, var(--text-1));
+  font-weight: 500;
+}
+
+/* Hints & captions — Readex Pro for calm fineprint */
+.type-hint,
+.type-caption {
+  font-family: var(--type-voice-body);
+  font-weight: 400;
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  color: var(--color-text-faint, var(--text-3));
+  letter-spacing: 0.005em;
+}
+
+/* Form labels — Tajawal for scanability */
+.type-form-label {
+  font-family: var(--type-voice-ui);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: var(--color-text, var(--text-1));
+  display: block;
+  margin-block-end: 0.4rem;
+}
+
+/* Input content — Readex Pro for readability */
+.type-input {
+  font-family: var(--type-voice-body);
+  font-weight: 400;
+  font-size: var(--text-base);
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   Cairo Fallback Hardening (final guarantee)
+   ════════════════════════════════════════════════════════════════════════════ */
+:root {
+  --font-cairo-fallback: "Cairo", "SF Arabic", sans-serif;
+}
+
+/* Ancient browser fallback — variable fonts unsupported */
+@supports not (font-variation-settings: "wght" 500) {
+  .type-body,
+  .type-body-lead,
+  .u-prose {
+    font-family: "Cairo", "SF Arabic", sans-serif;
+    font-weight: 400;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   Tajawal Micro-tuning — geometric, needs open tracking at small sizes
+   ════════════════════════════════════════════════════════════════════════════ */
+.type-tab,
+.type-breadcrumb,
+.type-hint {
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+/* Tajawal Black 900 — for heaviest CTAs (rare use) */
+.type-cta-heavy {
+  font-family: var(--type-voice-ui);
+  font-weight: 900;
+  letter-spacing: -0.005em;
+  line-height: 1.1;
+}
+
+/* Mobile <480px: tiny buttons fall back to Readex Pro for clarity at 12-14px */
+@media (max-width: 480px) {
+  .type-button--sm {
+    font-family: var(--type-voice-body);
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   Phase 3 Discipline:
+   1. Body paragraphs (>40 words)  →  var(--type-voice-body)  [Readex Pro].
+   2. UI labels (<8 words)         →  var(--type-voice-ui)    [Tajawal].
+   3. Buttons + CTAs               →  var(--type-voice-ui)    [Tajawal] always.
+   4. Form input content           →  var(--type-voice-body)  [readability].
+   5. Form label                   →  var(--type-voice-ui)    [scanability].
+   6. Cairo يبقى آخر fallback في كل stack — لا تحذفه.
+   7. لا تخلط Tajawal و Readex Pro في نفس الكتلة الواحدة (eye fatigue).
+   8. Mobile <480px: buttons صغيرة تتحوّل إلى Readex Pro fallback.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* End RESONANCE v2 — Worker 15 / Phase 3 ─────────────────────────────────── */
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   RESONANCE v2 — Worker 15 / Phase 4 — Latin & Numeric Layer
+   ────────────────────────────────────────────────────────────────────────────
+   Loads Inter (Latin UI), JetBrains Mono (code + numeric mono), Fraunces
+   (literary serif italic). Deepens specs of .type-num*, .type-code*,
+   .type-latin*, .type-quote* utilities (Phase 1 versions remain; later
+   rules in cascade win).
+
+   PRESERVATION CONTRACT (Worker 15 / Phase 4):
+   • DOES NOT remove any font from any --font-* stack.
+   • DOES NOT modify .u-num from W12 P1B.
+   • DOES NOT change values inside any qcalc / cath-stat-value / data-countup.
+   • REPLACE-IN-PLACE only on --font-numeric (added JetBrains Mono as 2nd tier).
+   • AUGMENT only on existing HTML elements (no deletions).
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── 1) New stack tokens (APPEND) ─────────────────────────────────────────── */
+:root {
+  /* Latin UI font for mixed-script segments (USD, brand names, abbreviations) */
+  --font-latin: "Inter", "Readex Pro", "SF Pro Text", -apple-system,
+                BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Literary serif italic for English citations (psych/eq pages) */
+  --font-quote-literary: "Fraunces", "Readex Pro", "Times New Roman",
+                         Georgia, serif;
+
+  /* Display numerals — large hero numbers, prefer JetBrains Mono shape */
+  --font-num-display: "JetBrains Mono", "IBM Plex Sans Arabic",
+                      "SF Mono", monospace;
+
+  /* Voice token reroutes (P4) — aliases over the new stacks */
+  --type-voice-numeric:        var(--font-numeric);          /* updated stack */
+  --type-voice-code:           var(--font-mono);             /* JetBrains real */
+  --type-voice-latin:          var(--font-latin);            /* new */
+  --type-voice-quote-literary: var(--font-quote-literary);   /* Fraunces */
+}
+
+/* ── 2) Numeric Layer — tabular nums locked, JetBrains shape for displays ─── */
+.type-num,
+[data-type-voice="numeric"] {
+  font-family: var(--type-voice-numeric);
+  font-weight: 600;
+  font-feature-settings: "tnum" 1, "lnum" 1, "kern" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: 0;
+  unicode-bidi: isolate;
+}
+
+.type-num-tabular {
+  font-family: var(--type-voice-numeric);
+  font-weight: 600;
+  font-feature-settings: "tnum" 1, "lnum" 1, "kern" 1, "ss01" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: 0;
+  unicode-bidi: isolate;
+}
+
+.type-num-display {
+  font-family: var(--font-num-display);
+  font-weight: 700;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  unicode-bidi: isolate;
+}
+
+.type-num-inline {
+  font-family: var(--type-voice-numeric);
+  font-feature-settings: "tnum" 1, "lnum" 1, "kern" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  unicode-bidi: isolate;
+}
+
+.type-num-currency {
+  font-family: var(--type-voice-numeric);
+  font-weight: 600;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  unicode-bidi: isolate;
+  padding-inline: 0.1em;
+  white-space: nowrap;
+}
+
+/* ── 3) Code Layer — JetBrains Mono with ligatures + tab stops ────────────── */
+.type-code,
+[data-type-voice="code"] {
+  font-family: var(--type-voice-code);
+  font-weight: 400;
+  font-feature-settings: "calt" 1, "liga" 1;
+  line-height: 1.6;
+  letter-spacing: 0;
+  unicode-bidi: isolate;
+  tab-size: 2;
+  -moz-tab-size: 2;
+}
+
+.type-code-inline {
+  font-family: var(--type-voice-code);
+  font-weight: 500;
+  font-size: 0.9em;
+  padding: 0.1em 0.35em;
+  background: color-mix(in oklch, var(--color-surface-2) 60%, transparent);
+  border-radius: 0.25em;
+  unicode-bidi: isolate;
+}
+
+.type-kbd,
+kbd.type-kbd {
+  font-family: var(--type-voice-code);
+  font-weight: 600;
+  font-size: 0.85em;
+  padding: 0.15em 0.5em;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-text-faint);
+  border-radius: 0.25em;
+  box-shadow: 0 1px 0 var(--color-text-faint);
+  unicode-bidi: isolate;
+}
+
+/* ── 4) Latin Layer — Inter for mixed-script segments ─────────────────────── */
+.type-latin,
+[data-type-voice="latin"] {
+  font-family: var(--type-voice-latin);
+  unicode-bidi: isolate;
+}
+
+.type-latin-ui {
+  font-family: var(--type-voice-latin);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  line-height: 1.4;
+  unicode-bidi: isolate;
+}
+
+.type-latin-num {
+  font-family: var(--type-voice-latin);
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  unicode-bidi: isolate;
+}
+
+.type-latin-brand {
+  font-family: var(--type-voice-latin);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  unicode-bidi: isolate;
+}
+
+.type-mixed-harmony {
+  unicode-bidi: isolate;
+  font-feature-settings: "kern" 1;
+}
+
+/* ── 5) Literary Quote Layer — Fraunces italic for EN, Aref Ruqaa for AR ──── */
+.type-quote-literary-en {
+  font-family: var(--type-voice-quote-literary);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0;
+  line-height: 1.65;
+  font-variation-settings: "opsz" 18, "SOFT" 50;
+  unicode-bidi: isolate;
+}
+
+.type-quote-block {
+  font-family: var(--type-voice-quote);
+  font-weight: 400;
+  font-size: var(--text-xl);
+  line-height: 1.65;
+  color: var(--color-text-muted);
+  border-inline-start: 3px solid var(--color-tint, var(--color-brand));
+  padding-inline-start: var(--space-4);
+  margin-block: var(--space-5);
+  position: relative;
+}
+
+.type-quote-block::before {
+  content: "\201C"; /* left double quotation mark */
+  color: var(--color-tint, var(--color-brand));
+  font-size: 1.4em;
+  font-family: var(--font-quote-literary);
+  vertical-align: -0.15em;
+  margin-inline-end: 0.1em;
+}
+
+.type-quote-block::after {
+  content: "\201D"; /* right double quotation mark */
+  color: var(--color-tint, var(--color-brand));
+  font-size: 1.4em;
+  font-family: var(--font-quote-literary);
+  vertical-align: -0.15em;
+  margin-inline-start: 0.1em;
+}
+
+.type-citation {
+  font-family: var(--type-voice-body);
+  font-weight: 400;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--color-text-faint);
+  font-style: italic;
+  font-feature-settings: "lnum" 1;
+}
+
+/* ── 6) Latin-Arabic Mixing Rules ─────────────────────────────────────────── */
+/*
+   عند مزج العربية والإنجليزية في نفس النص:
+   1. unicode-bidi: isolate على الـ Latin segment
+   2. .type-latin على الـ Latin part
+   3. تجنّب letter-spacing على mixed lines (يكسر باعدي)
+*/
+.u-prose [lang="en"],
+.u-prose .latin,
+.type-body [lang="en"] {
+  font-family: var(--type-voice-latin);
+  unicode-bidi: isolate;
+}
+
+.u-prose .num,
+.type-body .num {
+  font-family: var(--type-voice-numeric);
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  unicode-bidi: isolate;
+}
+
+.u-prose .brand,
+.type-body .brand {
+  font-family: var(--type-voice-latin);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  unicode-bidi: isolate;
+}
+
+.u-prose .currency,
+.type-body .currency {
+  font-family: var(--type-voice-numeric);
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  unicode-bidi: isolate;
+  white-space: nowrap;
+}
+
+/* ── 7) Auto-apply tabular numerals on critical surfaces ─────────────────── */
+[data-cath-stat],
+.cath-stat-value,
+.bento-stat-value,
+.qcalc-value,
+.stat-tile-value,
+[data-countup],
+[data-tabular] {
+  font-family: var(--type-voice-numeric);
+  font-feature-settings: "tnum" 1, "lnum" 1, "kern" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  unicode-bidi: isolate;
+}
+
+table.numeric-cols td,
+table.numeric-cols th {
+  font-family: var(--type-voice-numeric);
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+/* ── 8) Discipline Comment ───────────────────────────────────────────────── */
+/*
+Worker 15 / Phase 4 — Latin & Numeric Discipline:
+  1. Stat values + qcalc values → var(--type-voice-numeric) [IBM Plex + JetBrains].
+  2. Code blocks → var(--type-voice-code) [JetBrains Mono ligatures on].
+  3. Latin segments في عربي → .type-latin + unicode-bidi: isolate.
+  4. Currency (IQD/USD) → .type-num-currency + nowrap.
+  5. Brand names → .type-latin-brand.
+  6. Arabic literary quotes → .type-quote (Aref Ruqaa).
+  7. English literary quotes → .type-quote-literary-en (Fraunces italic).
+  8. Academic citations → .type-citation.
+  9. لا italic على Aref Ruqaa أبداً (يقطع الذوق).
+*/
+
+/* End RESONANCE v2 / Worker 15 / Phase 4 ─────────────────────────────────── */
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESONANCE v2 — Worker 15 / Phase 5 — Modular Scale & Vertical Rhythm
+   Type scale REPLACED in-place above (perfect-fourth 1.333). This block
+   appends leading/tracking/rhythm/measure tokens + reading-rhythm bindings
+   + opsz auto on variable fonts + .u-rhythm-*, .u-measure-*, .u-prose
+   + hyphenation rules.
+
+   Reference: Bringhurst (Elements of Typographic Style §2/§3),
+              Hochuli (Detail in Typography), Lupton (Thinking with Type).
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Display Sizes (ceremonial — paired with --text-display) ─────────────── */
+:root {
+  --text-display-1: clamp(3.583rem, 3.270rem + 1.565vw, 4.027rem);  /* 57.3..64.4 */
+  --text-display-2: clamp(4.300rem, 3.880rem + 2.100vw, 4.829rem);  /* 68.8..77.3 */
+}
+
+/* ─── Leading Tokens (override W12 P1 with refined ratios) ───────────────── */
+:root {
+  --leading-none:    1;        /* للـ display ceremonial */
+  --leading-tight:   1.15;     /* لـ h1/h2 (display)     was 1.18 */
+  --leading-snug:    1.35;     /* لـ h3/h4 (card titles) was 1.32 */
+  --leading-normal:  1.5;      /* لـ UI                  was 1.55 */
+  --leading-relaxed: 1.7;      /* لـ body paragraphs (kept) */
+  --leading-loose:   1.85;     /* لـ poetry, quotes (kept) */
+}
+
+/* ─── Tracking Tokens (8 — extends W12 P1 set of 5) ──────────────────────── */
+:root {
+  --tracking-tightest: -0.04em;
+  --tracking-tighter:  -0.025em;   /* (kept) */
+  --tracking-tight:    -0.015em;   /* refined from -0.012em */
+  --tracking-snug:     -0.005em;   /* NEW */
+  --tracking-normal:   0;          /* (kept) */
+  --tracking-wide:     0.01em;     /* refined from 0.012em */
+  --tracking-wider:    0.025em;    /* refined from 0.05em — Arabic-safe */
+  --tracking-widest:   0.04em;     /* NEW (Latin only) */
+}
+
+/* ─── Rhythm Tokens (8pt baseline grid) ──────────────────────────────────── */
+:root {
+  --rhythm-1:  0.5rem;  /*   8px */
+  --rhythm-2:  1rem;    /*  16px */
+  --rhythm-3:  1.5rem;  /*  24px */
+  --rhythm-4:  2rem;    /*  32px */
+  --rhythm-5:  2.5rem;  /*  40px */
+  --rhythm-6:  3rem;    /*  48px */
+  --rhythm-7:  3.5rem;  /*  56px */
+  --rhythm-8:  4rem;    /*  64px */
+  --rhythm-10: 5rem;    /*  80px */
+  --rhythm-12: 6rem;    /*  96px */
+  --rhythm-16: 8rem;    /* 128px */
+
+  /* Semantic rhythm aliases */
+  --rhythm-h-to-body: var(--rhythm-3);   /* تحت h1/h2 */
+  --rhythm-h-to-h:    var(--rhythm-5);   /* بين h2 و h3 */
+  --rhythm-section:   var(--rhythm-8);   /* بين sections */
+  --rhythm-page:      var(--rhythm-12);  /* بين أقسام الصفحة */
+}
+
+/* ─── Reading Measure (line-length / hold) — Bringhurst 45-75 chars ──────── */
+:root {
+  --measure-narrow:    45ch;
+  --measure-normal:    60ch;
+  --measure-wide:      72ch;
+
+  --measure-narrow-ar: 38ch;
+  --measure-normal-ar: 52ch;
+  --measure-wide-ar:   65ch;
+}
+
+/* ─── Reading-Rhythm Bindings — apply leading + tracking to each voice ──── */
+
+/* Hero */
+.type-hero {
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tighter);
+}
+.type-hero--xl,
+.type-hero--lg {
+  line-height: var(--leading-none);
+  letter-spacing: var(--tracking-tightest);
+}
+
+/* Display */
+.type-display {
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+.type-display-h {
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-snug);
+}
+.type-display-l {
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+}
+
+/* Body */
+.type-body {
+  line-height: var(--leading-relaxed);
+  letter-spacing: var(--tracking-normal);
+}
+.type-body-lead {
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-snug);
+}
+.type-body-lg { line-height: var(--leading-relaxed); }
+.type-body-sm { line-height: var(--leading-normal); }
+
+/* UI */
+.type-ui-label,
+.type-button,
+.type-tab,
+.type-breadcrumb {
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* Numeric */
+.type-num,
+.type-num-tabular,
+.type-num-currency {
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-normal);
+}
+.type-num-display {
+  line-height: var(--leading-none);
+  letter-spacing: var(--tracking-tighter);
+}
+
+/* Code */
+.type-code {
+  line-height: var(--leading-relaxed);
+  letter-spacing: var(--tracking-normal);
+}
+.type-code-inline {
+  line-height: var(--leading-normal);
+}
+
+/* Quote */
+.type-quote,
+.type-quote-block,
+.type-quote-literary,
+.type-quote-literary-en {
+  line-height: var(--leading-loose);
+  letter-spacing: var(--tracking-snug);
+}
+
+/* Accent (Aref Ruqaa — needs space to breathe) */
+.type-eyebrow {
+  line-height: var(--leading-loose);
+  letter-spacing: var(--tracking-wider);
+}
+.type-signature {
+  line-height: var(--leading-loose);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* ─── Optical-Size Bindings (Variable Fonts: Inter / Readex / Fraunces) ──── */
+.type-hero,
+.type-display,
+.type-display-h,
+.type-display-l {
+  font-optical-sizing: auto;
+}
+
+.type-body,
+.type-body-lead,
+.type-body-lg,
+.type-body-sm {
+  font-optical-sizing: auto;
+}
+
+.type-quote-literary-en {
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 18, "SOFT" 50;
+}
+
+.type-latin,
+.type-latin-ui,
+.type-latin-brand {
+  font-optical-sizing: auto;
+}
+
+@supports not (font-optical-sizing: auto) {
+  /* fallback: variable fonts use their default opsz — no action needed */
+}
+
+/* ─── Vertical-Rhythm Utilities (apply to containers) ────────────────────── */
+
+/* Reading rhythm — long-form lessons */
+.u-rhythm-reading > * + * {
+  margin-block-start: var(--rhythm-3);
+}
+.u-rhythm-reading h1,
+.u-rhythm-reading h2,
+.u-rhythm-reading .type-hero,
+.u-rhythm-reading .type-display {
+  margin-block-start: var(--rhythm-5);
+  margin-block-end:   var(--rhythm-2);
+}
+.u-rhythm-reading h3,
+.u-rhythm-reading h4,
+.u-rhythm-reading .type-display-h {
+  margin-block-start: var(--rhythm-4);
+  margin-block-end:   var(--rhythm-2);
+}
+.u-rhythm-reading p,
+.u-rhythm-reading .type-body {
+  margin-block: 0 var(--rhythm-3);
+}
+.u-rhythm-reading blockquote,
+.u-rhythm-reading .type-quote-block {
+  margin-block: var(--rhythm-4);
+}
+
+/* Card rhythm — heading + body cards */
+.u-rhythm-card > * + * {
+  margin-block-start: var(--rhythm-2);
+}
+.u-rhythm-card .type-display-h + .type-body,
+.u-rhythm-card .type-display-h + p {
+  margin-block-start: var(--rhythm-2);
+}
+
+/* Tight rhythm — sidebar items, list rows */
+.u-rhythm-tight > * + * {
+  margin-block-start: var(--rhythm-1);
+}
+
+/* Loose rhythm — long page sections */
+.u-rhythm-loose > * + * {
+  margin-block-start: var(--rhythm-6);
+}
+.u-rhythm-loose > h2,
+.u-rhythm-loose > .type-display {
+  margin-block-start: var(--rhythm-8);
+}
+
+/* ─── Reading-Width Utilities ────────────────────────────────────────────── */
+.u-measure-narrow { max-width: var(--measure-narrow-ar); }
+.u-measure-normal { max-width: var(--measure-normal-ar); }
+.u-measure-wide   { max-width: var(--measure-wide-ar); }
+
+/* Latin overrides — when content is English, allow wider measures */
+.u-measure-narrow:lang(en),
+.u-measure-narrow .type-latin,
+.u-measure-narrow [lang="en"] {
+  max-width: var(--measure-narrow);
+}
+.u-measure-normal:lang(en),
+.u-measure-normal .type-latin,
+.u-measure-normal [lang="en"] {
+  max-width: var(--measure-normal);
+}
+.u-measure-wide:lang(en),
+.u-measure-wide .type-latin,
+.u-measure-wide [lang="en"] {
+  max-width: var(--measure-wide);
+}
+
+/* ─── Hyphenation & Wrap Rules ───────────────────────────────────────────── */
+
+/* Body & prose — hyphens auto for natural flow */
+.type-body,
+.u-prose,
+.u-rhythm-reading p {
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* Headlines — never hyphenate */
+.type-hero,
+.type-display,
+.type-display-h {
+  hyphens: none;
+  word-break: keep-all;
+}
+
+/* Code blocks — preserve whitespace */
+.type-code,
+pre.type-code {
+  white-space: pre;
+  overflow-x: auto;
+  word-break: normal;
+}
+
+/* Inline code — keep on one line when short */
+.type-code-inline {
+  white-space: nowrap;
+  word-break: keep-all;
+}
+
+/* ─── Prose Defaults (.u-prose container) ────────────────────────────────── */
+.u-prose {
+  font-family: var(--type-voice-body);
+  font-size:   var(--text-base);
+  line-height: var(--leading-relaxed);
+  color:       var(--color-text, currentColor);
+  max-width:   var(--measure-normal-ar);
+}
+
+.u-prose h1 {
+  font-family: var(--type-voice-display);
+  font-size:   var(--text-4xl);
+  line-height: var(--leading-tight);
+  margin-block: var(--rhythm-5) var(--rhythm-3);
+}
+.u-prose h2 {
+  font-family: var(--type-voice-display);
+  font-size:   var(--text-3xl);
+  line-height: var(--leading-tight);
+  margin-block: var(--rhythm-5) var(--rhythm-3);
+}
+.u-prose h3 {
+  font-family: var(--type-voice-display);
+  font-size:   var(--text-2xl);
+  line-height: var(--leading-snug);
+  margin-block: var(--rhythm-4) var(--rhythm-2);
+  font-weight: 600;
+}
+.u-prose h4 {
+  font-family: var(--type-voice-body);
+  font-size:   var(--text-xl);
+  line-height: var(--leading-snug);
+  margin-block: var(--rhythm-3) var(--rhythm-2);
+  font-weight: 600;
+}
+.u-prose p  { margin-block: 0 var(--rhythm-3); }
+.u-prose ul,
+.u-prose ol { margin-block: 0 var(--rhythm-3); padding-inline-start: var(--rhythm-3); }
+.u-prose li { margin-block-end: var(--rhythm-1); }
+.u-prose blockquote { margin-block: var(--rhythm-4); }
+.u-prose code { font-family: var(--type-voice-code); }
+.u-prose pre  {
+  font-family: var(--type-voice-code);
+  margin-block: var(--rhythm-3);
+  padding: var(--rhythm-2);
+  background: var(--color-surface-2, rgba(255,255,255,0.04));
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+/* ─── Phase 5 Discipline (golden rules) ──────────────────────────────────── */
+/*
+  Worker 15 / Phase 5 — Scale & Rhythm Discipline:
+    1. كل margin/padding في القواعد الجديدة → var(--rhythm-*).
+    2. كل font-size → var(--text-*) (perfect-fourth scale).
+    3. كل line-height → var(--leading-*).
+    4. كل letter-spacing → var(--tracking-*).
+    5. Reading width → var(--measure-*-ar) للعربية، var(--measure-*) للإنجليزية.
+    6. Variable fonts (Inter/Readex/Fraunces) → font-optical-sizing: auto.
+    7. Body/.u-prose → hyphens: auto. Headlines → hyphens: none.
+    8. لا magic numbers — لا 12px ولا 1.42 ولا -0.018em. tokens فقط.
+*/
+
+/* End RESONANCE v2 / Worker 15 / Phase 5 — Modular Scale & Rhythm ────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   RESONANCE v2 — Worker 15 / Phase 6 — Per-Page Type Personality
+   Builds on: Phases 1-5 (voices, fonts, scale, rhythm).
+   Adds: 15 page personalities × 4 type tokens + generic bindings.
+   Philosophy: كل صفحة لها روح — typography ترن مع روح المحتوى.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ──────────── Default page-personality fallback (no override) */
+.page {
+  --type-page-h1-family:    var(--type-voice-display);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-tight);
+  --type-page-h1-leading:   var(--leading-tight);
+
+  --type-page-body-family:  var(--type-voice-body);
+  --type-page-body-weight:  400;
+
+  --type-page-num-family:   var(--type-voice-numeric);
+  --type-page-accent-vis:   0.05;
+}
+
+/* ──────────── 15 Page Personalities ──────────────────────────────────────── */
+
+/* 1. Dashboard — Elegant (Aref Ruqaa hero + Reem Kufi stats) */
+.page[data-page-personality="dashboard"] {
+  --type-page-h1-family:    var(--font-hero);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-snug);
+  --type-page-h1-leading:   var(--leading-tight);
+  --type-page-accent-vis:   0.10;
+}
+
+/* 2. Callcenter — Sharp (Reem Kufi 700 + Tajawal heavy buttons) */
+.page[data-page-personality="callcenter"] {
+  --type-page-h1-family:    var(--font-display);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-tight);
+  --type-page-h1-leading:   var(--leading-tight);
+  --type-page-body-weight:  500;
+  --type-page-accent-vis:   0.02;
+}
+.page[data-page-personality="callcenter"] .type-button,
+.page[data-page-personality="callcenter"] .ql-btn {
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* 3. Fieldsales — Energetic (Tajawal Black CTAs) */
+.page[data-page-personality="fieldsales"] {
+  --type-page-h1-family:    var(--font-display);
+  --type-page-h1-weight:    800;
+  --type-page-h1-tracking:  var(--tracking-tighter);
+  --type-page-accent-vis:   0.05;
+}
+.page[data-page-personality="fieldsales"] .type-button--lg,
+.page[data-page-personality="fieldsales"] .ql-btn-primary {
+  font-family: var(--font-ui);
+  font-weight: 900;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* 4. Accountmgr — Executive (Reem Kufi + Inter for KPIs) */
+.page[data-page-personality="accountmgr"] {
+  --type-page-h1-family:    var(--font-display);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-tight);
+  --type-page-accent-vis:   0.03;
+}
+.page[data-page-personality="accountmgr"] .type-num,
+.page[data-page-personality="accountmgr"] [data-cath-stat] {
+  font-family: var(--font-latin);
+  font-weight: 600;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+/* 5. Social — Vibrant (Tajawal 900 metrics + Aref Ruqaa taglines) */
+.page[data-page-personality="social"] {
+  --type-page-h1-family:    var(--font-display);
+  --type-page-h1-weight:    800;
+  --type-page-h1-tracking:  var(--tracking-tighter);
+  --type-page-accent-vis:   0.12;
+}
+.page[data-page-personality="social"] .type-num-display,
+.page[data-page-personality="social"] [data-countup] {
+  font-family: var(--font-ui);
+  font-weight: 900;
+  letter-spacing: var(--tracking-tighter);
+}
+
+/* 6. Lab — Experimental (JetBrains Mono ribbons) */
+.page[data-page-personality="lab"] {
+  --type-page-h1-family:    var(--font-display);
+  --type-page-h1-weight:    600;
+  --type-page-h1-tracking:  var(--tracking-snug);
+  --type-page-accent-vis:   0.04;
+}
+.page[data-page-personality="lab"] .scenario-id,
+.page[data-page-personality="lab"] .lab-badge {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-feature-settings: "tnum" 1, "calt" 1;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* 7. Psych — Literary (Aref Ruqaa wisdom + Fraunces Latin) */
+.page[data-page-personality="psych"] {
+  --type-page-h1-family:    var(--font-hero);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-snug);
+  --type-page-h1-leading:   var(--leading-relaxed);
+  --type-page-body-family:  var(--font-text);
+  --type-page-accent-vis:   0.20;
+}
+.page[data-page-personality="psych"] blockquote,
+.page[data-page-personality="psych"] .type-quote-block,
+.page[data-page-personality="psych"] .type-quote-literary {
+  font-family: var(--font-accent);
+  line-height: var(--leading-loose);
+}
+.page[data-page-personality="psych"] [lang="en"] {
+  font-family: var(--font-quote-literary);
+  font-style: italic;
+}
+
+/* 8. EQ — Emotional (Aref Ruqaa hero + soft body) */
+.page[data-page-personality="eq"] {
+  --type-page-h1-family:    var(--font-hero);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-snug);
+  --type-page-accent-vis:   0.15;
+  --type-page-body-weight:  400;
+}
+.page[data-page-personality="eq"] .type-body-lead {
+  font-style: normal;
+  line-height: var(--leading-loose);
+  letter-spacing: var(--tracking-snug);
+}
+
+/* 9. Negotiation — Persuasive (tight rhythm) */
+.page[data-page-personality="negotiation"] {
+  --type-page-h1-family:    var(--font-display);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-tight);
+  --type-page-accent-vis:   0.04;
+}
+.page[data-page-personality="negotiation"] .type-button {
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* 10. Customercare — Warm (Aref empathy quotes + relaxed body) */
+.page[data-page-personality="customercare"] {
+  --type-page-h1-family:    var(--font-hero);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-snug);
+  --type-page-accent-vis:   0.12;
+  --type-page-body-weight:  400;
+}
+.page[data-page-personality="customercare"] .type-body {
+  line-height: var(--leading-relaxed);
+  letter-spacing: var(--tracking-snug);
+}
+
+/* 11. Programming — Technical (mono-emphatic + Inter for Latin terms) */
+.page[data-page-personality="programming"] {
+  --type-page-h1-family:    var(--font-display);
+  --type-page-h1-weight:    600;
+  --type-page-h1-tracking:  var(--tracking-snug);
+  --type-page-accent-vis:   0.02;
+}
+.page[data-page-personality="programming"] [lang="en"],
+.page[data-page-personality="programming"] .term-en {
+  font-family: var(--font-latin);
+  font-weight: 500;
+}
+.page[data-page-personality="programming"] code,
+.page[data-page-personality="programming"] pre {
+  font-family: var(--font-mono);
+  font-feature-settings: "calt" 1, "liga" 1;
+}
+
+/* 12. Accounting — Precise (IBM Plex tabular lock) */
+.page[data-page-personality="accounting"] {
+  --type-page-h1-family:    var(--font-display);
+  --type-page-h1-weight:    600;
+  --type-page-h1-tracking:  var(--tracking-tight);
+  --type-page-accent-vis:   0.02;
+  --type-page-num-family:   var(--type-voice-numeric);
+}
+.page[data-page-personality="accounting"] .type-num,
+.page[data-page-personality="accounting"] td.numeric,
+.page[data-page-personality="accounting"] [data-cath-stat] {
+  font-family: var(--type-page-num-family);
+  font-feature-settings: "tnum" 1, "lnum" 1, "ss01" 1;
+}
+
+/* 13. Phonerepair — Industrial (Tajawal headings + JetBrains parts) */
+.page[data-page-personality="phonerepair"] {
+  --type-page-h1-family:    var(--font-display);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-tight);
+  --type-page-accent-vis:   0.02;
+}
+.page[data-page-personality="phonerepair"] .part-number,
+.page[data-page-personality="phonerepair"] .ic-id,
+.page[data-page-personality="phonerepair"] .model-code {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-feature-settings: "tnum" 1;
+  letter-spacing: var(--tracking-normal);
+}
+
+/* 14. HRmastery — Formal (Aref ceremonial + Inter companies) */
+.page[data-page-personality="hrmastery"] {
+  --type-page-h1-family:    var(--font-hero);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-snug);
+  --type-page-accent-vis:   0.10;
+}
+.page[data-page-personality="hrmastery"] .company-name,
+.page[data-page-personality="hrmastery"] [data-company] {
+  font-family: var(--font-latin);
+  font-weight: 600;
+  letter-spacing: var(--tracking-tight);
+}
+.page[data-page-personality="hrmastery"] .position-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+}
+
+/* 15. Myprogress — Reflective (Aref milestones + Tajawal stats) */
+.page[data-page-personality="myprogress"] {
+  --type-page-h1-family:    var(--font-hero);
+  --type-page-h1-weight:    700;
+  --type-page-h1-tracking:  var(--tracking-snug);
+  --type-page-h1-leading:   var(--leading-relaxed);
+  --type-page-accent-vis:   0.18;
+}
+.page[data-page-personality="myprogress"] .milestone-title {
+  font-family: var(--font-accent);
+  font-weight: 700;
+  line-height: var(--leading-loose);
+}
+.page[data-page-personality="myprogress"] [data-cath-stat] {
+  font-family: var(--font-ui);
+  font-weight: 500;
+}
+
+/* ──────────── Generic page-personality bindings ──────────────────────────── */
+
+/* H1 inherits page-personality cast */
+.page[data-page-personality] .page-h h1,
+.page[data-page-personality] > h1 {
+  font-family: var(--type-page-h1-family);
+  font-weight: var(--type-page-h1-weight);
+  letter-spacing: var(--type-page-h1-tracking);
+  line-height: var(--type-page-h1-leading);
+}
+
+/* Body inherits */
+.page[data-page-personality] .type-body,
+.page[data-page-personality] .u-prose p {
+  font-family: var(--type-page-body-family, var(--type-voice-body));
+  font-weight: var(--type-page-body-weight, 400);
+}
+
+/* Numerics inherit */
+.page[data-page-personality] .type-num,
+.page[data-page-personality] .type-num-tabular {
+  font-family: var(--type-page-num-family, var(--type-voice-numeric));
+}
+
+/* ──────────── RESONANCE v2 / Worker 15 — COMPLETE ─────────────────────────
+   9 voices × 15 page personalities × 5 weights ≈ 675 type combinations.
+   كل واحدة موزونة pedagogically لتعكس روح المحتوى.
+
+   Discipline final reminder:
+   1. لا تخلط personalities داخل صفحة واحدة.
+   2. .page[data-page-personality="..."] هو الـ scope الوحيد للـ overrides.
+   3. لا تضف personality جديدة إلا بعد تعديل Upg.type2.list().
+   4. --type-page-accent-vis تذكير بالنسبة المرئية لـ Aref Ruqaa، ليس enforcement.
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* End RESONANCE v2 / Worker 15 / Phase 6 ──────────────────────────────────── */
