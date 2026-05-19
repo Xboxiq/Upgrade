@@ -16259,7 +16259,7 @@ body { font-size: calc(var(--text-base) * var(--type-zoom)); }
 
 /* ─── Voice mapping (overrides Phase 1 generic stack) ─────────────────────── */
 :root {
-  --font-display: "Thmanyah", "Reem Kufi", "Cairo",
+  --font-display: "Thmanyah", "Reem Kufi", "Aref Ruqaa", "Cairo",
                   "SF Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI",
                   Roboto, sans-serif;
 
@@ -19684,3 +19684,180 @@ body[data-material-density="high"] {
    ════════════════════════════════════════════════════════════════ */
 
 /* End Worker 15 / Phase 1 — Type Audit & Casting ──────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   RESONANCE v2 — Worker 15 / Phase 2 — Arabic Display Crown
+   ────────────────────────────────────────────────────────────────────────────
+   Aref Ruqaa Bold = wordmark + hero ceremonial (gateway, dashboard greet,
+   psych/eq/customercare h1).
+   Reem Kufi 700 = page h1/h2 operational (12 other pages).
+   Cairo Bold = guaranteed fallback in every stack.
+   Thmanyah optional preempts both if loaded.
+   ──────────────────────────────────────────────────────────────────────────── */
+
+/* ─── Wordmark + Hero stacks (new tokens, additive) ───────────────────────── */
+:root {
+  /* Wordmark-specific stack — Aref Ruqaa أولاً (ceremonial brand mark) */
+  --font-wordmark:   "Aref Ruqaa", "Thmanyah", "Reem Kufi", "Cairo",
+                     "SF Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI",
+                     Roboto, serif;
+
+  /* Hero ceremonial — للـ greetings + literary page openings */
+  --font-hero:       "Aref Ruqaa", "Thmanyah", "Reem Kufi", "Cairo",
+                     "SF Arabic", -apple-system, BlinkMacSystemFont, serif;
+}
+
+/* ─── Voice token reroute (overrides Phase 1 aliases for hero/wordmark) ───── */
+:root {
+  --type-voice-hero:        var(--font-hero);       /* now Aref Ruqaa-first */
+  --type-voice-display:     var(--font-display);    /* unchanged — Reem Kufi-first */
+  --type-voice-wordmark:    var(--font-wordmark);   /* new voice */
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Display Utilities — تحديث لـ Phase 1 + إضافات Phase 2.
+   لاحظ: قواعد Phase 1 لـ .type-hero/.type-display/.type-display-h
+   ما زالت موجودة في الأعلى — هذي القواعد cascade after فتُربح.
+   ════════════════════════════════════════════════════════════════ */
+
+/* TYPE HERO — for ceremonial openings: gateway, hero greetings, literary h1 */
+.type-hero,
+[data-type-voice="hero"] {
+  font-family: var(--type-voice-hero);
+  font-weight: 700;                    /* Aref Ruqaa Bold */
+  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  /* Aref Ruqaa ascenders بارزة — نُعطي padding للتنفّس */
+  padding-block: 0.05em;
+}
+
+.type-hero--xl {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+}
+
+.type-hero--lg {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.type-hero--md {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+/* TYPE DISPLAY — h1/h2 page sections (Reem Kufi 700) */
+.type-display,
+[data-type-voice="display"] {
+  font-family: var(--type-voice-display);
+  font-weight: 700;
+  font-feature-settings: "kern" 1, "liga" 1;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.type-display-h {
+  font-family: var(--type-voice-display);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  line-height: 1.2;
+}
+
+.type-display-l {
+  font-family: var(--type-voice-display);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  line-height: 1.25;
+  font-feature-settings: "kern" 1;
+}
+
+/* TYPE WORDMARK — exclusive for "Upgrade" brand mark + sidebar logo */
+.type-wordmark,
+[data-type-voice="wordmark"] {
+  font-family: var(--type-voice-wordmark);
+  font-weight: 700;
+  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+  letter-spacing: -0.005em;
+  line-height: 1.0;
+  /* تكبير 5% لأن Aref Ruqaa يبدو أصغر بصرياً من إخوانه */
+  font-size: 1.05em;
+}
+
+/* TYPE WEIGHT VARIANTS — للـ display family */
+.type-weight-heavy    { font-weight: 800; }
+.type-weight-bold     { font-weight: 700; }
+.type-weight-semibold { font-weight: 600; }
+.type-weight-medium   { font-weight: 500; }
+.type-weight-regular  { font-weight: 400; }
+
+/* ════════════════════════════════════════════════════════════════
+   Aref Ruqaa Micro-tuning — refine per-context behavior.
+   Aref Ruqaa is calligraphic — needs vertical breathing room.
+   ════════════════════════════════════════════════════════════════ */
+
+/* Aref Ruqaa baseline يقع أعلى قليلاً — تعديل bottom padding */
+.type-wordmark,
+.type-hero {
+  padding-block-end: 0.1em;
+}
+
+/* في dark theme، Aref Ruqaa يظل bold (الكونتراست عالٍ ضد الخلفية الداكنة) */
+:root[data-theme="dark"] .type-hero,
+:root[data-theme="dark"] .type-wordmark {
+  font-weight: 700;
+}
+
+/* في light theme، يحتاج tracking أقل سلباً للوضوح */
+:root[data-theme="light"] .type-hero,
+:root[data-theme="light"] .type-wordmark {
+  letter-spacing: -0.005em;
+}
+
+/* Aref Ruqaa لا يدعم italic — منع الإصابة بـ inheritance */
+.type-hero,
+.type-wordmark,
+.type-eyebrow,
+.type-signature,
+.type-ribbon {
+  font-style: normal;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Reem Kufi Micro-tuning — geometric sans for h1/h2.
+   Reem Kufi works best 18px+ with tight tracking.
+   ════════════════════════════════════════════════════════════════ */
+
+/* Reem Kufi medium weight (500) للـ subtitles — kerning أنعم */
+.type-display-l {
+  font-feature-settings: "kern" 1;
+  letter-spacing: -0.005em;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Wordmark Hover State — pulse صغير (Worker 16 سيُعمّقها)
+   ════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: no-preference) {
+  .type-wordmark {
+    transition: letter-spacing var(--duration-base, 240ms) var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1));
+  }
+  .type-wordmark:hover {
+    letter-spacing: 0.01em;  /* ينفتح قليلاً عند hover */
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Worker 15 / Phase 2 — Display Discipline:
+   1. Aref Ruqaa exclusive: wordmark + hero + accent (eyebrow/signature/ribbon).
+      لا تستعمله لـ h2/h3/body.
+   2. Reem Kufi exclusive: page h1/h2 (display).
+      لا تستعمله لـ wordmark أو hero ceremonial.
+   3. Cairo Bold للـ fallback آخر مع باقي الخطوط.
+   4. لا italic على Aref Ruqaa أو Reem Kufi.
+   5. Aref Ruqaa حجمه يبدو أصغر — كبّر 5% عند المقارنة بـ Reem Kufi.
+   6. لا تستعمل --font-display مباشرة لـ wordmark — استعمل --font-wordmark.
+   7. literary pages (psych, eq, customercare) → .type-hero.
+      operational pages (callcenter, fieldsales, ...) → .type-display.
+   ════════════════════════════════════════════════════════════════ */
+
+/* End RESONANCE v2 — Worker 15 / Phase 2 ─────────────────────────────────── */
