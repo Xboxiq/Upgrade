@@ -1,17 +1,17 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-19T19:15:00Z",
+  "last_updated": "2026-05-19T20:30:00Z",
   "pack": "v2-resonance",
-  "pack_status": "scaffolded",
+  "pack_status": "in-progress",
   "current": {
     "pack": "v2",
     "worker": "15",
     "worker_name": "TYPOGRAPHY_SOUL",
-    "phase": 0,
+    "phase": 1,
     "phases_total": 6,
     "phase_order": ["1", "2", "3", "4", "5", "6"],
-    "branch": null,
-    "status": "ready"
+    "branch": "worker-15-resonance",
+    "status": "in-progress"
   },
   "previous": {
     "pack": "v1",
@@ -90,9 +90,10 @@
     { "worker": "14", "phase": 3, "title": "Dashboard Bento Consolidation — 10 cells, zero legacy duplication, 5 sacred IDs relocated cleanly", "branch": "worker-14-atelier-p2-p6", "lines_added": 255, "lines_deleted": 385 },
     { "worker": "14", "phase": 4, "title": "Chrome Refinement — Topbar Island scroll-shrink + search→cmdk + nav-pill spring-slide + 17 collapsed-mode tooltips + mobile drawer scrim + Upg.chrome", "branch": "worker-14-atelier-p2-p6", "lines_added": 381 },
     { "worker": "14", "phase": 5, "title": "Motion Choreography v2 — magnetic hover + reveal/stagger/intersect + page enter spring + Upg.choreo + Upg.transition", "branch": "worker-14-atelier-p2-p6", "lines_added": 339 },
-    { "worker": "14", "phase": 6, "title": "Final Polish — inline purge 215→76 + sw v2 (precache+offline) + manifest shortcuts + favicon v2 squircle + Upg.focusTrap (auto-attach modals) + Lighthouse helpers + sanity v16 (19/19 modules) + CHANGELOG v16", "branch": "worker-14-phase-6-final", "lines_added": 1080 }
+    { "worker": "14", "phase": 6, "title": "Final Polish — inline purge 215→76 + sw v2 (precache+offline) + manifest shortcuts + favicon v2 squircle + Upg.focusTrap (auto-attach modals) + Lighthouse helpers + sanity v16 (19/19 modules) + CHANGELOG v16", "branch": "worker-14-phase-6-final", "lines_added": 1080 },
+    { "worker": "15", "phase": 1, "title": "Type Audit & Casting — 9 voice tokens (--type-voice-*) + 21 utility classes (.type-*) + 9 [data-type-voice] selectors + 11 sample augmentations across 4 pages",                  "branch": "worker-15-resonance",     "lines_added": 322 }
   ],
-  "next_action": "Pack v2 RESONANCE scaffolded. Meta files (7) + Worker 15 TYPOGRAPHY_SOUL index + 6 phase files + CONTENT_REORDER_RITUAL = 15 markdown files in prompts/v2/. Ready to start Worker 15 Phase 1 — Type Audit & Casting. Use prompts/v2/AUTO_PILOT_v2.md to begin execution. Workers 16-19 (VITAL_UI, CONTENT_REVIVAL, LEARNING_SHELL, MICRO_POLISH) deferred to subsequent sessions per user-approved plan (path C).",
+  "next_action": "Continue Worker 15 Phase 2 — Arabic Display Crown (Aref Ruqaa expansion 700+400 + Reem Kufi extension 400-700 + display utilities .type-hero/.type-display-h + wordmark test)",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
@@ -115,7 +116,7 @@
       "prompts/v2/CONTENT_REORDER_RITUAL.md"
     ],
     "workers_planned": [
-      { "id": "15", "name": "TYPOGRAPHY_SOUL",  "phases": 6, "status": "scaffolded" },
+      { "id": "15", "name": "TYPOGRAPHY_SOUL",  "phases": 6, "status": "in-progress" },
       { "id": "16", "name": "VITAL_UI",         "phases": 6, "status": "deferred" },
       { "id": "17", "name": "CONTENT_REVIVAL",  "phases": 6, "status": "deferred" },
       { "id": "18", "name": "LEARNING_SHELL",   "phases": 4, "status": "deferred" },
