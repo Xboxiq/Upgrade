@@ -21501,3 +21501,124 @@ pre.type-code {
    ════════════════════════════════════════════════════════════════ */
 
 /* End VITAL UI v1 / Worker 16 / Phase 2 ─────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   VITAL UI v1 — Cinematic Page Transitions (Worker 16 / Phase 3)
+   Doctrine: الانتقال بين صفحتين ليس قطعاً، هو سرد. Direction-aware + depth-aware.
+   Builds atop W14 P5 (Upg.transition.navigate). Pure additive — no rewrite.
+   Philosophy:
+     1. fade        → موجود من W14 (default — لا يلمس).
+     2. depth-*     → z-axis micro-shift (4/10/18px) + scale ميكروسكوبي.
+     3. slide-*     → direction-aware (RTL platform، logical-property friendly).
+     4. morph       → flagship: scale + hue-rotate لحظي + opacity (1.4× duration).
+     5. parallax    → 3 sub-layers (1/1.6/2.4) عبر --parallax-y custom property.
+   Budget: ~120 lines including comments. كل keyframe له reduced-motion guard.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* z-axis offsets — used inside transition keyframes. */
+  --depth-shallow:              4px;
+  --depth-mid:                  10px;
+  --depth-deep:                 18px;
+
+  /* Page transition timing. Easing is iOS-style ease-out-cubic.
+     Duration sits between Upg.motion --duration-md and --duration-lg. */
+  --transition-page-duration:   380ms;
+  --transition-page-easing:     cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* Parallax driver — JS updates this on scroll (rAF-throttled).
+     Defaults to 0 so opt-in elements do not move until the engine is live. */
+  --parallax-y:                 0px;
+}
+
+/* ── Cinematic Keyframes ─────────────────────────────────────────────────── */
+@keyframes vital-depth-in {
+  0%   { transform: translateZ(calc(var(--depth-mid) * -1)) scale(0.985); opacity: 0; }
+  100% { transform: translateZ(0) scale(1); opacity: 1; }
+}
+
+@keyframes vital-depth-out {
+  0%   { transform: translateZ(0) scale(1); opacity: 1; }
+  100% { transform: translateZ(var(--depth-mid)) scale(1.012); opacity: 0; }
+}
+
+@keyframes vital-slide-rtl {
+  0%   { transform: translate3d(40px, 0, 0); opacity: 0; }
+  100% { transform: translate3d(0, 0, 0); opacity: 1; }
+}
+
+@keyframes vital-morph-fade {
+  0%   { transform: scale(0.97); opacity: 0; filter: hue-rotate(-3deg); }
+  60%  { opacity: 1; filter: hue-rotate(0deg); }
+  100% { transform: scale(1); opacity: 1; filter: none; }
+}
+
+/* ── Transition Variants (opt-in via class on .page.active) ──────────────── */
+.page-transition--depth-shallow {
+  animation: vital-depth-in calc(var(--transition-page-duration) * 0.85) var(--transition-page-easing) both;
+  transform-origin: center;
+}
+.page-transition--depth-mid {
+  animation: vital-depth-in var(--transition-page-duration) var(--transition-page-easing) both;
+  transform-origin: center;
+}
+.page-transition--depth-deep {
+  animation: vital-depth-in calc(var(--transition-page-duration) * 1.2) var(--transition-page-easing) both;
+  transform-origin: center;
+}
+.page-transition--slide-rtl {
+  animation: vital-slide-rtl var(--transition-page-duration) var(--transition-page-easing) both;
+}
+.page-transition--slide-ltr {
+  animation: vital-slide-rtl var(--transition-page-duration) var(--transition-page-easing) both reverse;
+}
+.page-transition--morph {
+  animation: vital-morph-fade calc(var(--transition-page-duration) * 1.4) var(--transition-page-easing) both;
+  transform-origin: center;
+}
+
+/* ── Parallax Sub-Layers ──────────────────────────────────────────────────
+   Opt-in via [data-parallax="1|2|3"] on any element inside .page.active.
+   Driven by JS-set --parallax-y. translate3d enforces GPU layer.
+   Transform-only — no layout impact.
+   ──────────────────────────────────────────────────────────────────────── */
+[data-parallax="1"] {
+  transform: translate3d(0, var(--parallax-y), 0);
+  transition: transform 480ms ease-out;
+  will-change: transform;
+}
+[data-parallax="2"] {
+  transform: translate3d(0, calc(var(--parallax-y) * 1.6), 0);
+  transition: transform 520ms ease-out;
+  will-change: transform;
+}
+[data-parallax="3"] {
+  transform: translate3d(0, calc(var(--parallax-y) * 2.4), 0);
+  transition: transform 560ms ease-out;
+  will-change: transform;
+}
+
+/* ── Reduced-Motion Guard (mandatory) ─────────────────────────────────────
+   Silences every Phase-3 keyframe + parallax. No exceptions.
+   ──────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .page-transition--depth-shallow,
+  .page-transition--depth-mid,
+  .page-transition--depth-deep,
+  .page-transition--slide-rtl,
+  .page-transition--slide-ltr,
+  .page-transition--morph,
+  [data-parallax="1"],
+  [data-parallax="2"],
+  [data-parallax="3"] {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    will-change: auto !important;
+    filter: none !important;
+  }
+}
+
+/* End VITAL UI v1 / Worker 16 / Phase 3 ─────────────────────────────────── */
