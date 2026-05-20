@@ -21291,3 +21291,213 @@ pre.type-code {
    ──────────────────────────────────────────────────────────────────────── */
 
 /* End VITAL UI v1 / Worker 16 / Phase 1 ─────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════
+   VITAL UI v1 — Tactile Microinteractions (Worker 16 / Phase 2)
+   Pack v2 RESONANCE — كل لمسة تستحق ردّاً ميكروسكوبياً صريحاً.
+   Scope: button signatures + ripple + card hover-lift + magnet polish.
+   Builds on Phase 1 (Living Surfaces) without modifying it.
+   ════════════════════════════════════════════════════════════════ */
+:root {
+  /* Tactile Tokens (6) — central control of press/lift/magnet feel */
+  --tactile-press-scale: 0.985;          /* compression on :active */
+  --tactile-press-duration: 120ms;       /* fast feedback under 150ms (Bret Victor: immediate connection) */
+  --tactile-press-easing: cubic-bezier(0.32, 0, 0.16, 1);
+  --tactile-lift-y: -2px;                /* hover lift on cards (≤ 3px to avoid drift) */
+  --tactile-lift-shadow:
+    0 8px 24px -10px color-mix(in oklch, var(--color-tint, var(--color-brand)) 25%, transparent);
+  --tactile-magnet-strength: 0.18;       /* magnet pull factor (used in JS) */
+}
+
+/* Light theme — dampen lift shadow on warm linen */
+[data-theme="light"] {
+  --tactile-lift-shadow:
+    0 6px 18px -8px color-mix(in oklch, var(--color-tint, var(--color-brand)) 18%, transparent);
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Tactile Keyframes (2) — ripple + soft pulse
+   GPU-cheap: transform + opacity only.
+   ────────────────────────────────────────────────────────────── */
+@keyframes tactile-ripple {
+  0%   { transform: translate(-50%, -50%) scale(0);   opacity: 0.55; }
+  100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0;    }
+}
+
+@keyframes tactile-pulse-soft {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 transparent;
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 6px color-mix(in oklch, var(--color-tint, var(--color-brand)) 18%, transparent);
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Press / Magnet / Glow / Recede Classes (4)
+   All opt-in via class. None auto-applied to existing W12-W15 elements.
+   ────────────────────────────────────────────────────────────── */
+
+/* .tactile-press — compress on :active (signal that the click landed). */
+.tactile-press {
+  transition: transform var(--tactile-press-duration) var(--tactile-press-easing);
+  will-change: transform;
+}
+.tactile-press:active {
+  transform: scale(var(--tactile-press-scale));
+}
+
+/* .tactile-magnet — micro-pull on hover (paired with [data-magnet] for JS amplification). */
+.tactile-magnet {
+  transition: transform 220ms var(--tactile-press-easing);
+}
+.tactile-magnet:hover {
+  transform: translateY(-1px) scale(1.005);
+}
+.tactile-magnet:focus-visible {
+  transform: translateY(-1px) scale(1.005);
+}
+
+/* .tactile-glow — soft tinted halo on hover/focus (≤ 1.5% screen footprint). */
+.tactile-glow {
+  position: relative;
+  isolation: isolate;
+}
+.tactile-glow::after {
+  content: "";
+  position: absolute;
+  inset: -8%;
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 240ms ease;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in oklch, var(--color-tint, var(--color-brand)) 70%, transparent) 0%,
+    transparent 70%
+  );
+  filter: blur(14px);
+  pointer-events: none;
+}
+.tactile-glow:hover::after,
+.tactile-glow:focus-visible::after {
+  opacity: 0.32;
+}
+
+/* .tactile-recede — sinks slightly on click (haptic illusion of depression). */
+.tactile-recede {
+  transition: transform 140ms var(--tactile-press-easing);
+}
+.tactile-recede:active {
+  transform: translateY(1px);
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Card Hover-Lift Refinement
+   Both class and data-attribute hooks supported (additive).
+   ────────────────────────────────────────────────────────────── */
+[data-tactile="card"],
+.tactile-card {
+  transition:
+    transform 240ms var(--tactile-press-easing),
+    box-shadow 280ms ease;
+  will-change: transform;
+}
+[data-tactile="card"]:hover,
+.tactile-card:hover {
+  transform: translateY(var(--tactile-lift-y));
+  box-shadow: var(--tactile-lift-shadow);
+}
+[data-tactile="card"]:focus-visible,
+.tactile-card:focus-visible {
+  transform: translateY(var(--tactile-lift-y));
+  box-shadow: var(--tactile-lift-shadow);
+}
+[data-tactile="card"]:active,
+.tactile-card:active {
+  transform: translateY(0) scale(var(--tactile-press-scale));
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Ripple Layer — JS sets --ripple-x / --ripple-y on pointerdown.
+   Pure CSS animation; no library, no asset.
+   ────────────────────────────────────────────────────────────── */
+[data-ripple] {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+[data-ripple]::after {
+  content: "";
+  position: absolute;
+  width: 120%;
+  aspect-ratio: 1;
+  left: var(--ripple-x, 50%);
+  top: var(--ripple-y, 50%);
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  background: color-mix(in oklch, var(--color-tint, var(--color-brand)) 28%, transparent);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+[data-ripple][data-ripple-fire="true"]::after {
+  animation: tactile-ripple 520ms ease-out;
+}
+/* Ensure children sit above the ripple layer */
+[data-ripple] > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Reduced-Motion Guard (Phase 2) — silences ALL tactile motion
+   while preserving the static state (no jarring removal).
+   ────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .tactile-press,
+  .tactile-magnet,
+  .tactile-recede,
+  .tactile-card,
+  [data-tactile="card"],
+  [data-ripple]::after {
+    transition: none !important;
+    animation: none !important;
+  }
+  .tactile-press:active,
+  .tactile-magnet:hover,
+  .tactile-magnet:focus-visible,
+  .tactile-recede:active,
+  .tactile-card:hover,
+  .tactile-card:focus-visible,
+  .tactile-card:active,
+  [data-tactile="card"]:hover,
+  [data-tactile="card"]:focus-visible,
+  [data-tactile="card"]:active {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  .tactile-glow::after {
+    transition: none !important;
+  }
+  .tactile-glow:hover::after,
+  .tactile-glow:focus-visible::after {
+    opacity: 0 !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   VITAL UI Discipline — Phase 2 (Tactile):
+   1. Tactile classes are opt-in ONLY — never auto-applied via :is/:where to existing widgets.
+   2. .tactile-glow halo opacity ≤ 0.35 — louder = noise, not feedback.
+   3. .tactile-card lift ≤ 3px Y — prevents content reflow on slow GPUs.
+   4. [data-ripple] requires overflow:hidden on host (already enforced above).
+   5. JS magnet uses transform-only (translate3d) — no layout thrash.
+   6. All four tactile classes silenced under prefers-reduced-motion.
+   ════════════════════════════════════════════════════════════════ */
+
+/* End VITAL UI v1 / Worker 16 / Phase 2 ─────────────────────────────────── */
