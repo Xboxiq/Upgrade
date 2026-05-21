@@ -21734,3 +21734,35 @@ pre.type-code {
    ─────────────────────────────────────────────────────────────────────── */
 
 /* End VITAL UI v1 / Worker 16 / Phase 4 ─────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   VITAL UI v1 — Sound state hook (Worker 16 / Phase 5)
+   Visual hook only — actual audio synthesis lives in Upg.sound IIFE (app.js).
+   The body gets [data-sound-state="on"|"off"] so future polish (Phase 6 hooks
+   in command palette / topbar indicator) can react via CSS without JS.
+   No animation, no transition — pure semantic state attribute.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Reserve a CSS hook surface — utilities can opt in later via attr selector. */
+[data-sound-state="on"]  { --sound-on: 1; }
+[data-sound-state="off"] { --sound-on: 0; }
+
+/* Optional indicator dot — opt-in via .sound-indicator class anywhere.
+   Defaults dim; brightens to identity tint when sound is active. */
+.sound-indicator {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: color-mix(in oklch, var(--color-tint, #6b7280) 40%, transparent);
+  vertical-align: middle;
+  transition: background 200ms var(--ease-out, ease);
+}
+[data-sound-state="on"] .sound-indicator {
+  background: color-mix(in oklch, var(--color-tint, #66FCF1) 90%, transparent);
+  box-shadow: 0 0 6px color-mix(in oklch, var(--color-tint, #66FCF1) 50%, transparent);
+}
+
+/* End VITAL UI v1 / Worker 16 / Phase 5 ─────────────────────────────────── */
