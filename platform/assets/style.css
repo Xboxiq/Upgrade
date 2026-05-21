@@ -21938,3 +21938,120 @@ body[data-aura-override] {
 }
 
 /* End VITAL UI v1 / Worker 16 / Phase 6 / Final ──────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   RESONANCE v2 — Worker 17 / Phase 1 — Block Schema Scaffolding
+   Pure metadata layer. No visible UI in this phase.
+   Reservations for Phases 2-6 (TL;DR, pitfalls, practice, cross-refs, pacing).
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── Tier color tokens — for content reorder ritual + Phase 6 progress ──── */
+:root {
+  --tier-foundation:    oklch(72% 0.12 160);  /* green ~160h, "ابدأ هنا" */
+  --tier-practitioner:  oklch(72% 0.15 60);   /* amber ~60h, "تمكّن" */
+  --tier-expert:        oklch(65% 0.18 25);   /* red-orange ~25h, "إتقان" */
+
+  /* ── Difficulty pip tints (1..5) — for Phase 2 takeaways + ritual ────── */
+  --diff-1: oklch(78% 0.10 180);  /* sky cyan, Remember */
+  --diff-2: oklch(75% 0.12 150);  /* leaf green, Understand */
+  --diff-3: oklch(72% 0.14 80);   /* harvest gold, Apply */
+  --diff-4: oklch(68% 0.16 40);   /* warm amber, Analyze */
+  --diff-5: oklch(62% 0.18 20);   /* ember red, Evaluate/Create */
+
+  /* ── Block aside chrome reservations (Phases 2-5 will consume these) ── */
+  --block-aside-bg:        color-mix(in oklch, var(--color-surface-2) 60%, transparent);
+  --block-aside-border:    color-mix(in oklch, var(--color-tint, var(--color-brand)) 30%, transparent);
+  --block-aside-radius:    0.5rem;
+  --block-aside-pad-i:     var(--space-3);
+  --block-aside-pad-b:     var(--space-3);
+  --block-aside-shadow:    0 1px 2px color-mix(in oklch, var(--color-text) 6%, transparent);
+
+  /* ── Block-type accent tokens (Phase 2 will tint asides per type) ────── */
+  --block-type-lesson:     oklch(72% 0.10 220);  /* calm steel-blue */
+  --block-type-drill:      oklch(70% 0.13 90);   /* warm green-gold */
+  --block-type-case:       oklch(65% 0.14 30);   /* terra-cotta */
+  --block-type-reference:  oklch(70% 0.06 260);  /* lavender-grey */
+  --block-type-cheat:      oklch(75% 0.11 160);  /* mint */
+  --block-type-calc:       oklch(68% 0.12 50);   /* amber */
+  --block-type-quiz:       oklch(65% 0.16 340);  /* magenta */
+  --block-type-scenario:   oklch(70% 0.13 350);  /* rose */
+}
+
+/* ── Optional debug overlay — toggle in DevTools: body[data-block-debug="1"] */
+body[data-block-debug="1"] [data-block-id] {
+  outline: 1px dashed color-mix(in oklch, var(--color-tint, var(--color-brand)) 50%, transparent);
+  outline-offset: 4px;
+  position: relative;
+}
+
+body[data-block-debug="1"] [data-block-id]::before {
+  content: attr(data-block-id) " · " attr(data-block-type) " · " attr(data-difficulty) "⭐ · " attr(data-est-minutes) "min";
+  position: absolute;
+  top: 0;
+  inset-inline-start: 0;
+  transform: translateY(-100%);
+  font-family: var(--type-voice-numeric, var(--font-numeric, monospace));
+  font-size: 0.7rem;
+  font-weight: 600;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  color: color-mix(in oklch, var(--color-text-faint, var(--color-text)) 90%, transparent);
+  background: color-mix(in oklch, var(--color-surface-1) 95%, transparent);
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--color-border, color-mix(in oklch, var(--color-text) 12%, transparent));
+  pointer-events: none;
+  z-index: 100;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* ── Difficulty pip overlay (debug, top-right) ──────────────────────────── */
+body[data-block-debug="1"] [data-block-id][data-difficulty]::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  inset-inline-end: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--diff-1);
+  pointer-events: none;
+  z-index: 100;
+}
+body[data-block-debug="1"] [data-difficulty="2"]::after { background: var(--diff-2); }
+body[data-block-debug="1"] [data-difficulty="3"]::after { background: var(--diff-3); }
+body[data-block-debug="1"] [data-difficulty="4"]::after { background: var(--diff-4); }
+body[data-block-debug="1"] [data-difficulty="5"]::after { background: var(--diff-5); }
+
+/* ── Print-friendly: schema overlays hidden, content untouched ──────────── */
+@media print {
+  body[data-block-debug="1"] [data-block-id]::before,
+  body[data-block-debug="1"] [data-block-id]::after { display: none; }
+  body[data-block-debug="1"] [data-block-id] { outline: none; }
+}
+
+/* ── Reduced-motion / high-contrast honor ──────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  body[data-block-debug="1"] [data-block-id]::before { transition: none; }
+}
+@media (prefers-contrast: more) {
+  body[data-block-debug="1"] [data-block-id] {
+    outline-style: solid;
+    outline-color: currentColor;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   Discipline Comment — Worker 17 / Phase 1
+   1. Block schema is metadata-only. No visible chrome added in this phase.
+   2. Phases 2-6 will WRAP siblings around blocks (not modify them).
+   3. data-block-id is permanent. Never rename across phases.
+   4. data-difficulty is Bloom-aligned (1=Remember, 5=Create).
+   5. data-prereq is comma-separated block-ids in same page.
+   6. To debug, set body[data-block-debug="1"] in DevTools.
+   7. All tokens defined here are RESERVED — Phases 2-6 consume them.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* End RESONANCE v2 / Worker 17 / Phase 1 ─────────────────────────────────── */
