@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-21T02:30:00Z",
+  "last_updated": "2026-05-21T12:30:00Z",
   "pack": "v2-resonance",
   "pack_status": "in-progress",
   "current": {
     "pack": "v2",
-    "worker": "16",
-    "worker_name": "VITAL_UI",
-    "phase": 6,
+    "worker": "17",
+    "worker_name": "CONTENT_REVIVAL",
+    "phase": 0,
     "phases_total": 6,
     "phase_order": [
       "1",
@@ -17,10 +17,23 @@
       "5",
       "6"
     ],
-    "branch": "worker-16-vital-ui-p6",
-    "status": "completed"
+    "branch": null,
+    "status": "ready",
+    "specs_scaffolded": true,
+    "specs_branch": "pack-v2-worker-17-specs",
+    "next_phase_branch": "worker-17-resonance"
   },
   "previous": {
+    "pack": "v2",
+    "worker": "16",
+    "worker_name": "VITAL_UI",
+    "phase": 6,
+    "phases_total": 6,
+    "branch": "worker-16-vital-ui-p6",
+    "status": "completed",
+    "merged_pr": 65
+  },
+  "before_previous": {
     "pack": "v2",
     "worker": "15",
     "worker_name": "TYPOGRAPHY_SOUL",
@@ -586,7 +599,7 @@
       "lines_added": 284
     }
   ],
-  "next_action": "Open PR worker-16-vital-ui-p6 → main, then start Worker 17 (CONTENT REVIVAL) Phase 1 in a new session.",
+  "next_action": "Worker 17 specs scaffolded on branch pack-v2-worker-17-specs. After PR merge, start a new AUTO_PILOT v2 session — it will branch worker-17-resonance from main and execute Phase 1 (Block Schema & Metadata Audit).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
@@ -606,7 +619,14 @@
       "prompts/v2/15_PHASE_4_LATIN_NUMERIC.md",
       "prompts/v2/15_PHASE_5_SCALE_RHYTHM.md",
       "prompts/v2/15_PHASE_6_PER_PAGE_PERSONALITY.md",
-      "prompts/v2/CONTENT_REORDER_RITUAL.md"
+      "prompts/v2/CONTENT_REORDER_RITUAL.md",
+      "prompts/v2/17_WORKER_CONTENT_REVIVAL.md",
+      "prompts/v2/17_PHASE_1_BLOCK_SCHEMA.md",
+      "prompts/v2/17_PHASE_2_TLDR_TAKEAWAYS.md",
+      "prompts/v2/17_PHASE_3_PITFALLS_WARNINGS.md",
+      "prompts/v2/17_PHASE_4_PRACTICE_SELFCHECK.md",
+      "prompts/v2/17_PHASE_5_CROSSREF_PATHS.md",
+      "prompts/v2/17_PHASE_6_PACING_MASTERY.md"
     ],
     "workers_planned": [
       {
@@ -627,7 +647,8 @@
         "id": "17",
         "name": "CONTENT_REVIVAL",
         "phases": 6,
-        "status": "deferred"
+        "status": "specs-ready",
+        "specs_branch": "pack-v2-worker-17-specs"
       },
       {
         "id": "18",
