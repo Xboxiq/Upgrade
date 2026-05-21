@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-21T02:30:00Z",
+  "last_updated": "2026-05-21T12:00:00Z",
   "pack": "v2-resonance",
-  "pack_status": "in-progress",
+  "pack_status": "blocked",
   "current": {
     "pack": "v2",
-    "worker": "16",
-    "worker_name": "VITAL_UI",
-    "phase": 6,
+    "worker": "17",
+    "worker_name": "CONTENT_REVIVAL",
+    "phase": 0,
     "phases_total": 6,
     "phase_order": [
       "1",
@@ -17,10 +17,31 @@
       "5",
       "6"
     ],
-    "branch": "worker-16-vital-ui-p6",
-    "status": "completed"
+    "branch": null,
+    "status": "blocked",
+    "blocker": "phase-specs-missing",
+    "blocker_detail": "prompts/v2/17_WORKER_CONTENT_REVIVAL.md and 17_PHASE_*.md do not exist. Workers 17/18/19 are 'deferred' in pack_v2_scaffold.workers_planned. Pack v2 rule prohibits editing prompts/v2/* without explicit user permission. Cannot start Worker 17 Phase 1 until specs are scaffolded.",
+    "needed_files": [
+      "prompts/v2/17_WORKER_CONTENT_REVIVAL.md",
+      "prompts/v2/17_PHASE_1_*.md",
+      "prompts/v2/17_PHASE_2_*.md",
+      "prompts/v2/17_PHASE_3_*.md",
+      "prompts/v2/17_PHASE_4_*.md",
+      "prompts/v2/17_PHASE_5_*.md",
+      "prompts/v2/17_PHASE_6_*.md"
+    ]
   },
   "previous": {
+    "pack": "v2",
+    "worker": "16",
+    "worker_name": "VITAL_UI",
+    "phase": 6,
+    "phases_total": 6,
+    "branch": "worker-16-vital-ui-p6",
+    "status": "completed",
+    "merged_pr": 65
+  },
+  "before_previous": {
     "pack": "v2",
     "worker": "15",
     "worker_name": "TYPOGRAPHY_SOUL",
@@ -586,7 +607,7 @@
       "lines_added": 284
     }
   ],
-  "next_action": "Open PR worker-16-vital-ui-p6 → main, then start Worker 17 (CONTENT REVIVAL) Phase 1 in a new session.",
+  "next_action": "BLOCKED — Worker 16 PR #65 already merged into main. Cannot proceed to Worker 17 because phase specs (17_WORKER_CONTENT_REVIVAL.md + 17_PHASE_1..6) do not exist in prompts/v2/. User must either (a) explicitly authorize scaffolding Worker 17/18/19 phase specs, (b) provide the specs themselves, or (c) declare Pack v2 done at Worker 16 and update pack_v2_scaffold.workers_planned[].status accordingly.",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
