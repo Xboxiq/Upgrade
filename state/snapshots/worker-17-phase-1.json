@@ -1,0 +1,121 @@
+{
+  "pack": "v2",
+  "worker": "17",
+  "worker_name": "CONTENT_REVIVAL",
+  "phase_completed": 1,
+  "phases_total": 6,
+  "title": "Block Schema & Metadata Audit — 923 educational blocks tagged with id/type/difficulty/est-minutes + 30 prereq seeds + RESONANCE CSS scaffolding",
+  "branch": "worker-17-resonance",
+  "files_touched": [
+    "scripts/worker-17-block-schema.mjs",
+    "platform/index.html",
+    "platform/assets/style.css"
+  ],
+  "files_untouched_by_design": [
+    "platform/assets/app.js (Phase 4 + 6 will touch — Upg.practice + Upg.pace)",
+    "All block text content (zero edits — hard-enforced)",
+    "archive/*",
+    "prompts/*"
+  ],
+  "lines_added_total": 500,
+  "lines_added_breakdown": {
+    "scripts/worker-17-block-schema.mjs": 383,
+    "platform/assets/style.css": 117,
+    "platform/index.html_net": 0
+  },
+  "html_diff_signature": "923 insertions / 923 deletions — paired same-content lines (only attributes added, no text edits)",
+  "blocks_tagged_total": 923,
+  "blocks_per_page": {
+    "callcenter": 100,
+    "fieldsales": 177,
+    "accountmgr": 22,
+    "social": 34,
+    "lab": 4,
+    "psych": 129,
+    "eq": 45,
+    "negotiation": 29,
+    "customercare": 16,
+    "programming": 78,
+    "accounting": 56,
+    "phonerepair": 79,
+    "hrmastery": 150,
+    "myprogress": 4
+  },
+  "type_distribution": {
+    "lesson": 424,
+    "drill": 310,
+    "case": 115,
+    "reference": 56,
+    "cheat": 18,
+    "calc": 0,
+    "quiz": 0,
+    "scenario": 0
+  },
+  "difficulty_distribution": {
+    "1": 65,
+    "2": 358,
+    "3": 359,
+    "4": 129,
+    "5": 12
+  },
+  "prereqs_seeded": 30,
+  "prereqs_planned_phase_5": "~250 (systematic pass)",
+  "data_attributes_added": [
+    "data-block-id",
+    "data-block-type",
+    "data-difficulty",
+    "data-est-minutes",
+    "data-prereq (subset)"
+  ],
+  "tokens_added": [
+    "--tier-foundation",
+    "--tier-practitioner",
+    "--tier-expert",
+    "--diff-1",
+    "--diff-2",
+    "--diff-3",
+    "--diff-4",
+    "--diff-5",
+    "--block-aside-bg",
+    "--block-aside-border",
+    "--block-aside-radius",
+    "--block-aside-pad-i",
+    "--block-aside-pad-b",
+    "--block-aside-shadow",
+    "--block-type-lesson",
+    "--block-type-drill",
+    "--block-type-case",
+    "--block-type-reference",
+    "--block-type-cheat",
+    "--block-type-calc",
+    "--block-type-quiz",
+    "--block-type-scenario"
+  ],
+  "tokens_added_count": 22,
+  "css_features_added": [
+    "body[data-block-debug=1] DevTools overlay (id/type/difficulty/min via ::before)",
+    "Difficulty pip via ::after with 5 tints",
+    "Print + reduced-motion + high-contrast guards"
+  ],
+  "api_added": null,
+  "api_count_total": 23,
+  "script_features": {
+    "idempotent": true,
+    "verified_no_double_apply": true,
+    "selector_count": 60,
+    "page_prefix_count": 14,
+    "type_overrides": 18,
+    "minute_overrides": 14,
+    "prereq_seeds": 30
+  },
+  "sacred_check": {
+    "pages": 14,
+    "qcalc": 391,
+    "upg_apis": 23,
+    "data_page_personality_html": 15,
+    "block_text_edits": 0
+  },
+  "resonance_notes": "المحتوى الآن يعرف عن نفسه — كل block من ٩٢٣ يحمل اسمه (cc-001..hr-150)، صنفه (lesson/drill/case/reference/cheat)، صعوبته (نجوم Bloom)، زمنه التقريبي بكرم. الطبقة لا ترى بصرياً (Phase 1 معماري بحت)، لكنها تفتح الباب لـ Phases 2-6: الـ TL;DR يعرف ما يلخّص، الـ pitfalls يعرف ما يحذّر منه، الـ practice يعرف ما يختبر، الـ cross-refs يعرف ما يربط، والـ pacing يعرف كم يحتاج المتعلم. السكربت idempotent — نشغّله ألف مرة بدون تكرار. الجدول لـ ١٤ صفحة كاشف عن ثقل المحتوى الحقيقي: hrmastery (150) و fieldsales (177) و psych (129) أعمدة المنصة، بينما lab و myprogress و accountmgr صغار شكلاً لأنهم منصات لا محتوى. الـ debug overlay (body[data-block-debug=1]) فتح في DevTools يجعل الـ schema تتنفّس بصرياً للمراجعة.",
+  "philosophy": "Resonance over noise — قبل أن نُغني المحتوى، نُعرّفه. كل block يجب أن يعرف من هو ولِمَن.",
+  "next_action": "Continue Worker 17 Phase 2 — TL;DR & Key Takeaways. Add <aside class='block-tldr'> + <ul class='block-takeaways'> + reading-time auto-display + 'لماذا يهم' framer for ~150 major blocks (lesson + case types with difficulty ≥ 3). Branch: worker-17-resonance (continue, do NOT create new branch)."
+}

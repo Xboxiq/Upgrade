@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-21T12:30:00Z",
+  "last_updated": "2026-05-21T18:45:00Z",
   "pack": "v2-resonance",
   "pack_status": "in-progress",
   "current": {
     "pack": "v2",
     "worker": "17",
     "worker_name": "CONTENT_REVIVAL",
-    "phase": 0,
+    "phase": 1,
     "phases_total": 6,
     "phase_order": [
       "1",
@@ -17,8 +17,8 @@
       "5",
       "6"
     ],
-    "branch": null,
-    "status": "ready",
+    "branch": "worker-17-resonance",
+    "status": "in-progress",
     "specs_scaffolded": true,
     "specs_branch": "pack-v2-worker-17-specs",
     "next_phase_branch": "worker-17-resonance"
@@ -597,9 +597,18 @@
       "title": "Identity Auras — 15 aura signatures (default + 14 page personalities) defining --aura-from/--aura-to/--aura-glow tokens + auto-apply selectors routing Phase 1 .life-ambient/.life-mesh/.life-surface (and data-life=ambient/mesh/surface) layers through [data-page-personality] cascade + pointer trail (Phase 4) integration via media-gated overrides (3 layers, gated by pointer:fine + prefers-reduced-motion:no-preference) + body[data-aura-override] global override surface with 480ms ease-out background transition + dedicated reduced-motion guard silencing aura'd surface animations + override transition + Upg.aura IIFE (23rd top-level Upg.* namespace, ~112 JS + ~172 CSS = 284 lines) with frozen surface (apply/clear/current/list/preview) + isValid AURAS guard with console.warn fallback + upg:aura:change CustomEvent dispatched on every state change + preview(name, durationMs) restores previous override state (or full clear) after timeout (min 200ms, default 1200ms) + current() resolves override → body attr → active page personality fallback chain. Sacred preserved (14 pages / 391 qcalc / 22 prior Upg.* APIs / 15 data-page-personality / 47 reduced-motion guards / no HTML changes). Worker 16 final phase — closes VITAL UI.",
       "branch": "worker-16-vital-ui-p6",
       "lines_added": 284
+    },
+    {
+      "worker": "17",
+      "phase": 1,
+      "title": "Block Schema & Metadata Audit — 923 educational blocks AUGMENTED with data-block-id (page-prefix + 3-digit ordinal, deterministic) + data-block-type (lesson 424 / drill 310 / case 115 / reference 56 / cheat 18 — 5 of 8 types active) + data-difficulty (1..5, Bloom-aligned: 65/358/359/129/12) + data-est-minutes (generous, kindness-over-precision: lesson 6 / drill 8 / case 12 / reference 4 / cheat 5, with per-class overrides for skill-detail-section, kam-stage, pr-repair-card, hrm-trap-card, etc) + 30 data-prereq seeds (Phase 5 will finish systematically) + scripts/worker-17-block-schema.mjs (idempotent ESM augment script, 383 LOC, walks each page slice + matches curated 60+ block-class roots in source order + skips already-tagged elements) + style.css RESONANCE block schema scaffolding +117 lines (3 tier color tokens --tier-foundation/practitioner/expert + 5 difficulty pip tints --diff-1..5 + 8 block-type accent tokens --block-type-{lesson,drill,case,reference,cheat,calc,quiz,scenario} + 6 block aside chrome reservations consumed by Phases 2-5 + body[data-block-debug=1] DevTools overlay surfacing id/type/difficulty/min via ::before + difficulty pip via ::after + print + reduced-motion + high-contrast guards). Per-page tally: callcenter 100, fieldsales 177, accountmgr 22, social 34, lab 4, psych 129, eq 45, negotiation 29, customercare 16, programming 78, accounting 56, phonerepair 79, hrmastery 150, myprogress 4. Sacred preserved (14 pages / 391 qcalc / 23 Upg.* APIs / 15 data-page-personality / app.js untouched / zero text edits — diff: 923 ins ↔ 923 del paired same-content lines).",
+      "branch": "worker-17-resonance",
+      "lines_added": 500,
+      "blocks_tagged": 923,
+      "prereqs_seeded": 30
     }
   ],
-  "next_action": "Worker 17 specs scaffolded on branch pack-v2-worker-17-specs. After PR merge, start a new AUTO_PILOT v2 session — it will branch worker-17-resonance from main and execute Phase 1 (Block Schema & Metadata Audit).",
+  "next_action": "Continue Worker 17 Phase 2 — TL;DR & Key Takeaways. Add <aside class='block-tldr'> + <ul class='block-takeaways'> + reading-time auto-display + 'لماذا يهم' framer for ~150 major blocks. Branch: worker-17-resonance (continue, do NOT create new branch).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
@@ -647,8 +656,11 @@
         "id": "17",
         "name": "CONTENT_REVIVAL",
         "phases": 6,
-        "status": "specs-ready",
-        "specs_branch": "pack-v2-worker-17-specs"
+        "status": "in-progress",
+        "current_phase": 1,
+        "phases_completed": [1],
+        "specs_branch": "pack-v2-worker-17-specs",
+        "exec_branch": "worker-17-resonance"
       },
       {
         "id": "18",
