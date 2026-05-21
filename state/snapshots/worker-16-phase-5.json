@@ -1,0 +1,68 @@
+{
+  "pack": "v2",
+  "worker": "16",
+  "worker_name": "VITAL_UI",
+  "phase_completed": 5,
+  "phases_total": 6,
+  "branch": "worker-16-vital-ui-p5",
+  "title": "Sound Design — Upg.sound (5 synthed sounds, opt-in, reduced-motion-respecting)",
+  "files_touched": [
+    "platform/assets/app.js",
+    "platform/assets/style.css"
+  ],
+  "lines_added_total": 279,
+  "tokens_added": [
+    "data-sound-state (body attribute, on|off)",
+    "--sound-on (CSS custom prop, 0|1)"
+  ],
+  "api_added": {
+    "namespace": "Upg.sound",
+    "is_top_level": true,
+    "top_level_count_after": 22,
+    "methods": [
+      "enable() -> boolean",
+      "disable() -> boolean",
+      "play(name) -> boolean",
+      "setVolume(0..1) -> number",
+      "enabled() -> boolean",
+      "available() -> boolean",
+      "list() -> string[]"
+    ],
+    "frozen": true
+  },
+  "sound_recipes": {
+    "tap": "sine 880Hz x 60ms",
+    "confirm": "sine 1320 -> 1760Hz two-step rise",
+    "error": "triangle 220Hz x 140ms (low warn)",
+    "nav": "sine 660Hz x 50ms (subtle swipe)",
+    "complete": "sine 1320 -> 1760 -> 2640Hz three-step ascending"
+  },
+  "synthesis": {
+    "approach": "WebAudio API only — zero asset loading",
+    "envelope": "ADSR per note (linearRamp attack, exponentialRamp release)",
+    "lazy_context": true,
+    "respects_autoplay_policy": true,
+    "debounce_ms": 50,
+    "default_volume": 0.18,
+    "off_by_default": true,
+    "persistence_key": "upg.sound.enabled"
+  },
+  "a11y": {
+    "respects_reduced_motion": true,
+    "live_mq_change_listener": true,
+    "refuses_enable_under_reduce_motion": true,
+    "silences_state_attribute_live": true
+  },
+  "sacred_preserved": {
+    "pages": 14,
+    "qcalc_instances": 391,
+    "upg_top_level_apis": 21,
+    "phases_1_to_4_untouched": true,
+    "no_html_changes": true,
+    "no_audio_assets": true,
+    "no_new_libraries": true,
+    "w12_w15_motion_engine_intact": true
+  },
+  "resonance_notes": "الصوت دخل المنصة على أطراف الأصابع — احترامي بالكامل. صامت افتراضياً، يحترم reduced-motion، يتذكّر تفضيل المستخدم بين الجلسات. خمسة أصوات synth قصيرة (60-140ms) كافية لكل حالة UI: لمسة، تأكيد، خطأ، تنقّل، إنجاز. لا ملفات صوت، لا libraries، فقط أوسيليتورات. الواجهة الآن قادرة على ردّ صوتي إذا أراد المستخدم — وصامتة بشدّة إذا لم يرد.",
+  "next_action": "Continue Worker 16 Phase 6 — Identity Auras (14 page auras + --aura-* tokens × 14 + Upg.aura API + integration with data-page-personality)."
+}
