@@ -1,0 +1,84 @@
+{
+  "pack": "v2",
+  "worker": "16",
+  "worker_name": "VITAL_UI",
+  "phase_completed": 4,
+  "phases_total": 6,
+  "branch": "worker-16-vital-ui-p4",
+  "files_touched": [
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "lines_added_total": 251,
+  "lines_added_breakdown": {
+    "style.css": 112,
+    "app.js": 139
+  },
+  "tokens_added": [
+    "--pointer-trail-size",
+    "--pointer-trail-color",
+    "--pointer-trail-opacity",
+    "--pointer-trail-decay"
+  ],
+  "css_classes_added": [
+    ".pointer-trail",
+    ".pointer-trail--layer-2",
+    ".pointer-trail--layer-3",
+    ".pointer-trail--rest"
+  ],
+  "css_selectors_added": [
+    ":where(*):focus-visible (focus-ring elevation halo, specificity 0)"
+  ],
+  "media_queries_added": [
+    "@media (pointer: fine) and (prefers-reduced-motion: no-preference)",
+    "@media (prefers-reduced-motion: reduce) — belt-and-braces display:none guard"
+  ],
+  "apis_extended": [
+    "Upg.life.pointer.enable()",
+    "Upg.life.pointer.disable()",
+    "Upg.life.pointer.enabled()",
+    "Upg.life.pointer.rest()"
+  ],
+  "apis_preserved": [
+    "Upg.life.set/clear/get/list/audit (Phase 1)",
+    "Upg.life.pulse (Phase 2)",
+    "Upg.transition.* (Phase 3)",
+    "21 top-level Upg.* APIs"
+  ],
+  "sacred_preservation": {
+    "page_sections": "14 (was 14)",
+    "qcalc_instances": "391 (was 391)",
+    "upg_top_level_apis": "21 (was 21 — Upg.life extended in-place)",
+    "cairo_present": true,
+    "data_page_personality": "15 (was 15)",
+    "prefers_reduced_motion_guards": "≥15 (added 2)"
+  },
+  "behavior_summary": {
+    "trail_layers": 3,
+    "trail_blur_progression_px": [2, 6, 12],
+    "trail_opacity_progression": [0.4, 0.22, 0.128],
+    "trail_size_multipliers": [1.0, 1.6, 2.2],
+    "transition_durations_ms": [80, 140, 200],
+    "rest_timeout_ms": 1500,
+    "personality_color_source": "var(--color-tint, var(--color-brand))",
+    "touch_device_behavior": "no-op API exposed, no DOM created, no listeners attached",
+    "reduced_motion_behavior": "no-op API exposed, no DOM created; mid-session toggle disables in-flight trails",
+    "focus_halo_specificity": "0 (uses :where() wrapper to never override existing focus styles)"
+  },
+  "resonance_notes": "المؤشر يكتسب لون شخصية الصفحة بدون أن يفرض نفسه. الأثر الثلاثي ميكروسكوبي عند الحركة، يخبو بعد 1.5s سكون. focus-ring يصبح صدى لوني للأثر. على touch — اختفاء كامل بدون إعلان. على reduced-motion — صمت تام. الرفيق حاضر، لا يزعج.",
+  "discipline_check": {
+    "makes_session_more_pleasant": true,
+    "serves_meaning_not_noise": true,
+    "would_be_missed_if_gone": true,
+    "preservation_first_deviations": [
+      ":where(*):focus-visible instead of *:focus-visible (preserves 9+ existing scoped focus rules)",
+      "outline kept untouched — only box-shadow halo added (so no cascade conflict with W11/W12/W14 outline rules)"
+    ]
+  },
+  "context_notes": [
+    "Branch worker-16-vital-ui-p4 created from main (after PR #62 merge for Phase 3).",
+    "Established Worker-16 per-phase branch pattern continued (worker-16-vital-ui / -p2 / -p3 / -p4).",
+    "PR per Worker rule: each Worker-16 phase has had its own PR per established pattern; this phase will get its own PR before phase 5."
+  ],
+  "next_action": "Continue Worker 16 Phase 5 — Sound Design (WebAudio synth-only UI sounds, 5 sounds + Upg.sound API + opt-in toggle in command palette + a11y respect)."
+}

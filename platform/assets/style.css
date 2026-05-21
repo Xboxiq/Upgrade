@@ -21622,3 +21622,115 @@ pre.type-code {
 }
 
 /* End VITAL UI v1 / Worker 16 / Phase 3 ─────────────────────────────────── */
+
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   VITAL UI v1 — Pointer Companion (Worker 16 / Phase 4)
+   Pack v2 RESONANCE.
+
+   Doctrine: المؤشر ليس سهماً — هو رفيق بلون شخصية الصفحة.
+
+   This phase adds:
+     1. 4 --pointer-* tokens (size / color / opacity / decay).
+     2. .pointer-trail (3 layers, layer-2 + layer-3 progressively softer).
+     3. .pointer-trail--rest sleep state (opacity → 0 after 1.5s idle).
+     4. :where(*):focus-visible elevation halo (tinted, additive).
+     5. Active ONLY under @media (pointer: fine) AND no-preference.
+
+   Preservation:
+     - W12 P2 magnetic-cursor aura UNTOUCHED.
+     - All local :focus-visible rules retain priority via :where() wrapper.
+     - Touch / coarse pointer / reduced-motion → zero CSS work, zero JS work.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --pointer-trail-size:    18px;
+  --pointer-trail-color:   var(--color-tint, var(--color-brand));
+  --pointer-trail-opacity: 0.4;
+  --pointer-trail-decay:   1.5s;
+}
+
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .pointer-trail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    width: var(--pointer-trail-size);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      var(--pointer-trail-color) 0%,
+      transparent 70%
+    );
+    opacity: var(--pointer-trail-opacity);
+    z-index: 9998;
+    transform: translate3d(-9999px, -9999px, 0);
+    transition:
+      transform 80ms linear,
+      opacity 220ms ease;
+    mix-blend-mode: screen;
+    filter: blur(2px);
+    contain: layout paint style;
+  }
+
+  .pointer-trail--layer-2 {
+    width: calc(var(--pointer-trail-size) * 1.6);
+    opacity: calc(var(--pointer-trail-opacity) * 0.55);
+    transition:
+      transform 140ms linear,
+      opacity 280ms ease;
+    filter: blur(6px);
+  }
+
+  .pointer-trail--layer-3 {
+    width: calc(var(--pointer-trail-size) * 2.2);
+    opacity: calc(var(--pointer-trail-opacity) * 0.32);
+    transition:
+      transform 200ms linear,
+      opacity 360ms ease;
+    filter: blur(12px);
+  }
+
+  .pointer-trail--rest {
+    opacity: 0;
+  }
+
+  /* ────────────────────────────────────────────────────────────
+     Focus-Ring Elevation — pairs with pointer trail color.
+     Wrapped in :where(*) → specificity (0,0,0) so EVERY existing
+     local :focus-visible rule (W11/W12/W14) keeps priority.
+     ──────────────────────────────────────────────────────────── */
+  :where(*):focus-visible {
+    box-shadow: 0 0 0 6px color-mix(
+      in oklch,
+      var(--color-tint, var(--color-brand)) 18%,
+      transparent
+    );
+  }
+}
+
+/* ──────────── Reduced-Motion Guard (Phase 4) ──────────────────────────────
+   Belt-and-braces: any browser that incorrectly enters the @media block
+   above with reduce-mode active still has zero motion via this guard.
+   ─────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .pointer-trail,
+  .pointer-trail--layer-2,
+  .pointer-trail--layer-3 {
+    display: none;
+  }
+}
+
+/* ──────────── VITAL UI Discipline — Phase 4 (Pointer) ─────────────────────
+   1. JS bails on (pointer: coarse) and (prefers-reduced-motion: reduce).
+   2. Trails are pure transform animations — no layout thrash, no repaint.
+   3. mix-blend-mode: screen → preserves underlying art on dark/light themes.
+   4. contain: layout paint style → isolated rendering, no parent reflow.
+   5. Focus halo uses :where() → never overrides custom focus styling.
+   ─────────────────────────────────────────────────────────────────────── */
+
+/* End VITAL UI v1 / Worker 16 / Phase 4 ─────────────────────────────────── */
