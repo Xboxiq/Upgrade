@@ -21766,3 +21766,175 @@ pre.type-code {
 }
 
 /* End VITAL UI v1 / Worker 16 / Phase 5 ─────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   VITAL UI v1 — Identity Auras (Worker 16 / Phase 6 / Final)
+   ────────────────────────────────────────────────────────────────────────
+   Each of the 14 pages (+ default fallback) gets a unique ambient halo.
+   Auras consume W12 P5 identity tints conceptually but define their own
+   --aura-from / --aura-to / --aura-glow tokens so the halo personality
+   is decoupled from text/border tint personality.
+
+   Auto-apply: any element with .life-ambient / .life-mesh / .life-surface
+   (Phase 1) inside a [data-page-personality="X"] subtree picks up that
+   page's aura without HTML changes.
+
+   23rd top-level Upg.* (Upg.aura) lives in app.js for runtime override.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ── 15 aura signatures (default + 14 pages) ─────────────────────────── */
+:root {
+  /* Default fallback aura — used by gateway and any unscoped surface. */
+  --aura-default-from: hsl(220 30% 50% / 0.10);
+  --aura-default-to:   hsl(260 30% 50% / 0.06);
+  --aura-default-glow: hsl(220 50% 60%);
+
+  /* Generic alias (consumed when no personality is set). */
+  --aura-from: var(--aura-default-from);
+  --aura-to:   var(--aura-default-to);
+  --aura-glow: var(--aura-default-glow);
+}
+
+[data-page-personality="dashboard"] {
+  --aura-from: hsl(220 25% 55% / 0.12);
+  --aura-to:   hsl(240 30% 50% / 0.07);
+  --aura-glow: hsl(220 60% 65%);
+}
+[data-page-personality="callcenter"] {
+  --aura-from: hsl(195 80% 55% / 0.14);
+  --aura-to:   hsl(210 90% 50% / 0.08);
+  --aura-glow: hsl(195 90% 60%);
+}
+[data-page-personality="fieldsales"] {
+  --aura-from: hsl(28 90% 55% / 0.14);
+  --aura-to:   hsl(15 85% 50% / 0.08);
+  --aura-glow: hsl(28 95% 60%);
+}
+[data-page-personality="accountmgr"] {
+  --aura-from: hsl(220 70% 45% / 0.14);
+  --aura-to:   hsl(235 60% 35% / 0.08);
+  --aura-glow: hsl(220 80% 55%);
+}
+[data-page-personality="social"] {
+  --aura-from: hsl(320 75% 60% / 0.14);
+  --aura-to:   hsl(285 65% 55% / 0.08);
+  --aura-glow: hsl(320 85% 65%);
+}
+[data-page-personality="lab"] {
+  --aura-from: hsl(295 80% 60% / 0.15);
+  --aura-to:   hsl(265 75% 50% / 0.08);
+  --aura-glow: hsl(295 90% 65%);
+}
+[data-page-personality="psych"] {
+  --aura-from: hsl(35 70% 55% / 0.13);
+  --aura-to:   hsl(20 60% 45% / 0.07);
+  --aura-glow: hsl(35 80% 60%);
+}
+[data-page-personality="eq"] {
+  --aura-from: hsl(345 65% 65% / 0.13);
+  --aura-to:   hsl(15 55% 60% / 0.07);
+  --aura-glow: hsl(345 75% 70%);
+}
+[data-page-personality="negotiation"] {
+  --aura-from: hsl(45 80% 55% / 0.13);
+  --aura-to:   hsl(35 70% 50% / 0.08);
+  --aura-glow: hsl(45 90% 60%);
+}
+[data-page-personality="customercare"] {
+  --aura-from: hsl(150 60% 50% / 0.13);
+  --aura-to:   hsl(135 50% 45% / 0.07);
+  --aura-glow: hsl(150 70% 55%);
+}
+[data-page-personality="programming"] {
+  --aura-from: hsl(120 65% 50% / 0.14);
+  --aura-to:   hsl(95 60% 45% / 0.08);
+  --aura-glow: hsl(120 75% 55%);
+}
+[data-page-personality="accounting"] {
+  --aura-from: hsl(48 75% 55% / 0.13);
+  --aura-to:   hsl(38 65% 45% / 0.07);
+  --aura-glow: hsl(48 85% 60%);
+}
+[data-page-personality="phonerepair"] {
+  --aura-from: hsl(210 35% 55% / 0.13);
+  --aura-to:   hsl(225 30% 45% / 0.07);
+  --aura-glow: hsl(210 50% 60%);
+}
+[data-page-personality="hrmastery"] {
+  --aura-from: hsl(225 45% 35% / 0.14);
+  --aura-to:   hsl(245 40% 30% / 0.08);
+  --aura-glow: hsl(225 60% 50%);
+}
+[data-page-personality="myprogress"] {
+  --aura-from: hsl(215 20% 55% / 0.12);
+  --aura-to:   hsl(225 18% 45% / 0.07);
+  --aura-glow: hsl(215 35% 60%);
+}
+
+/* ── Auto-apply: route Phase-1 ambient/surface/mesh layers to aura tokens ── */
+[data-page-personality] .life-ambient::before,
+[data-page-personality] [data-life="ambient"]::before,
+[data-page-personality] .life-surface::before,
+[data-page-personality] [data-life="surface"]::before {
+  background:
+    radial-gradient(var(--life-ambient-radius, 60% 80%) at 30% 30%,
+      var(--aura-from) 0%, transparent 70%),
+    radial-gradient(var(--life-ambient-radius, 60% 80%) at 75% 70%,
+      var(--aura-to) 0%, transparent 75%);
+}
+
+[data-page-personality] .life-mesh::after,
+[data-page-personality] [data-life="mesh"]::after {
+  background:
+    conic-gradient(from 0deg at 30% 30%,
+      var(--aura-glow),
+      transparent 30%,
+      var(--aura-from) 60%,
+      transparent 90%);
+}
+
+/* ── Pointer companion picks up aura glow (Phase 4 integration) ────── */
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  [data-page-personality] .pointer-trail {
+    background: radial-gradient(circle,
+      var(--aura-glow) 0%,
+      transparent 70%);
+  }
+  [data-page-personality] .pointer-trail--layer-2 {
+    background: radial-gradient(circle,
+      color-mix(in oklch, var(--aura-glow) 70%, transparent) 0%,
+      transparent 70%);
+  }
+  [data-page-personality] .pointer-trail--layer-3 {
+    background: radial-gradient(circle,
+      color-mix(in oklch, var(--aura-glow) 45%, transparent) 0%,
+      transparent 70%);
+  }
+}
+
+/* ── Body-level aura override (set by Upg.aura.apply / .preview) ─────── */
+body[data-aura-override] {
+  /* When an override is set, body itself has data-page-personality too,
+     so the cascade above naturally applies aura tokens to body-rooted
+     surfaces (e.g. greeting, dashboard hero). No additional rules needed. */
+  transition: background 480ms var(--ease-out, cubic-bezier(0.22, 0.61, 0.36, 1));
+}
+
+/* ── Reduced-motion belt-and-braces for aura'd surfaces ──────────────── */
+@media (prefers-reduced-motion: reduce) {
+  [data-page-personality] .life-ambient::before,
+  [data-page-personality] [data-life="ambient"]::before,
+  [data-page-personality] .life-surface::before,
+  [data-page-personality] [data-life="surface"]::before,
+  [data-page-personality] .life-mesh::after,
+  [data-page-personality] [data-life="mesh"]::after {
+    animation: none !important;
+  }
+  body[data-aura-override] {
+    transition: none !important;
+  }
+}
+
+/* End VITAL UI v1 / Worker 16 / Phase 6 / Final ──────────────────────── */
