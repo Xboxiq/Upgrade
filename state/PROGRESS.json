@@ -6,7 +6,7 @@
   "current": {
     "pack": "v2",
     "worker": "17",
-    "worker_name": "CONTENT_REVIVAL",
+    "worker_name": "CREATIVE_REVOLUTION",
     "phase": 0,
     "phases_total": 6,
     "phase_order": [
@@ -21,7 +21,15 @@
     "status": "ready",
     "specs_scaffolded": true,
     "specs_branch": "pack-v2-worker-17-specs",
-    "next_phase_branch": "worker-17-resonance"
+    "next_phase_branch": "worker-17-creative-revolution",
+    "pivot_history": [
+      {
+        "from": "CONTENT_REVIVAL (block schema + TL;DR + pitfalls + practice + cross-refs + pacing)",
+        "to": "CREATIVE_REVOLUTION (token unification + GPU performance + Quiet Luxury palette + typography reduction + fluid bento + floating nav dock)",
+        "reason": "user requested radical cinematic Quiet Luxury overhaul instead of educational metadata layer",
+        "date": "2026-05-21"
+      }
+    ]
   },
   "previous": {
     "pack": "v2",
@@ -599,7 +607,7 @@
       "lines_added": 284
     }
   ],
-  "next_action": "Worker 17 specs scaffolded on branch pack-v2-worker-17-specs. After PR merge, start a new AUTO_PILOT v2 session — it will branch worker-17-resonance from main and execute Phase 1 (Block Schema & Metadata Audit).",
+  "next_action": "Worker 17 CREATIVE REVOLUTION specs scaffolded on branch pack-v2-worker-17-specs (PR #66). After PR merge, AUTO_PILOT v2 in a new session will branch worker-17-creative-revolution from main and execute Phase 1 (Token Unification: merge 3 :root blocks → 1, declare 5 Quiet Luxury tokens, migrate hex → var refs).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
@@ -620,13 +628,13 @@
       "prompts/v2/15_PHASE_5_SCALE_RHYTHM.md",
       "prompts/v2/15_PHASE_6_PER_PAGE_PERSONALITY.md",
       "prompts/v2/CONTENT_REORDER_RITUAL.md",
-      "prompts/v2/17_WORKER_CONTENT_REVIVAL.md",
-      "prompts/v2/17_PHASE_1_BLOCK_SCHEMA.md",
-      "prompts/v2/17_PHASE_2_TLDR_TAKEAWAYS.md",
-      "prompts/v2/17_PHASE_3_PITFALLS_WARNINGS.md",
-      "prompts/v2/17_PHASE_4_PRACTICE_SELFCHECK.md",
-      "prompts/v2/17_PHASE_5_CROSSREF_PATHS.md",
-      "prompts/v2/17_PHASE_6_PACING_MASTERY.md"
+      "prompts/v2/17_WORKER_CREATIVE_REVOLUTION.md",
+      "prompts/v2/17_PHASE_1_TOKEN_UNIFICATION.md",
+      "prompts/v2/17_PHASE_2_GPU_PERFORMANCE.md",
+      "prompts/v2/17_PHASE_3_QUIET_LUXURY_PALETTE.md",
+      "prompts/v2/17_PHASE_4_TYPOGRAPHY_REDUCTION.md",
+      "prompts/v2/17_PHASE_5_FLUID_BENTO_TABLES.md",
+      "prompts/v2/17_PHASE_6_FLOATING_NAV_DOCK.md"
     ],
     "workers_planned": [
       {
@@ -645,10 +653,11 @@
       },
       {
         "id": "17",
-        "name": "CONTENT_REVIVAL",
+        "name": "CREATIVE_REVOLUTION",
         "phases": 6,
         "status": "specs-ready",
-        "specs_branch": "pack-v2-worker-17-specs"
+        "specs_branch": "pack-v2-worker-17-specs",
+        "philosophy": "Quiet Luxury Cinematic — Void Black/Deep Slate/Nebula Gold/Premium Ivory/Lochmara, 9→2 fonts, 4-tier glass→3-tier, fluid bento, mobile floating dock"
       },
       {
         "id": "18",
