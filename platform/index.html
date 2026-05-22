@@ -4,8 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>منصة التدريب الاحترافية</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- ════════════════════════════════════════════════════════════════════
+       TASMEEM v3 — Worker 20 / Phase 1 — DEVOTIO Offline-First Mandate
+       ────────────────────────────────────────────────────────────────────
+       The previous Google Fonts <link> chain (3 lines) was DELETED on
+       2026-05-22 as part of Pack v3 (DEVOTIO). The platform now lives
+       100% offline. Local @font-face declarations live in style.css
+       (added in Phase 2) referencing files in platform/assets/fonts/.
+
+       Between Phase 1 and Phase 3, system fallback applies. This is
+       intentional — see prompts/v3/20_PHASE_1_FONT_FORENSICS.md.
+       ════════════════════════════════════════════════════════════════════ -->
   <meta name="theme-color" content="#0E1220" media="(prefers-color-scheme: dark)" />
   <meta name="theme-color" content="#F7F5F1" media="(prefers-color-scheme: light)" />
   <meta name="description" content="منصة التطوير المهني الذاتي بمعيار عالمي — 9 مسارات تخصصية، تعلم تفاعلي، محتوى علمي عميق." />
@@ -18,7 +27,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="favicon.svg" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Readex+Pro:wght@200..700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@300;400;500;700;900&family=Cairo:wght@400;600;700&family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&display=swap" rel="stylesheet" />
+
 
 <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -31997,6 +32006,25 @@ const bird = { ...canMove(), ...canFly() };
 
 <!-- ATELIER v16 / Phase 4 — Mobile drawer scrim (clickable overlay, click/tap closes) -->
 <div class="drawer-scrim" data-action="close-drawer" aria-hidden="true"></div>
+
+<!-- TASMEEM v3 / Phase 1-2 transitional banner.
+     Removed automatically in Phase 3 once fonts bind to voices. -->
+<div id="tasmeem-transitional-banner" hidden
+     style="position:fixed; bottom:1rem; inset-inline-end:1rem;
+            background: rgba(0,0,0,0.85); color:#fff;
+            padding:.6rem 1rem; border-radius:.5rem;
+            font-family: system-ui, sans-serif; font-size:12px;
+            z-index:9999; pointer-events:none;">
+  TASMEEM Phase 1-2 transitional — system fallback active until Phase 3 binds local fonts.
+</div>
+<script>
+  (function () {
+    var b = document.getElementById('tasmeem-transitional-banner');
+    var rs = getComputedStyle(document.documentElement);
+    var status = rs.getPropertyValue('--tasmeem-fonts-status').trim().replace(/['"]/g,'');
+    if (b && status !== 'phase-3-bound') b.hidden = false;
+  })();
+</script>
 
 </body>
 </html>
