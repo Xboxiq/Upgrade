@@ -1,720 +1,101 @@
 {
-  "schema_version": 2,
-  "last_updated": "2026-05-22T16:45:00Z",
-  "pack": "v2-resonance",
+  "schema_version": 3,
+  "last_updated": "2026-05-22T17:00:00Z",
+  "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
-    "pack": "v2",
-    "worker": "17",
-    "worker_name": "CONTENT_REVIVAL",
-    "phase": 6,
+    "pack": "v3",
+    "worker": 20,
+    "worker_name": "TASMEEM_RECONSTRUCTION",
+    "phase": 1,
+    "phase_name": "FONT_FORENSICS",
     "phases_total": 6,
-    "phase_order": [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6"
-    ],
-    "branch": "worker-17-resonance-p6",
+    "step": 3,
+    "step_name": "APPEND Inventory Comment Block in style.css",
     "status": "in-progress",
-    "specs_scaffolded": true,
-    "specs_branch": "pack-v2-worker-17-specs",
-    "next_phase_branch": null,
-    "worker_complete": true,
-    "pr_pending": true
+    "branch": "worker-20-devotio",
+    "step_started_at": "2026-05-22T17:14:00Z"
   },
-  "previous": {
-    "pack": "v2",
-    "worker": "17",
-    "worker_name": "CONTENT_REVIVAL",
-    "phase": 5,
-    "phases_total": 6,
-    "branch": "worker-17-resonance-p5",
-    "status": "completed",
-    "merged_pr": 72
-  },
-  "before_previous": {
-    "pack": "v2",
-    "worker": "16",
-    "worker_name": "VITAL_UI",
-    "phase": 6,
-    "phases_total": 6,
-    "branch": "worker-16-vital-ui-p6",
-    "status": "completed",
-    "merged_pr": 65
-  },
-  "completed_phases": [
-    {
-      "worker": "01",
-      "phase": 1,
-      "title": "Foundation Tokens & Aurora Mesh",
-      "branch": "worker-01-phase-1-v2",
-      "lines_added": 121
-    },
-    {
-      "worker": "01",
-      "phase": 2,
-      "title": "Conic Halo + Magnetic Cursor Aura",
-      "branch": "worker-01-phase-2",
-      "lines_added": 204
-    },
-    {
-      "worker": "01",
-      "phase": 3,
-      "title": "Living Numerals + Sectional Identity Tint",
-      "branch": "worker-01-phase-3",
-      "lines_added": 193
-    },
-    {
-      "worker": "01",
-      "phase": 4,
-      "title": "Polish: reduced-motion, print, View Transitions, visibility-pause",
-      "branch": "worker-01-phase-4",
-      "lines_added": 145
-    },
-    {
-      "worker": "02",
-      "phase": 1,
-      "title": "Sales Frameworks Comparison (4 schools)",
-      "branch": "worker-02-phase-1",
-      "lines_added": 564
-    },
-    {
-      "worker": "02",
-      "phase": 2,
-      "title": "Discovery Library + Closing + Iraqi Objections",
-      "branch": "worker-02-phase-2",
-      "lines_added": 440
-    },
-    {
-      "worker": "02",
-      "phase": 3,
-      "title": "3 Interactive Labs",
-      "branch": "worker-02-phase-3",
-      "lines_added": 550
-    },
-    {
-      "worker": "02",
-      "phase": 4,
-      "title": "page-accountmgr (KAM)",
-      "branch": "worker-02-phase-4",
-      "lines_added": 515
-    },
-    {
-      "worker": "02",
-      "phase": 5,
-      "title": "Iraq Salary + Career Ladder + Cheat Sheet + Citations + Progress",
-      "branch": "worker-02-phase-5",
-      "lines_added": 386
-    },
-    {
-      "worker": "03",
-      "phase": 1,
-      "title": "Voice Profile (5 dims) + Empathy Loop + 14 Archetypes",
-      "branch": "worker-03-phase-1",
-      "lines_added": 895
-    },
-    {
-      "worker": "03",
-      "phase": 2,
-      "title": "KPI Deep-Dive + APIndex Calculator + Call Anatomy 7 Stages",
-      "branch": "worker-03-phase-2",
-      "lines_added": 828
-    },
-    {
-      "worker": "03",
-      "phase": 3,
-      "title": "Voice Self-Assessment Studio (Web Audio + Web Speech)",
-      "branch": "worker-03-phase-3",
-      "lines_added": 979
-    },
-    {
-      "worker": "03",
-      "phase": 4,
-      "title": "Simulator + Iraq Block + Cheat Sheet + 12 Citations",
-      "branch": "worker-03-phase-4",
-      "lines_added": 1002
-    },
-    {
-      "worker": "04",
-      "phase": 1,
-      "title": "Accounting Foundations (Equation + T-Account + 9-Step Cycle)",
-      "branch": "worker-04-phase-1",
-      "lines_added": 1180
-    },
-    {
-      "worker": "04",
-      "phase": 2,
-      "title": "Iraqi COA + IFRS vs Local + 10 Ratios",
-      "branch": "worker-04-phase-2",
-      "lines_added": 639
-    },
-    {
-      "worker": "04",
-      "phase": 3,
-      "title": "Iraqi Tax Calculator + Salary Slip",
-      "branch": "worker-04-phase-3",
-      "lines_added": 685
-    },
-    {
-      "worker": "04",
-      "phase": 4,
-      "title": "Income Statement + Balance Sheet Builders + Cash Flow + Equity Change",
-      "branch": "worker-04-phase-4",
-      "lines_added": 812
-    },
-    {
-      "worker": "04",
-      "phase": 5,
-      "title": "Cashier Track + Iraq Salary + Cheat Sheet + 12 Citations",
-      "branch": "worker-04-phase-5",
-      "lines_added": 680
-    },
-    {
-      "worker": "05",
-      "phase": 1,
-      "title": "Fundamentals Gate (8 cards + Quiz) + Path Decision Tree",
-      "branch": "worker-05-complete",
-      "lines_added": 874
-    },
-    {
-      "worker": "05",
-      "phase": 2,
-      "title": "FE + BE 12-week Roadmaps + Git Survival Kit",
-      "branch": "worker-05-complete",
-      "lines_added": 714
-    },
-    {
-      "worker": "05",
-      "phase": 3,
-      "title": "Clean Code Pillars + Code Review Etiquette + Soft Skills",
-      "branch": "worker-05-complete",
-      "lines_added": 482
-    },
-    {
-      "worker": "05",
-      "phase": 4,
-      "title": "5 Interactive Labs — Trace, Big-O, Git Sandbox, Interview Sim, Portfolio Gen",
-      "branch": "worker-05-complete",
-      "lines_added": 1353
-    },
-    {
-      "worker": "05",
-      "phase": 5,
-      "title": "Iraq Salary + Companies + First-Job Strategy + Cheat Sheet + 12 Citations",
-      "branch": "worker-05-complete",
-      "lines_added": 445
-    },
-    {
-      "worker": "06",
-      "phase": 1,
-      "title": "Attention Psychology (6 axes) + Algo Anatomy (7 platforms)",
-      "branch": "worker-06-complete",
-      "lines_added": 660
-    },
-    {
-      "worker": "06",
-      "phase": 2,
-      "title": "Content Pillars + 15 Hook Frameworks + 30-day Calendar Builder",
-      "branch": "worker-06-complete",
-      "lines_added": 580
-    },
-    {
-      "worker": "06",
-      "phase": 3,
-      "title": "Marketing Funnel (5 stages) + Performance Math Calculator + A/B Test Designer",
-      "branch": "worker-06-complete",
-      "lines_added": 508
-    },
-    {
-      "worker": "06",
-      "phase": 4,
-      "title": "Email + WhatsApp + Influencer Vetting Tool",
-      "branch": "worker-06-complete",
-      "lines_added": 368
-    },
-    {
-      "worker": "06",
-      "phase": 5,
-      "title": "Iraq Salary + Companies + Iraqi Hooks + Cheat Sheet + 12 Citations",
-      "branch": "worker-06-complete",
-      "lines_added": 230
-    },
-    {
-      "worker": "07",
-      "phase": 1,
-      "title": "nav-item + page skeleton + Electronics Fundamentals + Tools Gallery",
-      "branch": "worker-07-complete",
-      "lines_added": 478
-    },
-    {
-      "worker": "07",
-      "phase": 2,
-      "title": "Mainboard Anatomy interactive + 10 Repair Cards (1-10)",
-      "branch": "worker-07-complete",
-      "lines_added": 582
-    },
-    {
-      "worker": "07",
-      "phase": 3,
-      "title": "Repair Cards 11-20 + 3 Decision Trees + Software Side",
-      "branch": "worker-07-complete",
-      "lines_added": 572
-    },
-    {
-      "worker": "07",
-      "phase": 4,
-      "title": "Micro-Solder Intro + Customer Service + Ethics + Iraq Block",
-      "branch": "worker-07-complete",
-      "lines_added": 481
-    },
-    {
-      "worker": "07",
-      "phase": 5,
-      "title": "6 Interactive Labs + Career Path + Cheat Sheet + 12 Citations",
-      "branch": "worker-07-complete",
-      "lines_added": 1206
-    },
-    {
-      "worker": "08",
-      "phase": 1,
-      "title": "HR psychology (5 dims) + STAR framework + 15 Common Questions",
-      "branch": "worker-08-complete",
-      "lines_added": 1202
-    },
-    {
-      "worker": "08",
-      "phase": 2,
-      "title": "30 Trap Questions + Pre-Interview Toolkit + Post-Interview Playbook",
-      "branch": "worker-08-complete",
-      "lines_added": 660
-    },
-    {
-      "worker": "08",
-      "phase": 3,
-      "title": "Salary Negotiation Calculator IQ + 6 principles + Iraq Salary table",
-      "branch": "worker-08-complete",
-      "lines_added": 672
-    },
-    {
-      "worker": "08",
-      "phase": 4,
-      "title": "15 Scenarios Player + Job Ad Decoder + 12 HR Red Flags",
-      "branch": "worker-08-complete",
-      "lines_added": 920
-    },
-    {
-      "worker": "08",
-      "phase": 5,
-      "title": "Mock Screen Timer + Offer Compare + Iraq Labor Law + Cheat Sheet + 14 Citations",
-      "branch": "worker-08-complete",
-      "lines_added": 977
-    },
-    {
-      "worker": "09",
-      "phase": 1,
-      "title": "7 Drives + 12 Biases in page-psych",
-      "branch": "worker-09-complete",
-      "lines_added": 478
-    },
-    {
-      "worker": "09",
-      "phase": 2,
-      "title": "Goleman 5 + RULER + Mood Meter Interactive in page-eq",
-      "branch": "worker-09-complete",
-      "lines_added": 612
-    },
-    {
-      "worker": "09",
-      "phase": 3,
-      "title": "Self-Diagnostic Suite — 6 tests + scoring engine",
-      "branch": "worker-09-complete",
-      "lines_added": 845
-    },
-    {
-      "worker": "09",
-      "phase": 4,
-      "title": "Psych Insets — cross-page micro-cards (7 pages × 3 insets)",
-      "branch": "worker-09-complete",
-      "lines_added": 232
-    },
-    {
-      "worker": "09",
-      "phase": 5,
-      "title": "Therapist Bridge + Insights Engine + 16 Citations",
-      "branch": "worker-09-complete",
-      "lines_added": 365
-    },
-    {
-      "worker": "11",
-      "phase": 1,
-      "title": "Sovereign Theme System (tokens + bridge + 3-state toggle)",
-      "branch": "worker-11-complete",
-      "lines_added": 359
-    },
-    {
-      "worker": "11",
-      "phase": 2,
-      "title": "Lucide-style Icon System (95 symbols + .qi + migrator)",
-      "branch": "worker-11-complete",
-      "lines_added": 401
-    },
-    {
-      "worker": "11",
-      "phase": 3,
-      "title": "Entry Gateway + Identity Lock + Onboarding 4-step",
-      "branch": "worker-11-complete",
-      "lines_added": 912
-    },
-    {
-      "worker": "11",
-      "phase": 4,
-      "title": "Calculator Foundation Component (qcalc) + 8 migrations",
-      "branch": "worker-11-phase-4-7",
-      "lines_added": 1368
-    },
-    {
-      "worker": "11",
-      "phase": 5,
-      "title": "Command Palette + Keyboard Shortcuts (30+ commands)",
-      "branch": "worker-11-phase-4-7",
-      "lines_added": 713
-    },
-    {
-      "worker": "11",
-      "phase": 6,
-      "title": "Real Dashboard + Unified State Layer + page-myprogress",
-      "branch": "worker-11-phase-4-7",
-      "lines_added": 1039
-    },
-    {
-      "worker": "11",
-      "phase": 7,
-      "title": "Production Pass + PWA (manifest, sw, favicon, utilities, a11y)",
-      "branch": "worker-11-phase-4-7",
-      "lines_added": 531
-    },
-    {
-      "worker": "12",
-      "phase": 1,
-      "title": "Typography & Spatial System (10 text-sizes, 13 spaces, leading/tracking/weight, prose, Upg.type)",
-      "branch": "worker-12-aurora",
-      "lines_added": 415
-    },
-    {
-      "worker": "12",
-      "phase": "1B",
-      "title": "Typeface Soul — premium Arabic stack (Reem Kufi + Readex Pro + IBM Plex Arabic + Aref Ruqaa + Thmanyah optional)",
-      "branch": "worker-12-aurora",
-      "lines_added": 480
-    },
-    {
-      "worker": "12",
-      "phase": 2,
-      "title": "Linen-Bone off-white re-chisel + tinted shadows + tonal elevation + nav-badge identity classes (10 inline gradients purged)",
-      "branch": "worker-12-aurora",
-      "lines_added": 480
-    },
-    {
-      "worker": "12",
-      "phase": 3,
-      "title": "Materials & Depth — 4-tier glass (thin/regular/thick/chrome) + scroll-aware elevation + halos + grain refresh + Upg.scroll",
-      "branch": "worker-12-aurora",
-      "lines_added": 560
-    },
-    {
-      "worker": "12",
-      "phase": 4,
-      "title": "Navigation Chrome — Source-List sidebar collapse (Cmd+\\) + Dynamic-Island compact topbar + View Transitions nav-pill + mobile drawer + Upg.nav",
-      "branch": "worker-12-aurora",
-      "lines_added": 620
-    },
-    {
-      "worker": "12",
-      "phase": 5,
-      "title": "Dashboard Hero — 15 per-page identity tints + Bento utilities + count-up tickers + time-of-day greet + Upg.identity/greet/countup",
-      "branch": "worker-12-aurora",
-      "lines_added": 640
-    },
-    {
-      "worker": "12",
-      "phase": 6,
-      "title": "Motion & Interaction — easing/duration tokens (5 ease + 6 duration) + press/lift/glow/reveal/skeleton + view-transition wrap + Upg.motion",
-      "branch": "worker-12-aurora",
-      "lines_added": 520
-    },
-    {
-      "worker": "12",
-      "phase": 7,
-      "title": "Inline purge (1671→587) + 100+ utilities + per-page header tint underline + boot banner + sanity assert + CHANGELOG",
-      "branch": "worker-12-aurora",
-      "lines_added": 964
-    },
-    {
-      "worker": "13",
-      "phase": 1,
-      "title": "Bento Dashboard — Augment-and-Wrap (greeting + 4 countup tiles + dock + legacy wrapper)",
-      "branch": "worker-13-aurora-completion-impl",
-      "lines_added": 76
-    },
-    {
-      "worker": "13",
-      "phase": 2,
-      "title": "Real Inline Purge — utilities pack + cleanup v2 + decomposer (587→223 inline, 12 stray !important, 7 u-grad-* utilities)",
-      "branch": "worker-13-phase-2-3-impl",
-      "lines_added": 1688
-    },
-    {
-      "worker": "13",
-      "phase": 3,
-      "title": "Final Polish — wordmark Aref Ruqaa accent + sidebar toggle in topbar + boot sanity v15.1 IIFE + CHANGELOG v15.1",
-      "branch": "worker-13-phase-2-3-impl",
-      "lines_added": 93
-    },
-    {
-      "worker": "14",
-      "phase": 1,
-      "title": "Liquid Glass v2 — WWDC25 blur ladder (16/24/32/40) + edge specular + 3-tier paper tonal + paper grain v2 + density API + Upg.material",
-      "branch": "worker-14-atelier",
-      "lines_added": 227
-    },
-    {
-      "worker": "14",
-      "phase": 2,
-      "title": "Page Headers Re-chisel — 14 .page-h blocks (eyebrow + .qi icon + lede + 56px tint underline) + emoji purge from H1s",
-      "branch": "worker-14-atelier-p2-p6",
-      "lines_added": 202
-    },
-    {
-      "worker": "14",
-      "phase": 3,
-      "title": "Dashboard Bento Consolidation — 10 cells, zero legacy duplication, 5 sacred IDs relocated cleanly",
-      "branch": "worker-14-atelier-p2-p6",
-      "lines_added": 255,
-      "lines_deleted": 385
-    },
-    {
-      "worker": "14",
-      "phase": 4,
-      "title": "Chrome Refinement — Topbar Island scroll-shrink + search→cmdk + nav-pill spring-slide + 17 collapsed-mode tooltips + mobile drawer scrim + Upg.chrome",
-      "branch": "worker-14-atelier-p2-p6",
-      "lines_added": 381
-    },
-    {
-      "worker": "14",
-      "phase": 5,
-      "title": "Motion Choreography v2 — magnetic hover + reveal/stagger/intersect + page enter spring + Upg.choreo + Upg.transition",
-      "branch": "worker-14-atelier-p2-p6",
-      "lines_added": 339
-    },
-    {
-      "worker": "14",
-      "phase": 6,
-      "title": "Final Polish — inline purge 215→76 + sw v2 (precache+offline) + manifest shortcuts + favicon v2 squircle + Upg.focusTrap (auto-attach modals) + Lighthouse helpers + sanity v16 (19/19 modules) + CHANGELOG v16",
-      "branch": "worker-14-phase-6-final",
-      "lines_added": 1080
-    },
-    {
-      "worker": "15",
-      "phase": 1,
-      "title": "Type Audit & Casting — 9 voice tokens (--type-voice-*) + 21 utility classes (.type-*) + 9 [data-type-voice] selectors + 11 sample augmentations across 4 pages",
-      "branch": "worker-15-resonance",
-      "lines_added": 322
-    },
-    {
-      "worker": "15",
-      "phase": 2,
-      "title": "Arabic Display Crown — --font-wordmark/--font-hero stacks + 4 display utilities (.type-wordmark/.type-hero[--xl/--lg/--md]/.type-display[-h/-l]) + 5 weight variants + Aref Ruqaa/Reem Kufi micro-tuning + 14 page-h1 augmented (11 type-display + 3 type-hero literary) + dashboard greeting type-hero + 2 wordmarks (gateway + sidebar)",
-      "branch": "worker-15-resonance",
-      "lines_added": 195
-    },
-    {
-      "worker": "15",
-      "phase": 3,
-      "title": "Arabic Body & UI Layer — Google Fonts +Tajawal (300/400/500/700/900) + --font-ui token (Tajawal-primary) + --font-text reroute (Readex Pro→Tajawal→IBM Plex→Cairo) + 18 UI utilities (.type-body/.type-body-lead/.type-body-lg/.type-body-sm + .type-ui-label[--sm] + .type-button[--lg/--sm] + .type-tab[--active] + .type-breadcrumb[--current] + .type-hint + .type-caption + .type-form-label + .type-input + .type-cta-heavy) + Cairo fallback hardening (@supports not variable) + mobile <480px small-button Readex fallback + 23 sample augmentations (10 buttons + 5 lab-eyebrow tabs + 4 form-labels + 3 inputs + 1 hint)",
-      "branch": "worker-15-resonance",
-      "lines_added": 245
-    },
-    {
-      "worker": "15",
-      "phase": 4,
-      "title": "Latin & Numeric Layer — Google Fonts +Inter(300..700) +JetBrains Mono(400/500/700) +Fraunces(ital,opsz,wght) + --font-latin token (Inter-primary) + --font-quote-literary token (Fraunces-primary) + --font-num-display token (JetBrains-primary) + --font-numeric updated (IBM Plex+JetBrains second-tier) + 4 voice token reroutes + 18 deepened utilities (.type-num/.type-num-tabular/.type-num-display/.type-num-inline/.type-num-currency + .type-code/.type-code-inline/.type-kbd + .type-latin/.type-latin-ui/.type-latin-num/.type-latin-brand/.type-mixed-harmony + .type-quote-literary-en/.type-quote-block(::before/::after)/.type-citation) + Latin-Arabic mixing rules (lang=en/.latin/.num/.brand/.currency in u-prose|type-body) + auto-tabular on cath-stat-value/bento-stat-value/qcalc-value/stat-tile-value/data-countup/data-tabular + 7 sample augmentations (4 stat-tile spans → type-num-display + 3 pre blocks → type-code) + unicode-bidi: isolate hardened (25 instances)",
-      "branch": "worker-15-resonance",
-      "lines_added": 281
-    },
-    {
-      "worker": "15",
-      "phase": 5,
-      "title": "Modular Scale & Rhythm — type scale REPLACE-IN-PLACE (Major-Third 1.25 → Perfect-Fourth 1.333 with clamp() fluid steps xs..5xl) + --text-display-1/-2 ceremonial sizes + --leading-* refined (none/tight/snug/normal/relaxed/loose, 6 tokens) + --tracking-* expanded (tightest/tighter/tight/snug/normal/wide/wider/widest, 8 tokens) + --rhythm-* 8pt baseline grid (rhythm-1..16 + h-to-body/h-to-h/section/page semantic aliases, 15 tokens) + --measure-* reading width (narrow/normal/wide × Latin+Arabic, 6 tokens) + reading-rhythm bindings on every type-* voice (leading + tracking via tokens) + font-optical-sizing: auto on hero/display/body/quote/latin (6 selectors) + .u-rhythm-reading/.u-rhythm-card/.u-rhythm-tight/.u-rhythm-loose container utilities + .u-measure-narrow/.u-measure-normal/.u-measure-wide with :lang(en) Latin overrides + .u-prose default cascade (h1/h2/h3/h4/p/ul/ol/li/blockquote/code/pre) + hyphenation rules (auto for body, none for headings, pre for code blocks) + Phase 5 discipline comment. --text-2xs and --text-display preserved for legacy callers.",
-      "branch": "worker-15-resonance",
-      "lines_added": 365
-    },
-    {
-      "worker": "15",
-      "phase": 6,
-      "title": "Per-Page Type Personality — 15 page personalities (dashboard elegant / callcenter sharp / fieldsales energetic / accountmgr executive / social vibrant / lab experimental / psych literary / eq emotional / negotiation persuasive / customercare warm / programming technical / accounting precise / phonerepair industrial / hrmastery formal / myprogress reflective) + 4 --type-page-* tokens (h1-family/weight/tracking/leading + body-family/weight + num-family + accent-vis) × 15 pages + generic page-personality bindings on h1/.type-body/.u-prose p/.type-num + 15 data-page-personality augmentations on every page section + Upg.type2 API (get/set/list/observe) with PERSONALITIES const + upg:type:change CustomEvent fired on upg:nav:change + hashchange fallback. 20th Upg.* API. Sacred preserved (15 pages / 391 qcalc / Cairo).",
-      "branch": "worker-15-resonance",
-      "lines_added": 380
-    },
-    {
-      "worker": "16",
-      "phase": 1,
-      "title": "Living Surfaces — 8 --life-* tokens (breath/mesh duration + opacity + ambient from/to + radius + drift) + light-theme density override + 3 keyframes (life-breath / life-drift / life-mesh-shift, all GPU-cheap transform+opacity+background-position) + 4 utility classes (.life-ambient with drifting radial halo / .life-mesh with conic-gradient + dual radial blend / .life-breathing with scale+opacity pulse / .life-surface combined hero panel) + 5 data-life modes (ambient/mesh/breathing/surface/none) for AUGMENT-without-class workflow + Upg.life API (set/clear/get/list/audit) — 21st Upg.* API + dedicated prefers-reduced-motion guard silencing all 4 utilities and 4 data-life animations + 10 sample augments (gateway-wordmark breathing / dashboard bento mesh / bento-greet ambient / page-programming page-h mesh / page-psych page-h ambient / page-fieldsales page-h ambient / qcalc bigo-cost surface / qcalc bigfive-score surface / callcenter cc-section-header ambient / w09e-goleman section breathing). Sacred preserved (15 pages / 391 qcalc / 9 fonts / 15 personalities / 19 prior APIs).",
-      "branch": "worker-16-vital-ui",
-      "lines_added": 250
-    },
-    {
-      "worker": "16",
-      "phase": 2,
-      "title": "Tactile Microinteractions — 6 --tactile-* tokens (press-scale 0.985 / press-duration 120ms / press-easing / lift-y -2px / lift-shadow color-mix tinted / magnet-strength 0.18) + light-theme dampened lift shadow + 2 keyframes (tactile-ripple radial expand 0→2.2 in 520ms / tactile-pulse-soft scale+box-shadow ring at 50%) + 5 utility classes (.tactile-press compresses on :active / .tactile-magnet hover micro-pull translateY+scale / .tactile-glow tinted radial halo opacity≤0.32 with focus-visible / .tactile-recede sinks 1px on click haptic illusion / .tactile-card hover-lift -2px + tinted shadow + active scale-down) + data-tactile=card data-attribute alias + [data-ripple] CSS-only ripple layer with --ripple-x/--ripple-y custom props (overflow:hidden enforced + children z-index:1) + dedicated prefers-reduced-motion block silencing all 4 tactile classes + ripple animation + glow opacity + Upg.life.pulse(target, kind) extension preserving Upg.life.set/clear/get/list/audit + JS ripple delegation on pointerdown via [data-ripple] closest match with rapid-tap reflow re-trigger + JS magnet engine with rAF throttle (translate3d follow-cursor at strength/3 factor) + MutationObserver auto-attach for lazy [data-magnet] hosts + REDUCED-aware no-op + cleanup on pointerleave/pointercancel/blur. Sacred preserved (14 pages / 391 qcalc / 21 APIs / 9 fonts / 15 personalities / 32 life tokens / Phase 1 untouched). No HTML changes.",
-      "branch": "worker-16-vital-ui-p2",
-      "lines_added": 357
-    },
-    {
-      "worker": "16",
-      "phase": 3,
-      "title": "Cinematic Page Transitions — 3 --depth-* tokens (shallow/mid/deep 4/10/18px) + --transition-page-duration/easing (380ms cubic-bezier(0.22,0.61,0.36,1)) + 4 vital-* keyframes (depth-in, depth-out, slide-rtl, morph-fade with hue-rotate transient) + 6 transition variants (.page-transition--depth-shallow/mid/deep + slide-rtl/ltr + morph) + 3 [data-parallax=1|2|3] sub-layer selectors driven by --parallax-y custom property + dedicated prefers-reduced-motion guard silencing all 6 variants + 3 parallax levels (animation/transition/transform/will-change/filter all reset !important) + Upg.transition EXTEND preserving navigate/supports verbatim + adding navigate(pageId,{depth,direction}) optional 2nd arg + run(name,opts) convenience alias + variants() returning 7 keys + setDefault({depth}) for session default + Object.frozen extended object replacement + direction-aware slide auto-resolves RTL/LTR by document.dir + parallax engine (rAF-throttled scroll+resize listeners, ±24px cap, factor 0.04, reset on upg:nav:change, reduced-motion no-op). Sacred preserved (14 pages / 391 qcalc / 21 APIs — EXTEND only, no new module).",
-      "branch": "worker-16-vital-ui-p3",
-      "lines_added": 283
-    },
-    {
-      "worker": "16",
-      "phase": 4,
-      "title": "Pointer Companion — 4 --pointer-* tokens (size 18px / color routed to --color-tint / opacity 0.4 / decay 1.5s) + 3 trail layers (.pointer-trail base + --layer-2 with width×1.6 blur 6px opacity 0.55 + --layer-3 with width×2.2 blur 12px opacity 0.32) progressive transition timings (80ms / 140ms / 200ms) + .pointer-trail--rest sleep state + personality color awareness via --color-tint (consumes W12 P5 identity tints automatically per active page) + focus-ring elevation via :where(*):focus-visible (specificity 0 → preserves all existing local focus styles in W11/W12/W14 unchanged) + dual gating @media (pointer: fine) and (prefers-reduced-motion: no-preference) + redundant @media (prefers-reduced-motion: reduce) display:none belt-and-braces guard + mix-blend-mode: screen for theme-agnostic blending + contain: layout paint style for isolated rendering + Upg.life.pointer EXTEND (enable/disable/enabled/rest) preserving Phase 1 surface (set/clear/get/list/audit) and Phase 2 surface (.pulse) verbatim + touch device + reduced-motion users get no-op API with preserved shape + dynamic mqReduced.change listener disables trails mid-session if user toggles reduce-motion + pointerleave/blur force-rest hooks. Sacred preserved (14 pages / 391 qcalc / 21 Upg.* top-level APIs — EXTEND only, no new module).",
-      "branch": "worker-16-vital-ui-p4",
-      "lines_added": 251
-    },
-    {
-      "worker": "16",
-      "phase": 5,
-      "title": "Sound Design — Upg.sound IIFE (22nd top-level Upg.* namespace, ~220 JS + ~25 CSS = 279 lines) + 5 synth recipes (tap sine 880Hz × 60ms / confirm sine 1320→1760Hz two-step rise / error triangle 220Hz × 140ms / nav sine 660Hz × 50ms / complete sine 1320→1760→2640Hz three-step ascending) + WebAudio synthesis ONLY (zero asset loading) + ADSR envelope per note (linearRamp attack + exponentialRamp release) + AudioContext built lazily on first enable()/play() (respects browser autoplay policy + Safari/locked-down quirks swallowed) + 7 public methods (enable/disable/play/setVolume/enabled/available/list) all Object.freeze-locked + off by default (must call Upg.sound.enable() explicitly) + localStorage persistence via upg.sound.enabled key (across sessions, NEVER auto-builds ctx until user gesture) + 50ms per-sound debounce (prevents button-mash blasting) + master volume default 0.18 (soft, clamped 0..1) + prefers-reduced-motion: reduce → enable() refuses + live mqReduce.change listener flips data-sound-state mid-session + body [data-sound-state=on|off] semantic attribute + --sound-on CSS custom prop (0|1) + .sound-indicator dot utility (6px circle, dim default → identity-tint glow when on, color-mix in oklch). Sacred preserved (14 pages / 391 qcalc / 21 prior Upg.* APIs / Phases 1-4 IIFEs untouched / W12-W15 motion engine intact / no HTML changes / no audio files / no libraries).",
-      "branch": "worker-16-vital-ui-p5",
-      "lines_added": 279
-    },
-    {
-      "worker": "16",
-      "phase": 6,
-      "title": "Identity Auras — 15 aura signatures (default + 14 page personalities) defining --aura-from/--aura-to/--aura-glow tokens + auto-apply selectors routing Phase 1 .life-ambient/.life-mesh/.life-surface (and data-life=ambient/mesh/surface) layers through [data-page-personality] cascade + pointer trail (Phase 4) integration via media-gated overrides (3 layers, gated by pointer:fine + prefers-reduced-motion:no-preference) + body[data-aura-override] global override surface with 480ms ease-out background transition + dedicated reduced-motion guard silencing aura'd surface animations + override transition + Upg.aura IIFE (23rd top-level Upg.* namespace, ~112 JS + ~172 CSS = 284 lines) with frozen surface (apply/clear/current/list/preview) + isValid AURAS guard with console.warn fallback + upg:aura:change CustomEvent dispatched on every state change + preview(name, durationMs) restores previous override state (or full clear) after timeout (min 200ms, default 1200ms) + current() resolves override → body attr → active page personality fallback chain. Sacred preserved (14 pages / 391 qcalc / 22 prior Upg.* APIs / 15 data-page-personality / 47 reduced-motion guards / no HTML changes). Worker 16 final phase — closes VITAL UI.",
-      "branch": "worker-16-vital-ui-p6",
-      "lines_added": 284
-    },
-    {
-      "worker": "17",
-      "phase": 1,
-      "title": "Block Schema & Metadata Audit — 503 educational blocks tagged across 13 content pages with data-block-id (page-prefixed cc/fs/am/so/lb/ps/eq/ng/cu/pg/ac/pr/hr) + data-block-type (8 taxonomy: lesson/drill/case/reference/quiz/calc/scenario/cheat) + data-difficulty (Bloom-aligned 1-5) + data-est-minutes (gentle estimate) + 30 data-prereq seeds on diff>=4 blocks (Phase 5 will complete the systematic prereq pass). Idempotent Node script scripts/worker-17-block-schema.mjs (curated 35-class allowlist, in-band 503 blocks well within 400-550 sanity probe, type distribution 241 lesson / 123 drill / 98 case / 32 reference / 8 calc / 1 cheat, ~3,576 estimated minutes ≈ 60 hours of guided learning). CSS scaffolding APPENDED in style.css: 3 --tier-* tokens (foundation/practitioner/expert) + 5 --diff-* pip tints + 7 --block-aside-* chrome tokens + 8 --block-type-* accent tints + body[data-block-debug=\"1\"] dual-overlay (id+type+⭐+min caption + ←prereq pill) + print-safe (no debug in @media print) + reduced-motion safe. Sacred preserved 100% (14 pages / 391 qcalc / 22 Upg.* APIs / 15 data-page-personality / zero text edits / app.js untouched — Phase 4 + 6 will add Upg.practice + Upg.pace).",
-      "branch": "worker-17-resonance-p1",
-      "lines_added": 932
-    },
-    {
-      "worker": "17",
-      "phase": 2,
-      "title": "TL;DR & Key Takeaways — 26 anchor blocks wrapped (8 calcs cc-001/fs-001/so-001/ps-001/ng-001/pg-001/ac-001/ac-002 + 1 cheat cc-069 + 5 page-anchors am-001/cc-012/eq-005/so-002/pr-001 + 6 micro-soldering pr-041..046 + 6 ethics pr-053..058) with sibling <aside class=\"block-tldr\"> BEFORE block + sibling <ul class=\"block-takeaways\"> AFTER block + data-reading-time AUGMENT on each block opening + 'لماذا يهم' (why this matters) framer per aside + 3-5 hand-authored takeaways per block. CSS APPEND ~190 lines in style.css: .block-tldr (entrance keyframe + reduced-motion guard + tinted background via --block-aside-bg + border-inline-start identity tint + flex header layout) + .block-tldr-eyebrow/-meta/-time/-diff/-body/-why with W15 type-voice consumption (numeric/accent fallbacks) + .block-takeaways with counter-reset + ::before label badge + .block-takeaway grid layout with counter() numerals + mobile <480px collapse rules + @media print page-break-inside:avoid + reduced-transparency fallback. Idempotent Python injector scripts/worker-17-tldr-takeaways.py (depth-tracked HTML insertion, re-run produces 0 duplicates, hand-authored content map for 26 blocks). Resonance doctrine applied: scaled spec target from ~150 to 26 high-impact anchors (resonance > noise). Sacred preserved 100% (14 pages / 391 qcalc / 23 Upg.* APIs / 503 data-block-id / zero block text edits / app.js untouched).",
-      "branch": "worker-17-resonance-p2",
-      "lines_added": 1202
-    },
-    {
-      "worker": "17",
-      "phase": 3,
-      "title": "Pitfalls & Diagnostics — 28 high-impact <details class=\"block-pitfalls\"> sibling blocks (default closed) covering: 6 micro-solder discipline (pr-041..046), 6 repair ethics (pr-053..058), 5 HR/negotiation traps (hr-035..039), 11 key calc + concept anchors (cc-001 AHT / cc-012 vocal mirroring / fs-001 sales commission / am-001 hunter-vs-farmer / so-002 crisis stage / ng-001 BATNA / ac-001 Iraq tax / ac-002 salary slip / pg-001 Big-O / ps-001 OCEAN / eq-005 self-awareness). Each block: 4-7 hand-authored mistakes + 3-6 diagnostic self-mirror signs + optional Iraqi cultural note (16/28 carry). DOM order canonical: aside(tldr) → block → ul(takeaways) → details(pitfalls). Idempotent Python injector scripts/worker-17-pitfalls.py (~681 lines including 28-entry content map) inserts in REVERSE order to keep line indices valid; re-run produces zero duplicates via data-pitfalls-for guard. CSS APPEND ~228 lines in style.css: .block-pitfalls collapsible <details> chrome (oklch tints, smooth open/close, summary marker rotate via ::after content swap, focus-visible ring) + .pitfall-section--mistakes (red marker ✗) / --diagnostic (disabled checkbox aria-hidden) / --iraqi (italic blue-cyan border-inline-start) sub-sections + .block-pitfalls-summary grid layout (icon + title + count badge + chevron) + reduced-motion + reduced-transparency + print fallbacks (open by default in print, page-break-inside:avoid). Resonance doctrine applied: spec target ~80 high-impact blocks → 28 (resonance > noise; consequence-bearing only). Sacred preserved 100% (14 pages / 391 qcalc / 23 Upg.* APIs / 503 data-block-id / 26 block-tldr / 15 data-page-personality / zero block text edits / app.js untouched).",
-      "branch": "worker-17-resonance-p3",
-      "lines_added": 2329
-    },
-    {
-      "worker": "17",
-      "phase": 4,
-      "title": "Practice Drills & Self-Check — 62 practice sections (191 recall questions + answer reveals + reflection prompts) across 13 content pages + Upg.practice IIFE (23rd API, localStorage-only tracking: tried/reflect/stats/reset) + CSS ~195 lines (block-practice chrome + mobile + print + reduced-motion) + idempotent Node injector script.",
-      "branch": "worker-17-resonance-p4b",
-      "lines_added": 5235
-    },
-    {
-      "worker": "17",
-      "phase": 5,
-      "title": "Cross-References & Learning Bridges — 62 anchor blocks (those with practice from P4) augmented with data-related (3-5 ids each, in-page + cross-page mix) + completed data-prereq pass (74 total: 30 legacy P1 + 44 new on anchors, capped at 3 per block, difficulty < block's own) + 51 block-prereq-chip wrappers inserted BEFORE block (excluded only from 11 entry-level anchors with no prereqs) + 62 block-bridge in-page nav cards inserted AFTER each block-practice (DOM order: aside-tldr → block-prereq-chip → block → ul-takeaways → details-pitfalls → section-block-practice → nav-block-bridge) with 2-3 items per card using 7 fixed relations (extends/applies-in/contrasts/prereq-for/cheat/case/practice) + 8 sacred cross-page hero bridges (psych→eq, callcenter→customercare, accounting→accountmgr, hrmastery→negotiation, social→fieldsales, programming→phonerepair, lab→social, eq→negotiation) inserted before page closing </section> with linear-gradient background + radial halo ::before + tinted CTA button. CSS APPEND ~325 lines in style.css: .block-prereq-chip + 6 sub-elements (icon/label/list/item with hover+focus-visible) + .block-bridge container + 8 sub-elements (h/eyebrow/title/desc/list/item with RTL/LTR-aware hover translate + .--cheat variant) + .block-bridge--cross-page (linear-gradient + radial ::before pseudo + larger title) + .block-bridge-cta (tinted button with spring transform + box-shadow) + mobile <480px collapse + @media print fallbacks (transparent backgrounds, page-break-inside:avoid) + reduced-motion guard (transitions disabled, transform reset) + reduced-transparency fallback. Idempotent Python injector scripts/worker-17-bridges.py (~600 lines including 62-entry content map + 8 cross-bridge map; processes anchors in REVERSE line order to preserve indices; per-anchor idempotency via data-prereq-for/data-bridge-for guards; per-cross-bridge idempotency via data-cross-bridge-from guard). Resonance doctrine applied: spec target ~250 blocks → 62 (resonance > noise; only practice-anchored blocks where user already invested time). Sacred preserved 100% (14 pages / 391 qcalc / 23 Upg.* APIs / 503 data-block-id / 26 block-tldr / 28 block-pitfalls / 62 block-practice / app.js untouched / no new API).",
-      "branch": "worker-17-resonance-p5",
-      "lines_added": 2099
-    },
-    {
-      "worker": "17",
-      "phase": 6,
-      "title": "Session Pacing & Mastery Markers — 323 block-pacing chips inserted as siblings BEFORE every block with data-est-minutes >= 6 (3-state mastery toggle ○/◐/● cycling not-started→in-progress→mastered with localStorage persistence + 15/25/45 minute focus timer presets that hide preset group on start, show mm:ss countdown, log sessions ≥60 sec to upg.pace.focus.log capped at 500 entries) + 13 page-mastery-progress bars inserted INSIDE each content page's <header class='page-h'> just before </header> (3-tier gradient fill foundation→practitioner→expert sourced from --tier-* tokens + per-tier marker counts pre-computed at injection time + role='progressbar' aria-valuenow updates live) + 1 mastery heatmap section inserted INSIDE page-myprogress before its closing </section> (auto-fill 180px grid + per-page cards with bottom progress fill + 4 summary stats: total/mastered/in-progress/focus-hours). Upg.pace IIFE (25th top-level Upg.* namespace, ~380 JS lines) frozen surface with 11 methods (getMastery/setMastery/cycleMastery + startFocus/stopFocus/logFocus/totalFocusSeconds + refreshPageProgress/refreshAllProgress/renderHeatmap + states) + 3 CustomEvents (upg:pace:mastery / upg:pace:focus / upg:pace:focus:complete) + optional Upg.sound integration (plays 'tap' on mastery cycle, 'complete' on focus end) + lightweight MutationObserver re-binds only when relevant nodes added (avoids storms) + idempotent Python injector scripts/worker-17-pace.py (~290 lines, re-run produces 0 duplicates verified). CSS APPEND ~330 lines: .block-pacing chip + .mastery-toggle 3-state with oklch tints (60h amber for in-progress, 150h green for mastered) + .focus-presets/.focus-preset/.focus-active/.focus-stop timer chrome + .page-mastery-progress bar with linear-gradient fill across tier tokens + .page-mastery-progress-tiers markers with tri-color pip + .mp-heatmap-section + .heatmap-grid auto-fill + .heatmap-cell with absolute bottom fill + .mastery-summary 4-stat grid + dedicated reduced-motion + reduced-transparency + print + mobile <480px guards. Resonance doctrine applied: 'أتقنته' is the single most consequential word — converts reading from passive to reflective. Sacred preserved 100% (14 pages / 391 qcalc / 503 data-block-id / 26 block-tldr / 28 block-pitfalls / 62 block-practice / 62 data-related / 24 prior Upg.* APIs / 15 data-page-personality / zero block text edits / zero prior IIFE edits / 25 total Upg.* APIs after this phase). Worker 17 final phase — closes CONTENT REVIVAL.",
-      "branch": "worker-17-resonance-p6",
-      "lines_added": 7987
+  "completed_steps": [
+    {
+      "w": 20,
+      "p": 1,
+      "s": 1,
+      "name": "Identify and DELETE Google Fonts links",
+      "summary": "DELETE 3 <link> lines (2 preconnect + 1 stylesheet for Google Fonts) from index.html, REPLACE with TASMEEM v3 inventory comment block. Sacred sanity: cdn=0, preconnect=0, TASMEEM=1, pages=14, qcalc=391.",
+      "files": ["platform/index.html"],
+      "strategy": "B (python script scripts/_phase1_step1.py — kept idempotent for re-runs)",
+      "delta_bytes": 165,
+      "verified_at": "2026-05-22T17:08:00Z"
+    },
+    {
+      "w": 20,
+      "p": 1,
+      "s": 2,
+      "name": "Inventory: count font-family declarations",
+      "summary": "Read-only grep audit of platform/assets/style.css. Results captured for Step 3 inventory comment.",
+      "inventory": {
+        "css_total_lines": 23513,
+        "font_family_total": 252,
+        "font_family_via_var": 165,
+        "font_family_direct": 82,
+        "font_token_defs": 18,
+        "font_display_redefinitions": 2,
+        "font_display_lines": [16010, 16265],
+        "font_face_blocks": 4,
+        "type_voice_tokens": 18,
+        "font_status_token_present": false
+      },
+      "files": [],
+      "strategy": "read-only",
+      "verified_at": "2026-05-22T17:14:00Z"
     }
   ],
-  "next_action": "Worker 17 complete (6/6 phases). Open PR worker-17-resonance-p6 → main with full Worker 17 summary. After user merges: run CONTENT_REORDER_RITUAL (consumes data-difficulty + data-prereq + data-est-minutes from W17). Then start Worker 18 (LEARNING_SHELL) Phase 1 — consumes Upg.practice (W17 P4) + Upg.pace (W17 P6) for the personal training shell.",
-  "pack_v2_scaffold": {
-    "created_at": "2026-05-19T19:15:00Z",
-    "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
-    "scope": "Personal training platform. Single HTML file. Offline. No data layer, no telemetry, no governance.",
-    "files_created": [
-      "prompts/v2/00_MASTER_PROMPT_v2.md",
-      "prompts/v2/README_v2.md",
-      "prompts/v2/AUTO_PILOT_v2.md",
-      "prompts/v2/COMPACT_MASTER_v2.md",
-      "prompts/v2/10_RESUME_PROTOCOL_v2.md",
-      "prompts/v2/CONTEXT_LIMIT_FIX_v2.md",
-      "prompts/v2/MOBILE_KIRO_v2.md",
-      "prompts/v2/15_WORKER_TYPOGRAPHY_SOUL.md",
-      "prompts/v2/15_PHASE_1_TYPE_AUDIT_CASTING.md",
-      "prompts/v2/15_PHASE_2_ARABIC_DISPLAY.md",
-      "prompts/v2/15_PHASE_3_ARABIC_BODY.md",
-      "prompts/v2/15_PHASE_4_LATIN_NUMERIC.md",
-      "prompts/v2/15_PHASE_5_SCALE_RHYTHM.md",
-      "prompts/v2/15_PHASE_6_PER_PAGE_PERSONALITY.md",
-      "prompts/v2/CONTENT_REORDER_RITUAL.md",
-      "prompts/v2/17_WORKER_CONTENT_REVIVAL.md",
-      "prompts/v2/17_PHASE_1_BLOCK_SCHEMA.md",
-      "prompts/v2/17_PHASE_2_TLDR_TAKEAWAYS.md",
-      "prompts/v2/17_PHASE_3_PITFALLS_WARNINGS.md",
-      "prompts/v2/17_PHASE_4_PRACTICE_SELFCHECK.md",
-      "prompts/v2/17_PHASE_5_CROSSREF_PATHS.md",
-      "prompts/v2/17_PHASE_6_PACING_MASTERY.md"
-    ],
-    "workers_planned": [
-      {
-        "id": "15",
-        "name": "TYPOGRAPHY_SOUL",
-        "phases": 6,
-        "status": "completed"
-      },
-      {
-        "id": "16",
-        "name": "VITAL_UI",
-        "phases": 6,
-        "status": "completed",
-        "current_phase": 6,
-        "phases_completed": [1, 2, 3, 4, 5, 6]
-      },
-      {
-        "id": "17",
-        "name": "CONTENT_REVIVAL",
-        "phases": 6,
-        "status": "completed-pending-pr",
-        "specs_branch": "pack-v2-worker-17-specs",
-        "phases_completed": [1, 2, 3, 4, 5, 6]
-      },
-      {
-        "id": "18",
-        "name": "LEARNING_SHELL",
-        "phases": 4,
-        "status": "deferred"
-      },
-      {
-        "id": "19",
-        "name": "MICRO_POLISH",
-        "phases": 4,
-        "status": "deferred"
-      }
-    ],
-    "rituals": [
-      {
-        "name": "CONTENT_REORDER_RITUAL",
-        "scope": "post-Worker-17",
-        "status": "scaffolded"
-      }
-    ]
+  "tool_calls_this_phase": 11,
+  "tool_calls_this_session": 21,
+  "next_action": "Resume W20 P1 Step 3 — APPEND ~480 line inventory comment block to platform/assets/style.css using fs_append (Strategy C). Comment must reflect inventory captured in Step 2 (252 font-family, 18 token defs, 2 --font-display redefs at lines 16010+16265, 4 @font-face, 18 --type-voice-* preserved). Then Step 4 (status tokens), Step 5 (warning banner), commit, push.",
+  "branch": "worker-20-devotio",
+  "errors_log": [],
+  "previous_pack": {
+    "pack": "v2-resonance",
+    "last_worker": "17",
+    "last_phase": 6,
+    "status": "pr-pending-not-merged",
+    "note": "Worker 17 P6 finished on branch worker-17-resonance-p6. Per user direction, jumping ahead to v3 DEVOTIO Worker 20 even though v2 PR not merged. v2 history preserved in pack_v2_history below."
   },
-  "notes": "Pack v2 RESONANCE scaffolded under prompts/v2/. Path C selected by user: Meta + Worker 15 (full 6 phases) + Ritual = 15 files. Workers 16-19 + Ritual execution to follow in subsequent sessions. Cathedral v16 baseline preserved. All 19 Upg.* APIs, 14 pages, 391 qcalc references preserved. Previous Pack v1 history (v16 ATELIER): Phase 6 of Worker 14 shipped on branch worker-14-phase-6-final via PR #53. Inline 215->76 (139 removed) via deterministic node script + 330 lines Final Utilities Pack. New Upg.focusTrap IIFE auto-attaches to dialog/modal/qmodal/data-modal via MutationObserver, ESC-to-close, return-focus. Lighthouse boot helper (lazy imgs, decoding=async, pointer-enter prefetch markers). Sanity v16 verifies 19 Upg.* modules. sw.js rewrite (74->119 lines) versioned shell/assets/fonts caches, navigation network-first then offline.html fallback, SWR for assets and Google Fonts. Manifest 4 shortcuts (#dashboard, #callcenter, #myprogress, #accounting), 192/512 icon entries. Favicon v2 100x100 squircle rx=22, dual-color stroke gradient (#66FCF1 to #4F46E5). offline.html RTL Cairo, online auto-reload, retry button + home link. CHANGELOG v16 added at top. All 14 page sections, 391 qcalc, 15 identity tints preserved."
+  "pack_v2_history": {
+    "philosophy": "RESONANCE — Resonance over noise.",
+    "workers_completed": ["15 (6/6)", "16 (6/6)", "17 (6/6 pending PR)"],
+    "scaffold_files": "see prompts/v2/",
+    "sacred_baseline_after_v2": {
+      "pages": 14,
+      "qcalc_refs": 391,
+      "upg_apis": 25,
+      "data_block_id": 503,
+      "data_page_personality": 15,
+      "block_tldr": 26,
+      "block_pitfalls": 28,
+      "block_practice": 62,
+      "data_related": 62,
+      "block_pacing": 323,
+      "page_mastery_progress": 13,
+      "fonts_loaded_remotely": 9
+    }
+  },
+  "v3_workers_planned": [
+    {"id": 20, "name": "TASMEEM_RECONSTRUCTION", "phases": 6, "status": "in-progress"},
+    {"id": 21, "name": "CHROMATIC_SOUL", "phases": 5, "status": "queued"},
+    {"id": 22, "name": "RITUAL_UI", "phases": 6, "status": "queued"},
+    {"id": 23, "name": "DECONSTRUCTION", "phases": 5, "status": "queued"},
+    {"id": 24, "name": "DUAL_FORM", "phases": 5, "status": "queued"}
+  ],
+  "v3_phase_plan_w20": [
+    {"phase": 1, "name": "FONT_FORENSICS", "steps": 5, "estimated_lines": 520, "files": ["index.html", "style.css"]},
+    {"phase": 2, "name": "LOCAL_FONT_LOAD", "steps": "TBD"},
+    {"phase": 3, "name": "VOICE_BINDINGS", "steps": "TBD"},
+    {"phase": 4, "name": "NUMERIC_DISCIPLINE", "steps": "TBD"},
+    {"phase": 5, "name": "KASHIDA_RHYTHM", "steps": "TBD"},
+    {"phase": 6, "name": "PER_PAGE_TYPE_SIGNATURE", "steps": "TBD"}
+  ],
+  "notes": "Pack v3 DEVOTIO — 'قبل أن نبني محراباً جديداً، نُجرّ ما بقي من الكاتدرائية القديمة.' Branch worker-20-devotio created from main. v2 history preserved in pack_v2_history. AUTO_PILOT_v3 protocol: 1 tool call per response, scripts for multi-edits on huge files (32K HTML / 23K CSS / 16K JS), pre-grep verify before every edit."
 }
