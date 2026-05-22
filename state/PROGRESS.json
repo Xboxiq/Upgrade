@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-22T11:30:00Z",
+  "last_updated": "2026-05-22T14:00:00Z",
   "pack": "v2-resonance",
   "pack_status": "in-progress",
   "current": {
     "pack": "v2",
     "worker": "17",
     "worker_name": "CONTENT_REVIVAL",
-    "phase": 3,
+    "phase": 4,
     "phases_total": 6,
     "phase_order": [
       "1",
@@ -17,11 +17,11 @@
       "5",
       "6"
     ],
-    "branch": "worker-17-resonance-p3",
+    "branch": "worker-17-resonance-p4b",
     "status": "in-progress",
     "specs_scaffolded": true,
     "specs_branch": "pack-v2-worker-17-specs",
-    "next_phase_branch": "worker-17-resonance-p4"
+    "next_phase_branch": "worker-17-resonance-p5"
   },
   "previous": {
     "pack": "v2",
@@ -618,9 +618,16 @@
       "title": "Pitfalls & Diagnostics — 28 high-impact <details class=\"block-pitfalls\"> sibling blocks (default closed) covering: 6 micro-solder discipline (pr-041..046), 6 repair ethics (pr-053..058), 5 HR/negotiation traps (hr-035..039), 11 key calc + concept anchors (cc-001 AHT / cc-012 vocal mirroring / fs-001 sales commission / am-001 hunter-vs-farmer / so-002 crisis stage / ng-001 BATNA / ac-001 Iraq tax / ac-002 salary slip / pg-001 Big-O / ps-001 OCEAN / eq-005 self-awareness). Each block: 4-7 hand-authored mistakes + 3-6 diagnostic self-mirror signs + optional Iraqi cultural note (16/28 carry). DOM order canonical: aside(tldr) → block → ul(takeaways) → details(pitfalls). Idempotent Python injector scripts/worker-17-pitfalls.py (~681 lines including 28-entry content map) inserts in REVERSE order to keep line indices valid; re-run produces zero duplicates via data-pitfalls-for guard. CSS APPEND ~228 lines in style.css: .block-pitfalls collapsible <details> chrome (oklch tints, smooth open/close, summary marker rotate via ::after content swap, focus-visible ring) + .pitfall-section--mistakes (red marker ✗) / --diagnostic (disabled checkbox aria-hidden) / --iraqi (italic blue-cyan border-inline-start) sub-sections + .block-pitfalls-summary grid layout (icon + title + count badge + chevron) + reduced-motion + reduced-transparency + print fallbacks (open by default in print, page-break-inside:avoid). Resonance doctrine applied: spec target ~80 high-impact blocks → 28 (resonance > noise; consequence-bearing only). Sacred preserved 100% (14 pages / 391 qcalc / 23 Upg.* APIs / 503 data-block-id / 26 block-tldr / 15 data-page-personality / zero block text edits / app.js untouched).",
       "branch": "worker-17-resonance-p3",
       "lines_added": 2329
+    },
+    {
+      "worker": "17",
+      "phase": 4,
+      "title": "Practice Drills & Self-Check — 62 practice sections (191 recall questions + answer reveals + reflection prompts) across 13 content pages + Upg.practice IIFE (23rd API, localStorage-only tracking: tried/reflect/stats/reset) + CSS ~195 lines (block-practice chrome + mobile + print + reduced-motion) + idempotent Node injector script.",
+      "branch": "worker-17-resonance-p4b",
+      "lines_added": 5235
     }
   ],
-  "next_action": "Continue Worker 17 Phase 4 — Practice & Self-Check. Branch worker-17-resonance-p4 to be created from worker-17-resonance-p3 (or main after PR merge).",
+  "next_action": "Continue Worker 17 Phase 5 — Cross-Reference Paths. Branch worker-17-resonance-p5 from main (after PR merge).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
