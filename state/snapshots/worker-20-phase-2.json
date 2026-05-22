@@ -1,0 +1,118 @@
+{
+  "pack": "v3",
+  "worker": "20",
+  "phase_completed": 2,
+  "phases_total": 6,
+  "phase_status": "blocked-pending-fonts",
+  "phase_kind": "structural-only",
+  "files_touched": [
+    "platform/assets/fonts/MANIFEST.json",
+    "platform/assets/fonts/README.md",
+    "platform/assets/fonts/aref-ruqaa/README.md",
+    "platform/assets/fonts/reem-kufi/README.md",
+    "platform/assets/fonts/cairo/README.md",
+    "platform/assets/fonts/tajawal/README.md",
+    "platform/assets/fonts/ibm-plex-arabic/README.md",
+    "platform/assets/fonts/readex-pro/README.md",
+    "platform/assets/fonts/inter/README.md",
+    "platform/assets/fonts/jetbrains-mono/README.md",
+    "platform/assets/fonts/fraunces/README.md",
+    "scripts/worker-20-bootstrap.sh",
+    "scripts/worker-20-download-fonts.sh",
+    "scripts/worker-20-subset-fonts.py",
+    "scripts/README.md",
+    "state/PROGRESS.json",
+    "state/snapshots/worker-20-phase-2.json"
+  ],
+  "files_NOT_touched_intentionally": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "rationale_for_no_platform_mutation": "Phase 2 is the binary-acquisition phase. Adding @font-face declarations or <link rel=preload> tags pointing to non-existent woff2 files would emit 404s and console warnings, polluting the cathedral. Tokens (--font-*, --type-voice-*) remain on their Resonance v2 stacks (Cairo, Tajawal, Reem Kufi, etc) which still resolve via system + Phase-1-Thmanyah-stub fallback. Once owner runs the bootstrap and commits the binaries, Phase 3 (Voice Bindings) appends the @font-face block and re-routes the stacks in a single semantically-coherent pass.",
+  "lines_added_total": 1021,
+  "tokens_added": [],
+  "fonts_added_offline": [],
+  "fonts_expected_after_bootstrap": [
+    "aref-ruqaa-400.woff2",
+    "aref-ruqaa-700.woff2",
+    "reem-kufi-VF.woff2",
+    "cairo-400.woff2",
+    "cairo-600.woff2",
+    "cairo-700.woff2",
+    "tajawal-300.woff2",
+    "tajawal-400.woff2",
+    "tajawal-500.woff2",
+    "tajawal-700.woff2",
+    "ibm-plex-arabic-300.woff2",
+    "ibm-plex-arabic-400.woff2",
+    "ibm-plex-arabic-500.woff2",
+    "ibm-plex-arabic-600.woff2",
+    "ibm-plex-arabic-700.woff2",
+    "readex-pro-VF.woff2",
+    "inter-VF.woff2",
+    "jetbrains-mono-400.woff2",
+    "jetbrains-mono-500.woff2",
+    "jetbrains-mono-700.woff2",
+    "fraunces-VF.woff2",
+    "fraunces-italic-VF.woff2"
+  ],
+  "fonts_expected_count": 22,
+  "fonts_total_size_kb_target_max": 320,
+  "license_files_expected_count": 9,
+  "blocker": {
+    "kind": "sandbox-network-restriction",
+    "summary": "Sandbox network mode INTEGRATIONS_ONLY. Squid proxy returns HTTP 403 for github.com/google/fonts, fonts.gstatic.com, registry.npmjs.org, pypi.org. Cannot download OFL font binaries inside the agent session.",
+    "evidence": [
+      "curl -I https://github.com/google/fonts/raw/main/ofl/cairo/static/Cairo-Regular.ttf -> HTTP 403 (squid ERR_ACCESS_DENIED)",
+      "curl -I https://fonts.gstatic.com/ -> HTTP 403",
+      "pip install fonttools -> ProxyError: Tunnel connection failed: 403 Forbidden",
+      "Sandbox details: network_mode=INTEGRATIONS_ONLY"
+    ],
+    "user_action_required": [
+      "git checkout worker-20-devotio-p2",
+      "pip install 'fonttools[woff]' brotli",
+      "bash scripts/worker-20-bootstrap.sh",
+      "git add platform/assets/fonts/",
+      "git commit -m 'phase 2 (devotio): font binaries populated locally'",
+      "git push origin worker-20-devotio-p2",
+      "Re-invoke AUTO_PILOT v3 to resume at Worker 20 Phase 3"
+    ]
+  },
+  "scaffolding_summary": {
+    "manifest_families": 9,
+    "manifest_files_listed": 22,
+    "per_family_readmes": 9,
+    "scripts": [
+      "scripts/worker-20-bootstrap.sh (orchestrator, 4-step: deps -> download -> subset -> verify)",
+      "scripts/worker-20-download-fonts.sh (curl + jq, idempotent, reads MANIFEST.json)",
+      "scripts/worker-20-subset-fonts.py (pyftsubset, idempotent via mtime check, 5 subset_targets)"
+    ],
+    "subset_targets_defined": [
+      "arabic",
+      "arabic_with_digits",
+      "latin_basic",
+      "latin_with_currency",
+      "latin_mono"
+    ]
+  },
+  "sacred_preservation": {
+    "page_sections": 14,
+    "qcalc_references": 391,
+    "upg_apis_count": 24,
+    "google_fonts_references": 0,
+    "google_fonts_status_post_phase_1": "purged",
+    "type_voice_tokens_count": 9,
+    "phase_1_banner_intact": true,
+    "platform_files_mutated_in_phase_2": []
+  },
+  "offline_check": {
+    "external_requests": 0,
+    "manifest_runtime_egress": "0 bytes — fonts are already local once bootstrap runs"
+  },
+  "devotion_notes": "الشبكة مسموحة مرة واحدة، لتُترَك للأبد. المنفّذ كتب العقد (MANIFEST + scripts) ووقّع على نفسه ألا يكتب CSS لخطوط غير موجودة. المالك يُكمل بضربة طرفية واحدة من جهازه.",
+  "next_action": "USER ACTION on workstation: bash scripts/worker-20-bootstrap.sh, commit fonts, push. Then re-run AUTO_PILOT v3 — it will resume at Worker 20 Phase 3 (Voice Bindings) automatically.",
+  "branch": "worker-20-devotio-p2",
+  "commit_code": "6f490ef",
+  "commit_pushed": "6f490ef"
+}

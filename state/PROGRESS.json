@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-22T23:59:00Z",
+  "last_updated": "2026-05-22T22:05:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
     "pack": "v3",
     "worker": "20",
     "worker_name": "TASMEEM_RECONSTRUCTION",
-    "phase": 1,
+    "phase": 2,
     "phases_total": 6,
     "phase_order": [
       "1",
@@ -17,28 +17,35 @@
       "5",
       "6"
     ],
-    "branch": "worker-20-devotio",
-    "status": "blocked"
+    "branch": "worker-20-devotio-p2",
+    "status": "blocked-pending-fonts",
+    "blocker": {
+      "kind": "sandbox-network-restriction",
+      "summary": "Sandbox network mode is INTEGRATIONS_ONLY (squid proxy returns 403 for github.com / fonts.gstatic.com / pypi). Cannot download OFL font binaries inside the agent session.",
+      "scope": "Phase 2 binary acquisition only. Phase 2 structural scaffolding is complete (folders, MANIFEST.json, per-family READMEs, scripts, license placeholders).",
+      "user_action_required": "Run `bash scripts/worker-20-bootstrap.sh` once on a workstation with HTTPS, then commit and push platform/assets/fonts/*.woff2 + license files. After that, resume AUTO_PILOT v3 — Phase 3 (Voice Bindings) will pick up automatically.",
+      "branch_with_scaffolding": "worker-20-devotio-p2"
+    }
   },
   "previous": {
-    "pack": "v2",
-    "worker": "17",
-    "worker_name": "CONTENT_REVIVAL",
-    "phase": 5,
+    "pack": "v3",
+    "worker": "20",
+    "worker_name": "TASMEEM_RECONSTRUCTION",
+    "phase": 1,
     "phases_total": 6,
-    "branch": "worker-17-resonance-p5",
+    "branch": "worker-20-devotio",
     "status": "completed",
-    "merged_pr": 72
+    "merged_pr": 76
   },
   "before_previous": {
     "pack": "v2",
-    "worker": "16",
-    "worker_name": "VITAL_UI",
+    "worker": "17",
+    "worker_name": "CONTENT_REVIVAL",
     "phase": 6,
     "phases_total": 6,
-    "branch": "worker-16-vital-ui-p6",
+    "branch": "worker-17-resonance-p6",
     "status": "completed",
-    "merged_pr": 65
+    "merged_pr": 72
   },
   "completed_phases": [
     {
@@ -643,9 +650,17 @@
       "title": "Font Forensics + Google Fonts removal",
       "branch": "worker-20-devotio",
       "lines_added": 25
+    },
+    {
+      "worker": "20",
+      "phase": 2,
+      "title": "Local Font Bootstrap Scaffolding (BLOCKED-pending-fonts) — 9 family folders + per-family READMEs + MANIFEST.json single-source-of-truth + scripts/worker-20-{bootstrap.sh,download-fonts.sh,subset-fonts.py} idempotent toolchain reading MANIFEST + scripts/README.md. Sandbox network is INTEGRATIONS_ONLY (squid 403 for github.com / fonts.gstatic.com / pypi); woff2 binaries cannot be fetched in-agent. Owner runs `bash scripts/worker-20-bootstrap.sh` once on a workstation with HTTPS to populate 22 woff2 files (target <=320KB total) and commit them, after which Phase 3 (Voice Bindings) unblocks. No platform/index.html, app.js, or style.css mutation in this commit; Phase 1 baseline (TASMEEM v3 banner + --tasmeem-* tokens) preserved verbatim. Sacred preserved 100% (14 pages / 391 qcalc / 24 Upg.* APIs / 0 google fonts).",
+      "branch": "worker-20-devotio-p2",
+      "lines_added": 1021,
+      "blocked": true
     }
   ],
-  "next_action": "Unblock network access to official OFL font sources, then continue Worker 20 Phase 2",
+  "next_action": "Worker 20 Phase 2 (devotio) is structurally complete but BLOCKED-pending-fonts. ACTION REQUIRED ON USER WORKSTATION: (1) checkout branch worker-20-devotio-p2; (2) `pip install 'fonttools[woff]' brotli`; (3) `bash scripts/worker-20-bootstrap.sh` — this downloads 22 woff2 files from official OFL repos, subsets each to its declared unicode-range, and verifies <=320KB total; (4) `git add platform/assets/fonts/ && git commit -m 'phase 2 (devotio): font binaries populated locally' && git push`; (5) re-run AUTO_PILOT v3 — it will read this state and pick up Worker 20 Phase 3 (Voice Bindings) automatically.",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
@@ -732,10 +747,5 @@
       }
     ]
   },
-  "notes": "Pack v2 RESONANCE scaffolded under prompts/v2/. Path C selected by user: Meta + Worker 15 (full 6 phases) + Ritual = 15 files. Workers 16-19 + Ritual execution to follow in subsequent sessions. Cathedral v16 baseline preserved. All 19 Upg.* APIs, 14 pages, 391 qcalc references preserved. Previous Pack v1 history (v16 ATELIER): Phase 6 of Worker 14 shipped on branch worker-14-phase-6-final via PR #53. Inline 215->76 (139 removed) via deterministic node script + 330 lines Final Utilities Pack. New Upg.focusTrap IIFE auto-attaches to dialog/modal/qmodal/data-modal via MutationObserver, ESC-to-close, return-focus. Lighthouse boot helper (lazy imgs, decoding=async, pointer-enter prefetch markers). Sanity v16 verifies 19 Upg.* modules. sw.js rewrite (74->119 lines) versioned shell/assets/fonts caches, navigation network-first then offline.html fallback, SWR for assets and Google Fonts. Manifest 4 shortcuts (#dashboard, #callcenter, #myprogress, #accounting), 192/512 icon entries. Favicon v2 100x100 squircle rx=22, dual-color stroke gradient (#66FCF1 to #4F46E5). offline.html RTL Cairo, online auto-reload, retry button + home link. CHANGELOG v16 added at top. All 14 page sections, 391 qcalc, 15 identity tints preserved.",
-  "blocker": {
-    "worker": "20",
-    "phase": 2,
-    "reason": "Network egress blocked (curl to github.com returns CONNECT tunnel failed 403), cannot download required OFL/SIL fonts for local hosting."
-  }
+  "notes": "Pack v2 RESONANCE scaffolded under prompts/v2/. Path C selected by user: Meta + Worker 15 (full 6 phases) + Ritual = 15 files. Workers 16-19 + Ritual execution to follow in subsequent sessions. Cathedral v16 baseline preserved. All 19 Upg.* APIs, 14 pages, 391 qcalc references preserved. Previous Pack v1 history (v16 ATELIER): Phase 6 of Worker 14 shipped on branch worker-14-phase-6-final via PR #53. Inline 215->76 (139 removed) via deterministic node script + 330 lines Final Utilities Pack. New Upg.focusTrap IIFE auto-attaches to dialog/modal/qmodal/data-modal via MutationObserver, ESC-to-close, return-focus. Lighthouse boot helper (lazy imgs, decoding=async, pointer-enter prefetch markers). Sanity v16 verifies 19 Upg.* modules. sw.js rewrite (74->119 lines) versioned shell/assets/fonts caches, navigation network-first then offline.html fallback, SWR for assets and Google Fonts. Manifest 4 shortcuts (#dashboard, #callcenter, #myprogress, #accounting), 192/512 icon entries. Favicon v2 100x100 squircle rx=22, dual-color stroke gradient (#66FCF1 to #4F46E5). offline.html RTL Cairo, online auto-reload, retry button + home link. CHANGELOG v16 added at top. All 14 page sections, 391 qcalc, 15 identity tints preserved."
 }

@@ -1,0 +1,268 @@
+{
+  "spec": "TASMEEM v3 / Worker 20 / Phase 2 — Local Font Manifest",
+  "doctrine": "Single source of truth for the 9 OFL font families used by Upgrade. The bootstrap scripts (scripts/worker-20-*.sh|.py) read this file and download/subset only what is listed here. Adding a font means editing this file first.",
+  "license_pool": "OFL-1.1",
+  "subset_targets": {
+    "arabic": "U+0600-06FF, U+0750-077F, U+0660-0669, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F",
+    "arabic_with_digits": "U+0600-06FF, U+0750-077F, U+0660-0669, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F, U+0030-0039",
+    "latin_basic": "U+0020-024F, U+1E00-1EFF, U+2000-206F",
+    "latin_with_currency": "U+0020-024F, U+1E00-1EFF, U+2000-206F, U+20AC",
+    "latin_mono": "U+0020-024F, U+0030-0039, U+2000-206F"
+  },
+  "families": [
+    {
+      "id": "aref-ruqaa",
+      "css_name": "Aref Ruqaa",
+      "voice": "accent",
+      "subset": "arabic",
+      "license_url": "https://github.com/google/fonts/raw/main/ofl/arefruqaa/OFL.txt",
+      "files": [
+        {
+          "weight": 400,
+          "style": "normal",
+          "out": "aref-ruqaa-400.woff2",
+          "source_url": "https://github.com/google/fonts/raw/main/ofl/arefruqaa/ArefRuqaa-Regular.ttf",
+          "source_format": "ttf"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "out": "aref-ruqaa-700.woff2",
+          "source_url": "https://github.com/google/fonts/raw/main/ofl/arefruqaa/ArefRuqaa-Bold.ttf",
+          "source_format": "ttf"
+        }
+      ]
+    },
+    {
+      "id": "reem-kufi",
+      "css_name": "Reem Kufi",
+      "voice": "display",
+      "subset": "arabic",
+      "license_url": "https://github.com/google/fonts/raw/main/ofl/reemkufi/OFL.txt",
+      "files": [
+        {
+          "weight": "400 700",
+          "style": "normal",
+          "variable": true,
+          "out": "reem-kufi-VF.woff2",
+          "source_url": "https://github.com/google/fonts/raw/main/ofl/reemkufi/ReemKufi%5Bwght%5D.ttf",
+          "source_format": "ttf-variable"
+        }
+      ]
+    },
+    {
+      "id": "cairo",
+      "css_name": "Cairo",
+      "voice": "fallback",
+      "subset": "arabic",
+      "license_url": "https://github.com/google/fonts/raw/main/ofl/cairo/OFL.txt",
+      "files": [
+        {
+          "weight": 400,
+          "style": "normal",
+          "out": "cairo-400.woff2",
+          "source_url": "https://github.com/google/fonts/raw/main/ofl/cairo/static/Cairo-Regular.ttf",
+          "source_format": "ttf"
+        },
+        {
+          "weight": 600,
+          "style": "normal",
+          "out": "cairo-600.woff2",
+          "source_url": "https://github.com/google/fonts/raw/main/ofl/cairo/static/Cairo-SemiBold.ttf",
+          "source_format": "ttf"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "out": "cairo-700.woff2",
+          "source_url": "https://github.com/google/fonts/raw/main/ofl/cairo/static/Cairo-Bold.ttf",
+          "source_format": "ttf"
+        }
+      ]
+    },
+    {
+      "id": "tajawal",
+      "css_name": "Tajawal",
+      "voice": "ui",
+      "subset": "arabic",
+      "license_url": "https://github.com/google/fonts/raw/main/ofl/tajawal/OFL.txt",
+      "files": [
+        {
+          "weight": 300,
+          "style": "normal",
+          "out": "tajawal-300.woff2",
+          "source_url": "https://github.com/google/fonts/raw/main/ofl/tajawal/Tajawal-Light.ttf",
+          "source_format": "ttf"
+        },
+        {
+          "weight": 400,
+          "style": "normal",
+          "out": "tajawal-400.woff2",
+          "source_url": "https://github.com/google/fonts/raw/main/ofl/tajawal/Tajawal-Regular.ttf",
+          "source_format": "ttf"
+        },
+        {
+          "weight": 500,
+          "style": "normal",
+          "out": "tajawal-500.woff2",
+          "source_url": "https://github.com/google/fonts/raw/main/ofl/tajawal/Tajawal-Medium.ttf",
+          "source_format": "ttf"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "out": "tajawal-700.woff2",
+          "source_url": "https://github.com/google/fonts/raw/main/ofl/tajawal/Tajawal-Bold.ttf",
+          "source_format": "ttf"
+        }
+      ]
+    },
+    {
+      "id": "ibm-plex-arabic",
+      "css_name": "IBM Plex Sans Arabic",
+      "voice": "numeric",
+      "subset": "arabic_with_digits",
+      "license_url": "https://github.com/IBM/plex/raw/master/LICENSE.txt",
+      "license_filename": "LICENSE.txt",
+      "files": [
+        {
+          "weight": 300,
+          "style": "normal",
+          "out": "ibm-plex-arabic-300.woff2",
+          "source_url": "https://github.com/IBM/plex/raw/master/IBM-Plex-Sans-Arabic/fonts/complete/woff2/IBMPlexSansArabic-Light.woff2",
+          "source_format": "woff2"
+        },
+        {
+          "weight": 400,
+          "style": "normal",
+          "out": "ibm-plex-arabic-400.woff2",
+          "source_url": "https://github.com/IBM/plex/raw/master/IBM-Plex-Sans-Arabic/fonts/complete/woff2/IBMPlexSansArabic-Regular.woff2",
+          "source_format": "woff2"
+        },
+        {
+          "weight": 500,
+          "style": "normal",
+          "out": "ibm-plex-arabic-500.woff2",
+          "source_url": "https://github.com/IBM/plex/raw/master/IBM-Plex-Sans-Arabic/fonts/complete/woff2/IBMPlexSansArabic-Medium.woff2",
+          "source_format": "woff2"
+        },
+        {
+          "weight": 600,
+          "style": "normal",
+          "out": "ibm-plex-arabic-600.woff2",
+          "source_url": "https://github.com/IBM/plex/raw/master/IBM-Plex-Sans-Arabic/fonts/complete/woff2/IBMPlexSansArabic-SemiBold.woff2",
+          "source_format": "woff2"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "out": "ibm-plex-arabic-700.woff2",
+          "source_url": "https://github.com/IBM/plex/raw/master/IBM-Plex-Sans-Arabic/fonts/complete/woff2/IBMPlexSansArabic-Bold.woff2",
+          "source_format": "woff2"
+        }
+      ]
+    },
+    {
+      "id": "readex-pro",
+      "css_name": "Readex Pro",
+      "voice": "text",
+      "subset": "arabic",
+      "license_url": "https://github.com/google/fonts/raw/main/ofl/readexpro/OFL.txt",
+      "files": [
+        {
+          "weight": "200 700",
+          "style": "normal",
+          "variable": true,
+          "out": "readex-pro-VF.woff2",
+          "source_url": "https://github.com/google/fonts/raw/main/ofl/readexpro/ReadexPro%5BHEXP%2Cwght%5D.ttf",
+          "source_format": "ttf-variable"
+        }
+      ]
+    },
+    {
+      "id": "inter",
+      "css_name": "Inter",
+      "voice": "latin",
+      "subset": "latin_with_currency",
+      "license_url": "https://github.com/rsms/inter/raw/master/LICENSE.txt",
+      "files": [
+        {
+          "weight": "100 900",
+          "style": "normal",
+          "variable": true,
+          "out": "inter-VF.woff2",
+          "source_url": "https://github.com/rsms/inter/raw/master/docs/font-files/Inter-Variable.woff2",
+          "source_format": "woff2"
+        }
+      ]
+    },
+    {
+      "id": "jetbrains-mono",
+      "css_name": "JetBrains Mono",
+      "voice": "mono",
+      "subset": "latin_mono",
+      "license_url": "https://github.com/JetBrains/JetBrainsMono/raw/master/OFL.txt",
+      "files": [
+        {
+          "weight": 400,
+          "style": "normal",
+          "out": "jetbrains-mono-400.woff2",
+          "source_url": "https://github.com/JetBrains/JetBrainsMono/raw/master/fonts/webfonts/JetBrainsMono-Regular.woff2",
+          "source_format": "woff2"
+        },
+        {
+          "weight": 500,
+          "style": "normal",
+          "out": "jetbrains-mono-500.woff2",
+          "source_url": "https://github.com/JetBrains/JetBrainsMono/raw/master/fonts/webfonts/JetBrainsMono-Medium.woff2",
+          "source_format": "woff2"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "out": "jetbrains-mono-700.woff2",
+          "source_url": "https://github.com/JetBrains/JetBrainsMono/raw/master/fonts/webfonts/JetBrainsMono-Bold.woff2",
+          "source_format": "woff2"
+        }
+      ]
+    },
+    {
+      "id": "fraunces",
+      "css_name": "Fraunces",
+      "voice": "quote-literary",
+      "subset": "latin_basic",
+      "license_url": "https://github.com/undercasetype/Fraunces/raw/main/OFL.txt",
+      "files": [
+        {
+          "weight": "400 700",
+          "style": "normal",
+          "variable": true,
+          "out": "fraunces-VF.woff2",
+          "source_url": "https://github.com/undercasetype/Fraunces/raw/main/fonts/variable/Fraunces%5BSOFT%2CWONK%2Copsz%2Cwght%5D.ttf",
+          "source_format": "ttf-variable"
+        },
+        {
+          "weight": "400 700",
+          "style": "italic",
+          "variable": true,
+          "out": "fraunces-italic-VF.woff2",
+          "source_url": "https://github.com/undercasetype/Fraunces/raw/main/fonts/variable/Fraunces-Italic%5BSOFT%2CWONK%2Copsz%2Cwght%5D.ttf",
+          "source_format": "ttf-variable"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "families": 9,
+    "files_expected": 22,
+    "license_files_expected": 9,
+    "target_total_size_kb_max": 320
+  },
+  "post_bootstrap_action": "Phase 3 (Voice Bindings) reads this MANIFEST to APPEND @font-face declarations into platform/assets/style.css and re-route --font-* / --type-voice-* tokens to the local woff2 files.",
+  "discipline": [
+    "Adding a font: edit MANIFEST.json first, run bootstrap, then update style.css.",
+    "Removing a font: remove from MANIFEST.json, delete folder, purge @font-face references.",
+    "Never edit a generated .woff2 by hand — always re-run bootstrap.",
+    "Total fonts payload must stay <= 320KB after subset (target). If a font exceeds 100KB, deepen the subset."
+  ]
+}
