@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-21T12:30:00Z",
+  "last_updated": "2026-05-22T07:15:00Z",
   "pack": "v2-resonance",
   "pack_status": "in-progress",
   "current": {
     "pack": "v2",
     "worker": "17",
     "worker_name": "CONTENT_REVIVAL",
-    "phase": 0,
+    "phase": 1,
     "phases_total": 6,
     "phase_order": [
       "1",
@@ -17,11 +17,11 @@
       "5",
       "6"
     ],
-    "branch": null,
-    "status": "ready",
+    "branch": "worker-17-resonance-p1",
+    "status": "in-progress",
     "specs_scaffolded": true,
     "specs_branch": "pack-v2-worker-17-specs",
-    "next_phase_branch": "worker-17-resonance"
+    "next_phase_branch": "worker-17-resonance-p2"
   },
   "previous": {
     "pack": "v2",
@@ -597,9 +597,16 @@
       "title": "Identity Auras — 15 aura signatures (default + 14 page personalities) defining --aura-from/--aura-to/--aura-glow tokens + auto-apply selectors routing Phase 1 .life-ambient/.life-mesh/.life-surface (and data-life=ambient/mesh/surface) layers through [data-page-personality] cascade + pointer trail (Phase 4) integration via media-gated overrides (3 layers, gated by pointer:fine + prefers-reduced-motion:no-preference) + body[data-aura-override] global override surface with 480ms ease-out background transition + dedicated reduced-motion guard silencing aura'd surface animations + override transition + Upg.aura IIFE (23rd top-level Upg.* namespace, ~112 JS + ~172 CSS = 284 lines) with frozen surface (apply/clear/current/list/preview) + isValid AURAS guard with console.warn fallback + upg:aura:change CustomEvent dispatched on every state change + preview(name, durationMs) restores previous override state (or full clear) after timeout (min 200ms, default 1200ms) + current() resolves override → body attr → active page personality fallback chain. Sacred preserved (14 pages / 391 qcalc / 22 prior Upg.* APIs / 15 data-page-personality / 47 reduced-motion guards / no HTML changes). Worker 16 final phase — closes VITAL UI.",
       "branch": "worker-16-vital-ui-p6",
       "lines_added": 284
+    },
+    {
+      "worker": "17",
+      "phase": 1,
+      "title": "Block Schema & Metadata Audit — 503 educational blocks tagged across 13 content pages with data-block-id (page-prefixed cc/fs/am/so/lb/ps/eq/ng/cu/pg/ac/pr/hr) + data-block-type (8 taxonomy: lesson/drill/case/reference/quiz/calc/scenario/cheat) + data-difficulty (Bloom-aligned 1-5) + data-est-minutes (gentle estimate) + 30 data-prereq seeds on diff>=4 blocks (Phase 5 will complete the systematic prereq pass). Idempotent Node script scripts/worker-17-block-schema.mjs (curated 35-class allowlist, in-band 503 blocks well within 400-550 sanity probe, type distribution 241 lesson / 123 drill / 98 case / 32 reference / 8 calc / 1 cheat, ~3,576 estimated minutes ≈ 60 hours of guided learning). CSS scaffolding APPENDED in style.css: 3 --tier-* tokens (foundation/practitioner/expert) + 5 --diff-* pip tints + 7 --block-aside-* chrome tokens + 8 --block-type-* accent tints + body[data-block-debug=\"1\"] dual-overlay (id+type+⭐+min caption + ←prereq pill) + print-safe (no debug in @media print) + reduced-motion safe. Sacred preserved 100% (14 pages / 391 qcalc / 22 Upg.* APIs / 15 data-page-personality / zero text edits / app.js untouched — Phase 4 + 6 will add Upg.practice + Upg.pace).",
+      "branch": "worker-17-resonance-p1",
+      "lines_added": 932
     }
   ],
-  "next_action": "Worker 17 specs scaffolded on branch pack-v2-worker-17-specs. After PR merge, start a new AUTO_PILOT v2 session — it will branch worker-17-resonance from main and execute Phase 1 (Block Schema & Metadata Audit).",
+  "next_action": "Continue Worker 17 Phase 2 — TL;DR & Key Takeaways. Branch worker-17-resonance-p2 to be created from worker-17-resonance-p1 (or main after PR merge).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",

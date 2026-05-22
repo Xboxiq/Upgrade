@@ -21938,3 +21938,130 @@ body[data-aura-override] {
 }
 
 /* End VITAL UI v1 / Worker 16 / Phase 6 / Final ──────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   RESONANCE v2 — Worker 17 / Phase 1 — Block Schema Scaffolding
+   ────────────────────────────────────────────────────────────────────────
+   Pure metadata layer. Phase 1 adds NO visible UI to default state.
+   - Reserves tier + difficulty tokens (consumed by ritual + Phases 2-6)
+   - Reserves block-aside chrome tokens (consumed by Phase 2 onward)
+   - Provides debug overlay opt-in via body[data-block-debug="1"]
+   - Print-safe: debug overlay is hidden in @media print
+   ──────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Tier color tokens — reserved for CONTENT_REORDER_RITUAL + Phase 6 progress */
+  --tier-foundation:    oklch(72% 0.12 160); /* green ~160h, "ابدأ هنا" */
+  --tier-practitioner:  oklch(72% 0.15  60); /* amber ~60h,  "مارس" */
+  --tier-expert:        oklch(65% 0.18  25); /* red-orange,  "أتقن" */
+
+  /* Difficulty pip tints (1-5) — reserved for Phase 2 + ritual badges */
+  --diff-1: oklch(78% 0.10 180);
+  --diff-2: oklch(75% 0.12 150);
+  --diff-3: oklch(72% 0.14  80);
+  --diff-4: oklch(68% 0.16  40);
+  --diff-5: oklch(62% 0.18  20);
+
+  /* Block-aside chrome — reserved for Phases 2-3-4-5 (TL;DR / pitfalls / practice / cross-refs) */
+  --block-aside-bg:        color-mix(in oklch, var(--color-surface-2, #f6f3eb) 60%, transparent);
+  --block-aside-border:    color-mix(in oklch, var(--color-tint, var(--color-brand, #c8b08a)) 30%, transparent);
+  --block-aside-radius:    0.5rem;
+  --block-aside-pad-i:     var(--space-3, 0.75rem);
+  --block-aside-pad-b:     var(--space-3, 0.75rem);
+  --block-aside-shadow-y:  0;
+  --block-aside-shadow-blur: 12px;
+
+  /* Block-type accent tints — softly identified, but invisible by default */
+  --block-type-lesson:     color-mix(in oklch, var(--color-tint, var(--color-brand)) 18%, transparent);
+  --block-type-drill:      color-mix(in oklch, oklch(72% 0.14 80)              22%, transparent);
+  --block-type-case:       color-mix(in oklch, oklch(68% 0.16 40)              22%, transparent);
+  --block-type-reference:  color-mix(in oklch, oklch(78% 0.10 180)             22%, transparent);
+  --block-type-cheat:      color-mix(in oklch, oklch(78% 0.10 180)             18%, transparent);
+  --block-type-calc:       color-mix(in oklch, oklch(72% 0.15 60)              22%, transparent);
+  --block-type-quiz:       color-mix(in oklch, oklch(65% 0.18 25)              20%, transparent);
+  --block-type-scenario:   color-mix(in oklch, oklch(70% 0.13 200)             20%, transparent);
+}
+
+/* Optional debug overlay — toggled in DevTools or via cmdk in Phase 6.
+   Renders a faint dashed outline + a metadata caption above each block.
+   By default (no body attr) NOTHING is visible. */
+body[data-block-debug="1"] [data-block-id] {
+  outline: 1px dashed color-mix(in oklch, var(--color-tint, var(--color-brand)) 50%, transparent);
+  outline-offset: 4px;
+  position: relative;
+}
+
+body[data-block-debug="1"] [data-block-id]::before {
+  content: attr(data-block-id) " · " attr(data-block-type) " · " attr(data-difficulty) "⭐ · " attr(data-est-minutes) "min";
+  position: absolute;
+  top: 0;
+  inset-inline-start: 0;
+  transform: translateY(-115%);
+  font-family: var(--type-voice-numeric, var(--font-numeric, ui-monospace, monospace));
+  font-size: 0.7rem;
+  font-weight: 600;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  letter-spacing: var(--tracking-wide, 0.02em);
+  color: color-mix(in oklch, var(--color-text-faint, #6f6657) 92%, transparent);
+  background: color-mix(in oklch, var(--color-surface-1, #fffaf0) 95%, transparent);
+  padding: 0.15rem 0.45rem;
+  border-radius: 0.3rem;
+  border: 1px solid var(--color-border, color-mix(in oklch, var(--color-text) 12%, transparent));
+  pointer-events: none;
+  z-index: 100;
+  white-space: nowrap;
+}
+
+body[data-block-debug="1"] [data-block-id][data-prereq]::after {
+  content: "← " attr(data-prereq);
+  position: absolute;
+  top: 0;
+  inset-inline-end: 0;
+  transform: translateY(-115%);
+  font-family: var(--type-voice-numeric, var(--font-numeric, ui-monospace, monospace));
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: color-mix(in oklch, var(--color-text-faint, #6f6657) 85%, transparent);
+  background: color-mix(in oklch, var(--color-surface-2, #f6f3eb) 90%, transparent);
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.3rem;
+  border: 1px dashed color-mix(in oklch, var(--color-tint, var(--color-brand)) 35%, transparent);
+  pointer-events: none;
+  z-index: 100;
+  white-space: nowrap;
+}
+
+/* Print-friendly: debug overlay hidden, content untouched */
+@media print {
+  body[data-block-debug="1"] [data-block-id]::before,
+  body[data-block-debug="1"] [data-block-id]::after {
+    display: none;
+  }
+}
+
+/* Reduced-motion safety: no animation introduced here, but the dashed outline
+   should never animate even if a future utility tried to */
+@media (prefers-reduced-motion: reduce) {
+  body[data-block-debug="1"] [data-block-id] {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Discipline comment — Worker 17 / Phase 1
+   1. Block schema is metadata-only. No visible chrome added by default.
+   2. Phases 2-6 will WRAP siblings around blocks (never modify them).
+   3. data-block-id is permanent. Never rename. Never reuse.
+   4. data-difficulty is Bloom-aligned (1=Remember, 2=Understand, 3=Apply,
+      4=Analyze, 5=Evaluate/Create).
+   5. data-block-type is one of: lesson | drill | case | reference | quiz |
+      calc | scenario | cheat.
+   6. data-prereq is a comma-separated list of block-ids.
+   7. To debug: set body[data-block-debug="1"] in DevTools (or via the
+      command palette in Phase 6).
+   8. dashboard / gateway / myprogress carry no pedagogical blocks
+      (no schema attrs there — by design).
+   ════════════════════════════════════════════════════════════════════════ */
