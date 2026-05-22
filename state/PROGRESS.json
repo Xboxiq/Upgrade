@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-22T23:30:00Z",
+  "last_updated": "2026-05-23T01:00:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
     "pack": "v3",
     "worker": "20",
     "worker_name": "TASMEEM_RECONSTRUCTION",
-    "phase": 3,
+    "phase": 4,
     "phases_total": 6,
     "phase_order": [
       "1",
@@ -17,7 +17,7 @@
       "5",
       "6"
     ],
-    "branch": "worker-20-devotio-phase3",
+    "branch": "worker-20-devotio-p4",
     "status": "in-progress",
     "blocker": null
   },
@@ -659,9 +659,16 @@
       "title": "Voice Bindings — 22 local @font-face (9 families), collapse 6 --font-display → 1 unified block, route 18 --type-voice-* to local fonts, 16 tas-voice-* utility classes, Upg.font IIFE (25th API: list/voices/audit/isReady/computedFor/status/swap/reset), Thmanyah phantom removed from stacks. Sacred preserved 100% (14 pages / 391 qcalc / 25 Upg.* APIs / 0 google fonts / 0 CDN).",
       "branch": "worker-20-devotio-phase3",
       "lines_added": 581
+    },
+    {
+      "worker": "20",
+      "phase": 4,
+      "title": "Numeric Discipline — 6 tokens (--num-feat-*/--num-variant-*/--num-letter-spacing), 7 utility classes (tas-num-tabular/zero/fraction/hero/inline/ticker/arabic), auto-bind qcalc-result-value/stat-tile-value/cath-stat-value/bento-stat-value/countup/kpi, Upg.font.applyNumericDiscipline + auditNumericDiscipline, latin-digit policy, focus-timer CSS bind, 34 HTML augments. Sacred preserved 100% (14 pages / 391 qcalc / 25 Upg.* APIs / 0 google fonts / 0 CDN).",
+      "branch": "worker-20-devotio-p4",
+      "lines_added": 349
     }
   ],
-  "next_action": "Continue Worker 20 Phase 4 (Numeric Discipline) — on branch worker-20-devotio-phase3. Phase 3 (Voice Bindings) complete: 22 local @font-face, 18 voice tokens routed, tas-* utilities, Upg.font API. Font .woff2 binaries still needed (user must run scripts/worker-20-bootstrap.sh on workstation with network access to populate platform/assets/fonts/*.woff2). Phase 4 can proceed structurally regardless.",
+  "next_action": "Continue Worker 20 Phase 5 (Kashida & Rhythm) — on branch worker-20-devotio-p4. Phase 4 (Numeric Discipline) complete: 6 tokens, 7 utilities, 34 HTML augments, Upg.font.applyNumericDiscipline auto-bind, CSS-only bind for 323 focus timers. Phase 5 adds kashida on Arabic headings + leading/word-spacing micro-rhythm.",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
