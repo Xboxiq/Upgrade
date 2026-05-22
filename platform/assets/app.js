@@ -16711,3 +16711,77 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 })(window, document);
 /* End TASMEEM v3 / Phase 3 — Upg.font ──────────────────────────────────── */
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   TASMEEM v3 — Numeric Discipline Auto-Apply (Worker 20 / Phase 4)
+   Extends Upg.font with applyNumericDiscipline() + auditNumericDiscipline().
+   ════════════════════════════════════════════════════════════════════════════ */
+(function (window, document) {
+  'use strict';
+  if (!window.Upg || !window.Upg.font) return;
+
+  var NUM_SELECTORS = [
+    '.qcalc-result-value', '.qcalc-output',
+    '.stat-tile-value', '.cath-stat-value', '.bento-stat-value',
+    '.kpi-card-value', '.kpi-hero-num',
+    '[data-countup]', '[data-count-up]', '.count-up-value'
+  ];
+
+  var TICKER_MATCH = '[data-countup], [data-count-up], .count-up-value';
+  var HERO_MATCH = '.kpi-hero-num, .stat-tile-value, .cath-stat-value, .bento-stat-value';
+
+  function hasDiscipline(el) {
+    return el.classList.contains('tas-num-tabular') ||
+           el.classList.contains('tas-num-tabular-zero') ||
+           el.classList.contains('tas-num-hero') ||
+           el.classList.contains('tas-num-ticker');
+  }
+
+  function applyNumericDiscipline(root) {
+    root = root || document;
+    var counted = 0;
+    NUM_SELECTORS.forEach(function (sel) {
+      root.querySelectorAll(sel).forEach(function (el) {
+        if (hasDiscipline(el)) return;
+        if (el.matches(TICKER_MATCH)) {
+          el.classList.add('tas-num-ticker');
+        } else if (el.matches(HERO_MATCH)) {
+          el.classList.add('tas-num-hero');
+        } else {
+          el.classList.add('tas-num-tabular');
+        }
+        counted++;
+      });
+    });
+    return counted;
+  }
+
+  function auditNumericDiscipline() {
+    var result = {};
+    NUM_SELECTORS.forEach(function (sel) {
+      var all = document.querySelectorAll(sel);
+      var disc = 0;
+      all.forEach(function (el) { if (hasDiscipline(el)) disc++; });
+      result[sel] = { total: all.length, disciplined: disc };
+    });
+    return result;
+  }
+
+  // Extend Upg.font (additive — preserves Phase 3 frozen surface via new props)
+  window.Upg.font.applyNumericDiscipline = applyNumericDiscipline;
+  window.Upg.font.auditNumericDiscipline = auditNumericDiscipline;
+
+  // Auto-apply on page load
+  if (document.readyState !== 'loading') {
+    applyNumericDiscipline();
+  } else {
+    document.addEventListener('DOMContentLoaded', function () { applyNumericDiscipline(); });
+  }
+
+  // Re-apply on page navigation (Upg.nav fires upg:nav:change)
+  document.addEventListener('upg:nav:change', function () {
+    setTimeout(function () { applyNumericDiscipline(); }, 50);
+  });
+})(window, document);
+/* End TASMEEM v3 / Phase 4 — Numeric Discipline ────────────────────────── */

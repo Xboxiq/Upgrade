@@ -721,27 +721,27 @@
         <!-- ══════════ Cells 2-5 — 4 count-up Stat Tiles (canonical, single instance) ══════════ -->
         <article class="stat-tile b-1x1 material-regular" data-reveal>
           <div class="stat-tile-icon"><i class="qi" data-icon="check-circle" aria-hidden="true"></i></div>
-          <div class="stat-tile-value u-num"><span class="type-num-display" data-countup data-cath-stat="unitsCompleted">0</span></div>
+          <div class="stat-tile-value u-num"><span class="type-num-display tas-num-ticker" data-countup data-cath-stat="unitsCompleted">0</span></div>
           <div class="stat-tile-label">وحدة مُكتملة</div>
           <span class="stat-tile-trend is-up"><i class="qi" data-icon="trending-up" aria-hidden="true"></i> +3 هذا الأسبوع</span>
         </article>
 
         <article class="stat-tile b-1x1 material-regular" data-reveal>
           <div class="stat-tile-icon"><i class="qi" data-icon="bar-chart" aria-hidden="true"></i></div>
-          <div class="stat-tile-value u-num"><span class="type-num-display" data-countup data-cath-stat="avgCompletionRate">0</span>%</div>
+          <div class="stat-tile-value u-num"><span class="type-num-display tas-num-ticker" data-countup data-cath-stat="avgCompletionRate">0</span>%</div>
           <div class="stat-tile-label">معدل الإتمام</div>
           <span class="stat-tile-trend is-up"><i class="qi" data-icon="trending-up" aria-hidden="true"></i> +5%</span>
         </article>
 
         <article class="stat-tile b-1x1 material-regular" data-reveal>
           <div class="stat-tile-icon"><i class="qi" data-icon="clock" aria-hidden="true"></i></div>
-          <div class="stat-tile-value u-num"><span class="type-num-display" data-countup data-cath-stat="trainingHours">0</span></div>
+          <div class="stat-tile-value u-num"><span class="type-num-display tas-num-ticker" data-countup data-cath-stat="trainingHours">0</span></div>
           <div class="stat-tile-label">ساعة تدريب</div>
         </article>
 
         <article class="stat-tile b-1x1 material-regular" data-reveal>
           <div class="stat-tile-icon"><i class="qi" data-icon="flame" aria-hidden="true"></i></div>
-          <div class="stat-tile-value u-num"><span class="type-num-display" data-countup data-cath-stat="streak">0</span></div>
+          <div class="stat-tile-value u-num"><span class="type-num-display tas-num-ticker" data-countup data-cath-stat="streak">0</span></div>
           <div class="stat-tile-label">يوم streak</div>
         </article>
 
@@ -952,13 +952,13 @@
           <div class="qcalc-summary">
             <div class="qcalc-result-card qcalc-result-primary">
               <span class="qcalc-result-label">APIndex</span>
-              <span class="qcalc-result-value" data-bind="index" data-format="num2" data-state-bind="tierState">0</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="index" data-format="num2" data-state-bind="tierState">0</span>
               <span class="qcalc-result-unit">/ 100</span>
               <div class="qcalc-meter" data-bind="meter" data-meter="meter"><i class="u-pb-0"></i></div>
             </div>
             <div class="qcalc-result-card">
               <span class="qcalc-result-label">المستوى</span>
-              <span class="qcalc-result-value" data-bind="tier">—</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="tier">—</span>
             </div>
           </div>
         </div>
@@ -4764,16 +4764,16 @@
           <div class="qcalc-summary">
             <div class="qcalc-result-card qcalc-result-primary">
               <span class="qcalc-result-label">إجمالي الأجر المتوقع (OTE)</span>
-              <span class="qcalc-result-value" data-bind="ote" data-format="money">0</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="ote" data-format="money">0</span>
               <span class="qcalc-result-unit">د.ع</span>
             </div>
             <div class="qcalc-result-card" data-bind-card>
               <span class="qcalc-result-label">إجمالي العمولة</span>
-              <span class="qcalc-result-value" data-bind="totalComm" data-format="money" data-state-bind="tierState">0</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="totalComm" data-format="money" data-state-bind="tierState">0</span>
             </div>
             <div class="qcalc-result-card">
               <span class="qcalc-result-label">تحقيق الهدف</span>
-              <span class="qcalc-result-value" data-bind="attainment" data-format="num2">0</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="attainment" data-format="num2">0</span>
               <span class="qcalc-result-unit">%</span>
               <div class="qcalc-meter" data-bind="meter1" data-meter="attainmentMeter"><i class="u-pb-0"></i></div>
             </div>
@@ -9025,16 +9025,16 @@
           <div class="qcalc-summary">
             <div class="qcalc-result-card qcalc-result-primary">
               <span class="qcalc-result-label">حجم العينة لكل ذراع</span>
-              <span class="qcalc-result-value" data-bind="nPerArm" data-format="int">0</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="nPerArm" data-format="int">0</span>
               <span class="qcalc-result-unit">مستخدم</span>
             </div>
             <div class="qcalc-result-card">
               <span class="qcalc-result-label">إجمالي الاختبار</span>
-              <span class="qcalc-result-value" data-bind="totalN" data-format="int">0</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="totalN" data-format="int">0</span>
             </div>
             <div class="qcalc-result-card">
               <span class="qcalc-result-label">معدل المتغيّر المتوقع</span>
-              <span class="qcalc-result-value" data-bind="variantRate" data-format="num2">0</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="variantRate" data-format="num2">0</span>
               <span class="qcalc-result-unit">%</span>
             </div>
           </div>
@@ -12175,24 +12175,24 @@
           <div class="qcalc-summary qcalc-summary-2col">
             <div class="qcalc-result-card qcalc-result-primary">
               <span class="qcalc-result-label">المؤشّر المركّب</span>
-              <span class="qcalc-result-value" data-bind="composite" data-format="num2" data-state-bind="state">0</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="composite" data-format="num2" data-state-bind="state">0</span>
               <span class="qcalc-result-unit">/100</span>
             </div>
             <div class="qcalc-result-card">
               <span class="qcalc-result-label">الانفتاح</span>
-              <span class="qcalc-result-value" data-bind="oLabel">—</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="oLabel">—</span>
             </div>
             <div class="qcalc-result-card">
               <span class="qcalc-result-label">الضمير</span>
-              <span class="qcalc-result-value" data-bind="cLabel">—</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="cLabel">—</span>
             </div>
             <div class="qcalc-result-card">
               <span class="qcalc-result-label">الانبساط</span>
-              <span class="qcalc-result-value" data-bind="eLabel">—</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="eLabel">—</span>
             </div>
             <div class="qcalc-result-card">
               <span class="qcalc-result-label">العصابية</span>
-              <span class="qcalc-result-value" data-bind="nLabel">—</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="nLabel">—</span>
             </div>
           </div>
         </div>
@@ -15371,20 +15371,20 @@
           <div class="qcalc-summary qcalc-summary-2col">
             <div class="qcalc-result-card qcalc-result-primary">
               <span class="qcalc-result-label">منطقة الاتفاق المحتمل (ZOPA)</span>
-              <span class="qcalc-result-value" data-bind="status" data-state-bind="state">—</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="status" data-state-bind="state">—</span>
               <span class="qcalc-result-unit">عرض الـ ZOPA: <span data-bind="zopaWidth" data-format="money">0</span> د.ع</span>
             </div>
             <div class="qcalc-result-card">
               <span class="qcalc-result-label">الحد الأدنى للـ ZOPA</span>
-              <span class="qcalc-result-value" data-bind="zopaLow" data-format="money">0</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="zopaLow" data-format="money">0</span>
             </div>
             <div class="qcalc-result-card">
               <span class="qcalc-result-label">الحد الأعلى للـ ZOPA</span>
-              <span class="qcalc-result-value" data-bind="zopaHigh" data-format="money">0</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="zopaHigh" data-format="money">0</span>
             </div>
             <div class="qcalc-result-card">
               <span class="qcalc-result-label">نقطة الوسط المقترحة</span>
-              <span class="qcalc-result-value" data-bind="midpoint" data-format="money">0</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="midpoint" data-format="money">0</span>
             </div>
           </div>
         </div>
@@ -17459,16 +17459,16 @@
           <div class="qcalc-summary">
             <div class="qcalc-result-card qcalc-result-primary">
               <span class="qcalc-result-label">عدد العمليات التقريبي</span>
-              <span class="qcalc-result-value" data-bind="opsHuman" data-state-bind="state">0</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="opsHuman" data-state-bind="state">0</span>
             </div>
             <div class="qcalc-result-card">
               <span class="qcalc-result-label">الزمن المتوقع</span>
-              <span class="qcalc-result-value" data-bind="timeHuman">—</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="timeHuman">—</span>
               <span class="qcalc-result-unit">على 10⁸ ops/sec</span>
             </div>
             <div class="qcalc-result-card">
               <span class="qcalc-result-label">التصنيف</span>
-              <span class="qcalc-result-value" data-bind="label">—</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="label">—</span>
             </div>
           </div>
         </div>
@@ -21028,17 +21028,17 @@ const bird = { ...canMove(), ...canFly() };
             <div class="qcalc-summary">
               <div class="qcalc-result-card qcalc-result-primary">
                 <span class="qcalc-result-label">الصافي الشهري</span>
-                <span class="qcalc-result-value" data-bind="net" data-format="money">0</span>
+                <span class="qcalc-result-value tas-num-tabular" data-bind="net" data-format="money">0</span>
                 <span class="qcalc-result-unit">د.ع</span>
               </div>
               <div class="qcalc-result-card">
                 <span class="qcalc-result-label">إجمالي الضريبة</span>
-                <span class="qcalc-result-value" data-bind="tax" data-format="money">0</span>
+                <span class="qcalc-result-value tas-num-tabular" data-bind="tax" data-format="money">0</span>
                 <span class="qcalc-result-unit">د.ع · النسبة <span data-bind="effRate" data-format="num2">0</span>%</span>
               </div>
               <div class="qcalc-result-card">
                 <span class="qcalc-result-label">إجمالي الإعفاءات</span>
-                <span class="qcalc-result-value" data-bind="exemptions" data-format="money">0</span>
+                <span class="qcalc-result-value tas-num-tabular" data-bind="exemptions" data-format="money">0</span>
                 <span class="qcalc-result-unit">د.ع</span>
               </div>
             </div>
@@ -21282,16 +21282,16 @@ const bird = { ...canMove(), ...canFly() };
             <div class="qcalc-summary">
               <div class="qcalc-result-card qcalc-result-primary">
                 <span class="qcalc-result-label">صافي الراتب</span>
-                <span class="qcalc-result-value" data-bind="net" data-format="money">0</span>
+                <span class="qcalc-result-value tas-num-tabular" data-bind="net" data-format="money">0</span>
                 <span class="qcalc-result-unit">د.ع</span>
               </div>
               <div class="qcalc-result-card">
                 <span class="qcalc-result-label">إجمالي ما قبل الخصم</span>
-                <span class="qcalc-result-value" data-bind="totalGross" data-format="money">0</span>
+                <span class="qcalc-result-value tas-num-tabular" data-bind="totalGross" data-format="money">0</span>
               </div>
               <div class="qcalc-result-card">
                 <span class="qcalc-result-label">الضمان + الضريبة</span>
-                <span class="qcalc-result-value" data-bind="ssAndTax" data-format="money">0</span>
+                <span class="qcalc-result-value tas-num-tabular" data-bind="ssAndTax" data-format="money">0</span>
               </div>
             </div>
           </div>
@@ -31779,28 +31779,28 @@ const bird = { ...canMove(), ...canFly() };
       <article class="cath-stat">
         <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="check-circle"></i></div>
         <div class="cath-stat-body">
-          <div><span class="cath-stat-value" data-cath-stat="unitsCompleted" data-type-voice="numeric">0</span></div>
+          <div><span class="cath-stat-value tas-num-hero" data-cath-stat="unitsCompleted" data-type-voice="numeric">0</span></div>
           <span class="cath-stat-label">وحدة مُكتملة</span>
         </div>
       </article>
       <article class="cath-stat">
         <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="bar-chart"></i></div>
         <div class="cath-stat-body">
-          <div><span class="cath-stat-value" data-cath-stat="quizzesTaken" data-type-voice="numeric">0</span></div>
+          <div><span class="cath-stat-value tas-num-hero" data-cath-stat="quizzesTaken" data-type-voice="numeric">0</span></div>
           <span class="cath-stat-label">تقييمات نفسية</span>
         </div>
       </article>
       <article class="cath-stat">
         <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="bookmark"></i></div>
         <div class="cath-stat-body">
-          <div><span class="cath-stat-value" data-cath-stat="draftCount" data-type-voice="numeric">0</span></div>
+          <div><span class="cath-stat-value tas-num-hero" data-cath-stat="draftCount" data-type-voice="numeric">0</span></div>
           <span class="cath-stat-label">مسوّدة محفوظة</span>
         </div>
       </article>
       <article class="cath-stat">
         <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="star"></i></div>
         <div class="cath-stat-body">
-          <div><span class="cath-stat-value" data-cath-stat="topScore" data-type-voice="numeric">0</span></div>
+          <div><span class="cath-stat-value tas-num-hero" data-cath-stat="topScore" data-type-voice="numeric">0</span></div>
           <span class="cath-stat-label">أعلى درجة لاب</span>
         </div>
       </article>
