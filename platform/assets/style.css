@@ -23078,3 +23078,436 @@ body[data-block-debug="1"] [data-block-id][data-prereq]::after {
    9. Resonance scope: 62 anchored blocks (NOT 250) — anchors-where-user-already-engaged.
    10. No new Upg.* API. No JS. CSS-only styling + idempotent Python injector.
    ════════════════════════════════════════════════════════════════ */
+
+
+
+/* ════════════════════════════════════════════════════════════════
+   RESONANCE v2 — Worker 17 / Phase 6 — Pacing & Mastery
+   25th Upg.* API: Upg.pace
+   Adds: per-block pacing chip + mastery toggle + page progress bar
+         + mastery heatmap (page-myprogress)
+   ──────────────────────────────────────────────────────────────────
+   Tokens consumed (fallbacks for legacy callers):
+     --color-surface-1/-2, --color-border, --color-text*, --color-brand,
+     --color-tint (page personality), --space-1..3, --duration-quick/base,
+     --ease-decelerate/--ease-spring-soft, --block-aside-radius,
+     --tier-foundation/practitioner/expert, --type-voice-ui/numeric/display.
+   ════════════════════════════════════════════════════════════════ */
+
+/* ─── Per-block pacing chip ─────────────────────────────────────── */
+.block-pacing {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3, 0.75rem);
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+  margin-block: var(--space-2, 0.5rem);
+  background: color-mix(in oklch, var(--color-surface-2, #f5f5f5) 60%, transparent);
+  border: 1px solid color-mix(in oklch, var(--color-border, #e5e5e5) 80%, transparent);
+  border-radius: var(--block-aside-radius, 0.5rem);
+  font-size: var(--text-xs, 0.75rem);
+  flex-wrap: wrap;
+}
+
+.block-pacing-mastery,
+.block-pacing-timer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2, 0.5rem);
+  flex-wrap: wrap;
+}
+
+/* Mastery toggle (3-state) */
+.mastery-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.3em 0.7em;
+  background: var(--color-surface-1, #fff);
+  border: 1px solid var(--color-border, #e5e5e5);
+  border-radius: 0.4rem;
+  font-family: var(--type-voice-ui, var(--font-ui, inherit));
+  font-size: var(--text-xs, 0.75rem);
+  font-weight: 600;
+  color: var(--color-text, #1c1917);
+  cursor: pointer;
+  transition:
+    background var(--duration-quick, 120ms) var(--ease-decelerate, cubic-bezier(0,0,0.2,1)),
+    border-color var(--duration-quick, 120ms) var(--ease-decelerate, cubic-bezier(0,0,0.2,1)),
+    transform var(--duration-quick, 120ms) var(--ease-spring-soft, cubic-bezier(0.34,1.36,0.64,1));
+}
+
+.mastery-toggle:hover { background: var(--color-surface-2, #f5f5f5); }
+.mastery-toggle:active { transform: scale(0.97); }
+
+.mastery-toggle:focus-visible {
+  outline: 2px solid var(--color-tint, var(--color-brand, #4f46e5));
+  outline-offset: 2px;
+}
+
+.mastery-toggle[data-mastery-state="not-started"] {
+  color: var(--color-text-faint, var(--color-text-muted, #777));
+}
+
+.mastery-toggle[data-mastery-state="in-progress"] {
+  background: color-mix(in oklch, oklch(72% 0.15 60) 18%, var(--color-surface-1, #fff));
+  border-color: oklch(60% 0.15 60);
+  color: var(--color-text, #1c1917);
+}
+
+.mastery-toggle[data-mastery-state="mastered"] {
+  background: color-mix(in oklch, oklch(72% 0.13 150) 22%, var(--color-surface-1, #fff));
+  border-color: oklch(55% 0.16 150);
+  color: var(--color-text, #1c1917);
+}
+
+.mastery-icon {
+  font-family: var(--type-voice-numeric, monospace);
+  font-size: 1em;
+  display: inline-block;
+  min-width: 1em;
+  text-align: center;
+}
+
+/* Focus timer presets */
+.block-pacing-timer-label {
+  color: var(--color-text-muted, #777);
+  font-size: var(--text-xs, 0.75rem);
+  letter-spacing: var(--tracking-wider, 0.025em);
+}
+
+.focus-presets {
+  display: inline-flex;
+  gap: 0.3em;
+}
+
+.focus-preset {
+  padding: 0.25em 0.6em;
+  background: var(--color-surface-1, #fff);
+  border: 1px solid var(--color-border, #e5e5e5);
+  border-radius: 0.3rem;
+  font-family: var(--type-voice-numeric, var(--font-numeric, monospace));
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-size: var(--text-xs, 0.75rem);
+  font-weight: 600;
+  color: var(--color-text, #1c1917);
+  cursor: pointer;
+  transition: background var(--duration-quick, 120ms) var(--ease-decelerate, cubic-bezier(0,0,0.2,1)),
+              transform var(--duration-quick, 120ms) var(--ease-spring-soft, cubic-bezier(0.34,1.36,0.64,1));
+}
+
+.focus-preset:hover {
+  background: color-mix(in oklch, var(--color-tint, var(--color-brand, #4f46e5)) 15%, var(--color-surface-1, #fff));
+}
+
+.focus-preset:active { transform: scale(0.96); }
+
+.focus-preset:focus-visible {
+  outline: 2px solid var(--color-tint, var(--color-brand, #4f46e5));
+  outline-offset: 1px;
+}
+
+.focus-active {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.3em 0.6em;
+  background: color-mix(in oklch, var(--color-tint, var(--color-brand, #4f46e5)) 15%, var(--color-surface-1, #fff));
+  border: 1px solid color-mix(in oklch, var(--color-tint, var(--color-brand, #4f46e5)) 40%, var(--color-border, #e5e5e5));
+  border-radius: 0.4rem;
+  font-family: var(--type-voice-numeric, var(--font-numeric, monospace));
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.focus-active[hidden] { display: none; }
+
+.focus-active-time {
+  color: var(--color-text, #1c1917);
+  letter-spacing: 0.02em;
+  min-width: 3.5em;
+  text-align: center;
+}
+
+.focus-stop {
+  padding: 0.15em 0.5em;
+  background: transparent;
+  border: 1px solid color-mix(in oklch, var(--color-border, #e5e5e5) 70%, transparent);
+  border-radius: 0.3rem;
+  font-family: var(--type-voice-ui, var(--font-ui, inherit));
+  font-size: var(--text-xs, 0.75rem);
+  color: var(--color-text-muted, #777);
+  cursor: pointer;
+}
+
+.focus-stop:hover { color: var(--color-text, #1c1917); }
+
+.focus-stop:focus-visible {
+  outline: 2px solid var(--color-tint, var(--color-brand, #4f46e5));
+  outline-offset: 1px;
+}
+
+/* ─── Per-page progress bar (inside .page-h) ─────────────────────── */
+.page-mastery-progress {
+  margin-block: var(--space-3, 0.75rem) var(--space-2, 0.5rem);
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+  background: color-mix(in oklch, var(--color-surface-1, #fff) 92%, transparent);
+  border: 1px solid color-mix(in oklch, var(--color-border, #e5e5e5) 70%, transparent);
+  border-radius: var(--block-aside-radius, 0.5rem);
+}
+
+.page-mastery-progress-meta {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2, 0.5rem);
+  font-size: var(--text-sm, 0.875rem);
+  margin-block-end: var(--space-1, 0.25rem);
+  flex-wrap: wrap;
+}
+
+.page-mastery-progress-meta .type-eyebrow {
+  color: var(--color-text-muted, #777);
+}
+
+.page-mastery-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: color-mix(in oklch, var(--color-surface-2, #f5f5f5) 80%, transparent);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.page-mastery-progress-fill {
+  height: 100%;
+  width: var(--progress, 0%);
+  background: linear-gradient(
+    90deg,
+    var(--tier-foundation, oklch(72% 0.12 160)),
+    var(--tier-practitioner, oklch(72% 0.15 60)) 50%,
+    var(--tier-expert, oklch(65% 0.18 25))
+  );
+  transition: width var(--duration-base, 220ms) var(--ease-decelerate, cubic-bezier(0,0,0.2,1));
+  border-radius: 3px;
+}
+
+.page-mastery-progress-tiers {
+  display: flex;
+  gap: var(--space-3, 0.75rem);
+  margin-block-start: var(--space-1, 0.25rem);
+  font-size: var(--text-xs, 0.75rem);
+  color: var(--color-text-faint, var(--color-text-muted, #777));
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  flex-wrap: wrap;
+}
+
+.tier-marker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.tier-marker::before {
+  content: "";
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  border-radius: 0.15em;
+}
+
+.tier-marker--foundation::before   { background: var(--tier-foundation, oklch(72% 0.12 160)); }
+.tier-marker--practitioner::before { background: var(--tier-practitioner, oklch(72% 0.15 60)); }
+.tier-marker--expert::before       { background: var(--tier-expert, oklch(65% 0.18 25)); }
+
+/* ─── Mastery Heatmap (page-myprogress) ──────────────────────────── */
+.mp-heatmap-section {
+  margin-block-start: var(--space-6, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3, 0.75rem);
+}
+
+.mp-heatmap-section .mp-heatmap-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1, 0.25rem);
+  margin-block-end: var(--space-2, 0.5rem);
+}
+
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-2, 0.5rem);
+}
+
+.heatmap-cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1, 0.25rem);
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+  background: var(--color-surface-1, #fff);
+  border: 1px solid var(--color-border, #e5e5e5);
+  border-radius: var(--block-aside-radius, 0.5rem);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  min-height: 64px;
+  transition: transform var(--duration-quick, 120ms) var(--ease-spring-soft, cubic-bezier(0.34,1.36,0.64,1)),
+              border-color var(--duration-quick, 120ms) var(--ease-decelerate, cubic-bezier(0,0,0.2,1));
+}
+
+.heatmap-cell:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in oklch, var(--color-tint, var(--color-brand, #4f46e5)) 40%, var(--color-border, #e5e5e5));
+}
+
+.heatmap-cell:focus-visible {
+  outline: 2px solid var(--color-tint, var(--color-brand, #4f46e5));
+  outline-offset: 2px;
+}
+
+.heatmap-cell-fill {
+  position: absolute;
+  inset-inline-start: 0;
+  bottom: 0;
+  height: 4px;
+  width: var(--progress, 0%);
+  background: linear-gradient(
+    90deg,
+    var(--tier-foundation, oklch(72% 0.12 160)),
+    var(--tier-expert, oklch(65% 0.18 25))
+  );
+  border-radius: 0 0 var(--block-aside-radius, 0.5rem) var(--block-aside-radius, 0.5rem);
+  transition: width var(--duration-base, 220ms) var(--ease-decelerate, cubic-bezier(0,0,0.2,1));
+}
+
+.heatmap-cell-name {
+  font-family: var(--type-voice-display, var(--font-display, inherit));
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: var(--text-sm, 0.875rem);
+}
+
+.heatmap-cell-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-xs, 0.75rem);
+  color: var(--color-text-muted, #777);
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+.heatmap-cell[data-heatmap-pct="100"] {
+  border-color: oklch(55% 0.16 150);
+  background: color-mix(in oklch, oklch(72% 0.13 150) 8%, var(--color-surface-1, #fff));
+}
+
+/* Mastery summary stats */
+.mastery-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--space-2, 0.5rem);
+  margin-block-start: var(--space-3, 0.75rem);
+}
+
+.mastery-stat {
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+  background: var(--color-surface-1, #fff);
+  border: 1px solid var(--color-border, #e5e5e5);
+  border-radius: var(--block-aside-radius, 0.5rem);
+  text-align: center;
+}
+
+.mastery-stat-label {
+  display: block;
+  font-size: var(--text-xs, 0.75rem);
+  letter-spacing: var(--tracking-wider, 0.025em);
+  color: var(--color-text-muted, #777);
+  margin-block-end: var(--space-1, 0.25rem);
+}
+
+.mastery-stat-value {
+  display: block;
+  font-family: var(--type-voice-numeric, var(--font-numeric, monospace));
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-weight: 700;
+  font-size: var(--text-2xl, 1.5rem);
+  color: var(--color-text, #1c1917);
+}
+
+.mastery-stat-value--mastered   { color: oklch(55% 0.16 150); }
+.mastery-stat-value--inprogress { color: oklch(62% 0.16 60); }
+
+/* ─── Mobile (≤480px) ────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .block-pacing {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-2, 0.5rem);
+  }
+  .block-pacing-mastery,
+  .block-pacing-timer { justify-content: space-between; }
+  .focus-presets { flex-wrap: wrap; }
+  .heatmap-grid { grid-template-columns: 1fr 1fr; }
+  .mastery-summary { grid-template-columns: 1fr 1fr; }
+}
+
+/* ─── Print ──────────────────────────────────────────────────────── */
+@media print {
+  .block-pacing,
+  .focus-presets,
+  .focus-active,
+  .page-mastery-progress-bar,
+  .page-mastery-progress-tiers { display: none !important; }
+  .page-mastery-progress {
+    background: transparent !important;
+    border: 1px solid #000 !important;
+    page-break-inside: avoid;
+  }
+  .heatmap-cell {
+    background: transparent !important;
+    border: 1px solid #000 !important;
+    break-inside: avoid;
+  }
+  .heatmap-cell-fill { display: none !important; }
+  .mastery-stat {
+    background: transparent !important;
+    border: 1px solid #000 !important;
+  }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .heatmap-cell,
+  .page-mastery-progress-fill,
+  .heatmap-cell-fill,
+  .mastery-toggle,
+  .focus-preset { transition: none !important; }
+  .heatmap-cell:hover { transform: none !important; }
+  .focus-preset:active,
+  .mastery-toggle:active { transform: none !important; }
+}
+
+/* ─── Reduced transparency ───────────────────────────────────────── */
+@media (prefers-reduced-transparency: reduce) {
+  .block-pacing,
+  .page-mastery-progress { background: var(--color-surface-1, #fff); }
+  .focus-active {
+    background: var(--color-surface-2, #f5f5f5);
+    border-color: var(--color-border-strong, var(--color-border, #e5e5e5));
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Discipline Comment — Worker 17 / Phase 6 (FINAL)
+   1. Pacing chip rendered ONLY on blocks with data-est-minutes >= 6.
+   2. Mastery has 3 states. Click cycles. localStorage persistent.
+   3. Focus presets: 15 / 25 / 45 minutes only.
+   4. Sessions of >= 60 sec are logged to upg.pace.focus.log.
+   5. If Upg.sound is enabled, focus completion plays the 'complete' synth.
+   6. Page progress bar lives inside .page-h on each content page.
+   7. Heatmap rendered in page-myprogress only (auto-redraws on nav change).
+   8. Upg.pace is the 25th and final Upg.* API for Worker 17.
+   9. Zero telemetry. Zero sync. localStorage only. Zero CDN/library added.
+   10. Reduced-motion + reduced-transparency + print + mobile all guarded.
+   ════════════════════════════════════════════════════════════════ */
