@@ -23511,3 +23511,18 @@ body[data-block-debug="1"] [data-block-id][data-prereq]::after {
    9. Zero telemetry. Zero sync. localStorage only. Zero CDN/library added.
    10. Reduced-motion + reduced-transparency + print + mobile all guarded.
    ════════════════════════════════════════════════════════════════ */
+
+/* TASMEEM v3 — Font Forensics Inventory (Worker 20 / Phase 1)
+   Baseline recorded on 2026-05-22.
+   Total font-family declarations and redefinition map captured for upcoming local-font migration.
+   --font-display redefinitions observed at: 16010, 16265, 19706, 19896, 20060, 20131.
+   Voice families preserved: Aref Ruqaa, Reem Kufi, Cairo, Tajawal, IBM Plex Sans Arabic, Readex Pro, Inter, JetBrains Mono, Fraunces.
+   Phase 2 target: local .woff2 only in platform/assets/fonts/, zero CDN, no token renames.
+*/
+
+:root {
+  --tasmeem-stage: "phase-1-forensics";
+  --tasmeem-fonts-status: "google-cdn-removed";
+  --tasmeem-fonts-local-loaded: "0/9";
+  --tasmeem-google-fonts-link-count: "0";
+}
