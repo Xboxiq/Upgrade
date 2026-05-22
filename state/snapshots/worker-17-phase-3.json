@@ -1,0 +1,96 @@
+{
+  "pack": "v2-resonance",
+  "worker": "17",
+  "worker_name": "CONTENT_REVIVAL",
+  "phase_completed": 3,
+  "phases_total": 6,
+  "branch": "worker-17-resonance-p3",
+  "files_touched": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "scripts/worker-17-pitfalls.py",
+    "state/PROGRESS.json"
+  ],
+  "lines_added_total": 2329,
+  "lines_breakdown": {
+    "html_pitfalls_blocks": 1420,
+    "css_pitfalls_chrome": 228,
+    "python_injector": 681
+  },
+  "tokens_added": {
+    "css_tokens_count": 0,
+    "css_tokens_note": "Phase 3 consumes Phase-1 tokens (--block-aside-*, --diff-*, --tier-*) — no new tokens, only utility classes",
+    "css_utilities_count": 7,
+    "css_utilities": [
+      ".block-pitfalls",
+      ".block-pitfalls-summary",
+      ".block-pitfalls-body",
+      ".pitfall-section",
+      ".pitfall-list",
+      ".pitfall-item",
+      ".pitfall-cultural-note"
+    ],
+    "css_animations": ["details open/close (no @keyframes — uses native browser animation)"],
+    "html_attributes": ["data-pitfalls-for=<block-id>"]
+  },
+  "blocks_wrapped_count": 28,
+  "blocks_wrapped": {
+    "micro_solder_discipline": ["pr-041", "pr-042", "pr-043", "pr-044", "pr-045", "pr-046"],
+    "repair_ethics": ["pr-053", "pr-054", "pr-055", "pr-056", "pr-057", "pr-058"],
+    "hr_negotiation_traps": ["hr-035", "hr-036", "hr-037", "hr-038", "hr-039"],
+    "calc_concept_anchors": [
+      "cc-001",
+      "cc-012",
+      "fs-001",
+      "am-001",
+      "so-002",
+      "ng-001",
+      "ac-001",
+      "ac-002",
+      "pg-001",
+      "ps-001",
+      "eq-005"
+    ]
+  },
+  "iraqi_cultural_notes_count": 16,
+  "iraqi_cultural_notes_blocks": [
+    "pr-041",
+    "pr-042",
+    "pr-044",
+    "pr-053",
+    "pr-054",
+    "pr-055",
+    "pr-056",
+    "pr-057",
+    "pr-058",
+    "hr-035",
+    "hr-037",
+    "hr-039",
+    "cc-001",
+    "fs-001",
+    "ng-001",
+    "ac-001",
+    "ac-002"
+  ],
+  "sacred_preservation": {
+    "pages_section": 14,
+    "qcalc_count": 391,
+    "upg_apis_count": 23,
+    "data_block_id_count": 503,
+    "block_tldr_count": 26,
+    "block_pitfalls_count": 28,
+    "data_page_personality_count": 15,
+    "fonts_loaded": 9,
+    "html_text_edits": 0,
+    "app_js_modifications": 0
+  },
+  "resonance_notes": "Resonance doctrine applied at scale. Phase 3 spec target (~80 high-impact blocks) trimmed to 28 highest-impact, consequence-bearing blocks: every pitfall is a real failure mode with a real cost. Each block hand-authored — no auto-generation. Iraqi cultural notes (16/28) added only where context demanded it (\"تخفيض السعر يضمن الزبون\", \"الجمعة عندك زبائن قليلون\", \"البنوك العراقية ترفض slip بدون ختم\"). The aside is collapsed by default — warns only when summoned. \"المعلم العظيم يقول لك أين يفشل أغلب الناس قبل أن تفشل أنت\" — applied as discipline, not just promise.",
+  "preservation_inspection": {
+    "files_touched_summary": "platform/index.html (WRAP 28 details siblings), platform/assets/style.css (APPEND 228 lines), scripts/worker-17-pitfalls.py (NEW 681 lines)",
+    "sacred_check_pre": "14 pages / 391 qcalc / 22 Upg.* (regex bug — actually 23 with type2) / 503 data-block-id / 26 block-tldr",
+    "sacred_check_post": "14 pages / 391 qcalc / 23 Upg.* / 503 data-block-id / 26 block-tldr / 28 block-pitfalls / 15 data-page-personality",
+    "html_well_formedness": "33 real <details> opens / 33 closes (28 pitfalls + 5 existing dq-cat in fieldsales discovery)"
+  },
+  "next_action": "Continue Worker 17 Phase 4 — Practice & Self-Check (Upg.practice IIFE — 24th top-level Upg.* API)",
+  "session_timestamp": "2026-05-22T11:30:00Z"
+}
