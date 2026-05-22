@@ -23511,3 +23511,134 @@ body[data-block-debug="1"] [data-block-id][data-prereq]::after {
    9. Zero telemetry. Zero sync. localStorage only. Zero CDN/library added.
    10. Reduced-motion + reduced-transparency + print + mobile all guarded.
    ════════════════════════════════════════════════════════════════ */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   TASMEEM v3 — Font Forensics Inventory (Worker 20 / Phase 1)
+   ────────────────────────────────────────────────────────────────────
+   This block is documentation only. No CSS rules. Phase 2-3 will use
+   this inventory to plan local font loading + token reroute.
+   ════════════════════════════════════════════════════════════════════════
+
+   Recorded on 2026-05-22. Numbers are LIVE measurements taken via grep
+   on the post-Step-1 working tree (Google Fonts <link> already removed).
+
+   ─── Pre-Phase-2 baseline (LIVE counts) ──────────────────────────────────
+
+   Total file lines (style.css):              23,513
+   Total font-family declarations:               252
+   font-family using var() (good):               165   (65% — already healthy)
+   font-family using direct strings (chaos):      82   (35% — Phase 3 target <30)
+   --font-* token definitions:                    18
+   --type-voice-* tokens (sacred, preserved):     18
+   @font-face declarations existing:               4   (will become 18+ in Phase 2)
+   Distinct font-family names mentioned:           9   (target stays at 9)
+
+   ─── --font-display redefinition map ─────────────────────────────────────
+
+   Line 16010 — :root  (Cathedral v16 W12 P1)         — base stack with Cairo
+   Line 16265 — :root  (Cathedral v16 W12 P1B)        — Thmanyah + Reem Kufi
+
+   FACT: only line 16265 (last redefinition) is currently active. Line 16010
+   is dead code (browser uses last cascade winner). Phase 3 will COLLAPSE
+   these into ONE clean :root block.
+
+   NOTE: blueprint forecasted 6 redefinitions; reality found 2. The W15
+   Resonance pack rerouted via --font-text and --font-ui tokens rather
+   than re-overwriting --font-display. Cleaner than feared.
+
+   ─── Distinct font families currently in stacks ──────────────────────────
+
+   Arabic Display:   Aref Ruqaa, Reem Kufi, Cairo, Tajawal
+   Arabic Body:      IBM Plex Sans Arabic, Readex Pro, Cairo, Tajawal
+   Latin:            Inter, system-ui, -apple-system
+   Mono:             JetBrains Mono, SF Mono, ui-monospace
+   Quote/Serif:      Fraunces (literary in psych/eq pages)
+   Ghost reference:  "Thmanyah" (mentioned in line 16265 stack but never
+                                  loaded — phantom; Phase 3 will purge)
+
+   ─── Voice tokens from Resonance v2 (preserved by W20) ───────────────────
+
+   --type-voice-hero      → Aref Ruqaa wordmark, gateway, hero
+   --type-voice-display   → Reem Kufi h1/h2 page sections
+   --type-voice-display-h → Reem Kufi h3/h4 card titles
+   --type-voice-body      → Readex Pro / IBM Plex Arabic paragraphs
+   --type-voice-ui        → Tajawal labels, buttons, breadcrumbs
+   --type-voice-numeric   → IBM Plex Arabic + JetBrains Mono tabular
+   --type-voice-code      → JetBrains Mono code blocks
+   --type-voice-accent    → Aref Ruqaa eyebrows, signatures, ornament
+   --type-voice-quote     → Fraunces literary quotes (psych/eq)
+   --type-voice-latin     → Inter mixed-Latin paragraphs
+   --type-voice-eyebrow   → Aref Ruqaa Italic eyebrow overline
+   --type-voice-signature → Aref Ruqaa Bold signatures
+   (...18 tokens — all preserved by W20, only their stack VALUES change in P3)
+
+   ─── Phase 2 plan (foreshadow) ────────────────────────────────────────────
+
+   Will download these from OFL/SIL sources to platform/assets/fonts/:
+
+   1. Aref Ruqaa            (400 + 700)            — github.com/khaledhosny/arefruqaa
+   2. Reem Kufi             (400 + 500 + 600 + 700) — google fonts repo
+   3. Cairo                 (400 + 600 + 700)       — google fonts repo
+   4. Tajawal               (300 + 400 + 500 + 700) — google fonts repo
+   5. IBM Plex Sans Arabic  (300 + 400 + 500 + 600 + 700) — github.com/IBM/plex
+   6. Readex Pro            (200 + 400 + 700)       — google fonts repo (variable)
+   7. Inter                 (variable 100..900)      — rsms.me/inter
+   8. JetBrains Mono        (400 + 500 + 700)       — jetbrains.com/mono
+   9. Fraunces              (variable opsz, ital)    — undercasetype/Fraunces
+
+   Subsetting strategy:
+   - Arabic-script fonts: subset to Arabic Unicode block (U+0600-06FF)
+                          + Arabic Presentation Forms (U+FB50-FDFF, U+FE70-FEFF)
+                          + Arabic-Indic digits (U+0660-0669)
+                          + space + common punctuation (U+0020-007F selected)
+   - Latin fonts: subset to Latin Basic + Extended-A + numbers (U+0020-024F)
+   - Total budget: target <= 280KB after subset
+                   (vs ~600KB unsubsetted from Google CDN before Phase 1)
+
+   ─── Phase 3 plan (foreshadow) ────────────────────────────────────────────
+
+   - Collapse 2 --font-display redefinitions into ONE clean :root.
+   - REPLACE-IN-PLACE values of all 18 --type-voice-* tokens to reference
+     local font names (--font-aref-ruqaa, --font-reem-kufi, etc.).
+   - Remove "Thmanyah" phantom from all stacks (replaced by real Aref Ruqaa).
+   - Add Upg.font IIFE with: list, swap, audit, getLoadedFamilies APIs.
+   - Add tas-* utility classes that wrap voice tokens (e.g. .tas-voice-hero).
+
+   ─── Discipline going forward ────────────────────────────────────────────
+
+   1. NO direct font-family in CSS rules (after P3). Always var(--type-voice-*).
+   2. NO new --font-* token redefinitions in :root after P3.
+   3. NO Google Fonts link or any CDN font reference, ever.
+   4. NO new font family added without OFL/SIL license verification.
+   5. ALL @font-face declarations live in ONE block (Phase 2 / style.css).
+
+   END TASMEEM v3 — Phase 1 Inventory. Phase 2 begins font loading.
+   ════════════════════════════════════════════════════════════════════════ */
+
+
+
+/* ════════════════════════════════════════════════════════════════
+   TASMEEM v3 — Status Tokens (Worker 20 / Phase 1)
+   These are documentation tokens. Phase 2-3 will use real font tokens.
+   ════════════════════════════════════════════════════════════════ */
+:root {
+  /* DEVOTIO offline manifest (read-only after P1) */
+  --tasmeem-stage: "phase-1-forensics";
+  --tasmeem-fonts-status: "google-cdn-removed";
+  --tasmeem-fonts-local-loaded: "0/9";
+  --tasmeem-google-fonts-link-count: "0";  /* MUST stay 0 forever */
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Worker 20 / Phase 1 — Forensics Discipline:
+   1. النص أعلاه inventory فقط — لا قواعد فعلية.
+   2. لا تعدّل أي --font-* أو --type-voice-* في هذا الـ phase.
+   3. لا تحمّل أي خط — Phase 2 لذلك.
+   4. لا تكتب @font-face هنا — Phase 2 لذلك.
+   5. الـ banner سيختفي تلقائياً عند انتهاء Phase 3.
+   6. لو رأيت Google Fonts URL في git diff → fail fast.
+   ════════════════════════════════════════════════════════════════ */
+
+/* End TASMEEM v3 / Worker 20 / Phase 1 ─────────────────────────────── */

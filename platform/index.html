@@ -32006,5 +32006,29 @@ const bird = { ...canMove(), ...canFly() };
 <!-- ATELIER v16 / Phase 4 — Mobile drawer scrim (clickable overlay, click/tap closes) -->
 <div class="drawer-scrim" data-action="close-drawer" aria-hidden="true"></div>
 
+<!-- ════════════════════════════════════════════════════════════════════
+     TASMEEM v3 — Phase 1-2 Transitional Banner (Worker 20)
+     Visible while local fonts are not yet bound to voices. Phase 3
+     will set --tasmeem-fonts-status to "phase-3-bound" and this
+     banner will hide itself automatically.
+     ════════════════════════════════════════════════════════════════════ -->
+<div id="tasmeem-transitional-banner" hidden
+     style="position:fixed; bottom:1rem; inset-inline-end:1rem;
+            background: rgba(0,0,0,0.85); color:#fff;
+            padding:.6rem 1rem; border-radius:.5rem;
+            font-family: system-ui, sans-serif; font-size:12px;
+            z-index:9999; pointer-events:none;">
+  TASMEEM Phase 1-2 transitional — system fallback active until Phase 3 binds local fonts.
+</div>
+<script>
+  (function () {
+    var b = document.getElementById('tasmeem-transitional-banner');
+    if (!b) return;
+    var rs = getComputedStyle(document.documentElement);
+    var status = rs.getPropertyValue('--tasmeem-fonts-status').trim().replace(/['"]/g, '');
+    if (status !== 'phase-3-bound') b.hidden = false;
+  })();
+</script>
+
 </body>
 </html>
