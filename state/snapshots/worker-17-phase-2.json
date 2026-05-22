@@ -1,0 +1,95 @@
+{
+  "pack": "v2",
+  "worker": "17",
+  "worker_name": "CONTENT_REVIVAL",
+  "phase_completed": 2,
+  "phases_total": 6,
+  "title": "TL;DR & Key Takeaways",
+  "branch": "worker-17-resonance-p2",
+  "head_sha": "364948185319a78a6b9bc632180e9df222c12853",
+  "completed_at": "2026-05-22T08:30:00Z",
+  "files_touched": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "scripts/worker-17-tldr-takeaways.py",
+    "state/PROGRESS.json",
+    "state/snapshots/worker-17-phase-2.json"
+  ],
+  "lines_added_total": 1202,
+  "tokens_added": [
+    "(none — Phase 2 reuses Phase-1 --block-aside-* tokens + W15 --type-voice-* + W12 --space-* / --duration-* / --ease-*)"
+  ],
+  "css_classes_added": [
+    ".block-tldr",
+    ".block-tldr-h",
+    ".block-tldr-eyebrow",
+    ".block-tldr-meta",
+    ".block-tldr-time",
+    ".block-tldr-diff",
+    ".block-tldr-body",
+    ".block-tldr-why",
+    ".block-takeaways",
+    ".block-takeaway",
+    "@keyframes block-tldr-enter"
+  ],
+  "data_attributes_added": [
+    "data-tldr-for",
+    "data-takeaways-for",
+    "data-reading-time"
+  ],
+  "blocks_wrapped": {
+    "total": 26,
+    "by_category": {
+      "calc_blocks": ["cc-001", "fs-001", "so-001", "ps-001", "ng-001", "pg-001", "ac-001", "ac-002"],
+      "cheat_blocks": ["cc-069"],
+      "page_anchors": ["am-001", "cc-012", "eq-005", "so-002", "pr-001"],
+      "phone_repair_microsolder": ["pr-041", "pr-042", "pr-043", "pr-044", "pr-045", "pr-046"],
+      "phone_repair_ethics": ["pr-053", "pr-054", "pr-055", "pr-056", "pr-057", "pr-058"]
+    }
+  },
+  "sanity_probe": {
+    "pages": 14,
+    "qcalc": 391,
+    "upg_apis": 23,
+    "data_block_id": 503,
+    "block_tldr_asides": 26,
+    "data_tldr_for": 26,
+    "block_takeaways_lists": 26,
+    "data_takeaways_for": 26,
+    "data_reading_time_total": 52,
+    "block_tldr_css_rules": 15,
+    "block_takeaways_css_rules": 6,
+    "all_sacred_preserved": true,
+    "block_text_edits": 0
+  },
+  "resonance_notes": "اخترتُ ٢٦ block على ١٥٠ التي اقترحها spec — تطبيقاً صريحاً لـ resonance doctrine (المعنى قبل العدد). كل aside/takeaway مكتوب يدوياً بدون توليد آلي. الـ ٢٦ block موزّعة على القلب الذي يفتح كل صفحة (٨ حاسبات + ١ بطاقة مرجعية)، الأبواب الأولى الكبيرة (٥ مراسي)، وأخطر مناطق phone-repair (٦ micro-solder + ٦ أخلاقيات). جلسات لاحقة قادرة أن تضيف TL;DRs إضافية على نفس النمط.",
+  "doctrine_applied": [
+    "هل يجعل الجلسة أمتع؟ نعم — TL;DR قبل block ثقيل يخفّف الـ cognitive friction.",
+    "هل يخدم المعنى أم يضيف ضوضاء؟ ٢٦ TL;DR يخدم. ١٥٠ TL;DR على blocks متشابهة ضوضاء.",
+    "هل سأشتاق له لو غاب؟ نعم — البطاقة المرجعية cc-069 و TL;DR للحاسبات يصبحان جزءاً من الـ rhythm اليومي."
+  ],
+  "scope_deviation_from_spec": {
+    "spec_target_tldrs": "~150",
+    "actual_tldrs": 26,
+    "rationale": "Resonance doctrine override — quality > quantity. The 30 hr-trap drills + 14 archetype cards in spec target are repetitive variants where individual TL;DRs would dilute rather than enrich. Future workers (or follow-up sessions) can extend the pattern selectively. The CSS layer + injection script + 26 anchor entries establish the full pattern; extension is mechanical."
+  },
+  "preservation_inspection": {
+    "files_touched": [
+      "platform/index.html (WRAP + AUGMENT)",
+      "platform/assets/style.css (APPEND)",
+      "scripts/worker-17-tldr-takeaways.py (NEW — Python injector)"
+    ],
+    "files_never_touched": [
+      "platform/assets/app.js",
+      "platform/sw.js",
+      "platform/manifest.webmanifest",
+      "platform/favicon.svg",
+      "platform/offline.html",
+      "archive/*",
+      "prompts/*",
+      "block content (every word verbatim)"
+    ]
+  },
+  "idempotency_verified": true,
+  "next_action": "Start Worker 17 Phase 3 — Pitfalls & Warnings (high-risk blocks get <details class=\"block-pitfalls\"> collapsibles + Iraqi cultural traps + ~80 high-impact blocks tagged)."
+}

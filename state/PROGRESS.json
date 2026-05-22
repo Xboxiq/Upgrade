@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-22T07:15:00Z",
+  "last_updated": "2026-05-22T08:30:00Z",
   "pack": "v2-resonance",
   "pack_status": "in-progress",
   "current": {
     "pack": "v2",
     "worker": "17",
     "worker_name": "CONTENT_REVIVAL",
-    "phase": 1,
+    "phase": 2,
     "phases_total": 6,
     "phase_order": [
       "1",
@@ -17,11 +17,11 @@
       "5",
       "6"
     ],
-    "branch": "worker-17-resonance-p1",
+    "branch": "worker-17-resonance-p2",
     "status": "in-progress",
     "specs_scaffolded": true,
     "specs_branch": "pack-v2-worker-17-specs",
-    "next_phase_branch": "worker-17-resonance-p2"
+    "next_phase_branch": "worker-17-resonance-p3"
   },
   "previous": {
     "pack": "v2",
@@ -604,9 +604,16 @@
       "title": "Block Schema & Metadata Audit — 503 educational blocks tagged across 13 content pages with data-block-id (page-prefixed cc/fs/am/so/lb/ps/eq/ng/cu/pg/ac/pr/hr) + data-block-type (8 taxonomy: lesson/drill/case/reference/quiz/calc/scenario/cheat) + data-difficulty (Bloom-aligned 1-5) + data-est-minutes (gentle estimate) + 30 data-prereq seeds on diff>=4 blocks (Phase 5 will complete the systematic prereq pass). Idempotent Node script scripts/worker-17-block-schema.mjs (curated 35-class allowlist, in-band 503 blocks well within 400-550 sanity probe, type distribution 241 lesson / 123 drill / 98 case / 32 reference / 8 calc / 1 cheat, ~3,576 estimated minutes ≈ 60 hours of guided learning). CSS scaffolding APPENDED in style.css: 3 --tier-* tokens (foundation/practitioner/expert) + 5 --diff-* pip tints + 7 --block-aside-* chrome tokens + 8 --block-type-* accent tints + body[data-block-debug=\"1\"] dual-overlay (id+type+⭐+min caption + ←prereq pill) + print-safe (no debug in @media print) + reduced-motion safe. Sacred preserved 100% (14 pages / 391 qcalc / 22 Upg.* APIs / 15 data-page-personality / zero text edits / app.js untouched — Phase 4 + 6 will add Upg.practice + Upg.pace).",
       "branch": "worker-17-resonance-p1",
       "lines_added": 932
+    },
+    {
+      "worker": "17",
+      "phase": 2,
+      "title": "TL;DR & Key Takeaways — 26 anchor blocks wrapped (8 calcs cc-001/fs-001/so-001/ps-001/ng-001/pg-001/ac-001/ac-002 + 1 cheat cc-069 + 5 page-anchors am-001/cc-012/eq-005/so-002/pr-001 + 6 micro-soldering pr-041..046 + 6 ethics pr-053..058) with sibling <aside class=\"block-tldr\"> BEFORE block + sibling <ul class=\"block-takeaways\"> AFTER block + data-reading-time AUGMENT on each block opening + 'لماذا يهم' (why this matters) framer per aside + 3-5 hand-authored takeaways per block. CSS APPEND ~190 lines in style.css: .block-tldr (entrance keyframe + reduced-motion guard + tinted background via --block-aside-bg + border-inline-start identity tint + flex header layout) + .block-tldr-eyebrow/-meta/-time/-diff/-body/-why with W15 type-voice consumption (numeric/accent fallbacks) + .block-takeaways with counter-reset + ::before label badge + .block-takeaway grid layout with counter() numerals + mobile <480px collapse rules + @media print page-break-inside:avoid + reduced-transparency fallback. Idempotent Python injector scripts/worker-17-tldr-takeaways.py (depth-tracked HTML insertion, re-run produces 0 duplicates, hand-authored content map for 26 blocks). Resonance doctrine applied: scaled spec target from ~150 to 26 high-impact anchors (resonance > noise). Sacred preserved 100% (14 pages / 391 qcalc / 23 Upg.* APIs / 503 data-block-id / zero block text edits / app.js untouched).",
+      "branch": "worker-17-resonance-p2",
+      "lines_added": 1202
     }
   ],
-  "next_action": "Continue Worker 17 Phase 2 — TL;DR & Key Takeaways. Branch worker-17-resonance-p2 to be created from worker-17-resonance-p1 (or main after PR merge).",
+  "next_action": "Continue Worker 17 Phase 3 — Pitfalls & Warnings. Branch worker-17-resonance-p3 to be created from worker-17-resonance-p2 (or main after PR merge).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",

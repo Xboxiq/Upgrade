@@ -22065,3 +22065,201 @@ body[data-block-debug="1"] [data-block-id][data-prereq]::after {
    8. dashboard / gateway / myprogress carry no pedagogical blocks
       (no schema attrs there — by design).
    ════════════════════════════════════════════════════════════════════════ */
+
+
+
+/* ════════════════════════════════════════════════════════════════
+   RESONANCE v2 — Worker 17 / Phase 2 — TL;DR & Key Takeaways
+   Pre-block summary asides + post-block takeaway lists.
+   AUGMENT-only: never modifies block content itself.
+   Consumes Phase-1 tokens (--block-aside-*) + W15 type voices.
+   ════════════════════════════════════════════════════════════════ */
+
+/* ─── TL;DR Aside ─── */
+.block-tldr {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--block-aside-pad-b, 14px) var(--block-aside-pad-i, 18px);
+  margin-block-end: var(--space-3);
+  background: var(--block-aside-bg, color-mix(in oklch, var(--color-tint, var(--color-brand)) 5%, var(--color-surface-1)));
+  border-inline-start: 3px solid var(--block-aside-border, color-mix(in oklch, var(--color-tint, var(--color-brand)) 70%, var(--color-border)));
+  border-radius: var(--block-aside-radius, 0.6rem);
+  position: relative;
+  animation: block-tldr-enter var(--duration-base, 320ms) var(--ease-out, cubic-bezier(0.22,0.61,0.36,1)) both;
+}
+
+@keyframes block-tldr-enter {
+  from { opacity: 0; transform: translateY(-2px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .block-tldr { animation: none; }
+}
+
+.block-tldr-h {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.block-tldr-eyebrow {
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wider);
+  color: color-mix(in oklch, var(--color-text-faint) 80%, var(--color-tint, var(--color-brand)));
+  text-transform: none;
+}
+
+.block-tldr-meta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+}
+
+.block-tldr-time {
+  font-family: var(--type-voice-numeric, var(--font-numeric));
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+.block-tldr-diff {
+  letter-spacing: -0.05em;
+  color: color-mix(in oklch, var(--color-tint, var(--color-brand)) 80%, var(--color-text));
+}
+
+.block-tldr-body {
+  margin: 0;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.block-tldr-why {
+  margin: 0;
+  padding: var(--space-2) 0 0 0;
+  border-block-start: 1px dashed color-mix(in oklch, var(--color-border) 70%, transparent);
+  font-size: var(--text-sm);
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
+.block-tldr-why strong {
+  color: color-mix(in oklch, var(--color-text) 90%, var(--color-tint, var(--color-brand)));
+  font-weight: 600;
+  font-style: normal;
+  margin-inline-end: 0.4em;
+}
+
+/* ─── Takeaways List ─── */
+.block-takeaways {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  margin-block-start: var(--space-3);
+  background: color-mix(in oklch, var(--color-tint, var(--color-brand)) 4%, var(--color-surface-1));
+  border-radius: var(--block-aside-radius, 0.6rem);
+  position: relative;
+  counter-reset: takeaway;
+}
+
+.block-takeaways::before {
+  content: "نقاط للاسترجاع";
+  position: absolute;
+  top: -0.7em;
+  inset-inline-start: var(--space-3);
+  padding: 0.1em 0.6em;
+  background: var(--color-surface-1);
+  font-family: var(--type-voice-accent, var(--font-accent));
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  border-radius: 0.3rem;
+}
+
+.block-takeaway {
+  counter-increment: takeaway;
+  display: grid;
+  grid-template-columns: 1.6em 1fr;
+  gap: var(--space-2);
+  align-items: baseline;
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed, 1.7);
+  margin: 0;
+}
+
+.block-takeaway::before {
+  content: counter(takeaway);
+  font-family: var(--type-voice-numeric, var(--font-numeric));
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-weight: 700;
+  font-size: var(--text-xs);
+  color: color-mix(in oklch, var(--color-tint, var(--color-brand)) 80%, var(--color-text));
+  background: color-mix(in oklch, var(--color-surface-2) 70%, transparent);
+  border-radius: 0.3rem;
+  text-align: center;
+  padding: 0.1em 0;
+  align-self: start;
+}
+
+/* ─── Mobile refinements ─── */
+@media (max-width: 480px) {
+  .block-tldr,
+  .block-takeaways {
+    padding: var(--space-2);
+  }
+  .block-tldr-h {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+  }
+  .block-tldr-meta {
+    font-size: 0.7rem;
+  }
+}
+
+/* ─── Print: TL;DR + Takeaways visible, no animation ─── */
+@media print {
+  .block-tldr {
+    animation: none;
+    border-inline-start: 2px solid #000;
+    background: transparent;
+    page-break-inside: avoid;
+  }
+  .block-takeaways {
+    background: transparent;
+    page-break-inside: avoid;
+  }
+  .block-takeaways::before {
+    background: transparent;
+    border-color: #000;
+    color: #000;
+  }
+}
+
+/* ─── Reduced-transparency fallback (W14 P1 honor) ─── */
+@media (prefers-reduced-transparency: reduce) {
+  .block-tldr,
+  .block-takeaways {
+    background: var(--color-surface-1);
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Discipline Comment — Worker 17 / Phase 2
+   1. TL;DR aside ALWAYS precedes the block (DOM order).
+   2. Takeaways list ALWAYS follows the block.
+   3. Both reference the block via data-tldr-for / data-takeaways-for
+      (matching block's data-block-id).
+   4. TL;DR body ≤ 2 sentences. "لماذا يهم" ≤ 1 sentence.
+   5. Takeaways: 3 minimum, 5 maximum, ≤14 words each.
+   6. Never auto-generate text. Manual write-up only.
+   7. Resonance doctrine: prefer fewer authentic TL;DRs over many
+      noisy ones. 26 anchor blocks Phase 2 (calcs + cheat + microsolder
+      + ethics + page openers). Future sessions extend.
+   ════════════════════════════════════════════════════════════════ */
