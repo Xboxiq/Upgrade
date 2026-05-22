@@ -1,0 +1,85 @@
+{
+  "pack": "v3",
+  "pack_name": "DEVOTIO",
+  "worker": "20",
+  "worker_name": "TASMEEM_RECONSTRUCTION",
+  "phase_completed": 1,
+  "phase_title": "Font Forensics — Google Fonts CDN executed + 252 font-family inventoried + transitional banner",
+  "phases_total": 6,
+  "branch": "worker-20-devotio",
+  "commit_subject": "phase 1 (devotio): font forensics — remove google fonts cdn + inventory 252 font-family + transitional banner",
+  "files_touched": [
+    "platform/index.html",
+    "platform/assets/style.css"
+  ],
+  "lines_added_total": 201,
+  "lines_deleted_total": 3,
+  "tokens_added": [
+    "--tasmeem-stage",
+    "--tasmeem-fonts-status",
+    "--tasmeem-fonts-local-loaded",
+    "--tasmeem-google-fonts-link-count",
+    "--tasmeem-pack",
+    "--tasmeem-worker",
+    "--tasmeem-phase"
+  ],
+  "fonts_added_offline": [],
+  "google_fonts_links_removed": 3,
+  "preconnect_lines_removed": 2,
+  "stylesheet_links_removed": 1,
+  "inventory_baseline": {
+    "font_family_declarations_total": 252,
+    "font_family_using_var": 165,
+    "font_family_direct_strings": 87,
+    "font_face_declarations_existing": 4,
+    "distinct_font_names": 9,
+    "type_voice_tokens_unique": 11,
+    "type_voice_token_occurrences": 138,
+    "font_display_redefinitions": 6,
+    "font_display_active_line_estimate": 20131,
+    "ghost_fonts": ["Thmanyah"]
+  },
+  "voice_tokens_preserved": [
+    "--type-voice-hero",
+    "--type-voice-display",
+    "--type-voice-body",
+    "--type-voice-ui",
+    "--type-voice-numeric",
+    "--type-voice-code",
+    "--type-voice-accent",
+    "--type-voice-quote",
+    "--type-voice-quote-literary",
+    "--type-voice-latin",
+    "--type-voice-wordmark"
+  ],
+  "sacred_check": {
+    "pages": 14,
+    "qcalc": 391,
+    "upg_apis": 24,
+    "type_voice_lines": 154,
+    "fonts_googleapis_links": 0,
+    "fonts_gstatic_links": 0,
+    "preconnect_links": 0,
+    "tasmeem_markers_in_css": 4,
+    "tasmeem_stage_token": 1,
+    "transitional_banner_refs": 2
+  },
+  "offline_check": {
+    "external_requests": 0,
+    "google_fonts_links": 0,
+    "cdn_references": 0,
+    "verdict": "platform now self-hosted; system fallback active until Phase 3 binds local fonts"
+  },
+  "devotion_notes": "الجذر الأول: قطعنا الحبل السُّرّي مع شبكة Google. المنصة الآن تحت سيادتها. ما بين Phase 1 و Phase 3 ستظهر الواجهة بخط النظام — وذلك مقصود ليُذكّرنا أن الفخامة ليست في المظهر، بل في السيادة على المصدر.",
+  "preservation_verdict": {
+    "fourteen_pages": "preserved",
+    "three_ninety_one_qcalc": "preserved",
+    "twentyfour_upg_apis": "preserved",
+    "type_scale_tokens": "untouched",
+    "type_voice_tokens": "untouched (values reroute in Phase 3)",
+    "identity_tints": "untouched (Worker 21 owns)",
+    "all_w12_w15_voice_bindings": "intact",
+    "app_js": "untouched"
+  },
+  "next_action": "Worker 20 Phase 2 — Local Font Load: download 9 OFL .woff2 families to platform/assets/fonts/, write 18+ @font-face with font-display: swap, subset Arabic+Latin Basic, total payload ≤280KB."
+}
