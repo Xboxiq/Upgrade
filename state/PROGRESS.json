@@ -1,8 +1,18 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-22T16:45:00Z",
+  "last_updated": "2026-05-22T18:30:00Z",
   "pack": "v2-resonance",
-  "pack_status": "in-progress",
+  "pack_status": "blocked-needs-w18-w19-scaffold",
+  "blocker": {
+    "reason": "Workers 18 (LEARNING_SHELL) and 19 (MICRO_POLISH) have no spec files in prompts/v2/. Cannot proceed with AUTO_PILOT 15→19 autonomously because AUTO_PILOT v2 forbids touching prompts/v2/* without explicit user permission.",
+    "discovered_at": "2026-05-22T18:30:00Z",
+    "options_for_user": [
+      "A) Authorize scaffolding of prompts/v2/18_WORKER_LEARNING_SHELL.md + 18_PHASE_*.md + 19_WORKER_MICRO_POLISH.md + 19_PHASE_*.md, then resume AUTO_PILOT.",
+      "B) Run CONTENT_REORDER_RITUAL first (already scaffolded at prompts/v2/CONTENT_REORDER_RITUAL.md). It consumes data-difficulty / data-prereq / data-est-minutes from Worker 17 and is the natural next step.",
+      "C) Declare Pack v2 complete at Worker 17 (15→17 done is meaningful — TYPOGRAPHY_SOUL + VITAL_UI + CONTENT_REVIVAL form a coherent triad)."
+    ],
+    "recommended": "B then A then resume AUTO_PILOT for 18→19. Ritual produces the curriculum surface that Worker 18 (LEARNING_SHELL) is meant to wrap."
+  },
   "current": {
     "pack": "v2",
     "worker": "17",
@@ -18,12 +28,14 @@
       "6"
     ],
     "branch": "worker-17-resonance-p6",
-    "status": "in-progress",
+    "status": "done",
     "specs_scaffolded": true,
     "specs_branch": "pack-v2-worker-17-specs",
     "next_phase_branch": null,
     "worker_complete": true,
-    "pr_pending": true
+    "pr_pending": false,
+    "merged_pr": 73,
+    "merged_at": "2026-05-22T17:00:00Z"
   },
   "previous": {
     "pack": "v2",
@@ -643,7 +655,7 @@
       "lines_added": 7987
     }
   ],
-  "next_action": "Worker 17 complete (6/6 phases). Open PR worker-17-resonance-p6 → main with full Worker 17 summary. After user merges: run CONTENT_REORDER_RITUAL (consumes data-difficulty + data-prereq + data-est-minutes from W17). Then start Worker 18 (LEARNING_SHELL) Phase 1 — consumes Upg.practice (W17 P4) + Upg.pace (W17 P6) for the personal training shell.",
+  "next_action": "BLOCKED. Pack v2 Workers 15→17 fully merged into main (PRs #65, #72, #73 lineage). Next gate requires user decision: (A) authorize scaffolding of Worker 18/19 specs, (B) run CONTENT_REORDER_RITUAL first (already scaffolded), or (C) declare Pack v2 done at Worker 17. AUTO_PILOT v2 cannot proceed autonomously because prompts/v2/18_*.md and prompts/v2/19_*.md do not exist and the prompt forbids touching prompts/v2/* without explicit permission.",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
@@ -691,21 +703,22 @@
         "id": "17",
         "name": "CONTENT_REVIVAL",
         "phases": 6,
-        "status": "completed-pending-pr",
+        "status": "completed",
         "specs_branch": "pack-v2-worker-17-specs",
-        "phases_completed": [1, 2, 3, 4, 5, 6]
+        "phases_completed": [1, 2, 3, 4, 5, 6],
+        "merged_pr": 73
       },
       {
         "id": "18",
         "name": "LEARNING_SHELL",
         "phases": 4,
-        "status": "deferred"
+        "status": "blocked-no-specs"
       },
       {
         "id": "19",
         "name": "MICRO_POLISH",
         "phases": 4,
-        "status": "deferred"
+        "status": "blocked-no-specs"
       }
     ],
     "rituals": [
