@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-22T14:00:00Z",
+  "last_updated": "2026-05-22T16:30:00Z",
   "pack": "v2-resonance",
   "pack_status": "in-progress",
   "current": {
     "pack": "v2",
     "worker": "17",
     "worker_name": "CONTENT_REVIVAL",
-    "phase": 4,
+    "phase": 5,
     "phases_total": 6,
     "phase_order": [
       "1",
@@ -17,11 +17,11 @@
       "5",
       "6"
     ],
-    "branch": "worker-17-resonance-p4b",
+    "branch": "worker-17-resonance-p5",
     "status": "in-progress",
     "specs_scaffolded": true,
     "specs_branch": "pack-v2-worker-17-specs",
-    "next_phase_branch": "worker-17-resonance-p5"
+    "next_phase_branch": "worker-17-resonance-p6"
   },
   "previous": {
     "pack": "v2",
@@ -625,9 +625,16 @@
       "title": "Practice Drills & Self-Check — 62 practice sections (191 recall questions + answer reveals + reflection prompts) across 13 content pages + Upg.practice IIFE (23rd API, localStorage-only tracking: tried/reflect/stats/reset) + CSS ~195 lines (block-practice chrome + mobile + print + reduced-motion) + idempotent Node injector script.",
       "branch": "worker-17-resonance-p4b",
       "lines_added": 5235
+    },
+    {
+      "worker": "17",
+      "phase": 5,
+      "title": "Cross-References & Learning Bridges — 62 anchor blocks (those with practice from P4) augmented with data-related (3-5 ids each, in-page + cross-page mix) + completed data-prereq pass (74 total: 30 legacy P1 + 44 new on anchors, capped at 3 per block, difficulty < block's own) + 51 block-prereq-chip wrappers inserted BEFORE block (excluded only from 11 entry-level anchors with no prereqs) + 62 block-bridge in-page nav cards inserted AFTER each block-practice (DOM order: aside-tldr → block-prereq-chip → block → ul-takeaways → details-pitfalls → section-block-practice → nav-block-bridge) with 2-3 items per card using 7 fixed relations (extends/applies-in/contrasts/prereq-for/cheat/case/practice) + 8 sacred cross-page hero bridges (psych→eq, callcenter→customercare, accounting→accountmgr, hrmastery→negotiation, social→fieldsales, programming→phonerepair, lab→social, eq→negotiation) inserted before page closing </section> with linear-gradient background + radial halo ::before + tinted CTA button. CSS APPEND ~325 lines in style.css: .block-prereq-chip + 6 sub-elements (icon/label/list/item with hover+focus-visible) + .block-bridge container + 8 sub-elements (h/eyebrow/title/desc/list/item with RTL/LTR-aware hover translate + .--cheat variant) + .block-bridge--cross-page (linear-gradient + radial ::before pseudo + larger title) + .block-bridge-cta (tinted button with spring transform + box-shadow) + mobile <480px collapse + @media print fallbacks (transparent backgrounds, page-break-inside:avoid) + reduced-motion guard (transitions disabled, transform reset) + reduced-transparency fallback. Idempotent Python injector scripts/worker-17-bridges.py (~600 lines including 62-entry content map + 8 cross-bridge map; processes anchors in REVERSE line order to preserve indices; per-anchor idempotency via data-prereq-for/data-bridge-for guards; per-cross-bridge idempotency via data-cross-bridge-from guard). Resonance doctrine applied: spec target ~250 blocks → 62 (resonance > noise; only practice-anchored blocks where user already invested time). Sacred preserved 100% (14 pages / 391 qcalc / 23 Upg.* APIs / 503 data-block-id / 26 block-tldr / 28 block-pitfalls / 62 block-practice / app.js untouched / no new API).",
+      "branch": "worker-17-resonance-p5",
+      "lines_added": 2099
     }
   ],
-  "next_action": "Continue Worker 17 Phase 5 — Cross-Reference Paths. Branch worker-17-resonance-p5 from main (after PR merge).",
+  "next_action": "Continue Worker 17 Phase 6 — Pacing & Mastery. Branch worker-17-resonance-p6 from main (after PR merge).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
