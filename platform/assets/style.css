@@ -23512,17 +23512,166 @@ body[data-block-debug="1"] [data-block-id][data-prereq]::after {
    10. Reduced-motion + reduced-transparency + print + mobile all guarded.
    ════════════════════════════════════════════════════════════════ */
 
-/* TASMEEM v3 — Font Forensics Inventory (Worker 20 / Phase 1)
-   Baseline recorded on 2026-05-22.
-   Total font-family declarations and redefinition map captured for upcoming local-font migration.
-   --font-display redefinitions observed at: 16010, 16265, 19706, 19896, 20060, 20131.
-   Voice families preserved: Aref Ruqaa, Reem Kufi, Cairo, Tajawal, IBM Plex Sans Arabic, Readex Pro, Inter, JetBrains Mono, Fraunces.
-   Phase 2 target: local .woff2 only in platform/assets/fonts/, zero CDN, no token renames.
-*/
+/* ════════════════════════════════════════════════════════════════════════
+   TASMEEM v3 — Font Forensics Inventory (Worker 20 / Phase 1)
+   ────────────────────────────────────────────────────────────────────────
+   This block is documentation only. No CSS rules. Phases 2-3 will use
+   this inventory to plan local font loading + token reroute.
 
+   Baseline recorded: 2026-05-22.
+   Verification date:  see commit history (worker-20-devotio-p2 branch).
+   ════════════════════════════════════════════════════════════════════════
+
+   ─── Pre-Phase-1 baseline (measured on this very file) ──────────────────
+
+   Total font-family declarations:        253
+   font-family using var() (tokens):      165   (~65% — already healthy)
+   font-family using direct strings:        5   (legacy, will reach 0 in P3)
+   @font-face declarations existing:        4   (thmanyah/ stubs — files
+                                                 not yet committed; P2 adds 22 more)
+   Distinct font families in stacks:        9   (Aref Ruqaa, Reem Kufi,
+                                                 Cairo, Tajawal, IBM Plex
+                                                 Sans Arabic, Readex Pro,
+                                                 Inter, JetBrains Mono,
+                                                 Fraunces — target stays at 9)
+
+   ─── --font-* token redefinition map (18 redefinitions across :root) ────
+
+   The Cathedral lineage produced 18 :root redefinitions for --font-*
+   tokens. Only the LAST cascade winner is active at runtime — the rest
+   are dead code. Phase 3 collapses them all into ONE clean :root block.
+
+   Active --font-display redefinitions (--font-display only):
+     line 16010 — :root  (Cathedral v16 W12 P1)        — base Cairo stack
+     line 16265 — :root  (Cathedral v16 W12 P1B)       — Thmanyah ambition
+
+   FACT: line 16265 is currently the active --font-display value.
+   Cathedral v16 W15 stacks redefine sibling tokens
+   (--font-wordmark, --font-hero, --font-text, --font-numeric,
+    --font-accent, --font-mono, --font-ui, --font-latin,
+    --font-quote-literary, --font-num-display, --font-cairo-fallback)
+   at lines 19706, 19711, 19896, 20060, 20131, 20135, 20139.
+   Phase 3 will COLLAPSE all 18 redefinitions into ONE :root and
+   route them through local font names exclusively.
+
+   ─── Distinct font families currently in stacks ─────────────────────────
+
+   Arabic Display:   Aref Ruqaa, Reem Kufi, Cairo, Tajawal
+   Arabic Body:      IBM Plex Sans Arabic, Readex Pro, Cairo, Tajawal
+   Latin:            Inter, system-ui, -apple-system
+   Mono:             JetBrains Mono, SF Mono, ui-monospace
+   Quote/Serif:      Fraunces (literary in psych/eq pages)
+   Ghost reference:  "Thmanyah" (mentioned but never loaded — phantom).
+                     Phase 1 keeps the four thmanyah/* @font-face stubs;
+                     they remain harmless (browser falls through to
+                     Reem Kufi/Aref Ruqaa/Cairo until the owner provides
+                     a private licensed copy). NOT in MANIFEST.json.
+
+   ─── Voice tokens from Resonance v2 (preserved verbatim by W20) ─────────
+
+   --type-voice-hero            → Aref Ruqaa wordmark, gateway, hero
+   --type-voice-display         → Reem Kufi h1/h2 page sections
+   --type-voice-body            → Readex Pro / IBM Plex Arabic paragraphs
+   --type-voice-ui              → Tajawal labels, buttons, breadcrumbs
+   --type-voice-numeric         → IBM Plex Arabic + JetBrains Mono tabular
+   --type-voice-code            → JetBrains Mono code blocks
+   --type-voice-accent          → Aref Ruqaa eyebrows, signatures
+   --type-voice-quote           → Fraunces literary quotes (psych/eq)
+   --type-voice-quote-literary  → Fraunces with old-style figures
+   --type-voice-latin           → Inter mixed-Latin paragraphs
+   --type-voice-wordmark        → Aref Ruqaa Bold for the brand mark
+
+   Total: 11 voice tokens (Resonance v2 final count). Phase 3 keeps
+   every name and value structure identical; only the FIRST family in
+   each fallback stack changes (system → local woff2).
+
+   ─── Phase 2 plan (foreshadow — what is being scaffolded right now) ─────
+
+   Will download these from official OFL/SIL sources to
+   platform/assets/fonts/<family>/. See platform/assets/fonts/MANIFEST.json
+   for the authoritative single-source-of-truth contract.
+
+   1. Aref Ruqaa            (400 + 700)             — google/fonts
+   2. Reem Kufi             (variable wght 400-700) — google/fonts
+   3. Cairo                 (400 + 600 + 700)       — google/fonts
+   4. Tajawal               (300 + 400 + 500 + 700) — google/fonts
+   5. IBM Plex Sans Arabic  (300 + 400 + 500 + 600 + 700) — IBM/plex
+   6. Readex Pro            (variable wght 200-700) — google/fonts
+   7. Inter                 (variable wght 100-900) — rsms/inter
+   8. JetBrains Mono        (400 + 500 + 700)       — JetBrains/JetBrainsMono
+   9. Fraunces              (variable opsz/wght + italic) — undercasetype/Fraunces
+
+   Subsetting strategy (per platform/assets/fonts/MANIFEST.json
+   "subset_targets"):
+     - Arabic-script fonts: U+0600-06FF + U+0750-077F + U+0660-0669
+                            + U+FB50-FDFF + U+FE70-FEFF + U+0020-007F
+     - Latin fonts:         U+0020-024F + U+1E00-1EFF + U+2000-206F
+     - Mono fonts:          Latin range + digits only
+     - IBM Plex (numeric):  Arabic + Arabic-Indic digits + Latin digits
+   Total payload budget:    <= 320 KB after subset (target).
+
+   Phase 2 status as of this commit: STRUCTURALLY scaffolded
+   (folders + READMEs + MANIFEST + scripts/worker-20-bootstrap.sh).
+   Binaries acquisition is BLOCKED-pending-fonts; the sandbox
+   network is INTEGRATIONS_ONLY. Owner runs the bootstrap once on
+   a workstation; fonts arrive; Phase 3 unblocks.
+
+   ─── Phase 3 plan (foreshadow — voice bindings + collapse) ──────────────
+
+   - Collapse 18 :root redefinitions into ONE clean :root block.
+   - APPEND 22 @font-face declarations (one per woff2) referencing
+     platform/assets/fonts/<family>/<file>.woff2 with font-display: swap,
+     unicode-range narrow, font-feature-settings tuned per voice.
+   - REPLACE-IN-PLACE first family of every --type-voice-* fallback stack
+     to reference the local font (system fallback retained as last resort).
+   - Add Upg.font IIFE (the 25th Upg.* API) with: list(), swap(name),
+     audit(), getLoadedFamilies(), isReady(name).
+   - Update --tasmeem-stage to "phase-3-bound" and --tasmeem-fonts-status
+     to "phase-3-bound" (drives transitional-banner auto-hide below).
+   - Set --tasmeem-fonts-local-loaded to "9/9".
+   - Phase 3 acceptance: 0 system fallback chosen for primary text on
+     all 14 pages (verified via document.fonts.check API).
+
+   ─── Discipline going forward (enforced by Phases 4-7) ──────────────────
+
+   1. NO direct font-family in CSS rules (after P3).
+      Always var(--type-voice-*) or var(--font-*) — never the literal name.
+   2. NO new --font-* token redefinitions in :root after P3.
+   3. NO Google Fonts link, no fonts.gstatic.com, no CDN font reference,
+      ever again.  --tasmeem-google-fonts-link-count must stay "0".
+   4. NO new font family added without OFL/SIL license verification AND
+      MANIFEST.json edit AND license file commit.
+   5. ALL @font-face declarations live in ONE block (Phase 3 / style.css
+      around line 16000, BEFORE the :root --font-* token block).
+   6. Subsetting must keep total payload <= 320 KB.
+     Re-run scripts/worker-20-bootstrap.sh after editing MANIFEST.
+
+   END TASMEEM v3 — Phase 1 Inventory.  Phase 2 begins font acquisition.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ════════════════════════════════════════════════════════════════
+   TASMEEM v3 — Status Tokens (Worker 20 / Phase 1)
+   These are documentation tokens consumed by the transitional banner
+   in index.html and (Phase 3 onwards) by Upg.font. Phase 2-3 will
+   use real font tokens in addition to these markers.
+   ════════════════════════════════════════════════════════════════ */
 :root {
-  --tasmeem-stage: "phase-1-forensics";
-  --tasmeem-fonts-status: "google-cdn-removed";
-  --tasmeem-fonts-local-loaded: "0/9";
-  --tasmeem-google-fonts-link-count: "0";
+  /* DEVOTIO offline manifest (read-only after P1 except where noted) */
+  --tasmeem-stage: "phase-1-forensics";          /* P3 sets to "phase-3-bound" */
+  --tasmeem-fonts-status: "google-cdn-removed";  /* P3 sets to "phase-3-bound" */
+  --tasmeem-fonts-local-loaded: "0/9";           /* P3 sets to "9/9" */
+  --tasmeem-google-fonts-link-count: "0";        /* MUST stay "0" forever */
 }
+
+/* ════════════════════════════════════════════════════════════════
+   Worker 20 / Phase 1 — Forensics Discipline:
+   1. The block above is inventory ONLY — no CSS rules, no behavior.
+   2. Do not modify any --font-* or --type-voice-* in this phase.
+   3. Do not load any font in this phase — Phase 2 owns acquisition.
+   4. Do not write @font-face here — Phase 3 owns voice bindings.
+   5. The transitional banner in index.html auto-hides when
+      --tasmeem-fonts-status becomes "phase-3-bound".
+   6. If Google Fonts URL appears in git diff again -> fail fast.
+   ════════════════════════════════════════════════════════════════ */
+
+/* End TASMEEM v3 / Worker 20 / Phase 1 ─────────────────────────────── */
