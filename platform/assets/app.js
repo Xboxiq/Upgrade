@@ -16579,3 +16579,118 @@ document.addEventListener('DOMContentLoaded', () => {
  * Sacred preserved: 14 pages / 391 qcalc / 23 prior Upg.* APIs +
  *                   type2 (= 24th) + Upg.pace (25th human-counted).
  * ════════════════════════════════════════════════════════════════ */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+ * TASMEEM v3 — Upg.font API (Worker 20 / Phase 3)
+ * Programmatic introspection + control of local font system.
+ * Additive: preserves all 25 existing Upg.* APIs.
+ * ════════════════════════════════════════════════════════════════════════ */
+(function (window, document) {
+  'use strict';
+
+  var FAMILIES = [
+    { id: 'aref-ruqaa',       css: 'Aref Ruqaa',           weights: [400, 700],               script: 'arabic'  },
+    { id: 'reem-kufi',        css: 'Reem Kufi',            weights: [400, 700],               script: 'arabic'  },
+    { id: 'cairo',            css: 'Cairo',                weights: [400, 600, 700],          script: 'arabic'  },
+    { id: 'tajawal',          css: 'Tajawal',              weights: [300, 400, 500, 700],     script: 'arabic'  },
+    { id: 'ibm-plex-arabic',  css: 'IBM Plex Sans Arabic', weights: [300, 400, 500, 600, 700], script: 'arabic' },
+    { id: 'readex-pro',       css: 'Readex Pro',           weights: [200, 700],               script: 'arabic'  },
+    { id: 'inter',            css: 'Inter',                weights: [100, 900],               script: 'latin'   },
+    { id: 'jetbrains-mono',   css: 'JetBrains Mono',       weights: [400, 500, 700],          script: 'latin'   },
+    { id: 'fraunces',         css: 'Fraunces',             weights: [400, 700],               script: 'latin'   }
+  ];
+
+  var VOICES = [
+    'hero', 'display', 'display-h', 'display-l',
+    'body', 'body-lead', 'ui', 'label',
+    'numeric', 'num-tabular', 'code',
+    'accent', 'eyebrow', 'signature', 'ribbon',
+    'quote', 'latin', 'wordmark'
+  ];
+
+  function list() {
+    return FAMILIES.map(function (f) { return { id: f.id, css: f.css, weights: f.weights.slice(), script: f.script }; });
+  }
+
+  function voices() {
+    return VOICES.slice();
+  }
+
+  function audit() {
+    if (!document.fonts || !document.fonts.ready) {
+      return Promise.resolve({ supported: false });
+    }
+    return document.fonts.ready.then(function () {
+      var loaded = {};
+      document.fonts.forEach(function (font) {
+        var family = font.family.replace(/['"]/g, '');
+        if (!loaded[family]) loaded[family] = [];
+        loaded[family].push({ weight: font.weight, style: font.style, status: font.status });
+      });
+      return { supported: true, total_faces: document.fonts.size, by_family: loaded };
+    });
+  }
+
+  function isReady(familyCss, weight) {
+    if (!document.fonts || !document.fonts.check) return null;
+    var w = weight || 400;
+    return document.fonts.check(w + ' 12px "' + familyCss + '"');
+  }
+
+  function computedFor(target) {
+    var el = (typeof target === 'string') ? document.querySelector(target) : target;
+    if (!el) return null;
+    return getComputedStyle(el).fontFamily;
+  }
+
+  function status() {
+    var rs = getComputedStyle(document.documentElement);
+    return {
+      stage:              rs.getPropertyValue('--tasmeem-stage').trim().replace(/['"]/g, ''),
+      fonts_status:       rs.getPropertyValue('--tasmeem-fonts-status').trim().replace(/['"]/g, ''),
+      local_loaded:       rs.getPropertyValue('--tasmeem-fonts-local-loaded').trim().replace(/['"]/g, ''),
+      google_fonts_links: rs.getPropertyValue('--tasmeem-google-fonts-link-count').trim().replace(/['"]/g, '')
+    };
+  }
+
+  function swap(voice, fontCssName) {
+    if (VOICES.indexOf(voice) === -1) {
+      console.warn('[Upg.font] Invalid voice:', voice, '— expected one of', VOICES);
+      return false;
+    }
+    document.documentElement.style.setProperty('--type-voice-' + voice, '"' + fontCssName + '", sans-serif');
+    return true;
+  }
+
+  function reset(voice) {
+    if (VOICES.indexOf(voice) === -1) return false;
+    document.documentElement.style.removeProperty('--type-voice-' + voice);
+    return true;
+  }
+
+  window.Upg = window.Upg || {};
+  window.Upg.font = Object.freeze({
+    list: list,
+    voices: voices,
+    audit: audit,
+    isReady: isReady,
+    computedFor: computedFor,
+    status: status,
+    swap: swap,
+    reset: reset,
+    FAMILIES: Object.freeze(FAMILIES.slice()),
+    VOICES: Object.freeze(VOICES.slice())
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var s = status();
+    if (s.fonts_status === 'phase-3-bound' && s.google_fonts_links === '0') {
+      console.info(
+        '%c\ud83d\udd6f\ufe0f TASMEEM v3 ready \u2014 9/9 local families, 0 CDN, 0 external requests.',
+        'color:#7AB8FF; font-weight:bold;'
+      );
+    }
+  });
+})(window, document);
