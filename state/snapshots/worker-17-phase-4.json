@@ -1,0 +1,50 @@
+{
+  "pack": "v2",
+  "worker": "17",
+  "worker_name": "CONTENT_REVIVAL",
+  "phase_completed": 4,
+  "phases_total": 6,
+  "files_touched": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/app.js",
+    "scripts/worker-17-practice.mjs"
+  ],
+  "lines_added_total": 520,
+  "tokens_added": [
+    "Upg.practice (24th API — tried/isTried/getBlock/reflect/getReflection/stats/reset)"
+  ],
+  "practice_stats": {
+    "sections_injected": 63,
+    "total_questions": 179,
+    "total_reflections": 63,
+    "pages_covered": 13,
+    "distribution": {
+      "callcenter": 6,
+      "fieldsales": 5,
+      "accountmgr": 4,
+      "social": 3,
+      "lab": 2,
+      "psych": 5,
+      "eq": 4,
+      "negotiation": 7,
+      "customercare": 4,
+      "programming": 6,
+      "accounting": 8,
+      "phonerepair": 3,
+      "hrmastery": 5
+    }
+  },
+  "sacred_preserved": {
+    "pages": 14,
+    "qcalc": 391,
+    "block_ids": 503,
+    "upg_apis": 23,
+    "block_tldr": 26,
+    "block_pitfalls": 28,
+    "page_personalities": 15,
+    "block_text_edits": 0
+  },
+  "resonance_notes": "القراءة passive، الاستدعاء active. 179 سؤال recall-based يحوّل القارئ من متلقّي لمتعلّم فعّال. كل سؤال مصمّم ليُستدعى لا ليُتعرَّف عليه.",
+  "next_action": "Continue Worker 17 Phase 5 — Cross-References & Learning Paths"
+}
