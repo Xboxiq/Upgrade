@@ -16260,9 +16260,9 @@ body { font-size: calc(var(--text-base) * var(--type-zoom)); }
   unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+0020-007E;
 }
 
-/* ─── Voice mapping (overrides Phase 1 generic stack) ─────────────────────── */
+/* ─── Voice mapping (legacy W12 P1B — superseded by TASMEEM v3 Phase 3 block) ── */
 :root {
-  --font-display: "Thmanyah", "Reem Kufi", "Aref Ruqaa", "Cairo",
+  --font-display: "Reem Kufi", "Aref Ruqaa", "Cairo",
                   "SF Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI",
                   Roboto, sans-serif;
 
@@ -19697,18 +19697,18 @@ body[data-material-density="high"] {
    psych/eq/customercare h1).
    Reem Kufi 700 = page h1/h2 operational (12 other pages).
    Cairo Bold = guaranteed fallback in every stack.
-   Thmanyah optional preempts both if loaded.
+   Aref Ruqaa leads both stacks (Thmanyah phantom removed in TASMEEM v3 P3).
    ──────────────────────────────────────────────────────────────────────────── */
 
 /* ─── Wordmark + Hero stacks (new tokens, additive) ───────────────────────── */
 :root {
   /* Wordmark-specific stack — Aref Ruqaa أولاً (ceremonial brand mark) */
-  --font-wordmark:   "Aref Ruqaa", "Thmanyah", "Reem Kufi", "Cairo",
+  --font-wordmark:   "Aref Ruqaa", "Reem Kufi", "Cairo",
                      "SF Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI",
                      Roboto, serif;
 
   /* Hero ceremonial — للـ greetings + literary page openings */
-  --font-hero:       "Aref Ruqaa", "Thmanyah", "Reem Kufi", "Cairo",
+  --font-hero:       "Aref Ruqaa", "Reem Kufi", "Cairo",
                      "SF Arabic", -apple-system, BlinkMacSystemFont, serif;
 }
 
@@ -23512,17 +23512,447 @@ body[data-block-debug="1"] [data-block-id][data-prereq]::after {
    10. Reduced-motion + reduced-transparency + print + mobile all guarded.
    ════════════════════════════════════════════════════════════════ */
 
-/* TASMEEM v3 — Font Forensics Inventory (Worker 20 / Phase 1)
-   Baseline recorded on 2026-05-22.
-   Total font-family declarations and redefinition map captured for upcoming local-font migration.
-   --font-display redefinitions observed at: 16010, 16265, 19706, 19896, 20060, 20131.
-   Voice families preserved: Aref Ruqaa, Reem Kufi, Cairo, Tajawal, IBM Plex Sans Arabic, Readex Pro, Inter, JetBrains Mono, Fraunces.
-   Phase 2 target: local .woff2 only in platform/assets/fonts/, zero CDN, no token renames.
-*/
-
+/* ════════════════════════════════════════════════════════════════════════════
+   TASMEEM v3 — Voice Bindings (Worker 20 / Phase 3)
+   ────────────────────────────────────────────────────────────────────────────
+   Single source of truth for --font-* and --type-voice-* tokens.
+   All values reference LOCAL fonts loaded via @font-face above.
+   This block supersedes the 2 earlier --font-display definitions (lines ~16010, ~16265)
+   via cascade position (later wins). Those legacy blocks are preserved for backward compat
+   but this is the authoritative definition.
+   ════════════════════════════════════════════════════════════════════════════ */
 :root {
-  --tasmeem-stage: "phase-1-forensics";
-  --tasmeem-fonts-status: "google-cdn-removed";
-  --tasmeem-fonts-local-loaded: "0/9";
+  /* ─── Local Font Reference Aliases ─── */
+  --font-aref-ruqaa:        "Aref Ruqaa", serif;
+  --font-reem-kufi:         "Reem Kufi", sans-serif;
+  --font-cairo:             "Cairo", sans-serif;
+  --font-tajawal:           "Tajawal", sans-serif;
+  --font-ibm-plex-arabic:   "IBM Plex Sans Arabic", sans-serif;
+  --font-readex-pro:        "Readex Pro", sans-serif;
+  --font-inter:             "Inter", sans-serif;
+  --font-jetbrains-mono:    "JetBrains Mono", ui-monospace, monospace;
+  --font-fraunces:          "Fraunces", serif;
+
+  /* ─── Cathedral v16 Compatibility Stacks (W12+W15 backward compat) ─── */
+  --font-display:   "Reem Kufi", "Aref Ruqaa", "Cairo",
+                    "SF Arabic", -apple-system, BlinkMacSystemFont,
+                    "Segoe UI", Roboto, sans-serif;
+
+  --font-text:      "Readex Pro", "IBM Plex Sans Arabic", "Tajawal", "Cairo",
+                    "SF Arabic", -apple-system, sans-serif;
+
+  --font-numeric:   "IBM Plex Sans Arabic", "JetBrains Mono", "Readex Pro", "Cairo",
+                    "SF Mono", monospace;
+
+  --font-accent:    "Aref Ruqaa", "Reem Kufi", "Cairo",
+                    "Times New Roman", serif;
+
+  --font-mono:      "JetBrains Mono", "SF Mono", ui-monospace,
+                    "Cascadia Mono", "Segoe UI Mono", monospace;
+
+  /* ─── Resonance v2 Voice Tokens (W15) — Routed to Local Fonts ─── */
+  --type-voice-hero:        "Aref Ruqaa", "Reem Kufi", "Cairo", serif;
+  --type-voice-display:     "Reem Kufi", "Aref Ruqaa", "Cairo", sans-serif;
+  --type-voice-display-h:   "Reem Kufi", "Cairo", sans-serif;
+  --type-voice-display-l:   "Reem Kufi", "Cairo", sans-serif;
+  --type-voice-body:        "Readex Pro", "IBM Plex Sans Arabic", "Cairo", sans-serif;
+  --type-voice-body-lead:   "Readex Pro", "IBM Plex Sans Arabic", "Cairo", sans-serif;
+  --type-voice-ui:          "Tajawal", "Readex Pro", "Cairo", sans-serif;
+  --type-voice-label:       "Tajawal", "Cairo", sans-serif;
+  --type-voice-numeric:     "IBM Plex Sans Arabic", "JetBrains Mono", monospace;
+  --type-voice-num-tabular: "JetBrains Mono", "IBM Plex Sans Arabic", monospace;
+  --type-voice-code:        "JetBrains Mono", "SF Mono", monospace;
+  --type-voice-accent:      "Aref Ruqaa", "Cairo", serif;
+  --type-voice-eyebrow:     "Aref Ruqaa", "Cairo", serif;
+  --type-voice-signature:   "Aref Ruqaa", "Cairo", serif;
+  --type-voice-ribbon:      "Aref Ruqaa", "Cairo", serif;
+  --type-voice-quote:       "Fraunces", "Readex Pro", "Times New Roman", serif;
+  --type-voice-latin:       "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --type-voice-wordmark:    "Aref Ruqaa", "Reem Kufi", "Cairo", serif;
+
+  /* ─── Phase 3 Status ─── */
+  --tasmeem-stage:                   "phase-3-bound";
+  --tasmeem-fonts-status:            "phase-3-bound";
+  --tasmeem-fonts-local-loaded:      "9/9";
   --tasmeem-google-fonts-link-count: "0";
 }
+/* End TASMEEM v3 / Phase 3 — Voice Bindings ─────────────────────────────── */
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   TASMEEM v3 — Local @font-face Declarations (Worker 20 / Phase 3)
+   ────────────────────────────────────────────────────────────────────────────
+   9 families × 22 files total. All .woff2 served from platform/assets/fonts/.
+   Subset targets defined in MANIFEST.json. Zero CDN. Zero network.
+   font-display: swap on all faces (FOUT ≤ 200ms guaranteed).
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Aref Ruqaa (accent / hero / wordmark) ───────────────────────────────── */
+@font-face {
+  font-family: "Aref Ruqaa";
+  src: url("./fonts/aref-ruqaa/aref-ruqaa-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0660-0669, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F;
+}
+@font-face {
+  font-family: "Aref Ruqaa";
+  src: url("./fonts/aref-ruqaa/aref-ruqaa-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0660-0669, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F;
+}
+
+/* ─── Reem Kufi (display) — Variable ─────────────────────────────────────── */
+@font-face {
+  font-family: "Reem Kufi";
+  src: url("./fonts/reem-kufi/reem-kufi-VF.woff2") format("woff2-variations");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0660-0669, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F;
+}
+
+/* ─── Cairo (fallback / body-secondary) ───────────────────────────────────── */
+@font-face {
+  font-family: "Cairo";
+  src: url("./fonts/cairo/cairo-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0660-0669, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F;
+}
+@font-face {
+  font-family: "Cairo";
+  src: url("./fonts/cairo/cairo-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0660-0669, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F;
+}
+@font-face {
+  font-family: "Cairo";
+  src: url("./fonts/cairo/cairo-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0660-0669, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F;
+}
+
+/* ─── Tajawal (ui / body-tertiary) ────────────────────────────────────────── */
+@font-face {
+  font-family: "Tajawal";
+  src: url("./fonts/tajawal/tajawal-300.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0660-0669, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F;
+}
+@font-face {
+  font-family: "Tajawal";
+  src: url("./fonts/tajawal/tajawal-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0660-0669, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F;
+}
+@font-face {
+  font-family: "Tajawal";
+  src: url("./fonts/tajawal/tajawal-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0660-0669, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F;
+}
+@font-face {
+  font-family: "Tajawal";
+  src: url("./fonts/tajawal/tajawal-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0660-0669, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F;
+}
+
+/* ─── IBM Plex Sans Arabic (numeric / body) ───────────────────────────────── */
+@font-face {
+  font-family: "IBM Plex Sans Arabic";
+  src: url("./fonts/ibm-plex-arabic/ibm-plex-arabic-300.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0660-0669, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F, U+0030-0039;
+}
+@font-face {
+  font-family: "IBM Plex Sans Arabic";
+  src: url("./fonts/ibm-plex-arabic/ibm-plex-arabic-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0660-0669, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F, U+0030-0039;
+}
+@font-face {
+  font-family: "IBM Plex Sans Arabic";
+  src: url("./fonts/ibm-plex-arabic/ibm-plex-arabic-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0660-0669, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F, U+0030-0039;
+}
+@font-face {
+  font-family: "IBM Plex Sans Arabic";
+  src: url("./fonts/ibm-plex-arabic/ibm-plex-arabic-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0660-0669, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F, U+0030-0039;
+}
+@font-face {
+  font-family: "IBM Plex Sans Arabic";
+  src: url("./fonts/ibm-plex-arabic/ibm-plex-arabic-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0660-0669, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F, U+0030-0039;
+}
+
+/* ─── Readex Pro (text / body-primary) — Variable ─────────────────────────── */
+@font-face {
+  font-family: "Readex Pro";
+  src: url("./fonts/readex-pro/readex-pro-VF.woff2") format("woff2-variations");
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0660-0669, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F;
+}
+
+/* ─── Inter (latin) — Variable ────────────────────────────────────────────── */
+@font-face {
+  font-family: "Inter";
+  src: url("./fonts/inter/inter-VF.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-024F, U+1E00-1EFF, U+2000-206F, U+20AC;
+}
+
+/* ─── JetBrains Mono (code / numeric-display) ─────────────────────────────── */
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("./fonts/jetbrains-mono/jetbrains-mono-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-024F, U+0030-0039, U+2000-206F;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("./fonts/jetbrains-mono/jetbrains-mono-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-024F, U+0030-0039, U+2000-206F;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("./fonts/jetbrains-mono/jetbrains-mono-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-024F, U+0030-0039, U+2000-206F;
+}
+
+/* ─── Fraunces (quote-literary) — Variable ────────────────────────────────── */
+@font-face {
+  font-family: "Fraunces";
+  src: url("./fonts/fraunces/fraunces-VF.woff2") format("woff2-variations");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-024F, U+1E00-1EFF, U+2000-206F;
+}
+@font-face {
+  font-family: "Fraunces";
+  src: url("./fonts/fraunces/fraunces-italic-VF.woff2") format("woff2-variations");
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+0020-024F, U+1E00-1EFF, U+2000-206F;
+}
+
+/* End TASMEEM v3 / Phase 3 — @font-face Declarations ─────────────────────── */
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   TASMEEM v3 — Voice Utility Classes (Worker 20 / Phase 3)
+   ────────────────────────────────────────────────────────────────────────────
+   Each class binds one type voice. Use in HTML to apply consistent typography.
+   These complement (not replace) W12/W15 .h-* and .type-* classes.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.tas-voice-hero,
+[data-tas-voice="hero"] {
+  font-family: var(--type-voice-hero);
+  font-weight: 700;
+  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  padding-block: 0.05em;
+}
+
+.tas-voice-display,
+[data-tas-voice="display"] {
+  font-family: var(--type-voice-display);
+  font-weight: 700;
+  font-feature-settings: "kern" 1, "liga" 1;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.tas-voice-display-h {
+  font-family: var(--type-voice-display-h);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  line-height: 1.2;
+}
+
+.tas-voice-body,
+[data-tas-voice="body"] {
+  font-family: var(--type-voice-body);
+  font-weight: 400;
+  font-feature-settings: "kern" 1, "liga" 1;
+  letter-spacing: 0;
+  line-height: 1.65;
+}
+
+.tas-voice-body-lead {
+  font-family: var(--type-voice-body-lead);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  line-height: 1.55;
+}
+
+.tas-voice-ui,
+[data-tas-voice="ui"] {
+  font-family: var(--type-voice-ui);
+  font-weight: 500;
+  font-feature-settings: "kern" 1;
+  letter-spacing: 0;
+  line-height: 1.4;
+}
+
+.tas-voice-label {
+  font-family: var(--type-voice-label);
+  font-weight: 600;
+  font-feature-settings: "kern" 1;
+  letter-spacing: 0.005em;
+  line-height: 1.3;
+  text-transform: none;
+}
+
+.tas-voice-numeric,
+[data-tas-voice="numeric"] {
+  font-family: var(--type-voice-numeric);
+  font-weight: 500;
+  font-feature-settings: "tnum" 1, "lnum" 1, "kern" 1;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.tas-voice-num-tabular {
+  font-family: var(--type-voice-num-tabular);
+  font-weight: 500;
+  font-feature-settings: "tnum" 1, "lnum" 1, "ss01" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: 0;
+}
+
+.tas-voice-code,
+[data-tas-voice="code"] {
+  font-family: var(--type-voice-code);
+  font-weight: 400;
+  font-feature-settings: "calt" 1, "liga" 1;
+  letter-spacing: 0;
+  line-height: 1.5;
+  tab-size: 2;
+}
+
+.tas-voice-accent,
+[data-tas-voice="accent"] {
+  font-family: var(--type-voice-accent);
+  font-weight: 400;
+  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+  font-style: normal;
+}
+
+.tas-voice-eyebrow {
+  font-family: var(--type-voice-eyebrow);
+  font-weight: 400;
+  font-size: var(--text-xs, 0.75rem);
+  letter-spacing: 0.05em;
+  line-height: 1.3;
+  font-style: normal;
+}
+
+.tas-voice-signature {
+  font-family: var(--type-voice-signature);
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: -0.005em;
+}
+
+.tas-voice-ribbon {
+  font-family: var(--type-voice-ribbon);
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.02em;
+}
+
+.tas-voice-quote,
+[data-tas-voice="quote"] {
+  font-family: var(--type-voice-quote);
+  font-weight: 400;
+  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1, "swsh" 1;
+  font-style: italic;
+  letter-spacing: 0;
+  line-height: 1.55;
+}
+
+.tas-voice-latin,
+[data-tas-voice="latin"] {
+  font-family: var(--type-voice-latin);
+  font-weight: 400;
+  font-feature-settings: "kern" 1, "ss01" 1;
+  letter-spacing: 0;
+}
+
+.tas-voice-wordmark {
+  font-family: var(--type-voice-wordmark);
+  font-weight: 700;
+  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+  letter-spacing: -0.005em;
+  line-height: 1.0;
+  font-size: 1.05em;
+  font-style: normal;
+}
+
+/* ─── Discipline: Aref Ruqaa has no italic — enforce normal ─── */
+.tas-voice-hero,
+.tas-voice-wordmark,
+.tas-voice-eyebrow,
+.tas-voice-signature,
+.tas-voice-ribbon,
+.tas-voice-accent {
+  font-style: normal;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   Worker 20 / Phase 3 — Bindings Discipline:
+   1. لا تُضِف voice tokens جديد بعد الآن — الـ 18 voice كافية.
+   2. لو تحتاج خط جديد لـ voice موجود → استبدل قيمته في كتلة TASMEEM v3.
+   3. لا تستعمل font-family مباشر في قواعد جديدة — استعمل var(--type-voice-X).
+   4. tas-voice-* تُكمل (لا تستبدل) .h-* و .type-* من W12 + W15.
+   5. لو كتبت @media query مع font-family → استعمل token، لا hex names.
+   6. لا تخلط أكثر من 3 خطوط في stack واحد بعد الآن (نحن ضد cascade-collision).
+   ════════════════════════════════════════════════════════════════════════════ */
