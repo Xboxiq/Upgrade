@@ -4,8 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>منصة التدريب الاحترافية</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- ════════════════════════════════════════════════════════════════════
+       TASMEEM v3 — Worker 20 / Phase 1 — DEVOTIO Offline-First Mandate
+       ────────────────────────────────────────────────────────────────────
+       The previous Google Fonts <link> chain (3 lines: 2 preconnect + 1
+       stylesheet linking 9 families) was DELETED on 2026-05-22 as part
+       of Pack v3 (DEVOTIO). The platform now lives 100% offline. Local
+       @font-face declarations live in style.css (added in Phase 2) and
+       reference files in platform/assets/fonts/<family>/*.woff2.
+
+       Between Phase 1 and Phase 3, system fallback applies. This is
+       intentional — see prompts/v3/20_PHASE_1_FONT_FORENSICS.md.
+       ════════════════════════════════════════════════════════════════════ -->
   <meta name="theme-color" content="#0E1220" media="(prefers-color-scheme: dark)" />
   <meta name="theme-color" content="#F7F5F1" media="(prefers-color-scheme: light)" />
   <meta name="description" content="منصة التطوير المهني الذاتي بمعيار عالمي — 9 مسارات تخصصية، تعلم تفاعلي، محتوى علمي عميق." />
@@ -18,7 +28,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="favicon.svg" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Readex+Pro:wght@200..700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@300;400;500;700;900&family=Cairo:wght@400;600;700&family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&display=swap" rel="stylesheet" />
+  <!-- TASMEEM v3 / Phase 1 — Google Fonts stylesheet <link> deleted (was 9-family CDN). Local @font-face arrives in Phase 2. -->
 
 <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -31997,6 +32007,36 @@ const bird = { ...canMove(), ...canFly() };
 
 <!-- ATELIER v16 / Phase 4 — Mobile drawer scrim (clickable overlay, click/tap closes) -->
 <div class="drawer-scrim" data-action="close-drawer" aria-hidden="true"></div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TASMEEM v3 / Worker 20 / Phase 1-2 transitional banner
+     Visible while Google Fonts are removed but local @font-face not yet
+     bound to voices. Auto-hides in Phase 3 once --tasmeem-fonts-status
+     is updated to "phase-3-bound" by Worker 20 / Phase 3.
+     Pure CSS+inline script. No library. No CDN. ARIA-friendly.
+     ════════════════════════════════════════════════════════════════════ -->
+<div id="tasmeem-transitional-banner" hidden role="status" aria-live="polite"
+     style="position:fixed; bottom:1rem; inset-inline-end:1rem;
+            background: rgba(0,0,0,0.85); color:#fff;
+            padding:.6rem 1rem; border-radius:.5rem;
+            font-family: system-ui, -apple-system, sans-serif; font-size:12px;
+            line-height:1.4; max-width:22rem; z-index:9999; pointer-events:none;
+            box-shadow: 0 8px 24px rgba(0,0,0,.35);">
+  TASMEEM Phase 1–2 transitional — system fallback active until Phase 3 binds local fonts.
+</div>
+<script>
+  // TASMEEM v3 — show transitional banner only during Phase 1-2.
+  // Phase 3 sets --tasmeem-fonts-status to "phase-3-bound" and the banner stays hidden.
+  (function () {
+    try {
+      var b = document.getElementById('tasmeem-transitional-banner');
+      if (!b) return;
+      var rs = getComputedStyle(document.documentElement);
+      var status = (rs.getPropertyValue('--tasmeem-fonts-status') || '').trim().replace(/['"]/g, '');
+      if (status && status !== 'phase-3-bound') b.hidden = false;
+    } catch (_) { /* no-op */ }
+  })();
+</script>
 
 </body>
 </html>
