@@ -7,14 +7,14 @@
     "pack": "v3",
     "worker": 20,
     "worker_name": "TASMEEM_RECONSTRUCTION",
-    "phase": 1,
-    "phase_name": "FONT_FORENSICS",
+    "phase": 2,
+    "phase_name": "LOCAL_FONT_LOAD",
     "phases_total": 6,
-    "step": 3,
-    "step_name": "APPEND Inventory Comment Block in style.css",
-    "status": "in-progress",
-    "branch": "worker-20-devotio",
-    "step_started_at": "2026-05-22T17:14:00Z"
+    "step": 1,
+    "step_name": "<TBD — read prompts/v3/20_PHASE_2_LOCAL_FONT_LOAD.md>",
+    "status": "queued",
+    "branch": "worker-20-devotio-p1",
+    "step_started_at": null
   },
   "completed_steps": [
     {
@@ -49,11 +49,79 @@
       "files": [],
       "strategy": "read-only",
       "verified_at": "2026-05-22T17:14:00Z"
+    },
+    {
+      "w": 20,
+      "p": 1,
+      "s": 3,
+      "name": "APPEND Inventory Comment Block in style.css",
+      "summary": "Appended ~110 line TASMEEM v3 Forensics Inventory comment block to end of platform/assets/style.css. Documents 252 font-family decls, 18 token defs, 2 --font-display redefinitions (lines 16010+16265), 4 @font-face, 9 distinct font families, 18 voice tokens preserved, Phase 2/3 plan foreshadow, OFL/SIL discipline.",
+      "files": ["platform/assets/style.css"],
+      "strategy": "C (fs_append)",
+      "delta_lines": 105,
+      "verified_at": "2026-05-22T17:30:00Z"
+    },
+    {
+      "w": 20,
+      "p": 1,
+      "s": 4,
+      "name": "APPEND status tokens to :root",
+      "summary": "Appended new :root block with 4 documentation tokens: --tasmeem-stage='phase-1-forensics', --tasmeem-fonts-status='google-cdn-removed', --tasmeem-fonts-local-loaded='0/9', --tasmeem-google-fonts-link-count='0' (sentinel — must remain 0 forever). Phase 3 will flip --tasmeem-fonts-status to 'phase-3-bound'.",
+      "files": ["platform/assets/style.css"],
+      "strategy": "C (fs_append, batched with Step 6)",
+      "delta_lines": 12,
+      "verified_at": "2026-05-22T17:34:00Z"
+    },
+    {
+      "w": 20,
+      "p": 1,
+      "s": 5,
+      "name": "Add transitional warning banner",
+      "summary": "Inserted TASMEEM transitional banner div + IIFE before </body> in platform/index.html. Banner reads --tasmeem-fonts-status; hides automatically when Phase 3 sets it to 'phase-3-bound'. Currently visible (system fallback active).",
+      "files": ["platform/index.html"],
+      "strategy": "A (str_replace, single unique anchor at drawer-scrim+</body>)",
+      "delta_lines": 25,
+      "verified_at": "2026-05-22T17:36:00Z"
+    },
+    {
+      "w": 20,
+      "p": 1,
+      "s": 6,
+      "name": "Discipline Comment (Phase 1 close)",
+      "summary": "Appended Worker 20 / Phase 1 Forensics Discipline comment + 'End TASMEEM v3 / Worker 20 / Phase 1' marker to style.css. 6 discipline rules: no font-family edits, no token redefinitions, no @font-face yet, banner auto-hides, fail fast on Google Fonts URL in diff.",
+      "files": ["platform/assets/style.css"],
+      "strategy": "C (fs_append, batched with Step 4)",
+      "delta_lines": 13,
+      "verified_at": "2026-05-22T17:34:00Z"
     }
   ],
-  "tool_calls_this_phase": 11,
-  "tool_calls_this_session": 21,
-  "next_action": "Resume W20 P1 Step 3 — APPEND ~480 line inventory comment block to platform/assets/style.css using fs_append (Strategy C). Comment must reflect inventory captured in Step 2 (252 font-family, 18 token defs, 2 --font-display redefs at lines 16010+16265, 4 @font-face, 18 --type-voice-* preserved). Then Step 4 (status tokens), Step 5 (warning banner), commit, push.",
+  "completed_phases": [
+    {
+      "worker": 20,
+      "phase": 1,
+      "name": "FONT_FORENSICS",
+      "title": "Font Forensics — DELETE Google Fonts CDN + APPEND inventory + status tokens + transitional banner + discipline comment",
+      "branch": "worker-20-devotio-p1",
+      "lines_added": 167,
+      "files_touched": ["platform/index.html", "platform/assets/style.css", "scripts/_phase1_step1.py"],
+      "sacred_post_phase": {
+        "pages": 14,
+        "qcalc": 391,
+        "upg_apis": 24,
+        "fonts_googleapis_com_in_index": 0,
+        "fonts_gstatic_com_in_index": 0,
+        "preconnect_fonts": 0,
+        "type_voice_lines": 31,
+        "tasmeem_v3_markers_in_css": 4,
+        "tasmeem_stage_token": 1,
+        "tasmeem_transitional_banner_refs": 2
+      },
+      "verified_at": "2026-05-22T17:36:00Z"
+    }
+  ],
+  "tool_calls_this_phase": 18,
+  "tool_calls_this_session": 12,
+  "next_action": "Phase 1 COMPLETE. Run end-of-phase commit + push (git add platform/ scripts/ → commit -m 'W20 P1 FONT_FORENSICS complete' → github_push_to_remote → git add state/ → commit → push). Then start Phase 2 (LOCAL_FONT_LOAD) in next session.",
   "branch": "worker-20-devotio",
   "errors_log": [],
   "previous_pack": {
