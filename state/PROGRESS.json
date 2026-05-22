@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-22T16:45:00Z",
-  "pack": "v2-resonance",
+  "last_updated": "2026-05-22T15:30:00Z",
+  "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
-    "pack": "v2",
-    "worker": "17",
-    "worker_name": "CONTENT_REVIVAL",
-    "phase": 6,
+    "pack": "v3",
+    "worker": "20",
+    "worker_name": "TASMEEM_RECONSTRUCTION",
+    "phase": 1,
     "phases_total": 6,
     "phase_order": [
       "1",
@@ -17,15 +17,25 @@
       "5",
       "6"
     ],
-    "branch": "worker-17-resonance-p6",
+    "branch": "worker-20-tasmeem",
     "status": "in-progress",
     "specs_scaffolded": true,
-    "specs_branch": "pack-v2-worker-17-specs",
+    "specs_branch": "worker-20-pack-v3-devotio",
     "next_phase_branch": null,
-    "worker_complete": true,
-    "pr_pending": true
+    "worker_complete": false,
+    "pr_pending": false
   },
   "previous": {
+    "pack": "v2",
+    "worker": "17",
+    "worker_name": "CONTENT_REVIVAL",
+    "phase": 6,
+    "phases_total": 6,
+    "branch": "worker-17-resonance-p6",
+    "status": "completed",
+    "pack_complete": true
+  },
+  "before_previous": {
     "pack": "v2",
     "worker": "17",
     "worker_name": "CONTENT_REVIVAL",
@@ -34,16 +44,6 @@
     "branch": "worker-17-resonance-p5",
     "status": "completed",
     "merged_pr": 72
-  },
-  "before_previous": {
-    "pack": "v2",
-    "worker": "16",
-    "worker_name": "VITAL_UI",
-    "phase": 6,
-    "phases_total": 6,
-    "branch": "worker-16-vital-ui-p6",
-    "status": "completed",
-    "merged_pr": 65
   },
   "completed_phases": [
     {
@@ -641,9 +641,18 @@
       "title": "Session Pacing & Mastery Markers — 323 block-pacing chips inserted as siblings BEFORE every block with data-est-minutes >= 6 (3-state mastery toggle ○/◐/● cycling not-started→in-progress→mastered with localStorage persistence + 15/25/45 minute focus timer presets that hide preset group on start, show mm:ss countdown, log sessions ≥60 sec to upg.pace.focus.log capped at 500 entries) + 13 page-mastery-progress bars inserted INSIDE each content page's <header class='page-h'> just before </header> (3-tier gradient fill foundation→practitioner→expert sourced from --tier-* tokens + per-tier marker counts pre-computed at injection time + role='progressbar' aria-valuenow updates live) + 1 mastery heatmap section inserted INSIDE page-myprogress before its closing </section> (auto-fill 180px grid + per-page cards with bottom progress fill + 4 summary stats: total/mastered/in-progress/focus-hours). Upg.pace IIFE (25th top-level Upg.* namespace, ~380 JS lines) frozen surface with 11 methods (getMastery/setMastery/cycleMastery + startFocus/stopFocus/logFocus/totalFocusSeconds + refreshPageProgress/refreshAllProgress/renderHeatmap + states) + 3 CustomEvents (upg:pace:mastery / upg:pace:focus / upg:pace:focus:complete) + optional Upg.sound integration (plays 'tap' on mastery cycle, 'complete' on focus end) + lightweight MutationObserver re-binds only when relevant nodes added (avoids storms) + idempotent Python injector scripts/worker-17-pace.py (~290 lines, re-run produces 0 duplicates verified). CSS APPEND ~330 lines: .block-pacing chip + .mastery-toggle 3-state with oklch tints (60h amber for in-progress, 150h green for mastered) + .focus-presets/.focus-preset/.focus-active/.focus-stop timer chrome + .page-mastery-progress bar with linear-gradient fill across tier tokens + .page-mastery-progress-tiers markers with tri-color pip + .mp-heatmap-section + .heatmap-grid auto-fill + .heatmap-cell with absolute bottom fill + .mastery-summary 4-stat grid + dedicated reduced-motion + reduced-transparency + print + mobile <480px guards. Resonance doctrine applied: 'أتقنته' is the single most consequential word — converts reading from passive to reflective. Sacred preserved 100% (14 pages / 391 qcalc / 503 data-block-id / 26 block-tldr / 28 block-pitfalls / 62 block-practice / 62 data-related / 24 prior Upg.* APIs / 15 data-page-personality / zero block text edits / zero prior IIFE edits / 25 total Upg.* APIs after this phase). Worker 17 final phase — closes CONTENT REVIVAL.",
       "branch": "worker-17-resonance-p6",
       "lines_added": 7987
+    },
+    {
+      "worker": "20",
+      "phase": 1,
+      "title": "Font Forensics — DELETE Google Fonts CDN chain (3 lines: 2 preconnects + 1 stylesheet link, ~600KB external payload) from index.html + APPEND ~480-line inventory comment block in style.css (252 font-family declarations cataloged, 64 var()-based vs 188 direct strings, 4 phantom Thmanyah @font-face declarations whose .woff2 files don't exist on disk, 2 --font-display redefinitions in :root with last-wins cascade, 11 --type-voice-* tokens preserved verbatim) + APPEND :root status tokens (--tasmeem-stage, --tasmeem-fonts-status='google-cdn-removed', --tasmeem-fonts-local-loaded='0/9', --tasmeem-google-fonts-link-count='0', --tasmeem-pack='v3-devotio') + ADD transitional banner in index.html (id=tasmeem-transitional-banner, hidden by default, JS gate reads --tasmeem-fonts-status and shows banner unless 'phase-3-bound' — Phase 3 will flip status to auto-hide) + foreshadow Phase 2 (9 fonts to download from OFL/SIL sources to platform/assets/fonts/, ≤280KB after subset) + foreshadow Phase 3 (collapse --font-display redefinitions, REPLACE-IN-PLACE 11 voice tokens to local font names, remove Thmanyah phantom, add Upg.font IIFE + tas-* utilities). Sacred preserved 100% (14 pages / 391 qcalc / 24 Upg.* APIs / 11 voice tokens / W12+W15 voice bindings untouched / app.js untouched / archive/ untouched / 0 fonts.googleapis.com / 0 fonts.gstatic.com / 0 preconnect to fonts).",
+      "branch": "worker-20-tasmeem",
+      "lines_added": 188,
+      "lines_deleted": 3,
+      "pack": "v3"
     }
   ],
-  "next_action": "Worker 17 complete (6/6 phases). Open PR worker-17-resonance-p6 → main with full Worker 17 summary. After user merges: run CONTENT_REORDER_RITUAL (consumes data-difficulty + data-prereq + data-est-minutes from W17). Then start Worker 18 (LEARNING_SHELL) Phase 1 — consumes Upg.practice (W17 P4) + Upg.pace (W17 P6) for the personal training shell.",
+  "next_action": "Continue Worker 20 Phase 2 — Local Font Load. Download 9 OFL/SIL Arabic+Latin .woff2 files (Aref Ruqaa, Reem Kufi, Cairo, Tajawal, IBM Plex Sans Arabic, Readex Pro, Inter, JetBrains Mono, Fraunces) to platform/assets/fonts/<family>/, write 18+ @font-face declarations with unicode-range subsetting (Arabic block + Latin Basic) and font-display:swap, target ≤280KB total payload. Continue on branch worker-20-tasmeem (do not branch).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",

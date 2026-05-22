@@ -1,0 +1,83 @@
+{
+  "pack": "v3",
+  "pack_name": "DEVOTIO",
+  "worker": "20",
+  "worker_name": "TASMEEM_RECONSTRUCTION",
+  "phase_completed": 1,
+  "phase_name": "Font Forensics",
+  "phases_total": 6,
+  "completed_at": "2026-05-22T15:30:00Z",
+  "branch": "worker-20-tasmeem",
+  "commits": [
+    {
+      "sha_prefix": "6250ee1",
+      "message": "phase 1 (devotio): font forensics — remove google fonts cdn + inventory 252 font-family + transitional banner"
+    }
+  ],
+  "files_touched": {
+    "platform/index.html": {
+      "operation": "DELETE+ADD",
+      "lines_deleted": 3,
+      "lines_added": 49,
+      "summary": "DELETED 3 lines (2 fonts.googleapis preconnects + 1 fonts.googleapis stylesheet link). ADDED documentation comment in <head> + ADDED transitional banner div + JS gate before </body>."
+    },
+    "platform/assets/style.css": {
+      "operation": "APPEND",
+      "lines_added": 139,
+      "summary": "APPENDED ~120-line inventory comment block + :root status tokens (--tasmeem-stage, --tasmeem-fonts-status, --tasmeem-fonts-local-loaded, --tasmeem-google-fonts-link-count, --tasmeem-pack) + discipline rules. NO actual @font-face, NO --font-* token edits."
+    },
+    "platform/assets/app.js": {
+      "operation": "UNTOUCHED",
+      "lines_added": 0,
+      "summary": "Phase 3 owns Upg.font IIFE."
+    }
+  },
+  "lines_added_total": 188,
+  "lines_deleted_total": 3,
+  "tokens_added": [
+    "--tasmeem-stage",
+    "--tasmeem-fonts-status",
+    "--tasmeem-fonts-local-loaded",
+    "--tasmeem-google-fonts-link-count",
+    "--tasmeem-pack"
+  ],
+  "tokens_modified": [],
+  "tokens_removed": [],
+  "fonts_added_offline": [],
+  "fonts_removed_remote": [
+    "Google Fonts CDN chain — Reem Kufi, Readex Pro, IBM Plex Sans Arabic, Aref Ruqaa, Tajawal, Cairo, Inter, JetBrains Mono, Fraunces (all 9 families, 1 stylesheet URL + 2 preconnect lines deleted)"
+  ],
+  "apis_added": [],
+  "apis_modified": [],
+  "html_additions": {
+    "tasmeem-transitional-banner": "Fixed-position bottom-end notice div (hidden by default; JS gate shows it unless --tasmeem-fonts-status === 'phase-3-bound'). System-font styled (Cairo/Noto fallback). Auto-hides in Phase 3."
+  },
+  "sacred_preservation": {
+    "section_page_count": 14,
+    "qcalc_count": 391,
+    "upg_api_count": 24,
+    "type_voice_token_count": 11,
+    "font_face_count": 4,
+    "voice_bindings_intact": true,
+    "identity_tints_intact": true,
+    "app_js_untouched": true,
+    "archive_untouched": true,
+    "prompts_untouched": true
+  },
+  "offline_check": {
+    "external_requests": 0,
+    "google_fonts_links": 0,
+    "google_gstatic_links": 0,
+    "preconnect_to_fonts": 0,
+    "cdn_references": 0,
+    "verified_via_grep": true
+  },
+  "devotion_notes": "الجذور تُغرس في الأرض الآن. حذفنا 600KB من شبكة Google Fonts بدون أن نزرع بديلاً محلياً بعد — هذي قطيعة قبل وصلٍ. بين Phase 1 و Phase 3 المنصة تتنفّس عبر الخط النظامي (Cairo/Noto المحلية على الجهاز). البانر العلوي يذكّر المالك بأنّه في مرحلة انتقالية. هذا هو معنى DEVOTIO: نقبل الفترة الانتقالية الخالية من البريق لأن الهدف سيادة كاملة على الخط.",
+  "philosophy_check": {
+    "serves_training_ritual": "yes — preparing for offline-only operation",
+    "arabic_rooted": "yes — uses --tasmeem-* prefix (تَسْميم) + Arabic comments + RTL banner",
+    "works_offline_100": "yes — phase 1 closes the last network egress for fonts (0 external requests verified)",
+    "would_miss_if_gone": "yes — without forensics inventory, Phase 2-3 would re-create the same 252-declaration mess"
+  },
+  "next_action": "Continue Worker 20 Phase 2 — Local Font Load. Download 9 OFL/SIL .woff2 files to platform/assets/fonts/<family>/ + write 18+ @font-face declarations with unicode-range subsetting + font-display:swap. Continue on branch worker-20-tasmeem (do NOT branch)."
+}
