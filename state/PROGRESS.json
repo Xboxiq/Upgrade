@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-22T16:30:00Z",
+  "last_updated": "2026-05-22T16:45:00Z",
   "pack": "v2-resonance",
   "pack_status": "in-progress",
   "current": {
     "pack": "v2",
     "worker": "17",
     "worker_name": "CONTENT_REVIVAL",
-    "phase": 5,
+    "phase": 6,
     "phases_total": 6,
     "phase_order": [
       "1",
@@ -17,13 +17,25 @@
       "5",
       "6"
     ],
-    "branch": "worker-17-resonance-p5",
+    "branch": "worker-17-resonance-p6",
     "status": "in-progress",
     "specs_scaffolded": true,
     "specs_branch": "pack-v2-worker-17-specs",
-    "next_phase_branch": "worker-17-resonance-p6"
+    "next_phase_branch": null,
+    "worker_complete": true,
+    "pr_pending": true
   },
   "previous": {
+    "pack": "v2",
+    "worker": "17",
+    "worker_name": "CONTENT_REVIVAL",
+    "phase": 5,
+    "phases_total": 6,
+    "branch": "worker-17-resonance-p5",
+    "status": "completed",
+    "merged_pr": 72
+  },
+  "before_previous": {
     "pack": "v2",
     "worker": "16",
     "worker_name": "VITAL_UI",
@@ -32,16 +44,6 @@
     "branch": "worker-16-vital-ui-p6",
     "status": "completed",
     "merged_pr": 65
-  },
-  "before_previous": {
-    "pack": "v2",
-    "worker": "15",
-    "worker_name": "TYPOGRAPHY_SOUL",
-    "phase": 6,
-    "phases_total": 6,
-    "branch": "worker-15-resonance",
-    "status": "completed",
-    "merged_pr": 57
   },
   "completed_phases": [
     {
@@ -632,9 +634,16 @@
       "title": "Cross-References & Learning Bridges — 62 anchor blocks (those with practice from P4) augmented with data-related (3-5 ids each, in-page + cross-page mix) + completed data-prereq pass (74 total: 30 legacy P1 + 44 new on anchors, capped at 3 per block, difficulty < block's own) + 51 block-prereq-chip wrappers inserted BEFORE block (excluded only from 11 entry-level anchors with no prereqs) + 62 block-bridge in-page nav cards inserted AFTER each block-practice (DOM order: aside-tldr → block-prereq-chip → block → ul-takeaways → details-pitfalls → section-block-practice → nav-block-bridge) with 2-3 items per card using 7 fixed relations (extends/applies-in/contrasts/prereq-for/cheat/case/practice) + 8 sacred cross-page hero bridges (psych→eq, callcenter→customercare, accounting→accountmgr, hrmastery→negotiation, social→fieldsales, programming→phonerepair, lab→social, eq→negotiation) inserted before page closing </section> with linear-gradient background + radial halo ::before + tinted CTA button. CSS APPEND ~325 lines in style.css: .block-prereq-chip + 6 sub-elements (icon/label/list/item with hover+focus-visible) + .block-bridge container + 8 sub-elements (h/eyebrow/title/desc/list/item with RTL/LTR-aware hover translate + .--cheat variant) + .block-bridge--cross-page (linear-gradient + radial ::before pseudo + larger title) + .block-bridge-cta (tinted button with spring transform + box-shadow) + mobile <480px collapse + @media print fallbacks (transparent backgrounds, page-break-inside:avoid) + reduced-motion guard (transitions disabled, transform reset) + reduced-transparency fallback. Idempotent Python injector scripts/worker-17-bridges.py (~600 lines including 62-entry content map + 8 cross-bridge map; processes anchors in REVERSE line order to preserve indices; per-anchor idempotency via data-prereq-for/data-bridge-for guards; per-cross-bridge idempotency via data-cross-bridge-from guard). Resonance doctrine applied: spec target ~250 blocks → 62 (resonance > noise; only practice-anchored blocks where user already invested time). Sacred preserved 100% (14 pages / 391 qcalc / 23 Upg.* APIs / 503 data-block-id / 26 block-tldr / 28 block-pitfalls / 62 block-practice / app.js untouched / no new API).",
       "branch": "worker-17-resonance-p5",
       "lines_added": 2099
+    },
+    {
+      "worker": "17",
+      "phase": 6,
+      "title": "Session Pacing & Mastery Markers — 323 block-pacing chips inserted as siblings BEFORE every block with data-est-minutes >= 6 (3-state mastery toggle ○/◐/● cycling not-started→in-progress→mastered with localStorage persistence + 15/25/45 minute focus timer presets that hide preset group on start, show mm:ss countdown, log sessions ≥60 sec to upg.pace.focus.log capped at 500 entries) + 13 page-mastery-progress bars inserted INSIDE each content page's <header class='page-h'> just before </header> (3-tier gradient fill foundation→practitioner→expert sourced from --tier-* tokens + per-tier marker counts pre-computed at injection time + role='progressbar' aria-valuenow updates live) + 1 mastery heatmap section inserted INSIDE page-myprogress before its closing </section> (auto-fill 180px grid + per-page cards with bottom progress fill + 4 summary stats: total/mastered/in-progress/focus-hours). Upg.pace IIFE (25th top-level Upg.* namespace, ~380 JS lines) frozen surface with 11 methods (getMastery/setMastery/cycleMastery + startFocus/stopFocus/logFocus/totalFocusSeconds + refreshPageProgress/refreshAllProgress/renderHeatmap + states) + 3 CustomEvents (upg:pace:mastery / upg:pace:focus / upg:pace:focus:complete) + optional Upg.sound integration (plays 'tap' on mastery cycle, 'complete' on focus end) + lightweight MutationObserver re-binds only when relevant nodes added (avoids storms) + idempotent Python injector scripts/worker-17-pace.py (~290 lines, re-run produces 0 duplicates verified). CSS APPEND ~330 lines: .block-pacing chip + .mastery-toggle 3-state with oklch tints (60h amber for in-progress, 150h green for mastered) + .focus-presets/.focus-preset/.focus-active/.focus-stop timer chrome + .page-mastery-progress bar with linear-gradient fill across tier tokens + .page-mastery-progress-tiers markers with tri-color pip + .mp-heatmap-section + .heatmap-grid auto-fill + .heatmap-cell with absolute bottom fill + .mastery-summary 4-stat grid + dedicated reduced-motion + reduced-transparency + print + mobile <480px guards. Resonance doctrine applied: 'أتقنته' is the single most consequential word — converts reading from passive to reflective. Sacred preserved 100% (14 pages / 391 qcalc / 503 data-block-id / 26 block-tldr / 28 block-pitfalls / 62 block-practice / 62 data-related / 24 prior Upg.* APIs / 15 data-page-personality / zero block text edits / zero prior IIFE edits / 25 total Upg.* APIs after this phase). Worker 17 final phase — closes CONTENT REVIVAL.",
+      "branch": "worker-17-resonance-p6",
+      "lines_added": 7987
     }
   ],
-  "next_action": "Continue Worker 17 Phase 6 — Pacing & Mastery. Branch worker-17-resonance-p6 from main (after PR merge).",
+  "next_action": "Worker 17 complete (6/6 phases). Open PR worker-17-resonance-p6 → main with full Worker 17 summary. After user merges: run CONTENT_REORDER_RITUAL (consumes data-difficulty + data-prereq + data-est-minutes from W17). Then start Worker 18 (LEARNING_SHELL) Phase 1 — consumes Upg.practice (W17 P4) + Upg.pace (W17 P6) for the personal training shell.",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
@@ -682,8 +691,9 @@
         "id": "17",
         "name": "CONTENT_REVIVAL",
         "phases": 6,
-        "status": "specs-ready",
-        "specs_branch": "pack-v2-worker-17-specs"
+        "status": "completed-pending-pr",
+        "specs_branch": "pack-v2-worker-17-specs",
+        "phases_completed": [1, 2, 3, 4, 5, 6]
       },
       {
         "id": "18",
