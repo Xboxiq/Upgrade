@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-22T22:05:00Z",
+  "last_updated": "2026-05-23T01:30:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
     "pack": "v3",
     "worker": "20",
     "worker_name": "TASMEEM_RECONSTRUCTION",
-    "phase": 2,
+    "phase": 3,
     "phases_total": 6,
     "phase_order": [
       "1",
@@ -17,15 +17,8 @@
       "5",
       "6"
     ],
-    "branch": "worker-20-devotio-p2",
-    "status": "blocked-pending-fonts",
-    "blocker": {
-      "kind": "sandbox-network-restriction",
-      "summary": "Sandbox network mode is INTEGRATIONS_ONLY (squid proxy returns 403 for github.com / fonts.gstatic.com / pypi). Cannot download OFL font binaries inside the agent session.",
-      "scope": "Phase 2 binary acquisition only. Phase 2 structural scaffolding is complete (folders, MANIFEST.json, per-family READMEs, scripts, license placeholders).",
-      "user_action_required": "Run `bash scripts/worker-20-bootstrap.sh` once on a workstation with HTTPS, then commit and push platform/assets/fonts/*.woff2 + license files. After that, resume AUTO_PILOT v3 — Phase 3 (Voice Bindings) will pick up automatically.",
-      "branch_with_scaffolding": "worker-20-devotio-p2"
-    }
+    "branch": "worker-20-devotio-p3",
+    "status": "in-progress"
   },
   "previous": {
     "pack": "v3",
@@ -658,9 +651,16 @@
       "branch": "worker-20-devotio-p2",
       "lines_added": 1021,
       "blocked": true
+    },
+    {
+      "worker": "20",
+      "phase": 3,
+      "title": "Voice Bindings — 22 local @font-face (9 families), collapse --font-display 2→1, route 18 voice tokens to local stacks, remove Thmanyah phantom, 16 tas-voice-* utilities, Upg.font IIFE (25th API: list/voices/audit/isReady/computedFor/status/swap/reset). Sacred preserved 100% (14 pages / 391 qcalc / 25 Upg.* APIs / 0 google fonts / 0 Thmanyah in rules).",
+      "branch": "worker-20-devotio-p3",
+      "lines_added": 525
     }
   ],
-  "next_action": "Worker 20 Phase 2 (devotio) is structurally complete but BLOCKED-pending-fonts. ACTION REQUIRED ON USER WORKSTATION: (1) checkout branch worker-20-devotio-p2; (2) `pip install 'fonttools[woff]' brotli`; (3) `bash scripts/worker-20-bootstrap.sh` — this downloads 22 woff2 files from official OFL repos, subsets each to its declared unicode-range, and verifies <=320KB total; (4) `git add platform/assets/fonts/ && git commit -m 'phase 2 (devotio): font binaries populated locally' && git push`; (5) re-run AUTO_PILOT v3 — it will read this state and pick up Worker 20 Phase 3 (Voice Bindings) automatically.",
+  "next_action": "Continue Worker 20 Phase 4 (Numeric Discipline). Branch: worker-20-devotio-p3 (continue on same branch). Font .woff2 binaries still pending user download — CSS @font-face declarations reference local paths, graceful fallback to system fonts until binaries are placed. Phase 4 adds tabular-nums discipline to all 391 qcalc instances.",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
