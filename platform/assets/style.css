@@ -24346,3 +24346,331 @@ input[type="number"]:where(:not([data-tas-num="arabic"])) {
    ════════════════════════════════════════════════════════════════════════════ */
 
 /* End TASMEEM v3 / Worker 20 / Phase 1 (finalized retroactively) ──────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   TASMEEM v3 — Worker 20 / Phase 5 — KASHIDA & RHYTHM
+   ────────────────────────────────────────────────────────────────────────────
+   Philosophy:
+     - الخط العربي يتنفّس عبر الكشيدة — تَلويحة الأفق بين الحرف والآخر.
+     - اللاتيني يتنفّس عبر leading.
+     - لا نَبني واجهة عربية بقواعد لاتينية.
+   What this block does:
+     - APPEND only — no rule from W12-W19 is rewritten.
+     - Adds 8 NEW rhythm tokens that don't already exist in :root cascade
+       (--leading-luxe / 3 word-spacing-* / 5 tracking-* voice-named / 2 kashida-*).
+     - Existing W12 --leading-tight/snug/normal/relaxed/loose values are
+       PRESERVED (they're already Arabic-tuned: relaxed=1.7, loose=1.85).
+     - Adds Arabic-first body rhythm rules + per-voice feature settings
+       + .tas-kashida class for hero h1 justification.
+   Sacred preserved:
+     - 14 page sections / 391 qcalc / 25 Upg.* APIs / 18 voice tokens.
+     - --text-* type scale untouched.
+     - --type-voice-* tokens untouched.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* Step 1 — Rhythm tokens (additive, no name collisions with W12) ──────────── */
+:root {
+  /* Ceremonial leading (NEW — sits above existing --leading-loose: 1.85) */
+  --leading-luxe:           2.00;   /* Quranic-style ceremonial breath */
+
+  /* Word-spacing per voice (NEW — none existed before) */
+  --word-spacing-tight:    -0.02em; /* hero (kashida fills) */
+  --word-spacing-normal:    0;
+  --word-spacing-loose:     0.05em; /* readable long-form */
+
+  /* Voice-named tracking (NEW — sit alongside W12 --tracking-tighter/tight/normal/wide/wider) */
+  --tracking-hero:         -0.020em; /* tight, dlig fills */
+  --tracking-display:      -0.015em;
+  --tracking-body:          0;
+  --tracking-ui:            0.005em;
+  --tracking-eyebrow:       0.050em; /* eyebrow needs breath */
+
+  /* Kashida control (NEW — used by .tas-kashida + @supports query) */
+  --kashida-mode:           "manual";  /* future hint */
+  --kashida-min-width:      8em;       /* below this, no justification */
+}
+
+/* Step 2 — Arabic body rhythm foundation ──────────────────────────────────── */
+/* Engages text-rendering on the Arabic root + activates kerning/liga/calt
+   globally. This is the single place we touch html[lang="ar"] / [dir="rtl"]
+   to avoid colliding with body rules elsewhere. */
+html[lang="ar"],
+html[dir="rtl"] {
+  text-rendering: optimizeLegibility;
+  -webkit-font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Long-form Arabic paragraphs — relaxed (1.7) is already tuned; we add
+   word-spacing + feature settings without touching line-height. */
+.tas-voice-body,
+.tas-voice-body-lead,
+[data-tas-voice="body"],
+.h-body,
+.lesson-body p,
+.scenario-text {
+  word-spacing: var(--word-spacing-normal);
+  letter-spacing: var(--tracking-body);
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+}
+
+/* Literary Arabic — extra breath on quotes (psych/eq/customercare) */
+.tas-voice-quote,
+[data-tas-voice="quote"],
+.h-quote,
+.literary-quote,
+[lang="ar"].literary,
+:lang(ar) .literary-quote {
+  line-height: var(--leading-loose);
+  word-spacing: var(--word-spacing-loose);
+  letter-spacing: var(--tracking-body);
+  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1, "swsh" 1;
+}
+
+/* Ceremonial — gateway poetry, hero greetings (opt-in via class/data) */
+[data-tas-voice="ceremonial"],
+.tas-voice-ceremonial,
+.gateway-poetry {
+  line-height: var(--leading-luxe);
+  word-spacing: var(--word-spacing-loose);
+  letter-spacing: 0;
+  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+}
+
+/* Step 3 — Heading rhythm (kashida-like via tracking + dlig) ──────────────── */
+
+/* h1 / hero — tightest tracking, dlig on, --leading-tight already 1.18 */
+.tas-voice-hero,
+[data-tas-voice="hero"],
+.h-display,
+.type-hero {
+  letter-spacing: var(--tracking-hero);
+  word-spacing: var(--word-spacing-tight);
+  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1, "calt" 1;
+}
+
+/* h1 / display — slightly looser */
+.tas-voice-display,
+[data-tas-voice="display"],
+.h-title {
+  letter-spacing: var(--tracking-display);
+  word-spacing: var(--word-spacing-tight);
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+}
+
+/* h2 / display-h */
+.tas-voice-display-h,
+.h-section {
+  letter-spacing: var(--tracking-display);
+  word-spacing: var(--word-spacing-normal);
+}
+
+/* UI labels — slight positive tracking */
+.tas-voice-ui,
+.tas-voice-label,
+[data-tas-voice="ui"] {
+  letter-spacing: var(--tracking-ui);
+  word-spacing: var(--word-spacing-normal);
+}
+
+/* Eyebrows / signatures — wider breathing */
+.tas-voice-eyebrow,
+.tas-voice-signature,
+.tas-voice-ribbon,
+.h-eyebrow {
+  letter-spacing: var(--tracking-eyebrow);
+  word-spacing: var(--word-spacing-loose);
+}
+
+/* Step 4 — .tas-kashida class (manual justification on hero h1) ───────────── */
+/* Used to fill heading container width without word-spacing distortion.
+   Falls back to inter-word justify on Safari/older browsers; engages true
+   text-justify: kashida via @supports on Firefox + Chrome 116+. */
+.tas-kashida,
+[data-tas-kashida="on"] {
+  text-align: justify;
+  text-justify: inter-word;
+  -webkit-text-justify: inter-word;
+}
+
+/* Disable kashida on small viewports — looks awkward on phones */
+@media (max-width: 480px) {
+  .tas-kashida,
+  [data-tas-kashida="on"] {
+    text-align: start;
+    text-justify: auto;
+  }
+}
+
+/* True kashida where supported (progressive enhancement) */
+@supports (text-justify: kashida) {
+  .tas-kashida,
+  [data-tas-kashida="on"] {
+    text-justify: kashida;
+  }
+}
+
+/* Step 5 — Per-voice feature deepening ────────────────────────────────────── */
+
+/* Aref Ruqaa / wordmark / accent — calligraphic, all features on */
+.tas-voice-wordmark,
+.tas-voice-accent,
+.tas-voice-signature,
+.tas-voice-ribbon,
+.tas-voice-eyebrow,
+.tas-voice-hero {
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1,
+    "dlig" 1,
+    "calt" 1,
+    "rlig" 1,
+    "init" 1, "medi" 1, "fina" 1, "isol" 1;
+}
+
+/* Reem Kufi — geometric display, simpler features */
+.tas-voice-display,
+.tas-voice-display-h,
+.tas-voice-display-l {
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1,
+    "calt" 1,
+    "init" 1, "medi" 1, "fina" 1, "isol" 1;
+}
+
+/* Readex Pro / IBM Plex Arabic — body (no dlig for readability) */
+.tas-voice-body,
+.tas-voice-body-lead {
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1,
+    "calt" 1,
+    "init" 1, "medi" 1, "fina" 1, "isol" 1;
+}
+
+/* Tajawal — UI */
+.tas-voice-ui,
+.tas-voice-label {
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1,
+    "calt" 1;
+}
+
+/* Inter — Latin; ss01/ss03 alternates for digit clarity */
+.tas-voice-latin {
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1,
+    "calt" 1,
+    "ss01" 1,
+    "ss03" 1;
+}
+
+/* JetBrains Mono — code; keep zero distinct (slashed default), enable code ligatures */
+.tas-voice-code {
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1,
+    "calt" 1,
+    "zero" 1;
+}
+
+/* Fraunces — literary; swashes + stylistic alternates on */
+.tas-voice-quote {
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1,
+    "dlig" 1,
+    "swsh" 1,
+    "salt" 1,
+    "ss01" 1;
+}
+
+/* Step 6 — Optical-size hints for variable fonts ──────────────────────────── */
+/* Only applies when the loaded font supports variable opsz axis. The
+   browser silently ignores unsupported axes, so this is safe on static fonts. */
+.tas-voice-hero,
+.tas-voice-display,
+.h-display,
+.type-hero {
+  font-variation-settings: "opsz" 96;
+}
+
+.tas-voice-display-h,
+.tas-voice-display-l,
+.h-section {
+  font-variation-settings: "opsz" 24;
+}
+
+.tas-voice-body,
+.tas-voice-body-lead {
+  font-variation-settings: "opsz" 14;
+}
+
+.tas-voice-ui,
+.tas-voice-label {
+  font-variation-settings: "opsz" 11;
+}
+
+/* Step 7 — qcalc rhythm guard ─────────────────────────────────────────────── */
+/* Numbers don't need Arabic breathing — Phase 4 already locked their voice.
+   This just confirms qcalc-* don't inherit body word-spacing/leading drift. */
+.qcalc-result-value,
+.qcalc-value,
+.qcalc-result,
+.qcalc-output,
+.cath-stat-value,
+.bento-stat-value,
+.stat-tile-value,
+.kpi-card-value,
+.kpi-hero-num,
+[data-countup],
+[data-count-up],
+.count-up-value {
+  word-spacing: 0;
+  /* leading + tracking already disciplined via Phase 4 .tas-num-* classes */
+}
+
+/* Step 8 — Reduced-motion + print safety ──────────────────────────────────── */
+/* Nothing animates here, but @supports queries can flicker on Safari when
+   font-variation-settings transitions. Disable transitions on these properties. */
+@media (prefers-reduced-motion: reduce) {
+  .tas-voice-hero,
+  .tas-voice-display,
+  .tas-voice-display-h,
+  .tas-voice-body,
+  .tas-voice-quote,
+  .tas-kashida {
+    transition-property: color, background-color, opacity, border-color;
+    /* explicitly: NO transition on font-variation-settings, letter-spacing,
+       word-spacing, line-height — prevents flicker */
+  }
+}
+
+@media print {
+  .tas-kashida,
+  [data-tas-kashida="on"] {
+    text-align: start;
+    text-justify: auto;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   Worker 20 / Phase 5 — Rhythm Discipline:
+   1. Body Arabic line-height: 1.7 (--leading-relaxed from W12 — preserved).
+   2. Hero/display → tracking-hero (-0.02em) + dlig + opsz 96.
+   3. .tas-kashida applies only on viewport ≥480px and falls back gracefully.
+   4. qcalc rhythm UNTOUCHED — Phase 4 .tas-num-* classes own that surface.
+   5. font-feature-settings "init/medi/fina/isol" on every Arabic voice.
+   6. opsz variation only takes effect on variable fonts (silent on static).
+   7. No transition on letter/word/leading — prevents Safari flicker.
+   8. App.js NOT touched. No new Upg.* APIs.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* End TASMEEM v3 / Worker 20 / Phase 5 ────────────────────────────────────── */
