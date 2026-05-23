@@ -18136,3 +18136,141 @@ document.addEventListener('DOMContentLoaded', () => {
 
 })(window, document);
 /* End RITUAL UI v3 / Worker 22 / Phase 5 — Time of Day ──────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   RITUAL UI v3 — Aura Deepening Logic (Worker 22 / Phase 6 — FINAL)
+   EXTENDS W16 P6 Upg.aura with deepen/undeepen/deepRhythmFor.
+   EXTENDS Upg.ritual (Phases 1-5) with auraTie/deepenAura/undeepenAura/rhythmMap.
+   No new top-level Upg.* — both extended in-place via freeze-replace.
+   Upg.* count stays at 27. Upg.ritual.* surface = 6th re-freeze.
+   Closes Worker 22 RITUAL UI 6/6.
+   ════════════════════════════════════════════════════════════════════════ */
+(function ritualAuraDeepenIIFE(window, document){
+  'use strict';
+  if (!window.Upg || !window.Upg.ritual) return;        // requires P1
+  if (!window.Upg.aura) return;                          // requires W16 P6
+  if (window.Upg.ritual.auraTie) return;                 // idempotent
+
+  /* ── 16 personality → rhythm mappings (frozen) ────────────────────── */
+  var PERSONALITY_RHYTHM = Object.freeze({
+    'dashboard':    'gentle',
+    'callcenter':   'pulse',
+    'fieldsales':   'pulse',
+    'accountmgr':   'gentle',
+    'social':       'sweep',
+    'lab':          'sweep',
+    'psych':        'gentle',
+    'eq':           'gentle',
+    'negotiation':  'pulse',
+    'customercare': 'gentle',
+    'programming':  'sweep',
+    'accounting':   'gentle',
+    'phonerepair':  'gentle',
+    'hrmastery':    'gentle',
+    'myprogress':   'gentle',
+    'curriculum':   'gentle'
+  });
+  var RHYTHM_LIST = Object.freeze(['gentle', 'pulse', 'sweep']);
+
+  /* ── helpers ──────────────────────────────────────────────────────── */
+  function activePageEl(){
+    return document.querySelector('section.page.active')
+        || document.querySelector('section.page:not([hidden])')
+        || document.querySelector('section.page')
+        || null;
+  }
+
+  function rhythmFor(personality){
+    if (!personality) return 'gentle';
+    return PERSONALITY_RHYTHM[personality] || 'gentle';
+  }
+
+  /* ── deepen / undeepen — operate on a target page ─────────────────── */
+  function deepen(pageEl){
+    var target = pageEl || activePageEl();
+    if (!target) return false;
+    var personality = target.getAttribute('data-page-personality');
+    var rhythm = rhythmFor(personality);
+    target.setAttribute('data-rit-aura', 'deep');
+    target.setAttribute('data-rit-aura-rhythm', rhythm);
+    return Object.freeze({ personality: personality || null, rhythm: rhythm });
+  }
+
+  function undeepen(pageEl){
+    var target = pageEl || activePageEl();
+    if (!target) return false;
+    target.removeAttribute('data-rit-aura');
+    target.removeAttribute('data-rit-aura-rhythm');
+    return true;
+  }
+
+  /* ── auraTie — snapshot current aura/atmosphere/tint binding ──────── */
+  function auraTie(){
+    var page = activePageEl();
+    if (!page) return null;
+    var personality = page.getAttribute('data-page-personality') || null;
+    var atmosphere  = document.body.getAttribute('data-rit-time') || null;
+    var rhythmAttr  = page.getAttribute('data-rit-aura-rhythm') || rhythmFor(personality);
+    var auraDeep    = page.getAttribute('data-rit-aura') === 'deep';
+    var tint = '';
+    try {
+      tint = (getComputedStyle(page).getPropertyValue('--color-tint') || '').trim();
+    } catch (_e) { tint = ''; }
+    return Object.freeze({
+      personality: personality,
+      atmosphere:  atmosphere,
+      tint:        tint,
+      rhythm:      rhythmAttr,
+      auraDeep:    auraDeep
+    });
+  }
+
+  /* ── auto-deepen on nav and on initial load ───────────────────────── */
+  function autoDeepen(){
+    // Tiny delay so nav transition can settle / hidden attribute updates land
+    window.setTimeout(function(){ deepen(); }, 60);
+  }
+  document.addEventListener('upg:nav:change', autoDeepen);
+
+  function boot(){
+    deepen();
+    // One-time ritual completion log — Devotion banner.
+    try {
+      console.info(
+        '%c🌟 RITUAL UI v3 — entry · halo · 5 thresholds · 3 inkpots · 5 atmospheres · 3 aura rhythms — all phases bound',
+        'color:#9D7BFF; font-weight:bold;'
+      );
+    } catch (_e) { /* console may be unavailable */ }
+  }
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+
+  /* ── EXTEND Upg.aura via freeze-replace (W16 P6 surface preserved) ── */
+  var auraCurrent  = window.Upg.aura;
+  var auraExtended = Object.assign({}, auraCurrent, {
+    deepen:         deepen,
+    undeepen:       undeepen,
+    deepRhythmFor:  rhythmFor,
+    rhythms:        function(){ return RHYTHM_LIST.slice(); },
+    rhythmMap:      function(){ return Object.assign({}, PERSONALITY_RHYTHM); }
+  });
+  window.Upg.aura = Object.freeze(auraExtended);
+
+  /* ── EXTEND Upg.ritual via 6th freeze-replace (P1-P5 preserved) ───── */
+  var ritualCurrent  = window.Upg.ritual;
+  var ritualExtended = Object.assign({}, ritualCurrent, {
+    auraTie:       auraTie,
+    deepenAura:    deepen,
+    undeepenAura:  undeepen,
+    rhythmMap:     function(){ return Object.assign({}, PERSONALITY_RHYTHM); },
+    rhythms:       function(){ return RHYTHM_LIST.slice(); }
+  });
+  window.Upg.ritual = Object.freeze(ritualExtended);
+
+})(window, document);
+/* End RITUAL UI v3 / Worker 22 / Phase 6 — Aura Deepening — Worker 22 COMPLETE 6/6 ─ */
