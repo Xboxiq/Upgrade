@@ -17950,3 +17950,189 @@ document.addEventListener('DOMContentLoaded', () => {
 
 })(window, document);
 /* End RITUAL UI v3 / Worker 22 / Phase 4 — Inkpot Feedback ─────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   RITUAL UI v3 — Time-of-Day Atmospheres (Worker 22 / Phase 5)
+   EXTENDS Upg.ritual (Phases 1-4) with .atmosphere namespace.
+   No new top-level Upg.* — Upg.ritual count stays at 1 namespace (26 total).
+   Sacred preserved: prior surfaces (start/stop/disable/enable/status/list,
+   POETRY_LINES, enterHalo/exitHalo/toggleHalo/isHaloActive, transition extras,
+   inkpot) remain intact; we re-freeze with the new atmosphere member.
+   ════════════════════════════════════════════════════════════════════════ */
+(function ritualAtmosphereIIFE(window, document){
+  'use strict';
+  if (!window.Upg || !window.Upg.ritual) return;        // requires Phase 1
+  if (window.Upg.ritual.atmosphere) return;              // idempotent
+
+  var STORAGE_DISABLED = 'upg_ritual_atmo_disabled';
+  var STORAGE_OVERRIDE = 'upg_ritual_atmo_override';
+
+  /* ── Atmospheres — Islamic-rooted, frozen ─────────────────────────── */
+  var ATMOSPHERES = Object.freeze({
+    dawn:     Object.freeze({ ar: 'فَجْر',   range: [4.5,  7.0]  }),
+    forenoon: Object.freeze({ ar: 'ضُحى',   range: [7.0,  13.0] }),
+    asr:      Object.freeze({ ar: 'عَصْر',   range: [13.0, 17.0] }),
+    maghrib:  Object.freeze({ ar: 'مَغْرِب', range: [17.0, 19.5] }),
+    isha:     Object.freeze({ ar: 'عِشاء',  range: [19.5, 28.5] })  // wraps midnight
+  });
+  var ORDER = ['dawn', 'forenoon', 'asr', 'maghrib', 'isha'];
+
+  /* ── helpers ──────────────────────────────────────────────────────── */
+  function safeStorageGet(key){
+    try { return window.localStorage.getItem(key); }
+    catch (_e) { return null; }
+  }
+  function safeStorageSet(key, value){
+    try { window.localStorage.setItem(key, value); }
+    catch (_e) { /* unavailable */ }
+  }
+  function safeStorageRemove(key){
+    try { window.localStorage.removeItem(key); }
+    catch (_e) { /* unavailable */ }
+  }
+
+  /* ── time → atmosphere id ─────────────────────────────────────────── */
+  function detectAtmosphere(){
+    var now = new Date();
+    var h = now.getHours() + (now.getMinutes() / 60);
+    for (var i = 0; i < ORDER.length; i++){
+      var id = ORDER[i];
+      var range = ATMOSPHERES[id].range;
+      var start = range[0];
+      var end = range[1];
+      if (end > 24){
+        if (h >= start || h < (end - 24)) return id;
+      } else {
+        if (h >= start && h < end) return id;
+      }
+    }
+    return 'isha';  // pre-fajr fallback
+  }
+
+  function isDisabled(){ return safeStorageGet(STORAGE_DISABLED) === '1'; }
+  function getOverride(){
+    var v = safeStorageGet(STORAGE_OVERRIDE);
+    return (v && ATMOSPHERES[v]) ? v : null;
+  }
+
+  /* ── apply / set / clear / refresh / disable / enable ─────────────── */
+  function ensureLayer(){
+    var layer = document.querySelector('.rit-atmo-layer');
+    if (layer) return layer;
+    layer = document.createElement('div');
+    layer.className = 'rit-atmo-layer';
+    layer.setAttribute('aria-hidden', 'true');
+    layer.setAttribute('role', 'presentation');
+    if (document.body.firstChild){
+      document.body.insertBefore(layer, document.body.firstChild);
+    } else {
+      document.body.appendChild(layer);
+    }
+    return layer;
+  }
+
+  function apply(atmoId){
+    if (!ATMOSPHERES[atmoId]) atmoId = 'forenoon';
+    document.body.setAttribute('data-rit-time', atmoId);
+    ensureLayer();
+    return atmoId;
+  }
+
+  function set(atmoId){
+    if (!ATMOSPHERES[atmoId]){
+      console.warn('[Upg.ritual.atmosphere] Unknown:', atmoId, '— valid:', ORDER.join(', '));
+      return false;
+    }
+    safeStorageSet(STORAGE_OVERRIDE, atmoId);
+    apply(atmoId);
+    return true;
+  }
+
+  function clearOverride(){
+    safeStorageRemove(STORAGE_OVERRIDE);
+    refresh();
+  }
+
+  function refresh(){
+    if (isDisabled()){
+      document.body.removeAttribute('data-rit-time');
+      var layer = document.querySelector('.rit-atmo-layer');
+      if (layer && layer.parentNode) layer.parentNode.removeChild(layer);
+      return null;
+    }
+    var atmoId = getOverride() || detectAtmosphere();
+    apply(atmoId);
+    return atmoId;
+  }
+
+  function disable(){
+    safeStorageSet(STORAGE_DISABLED, '1');
+    document.body.removeAttribute('data-rit-time');
+    var layer = document.querySelector('.rit-atmo-layer');
+    if (layer && layer.parentNode) layer.parentNode.removeChild(layer);
+  }
+
+  function enable(){
+    safeStorageRemove(STORAGE_DISABLED);
+    refresh();
+  }
+
+  function status(){
+    var arabicNames = {};
+    ORDER.forEach(function(id){ arabicNames[id] = ATMOSPHERES[id].ar; });
+    return Object.freeze({
+      current:     document.body.getAttribute('data-rit-time') || null,
+      detected:    detectAtmosphere(),
+      override:    getOverride(),
+      disabled:    isDisabled(),
+      atmospheres: arabicNames
+    });
+  }
+
+  function list(){ return ORDER.slice(); }
+  function listArabic(){
+    var out = {};
+    ORDER.forEach(function(id){ out[id] = ATMOSPHERES[id].ar; });
+    return out;
+  }
+
+  /* ── atmosphere API surface (frozen) ──────────────────────────────── */
+  var atmosphereApi = Object.freeze({
+    detect:        detectAtmosphere,
+    apply:         apply,
+    set:           set,
+    clearOverride: clearOverride,
+    refresh:       refresh,
+    disable:       disable,
+    enable:        enable,
+    status:        status,
+    list:          list,
+    listArabic:    listArabic,
+    ATMOSPHERES:   ATMOSPHERES
+  });
+
+  /* ── Wire-up: initial apply, 20-minute timer, visibilitychange ────── */
+  function boot(){
+    refresh();
+    // Re-evaluate every 20 minutes — quiet but timely
+    setInterval(refresh, 20 * 60 * 1000);
+    // Re-evaluate on visibility change (user returned from sleep / other tab)
+    document.addEventListener('visibilitychange', function(){
+      if (!document.hidden) refresh();
+    });
+  }
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+
+  /* ── Extend Upg.ritual via freeze-replace pattern (matches Phase 4) ── */
+  var ritualCurrent  = window.Upg.ritual;
+  var ritualExtended = Object.assign({}, ritualCurrent, { atmosphere: atmosphereApi });
+  window.Upg.ritual  = Object.freeze(ritualExtended);
+
+})(window, document);
+/* End RITUAL UI v3 / Worker 22 / Phase 5 — Time of Day ──────────────── */

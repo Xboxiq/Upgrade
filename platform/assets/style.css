@@ -27225,3 +27225,214 @@ body[data-rit-halo="active"] .rit-halo-toggle::after {
    ════════════════════════════════════════════════════════════════════════ */
 
 /* End RITUAL UI v3 / Worker 22 / Phase 4 — Inkpot Feedback ─────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   RITUAL UI v3 — Time-of-Day Atmospheres (Worker 22 / Phase 5)
+   ────────────────────────────────────────────────────────────────────────
+   ٥ atmospheres مُتَجَذّرة في إيقاع اليوم الإسلامي:
+     dawn  (فَجْر  04:30-07:00)  pearl + soft lapis — نَسَم بارد رَطِب
+     forenoon (ضُحى 07:00-13:00)  saffron + marble — ضوء ذهبي حادّ
+     asr   (عَصْر  13:00-17:00)  henna + saffron — عَنْبَر دافئ
+     maghrib (مَغْرِب 17:00-19:30) coral + henna — قرمزي مَائِل
+     isha  (عِشاء  19:30-04:30)  mihrab + indigo — سُكون نِيلي
+   لا يَستبدل theme dark/light — يَلبَسُه. veil ≤ 22% opacity.
+   ════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Default scaffolding — neutral until JS sets data-rit-time */
+  --rit-atmo-veil:           transparent;
+  --rit-atmo-tint-shift:     transparent;
+  --rit-atmo-leading-shift:  0em;
+  --rit-atmo-name:           "default";
+}
+
+/* ─── 1. DAWN (فَجْر) — fresh blue-pearl ─────────────────────────────── */
+body[data-rit-time="dawn"] {
+  --rit-atmo-name: "dawn";
+  --rit-atmo-veil:
+    radial-gradient(ellipse 100% 60% at 50% 0%,
+      color-mix(in oklch, var(--chr-lapis-200) 18%, transparent) 0%,
+      transparent 70%);
+  --rit-atmo-tint-shift:
+    color-mix(in oklch, var(--chr-pearl-200) 8%, transparent);
+  --life-ambient-from:
+    color-mix(in oklch, var(--chr-lapis-300) 14%, transparent);
+  --life-ambient-to:
+    color-mix(in oklch, var(--chr-pearl-400) 10%, transparent);
+  --rit-atmo-leading-shift: -0.02em;  /* tighter for morning alertness */
+}
+
+/* ─── 2. FORENOON (ضُحى) — golden marble bright ──────────────────────── */
+body[data-rit-time="forenoon"] {
+  --rit-atmo-name: "forenoon";
+  --rit-atmo-veil:
+    radial-gradient(ellipse 100% 80% at 50% 10%,
+      color-mix(in oklch, var(--chr-saffron-200) 14%, transparent) 0%,
+      transparent 70%);
+  --rit-atmo-tint-shift:
+    color-mix(in oklch, var(--chr-marble-300) 10%, transparent);
+  --life-ambient-from:
+    color-mix(in oklch, var(--chr-saffron-400) 12%, transparent);
+  --life-ambient-to:
+    color-mix(in oklch, var(--chr-marble-500) 8%, transparent);
+  --rit-atmo-leading-shift: -0.01em;
+}
+
+/* ─── 3. ASR (عَصْر) — amber warm henna ──────────────────────────────── */
+body[data-rit-time="asr"] {
+  --rit-atmo-name: "asr";
+  --rit-atmo-veil:
+    radial-gradient(ellipse 90% 80% at 80% 30%,
+      color-mix(in oklch, var(--chr-henna-300) 16%, transparent) 0%,
+      transparent 70%);
+  --rit-atmo-tint-shift:
+    color-mix(in oklch, var(--chr-saffron-400) 12%, transparent);
+  --life-ambient-from:
+    color-mix(in oklch, var(--chr-henna-400) 14%, transparent);
+  --life-ambient-to:
+    color-mix(in oklch, var(--chr-saffron-500) 12%, transparent);
+  --rit-atmo-leading-shift: 0em;
+}
+
+/* ─── 4. MAGHRIB (مَغْرِب) — crimson sunset ──────────────────────────── */
+body[data-rit-time="maghrib"] {
+  --rit-atmo-name: "maghrib";
+  --rit-atmo-veil:
+    radial-gradient(ellipse 120% 100% at 70% 70%,
+      color-mix(in oklch, var(--chr-coral-400) 20%, transparent) 0%,
+      transparent 75%);
+  --rit-atmo-tint-shift:
+    color-mix(in oklch, var(--chr-henna-500) 14%, transparent);
+  --life-ambient-from:
+    color-mix(in oklch, var(--chr-coral-500) 16%, transparent);
+  --life-ambient-to:
+    color-mix(in oklch, var(--chr-henna-600) 14%, transparent);
+  --rit-atmo-leading-shift: 0.005em;  /* slightly more breath for evening reflection */
+}
+
+/* ─── 5. ISHA (عِشاء) — deep mihrab night ────────────────────────────── */
+body[data-rit-time="isha"] {
+  --rit-atmo-name: "isha";
+  --rit-atmo-veil:
+    radial-gradient(ellipse 120% 100% at 50% 30%,
+      color-mix(in oklch, var(--chr-mihrab-700) 22%, transparent) 0%,
+      transparent 75%);
+  --rit-atmo-tint-shift:
+    color-mix(in oklch, var(--chr-indigo-700) 16%, transparent);
+  --life-ambient-from:
+    color-mix(in oklch, var(--chr-mihrab-600) 18%, transparent);
+  --life-ambient-to:
+    color-mix(in oklch, var(--chr-indigo-800) 14%, transparent);
+  --rit-atmo-leading-shift: 0.01em;  /* more breath for night calm */
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Apply atmosphere veil — fixed pseudo on body (z-index: 0 for body::after
+   which sits behind content but above body bg; use ::before-like pattern).
+   We use a separate fixed div mounted by JS to avoid clashing with W16/W21
+   ::before/::after veils already on body.
+   ════════════════════════════════════════════════════════════════════════ */
+.rit-atmo-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--rit-atmo-veil);
+  opacity: 0;
+  transition: opacity 1200ms ease-in-out, background 1200ms ease-in-out;
+  /* Mount to body but stay behind page content (which sits at z-index >= 1) */
+  contain: layout paint;
+  isolation: isolate;
+}
+body[data-rit-time]:not([data-rit-time="default"]) .rit-atmo-layer {
+  opacity: 1;
+}
+body:not([data-rit-time]) .rit-atmo-layer,
+body[data-rit-time="default"] .rit-atmo-layer {
+  opacity: 0;
+}
+
+/* Apply leading shift to body voice text (subtle — calc with W15 tracking) */
+body[data-rit-time] .tas-voice-body,
+body[data-rit-time] .tas-voice-quote,
+body[data-rit-time] .type-body,
+body[data-rit-time] .type-body-lead,
+body[data-rit-time] .u-prose p {
+  letter-spacing: calc(var(--tracking-normal, 0em) + var(--rit-atmo-leading-shift, 0em));
+  transition: letter-spacing 1500ms ease;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Atmospheric tint to glass surfaces (W14 P1 + W21 backward-compat)
+   Soft overlay through background-blend-mode keeps existing glass intact.
+   ════════════════════════════════════════════════════════════════════════ */
+body[data-rit-time]:not([data-rit-time="default"]) .glass,
+body[data-rit-time]:not([data-rit-time="default"]) .glass-card,
+body[data-rit-time]:not([data-rit-time="default"]) .bento-card {
+  background-image: linear-gradient(var(--rit-atmo-tint-shift), var(--rit-atmo-tint-shift));
+  background-blend-mode: overlay;
+  transition: background-image 1200ms ease, background-blend-mode 0ms;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Reduced-Transparency guard — flatten veils on users who opted out
+   ════════════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-transparency: reduce) {
+  .rit-atmo-layer {
+    background: var(--rit-atmo-tint-shift, transparent) !important;
+    filter: none !important;
+  }
+  body[data-rit-time]:not([data-rit-time="default"]) .glass,
+  body[data-rit-time]:not([data-rit-time="default"]) .glass-card,
+  body[data-rit-time]:not([data-rit-time="default"]) .bento-card {
+    background-image: none !important;
+    background-blend-mode: normal !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Reduced-Motion guard — instant atmosphere change, no transitions
+   ════════════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .rit-atmo-layer,
+  body[data-rit-time] .tas-voice-body,
+  body[data-rit-time] .tas-voice-quote,
+  body[data-rit-time] .type-body,
+  body[data-rit-time] .type-body-lead,
+  body[data-rit-time] .u-prose p,
+  body[data-rit-time] .glass,
+  body[data-rit-time] .glass-card,
+  body[data-rit-time] .bento-card {
+    transition: none !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Print — strip atmospheric veil so content prints cleanly
+   ════════════════════════════════════════════════════════════════════════ */
+@media print {
+  .rit-atmo-layer { display: none !important; }
+  body[data-rit-time] .glass,
+  body[data-rit-time] .glass-card,
+  body[data-rit-time] .bento-card {
+    background-image: none !important;
+    background-blend-mode: normal !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Worker 22 / Phase 5 — Atmosphere Discipline:
+   1. ٥ atmospheres ثابتة (dawn/forenoon/asr/maghrib/isha) — Islamic-rooted، لا تَخترع.
+   2. veil opacity ≤ 22% — لا overwhelm.
+   3. transition بين atmospheres = 1200ms (smooth shift).
+   4. لا يَستبدل theme (dark/light) — يَلبَسُه via veil.
+   5. opt-out via localStorage upg_ritual_atmo_disabled.
+   6. override via localStorage upg_ritual_atmo_override (manual fixed atmo).
+   7. refresh كل ٢٠ دقيقة (timer + visibilitychange).
+   8. reduced-transparency → flatten radial-gradient to solid tint shift.
+   9. reduced-motion → instant change (0 transitions).
+   10. print → veil hidden + glass restored to plain background.
+   ════════════════════════════════════════════════════════════════════════ */
+/* End RITUAL UI v3 / Worker 22 / Phase 5 — Time of Day ──────────────── */
