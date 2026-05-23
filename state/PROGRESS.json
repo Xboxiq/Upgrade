@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-23T18:30:00Z",
+  "last_updated": "2026-05-23T19:15:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
     "pack": "v3",
     "worker": "21",
     "worker_name": "CHROMATIC_SOUL",
-    "phase": 3,
+    "phase": 4,
     "phases_total": 5,
     "phase_order": [
       "1",
@@ -24,7 +24,7 @@
     "pack": "v3",
     "worker": "21",
     "worker_name": "CHROMATIC_SOUL",
-    "phase": 2,
+    "phase": 3,
     "phases_total": 5,
     "branch": "worker-21-devotio",
     "status": "completed",
@@ -34,7 +34,7 @@
     "pack": "v3",
     "worker": "21",
     "worker_name": "CHROMATIC_SOUL",
-    "phase": 1,
+    "phase": 2,
     "phases_total": 5,
     "branch": "worker-21-devotio",
     "status": "completed",
@@ -702,9 +702,17 @@
       "branch": "worker-21-devotio",
       "lines_added": 389,
       "lines_deleted": 15
+    },
+    {
+      "worker": "21",
+      "phase": 4,
+      "title": "Gradient Recast — REPLACE-IN-PLACE 2 legacy aurora gradient tokens (--deep-gradient base block: rgba(102,252,241/.10) teal + rgba(139,92,246/.10) violet + rgba(6,182,212/.06) cyan → color-mix(in oklch, var(--chr-lapis-700) 18%) + chr-mihrab-700 22% + chr-indigo-800 14%; light theme override --deep-gradient: var(--color-brand)+warning+surface-2 → chr-lapis-300/saffron-300/marble-400 warm wash) + REPLACE-IN-PLACE --life-ambient-from/to (W16 P1) generic --color-brand fallbacks → chr-lapis-500/chr-mihrab-700 fallbacks with raised opacity 12%/8% (was 8%/4%) for visible cultural identity; light theme variant 6%/3% (was 5%/2.5%) + APPEND explicit [data-theme=\"dark\"] override for --deep-gradient (3 oklch radials with alpha) + APPEND 16 [data-page-personality=\"X\"] gradient pairs (15 pages + curriculum forward-compat) each defining --chr-grad-hero (linear 135deg from base-stop to deep-stop) + --chr-grad-ambient (radial ellipse 100% 80% at 50% 0% top-center, 8-16% opacity per page mood, eq exception 180deg vertical fade for meditative rhythm + 16% opacity for mihrab depth) — gradient pairs: dashboard saffron-400→700 / callcenter damascus-400→800 / fieldsales silt-400→700 / accountmgr cedar-500→800 / social coral-400→700 / lab marble-400→700 / psych lapis-400→800 / eq mihrab-500→800 vertical / negotiation damascus-600→900 deeper / customercare pearl-300→600 / programming indigo-500→900 / accounting palm-400→700 / phonerepair henna-500→800 / hrmastery henna-400→700 / myprogress lapis-300→600 / curriculum saffron-500→800 + APPEND 5 cinematic gradient utilities (.chr-grad-page using var(--chr-grad-ambient) fallback to deep-gradient / .chr-grad-hero using --chr-grad-hero fallback to color-tint→tint-edge linear with marble-50 text default / .chr-grad-card with surface-1 mix and tinted border / .chr-grad-divider 90deg horizontal 50% center fade gradient line / .chr-grad-mesh isolated ::before with dual radial blobs + blur 24px) + dedicated @media (prefers-reduced-transparency: reduce) flatten for .chr-grad-mesh::before (filter: none + single chr-lapis tint wash) + Discipline comment block (8 rules). Sacred preserved 100% (14 pages / 391 qcalc / 26 Upg.* APIs / 0 google fonts / 120 chr-* tokens / 15 --tint-* names + Phase 3 16 personality blocks intact / W11 P1 --deep-gradient binding intact across all consumers / W16 P1 --life-ambient-* names + radius/keyframes preserved / Phase 1+2+3 untouched / app.js untouched / no HTML changes / no new APIs / 0 hex in Phase 4 block). 334 net lines added (345 insertions, 11 deletions on REPLACE).",
+      "branch": "worker-21-devotio",
+      "lines_added": 334,
+      "lines_deleted": 11
     }
   ],
-  "next_action": "Continue Worker 21 Phase 3 (Page Reassignment — REPLACE-IN-PLACE 15 --tint-<page> values from aurora-derived to 12 Arabic palette mappings (psych=mihrab, callcenter=marble, hrmastery=henna, dashboard=saffron, accounting=palm, customercare=pearl, programming=indigo, social=coral, fieldsales=silt, accountmgr=cedar, eq=mihrab-secondary, lab=marble, phonerepair=marble, myprogress=marble, negotiation=damascus) + add Upg.chroma IIFE — 26th top-level Upg.* API).",
+  "next_action": "Continue Worker 21 Phase 5 (Theme Bridge — WCAG AA contrast verification on all text/bg pairs across 15 personalities × 2 themes, refine W12 P2 Linen-Bone tinted shadow chain + Pack v1/v2 --shadow-c-* compatibility, expose Upg.chroma.contrast() utility helper + final Mihrab dark refinements. Closes Worker 21 CHROMATIC SOUL — opens PR worker-21-devotio → main).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
