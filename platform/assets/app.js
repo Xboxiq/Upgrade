@@ -17478,3 +17478,160 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 })(window, document);
 /* End RITUAL UI v3 / Worker 22 / Phase 1 — Entry Ritual ──────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   RITUAL UI v3 — Reading Halo Logic (Worker 22 / Phase 2)
+   EXTENDS Upg.ritual (from P1) with halo methods.
+   No new top-level API — Upg.ritual count stays at 1 namespace (27 total).
+   Sacred preserved: P1 surface (start/stop/disable/enable/status/POETRY_LINES)
+   remains intact; we re-freeze with extended members.
+   ════════════════════════════════════════════════════════════════════════ */
+(function (window, document) {
+  'use strict';
+  if (!window.Upg || !window.Upg.ritual) return;  // requires P1 IIFE first
+
+  const STORAGE_KEY_LAST_HALO = 'upg_ritual_last_halo_target';
+  const ATTR_BODY   = 'data-rit-halo';
+  const ATTR_TARGET = 'data-rit-halo-target';
+
+  let activeTarget = null;
+  let exitButton   = null;
+
+  // Pick a sensible default target if none specified.
+  const defaultTarget = () => {
+    const visible = (sel) => {
+      const el = document.querySelector(sel);
+      if (!el) return null;
+      // crude visibility: not display:none + has size
+      const style = window.getComputedStyle(el);
+      if (style.display === 'none' || style.visibility === 'hidden') return null;
+      return el;
+    };
+    return visible('section.page:not([hidden]) .page-body') ||
+           visible('section.page:not([hidden]) main') ||
+           visible('section.page:not([hidden]) article') ||
+           visible('section.page:not([hidden])') ||
+           visible('main') ||
+           document.body;
+  };
+
+  const onEscape = (e) => {
+    if (e.key === 'Escape') exitHalo();
+  };
+
+  const onOutsideClick = (e) => {
+    if (!activeTarget) return;
+    const t = e.target;
+    if (!t || !t.closest) return;
+    if (activeTarget.contains(t)) return;
+    if (t.closest('.rit-halo-toggle')) return;
+    if (t.closest('[data-rit-halo-toggle]')) return;
+    if (t.closest('.rit-halo-exit')) return;
+    exitHalo();
+  };
+
+  function enterHalo(targetOrSelector) {
+    const target = (typeof targetOrSelector === 'string')
+      ? document.querySelector(targetOrSelector)
+      : (targetOrSelector || defaultTarget());
+    if (!target) return false;
+
+    // Exit existing different halo first
+    if (activeTarget && activeTarget !== target) exitHalo();
+    if (activeTarget === target) return true;
+
+    target.setAttribute(ATTR_TARGET, '');
+    document.body.setAttribute(ATTR_BODY, 'active');
+    activeTarget = target;
+
+    // Inject exit button
+    exitButton = document.createElement('button');
+    exitButton.type = 'button';
+    exitButton.className = 'rit-halo-exit';
+    exitButton.setAttribute('aria-label', 'خروج من وضع القراءة');
+    exitButton.textContent = '×';
+    exitButton.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      ev.stopPropagation();
+      exitHalo();
+    });
+    target.appendChild(exitButton);
+
+    // Persist selector
+    if (target.id) {
+      try { localStorage.setItem(STORAGE_KEY_LAST_HALO, '#' + target.id); } catch (e) {}
+    }
+
+    document.addEventListener('keydown', onEscape);
+    // capture phase so chrome clicks dismiss before reaching disabled handlers
+    document.addEventListener('click', onOutsideClick, true);
+
+    return true;
+  }
+
+  function exitHalo() {
+    if (!activeTarget) return false;
+    activeTarget.removeAttribute(ATTR_TARGET);
+    document.body.removeAttribute(ATTR_BODY);
+    if (exitButton && exitButton.parentNode) {
+      try { exitButton.parentNode.removeChild(exitButton); } catch (e) {}
+    }
+    exitButton = null;
+    activeTarget = null;
+    document.removeEventListener('keydown', onEscape);
+    document.removeEventListener('click', onOutsideClick, true);
+    return true;
+  }
+
+  function toggleHalo(targetOrSelector) {
+    if (activeTarget) return exitHalo();
+    return enterHalo(targetOrSelector);
+  }
+
+  function isHaloActive() { return activeTarget !== null; }
+
+  function lastHaloTarget() {
+    try { return localStorage.getItem(STORAGE_KEY_LAST_HALO); }
+    catch (e) { return null; }
+  }
+
+  // Cmd+. / Ctrl+. global shortcut
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && !e.altKey && !e.shiftKey && e.key === '.') {
+      e.preventDefault();
+      toggleHalo();
+    }
+  });
+
+  // Toggle button delegation
+  document.addEventListener('click', (e) => {
+    if (!e.target || !e.target.closest) return;
+    if (e.target.closest('[data-rit-halo-toggle]')) {
+      e.preventDefault();
+      toggleHalo();
+    }
+  });
+
+  // EXTEND Upg.ritual without breaking P1 frozen members.
+  // Strategy: re-build a frozen object inheriting all P1 keys + new halo keys.
+  const prev = window.Upg.ritual;
+  const merged = {
+    // P1 surface (verbatim)
+    start:   prev.start,
+    stop:    prev.stop,
+    disable: prev.disable,
+    enable:  prev.enable,
+    status:  prev.status,
+    POETRY_LINES: prev.POETRY_LINES,
+    // P2 additions
+    enterHalo,
+    exitHalo,
+    toggleHalo,
+    isHaloActive,
+    lastHaloTarget
+  };
+  window.Upg.ritual = Object.freeze(merged);
+})(window, document);
+/* End RITUAL UI v3 / Worker 22 / Phase 2 — Reading Halo Logic ──────── */
