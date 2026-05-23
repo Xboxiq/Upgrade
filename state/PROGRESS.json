@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-23T01:00:00Z",
+  "last_updated": "2026-05-23T01:30:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
     "pack": "v3",
     "worker": "20",
     "worker_name": "TASMEEM_RECONSTRUCTION",
-    "phase": 4,
+    "phase": 5,
     "phases_total": 6,
     "phase_order": [
       "1",
@@ -17,11 +17,21 @@
       "5",
       "6"
     ],
-    "branch": "worker-20-devotio-phase4",
+    "branch": "worker-20-devotio-phase5",
     "status": "in-progress",
     "blocker": null
   },
   "previous": {
+    "pack": "v3",
+    "worker": "20",
+    "worker_name": "TASMEEM_RECONSTRUCTION",
+    "phase": 4,
+    "phases_total": 6,
+    "branch": "worker-20-devotio-phase4",
+    "status": "completed",
+    "merged_pr": 83
+  },
+  "before_previous": {
     "pack": "v3",
     "worker": "20",
     "worker_name": "TASMEEM_RECONSTRUCTION",
@@ -30,16 +40,6 @@
     "branch": "worker-20-devotio-phase3",
     "status": "completed",
     "merged_pr": 79
-  },
-  "before_previous": {
-    "pack": "v3",
-    "worker": "20",
-    "worker_name": "TASMEEM_RECONSTRUCTION",
-    "phase": 1,
-    "phases_total": 6,
-    "branch": "worker-20-devotio",
-    "status": "completed",
-    "merged_pr": 76
   },
   "completed_phases": [
     {
@@ -666,9 +666,16 @@
       "title": "Numeric Discipline — 6 numeric tokens (--num-feat-tabular/-tabular-zero/-fraction/-stylistic-alt + --num-variant-tabular/-zero/-fraction + --num-letter-spacing[-wide/-tight]) + 7 tas-num-* utility classes (tabular/tabular-zero/fraction/hero/inline/ticker/arabic) + auto-bind block targeting REAL classes in this codebase (.qcalc-result-value × 26 / .qcalc-input × 80 / .qcalc-meter × 2 / .stat-tile-value × 4 / .cath-stat-value × 4 / .u-num × 5 / [data-countup] × 4 / input[type=number] generic) + forward-compat selectors for .qcalc-value/.qcalc-result/.qcalc-output/.bento-stat-value/.kpi-card-value/.kpi-hero-num + Latin-vs-Arabic-Indic digit policy (font-language-override ENG on numeric contexts, opt-in .tas-num-arabic for cultural moments) + reduced-motion guard on tickers + Upg.font extended (additive freeze-replace) with applyNumericDiscipline(root) auto-classifier and auditNumericDiscipline() coverage report + DOMContentLoaded auto-fire + upg:nav:change re-fire + 38 HTML augments (26 .tas-num-tabular on qcalc-result-value, 4 .tas-num-hero on cath-stat-value, 4 .tas-num-hero on stat-tile-value, 4 .tas-num-ticker on type-num-display countup spans). Sacred preserved 100% (14 pages / 391 qcalc / 25 Upg.* APIs / 0 google fonts / 19 type-voice tokens / Phase 3 IIFE untouched). No new top-level Upg.* — only methods on Upg.font.",
       "branch": "worker-20-devotio-phase4",
       "lines_added": 410
+    },
+    {
+      "worker": "20",
+      "phase": 5,
+      "title": "Kashida & Rhythm — 11 NEW additive rhythm tokens (--leading-luxe ceremonial 2.00 / --word-spacing-tight,-normal,-loose / --tracking-hero,-display,-body,-ui,-eyebrow voice-named / --kashida-mode,-min-width) sitting alongside W12 --leading-tight,-snug,-normal,-relaxed,-loose (preserved verbatim — relaxed=1.7 already Arabic-tuned) + html[lang=ar]/[dir=rtl] root engages text-rendering: optimizeLegibility + global kern/liga/calt + .tas-voice-body/-body-lead/.h-body/.lesson-body p/.scenario-text get word-spacing+tracking-body + .tas-voice-quote/.h-quote/.literary-quote/:lang(ar) .literary-quote get leading-loose+word-spacing-loose+dlig+swsh + ceremonial voice gets leading-luxe + 5 heading rhythm classes (.tas-voice-hero/display/display-h/ui/eyebrow) get tracking-hero (-0.020em)/display(-0.015em)/eyebrow(0.05em) + .tas-kashida class with @media (max-width: 480px) auto-disable + @supports (text-justify: kashida) progressive-enhancement to true kashida on Firefox/Chrome 116+ + per-voice feature deepening (Aref Ruqaa: rlig+init/medi/fina/isol all on / Reem Kufi: same minus dlig / Readex+IBM Plex body: no dlig for readability / Tajawal UI: kern+liga+calt / Inter Latin: ss01+ss03 alternates / JetBrains code: zero kept slashed + ligatures / Fraunces literary: swsh+salt+ss01) + opsz variation hints (96/24/14/11) for variable fonts + qcalc rhythm guard (word-spacing 0 — Phase 4 .tas-num-* classes own that surface) + reduced-motion: reduce blocks transition on font-variation/letter/word/leading to prevent Safari flicker + @media print disables kashida justification. AUGMENT: 14 hero h1 across all pages get class=\"... tas-kashida\" + lang=\"ar\" (callcenter, fieldsales, accountmgr, social, lab, psych, eq, negotiation, customercare, programming, accounting, phonerepair, hrmastery, myprogress). Sacred preserved 100% (14 pages / 391 qcalc / 25 Upg.* APIs / 0 google fonts / 19 type-voice tokens / W12 leading values untouched / app.js completely untouched / no new APIs).",
+      "branch": "worker-20-devotio-phase5",
+      "lines_added": 342
     }
   ],
-  "next_action": "Continue Worker 20 Phase 5 (Kashida & Rhythm) — on branch worker-20-devotio-phase4. Phase 4 (Numeric Discipline) complete: 6 numeric tokens + 7 tas-num utilities + qcalc/stat-tile/countup auto-bind + Upg.font.applyNumericDiscipline/auditNumericDiscipline + Latin-digit policy + 38 HTML augments. 391 qcalc preserved. Font .woff2 binaries still pending bootstrap by user (Phase 5 also proceeds structurally regardless).",
+  "next_action": "Continue Worker 20 Phase 6 (Per-Page Type Signature) — على branch worker-20-devotio-phase6. Phase 5 (Kashida & Rhythm) complete: 11 additive rhythm tokens + .tas-kashida class + per-voice feature deepening + opsz hints + 14 hero h1 augments. Body Arabic breathes at line-height 1.7 (W12 preserved). qcalc rhythm untouched (Phase 4 surface protected). app.js untouched. No new Upg.* APIs.",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",

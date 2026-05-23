@@ -1,0 +1,142 @@
+{
+  "pack": "v3",
+  "worker": "20",
+  "worker_name": "TASMEEM_RECONSTRUCTION",
+  "phase_completed": 5,
+  "phases_total": 6,
+  "branch": "worker-20-devotio-phase5",
+  "files_touched": [
+    "platform/assets/style.css",
+    "platform/index.html",
+    "state/PROGRESS.json",
+    "state/snapshots/worker-20-phase-5.json"
+  ],
+  "files_NOT_touched": [
+    "platform/assets/app.js (zero edits — Phase 5 is CSS+HTML only by design)"
+  ],
+  "lines_added_total": 342,
+  "tokens_added": [
+    "--leading-luxe (2.00 ceremonial — sits above existing W12 --leading-loose 1.85)",
+    "--word-spacing-tight (-0.02em)",
+    "--word-spacing-normal (0)",
+    "--word-spacing-loose (0.05em)",
+    "--tracking-hero (-0.020em)",
+    "--tracking-display (-0.015em)",
+    "--tracking-body (0)",
+    "--tracking-ui (0.005em)",
+    "--tracking-eyebrow (0.050em)",
+    "--kashida-mode (\"manual\")",
+    "--kashida-min-width (8em)"
+  ],
+  "tokens_preserved_unchanged": [
+    "W12 --leading-tight (1.18)",
+    "W12 --leading-snug (1.32)",
+    "W12 --leading-normal (1.55)",
+    "W12 --leading-relaxed (1.70 — already Arabic-tuned)",
+    "W12 --leading-loose (1.85)",
+    "W12 --tracking-tighter (-0.025em)",
+    "W12 --tracking-tight (-0.012em)",
+    "W12 --tracking-normal (0)",
+    "W12 --tracking-wide (0.012em)",
+    "W12 --tracking-wider (0.05em)"
+  ],
+  "rules_added": [
+    "html[lang=ar]/[dir=rtl] root: text-rendering optimizeLegibility + global kern/liga/calt + antialiased",
+    ".tas-voice-body/-body-lead/[data-tas-voice=body]/.h-body/.lesson-body p/.scenario-text: word-spacing+tracking-body+features",
+    ".tas-voice-quote/[data-tas-voice=quote]/.h-quote/.literary-quote/:lang(ar) .literary-quote: leading-loose+word-spacing-loose+dlig+swsh",
+    "[data-tas-voice=ceremonial]/.tas-voice-ceremonial/.gateway-poetry: leading-luxe (2.00)",
+    ".tas-voice-hero/[data-tas-voice=hero]/.h-display/.type-hero: tracking-hero + word-spacing-tight + dlig + calt",
+    ".tas-voice-display/[data-tas-voice=display]/.h-title: tracking-display + word-spacing-tight",
+    ".tas-voice-display-h/.h-section: tracking-display + word-spacing-normal",
+    ".tas-voice-ui/.tas-voice-label/[data-tas-voice=ui]: tracking-ui + word-spacing-normal",
+    ".tas-voice-eyebrow/.tas-voice-signature/.tas-voice-ribbon/.h-eyebrow: tracking-eyebrow + word-spacing-loose",
+    ".tas-kashida/[data-tas-kashida=on]: text-justify inter-word with @supports kashida progressive enhancement and @media (max-width: 480px) auto-disable",
+    "Per-voice feature deepening (7 voice families with init/medi/fina/isol Arabic positional forms)",
+    "opsz variation hints (96/24/14/11) for variable fonts (Fraunces, Inter)",
+    "qcalc rhythm guard (word-spacing 0 — protects Phase 4 .tas-num-* surface)",
+    "@media (prefers-reduced-motion: reduce): no transition on letter/word/leading/font-variation",
+    "@media print: kashida justification disabled"
+  ],
+  "html_augments": {
+    "hero_h1_with_tas-kashida_and_lang_ar": [
+      "callcenter (وحدة الكول سنتر)",
+      "fieldsales (وحدة المبيعات)",
+      "accountmgr (إدارة الحسابات الكبيرة (KAM))",
+      "social (وحدة السوشيال ميديا)",
+      "lab (مختبر السيناريوهات)",
+      "psych (الدوافع النفسية الخفية)",
+      "eq (الذكاء العاطفي — EQ)",
+      "negotiation (المفاوضات والإقناع)",
+      "customercare (خدمة العملاء المتميزة)",
+      "programming (البرمجة والهندسة البرمجية)",
+      "accounting (المحاسبة والكاشير)",
+      "phonerepair (صيانة الهواتف الذكية — Mastery)",
+      "hrmastery (إتقان HR والتفاوض على الراتب)",
+      "myprogress (تقدمي)"
+    ],
+    "total": 14,
+    "limit_per_phase": 14
+  },
+  "fonts_added_offline": [],
+  "apis_added": [],
+  "apis_extended": [],
+  "apis_preserved_top_level": 25,
+  "apis_preserved_under_upg_font": [
+    "Upg.font.list",
+    "Upg.font.voices",
+    "Upg.font.audit",
+    "Upg.font.isReady",
+    "Upg.font.computedFor",
+    "Upg.font.status",
+    "Upg.font.swap",
+    "Upg.font.reset",
+    "Upg.font.applyNumericDiscipline (Phase 4)",
+    "Upg.font.auditNumericDiscipline (Phase 4)"
+  ],
+  "rhythm_policy": {
+    "body_arabic_leading": "1.70 (W12 --leading-relaxed preserved — was already Arabic-tuned)",
+    "literary_quote_leading": "1.85 (W12 --leading-loose)",
+    "ceremonial_leading": "2.00 (NEW --leading-luxe — for opt-in gateway poetry only)",
+    "hero_tracking": "-0.020em (NEW --tracking-hero) + word-spacing-tight + dlig",
+    "display_tracking": "-0.015em (NEW --tracking-display) + word-spacing-tight",
+    "ui_tracking": "+0.005em (NEW --tracking-ui)",
+    "eyebrow_tracking": "+0.050em (NEW --tracking-eyebrow) + word-spacing-loose",
+    "kashida_strategy": "manual via .tas-kashida + @supports progressive enhancement + ≥481px gate + print-safe disable",
+    "qcalc_word_spacing": "0 (locked — Phase 4 .tas-num-* surface preserved)"
+  },
+  "feature_settings_per_voice": {
+    "wordmark_accent_signature_ribbon_eyebrow_hero": "kern+liga+dlig+calt+rlig+init+medi+fina+isol",
+    "display_display-h_display-l": "kern+liga+calt+init+medi+fina+isol",
+    "body_body-lead": "kern+liga+calt+init+medi+fina+isol (no dlig — readability)",
+    "ui_label": "kern+liga+calt",
+    "latin": "kern+liga+calt+ss01+ss03 (Inter alternates)",
+    "code": "kern+liga+calt+zero (slashed-zero kept)",
+    "quote": "kern+liga+dlig+swsh+salt+ss01 (Fraunces literary)"
+  },
+  "reduced_motion_guard": "transition on letter/word/leading/font-variation suppressed under prefers-reduced-motion: reduce — prevents Safari flicker on @supports queries",
+  "print_safety": "kashida justification auto-disabled under @media print",
+  "sacred_preservation": {
+    "pages": 14,
+    "qcalc": 391,
+    "qcalc_result_value": 26,
+    "upg_apis_top_level": 25,
+    "voice_tokens_distinct": 19,
+    "google_fonts_links": 0,
+    "cdn_references": 0,
+    "appjs_lines_diff": 0,
+    "phase_3_iife_untouched": true,
+    "phase_4_tas_num_classes_untouched": true,
+    "w12_leading_values_untouched": true,
+    "w12_tracking_values_untouched": true,
+    "w12_text_scale_untouched": true,
+    "no_new_top_level_upg_api": true
+  },
+  "offline_check": {
+    "external_requests": 0,
+    "google_fonts_links": 0,
+    "cdn_references": 0,
+    "fetch_calls_added": 0
+  },
+  "devotion_notes": "العربية تتنفّس عبر الكشيدة. ١٤ عنواناً hero الآن يَستَطيل عبر العرض دون تَشَنُّج، يَحترم الأرض الإنجليزية في الـ qcalc، يَنام عند الـ print، يَهدأ عند ذوي الحساسية للحركة. العربي سيد على إيقاعه، اللاتيني سيد على leading-ه، الأرقام محصّنة بانضباطها الجدولي. تَلويحة الأفق بين الحرف والآخر — هذا هو الإيقاع.",
+  "next_action": "Continue Worker 20 Phase 6 (Per-Page Type Signature) — 14 type signature بالخطوط المحلية + REPLACE-IN-PLACE لـ W15 P6 signatures (نفس النية، مصادر محلية). Final phase of Worker 20 — closes TASMEEM RECONSTRUCTION."
+}
