@@ -26014,3 +26014,237 @@ html[dir="rtl"] {
    ════════════════════════════════════════════════════════════════════════ */
 
 /* End CHROMATIC SOUL v3 / Worker 21 / Phase 4 — Gradient Recast ───────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   CHROMATIC SOUL v3 — Light Theme Bridge (Worker 21 / Phase 5)
+   ────────────────────────────────────────────────────────────────────────
+   W12 P2 Linen-Bone preserved verbatim. Phase 5 يضيف tint behaviors
+   تَعمل فوق Linen-Bone بدون تعديل قِيَمها الأساسية.
+
+   على light: tints تظهر بدرجات أفتح (300/400/500) للحضور الناعم.
+   على dark: Phase 3 + Phase 2 (Mihrab) محفوظة كما هي.
+   ════════════════════════════════════════════════════════════════════════ */
+:root[data-theme="light"] {
+  /* Per-page identity tints — softer stops for light context */
+  --tint-dashboard:     var(--chr-saffron-300);
+  --tint-callcenter:    var(--chr-damascus-400);
+  --tint-fieldsales:    var(--chr-silt-300);
+  --tint-accountmgr:    var(--chr-cedar-400);
+  --tint-social:        var(--chr-coral-400);
+  --tint-lab:           var(--chr-marble-700);  /* darker for visible contrast */
+  --tint-psych:         var(--chr-lapis-400);
+  --tint-eq:            var(--chr-mihrab-500);
+  --tint-negotiation:   var(--chr-damascus-600);
+  --tint-customercare:  var(--chr-pearl-700);   /* darker pearl on light bg */
+  --tint-programming:   var(--chr-indigo-500);
+  --tint-accounting:    var(--chr-palm-400);
+  --tint-phonerepair:   var(--chr-henna-500);
+  --tint-hrmastery:     var(--chr-henna-400);
+  --tint-myprogress:    var(--chr-lapis-500);
+  --tint-curriculum:    var(--chr-saffron-500);
+
+  /* Edge tints — Phase 4 gradient secondary stops on light */
+  --tint-edge-dashboard:    var(--chr-saffron-500);
+  --tint-edge-callcenter:   var(--chr-damascus-600);
+  --tint-edge-fieldsales:   var(--chr-silt-500);
+  --tint-edge-accountmgr:   var(--chr-cedar-600);
+  --tint-edge-social:       var(--chr-coral-600);
+  --tint-edge-lab:          var(--chr-marble-900);
+  --tint-edge-psych:        var(--chr-lapis-600);
+  --tint-edge-eq:           var(--chr-mihrab-700);
+  --tint-edge-negotiation:  var(--chr-damascus-800);
+  --tint-edge-customercare: var(--chr-pearl-900);
+  --tint-edge-programming:  var(--chr-indigo-700);
+  --tint-edge-accounting:   var(--chr-palm-600);
+  --tint-edge-phonerepair:  var(--chr-henna-700);
+  --tint-edge-hrmastery:    var(--chr-henna-600);
+  --tint-edge-myprogress:   var(--chr-lapis-700);
+  --tint-edge-curriculum:   var(--chr-saffron-700);
+
+  /* Soft tints — hover backgrounds, very subtle on Linen-Bone */
+  --tint-soft-dashboard:    var(--chr-saffron-50);
+  --tint-soft-callcenter:   var(--chr-damascus-50);
+  --tint-soft-fieldsales:   var(--chr-silt-50);
+  --tint-soft-accountmgr:   var(--chr-cedar-50);
+  --tint-soft-social:       var(--chr-coral-50);
+  --tint-soft-lab:          var(--chr-marble-50);
+  --tint-soft-psych:        var(--chr-lapis-50);
+  --tint-soft-eq:           var(--chr-mihrab-50);
+  --tint-soft-negotiation:  var(--chr-damascus-100);
+  --tint-soft-customercare: var(--chr-pearl-50);
+  --tint-soft-programming:  var(--chr-indigo-50);
+  --tint-soft-accounting:   var(--chr-palm-50);
+  --tint-soft-phonerepair:  var(--chr-henna-50);
+  --tint-soft-hrmastery:    var(--chr-henna-50);
+  --tint-soft-myprogress:   var(--chr-lapis-50);
+  --tint-soft-curriculum:   var(--chr-saffron-100);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   CHROMATIC SOUL v3 — Pack v1/v2 Backward-Compat Shims (Worker 21 / Phase 5)
+   ────────────────────────────────────────────────────────────────────────
+   بعض كلاسات W11-W19 (atelier-glow / aurora-pulse / aurora-*) كانت تستهلك
+   aurora teal/cyan/violet hardcoded. هنا نمدّ لها بديلاً tint-aware عبر
+   --aurora-fallback. لا نعدّل القاعدة الأصلية.
+   ════════════════════════════════════════════════════════════════════════ */
+
+.atelier-glow,
+.aurora-pulse,
+[class*="aurora-"]:not([class*="aurora-tint"]) {
+  --aurora-fallback: var(--color-tint, var(--chr-lapis-500));
+}
+
+/* Card hover edge — replace generic cyan border with personality tint */
+.bento-card:hover,
+.cath-card:hover,
+.glass-card:hover {
+  border-color: color-mix(in oklch,
+    var(--color-tint, var(--chr-lapis-500)) 38%,
+    var(--color-border-strong, var(--color-border)));
+}
+
+/* ::selection — Mihrab/Lapis tinted for both themes */
+::selection {
+  background: color-mix(in oklch,
+    var(--color-tint, var(--chr-lapis-500)) 35%,
+    transparent);
+  color: var(--color-text);
+}
+
+/* Scrollbar (Firefox + WebKit) — theme-aware Mihrab/Marble */
+:root[data-theme="dark"] {
+  scrollbar-color: var(--chr-mihrab-700) var(--chr-mihrab-900);
+}
+:root[data-theme="light"] {
+  scrollbar-color: var(--chr-marble-700) var(--chr-marble-50);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch,
+    var(--color-tint, var(--chr-lapis-500)) 25%,
+    var(--color-surface-2));
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklch,
+    var(--color-tint, var(--chr-lapis-500)) 50%,
+    var(--color-surface-3));
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   CHROMATIC SOUL v3 — Print Theme (Worker 21 / Phase 5)
+   ────────────────────────────────────────────────────────────────────────
+   Print: white bg, Mihrab text (deep but pure), tints as accents only.
+   Worker 24 P5 (Print Atelier) سيُعمّق هذي القاعدة لاحقاً.
+   ════════════════════════════════════════════════════════════════════════ */
+@media print {
+  :root,
+  :root[data-theme="dark"],
+  :root[data-theme="light"] {
+    --color-bg:           white;
+    --color-surface-0:    white;
+    --color-surface-1:    var(--chr-pearl-50);
+    --color-surface-2:    var(--chr-pearl-100);
+    --color-surface-3:    var(--chr-pearl-200);
+    --color-text:         var(--chr-mihrab-900);
+    --color-text-muted:   var(--chr-mihrab-700);
+    --color-text-faint:   var(--chr-mihrab-500);
+    --color-border:       var(--chr-mihrab-300);
+  }
+
+  /* Hide all ambient gradient layers (W11+W14+W16) — saves ink, sharpens text */
+  body::before,
+  body::after,
+  .life-ambient::before,
+  .life-mesh::after,
+  .life-surface::before,
+  [data-life]::before,
+  [data-life]::after {
+    display: none !important;
+  }
+
+  /* Force chr-grad-hero to print as solid tint (gradients vanish in ink) */
+  .chr-grad-hero {
+    background: var(--color-tint, var(--chr-lapis-500)) !important;
+    color: white !important;
+  }
+
+  /* chr-grad-page reverts to white in print */
+  .chr-grad-page {
+    background: white !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   CHROMATIC SOUL v3 — Mihrab Dark Refinements (Worker 21 / Phase 5)
+   ────────────────────────────────────────────────────────────────────────
+   التلميس الأخير على dark theme: code blocks تتنفّس Indigo، quotes
+   تتنفّس Mihrab veil، glass surfaces دافئة.
+   ════════════════════════════════════════════════════════════════════════ */
+:root[data-theme="dark"] {
+  /* Glass surfaces warmer on Mihrab base */
+  --glass-bg-dark:
+    color-mix(in oklch, var(--chr-mihrab-800) 78%, transparent);
+  --glass-edge-dark:
+    color-mix(in oklch, var(--chr-mihrab-500) 35%, transparent);
+
+  /* Code blocks — deep Indigo bg with Marble text (programming page friendly) */
+  --code-bg:
+    color-mix(in oklch, var(--chr-indigo-900) 92%, var(--chr-mihrab-900));
+  --code-text:
+    var(--chr-marble-100);
+
+  /* Quotes — Mihrab veil bg with Lapis edge (psych/literary pages) */
+  --quote-bg:
+    color-mix(in oklch, var(--chr-mihrab-800) 85%, transparent);
+  --quote-border-edge:
+    var(--chr-lapis-500);
+}
+
+/* Inline code — body-level <code> (not inside <pre>) */
+:root[data-theme="dark"] code:not(pre code) {
+  background: var(--code-bg, var(--chr-indigo-900));
+  color: var(--code-text, var(--chr-marble-100));
+  padding: 0.1em 0.3em;
+  border-radius: 0.25em;
+}
+
+/* Quote blocks — blockquote + Pack v3 literary classes */
+:root[data-theme="dark"] blockquote,
+:root[data-theme="dark"] .h-quote,
+:root[data-theme="dark"] .literary-quote {
+  background: var(--quote-bg, var(--chr-mihrab-800));
+  border-inline-start: 3px solid var(--quote-border-edge, var(--chr-lapis-500));
+  padding-inline-start: var(--space-4, 1rem);
+  padding-block: var(--space-2, 0.5rem);
+  border-radius: 0.5rem;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Worker 21 / Phase 5 — Bridge Discipline:
+   1. Light theme Linen-Bone (W12 P2) محفوظ — Phase 5 لمس tints فقط (لا base).
+   2. backward-compat shims لـ aurora-* / atelier-glow بدون تعديل قواعدها.
+   3. print: white bg + chr-mihrab text + tints as accents فقط (Worker 24
+      P5 سيُعمّق).
+   4. WCAG AA verification عبر Upg.chroma.verifyContrast() — 4.5:1 minimum
+      على كل text/bg pair.
+   5. selection + scrollbar + focus-ring جميعها tint-aware (تتبع tint
+      الصفحة الحالية).
+   6. Mihrab refinements: code bg = chr-indigo-900، quote bg = chr-mihrab-800
+      + border = chr-lapis-500.
+   7. لم نلمس IIFE الأصلي لـ Upg.chroma — Phase 5 يُمدّده عبر
+      additive freeze-replace في app.js (نفس نمط Worker 20 Phase 4/6).
+   8. CHROMATIC SOUL Worker 21 مكتمل عند هذا الحد — 5/5 phases.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* End CHROMATIC SOUL v3 — Worker 21 / Phase 5 — Theme Bridge ─────────── */
+/* End CHROMATIC SOUL v3 — WORKER 21 COMPLETE 5/5 ─────────────────────── */
