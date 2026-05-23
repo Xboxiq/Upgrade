@@ -254,9 +254,12 @@ body[data-theme="dark"] {
       --glass-border:    1px solid rgba(148, 197, 255, 0.08);
       --glass-blur:      saturate(160%) blur(18px);
       --glass-shine:     linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0) 40%);
-      --deep-gradient:   radial-gradient(1200px 520px at 12% -10%, rgba(102,252,241,0.10), transparent 55%),
-                         radial-gradient(900px 500px at 95% 110%, rgba(139,92,246,0.10), transparent 50%),
-                         radial-gradient(700px 400px at 60% 50%, rgba(6,182,212,0.06), transparent 60%);
+      /* CHROMATIC SOUL v3 / Worker 21 / Phase 4 — REPLACE deep-gradient
+         (was aurora teal/violet rgba; now Lapis + Mihrab + Indigo Arabic
+         palette references via Pack v3 chr-* tokens) */
+      --deep-gradient:   radial-gradient(1200px 520px at 12% -10%, color-mix(in oklch, var(--chr-lapis-700) 18%, transparent) 0%, transparent 55%),
+                         radial-gradient(900px 500px at 95% 110%, color-mix(in oklch, var(--chr-mihrab-700) 22%, transparent) 0%, transparent 50%),
+                         radial-gradient(700px 400px at 60% 50%, color-mix(in oklch, var(--chr-indigo-800) 14%, transparent) 0%, transparent 60%);
       --glow-accent:     0 0 0 1px rgba(102,252,241,0.18), 0 10px 40px -10px rgba(102,252,241,0.28), 0 2px 14px rgba(0,0,0,0.45);
       --glow-violet:     0 0 0 1px rgba(139,92,246,0.22), 0 10px 40px -10px rgba(139,92,246,0.30);
       --glow-amber:      0 0 0 1px rgba(245,158,11,0.22), 0 10px 40px -10px rgba(245,158,11,0.30);
@@ -3867,9 +3870,11 @@ body[data-theme="dark"] {
       --shadow-md:     var(--shadow-c-md);
       --shadow-accent: 0 0 22px color-mix(in oklch, var(--color-brand) 22%, transparent);
 
-      --deep-gradient: radial-gradient(1200px 520px at 12% -10%, color-mix(in oklch, var(--color-brand) 8%, transparent), transparent 55%),
-                       radial-gradient(900px 500px at 95% 110%, color-mix(in oklch, var(--color-warning) 12%, transparent), transparent 50%),
-                       radial-gradient(700px 400px at 60% 50%, color-mix(in oklch, var(--color-surface-2) 30%, transparent), transparent 60%);
+      /* CHROMATIC SOUL v3 / Worker 21 / Phase 4 — REPLACE light-theme
+         deep-gradient (was generic brand+warning; now lapis-marble warm wash) */
+      --deep-gradient: radial-gradient(1200px 520px at 12% -10%, color-mix(in oklch, var(--chr-lapis-300) 10%, transparent), transparent 55%),
+                       radial-gradient(900px 500px at 95% 110%, color-mix(in oklch, var(--chr-saffron-300) 8%, transparent), transparent 50%),
+                       radial-gradient(700px 400px at 60% 50%, color-mix(in oklch, var(--chr-marble-400) 22%, transparent), transparent 60%);
 
       background: linear-gradient(160deg, var(--color-bg) 0%, var(--color-surface-2) 100%);
       color: var(--color-text);
@@ -21172,9 +21177,11 @@ pre.type-code {
   --life-mesh-duration: 22s;
   --life-mesh-opacity: 0.06;
 
-  /* Ambient gradient endpoints — overridden per personality in Phase 6 */
-  --life-ambient-from: color-mix(in oklch, var(--color-tint, var(--color-brand)) 8%, transparent);
-  --life-ambient-to:   color-mix(in oklch, var(--color-tint-edge, var(--color-brand)) 4%, transparent);
+  /* Ambient gradient endpoints — overridden per personality in Phase 6
+     CHROMATIC SOUL v3 Phase 4: chr-* fallbacks, raised to 12%/8% for
+     visible cultural identity (was 8%/4% generic) */
+  --life-ambient-from: color-mix(in oklch, var(--color-tint, var(--chr-lapis-500)) 12%, transparent);
+  --life-ambient-to:   color-mix(in oklch, var(--color-tint-edge, var(--chr-mihrab-700)) 8%, transparent);
 
   /* Ambient halo radius */
   --life-ambient-radius: 65%;
@@ -21186,8 +21193,8 @@ pre.type-code {
 /* Theme-aware density — light theme breathes a bit fainter */
 [data-theme="light"] {
   --life-mesh-opacity: 0.04;
-  --life-ambient-from: color-mix(in oklch, var(--color-tint, var(--color-brand)) 5%, transparent);
-  --life-ambient-to:   color-mix(in oklch, var(--color-tint-edge, var(--color-brand)) 2.5%, transparent);
+  --life-ambient-from: color-mix(in oklch, var(--color-tint, var(--chr-lapis-500)) 6%, transparent);
+  --life-ambient-to:   color-mix(in oklch, var(--color-tint-edge, var(--chr-mihrab-700)) 3%, transparent);
 }
 
 
@@ -25691,3 +25698,319 @@ html[dir="rtl"] {
    ════════════════════════════════════════════════════════════════════════ */
 
 /* End CHROMATIC SOUL v3 / Worker 21 / Phase 3 — Page Reassignment ──────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   CHROMATIC SOUL v3 — Gradient Recast (Worker 21 / Phase 4)
+   ────────────────────────────────────────────────────────────────────────
+   Phase 4 ينقل gradients من aurora-generic إلى Arabic-rooted:
+   - REPLACE-IN-PLACE قِيَم --deep-gradient (W11 P1) — أعلاه
+   - REPLACE-IN-PLACE قِيَم --life-ambient-from/to (W16 P1) — أعلاه
+   - APPEND override واضح لـ [data-theme="dark"] على --deep-gradient
+   - APPEND 15 personality-specific gradient pairs (--chr-grad-hero/-ambient)
+   - APPEND 5 cinematic utility classes (.chr-grad-page/-hero/-card/-divider/-mesh)
+
+   كل personality يصبح له "نَفَس" بصري: gradient من tint الأساسي إلى
+   tint-edge، شفّاف بما فيه الكفاية ليتنفّس النص فوقه.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Explicit dark theme override for --deep-gradient ──────────────── */
+[data-theme="dark"] {
+  --deep-gradient:
+    radial-gradient(1200px 520px at 12% -10%,
+      oklch(40% 0.16 252 / 0.20)  0%,
+      transparent                 55%),
+    radial-gradient(900px 500px at 95% 110%,
+      oklch(28% 0.072 280 / 0.25) 0%,
+      transparent                 50%),
+    radial-gradient(700px 400px at 60% 50%,
+      oklch(22% 0.065 270 / 0.18) 0%,
+      transparent                 60%);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Per-Personality Gradients — 15 hero + 15 ambient
+   Hero: linear 135deg (top-left → bottom-right) for content panels
+   Ambient: radial ellipse at top-center (50% 0%) for body/page backdrops
+   ════════════════════════════════════════════════════════════════════════ */
+
+[data-page-personality="dashboard"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-saffron-400) 0%,
+      var(--chr-saffron-700) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-saffron-500) 14%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="callcenter"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-damascus-400) 0%,
+      var(--chr-damascus-800) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-damascus-500) 12%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="fieldsales"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-silt-400) 0%,
+      var(--chr-silt-700) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-silt-500) 12%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="accountmgr"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-cedar-500) 0%,
+      var(--chr-cedar-800) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-cedar-600) 12%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="social"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-coral-400) 0%,
+      var(--chr-coral-700) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-coral-500) 14%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="lab"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-marble-400) 0%,
+      var(--chr-marble-700) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-marble-500) 10%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="psych"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-lapis-400) 0%,
+      var(--chr-lapis-800) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-lapis-500) 14%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="eq"] {
+  --chr-grad-hero:
+    linear-gradient(180deg,
+      var(--chr-mihrab-500) 0%,
+      var(--chr-mihrab-800) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 100% at 50% 0%,
+      color-mix(in oklch, var(--chr-mihrab-600) 16%, transparent) 0%,
+      transparent 65%);
+}
+
+[data-page-personality="negotiation"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-damascus-600) 0%,
+      var(--chr-damascus-900) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-damascus-700) 12%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="customercare"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-pearl-300) 0%,
+      var(--chr-pearl-600) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-pearl-500) 8%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="programming"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-indigo-500) 0%,
+      var(--chr-indigo-900) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-indigo-600) 14%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="accounting"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-palm-400) 0%,
+      var(--chr-palm-700) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-palm-500) 12%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="phonerepair"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-henna-500) 0%,
+      var(--chr-henna-800) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-henna-600) 12%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="hrmastery"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-henna-400) 0%,
+      var(--chr-henna-700) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-henna-500) 12%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="myprogress"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-lapis-300) 0%,
+      var(--chr-lapis-600) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-lapis-400) 10%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="curriculum"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-saffron-500) 0%,
+      var(--chr-saffron-800) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-saffron-600) 14%, transparent) 0%,
+      transparent 60%);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Cinematic Gradient Utilities (Worker 21 / Phase 4)
+   ────────────────────────────────────────────────────────────────────────
+   Apply on demand. Worker 22 (Ritual UI) will activate on entry/threshold
+   transitions. Phase 4 just defines the surface — no mass HTML wiring.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Page-level ambient — applied to body or page section */
+.chr-grad-page {
+  background: var(--chr-grad-ambient, var(--deep-gradient));
+}
+
+/* Hero panel — applied to page-h or hero card.
+   Uses marble-50 text by default — works on most hero gradients.
+   Customers needing dark text override locally. */
+.chr-grad-hero {
+  background: var(--chr-grad-hero,
+    linear-gradient(135deg,
+      var(--color-tint, var(--chr-lapis-500)),
+      var(--color-tint-edge, var(--chr-mihrab-700))));
+  color: oklch(98% 0.012 80);
+}
+
+/* Card — soft tint, just hint of identity */
+.chr-grad-card {
+  background:
+    linear-gradient(180deg,
+      color-mix(in oklch,
+        var(--color-tint-soft, transparent) 60%,
+        var(--color-surface-1)) 0%,
+      var(--color-surface-1) 100%);
+  border: 1px solid color-mix(in oklch,
+    var(--color-tint, var(--color-brand)) 18%,
+    var(--color-border));
+}
+
+/* Divider — horizontal gradient line */
+.chr-grad-divider {
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    color-mix(in oklch,
+      var(--color-tint, var(--color-brand)) 50%,
+      transparent) 50%,
+    transparent 100%);
+  border: none;
+  margin-block: var(--space-md, 1rem);
+}
+
+/* Mesh — organic layered halos behind content */
+.chr-grad-mesh {
+  position: relative;
+  isolation: isolate;
+}
+.chr-grad-mesh::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 50% 50% at 30% 30%,
+      color-mix(in oklch,
+        var(--color-tint, var(--chr-lapis-500)) 10%,
+        transparent) 0%,
+      transparent 70%),
+    radial-gradient(ellipse 60% 60% at 75% 70%,
+      color-mix(in oklch,
+        var(--color-tint-edge, var(--chr-mihrab-700)) 10%,
+        transparent) 0%,
+      transparent 70%);
+  filter: blur(24px);
+}
+
+/* Reduced-transparency fallback — flatten mesh to a single tint wash */
+@media (prefers-reduced-transparency: reduce) {
+  .chr-grad-mesh::before {
+    filter: none;
+    background: color-mix(in oklch,
+      var(--color-tint, var(--chr-lapis-500)) 6%,
+      transparent);
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Worker 21 / Phase 4 — Gradient Discipline:
+   1. كل personality له --chr-grad-hero (linear) و --chr-grad-ambient (radial).
+   2. لا hex في gradient stops — كل القيم chr-* references أو oklch().
+   3. radial ambient يبدأ من 50% 0% (top-center) — حسّ إسلامي مِحرابي.
+   4. linear hero يبدأ من 135deg (top-left → bottom-right) — قاعدة واحدة
+      موحَّدة. eq فقط يستعمل 180deg (vertical) لإيقاع تأمّلي عمودي.
+   5. ambient gradient ≤ 14% opacity — ما يطغى على النص. eq استثناء 16%
+      (المحراب يحتاج عمقاً أكبر).
+   6. cinematic utilities (.chr-grad-*) للتطبيق اليدوي فقط في Phase 4.
+      Worker 22 (Ritual UI) يربطها بـ entry/threshold transitions تلقائياً.
+   7. .chr-grad-mesh له fallback صريح في prefers-reduced-transparency:
+      reduce — flatten إلى single tint wash بدون blur (أداء + a11y).
+   8. --deep-gradient القاعدة (W11 P1) محفوظة الـ name، القيم استُبدِلت
+      بـ chr-lapis/chr-mihrab/chr-indigo (dark) و chr-lapis/saffron/marble
+      (light). ما تكسير binding في كل صفحة.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* End CHROMATIC SOUL v3 / Worker 21 / Phase 4 — Gradient Recast ───────── */
