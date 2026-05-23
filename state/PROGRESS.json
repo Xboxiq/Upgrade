@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-23T01:30:00Z",
+  "last_updated": "2026-05-23T02:30:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
     "pack": "v3",
     "worker": "20",
     "worker_name": "TASMEEM_RECONSTRUCTION",
-    "phase": 5,
+    "phase": 6,
     "phases_total": 6,
     "phase_order": [
       "1",
@@ -17,11 +17,21 @@
       "5",
       "6"
     ],
-    "branch": "worker-20-devotio-phase5",
-    "status": "in-progress",
+    "branch": "worker-20-devotio-phase6",
+    "status": "completed-pending-pr",
     "blocker": null
   },
   "previous": {
+    "pack": "v3",
+    "worker": "20",
+    "worker_name": "TASMEEM_RECONSTRUCTION",
+    "phase": 5,
+    "phases_total": 6,
+    "branch": "worker-20-devotio-phase5",
+    "status": "completed",
+    "merged_pr": 85
+  },
+  "before_previous": {
     "pack": "v3",
     "worker": "20",
     "worker_name": "TASMEEM_RECONSTRUCTION",
@@ -30,16 +40,6 @@
     "branch": "worker-20-devotio-phase4",
     "status": "completed",
     "merged_pr": 83
-  },
-  "before_previous": {
-    "pack": "v3",
-    "worker": "20",
-    "worker_name": "TASMEEM_RECONSTRUCTION",
-    "phase": 3,
-    "phases_total": 6,
-    "branch": "worker-20-devotio-phase3",
-    "status": "completed",
-    "merged_pr": 79
   },
   "completed_phases": [
     {
@@ -673,9 +673,16 @@
       "title": "Kashida & Rhythm — 11 NEW additive rhythm tokens (--leading-luxe ceremonial 2.00 / --word-spacing-tight,-normal,-loose / --tracking-hero,-display,-body,-ui,-eyebrow voice-named / --kashida-mode,-min-width) sitting alongside W12 --leading-tight,-snug,-normal,-relaxed,-loose (preserved verbatim — relaxed=1.7 already Arabic-tuned) + html[lang=ar]/[dir=rtl] root engages text-rendering: optimizeLegibility + global kern/liga/calt + .tas-voice-body/-body-lead/.h-body/.lesson-body p/.scenario-text get word-spacing+tracking-body + .tas-voice-quote/.h-quote/.literary-quote/:lang(ar) .literary-quote get leading-loose+word-spacing-loose+dlig+swsh + ceremonial voice gets leading-luxe + 5 heading rhythm classes (.tas-voice-hero/display/display-h/ui/eyebrow) get tracking-hero (-0.020em)/display(-0.015em)/eyebrow(0.05em) + .tas-kashida class with @media (max-width: 480px) auto-disable + @supports (text-justify: kashida) progressive-enhancement to true kashida on Firefox/Chrome 116+ + per-voice feature deepening (Aref Ruqaa: rlig+init/medi/fina/isol all on / Reem Kufi: same minus dlig / Readex+IBM Plex body: no dlig for readability / Tajawal UI: kern+liga+calt / Inter Latin: ss01+ss03 alternates / JetBrains code: zero kept slashed + ligatures / Fraunces literary: swsh+salt+ss01) + opsz variation hints (96/24/14/11) for variable fonts + qcalc rhythm guard (word-spacing 0 — Phase 4 .tas-num-* classes own that surface) + reduced-motion: reduce blocks transition on font-variation/letter/word/leading to prevent Safari flicker + @media print disables kashida justification. AUGMENT: 14 hero h1 across all pages get class=\"... tas-kashida\" + lang=\"ar\" (callcenter, fieldsales, accountmgr, social, lab, psych, eq, negotiation, customercare, programming, accounting, phonerepair, hrmastery, myprogress). Sacred preserved 100% (14 pages / 391 qcalc / 25 Upg.* APIs / 0 google fonts / 19 type-voice tokens / W12 leading values untouched / app.js completely untouched / no new APIs).",
       "branch": "worker-20-devotio-phase5",
       "lines_added": 342
+    },
+    {
+      "worker": "20",
+      "phase": 6,
+      "title": "Per-Page Type Signature — 15 personality blocks ([data-page-personality=\"X\"]) each overriding 2-5 voice tokens (--type-voice-display/body/hero/quote/numeric/eyebrow/code) + scoped --tracking-display/-hero/-eyebrow/-body fine-tuning (range -0.024em negotiation tightest → 0 lab/programming mono) + 1 --sig-active root marker for runtime introspection. Per-personality element rules: dashboard opsz 96 / callcenter uppercase eyebrow Latin 0.08em / fieldsales dlig+kern+liga+calt @600 / accountmgr Aref Ruqaa hero opsz 144 + dlig / social swsh+salt+dlig display / lab JetBrains Mono display + zero feat / psych italic literary quote with dlig+swsh+salt+ss01 / eq Aref Ruqaa hero @400 opsz 72 (lighter, emotional) / negotiation @600 body (assertive) / customercare Tajawal display @700 dlig / programming JetBrains Mono display + zero/calt/liga + code/pre feat / accounting tnum+lnum+zero+ss01 on qcalc-result-value/qcalc-value/stat-tile-value/cath-stat-value/tas-num-tabular @600 / phonerepair Cairo @700 / hrmastery Aref Ruqaa hero opsz 96 / myprogress Reem Kufi @500 (gentle journal). Forward-compat curriculum block (Pack v2 ritual scaffolded). W15 P6 compat layer: 4 generic class :not(.tas-voice-*) routes for .h-display/.h-quote/.h-body/.h-hero + .type-display/.type-quote/.type-hero — re-routes through var(--type-voice-*) for any [data-page-personality] scope (lower specificity than W15 P6 .page[data-page-personality] selectors, additive only). Upg.font EXTEND (additive freeze-replace pattern matching Phase 4) preserving Phase 3+4 surface verbatim + adding getPageSignature() returning {pageId, personality, sigActive, voiceDisplay/body/hero/quote/numeric, trackingDisplay/Hero, leadingRelaxed} + listSignatures() returning copy of 17-known list (15 + curriculum + default) + auditSignatures() returning {total, applied (unique), missing (unique), coverage %}. One-time silent log on DOMContentLoaded only when coverage=100%. Sacred preserved 100% (14 pages / 391 qcalc / 25 Upg.* APIs unchanged top-level / 19 voice tokens / W15 P6 .page[data-page-personality] block untouched / Phase 3+4+5 IIFEs untouched / 0 google fonts / no HTML changes / qcalc rhythm protected). Worker 20 final phase — closes TASMEEM RECONSTRUCTION 6/6.",
+      "branch": "worker-20-devotio-phase6",
+      "lines_added": 410
     }
   ],
-  "next_action": "Continue Worker 20 Phase 6 (Per-Page Type Signature) — على branch worker-20-devotio-phase6. Phase 5 (Kashida & Rhythm) complete: 11 additive rhythm tokens + .tas-kashida class + per-voice feature deepening + opsz hints + 14 hero h1 augments. Body Arabic breathes at line-height 1.7 (W12 preserved). qcalc rhythm untouched (Phase 4 surface protected). app.js untouched. No new Upg.* APIs.",
+  "next_action": "Open PR worker-20-devotio-phase6 → main (Worker 20 COMPLETE 6/6 phases). After merge, start Worker 21 Phase 1 (Palette Forge — CHROMATIC SOUL: 12 Arabic dye palettes redistributed across 15 identity tints).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",

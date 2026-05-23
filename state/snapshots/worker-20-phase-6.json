@@ -1,0 +1,80 @@
+{
+  "pack": "v3",
+  "worker": "20",
+  "worker_name": "TASMEEM_RECONSTRUCTION",
+  "phase_completed": 6,
+  "phases_total": 6,
+  "branch": "worker-20-devotio-phase6",
+  "files_touched": [
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "lines_added_total": 410,
+  "css_lines_added": 296,
+  "js_lines_added": 114,
+  "tokens_added": [
+    "--sig-active (root marker)",
+    "15 personality scopes each overriding 2-5 of: --type-voice-display, --type-voice-body, --type-voice-hero, --type-voice-quote, --type-voice-numeric, --type-voice-eyebrow, --type-voice-code, --tracking-display, --tracking-hero, --tracking-eyebrow, --tracking-body"
+  ],
+  "fonts_added_offline": [],
+  "personalities_covered": [
+    "dashboard",
+    "callcenter",
+    "fieldsales",
+    "accountmgr",
+    "social",
+    "lab",
+    "psych",
+    "eq",
+    "negotiation",
+    "customercare",
+    "programming",
+    "accounting",
+    "phonerepair",
+    "hrmastery",
+    "myprogress",
+    "curriculum (forward-compat)"
+  ],
+  "api_extended": {
+    "namespace": "Upg.font",
+    "added_methods": [
+      "getPageSignature()",
+      "listSignatures()",
+      "auditSignatures()"
+    ],
+    "new_top_level_apis": 0,
+    "total_top_level_apis_after": 25
+  },
+  "devotion_notes": "Each page now speaks before it is read. Callcenter feels sharp (tracking -0.022em + uppercase eyebrows). Psych breathes literary (italic + dlig + swsh on quotes). Accountmgr arrives in ceremony (Aref Ruqaa hero + opsz 144). Lab and programming go monospaced (zero feature). Accounting tightens its tabular numerals (tnum + lnum + ss01). Fifteen distinct voices, one offline platform. الخط حكى قبل أن يُقرأ.",
+  "offline_check": {
+    "external_requests": 0,
+    "google_fonts_html_refs": 0,
+    "google_fonts_css_refs": 0,
+    "cdn_refs_added": 0
+  },
+  "sacred_preserved": {
+    "pages": 14,
+    "qcalc": 391,
+    "upg_apis": 25,
+    "data_page_personality_attrs": 15,
+    "tas_voice_classes_unchanged": true,
+    "w15_p6_signatures_untouched": true,
+    "phase_5_kashida_rhythm_intact": true,
+    "phase_4_numeric_discipline_intact": true,
+    "phase_3_voice_bindings_intact": true
+  },
+  "acceptance": {
+    "fifteen_signature_blocks": true,
+    "voice_token_overrides_per_block": true,
+    "Upg_font_getPageSignature_defined": true,
+    "Upg_font_listSignatures_defined": true,
+    "Upg_font_auditSignatures_defined": true,
+    "compat_layer_for_W15_P6_routes_via_voice_tokens": true,
+    "qcalc_rhythm_preserved": true,
+    "zero_fonts_googleapis_com_refs_in_codebase": true,
+    "no_html_changes": true,
+    "no_phase_3_iife_edits": true
+  },
+  "worker_20_status": "COMPLETE — 6/6 phases shipped",
+  "next_action": "Open PR worker-20-devotio-phase6 → main, then start Worker 21 Phase 1 (Palette Forge — CHROMATIC SOUL)"
+}
