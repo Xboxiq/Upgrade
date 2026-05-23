@@ -17635,3 +17635,140 @@ document.addEventListener('DOMContentLoaded', () => {
   window.Upg.ritual = Object.freeze(merged);
 })(window, document);
 /* End RITUAL UI v3 / Worker 22 / Phase 2 — Reading Halo Logic ──────── */
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   RITUAL UI v3 — Threshold Routing (Worker 22 / Phase 3)
+   EXTENDs Upg.transition.run with ritual option + adds threshold helpers
+   to Upg.ritual. No new top-level Upg.* namespace (still 27).
+   ════════════════════════════════════════════════════════════════════════ */
+(function (window, document) {
+  'use strict';
+  if (!window.Upg || !window.Upg.transition || !window.Upg.ritual) return;
+
+  var VARIANTS = ['fade', 'mashrabiya', 'scroll', 'iris', 'mihrab-arch'];
+
+  var PERSONALITY_TRANSITIONS = {
+    'dashboard':    'mashrabiya',
+    'callcenter':   'iris',
+    'fieldsales':   'fade',
+    'accountmgr':   'mihrab-arch',
+    'social':       'mashrabiya',
+    'lab':          'iris',
+    'psych':        'scroll',
+    'eq':           'scroll',
+    'negotiation':  'mihrab-arch',
+    'customercare': 'mashrabiya',
+    'programming':  'iris',
+    'accounting':   'mihrab-arch',
+    'phonerepair':  'fade',
+    'hrmastery':    'scroll',
+    'myprogress':   'fade',
+    'curriculum':   'mashrabiya'
+  };
+
+  var isReducedMotion = function () {
+    return window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  };
+
+  // Get transition variant for a page personality
+  var getTransitionForPage = function (pageId) {
+    var stripped = (pageId || '').replace(/^page-/, '');
+    return PERSONALITY_TRANSITIONS[stripped] || 'fade';
+  };
+
+  // Set body data attribute (used by CSS @supports view-transitions)
+  var setActiveTransition = function (variant) {
+    if (VARIANTS.indexOf(variant) === -1) variant = 'fade';
+    document.body.setAttribute('data-rit-thresh', variant);
+  };
+
+  // ─── EXTEND Upg.transition.run ───────────────────────────────────────
+  var originalRun = window.Upg.transition.run;
+
+  var extendedRun = function (name, opts) {
+    opts = opts || {};
+    var variant = opts.ritual ||
+                  (opts.toPageId ? getTransitionForPage(opts.toPageId) : null) ||
+                  'fade';
+
+    // In reduced-motion, always use fade (instant)
+    if (isReducedMotion()) variant = 'fade';
+
+    setActiveTransition(variant);
+
+    // Use View Transitions API if available and variant is non-fade
+    if (document.startViewTransition && variant !== 'fade' && !isReducedMotion()) {
+      var vt = document.startViewTransition(function () {
+        if (typeof originalRun === 'function') originalRun(name, opts);
+      });
+      return vt;
+    }
+
+    // CSS class-based fallback animation
+    if (variant !== 'fade' && !isReducedMotion()) {
+      var pages = document.querySelectorAll('section.page');
+      var oldEl = null;
+      var newEl = opts.toPageId ? document.getElementById(opts.toPageId) : null;
+
+      for (var i = 0; i < pages.length; i++) {
+        if (!pages[i].hasAttribute('hidden') && pages[i] !== newEl) {
+          oldEl = pages[i];
+          break;
+        }
+      }
+
+      if (oldEl) oldEl.classList.add('rit-thresh-' + variant + '-out');
+      if (newEl) newEl.classList.add('rit-thresh-' + variant + '-in');
+
+      setTimeout(function () {
+        if (oldEl) oldEl.classList.remove('rit-thresh-' + variant + '-out');
+        if (newEl) newEl.classList.remove('rit-thresh-' + variant + '-in');
+      }, 600);
+    }
+
+    // Call original run (preserves all W14 behavior)
+    if (typeof originalRun === 'function') return originalRun(name, opts);
+  };
+
+  // Replace run on the frozen object by creating new extended object
+  var transitionExtended = Object.assign({}, window.Upg.transition, { run: extendedRun });
+  window.Upg.transition = Object.freeze(transitionExtended);
+
+  // ─── EXTEND Upg.ritual with threshold helpers ────────────────────────
+
+  var ritualCurrent = window.Upg.ritual;
+  var ritualExtended = Object.assign({}, ritualCurrent, {
+    setTransition: function (variant, pagePersonality) {
+      if (pagePersonality) {
+        if (VARIANTS.indexOf(variant) !== -1) {
+          PERSONALITY_TRANSITIONS[pagePersonality] = variant;
+        }
+      } else {
+        setActiveTransition(variant);
+      }
+    },
+    getTransition: function (pagePersonality) {
+      return PERSONALITY_TRANSITIONS[(pagePersonality || '').replace(/^page-/, '')] || 'fade';
+    },
+    listTransitions: function () { return VARIANTS.slice(); },
+    transitionMap: function () {
+      var copy = {};
+      for (var k in PERSONALITY_TRANSITIONS) {
+        if (PERSONALITY_TRANSITIONS.hasOwnProperty(k)) copy[k] = PERSONALITY_TRANSITIONS[k];
+      }
+      return copy;
+    }
+  });
+  window.Upg.ritual = Object.freeze(ritualExtended);
+
+  // ─── Auto-route on upg:nav:change ────────────────────────────────────
+  document.addEventListener('upg:nav:change', function (e) {
+    var pageId = (e.detail && e.detail.pageId) || '';
+    var variant = getTransitionForPage(pageId);
+    setActiveTransition(variant);
+  });
+
+})(window, document);
+/* End RITUAL UI v3 / Worker 22 / Phase 3 — Threshold Routing ────────── */
