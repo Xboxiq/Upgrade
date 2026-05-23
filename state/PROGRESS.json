@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-23T19:27:20Z",
+  "last_updated": "2026-05-23T21:15:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
     "pack": "v3",
     "worker": "22",
     "worker_name": "RITUAL_UI",
-    "phase": 2,
+    "phase": 3,
     "phases_total": 6,
     "phase_order": [
       "1",
@@ -25,7 +25,7 @@
     "pack": "v3",
     "worker": "22",
     "worker_name": "RITUAL_UI",
-    "phase": 1,
+    "phase": 2,
     "phases_total": 6,
     "branch": "worker-22-devotio",
     "status": "completed",
@@ -33,13 +33,13 @@
   },
   "before_previous": {
     "pack": "v3",
-    "worker": "21",
-    "worker_name": "CHROMATIC_SOUL",
-    "phase": 5,
-    "phases_total": 5,
-    "branch": "worker-21-devotio",
+    "worker": "22",
+    "worker_name": "RITUAL_UI",
+    "phase": 1,
+    "phases_total": 6,
+    "branch": "worker-22-devotio",
     "status": "completed",
-    "merged_pr": 88
+    "merged_pr": null
   },
   "completed_phases": [
     {
@@ -735,9 +735,16 @@
       "title": "Reading Halo — Cmd+. toggle, chrome dims 0.15 + 4px blur (15 selectors), target raises with Lapis halo glow + edge pulse 4s + scale 1.005, JS-injected exit button (×, top-inline-end), veil with backdrop-blur(2px) + Mihrab/Marble theme-aware bg, [data-rit-halo='active'] body attr + [data-rit-halo-target] element attr, Toggle button stays accessible mid-halo (override dim) + 'نَشَط' active label, Esc + outside-click (capture-phase) + exit-button = exit, localStorage 'upg_ritual_last_halo_target' for Phase 6 consumption, Cmd+./Ctrl+. global shortcut (preventDefault) + [data-rit-halo-toggle] delegation, Upg.ritual EXTEND via re-freeze pattern (P1 surface preserved verbatim: start/stop/disable/enable/status/POETRY_LINES + new: enterHalo/exitHalo/toggleHalo/isHaloActive/lastHaloTarget), default target picker (page-body→main→article→section→main→body fallback chain) with computed-style visibility check, dedicated reduced-motion guard silencing all transitions + edge-pulse animation + transform reset (16 selectors). Sacred preserved 100% (14 pages / 391 qcalc / 27 Upg.* APIs — Upg.ritual extended in-place / 0 google fonts / Phase 1 entry ritual untouched). 409 lines added (CSS 242 + JS 157 + HTML 10).",
       "branch": "worker-22-devotio",
       "lines_added": 409
+    },
+    {
+      "worker": "22",
+      "phase": 3,
+      "title": "Threshold Transitions — 5 variants (fade/mashrabiya/scroll/iris/mihrab-arch), View Transitions API + CSS fallback, 15 personality-to-transition mappings, Upg.transition.run EXTEND with ritual option, Upg.ritual EXTEND (setTransition/getTransition/listTransitions/transitionMap), upg:nav:change auto-route, reduced-motion instant fallback. Sacred preserved (14 pages / 391 qcalc / 27 Upg.* APIs — Upg.transition + Upg.ritual extended in-place / 0 google fonts / Phase 1-2 untouched). 351 lines added (CSS 240 + JS 111).",
+      "branch": "worker-22-devotio",
+      "lines_added": 351
     }
   ],
-  "next_action": "Continue Worker 22 Phase 3 (Threshold Transitions — 5 transition variants: fade/mashrabiya/scroll/iris/mihrab-arch + per-personality routing + Upg.transition extension).",
+  "next_action": "Continue Worker 22 Phase 4 (Inkpot Feedback — Arabic-rooted hover/click effects: ink-spread, kashida-pull, kalam-stroke).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",

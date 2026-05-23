@@ -1,0 +1,79 @@
+{
+  "pack": "v3",
+  "worker": "22",
+  "worker_name": "RITUAL_UI",
+  "phase_completed": 3,
+  "phases_total": 6,
+  "phase_title": "Threshold Transitions",
+  "files_touched": [
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "lines_added_total": 351,
+  "lines_breakdown": {
+    "css": 240,
+    "js": 111,
+    "html": 0
+  },
+  "tokens_added": [
+    "--rit-thresh-duration",
+    "--rit-thresh-easing-classical",
+    "--rit-thresh-easing-mashrabiya",
+    "--rit-thresh-easing-scroll",
+    "--rit-thresh-easing-iris",
+    "--rit-thresh-easing-mihrab",
+    "--rit-thresh-active"
+  ],
+  "apis_extended": [
+    "Upg.transition.run (ritual option added)",
+    "Upg.ritual.setTransition",
+    "Upg.ritual.getTransition",
+    "Upg.ritual.listTransitions",
+    "Upg.ritual.transitionMap"
+  ],
+  "keyframes_added": [
+    "rit-thresh-fade-out",
+    "rit-thresh-fade-in",
+    "rit-thresh-mashrabiya-out",
+    "rit-thresh-mashrabiya-in",
+    "rit-thresh-scroll-out",
+    "rit-thresh-scroll-in",
+    "rit-thresh-iris-out",
+    "rit-thresh-iris-in",
+    "rit-thresh-mihrab-out",
+    "rit-thresh-mihrab-in"
+  ],
+  "personality_routing": {
+    "dashboard": "mashrabiya",
+    "callcenter": "iris",
+    "fieldsales": "fade",
+    "accountmgr": "mihrab-arch",
+    "social": "mashrabiya",
+    "lab": "iris",
+    "psych": "scroll",
+    "eq": "scroll",
+    "negotiation": "mihrab-arch",
+    "customercare": "mashrabiya",
+    "programming": "iris",
+    "accounting": "mihrab-arch",
+    "phonerepair": "fade",
+    "hrmastery": "scroll",
+    "myprogress": "fade",
+    "curriculum": "mashrabiya"
+  },
+  "fonts_added_offline": [],
+  "devotion_notes": "العتبة طقس — كل عبور بين صفحتين صار له طبيعة مستلهمة من العمارة العربية: مشربية تنفتح، محراب يتدلّى، إيريس يتمدّد. الفارق ميلي ثانية، لكن الوعي يتغيّر.",
+  "offline_check": {
+    "external_requests": 0,
+    "cdn_additions": 0,
+    "google_fonts_links": 0
+  },
+  "sacred_preservation": {
+    "pages": 14,
+    "qcalc": 391,
+    "upg_apis": 27,
+    "google_fonts": 0,
+    "reduced_motion_guards_added": 1
+  },
+  "next_action": "Continue Worker 22 Phase 4 (Inkpot Feedback — Arabic-rooted hover/click effects: ink-spread, kashida-pull, kalam-stroke)"
+}
