@@ -24674,3 +24674,299 @@ html[dir="rtl"] {
    ════════════════════════════════════════════════════════════════════════════ */
 
 /* End TASMEEM v3 / Worker 20 / Phase 5 ────────────────────────────────────── */
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   TASMEEM v3 — Worker 20 / Phase 6 — PER-PAGE TYPE SIGNATURE
+   ──────────────────────────────────────────────────────────────────────────
+   15 page personalities, each gets a unique --type-voice-* override surface.
+   Cascade order: root tokens → personality override → element rule.
+   Doctrine: a page must speak before it is read.
+   APPEND-only. Builds on W15 P6 (--type-page-* tokens, preserved verbatim).
+   No HTML changes. No app.js coupling beyond Upg.font sub-IIFE below.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ──────────── Signature root marker (no defaults — activates per scope) ─── */
+:root {
+  --sig-active: "default";
+}
+
+/* ──────────── 1. Dashboard — حُرفي/تنفيذي ───────────────────────────────── */
+[data-page-personality="dashboard"] {
+  --sig-active: "dashboard";
+  --type-voice-display: var(--font-reem-kufi), var(--font-cairo), sans-serif;
+  --type-voice-body:    var(--font-tajawal), var(--font-readex-pro), sans-serif;
+  --tracking-display:   -0.018em;
+}
+[data-page-personality="dashboard"] .h-display,
+[data-page-personality="dashboard"] .type-display,
+[data-page-personality="dashboard"] .tas-voice-display {
+  font-weight: 700;
+  font-variation-settings: "opsz" 96;
+}
+
+/* ──────────── 2. Callcenter — حادّ/سريع ─────────────────────────────────── */
+[data-page-personality="callcenter"] {
+  --sig-active: "callcenter";
+  --type-voice-display: var(--font-reem-kufi), var(--font-cairo), sans-serif;
+  --type-voice-body:    var(--font-tajawal), var(--font-cairo), sans-serif;
+  --type-voice-eyebrow: var(--font-tajawal), var(--font-cairo), sans-serif;
+  --tracking-display:   -0.022em;
+  --tracking-eyebrow:    0.08em;
+}
+[data-page-personality="callcenter"] .tas-voice-eyebrow,
+[data-page-personality="callcenter"] .h-eyebrow {
+  text-transform: uppercase; /* Latin parts only — Arabic ignores */
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+/* ──────────── 3. Fieldsales — نشيط/طاقي ─────────────────────────────────── */
+[data-page-personality="fieldsales"] {
+  --sig-active: "fieldsales";
+  --type-voice-display: var(--font-reem-kufi), var(--font-cairo), sans-serif;
+  --type-voice-body:    var(--font-readex-pro), var(--font-cairo), sans-serif;
+  --tracking-display:   -0.012em;
+  --tracking-body:       0.005em;
+}
+[data-page-personality="fieldsales"] .tas-voice-display,
+[data-page-personality="fieldsales"] .h-display {
+  font-weight: 600;
+  font-feature-settings: "dlig" 1, "kern" 1, "liga" 1, "calt" 1;
+}
+
+/* ──────────── 4. Accountmgr — تنفيذي/راقي ───────────────────────────────── */
+[data-page-personality="accountmgr"] {
+  --sig-active: "accountmgr";
+  --type-voice-display: var(--font-aref-ruqaa), var(--font-reem-kufi), serif;
+  --type-voice-hero:    var(--font-aref-ruqaa), var(--font-reem-kufi), serif;
+  --type-voice-body:    var(--font-ibm-plex-arabic), var(--font-readex-pro), sans-serif;
+  --tracking-hero:      -0.005em;
+}
+[data-page-personality="accountmgr"] .tas-voice-hero,
+[data-page-personality="accountmgr"] .type-hero,
+[data-page-personality="accountmgr"] .h-hero {
+  font-weight: 700;
+  font-variation-settings: "opsz" 144;
+  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1, "calt" 1;
+}
+
+/* ──────────── 5. Social — حيوي/ديناميكي ─────────────────────────────────── */
+[data-page-personality="social"] {
+  --sig-active: "social";
+  --type-voice-display: var(--font-reem-kufi), var(--font-cairo), sans-serif;
+  --type-voice-body:    var(--font-readex-pro), var(--font-cairo), sans-serif;
+  --type-voice-quote:   var(--font-fraunces), var(--font-readex-pro), serif;
+  --tracking-display:   -0.015em;
+}
+[data-page-personality="social"] .tas-voice-display,
+[data-page-personality="social"] .h-display {
+  font-weight: 700;
+  font-feature-settings: "swsh" 1, "salt" 1, "dlig" 1, "kern" 1, "liga" 1;
+}
+
+/* ──────────── 6. Lab — تجريبي/تقني ──────────────────────────────────────── */
+[data-page-personality="lab"] {
+  --sig-active: "lab";
+  --type-voice-display: var(--font-jetbrains-mono), var(--font-reem-kufi), monospace;
+  --type-voice-body:    var(--font-tajawal), var(--font-cairo), sans-serif;
+  --type-voice-numeric: var(--font-jetbrains-mono), var(--font-ibm-plex-arabic), monospace;
+  --tracking-display:    0;
+}
+[data-page-personality="lab"] .tas-voice-display,
+[data-page-personality="lab"] .h-display,
+[data-page-personality="lab"] .type-display {
+  font-family: var(--font-jetbrains-mono), var(--font-reem-kufi), monospace;
+  font-weight: 700;
+  font-feature-settings: "zero" 1, "kern" 1, "liga" 1;
+}
+
+/* ──────────── 7. Psych — فلسفي/أدبي ─────────────────────────────────────── */
+[data-page-personality="psych"] {
+  --sig-active: "psych";
+  --type-voice-hero:    var(--font-aref-ruqaa), var(--font-cairo), serif;
+  --type-voice-display: var(--font-aref-ruqaa), var(--font-reem-kufi), serif;
+  --type-voice-body:    var(--font-readex-pro), var(--font-ibm-plex-arabic), sans-serif;
+  --type-voice-quote:   var(--font-fraunces), var(--font-readex-pro), serif;
+  --tracking-hero:      -0.005em;
+}
+[data-page-personality="psych"] .tas-voice-quote,
+[data-page-personality="psych"] .h-quote,
+[data-page-personality="psych"] .type-quote-block,
+[data-page-personality="psych"] .type-quote-literary {
+  font-style: italic;
+  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1, "swsh" 1, "salt" 1, "ss01" 1;
+}
+
+/* ──────────── 8. EQ — عاطفي/هادئ ────────────────────────────────────────── */
+[data-page-personality="eq"] {
+  --sig-active: "eq";
+  --type-voice-hero:    var(--font-aref-ruqaa), var(--font-cairo), serif;
+  --type-voice-display: var(--font-aref-ruqaa), var(--font-reem-kufi), serif;
+  --type-voice-body:    var(--font-readex-pro), var(--font-ibm-plex-arabic), sans-serif;
+  --tracking-hero:       0;
+  --tracking-display:   -0.005em;
+}
+[data-page-personality="eq"] .tas-voice-hero,
+[data-page-personality="eq"] .type-hero,
+[data-page-personality="eq"] .h-hero {
+  font-weight: 400; /* lighter for emotional softness */
+  font-variation-settings: "opsz" 72;
+}
+
+/* ──────────── 9. Negotiation — إقناعي/قوي ───────────────────────────────── */
+[data-page-personality="negotiation"] {
+  --sig-active: "negotiation";
+  --type-voice-display: var(--font-reem-kufi), var(--font-cairo), sans-serif;
+  --type-voice-body:    var(--font-ibm-plex-arabic), var(--font-readex-pro), sans-serif;
+  --tracking-display:   -0.024em; /* tightest — assertive */
+}
+[data-page-personality="negotiation"] .tas-voice-body,
+[data-page-personality="negotiation"] .h-body {
+  font-weight: 600;
+}
+
+/* ──────────── 10. Customercare — دافئ/خدمي ──────────────────────────────── */
+[data-page-personality="customercare"] {
+  --sig-active: "customercare";
+  --type-voice-display: var(--font-tajawal), var(--font-cairo), sans-serif;
+  --type-voice-body:    var(--font-tajawal), var(--font-readex-pro), sans-serif;
+  --tracking-display:   -0.008em;
+}
+[data-page-personality="customercare"] .tas-voice-display,
+[data-page-personality="customercare"] .h-display {
+  font-weight: 700;
+  font-feature-settings: "dlig" 1, "kern" 1, "liga" 1, "calt" 1;
+}
+
+/* ──────────── 11. Programming — تقني/منطقي ──────────────────────────────── */
+[data-page-personality="programming"] {
+  --sig-active: "programming";
+  --type-voice-display: var(--font-jetbrains-mono), var(--font-reem-kufi), monospace;
+  --type-voice-body:    var(--font-ibm-plex-arabic), var(--font-readex-pro), sans-serif;
+  --type-voice-code:    var(--font-jetbrains-mono), monospace;
+  --type-voice-numeric: var(--font-jetbrains-mono), monospace;
+  --tracking-display:    0;
+}
+[data-page-personality="programming"] .tas-voice-display,
+[data-page-personality="programming"] .h-display,
+[data-page-personality="programming"] .type-display {
+  font-family: var(--font-jetbrains-mono), var(--font-reem-kufi), monospace;
+  font-weight: 700;
+  font-feature-settings: "zero" 1, "calt" 1, "liga" 1;
+}
+[data-page-personality="programming"] code,
+[data-page-personality="programming"] pre,
+[data-page-personality="programming"] .type-code,
+[data-page-personality="programming"] .type-code-inline {
+  font-feature-settings: "calt" 1, "liga" 1, "zero" 1;
+}
+
+/* ──────────── 12. Accounting — دقيق/محاسبي ──────────────────────────────── */
+[data-page-personality="accounting"] {
+  --sig-active: "accounting";
+  --type-voice-display: var(--font-ibm-plex-arabic), var(--font-reem-kufi), sans-serif;
+  --type-voice-body:    var(--font-ibm-plex-arabic), var(--font-readex-pro), sans-serif;
+  --type-voice-numeric: var(--font-ibm-plex-arabic), var(--font-jetbrains-mono), monospace;
+  --tracking-display:   -0.014em;
+}
+[data-page-personality="accounting"] .qcalc-result-value,
+[data-page-personality="accounting"] .qcalc-value,
+[data-page-personality="accounting"] .stat-tile-value,
+[data-page-personality="accounting"] .cath-stat-value,
+[data-page-personality="accounting"] .tas-num-tabular {
+  font-feature-settings: "tnum" 1, "lnum" 1, "zero" 1, "ss01" 1;
+  font-weight: 600;
+}
+
+/* ──────────── 13. Phonerepair — حِرَفي/يدوي ─────────────────────────────── */
+[data-page-personality="phonerepair"] {
+  --sig-active: "phonerepair";
+  --type-voice-display: var(--font-cairo), var(--font-reem-kufi), sans-serif;
+  --type-voice-body:    var(--font-cairo), var(--font-tajawal), sans-serif;
+  --tracking-display:   -0.012em;
+}
+[data-page-personality="phonerepair"] .tas-voice-display,
+[data-page-personality="phonerepair"] .h-display {
+  font-weight: 700;
+}
+
+/* ──────────── 14. HRMastery — رسمي/إنساني ───────────────────────────────── */
+[data-page-personality="hrmastery"] {
+  --sig-active: "hrmastery";
+  --type-voice-hero:    var(--font-aref-ruqaa), var(--font-cairo), serif;
+  --type-voice-display: var(--font-aref-ruqaa), var(--font-reem-kufi), serif;
+  --type-voice-body:    var(--font-tajawal), var(--font-readex-pro), sans-serif;
+  --tracking-hero:      -0.008em;
+}
+[data-page-personality="hrmastery"] .tas-voice-hero,
+[data-page-personality="hrmastery"] .type-hero,
+[data-page-personality="hrmastery"] .h-hero {
+  font-weight: 700;
+  font-variation-settings: "opsz" 96;
+}
+
+/* ──────────── 15. MyProgress — شخصي/تأملي ───────────────────────────────── */
+[data-page-personality="myprogress"] {
+  --sig-active: "myprogress";
+  --type-voice-display: var(--font-reem-kufi), var(--font-cairo), sans-serif;
+  --type-voice-body:    var(--font-readex-pro), var(--font-cairo), sans-serif;
+  --tracking-display:   -0.01em;
+}
+[data-page-personality="myprogress"] .tas-voice-display,
+[data-page-personality="myprogress"] .h-display {
+  font-weight: 500; /* gentle, journal-like */
+}
+
+/* ──────────── Curriculum — forward-compat (Pack v2 ritual scaffolded) ──── */
+[data-page-personality="curriculum"] {
+  --sig-active: "curriculum";
+  --type-voice-display: var(--font-reem-kufi), var(--font-cairo), sans-serif;
+  --type-voice-body:    var(--font-tajawal), var(--font-readex-pro), sans-serif;
+  --tracking-display:   -0.014em;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   W15 P6 Compat Layer — voice-token routing (additive, low specificity)
+   ──────────────────────────────────────────────────────────────────────────
+   Forces generic voice classes within any personality scope to consume the
+   active --type-voice-* override (instead of the W15 P6 --type-page-* layer
+   which targets H1 directly). The :not() guards prevent stomping over
+   explicit tas-voice-* classes that already opted into voice tokens.
+   ══════════════════════════════════════════════════════════════════════════ */
+[data-page-personality] .h-display:not(.tas-voice-display),
+[data-page-personality] .type-display:not(.tas-voice-display) {
+  font-family: var(--type-voice-display);
+}
+[data-page-personality] .h-quote:not(.tas-voice-quote),
+[data-page-personality] .type-quote:not(.tas-voice-quote) {
+  font-family: var(--type-voice-quote);
+}
+[data-page-personality] .h-body:not(.tas-voice-body) {
+  font-family: var(--type-voice-body);
+}
+[data-page-personality] .h-hero:not(.tas-voice-hero),
+[data-page-personality] .type-hero:not(.tas-voice-hero) {
+  font-family: var(--type-voice-hero);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Worker 20 / Phase 6 — Signature Discipline:
+   1. لا تخلق personality جديد بدون token block + signature block.
+   2. لو احتجت override ضمن personality → استبدل قيمة voice token (لا
+      تستعمل font-family مباشر).
+   3. قاعدة الترتيب: root tokens → personality override → element rule.
+   4. كل personality له ميزة واحدة بصرية مميَّزة (uppercase eyebrows لـ
+      callcenter، italic quote لـ psych، إلخ) — لا تخلط.
+   5. opsz variation فقط على variable fonts (Aref Ruqaa ليست variable —
+      الصفة تُتجاهل بصمت دون كسر cascade).
+   6. tracking-display تتراوح بين -0.024em (negotiation أحدّ) إلى 0
+      (lab/programming mono — متساوي العرض).
+   7. W15 P6 token block (--type-page-*) PRESERVED verbatim — لا نلمس
+      .page[data-page-personality] selectors. Phase 6 يضيف عبر
+      [data-page-personality] (specificity أقل بـ class واحد).
+   8. qcalc rhythm (Phase 4 .tas-num-*) محفوظ — accounting personality
+      فقط يضيف feature-settings عبر classes صريحة.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* End TASMEEM v3 / Worker 20 / Phase 6 — WORKER 20 COMPLETE ───────────────── */
