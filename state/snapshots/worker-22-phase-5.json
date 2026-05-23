@@ -1,0 +1,151 @@
+{
+  "pack": "v3",
+  "worker": "22",
+  "worker_name": "RITUAL_UI",
+  "phase_completed": 5,
+  "phases_total": 6,
+  "phase_title": "Time-of-Day Atmospheres",
+  "files_touched": [
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "lines_added_total": 397,
+  "lines_breakdown": {
+    "css": 211,
+    "js": 186,
+    "html": 0
+  },
+  "tokens_added": [
+    "--rit-atmo-veil",
+    "--rit-atmo-tint-shift",
+    "--rit-atmo-leading-shift",
+    "--rit-atmo-name"
+  ],
+  "tokens_consumed": [
+    "--chr-lapis-200/300 (W21 P1)",
+    "--chr-pearl-200/400 (W21 P1)",
+    "--chr-saffron-200/400/500 (W21 P1)",
+    "--chr-marble-300/500 (W21 P1)",
+    "--chr-henna-300/400/500/600 (W21 P1)",
+    "--chr-coral-400/500 (W21 P1)",
+    "--chr-mihrab-600/700 (W21 P1)",
+    "--chr-indigo-700/800 (W21 P1)",
+    "--life-ambient-from (W16 P1 + W21 P4) — REROUTED per atmosphere",
+    "--life-ambient-to (W16 P1 + W21 P4) — REROUTED per atmosphere",
+    "--tracking-normal (W15 P5)"
+  ],
+  "atmospheres": {
+    "dawn": {
+      "ar": "فَجْر",
+      "range_hours": [4.5, 7.0],
+      "veil": "lapis-200 18% radial top-center",
+      "ambient_from": "lapis-300 14%",
+      "ambient_to": "pearl-400 10%",
+      "leading_shift": "-0.02em (tighter for morning alertness)",
+      "tint_shift": "pearl-200 8%"
+    },
+    "forenoon": {
+      "ar": "ضُحى",
+      "range_hours": [7.0, 13.0],
+      "veil": "saffron-200 14% radial top",
+      "ambient_from": "saffron-400 12%",
+      "ambient_to": "marble-500 8%",
+      "leading_shift": "-0.01em",
+      "tint_shift": "marble-300 10%"
+    },
+    "asr": {
+      "ar": "عَصْر",
+      "range_hours": [13.0, 17.0],
+      "veil": "henna-300 16% radial right-upper",
+      "ambient_from": "henna-400 14%",
+      "ambient_to": "saffron-500 12%",
+      "leading_shift": "0em (neutral)",
+      "tint_shift": "saffron-400 12%"
+    },
+    "maghrib": {
+      "ar": "مَغْرِب",
+      "range_hours": [17.0, 19.5],
+      "veil": "coral-400 20% radial lower-right",
+      "ambient_from": "coral-500 16%",
+      "ambient_to": "henna-600 14%",
+      "leading_shift": "+0.005em (more breath for evening reflection)",
+      "tint_shift": "henna-500 14%"
+    },
+    "isha": {
+      "ar": "عِشاء",
+      "range_hours": [19.5, 28.5],
+      "wraps_midnight": true,
+      "veil": "mihrab-700 22% radial center",
+      "ambient_from": "mihrab-600 18%",
+      "ambient_to": "indigo-800 14%",
+      "leading_shift": "+0.01em (more breath for night calm)",
+      "tint_shift": "indigo-700 16%"
+    }
+  },
+  "apis_extended": [
+    "Upg.ritual.atmosphere.detect",
+    "Upg.ritual.atmosphere.apply",
+    "Upg.ritual.atmosphere.set",
+    "Upg.ritual.atmosphere.clearOverride",
+    "Upg.ritual.atmosphere.refresh",
+    "Upg.ritual.atmosphere.disable",
+    "Upg.ritual.atmosphere.enable",
+    "Upg.ritual.atmosphere.status",
+    "Upg.ritual.atmosphere.list",
+    "Upg.ritual.atmosphere.listArabic",
+    "Upg.ritual.atmosphere.ATMOSPHERES (frozen)"
+  ],
+  "localstorage_keys_added": [
+    "upg_ritual_atmo_disabled",
+    "upg_ritual_atmo_override"
+  ],
+  "html_augments": {
+    "files_modified": 0,
+    "note": "DOM-free phase — .rit-atmo-layer mounted at runtime by JS as fixed div"
+  },
+  "fonts_added_offline": [],
+  "css_features_used": [
+    "color-mix(in oklch, ...)",
+    "radial-gradient ellipse with custom positioning per atmosphere",
+    "background-blend-mode: overlay (glass surfaces)",
+    "letter-spacing transition 1500ms"
+  ],
+  "wiring": {
+    "auto_detect_on_boot": true,
+    "interval_minutes": 20,
+    "visibility_change_listener": true,
+    "freeze_replace_pattern": "Object.assign + Object.freeze (5th re-freeze, matches Phases 2-4)"
+  },
+  "devotion_notes": "المنصة كانت تَجهل الوقت — تَفتحها الفجر تَرى ما رأيت في الظهر. الآن قبل الإقبال يَسبقها فَجْر بَنفسجي خَفيف، الضُحى تَلبَسها بساطاً ذَهبياً، العصر يَدفّئها بحُمرة العنبر، المغرب يُدفّئ نفساً ويُهدّئ آخر، العشاء يُلَفّها بسُكون نِيلي. شَفَيف بحَدّ ٢٢٪ — لا overwhelm. اللحظة لها لون. الانضباط يُمارَس داخل لون الوقت لا فوقه.",
+  "offline_check": {
+    "external_requests": 0,
+    "cdn_additions": 0,
+    "google_fonts_links": 0,
+    "audio_assets_added": 0,
+    "libraries_added": 0,
+    "fonts_added": 0
+  },
+  "sacred_preservation": {
+    "pages": 14,
+    "qcalc": 391,
+    "upg_apis_top_level": 27,
+    "upg_ritual_freezes": 5,
+    "google_fonts": 0,
+    "reduced_motion_guards_total": 60,
+    "reduced_motion_guards_added": 3,
+    "reduced_transparency_guards_total": 12,
+    "reduced_transparency_guards_added": 1,
+    "data_page_personality": 15,
+    "phase_1_4_iifes_touched": false,
+    "w16_life_ambient_tokens_rerouted_only": true,
+    "w21_chr_palette_consumed_only": true,
+    "html_untouched": true
+  },
+  "discipline_check": {
+    "serves_training_ritual": true,
+    "arabic_rooted": true,
+    "offline_100_percent": true,
+    "would_miss_if_gone": true
+  },
+  "next_action": "Continue Worker 22 Phase 6 (Aura Deepening — extend W16 P6 auras with chr-* + ritual tie-in + per-personality choreography; closes Worker 22)"
+}
