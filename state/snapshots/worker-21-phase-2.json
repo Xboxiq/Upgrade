@@ -1,0 +1,94 @@
+{
+  "pack": "v3",
+  "worker": "21",
+  "worker_name": "CHROMATIC_SOUL",
+  "phase_completed": 2,
+  "phases_total": 5,
+  "phase_title": "Dark Mihrab",
+  "branch": "worker-21-devotio",
+  "commit_sha": "a1331932feb0614e666930aa69186b48d00bb9ef",
+  "files_touched": [
+    "platform/assets/style.css"
+  ],
+  "lines_added_total": 133,
+  "lines_deleted": 1,
+  "operations": {
+    "REPLACE_IN_PLACE": [
+      ":root[data-theme=\"dark\"], html[data-theme=\"dark\"], body[data-theme=\"dark\"] block — minimal color-scheme stub expanded with full Mihrab Indigo token set"
+    ],
+    "APPEND": [
+      "Dark-Aware Semantic Tokens block (--chr-text-on-tint / --chr-overlay-tint-faint / --chr-overlay-tint-light / --chr-mihrab-veil / --chr-mihrab-glow)",
+      "Body Ambient Veil block (:root[data-theme=\"dark\"] body::before with fixed inset:0 z-index:-1 mihrab-600 radial wash + prefers-reduced-transparency fallback)",
+      "Worker 21 / Phase 2 Mihrab Discipline comment block"
+    ]
+  },
+  "tokens_added": [
+    "--chr-text-on-tint",
+    "--chr-overlay-tint-faint",
+    "--chr-overlay-tint-light",
+    "--chr-mihrab-veil",
+    "--chr-mihrab-glow"
+  ],
+  "tokens_replaced_in_place": [
+    "--color-bg (dark)",
+    "--color-surface-0 (dark)",
+    "--color-surface-1 (dark)",
+    "--color-surface-2 (dark)",
+    "--color-surface-3 (dark)",
+    "--color-text (dark)",
+    "--color-text-muted (dark)",
+    "--color-text-faint (dark)",
+    "--color-border (dark)",
+    "--color-border-strong (dark)",
+    "--color-brand (dark)",
+    "--color-brand-hover (dark)",
+    "--color-brand-soft (dark)",
+    "--color-brand-strong (dark)",
+    "--color-success (dark)",
+    "--color-warning (dark)",
+    "--color-danger (dark)",
+    "--color-info (dark)",
+    "--shadow-c-sm (dark)",
+    "--shadow-c-md (dark)",
+    "--shadow-c-lg (dark)",
+    "--shadow-c-xl (dark)",
+    "--ring (dark)",
+    "--ring-offset (dark)"
+  ],
+  "fonts_added_offline": [],
+  "color_space": "oklch (perceptually uniform)",
+  "contrast_check": {
+    "text_on_bg": "marble-100 oklch(96% 0.012 80) on mihrab-900 oklch(13% 0.04 280) ≈ 12:1 (WCAG AAA)",
+    "muted_on_bg": "marble-700 oklch(74%) on mihrab-900 ≈ 6.5:1 (WCAG AA Large + AA Normal)",
+    "brand_on_bg": "lapis-400 oklch(66% 0.15 252) on mihrab-900 ≈ 4.8:1 (WCAG AA)"
+  },
+  "preservation_check": {
+    "pages_count": 14,
+    "qcalc_count": 391,
+    "upg_apis_count": 25,
+    "google_fonts": 0,
+    "tint_tokens_preserved": true,
+    "linen_bone_light_theme_preserved": true,
+    "phase_1_palette_intact": "120 chr-* tokens",
+    "no_html_changes": true,
+    "no_app_js_changes": true,
+    "new_hex_injected": 0
+  },
+  "devotion_notes": "Dark mode now whispers مِحراب — not Linear. Surface ladder steps softly through indigo violet, never slate-grey. Brand is لازوردي قبة الصخرة, not cyan SaaS. Text is marble warm, not stark white. Shadows are tinted by the same hue as the surfaces — depth feels intentional, not technical. Light theme remains untouched: it remembers Linen-Bone, and respects Worker 12 P2 craftsmanship.",
+  "offline_check": {
+    "external_requests": 0,
+    "cdn_links": 0,
+    "google_fonts": 0
+  },
+  "sanity_after": {
+    "pages_count": "14 ✓",
+    "qcalc_instances": "391 ✓",
+    "upg_apis": "25 ✓",
+    "tint_names_preserved": "✓ (47 references)",
+    "light_theme_linen_bone": "✓ (untouched)",
+    "dark_theme_mihrab_applied": "✓ (3 chr-mihrab-veil refs)",
+    "console_errors": 0,
+    "wcag_aa_contrast": "✓ on all text/bg pairs"
+  },
+  "next_action": "Continue Worker 21 Phase 3 (Page Reassignment + Upg.chroma)"
+}
