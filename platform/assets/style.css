@@ -23511,3 +23511,19 @@ body[data-block-debug="1"] [data-block-id][data-prereq]::after {
    9. Zero telemetry. Zero sync. localStorage only. Zero CDN/library added.
    10. Reduced-motion + reduced-transparency + print + mobile all guarded.
    ════════════════════════════════════════════════════════════════ */
+
+
+/* TASMEEM v3 — Font Forensics Inventory (Worker 20 / Phase 1)
+   Baseline: Google Fonts CDN removed from index.html.
+   Total font-family declarations: 252 (target reduction in later phases).
+   Existing voice token system preserved; rerouting to local fonts in Phase 3.
+   Planned local families: Aref Ruqaa, Reem Kufi, Cairo, Tajawal, IBM Plex Sans Arabic,
+   Readex Pro, Inter, JetBrains Mono, Fraunces.
+   Devotion rule: no CDN, no direct font-family drift, no token deletion. */
+
+:root {
+  --tasmeem-stage: "phase-1-forensics";
+  --tasmeem-fonts-status: "google-cdn-removed";
+  --tasmeem-fonts-local-loaded: "0/9";
+  --tasmeem-google-fonts-link-count: "0";
+}
