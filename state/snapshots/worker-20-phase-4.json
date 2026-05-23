@@ -1,0 +1,104 @@
+{
+  "pack": "v3",
+  "worker": "20",
+  "worker_name": "TASMEEM_RECONSTRUCTION",
+  "phase_completed": 4,
+  "phases_total": 6,
+  "branch": "worker-20-devotio-phase4",
+  "files_touched": [
+    "platform/assets/style.css",
+    "platform/assets/app.js",
+    "platform/index.html",
+    "state/PROGRESS.json",
+    "state/snapshots/worker-20-phase-4.json"
+  ],
+  "lines_added_total": 410,
+  "tokens_added": [
+    "--num-feat-tabular",
+    "--num-feat-tabular-zero",
+    "--num-feat-fraction",
+    "--num-feat-stylistic-alt",
+    "--num-variant-tabular",
+    "--num-variant-zero",
+    "--num-variant-fraction",
+    "--num-letter-spacing",
+    "--num-letter-spacing-wide",
+    "--num-letter-spacing-tight"
+  ],
+  "utilities_added": [
+    ".tas-num-tabular / [data-tas-num=tabular]",
+    ".tas-num-tabular-zero / [data-tas-num=tabular-zero]",
+    ".tas-num-fraction / [data-tas-num=fraction]",
+    ".tas-num-hero / [data-tas-num=hero]",
+    ".tas-num-inline",
+    ".tas-num-ticker",
+    ".tas-num-arabic / [data-tas-num=arabic]"
+  ],
+  "auto_bind_selectors": [
+    ".qcalc-result-value (26 instances in HTML — augmented inline)",
+    ".qcalc-value / .qcalc-result / .qcalc-output (forward-compat)",
+    ".qcalc-input / input[type=number] inside .qcalc-input",
+    ".qcalc-meter",
+    ".qcalc-result-unit / .qcalc-suffix",
+    ".stat-tile-value (4 — augmented inline)",
+    ".cath-stat-value (4 — augmented inline)",
+    ".bento-stat-value (forward-compat)",
+    ".kpi-card-value / .kpi-hero-num (forward-compat)",
+    ".u-num / .type-num-tabular",
+    "[data-countup] / [data-count-up] / .count-up-value",
+    "[data-difficulty]::after / .tier-star-count",
+    "input[type=number] (generic global)"
+  ],
+  "html_augments": {
+    "qcalc-result-value + tas-num-tabular": 26,
+    "cath-stat-value + tas-num-hero": 4,
+    "stat-tile-value u-num + tas-num-hero": 4,
+    "type-num-display data-countup + tas-num-ticker": 4,
+    "total": 38,
+    "limit_per_phase": 80
+  },
+  "fonts_added_offline": [],
+  "apis_extended": [
+    "Upg.font.applyNumericDiscipline(root)",
+    "Upg.font.auditNumericDiscipline()"
+  ],
+  "apis_preserved": [
+    "Upg.font.list",
+    "Upg.font.voices",
+    "Upg.font.audit",
+    "Upg.font.isReady",
+    "Upg.font.computedFor",
+    "Upg.font.status",
+    "Upg.font.swap",
+    "Upg.font.reset"
+  ],
+  "events_listened": [
+    "DOMContentLoaded (one-shot auto-apply)",
+    "upg:nav:change (50ms-deferred re-apply)"
+  ],
+  "digit_policy": {
+    "qcalc / stat-tile / KPI / count-up": "Latin digits (font-language-override ENG, unicode-bidi plaintext)",
+    "Arabic body": "Arabic-Indic allowed by default",
+    "ceremonial / literary": "opt-in via .tas-num-arabic"
+  },
+  "reduced_motion_guard": "tickers transition+animation suppressed under prefers-reduced-motion: reduce",
+  "sacred_preservation": {
+    "pages": 14,
+    "qcalc": 391,
+    "qcalc_result_value": 26,
+    "upg_apis_top_level": 25,
+    "voice_tokens_distinct": 19,
+    "google_fonts_links": 0,
+    "cdn_references": 0,
+    "phase_3_iife_untouched": true,
+    "no_new_top_level_upg_api": true,
+    "extended_upg_font_via_freeze_replace": true
+  },
+  "offline_check": {
+    "external_requests": 0,
+    "google_fonts_links": 0,
+    "cdn_references": 0
+  },
+  "devotion_notes": "الأرقام في منصة تدريب ليست زينة — هي حُجج. ٢٦ qcalc-result + ٨ stat-tiles + ٤ count-up tickers اكتسبت انضباطاً جدولياً، صفر اهتزاز، صفر التباس بين 0 و O. الأرقام الآن تحترم نفسها.",
+  "next_action": "Continue Worker 20 Phase 5 (Kashida & Rhythm) — كشيدة على عناوين معينة + leading عربي صحيح (1.6 بدل 1.4) + word-spacing + RTL micro-rhythm."
+}
