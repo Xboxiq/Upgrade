@@ -26248,3 +26248,42 @@ html[dir="rtl"] {
 
 /* End CHROMATIC SOUL v3 — Worker 21 / Phase 5 — Theme Bridge ─────────── */
 /* End CHROMATIC SOUL v3 — WORKER 21 COMPLETE 5/5 ─────────────────────── */
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   RITUAL UI v3 — Entry Ritual (Worker 22 / Phase 1)
+   ════════════════════════════════════════════════════════════════════════ */
+:root {
+  --rit-entry-duration: 4000ms;
+  --rit-entry-wordmark-delay: 400ms;
+  --rit-entry-poetry-delay: 900ms;
+  --rit-entry-glow-expand-delay: 2000ms;
+  --rit-entry-fade-out-delay: 3500ms;
+  --rit-entry-fade-out-duration: 500ms;
+  --rit-entry-veil-color: var(--chr-mihrab-900);
+  --rit-entry-glow-color: var(--chr-lapis-500);
+  --rit-entry-wordmark-color: var(--chr-marble-50);
+  --rit-entry-poetry-color: var(--chr-pearl-300);
+  --rit-entry-easing: cubic-bezier(0.45,0.05,0.55,0.95);
+}
+
+.rit-entry-portal {position: fixed; inset: 0; z-index: 9999; isolation: isolate;}
+.rit-entry-portal[hidden] {display: none !important;}
+.rit-entry-veil {position: absolute; inset: 0; background: var(--rit-entry-veil-color); opacity: .98;}
+.rit-entry-stage {position: absolute; inset: 0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.5rem; padding:2rem; text-align:center;}
+.rit-entry-glow {position:absolute; top:50%; left:50%; width:12rem; height:12rem; transform:translate(-50%,-50%); background:radial-gradient(circle,color-mix(in oklch,var(--rit-entry-glow-color) 82%,transparent) 0%,transparent 70%); filter: blur(16px); opacity:0;}
+.rit-entry-wordmark {position:relative; z-index:2; font-size:clamp(3rem,8vw,5rem); line-height:1; color:var(--rit-entry-wordmark-color); opacity:0;}
+.rit-entry-poetry {position:relative; z-index:2; font-size:clamp(1.125rem,2.5vw,1.5rem); color:var(--rit-entry-poetry-color); opacity:0; max-width:28rem; line-height:1.7;}
+.rit-entry-skip {position:absolute; bottom:2rem; inset-inline-end:2rem; background:transparent; border:1px solid color-mix(in oklch,var(--rit-entry-poetry-color) 30%,transparent); color:var(--rit-entry-poetry-color); padding:.4rem 1rem; border-radius:.5rem;}
+body.rit-entry-active {overflow:hidden;}
+body.rit-entry-active .rit-entry-glow {animation: ritGlow 1500ms var(--rit-entry-easing) var(--rit-entry-wordmark-delay) forwards, ritGlowExpand 1500ms var(--rit-entry-easing) var(--rit-entry-glow-expand-delay) forwards;}
+body.rit-entry-active .rit-entry-wordmark {animation: ritWord 500ms var(--rit-entry-easing) var(--rit-entry-wordmark-delay) forwards, ritFade var(--rit-entry-fade-out-duration) var(--rit-entry-easing) var(--rit-entry-fade-out-delay) forwards;}
+body.rit-entry-active .rit-entry-poetry {animation: ritPoetry 1000ms var(--rit-entry-easing) var(--rit-entry-poetry-delay) forwards, ritFade var(--rit-entry-fade-out-duration) var(--rit-entry-easing) var(--rit-entry-fade-out-delay) forwards;}
+@keyframes ritWord {from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)}}
+@keyframes ritPoetry {from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)}}
+@keyframes ritGlow {from{opacity:0;transform:translate(-50%,-50%) scale(.65)} to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes ritGlowExpand {to{opacity:0;transform:translate(-50%,-50%) scale(10)}}
+@keyframes ritFade {to{opacity:0}}
+@media (prefers-reduced-motion: reduce){
+  .rit-entry-glow,.rit-entry-wordmark,.rit-entry-poetry{animation:none !important;opacity:1;}
+}
