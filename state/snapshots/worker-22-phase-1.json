@@ -1,0 +1,115 @@
+{
+  "pack": "v3",
+  "worker": "22",
+  "worker_name": "RITUAL_UI",
+  "phase_completed": 1,
+  "phases_total": 6,
+  "phase_title": "Entry Ritual — 4s mihrab veil + lapis glow + arabic poetry",
+  "branch": "worker-22-devotio",
+  "files_touched": [
+    "platform/assets/style.css",
+    "platform/assets/app.js",
+    "platform/index.html"
+  ],
+  "lines_added_total": 522,
+  "lines_breakdown": {
+    "css": 292,
+    "js": 210,
+    "html": 20
+  },
+  "tokens_added": [
+    "--rit-entry-duration",
+    "--rit-entry-veil-fade-in",
+    "--rit-entry-wordmark-delay",
+    "--rit-entry-wordmark-duration",
+    "--rit-entry-poetry-delay",
+    "--rit-entry-poetry-duration",
+    "--rit-entry-glow-expand-delay",
+    "--rit-entry-glow-duration",
+    "--rit-entry-fade-out-delay",
+    "--rit-entry-fade-out-duration",
+    "--rit-entry-veil-color",
+    "--rit-entry-glow-color",
+    "--rit-entry-wordmark-color",
+    "--rit-entry-poetry-color",
+    "--rit-entry-easing"
+  ],
+  "keyframes_added": [
+    "rit-entry-veil-in",
+    "rit-entry-veil-out",
+    "rit-entry-wordmark-in",
+    "rit-entry-poetry-in",
+    "rit-entry-glow-pulse",
+    "rit-entry-glow-expand",
+    "rit-entry-fade-out",
+    "rit-entry-skip-in"
+  ],
+  "selectors_added": [
+    ".rit-entry-portal",
+    ".rit-entry-portal[hidden]",
+    ".rit-entry-veil",
+    ".rit-entry-stage",
+    ".rit-entry-glow",
+    ".rit-entry-wordmark",
+    ".rit-entry-poetry",
+    ".rit-entry-skip",
+    ".rit-entry-skip:hover",
+    ".rit-entry-skip:focus-visible"
+  ],
+  "apis_added": [
+    "window.Upg.ritual.start(rituId, opts)",
+    "window.Upg.ritual.stop(rituId)",
+    "window.Upg.ritual.disable(rituId)",
+    "window.Upg.ritual.enable(rituId)",
+    "window.Upg.ritual.status()",
+    "window.Upg.ritual.list()",
+    "window.Upg.ritual.POETRY_LINES"
+  ],
+  "upg_apis_total_after": 27,
+  "upg_apis_total_before": 26,
+  "fonts_added_offline": [],
+  "external_assets_added": [],
+  "localstorage_keys_added": [
+    "upg_ritual_last_entry",
+    "upg_ritual_disabled"
+  ],
+  "html_augments": [
+    "#rit-entry-portal div inserted before </body> after .drawer-scrim"
+  ],
+  "sacred_preserved": {
+    "page_sections": 14,
+    "qcalc_count": 391,
+    "google_fonts_count": 0,
+    "chr_tokens_minimum": 501,
+    "tint_tokens_minimum": 198,
+    "type_voice_tokens_minimum": 261,
+    "reduced_motion_guards_minimum": 56,
+    "w21_iifes_untouched": true,
+    "w12_w16_keyframes_untouched": true,
+    "existing_css_rules_modified": 0
+  },
+  "offline_check": {
+    "external_requests": 0,
+    "audio_assets_added": 0,
+    "video_assets_added": 0,
+    "cdn_links_added": 0,
+    "google_fonts_links_added": 0
+  },
+  "reduced_motion_handling": {
+    "all_keyframes_silenced": true,
+    "instant_dismiss_delay_ms": 800,
+    "transitions_disabled": true,
+    "reduced_transparency_fallback": true
+  },
+  "gating": {
+    "once_per_day_localstorage": "upg_ritual_last_entry",
+    "opt_out_localstorage": "upg_ritual_disabled",
+    "skip_methods": ["Esc key", "click on portal/veil/stage", "skip button"],
+    "auto_fire_on_load": true,
+    "auto_fire_delay_ms": 100,
+    "force_param_supported": true
+  },
+  "poetry_lines_count": 7,
+  "devotion_notes": "الباب طقس. 4 ثوانٍ من الـ Mihrab veil + Lapis glow + شعر عربي تخلق التزاماً يومياً. الفتح صار استدعاءً، لا click عابراً.",
+  "next_action": "Continue Worker 22 Phase 2 (Reading Halo — Cmd+. zen mode toggle: chrome dims, content glows, focus on selected article)."
+}

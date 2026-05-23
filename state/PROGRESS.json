@@ -1,26 +1,37 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-23T20:00:00Z",
+  "last_updated": "2026-05-23T21:30:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
     "pack": "v3",
-    "worker": "21",
-    "worker_name": "CHROMATIC_SOUL",
-    "phase": 5,
-    "phases_total": 5,
+    "worker": "22",
+    "worker_name": "RITUAL_UI",
+    "phase": 1,
+    "phases_total": 6,
     "phase_order": [
       "1",
       "2",
       "3",
       "4",
-      "5"
+      "5",
+      "6"
     ],
-    "branch": "worker-21-devotio",
-    "status": "completed-pending-pr",
+    "branch": "worker-22-devotio",
+    "status": "in-progress",
     "blocker": null
   },
   "previous": {
+    "pack": "v3",
+    "worker": "21",
+    "worker_name": "CHROMATIC_SOUL",
+    "phase": 5,
+    "phases_total": 5,
+    "branch": "worker-21-devotio",
+    "status": "completed",
+    "merged_pr": 88
+  },
+  "before_previous": {
     "pack": "v3",
     "worker": "21",
     "worker_name": "CHROMATIC_SOUL",
@@ -28,17 +39,7 @@
     "phases_total": 5,
     "branch": "worker-21-devotio",
     "status": "completed",
-    "merged_pr": null
-  },
-  "before_previous": {
-    "pack": "v3",
-    "worker": "21",
-    "worker_name": "CHROMATIC_SOUL",
-    "phase": 3,
-    "phases_total": 5,
-    "branch": "worker-21-devotio",
-    "status": "completed",
-    "merged_pr": null
+    "merged_pr": 88
   },
   "completed_phases": [
     {
@@ -717,10 +718,19 @@
       "title": "Theme Bridge — 48 [data-theme=\"light\"] tint overrides (15 --tint-* + 16 --tint-edge-* + 16 --tint-soft-* using softer chr-* stops 50/300/400/500 since W12 P2 Linen-Bone is brighter than dark Mihrab; lab/customercare get DARKER stops marble-700/pearl-700 for visible contrast on light bg) — W12 P2 Linen-Bone base values UNTOUCHED + Pack v1/v2 backward-compat shims (.atelier-glow/.aurora-pulse/[class*=\"aurora-\"] get --aurora-fallback routed to var(--color-tint, chr-lapis-500); .bento-card/.cath-card/.glass-card hover border-color rerouted to color-mix var(--color-tint) 38%; ::selection background = color-mix tint 35%; theme-aware scrollbar-color (mihrab-700/mihrab-900 dark + marble-700/marble-50 light) with WebKit thumb fallback) + @media print stylesheet (white bg + chr-mihrab-900 text + chr-pearl-50/100/200 surface ladder + chr-mihrab-300 borders + display:none on body::before/after + 7 life-* ambient layer selectors + .chr-grad-hero forced solid color-tint with white text + .chr-grad-page reset to white) + Mihrab dark refinements (--glass-bg-dark/--glass-edge-dark color-mix mihrab-800/500 + --code-bg = color-mix(chr-indigo-900 92%, chr-mihrab-900) + --code-text = chr-marble-100 + --quote-bg = color-mix(chr-mihrab-800 85%) + --quote-border-edge = chr-lapis-500; auto-applied to code:not(pre code) inline + blockquote/.h-quote/.literary-quote with border-inline-start) + Upg.chroma EXTEND via additive freeze-replace pattern (Phase 3 IIFE untouched verbatim; new ~136-line IIFE adds checkContrast(fg, bg) returning {ratio, passAA, passAAA, passLargeAA, fg, bg} via temp DOM element + computed-style RGB extraction + WCAG luminance/ratio formulas + verifyContrast() snapshotting --color-text/--color-text-muted/--color-bg/--color-surface-0/-1/--color-brand and checking 5 critical text/bg pairs + DOMContentLoaded one-time auto-audit logging '✓ CHROMATIC SOUL — WCAG AA verified · theme: dark/light' on green or '🔴 CHROMATIC SOUL — WCAG AA contrast issues' with failing pairs in red; text-muted-on-bg explicitly excluded from AA failure threshold since muted is intentionally lower contrast). Bridge Discipline comment block (8 rules). Sacred preserved 100% (14 pages / 391 qcalc / 26 Upg.* top-level APIs unchanged — Upg.chroma surface still frozen but extended additively / 120 chr-* tokens / W12 P2 Linen-Bone Light theme verbatim untouched / Phase 1+2+3+4 IIFEs untouched / 0 google fonts / 0 hex in Phase 5 block / no HTML changes / paper-tone preserved). 370 net lines added (234 CSS + 136 JS, 0 deletions). Worker 21 CHROMATIC SOUL final phase — closes 5/5.",
       "branch": "worker-21-devotio",
       "lines_added": 370,
+      "lines_deleted": 0,
+      "merged_pr": 88
+    },
+    {
+      "worker": "22",
+      "phase": 1,
+      "title": "Entry Ritual — 4-second sacred portal opening the platform: Mihrab veil overlay (full-viewport, z-index 9999) + Lapis radial glow that pulses then expands to fill viewport + Aref-Ruqaa wordmark 'Upgrade' fade-in with translateY+scale+blur reveal + Fraunces-italic Arabic poetry line picked randomly from 7 hand-curated lines (POETRY_LINES frozen canon) + skip button (top-end inset, fades in at 1.5s) + once-per-day localStorage gate (upg_ritual_last_entry timestamp + isToday() comparison) + opt-out via Upg.ritual.disable('entry') persisted in upg_ritual_disabled JSON list. CSS APPEND ~292 lines in style.css: 10 --rit-entry-* tokens (timeline durations + 4 chr-* sourced colors + cubic-bezier easing) + .rit-entry-portal/-veil/-stage/-glow/-wordmark/-poetry/-skip selectors + 9 keyframes (rit-entry-veil-in/out, wordmark-in, poetry-in, glow-pulse, glow-expand, fade-out, skip-in, plus the wordmark animation chain runs both wordmark-in AND fade-out as 2-step) + dedicated prefers-reduced-motion guard silencing all animations + setting opacity:1 on veil/wordmark, opacity:0.85 on poetry, opacity:0.32 on glow, opacity:0.7 on skip + prefers-reduced-transparency fallback flattening glow blur to solid 35% tint. JS APPEND ~210 lines in app.js: Upg.ritual IIFE (27th top-level Upg.* API) with frozen surface (start, stop, disable, enable, status, list, POETRY_LINES) + entryActive/entryTimer/entryCleanup state + isReducedMotion()/isToday()/readDisabledList()/isDisabled()/setDisabled() helpers + startEntry(force) gate-check + DOM seek + poetry randomization + reduced-motion data-attr marker + auto-dismiss timer (4s normal / 800ms reduced) + Esc keydown + portal/veil click + skip button click handlers + cleanup function + autoFire() on DOMContentLoaded with 100ms layout-settle delay. HTML AUGMENT — single <div id='rit-entry-portal' hidden role='presentation' aria-hidden='true'> inserted before </body> after drawer-scrim with .rit-entry-veil + .rit-entry-stage (wrapping .rit-entry-glow + h1.rit-entry-wordmark.tas-voice-wordmark='Upgrade' + p.rit-entry-poetry.tas-voice-quote[data-rit-poetry-text]) + button.rit-entry-skip[data-rit-skip] = 'تخطَّ'. Sacred preserved 100% (14 pages / 391 qcalc / 27 Upg.* APIs (was 26, +ritual) / 0 google fonts / 501 chr-* tokens / 198 --tint-* tokens / 261 --type-voice-* tokens / W21 IIFEs untouched / no existing CSS rules modified / no W12-W16 keyframes touched). 522 net lines added (CSS 292 + JS 210 + HTML 20). Worker 22 RITUAL UI opens 1/6.",
+      "branch": "worker-22-devotio",
+      "lines_added": 522,
       "lines_deleted": 0
     }
   ],
-  "next_action": "Open PR worker-21-devotio → main (Worker 21 CHROMATIC SOUL COMPLETE 5/5 phases). After merge, start Worker 22 Phase 1 (Entry Ritual — RITUAL UI: gateway entry threshold + identity lock onboarding ceremony).",
+  "next_action": "Continue Worker 22 Phase 2 (Reading Halo — Cmd+. zen mode: chrome dims, content glows, focus on selected article).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
