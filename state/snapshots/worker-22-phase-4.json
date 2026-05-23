@@ -1,0 +1,100 @@
+{
+  "pack": "v3",
+  "worker": "22",
+  "worker_name": "RITUAL_UI",
+  "phase_completed": 4,
+  "phases_total": 6,
+  "phase_title": "Inkpot Feedback",
+  "files_touched": [
+    "platform/assets/style.css",
+    "platform/assets/app.js",
+    "platform/index.html"
+  ],
+  "lines_added_total": 422,
+  "lines_breakdown": {
+    "css": 229,
+    "js": 178,
+    "html": 15
+  },
+  "tokens_added": [
+    "--rit-ink-duration",
+    "--rit-ink-easing",
+    "--rit-ink-color",
+    "--rit-ink-color-soft",
+    "--rit-ink-spread-size",
+    "--rit-ink-kalam-thickness"
+  ],
+  "tokens_consumed": [
+    "--color-tint (W21 P3)",
+    "--chr-lapis-500 (W21 P1)"
+  ],
+  "apis_extended": [
+    "Upg.ritual.inkpot.trigger",
+    "Upg.ritual.inkpot.attach",
+    "Upg.ritual.inkpot.listVariants",
+    "Upg.ritual.inkpot.personalityMap",
+    "Upg.ritual.inkpot.setPersonalityVariant",
+    "Upg.ritual.inkpot.resolveFor"
+  ],
+  "keyframes_added": [
+    "rit-ink-spread",
+    "rit-ink-kashida-pull",
+    "rit-ink-kalam-stroke"
+  ],
+  "variants": [
+    "ink-spread",
+    "kashida-pull",
+    "kalam-stroke",
+    "auto"
+  ],
+  "personality_routing": {
+    "dashboard": "ink-spread",
+    "callcenter": "kalam-stroke",
+    "fieldsales": "ink-spread",
+    "accountmgr": "kashida-pull",
+    "social": "ink-spread",
+    "lab": "kalam-stroke",
+    "psych": "kashida-pull",
+    "eq": "kashida-pull",
+    "negotiation": "kalam-stroke",
+    "customercare": "ink-spread",
+    "programming": "kalam-stroke",
+    "accounting": "kashida-pull",
+    "phonerepair": "ink-spread",
+    "hrmastery": "kashida-pull",
+    "myprogress": "ink-spread",
+    "curriculum": "ink-spread"
+  },
+  "html_augments": {
+    "data_rit_ink_explicit": 15,
+    "targets": "8 gateway-cta + 6 dock-btn quick-nav + 1 finish-onboarding final-stage CTA"
+  },
+  "fonts_added_offline": [],
+  "devotion_notes": "النَقْر صار حِبراً عربياً. الـ ripple العام مادّة جافة؛ الآن في صفحة callcenter الضغطة ضربة قَلَم القَصب، في psych شَدّة كَشيدة تَتمدّد على الحافة، في dashboard انتشار حِبر يَنبض من نقطة الإصبع. الفارق صغير — لكنّه يُذكّر اليد كل لمسة بالأصل.",
+  "offline_check": {
+    "external_requests": 0,
+    "cdn_additions": 0,
+    "google_fonts_links": 0,
+    "audio_assets_added": 0,
+    "libraries_added": 0
+  },
+  "sacred_preservation": {
+    "pages": 14,
+    "qcalc": 391,
+    "upg_apis_top_level": 27,
+    "upg_ritual_freezes": 4,
+    "google_fonts": 0,
+    "reduced_motion_guards_total": 59,
+    "reduced_motion_guards_added": 3,
+    "phase_1_3_iifes_touched": false,
+    "w21_color_tint_cascade_respected": true,
+    "w16_tactile_system_intact": true
+  },
+  "discipline_check": {
+    "serves_training_ritual": true,
+    "arabic_rooted": true,
+    "offline_100_percent": true,
+    "would_miss_if_gone": true
+  },
+  "next_action": "Continue Worker 22 Phase 5 (Time-of-Day — 5 atmospheres Dawn/Forenoon/Asr/Maghrib/Isha; auto-detect time, ambient veil shift, bg modulation)"
+}

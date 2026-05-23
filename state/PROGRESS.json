@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-23T21:15:00Z",
+  "last_updated": "2026-05-23T22:30:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
     "pack": "v3",
     "worker": "22",
     "worker_name": "RITUAL_UI",
-    "phase": 3,
+    "phase": 4,
     "phases_total": 6,
     "phase_order": [
       "1",
@@ -25,7 +25,7 @@
     "pack": "v3",
     "worker": "22",
     "worker_name": "RITUAL_UI",
-    "phase": 2,
+    "phase": 3,
     "phases_total": 6,
     "branch": "worker-22-devotio",
     "status": "completed",
@@ -35,7 +35,7 @@
     "pack": "v3",
     "worker": "22",
     "worker_name": "RITUAL_UI",
-    "phase": 1,
+    "phase": 2,
     "phases_total": 6,
     "branch": "worker-22-devotio",
     "status": "completed",
@@ -742,9 +742,16 @@
       "title": "Threshold Transitions — 5 variants (fade/mashrabiya/scroll/iris/mihrab-arch), View Transitions API + CSS fallback, 15 personality-to-transition mappings, Upg.transition.run EXTEND with ritual option, Upg.ritual EXTEND (setTransition/getTransition/listTransitions/transitionMap), upg:nav:change auto-route, reduced-motion instant fallback. Sacred preserved (14 pages / 391 qcalc / 27 Upg.* APIs — Upg.transition + Upg.ritual extended in-place / 0 google fonts / Phase 1-2 untouched). 351 lines added (CSS 240 + JS 111).",
       "branch": "worker-22-devotio",
       "lines_added": 351
+    },
+    {
+      "worker": "22",
+      "phase": 4,
+      "title": "Inkpot Feedback — 3 Arabic-rooted click feedback variants replacing generic ripple: ink-spread (radial fade from click point) / kashida-pull (horizontal stretch line on bottom edge, شَدّة كَشيدة) / kalam-stroke (135° diagonal sweep, ضَربة قَلَم القَصب) + auto slot. 6 --rit-ink-* tokens (duration 420ms / cubic-bezier easing / color + soft routed via color-mix(oklch, --color-tint W21 P3 cascade) / spread-size 50% / kalam-thickness 2px). 3 keyframes (rit-ink-spread / rit-ink-kashida-pull / rit-ink-kalam-stroke). Per-personality auto-routing with 16 mappings: callcenter/lab/negotiation/programming → kalam-stroke; accountmgr/psych/eq/accounting/hrmastery → kashida-pull; dashboard/fieldsales/social/customercare/phonerepair/myprogress/curriculum → ink-spread (default). CSS-side static fallback selectors mirror JS map for non-JS users. Click coordinates → CSS custom props (--rit-ink-x/--rit-ink-y/--rit-ink-size set by JS based on getBoundingClientRect). Single global click delegate via document.addEventListener with passive flag + closest('[data-rit-ink]') resolution; force-reflow re-trigger pattern; 500ms (120ms reduced) auto-clear of data-rit-ink-active flag with stale-trigger guard. attachToInteractive(root) auto-tags 'button, a[role=button], .bento-card, .qcalc-button, .tas-voice-ui' with data-rit-ink='auto' on DOMContentLoaded + upg:nav:change (30ms debounce); .rit-ink-bare opt-out class. EXTEND Upg.ritual via Object.assign + Object.freeze (matching Phase 3 pattern; P1+P2+P3 surface preserved verbatim) adding inkpot namespace: trigger(el,e) / attach(root) / listVariants() / personalityMap() / setPersonalityVariant(p,v) / resolveFor(p) — all frozen. No new top-level Upg.* (still 27). 15 explicit data-rit-ink='auto' pre-tags on highest-traffic CTAs (8 gateway buttons covering all onboarding stages + 6 dock-btn dashboard quick-nav + intent symbol on the most ceremonial entry surfaces); rest auto-attach. Reduced-motion guard reduces all variants to 80ms flash; reduced-transparency falls back to flat --rit-ink-color (no gradient blend); @media print disables ::before/::after entirely. Discipline comment block (8 rules): no styling on non-interactive elements / .rit-ink-bare opt-out / does NOT replace W16 P2 tactile-* (additive only) / Inkpot color always inherits W21 P3 page tint / .rit-ink-active class fallback for legacy callers. Sacred preserved 100% (14 pages / 391 qcalc / 27 Upg.* APIs — Upg.ritual extended in-place / 0 google fonts / 0 hex / Phase 1-3 IIFEs untouched / W16 P2 tactile + ripple system intact / W21 P3 --color-tint cascade respected / no HTML structural changes — only attribute additions). 422 lines added total (CSS 229 + JS 178 + HTML 15 attribute changes / 30 line touches).",
+      "branch": "worker-22-devotio",
+      "lines_added": 422
     }
   ],
-  "next_action": "Continue Worker 22 Phase 4 (Inkpot Feedback — Arabic-rooted hover/click effects: ink-spread, kashida-pull, kalam-stroke).",
+  "next_action": "Continue Worker 22 Phase 5 (Time-of-Day — 5 atmospheres Dawn/Forenoon/Asr/Maghrib/Isha; auto-detect time, ambient veil shift, bg modulation).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
