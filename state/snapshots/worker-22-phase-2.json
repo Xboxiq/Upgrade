@@ -1,0 +1,79 @@
+{
+  "pack": "v3",
+  "worker": "22",
+  "worker_name": "RITUAL_UI",
+  "phase_completed": 2,
+  "phases_total": 6,
+  "title": "Reading Halo — chrome dims, target glows lapis, Cmd+. toggle, Upg.ritual.{enterHalo,exitHalo,toggleHalo,isHaloActive}",
+  "branch": "worker-22-devotio-p2",
+  "files_touched": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "lines_added_total": 496,
+  "lines_added_breakdown": {
+    "platform/index.html": 12,
+    "platform/assets/style.css": 275,
+    "platform/assets/app.js": 209
+  },
+  "tokens_added": [
+    "--rit-halo-duration",
+    "--rit-halo-easing",
+    "--rit-halo-chrome-opacity",
+    "--rit-halo-chrome-blur",
+    "--rit-halo-glow-color",
+    "--rit-halo-bg-veil"
+  ],
+  "tokens_added_count": 6,
+  "fonts_added_offline": [],
+  "keyframes_added": [
+    "rit-halo-veil-in",
+    "rit-halo-edge-pulse"
+  ],
+  "api_extensions": {
+    "Upg.ritual": [
+      "enterHalo(targetOrSelector?)",
+      "exitHalo()",
+      "toggleHalo(targetOrSelector?)",
+      "isHaloActive()"
+    ]
+  },
+  "events_dispatched": [
+    "upg:ritual:halo:enter",
+    "upg:ritual:halo:exit"
+  ],
+  "localstorage_keys_added": [
+    "upg_ritual_last_halo_target"
+  ],
+  "shortcuts_added": [
+    "Cmd+. / Ctrl+. — toggle reading halo"
+  ],
+  "ui_added": [
+    "topbar #rit-halo-toggle button (data-rit-halo-toggle, aria-pressed sync)",
+    ".rit-halo-exit button (auto-injected on enter, removed on exit)"
+  ],
+  "a11y_guards": [
+    "@media (prefers-reduced-motion: reduce) — instant toggle, no transitions, no edge pulse",
+    "@media (prefers-reduced-transparency: reduce) — drop blur on chrome dim + veil",
+    "@media print — strip halo entirely, target prints normally",
+    ".skip-link kept fully accessible during halo state",
+    "savedFocus / focus restoration on enter+exit",
+    "tabindex=-1 auto-set on target if missing"
+  ],
+  "devotion_notes": "Chrome doesn't disappear — it bows. opacity 0.15 + blur 4px makes it present but mute, like a librarian stepping back from your desk. Target raises 0.5% scale + Lapis halo glow + slow edge pulse (4s ease-in-out infinite, opacity-only). Esc/outside-click/exit-button all release. The platform learned to be quiet on demand.",
+  "offline_check": {
+    "external_requests": 0,
+    "google_fonts": 0,
+    "cdn_links": 0
+  },
+  "sacred_preserved": {
+    "section_page_count": 14,
+    "qcalc_count": 391,
+    "upg_top_level_apis": 27,
+    "google_fonts_links": 0,
+    "rit_entry_portal_count": 1,
+    "rit_entry_css_refs": 24
+  },
+  "next_action": "Continue Worker 22 Phase 3 (Threshold Transitions)"
+}

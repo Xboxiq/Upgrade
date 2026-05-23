@@ -1,9 +1,27 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-23T21:00:00Z",
+  "last_updated": "2026-05-23T22:30:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
+    "pack": "v3",
+    "worker": "22",
+    "worker_name": "RITUAL_UI",
+    "phase": 2,
+    "phases_total": 6,
+    "phase_order": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "branch": "worker-22-devotio-p2",
+    "status": "in-progress",
+    "blocker": null
+  },
+  "previous": {
     "pack": "v3",
     "worker": "22",
     "worker_name": "RITUAL_UI",
@@ -18,18 +36,8 @@
       "6"
     ],
     "branch": "worker-22-devotio",
-    "status": "in-progress",
-    "blocker": null
-  },
-  "previous": {
-    "pack": "v3",
-    "worker": "21",
-    "worker_name": "CHROMATIC_SOUL",
-    "phase": 4,
-    "phases_total": 5,
-    "branch": "worker-21-devotio",
     "status": "completed",
-    "merged_pr": null
+    "blocker": null
   },
   "before_previous": {
     "pack": "v3",
@@ -726,9 +734,16 @@
       "title": "Entry Ritual",
       "branch": "worker-22-devotio",
       "lines_added": 0
+    },
+    {
+      "worker": "22",
+      "phase": 2,
+      "title": "Reading Halo — Cmd+. toggle zen mode (chrome dims to 0.15 opacity + 4px blur, target raises 0.5% scale + Lapis halo glow + 4s opacity-only edge pulse) + 6 --rit-halo-* tokens (duration 480ms / easing cubic-bezier(0.25,0.46,0.45,0.94) / chrome-opacity 0.15 / chrome-blur 4px / glow-color routed to chr-lapis-500 / bg-veil color-mix mihrab-900 78%, light-theme veil overrides to marble-50 88%) + body[data-rit-halo=\"active\"] selector with chrome dim cascade (#sidebar / #topbar / .sidebar / .top-chrome / .breadcrumb / header.app-header / footer.app-footer / .nav-rail / .cmdk-trigger / .qcalc-toolbar / .stat-tile-row) + skip-link + halo controls + target kept fully accessible (opacity:1!important, pointer-events:auto!important) + body::after veil with backdrop-filter blur 2px + 2 keyframes (rit-halo-veil-in fade 0→1, rit-halo-edge-pulse opacity 0.20↔0.45 4s ease-in-out infinite) + .rit-halo-exit auto-injected button (top-right of target, 2rem circle with Lapis hover) + .rit-halo-toggle topbar button (aria-pressed sync, نَشَط label when active, mobile <480px label hidden) + Upg.ritual EXTEND with enterHalo(targetOrSelector?)/exitHalo()/toggleHalo(targetOrSelector?)/isHaloActive() (preserves Phase 1 Upg.ritual.{start,disable,enable} verbatim) + Cmd+./Ctrl+. global shortcut + click delegation on [data-rit-halo-toggle] + Esc handler (with stopPropagation on exit-button click) + outside-click handler (whitelists target, toggle, exit, skip-link) + savedFocus restoration + auto tabindex=-1 if missing + 2 CustomEvents (upg:ritual:halo:enter / upg:ritual:halo:exit) + localStorage upg_ritual_last_halo_target persistence (Phase 6 will use this) + dedicated reduced-motion guard (instant toggle, no transitions, no edge pulse, no scale) + reduced-transparency guard (drops blur on chrome + veil) + @media print guard (hide chrome dimming / veil / exit button, target prints normally with no shadow/transform/margin/padding/max-width). Sacred preserved 100% (14 pages / 391 qcalc / 27 Upg.* APIs (was 26, now Upg.ritual surfaced via window.Upg.ritual) / 0 google fonts / Phase 1 entry ritual artifacts intact: 1 portal in HTML + 24 rit-entry-* CSS refs + Upg.ritual.start preserved).",
+      "branch": "worker-22-devotio-p2",
+      "lines_added": 496
     }
   ],
-  "next_action": "Continue Worker 22 Phase 2",
+  "next_action": "Continue Worker 22 Phase 3 (Threshold Transitions)",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
