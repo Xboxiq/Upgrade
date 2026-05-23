@@ -32000,5 +32000,24 @@ const bird = { ...canMove(), ...canFly() };
 <!-- ATELIER v16 / Phase 4 — Mobile drawer scrim (clickable overlay, click/tap closes) -->
 <div class="drawer-scrim" data-action="close-drawer" aria-hidden="true"></div>
 
+<!-- ════════════════════════════════════════════════════════════════════
+     RITUAL UI v3 — Entry Portal (Worker 22 / Phase 1)
+     Activated by Upg.ritual.start('entry'). Shows once per day.
+     Skip via Esc or click. Disabled fully via Upg.ritual.disable('entry').
+     ════════════════════════════════════════════════════════════════════ -->
+<div id="rit-entry-portal" class="rit-entry-portal" hidden role="presentation" aria-hidden="true">
+  <div class="rit-entry-veil"></div>
+  <div class="rit-entry-stage">
+    <div class="rit-entry-glow"></div>
+    <h1 class="rit-entry-wordmark tas-voice-wordmark">Upgrade</h1>
+    <p class="rit-entry-poetry tas-voice-quote" data-rit-poetry-text></p>
+  </div>
+  <button type="button" class="rit-entry-skip"
+          aria-label="تَخَطَّ طقس الفتح"
+          data-rit-skip>
+    تخطَّ
+  </button>
+</div>
+
 </body>
 </html>
