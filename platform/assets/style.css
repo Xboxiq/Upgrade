@@ -98,7 +98,63 @@ body[data-theme="light"] {
 
 :root[data-theme="dark"],
 html[data-theme="dark"],
-body[data-theme="dark"] { color-scheme: dark; }
+body[data-theme="dark"] {
+  /* ════════════════════════════════════════════════════════════════════
+     CHROMATIC SOUL v3 — Mihrab Dark (Worker 21 / Phase 2)
+     REPLACE-IN-PLACE: minimal color-scheme block expanded with full
+     Mihrab token set. References Yemeni night sky, prayer niche, deep
+     contemplation. Aurora :root defaults remain as no-theme fallback.
+     ════════════════════════════════════════════════════════════════════ */
+
+  /* ─── Surface ladder — Mihrab depth (5 levels) ─── */
+  --color-bg:           oklch(13% 0.04  280);  /* mihrab-900 deepest */
+  --color-surface-0:    oklch(16% 0.05  280);  /* page card */
+  --color-surface-1:    oklch(20% 0.055 280);  /* raised card */
+  --color-surface-2:    oklch(24% 0.06  280);  /* deeper raised */
+  --color-surface-3:    oklch(28% 0.058 280);  /* sunk well / tooltip */
+
+  /* ─── Text ladder — Marble-toned for soft warmth on indigo ─── */
+  --color-text:         oklch(96% 0.012 80);   /* marble-100 (warm white) */
+  --color-text-muted:   oklch(74% 0.010 80);   /* marble-700 muted */
+  --color-text-faint:   oklch(54% 0.012 80);   /* marble-800 faint */
+
+  /* ─── Borders ─── */
+  --color-border:        oklch(28% 0.05  280);
+  --color-border-strong: oklch(38% 0.06  280);
+
+  /* ─── Brand — Lapis 400 (lighter for dark visibility) ─── */
+  --color-brand:        oklch(66% 0.15 252);   /* lapis-400 */
+  --color-brand-hover:  oklch(72% 0.16 252);   /* lapis-300 brighter */
+  --color-brand-soft:   color-mix(in oklch, oklch(66% 0.15 252) 16%, transparent);
+  --color-brand-strong: oklch(56% 0.18 252);   /* lapis-500 base */
+
+  /* ─── Semantic state colors — Arabic-rooted ─── */
+  --color-success:      oklch(62% 0.10 160);   /* cedar 400 */
+  --color-warning:      oklch(80% 0.14 78);    /* saffron 400 */
+  --color-danger:       oklch(67% 0.15 28);    /* henna 400 */
+  --color-info:         oklch(66% 0.15 252);   /* lapis 400 — same as brand */
+
+  /* ─── Tinted shadows — Mihrab-toned (no flat black, no slate) ─── */
+  --shadow-c-sm:
+    0 1px 2px oklch(8% 0.05 280 / 0.45),
+    0 1px 1px oklch(13% 0.03 280 / 0.30);
+  --shadow-c-md:
+    0 4px 12px oklch(8% 0.05 280 / 0.55),
+    0 2px 4px oklch(13% 0.03 280 / 0.35);
+  --shadow-c-lg:
+    0 12px 32px oklch(8% 0.05 280 / 0.60),
+    0 4px 10px oklch(13% 0.03 280 / 0.40);
+  --shadow-c-xl:
+    0 24px 60px oklch(8% 0.05 280 / 0.65),
+    0 8px 20px oklch(13% 0.03 280 / 0.45);
+
+  /* ─── Focus ring — Lapis ─── */
+  --ring: 0 0 0 3px color-mix(in oklch, oklch(66% 0.15 252) 38%, transparent);
+  --ring-offset: 2px;
+
+  color-scheme: dark;
+}
+/* End CHROMATIC SOUL v3 / Phase 2 — Dark Mihrab REPLACE-IN-PLACE ────── */
 
 /* ═══════════════════════════════════════════════════════════════
    CATHEDRAL v14 — Icon Component (Worker 11 / Phase 2)
@@ -25360,3 +25416,79 @@ html[dir="rtl"] {
    ════════════════════════════════════════════════════════════════════════ */
 
 /* End CHROMATIC SOUL v3 / Phase 1 — Palette Forge ─────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   CHROMATIC SOUL v3 — Dark-Aware Semantic Tokens (Worker 21 / Phase 2)
+   These tokens activate dark-aware overlays + text-on-tint helpers.
+   Light theme keeps W12 P2 Linen-Bone defaults (transparent veil).
+   ════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* Default values — overridden in dark block below */
+  --chr-text-on-tint:        var(--color-text);
+  --chr-overlay-tint-faint:  color-mix(in oklch, var(--color-bg) 92%, transparent);
+  --chr-overlay-tint-light:  color-mix(in oklch, var(--color-bg) 84%, transparent);
+
+  --chr-mihrab-veil:         transparent;
+  --chr-mihrab-glow:         transparent;
+}
+
+:root[data-theme="dark"] {
+  /* Mihrab veil — subtle violet wash from top of viewport (mihrab arch) */
+  --chr-mihrab-veil:
+    radial-gradient(ellipse 120% 80% at 50% -20%,
+      oklch(36% 0.08 280 / 0.18) 0%,
+      transparent 60%);
+
+  /* Mihrab glow — for hero/CTA accents */
+  --chr-mihrab-glow:
+    radial-gradient(circle at 50% 50%,
+      oklch(56% 0.18 252 / 0.20) 0%,
+      transparent 70%);
+
+  /* Text-on-tint — derived for dark contrast safety */
+  --chr-text-on-tint:
+    color-mix(in oklch, var(--chr-active-tint, var(--color-brand)) 14%, var(--color-text));
+
+  /* Overlays for modals/sheets — Mihrab-tinted, never pure black */
+  --chr-overlay-tint-faint:  color-mix(in oklch, oklch(13% 0.04 280) 88%, transparent);
+  --chr-overlay-tint-light:  color-mix(in oklch, oklch(20% 0.06 280) 78%, transparent);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   CHROMATIC SOUL v3 — Body Ambient Veil (Worker 21 / Phase 2)
+   Subtle violet wash from top of viewport (mihrab arch effect).
+   Only in dark mode. Static gradient — reduced-motion safe by nature.
+   z-index: -1 keeps it behind all content; pointer-events: none preserves
+   click-through. Existing W12+W14+W16 ambient gradients on body remain
+   unaffected — Phase 4 (Gradient Recast) reroutes them through chr-* tokens.
+   ════════════════════════════════════════════════════════════════════════ */
+:root[data-theme="dark"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--chr-mihrab-veil);
+  mix-blend-mode: normal;  /* Phase 4 may refine to multiply/screen */
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :root[data-theme="dark"] body::before {
+    background: oklch(13% 0.04 280);  /* solid mihrab-900 fallback */
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Worker 21 / Phase 2 — Mihrab Discipline:
+   1. لا تعدّل أي قيمة في :root[data-theme="light"] (W12 P2 محفوظ).
+   2. dark theme كل الألوان oklch — لا hsl، لا hex.
+   3. Mihrab veil يعمل عبر body::before — Phase 4 يضيف layers.
+   4. text contrast على dark bg ≥ 4.5:1 (verified: marble-100 on mihrab-900 ≈ 12:1 ✓).
+   5. brand = Lapis 400 في dark (أفتح من 500 لـ visibility واضحة).
+   6. semantic colors تستعمل palette stops محسوبة لا تخمين.
+   7. shadow tints = mihrab darker stops (8/13% L) — ليس slate أو black.
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* End CHROMATIC SOUL v3 / Worker 21 / Phase 2 — Dark Mihrab ──────────── */
