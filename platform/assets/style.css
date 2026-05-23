@@ -23956,3 +23956,247 @@ body[data-block-debug="1"] [data-block-id][data-prereq]::after {
    5. لو كتبت @media query مع font-family → استعمل token، لا hex names.
    6. لا تخلط أكثر من 3 خطوط في stack واحد بعد الآن (نحن ضد cascade-collision).
    ════════════════════════════════════════════════════════════════════════════ */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   TASMEEM v3 — Numeric Discipline (Worker 20 / Phase 4)
+   ────────────────────────────────────────────────────────────────────────────
+   الفلسفة: الأرقام في منصة تدريب ليست زينة — هي حُجج. كل qcalc يستحق
+   tabular discipline حتى لا ترتجف الأرقام عند التحديث، ولا تلتبس الأصفار
+   بـ O، ولا تختلط الأرقام العربية باللاتينية في عمود واحد.
+   ──────────────────────────────────────────────────────────────────────────── */
+
+/* ─── Step 1 — Numeric Discipline Tokens ──────────────────────────────────── */
+:root {
+  /* Feature settings strings (reusable in font-feature-settings) */
+  --num-feat-tabular:        "tnum" 1, "lnum" 1, "kern" 1;
+  --num-feat-tabular-zero:   "tnum" 1, "lnum" 1, "zero" 1, "kern" 1;
+  --num-feat-fraction:       "frac" 1, "tnum" 1, "lnum" 1;
+  --num-feat-stylistic-alt:  "ss01" 1, "tnum" 1, "lnum" 1;
+
+  /* Variant strings (reusable in font-variant-numeric) */
+  --num-variant-tabular:     tabular-nums lining-nums;
+  --num-variant-zero:        tabular-nums lining-nums slashed-zero;
+  --num-variant-fraction:    tabular-nums lining-nums diagonal-fractions;
+
+  /* Letter spacing for digit groups */
+  --num-letter-spacing:        0;
+  --num-letter-spacing-wide:   0.02em;
+  --num-letter-spacing-tight: -0.005em;
+}
+
+/* ─── Step 2 — Numeric Utility Classes ────────────────────────────────────── */
+
+/* Base — most common: tabular + lining nums */
+.tas-num-tabular,
+[data-tas-num="tabular"] {
+  font-family: var(--type-voice-num-tabular);
+  font-feature-settings: var(--num-feat-tabular);
+  font-variant-numeric: var(--num-variant-tabular);
+  letter-spacing: var(--num-letter-spacing);
+  /* Force Latin digits even within Arabic context (UI consistency) */
+  font-language-override: "ENG";
+  unicode-bidi: plaintext;
+}
+
+/* With slashed zero — engineering/code/stats where 0 must not look like O */
+.tas-num-tabular-zero,
+[data-tas-num="tabular-zero"] {
+  font-family: var(--type-voice-num-tabular);
+  font-feature-settings: var(--num-feat-tabular-zero);
+  font-variant-numeric: var(--num-variant-zero);
+  letter-spacing: var(--num-letter-spacing);
+  font-language-override: "ENG";
+  unicode-bidi: plaintext;
+}
+
+/* Fraction — for ratios like 3/5 in qcalc */
+.tas-num-fraction,
+[data-tas-num="fraction"] {
+  font-family: var(--type-voice-num-tabular);
+  font-feature-settings: var(--num-feat-fraction);
+  font-variant-numeric: var(--num-variant-fraction);
+}
+
+/* Stylistic alt — hero stats (uses ss01 — IBM Plex / JetBrains alt-1) */
+.tas-num-hero,
+[data-tas-num="hero"] {
+  font-family: var(--type-voice-num-tabular);
+  font-feature-settings: var(--num-feat-stylistic-alt);
+  font-variant-numeric: var(--num-variant-tabular);
+  letter-spacing: var(--num-letter-spacing-tight);
+  font-weight: 600;
+  font-language-override: "ENG";
+  unicode-bidi: plaintext;
+}
+
+/* Inline — numbers inside Arabic body paragraphs (preserves baseline) */
+.tas-num-inline {
+  font-feature-settings: var(--num-feat-tabular);
+  font-variant-numeric: var(--num-variant-tabular);
+  /* Don't change family — inherit from parent */
+  letter-spacing: var(--num-letter-spacing);
+}
+
+/* Mono large — count-up tickers (prevents jitter on update) */
+.tas-num-ticker {
+  font-family: var(--type-voice-num-tabular);
+  font-variant-numeric: var(--num-variant-tabular);
+  letter-spacing: var(--num-letter-spacing);
+  /* Critical: fixed-width digits prevent layout shift on count-up */
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-language-override: "ENG";
+  unicode-bidi: plaintext;
+  /* Disable transitions on font-variant to prevent flicker */
+  transition: none;
+}
+
+/* ─── Step 3 — qcalc + Stat Tiles + KPI Auto-Bind ─────────────────────────── */
+/* Hardens existing W11/W12/W15 numeric classes with discipline.
+   Targets ACTUAL class names present in this codebase:
+     - .qcalc-result-value (26 instances) — primary qcalc output
+     - .qcalc-input        (80 instances) — numeric input wrappers / fields
+     - .qcalc-meter        ( 2 instances) — progress meters
+     - .stat-tile-value    ( 4 instances) — bento stat tiles
+     - .cath-stat-value    ( 4 instances) — cathedral stat group
+     - .u-num              ( 5 instances) — generic numeric utility from W12 P7
+     - [data-countup]      ( 4 instances) — count-up tickers from W12 P5
+   Also includes forward-compat selectors for .qcalc-value/.qcalc-result/
+   .qcalc-output/.bento-stat-value/.kpi-card-value/.kpi-hero-num so future
+   qcalc subclasses inherit discipline automatically.
+   ──────────────────────────────────────────────────────────────────────── */
+
+.qcalc-result-value,
+.qcalc-value,
+.qcalc-result,
+.qcalc-output {
+  font-family: var(--type-voice-num-tabular);
+  font-feature-settings: var(--num-feat-tabular-zero);
+  font-variant-numeric: tabular-nums lining-nums slashed-zero;
+  letter-spacing: var(--num-letter-spacing);
+  font-language-override: "ENG";
+  unicode-bidi: plaintext;
+}
+
+/* qcalc input fields — readable digits while typing, no jitter on change */
+.qcalc-input,
+.qcalc-input input[type="number"],
+.qcalc-input input[type="text"],
+.qcalc-meter {
+  font-feature-settings: var(--num-feat-tabular);
+  font-variant-numeric: var(--num-variant-tabular);
+  letter-spacing: var(--num-letter-spacing);
+  font-language-override: "ENG";
+}
+
+/* Generic numeric input — anywhere inside the platform — same discipline */
+input[type="number"]:where(:not([data-tas-num="arabic"])) {
+  font-feature-settings: var(--num-feat-tabular);
+  font-variant-numeric: var(--num-variant-tabular);
+  font-language-override: "ENG";
+}
+
+/* qcalc result-unit (KB, IQD, %, ms…) — keep tabular but allow proportional spacing */
+.qcalc-result-unit,
+.qcalc-suffix {
+  font-feature-settings: "tnum" 1, "lnum" 1, "kern" 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--num-letter-spacing);
+}
+
+/* W12/W15 stat-tile-value, cath-stat-value, bento-stat-value — same family */
+.stat-tile-value,
+.cath-stat-value,
+.bento-stat-value {
+  font-family: var(--type-voice-num-tabular);
+  font-feature-settings: var(--num-feat-tabular-zero);
+  font-variant-numeric: tabular-nums lining-nums slashed-zero;
+  letter-spacing: var(--num-letter-spacing-tight);
+  font-language-override: "ENG";
+  unicode-bidi: plaintext;
+}
+
+/* W12 .u-num + W15 .type-num-tabular — preserved + hardened */
+.u-num,
+.type-num-tabular {
+  font-family: var(--type-voice-num-tabular);
+  font-feature-settings: var(--num-feat-tabular);
+  font-variant-numeric: var(--num-variant-tabular);
+  letter-spacing: var(--num-letter-spacing);
+  font-language-override: "ENG";
+}
+
+/* count-up tickers — prevent jitter on every frame update */
+[data-countup],
+[data-count-up],
+.count-up-value {
+  font-family: var(--type-voice-num-tabular);
+  font-feature-settings: var(--num-feat-tabular);
+  font-variant-numeric: var(--num-variant-tabular);
+  font-variant-position: normal;
+  /* Critical for jitter-free animation */
+  font-kerning: none;
+  letter-spacing: var(--num-letter-spacing);
+  font-language-override: "ENG";
+  unicode-bidi: plaintext;
+}
+
+/* KPI cards (callcenter, fieldsales) — large hero numbers (forward-compat) */
+.kpi-card-value,
+.kpi-hero-num {
+  font-family: var(--type-voice-num-tabular);
+  font-feature-settings: var(--num-feat-stylistic-alt);
+  font-variant-numeric: var(--num-variant-zero);
+  letter-spacing: var(--num-letter-spacing-tight);
+  font-weight: 600;
+  font-language-override: "ENG";
+}
+
+/* Star ratings (data-difficulty from W17) — preserve discipline */
+[data-difficulty]::after,
+.tier-star-count {
+  font-family: var(--type-voice-num-tabular);
+  font-feature-settings: var(--num-feat-tabular);
+  font-variant-numeric: var(--num-variant-tabular);
+}
+
+/* ─── Step 4 — Arabic vs Latin Digit Policy ───────────────────────────────── */
+/* Policy:
+   - Inside qcalc, stat tiles, KPI cards: ALWAYS Latin digits (0-9).
+     Reason: tabular-nums work better, copy-paste friendly, engineering UX.
+   - Inside Arabic body paragraphs: ALLOW Arabic-Indic (٠-٩) when natural.
+     Reason: literary/cultural fidelity in flowing text.
+   - For ceremonial/literary moments, opt-in via .tas-num-arabic explicitly.
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* Arabic-Indic digits — opt-in for cultural/literary context */
+.tas-num-arabic,
+[data-tas-num="arabic"] {
+  font-family: var(--type-voice-numeric);
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-variant-numeric: tabular-nums;
+  font-language-override: "ARA";
+  unicode-bidi: plaintext;
+}
+
+/* Reduce motion: disable any subtle digit animation if defined elsewhere */
+@media (prefers-reduced-motion: reduce) {
+  [data-countup],
+  [data-count-up],
+  .count-up-value,
+  .tas-num-ticker {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   Worker 20 / Phase 4 — Numeric Discipline:
+   1. كل qcalc-result-value يحصل على tabular discipline تلقائياً (Upg.font).
+   2. لا تعدّل قيم الأرقام في HTML — فقط classes.
+   3. لو احتجت Arabic-Indic، استعمل .tas-num-arabic explicitly.
+   4. count-up tickers تستعمل .tas-num-ticker — لا flicker.
+   5. لا تخلط tabular مع proportional في عمود واحد.
+   6. لا تُضِف font-family جديد للأرقام — كله عبر var(--type-voice-num-tabular).
+   ════════════════════════════════════════════════════════════════════════════ */
