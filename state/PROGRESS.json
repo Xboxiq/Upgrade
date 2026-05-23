@@ -7,7 +7,7 @@
     "pack": "v3",
     "worker": "22",
     "worker_name": "RITUAL_UI",
-    "phase": 2,
+    "phase": 3,
     "phases_total": 6,
     "phase_order": [
       "1",
@@ -733,9 +733,16 @@
       "title": "Reading Halo — zen mode (Cmd+. / Ctrl+. toggle), chrome dims to 0.15 opacity + 4px blur, target element glows lapis + raised z-900, exit via Esc/outside-click/×-button, Upg.ritual extended (enterHalo/exitHalo/toggleHalo/isHaloActive), localStorage remembers last target, reduced-motion instant toggle. Sacred preserved 100% (14 pages / 391 qcalc / 27 Upg.* APIs / 0 google fonts).",
       "branch": "worker-22-devotio-v2",
       "lines_added": 294
+    },
+    {
+      "worker": "22",
+      "phase": 3,
+      "title": "Threshold Transitions — 5 variants (fade/mashrabiya/scroll/iris/mihrab-arch) × 2 directions (in/out) = 10 keyframes + View Transitions API integration + CSS fallback + 16 personality→transition mapping + Upg.transition.run extended with ritual option + Upg.ritual.setTransition/getTransition/listTransitions/transitionMap + reduced-motion instant guard. Sacred preserved 100% (14 pages / 391 qcalc / 27 Upg.* APIs / 0 google fonts).",
+      "branch": "worker-22-devotio-v2",
+      "lines_added": 310
     }
   ],
-  "next_action": "Continue Worker 22 Phase 3 (Threshold Transitions — 5 variants: fade/mashrabiya/scroll/iris/mihrab-arch + per-personality routing).",
+  "next_action": "Continue Worker 22 Phase 4 (Inkpot Feedback — Arabic-rooted hover/click effects: ink-spread, kashida-pull, kalam-stroke).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
