@@ -16886,22 +16886,84 @@ body, .u-prose p {
    ════════════════════════════════════════════════════════════════════════════ */
 
 /* ─── Per-Page Identity Tint Tokens ───────────────────────────────────────── */
+/* ════════════════════════════════════════════════════════════════════════════
+   CHROMATIC SOUL v3 — Identity Tint Reassignment (Worker 21 / Phase 3)
+   ────────────────────────────────────────────────────────────────────────────
+   REPLACE-IN-PLACE: 15 --tint-* names PRESERVED, values rerouted from
+   aurora-derived HSL to chr-* Arabic palette references. Pack v1/v2/W20
+   bindings continue working unchanged (every consumer reads var(--tint-*)).
+   ────────────────────────────────────────────────────────────────────────────
+   - dashboard    → Saffron 500   (gold — الذهب اليومي)
+   - callcenter   → Damascus 500  (steel — السيف المُذهَّب)
+   - fieldsales   → Silt 500      (earth — طمي النيل)
+   - accountmgr   → Cedar 600     (forest — أرز الثبات)
+   - social       → Coral 500     (vibrant — مرجان البحر الأحمر)
+   - lab          → Marble 500    (stone — البتراء)
+   - psych        → Lapis 500     (deep blue — قبة الصخرة)
+   - eq           → Mihrab 600    (violet — السكون)
+   - negotiation  → Damascus 700  (dark steel — السيف المضغوط)
+   - customercare → Pearl 500     (soft — لؤلؤ الخليج)
+   - programming  → Indigo 600    (deep — اليمن في الليل)
+   - accounting   → Palm 500      (olive — نخيل البصرة)
+   - phonerepair  → Henna 600     (deep rust — حرفة يدوية)
+   - hrmastery    → Henna 500     (warm — إنساني دافئ)
+   - myprogress   → Lapis 400     (medium — تأمل شخصي)
+   - curriculum   → Saffron 600   (forward-compat — Pack v2 ritual)
+   ════════════════════════════════════════════════════════════════════════════ */
 :root {
-  --tint-dashboard:    var(--color-brand);
-  --tint-callcenter:   hsl(186 80% 45%);
-  --tint-fieldsales:   hsl(152 60% 38%);
-  --tint-accountmgr:   hsl(176 70% 38%);
-  --tint-social:       hsl(265 70% 56%);
-  --tint-lab:          hsl(330 80% 56%);
-  --tint-psych:        hsl(35 90% 50%);
-  --tint-eq:           hsl(0 75% 56%);
-  --tint-negotiation:  hsl(220 80% 56%);
-  --tint-customercare: hsl(190 60% 48%);
-  --tint-programming:  hsl(210 90% 56%);
-  --tint-accounting:   hsl(45 92% 50%);
-  --tint-phonerepair:  hsl(15 80% 56%);
-  --tint-hrmastery:    hsl(280 70% 56%);
-  --tint-myprogress:   var(--color-success);
+  /* Primary tints — main color per page (15 + curriculum forward-compat) */
+  --tint-dashboard:    var(--chr-saffron-500);
+  --tint-callcenter:   var(--chr-damascus-500);
+  --tint-fieldsales:   var(--chr-silt-500);
+  --tint-accountmgr:   var(--chr-cedar-600);
+  --tint-social:       var(--chr-coral-500);
+  --tint-lab:          var(--chr-marble-500);
+  --tint-psych:        var(--chr-lapis-500);
+  --tint-eq:           var(--chr-mihrab-600);
+  --tint-negotiation:  var(--chr-damascus-700);
+  --tint-customercare: var(--chr-pearl-500);
+  --tint-programming:  var(--chr-indigo-600);
+  --tint-accounting:   var(--chr-palm-500);
+  --tint-phonerepair:  var(--chr-henna-600);
+  --tint-hrmastery:    var(--chr-henna-500);
+  --tint-myprogress:   var(--chr-lapis-400);
+  --tint-curriculum:   var(--chr-saffron-600);
+
+  /* Edge tints — secondary stop for gradients (Phase 4 consumes these) */
+  --tint-edge-dashboard:    var(--chr-saffron-700);
+  --tint-edge-callcenter:   var(--chr-damascus-700);
+  --tint-edge-fieldsales:   var(--chr-silt-700);
+  --tint-edge-accountmgr:   var(--chr-cedar-800);
+  --tint-edge-social:       var(--chr-coral-700);
+  --tint-edge-lab:          var(--chr-marble-700);
+  --tint-edge-psych:        var(--chr-lapis-700);
+  --tint-edge-eq:           var(--chr-mihrab-800);
+  --tint-edge-negotiation:  var(--chr-damascus-900);
+  --tint-edge-customercare: var(--chr-pearl-700);
+  --tint-edge-programming:  var(--chr-indigo-800);
+  --tint-edge-accounting:   var(--chr-palm-700);
+  --tint-edge-phonerepair:  var(--chr-henna-800);
+  --tint-edge-hrmastery:    var(--chr-henna-700);
+  --tint-edge-myprogress:   var(--chr-lapis-600);
+  --tint-edge-curriculum:   var(--chr-saffron-800);
+
+  /* Soft tints — for hover backgrounds (subtle hint of identity) */
+  --tint-soft-dashboard:    var(--chr-saffron-100);
+  --tint-soft-callcenter:   var(--chr-damascus-100);
+  --tint-soft-fieldsales:   var(--chr-silt-100);
+  --tint-soft-accountmgr:   var(--chr-cedar-100);
+  --tint-soft-social:       var(--chr-coral-100);
+  --tint-soft-lab:          var(--chr-marble-100);
+  --tint-soft-psych:        var(--chr-lapis-100);
+  --tint-soft-eq:           var(--chr-mihrab-100);
+  --tint-soft-negotiation:  var(--chr-damascus-200);
+  --tint-soft-customercare: var(--chr-pearl-100);
+  --tint-soft-programming:  var(--chr-indigo-100);
+  --tint-soft-accounting:   var(--chr-palm-100);
+  --tint-soft-phonerepair:  var(--chr-henna-100);
+  --tint-soft-hrmastery:    var(--chr-henna-100);
+  --tint-soft-myprogress:   var(--chr-lapis-50);
+  --tint-soft-curriculum:   var(--chr-saffron-200);
 }
 
 [data-active-tint="dashboard"]    { --color-tint: var(--tint-dashboard); }
@@ -25492,3 +25554,140 @@ html[dir="rtl"] {
    ──────────────────────────────────────────────────────────────────────── */
 
 /* End CHROMATIC SOUL v3 / Worker 21 / Phase 2 — Dark Mihrab ──────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   CHROMATIC SOUL v3 — Personality Color Overrides (Worker 21 / Phase 3)
+   ────────────────────────────────────────────────────────────────────────
+   كل [data-page-personality="X"] يضبط --color-tint و --color-tint-edge
+   و --color-tint-soft و --chr-active-tint من tints المُحدَّثة.
+   جميع W12-W19 selectors التي تستهلك var(--color-tint) تكتسب القيم
+   الجديدة تلقائياً — صفر تعديل في consumers قائمة.
+   ════════════════════════════════════════════════════════════════════════ */
+
+[data-page-personality="dashboard"] {
+  --color-tint:       var(--tint-dashboard);
+  --color-tint-edge:  var(--tint-edge-dashboard);
+  --color-tint-soft:  var(--tint-soft-dashboard);
+  --chr-active-tint:  var(--tint-dashboard);
+}
+
+[data-page-personality="callcenter"] {
+  --color-tint:       var(--tint-callcenter);
+  --color-tint-edge:  var(--tint-edge-callcenter);
+  --color-tint-soft:  var(--tint-soft-callcenter);
+  --chr-active-tint:  var(--tint-callcenter);
+}
+
+[data-page-personality="fieldsales"] {
+  --color-tint:       var(--tint-fieldsales);
+  --color-tint-edge:  var(--tint-edge-fieldsales);
+  --color-tint-soft:  var(--tint-soft-fieldsales);
+  --chr-active-tint:  var(--tint-fieldsales);
+}
+
+[data-page-personality="accountmgr"] {
+  --color-tint:       var(--tint-accountmgr);
+  --color-tint-edge:  var(--tint-edge-accountmgr);
+  --color-tint-soft:  var(--tint-soft-accountmgr);
+  --chr-active-tint:  var(--tint-accountmgr);
+}
+
+[data-page-personality="social"] {
+  --color-tint:       var(--tint-social);
+  --color-tint-edge:  var(--tint-edge-social);
+  --color-tint-soft:  var(--tint-soft-social);
+  --chr-active-tint:  var(--tint-social);
+}
+
+[data-page-personality="lab"] {
+  --color-tint:       var(--tint-lab);
+  --color-tint-edge:  var(--tint-edge-lab);
+  --color-tint-soft:  var(--tint-soft-lab);
+  --chr-active-tint:  var(--tint-lab);
+}
+
+[data-page-personality="psych"] {
+  --color-tint:       var(--tint-psych);
+  --color-tint-edge:  var(--tint-edge-psych);
+  --color-tint-soft:  var(--tint-soft-psych);
+  --chr-active-tint:  var(--tint-psych);
+}
+
+[data-page-personality="eq"] {
+  --color-tint:       var(--tint-eq);
+  --color-tint-edge:  var(--tint-edge-eq);
+  --color-tint-soft:  var(--tint-soft-eq);
+  --chr-active-tint:  var(--tint-eq);
+}
+
+[data-page-personality="negotiation"] {
+  --color-tint:       var(--tint-negotiation);
+  --color-tint-edge:  var(--tint-edge-negotiation);
+  --color-tint-soft:  var(--tint-soft-negotiation);
+  --chr-active-tint:  var(--tint-negotiation);
+}
+
+[data-page-personality="customercare"] {
+  --color-tint:       var(--tint-customercare);
+  --color-tint-edge:  var(--tint-edge-customercare);
+  --color-tint-soft:  var(--tint-soft-customercare);
+  --chr-active-tint:  var(--tint-customercare);
+}
+
+[data-page-personality="programming"] {
+  --color-tint:       var(--tint-programming);
+  --color-tint-edge:  var(--tint-edge-programming);
+  --color-tint-soft:  var(--tint-soft-programming);
+  --chr-active-tint:  var(--tint-programming);
+}
+
+[data-page-personality="accounting"] {
+  --color-tint:       var(--tint-accounting);
+  --color-tint-edge:  var(--tint-edge-accounting);
+  --color-tint-soft:  var(--tint-soft-accounting);
+  --chr-active-tint:  var(--tint-accounting);
+}
+
+[data-page-personality="phonerepair"] {
+  --color-tint:       var(--tint-phonerepair);
+  --color-tint-edge:  var(--tint-edge-phonerepair);
+  --color-tint-soft:  var(--tint-soft-phonerepair);
+  --chr-active-tint:  var(--tint-phonerepair);
+}
+
+[data-page-personality="hrmastery"] {
+  --color-tint:       var(--tint-hrmastery);
+  --color-tint-edge:  var(--tint-edge-hrmastery);
+  --color-tint-soft:  var(--tint-soft-hrmastery);
+  --chr-active-tint:  var(--tint-hrmastery);
+}
+
+[data-page-personality="myprogress"] {
+  --color-tint:       var(--tint-myprogress);
+  --color-tint-edge:  var(--tint-edge-myprogress);
+  --color-tint-soft:  var(--tint-soft-myprogress);
+  --chr-active-tint:  var(--tint-myprogress);
+}
+
+[data-page-personality="curriculum"] {
+  --color-tint:       var(--tint-curriculum);
+  --color-tint-edge:  var(--tint-edge-curriculum);
+  --color-tint-soft:  var(--tint-soft-curriculum);
+  --chr-active-tint:  var(--tint-curriculum);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Worker 21 / Phase 3 — Reassignment Discipline
+   ────────────────────────────────────────────────────────────────────────
+   1. لا تغيّر اسم --tint-* — Pack v1/v2/W20 يستهلكها.
+   2. كل personality له tint + tint-edge + tint-soft (3 مستويات).
+   3. لو احتجت صبغة جديدة لصفحة، اختر من الـ 12 palette — لا تخترع.
+   4. --chr-active-tint مرادف لـ --color-tint (للتوافق مع Pack v3 chr-*).
+   5. Phase 4 سيستعمل --tint-edge-* في gradients — لا تحذف edges.
+   6. ramp 9 stops لكل لون — لو احتجت stop خارج، اختر أقرب.
+   7. curriculum forward-compat — Pack v2 ritual يستعمله، الـ HTML الحالي لا.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* End CHROMATIC SOUL v3 / Worker 21 / Phase 3 — Page Reassignment ──────── */
