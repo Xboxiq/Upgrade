@@ -1,0 +1,74 @@
+{
+  "pack": "v3",
+  "worker": "22",
+  "worker_name": "RITUAL_UI",
+  "phase_completed": 2,
+  "phases_total": 6,
+  "phase_title": "Reading Halo — Cmd+. toggle + chrome dims + Lapis target glow",
+  "branch": "worker-22-devotio",
+  "files_touched": [
+    "platform/assets/style.css",
+    "platform/assets/app.js",
+    "platform/index.html"
+  ],
+  "lines_added_total": 409,
+  "lines_breakdown": {
+    "css": 242,
+    "js": 157,
+    "html": 10
+  },
+  "tokens_added": [
+    "--rit-halo-duration",
+    "--rit-halo-easing",
+    "--rit-halo-chrome-opacity",
+    "--rit-halo-chrome-blur",
+    "--rit-halo-glow-color",
+    "--rit-halo-bg-veil"
+  ],
+  "keyframes_added": [
+    "rit-halo-veil-in",
+    "rit-halo-edge-pulse"
+  ],
+  "selectors_added": [
+    "body[data-rit-halo='active'] (multi-chrome dim ladder, 15 selectors)",
+    "body[data-rit-halo='active']::after (veil with backdrop-blur)",
+    "[data-rit-halo-target] (raised stage with halo glow)",
+    "[data-rit-halo-target]::before (edge pulse halo)",
+    ".rit-halo-exit (×, JS-injected)",
+    ".rit-halo-toggle (chrome button) + ::before dot + active 'نَشَط' label"
+  ],
+  "html_augmented": [
+    "<button id='rit-halo-toggle' class='rit-halo-toggle' data-rit-halo-toggle> in topbar-actions"
+  ],
+  "api_changes": {
+    "namespace": "Upg.ritual (no new top-level — extended in place)",
+    "p1_preserved": ["start", "stop", "disable", "enable", "status", "POETRY_LINES"],
+    "p2_added": ["enterHalo", "exitHalo", "toggleHalo", "isHaloActive", "lastHaloTarget"],
+    "extension_pattern": "re-freeze with merged surface; P1 frozen members copied verbatim before adding P2 members"
+  },
+  "shortcuts_added": [
+    "Cmd+. / Ctrl+. global toggle (preventDefault, no Alt/Shift)",
+    "Click on [data-rit-halo-toggle] anywhere",
+    "Esc (when halo active)",
+    "Click outside target (capture phase, ignores toggle/exit buttons)"
+  ],
+  "fonts_added_offline": [],
+  "devotion_notes": "القراءة طقس صامت. الـ chrome يَتنحّى — يَخفت ويَتمايل خلف ضباب لطيف، لا يَختفي تماماً. الـ target يَرتفع، يَسطع بـ Lapis، يَطلب الانتباه دون عنف. Esc يَردّ كل شيء. Cmd+. يفتح ويَغلق المحراب الصغير حول الفقرة.",
+  "offline_check": {
+    "external_requests": 0,
+    "google_fonts_links": 0,
+    "cdn_imports": 0,
+    "audio_assets_added": 0,
+    "image_assets_added": 0
+  },
+  "sacred_preserved": {
+    "pages": 14,
+    "qcalc": 391,
+    "upg_apis": 27,
+    "google_fonts": 0,
+    "phase_1_intact": true,
+    "phase_1_apis_preserved_verbatim": ["start","stop","disable","enable","status","POETRY_LINES"]
+  },
+  "reduced_motion_guards_added": 2,
+  "next_action": "Continue Worker 22 Phase 3 (Threshold Transitions — 5 transition variants: fade/mashrabiya/scroll/iris/mihrab-arch + per-personality routing + Upg.transition extension)."
+}
