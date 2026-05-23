@@ -17268,3 +17268,98 @@ document.addEventListener('DOMContentLoaded', () => {
 })(window, document);
 /* End CHROMATIC SOUL v3 / Worker 21 / Phase 5 — Contrast Verification ─── */
 /* End CHROMATIC SOUL v3 — WORKER 21 COMPLETE 5/5 ─────────────────────── */
+
+
+/* RITUAL UI v3 — Entry Ritual API (Worker 22 / Phase 1) */
+(function ritualEntryIIFE(){
+  const Upg = (window.Upg = window.Upg || {});
+  const KEY_DAY = 'upg_ritual_last_entry';
+  const KEY_DISABLED = 'upg_ritual_entry_disabled';
+  const lines = ['بسم اللحظة، نَبدأ','الحرف يَستقبل اليد','اليوم — مرة أخرى','الانضباط طقس، لا قرار','اقرأ كأنّك لم تَقرأ من قبل','الجرّة المملوءة هي التي تُسكب','خُذ نَفَساً، ثم أَمسك القلم'];
+
+  let autoTimer = null;
+  let activeKeydownHandler = null;
+
+  function todayStamp(){
+    const d = new Date();
+    const m = String(d.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(d.getUTCDate()).padStart(2, '0');
+    return `${d.getUTCFullYear()}-${m}-${day}`;
+  }
+
+  function reduced(){ return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+
+  function safeStorageGet(key){
+    try { return window.localStorage.getItem(key); }
+    catch (_e) { return null; }
+  }
+
+  function safeStorageSet(key, value){
+    try { window.localStorage.setItem(key, value); }
+    catch (_e) { /* storage unavailable, ignore */ }
+  }
+
+  function safeStorageRemove(key){
+    try { window.localStorage.removeItem(key); }
+    catch (_e) { /* storage unavailable, ignore */ }
+  }
+
+  function shouldRun(){ return !safeStorageGet(KEY_DISABLED) && safeStorageGet(KEY_DAY) !== todayStamp(); }
+
+  function finish(portal){
+    document.body.classList.remove('rit-entry-active');
+    if (portal){
+      portal.hidden = true;
+      portal.setAttribute('aria-hidden', 'true');
+    }
+
+    if (autoTimer !== null){
+      clearTimeout(autoTimer);
+      autoTimer = null;
+    }
+
+    if (activeKeydownHandler){
+      window.removeEventListener('keydown', activeKeydownHandler);
+      activeKeydownHandler = null;
+    }
+  }
+
+  function startEntry(force){
+    const portal = document.getElementById('rit-entry-portal');
+    if (!portal) return false;
+    if (!force && !shouldRun()) return false;
+
+    const t = portal.querySelector('[data-rit-poetry-text]');
+    if (t) t.textContent = lines[Math.floor(Math.random() * lines.length)];
+
+    portal.hidden = false;
+    portal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('rit-entry-active');
+
+    let finished = false;
+    const skip = () => {
+      if (finished) return;
+      finished = true;
+      safeStorageSet(KEY_DAY, todayStamp());
+      finish(portal);
+    };
+
+    portal.addEventListener('click', skip, { once: true });
+    activeKeydownHandler = (e) => { if (e.key === 'Escape') skip(); };
+    window.addEventListener('keydown', activeKeydownHandler);
+
+    autoTimer = setTimeout(skip, reduced() ? 120 : 4000);
+    return true;
+  }
+
+  Upg.ritual = Upg.ritual || {};
+  Upg.ritual.start = function(name, opts = {}){ if(name === 'entry') return startEntry(!!opts.force); return false; };
+  Upg.ritual.disable = function(name){ if(name === 'entry') safeStorageSet(KEY_DISABLED,'1'); };
+  Upg.ritual.enable = function(name){ if(name === 'entry') safeStorageRemove(KEY_DISABLED); };
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', () => startEntry(false), { once: true });
+  } else {
+    startEntry(false);
+  }
+})();
