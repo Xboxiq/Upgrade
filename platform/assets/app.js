@@ -17772,3 +17772,181 @@ document.addEventListener('DOMContentLoaded', () => {
 
 })(window, document);
 /* End RITUAL UI v3 / Worker 22 / Phase 3 — Threshold Routing ────────── */
+
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   RITUAL UI v3 — Inkpot Feedback Logic (Worker 22 / Phase 4)
+   EXTENDS Upg.ritual with `inkpot` namespace.
+   No new top-level Upg.* — namespace count stays at 27.
+   Sacred preserved: P1 + P2 + P3 surface remains intact; we re-freeze
+   with inkpot key added.
+   ════════════════════════════════════════════════════════════════════════ */
+(function (window, document) {
+  'use strict';
+  if (!window.Upg || !window.Upg.ritual) return;  // requires P1+ IIFEs first
+  if (window.Upg.ritual.inkpot) return;            // idempotent
+
+  var VARIANTS = ['ink-spread', 'kashida-pull', 'kalam-stroke', 'auto'];
+
+  // 16 mappings — must mirror CSS per-personality auto routing block.
+  var PERSONALITY_INK_VARIANTS = {
+    'dashboard':    'ink-spread',
+    'callcenter':   'kalam-stroke',
+    'fieldsales':   'ink-spread',
+    'accountmgr':   'kashida-pull',
+    'social':       'ink-spread',
+    'lab':          'kalam-stroke',
+    'psych':        'kashida-pull',
+    'eq':           'kashida-pull',
+    'negotiation':  'kalam-stroke',
+    'customercare': 'ink-spread',
+    'programming':  'kalam-stroke',
+    'accounting':   'kashida-pull',
+    'phonerepair':  'ink-spread',
+    'hrmastery':    'kashida-pull',
+    'myprogress':   'ink-spread',
+    'curriculum':   'ink-spread'
+  };
+
+  var ATTR        = 'data-rit-ink';
+  var ATTR_ACTIVE = 'data-rit-ink-active';
+  var BARE_CLASS  = 'rit-ink-bare';
+  var SELECTORS   = ['button', 'a[role="button"]', '.bento-card', '.qcalc-button', '.tas-voice-ui'];
+
+  var prefersReduced = function () {
+    try {
+      return !!(window.matchMedia &&
+                window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    } catch (e) { return false; }
+  };
+
+  var getCurrentPersonality = function () {
+    // Prefer body-level pointer if W22 P3 set it
+    var body = document.body;
+    if (body && body.getAttribute('data-active-personality')) {
+      return body.getAttribute('data-active-personality');
+    }
+    // Fallback: query for a visible page section
+    var pages = document.querySelectorAll('section.page');
+    for (var i = 0; i < pages.length; i++) {
+      var el = pages[i];
+      if (el.hidden) continue;
+      var style = window.getComputedStyle(el);
+      if (style.display === 'none' || style.visibility === 'hidden') continue;
+      var p = el.getAttribute('data-page-personality');
+      if (p) return p;
+    }
+    return null;
+  };
+
+  var resolveVariant = function (declared) {
+    if (declared && VARIANTS.indexOf(declared) !== -1 && declared !== 'auto') {
+      return declared;
+    }
+    var personality = getCurrentPersonality();
+    return PERSONALITY_INK_VARIANTS[personality] || 'ink-spread';
+  };
+
+  var trigger = function (el, e) {
+    if (!el || el.classList.contains(BARE_CLASS)) return;
+
+    var declared = el.getAttribute(ATTR) || 'auto';
+    // Keep the slot mode the author chose (auto/explicit). Resolution is
+    // visual-only via CSS; the JS only writes coords + flips active flag.
+
+    // Click coordinates → CSS custom props
+    var rect = el.getBoundingClientRect();
+    if (e && typeof e.clientX === 'number' && typeof e.clientY === 'number' && rect.width && rect.height) {
+      var x = ((e.clientX - rect.left) / rect.width) * 100;
+      var y = ((e.clientY - rect.top)  / rect.height) * 100;
+      el.style.setProperty('--rit-ink-x', x.toFixed(2) + '%');
+      el.style.setProperty('--rit-ink-y', y.toFixed(2) + '%');
+    }
+    var maxDim = Math.max(rect.width, rect.height) * 2;
+    if (maxDim > 0) el.style.setProperty('--rit-ink-size', maxDim.toFixed(0) + 'px');
+
+    // Re-trigger animation: clear, force reflow, set
+    el.removeAttribute(ATTR_ACTIVE);
+    /* force reflow */ // eslint-disable-next-line no-unused-expressions
+    void el.offsetWidth;
+    el.setAttribute(ATTR_ACTIVE, 'true');
+
+    var clearDelay = prefersReduced() ? 120 : 500;
+    setTimeout(function () {
+      // only clear if no newer trigger overwrote it
+      if (el.getAttribute(ATTR_ACTIVE) === 'true') {
+        el.removeAttribute(ATTR_ACTIVE);
+      }
+    }, clearDelay);
+
+    return resolveVariant(declared);
+  };
+
+  var attachToInteractive = function (root) {
+    var scope = root || document;
+    var nodes = scope.querySelectorAll(SELECTORS.join(','));
+    var count = 0;
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      if (el.classList && el.classList.contains(BARE_CLASS)) continue;
+      if (!el.hasAttribute(ATTR)) {
+        el.setAttribute(ATTR, 'auto');
+        count++;
+      }
+    }
+    return count;
+  };
+
+  // ─── Single global click delegate ─────────────────────────────────────
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!t || !t.closest) return;
+    var host = t.closest('[' + ATTR + ']');
+    if (!host) return;
+    trigger(host, e);
+  }, { passive: true, capture: false });
+
+  // ─── Init on load + nav changes ──────────────────────────────────────
+  var init = function () { attachToInteractive(document); };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
+  }
+  document.addEventListener('upg:nav:change', function () {
+    setTimeout(function () { attachToInteractive(document); }, 30);
+  });
+
+  // ─── EXTEND Upg.ritual with inkpot namespace ─────────────────────────
+  var ritualCurrent = window.Upg.ritual;
+  var inkpotApi = Object.freeze({
+    trigger: trigger,
+    attach:  attachToInteractive,
+    listVariants:    function () { return VARIANTS.slice(); },
+    personalityMap:  function () {
+      var copy = {};
+      for (var k in PERSONALITY_INK_VARIANTS) {
+        if (PERSONALITY_INK_VARIANTS.hasOwnProperty(k)) {
+          copy[k] = PERSONALITY_INK_VARIANTS[k];
+        }
+      }
+      return copy;
+    },
+    setPersonalityVariant: function (personality, variant) {
+      if (!personality) return false;
+      if (VARIANTS.indexOf(variant) === -1) return false;
+      PERSONALITY_INK_VARIANTS[personality] = variant;
+      return true;
+    },
+    resolveFor: function (personality) {
+      return PERSONALITY_INK_VARIANTS[personality] || 'ink-spread';
+    }
+  });
+
+  var ritualExtended = Object.assign({}, ritualCurrent, { inkpot: inkpotApi });
+  window.Upg.ritual = Object.freeze(ritualExtended);
+
+})(window, document);
+/* End RITUAL UI v3 / Worker 22 / Phase 4 — Inkpot Feedback ─────────── */
