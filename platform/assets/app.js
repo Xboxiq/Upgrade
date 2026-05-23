@@ -17268,3 +17268,213 @@ document.addEventListener('DOMContentLoaded', () => {
 })(window, document);
 /* End CHROMATIC SOUL v3 / Worker 21 / Phase 5 — Contrast Verification ─── */
 /* End CHROMATIC SOUL v3 — WORKER 21 COMPLETE 5/5 ─────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   RITUAL UI v3 — Upg.ritual API (Worker 22 / Phase 1)
+   ════════════════════════════════════════════════════════════════════════
+   27th top-level Upg.* namespace.
+   Phase 1 introduces Entry Ritual; Phases 2-6 will EXTEND this IIFE
+   (additive freeze-replace) with reading halo, threshold transitions,
+   inkpot feedback, time-of-day, and aura deepening.
+   ════════════════════════════════════════════════════════════════════════ */
+(function (window, document) {
+  'use strict';
+
+  const STORAGE_KEY_LAST_ENTRY = 'upg_ritual_last_entry';
+  const STORAGE_KEY_DISABLED   = 'upg_ritual_disabled';
+
+  /* 7 hand-curated Arabic poetry lines — read-only canon.
+     Do not invent more without spec approval. */
+  const POETRY_LINES = Object.freeze([
+    'بسم اللحظة، نَبدأ.',
+    'الحرف يَستقبل اليد.',
+    'اليوم — مرة أخرى.',
+    'الانضباط طقس، لا قرار.',
+    'اقرأ كأنّك لم تَقرأ من قبل.',
+    'الجرّة المملوءة هي التي تُسكب.',
+    'خُذ نَفَساً، ثم أَمسك القلم.'
+  ]);
+
+  /* ── Helpers ─────────────────────────────────────────────────────── */
+
+  const isReducedMotion = () =>
+    !!(window.matchMedia &&
+       window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  const isToday = (timestamp) => {
+    if (!timestamp) return false;
+    const ts = parseInt(timestamp, 10);
+    if (!Number.isFinite(ts)) return false;
+    const last = new Date(ts);
+    const now  = new Date();
+    return last.getFullYear() === now.getFullYear() &&
+           last.getMonth()    === now.getMonth() &&
+           last.getDate()     === now.getDate();
+  };
+
+  const readDisabledList = () => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY_DISABLED);
+      const arr = raw ? JSON.parse(raw) : [];
+      return Array.isArray(arr) ? arr : [];
+    } catch (_) { return []; }
+  };
+
+  const isDisabled = (rituId) => readDisabledList().includes(rituId);
+
+  const setDisabled = (rituId, on) => {
+    try {
+      const set = new Set(readDisabledList());
+      if (on) set.add(rituId); else set.delete(rituId);
+      localStorage.setItem(STORAGE_KEY_DISABLED, JSON.stringify([...set]));
+    } catch (_) { /* ignore quota / private mode */ }
+  };
+
+  /* ── Entry Ritual ────────────────────────────────────────────────── */
+
+  let entryActive = false;
+  let entryTimer  = null;
+  let entryCleanup = null;
+
+  const dismissEntry = () => {
+    const portal = document.getElementById('rit-entry-portal');
+    if (!portal) return;
+    if (entryTimer) { clearTimeout(entryTimer); entryTimer = null; }
+    if (entryCleanup) { entryCleanup(); entryCleanup = null; }
+    portal.style.opacity = '0';
+    setTimeout(() => {
+      portal.setAttribute('hidden', '');
+      portal.setAttribute('aria-hidden', 'true');
+      portal.style.opacity = '';
+      entryActive = false;
+    }, 220);
+  };
+
+  const startEntry = (force) => {
+    if (entryActive) return false;
+
+    if (!force) {
+      if (isDisabled('entry')) return false;
+      const lastEntry = localStorage.getItem(STORAGE_KEY_LAST_ENTRY);
+      if (isToday(lastEntry)) return false;
+    }
+
+    const portal = document.getElementById('rit-entry-portal');
+    if (!portal) return false;
+
+    /* Mark today's entry — even on force, we set so a second force in same
+       session won't auto-fire on next reload. */
+    try { localStorage.setItem(STORAGE_KEY_LAST_ENTRY, String(Date.now())); }
+    catch (_) { /* ignore */ }
+
+    /* Pick random poetry line */
+    const poetryEl = portal.querySelector('[data-rit-poetry-text]');
+    if (poetryEl) {
+      const idx = Math.floor(Math.random() * POETRY_LINES.length);
+      poetryEl.textContent = POETRY_LINES[idx];
+    }
+
+    /* Reduced-motion marker (CSS handles instant display) */
+    const rm = isReducedMotion();
+    if (rm) portal.setAttribute('data-rit-rm', 'reduce');
+    else    portal.removeAttribute('data-rit-rm');
+
+    /* Reveal */
+    entryActive = true;
+    portal.removeAttribute('hidden');
+    portal.setAttribute('aria-hidden', 'false');
+
+    /* Auto-dismiss timing */
+    const dismissDelay = rm ? 800 : 4000;
+    entryTimer = setTimeout(dismissEntry, dismissDelay);
+
+    /* Skip handlers */
+    const skipBtn = portal.querySelector('[data-rit-skip]');
+    const onSkip = (e) => { if (e) e.preventDefault(); dismissEntry(); };
+    const onKeydown = (e) => {
+      if (e.key === 'Escape' || e.key === 'Esc') {
+        e.preventDefault();
+        dismissEntry();
+      }
+    };
+    const onPortalClick = (e) => {
+      const t = e.target;
+      if (!t) return;
+      if (t === portal ||
+          t.classList.contains('rit-entry-veil') ||
+          t.classList.contains('rit-entry-stage')) {
+        dismissEntry();
+      }
+    };
+
+    if (skipBtn) skipBtn.addEventListener('click', onSkip);
+    document.addEventListener('keydown', onKeydown, true);
+    portal.addEventListener('click', onPortalClick);
+
+    entryCleanup = () => {
+      if (skipBtn) skipBtn.removeEventListener('click', onSkip);
+      document.removeEventListener('keydown', onKeydown, true);
+      portal.removeEventListener('click', onPortalClick);
+    };
+
+    return true;
+  };
+
+  /* ── Public API ──────────────────────────────────────────────────── */
+
+  const start = (rituId, opts) => {
+    const force = !!(opts && opts.force);
+    if (rituId === 'entry') return startEntry(force);
+    if (window.console && console.warn) {
+      console.warn('[Upg.ritual] Unknown ritual:', rituId);
+    }
+    return false;
+  };
+
+  const stop = (rituId) => {
+    if (rituId === 'entry') { dismissEntry(); return true; }
+    return false;
+  };
+
+  const disable = (rituId) => { setDisabled(rituId, true);  return true; };
+  const enable  = (rituId) => { setDisabled(rituId, false); return true; };
+
+  const status = () => {
+    const lastEntry = localStorage.getItem(STORAGE_KEY_LAST_ENTRY);
+    const ts = lastEntry ? parseInt(lastEntry, 10) : null;
+    return {
+      entry: {
+        last_run:   (ts && Number.isFinite(ts)) ? new Date(ts).toISOString() : null,
+        ran_today:  isToday(lastEntry),
+        disabled:   isDisabled('entry'),
+        active_now: entryActive
+      }
+    };
+  };
+
+  const list = () => Object.freeze(['entry']);
+
+  /* ── Auto-trigger entry on first DOMContentLoaded of the day ─────── */
+
+  const autoFire = () => {
+    /* Small delay to let layout/fonts settle to avoid wordmark FOIT flash */
+    setTimeout(() => { try { startEntry(false); } catch (_) {} }, 100);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', autoFire, { once: true });
+  } else {
+    autoFire();
+  }
+
+  /* ── Expose ──────────────────────────────────────────────────────── */
+
+  window.Upg = window.Upg || {};
+  window.Upg.ritual = Object.freeze({
+    start, stop, disable, enable, status, list,
+    POETRY_LINES
+  });
+})(window, document);
+/* End RITUAL UI v3 / Worker 22 / Phase 1 — Entry Ritual ──────────────── */
