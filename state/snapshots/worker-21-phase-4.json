@@ -1,0 +1,72 @@
+{
+  "pack": "v3",
+  "worker": "21",
+  "worker_name": "CHROMATIC_SOUL",
+  "phase_completed": 4,
+  "phases_total": 5,
+  "phase_title": "Gradient Recast",
+  "branch": "worker-21-devotio",
+  "files_touched": [
+    "platform/assets/style.css"
+  ],
+  "operations": {
+    "replace_in_place": [
+      "--deep-gradient (base/dark block, 3 radial-gradient stops): aurora rgba teal/violet/cyan → chr-lapis-700/chr-mihrab-700/chr-indigo-800 via color-mix(in oklch, ... %, transparent)",
+      "--deep-gradient (light theme override): generic --color-brand/--color-warning/--color-surface-2 → chr-lapis-300/chr-saffron-300/chr-marble-400 warm wash",
+      "--life-ambient-from (root): var(--color-tint, var(--color-brand)) 8% → var(--color-tint, var(--chr-lapis-500)) 12%",
+      "--life-ambient-to (root): var(--color-tint-edge, var(--color-brand)) 4% → var(--color-tint-edge, var(--chr-mihrab-700)) 8%",
+      "--life-ambient-from (light theme): 5% → 6% with chr-lapis-500 fallback",
+      "--life-ambient-to (light theme): 2.5% → 3% with chr-mihrab-700 fallback"
+    ],
+    "appended": [
+      "[data-theme=\"dark\"] explicit override for --deep-gradient (3 oklch radials with alpha 0.18-0.25)",
+      "16 [data-page-personality=\"X\"] gradient pair blocks (--chr-grad-hero linear 135deg + --chr-grad-ambient radial ellipse 100% 80% at 50% 0% top-center; eq exception 180deg vertical 16% opacity)",
+      "5 cinematic gradient utilities: .chr-grad-page / .chr-grad-hero / .chr-grad-card / .chr-grad-divider / .chr-grad-mesh (with isolated ::before dual radial halos + blur 24px)",
+      "@media (prefers-reduced-transparency: reduce) fallback for .chr-grad-mesh::before (filter:none + single chr-lapis tint wash)",
+      "Phase 4 Gradient Discipline comment block (8 rules)"
+    ]
+  },
+  "metrics": {
+    "lines_added_net": 334,
+    "lines_inserted_total": 345,
+    "lines_deleted_total": 11,
+    "personality_gradient_pairs": 16,
+    "cinematic_utilities": 5,
+    "deep_gradient_token_replacements": 2,
+    "life_ambient_token_replacements": 4,
+    "new_dark_theme_overrides": 1,
+    "hex_in_phase_4_block": 0
+  },
+  "tokens_added": [
+    "--chr-grad-hero (15 page personalities + 1 curriculum forward-compat)",
+    "--chr-grad-ambient (15 page personalities + 1 curriculum forward-compat)"
+  ],
+  "tokens_replaced_in_place": [
+    "--deep-gradient (base block)",
+    "--deep-gradient (light theme override)",
+    "--life-ambient-from (root)",
+    "--life-ambient-to (root)",
+    "--life-ambient-from (light theme)",
+    "--life-ambient-to (light theme)"
+  ],
+  "fonts_added_offline": [],
+  "new_apis": [],
+  "devotion_notes": "كل صفحة الآن تتنفّس بـ gradient عربي خاص بها. dashboard ذهب الزعفران، psych لازوردي السماء، eq محراب عمودي ساكن، negotiation دمشقي حادّ، programming نِيلي اليمن، accounting أخضر النخيل. radial ambient يبدأ من 50% 0% (top-center) — حسّ مِحرابي إسلامي. eq كسر القاعدة مرة واحدة (180deg vertical) — لأن المحراب يحتاج عمقاً عمودياً، لا قطرياً.",
+  "offline_check": {
+    "external_requests": 0,
+    "google_fonts_links": 0,
+    "cdn_links": 0
+  },
+  "sacred_preserved": {
+    "pages_count": 14,
+    "qcalc_instances": 391,
+    "upg_top_level_apis": 26,
+    "tint_token_names": "preserved",
+    "chr_palette_tokens": 120,
+    "personality_blocks": 16,
+    "linen_bone_light_theme": "untouched",
+    "app_js": "untouched",
+    "index_html": "untouched"
+  },
+  "next_action": "Worker 21 Phase 5 (Theme Bridge) — WCAG AA contrast verification on all text/bg pairs, W12 P2 Linen-Bone tinted-shadow refinements, Upg.chroma.contrast() helper, final Mihrab polish. Closes Worker 21 — opens PR worker-21-devotio → main."
+}

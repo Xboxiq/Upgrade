@@ -1,0 +1,113 @@
+{
+  "pack": "v3",
+  "worker": "21",
+  "worker_name": "CHROMATIC_SOUL",
+  "phase_completed": 5,
+  "phases_total": 5,
+  "phase_title": "Theme Bridge",
+  "branch": "worker-21-devotio",
+  "worker_status": "complete-pending-pr",
+  "files_touched": [
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "operations": {
+    "appended_css": [
+      ":root[data-theme=\"light\"] { 48 tint overrides — 15 --tint-* + 16 --tint-edge-* + 16 --tint-soft-* with softer chr-* stops; lab/customercare use DARKER stops for contrast on Linen-Bone }",
+      "Pack v1/v2 backward-compat shims (.atelier-glow / .aurora-pulse / [class*=\"aurora-\"] → --aurora-fallback routed to color-tint, plus .bento-card/.cath-card/.glass-card hover border, ::selection, theme-aware scrollbar-color)",
+      "@media print { white bg + chr-mihrab-900 text + chr-pearl surface ladder + display:none on 7 ambient layer selectors + .chr-grad-hero forced solid }",
+      "Mihrab dark refinements (--glass-bg-dark / --glass-edge-dark / --code-bg / --code-text / --quote-bg / --quote-border-edge + auto-applied to code:not(pre code) and blockquote/.h-quote/.literary-quote)",
+      "Phase 5 Bridge Discipline comment (8 rules)",
+      "End-of-Worker-21 marker comment"
+    ],
+    "appended_js": [
+      "Upg.chroma EXTEND via additive freeze-replace (~136-line IIFE)",
+      "checkContrast(fg, bg) — temp DOM element + computed-style RGB + WCAG luminance/ratio",
+      "verifyContrast() — snapshots 5 critical text/bg pairs from CSS custom props",
+      "DOMContentLoaded one-time auto-audit with green pass / red fail console output"
+    ]
+  },
+  "metrics": {
+    "lines_added_net": 370,
+    "lines_inserted_total": 370,
+    "lines_deleted_total": 0,
+    "css_lines_added": 234,
+    "js_lines_added": 136,
+    "light_theme_tint_overrides": 48,
+    "backward_compat_selectors": 5,
+    "print_overrides": 8,
+    "mihrab_refinement_tokens": 6,
+    "new_methods_on_upg_chroma": 2,
+    "hex_in_phase_5_block": 0
+  },
+  "tokens_added": [
+    "15 --tint-<page> light theme overrides",
+    "16 --tint-edge-<page> light theme overrides",
+    "16 --tint-soft-<page> light theme overrides",
+    "--aurora-fallback shim variable",
+    "--glass-bg-dark / --glass-edge-dark",
+    "--code-bg / --code-text",
+    "--quote-bg / --quote-border-edge"
+  ],
+  "new_apis": [
+    "Upg.chroma.checkContrast(fg, bg) — pure WCAG ratio calculator",
+    "Upg.chroma.verifyContrast() — snapshot of current theme's 5 critical text/bg pairs"
+  ],
+  "fonts_added_offline": [],
+  "devotion_notes": "اللون يكتمل. على dark صار محراباً لازوردياً، على light صار فجراً مرخمَ الأطراف، على print صار حِبراً أسود على رخام. Upg.chroma.verifyContrast() يحرس العَتَبة — لا نص يمر دون contrast 4.5:1. الذاكرة العربية لها الآن جسر بين الوضعين، وحماية رياضية للقراءة.",
+  "offline_check": {
+    "external_requests": 0,
+    "google_fonts_links": 0,
+    "cdn_links": 0
+  },
+  "sacred_preserved": {
+    "pages_count": 14,
+    "qcalc_instances": 391,
+    "upg_top_level_apis": 26,
+    "upg_chroma_methods_after_extend": 9,
+    "tint_token_names": "preserved verbatim across both themes",
+    "chr_palette_tokens": 120,
+    "linen_bone_light_theme_base": "untouched",
+    "phase_1_2_3_4_iifes": "untouched",
+    "app_js_phase_3_chroma_iife": "untouched",
+    "index_html": "untouched"
+  },
+  "worker_21_summary": {
+    "phases_completed": 5,
+    "phases_total": 5,
+    "total_lines_added": 1616,
+    "phase_breakdown": {
+      "phase_1_palette_forge": 390,
+      "phase_2_dark_mihrab": 133,
+      "phase_3_page_reassignment": 389,
+      "phase_4_gradient_recast": 334,
+      "phase_5_theme_bridge": 370
+    },
+    "tokens_introduced": {
+      "chr_numeric_palette": 120,
+      "chr_semantic": 4,
+      "chr_grad_baseline": 8,
+      "chr_grad_per_personality": 32,
+      "chr_active_tint": 1,
+      "tint_edge_per_page": 16,
+      "tint_soft_per_page": 16,
+      "tint_chr_aware_per_page_dark": 15,
+      "tint_chr_aware_per_page_light": 48,
+      "mihrab_refinement_tokens": 6
+    },
+    "apis_added": [
+      "Upg.chroma (top-level, 26th) — list/tints/getPageTint/audit/getCurrentTint/resolveColor/status + PALETTES + PAGE_TINTS",
+      "Upg.chroma.checkContrast (Phase 5 extension)",
+      "Upg.chroma.verifyContrast (Phase 5 extension + auto-audit)"
+    ],
+    "fonts_added_offline": 0,
+    "external_requests": 0,
+    "philosophy_check": {
+      "serves_training_ritual": true,
+      "arabic_rooted": true,
+      "works_offline": true,
+      "would_be_missed": true
+    }
+  },
+  "next_action": "Open PR worker-21-devotio → main with title 'feat: Worker 21 — CHROMATIC SOUL DEVOTIO (5/5 phases)'. After merge, start Worker 22 Phase 1 (Entry Ritual — RITUAL UI: gateway entry threshold + identity lock onboarding ceremony)."
+}

@@ -98,7 +98,63 @@ body[data-theme="light"] {
 
 :root[data-theme="dark"],
 html[data-theme="dark"],
-body[data-theme="dark"] { color-scheme: dark; }
+body[data-theme="dark"] {
+  /* ════════════════════════════════════════════════════════════════════
+     CHROMATIC SOUL v3 — Mihrab Dark (Worker 21 / Phase 2)
+     REPLACE-IN-PLACE: minimal color-scheme block expanded with full
+     Mihrab token set. References Yemeni night sky, prayer niche, deep
+     contemplation. Aurora :root defaults remain as no-theme fallback.
+     ════════════════════════════════════════════════════════════════════ */
+
+  /* ─── Surface ladder — Mihrab depth (5 levels) ─── */
+  --color-bg:           oklch(13% 0.04  280);  /* mihrab-900 deepest */
+  --color-surface-0:    oklch(16% 0.05  280);  /* page card */
+  --color-surface-1:    oklch(20% 0.055 280);  /* raised card */
+  --color-surface-2:    oklch(24% 0.06  280);  /* deeper raised */
+  --color-surface-3:    oklch(28% 0.058 280);  /* sunk well / tooltip */
+
+  /* ─── Text ladder — Marble-toned for soft warmth on indigo ─── */
+  --color-text:         oklch(96% 0.012 80);   /* marble-100 (warm white) */
+  --color-text-muted:   oklch(74% 0.010 80);   /* marble-700 muted */
+  --color-text-faint:   oklch(54% 0.012 80);   /* marble-800 faint */
+
+  /* ─── Borders ─── */
+  --color-border:        oklch(28% 0.05  280);
+  --color-border-strong: oklch(38% 0.06  280);
+
+  /* ─── Brand — Lapis 400 (lighter for dark visibility) ─── */
+  --color-brand:        oklch(66% 0.15 252);   /* lapis-400 */
+  --color-brand-hover:  oklch(72% 0.16 252);   /* lapis-300 brighter */
+  --color-brand-soft:   color-mix(in oklch, oklch(66% 0.15 252) 16%, transparent);
+  --color-brand-strong: oklch(56% 0.18 252);   /* lapis-500 base */
+
+  /* ─── Semantic state colors — Arabic-rooted ─── */
+  --color-success:      oklch(62% 0.10 160);   /* cedar 400 */
+  --color-warning:      oklch(80% 0.14 78);    /* saffron 400 */
+  --color-danger:       oklch(67% 0.15 28);    /* henna 400 */
+  --color-info:         oklch(66% 0.15 252);   /* lapis 400 — same as brand */
+
+  /* ─── Tinted shadows — Mihrab-toned (no flat black, no slate) ─── */
+  --shadow-c-sm:
+    0 1px 2px oklch(8% 0.05 280 / 0.45),
+    0 1px 1px oklch(13% 0.03 280 / 0.30);
+  --shadow-c-md:
+    0 4px 12px oklch(8% 0.05 280 / 0.55),
+    0 2px 4px oklch(13% 0.03 280 / 0.35);
+  --shadow-c-lg:
+    0 12px 32px oklch(8% 0.05 280 / 0.60),
+    0 4px 10px oklch(13% 0.03 280 / 0.40);
+  --shadow-c-xl:
+    0 24px 60px oklch(8% 0.05 280 / 0.65),
+    0 8px 20px oklch(13% 0.03 280 / 0.45);
+
+  /* ─── Focus ring — Lapis ─── */
+  --ring: 0 0 0 3px color-mix(in oklch, oklch(66% 0.15 252) 38%, transparent);
+  --ring-offset: 2px;
+
+  color-scheme: dark;
+}
+/* End CHROMATIC SOUL v3 / Phase 2 — Dark Mihrab REPLACE-IN-PLACE ────── */
 
 /* ═══════════════════════════════════════════════════════════════
    CATHEDRAL v14 — Icon Component (Worker 11 / Phase 2)
@@ -198,9 +254,12 @@ body[data-theme="dark"] { color-scheme: dark; }
       --glass-border:    1px solid rgba(148, 197, 255, 0.08);
       --glass-blur:      saturate(160%) blur(18px);
       --glass-shine:     linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0) 40%);
-      --deep-gradient:   radial-gradient(1200px 520px at 12% -10%, rgba(102,252,241,0.10), transparent 55%),
-                         radial-gradient(900px 500px at 95% 110%, rgba(139,92,246,0.10), transparent 50%),
-                         radial-gradient(700px 400px at 60% 50%, rgba(6,182,212,0.06), transparent 60%);
+      /* CHROMATIC SOUL v3 / Worker 21 / Phase 4 — REPLACE deep-gradient
+         (was aurora teal/violet rgba; now Lapis + Mihrab + Indigo Arabic
+         palette references via Pack v3 chr-* tokens) */
+      --deep-gradient:   radial-gradient(1200px 520px at 12% -10%, color-mix(in oklch, var(--chr-lapis-700) 18%, transparent) 0%, transparent 55%),
+                         radial-gradient(900px 500px at 95% 110%, color-mix(in oklch, var(--chr-mihrab-700) 22%, transparent) 0%, transparent 50%),
+                         radial-gradient(700px 400px at 60% 50%, color-mix(in oklch, var(--chr-indigo-800) 14%, transparent) 0%, transparent 60%);
       --glow-accent:     0 0 0 1px rgba(102,252,241,0.18), 0 10px 40px -10px rgba(102,252,241,0.28), 0 2px 14px rgba(0,0,0,0.45);
       --glow-violet:     0 0 0 1px rgba(139,92,246,0.22), 0 10px 40px -10px rgba(139,92,246,0.30);
       --glow-amber:      0 0 0 1px rgba(245,158,11,0.22), 0 10px 40px -10px rgba(245,158,11,0.30);
@@ -3811,9 +3870,11 @@ body[data-theme="dark"] { color-scheme: dark; }
       --shadow-md:     var(--shadow-c-md);
       --shadow-accent: 0 0 22px color-mix(in oklch, var(--color-brand) 22%, transparent);
 
-      --deep-gradient: radial-gradient(1200px 520px at 12% -10%, color-mix(in oklch, var(--color-brand) 8%, transparent), transparent 55%),
-                       radial-gradient(900px 500px at 95% 110%, color-mix(in oklch, var(--color-warning) 12%, transparent), transparent 50%),
-                       radial-gradient(700px 400px at 60% 50%, color-mix(in oklch, var(--color-surface-2) 30%, transparent), transparent 60%);
+      /* CHROMATIC SOUL v3 / Worker 21 / Phase 4 — REPLACE light-theme
+         deep-gradient (was generic brand+warning; now lapis-marble warm wash) */
+      --deep-gradient: radial-gradient(1200px 520px at 12% -10%, color-mix(in oklch, var(--chr-lapis-300) 10%, transparent), transparent 55%),
+                       radial-gradient(900px 500px at 95% 110%, color-mix(in oklch, var(--chr-saffron-300) 8%, transparent), transparent 50%),
+                       radial-gradient(700px 400px at 60% 50%, color-mix(in oklch, var(--chr-marble-400) 22%, transparent), transparent 60%);
 
       background: linear-gradient(160deg, var(--color-bg) 0%, var(--color-surface-2) 100%);
       color: var(--color-text);
@@ -16830,22 +16891,84 @@ body, .u-prose p {
    ════════════════════════════════════════════════════════════════════════════ */
 
 /* ─── Per-Page Identity Tint Tokens ───────────────────────────────────────── */
+/* ════════════════════════════════════════════════════════════════════════════
+   CHROMATIC SOUL v3 — Identity Tint Reassignment (Worker 21 / Phase 3)
+   ────────────────────────────────────────────────────────────────────────────
+   REPLACE-IN-PLACE: 15 --tint-* names PRESERVED, values rerouted from
+   aurora-derived HSL to chr-* Arabic palette references. Pack v1/v2/W20
+   bindings continue working unchanged (every consumer reads var(--tint-*)).
+   ────────────────────────────────────────────────────────────────────────────
+   - dashboard    → Saffron 500   (gold — الذهب اليومي)
+   - callcenter   → Damascus 500  (steel — السيف المُذهَّب)
+   - fieldsales   → Silt 500      (earth — طمي النيل)
+   - accountmgr   → Cedar 600     (forest — أرز الثبات)
+   - social       → Coral 500     (vibrant — مرجان البحر الأحمر)
+   - lab          → Marble 500    (stone — البتراء)
+   - psych        → Lapis 500     (deep blue — قبة الصخرة)
+   - eq           → Mihrab 600    (violet — السكون)
+   - negotiation  → Damascus 700  (dark steel — السيف المضغوط)
+   - customercare → Pearl 500     (soft — لؤلؤ الخليج)
+   - programming  → Indigo 600    (deep — اليمن في الليل)
+   - accounting   → Palm 500      (olive — نخيل البصرة)
+   - phonerepair  → Henna 600     (deep rust — حرفة يدوية)
+   - hrmastery    → Henna 500     (warm — إنساني دافئ)
+   - myprogress   → Lapis 400     (medium — تأمل شخصي)
+   - curriculum   → Saffron 600   (forward-compat — Pack v2 ritual)
+   ════════════════════════════════════════════════════════════════════════════ */
 :root {
-  --tint-dashboard:    var(--color-brand);
-  --tint-callcenter:   hsl(186 80% 45%);
-  --tint-fieldsales:   hsl(152 60% 38%);
-  --tint-accountmgr:   hsl(176 70% 38%);
-  --tint-social:       hsl(265 70% 56%);
-  --tint-lab:          hsl(330 80% 56%);
-  --tint-psych:        hsl(35 90% 50%);
-  --tint-eq:           hsl(0 75% 56%);
-  --tint-negotiation:  hsl(220 80% 56%);
-  --tint-customercare: hsl(190 60% 48%);
-  --tint-programming:  hsl(210 90% 56%);
-  --tint-accounting:   hsl(45 92% 50%);
-  --tint-phonerepair:  hsl(15 80% 56%);
-  --tint-hrmastery:    hsl(280 70% 56%);
-  --tint-myprogress:   var(--color-success);
+  /* Primary tints — main color per page (15 + curriculum forward-compat) */
+  --tint-dashboard:    var(--chr-saffron-500);
+  --tint-callcenter:   var(--chr-damascus-500);
+  --tint-fieldsales:   var(--chr-silt-500);
+  --tint-accountmgr:   var(--chr-cedar-600);
+  --tint-social:       var(--chr-coral-500);
+  --tint-lab:          var(--chr-marble-500);
+  --tint-psych:        var(--chr-lapis-500);
+  --tint-eq:           var(--chr-mihrab-600);
+  --tint-negotiation:  var(--chr-damascus-700);
+  --tint-customercare: var(--chr-pearl-500);
+  --tint-programming:  var(--chr-indigo-600);
+  --tint-accounting:   var(--chr-palm-500);
+  --tint-phonerepair:  var(--chr-henna-600);
+  --tint-hrmastery:    var(--chr-henna-500);
+  --tint-myprogress:   var(--chr-lapis-400);
+  --tint-curriculum:   var(--chr-saffron-600);
+
+  /* Edge tints — secondary stop for gradients (Phase 4 consumes these) */
+  --tint-edge-dashboard:    var(--chr-saffron-700);
+  --tint-edge-callcenter:   var(--chr-damascus-700);
+  --tint-edge-fieldsales:   var(--chr-silt-700);
+  --tint-edge-accountmgr:   var(--chr-cedar-800);
+  --tint-edge-social:       var(--chr-coral-700);
+  --tint-edge-lab:          var(--chr-marble-700);
+  --tint-edge-psych:        var(--chr-lapis-700);
+  --tint-edge-eq:           var(--chr-mihrab-800);
+  --tint-edge-negotiation:  var(--chr-damascus-900);
+  --tint-edge-customercare: var(--chr-pearl-700);
+  --tint-edge-programming:  var(--chr-indigo-800);
+  --tint-edge-accounting:   var(--chr-palm-700);
+  --tint-edge-phonerepair:  var(--chr-henna-800);
+  --tint-edge-hrmastery:    var(--chr-henna-700);
+  --tint-edge-myprogress:   var(--chr-lapis-600);
+  --tint-edge-curriculum:   var(--chr-saffron-800);
+
+  /* Soft tints — for hover backgrounds (subtle hint of identity) */
+  --tint-soft-dashboard:    var(--chr-saffron-100);
+  --tint-soft-callcenter:   var(--chr-damascus-100);
+  --tint-soft-fieldsales:   var(--chr-silt-100);
+  --tint-soft-accountmgr:   var(--chr-cedar-100);
+  --tint-soft-social:       var(--chr-coral-100);
+  --tint-soft-lab:          var(--chr-marble-100);
+  --tint-soft-psych:        var(--chr-lapis-100);
+  --tint-soft-eq:           var(--chr-mihrab-100);
+  --tint-soft-negotiation:  var(--chr-damascus-200);
+  --tint-soft-customercare: var(--chr-pearl-100);
+  --tint-soft-programming:  var(--chr-indigo-100);
+  --tint-soft-accounting:   var(--chr-palm-100);
+  --tint-soft-phonerepair:  var(--chr-henna-100);
+  --tint-soft-hrmastery:    var(--chr-henna-100);
+  --tint-soft-myprogress:   var(--chr-lapis-50);
+  --tint-soft-curriculum:   var(--chr-saffron-200);
 }
 
 [data-active-tint="dashboard"]    { --color-tint: var(--tint-dashboard); }
@@ -21054,9 +21177,11 @@ pre.type-code {
   --life-mesh-duration: 22s;
   --life-mesh-opacity: 0.06;
 
-  /* Ambient gradient endpoints — overridden per personality in Phase 6 */
-  --life-ambient-from: color-mix(in oklch, var(--color-tint, var(--color-brand)) 8%, transparent);
-  --life-ambient-to:   color-mix(in oklch, var(--color-tint-edge, var(--color-brand)) 4%, transparent);
+  /* Ambient gradient endpoints — overridden per personality in Phase 6
+     CHROMATIC SOUL v3 Phase 4: chr-* fallbacks, raised to 12%/8% for
+     visible cultural identity (was 8%/4% generic) */
+  --life-ambient-from: color-mix(in oklch, var(--color-tint, var(--chr-lapis-500)) 12%, transparent);
+  --life-ambient-to:   color-mix(in oklch, var(--color-tint-edge, var(--chr-mihrab-700)) 8%, transparent);
 
   /* Ambient halo radius */
   --life-ambient-radius: 65%;
@@ -21068,8 +21193,8 @@ pre.type-code {
 /* Theme-aware density — light theme breathes a bit fainter */
 [data-theme="light"] {
   --life-mesh-opacity: 0.04;
-  --life-ambient-from: color-mix(in oklch, var(--color-tint, var(--color-brand)) 5%, transparent);
-  --life-ambient-to:   color-mix(in oklch, var(--color-tint-edge, var(--color-brand)) 2.5%, transparent);
+  --life-ambient-from: color-mix(in oklch, var(--color-tint, var(--chr-lapis-500)) 6%, transparent);
+  --life-ambient-to:   color-mix(in oklch, var(--color-tint-edge, var(--chr-mihrab-700)) 3%, transparent);
 }
 
 
@@ -24970,3 +25095,1156 @@ html[dir="rtl"] {
    ══════════════════════════════════════════════════════════════════════════ */
 
 /* End TASMEEM v3 / Worker 20 / Phase 6 — WORKER 20 COMPLETE ───────────────── */
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   CHROMATIC SOUL v3 — Palette Forge (Worker 21 / Phase 1)
+   ────────────────────────────────────────────────────────────────────────
+   12 Arabic cultural colors, each in 9 stops (50→900) + base layer notes.
+   Color space: oklch (perceptually uniform — guaranteed visual rhythm).
+   Cultural references: قبة الصخرة، السيوف الدمشقية، الحنّاء، الزعفران،
+   نخيل العراق، لؤلؤ الخليج، نِيلي اليمن، مرجان البحر الأحمر، طمي النيل،
+   أرز لبنان، محراب الصلاة، رخام البتراء.
+   ────────────────────────────────────────────────────────────────────────
+   Phase 1 ADDS only — no existing token mutated. 15 --tint-* preserved.
+   Light theme Linen-Bone (W12 P2) untouched. Phase 3 wires palette into
+   identity tints. Phase 2 swaps dark base to Mihrab. This phase = forge.
+   ════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* ════════════════════════════════════════════════════════════════════
+     1. LAPIS (لازوردي) — قبة الصخرة، السماء العميقة، صبغة الكِبرياء
+     Hue: 252  |  baseline (500): oklch(56% 0.18 252)  |  brand candidate
+     ════════════════════════════════════════════════════════════════════ */
+  --chr-lapis-50:   oklch(96% 0.025 252);
+  --chr-lapis-100:  oklch(92% 0.05  252);
+  --chr-lapis-200:  oklch(85% 0.08  252);
+  --chr-lapis-300:  oklch(76% 0.12  252);
+  --chr-lapis-400:  oklch(66% 0.15  252);
+  --chr-lapis-500:  oklch(56% 0.18  252);  /* base */
+  --chr-lapis-600:  oklch(48% 0.18  252);
+  --chr-lapis-700:  oklch(40% 0.16  252);
+  --chr-lapis-800:  oklch(32% 0.13  252);
+  --chr-lapis-900:  oklch(22% 0.09  252);
+
+  /* ════════════════════════════════════════════════════════════════════
+     2. DAMASCUS (دمشقي) — السيوف المُذهَّبة، الحدّة المُكبَلة
+     Hue: 220  |  cool steel grey-blue
+     ════════════════════════════════════════════════════════════════════ */
+  --chr-damascus-50:   oklch(96% 0.012 220);
+  --chr-damascus-100:  oklch(92% 0.018 220);
+  --chr-damascus-200:  oklch(82% 0.025 220);
+  --chr-damascus-300:  oklch(72% 0.032 220);
+  --chr-damascus-400:  oklch(60% 0.04  220);
+  --chr-damascus-500:  oklch(48% 0.04  220);  /* base */
+  --chr-damascus-600:  oklch(40% 0.04  220);
+  --chr-damascus-700:  oklch(33% 0.038 220);
+  --chr-damascus-800:  oklch(26% 0.032 220);
+  --chr-damascus-900:  oklch(18% 0.022 220);
+
+  /* ════════════════════════════════════════════════════════════════════
+     3. HENNA (حِنّاء) — الأعراس، التراث، الدفء الحرّاني
+     Hue: 28   |  warm rust-red
+     ════════════════════════════════════════════════════════════════════ */
+  --chr-henna-50:    oklch(96% 0.020 28);
+  --chr-henna-100:   oklch(92% 0.045 28);
+  --chr-henna-200:   oklch(85% 0.082 28);
+  --chr-henna-300:   oklch(76% 0.12  28);
+  --chr-henna-400:   oklch(67% 0.15  28);
+  --chr-henna-500:   oklch(58% 0.18  28);  /* base */
+  --chr-henna-600:   oklch(50% 0.17  28);
+  --chr-henna-700:   oklch(42% 0.15  28);
+  --chr-henna-800:   oklch(34% 0.12  28);
+  --chr-henna-900:   oklch(24% 0.08  28);
+
+  /* ════════════════════════════════════════════════════════════════════
+     4. SAFFRON (زعفران) — الذهب اليومي، المطبخ، الفجر
+     Hue: 78   |  warm yellow-gold
+     ════════════════════════════════════════════════════════════════════ */
+  --chr-saffron-50:    oklch(98% 0.020 78);
+  --chr-saffron-100:   oklch(95% 0.040 78);
+  --chr-saffron-200:   oklch(90% 0.080 78);
+  --chr-saffron-300:   oklch(85% 0.115 78);
+  --chr-saffron-400:   oklch(80% 0.140 78);
+  --chr-saffron-500:   oklch(78% 0.160 78);  /* base — warm gold */
+  --chr-saffron-600:   oklch(68% 0.160 78);
+  --chr-saffron-700:   oklch(58% 0.140 78);
+  --chr-saffron-800:   oklch(46% 0.115 78);
+  --chr-saffron-900:   oklch(32% 0.085 78);
+
+  /* ════════════════════════════════════════════════════════════════════
+     5. DATE-PALM (نَخيل) — العراق، الخصوبة، أخضر-زيتي
+     Hue: 130  |  olive-green
+     ════════════════════════════════════════════════════════════════════ */
+  --chr-palm-50:    oklch(96% 0.018 130);
+  --chr-palm-100:   oklch(92% 0.035 130);
+  --chr-palm-200:   oklch(85% 0.060 130);
+  --chr-palm-300:   oklch(76% 0.080 130);
+  --chr-palm-400:   oklch(66% 0.095 130);
+  --chr-palm-500:   oklch(58% 0.100 130);  /* base */
+  --chr-palm-600:   oklch(50% 0.095 130);
+  --chr-palm-700:   oklch(42% 0.082 130);
+  --chr-palm-800:   oklch(34% 0.065 130);
+  --chr-palm-900:   oklch(24% 0.045 130);
+
+  /* ════════════════════════════════════════════════════════════════════
+     6. PEARL (لُؤلؤ) — الخليج، النقاء، صدف
+     Hue: 220  |  near-white with cool undertone
+     ════════════════════════════════════════════════════════════════════ */
+  --chr-pearl-50:    oklch(99% 0.005 220);
+  --chr-pearl-100:   oklch(97% 0.008 220);
+  --chr-pearl-200:   oklch(94% 0.012 220);
+  --chr-pearl-300:   oklch(91% 0.016 220);
+  --chr-pearl-400:   oklch(89% 0.018 220);
+  --chr-pearl-500:   oklch(88% 0.020 220);  /* base — pearl shimmer */
+  --chr-pearl-600:   oklch(80% 0.020 220);
+  --chr-pearl-700:   oklch(70% 0.018 220);
+  --chr-pearl-800:   oklch(58% 0.016 220);
+  --chr-pearl-900:   oklch(42% 0.012 220);
+
+  /* ════════════════════════════════════════════════════════════════════
+     7. INDIGO (نِيلي) — اليمن في الليل، العمق التقني
+     Hue: 270  |  deep blue-violet
+     ════════════════════════════════════════════════════════════════════ */
+  --chr-indigo-50:    oklch(95% 0.022 270);
+  --chr-indigo-100:   oklch(90% 0.045 270);
+  --chr-indigo-200:   oklch(82% 0.075 270);
+  --chr-indigo-300:   oklch(72% 0.095 270);
+  --chr-indigo-400:   oklch(58% 0.105 270);
+  --chr-indigo-500:   oklch(48% 0.110 270);
+  --chr-indigo-600:   oklch(38% 0.10  270);  /* base — depth */
+  --chr-indigo-700:   oklch(30% 0.085 270);
+  --chr-indigo-800:   oklch(22% 0.065 270);
+  --chr-indigo-900:   oklch(15% 0.045 270);
+
+  /* ════════════════════════════════════════════════════════════════════
+     8. CORAL (مرجان) — البحر الأحمر، الحياة
+     Hue: 28 (same family as henna; differentiated by chroma + lightness)
+     ════════════════════════════════════════════════════════════════════ */
+  --chr-coral-50:    oklch(97% 0.015 28);
+  --chr-coral-100:   oklch(94% 0.04  28);
+  --chr-coral-200:   oklch(89% 0.08  28);
+  --chr-coral-300:   oklch(82% 0.12  28);
+  --chr-coral-400:   oklch(76% 0.145 28);
+  --chr-coral-500:   oklch(70% 0.16  28);   /* base — vibrant coral */
+  --chr-coral-600:   oklch(62% 0.16  28);
+  --chr-coral-700:   oklch(54% 0.14  28);
+  --chr-coral-800:   oklch(44% 0.115 28);
+  --chr-coral-900:   oklch(32% 0.080 28);
+
+  /* ════════════════════════════════════════════════════════════════════
+     9. SILT (طمي النيل) — مصر الزراعية، الأرض الخصبة
+     Hue: 60   |  warm earthy tan
+     ════════════════════════════════════════════════════════════════════ */
+  --chr-silt-50:    oklch(96% 0.012 60);
+  --chr-silt-100:   oklch(92% 0.022 60);
+  --chr-silt-200:   oklch(85% 0.036 60);
+  --chr-silt-300:   oklch(76% 0.048 60);
+  --chr-silt-400:   oklch(64% 0.058 60);
+  --chr-silt-500:   oklch(52% 0.060 60);   /* base */
+  --chr-silt-600:   oklch(45% 0.058 60);
+  --chr-silt-700:   oklch(38% 0.052 60);
+  --chr-silt-800:   oklch(30% 0.042 60);
+  --chr-silt-900:   oklch(22% 0.030 60);
+
+  /* ════════════════════════════════════════════════════════════════════
+     10. CEDAR (أرز) — لبنان، الثبات الجبلي
+     Hue: 160  |  forest-green with warm undertone
+     ════════════════════════════════════════════════════════════════════ */
+  --chr-cedar-50:    oklch(96% 0.014 160);
+  --chr-cedar-100:   oklch(92% 0.030 160);
+  --chr-cedar-200:   oklch(85% 0.050 160);
+  --chr-cedar-300:   oklch(76% 0.068 160);
+  --chr-cedar-400:   oklch(62% 0.078 160);
+  --chr-cedar-500:   oklch(50% 0.080 160);   /* base */
+  --chr-cedar-600:   oklch(43% 0.076 160);
+  --chr-cedar-700:   oklch(36% 0.066 160);
+  --chr-cedar-800:   oklch(28% 0.052 160);
+  --chr-cedar-900:   oklch(20% 0.036 160);
+
+  /* ════════════════════════════════════════════════════════════════════
+     11. MIHRAB (محراب) — السكون العميق، الصلاة، dark base candidate
+     Hue: 280  |  deep violet-indigo (almost black)
+     ════════════════════════════════════════════════════════════════════ */
+  --chr-mihrab-50:    oklch(95% 0.015 280);
+  --chr-mihrab-100:   oklch(88% 0.030 280);
+  --chr-mihrab-200:   oklch(78% 0.050 280);
+  --chr-mihrab-300:   oklch(66% 0.070 280);
+  --chr-mihrab-400:   oklch(52% 0.080 280);
+  --chr-mihrab-500:   oklch(42% 0.085 280);
+  --chr-mihrab-600:   oklch(36% 0.080 280);   /* base */
+  --chr-mihrab-700:   oklch(28% 0.072 280);
+  --chr-mihrab-800:   oklch(20% 0.060 280);
+  --chr-mihrab-900:   oklch(13% 0.040 280);   /* dark bg target (Phase 2) */
+
+  /* ════════════════════════════════════════════════════════════════════
+     12. MARBLE (سنّان رخام) — البتراء، الحجر الفاتح
+     Hue: 80   |  warm off-white limestone
+     ════════════════════════════════════════════════════════════════════ */
+  --chr-marble-50:    oklch(99% 0.005 80);
+  --chr-marble-100:   oklch(97% 0.010 80);
+  --chr-marble-200:   oklch(94% 0.018 80);
+  --chr-marble-300:   oklch(91% 0.020 80);
+  --chr-marble-400:   oklch(88% 0.022 80);
+  --chr-marble-500:   oklch(85% 0.020 80);   /* base — marble shimmer */
+  --chr-marble-600:   oklch(76% 0.018 80);
+  --chr-marble-700:   oklch(64% 0.016 80);
+  --chr-marble-800:   oklch(52% 0.014 80);
+  --chr-marble-900:   oklch(38% 0.012 80);
+
+  /* ════════════════════════════════════════════════════════════════════
+     SEMANTIC — Pack v3 reinterpreted with Arabic roots
+     These are token aliases. Pack v1/v2 --color-success/warning/danger/info
+     remain authoritative for active styling. Phase 5 builds the bridge.
+     ════════════════════════════════════════════════════════════════════ */
+  --chr-semantic-success:   var(--chr-cedar-500);    /* أرز green */
+  --chr-semantic-warning:   var(--chr-saffron-500);  /* زعفران gold */
+  --chr-semantic-danger:    var(--chr-henna-500);    /* حنّاء deep red */
+  --chr-semantic-info:      var(--chr-lapis-500);    /* لازوردي blue */
+
+  /* ════════════════════════════════════════════════════════════════════
+     GRADIENTS — primary pairs for ambient backgrounds (Phase 4 consumes)
+     ════════════════════════════════════════════════════════════════════ */
+  --chr-grad-lapis-mihrab:    linear-gradient(135deg,
+                                var(--chr-lapis-700)  0%,
+                                var(--chr-mihrab-800) 100%);
+  --chr-grad-saffron-henna:   linear-gradient(135deg,
+                                var(--chr-saffron-400) 0%,
+                                var(--chr-henna-500)   100%);
+  --chr-grad-palm-cedar:      linear-gradient(135deg,
+                                var(--chr-palm-400)  0%,
+                                var(--chr-cedar-600) 100%);
+  --chr-grad-pearl-marble:    linear-gradient(135deg,
+                                var(--chr-pearl-200)  0%,
+                                var(--chr-marble-300) 100%);
+  --chr-grad-mihrab-indigo:   linear-gradient(180deg,
+                                var(--chr-mihrab-900)  0%,
+                                var(--chr-indigo-900)  100%);
+  --chr-grad-coral-saffron:   linear-gradient(135deg,
+                                var(--chr-coral-500)   0%,
+                                var(--chr-saffron-500) 100%);
+
+  /* Status / metadata — lets Phase 3+ assert order */
+  --chr-stage:                 "phase-1-palette-ready";
+  --chr-palettes-count:        "12";
+  --chr-stops-per-palette:     "10";
+
+  /* Active tint — consumed by [data-chr-mood] + .chr-tint-* utilities.
+     Default = Lapis (Pack v3 brand candidate). Phase 3 wires per page. */
+  --chr-active-tint:           var(--chr-lapis-500);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   CHROMATIC SOUL v3 — Tint Utility Classes (Worker 21 / Phase 1)
+   For applying a palette as text color, bg, border, or active tint.
+   Pattern: chr-text-<color>-<stop> · chr-bg-<color>-<stop> · chr-tint-<color>
+   All additive — none of W12/W14/W20 utilities are touched.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Text color utilities (12 colors × 2 most useful stops each) ─── */
+.chr-text-lapis-500    { color: var(--chr-lapis-500); }
+.chr-text-lapis-700    { color: var(--chr-lapis-700); }
+.chr-text-damascus-500 { color: var(--chr-damascus-500); }
+.chr-text-damascus-700 { color: var(--chr-damascus-700); }
+.chr-text-henna-500    { color: var(--chr-henna-500); }
+.chr-text-henna-700    { color: var(--chr-henna-700); }
+.chr-text-saffron-500  { color: var(--chr-saffron-500); }
+.chr-text-saffron-700  { color: var(--chr-saffron-700); }
+.chr-text-palm-500     { color: var(--chr-palm-500); }
+.chr-text-palm-700     { color: var(--chr-palm-700); }
+.chr-text-pearl-500    { color: var(--chr-pearl-500); }
+.chr-text-pearl-800    { color: var(--chr-pearl-800); }
+.chr-text-indigo-500   { color: var(--chr-indigo-500); }
+.chr-text-indigo-700   { color: var(--chr-indigo-700); }
+.chr-text-coral-500    { color: var(--chr-coral-500); }
+.chr-text-coral-700    { color: var(--chr-coral-700); }
+.chr-text-silt-500     { color: var(--chr-silt-500); }
+.chr-text-silt-700     { color: var(--chr-silt-700); }
+.chr-text-cedar-500    { color: var(--chr-cedar-500); }
+.chr-text-cedar-700    { color: var(--chr-cedar-700); }
+.chr-text-mihrab-500   { color: var(--chr-mihrab-500); }
+.chr-text-mihrab-700   { color: var(--chr-mihrab-700); }
+.chr-text-marble-500   { color: var(--chr-marble-500); }
+.chr-text-marble-800   { color: var(--chr-marble-800); }
+
+/* ─── Background utilities (most-useful stops per color, contrast-paired) ─── */
+.chr-bg-lapis-50       { background-color: var(--chr-lapis-50); }
+.chr-bg-lapis-100      { background-color: var(--chr-lapis-100); }
+.chr-bg-lapis-500      { background-color: var(--chr-lapis-500); color: var(--chr-pearl-50); }
+.chr-bg-lapis-700      { background-color: var(--chr-lapis-700); color: var(--chr-pearl-50); }
+.chr-bg-lapis-900      { background-color: var(--chr-lapis-900); color: var(--chr-pearl-100); }
+
+.chr-bg-damascus-100   { background-color: var(--chr-damascus-100); }
+.chr-bg-damascus-500   { background-color: var(--chr-damascus-500); color: var(--chr-pearl-50); }
+.chr-bg-damascus-800   { background-color: var(--chr-damascus-800); color: var(--chr-pearl-100); }
+
+.chr-bg-henna-100      { background-color: var(--chr-henna-100); }
+.chr-bg-henna-500      { background-color: var(--chr-henna-500); color: var(--chr-pearl-50); }
+.chr-bg-henna-700      { background-color: var(--chr-henna-700); color: var(--chr-pearl-50); }
+
+.chr-bg-saffron-100    { background-color: var(--chr-saffron-100); }
+.chr-bg-saffron-500    { background-color: var(--chr-saffron-500); color: var(--chr-mihrab-900); }
+.chr-bg-saffron-700    { background-color: var(--chr-saffron-700); color: var(--chr-pearl-50); }
+
+.chr-bg-palm-100       { background-color: var(--chr-palm-100); }
+.chr-bg-palm-500       { background-color: var(--chr-palm-500); color: var(--chr-pearl-50); }
+.chr-bg-palm-700       { background-color: var(--chr-palm-700); color: var(--chr-pearl-50); }
+
+.chr-bg-pearl-100      { background-color: var(--chr-pearl-100); color: var(--chr-mihrab-800); }
+.chr-bg-pearl-300      { background-color: var(--chr-pearl-300); color: var(--chr-mihrab-800); }
+.chr-bg-pearl-500      { background-color: var(--chr-pearl-500); color: var(--chr-mihrab-900); }
+
+.chr-bg-indigo-100     { background-color: var(--chr-indigo-100); }
+.chr-bg-indigo-600     { background-color: var(--chr-indigo-600); color: var(--chr-pearl-50); }
+.chr-bg-indigo-800     { background-color: var(--chr-indigo-800); color: var(--chr-pearl-100); }
+
+.chr-bg-coral-100      { background-color: var(--chr-coral-100); }
+.chr-bg-coral-500      { background-color: var(--chr-coral-500); color: var(--chr-mihrab-900); }
+.chr-bg-coral-700      { background-color: var(--chr-coral-700); color: var(--chr-pearl-50); }
+
+.chr-bg-silt-100       { background-color: var(--chr-silt-100); }
+.chr-bg-silt-500       { background-color: var(--chr-silt-500); color: var(--chr-pearl-50); }
+.chr-bg-silt-700       { background-color: var(--chr-silt-700); color: var(--chr-pearl-50); }
+
+.chr-bg-cedar-100      { background-color: var(--chr-cedar-100); }
+.chr-bg-cedar-500      { background-color: var(--chr-cedar-500); color: var(--chr-pearl-50); }
+.chr-bg-cedar-700      { background-color: var(--chr-cedar-700); color: var(--chr-pearl-50); }
+
+.chr-bg-mihrab-500     { background-color: var(--chr-mihrab-500); color: var(--chr-pearl-100); }
+.chr-bg-mihrab-700     { background-color: var(--chr-mihrab-700); color: var(--chr-pearl-100); }
+.chr-bg-mihrab-900     { background-color: var(--chr-mihrab-900); color: var(--chr-pearl-100); }
+
+.chr-bg-marble-100     { background-color: var(--chr-marble-100); color: var(--chr-mihrab-800); }
+.chr-bg-marble-300     { background-color: var(--chr-marble-300); color: var(--chr-mihrab-800); }
+.chr-bg-marble-500     { background-color: var(--chr-marble-500); color: var(--chr-mihrab-900); }
+
+/* ─── Tint applicator — sets --chr-active-tint for downstream consumers ─── */
+.chr-tint-lapis        { --chr-active-tint: var(--chr-lapis-500); }
+.chr-tint-damascus     { --chr-active-tint: var(--chr-damascus-500); }
+.chr-tint-henna        { --chr-active-tint: var(--chr-henna-500); }
+.chr-tint-saffron      { --chr-active-tint: var(--chr-saffron-500); }
+.chr-tint-palm         { --chr-active-tint: var(--chr-palm-500); }
+.chr-tint-pearl        { --chr-active-tint: var(--chr-pearl-500); }
+.chr-tint-indigo       { --chr-active-tint: var(--chr-indigo-600); }
+.chr-tint-coral        { --chr-active-tint: var(--chr-coral-500); }
+.chr-tint-silt         { --chr-active-tint: var(--chr-silt-500); }
+.chr-tint-cedar        { --chr-active-tint: var(--chr-cedar-500); }
+.chr-tint-mihrab       { --chr-active-tint: var(--chr-mihrab-600); }
+.chr-tint-marble       { --chr-active-tint: var(--chr-marble-500); }
+
+/* ─── Border utilities (subset — most-used) ─── */
+.chr-border-lapis-500    { border-color: var(--chr-lapis-500); }
+.chr-border-damascus-500 { border-color: var(--chr-damascus-500); }
+.chr-border-henna-500    { border-color: var(--chr-henna-500); }
+.chr-border-saffron-500  { border-color: var(--chr-saffron-500); }
+.chr-border-palm-500     { border-color: var(--chr-palm-500); }
+.chr-border-pearl-500    { border-color: var(--chr-pearl-500); }
+.chr-border-indigo-600   { border-color: var(--chr-indigo-600); }
+.chr-border-coral-500    { border-color: var(--chr-coral-500); }
+.chr-border-silt-500     { border-color: var(--chr-silt-500); }
+.chr-border-cedar-500    { border-color: var(--chr-cedar-500); }
+.chr-border-mihrab-700   { border-color: var(--chr-mihrab-700); }
+.chr-border-marble-500   { border-color: var(--chr-marble-500); }
+
+/* ─── Mood data-attribute selectors — high-level scope vector ─── */
+[data-chr-mood="lapis"]    { --chr-active-tint: var(--chr-lapis-500); }
+[data-chr-mood="damascus"] { --chr-active-tint: var(--chr-damascus-500); }
+[data-chr-mood="henna"]    { --chr-active-tint: var(--chr-henna-500); }
+[data-chr-mood="saffron"]  { --chr-active-tint: var(--chr-saffron-500); }
+[data-chr-mood="palm"]     { --chr-active-tint: var(--chr-palm-500); }
+[data-chr-mood="pearl"]    { --chr-active-tint: var(--chr-pearl-500); }
+[data-chr-mood="indigo"]   { --chr-active-tint: var(--chr-indigo-600); }
+[data-chr-mood="coral"]    { --chr-active-tint: var(--chr-coral-500); }
+[data-chr-mood="silt"]     { --chr-active-tint: var(--chr-silt-500); }
+[data-chr-mood="cedar"]    { --chr-active-tint: var(--chr-cedar-500); }
+[data-chr-mood="mihrab"]   { --chr-active-tint: var(--chr-mihrab-600); }
+[data-chr-mood="marble"]   { --chr-active-tint: var(--chr-marble-500); }
+
+/* ─── Gradient utilities — apply directly as bg ─── */
+.chr-grad-lapis-mihrab    { background-image: var(--chr-grad-lapis-mihrab); color: var(--chr-pearl-50); }
+.chr-grad-saffron-henna   { background-image: var(--chr-grad-saffron-henna); color: var(--chr-mihrab-900); }
+.chr-grad-palm-cedar      { background-image: var(--chr-grad-palm-cedar); color: var(--chr-pearl-50); }
+.chr-grad-pearl-marble    { background-image: var(--chr-grad-pearl-marble); color: var(--chr-mihrab-900); }
+.chr-grad-mihrab-indigo   { background-image: var(--chr-grad-mihrab-indigo); color: var(--chr-pearl-100); }
+.chr-grad-coral-saffron   { background-image: var(--chr-grad-coral-saffron); color: var(--chr-mihrab-900); }
+
+/* ════════════════════════════════════════════════════════════════════════
+   Worker 21 / Phase 1 — Forge Discipline:
+   1. لا تستعمل hex (#RRGGBB) — كل الألوان oklch.
+   2. لا تخلط Pack v1/v2 brand مع Pack v3 chr-* في نفس عنصر بدون wrapper
+      — Phase 5 يبني الجسر.
+   3. utility classes للمعاينة فقط — Phase 3 يربطها بالـ identity tints
+      الحقيقية (15 --tint-* names).
+   4. كل palette له 10 stops (50/100/200/300/400/500/600/700/800/900).
+      ممنوع اختراع stops بين (350, 850, إلخ).
+   5. لو احتجت لون خارج الـ 12 → ممنوع. اختر أقرب واحد.
+   6. semantic tokens (success/warning/danger/info) Arabic-rooted aliases —
+      لا يستبدلون color tokens الأصلية في Phase 1 (Phase 5 يبني الجسر).
+   7. Phase 1 لا يلمس --tint-*, --color-bg, --color-surface-*, paper-tone-*,
+      shadow-c-*. ولا app.js. ولا index.html.
+   8. لو لمست light theme Linen-Bone (W12 P2) → rollback فوراً. مقدّس.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* End CHROMATIC SOUL v3 / Phase 1 — Palette Forge ─────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   CHROMATIC SOUL v3 — Dark-Aware Semantic Tokens (Worker 21 / Phase 2)
+   These tokens activate dark-aware overlays + text-on-tint helpers.
+   Light theme keeps W12 P2 Linen-Bone defaults (transparent veil).
+   ════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* Default values — overridden in dark block below */
+  --chr-text-on-tint:        var(--color-text);
+  --chr-overlay-tint-faint:  color-mix(in oklch, var(--color-bg) 92%, transparent);
+  --chr-overlay-tint-light:  color-mix(in oklch, var(--color-bg) 84%, transparent);
+
+  --chr-mihrab-veil:         transparent;
+  --chr-mihrab-glow:         transparent;
+}
+
+:root[data-theme="dark"] {
+  /* Mihrab veil — subtle violet wash from top of viewport (mihrab arch) */
+  --chr-mihrab-veil:
+    radial-gradient(ellipse 120% 80% at 50% -20%,
+      oklch(36% 0.08 280 / 0.18) 0%,
+      transparent 60%);
+
+  /* Mihrab glow — for hero/CTA accents */
+  --chr-mihrab-glow:
+    radial-gradient(circle at 50% 50%,
+      oklch(56% 0.18 252 / 0.20) 0%,
+      transparent 70%);
+
+  /* Text-on-tint — derived for dark contrast safety */
+  --chr-text-on-tint:
+    color-mix(in oklch, var(--chr-active-tint, var(--color-brand)) 14%, var(--color-text));
+
+  /* Overlays for modals/sheets — Mihrab-tinted, never pure black */
+  --chr-overlay-tint-faint:  color-mix(in oklch, oklch(13% 0.04 280) 88%, transparent);
+  --chr-overlay-tint-light:  color-mix(in oklch, oklch(20% 0.06 280) 78%, transparent);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   CHROMATIC SOUL v3 — Body Ambient Veil (Worker 21 / Phase 2)
+   Subtle violet wash from top of viewport (mihrab arch effect).
+   Only in dark mode. Static gradient — reduced-motion safe by nature.
+   z-index: -1 keeps it behind all content; pointer-events: none preserves
+   click-through. Existing W12+W14+W16 ambient gradients on body remain
+   unaffected — Phase 4 (Gradient Recast) reroutes them through chr-* tokens.
+   ════════════════════════════════════════════════════════════════════════ */
+:root[data-theme="dark"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--chr-mihrab-veil);
+  mix-blend-mode: normal;  /* Phase 4 may refine to multiply/screen */
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :root[data-theme="dark"] body::before {
+    background: oklch(13% 0.04 280);  /* solid mihrab-900 fallback */
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Worker 21 / Phase 2 — Mihrab Discipline:
+   1. لا تعدّل أي قيمة في :root[data-theme="light"] (W12 P2 محفوظ).
+   2. dark theme كل الألوان oklch — لا hsl، لا hex.
+   3. Mihrab veil يعمل عبر body::before — Phase 4 يضيف layers.
+   4. text contrast على dark bg ≥ 4.5:1 (verified: marble-100 on mihrab-900 ≈ 12:1 ✓).
+   5. brand = Lapis 400 في dark (أفتح من 500 لـ visibility واضحة).
+   6. semantic colors تستعمل palette stops محسوبة لا تخمين.
+   7. shadow tints = mihrab darker stops (8/13% L) — ليس slate أو black.
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* End CHROMATIC SOUL v3 / Worker 21 / Phase 2 — Dark Mihrab ──────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   CHROMATIC SOUL v3 — Personality Color Overrides (Worker 21 / Phase 3)
+   ────────────────────────────────────────────────────────────────────────
+   كل [data-page-personality="X"] يضبط --color-tint و --color-tint-edge
+   و --color-tint-soft و --chr-active-tint من tints المُحدَّثة.
+   جميع W12-W19 selectors التي تستهلك var(--color-tint) تكتسب القيم
+   الجديدة تلقائياً — صفر تعديل في consumers قائمة.
+   ════════════════════════════════════════════════════════════════════════ */
+
+[data-page-personality="dashboard"] {
+  --color-tint:       var(--tint-dashboard);
+  --color-tint-edge:  var(--tint-edge-dashboard);
+  --color-tint-soft:  var(--tint-soft-dashboard);
+  --chr-active-tint:  var(--tint-dashboard);
+}
+
+[data-page-personality="callcenter"] {
+  --color-tint:       var(--tint-callcenter);
+  --color-tint-edge:  var(--tint-edge-callcenter);
+  --color-tint-soft:  var(--tint-soft-callcenter);
+  --chr-active-tint:  var(--tint-callcenter);
+}
+
+[data-page-personality="fieldsales"] {
+  --color-tint:       var(--tint-fieldsales);
+  --color-tint-edge:  var(--tint-edge-fieldsales);
+  --color-tint-soft:  var(--tint-soft-fieldsales);
+  --chr-active-tint:  var(--tint-fieldsales);
+}
+
+[data-page-personality="accountmgr"] {
+  --color-tint:       var(--tint-accountmgr);
+  --color-tint-edge:  var(--tint-edge-accountmgr);
+  --color-tint-soft:  var(--tint-soft-accountmgr);
+  --chr-active-tint:  var(--tint-accountmgr);
+}
+
+[data-page-personality="social"] {
+  --color-tint:       var(--tint-social);
+  --color-tint-edge:  var(--tint-edge-social);
+  --color-tint-soft:  var(--tint-soft-social);
+  --chr-active-tint:  var(--tint-social);
+}
+
+[data-page-personality="lab"] {
+  --color-tint:       var(--tint-lab);
+  --color-tint-edge:  var(--tint-edge-lab);
+  --color-tint-soft:  var(--tint-soft-lab);
+  --chr-active-tint:  var(--tint-lab);
+}
+
+[data-page-personality="psych"] {
+  --color-tint:       var(--tint-psych);
+  --color-tint-edge:  var(--tint-edge-psych);
+  --color-tint-soft:  var(--tint-soft-psych);
+  --chr-active-tint:  var(--tint-psych);
+}
+
+[data-page-personality="eq"] {
+  --color-tint:       var(--tint-eq);
+  --color-tint-edge:  var(--tint-edge-eq);
+  --color-tint-soft:  var(--tint-soft-eq);
+  --chr-active-tint:  var(--tint-eq);
+}
+
+[data-page-personality="negotiation"] {
+  --color-tint:       var(--tint-negotiation);
+  --color-tint-edge:  var(--tint-edge-negotiation);
+  --color-tint-soft:  var(--tint-soft-negotiation);
+  --chr-active-tint:  var(--tint-negotiation);
+}
+
+[data-page-personality="customercare"] {
+  --color-tint:       var(--tint-customercare);
+  --color-tint-edge:  var(--tint-edge-customercare);
+  --color-tint-soft:  var(--tint-soft-customercare);
+  --chr-active-tint:  var(--tint-customercare);
+}
+
+[data-page-personality="programming"] {
+  --color-tint:       var(--tint-programming);
+  --color-tint-edge:  var(--tint-edge-programming);
+  --color-tint-soft:  var(--tint-soft-programming);
+  --chr-active-tint:  var(--tint-programming);
+}
+
+[data-page-personality="accounting"] {
+  --color-tint:       var(--tint-accounting);
+  --color-tint-edge:  var(--tint-edge-accounting);
+  --color-tint-soft:  var(--tint-soft-accounting);
+  --chr-active-tint:  var(--tint-accounting);
+}
+
+[data-page-personality="phonerepair"] {
+  --color-tint:       var(--tint-phonerepair);
+  --color-tint-edge:  var(--tint-edge-phonerepair);
+  --color-tint-soft:  var(--tint-soft-phonerepair);
+  --chr-active-tint:  var(--tint-phonerepair);
+}
+
+[data-page-personality="hrmastery"] {
+  --color-tint:       var(--tint-hrmastery);
+  --color-tint-edge:  var(--tint-edge-hrmastery);
+  --color-tint-soft:  var(--tint-soft-hrmastery);
+  --chr-active-tint:  var(--tint-hrmastery);
+}
+
+[data-page-personality="myprogress"] {
+  --color-tint:       var(--tint-myprogress);
+  --color-tint-edge:  var(--tint-edge-myprogress);
+  --color-tint-soft:  var(--tint-soft-myprogress);
+  --chr-active-tint:  var(--tint-myprogress);
+}
+
+[data-page-personality="curriculum"] {
+  --color-tint:       var(--tint-curriculum);
+  --color-tint-edge:  var(--tint-edge-curriculum);
+  --color-tint-soft:  var(--tint-soft-curriculum);
+  --chr-active-tint:  var(--tint-curriculum);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Worker 21 / Phase 3 — Reassignment Discipline
+   ────────────────────────────────────────────────────────────────────────
+   1. لا تغيّر اسم --tint-* — Pack v1/v2/W20 يستهلكها.
+   2. كل personality له tint + tint-edge + tint-soft (3 مستويات).
+   3. لو احتجت صبغة جديدة لصفحة، اختر من الـ 12 palette — لا تخترع.
+   4. --chr-active-tint مرادف لـ --color-tint (للتوافق مع Pack v3 chr-*).
+   5. Phase 4 سيستعمل --tint-edge-* في gradients — لا تحذف edges.
+   6. ramp 9 stops لكل لون — لو احتجت stop خارج، اختر أقرب.
+   7. curriculum forward-compat — Pack v2 ritual يستعمله، الـ HTML الحالي لا.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* End CHROMATIC SOUL v3 / Worker 21 / Phase 3 — Page Reassignment ──────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   CHROMATIC SOUL v3 — Gradient Recast (Worker 21 / Phase 4)
+   ────────────────────────────────────────────────────────────────────────
+   Phase 4 ينقل gradients من aurora-generic إلى Arabic-rooted:
+   - REPLACE-IN-PLACE قِيَم --deep-gradient (W11 P1) — أعلاه
+   - REPLACE-IN-PLACE قِيَم --life-ambient-from/to (W16 P1) — أعلاه
+   - APPEND override واضح لـ [data-theme="dark"] على --deep-gradient
+   - APPEND 15 personality-specific gradient pairs (--chr-grad-hero/-ambient)
+   - APPEND 5 cinematic utility classes (.chr-grad-page/-hero/-card/-divider/-mesh)
+
+   كل personality يصبح له "نَفَس" بصري: gradient من tint الأساسي إلى
+   tint-edge، شفّاف بما فيه الكفاية ليتنفّس النص فوقه.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Explicit dark theme override for --deep-gradient ──────────────── */
+[data-theme="dark"] {
+  --deep-gradient:
+    radial-gradient(1200px 520px at 12% -10%,
+      oklch(40% 0.16 252 / 0.20)  0%,
+      transparent                 55%),
+    radial-gradient(900px 500px at 95% 110%,
+      oklch(28% 0.072 280 / 0.25) 0%,
+      transparent                 50%),
+    radial-gradient(700px 400px at 60% 50%,
+      oklch(22% 0.065 270 / 0.18) 0%,
+      transparent                 60%);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Per-Personality Gradients — 15 hero + 15 ambient
+   Hero: linear 135deg (top-left → bottom-right) for content panels
+   Ambient: radial ellipse at top-center (50% 0%) for body/page backdrops
+   ════════════════════════════════════════════════════════════════════════ */
+
+[data-page-personality="dashboard"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-saffron-400) 0%,
+      var(--chr-saffron-700) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-saffron-500) 14%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="callcenter"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-damascus-400) 0%,
+      var(--chr-damascus-800) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-damascus-500) 12%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="fieldsales"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-silt-400) 0%,
+      var(--chr-silt-700) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-silt-500) 12%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="accountmgr"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-cedar-500) 0%,
+      var(--chr-cedar-800) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-cedar-600) 12%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="social"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-coral-400) 0%,
+      var(--chr-coral-700) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-coral-500) 14%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="lab"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-marble-400) 0%,
+      var(--chr-marble-700) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-marble-500) 10%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="psych"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-lapis-400) 0%,
+      var(--chr-lapis-800) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-lapis-500) 14%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="eq"] {
+  --chr-grad-hero:
+    linear-gradient(180deg,
+      var(--chr-mihrab-500) 0%,
+      var(--chr-mihrab-800) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 100% at 50% 0%,
+      color-mix(in oklch, var(--chr-mihrab-600) 16%, transparent) 0%,
+      transparent 65%);
+}
+
+[data-page-personality="negotiation"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-damascus-600) 0%,
+      var(--chr-damascus-900) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-damascus-700) 12%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="customercare"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-pearl-300) 0%,
+      var(--chr-pearl-600) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-pearl-500) 8%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="programming"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-indigo-500) 0%,
+      var(--chr-indigo-900) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-indigo-600) 14%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="accounting"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-palm-400) 0%,
+      var(--chr-palm-700) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-palm-500) 12%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="phonerepair"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-henna-500) 0%,
+      var(--chr-henna-800) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-henna-600) 12%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="hrmastery"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-henna-400) 0%,
+      var(--chr-henna-700) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-henna-500) 12%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="myprogress"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-lapis-300) 0%,
+      var(--chr-lapis-600) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-lapis-400) 10%, transparent) 0%,
+      transparent 60%);
+}
+
+[data-page-personality="curriculum"] {
+  --chr-grad-hero:
+    linear-gradient(135deg,
+      var(--chr-saffron-500) 0%,
+      var(--chr-saffron-800) 100%);
+  --chr-grad-ambient:
+    radial-gradient(ellipse 100% 80% at 50% 0%,
+      color-mix(in oklch, var(--chr-saffron-600) 14%, transparent) 0%,
+      transparent 60%);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Cinematic Gradient Utilities (Worker 21 / Phase 4)
+   ────────────────────────────────────────────────────────────────────────
+   Apply on demand. Worker 22 (Ritual UI) will activate on entry/threshold
+   transitions. Phase 4 just defines the surface — no mass HTML wiring.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Page-level ambient — applied to body or page section */
+.chr-grad-page {
+  background: var(--chr-grad-ambient, var(--deep-gradient));
+}
+
+/* Hero panel — applied to page-h or hero card.
+   Uses marble-50 text by default — works on most hero gradients.
+   Customers needing dark text override locally. */
+.chr-grad-hero {
+  background: var(--chr-grad-hero,
+    linear-gradient(135deg,
+      var(--color-tint, var(--chr-lapis-500)),
+      var(--color-tint-edge, var(--chr-mihrab-700))));
+  color: oklch(98% 0.012 80);
+}
+
+/* Card — soft tint, just hint of identity */
+.chr-grad-card {
+  background:
+    linear-gradient(180deg,
+      color-mix(in oklch,
+        var(--color-tint-soft, transparent) 60%,
+        var(--color-surface-1)) 0%,
+      var(--color-surface-1) 100%);
+  border: 1px solid color-mix(in oklch,
+    var(--color-tint, var(--color-brand)) 18%,
+    var(--color-border));
+}
+
+/* Divider — horizontal gradient line */
+.chr-grad-divider {
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    color-mix(in oklch,
+      var(--color-tint, var(--color-brand)) 50%,
+      transparent) 50%,
+    transparent 100%);
+  border: none;
+  margin-block: var(--space-md, 1rem);
+}
+
+/* Mesh — organic layered halos behind content */
+.chr-grad-mesh {
+  position: relative;
+  isolation: isolate;
+}
+.chr-grad-mesh::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 50% 50% at 30% 30%,
+      color-mix(in oklch,
+        var(--color-tint, var(--chr-lapis-500)) 10%,
+        transparent) 0%,
+      transparent 70%),
+    radial-gradient(ellipse 60% 60% at 75% 70%,
+      color-mix(in oklch,
+        var(--color-tint-edge, var(--chr-mihrab-700)) 10%,
+        transparent) 0%,
+      transparent 70%);
+  filter: blur(24px);
+}
+
+/* Reduced-transparency fallback — flatten mesh to a single tint wash */
+@media (prefers-reduced-transparency: reduce) {
+  .chr-grad-mesh::before {
+    filter: none;
+    background: color-mix(in oklch,
+      var(--color-tint, var(--chr-lapis-500)) 6%,
+      transparent);
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Worker 21 / Phase 4 — Gradient Discipline:
+   1. كل personality له --chr-grad-hero (linear) و --chr-grad-ambient (radial).
+   2. لا hex في gradient stops — كل القيم chr-* references أو oklch().
+   3. radial ambient يبدأ من 50% 0% (top-center) — حسّ إسلامي مِحرابي.
+   4. linear hero يبدأ من 135deg (top-left → bottom-right) — قاعدة واحدة
+      موحَّدة. eq فقط يستعمل 180deg (vertical) لإيقاع تأمّلي عمودي.
+   5. ambient gradient ≤ 14% opacity — ما يطغى على النص. eq استثناء 16%
+      (المحراب يحتاج عمقاً أكبر).
+   6. cinematic utilities (.chr-grad-*) للتطبيق اليدوي فقط في Phase 4.
+      Worker 22 (Ritual UI) يربطها بـ entry/threshold transitions تلقائياً.
+   7. .chr-grad-mesh له fallback صريح في prefers-reduced-transparency:
+      reduce — flatten إلى single tint wash بدون blur (أداء + a11y).
+   8. --deep-gradient القاعدة (W11 P1) محفوظة الـ name، القيم استُبدِلت
+      بـ chr-lapis/chr-mihrab/chr-indigo (dark) و chr-lapis/saffron/marble
+      (light). ما تكسير binding في كل صفحة.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* End CHROMATIC SOUL v3 / Worker 21 / Phase 4 — Gradient Recast ───────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   CHROMATIC SOUL v3 — Light Theme Bridge (Worker 21 / Phase 5)
+   ────────────────────────────────────────────────────────────────────────
+   W12 P2 Linen-Bone preserved verbatim. Phase 5 يضيف tint behaviors
+   تَعمل فوق Linen-Bone بدون تعديل قِيَمها الأساسية.
+
+   على light: tints تظهر بدرجات أفتح (300/400/500) للحضور الناعم.
+   على dark: Phase 3 + Phase 2 (Mihrab) محفوظة كما هي.
+   ════════════════════════════════════════════════════════════════════════ */
+:root[data-theme="light"] {
+  /* Per-page identity tints — softer stops for light context */
+  --tint-dashboard:     var(--chr-saffron-300);
+  --tint-callcenter:    var(--chr-damascus-400);
+  --tint-fieldsales:    var(--chr-silt-300);
+  --tint-accountmgr:    var(--chr-cedar-400);
+  --tint-social:        var(--chr-coral-400);
+  --tint-lab:           var(--chr-marble-700);  /* darker for visible contrast */
+  --tint-psych:         var(--chr-lapis-400);
+  --tint-eq:            var(--chr-mihrab-500);
+  --tint-negotiation:   var(--chr-damascus-600);
+  --tint-customercare:  var(--chr-pearl-700);   /* darker pearl on light bg */
+  --tint-programming:   var(--chr-indigo-500);
+  --tint-accounting:    var(--chr-palm-400);
+  --tint-phonerepair:   var(--chr-henna-500);
+  --tint-hrmastery:     var(--chr-henna-400);
+  --tint-myprogress:    var(--chr-lapis-500);
+  --tint-curriculum:    var(--chr-saffron-500);
+
+  /* Edge tints — Phase 4 gradient secondary stops on light */
+  --tint-edge-dashboard:    var(--chr-saffron-500);
+  --tint-edge-callcenter:   var(--chr-damascus-600);
+  --tint-edge-fieldsales:   var(--chr-silt-500);
+  --tint-edge-accountmgr:   var(--chr-cedar-600);
+  --tint-edge-social:       var(--chr-coral-600);
+  --tint-edge-lab:          var(--chr-marble-900);
+  --tint-edge-psych:        var(--chr-lapis-600);
+  --tint-edge-eq:           var(--chr-mihrab-700);
+  --tint-edge-negotiation:  var(--chr-damascus-800);
+  --tint-edge-customercare: var(--chr-pearl-900);
+  --tint-edge-programming:  var(--chr-indigo-700);
+  --tint-edge-accounting:   var(--chr-palm-600);
+  --tint-edge-phonerepair:  var(--chr-henna-700);
+  --tint-edge-hrmastery:    var(--chr-henna-600);
+  --tint-edge-myprogress:   var(--chr-lapis-700);
+  --tint-edge-curriculum:   var(--chr-saffron-700);
+
+  /* Soft tints — hover backgrounds, very subtle on Linen-Bone */
+  --tint-soft-dashboard:    var(--chr-saffron-50);
+  --tint-soft-callcenter:   var(--chr-damascus-50);
+  --tint-soft-fieldsales:   var(--chr-silt-50);
+  --tint-soft-accountmgr:   var(--chr-cedar-50);
+  --tint-soft-social:       var(--chr-coral-50);
+  --tint-soft-lab:          var(--chr-marble-50);
+  --tint-soft-psych:        var(--chr-lapis-50);
+  --tint-soft-eq:           var(--chr-mihrab-50);
+  --tint-soft-negotiation:  var(--chr-damascus-100);
+  --tint-soft-customercare: var(--chr-pearl-50);
+  --tint-soft-programming:  var(--chr-indigo-50);
+  --tint-soft-accounting:   var(--chr-palm-50);
+  --tint-soft-phonerepair:  var(--chr-henna-50);
+  --tint-soft-hrmastery:    var(--chr-henna-50);
+  --tint-soft-myprogress:   var(--chr-lapis-50);
+  --tint-soft-curriculum:   var(--chr-saffron-100);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   CHROMATIC SOUL v3 — Pack v1/v2 Backward-Compat Shims (Worker 21 / Phase 5)
+   ────────────────────────────────────────────────────────────────────────
+   بعض كلاسات W11-W19 (atelier-glow / aurora-pulse / aurora-*) كانت تستهلك
+   aurora teal/cyan/violet hardcoded. هنا نمدّ لها بديلاً tint-aware عبر
+   --aurora-fallback. لا نعدّل القاعدة الأصلية.
+   ════════════════════════════════════════════════════════════════════════ */
+
+.atelier-glow,
+.aurora-pulse,
+[class*="aurora-"]:not([class*="aurora-tint"]) {
+  --aurora-fallback: var(--color-tint, var(--chr-lapis-500));
+}
+
+/* Card hover edge — replace generic cyan border with personality tint */
+.bento-card:hover,
+.cath-card:hover,
+.glass-card:hover {
+  border-color: color-mix(in oklch,
+    var(--color-tint, var(--chr-lapis-500)) 38%,
+    var(--color-border-strong, var(--color-border)));
+}
+
+/* ::selection — Mihrab/Lapis tinted for both themes */
+::selection {
+  background: color-mix(in oklch,
+    var(--color-tint, var(--chr-lapis-500)) 35%,
+    transparent);
+  color: var(--color-text);
+}
+
+/* Scrollbar (Firefox + WebKit) — theme-aware Mihrab/Marble */
+:root[data-theme="dark"] {
+  scrollbar-color: var(--chr-mihrab-700) var(--chr-mihrab-900);
+}
+:root[data-theme="light"] {
+  scrollbar-color: var(--chr-marble-700) var(--chr-marble-50);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch,
+    var(--color-tint, var(--chr-lapis-500)) 25%,
+    var(--color-surface-2));
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklch,
+    var(--color-tint, var(--chr-lapis-500)) 50%,
+    var(--color-surface-3));
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   CHROMATIC SOUL v3 — Print Theme (Worker 21 / Phase 5)
+   ────────────────────────────────────────────────────────────────────────
+   Print: white bg, Mihrab text (deep but pure), tints as accents only.
+   Worker 24 P5 (Print Atelier) سيُعمّق هذي القاعدة لاحقاً.
+   ════════════════════════════════════════════════════════════════════════ */
+@media print {
+  :root,
+  :root[data-theme="dark"],
+  :root[data-theme="light"] {
+    --color-bg:           white;
+    --color-surface-0:    white;
+    --color-surface-1:    var(--chr-pearl-50);
+    --color-surface-2:    var(--chr-pearl-100);
+    --color-surface-3:    var(--chr-pearl-200);
+    --color-text:         var(--chr-mihrab-900);
+    --color-text-muted:   var(--chr-mihrab-700);
+    --color-text-faint:   var(--chr-mihrab-500);
+    --color-border:       var(--chr-mihrab-300);
+  }
+
+  /* Hide all ambient gradient layers (W11+W14+W16) — saves ink, sharpens text */
+  body::before,
+  body::after,
+  .life-ambient::before,
+  .life-mesh::after,
+  .life-surface::before,
+  [data-life]::before,
+  [data-life]::after {
+    display: none !important;
+  }
+
+  /* Force chr-grad-hero to print as solid tint (gradients vanish in ink) */
+  .chr-grad-hero {
+    background: var(--color-tint, var(--chr-lapis-500)) !important;
+    color: white !important;
+  }
+
+  /* chr-grad-page reverts to white in print */
+  .chr-grad-page {
+    background: white !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   CHROMATIC SOUL v3 — Mihrab Dark Refinements (Worker 21 / Phase 5)
+   ────────────────────────────────────────────────────────────────────────
+   التلميس الأخير على dark theme: code blocks تتنفّس Indigo، quotes
+   تتنفّس Mihrab veil، glass surfaces دافئة.
+   ════════════════════════════════════════════════════════════════════════ */
+:root[data-theme="dark"] {
+  /* Glass surfaces warmer on Mihrab base */
+  --glass-bg-dark:
+    color-mix(in oklch, var(--chr-mihrab-800) 78%, transparent);
+  --glass-edge-dark:
+    color-mix(in oklch, var(--chr-mihrab-500) 35%, transparent);
+
+  /* Code blocks — deep Indigo bg with Marble text (programming page friendly) */
+  --code-bg:
+    color-mix(in oklch, var(--chr-indigo-900) 92%, var(--chr-mihrab-900));
+  --code-text:
+    var(--chr-marble-100);
+
+  /* Quotes — Mihrab veil bg with Lapis edge (psych/literary pages) */
+  --quote-bg:
+    color-mix(in oklch, var(--chr-mihrab-800) 85%, transparent);
+  --quote-border-edge:
+    var(--chr-lapis-500);
+}
+
+/* Inline code — body-level <code> (not inside <pre>) */
+:root[data-theme="dark"] code:not(pre code) {
+  background: var(--code-bg, var(--chr-indigo-900));
+  color: var(--code-text, var(--chr-marble-100));
+  padding: 0.1em 0.3em;
+  border-radius: 0.25em;
+}
+
+/* Quote blocks — blockquote + Pack v3 literary classes */
+:root[data-theme="dark"] blockquote,
+:root[data-theme="dark"] .h-quote,
+:root[data-theme="dark"] .literary-quote {
+  background: var(--quote-bg, var(--chr-mihrab-800));
+  border-inline-start: 3px solid var(--quote-border-edge, var(--chr-lapis-500));
+  padding-inline-start: var(--space-4, 1rem);
+  padding-block: var(--space-2, 0.5rem);
+  border-radius: 0.5rem;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Worker 21 / Phase 5 — Bridge Discipline:
+   1. Light theme Linen-Bone (W12 P2) محفوظ — Phase 5 لمس tints فقط (لا base).
+   2. backward-compat shims لـ aurora-* / atelier-glow بدون تعديل قواعدها.
+   3. print: white bg + chr-mihrab text + tints as accents فقط (Worker 24
+      P5 سيُعمّق).
+   4. WCAG AA verification عبر Upg.chroma.verifyContrast() — 4.5:1 minimum
+      على كل text/bg pair.
+   5. selection + scrollbar + focus-ring جميعها tint-aware (تتبع tint
+      الصفحة الحالية).
+   6. Mihrab refinements: code bg = chr-indigo-900، quote bg = chr-mihrab-800
+      + border = chr-lapis-500.
+   7. لم نلمس IIFE الأصلي لـ Upg.chroma — Phase 5 يُمدّده عبر
+      additive freeze-replace في app.js (نفس نمط Worker 20 Phase 4/6).
+   8. CHROMATIC SOUL Worker 21 مكتمل عند هذا الحد — 5/5 phases.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* End CHROMATIC SOUL v3 — Worker 21 / Phase 5 — Theme Bridge ─────────── */
+/* End CHROMATIC SOUL v3 — WORKER 21 COMPLETE 5/5 ─────────────────────── */
