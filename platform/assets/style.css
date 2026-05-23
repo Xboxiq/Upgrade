@@ -23956,3 +23956,150 @@ body[data-block-debug="1"] [data-block-id][data-prereq]::after {
    5. لو كتبت @media query مع font-family → استعمل token، لا hex names.
    6. لا تخلط أكثر من 3 خطوط في stack واحد بعد الآن (نحن ضد cascade-collision).
    ════════════════════════════════════════════════════════════════════════════ */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   TASMEEM v3 — Font Forensics Inventory (Worker 20 / Phase 1)
+   ────────────────────────────────────────────────────────────────────────────
+   This block is documentation only. No CSS rules. Phase 2-3 used this
+   inventory to plan local font loading + token reroute. Kept on record
+   as the canonical Phase 1 deliverable per
+   prompts/v3/20_PHASE_1_FONT_FORENSICS.md (acceptance criteria #3).
+
+   ⚠ Retroactive note (2026-05-23):
+   Phase 1 originally landed via PR #76 with the minimum: (a) Google
+   Fonts <link> deletion, (b) the four --tasmeem-* status tokens, and
+   (c) state files. The inventory + discipline comment blocks the spec
+   asks for were not appended at the time. PR #81 and PR #82 attempted
+   to re-do Phase 1 from the same pre-merge base; neither carried this
+   block either, and both became unmergeable after Phase 2 + Phase 3
+   landed (PR #78, PR #79). This block + the discipline block below
+   close that gap — Phase 1 is now complete on record without touching
+   anything Phase 2 or Phase 3 produced.
+   ════════════════════════════════════════════════════════════════════════════
+
+   ─── Pre-Phase-1 baseline (as documented by spec) ──────────────────────────
+
+   Total font-family declarations:        252
+   font-family using var() (good):        ~64   (grew in P3)
+   font-family using direct strings:      ~188  (shrank in P3)
+   @font-face declarations existing:      0     (became 22 in P2/P3)
+   --font-display redefinitions:          6     (collapsed to 1 in P3)
+   Distinct font names mentioned:         9     (target stays at 9)
+
+   ─── --font-display redefinition map (pre-P3 history) ──────────────────────
+
+   Line 16010 — :root  (Cathedral v16 W12 P1)         — base stack with Cairo
+   Line 16265 — :root  (Cathedral v16 W12 P1B)        — Thmanyah ambition
+   Line 19706 — :root  (Resonance v2 W15 P2)          — Aref Ruqaa display
+   Line 19896 — :root  (Resonance v2 W15 P3)          — UI body refinement
+   Line 20060 — :root  (Resonance v2 W15 P5)          — Cairo fallback hardening
+   Line 20131 — :root  (Resonance v2 W15 P6)          — Per-page personality
+
+   FACT (pre-P3): only line 20131 (last redefinition) was active. The
+   five earlier were dead code (browser uses last cascade winner).
+   Phase 3 collapsed the surviving redefinitions into one clean :root.
+
+   ─── Distinct font families currently in stacks ────────────────────────────
+
+   Arabic Display:   Aref Ruqaa, Reem Kufi, Cairo, Tajawal
+   Arabic Body:      IBM Plex Sans Arabic, Readex Pro, Cairo, Tajawal
+   Latin:            Inter, system-ui, -apple-system
+   Mono:             JetBrains Mono, SF Mono, ui-monospace
+   Quote/Serif:      Fraunces (literary in psych/eq pages)
+   Ghost reference:  "Thmanyah" (mentioned but never loaded — phantom;
+                                 removed from active stacks in P3)
+
+   ─── Voice tokens from Resonance v2 (preserved by W20) ─────────────────────
+
+   --type-voice-hero          → Aref Ruqaa wordmark, gateway, hero
+   --type-voice-display       → Reem Kufi h1/h2 page sections
+   --type-voice-display-h     → Reem Kufi h3/h4 card titles
+   --type-voice-display-l     → Reem Kufi light display variant
+   --type-voice-body          → Readex Pro / IBM Plex Arabic paragraphs
+   --type-voice-body-lead     → Readex Pro lead paragraph
+   --type-voice-ui            → Tajawal labels, buttons, breadcrumbs
+   --type-voice-label         → Tajawal compact UI labels
+   --type-voice-numeric       → IBM Plex Arabic + JetBrains Mono tabular
+   --type-voice-num-tabular   → JetBrains Mono tabular numerals
+   --type-voice-code          → JetBrains Mono code blocks
+   --type-voice-accent        → Aref Ruqaa eyebrows, signatures, ornament
+   --type-voice-quote         → Fraunces literary quotes (psych/eq)
+   --type-voice-quote-literary→ Fraunces extended literary
+   --type-voice-latin         → Inter mixed-Latin paragraphs
+   --type-voice-eyebrow       → Aref Ruqaa Italic eyebrow overline
+   --type-voice-signature     → Aref Ruqaa Bold signatures
+   --type-voice-ribbon        → Aref Ruqaa ribbon
+   --type-voice-wordmark      → Aref Ruqaa + Reem Kufi wordmark
+   (19 tokens total — all preserved by W20; only their stack VALUES
+    were rerouted to local fonts in P3.)
+
+   ─── Phase 2 plan (foreshadow / now executed) ──────────────────────────────
+
+   Will download these from OFL/SIL sources to platform/assets/fonts/:
+
+   1. Aref Ruqaa            (400 + 700)
+   2. Reem Kufi             (400 + 500 + 600 + 700)
+   3. Cairo                 (400 + 600 + 700)
+   4. Tajawal               (300 + 400 + 500 + 700)
+   5. IBM Plex Sans Arabic  (300 + 400 + 500 + 600 + 700)
+   6. Readex Pro            (200 + 400 + 700)
+   7. Inter                 (variable 100..900)
+   8. JetBrains Mono        (400 + 500 + 700)
+   9. Fraunces              (variable opsz, ital)
+
+   Subsetting strategy:
+   - Arabic-script fonts: subset to Arabic Unicode block (U+0600-06FF)
+                          + Arabic Presentation Forms (U+FB50-FDFF, U+FE70-FEFF)
+                          + Arabic-Indic digits (U+0660-0669)
+                          + space + common punctuation (U+0020-007F selected)
+   - Latin fonts: subset to Latin Basic + Extended-A + numbers (U+0020-024F)
+   - Total budget: <= 280KB after subset (vs ~600KB unsubsetted from CDN).
+
+   ─── Phase 3 plan (foreshadow / now executed) ──────────────────────────────
+
+   - Collapse 6 --font-display redefinitions into ONE clean :root.
+   - REPLACE-IN-PLACE values of all --type-voice-* tokens to reference
+     local font names where applicable.
+   - Remove "Thmanyah" phantom from all stacks (replaced by real Aref Ruqaa).
+   - Add Upg.font IIFE with: list, voices, audit, isReady, computedFor,
+     status, swap, reset APIs (25th frozen Upg.* surface).
+   - Add tas-voice-* utility classes that wrap voice tokens.
+
+   ─── Discipline going forward ──────────────────────────────────────────────
+
+   1. NO direct font-family in CSS rules (after P3). Always var(--type-voice-*).
+   2. NO new --font-* token redefinitions in :root after P3.
+   3. NO Google Fonts link or any CDN font reference, ever.
+   4. NO new font family added without OFL/SIL license verification.
+   5. ALL @font-face declarations live in ONE block (style.css, post-P3).
+
+   ─── Post-W20 delta (recorded 2026-05-23, after P3 merged) ─────────────────
+
+   Total font-family declarations:        293   (delta +41 from P3 utilities)
+   font-family using var() (good):        182   (delta +118; tokens won)
+   font-family using direct strings:      27    (delta -161; legacy purged)
+   @font-face declarations:               29    (delta +29; 22 voices + 7 weights)
+   --font-display redefinitions remaining: 3    (legacy comments untouched;
+                                                 the active one in :root
+                                                 is the P3-collapsed block)
+   --type-voice-* tokens:                 19    (preserved as required)
+   Google Fonts URL count in index.html:  0     (must stay 0 forever)
+   --tasmeem-fonts-status:                "phase-3-bound"
+
+   END TASMEEM v3 — Phase 1 Inventory. Phase 2 and Phase 3 already shipped.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   Worker 20 / Phase 1 — Forensics Discipline:
+   1. النص أعلاه inventory فقط — لا قواعد فعلية.
+   2. لا تعدّل أي --font-* أو --type-voice-* استناداً لهذا التعليق وحده.
+   3. أي تحميل خط جديد يتم في Phase 2 (مكتمل).
+   4. أي @font-face إضافي يتم في Phase 2 (مكتمل).
+   5. الـ transitional banner من Phase 1 أُزيل في Phase 3 (متوقّع).
+   6. لو رأيت Google Fonts URL في git diff → fail fast.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* End TASMEEM v3 / Worker 20 / Phase 1 (finalized retroactively) ──────────── */
