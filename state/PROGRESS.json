@@ -1,27 +1,36 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-23T02:30:00Z",
+  "last_updated": "2026-05-23T12:00:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
     "pack": "v3",
-    "worker": "20",
-    "worker_name": "TASMEEM_RECONSTRUCTION",
-    "phase": 6,
-    "phases_total": 6,
+    "worker": "21",
+    "worker_name": "CHROMATIC_SOUL",
+    "phase": 1,
+    "phases_total": 5,
     "phase_order": [
       "1",
       "2",
       "3",
       "4",
-      "5",
-      "6"
+      "5"
     ],
-    "branch": "worker-20-devotio-phase6",
-    "status": "completed-pending-pr",
+    "branch": "worker-21-devotio",
+    "status": "in-progress",
     "blocker": null
   },
   "previous": {
+    "pack": "v3",
+    "worker": "20",
+    "worker_name": "TASMEEM_RECONSTRUCTION",
+    "phase": 6,
+    "phases_total": 6,
+    "branch": "worker-20-devotio-phase6",
+    "status": "completed",
+    "merged_pr": 86
+  },
+  "before_previous": {
     "pack": "v3",
     "worker": "20",
     "worker_name": "TASMEEM_RECONSTRUCTION",
@@ -30,16 +39,6 @@
     "branch": "worker-20-devotio-phase5",
     "status": "completed",
     "merged_pr": 85
-  },
-  "before_previous": {
-    "pack": "v3",
-    "worker": "20",
-    "worker_name": "TASMEEM_RECONSTRUCTION",
-    "phase": 4,
-    "phases_total": 6,
-    "branch": "worker-20-devotio-phase4",
-    "status": "completed",
-    "merged_pr": 83
   },
   "completed_phases": [
     {
@@ -679,10 +678,18 @@
       "phase": 6,
       "title": "Per-Page Type Signature — 15 personality blocks ([data-page-personality=\"X\"]) each overriding 2-5 voice tokens (--type-voice-display/body/hero/quote/numeric/eyebrow/code) + scoped --tracking-display/-hero/-eyebrow/-body fine-tuning (range -0.024em negotiation tightest → 0 lab/programming mono) + 1 --sig-active root marker for runtime introspection. Per-personality element rules: dashboard opsz 96 / callcenter uppercase eyebrow Latin 0.08em / fieldsales dlig+kern+liga+calt @600 / accountmgr Aref Ruqaa hero opsz 144 + dlig / social swsh+salt+dlig display / lab JetBrains Mono display + zero feat / psych italic literary quote with dlig+swsh+salt+ss01 / eq Aref Ruqaa hero @400 opsz 72 (lighter, emotional) / negotiation @600 body (assertive) / customercare Tajawal display @700 dlig / programming JetBrains Mono display + zero/calt/liga + code/pre feat / accounting tnum+lnum+zero+ss01 on qcalc-result-value/qcalc-value/stat-tile-value/cath-stat-value/tas-num-tabular @600 / phonerepair Cairo @700 / hrmastery Aref Ruqaa hero opsz 96 / myprogress Reem Kufi @500 (gentle journal). Forward-compat curriculum block (Pack v2 ritual scaffolded). W15 P6 compat layer: 4 generic class :not(.tas-voice-*) routes for .h-display/.h-quote/.h-body/.h-hero + .type-display/.type-quote/.type-hero — re-routes through var(--type-voice-*) for any [data-page-personality] scope (lower specificity than W15 P6 .page[data-page-personality] selectors, additive only). Upg.font EXTEND (additive freeze-replace pattern matching Phase 4) preserving Phase 3+4 surface verbatim + adding getPageSignature() returning {pageId, personality, sigActive, voiceDisplay/body/hero/quote/numeric, trackingDisplay/Hero, leadingRelaxed} + listSignatures() returning copy of 17-known list (15 + curriculum + default) + auditSignatures() returning {total, applied (unique), missing (unique), coverage %}. One-time silent log on DOMContentLoaded only when coverage=100%. Sacred preserved 100% (14 pages / 391 qcalc / 25 Upg.* APIs unchanged top-level / 19 voice tokens / W15 P6 .page[data-page-personality] block untouched / Phase 3+4+5 IIFEs untouched / 0 google fonts / no HTML changes / qcalc rhythm protected). Worker 20 final phase — closes TASMEEM RECONSTRUCTION 6/6.",
       "branch": "worker-20-devotio-phase6",
-      "lines_added": 410
+      "lines_added": 410,
+      "merged_pr": 86
+    },
+    {
+      "worker": "21",
+      "phase": 1,
+      "title": "Palette Forge — 12 Arabic cultural color palettes (Lapis لازوردي / Damascus دمشقي / Henna حنّاء / Saffron زعفران / Date-Palm نَخيل / Pearl لؤلؤ / Indigo نِيلي / Coral مرجان / Silt طمي النيل / Cedar أرز / Mihrab محراب / Marble رخام) × 10 stops each (50/100/200/300/400/500/600/700/800/900) = 120 oklch palette tokens + 4 Arabic-rooted semantic aliases (--chr-semantic-success=cedar / -warning=saffron / -danger=henna / -info=lapis) + 6 gradient pairs (lapis-mihrab / saffron-henna / palm-cedar / pearl-marble / mihrab-indigo / coral-saffron) + 3 metadata vars (--chr-stage='phase-1-palette-ready' / --chr-palettes-count='12' / --chr-stops-per-palette='10') + 1 --chr-active-tint var (default lapis-500) + 24 chr-text-* utilities (12 colors × 2 stops) + 38 chr-bg-* utilities (with contrast-paired text colors) + 12 chr-tint-* utilities (sets --chr-active-tint per scope) + 12 chr-border-* utilities + 6 chr-grad-* gradient utilities + 12 [data-chr-mood] data-attribute selectors + Forge Discipline comment block (8 rules). Color space: oklch (perceptually uniform, zero hex injected). Sacred preserved 100% (14 pages / 391 qcalc / 25 Upg.* APIs / 15 --tint-* names verbatim / --color-bg / paper-tone Linen-Bone W12 P2 light theme untouched / 0 google fonts / app.js untouched / index.html untouched). Phase 1 ADDS only — no existing token mutated. Phase 2 will swap dark base to Mihrab; Phase 3 will wire palette into the 15 identity tints + add Upg.chroma; Phase 4 will recast gradients; Phase 5 will bridge contrast + WCAG AA. Worker 21 opens CHROMATIC SOUL.",
+      "branch": "worker-21-devotio",
+      "lines_added": 390
     }
   ],
-  "next_action": "Open PR worker-20-devotio-phase6 → main (Worker 20 COMPLETE 6/6 phases). After merge, start Worker 21 Phase 1 (Palette Forge — CHROMATIC SOUL: 12 Arabic dye palettes redistributed across 15 identity tints).",
+  "next_action": "Continue Worker 21 Phase 2 (Dark Mihrab — replace --color-bg + --color-surface-0/1/2/3 in dark theme with Mihrab Indigo oklch values; Linen-Bone light theme preserved verbatim).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
