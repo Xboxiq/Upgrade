@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-22T16:45:00Z",
-  "pack": "v2-resonance",
+  "last_updated": "2026-05-22T21:23:27Z",
+  "pack": "v3",
   "pack_status": "in-progress",
   "current": {
-    "pack": "v2",
-    "worker": "17",
-    "worker_name": "CONTENT_REVIVAL",
-    "phase": 6,
+    "pack": "v3",
+    "worker": "20",
+    "worker_name": "TASMEEM_RECONSTRUCTION",
+    "phase": 1,
     "phases_total": 6,
     "phase_order": [
       "1",
@@ -17,13 +17,13 @@
       "5",
       "6"
     ],
-    "branch": "worker-17-resonance-p6",
+    "branch": "worker-20-devotio",
     "status": "in-progress",
     "specs_scaffolded": true,
-    "specs_branch": "pack-v2-worker-17-specs",
+    "specs_branch": null,
     "next_phase_branch": null,
-    "worker_complete": true,
-    "pr_pending": true
+    "worker_complete": false,
+    "pr_pending": false
   },
   "previous": {
     "pack": "v2",
@@ -641,9 +641,16 @@
       "title": "Session Pacing & Mastery Markers — 323 block-pacing chips inserted as siblings BEFORE every block with data-est-minutes >= 6 (3-state mastery toggle ○/◐/● cycling not-started→in-progress→mastered with localStorage persistence + 15/25/45 minute focus timer presets that hide preset group on start, show mm:ss countdown, log sessions ≥60 sec to upg.pace.focus.log capped at 500 entries) + 13 page-mastery-progress bars inserted INSIDE each content page's <header class='page-h'> just before </header> (3-tier gradient fill foundation→practitioner→expert sourced from --tier-* tokens + per-tier marker counts pre-computed at injection time + role='progressbar' aria-valuenow updates live) + 1 mastery heatmap section inserted INSIDE page-myprogress before its closing </section> (auto-fill 180px grid + per-page cards with bottom progress fill + 4 summary stats: total/mastered/in-progress/focus-hours). Upg.pace IIFE (25th top-level Upg.* namespace, ~380 JS lines) frozen surface with 11 methods (getMastery/setMastery/cycleMastery + startFocus/stopFocus/logFocus/totalFocusSeconds + refreshPageProgress/refreshAllProgress/renderHeatmap + states) + 3 CustomEvents (upg:pace:mastery / upg:pace:focus / upg:pace:focus:complete) + optional Upg.sound integration (plays 'tap' on mastery cycle, 'complete' on focus end) + lightweight MutationObserver re-binds only when relevant nodes added (avoids storms) + idempotent Python injector scripts/worker-17-pace.py (~290 lines, re-run produces 0 duplicates verified). CSS APPEND ~330 lines: .block-pacing chip + .mastery-toggle 3-state with oklch tints (60h amber for in-progress, 150h green for mastered) + .focus-presets/.focus-preset/.focus-active/.focus-stop timer chrome + .page-mastery-progress bar with linear-gradient fill across tier tokens + .page-mastery-progress-tiers markers with tri-color pip + .mp-heatmap-section + .heatmap-grid auto-fill + .heatmap-cell with absolute bottom fill + .mastery-summary 4-stat grid + dedicated reduced-motion + reduced-transparency + print + mobile <480px guards. Resonance doctrine applied: 'أتقنته' is the single most consequential word — converts reading from passive to reflective. Sacred preserved 100% (14 pages / 391 qcalc / 503 data-block-id / 26 block-tldr / 28 block-pitfalls / 62 block-practice / 62 data-related / 24 prior Upg.* APIs / 15 data-page-personality / zero block text edits / zero prior IIFE edits / 25 total Upg.* APIs after this phase). Worker 17 final phase — closes CONTENT REVIVAL.",
       "branch": "worker-17-resonance-p6",
       "lines_added": 7987
+    },
+    {
+      "worker": "20",
+      "phase": 1,
+      "title": "Font Forensics",
+      "branch": "worker-20-devotio",
+      "lines_added": 24
     }
   ],
-  "next_action": "Worker 17 complete (6/6 phases). Open PR worker-17-resonance-p6 → main with full Worker 17 summary. After user merges: run CONTENT_REORDER_RITUAL (consumes data-difficulty + data-prereq + data-est-minutes from W17). Then start Worker 18 (LEARNING_SHELL) Phase 1 — consumes Upg.practice (W17 P4) + Upg.pace (W17 P6) for the personal training shell.",
+  "next_action": "Continue Worker 20 Phase 2",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
@@ -685,7 +692,14 @@
         "phases": 6,
         "status": "completed",
         "current_phase": 6,
-        "phases_completed": [1, 2, 3, 4, 5, 6]
+        "phases_completed": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
       },
       {
         "id": "17",
@@ -693,7 +707,14 @@
         "phases": 6,
         "status": "completed-pending-pr",
         "specs_branch": "pack-v2-worker-17-specs",
-        "phases_completed": [1, 2, 3, 4, 5, 6]
+        "phases_completed": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
       },
       {
         "id": "18",

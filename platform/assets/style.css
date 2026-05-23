@@ -23511,3 +23511,19 @@ body[data-block-debug="1"] [data-block-id][data-prereq]::after {
    9. Zero telemetry. Zero sync. localStorage only. Zero CDN/library added.
    10. Reduced-motion + reduced-transparency + print + mobile all guarded.
    ════════════════════════════════════════════════════════════════ */
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   TASMEEM v3 — Font Forensics Inventory (Worker 20 / Phase 1)
+   Documentation-only block for Worker 20 transition to local fonts.
+   Baseline notes: direct font-family sprawl exists; voice tokens preserved;
+   Google Fonts removed from index.html in this phase.
+   Next: add local .woff2 @font-face assets in Phase 2, then rebind voices.
+   ════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --tasmeem-stage: "phase-1-forensics";
+  --tasmeem-fonts-status: "google-cdn-removed";
+  --tasmeem-fonts-local-loaded: "0/9";
+  --tasmeem-google-fonts-link-count: "0";
+}
