@@ -1,34 +1,35 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-23T20:00:00Z",
+  "last_updated": "2026-05-24T01:00:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
     "pack": "v3",
-    "worker": "21",
-    "worker_name": "CHROMATIC_SOUL",
-    "phase": 5,
-    "phases_total": 5,
+    "worker": "22",
+    "worker_name": "RITUAL_UI",
+    "phase": 1,
+    "phases_total": 6,
     "phase_order": [
       "1",
       "2",
       "3",
       "4",
-      "5"
+      "5",
+      "6"
     ],
-    "branch": "worker-21-devotio",
-    "status": "completed-pending-pr",
+    "branch": "worker-22-devotio-v2",
+    "status": "in-progress",
     "blocker": null
   },
   "previous": {
     "pack": "v3",
     "worker": "21",
     "worker_name": "CHROMATIC_SOUL",
-    "phase": 4,
+    "phase": 5,
     "phases_total": 5,
     "branch": "worker-21-devotio",
     "status": "completed",
-    "merged_pr": null
+    "merged_pr": 88
   },
   "before_previous": {
     "pack": "v3",
@@ -718,9 +719,16 @@
       "branch": "worker-21-devotio",
       "lines_added": 370,
       "lines_deleted": 0
+    },
+    {
+      "worker": "22",
+      "phase": 1,
+      "title": "Entry Ritual — 4s portal (mihrab veil + lapis glow + 7 arabic poetry lines, once-per-day localStorage gate, Esc/click skip, reduced-motion instant 800ms, Upg.ritual API: start/stop/disable/enable/status). 27th Upg.* namespace. Sacred preserved 100% (14 pages / 391 qcalc / 26 prior Upg.* APIs / 0 google fonts / no CDN).",
+      "branch": "worker-22-devotio-v2",
+      "lines_added": 439
     }
   ],
-  "next_action": "Open PR worker-21-devotio → main (Worker 21 CHROMATIC SOUL COMPLETE 5/5 phases). After merge, start Worker 22 Phase 1 (Entry Ritual — RITUAL UI: gateway entry threshold + identity lock onboarding ceremony).",
+  "next_action": "Continue Worker 22 Phase 2 (Reading Halo — zen mode, Cmd+. toggle, chrome dims, content glows).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
