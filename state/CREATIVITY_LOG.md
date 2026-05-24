@@ -98,11 +98,24 @@
 **Verified at commit:** 48c52f8
 
 ---STATS---
-total_beacons: 9
+total_beacons: 10
 unique_categories_used: 8
-avg_score: 4.22
+avg_score: 4.20
 last_5_avg: 4.0
-disruption_triggers: 0
+disruption_triggers: 1
 forbidden_violations: 0
 creativity_health: 100
-last_updated: 2026-05-24 / γ7
+last_updated: 2026-05-24 / γ8
+
+
+
+## γ8 — 2026-05-24
+**Beacon Type:** 🏛 STRUCTURAL_BEACON
+**The Surprise:** عالم وَرشة يَرفض شبكة الـ AI النظيفة. سطح الصفحة كله ورقة هندسية خضراء — شبكة 4mm + شبكة 20mm + خط أصفر باهت كل 80mm — كلها CSS بحت (4 طبقات repeating-linear-gradient، صفر SVG، صفر صور). فوقها كل `.card` يُزاح بـ ±3px ويُمال بـ ±0.35° حسب موقعه (`:nth-child(4n+1..4)`)، فالـ layout يَكشف **يداً بَنته**، لا خوارزميةً صفّته. شريط لاصق أصفر مائل بـ -3° على كل بطاقة كأنها وُسِمَت ثم وُضِعَت. عند الـ hover، الكارد ينتصب لحظياً (rotate(0)) ويَرتفع 2px — "لاحظتُك". الـ `[data-bench="tidy"]` على body يَنزع كل الإمالات لِـ a11y/print/screenshots. reduced-motion + print + forced-colors يَرجعان إلى grid مرتَّب تلقائياً.
+**Reference Avoided:** Forbidden #6 — bento grid مستطيلات بنفس padding + Forbidden #5 — card بـ shadow ناعم + 12px radius (Creativity Doctrine § ٣).
+**Inspired-by:** Wild Card #13 — Iraqi marsh architecture (reed mudhif structures): البناء يَكشف بنيته، كل عقدة قصب مرئية، الجمال من صدق التركيب.
+**User-Visible:** yes (every card in phonerepair + customercare is subtly off-grid; tidy mode is one keystroke / one Upg.worlds.warsha.setBench('tidy') away)
+**Originality Self-Score:** 4/5 — nth-child rotation isn't novel; combining a CSS-only engineering-paper bench surface (4 stacked gradients, no images) with deterministic per-slot skew that the user can toggle off, all under a Brutalist-honesty doctrine, is uncommon. Claim: most "imperfect" UIs use JS Math.random per render (jitter); few use stable nth-child hashes that survive re-render.
+**Files touched:** platform/assets/css/worlds/_warsha.css · platform/assets/js/elan/world-warsha.js · platform/assets/app.js
+**Verified at commit:** becc1bf
+**Pivot note:** γ8 spec proposed 🤚 INTERACTION_BEACON (long-press conic ring); γ5 already used INTERACTION (Hadeed stamp+sweep). Mandatory pivot per Creativity Doctrine § ٤. Long-press utility preserved as a world feature for sensitive ops, but the declared Beacon for γ8 is the structural bench.

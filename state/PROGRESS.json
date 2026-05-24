@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-24T03:00:00Z",
+  "last_updated": "2026-05-24T21:22:57.055Z",
   "pack": "v3-devotio",
   "pack_status": "all-done",
   "current": {
@@ -949,8 +949,8 @@
   "notes": "Pack v2 RESONANCE scaffolded under prompts/v2/. Path C selected by user: Meta + Worker 15 (full 6 phases) + Ritual = 15 files. Workers 16-19 + Ritual execution to follow in subsequent sessions. Cathedral v16 baseline preserved. All 19 Upg.* APIs, 14 pages, 391 qcalc references preserved. Previous Pack v1 history (v16 ATELIER): Phase 6 of Worker 14 shipped on branch worker-14-phase-6-final via PR #53. Inline 215->76 (139 removed) via deterministic node script + 330 lines Final Utilities Pack. New Upg.focusTrap IIFE auto-attaches to dialog/modal/qmodal/data-modal via MutationObserver, ESC-to-close, return-focus. Lighthouse boot helper (lazy imgs, decoding=async, pointer-enter prefetch markers). Sanity v16 verifies 19 Upg.* modules. sw.js rewrite (74->119 lines) versioned shell/assets/fonts caches, navigation network-first then offline.html fallback, SWR for assets and Google Fonts. Manifest 4 shortcuts (#dashboard, #callcenter, #myprogress, #accounting), 192/512 icon entries. Favicon v2 100x100 squircle rx=22, dual-color stroke gradient (#66FCF1 to #4F46E5). offline.html RTL Cairo, online auto-reload, retry button + home link. CHANGELOG v16 added at top. All 14 page sections, 391 qcalc, 15 identity tints preserved.",
   "elan_v4": {
     "current_pillar": "γ",
-    "current_stage": 7,
-    "current_stage_id": "γ7",
+    "current_stage": 8,
+    "current_stage_id": "γ8",
     "status": "in-progress",
     "started_at": "2026-05-24T00:00:00Z",
     "branch": "elan-γ-eight-worlds",
@@ -967,12 +967,13 @@
       "γ4",
       "γ5",
       "γ6",
-      "γ7"
+      "γ7",
+      "γ8"
     ],
     "beacons_this_session": 1,
     "creativity_health": 100,
-    "creativity_health_note": "After γ7: 9 Beacons (β2 TYPOGRAPHIC 4/5, β3 DATA 5/5, γ1 STRUCTURAL 4/5, γ2 TYPOGRAPHIC 5/5, γ3 VISUAL 4/5, γ4 MOTION 4/5, γ5 INTERACTION 4/5, γ6 CHROMATIC 4/5, γ7 SOUND 4/5). 8 unique categories (TYPOGRAPHIC×2, DATA, STRUCTURAL, VISUAL, MOTION, INTERACTION, CHROMATIC, SOUND), 0 violations → avg 4.22 → (4.22×20)+(8×5)-0 = 124 → capped at 100. Disruption-clean entry of SOUND breaks MOTION/INTERACTION/CHROMATIC streak.",
-    "next_action": "Continue Pillar γ with γ8 WARSHA (phonerepair + customercare). Beacon target: avoid SOUND/CHROMATIC/INTERACTION (last 3 used in γ5/γ6/γ7). Candidates: STRUCTURAL, TYPOGRAPHIC, VISUAL, DATA, META.",
+    "creativity_health_note": "After γ8: 10 Beacons, 8 unique categories (TYPOGRAPHIC×2, DATA, STRUCTURAL×2, VISUAL, MOTION, INTERACTION, CHROMATIC, SOUND), 0 violations → avg 4.20 → (4.20×20)+(8×5)-0 = 124 → capped at 100. STRUCTURAL chosen to break the SOUND/CHROMATIC/INTERACTION streak from γ5–γ7.",
+    "next_action": "Continue Pillar γ with γ9 SALOON (hrmastery + accountmgr) — last stage in γ. Spec proposes META_BEACON which is allowed (META unused this pillar). Then open PR for Pillar γ.",
     "β1_artifacts": {
       "branch": "elan-β-type-soul",
       "commit": "43be524",
@@ -1252,7 +1253,10 @@
       "branch": "elan-γ-eight-worlds",
       "commit": "48c52f8",
       "world_name": "tayyar",
-      "pages_assigned": ["social", "callcenter"],
+      "pages_assigned": [
+        "social",
+        "callcenter"
+      ],
       "_tayyar_css_lines": 292,
       "data_world_tayyar_selectors_in_tayyar_css": 40,
       "has_fallback_selectors_in_tayyar_css": 2,
@@ -1262,7 +1266,15 @@
       "world_tayyar_js_lines": 216,
       "app_js_imports_world_tayyar": 1,
       "Upg_worlds_tayyar_registered": true,
-      "Upg_worlds_tayyar_methods": ["play", "mute", "unmute", "toggle", "isMuted", "available", "arpeggio"],
+      "Upg_worlds_tayyar_methods": [
+        "play",
+        "mute",
+        "unmute",
+        "toggle",
+        "isMuted",
+        "available",
+        "arpeggio"
+      ],
       "Upg_apis_top_level_after": 31,
       "lines_added": 507,
       "lines_deleted": 5,
@@ -1276,10 +1288,20 @@
       "anchor_bg_hsl": "285 25% 8%",
       "ease_tayyar": "cubic-bezier(0.45, -0.4, 0.55, 1.4)",
       "duration_tayyar_ms": 520,
-      "background_layers": ["horizon-glow-radial", "scan-lines-1px-per-3px"],
+      "background_layers": [
+        "horizon-glow-radial",
+        "scan-lines-1px-per-3px"
+      ],
       "audio_files_added": 0,
-      "webaudio_arpeggio_hz": [220, 330, 440],
-      "webaudio_filter_sweep_hz": [600, 3200],
+      "webaudio_arpeggio_hz": [
+        220,
+        330,
+        440
+      ],
+      "webaudio_filter_sweep_hz": [
+        600,
+        3200
+      ],
       "webaudio_envelope_attack_ms": 8,
       "webaudio_envelope_release_ms": 130,
       "webaudio_peak_gain": 0.07,
@@ -1288,7 +1310,11 @@
       "respects_autoplay_policy": true,
       "mute_persists_via_localstorage": true,
       "world_js_to_alias_added": true,
-      "world_js_to_alias_revives_listeners": ["world-nada", "world-hadeed", "world-dhahab"],
+      "world_js_to_alias_revives_listeners": [
+        "world-nada",
+        "world-hadeed",
+        "world-dhahab"
+      ],
       "beacon_type": "SOUND_BEACON",
       "beacon_avoided": "Forbidden #16 toast-with-checkmark + generic notification ding",
       "beacon_inspired_by": "Wild Card #15 Synthwave + Khat (procedural electronic warmth)",
@@ -1311,6 +1337,73 @@
     },
     "pillars_total": 6,
     "stages_total": 39,
-    "stages_completed_count": 10
+    "stages_completed_count": 14,
+    "γ8_artifacts": {
+      "branch": "elan-γ-eight-worlds",
+      "commit": "becc1bf",
+      "world_name": "warsha",
+      "pages_assigned": [
+        "phonerepair",
+        "customercare"
+      ],
+      "_warsha_css_lines": 388,
+      "data_world_warsha_selectors_in_warsha_css": 54,
+      "bench_grid_repeating_linear_gradients": 5,
+      "bench_skew_nth_child_rules": 6,
+      "bench_rotate_transforms_total": 8,
+      "tidy_mode_rules": 5,
+      "reduced_motion_guards": 2,
+      "print_guard": 1,
+      "forced_colors_guard": 1,
+      "has_fallback_selectors": 1,
+      "world_warsha_js_exists": true,
+      "world_warsha_js_lines": 179,
+      "world_warsha_js_node_check_pass": true,
+      "app_js_imports_world_warsha": 1,
+      "Upg_worlds_warsha_registered": true,
+      "Upg_worlds_warsha_methods": [
+        "engage",
+        "disengage",
+        "setBench",
+        "getBench",
+        "HOLD_MS"
+      ],
+      "Upg_apis_top_level_after": 31,
+      "longpress_hold_ms": 650,
+      "haptic_tap_ms": 8,
+      "haptic_fire_pattern": [
+        12,
+        30,
+        12
+      ],
+      "longpress_event": "upg:longpress:fire",
+      "voice_display": "Boutros Modern Kufi",
+      "voice_body": "Vazirmatn",
+      "voice_accent": "JetBrains Mono",
+      "ember_color_hsl": "25 85% 52%",
+      "focus_color_hsl": "48 95% 55%",
+      "anchor_bg_hsl": "28 12% 18%",
+      "bench_color_hsl": "155 18% 22%",
+      "ease_warsha": "cubic-bezier(0.55, 0.1, 0.25, 1)",
+      "duration_warsha_ms": 280,
+      "shadow_style": "solid-drop-with-haze (workshop weight)",
+      "card_radius": "var(--r-2)",
+      "card_skew_max_deg": 0.35,
+      "card_offset_max_px": 3,
+      "bench_grid_minor_mm": 4,
+      "bench_grid_major_mm": 20,
+      "backdrop_filter_used": false,
+      "inline_svg_used": false,
+      "emoji_in_markup": false,
+      "lines_added": 566,
+      "lines_deleted": 4,
+      "files_modified": 2,
+      "files_added": 1,
+      "beacon_type": "STRUCTURAL_BEACON",
+      "beacon_avoided": "Forbidden #6 bento-grid sameness + #5 default soft-shadow card",
+      "beacon_inspired_by": "Wild Card #13 Iraqi marsh mudhif (reed temples celebrate construction)",
+      "beacon_self_score": 4,
+      "pivot_note": "γ8 spec proposed INTERACTION_BEACON (long-press) but γ5 already used INTERACTION; mandatory pivot per Creativity Doctrine § ٤. Long-press preserved as a world utility (not declared as Beacon)."
+    }
   }
 }

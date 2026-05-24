@@ -701,3 +701,80 @@ The spec asked for an empty `@layer themes` block in `style.css` (themes "deprec
 - Hibr (γ2), Naar (γ3), Nada (γ4), Hadeed (γ5), Dhahab (γ6) — untouched
 - 391 qcalc references — unaffected
 - No Google Fonts, no CDN, no audio assets
+
+
+
+---
+
+## γ8 — World 7: Warsha (Workshop) — 2026-05-24
+**Pillar:** γ EIGHT WORLDS
+**Stage:** 8 of 9
+**Branch:** `elan-γ-eight-worlds`
+**Verified at commit:** `becc1bf`
+
+### Before
+- `platform/assets/css/worlds/_warsha.css`: 7-line placeholder (1 `[data-world="warsha"]` selector, empty body)
+- `platform/assets/js/elan/world-warsha.js`: absent
+- `app.js` imports of `elan/world-warsha.js`: 0
+
+### After (verified by grep + node --check)
+
+| Domain | Key | Value |
+|---|---|---:|
+| CSS | `_warsha_css_lines` | 388 |
+| CSS | `data_world_warsha_selectors` | 54 |
+| CSS — Beacon | `bench_grid_repeating_linear_gradients` | 5 |
+| CSS — Beacon | `bench_skew_nth_child_rules` | 6 |
+| CSS — Beacon | `bench_rotate_transforms_total` | 8 |
+| CSS — Tidy | `data-bench=tidy_rules` | 5 |
+| CSS — Guards | `prefers-reduced-motion` | 2 |
+| CSS — Guards | `@media print` | 1 |
+| CSS — Guards | `forced-colors: active` | 1 |
+| JS | `world_warsha_js_lines` | 179 |
+| JS | `node --check` | pass |
+| JS — Public API | `Upg.worlds.warsha methods` | engage,disengage,setBench,getBench,HOLD_MS |
+| JS — Hold | `longpress_hold_ms` | 650 |
+| JS — Haptic | `tap_ms / fire_pattern` | 8 / [12,30,12] |
+| JS — Event | `upg:longpress:fire` | bubbling, detail.{action,world} |
+| App | `app.js imports world-warsha` | 1 |
+| Sacred | `page_sections` | 15 (preserved) |
+| Sacred | `data-world hooks` | 15 (preserved) |
+| Sacred | `inline_style_index` | 86 (unchanged) |
+| Sacred | `important_total_in_css` | 276 (unchanged) |
+| Sacred | `Upg.* top-level APIs` | 31 (unchanged — warsha nests under .worlds) |
+| Forbidden | `backdrop-filter` | 0 |
+| Forbidden | `inline <svg viewBox>` | 0 |
+| Forbidden | `font-awesome / material-icons` | 0 |
+| Forbidden | `emoji in markup` | 0 |
+| Stage budget | `lines_added / deleted` | 566 / 4 |
+| Stage budget | `files_modified / added` | 2 / 1 |
+
+### Files
+**Modified (2):**
+- `platform/assets/css/worlds/_warsha.css` (7 → 388 lines)
+- `platform/assets/app.js` (+1 import line)
+
+**Created (1):**
+- `platform/assets/js/elan/world-warsha.js` (179 lines, ESM, frozen `Upg.worlds.warsha`)
+
+**Untouched (sacred):**
+- `platform/index.html` (zero edits — γ1 already wired `data-world="warsha"` on phonerepair + customercare)
+- All other 7 world CSS files
+- All 92 legacy IIFE files
+- `core/*.js`, `MANIFEST.md`, `_legacy-*.js`
+
+### Beacon (declared)
+**Type:** 🏛 STRUCTURAL_BEACON — "Workshop Bench"
+**Surprise:** four-layer CSS engineering-paper grid + per-slot nth-child skew (±0.35°, ±3px), tidy-mode escape hatch.
+**Avoided:** Forbidden #6 (bento sameness) + #5 (default soft-shadow card)
+**Inspired-by:** Wild Card #13 — Iraqi marsh mudhif (reed temples that confess their construction)
+**Self-Score:** 4 / 5
+**Pivot note:** spec proposed 🤚 INTERACTION (long-press); γ5 already used INTERACTION → mandatory category pivot per Creativity Doctrine § ٤. Long-press feature retained as a world utility, not as the Beacon.
+
+### Verdict
+🟢 **structural** — Pillar γ now 8/9. Sacred preserved 100%. Forbidden Library
+violations remain at 0. Bench Beacon is reduced-motion-safe, print-safe,
+forced-colors-safe, and accessibility-toggleable. Next: γ9 SALOON — Pillar
+γ closes; PR follows.
+
+— Entry end —
