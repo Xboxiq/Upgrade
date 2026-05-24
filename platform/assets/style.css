@@ -1,5 +1,29 @@
 /* Auto-generated from arabic-training-platform-v12 (1) (4) (1) (1) (1).html — do not hand-edit */
 
+/* ════════════════════════════════════════════════════════════════════════
+   DECONSTRUCTION v3 — @layer Cascade System (Worker 23 / Phase 1)
+   ────────────────────────────────────────────────────────────────────────
+   Order matters: later layers override earlier (cascade order).
+   Pack v1/v2/v3 history wraps into these layers WITHOUT changing rules.
+   Phase 2 will use this to purge ~80% of the 271 !important declarations.
+   ────────────────────────────────────────────────────────────────────────
+   Layer purposes:
+     1. reset      — browser reset (margin/padding/box-sizing)
+     2. tokens     — :root variables (--color, --font, --tint, --chr-*, etc.)
+     3. base       — html, body, typography defaults, focus, selection
+     4. utilities  — atomic classes (tas-*, chr-*, rit-*, life-*, .h-*, etc.)
+     5. components — building blocks (.bento-*, .qcalc-*, .cath-*, .glass-*)
+     6. themes     — :root[data-theme="..."] overrides
+     7. overrides  — @media print/reduced-motion/etc. + intentional !important
+   ────────────────────────────────────────────────────────────────────────
+   Phase 1 strategy: declare 7 layers + WRAP three foundational regions
+   (default :root → tokens · [data-theme] blocks → themes · everything
+   else → components). Phase 2-5 progressively lift more rules into
+   their proper home layers. No CSS rule is modified — only WRAPPED.
+   ════════════════════════════════════════════════════════════════════════ */
+@layer reset, tokens, base, utilities, components, themes, overrides;
+
+@layer tokens {
 /* ═══════════════════════════════════════════════════════════════
    CATHEDRAL v14 — Sovereign Theme Tokens (Worker 11 / Phase 1)
    Layer: semantic tokens (5 surface levels + tinted shadows)
@@ -51,7 +75,9 @@
   --radius-xs:   4px;
   --radius-full: 999px;
 }
+}  /* ─── end @layer tokens (default :root foundation) ─── */
 
+@layer themes {
 /* Off-White Premium (Stripe-grade — warm, not stark white) */
 :root[data-theme="light"],
 html[data-theme="light"],
@@ -155,7 +181,9 @@ body[data-theme="dark"] {
   color-scheme: dark;
 }
 /* End CHROMATIC SOUL v3 / Phase 2 — Dark Mihrab REPLACE-IN-PLACE ────── */
+}  /* ─── end @layer themes (light + dark) ─── */
 
+@layer components {
 /* ═══════════════════════════════════════════════════════════════
    CATHEDRAL v14 — Icon Component (Worker 11 / Phase 2)
    Lucide-style: <i class="qi" data-icon="NAME"></i>
@@ -27936,3 +27964,24 @@ body[data-rit-time]:not([data-rit-time="default"]) .bento-card {
    ════════════════════════════════════════════════════════════════════════ */
 
 /* End RITUAL UI v3 / Phase 6 — Aura Deepening — Worker 22 COMPLETE 6/6 ── */
+
+}  /* ─── end @layer components (Worker 11-22 components/utilities/keyframes/media — wrapped en bloc; Phase 2-5 will lift sub-regions into reset/base/utilities/overrides) ─── */
+
+/* ════════════════════════════════════════════════════════════════════════
+   Worker 23 / Phase 1 — Layer Discipline:
+   1. ٧ layers ثابتة — لا تَخلق layer جديد بدون phase-spec.
+   2. كل قاعدة جديدة بعد Phase 1 يجب أن تكون داخل @layer.
+   3. القواعد الجذرية (:root tokens) في `tokens` layer.
+   4. Theme overrides ([data-theme="light"|"dark"]) في `themes` layer.
+   5. !important المتبقّية بعد Phase 2 توضع في `overrides` layer.
+   6. لا تَحذف Phase 1 wrapper braces قبل Phase 3 (Phase 2-3 يستعملها).
+   7. Cascade order is destiny: components < themes < overrides — احترم.
+   8. أي قاعدة بدون @layer = أعلى أولوية (unlayered) → استخدم بِحَذَر.
+   ────────────────────────────────────────────────────────────────────────
+   Reference probes (post Phase 1):
+   - grep -c '@layer' style.css                 → ≥4 (declaration + 3 blocks)
+   - grep -c '@layer tokens'                    → ≥2 (declaration + opener)
+   - grep -c '@layer themes'                    → ≥2 (declaration + opener)
+   - grep -c '@layer components'                → ≥2 (declaration + opener)
+   - grep -c '!important'                       → 271 (preserved verbatim)
+   ════════════════════════════════════════════════════════════════════════ */
