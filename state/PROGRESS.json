@@ -1,9 +1,27 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-24T19:30:00Z",
+  "last_updated": "2026-05-24T22:00:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
+    "pack": "v3",
+    "worker": "24",
+    "worker_name": "DUAL-FORM",
+    "phase": 3,
+    "phases_total": 5,
+    "phase_order": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "branch": "worker-24-devotio-p3",
+    "status": "in-progress",
+    "blocker": null,
+    "next_action": "Open PR for worker-24-devotio-p3 (Phase 3 — Swipe Gestures, 3 variants page/calc/dismiss + PointerEvents + RTL-aware + mobile-only ≤720px + Upg.touch API). Next session: Worker 24 Phase 4 (Haptic Layer — Vibration API patterns tap/success/warn/error/longpress + Upg.touch.haptic + opt-in toggle persisted)."
+  },
+  "previous": {
     "pack": "v3",
     "worker": "24",
     "worker_name": "DUAL-FORM",
@@ -17,11 +35,11 @@
       "5"
     ],
     "branch": "worker-24-devotio-p2",
-    "status": "in-progress",
-    "blocker": null,
-    "next_action": "Open PR for worker-24-devotio-p2 (Phase 2 — Bottom Nav, mobile-only ≤720px, 5 destinations + cmdk FAB + RTL-aware + safe-area). Next session: Worker 24 Phase 3 (Swipe Gestures — PointerEvents-based page-swipe + calc-swipe + dismiss-swipe + Upg.touch.swipe API)."
+    "status": "merged",
+    "merged_pr": 106,
+    "blocker": null
   },
-  "previous": {
+  "before_previous": {
     "pack": "v3",
     "worker": "24",
     "worker_name": "DUAL-FORM",
@@ -37,24 +55,6 @@
     "branch": "worker-24-devotio-p1",
     "status": "merged",
     "merged_pr": 105,
-    "blocker": null
-  },
-  "before_previous": {
-    "pack": "v3",
-    "worker": "23",
-    "worker_name": "DECONSTRUCTION",
-    "phase": 5,
-    "phases_total": 5,
-    "phase_order": [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5"
-    ],
-    "branch": "worker-23-devotio-p5",
-    "status": "merged",
-    "merged_pr": 103,
     "blocker": null
   },
   "completed_phases": [
@@ -833,9 +833,17 @@
       "branch": "worker-24-devotio-p2",
       "lines_added": 247,
       "lines_deleted": 0
+    },
+    {
+      "worker": "24",
+      "phase": 3,
+      "title": "Swipe Gestures — CREATE platform/assets/js/upg-touch-1.js (283 lines, 30th top-level Upg.* namespace, side-effect IIFE matching W23 P5 ESM convention) + 3 swipe variants (page-swipe horizontal on #main → window.navigateTo(next/prev) with Upg.shards.mountShard fallback / calc-swipe horizontal on .qcalc + [data-qcalc-group] → CustomEvent upg:calc:next | upg:calc:prev (bubbles) / dismiss-swipe vertical-down on document.body → Upg.ritual.exitHalo() gated by Upg.ritual.isHaloActive()) + shared attachSwipe(element, options) detector (PointerEvents-only, mouse excluded by default unless options.allowMouse, threshold 60px + velocity ≥ 0.3 px/ms + duration ≤ 600 ms, pointerdown/pointerup/pointercancel listeners with passive:true, returns detach() cleanup function) + 15-id PAGE_ORDER (dashboard / callcenter / fieldsales / accountmgr / social / lab / psych / eq / negotiation / customercare / programming / accounting / phonerepair / hrmastery / myprogress) + RTL-aware navigation logic (document.dir === 'rtl' → swipe LEFT = previous page, swipe RIGHT = next page, matches reading-direction expectation; LTR opposite) + getActivePageId resolver (.page.active → .page:not([hidden]) fallback) + isMobile() matchMedia(max-width: 720px) gate + isReducedMotion() probe + Object.frozen Upg.touch surface (attachSwipe / audit / PAGE_ORDER / config{threshold,velocityMin,timeMax,mobileBreak} / refresh) + idempotent guard (window.Upg.touch presence check) + auto-rebind on upg:nav:change (50ms setTimeout for calc + dismiss swipe) + APPEND ~67 lines to platform/assets/css/utilities.css (touch-action: pan-y on #main + .qcalc + [data-qcalc-group] mobile-only / touch-action: auto safety-belt reset on desktop ≥721px / .dual-swipe-hint opt-in fixed surface above bottom-nav using --dual-bottom-nav-h + --safe-bottom W24 P1+P2 tokens with --space-2/--space-3 fallbacks / .dual-swipe-hint--fade modifier with 1500ms ease 3s delay opacity transition / desktop ≥721px display:none / reduced-motion guard freezes hint transition) + EXTEND _compat.js EXPECTED list with 'touch' (29→30 APIs) + EXTEND app.js with import './js/upg-touch-1.js' after upg-nav-2.js + EXTEND sw.js PRECACHE with /assets/js/upg-touch-1.js + bump SW VERSION devotio-v3-w24-p2 → devotio-v3-w24-p3. Spec deviations from 24_PHASE_3_SWIPE_GESTURES.md: (1) renamed module upg-touch.js → upg-touch-1.js to match codebase naming convention (upg-shards-1, upg-life-1/2/3, upg-nav-1/2 etc.); (2) wrapped as IIFE side-effect module (no export) matching W23 P5 ESM-via-side-effect pattern instead of explicit export init() pattern (preserves exact W23 P5 convention); (3) targeted #main as page-host instead of #page-host (reality: index.html uses <main id=\"main\"> per W23 P4 not a separate page-host wrapper); (4) page-swipe primary navigation route uses window.navigateTo not Upg.shards.mountShard since mountShard refuses while inline copies present (W23 P4 contract — shards staged not active); (5) calc-swipe selector .qcalc + [data-qcalc-group] (codebase uses .qcalc not .qcalc-panel; outermost-only via parentElement.closest('.qcalc') === null check to avoid double-firing on nested .qcalc-body etc.); (6) dismiss-swipe binds to document.body globally and gates via Upg.ritual.isHaloActive() instead of binding directly to [data-rit-halo-target] (the target attribute is set dynamically per enterHalo call — body+gate is safer for cross-page reuse). Sacred preserved 100% (15 page sections / 391 qcalc / 30 unique Upg.* APIs (was 29, +Upg.touch) / 0 google fonts / 0 CDN / desktop sidebar untouched / desktop swipe excluded via @media gate / Phase 1 dvh & safe-area baseline untouched / Phase 2 bottom-nav untouched / W22 P2 reading-halo consumed read-only / no HTML changes / app.js gains 1 import line / sw.js gains 1 PRECACHE entry + version bump). Module passes node --check; brace balance verified.",
+      "branch": "worker-24-devotio-p3",
+      "lines_added": 357,
+      "lines_deleted": 0
     }
   ],
-  "next_action": "Open PR for worker-24-devotio-p2 (Worker 24 / Phase 2 — Bottom Nav). Next session: Worker 24 Phase 3 (Swipe Gestures — PointerEvents-based page-swipe + calc-swipe + dismiss-swipe + Upg.touch.swipe API surface introduction).",
+  "next_action": "Open PR for worker-24-devotio-p3 (Worker 24 / Phase 3 — Swipe Gestures). Next session: Worker 24 Phase 4 (Haptic Layer — Vibration API patterns tap/success/warn/error/longpress + Upg.touch.haptic sub-namespace + opt-in toggle persisted via localStorage upg.touch.haptic.enabled).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
