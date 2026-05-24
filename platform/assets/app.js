@@ -103,6 +103,7 @@ import './js/upg-aura-2.js';
 import './js/upg-layer-1.js';
 import './js/upg-layer-2.js';
 import './js/upg-shards-1.js';
+import './js/upg-nav-2.js';
 
 // Phase 5/C: verify backward-compat shim (window.Upg.* checklist)
 import './js/_compat.js';

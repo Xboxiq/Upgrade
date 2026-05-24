@@ -1100,3 +1100,186 @@ html, body {
 }
 
 /* End DUAL-FORM v3 / Phase 1 — Safe-Area Chrome ──────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   DUAL-FORM v3 — Bottom Nav Visual (Worker 24 / Phase 2)
+   Mobile-only navigation. Floating-style. Desktop sidebar untouched.
+
+   Discipline:
+   1. Mobile-only — hidden على >720px.
+   2. ٥ destinations ثابتة (لا تَخلق ٦).
+   3. Touch target ≥ 44×44px على كل عنصر.
+   4. Active tab يَستعمل --color-tint للصفحة الحالية.
+   5. Center FAB يَفتح command palette (Cmd+K equivalent).
+   6. RTL-aware: في عربي، الترتيب تلقائياً يُعكَس بسبب dir="rtl".
+   ════════════════════════════════════════════════════════════════════════ */
+
+.dual-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  inset-inline: 0;
+  display: none;  /* default: hidden on desktop */
+  z-index: 700;
+  padding-block: var(--space-2, 0.5rem);
+  padding-bottom: max(var(--space-2, 0.5rem), var(--safe-bottom, 0px));
+  padding-inline-start: max(var(--space-2, 0.5rem), var(--safe-left, 0px));
+  padding-inline-end:   max(var(--space-2, 0.5rem), var(--safe-right, 0px));
+  background: var(--dual-bottom-nav-bg);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border-top: 1px solid var(--dual-bottom-nav-border);
+  /* Slide up on initial appear */
+  transform: translateY(0);
+  transition: transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (max-width: 720px) {
+  .dual-bottom-nav {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-1, 0.25rem);
+    align-items: center;
+    justify-items: center;
+  }
+}
+
+@media (min-width: 721px) {
+  .dual-bottom-nav {
+    display: none !important;  /* desktop never */
+  }
+}
+
+/* prefers-reduced-transparency fallback — solid surface, no blur */
+@media (prefers-reduced-transparency: reduce) {
+  .dual-bottom-nav {
+    background: var(--color-surface-1, #fbf8f3);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+.dual-bottom-nav-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: var(--space-1, 0.25rem) var(--space-2, 0.5rem);
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted, color-mix(in oklch, var(--color-text, #1c1c1e) 64%, transparent));
+  text-decoration: none;
+  font-family: var(--type-voice-label, var(--font-text, system-ui));
+  cursor: pointer;
+  border-radius: 12px;
+  transition: color 160ms ease, background 160ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dual-bottom-nav-item:hover,
+.dual-bottom-nav-item:focus-visible {
+  color: var(--color-text, #1c1c1e);
+  background: color-mix(in oklch, var(--color-tint, var(--chr-lapis-500, #2d4a8a)) 12%, transparent);
+}
+
+.dual-bottom-nav-item:focus-visible {
+  outline: 2px solid var(--color-tint, var(--chr-lapis-500, #2d4a8a));
+  outline-offset: 2px;
+}
+
+/* Active tab — uses current page tint */
+.dual-bottom-nav-item[data-active="true"] {
+  color: var(--color-tint, var(--chr-lapis-500, #2d4a8a));
+}
+.dual-bottom-nav-item[data-active="true"]::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.dual-bottom-nav-icon {
+  width: 22px;
+  height: 22px;
+  color: currentColor;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.dual-bottom-nav-label {
+  font-size: 0.65rem;
+  line-height: 1;
+  letter-spacing: 0;
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Center button — FAB style, slightly elevated */
+.dual-bottom-nav-center {
+  background: var(--color-tint, var(--chr-lapis-500, #2d4a8a));
+  color: white;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  margin-block-start: -16px;  /* lifted above the row */
+  box-shadow: var(--dual-bottom-nav-shadow);
+}
+.dual-bottom-nav-center:hover,
+.dual-bottom-nav-center:focus-visible {
+  background: var(--color-tint-edge, var(--chr-lapis-700, #1f3568));
+  color: white;
+}
+.dual-bottom-nav-center[data-active="true"] {
+  /* center FAB never shows the tiny dot since its color is fully filled */
+  color: white;
+}
+.dual-bottom-nav-center[data-active="true"]::before {
+  display: none;
+}
+.dual-bottom-nav-center .dual-bottom-nav-icon {
+  width: 26px;
+  height: 26px;
+}
+
+/* Slide-up animation on first paint */
+@keyframes dual-bottom-nav-rise {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+@media (max-width: 720px) and (prefers-reduced-motion: no-preference) {
+  .dual-bottom-nav {
+    animation: dual-bottom-nav-rise 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dual-bottom-nav {
+    animation: none !important;
+    transition: none !important;
+  }
+  .dual-bottom-nav-item {
+    transition: none !important;
+  }
+}
+
+/* Push page-host content up by nav height when nav is visible (mobile) */
+@media (max-width: 720px) {
+  body[data-bottom-nav="visible"] #page-host,
+  body[data-bottom-nav="visible"] main[data-shard-host],
+  body[data-bottom-nav="visible"] main.main-content {
+    padding-bottom: calc(var(--dual-bottom-nav-h, 64px) + max(var(--space-4, 1rem), var(--safe-bottom, 0px)));
+  }
+}
+
+/* End DUAL-FORM v3 / Phase 2 — Bottom Nav ──────────────────────────────── */

@@ -1,9 +1,27 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-24T18:00:00Z",
+  "last_updated": "2026-05-24T19:30:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
+    "pack": "v3",
+    "worker": "24",
+    "worker_name": "DUAL-FORM",
+    "phase": 2,
+    "phases_total": 5,
+    "phase_order": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "branch": "worker-24-devotio-p2",
+    "status": "in-progress",
+    "blocker": null,
+    "next_action": "Open PR for worker-24-devotio-p2 (Phase 2 — Bottom Nav, mobile-only ≤720px, 5 destinations + cmdk FAB + RTL-aware + safe-area). Next session: Worker 24 Phase 3 (Swipe Gestures — PointerEvents-based page-swipe + calc-swipe + dismiss-swipe + Upg.touch.swipe API)."
+  },
+  "previous": {
     "pack": "v3",
     "worker": "24",
     "worker_name": "DUAL-FORM",
@@ -17,11 +35,11 @@
       "5"
     ],
     "branch": "worker-24-devotio-p1",
-    "status": "in-progress",
-    "blocker": null,
-    "next_action": "Open PR for worker-24-devotio-p1 (Phase 1 — dvh & safe-area). Next session: Worker 24 Phase 2 (Bottom Nav — mobile-only ≤720px, 5 destinations, RTL-aware)."
+    "status": "merged",
+    "merged_pr": 105,
+    "blocker": null
   },
-  "previous": {
+  "before_previous": {
     "pack": "v3",
     "worker": "23",
     "worker_name": "DECONSTRUCTION",
@@ -37,24 +55,6 @@
     "branch": "worker-23-devotio-p5",
     "status": "merged",
     "merged_pr": 103,
-    "blocker": null
-  },
-  "before_previous": {
-    "pack": "v3",
-    "worker": "23",
-    "worker_name": "DECONSTRUCTION",
-    "phase": 4,
-    "phases_total": 5,
-    "phase_order": [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5"
-    ],
-    "branch": "worker-23-devotio-p4",
-    "status": "merged",
-    "merged_pr": 102,
     "blocker": null
   },
   "completed_phases": [
@@ -825,9 +825,17 @@
       "branch": "worker-24-devotio-p1",
       "lines_added": 119,
       "lines_deleted": 9
+    },
+    {
+      "worker": "24",
+      "phase": 2,
+      "title": "Bottom Nav — mobile-only ≤720px floating navigation + 5 destinations (الرئيسية → page-dashboard / التدريب → page-lab / مَركز الأوامر center FAB → Upg.cmdk.open / التقدّم → page-myprogress / المزيد → Upg.nav.openDrawer mobile drawer fallback toggleDrawer) + RTL-aware order via inherited dir=rtl + safe-area-aware bottom/inline padding via max() merge of --space-* with --safe-bottom/left/right tokens (Phase 1 baseline) + slide-up rise animation (dual-bottom-nav-rise 400ms cubic-bezier(0.4,0,0.2,1)) gated by @media (max-width: 720px) AND prefers-reduced-motion: no-preference + dedicated reduced-motion guard silencing animation+transition + reduced-transparency guard reverting to solid surface (no backdrop-filter) + 5 --dual-bottom-nav-* tokens APPENDED to tokens.css (bg with color-mix oklch 88% surface-1 + transparent / border / radius 20px / shadow inheriting --shadow-c-lg / h 64px) + ~165 lines APPENDED to chrome.css (.dual-bottom-nav fixed bottom inset-inline:0 z-index:700 with grid 5 columns repeat / .dual-bottom-nav-item flex column 44×44 minimum tap target with focus-visible outline 2px + active::before 4px dot indicator at top using currentColor / .dual-bottom-nav-center FAB 56×56 lifted -16px with --color-tint background and white icon / desktop @media (min-width: 721px) display:none !important / body[data-bottom-nav=visible] reserves padding-bottom on #page-host/main[data-shard-host]/main.main-content equal to nav h + safe-bottom max-merged with space-4) + AUGMENT platform/index.html before </body> with <nav id=\"dual-bottom-nav\"> structure (5 items: 2 anchors + center button + 1 anchor + button-more, each with inline 24×24 SVG icon + Arabic label .dual-bottom-nav-label except center FAB icon-only + aria-label per item + aria-current=page on data-active) + CREATE platform/assets/js/upg-nav-2.js (146-line ESM IIFE side-effect module: idempotent guard window.__upgBottomNavWired / matchMedia(max-width: 720px) listener (modern addEventListener + Safari < 14 addListener fallback) writes body[data-bottom-nav=visible|absent] / resolveActivePageId 3-tier fallback chain (visible section.page → location.hash → .nav-item.active[data-page]) / updateBottomNavActive applies data-active=true and aria-current=page only on matching shard / handleBottomNavClick delegates closest .dual-bottom-nav-item: data-shard → navigateToPage 3-tier fallback (window.navigateTo → Upg.shards.mountShard → location.hash) / data-action cmdk-open → Upg.cmdk.open / data-action more-open → Upg.nav.openDrawer with toggleDrawer fallback / wires document click + upg:nav:change + upg:page:change + window hashchange + DOMContentLoaded boot or immediate boot if document already loaded) + APPEND import './js/upg-nav-2.js' to platform/assets/app.js after upg-shards-1.js + APPEND PRECACHE entry to platform/sw.js + bump SW VERSION devotio-v3-w23-p5-2026-05 → devotio-v3-w24-p2-2026-05. Sacred preserved 100% (15 page sections / 391 qcalc / 29 unique Upg.* APIs unchanged / 0 google fonts / 0 CDN / desktop sidebar untouched / Phase 1 dvh & safe-area baseline untouched / no new top-level Upg.* — Phase 4 introduces Upg.touch). Spec deviations from 24_PHASE_2_BOTTOM_NAV.md: (1) routed التدريب data-shard to lab not curriculum (no page-curriculum exists in 15 sections, lab is closest match with cross-page interactive labs); (2) used window.navigateTo as primary navigation since Upg.shards.mountShard refuses while inline copies present (W23 P4 contract); (3) used Upg.nav.openDrawer for more-open since Upg.chrome lacks openSidebar/toggleSidebar in current build; (4) created upg-nav-2.js as new IIFE rather than editing upg-nav-1.js to preserve W11 surface verbatim per Pack v3 ESM discipline.",
+      "branch": "worker-24-devotio-p2",
+      "lines_added": 247,
+      "lines_deleted": 0
     }
   ],
-  "next_action": "Open PR for worker-24-devotio-p1 (Worker 24 / Phase 1 — dvh & safe-area). Next session: Worker 24 Phase 2 (Bottom Nav — mobile-only ≤720px, 5 destinations, RTL-aware).",
+  "next_action": "Open PR for worker-24-devotio-p2 (Worker 24 / Phase 2 — Bottom Nav). Next session: Worker 24 Phase 3 (Swipe Gestures — PointerEvents-based page-swipe + calc-swipe + dismiss-swipe + Upg.touch.swipe API surface introduction).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
