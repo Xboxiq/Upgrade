@@ -57,3 +57,61 @@ N/A — هذه أول baseline measurement لمشروع v4.
 الأولوية التالية: α2 Token Architecture (يبني الأساس لـ β + γ).
 
 — Entry end —
+
+
+
+---
+
+## α2 — Token Architecture — 2026-05-24
+**Pillar:** α FOUNDATION
+**Stage:** 2 of 3
+**Branch:** `elan-α-foundation`
+**Verified at commit:** `de67c20`
+
+### Before
+- `tokens.css`: 289 lines (mixed concerns: tokens + 16 @font-face + viewport tokens + bottom-nav + print)
+- 0 files in `tokens/` (directory absent)
+- 0 files in `worlds/` (directory absent)
+- @font-face declarations in tokens.css: **16** (real, plus 1 in a comment string)
+
+### After (verified by grep)
+
+| Domain | Key | Value |
+|---|---|---:|
+| Architecture | `tokens_css_lines` | 23 |
+| Architecture | `tokens_css_imports` | 13 |
+| Architecture | `tokens_dir_files` | 5 |
+| Architecture | `worlds_dir_files` | 8 |
+| Architecture | `fontface_in_tokens_real` | 0 |
+| Architecture | `fontface_in_tokens_dir_real` | 0 |
+| Architecture | `legacy_fontface_preserved` | 16 |
+| Architecture | `important_added_in_tokens` | 0 |
+| Stability | `important_total` | 276 (unchanged) |
+| Stability | `js_files_total` | 92 (unchanged) |
+
+### Files
+**Created (14):**
+- `platform/assets/css/_legacy-fontface.css` (preservation; β1 will replace)
+- `platform/assets/css/tokens/_color.css` (78 L)
+- `platform/assets/css/tokens/_space.css` (76 L; preserves `--dual-*`, `--print-*`, `--vh-*`, `--dvh-*` aliases)
+- `platform/assets/css/tokens/_type.css` (51 L; 18 voice slots fallback)
+- `platform/assets/css/tokens/_motion.css` (38 L; 5 ease + 6 duration)
+- `platform/assets/css/tokens/_breakpoint.css` (21 L)
+- 8 × `platform/assets/css/worlds/_<world>.css` placeholders (≤ 8 lines each)
+
+**Modified (2):**
+- `platform/assets/css/tokens.css` (289 → 23 lines; pure imports)
+- `platform/assets/style.css` (added `@import` for `_legacy-fontface.css`)
+
+**Untouched:**
+- All 92 JS files
+- `platform/index.html` (32107 lines, 0 edits)
+- `pages.css`, `motion.css`, `chrome.css`, `utilities.css`, `base.css`
+
+### Verdict
+🟢 **structural** — Foundation reorganized without visual or behavioral break.
+13-import discipline established. Worlds/ scaffold ready for γ.
+Backward-compat aliases preserve every legacy var name still referenced.
+Next priority: α3 Module Manifest (92 → ≤ 28 JS files via ESM consolidation).
+
+— Entry end —
