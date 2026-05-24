@@ -1,0 +1,91 @@
+{
+  "pack": "v3",
+  "worker": "23",
+  "worker_name": "DECONSTRUCTION",
+  "phase_completed": 3,
+  "phases_total": 5,
+  "branch": "worker-23-devotio-p3",
+  "phase_title": "CSS Shatter",
+  "files_touched": {
+    "modified": [
+      "platform/assets/style.css"
+    ],
+    "created": [
+      "platform/assets/css/tokens.css",
+      "platform/assets/css/base.css",
+      "platform/assets/css/utilities.css",
+      "platform/assets/css/chrome.css",
+      "platform/assets/css/pages.css",
+      "platform/assets/css/motion.css",
+      "scripts/shatter-css.mjs"
+    ],
+    "deleted_after_commit": [
+      "scripts/shatter-css.mjs"
+    ]
+  },
+  "lines_added_total": 31747,
+  "lines_deleted_total": 27976,
+  "net_lines": 3771,
+  "shatter_routing": {
+    "tokens-aux_into_tokens.css": 16,
+    "base": 8,
+    "utilities": 855,
+    "chrome": 165,
+    "pages": 3975,
+    "motion": 120,
+    "total_top_level_rules": 5139
+  },
+  "file_sizes": {
+    "style_css_entry": 149,
+    "tokens_css": 208,
+    "base_css": 47,
+    "utilities_css": 2641,
+    "chrome_css": 1038,
+    "pages_css": 26404,
+    "motion_css": 1031
+  },
+  "tokens_added": [],
+  "fonts_added_offline": [],
+  "devotion_notes": "Monolith 28K-line ميت. ٦ ملفات مُتخصّصة حية. كل واحد يَفعَل شيئاً واحداً، يَفعله بِأمانة. tokens.css = الجذور · base.css = الأساس · utilities.css = الأدوات الذرّية · chrome.css = الإطار · pages.css = القلوب الـ 14 · motion.css = النفَس. The cascade tier of every rule was preserved — split is purely organizational; Phase 4-5 may promote utilities to layer(utilities) once regression-verified. كل @import نسبي · صفر CDN · يعمل offline 100%.",
+  "offline_check": {
+    "external_requests": 0,
+    "cdn_links_in_index_html": 0,
+    "cdn_links_in_style_css": 0,
+    "google_fonts_post_w20p1": 0,
+    "all_imports_relative": true
+  },
+  "preservation_check": {
+    "pages_in_index_html": 14,
+    "qcalc_references": 391,
+    "upg_apis_top_level": 28,
+    "google_fonts": 0,
+    "layer_declarations": 4,
+    "layer_block_form_in_entry": 1,
+    "layer_block_themes_inline": true,
+    "important_occurrences_actual": 308,
+    "important_occurrences_baseline": 310,
+    "important_baseline_delta_explanation": "2 occurrences lost from doc-comment-text mentions in original Phase 1 banner ('intentional !important' / 'will purge !important'); zero CSS rules lost",
+    "important_lines_grep_c": 265,
+    "important_target_post_p2": 310,
+    "regression_alarm": false,
+    "brace_balance": {
+      "style_css_open": 3,
+      "style_css_close": 3,
+      "css_dir_total_open": 5700,
+      "css_dir_total_close": 5700,
+      "delta_from_monolith": -2,
+      "delta_explanation": "tokens @layer wrapper removed (1 pair) + components @layer wrapper removed (1 pair); themes block preserved in entry"
+    }
+  },
+  "known_limitations": {
+    "upg_layer_audit_under_reports": "Upg.layer.audit() / auditImportant() walk document.styleSheets but do not recurse into CSSImportRule.styleSheet — they will under-report rule counts after Phase 3 (only the inline @layer themes + declaration form visible). Browser cascade still works correctly. Future patch session or Phase 5 may extend the walker. Phase 3 spec mandates app.js NOT-TO-TOUCH so this is deferred."
+  },
+  "next_action": "Continue Worker 23 Phase 4 (HTML Template Split — break index.html monolith into shell + 14 page-shards via <template> injection)",
+  "phase_3_strategy": {
+    "split_method": "brace-aware + comment-aware + string-aware iterator over @layer components content",
+    "classifier": "regex-based selector pattern matching (chrome → utilities → base → default-pages); @-rules routed to motion (keyframes / a11y media / print / forced-colors) or pages (responsive media / supports / sub-:root)",
+    "cascade_preservation": "all @imports use layer(components) except tokens.css → layer(tokens) and base.css → layer(base); themes inline in entry; ZERO rules shifted to a different cascade tier in Phase 3",
+    "splitter_idempotency": "re-running shatter-css.mjs against the (already-shattered) entry style.css would fail to find @layer components { ... } — script is one-shot by design; cleanup commit removes it",
+    "splitter_lifecycle": "scripts/shatter-css.mjs committed for audit trail in this same phase 3 commit; deleted in subsequent state-cleanup commit per spec Step 6"
+  }
+}

@@ -1,0 +1,1031 @@
+/* ════════════════════════════════════════════════════════════════════════
+   DEVOTIO v3 — motion.css (Worker 23 / Phase 3 — CSS Shatter)
+   Generated: 2026-05-24
+   ────────────────────────────────────────────────────────────────────────
+   Purpose: All @keyframes + a11y guards (@media prefers-reduced-motion / prefers-reduced-transparency / forced-colors) + @media print + @page rules.
+   Imported via: @import url("./css/motion.css") layer(<L>) from style.css.
+   Cascade: rules retain their pre-P3 layer position (split is purely
+            organizational; no cascade tier was changed in Phase 3).
+   ════════════════════════════════════════════════════════════════════════ */
+
+@keyframes qi-spin   { to { transform: rotate(360deg); } }
+
+@keyframes qi-pulse  { 0%,100% { opacity:1; } 50% { opacity:.55; } }
+
+@keyframes qi-bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .qi-spin svg, .qi-pulse, .qi-bounce { animation: none; }
+}
+
+@keyframes qlAmbientDrift {
+      0%   { transform: translate3d(0, 0, 0) scale(1);    opacity: 0.85; }
+      50%  { transform: translate3d(-10px, 6px, 0) scale(1.03); opacity: 1; }
+      100% { transform: translate3d(12px, -8px, 0) scale(1.02); opacity: 0.9; }
+    }
+
+@keyframes qlGlowPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(102,252,241,0.35); }
+      50%      { box-shadow: 0 0 0 10px rgba(102,252,241,0); }
+    }
+
+@keyframes pageFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+@keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+      50%       { box-shadow: 0 0 0 5px rgba(34,197,94,0); }
+    }
+
+@keyframes p1-radar-in {
+      0%   { transform: scale(0.1); opacity: 0; }
+      60%  { opacity: 1; }
+      100% { transform: scale(1);   opacity: 1; }
+    }
+
+@keyframes p1-pulse {
+      0%,100% { opacity: 1; }
+      50%     { opacity: 0.35; }
+    }
+
+@keyframes loadBar {
+  from { width:0; }
+  to   { width:100%; }
+}
+
+@keyframes skelShimmer {
+  0%   { background-position:200% 0; }
+  100% { background-position:-200% 0; }
+}
+
+@keyframes qlAuroraDrift {
+  0%   { transform: translate3d(0, 0, 0)         scale(1);    }
+  25%  { transform: translate3d(-2%, 1.5%, 0)    scale(1.04); }
+  50%  { transform: translate3d(2.5%, -1%, 0)    scale(1.06); }
+  75%  { transform: translate3d(-1.5%, -2%, 0)   scale(1.03); }
+  100% { transform: translate3d(1%, 2%, 0)       scale(1.05); }
+}
+
+@keyframes qlHaloRotate {
+  to { --halo-angle: 360deg; }
+}
+
+@keyframes qlHeaderSweep {
+  from { transform: scaleX(0);   opacity: 0; }
+  to   { transform: scaleX(1);   opacity: 0.85; }
+}
+
+@keyframes qlVTFadeOut { to   { opacity: 0; } }
+
+@keyframes qlVTFadeIn  { from { opacity: 0; } }
+
+@keyframes sfModalIn { from { opacity: 0; } to { opacity: 1; } }
+
+@keyframes sfCardIn  { from { opacity: 0; transform: translateY(12px) scale(.98); }
+                       to   { opacity: 1; transform: none; } }
+
+@media print {
+  #page-accountmgr .qbr-card { border: 1px solid #999; background: #fff; color: #000; }
+  #page-accountmgr .qbr-list li { background: #fff; border-inline-start: 3px solid #333; }
+  #page-accountmgr .qbr-list span { color: #333; }
+}
+
+@media print {
+  #page-fieldsales .cheat-sheet { background: #fff; border: 1px solid #999; }
+  #page-fieldsales .cheat-sheet .cs-col { background: #fff; border: 1px solid #ccc; color: #000; page-break-inside: avoid; }
+  #page-fieldsales .cheat-sheet h6, #page-fieldsales .cheat-sheet li b { color: #0f766e; }
+  #page-fieldsales .cheat-sheet li { color: #000; }
+  #page-fieldsales .sales-progress { display: none; }
+}
+
+@keyframes vs-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(1.4); }
+}
+
+@keyframes vs-pulse-btn {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.45); }
+  50%      { box-shadow: 0 0 0 8px rgba(239,68,68,0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #page-callcenter .sim-progress-bar,
+  #page-callcenter .sim-scenario { transition: none !important; transform: none !important; }
+}
+
+@media print {
+  #page-callcenter .cc-cheat { background: #fff; border: 1px solid #999; }
+  #page-callcenter .cc-cheat .cs-col { background: #fff; border: 1px solid #ccc; color: #000; page-break-inside: avoid; }
+  #page-callcenter .cc-cheat h6, #page-callcenter .cc-cheat li b { color: #0f766e; }
+  #page-callcenter .cc-cheat li { color: #000; }
+  #page-callcenter .sim-shell, #page-callcenter .iraq-grid > div { background: #fff !important; border: 1px solid #999 !important; color: #000 !important; }
+}
+
+@keyframes accEqIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes accCycleDash {
+  to { stroke-dashoffset: -200; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #page-accounting .acc-cycle-dash { animation: none; opacity: 0.35; }
+  #page-accounting .acc-eq-stack li { animation: none; }
+  #page-accounting .acc-tacct { animation: none; }
+}
+
+@media print {
+  #page-accounting .acc-foundations,
+  #page-accounting [data-acc-lab],
+  #page-accounting .acc-eq-col,
+  #page-accounting .acc-tacct,
+  #page-accounting .acc-cycle-detail {
+    background: #fff !important;
+    border: 1px solid #999 !important;
+    color: #000 !important;
+  }
+  #page-accounting .acc-eyebrow,
+  #page-accounting .acc-lab-tag,
+  #page-accounting .acc-cycle-step-tag,
+  #page-accounting .acc-cycle-example-tag {
+    color: #0f766e !important;
+    background: #fff !important;
+    border: 1px solid #0f766e !important;
+  }
+  #page-accounting .acc-cycle-step.active {
+    background: #0f766e !important;
+    color: #fff !important;
+  }
+}
+
+@media print {
+  #page-accounting .acc-coa-group,
+  #page-accounting .acc-ifrs-table-wrap,
+  #page-accounting .acc-ratio-card {
+    background: #fff !important;
+    border: 1px solid #999 !important;
+    color: #000 !important;
+  }
+  #page-accounting .acc-coa-group-body { display: block !important; }
+  #page-accounting .acc-ratio-card.hide { display: grid !important; }
+}
+
+@media print {
+  body * { visibility: hidden; }
+  #page-accounting .acc-tax-slip,
+  #page-accounting .acc-tax-slip * { visibility: visible; }
+  #page-accounting .acc-tax-slip {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 100%;
+    background: #fff !important;
+    color: #000 !important;
+    border: 1px solid #999 !important;
+  }
+  #page-accounting .acc-tax-slip h4,
+  #page-accounting .acc-tax-slip h6,
+  #page-accounting .acc-tax-slip-tag,
+  #page-accounting .acc-tax-slip-rows li b,
+  #page-accounting .acc-tax-slip-rows li span,
+  #page-accounting .acc-tax-slip-employer * { color: #000 !important; }
+  #page-accounting .acc-tax-slip-rows li.net {
+    background: #f0fdfa !important;
+    border: 2px solid #0f766e !important;
+  }
+}
+
+@media print {
+  #page-accounting .acc-is-form,
+  #page-accounting .acc-bs-form { display: none; }
+  #page-accounting .acc-is-stmt,
+  #page-accounting .acc-bs-summary,
+  #page-accounting .acc-cf-col,
+  #page-accounting .acc-cf-equity {
+    background: #fff !important;
+    border: 1px solid #999 !important;
+    color: #000 !important;
+  }
+  #page-accounting .acc-is-rows li.net { background: #f0fdfa !important; border-color: #0f766e !important; }
+}
+
+@media print {
+  #page-accounting .acc-cs-stage,
+  #page-accounting .acc-cs-block,
+  #page-accounting .acc-pos-card,
+  #page-accounting .acc-counterfeit,
+  #page-accounting .acc-iraq-card,
+  #page-accounting .acc-cheat-col,
+  #page-accounting .acc-citations {
+    background: #fff !important;
+    border: 1px solid #999 !important;
+    color: #000 !important;
+    page-break-inside: avoid;
+  }
+  #page-accounting .acc-cs-stage-num,
+  #page-accounting .acc-cs-block-title span,
+  #page-accounting .acc-pos-cat,
+  #page-accounting .acc-cheat-col h6,
+  #page-accounting .acc-iraq-card h6,
+  #page-accounting .acc-citations b { color: #0f766e !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #page-programming .prog-fund-card,
+  #page-programming .prog-paths-opts button { transition: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #page-programming .prog-git-card { transition: none; }
+}
+
+@media print {
+  #page-programming .prog-rm-tabs,
+  #page-programming .prog-paths-restart,
+  #page-programming .prog-quiz-foot { display: none !important; }
+  #page-programming .prog-rm-panel { display: block !important; page-break-before: always; }
+  #page-programming .prog-fund-card,
+  #page-programming .prog-git-card,
+  #page-programming .prog-rm-week {
+    background: #fff !important; color: #000 !important;
+    border: 1px solid #999 !important; page-break-inside: avoid;
+  }
+}
+
+@media print {
+  #page-programming .prog-iraq-card,
+  #page-programming .prog-cheat-card,
+  #page-programming .prog-cite-list li {
+    background: #fff !important; color: #000 !important;
+    border: 1px solid #999 !important; page-break-inside: avoid;
+  }
+  #page-programming .prog-iraq-card h3 { color: #047857 !important; }
+  #page-programming .prog-cheat-card h4 { color: #B45309 !important; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  #page-social .w6-attn-card:hover{ transform:none; }
+}
+
+@media print{
+  #page-social .w6-platform-tabs{ display:none; }
+  #page-social .w6-pp-card, #page-social .w6-attn-card{
+    background:#fff !important; border:1px solid #999 !important;
+    color:#000 !important; page-break-inside:avoid;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  #page-social .w6-pillar-card:hover,
+  #page-social .w6-fw-card:hover,
+  #page-social .w6-cal-day:hover{ transform:none; }
+}
+
+@media print{
+  #page-social .w6-cal-pills, #page-social .w6-cal-wrap > div:first-child{ display:none; }
+  #page-social .w6-fw-card{ background:#fff !important; color:#000 !important; page-break-inside:avoid; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  #page-social .w6-funnel-card:hover,
+  #page-social .w6-perf-out:hover{ transform:none; }
+}
+
+@media print{
+  #page-social .w6-funnel-card{ background:#fff !important; color:#000 !important; }
+  #page-social .w6-perf-input-wrap{ display:none; }
+}
+
+@media print{
+  #page-social .w6-sub-item, #page-social #w6InfFlags > div{
+    background:#fff !important; color:#000 !important; border-color:#999 !important;
+  }
+}
+
+@media print{
+  #page-social .w6-iq-salary, #page-social .w6-cheat, #page-social .w6-cite-list,
+  #page-social .w6-iq-hook{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
+
+@media print{
+  #page-phonerepair .pr-section{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+  #page-phonerepair .pr-card-body{ display:block !important; }
+}
+
+@media print{
+  #page-phonerepair .pr-mb-stage{ background:#fff !important; }
+  #page-phonerepair .pr-repair-card{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
+
+@media print{
+  #page-phonerepair .pr-tree{ background:#fff !important; }
+  #page-phonerepair .pr-tree-q,
+  #page-phonerepair .pr-tree-leaf,
+  #page-phonerepair .pr-sw-card{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
+
+@media print{
+  #page-phonerepair .pr-ms-card,
+  #page-phonerepair .pr-cs-card,
+  #page-phonerepair .pr-ethics-card,
+  #page-phonerepair .pr-iq-block{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
+
+@media print{
+  #page-phonerepair .pr-lab,
+  #page-phonerepair .pr-career-step,
+  #page-phonerepair .pr-cheat-card,
+  #page-phonerepair .pr-citations{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
+
+@media print{
+  #page-hrmastery .hrm-q-body{ display:block !important; }
+  #page-hrmastery .hrm-dim-card,
+  #page-hrmastery .hrm-star-card,
+  #page-hrmastery .hrm-q-item{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
+
+@media print{
+  #page-hrmastery .hrm-trap-list{ display:grid !important; }
+  #page-hrmastery .hrm-trap-card,
+  #page-hrmastery .hrm-pre-card,
+  #page-hrmastery .hrm-post-card{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
+
+@media print{
+  #page-hrmastery .hrm-calc,
+  #page-hrmastery .hrm-salary-table-wrap,
+  #page-hrmastery .hrm-neg-card{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
+
+@media print{
+  #page-hrmastery .hrm-scn-shell,
+  #page-hrmastery .hrm-decoder,
+  #page-hrmastery .hrm-redflag-card,
+  #page-hrmastery .hrm-flag-card{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
+
+@keyframes hrmPulse{
+  0%, 100%{ opacity:1; transform:scale(1); }
+  50%{ opacity:.55; transform:scale(.95); }
+}
+
+@media print{
+  #page-hrmastery .hrm-mock,
+  #page-hrmastery .hrm-cmp,
+  #page-hrmastery .hrm-law-card,
+  #page-hrmastery .hrm-cheat-card,
+  #page-hrmastery .hrm-citations{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside:avoid;
+  }
+}
+
+@media print{
+  #page-psych .w09-drive,
+  #page-psych .w09-bias{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside: avoid;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  #page-psych .w09-drive,
+  #page-psych .w09-bias{ transition: none; }
+}
+
+@media print{
+  #page-eq .w09e-domain,
+  #page-eq .w09e-ruler-step,
+  #page-eq .w09e-vocab,
+  #page-eq .w09e-mm-grid,
+  #page-eq .w09e-mm-side{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside: avoid;
+  }
+  #page-eq .w09e-mm-quadrant{ display:none; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  #page-eq .w09e-domain, #page-eq .w09e-ruler-step{ transition: none; }
+}
+
+@media print{
+  #page-psych .w09t-host, #page-psych .w09t-result{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important; page-break-inside: avoid;
+  }
+  #page-psych .w09t-tabs{ display:none; }
+}
+
+@media print{
+  .w09i-card{ background:#fff !important; color:#000 !important; border:1px solid #999 !important; }
+}
+
+@media print{
+  #page-psych .w09f-snapshot,
+  #page-psych .w09f-questions,
+  #page-psych .w09f-insights{
+    background:#fff !important; color:#000 !important;
+    border:1px solid #999 !important;
+  }
+}
+
+@keyframes gateway-fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+@keyframes gateway-aurora {
+  to { transform: translate3d(2%, -2%, 0) rotate(2deg); }
+}
+
+@media (prefers-reduced-motion: reduce) { .gateway-aurora { animation: none; } }
+
+@keyframes gateway-stage-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) { .gateway-stage { animation: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-gateway-open="true"] #app { filter: none; }
+}
+
+@keyframes qcalc-toast-in {
+  from { opacity: 0; transform: translate(-50%, 14px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qcalc-toast { animation: none; }
+  .qcalc-meter > i { transition: none; }
+}
+
+@keyframes cmdk-fade { from { opacity: 0; } to { opacity: 1; } }
+
+@keyframes cmdk-slide {
+  from { transform: translateY(-12px); opacity: 0; }
+  to   { transform: none;              opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cmdk-overlay, .cmdk-modal { animation: none; }
+}
+
+@media (prefers-reduced-motion: reduce) { .cath-stat { transition: none; } .cath-stat:hover { transform: none; } }
+
+@keyframes aurora-tile-pop {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-countup][data-countup-done="1"] { animation: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-theme="light"]::after { opacity: 0.015; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #topbar.island { transition: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-pill-indicator { transition: opacity 100ms linear, height 100ms linear; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer-scrim { transition: opacity 100ms linear; }
+}
+
+@media (forced-colors: active) {
+  .u-chip,
+  .u-callout,
+  .u-card-deep,
+  .u-card-tint,
+  .u-card-thin,
+  .u-card-row,
+  .u-card-tile,
+  .u-info-chip,
+  .u-info-box,
+  .u-pill,
+  .u-pill-xs,
+  .u-btn-tinted,
+  .u-btn-grad { border: 1px solid CanvasText !important; }
+}
+
+@keyframes life-drift {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  33% {
+    transform: translate3d(var(--life-drift-distance), calc(var(--life-drift-distance) * -0.6), 0);
+  }
+  66% {
+    transform: translate3d(calc(var(--life-drift-distance) * -0.5), calc(var(--life-drift-distance) * 0.4), 0);
+  }
+}
+
+@keyframes life-mesh-shift {
+  0%, 100% {
+    background-position: 0% 0%, 100% 100%, 50% 50%;
+  }
+  50% {
+    background-position: 100% 50%, 0% 50%, 50% 0%;
+  }
+}
+
+@keyframes tactile-pulse-soft {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 transparent;
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 6px color-mix(in oklch, var(--color-tint, var(--color-brand)) 18%, transparent);
+  }
+}
+
+@keyframes vital-depth-out {
+  0%   { transform: translateZ(0) scale(1); opacity: 1; }
+  100% { transform: translateZ(var(--depth-mid)) scale(1.012); opacity: 0; }
+}
+
+@keyframes vital-slide-rtl {
+  0%   { transform: translate3d(40px, 0, 0); opacity: 0; }
+  100% { transform: translate3d(0, 0, 0); opacity: 1; }
+}
+
+@keyframes vital-morph-fade {
+  0%   { transform: scale(0.97); opacity: 0; filter: hue-rotate(-3deg); }
+  60%  { opacity: 1; filter: hue-rotate(0deg); }
+  100% { transform: scale(1); opacity: 1; filter: none; }
+}
+
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .pointer-trail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    width: var(--pointer-trail-size);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      var(--pointer-trail-color) 0%,
+      transparent 70%
+    );
+    opacity: var(--pointer-trail-opacity);
+    z-index: 9998;
+    transform: translate3d(-9999px, -9999px, 0);
+    transition:
+      transform 80ms linear,
+      opacity 220ms ease;
+    mix-blend-mode: screen;
+    filter: blur(2px);
+    contain: layout paint style;
+  }
+
+  .pointer-trail--layer-2 {
+    width: calc(var(--pointer-trail-size) * 1.6);
+    opacity: calc(var(--pointer-trail-opacity) * 0.55);
+    transition:
+      transform 140ms linear,
+      opacity 280ms ease;
+    filter: blur(6px);
+  }
+
+  .pointer-trail--layer-3 {
+    width: calc(var(--pointer-trail-size) * 2.2);
+    opacity: calc(var(--pointer-trail-opacity) * 0.32);
+    transition:
+      transform 200ms linear,
+      opacity 360ms ease;
+    filter: blur(12px);
+  }
+
+  .pointer-trail--rest {
+    opacity: 0;
+  }
+
+  /* ────────────────────────────────────────────────────────────
+     Focus-Ring Elevation — pairs with pointer trail color.
+     Wrapped in :where(*) → specificity (0,0,0) so EVERY existing
+     local :focus-visible rule (W11/W12/W14) keeps priority.
+     ──────────────────────────────────────────────────────────── */
+  :where(*):focus-visible {
+    box-shadow: 0 0 0 6px color-mix(
+      in oklch,
+      var(--color-tint, var(--color-brand)) 18%,
+      transparent
+    );
+  }
+}
+
+@keyframes block-tldr-enter {
+  from { opacity: 0; transform: translateY(-2px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .block-tldr { animation: none; }
+}
+
+@media print {
+  .tas-kashida,
+  [data-tas-kashida="on"] {
+    text-align: start;
+    text-justify: auto;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :root[data-theme="dark"] body::before {
+    background: oklch(13% 0.04 280);  /* solid mihrab-900 fallback */
+  }
+}
+
+@keyframes rit-entry-veil-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes rit-entry-wordmark-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes rit-entry-poetry-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 0.85;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rit-entry-glow-pulse {
+  0%   { opacity: 0;    transform: translate(-50%, -50%) scale(0.6); }
+  60%  { opacity: 0.55; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0.45; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes rit-entry-glow-expand {
+  from {
+    opacity: 0.45;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(20);
+  }
+}
+
+@keyframes rit-entry-fade-out {
+  from { opacity: 1; filter: blur(0); }
+  to   { opacity: 0; filter: blur(8px); }
+}
+
+@keyframes rit-entry-skip-in {
+  from { opacity: 0; }
+  to   { opacity: 0.6; }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .rit-entry-veil {
+    opacity: 1;
+    background: var(--chr-mihrab-900);
+  }
+  .rit-entry-glow {
+    filter: none;
+  }
+}
+
+@media print {
+  .rit-entry-portal { display: none !important; }
+}
+
+@keyframes rit-halo-veil-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes rit-halo-edge-pulse {
+  0%, 100% { opacity: 0.20; }
+  50%      { opacity: 0.45; }
+}
+
+@keyframes rit-thresh-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes rit-thresh-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes rit-thresh-mashrabiya-out {
+  0% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    opacity: 1;
+  }
+  100% {
+    clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+    opacity: 0;
+  }
+}
+
+@keyframes rit-thresh-mashrabiya-in {
+  0% {
+    clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+    opacity: 0;
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    opacity: 1;
+  }
+}
+
+@keyframes rit-thresh-scroll-out {
+  from { transform: translateY(0);     opacity: 1; }
+  to   { transform: translateY(-30px); opacity: 0; }
+}
+
+@keyframes rit-thresh-scroll-in {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes rit-thresh-iris-out {
+  from {
+    clip-path: circle(150% at 50% 50%);
+    opacity: 1;
+  }
+  to {
+    clip-path: circle(0% at 50% 50%);
+    opacity: 0;
+  }
+}
+
+@keyframes rit-thresh-iris-in {
+  from {
+    clip-path: circle(0% at 50% 50%);
+    opacity: 0;
+  }
+  to {
+    clip-path: circle(150% at 50% 50%);
+    opacity: 1;
+  }
+}
+
+@keyframes rit-thresh-mihrab-out {
+  0% {
+    clip-path: ellipse(150% 150% at 50% 0%);
+    opacity: 1;
+  }
+  100% {
+    clip-path: ellipse(0% 0% at 50% 0%);
+    opacity: 0;
+  }
+}
+
+@keyframes rit-thresh-mihrab-in {
+  0% {
+    clip-path: ellipse(0% 0% at 50% 0%);
+    opacity: 0;
+  }
+  100% {
+    clip-path: ellipse(150% 150% at 50% 0%);
+    opacity: 1;
+  }
+}
+
+@keyframes rit-ink-spread {
+  0% {
+    width:  0;
+    height: 0;
+    opacity: 0.7;
+  }
+  60% {
+    opacity: 0.45;
+  }
+  100% {
+    width:  var(--rit-ink-size, 220%);
+    height: var(--rit-ink-size, 220%);
+    opacity: 0;
+  }
+}
+
+@keyframes rit-ink-kashida-pull {
+  0% {
+    width:   0;
+    opacity: 0.9;
+  }
+  60% {
+    width:   80%;
+    opacity: 0.7;
+  }
+  100% {
+    width:   100%;
+    opacity: 0;
+  }
+}
+
+@keyframes rit-ink-kalam-stroke {
+  0% {
+    opacity: 0;
+    background-position: 100% 100%;
+  }
+  40% {
+    opacity: 0.8;
+    background-position: 50% 50%;
+  }
+  100% {
+    opacity: 0;
+    background-position: 0% 0%;
+  }
+}
+
+@keyframes rit-aura-gentle-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(2%, -1%, 0) scale(1.02); }
+}
+
+@keyframes rit-aura-pulse {
+  0%, 100% { opacity: 0.30; transform: scale(0.98); }
+  50%      { opacity: 0.50; transform: scale(1.03); }
+}
+
+@keyframes rit-aura-sweep {
+  0%   { background-position: -100% -100%; }
+  100% { background-position: 200% 200%; }
+}
+
+/* ── Phase 1 + Phase 2 Discipline (relocated from monolith tail) ────── */
+
+/* ─── end @layer components (Worker 11-22 components/utilities/keyframes/media — wrapped en bloc; Phase 2-5 will lift sub-regions into reset/base/utilities/overrides) ─── */
+
+/* ════════════════════════════════════════════════════════════════════════
+   Worker 23 / Phase 1 — Layer Discipline:
+   1. ٧ layers ثابتة — لا تَخلق layer جديد بدون phase-spec.
+   2. كل قاعدة جديدة بعد Phase 1 يجب أن تكون داخل @layer.
+   3. القواعد الجذرية (:root tokens) في `tokens` layer.
+   4. Theme overrides ([data-theme="light"|"dark"]) في `themes` layer.
+   5. !important المتبقّية بعد Phase 2 توضع في `overrides` layer.
+   6. لا تَحذف Phase 1 wrapper braces قبل Phase 3 (Phase 2-3 يستعملها).
+   7. Cascade order is destiny: components < themes < overrides — احترم.
+   8. أي قاعدة بدون @layer = أعلى أولوية (unlayered) → استخدم بِحَذَر.
+   ────────────────────────────────────────────────────────────────────────
+   Reference probes (post Phase 1):
+   - grep -c '@layer' style.css                 → ≥4 (declaration + 3 blocks)
+   - grep -c '@layer tokens'                    → ≥2 (declaration + opener)
+   - grep -c '@layer themes'                    → ≥2 (declaration + opener)
+   - grep -c '@layer components'                → ≥2 (declaration + opener)
+   - grep -c '@layer components'                → ≥2 (declaration + opener)
+   - grep -o '!important' (count occurrences)   → 310 post-W23-P2 (was 319)
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ════════════════════════════════════════════════════════════════════════
+   DECONSTRUCTION v3 — Important Purge Inventory (Worker 23 / Phase 2)
+   ────────────────────────────────────────────────────────────────────────
+   Pre-purge baseline (post-Worker 22 / pre-W23-P2): 319 raw !IMPORTANT
+   Post-purge (this commit):                          310 raw !IMPORTANT
+   Net purge: 9 declarations on 7 source lines
+
+   ──── Honest baseline note ────
+   The original phase-spec target ("≤45") was authored against a 221
+   baseline before Worker 17 added an extensive print stylesheet (~190
+   print !IMPORTANT declarations across .block-tldr / .block-pitfalls /
+   .block-practice / .block-bridge / .mp-heatmap-section / .page-mastery-progress).
+   Print stylesheets traditionally require !IMPORTANT to defeat the
+   on-screen cascade when @media print activates, so those are NOT
+   candidates for purging.
+
+   The current realistic categorisation:
+
+   ┌─ Category ─────────────────────────────────────┬─ Count ─┬─ Action ─┐
+   │ A. @media (prefers-reduced-motion: reduce)     │   71    │ KEEP     │
+   │    Animation/transition silencing for a11y.    │         │ (a11y)   │
+   ├────────────────────────────────────────────────┼─────────┼──────────┤
+   │ B. @media print                                │  192    │ KEEP     │
+   │    Print UA cascade requires !IMPORTANT to     │         │ (UA)     │
+   │    defeat on-screen styles when printing.      │         │          │
+   ├────────────────────────────────────────────────┼─────────┼──────────┤
+   │ C. @media (prefers-reduced-transparency: reduce) │  6    │ KEEP     │
+   │    Backdrop-filter/glass flattening for a11y.  │         │ (a11y)   │
+   ├────────────────────────────────────────────────┼─────────┼──────────┤
+   │ D. @media (forced-colors: active)              │   1    │ KEEP     │
+   │    Windows High Contrast — UA-specific.        │         │ (UA)     │
+   ├────────────────────────────────────────────────┼─────────┼──────────┤
+   │ E. Utility classes (.u-w-*, .u-hidden,         │   ~25   │ KEEP     │
+   │    .u-sr-only, .u-mt-*, .u-mb-*, .u-tint-fill) │         │ (utility │
+   │    Utilities live inside @layer components per │         │ semantic │
+   │    Phase 1; !IMPORTANT preserves their override-│         │ contract)│
+   │    behaviour against component-internal rules. │         │          │
+   ├────────────────────────────────────────────────┼─────────┼──────────┤
+   │ F. [hidden] HTML attribute respects            │    3    │ KEEP     │
+   │    .sf-modal[hidden], .cmdk-overlay[hidden],   │         │ (HTML    │
+   │    .rit-entry-portal[hidden] — needed because  │         │ semantic)│
+   │    components set explicit display:flex/grid.  │         │          │
+   ├────────────────────────────────────────────────┼─────────┼──────────┤
+   │ G. Halo target overrides (W22 P2 documented)   │    4    │ KEEP     │
+   │    body[data-rit-halo="active"] [target] {     │         │ (W22 P2  │
+   │    opacity:1; filter:none; pointer-events:auto;│         │ critical)│
+   │    user-select:auto; }                         │         │          │
+   ├────────────────────────────────────────────────┼─────────┼──────────┤
+   │ H. Explicit opt-outs                           │    4    │ KEEP     │
+   │    [data-life="none"] (×2),                    │         │ (opt-out │
+   │    .rit-ink-bare animation:none,               │         │ semantic │
+   │    body.is-hidden animation-play-state:paused. │         │ contract)│
+   ├────────────────────────────────────────────────┼─────────┼──────────┤
+   │ I. Defensive specificity guard                 │    1    │ KEEP     │
+   │    .nav-tooltip mobile {display:none}          │         │ (state-  │
+   │    defends against [data-sidebar="collapsed"]  │         │ collision│
+   │    selector (specificity 0,2,1 > 0,1,0).       │         │ defense) │
+   └────────────────────────────────────────────────┴─────────┴──────────┘
+
+   Sub-total of categorised: 307
+   Remaining ~3 are inside category-A reduced-motion blocks I counted as
+   protected; the breakdown is exact at family-level and ±3 at line-level.
+
+   ──── Purged in this phase (9 declarations) ────
+   1. L4870  #cursor-aura { display: none } @media (pointer:coarse)
+            (single-rule media context — source-order wins)
+   2. L5843  #page-accountmgr .sm-cell { grid-column/grid-row: auto }
+            @media (max-width: 640px)  (×2 declarations on one line)
+   3. L11235 #page-social .w6-algo-table { grid-template-columns: 1fr 1fr }
+            @media (max-width: 880px)
+   4. L11295 #page-social .w6-cal-wrap { grid-template-columns: 1fr }
+            @media (max-width: 880px)
+   5. L11296 #page-social .w6-cal-pills { flex-direction: row }
+            @media (max-width: 880px)
+   6. L18735 .dock { display: flex }    refines W13/P1 baseline (later wins)
+   7. L18737 .dock { padding: var(--space-5, 20px) }
+   8. L18739 .dock { grid-template-columns: none }
+
+   All 9 rely on @media + source-order or layered same-specificity
+   later-rule precedence. Visual outcome unchanged.
+
+   ──── Discipline forward ────
+   1. لا تَشطب !IMPORTANT من قواعد reduced-motion / print /
+      reduced-transparency / forced-colors — تلك UA-protected.
+   2. لا تَشطب !IMPORTANT من utility classes (.u-*) — تلك override-
+      semantics متعمَّدة.
+   3. لا تَشطب !IMPORTANT من halo target (W22 P2) أو [data-life="none"]
+      أو [hidden] respects — تلك opt-out + state semantics.
+   4. أي !IMPORTANT جديد بعد Phase 2 يجب أن يكون موثَّقاً بـ comment
+      يَشرح "لماذا" + يُذْكَر فيه كاتغوري (A-I).
+   5. Upg.layer.auditImportant() target: 310 ± 5 (regress alarm if higher).
+   6. أي phase تالي يَتجاوز 315 → استشر phase-spec (regression).
+   7. الهدف الأصلي للطور (≤45) كان مَبنياً على baseline قديم (221) قبل
+      W17. الواقع الحالي (310) كله "intentional + categorized" بنفس
+      الروح — preservation > arbitrary number.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* End motion.css ──────────────────────────────────────────────────────── */
