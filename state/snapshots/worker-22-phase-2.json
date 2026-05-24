@@ -1,0 +1,78 @@
+{
+  "pack": "v3",
+  "worker": "22",
+  "worker_name": "RITUAL_UI",
+  "phase_completed": 2,
+  "phases_total": 6,
+  "title": "Reading Halo — zen mode toggle (Cmd+.)",
+  "files_touched": [
+    "platform/index.html",
+    "platform/assets/style.css",
+    "platform/assets/app.js",
+    "state/PROGRESS.json"
+  ],
+  "lines_added_total": 365,
+  "lines_breakdown": {
+    "css": 215,
+    "js": 150,
+    "html": 3
+  },
+  "tokens_added": [
+    "--rit-halo-duration",
+    "--rit-halo-easing",
+    "--rit-halo-chrome-opacity",
+    "--rit-halo-chrome-blur",
+    "--rit-halo-glow-color",
+    "--rit-halo-bg-veil"
+  ],
+  "keyframes_added": [
+    "rit-halo-veil-in",
+    "rit-halo-edge-pulse"
+  ],
+  "api_extended": {
+    "Upg.ritual": [
+      "enterHalo",
+      "exitHalo",
+      "toggleHalo",
+      "isHaloActive",
+      "lastHaloTarget"
+    ]
+  },
+  "events_dispatched": [
+    "upg:ritual:halo:enter",
+    "upg:ritual:halo:exit"
+  ],
+  "storage_keys_added": [
+    "upg_ritual_last_halo_target"
+  ],
+  "fonts_added_offline": [],
+  "external_assets_added": [],
+  "shortcuts_added": [
+    "Cmd+. / Ctrl+. → toggle halo"
+  ],
+  "preservation": {
+    "pages": 14,
+    "qcalc": 391,
+    "upg_apis": 26,
+    "google_fonts": 0,
+    "chr_lapis_tokens": 58,
+    "data_page_personality": 15,
+    "phase_1_iife_intact": true,
+    "phase_1_entry_tokens_intact": true
+  },
+  "a11y_guards": [
+    "prefers-reduced-motion: reduce — all transitions/animations silenced",
+    "prefers-reduced-transparency: reduce — blur layers dropped",
+    "chrome dims (opacity 0.15) but never display:none — skip-links still tabbable",
+    "exit button focus-visible Lapis route",
+    "Esc dismiss",
+    "outside-click dismiss"
+  ],
+  "devotion_notes": "القراءة صارت محرابًا. الـ chrome يَنحني، النص يَرتفع، الـ Lapis يهمس. صمتٌ مُتعمَّد على بُعد ضربتين من المفتاح.",
+  "offline_check": {
+    "external_requests": 0,
+    "cdn_links": 0,
+    "google_fonts_links": 0
+  },
+  "next_action": "Continue Worker 22 Phase 3 — Threshold Transitions"
+}
