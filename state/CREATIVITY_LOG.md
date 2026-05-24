@@ -37,12 +37,22 @@
 **Files touched:** platform/index.html · platform/assets/app.js · platform/assets/css/tokens.css · platform/assets/style.css · platform/assets/js/elan/world.js · platform/assets/css/worlds/_index.css
 **Verified at commit:** cc45787
 
+## γ2 — 2026-05-24
+**Beacon Type:** ✍️ TYPOGRAPHIC_BEACON
+**The Surprise:** عالم حِبر يَحذف checkmark ✓ من قاموسه. أيّ CTA إنجاز (`.btn-success-action`، `[data-cta="completed"]`، `[data-ink-dry]`) يَملأ نصّ الـ label بحبر تدريجي — من أول حرف إلى آخره خلال 600ms عبر `cubic-bezier(0.5, 0, 0.5, 1)` — كأن قَلَم نَسخ يَكتب الإنجاز فوق الكلمة لا بجانبها. الـ CSS يَستخدم `linear-gradient(to inline-end, …)` على `background-clip:text` (RTL-aware)، والـ JS يَفوّض listener واحد على `body` ويَنظِّف الـ class بعد 1400ms. لا toast، لا confetti، لا checkmark — الكتابة هي العلامة.
+**Reference Avoided:** Forbidden #16 — standard ✓ checkmark toast، #11 — animated counter from 0 (Creativity Doctrine § ٣).
+**Inspired-by:** Wild Card #1 — Najaf calligraphy manuscripts (الكتابة كحدث، لا الـ tick كرمز).
+**User-Visible:** yes (every completion CTA on dashboard / myprogress fills in 600ms; reduced-motion users get 1ms — instant but the ink still arrives, the writer is fast not absent)
+**Originality Self-Score:** 5/5 — `background-clip:text` + RTL-aware `to inline-end` gradient + delegated rAF + auto-clean. Claim: no other Arabic platform replaces success-checkmark with calligraphic ink-writing.
+**Files touched:** platform/assets/css/worlds/_hibr.css · platform/assets/js/elan/world-hibr.js · platform/assets/app.js
+**Verified at commit:** 72c0cc4
+
 ---STATS---
-total_beacons: 3
+total_beacons: 4
 unique_categories_used: 3
-avg_score: 4.33
-last_5_avg: 4.33
+avg_score: 4.5
+last_5_avg: 4.5
 disruption_triggers: 0
 forbidden_violations: 0
 creativity_health: 100
-last_updated: 2026-05-24 / γ1
+last_updated: 2026-05-24 / γ2

@@ -457,3 +457,50 @@ The spec asked for an empty `@layer themes` block in `style.css` (themes "deprec
 - 391 qcalc references — unchanged
 - 9 typeface families + β1/β2/β3 voice tokens — unchanged
 - All 8 `worlds/_<name>.css` stubs — unchanged (γ2..γ9 will fill them)
+
+
+---
+
+## γ2 — World Hibr (حِبر) — 2026-05-24
+**Branch:** `elan-γ-eight-worlds`
+**Commit:** `72c0cc4`
+**Files modified:** 1 — `platform/assets/app.js`
+**Files added:** 2 — `platform/assets/css/worlds/_hibr.css` (filled from stub), `platform/assets/js/elan/world-hibr.js`
+**Lines:** +292 / −4 (net +288)
+
+### Verified by grep on commit 72c0cc4
+| key | value | verified-by |
+|---|---:|---|
+| `_hibr.css` total lines | **193** | `wc -l platform/assets/css/worlds/_hibr.css` |
+| `data-world="hibr"` selectors in `_hibr.css` | **26** | `grep -c 'data-world="hibr"' platform/assets/css/worlds/_hibr.css` |
+| ink-dry beacon markers (is-drying / data-ink-* / btn-success / data-cta=completed) | **12** | `grep -c 'is-drying\|data-ink-state\|data-ink-dry\|btn-success-action\|data-cta="completed"' platform/assets/css/worlds/_hibr.css` |
+| `:has()` no-JS fallback selectors for hibr | **2** | `grep -c ':has(section.page' platform/assets/css/worlds/_hibr.css` |
+| reduced-motion guards in `_hibr.css` | **1** | `grep -c 'prefers-reduced-motion' platform/assets/css/worlds/_hibr.css` |
+| `world-hibr.js` syntax | **OK** | `node --check platform/assets/js/elan/world-hibr.js` |
+| `app.js` syntax | **OK** | `node --check platform/assets/app.js` |
+| `app.js` imports `elan/world-hibr.js` | **1** | `grep -c 'elan/world-hibr.js' platform/assets/app.js` |
+| `Upg.worlds.hibr` registered | **yes** | `grep 'window.Upg.worlds.hibr' platform/assets/js/elan/world-hibr.js` |
+| Top-level `Upg.*` APIs | **31** (unchanged — Upg.worlds.hibr is nested) | preserved |
+
+### Beacon
+- **Type:** ✍️ TYPOGRAPHIC_BEACON
+- **The Surprise:** Hibr CTA labels fill with ink — first letter to last — over 600ms with `--ease-hibr (0.5, 0, 0.5, 1)`. The act of writing IS the success indicator. No checkmark, no toast, no confetti.
+- **Selectors:** `.btn-success-action`, `[data-cta="completed"]`, `[data-ink-dry]`. Auto-cleans `.is-drying` after 1400ms (or 1ms in reduced motion).
+- **Reference avoided:** Forbidden #16 (standard ✓ toast) + #11 (animated counter from 0).
+- **Inspired-by:** Wild Card #1 — Najaf calligraphy manuscripts.
+- **User-Visible:** yes (every completion CTA on dashboard / myprogress)
+- **Originality Self-Score:** 5/5
+
+### Surface adopted by this world
+- **Anchor:** `hsl(36 18% 92%)` Tahbeer paper (NOT bone-white)
+- **Ink:** `hsl(225 35% 8%)` natural midnight
+- **Ember:** `hsl(0 65% 32%)` أحمر شنقريا
+- **Focus:** `hsl(45 80% 35%)` ذهب مخطوط
+- **Voice:** Boutros Modern Kufi (display) + Markazi Text (body)
+- **Motion:** `cubic-bezier(0.5, 0, 0.5, 1)` × 320ms baseline / 600ms ink-dry
+
+### Sacred preserved
+- 14 page sections — unchanged
+- 30 prior + Upg.world (31) top-level Upg.* APIs — unchanged
+- `archive/` — untouched
+- Worlds CSS imported AFTER themes — legacy `[data-theme]` cascade still honored when a world isn't active
