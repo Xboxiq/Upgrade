@@ -1,7 +1,121 @@
-/* ÊLAN v4 — α2 — World placeholder: حِبر (Hibr) — Ink
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — γ2 — World: حِبر (Hibr) — Ink
+   ────────────────────────────────────────────────────────────────────────
+   Ink-on-Tahbeer paper. Najaf manuscript inspiration.
    Pages: dashboard, myprogress
-   Filled in γ2. See WORLDS_ATLAS.md § World 1 for spec. */
+   See WORLDS_ATLAS.md § World 1 for spec.
+   ════════════════════════════════════════════════════════════════════════ */
 
 [data-world="hibr"] {
-  /* Awaiting γ2 stage. */
+  /* ─── Anchor (surface ladder) ─── */
+  --anchor-bg: hsl(36 18% 92%);
+  --anchor-1:  hsl(36 14% 88%);
+  --anchor-2:  hsl(36 12% 82%);
+  --anchor-3:  hsl(36 14% 76%);
+
+  /* ─── Ink (text ladder) ─── */
+  --ink:       hsl(225 35% 8%);
+  --ink-muted: hsl(225 22% 28%);
+  --ink-faint: hsl(225 14% 50%);
+
+  /* ─── Lines ─── */
+  --line:        hsl(36 14% 76%);
+  --line-strong: hsl(36 16% 64%);
+
+  /* ─── Accent pair ─── */
+  --ember: hsl(0 65% 32%);
+  --focus: hsl(45 80% 35%);
+  --accent: var(--ember);
+
+  /* ─── Motion fingerprint ─── */
+  --ease-hibr:     cubic-bezier(0.5, 0, 0.5, 1);
+  --duration-hibr: 320ms;
+
+  /* ─── Shadows (ink-tinted) ─── */
+  --shadow-sm: 0 1px 2px hsl(225 35% 8% / 0.06);
+  --shadow-md: 0 4px 12px hsl(225 35% 8% / 0.09);
+  --shadow-lg: 0 14px 32px hsl(225 35% 8% / 0.12);
+  --shadow-xl: 0 28px 60px hsl(225 35% 8% / 0.15);
+
+  /* ─── Focus ring ─── */
+  --ring: 0 0 0 3px color-mix(in oklch, var(--focus) 36%, transparent);
+
+  /* ─── System bridge (consumed by chrome/pages) ─── */
+  --color-bg: var(--anchor-bg);
+  --color-surface-0: var(--anchor-bg);
+  --color-surface-1: var(--anchor-1);
+  --color-surface-2: var(--anchor-2);
+  --color-surface-3: var(--anchor-3);
+  --color-text: var(--ink);
+  --color-text-muted: var(--ink-muted);
+  --color-text-faint: var(--ink-faint);
+  --color-border: var(--line);
+  --color-border-strong: var(--line-strong);
+  --color-brand: var(--ember);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Beacon: Ink-Drying CTA
+   ─────────────────────────────────────────────────────────────────
+   Text fills left-to-right like a Naskh pen writing.
+   Uses @property + background-clip:text.
+   No checkmark. No confetti. Just calligraphic honesty.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@property --ink-fill {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+
+[data-world="hibr"] .btn-success-action {
+  position: relative;
+  color: transparent;
+  background-image: linear-gradient(90deg, var(--ink) var(--ink-fill, 0%), transparent 0%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  transition: --ink-fill 600ms var(--ease-hibr);
+}
+
+[data-world="hibr"] .btn-success-action.is-drying {
+  --ink-fill: 100%;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Manuscript Ruling (cards get subtle horizontal lines)
+   ═══════════════════════════════════════════════════════════════════ */
+
+[data-world="hibr"] .card,
+[data-world="hibr"] .bento-card,
+[data-world="hibr"] .glass-card {
+  background-color: var(--anchor-1);
+  border: 1px solid var(--line);
+  position: relative;
+}
+
+[data-world="hibr"] .card::before,
+[data-world="hibr"] .bento-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 var(--s-4, 16px);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent calc(1.7em - 1px),
+    color-mix(in oklch, var(--line) 50%, transparent) calc(1.7em - 1px),
+    color-mix(in oklch, var(--line) 50%, transparent) 1.7em
+  );
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Reduced-motion: instant ink fill
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  [data-world="hibr"] .btn-success-action {
+    transition-duration: 0ms;
+  }
 }
