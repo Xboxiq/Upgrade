@@ -124,3 +124,4 @@ import './js/elan/world-hibr.js';
 import './js/elan/world-naar.js';
 import './js/elan/world-nada.js';
 import './js/elan/world-hadeed.js';
+import './js/elan/world-dhahab.js';
