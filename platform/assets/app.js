@@ -18483,3 +18483,170 @@ document.addEventListener('DOMContentLoaded', () => {
 
 })(window, document);
 /* End RITUAL UI v3 / Phase 6 — Aura Deepening — Worker 22 COMPLETE 6/6 ── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   DECONSTRUCTION v3 — Upg.layer (Worker 23 / Phase 1 — Pack v3 DEVOTIO)
+   ────────────────────────────────────────────────────────────────────────────
+   Programmatic introspection of the CSS @layer cascade introduced in Phase 1.
+   28th top-level Upg.* API (was 27 post-W22).
+
+   Public surface (Object.frozen):
+     Upg.layer.list()         → ['reset','tokens','base','utilities','components','themes','overrides']
+     Upg.layer.cascadeOrder() → declared order from CSSLayerStatementRule
+     Upg.layer.audit()        → { total, byLayer: { <name>: { rules, populated } } }
+     Upg.layer.status()       → snapshot for state/PROGRESS.json telemetry
+
+   Phase 2-5 will read from this API to verify cascade health after each
+   refactor step. Reduced-motion / reduced-transparency aware: API is
+   inert (no DOM mutations, no style writes, read-only on document.styleSheets).
+
+   Sacred preserved: zero touch on the 27 prior Upg.* APIs. Idempotent guard
+   prevents double-install on hot reload.
+   ════════════════════════════════════════════════════════════════════════════ */
+(function (window, document) {
+  'use strict';
+
+  if (window.Upg && window.Upg.layer && window.Upg.layer._installed === true) return;
+
+  const LAYERS = Object.freeze([
+    'reset',
+    'tokens',
+    'base',
+    'utilities',
+    'components',
+    'themes',
+    'overrides'
+  ]);
+
+  /* ── list — return a defensive copy of the canonical order ─── */
+  const list = () => LAYERS.slice();
+
+  /* ── cascadeOrder — read declared order from CSSLayerStatementRule ─── */
+  const cascadeOrder = () => {
+    if (!document.styleSheets) return null;
+    for (let s = 0; s < document.styleSheets.length; s++) {
+      const sheet = document.styleSheets[s];
+      let rules;
+      try {
+        rules = sheet.cssRules;
+      } catch (_) {
+        /* CORS-restricted sheet (none expected — offline-first) */
+        continue;
+      }
+      if (!rules) continue;
+      for (let r = 0; r < rules.length; r++) {
+        const rule = rules[r];
+        /* CSSLayerStatementRule — the `@layer a, b, c;` declaration */
+        if (typeof CSSLayerStatementRule !== 'undefined' &&
+            rule instanceof CSSLayerStatementRule) {
+          if (rule.nameList && rule.nameList.length) {
+            return Array.from(rule.nameList);
+          }
+        }
+      }
+    }
+    return null;
+  };
+
+  /* ── audit — count rules per @layer block (CSSLayerBlockRule) ─── */
+  const audit = () => {
+    const byLayer = {};
+    LAYERS.forEach(name => { byLayer[name] = { rules: 0, populated: false }; });
+
+    if (!document.styleSheets) {
+      return { total: 0, byLayer, supported: false };
+    }
+
+    const supported = (typeof CSSLayerBlockRule !== 'undefined');
+    if (!supported) {
+      return { total: 0, byLayer, supported: false };
+    }
+
+    let total = 0;
+
+    const walk = (rules) => {
+      if (!rules) return;
+      for (let i = 0; i < rules.length; i++) {
+        const r = rules[i];
+        if (r instanceof CSSLayerBlockRule) {
+          const name = r.name;
+          if (LAYERS.indexOf(name) !== -1) {
+            const inner = r.cssRules ? r.cssRules.length : 0;
+            byLayer[name].rules += inner;
+            if (inner > 0) byLayer[name].populated = true;
+            total += inner;
+          }
+          /* recurse into nested layer blocks (rare) */
+          walk(r.cssRules);
+        } else if (r.cssRules) {
+          /* @media, @supports, @container etc. — recurse */
+          walk(r.cssRules);
+        }
+      }
+    };
+
+    for (let s = 0; s < document.styleSheets.length; s++) {
+      try {
+        walk(document.styleSheets[s].cssRules);
+      } catch (_) { /* skip CORS sheet */ }
+    }
+
+    return { total, byLayer, supported: true };
+  };
+
+  /* ── status — compact snapshot for state/snapshots and CHECKPOINT logs ─── */
+  const status = () => {
+    const a = audit();
+    const populated = Object.keys(a.byLayer).filter(k => a.byLayer[k].populated);
+    return {
+      declared: cascadeOrder(),
+      layer_system_active: !!a.supported && populated.length >= 1,
+      total_rules_in_layers: a.total,
+      populated_layers: populated,
+      populated_count: populated.length,
+      audit: a.byLayer,
+      important_count_target: 45,
+      important_count_current_baseline: 271
+    };
+  };
+
+  /* ── public surface — Object.frozen ─── */
+  window.Upg = window.Upg || {};
+  window.Upg.layer = Object.freeze({
+    list: list,
+    cascadeOrder: cascadeOrder,
+    audit: audit,
+    status: status,
+    _installed: true
+  });
+
+  /* ── boot banner — fires once after DOM ready ─── */
+  const layerBanner = function () {
+    try {
+      const s = status();
+      if (s.layer_system_active) {
+        console.info(
+          '%c🧱 DECONSTRUCTION v3 — @layer cascade active (%d rules, %d/7 layers populated)',
+          'color:#FFB87A; font-weight:bold;',
+          s.total_rules_in_layers,
+          s.populated_count
+        );
+      } else {
+        /* CSSLayerBlockRule unavailable — pre-Chrome 99 / pre-Safari 15.4 / pre-Firefox 97 */
+        console.info(
+          '%c🧱 DECONSTRUCTION v3 — @layer declared but introspection API unavailable in this engine',
+          'color:#9D7BFF;'
+        );
+      }
+    } catch (_) { /* no-op for legacy browsers */ }
+  };
+  if (document.readyState !== 'loading') {
+    layerBanner();
+  } else {
+    document.addEventListener('DOMContentLoaded', layerBanner);
+  }
+
+})(window, document);
+/* End DECONSTRUCTION v3 / Phase 1 — Upg.layer (28th top-level API) ───────── */

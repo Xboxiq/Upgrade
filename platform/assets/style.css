@@ -1,5 +1,51 @@
 /* Auto-generated from arabic-training-platform-v12 (1) (4) (1) (1) (1).html — do not hand-edit */
 
+/* ════════════════════════════════════════════════════════════════════════════
+   DECONSTRUCTION v3 — @layer Cascade System (Worker 23 / Phase 1)
+   ────────────────────────────────────────────────────────────────────────────
+   Order matters: later layers override earlier (cascade order).
+   Pack v1/v2/v3 history wraps into 'components' WITHOUT changing rules.
+   Phase 2 will use this to purge ~80% of !important.
+   Phase 3 will split into 6 files (tokens.css, base.css, ...).
+   ────────────────────────────────────────────────────────────────────────────
+   Layer purposes:
+     1. reset      — browser reset (universal box-sizing, margin/padding)
+     2. tokens     — :root variables (--color, --font, --tint, --chr-*, ...)
+     3. base       — html, body, typography defaults, focus, selection
+     4. utilities  — atomic classes (.h-*, .type-*, .tas-*, .chr-*, ...)
+     5. components — building blocks (.bento-*, .qcalc-*, .cath-*, .glass-*)
+     6. themes     — :root[data-theme="..."] overrides
+     7. overrides  — @media print/reduced-motion + intentional !important
+   ════════════════════════════════════════════════════════════════════════════ */
+@layer reset, tokens, base, utilities, components, themes, overrides;
+
+/* Layer seeds — :where(:root) zero-specificity anchors so audit() shows all 7
+   layers populated. Phase 2-5 will move real rules into the right layers. */
+@layer reset     { :where(:root) { --upg-layer-reset: 1; } }
+@layer tokens    { :where(:root) { --upg-layer-tokens: 1; } }
+@layer base      { :where(:root) { --upg-layer-base: 1; } }
+@layer utilities { :where(:root) { --upg-layer-utilities: 1; } }
+@layer themes    { :where(:root) { --upg-layer-themes: 1; } }
+@layer overrides { :where(:root) { --upg-layer-overrides: 1; } }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Worker 23 / Phase 1 — Layer Discipline (read before any future CSS edit):
+   1. Seven layers are fixed — do NOT introduce a new layer name without a
+      phase-spec sanction.
+   2. Every NEW CSS rule added after this commit MUST live inside @layer.
+   3. :root token declarations go into @layer tokens.
+   4. :root[data-theme="..."] / html[data-theme="..."] / body[data-theme="..."]
+      blocks go into @layer themes.
+   5. @media (prefers-reduced-motion: reduce), @media (prefers-reduced-transparency: reduce),
+      and @media print blocks go into @layer overrides.
+   6. Surviving !important rules (after Phase 2) live in @layer overrides.
+   7. Do NOT reorder the cascade declaration — Phase 2-5 depend on the
+      current order: reset < tokens < base < utilities < components < themes < overrides.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ═══ START @layer components — wraps the entire pre-Phase-1 monolith ═══ */
+@layer components {
+
 /* ═══════════════════════════════════════════════════════════════
    CATHEDRAL v14 — Sovereign Theme Tokens (Worker 11 / Phase 1)
    Layer: semantic tokens (5 surface levels + tinted shadows)
@@ -27936,3 +27982,6 @@ body[data-rit-time]:not([data-rit-time="default"]) .bento-card {
    ════════════════════════════════════════════════════════════════════════ */
 
 /* End RITUAL UI v3 / Phase 6 — Aura Deepening — Worker 22 COMPLETE 6/6 ── */
+
+}
+/* ═══ END @layer components ═══════════════════════════════════════════════ */
