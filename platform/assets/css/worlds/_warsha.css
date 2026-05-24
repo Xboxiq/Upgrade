@@ -1,7 +1,388 @@
-/* ÊLAN v4 — α2 — World placeholder: وَرشة (Warsha) — Workshop
-   Pages: phonerepair, customercare
-   Filled in γ8. See WORLDS_ATLAS.md § World 7 for spec. */
+/* ────────────────────────────────────────────────────────────────────────
+   ÊLAN v4 — γ8 — World 7: وَرشة (Warsha) — Workshop
+   ────────────────────────────────────────────────────────────────────────
+   Inspiration : Baghdad's old repair-stalls + Iraqi mudhif honest joinery
+                 + raw industrial signage (yellow on brick, hand-painted).
+   Pages       : phonerepair, customercare
+   Voice       : Boutros Modern Kufi (display) + Vazirmatn (body) +
+                 JetBrains Mono (technical detail).
+   Motion      : cubic-bezier(0.55, 0.1, 0.25, 1) — مفك يلتف، 280ms.
+   ────────────────────────────────────────────────────────────────────────
+   🏛 STRUCTURAL_BEACON — "Workshop Bench"
+     The Surprise: Warsha refuses AI-clean grids. The page surface is a
+     green engineering bench (CSS-only 4mm grid + corner ticks); every
+     `.card` and `.panel` is intentionally micro-skewed and offset by a
+     stable nth-child hash, so the layout LOOKS hand-built — exactly what
+     a workshop deserves. A `[data-bench="tidy"]` modifier snaps every
+     card back to a clean grid for accessibility, print and screenshots.
+     Reduced-motion + print + forced-colors all collapse to tidy mode.
+     Reference avoided  : #6 bento grid sameness + #5 default soft-shadow card.
+     Wild-card inspired-by : #13 Iraqi marsh mudhif (reed temples that
+                            celebrate, not hide, their construction).
+   ─────────────────────────────────────────────────────────────────────── */
+
+
+/* ── 1. Tokens ───────────────────────────────────────────────────────── */
 
 [data-world="warsha"] {
-  /* Awaiting γ8 stage. */
+  /* Anchor — soot-stained walls, lamp-warm */
+  --anchor-bg: hsl(28 12% 18%);
+  --anchor-1:  hsl(28 14% 22%);
+  --anchor-2:  hsl(28 16% 27%);
+  --anchor-3:  hsl(28 18% 33%);
+
+  /* Ink — warm wax candlelight on dim walls */
+  --ink:       hsl(45 30% 92%);
+  --ink-muted: hsl(45 18% 70%);
+  --ink-faint: hsl(45 12% 50%);
+
+  /* Lines — cable runs and edge tape */
+  --line:        hsl(28 18% 33%);
+  --line-strong: hsl(28 22% 45%);
+
+  /* Workshop accents */
+  --ember:  hsl(25 85% 52%);   /* برتقالي طوب — brick orange */
+  --focus:  hsl(48 95% 55%);   /* أصفر علامة — signage yellow */
+  --accent: var(--ember);
+
+  /* Bench — engineering paper green (only used on the bench surface) */
+  --warsha-bench: hsl(155 18% 22%);
+  --warsha-grid:  hsl(155 22% 30%);
+  --warsha-rule:  hsl(48 95% 55% / 0.12);
+
+  /* Tape — visible "we've been here" marker */
+  --warsha-tape:        hsl(48 95% 55%);
+  --warsha-tape-shadow: hsl(28 30% 12%);
+
+  /* Motion fingerprint — wrench-twist, deliberate */
+  --ease-warsha:        cubic-bezier(0.55, 0.1, 0.25, 1);
+  --duration-warsha:    280ms;
+  --duration-longpress: 650ms;
+
+  /* Shadows — solid drop, no gauzy haze (tools have weight) */
+  --shadow-sm: 0 1px 0 hsl(28 30% 0% / 0.45);
+  --shadow-md:
+    0 3px 0 hsl(28 30% 0% / 0.55),
+    0 6px 14px hsl(28 30% 0% / 0.32);
+  --shadow-lg:
+    0 6px 0 hsl(28 30% 0% / 0.55),
+    0 14px 28px hsl(28 30% 0% / 0.40);
+  --shadow-xl:
+    0 12px 36px hsl(28 30% 0% / 0.55);
+
+  /* Focus ring — taut yellow tape */
+  --ring: 0 0 0 3px var(--focus);
+
+  /* Bind world tokens to the platform contract (so chrome stays neutral) */
+  --color-bg:           var(--anchor-bg);
+  --color-surface-0:    var(--anchor-bg);
+  --color-surface-1:    var(--anchor-1);
+  --color-surface-2:    var(--anchor-2);
+  --color-surface-3:    var(--anchor-3);
+  --color-text:         var(--ink);
+  --color-text-muted:   var(--ink-muted);
+  --color-text-faint:   var(--ink-faint);
+  --color-border:       var(--line);
+  --color-border-strong:var(--line-strong);
+  --color-brand:        var(--ember);
+  --color-tint:         var(--ember);
 }
+
+
+/* ── 2. Body voice + page surface (Beacon: bench grid) ───────────────── */
+
+[data-world="warsha"] body,
+[data-world="warsha"] .page-content,
+[data-world="warsha"] .page.active {
+  font-family: var(--voice-body);
+  color: var(--ink);
+}
+
+/* The bench surface — every Warsha page wears it.
+   Built from three repeating-linear-gradients (4mm minor + 20mm major
+   + faint amber rule lines). No SVG, no images, no JS.
+   Total bytes: ~120 in the cascade. */
+[data-world="warsha"] .page.active {
+  background-color: var(--warsha-bench);
+  background-image:
+    /* faint amber rule (every 80mm horizontal) */
+    repeating-linear-gradient(
+      to bottom,
+      var(--warsha-rule) 0,
+      var(--warsha-rule) 1px,
+      transparent 1px,
+      transparent 80px
+    ),
+    /* major engineering grid 20mm */
+    repeating-linear-gradient(
+      to right,
+      var(--warsha-grid) 0,
+      var(--warsha-grid) 1px,
+      transparent 1px,
+      transparent 80px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      var(--warsha-grid) 0,
+      var(--warsha-grid) 1px,
+      transparent 1px,
+      transparent 80px
+    ),
+    /* minor 4mm dots */
+    repeating-linear-gradient(
+      to right,
+      hsl(155 22% 30% / 0.55) 0,
+      hsl(155 22% 30% / 0.55) 0.5px,
+      transparent 0.5px,
+      transparent 16px
+    );
+  background-size: 100% 100%, 80px 80px, 80px 80px, 16px 16px;
+}
+
+
+/* ── 3. Beacon — bench-stacked cards (hand-built skew + offset) ──────── */
+
+[data-world="warsha"] .card,
+[data-world="warsha"] .panel,
+[data-world="warsha"] .ql-glass,
+[data-world="warsha"] [data-warsha-bench-card] {
+  background: var(--anchor-1);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  /* Default — clean (in case nth-child rules don't bind, e.g. lone cards) */
+  transform: none;
+  transition:
+    transform 200ms var(--ease-warsha),
+    box-shadow var(--duration-warsha) var(--ease-warsha);
+}
+
+/* Per-position skew/offset — stable per slot, never animated.
+   This is the deliberate-misalignment Beacon: AI grids never look like this. */
+[data-world="warsha"] .card:nth-child(4n + 1) {
+  transform: translate(-2px, -1px) rotate(-0.35deg);
+}
+[data-world="warsha"] .card:nth-child(4n + 2) {
+  transform: translate(3px, 1px) rotate(0.28deg);
+}
+[data-world="warsha"] .card:nth-child(4n + 3) {
+  transform: translate(-1px, 2px) rotate(0.18deg);
+}
+[data-world="warsha"] .card:nth-child(4n + 4) {
+  transform: translate(2px, -2px) rotate(-0.22deg);
+}
+[data-world="warsha"] .panel:nth-child(odd) {
+  transform: translate(-2px, 1px) rotate(-0.3deg);
+}
+[data-world="warsha"] .panel:nth-child(even) {
+  transform: translate(2px, -1px) rotate(0.3deg);
+}
+
+/* Hover — straighten + lift slightly, "you focused on this one" */
+[data-world="warsha"] .card:hover,
+[data-world="warsha"] .panel:hover {
+  transform: translate(0, -2px) rotate(0deg);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Tape edge — a yellow strip slightly rotated, calling the eye to the corner */
+[data-world="warsha"] .card::before {
+  content: "";
+  position: absolute;
+  inset-block-start: -8px;
+  inset-inline-end: var(--s-4);
+  inline-size: 56px;
+  block-size: 16px;
+  background:
+    linear-gradient(180deg,
+      color-mix(in oklch, var(--warsha-tape) 70%, transparent),
+      color-mix(in oklch, var(--warsha-tape) 50%, transparent));
+  border: 1px dashed color-mix(in oklch, hsl(28 30% 12%) 40%, transparent);
+  transform: rotate(-3deg);
+  pointer-events: none;
+  box-shadow: 0 1px 0 var(--warsha-tape-shadow);
+}
+
+
+/* ── 4. Tidy mode — accessibility + print + reduced-motion + forced-colors */
+
+[data-world="warsha"][data-bench="tidy"] .card,
+[data-world="warsha"][data-bench="tidy"] .panel,
+[data-world="warsha"] [data-bench="tidy"] .card,
+[data-world="warsha"] [data-bench="tidy"] .panel {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-world="warsha"] .card,
+  [data-world="warsha"] .panel,
+  [data-world="warsha"] .card:hover,
+  [data-world="warsha"] .panel:hover {
+    transform: none;
+    transition: none;
+  }
+}
+
+@media print {
+  [data-world="warsha"] .page.active {
+    background: white;
+  }
+  [data-world="warsha"] .card,
+  [data-world="warsha"] .panel {
+    transform: none;
+    box-shadow: none;
+    border: 1px solid hsl(0 0% 70%);
+  }
+  [data-world="warsha"] .card::before { display: none; }
+}
+
+@media (forced-colors: active) {
+  [data-world="warsha"] .card,
+  [data-world="warsha"] .panel { transform: none; }
+  [data-world="warsha"] .card::before { display: none; }
+}
+
+
+/* ── 5. Headings + workshop signage tag ──────────────────────────────── */
+
+[data-world="warsha"] :where(h1, h2, h3) {
+  color: var(--ink);
+}
+
+[data-world="warsha"] h1 {
+  /* Slight underline like a hand-stamped header on a job-card */
+  display: inline-block;
+  padding-block-end: 4px;
+  border-block-end: 3px solid var(--ember);
+}
+
+/* Workshop tag — yellow circle for "ticket #N" markers */
+[data-world="warsha"] .workshop-tag,
+[data-world="warsha"] [data-warsha-tag] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 32px;
+  block-size: 32px;
+  background: var(--focus);
+  color: hsl(28 30% 14%);
+  border-radius: 50%;
+  font-family: var(--voice-display);
+  font-weight: 800;
+  border: 2px solid hsl(28 30% 14%);
+  box-shadow: 0 1px 0 hsl(28 30% 0% / 0.4);
+}
+
+
+/* ── 6. Buttons — orange brick stamps ────────────────────────────────── */
+
+[data-world="warsha"] .btn,
+[data-world="warsha"] .btn-primary {
+  background: var(--ember);
+  color: hsl(28 30% 12%);
+  border: 1px solid hsl(28 30% 12%);
+  border-radius: var(--r-1);
+  padding: var(--s-3) var(--s-5);
+  font-family: var(--voice-display);
+  font-weight: 700;
+  letter-spacing: var(--track-snug);
+  cursor: pointer;
+  box-shadow: 0 2px 0 hsl(28 30% 0% / 0.4);
+  transition:
+    transform var(--duration-warsha) var(--ease-warsha),
+    box-shadow var(--duration-warsha) var(--ease-warsha);
+}
+
+[data-world="warsha"] .btn:hover,
+[data-world="warsha"] .btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 0 hsl(28 30% 0% / 0.45);
+}
+
+[data-world="warsha"] .btn:active,
+[data-world="warsha"] .btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 hsl(28 30% 0% / 0.45);
+}
+
+[data-world="warsha"] .btn-secondary {
+  background: transparent;
+  color: var(--focus);
+  border: 1px dashed var(--focus);
+}
+
+[data-world="warsha"] .btn:focus-visible,
+[data-world="warsha"] .btn-primary:focus-visible,
+[data-world="warsha"] .btn-secondary:focus-visible {
+  outline: none;
+  box-shadow: var(--ring), 0 2px 0 hsl(28 30% 0% / 0.4);
+}
+
+
+/* ── 7. Long-press utility (NOT the Beacon — feature for sensitive ops) */
+
+[data-world="warsha"] .btn-longpress {
+  position: relative;
+  padding: var(--s-3) var(--s-6);
+  background: var(--anchor-2);
+  color: var(--ink);
+  border: 2px solid var(--ember);
+  border-radius: var(--r-2);
+  font-family: var(--voice-display);
+  font-weight: 700;
+  cursor: pointer;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  --press-progress: 0;
+  --press-easing: var(--ease-warsha);
+  transition: background var(--duration-warsha) var(--press-easing);
+}
+
+[data-world="warsha"] .btn-longpress > * {
+  position: relative;
+  z-index: 1;
+}
+
+[data-world="warsha"] .btn-longpress::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0deg,
+    var(--ember) 0,
+    var(--ember) calc(var(--press-progress) * 360deg),
+    transparent calc(var(--press-progress) * 360deg)
+  );
+  opacity: 0.32;
+  pointer-events: none;
+  transition: opacity 100ms;
+  z-index: 0;
+}
+
+[data-world="warsha"] .btn-longpress[data-pressing="true"]::before {
+  opacity: 0.6;
+}
+
+[data-world="warsha"] .btn-longpress.is-fired {
+  background: var(--ember);
+  color: hsl(28 30% 12%);
+  border-color: var(--focus);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-world="warsha"] .btn-longpress::before { transition: none; }
+}
+
+
+/* ── 8. :has() no-JS body bridge (γ1 idiom — kept consistent) ────────── */
+
+@supports selector(:has(.x)) {
+  body:not([data-world]):has(section.page.active[data-world="warsha"])
+    [data-world-fallback] { /* placeholder consumer if needed */ }
+}
+
+/* End ÊLAN v4 / γ8 — Warsha (Workshop) ───────────────────────────────── */

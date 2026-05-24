@@ -126,3 +126,5 @@ import './js/elan/world-nada.js';
 import './js/elan/world-hadeed.js';
 import './js/elan/world-dhahab.js';
 import './js/elan/world-tayyar.js';
+// ÊLAN v4 — γ8: Warsha world (workshop bench beacon + long-press utility)
+import './js/elan/world-warsha.js';
