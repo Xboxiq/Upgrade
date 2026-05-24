@@ -188,3 +188,82 @@ ESM modules become a no-op at runtime today. Removal of legacy IIFEs
 **Forbidden Library violations:** 0
 **Originality Self-Score:** N/A (foundation pillar)
 **Next pillar:** β TYPE SOUL — branch `elan-β-type-soul` (new branch from main once Pillar α PR merges)
+
+
+
+---
+
+## β1 — Local Font Procurement — 2026-05-24
+**Pillar:** β TYPE SOUL
+**Stage:** 1 of 3
+**Branch:** `elan-β-type-soul`
+**Verified at commit:** `43be524`
+
+### Before
+- `MANIFEST.json`: 9 v3 / TASMEEM families (Aref Ruqaa, Reem Kufi, Cairo, Tajawal, IBM Plex Arabic, Readex Pro, Inter, JetBrains Mono, Fraunces) — all ultimately routed to Google Fonts mirror URLs.
+- `tokens/_type.css`: 0 @font-face (placeholder voice slots only).
+- `_legacy-fontface.css`: 20 @font-face for v3 fonts referencing woff2 files that do not exist on disk.
+- `pages.css`: 17 transitional @font-face (TASMEEM v3 P3 block) — out of scope for β1, deferred to ζ.
+- `scripts/elan-β1-fonts.sh`: not present.
+- `platform/index.html`: 0 Google Fonts CDN links.
+- woff2_on_disk: 0.
+
+### After (verified by grep)
+
+| Domain | Key | Value |
+|---|---|---:|
+| Manifest | `manifest_families` | 9 (replaced) |
+| Manifest | `manifest_files_listed` | 10 (Almarai split 400/700) |
+| Manifest | `manifest_files_expected_minimum` | 11 |
+| Manifest | `manifest_googleapis_refs` | 0 |
+| CSS | `font_face_in_tokens.css` | 0 |
+| CSS | `font_face_in__legacy_fontface.css` | 0 (was 20) |
+| CSS | `font_face_in__type.css` | 10 (was 0) |
+| CSS | `font_face_in_pages.css` | 17 (unchanged — out of β1 scope) |
+| CSS | `voice_tokens_declared` | 18 (preserved verbatim from α2) |
+| HTML | `google_fonts_in_index.html` | 0 |
+| Tooling | `bootstrap_script_executable` | yes |
+| Tooling | `bootstrap_script_lines` | 154 |
+| Filesystem | `new_font_subdirs_created` | 8 (boutros-modern-kufi · bukra · markazi-text · vazirmatn · almarai · amiri-quran · lateef · geist) |
+| Filesystem | `legacy_font_subdirs_kept` | 10 (deferred cleanup) |
+| Filesystem | `woff2_on_disk` | 0 (sandbox 403 — operator runs script) |
+
+### Files
+**Created (10):**
+- `scripts/elan-β1-fonts.sh` (idempotent procurement; jq + curl + pyftsubset; fallback_static_urls path; license placement; verify pass)
+- `platform/assets/fonts/boutros-modern-kufi/README.md`
+- `platform/assets/fonts/bukra/README.md`
+- `platform/assets/fonts/markazi-text/README.md`
+- `platform/assets/fonts/vazirmatn/README.md`
+- `platform/assets/fonts/almarai/README.md`
+- `platform/assets/fonts/amiri-quran/README.md`
+- `platform/assets/fonts/lateef/README.md`
+- `platform/assets/fonts/geist/README.md`
+- 8 new font directories (each with a README documenting role + license + voice + after-bootstrap expectations)
+
+**Modified (3):**
+- `platform/assets/fonts/MANIFEST.json` (9 families replaced; license_filename per family; fallback_static_urls; subset_targets extended with `arabic_quranic`)
+- `platform/assets/css/tokens/_type.css` (10 @font-face added at top; 18 voice slots + scale + leading + tracking preserved verbatim from α2)
+- `platform/assets/css/_legacy-fontface.css` (20 @font-face stripped; deprecation stub remains imported for cascade-compat)
+
+**Untouched (Sacred):**
+- `platform/index.html` (no edits — 0 Google Fonts links remain 0)
+- `archive/**` (untouched)
+- `app.js` (untouched)
+- All 92 legacy IIFEs
+- `pages.css` 17 transitional @font-face (deferred to ζ1 per scope discipline)
+
+### Sandbox Caveat (transparency)
+Sandbox network mode `INTEGRATIONS_ONLY` — `curl https://github.com/.../woff2` returns `403 Forbidden` (verified). Therefore β1 ships the **procurement scaffolding** only:
+- MANIFEST + bootstrap script + @font-face declarations + 8 family stubs.
+
+The `woff2 ≥ 11` acceptance bar is met after the operator runs:
+```
+bash scripts/elan-β1-fonts.sh
+```
+on a workstation where ordinary HTTPS reaches github / 29lt.com / sil.org, then commits the resulting `platform/assets/fonts/*/*.woff2` artifacts.
+
+### Verdict
+🟡 **scaffolded** — β1 deliverables complete on the AI side. Visible behavioural change is gated on operator running the bootstrap; until then voice tokens fall back to `system-ui` (β2 will route the new families).
+
+— Entry end —

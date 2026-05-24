@@ -948,20 +948,38 @@
   },
   "notes": "Pack v2 RESONANCE scaffolded under prompts/v2/. Path C selected by user: Meta + Worker 15 (full 6 phases) + Ritual = 15 files. Workers 16-19 + Ritual execution to follow in subsequent sessions. Cathedral v16 baseline preserved. All 19 Upg.* APIs, 14 pages, 391 qcalc references preserved. Previous Pack v1 history (v16 ATELIER): Phase 6 of Worker 14 shipped on branch worker-14-phase-6-final via PR #53. Inline 215->76 (139 removed) via deterministic node script + 330 lines Final Utilities Pack. New Upg.focusTrap IIFE auto-attaches to dialog/modal/qmodal/data-modal via MutationObserver, ESC-to-close, return-focus. Lighthouse boot helper (lazy imgs, decoding=async, pointer-enter prefetch markers). Sanity v16 verifies 19 Upg.* modules. sw.js rewrite (74->119 lines) versioned shell/assets/fonts caches, navigation network-first then offline.html fallback, SWR for assets and Google Fonts. Manifest 4 shortcuts (#dashboard, #callcenter, #myprogress, #accounting), 192/512 icon entries. Favicon v2 100x100 squircle rx=22, dual-color stroke gradient (#66FCF1 to #4F46E5). offline.html RTL Cairo, online auto-reload, retry button + home link. CHANGELOG v16 added at top. All 14 page sections, 391 qcalc, 15 identity tints preserved.",
   "elan_v4": {
-    "current_pillar": "α",
-    "current_stage": 3,
-    "current_stage_id": "α3",
-    "status": "complete-pillar-α",
+    "current_pillar": "β",
+    "current_stage": 1,
+    "current_stage_id": "β1",
+    "status": "in-progress",
     "started_at": "2026-05-24T00:00:00Z",
-    "branch": "elan-α-foundation",
+    "branch": "elan-β-type-soul",
     "completed_stages": [
       "α1",
       "α2",
-      "α3"
+      "α3",
+      "β1"
     ],
     "beacons_this_session": 0,
     "creativity_health": 0,
-    "next_action": "Open PR for Pillar α; next session start Pillar β on new branch elan-β-type-soul",
+    "creativity_health_note": "0 == initial state; Pillar α + β1 are foundation/scaffolding (no Beacons required). The < 60 crisis rule activates once γ stages start producing Beacons.",
+    "next_action": "β2 Voice Casting on the same branch elan-β-type-soul. β1 verification of woff2 binaries is pending operator running scripts/elan-β1-fonts.sh locally.",
+    "β1_artifacts": {
+      "branch": "elan-β-type-soul",
+      "commit": "43be524",
+      "manifest_families": 9,
+      "manifest_files_listed": 10,
+      "manifest_googleapis_refs": 0,
+      "font_face_in_type_css": 10,
+      "font_face_in_legacy_fontface": 0,
+      "font_face_in_pages_css": 17,
+      "voice_tokens_declared": 18,
+      "google_fonts_in_index_html": 0,
+      "bootstrap_script_executable": true,
+      "new_font_subdirs": 8,
+      "woff2_on_disk": 0,
+      "woff2_pending_operator": true
+    },
     "baseline": {
       "inline_style_index": 89,
       "important_total": 276,
@@ -979,6 +997,6 @@
     },
     "pillars_total": 6,
     "stages_total": 39,
-    "stages_completed_count": 3
+    "stages_completed_count": 4
   }
 }
