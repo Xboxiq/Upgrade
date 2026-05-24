@@ -113,3 +113,6 @@ import './js/_compat.js';
 
 // ÊLAN v4 — β3: format helpers (kashida-thousands in Dhahab world)
 import './js/elan/format.js';
+
+// ÊLAN v4 — γ1: world controller (mirrors active page → body[data-world])
+import './js/elan/world.js';
