@@ -1,138 +1,134 @@
-# ✦ ÊLAN v4 — Index & Pillars Map
-> الخريطة المرجعية لكل ملفات v4. اقرأ هذا الملف لمعرفة "أين أقف؟"
+# ✦ ÊLAN v4 — Index
+> الخريطة المرجعية. اقرأ هنا لمعرفة "أين نحن وأين نذهب".
 
 ---
 
-## 📁 محتويات `prompts/v4/`
+## 📁 ملفات `prompts/v4/` (مُلزِمة على AUTO_PILOT)
 
-### مفاتيح أساسية (تُلصَق في كل session)
+### المفاتيح الأربعة (تُقرأ في كل session — من AUTO_PILOT بنفسه)
 | الملف | الدور |
 |---|---|
-| `00_ELAN_MANIFESTO.md` | الدستور — يُلصَق أولاً |
-| `AUTO_PILOT_v4.md` | برومت التنفيذ الذاتي |
-| `COMPACT_v4.md` | نسخة مضغوطة للجوّال (قادم) |
-| `RESUME_v4.md` | استئناف من STAGE_SNAPSHOT (قادم) |
+| `00_ELAN_MANIFESTO.md` | الدستور — 8 مبادئ + سياق العوالم |
+| `CREATIVITY_DOCTRINE.md` | مذهب الإبداع — Beacons + Forbidden + Disruption |
+| `WORLDS_ATLAS.md` | 8 عوالم — لوحات tokens كاملة |
+| `AUTO_PILOT_v4.md` | البرومت الذي يلصقه المستخدم فقط |
+
+### الإضافيات
+| الملف | الدور |
+|---|---|
 | `INDEX.md` | هذا الملف |
+| `README.md` | quick reference للمستخدم |
 
-### Pillar α — FOUNDATION (الأساس)
-| Stage | الملف | الدور |
-|---|---|---|
-| α1 | `α1_FORENSIC_AUDIT.md` | مسح حقائق فعلية بـ grep قبل أي تعديل |
-| α2 | `α2_TOKEN_ARCHITECTURE.md` | 5 ملفات tokens منفصلة (color/space/type/motion/breakpoint) |
-| α3 | `α3_MODULE_MANIFEST.md` | dependency graph + إعادة تنظيم 92→~25 ملف JS |
-
-### Pillar β — TYPE SOUL (روح الخط)
-| Stage | الملف | الدور |
-|---|---|---|
-| β1 | `β1_LOCAL_FONT_PROCUREMENT.md` | 7 خطوط غير-Google + verify على القرص |
-| β2 | `β2_VOICE_CASTING.md` | 18 voice token + per-page voice signature |
-| β3 | `β3_NUMERIC_KASHIDA_SIGNATURE.md` | tabular nums + kashida rhythm + page sigs |
-
-### Pillar γ — CHROMA (اللون والروح)
-| Stage | الملف | الدور |
-|---|---|---|
-| γ1 | `γ1_MAWJ_LIGHT.md` | Light theme: رمل + فيروز + قهوة |
-| γ2 | `γ2_LAYL_DARK.md` | Dark theme: ليل صحراء + Aurora teal |
-| γ3 | `γ3_SAHAR_TRANSITION.md` | تجريبي: تحوّل dark→light عند فتح المنصة |
-| γ4 | `γ4_PER_PAGE_EMOTION.md` | tint عاطفي لكل صفحة (11 صفحة) |
-
-### Pillar δ — KINETIC SHELL (القشرة الحركية، متوازي مع γ بعد γ1)
-| Stage | الملف | الدور |
-|---|---|---|
-| δ1 | `δ1_SIDEBAR_MAGNETIC.md` | sidebar يميل خفيفاً مع pointer |
-| δ2 | `δ2_BENTO_DASHBOARD.md` | Bento حقيقي (تنفيذ Worker 13 لكن صادقاً) |
-| δ3 | `δ3_TOPBAR_LIVING.md` | topbar يتنفس + Dynamic-Island feel |
-| δ4 | `δ4_MOBILE_BOTTOM_NAV.md` | bottom-nav floating + safe-area + haptics |
-| δ5 | `δ5_VIEW_TRANSITIONS.md` | View Transitions API بين الصفحات |
-| δ6 | `δ6_REDUCED_MOTION.md` | احترام prefers-reduced-motion |
-
-### Pillar ε — CONTENT REVIVAL (إحياء المحتوى)
-| Stage | الملف | الدور |
-|---|---|---|
-| ε1 | `ε1_DASHBOARD.md` | إحياء dashboard بحسب ÊLAN |
-| ε2 | `ε2_CALLCENTER.md` | callcenter |
-| ε3 | `ε3_FIELDSALES.md` | fieldsales + KAM |
-| ε4 | `ε4_SOCIAL.md` | social + marketing |
-| ε5 | `ε5_LAB.md` | lab السيناريوهات |
-| ε6 | `ε6_PSYCH_EQ_NEGOTIATION.md` | الثلاثة كطبقة موحَّدة |
-| ε7 | `ε7_CUSTOMERCARE.md` | customer care |
-| ε8 | `ε8_PROGRAMMING.md` | programming |
-| ε9 | `ε9_ACCOUNTING.md` | accounting + tax IQ |
-| ε10 | `ε10_PHONEREPAIR.md` | phone repair |
-| ε11 | `ε11_HRMASTERY.md` | HR + salary negotiation |
-| ε12 | `ε12_PSYCHOLOGY_LAYER.md` | طبقة عرضية متغلغلة |
-
-### Pillar ζ — QUALITY GATE (الفحص النهائي)
-| Stage | الملف | الدور |
-|---|---|---|
-| ζ1 | `ζ1_INLINE_PURGE_TRUTHFUL.md` | inline → utilities (verified by grep) |
-| ζ2 | `ζ2_IMPORTANT_CAP.md` | !important: 276 → ≤ 20 |
-| ζ3 | `ζ3_LIGHTHOUSE_A11Y.md` | mobile ≥ 92, a11y ≥ 96 |
-| ζ4 | `ζ4_PWA_INSTALLABLE.md` | offline ritual + installable |
-| ζ5 | `ζ5_CHANGELOG_LEDGER.md` | TRUTH_LEDGER → CHANGELOG رسمي |
+### Stage Specs (تُكتَب stage-by-stage)
+| Pillar | Stages المتوقَّعة |
+|---|---|
+| α FOUNDATION | α1, α2, α3 |
+| β TYPE SOUL | β1, β2, β3 |
+| γ EIGHT WORLDS | γ1, γ2, γ3, γ4, γ5, γ6, γ7, γ8, γ9 |
+| δ KINETIC SHELL | δ1, δ2, δ3, δ4, δ5, δ6 |
+| ε CONTENT REVIVAL | ε1 — ε12 |
+| ζ QUALITY GATE | ζ1, ζ2, ζ3, ζ4, ζ5 |
 
 ---
 
-## 🔢 الحسابات
+## 🏛 6 Pillars المفصَّلة
+
+### Pillar α — FOUNDATION
+| Stage | اسم | الدور |
+|---|---|---|
+| α1 | Forensic Audit | قياس قبل تعديل بـ grep |
+| α2 | Token Architecture | 5 ملفات tokens (color/space/type/motion/breakpoint) |
+| α3 | Module Manifest | 92→28 ملف JS بـ ESM حقيقي |
+
+### Pillar β — TYPE SOUL
+| Stage | اسم | الدور |
+|---|---|---|
+| β1 | Local Font Procurement | 7 خطوط غير-Google + verified |
+| β2 | Voice Casting | 18 voice token + per-page voice |
+| β3 | Numeric Kashida Signature | tabular nums + kashida + per-page sigs |
+
+### Pillar γ — EIGHT WORLDS (الجوهر الجديد)
+| Stage | عالم | الصفحات |
+|---|---|---|
+| γ1 | World Foundation (CSS structure) | بنية ملفات worlds/ |
+| γ2 | حِبر (Hibr) | dashboard, myprogress |
+| γ3 | نار (Naar) | lab, programming |
+| γ4 | ندى (Nada) | psych, eq |
+| γ5 | حَديد (Hadeed) | negotiation, fieldsales |
+| γ6 | ذَهَب (Dhahab) | accounting |
+| γ7 | تَيار (Tayyar) | social, callcenter |
+| γ8 | وَرشة (Warsha) | phonerepair, customercare |
+| γ9 | صَالون (Saloon) | hrmastery |
+
+### Pillar δ — KINETIC SHELL (متوازي مع γ بعد γ1)
+| Stage | اسم | الدور |
+|---|---|---|
+| δ1 | Sidebar Magnetic | sidebar يميل مع pointer |
+| δ2 | Bento Dashboard (real) | تنفيذ Bento صادق + per-world |
+| δ3 | Topbar Living | topbar يتنفس + Dynamic Island |
+| δ4 | Mobile Bottom-Nav + Haptics | floating + safe-area + vibrate |
+| δ5 | View Transitions API | transition بين العوالم |
+| δ6 | Reduced Motion | احترام a11y |
+
+### Pillar ε — CONTENT REVIVAL
+| Stage | الصفحة | العالم |
+|---|---|---|
+| ε1 | dashboard | حِبر |
+| ε2 | callcenter | تَيار |
+| ε3 | fieldsales | حَديد |
+| ε4 | social | تَيار |
+| ε5 | lab | نار |
+| ε6 | psych+eq+negotiation | ندى+حَديد |
+| ε7 | customercare | وَرشة |
+| ε8 | programming | نار |
+| ε9 | accounting | ذَهَب |
+| ε10 | phonerepair | وَرشة |
+| ε11 | hrmastery | صَالون |
+| ε12 | Cross-page Psychology Layer | متعدد |
+
+### Pillar ζ — QUALITY GATE
+| Stage | اسم | الدور |
+|---|---|---|
+| ζ1 | Inline Purge Truthful | inline → utilities (verified) |
+| ζ2 | !important Cap | 276 → ≤ 20 |
+| ζ3 | Lighthouse + A11y | mobile ≥ 92, a11y ≥ 96 |
+| ζ4 | PWA Installable | offline ritual + installable |
+| ζ5 | Changelog Truth Ledger | TRUTH_LEDGER → CHANGELOG رسمي |
+
+---
+
+## 🔢 الإحصاء
 
 | البُعد | القيمة |
 |---|---:|
-| Pillars | 6 (α, β, γ, δ, ε, ζ) |
-| Stages إجمالاً | 33 |
-| Branches متوقَّعة | 6 |
-| PRs متوقَّعة | 6 (واحد per pillar) |
-| Stages في الـ session الواحد المتوسط | 2-4 |
-| Sessions تقديرية للإنجاز الكامل | 12-15 |
+| Pillars | 6 |
+| Stages إجمالاً | 38 (3+3+9+6+12+5) |
+| Branches متوقَّعة | 6 (واحد per pillar) |
+| PRs نهائية | 6 |
+| Beacons مطلوبة دنيا | ~27 (في γ + δ + ε، 27 stage × 1 minimum) |
+| Sessions تقديرية | 15-20 |
 
 ---
 
-## 🚦 ترتيب التنفيذ المُلزِم
+## 📊 ملفات state/ المُسخَّرة
 
-### Critical Path (لا يُكسَر):
-```
-α1 → α2 → α3   (FOUNDATION أولاً، لا يُتجاوز)
-   ↓
-β1 → β2 → β3   (TYPE قبل CHROMA لأن alignment يعتمد على voice metrics)
-   ↓
-γ1            (Mawj أولاً، إجباري قبل بقية γ و δ)
-```
-
-### بعد γ1 يصير التوازي ممكناً:
-- γ2, γ3, γ4 (chroma) **بالتوازي مع** δ1-δ6 (shell)
-- ε1-ε12 (content) بعد إنجاز γ كاملة و δ1+δ2+δ4 على الأقل
-
-### ζ آخر دائماً:
-- ζ1-ζ5 لا تُنفَّذ قبل اكتمال α + β + γ + δ + ε
+| الملف | الدور |
+|---|---|
+| `state/PROGRESS.json` | نقطة استئناف + creativity_health |
+| `state/AUDIT_BASELINE.md` | baseline من α1 (يُكتَب مرة) |
+| `state/TRUTH_LEDGER.md` | append-only أرقام محقَّقة |
+| `state/CREATIVITY_LOG.md` | append-only beacons + STATS |
 
 ---
 
-## 📊 مقاييس النجاح المُتعهَّد بها
+## 🛡 Sacred Assets
 
-| المقياس | الحالي (verified) | الهدف بعد ζ |
-|---|---:|---:|
-| ملفات woff2 على القرص | 0 | ≥ 12 (3 stages × 4 أوزان) |
-| `!important` total | 276 | ≤ 20 |
-| `inline style=` index | 89 | ≤ 30 |
-| `font-family` declarations | 336 | ≤ 80 (مركَّزة في 18 voice token) |
-| ملفات JS في /js/ | 92 | ≤ 28 |
-| pages.css سطور | 26,404 | ≤ 9,000 (مُقسَّم بحسب section) |
-| Pages preserved | 16 | 16 (sacred) |
-| Upg.* APIs preserved | 14 | 14 (sacred) |
-| Lighthouse Mobile Perf | ? | ≥ 92 |
-| Lighthouse Mobile A11y | ? | ≥ 96 |
-| One-thumb CTAs in lower 50% (mobile) | ? | ≥ 80% |
-
----
-
-## 🛡️ Sacred Assets (محرَّمة على كل phases)
-
-| الأصل | الموقع | السبب |
-|---|---|---|
-| الأرشيف الأصلي | `archive/arabic-translation-platform-v12-original.html` | تاريخ يُحفظ |
-| 14 Upg.* API | `window.Upg.*` (Upg.font, Upg.theme, Upg.nav, Upg.state, Upg.cmdk, …) | backward-compat |
-| 16 page sections | `<section class="page" id="page-*">` | لا حذف |
-| `state/PROGRESS.json` | جذر الريبو | ذاكرة النظام |
-| `prompts/v1, v2, v3` | كاملة | تاريخ القرار |
+| الأصل | لماذا |
+|---|---|
+| `archive/` | تاريخ يُحفظ |
+| `Upg.*` 14 APIs | backward-compat |
+| 16 page sections | لا حذف |
+| `prompts/v1, v2, v3` | تاريخ القرار |
 
 ---
 
