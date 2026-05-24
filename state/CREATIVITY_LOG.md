@@ -28,14 +28,14 @@
 **Verified at commit:** 647f9fe
 
 ---STATS---
-total_beacons: 4
+total_beacons: 5
 unique_categories_used: 3
-avg_score: 4.5
-last_5_avg: 4.5
+avg_score: 4.4
+last_5_avg: 4.4
 disruption_triggers: 0
 forbidden_violations: 0
 creativity_health: 100
-last_updated: 2026-05-24 / γ2
+last_updated: 2026-05-24 / γ3
 
 
 ## γ1 — 2026-05-24
@@ -59,3 +59,15 @@ last_updated: 2026-05-24 / γ2
 **Originality Self-Score:** 5/5
 **Files touched:** platform/assets/css/worlds/_hibr.css · platform/assets/js/elan/world-hibr.js · platform/assets/app.js
 **Verified at commit:** 73599eb
+
+
+
+## γ3 — 2026-05-24
+**Beacon Type:** 🎨 VISUAL_BEACON
+**The Surprise:** عند الـ hover على عنصر تفاعلي في عالم نار، شرارة (radial-gradient 24px) تظهر بدقة عند موقع المؤشر — CSS-only flash مدة 60ms. الـ JS يُحدِّث --mx/--my فقط عبر rAF-throttled pointermove. كأن مطرقة لمست المعدن الساخن.
+**Reference Avoided:** Forbidden #13 — spring-bounce hover / Forbidden #5 — shadow + radius card (Creativity Doctrine § ٣).
+**Inspired-by:** Wild Card #2 — Iraqi Brutalism (Chadirji concrete + steel).
+**User-Visible:** yes (visible on every .spark-host hover in lab + programming pages)
+**Originality Self-Score:** 4/5
+**Files touched:** platform/assets/css/worlds/_naar.css · platform/assets/js/elan/world-naar.js · platform/assets/app.js
+**Verified at commit:** 883ca46
