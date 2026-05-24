@@ -71,6 +71,21 @@ export function current() {
   return resolve(get());
 }
 
+/* γ1 — Legacy bridge: theme set also syncs body[data-world] default */
+const THEME_WORLD_MAP = Object.freeze({ light: 'hibr', dark: 'naar' });
+
+function syncWorldFromTheme(mode) {
+  const actual = resolve(mode);
+  const world = THEME_WORLD_MAP[actual];
+  if (world && window.Upg?.world?.set) {
+    // Only default-sync if no active page overrides
+    const currentWorld = window.Upg.world.current?.();
+    if (!currentWorld || currentWorld === THEME_WORLD_MAP[actual === 'light' ? 'dark' : 'light']) {
+      window.Upg.world.set(actual === 'light' ? 'page-dashboard' : 'page-lab');
+    }
+  }
+}
+
 export const theme = Object.freeze({ get, set, cycle, current, ORDER });
 
 if (typeof window !== 'undefined') {

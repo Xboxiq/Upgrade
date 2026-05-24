@@ -1,0 +1,63 @@
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — γ1 — World :has() Fallback (STRUCTURAL_BEACON)
+   ────────────────────────────────────────────────────────────────────────
+   Activates the correct world on <body> based on the active page in DOM.
+   This works WITHOUT JavaScript — a pure CSS mechanism.
+   JS (elan/world.js) enhances by setting body[data-world] directly,
+   but this layer guarantees worlds are active even when JS fails.
+
+   Beacon: 🏛 STRUCTURAL_BEACON
+   Surprise: العوالم تتفعل بدون JS — :has() يكفي.
+   Avoided: Forbidden #14 (standard JS-driven theme switcher as sole path)
+   ════════════════════════════════════════════════════════════════════════ */
+
+@supports selector(:has(*)) {
+
+  /* ─── حِبر (Hibr) — Ink ─── */
+  body:has(.page.active[data-world="hibr"]),
+  body:has(.page.is-active[data-world="hibr"]) {
+    --world-active: hibr;
+  }
+
+  /* ─── نار (Naar) — Fire ─── */
+  body:has(.page.active[data-world="naar"]),
+  body:has(.page.is-active[data-world="naar"]) {
+    --world-active: naar;
+  }
+
+  /* ─── ندى (Nada) — Dew ─── */
+  body:has(.page.active[data-world="nada"]),
+  body:has(.page.is-active[data-world="nada"]) {
+    --world-active: nada;
+  }
+
+  /* ─── حَديد (Hadeed) — Iron ─── */
+  body:has(.page.active[data-world="hadeed"]),
+  body:has(.page.is-active[data-world="hadeed"]) {
+    --world-active: hadeed;
+  }
+
+  /* ─── ذَهَب (Dhahab) — Gold ─── */
+  body:has(.page.active[data-world="dhahab"]),
+  body:has(.page.is-active[data-world="dhahab"]) {
+    --world-active: dhahab;
+  }
+
+  /* ─── تَيار (Tayyar) — Current ─── */
+  body:has(.page.active[data-world="tayyar"]),
+  body:has(.page.is-active[data-world="tayyar"]) {
+    --world-active: tayyar;
+  }
+
+  /* ─── وَرشة (Warsha) — Workshop ─── */
+  body:has(.page.active[data-world="warsha"]),
+  body:has(.page.is-active[data-world="warsha"]) {
+    --world-active: warsha;
+  }
+
+  /* ─── صَالون (Saloon) — Salon ─── */
+  body:has(.page.active[data-world="saloon"]),
+  body:has(.page.is-active[data-world="saloon"]) {
+    --world-active: saloon;
+  }
+}
