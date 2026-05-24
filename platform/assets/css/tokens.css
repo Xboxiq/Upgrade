@@ -259,3 +259,25 @@
    ════════════════════════════════════════════════════════════════════════ */
 
 /* End DUAL-FORM v3 / Phase 1 — Tokens ───────────────────────────────── */
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   DUAL-FORM v3 — Bottom Nav Tokens (Worker 24 / Phase 2)
+   ────────────────────────────────────────────────────────────────────────
+   الموبايل يَفكّر بالإبهام. الـ sidebar طويلة، الإبهام قصير.
+   Bottom nav يَجعل الـ ٥ أهمّ destinations في متناول اليد.
+   على الديسكتوب: hidden — صفر تأثير بصري.
+   ════════════════════════════════════════════════════════════════════════ */
+:root {
+  --dual-bottom-nav-bg:        color-mix(in oklch, var(--color-surface-1, var(--surface, #fff)) 88%, transparent);
+  --dual-bottom-nav-bg-solid:  var(--color-surface-1, var(--surface, #fff));
+  --dual-bottom-nav-border:    var(--color-border, var(--border, #e5e5e5));
+  --dual-bottom-nav-radius:    20px;
+  --dual-bottom-nav-shadow:    var(--shadow-c-lg, var(--shadow-lg, 0 14px 32px rgba(0,0,0,0.10)));
+  --dual-bottom-nav-fab-size:  56px;
+  --dual-bottom-nav-fab-lift:  16px;
+  --dual-bottom-nav-icon-size: 22px;
+  --dual-bottom-nav-icon-fab:  26px;
+  --dual-bottom-nav-z:         700;
+  --dual-bottom-nav-mq:        720px;
+}

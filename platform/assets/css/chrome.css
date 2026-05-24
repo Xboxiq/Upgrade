@@ -1088,3 +1088,268 @@ html, body {
 }
 
 /* End DUAL-FORM v3 / Phase 1 — Safe-Area Chrome ──────────────────────── */
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   DUAL-FORM v3 — Bottom Nav Visual (Worker 24 / Phase 2)
+   ────────────────────────────────────────────────────────────────────────
+   Mobile-only navigation. Floating-style above content.
+   - 5 primary destinations (الرئيسية / المعمل / مَركز / التقدّم / المزيد).
+   - Center FAB elevated بـ -16px لـ command palette (Cmd+K mobile equivalent).
+   - Visible فقط على @media (max-width: 720px).
+   - Active tab يَستعمل --color-tint للصفحة الحالية (W12 P5 identity tints).
+   - safe-area-inset-bottom محترم (W24 P1 tokens).
+   - Touch targets ≥ 44×44px.
+   - RTL-aware via inset-inline + dir="rtl" inheritance.
+   ════════════════════════════════════════════════════════════════════════ */
+
+.dual-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  inset-inline: 0;
+  display: none;
+  z-index: var(--dual-bottom-nav-z, 700);
+  padding-block-start: var(--space-2, 0.5rem);
+  padding-block-end: max(var(--space-2, 0.5rem), var(--safe-bottom));
+  padding-inline-start: max(var(--space-2, 0.5rem), var(--safe-left));
+  padding-inline-end:   max(var(--space-2, 0.5rem), var(--safe-right));
+  background: var(--dual-bottom-nav-bg);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+          backdrop-filter: blur(20px) saturate(150%);
+  border-top: 1px solid var(--dual-bottom-nav-border);
+  transform: translateY(0);
+  transition: transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: auto;
+}
+
+/* Browsers that don't support backdrop-filter — fall back to solid surface */
+@supports not ((backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px))) {
+  .dual-bottom-nav {
+    background: var(--dual-bottom-nav-bg-solid);
+  }
+}
+
+/* Mobile: visible as 5-column grid */
+@media (max-width: 720px) {
+  .dual-bottom-nav {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--space-1, 0.25rem);
+    align-items: center;
+    justify-items: stretch;
+  }
+}
+
+/* Desktop: never visible — sidebar takes over */
+@media (min-width: 721px) {
+  .dual-bottom-nav {
+    display: none !important;
+  }
+}
+
+/* Hide on print — bottom nav has no place on paper */
+@media print {
+  .dual-bottom-nav {
+    display: none !important;
+  }
+}
+
+/* ── Items (anchors + buttons share the same skin) ──────────────────── */
+.dual-bottom-nav-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 100%;
+  min-width: var(--dual-touch-min, 44px);
+  min-height: var(--dual-touch-min, 44px);
+  padding: var(--space-1, 0.25rem) var(--space-2, 0.5rem);
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted, var(--text-muted, #666));
+  text-decoration: none;
+  font-family: var(--type-voice-label, var(--font-text, inherit));
+  cursor: pointer;
+  border-radius: 12px;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+/* Buttons (cmdk/more) — reset native styling */
+.dual-bottom-nav-item[type="button"],
+button.dual-bottom-nav-item {
+  appearance: none;
+  -webkit-appearance: none;
+  font: inherit;
+  color: inherit;
+}
+
+/* Hover/focus — soft tint of the active page color */
+.dual-bottom-nav-item:hover,
+.dual-bottom-nav-item:focus-visible {
+  color: var(--color-text, var(--text, #111));
+  background: color-mix(
+    in oklch,
+    var(--color-tint, var(--chr-lapis-500, #3b82f6)) 12%,
+    transparent
+  );
+  outline: none;
+}
+
+.dual-bottom-nav-item:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--color-surface-1, var(--surface, #fff)),
+    0 0 0 4px color-mix(
+      in oklch,
+      var(--color-tint, var(--chr-lapis-500, #3b82f6)) 60%,
+      transparent
+    );
+}
+
+/* Active tab — uses current page tint with a soft pip indicator */
+.dual-bottom-nav-item[data-active="true"] {
+  color: var(--color-tint, var(--chr-lapis-500, #3b82f6));
+}
+.dual-bottom-nav-item[data-active="true"]::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.85;
+}
+
+/* RTL note: inset-inline-start handles flip; transform stays centered. */
+[dir="rtl"] .dual-bottom-nav-item[data-active="true"]::before {
+  transform: translateX(50%);
+}
+
+/* Pressed state — subtle tactile cue (no haptic — Phase 4 adds opt-in) */
+.dual-bottom-nav-item:active {
+  transform: scale(0.96);
+  transition-duration: 80ms;
+}
+
+/* ── Icon + label ───────────────────────────────────────────────────── */
+.dual-bottom-nav-icon {
+  width:  var(--dual-bottom-nav-icon-size, 22px);
+  height: var(--dual-bottom-nav-icon-size, 22px);
+  color: currentColor;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.dual-bottom-nav-label {
+  font-size: 0.65rem;
+  line-height: 1;
+  letter-spacing: 0;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* ── Center FAB — command palette opener ────────────────────────────── */
+.dual-bottom-nav-center {
+  width:  var(--dual-bottom-nav-fab-size, 56px);
+  height: var(--dual-bottom-nav-fab-size, 56px);
+  border-radius: 50%;
+  background: var(--color-tint, var(--chr-lapis-500, #3b82f6));
+  color: var(--color-on-tint, #fff);
+  margin-block-start: calc(var(--dual-bottom-nav-fab-lift, 16px) * -1);
+  box-shadow: var(--dual-bottom-nav-shadow);
+  align-self: center;
+  justify-self: center;
+}
+
+.dual-bottom-nav-center:hover,
+.dual-bottom-nav-center:focus-visible {
+  background: color-mix(
+    in oklch,
+    var(--color-tint, var(--chr-lapis-500, #3b82f6)) 100%,
+    black 8%
+  );
+  color: var(--color-on-tint, #fff);
+}
+
+.dual-bottom-nav-center .dual-bottom-nav-icon {
+  width:  var(--dual-bottom-nav-icon-fab, 26px);
+  height: var(--dual-bottom-nav-icon-fab, 26px);
+}
+
+/* Center FAB has no label — keep visual focus on glyph */
+.dual-bottom-nav-center .dual-bottom-nav-label {
+  display: none;
+}
+
+/* Center FAB never wears the active pip — it's a "do something" button */
+.dual-bottom-nav-center::before {
+  display: none !important;
+}
+
+/* ── Slide-up entrance animation ────────────────────────────────────── */
+@keyframes dual-bottom-nav-rise {
+  from { transform: translateY(110%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+@media (max-width: 720px) {
+  .dual-bottom-nav {
+    animation: dual-bottom-nav-rise 400ms cubic-bezier(0.4, 0, 0.2, 1) both;
+    animation-delay: 120ms;
+  }
+}
+
+/* Respect prefers-reduced-motion — silence rise + press-scale + transitions */
+@media (prefers-reduced-motion: reduce) {
+  .dual-bottom-nav {
+    animation: none !important;
+    transition: none !important;
+  }
+  .dual-bottom-nav-item {
+    transition: none !important;
+  }
+  .dual-bottom-nav-item:active {
+    transform: none !important;
+  }
+}
+
+/* ── Page-host content offset — push content above the bottom nav ───── */
+@media (max-width: 720px) {
+  #page-host,
+  main[data-shard-host],
+  main#page-host,
+  #main {
+    padding-bottom: calc(
+      var(--dual-bottom-nav-h, 64px)
+      + var(--dual-bottom-nav-fab-lift, 16px)
+      + max(var(--space-4, 1rem), var(--safe-bottom))
+    );
+  }
+}
+
+/* ── Hidden state — for programmatic concealment (e.g., during typing) ── */
+.dual-bottom-nav[data-hidden="true"] {
+  transform: translateY(120%);
+  pointer-events: none;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Worker 24 / Phase 2 — Bottom Nav Discipline
+   1. Mobile-only — hidden على >720px ومخفي عند الطباعة.
+   2. ٥ destinations ثابتة (لا تَخلق سادسة بدون phase جديد).
+   3. Touch target ≥ 44×44px على كل عنصر تفاعلي.
+   4. Active tab يَستعمل --color-tint الصفحة الحالية (W12 P5 + W21 P3).
+   5. Center FAB يَفتح Upg.cmdk.open() — لا يَستضيف destination.
+   6. RTL تلقائي عبر inset-inline-* + dir="rtl" inheritance.
+   7. لا haptic هنا — Phase 4 يُضيفه opt-in.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* End DUAL-FORM v3 / Phase 2 — Bottom Nav ───────────────────────────── */
