@@ -1,9 +1,27 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-24T16:30:00Z",
+  "last_updated": "2026-05-24T17:45:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
+    "pack": "v3",
+    "worker": "24",
+    "worker_name": "DUAL-FORM",
+    "phase": 1,
+    "phases_total": 5,
+    "phase_order": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "branch": "worker-24-devotio",
+    "status": "in-progress",
+    "blocker": null,
+    "next_action": "Continue Worker 24 Phase 2 (Bottom Nav — 5 mobile destinations, RTL-aware, max-width:720px gate, safe-area-inset-bottom consumer). Same branch worker-24-devotio (linear branch rule)."
+  },
+  "previous": {
     "pack": "v3",
     "worker": "23",
     "worker_name": "DECONSTRUCTION",
@@ -17,11 +35,11 @@
       "5"
     ],
     "branch": "worker-23-devotio-p5",
-    "status": "in-progress",
-    "blocker": null,
-    "next_action": "Open PR for worker-23-devotio-p5 — closes Worker 23 DECONSTRUCTION (5/5 phases). Next session: Start Worker 24 Phase 1 (DUAL-FORM — dvh + safe-area)."
+    "status": "merged",
+    "merged_pr": 103,
+    "blocker": null
   },
-  "previous": {
+  "before_previous": {
     "pack": "v3",
     "worker": "23",
     "worker_name": "DECONSTRUCTION",
@@ -37,24 +55,6 @@
     "branch": "worker-23-devotio-p4",
     "status": "merged",
     "merged_pr": 102,
-    "blocker": null
-  },
-  "before_previous": {
-    "pack": "v3",
-    "worker": "23",
-    "worker_name": "DECONSTRUCTION",
-    "phase": 3,
-    "phases_total": 5,
-    "phase_order": [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5"
-    ],
-    "branch": "worker-23-devotio-p3",
-    "status": "merged",
-    "merged_pr": 101,
     "blocker": null
   },
   "completed_phases": [
@@ -817,9 +817,17 @@
       "branch": "worker-23-devotio-p5",
       "lines_added": 19812,
       "lines_deleted": 19101
+    },
+    {
+      "worker": "24",
+      "phase": 1,
+      "title": "dvh & Safe Area — APPEND viewport+safe-area tokens (--dvh-100/--svh-100/--lvh-100/--vh-fallback + --safe-top/bottom/left/right + --dual-chrome-h-desktop/mobile + --dual-bottom-nav-h, 11 tokens) in tokens.css with @supports not (height: 100dvh) fallback aliasing dvh/svh/lvh to 100vh on legacy engines + REPLACE-IN-PLACE 3 raw 100vh in pages.css (#app grid height / #sidebar desktop height / #sidebar mobile drawer height) → var(--dvh-100, 100vh) (token-with-fallback pattern: dvh wherever supported, vh otherwise — zero behavior regression on Firefox <115 / older Safari) + APPEND safe-area chrome block to chrome.css (5 selector groups: #topbar+.app-header+header[role=banner] / #sidebar+.sidebar+.nav-rail / footer.app-footer+[role=contentinfo] / #main+#page-host+main[data-shard-host] / html,body min-height) using max(var(--space-X), var(--safe-Y)) so design padding is preserved on desktop (env() resolves to 0) but absorbed when device inset exceeds it on iPhone notch / home-indicator / landscape ears. Viewport meta `viewport-fit=cover` already present from W23 P5 — preserved. Sacred preserved 100% (14 page sections / 391 qcalc / 29 Upg.* APIs / 15 data-page-personality / 35 @media print blocks / 7 @layer cascade / no JS touched / no app.js touched). Foundation for W24 P2 bottom nav (will consume --dual-bottom-nav-h + --safe-bottom).",
+      "branch": "worker-24-devotio",
+      "lines_added": 111,
+      "lines_deleted": 3
     }
   ],
-  "next_action": "Open PR for worker-23-devotio-p5 — Worker 23 DECONSTRUCTION 5/5 complete. Next session: Start Worker 24 Phase 1 (DUAL-FORM — dvh + safe-area).",
+  "next_action": "Continue Worker 24 Phase 2 (Bottom Nav — 5 mobile destinations, RTL-aware, max-width:720px gate, safe-area-inset-bottom consumer). Same branch worker-24-devotio (linear branch rule).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
