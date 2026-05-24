@@ -1,7 +1,222 @@
-/* ÊLAN v4 — α2 — World placeholder: حِبر (Hibr) — Ink
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — γ2 — World 1: حِبر (Hibr) — Ink
+   ────────────────────────────────────────────────────────────────────────
    Pages: dashboard, myprogress
-   Filled in γ2. See WORLDS_ATLAS.md § World 1 for spec. */
+   Mood: قلم نَسخ على ورق التَّحبير. هدوء معرفي، انضباط تأمّلي.
+   Inspiration: Najaf manuscripts · Iraqi naskh calligraphy · Tahbeer paper.
+   Beacon (γ2): ✍️ TYPOGRAPHIC — text reveals as ink-on-paper, not ✓ ticks.
+   ════════════════════════════════════════════════════════════════════════ */
 
-[data-world="hibr"] {
-  /* Awaiting γ2 stage. */
+@layer worlds {
+
+  /* ─── Palette + System Tokens ─────────────────────────────────────── */
+
+  [data-world="hibr"] {
+    /* Anchor surfaces — Tahbeer paper, four warm graded steps */
+    --anchor-bg: hsl(36 18% 92%);
+    --anchor-1:  hsl(36 14% 88%);
+    --anchor-2:  hsl(36 12% 82%);
+    --anchor-3:  hsl(36 14% 76%);
+
+    /* Ink — naskh-grade dark, three optical depths */
+    --ink:        hsl(225 35% 8%);
+    --ink-muted:  hsl(225 22% 28%);
+    --ink-faint:  hsl(225 14% 50%);
+
+    /* Manuscript ruling lines */
+    --line:        hsl(36 14% 76%);
+    --line-strong: hsl(36 16% 64%);
+
+    /* Calligrapher's red + gilt accent (anchor + ember + focus per Atlas) */
+    --ember:  hsl(0 65% 32%);
+    --focus:  hsl(45 80% 35%);
+    --accent: var(--ember);
+
+    /* Hibr motion fingerprint — قلم النَّسخ */
+    --ease-hibr:     cubic-bezier(0.5, 0, 0.5, 1);
+    --duration-hibr: 320ms;
+
+    /* Tinted shadows (color-mix on ink, so they age with the world) */
+    --shadow-sm: 0 1px  2px hsl(225 35% 8% / 0.06);
+    --shadow-md: 0 4px 12px hsl(225 35% 8% / 0.09);
+    --shadow-lg: 0 14px 32px hsl(225 35% 8% / 0.12);
+    --shadow-xl: 0 28px 60px hsl(225 35% 8% / 0.15);
+
+    --ring: 0 0 0 3px color-mix(in oklch, var(--focus) 36%, transparent);
+
+    /* Forward aliases for v3 chrome that reads --color-* names */
+    --color-bg:            var(--anchor-bg);
+    --color-surface-0:     var(--anchor-bg);
+    --color-surface-1:     var(--anchor-1);
+    --color-surface-2:     var(--anchor-2);
+    --color-surface-3:     var(--anchor-3);
+    --color-text:          var(--ink);
+    --color-text-muted:    var(--ink-muted);
+    --color-text-faint:    var(--ink-faint);
+    --color-border:        var(--line);
+    --color-border-strong: var(--line-strong);
+    --color-brand:         var(--ember);
+  }
+
+  /* ─── World skin: body & long-form prose ──────────────────────────── */
+
+  body[data-world="hibr"],
+  body[data-world="hibr"] .page,
+  body[data-world="hibr"] .page-content {
+    background-color: var(--anchor-bg);
+    color: var(--ink);
+    font-family: var(--voice-body);
+    line-height: var(--lead-normal);
+  }
+
+  /* H1 in hibr — calligraphic, Markazi-anchored display */
+  body[data-world="hibr"] h1,
+  body[data-world="hibr"] .hero-title,
+  body[data-world="hibr"] h1.is-hero,
+  body[data-world="hibr"] .type-display,
+  body[data-world="hibr"] .type-hero {
+    font-family: var(--voice-signature);
+    color: var(--ink);
+    letter-spacing: var(--track-snug);
+  }
+
+  /* ─── Manuscript ruling — visible only inside hibr ─────────────── */
+
+  body[data-world="hibr"] .card,
+  body[data-world="hibr"] .panel,
+  body[data-world="hibr"] .bento-cell {
+    background-color: var(--anchor-1);
+    border: 1px solid var(--line);
+    border-radius: var(--r-2);
+    position: relative;
+    isolation: isolate;
+  }
+
+  /* The ruling itself — a faint repeating horizontal grid that mimics
+     the lined Tahbeer paper a katib lays beneath their hand. It sits
+     *behind* content (z-index: -1 within the isolated card) and never
+     intercepts pointer events. */
+  body[data-world="hibr"] .card::before,
+  body[data-world="hibr"] .panel::before,
+  body[data-world="hibr"] .bento-cell::before {
+    content: "";
+    position: absolute;
+    inset: var(--s-3) var(--s-4);
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(var(--lead-normal) * 1em - 1px),
+      color-mix(in oklch, var(--line) 55%, transparent)
+        calc(var(--lead-normal) * 1em - 1px),
+      color-mix(in oklch, var(--line) 55%, transparent)
+        calc(var(--lead-normal) * 1em)
+    );
+    opacity: 0.32;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* ─── Beacon: Ink-Drying Text Reveal ──────────────────────────────
+     The text element draws itself into existence as a left-to-right
+     sweep of ink across a transparent baseline. The mechanism is
+     `background-clip: text` over a gradient whose start position
+     animates from -0% to +100%. No ✓ check. No counter from 0.
+     CSS only animates when JS adds `.is-drying`; the world-hibr.js
+     controller adds it on world entry (cards) or on success-actions
+     (.btn-success-action / [data-action="completed"] / [data-track]).
+     Reduced-motion users skip the animation and see the final ink. */
+
+  body[data-world="hibr"] .btn-success-action,
+  body[data-world="hibr"] [data-action="completed"],
+  body[data-world="hibr"] [data-action="save-progress"],
+  body[data-world="hibr"] [data-track="completed"] {
+    color: transparent;
+    background-image: linear-gradient(
+      90deg,
+      var(--ink) 0%,
+      var(--ink) 0%,
+      color-mix(in oklch, var(--ink) 30%, transparent) 0%
+    );
+    background-size: 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    transition: background-image 600ms var(--ease-hibr);
+  }
+
+  body[data-world="hibr"] .btn-success-action.is-drying,
+  body[data-world="hibr"] [data-action="completed"].is-drying,
+  body[data-world="hibr"] [data-action="save-progress"].is-drying,
+  body[data-world="hibr"] [data-track="completed"].is-drying {
+    background-image: linear-gradient(
+      90deg,
+      var(--ink) 100%,
+      var(--ink) 100%,
+      color-mix(in oklch, var(--ink) 30%, transparent) 100%
+    );
+  }
+
+  /* Ink-dry on dashboard stat values — the W12 P5 countup tickers
+     write themselves into the manuscript on world entry. This makes
+     the beacon user-visible at first paint of the dashboard. */
+  body[data-world="hibr"] .bento-stat-value,
+  body[data-world="hibr"] .stat-tile-value {
+    background-image: linear-gradient(
+      90deg,
+      var(--ink) 0%,
+      var(--ink) 0%,
+      color-mix(in oklch, var(--ink) 25%, transparent) 0%
+    );
+    background-size: 100% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    transition: background-image 720ms var(--ease-hibr);
+    /* Color stays as-is until JS toggles is-drying — fallback safe */
+  }
+
+  body[data-world="hibr"] .bento-stat-value.is-drying,
+  body[data-world="hibr"] .stat-tile-value.is-drying {
+    color: transparent;
+    background-image: linear-gradient(
+      90deg,
+      var(--ink) 100%,
+      var(--ink) 100%,
+      color-mix(in oklch, var(--ink) 25%, transparent) 100%
+    );
+  }
+
+  /* Reduced-motion users: skip the sweep, render final ink immediately */
+  @media (prefers-reduced-motion: reduce) {
+    body[data-world="hibr"] .btn-success-action,
+    body[data-world="hibr"] [data-action="completed"],
+    body[data-world="hibr"] [data-action="save-progress"],
+    body[data-world="hibr"] [data-track="completed"],
+    body[data-world="hibr"] .bento-stat-value,
+    body[data-world="hibr"] .stat-tile-value {
+      color: var(--ink);
+      background-image: none;
+      transition: none;
+    }
+  }
+
+  /* Graceful fallback — older browsers without background-clip:text:
+     letters stay readable as solid ink, animation just doesn't reveal. */
+  @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+    body[data-world="hibr"] .btn-success-action,
+    body[data-world="hibr"] [data-action="completed"],
+    body[data-world="hibr"] [data-action="save-progress"],
+    body[data-world="hibr"] [data-track="completed"],
+    body[data-world="hibr"] .bento-stat-value,
+    body[data-world="hibr"] .stat-tile-value {
+      color: var(--ink);
+      background-image: none;
+    }
+  }
+
+  /* ─── Focus ring — calligrapher's gilt outline ────────────────── */
+  body[data-world="hibr"] :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+    box-shadow: var(--ring);
+  }
+
 }
