@@ -27623,3 +27623,316 @@ body[data-rit-time]:not([data-rit-time="default"]) .bento-card {
    ════════════════════════════════════════════════════════════════════════ */
 
 /* End RITUAL UI v3 / Phase 5 — Time of Day ──────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   RITUAL UI v3 — Worker 22 / Phase 6 — Aura Deepening
+   ────────────────────────────────────────────────────────────────────────
+   Builds atop:
+     • W16 P6 — Identity Auras  (--aura-* tokens, body[data-aura-*] surfaces)
+     • W21 P1 — chr-* palettes  (color-mix oklch ladder, mihrab + lapis)
+     • W21 P3 — 15 page tints   (--color-tint per personality)
+     • W22 P5 — Time-of-Day     (--rit-atmo-tint-shift atmosphere veil)
+     • W12 P5 — page personalities (data-page-personality attributes)
+
+   Goal: every page Aura is no longer "ambient generic" — it is woven from:
+     1. its identity tint   (W21)
+     2. the current atmosphere shift (W22 P5)
+     3. its personality rhythm (gentle / pulse / sweep)
+   So the Aura becomes a soul, not a halo.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Step 1: Deepened Aura Tokens ─────────────────────────────────────── */
+:root {
+  /* Tint chain: identity → atmosphere shift → final aura tint */
+  --rit-aura-deep-tint:
+    color-mix(in oklch,
+      var(--color-tint, var(--chr-lapis-500, #4a7fc8)) 65%,
+      var(--rit-atmo-tint-shift, transparent));
+
+  --rit-aura-deep-edge:
+    color-mix(in oklch,
+      var(--color-tint-edge, var(--chr-mihrab-700, #1f3a6e)) 70%,
+      var(--rit-atmo-tint-shift, transparent));
+
+  --rit-aura-deep-glow:
+    color-mix(in oklch,
+      var(--color-tint, var(--chr-lapis-500, #4a7fc8)) 50%,
+      transparent);
+
+  /* Default rhythm — overridden per personality via cascade below */
+  --rit-aura-rhythm: "gentle";
+
+  /* Animation budget tokens (so we never magic-number the keyframes) */
+  --rit-aura-gentle-duration: 28s;
+  --rit-aura-pulse-duration: 8s;
+  --rit-aura-sweep-duration: 22s;
+  --rit-aura-blur: 28px;
+}
+
+/* ─── Step 2: Aura Choreography — 3 rhythm modes ───────────────────────── */
+/* All three modes share the same fixed-position::before layer, GPU-cheap
+   (transform / opacity / background-position only). Layered behind page
+   content (z-index: -1). pointer-events: none enforced. */
+
+/* GENTLE — slow ambient drift (most pages: focus / contemplative) ─── */
+[data-rit-aura="deep"][data-rit-aura-rhythm="gentle"]::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 60% 40% at 30% 30%,
+      var(--rit-aura-deep-tint) 0%,
+      transparent 70%),
+    radial-gradient(ellipse 80% 60% at 75% 70%,
+      var(--rit-aura-deep-edge) 0%,
+      transparent 75%);
+  opacity: 0.45;
+  animation: rit-aura-gentle-drift var(--rit-aura-gentle-duration) ease-in-out infinite;
+  filter: blur(var(--rit-aura-blur));
+  will-change: transform;
+  contain: layout paint style;
+}
+
+@keyframes rit-aura-gentle-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(2%, -1%, 0) scale(1.02); }
+}
+
+/* PULSE — rhythmic breathing (callcenter / negotiation / fieldsales) ─── */
+[data-rit-aura="deep"][data-rit-aura-rhythm="pulse"]::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 50%,
+      var(--rit-aura-deep-tint) 0%,
+      transparent 70%);
+  opacity: 0.40;
+  animation: rit-aura-pulse var(--rit-aura-pulse-duration) cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  filter: blur(calc(var(--rit-aura-blur) + 4px));
+  will-change: opacity, transform;
+  contain: layout paint style;
+}
+
+@keyframes rit-aura-pulse {
+  0%, 100% { opacity: 0.30; transform: scale(0.98); }
+  50%      { opacity: 0.50; transform: scale(1.03); }
+}
+
+/* SWEEP — directional kinetic sweep (lab / programming / social) ─── */
+[data-rit-aura="deep"][data-rit-aura-rhythm="sweep"]::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background: linear-gradient(115deg,
+    transparent 0%,
+    transparent 30%,
+    var(--rit-aura-deep-tint) 50%,
+    transparent 70%,
+    transparent 100%);
+  background-size: 200% 200%;
+  background-position: -100% -100%;
+  opacity: 0.35;
+  animation: rit-aura-sweep var(--rit-aura-sweep-duration) linear infinite;
+  filter: blur(calc(var(--rit-aura-blur) + 8px));
+  will-change: background-position;
+  contain: layout paint style;
+}
+
+@keyframes rit-aura-sweep {
+  0%   { background-position: -100% -100%; }
+  100% { background-position: 200% 200%; }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Step 3: Per-Personality Rhythm Assignment (16 mappings)
+   ────────────────────────────────────────────────────────────────────────
+   Cascade applies the rhythm via [data-rit-aura-rhythm] (set by JS) AND
+   via personality fallback (so even if JS not yet attached, the right
+   rhythm renders on first paint after data-rit-aura="deep" lands).
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Gentle — calm / focus / contemplative pages (10 personalities) */
+[data-page-personality="dashboard"]:where([data-rit-aura="deep"]),
+[data-page-personality="psych"]:where([data-rit-aura="deep"]),
+[data-page-personality="eq"]:where([data-rit-aura="deep"]),
+[data-page-personality="customercare"]:where([data-rit-aura="deep"]),
+[data-page-personality="hrmastery"]:where([data-rit-aura="deep"]),
+[data-page-personality="myprogress"]:where([data-rit-aura="deep"]),
+[data-page-personality="phonerepair"]:where([data-rit-aura="deep"]),
+[data-page-personality="accounting"]:where([data-rit-aura="deep"]),
+[data-page-personality="accountmgr"]:where([data-rit-aura="deep"]),
+[data-page-personality="curriculum"]:where([data-rit-aura="deep"]) {
+  --rit-aura-rhythm: "gentle";
+}
+
+/* Pulse — high-energy / action pages (3 personalities) */
+[data-page-personality="callcenter"]:where([data-rit-aura="deep"]),
+[data-page-personality="negotiation"]:where([data-rit-aura="deep"]),
+[data-page-personality="fieldsales"]:where([data-rit-aura="deep"]) {
+  --rit-aura-rhythm: "pulse";
+}
+
+/* Sweep — kinetic / experimental / vibrant pages (3 personalities) */
+[data-page-personality="lab"]:where([data-rit-aura="deep"]),
+[data-page-personality="programming"]:where([data-rit-aura="deep"]),
+[data-page-personality="social"]:where([data-rit-aura="deep"]) {
+  --rit-aura-rhythm: "sweep";
+}
+
+/* ─── Personality fallback: if JS hasn't set data-rit-aura-rhythm yet, ── */
+/* the personality cascade still picks the correct keyframe below. ──── */
+
+/* Gentle personalities → gentle keyframe fallback */
+[data-page-personality="dashboard"][data-rit-aura="deep"]:not([data-rit-aura-rhythm])::before,
+[data-page-personality="psych"][data-rit-aura="deep"]:not([data-rit-aura-rhythm])::before,
+[data-page-personality="eq"][data-rit-aura="deep"]:not([data-rit-aura-rhythm])::before,
+[data-page-personality="customercare"][data-rit-aura="deep"]:not([data-rit-aura-rhythm])::before,
+[data-page-personality="hrmastery"][data-rit-aura="deep"]:not([data-rit-aura-rhythm])::before,
+[data-page-personality="myprogress"][data-rit-aura="deep"]:not([data-rit-aura-rhythm])::before,
+[data-page-personality="phonerepair"][data-rit-aura="deep"]:not([data-rit-aura-rhythm])::before,
+[data-page-personality="accounting"][data-rit-aura="deep"]:not([data-rit-aura-rhythm])::before,
+[data-page-personality="accountmgr"][data-rit-aura="deep"]:not([data-rit-aura-rhythm])::before,
+[data-page-personality="curriculum"][data-rit-aura="deep"]:not([data-rit-aura-rhythm])::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 60% 40% at 30% 30%,
+      var(--rit-aura-deep-tint) 0%,
+      transparent 70%),
+    radial-gradient(ellipse 80% 60% at 75% 70%,
+      var(--rit-aura-deep-edge) 0%,
+      transparent 75%);
+  opacity: 0.45;
+  animation: rit-aura-gentle-drift var(--rit-aura-gentle-duration) ease-in-out infinite;
+  filter: blur(var(--rit-aura-blur));
+  will-change: transform;
+  contain: layout paint style;
+}
+
+/* Pulse personalities → pulse keyframe fallback */
+[data-page-personality="callcenter"][data-rit-aura="deep"]:not([data-rit-aura-rhythm])::before,
+[data-page-personality="negotiation"][data-rit-aura="deep"]:not([data-rit-aura-rhythm])::before,
+[data-page-personality="fieldsales"][data-rit-aura="deep"]:not([data-rit-aura-rhythm])::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 50%,
+      var(--rit-aura-deep-tint) 0%,
+      transparent 70%);
+  opacity: 0.40;
+  animation: rit-aura-pulse var(--rit-aura-pulse-duration) cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  filter: blur(calc(var(--rit-aura-blur) + 4px));
+  will-change: opacity, transform;
+  contain: layout paint style;
+}
+
+/* Sweep personalities → sweep keyframe fallback */
+[data-page-personality="lab"][data-rit-aura="deep"]:not([data-rit-aura-rhythm])::before,
+[data-page-personality="programming"][data-rit-aura="deep"]:not([data-rit-aura-rhythm])::before,
+[data-page-personality="social"][data-rit-aura="deep"]:not([data-rit-aura-rhythm])::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background: linear-gradient(115deg,
+    transparent 0%,
+    transparent 30%,
+    var(--rit-aura-deep-tint) 50%,
+    transparent 70%,
+    transparent 100%);
+  background-size: 200% 200%;
+  background-position: -100% -100%;
+  opacity: 0.35;
+  animation: rit-aura-sweep var(--rit-aura-sweep-duration) linear infinite;
+  filter: blur(calc(var(--rit-aura-blur) + 8px));
+  will-change: background-position;
+  contain: layout paint style;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Step 4: Light theme softening (W12 P2 Linen-Bone sanctity)
+   ────────────────────────────────────────────────────────────────────────
+   In Light theme the Aura must remain felt, not seen — opacity capped.
+   ════════════════════════════════════════════════════════════════════════ */
+[data-theme="light"] [data-rit-aura="deep"]::before {
+  opacity: 0.28;
+  filter: blur(calc(var(--rit-aura-blur) + 6px));
+}
+
+[data-theme="light"] [data-rit-aura="deep"][data-rit-aura-rhythm="pulse"]::before {
+  opacity: 0.26;
+}
+
+[data-theme="light"] [data-rit-aura="deep"][data-rit-aura-rhythm="sweep"]::before {
+  opacity: 0.22;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Step 5: Reduced-Motion Guard — silence all aura animations
+   ────────────────────────────────────────────────────────────────────────
+   Aura still renders (it is identity, not motion) but as a static glow.
+   ════════════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  [data-rit-aura="deep"]::before {
+    animation: none !important;
+    transform: none !important;
+    opacity: 0.20 !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Step 6: Reduced-Transparency Guard — flatten gradient, soft solid tint
+   ════════════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-transparency: reduce) {
+  [data-rit-aura="deep"]::before {
+    background:
+      radial-gradient(circle at 50% 50%,
+        var(--rit-aura-deep-tint) 0%,
+        transparent 80%) !important;
+    filter: none !important;
+    opacity: 0.18 !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Step 7: Print Guard — auras never print
+   ════════════════════════════════════════════════════════════════════════ */
+@media print {
+  [data-rit-aura="deep"]::before {
+    display: none !important;
+    animation: none !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Worker 22 / Phase 6 — Aura Deepening Discipline:
+   1. ٣ rhythms فقط (gentle / pulse / sweep) — لا تخترع rhythm جديد.
+   2. كل personality له rhythm محدد — 16 mapping ثابت (10 gentle + 3 pulse
+      + 3 sweep).
+   3. opacity ≤ 0.50 dark ، ≤ 0.28 light — لا overwhelm.
+   4. blur ≥ 28px — يَجعل الـ aura "behind glass".
+   5. reduced-motion → static aura with opacity 0.20.
+   6. reduced-transparency → flat radial, no gradient layering.
+   7. print → display: none.
+   8. Auto-deepen on page nav — opt-out via Upg.aura.undeepen().
+   9. Light theme → softer (W12 P2 Linen-Bone sanctity).
+   10. Aura tint chains: identity tint (W21) × atmosphere shift (P5).
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* End RITUAL UI v3 / Phase 6 — Aura Deepening — Worker 22 COMPLETE 6/6 ── */
