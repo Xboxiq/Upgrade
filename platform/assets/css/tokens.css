@@ -27,3 +27,7 @@
 @import url("./worlds/_tayyar.css");
 @import url("./worlds/_warsha.css");
 @import url("./worlds/_saloon.css");
+
+/* Worlds activator + :has() switch — γ1 (must come AFTER the eight palettes
+   so the cascade can resolve --active-world for them). */
+@import url("./worlds/_index.css");

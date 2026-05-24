@@ -1,0 +1,53 @@
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — γ1 — Worlds Index + :has() Activator (Beacon Substrate)
+   ────────────────────────────────────────────────────────────────────────
+   🏛 STRUCTURAL_BEACON
+
+   Eight worlds, eight CSS-only switches. The active <section class="page">
+   declares its data-world; :root inherits via :has() and exposes
+   --active-world. The JavaScript controller (world.js) is enhancement —
+   it mirrors the same value onto body[data-world] and dispatches the
+   upg:world:change event for code that prefers an event bus over CSS.
+
+   Without JavaScript, the worlds still activate. This is the beacon:
+   the substrate of the eight worlds is the cascade itself.
+
+   This file does NOT define palettes — those live in worlds/_<name>.css
+   (filled in γ2-γ9). Here only the activator and the default fallback.
+   ════════════════════════════════════════════════════════════════════════ */
+
+@layer worlds {
+
+  /* Default before any .page.active is in DOM (first paint). */
+  :root {
+    --active-world: hibr;
+  }
+
+  /* :has() activator — eight rules, one per world. */
+  @supports selector(html:has(*)) {
+
+    html:has(.page.active[data-world="hibr"])    { --active-world: hibr;   }
+    html:has(.page.active[data-world="naar"])    { --active-world: naar;   }
+    html:has(.page.active[data-world="nada"])    { --active-world: nada;   }
+    html:has(.page.active[data-world="hadeed"])  { --active-world: hadeed; }
+    html:has(.page.active[data-world="dhahab"])  { --active-world: dhahab; }
+    html:has(.page.active[data-world="tayyar"])  { --active-world: tayyar; }
+    html:has(.page.active[data-world="warsha"])  { --active-world: warsha; }
+    html:has(.page.active[data-world="saloon"])  { --active-world: saloon; }
+
+  }
+
+  /* The world transition surface — animates body when the JS controller
+     changes data-world (or when :has() shifts --active-world).
+     Reduced-motion users get the change instantly. */
+  body {
+    transition:
+      background-color 320ms cubic-bezier(0.5, 0, 0.5, 1),
+      color            320ms cubic-bezier(0.5, 0, 0.5, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body { transition: none; }
+  }
+
+}
