@@ -98,14 +98,14 @@
 **Verified at commit:** 48c52f8
 
 ---STATS---
-total_beacons: 11
+total_beacons: 12
 unique_categories_used: 9
-avg_score: 4.27
+avg_score: 4.25
 last_5_avg: 4.2
 disruption_triggers: 1
 forbidden_violations: 0
 creativity_health: 100
-last_updated: 2026-05-24 / γ9 — Pillar γ COMPLETE (9/9)
+last_updated: 2026-05-24 / δ1 — Pillar δ KINETIC SHELL OPENED (1/6)
 
 
 
@@ -132,3 +132,17 @@ last_updated: 2026-05-24 / γ9 — Pillar γ COMPLETE (9/9)
 **Files touched:** platform/assets/css/worlds/_saloon.css · platform/assets/js/elan/world-saloon.js · platform/assets/app.js
 **Verified at commit:** deabf87
 **Pillar close:** γ9 closes Pillar γ EIGHT WORLDS — 9 stages, 9 distinct worlds, 9 unique beacon families across the pillar (one per category × 8, plus γ1 STRUCTURAL system foundation).
+
+
+
+
+## δ1 — 2026-05-24
+**Beacon Type:** 🌊 MOTION_BEACON
+**The Surprise:** الـ sidebar نفسه — العنصر الواحد بحدوده الواحدة — يَكتسب ثماني شخصيات مغناطيسية مختلفة بحسب العالم النشط. ميله الأقصى ومدّة استقراره ومنحنى easing تَرث جميعها من tokens العالم: `--ease-<world>` و `--duration-<world>` المُعرَّفة سلفاً في `worlds/_<name>.css`. النتيجة: نفس الصفيحة المعدنية في حِبر تَتمايل ببطء ورق المخطوطات (0.9°، 600ms)، وفي نار تَنبض كسندان حدادة (1.5°، 180ms)، وفي ندى تَنزلق كضباب فجر (0.6°، 520ms)، وفي حَديد تَصفِق كبَكَرة سينما (1.4°، 220ms)، وفي ذَهَب تَتزن ككفّة ميزان (0.9°، 360ms)، وفي تَيار تَنحني كموجة مَرنة (1.2°، 520ms)، وفي وَرشة تَتدرَّج بـ `steps(4, end)` كَطاولة مَنجَرة خشنة (1.3°)، وفي صَالون تَستقر كخشب جوز مَلموس (1.0°، 380ms). على أجهزة اللمس، المَيل الفيزيائي للجهاز يَقود نفس الـ vars عبر `DeviceOrientationEvent` ضمن سقف صلب 1.5° (لا motion sickness). على iOS 13+ يَطلب المُستخدم الإذن عبر زر نصيّ صغير "اسمح بالحركة" (لا emoji، لا أيقونة، نص بحت). الاستقرار جاذبية (نصف دورة واحدة، `cubic-bezier(0.32, -0.04, 0.4, 1)`) وليس spring (Forbidden #13). 17 nav-item + شعار wordmark الأصلي بقيت كما هي — هذا layer يَركَب فوقها عبر `[data-elan-magnetic="sidebar"]` data-attribute واحد فقط. مُتزامن مع `upg:world:change` فيَستقر بنعومة عند تبديل العالم.
+**Reference Avoided:** Forbidden #13 — spring-bounce hover (Framer Motion default cliché) + Forbidden #3 — floating sidebar with pill icons (Notion/Linear/Stripe clone). الـ slab هنا تَركيبيٌّ قائم على material-chrome، يَميل ولا يَطفو؛ يَستقر ولا يَنطّ.
+**Inspired-by:** Wild Card #2 — Iraqi Brutalism (Mohammed Makiya / Rifat Chadirji): الكتلة الخرسانية أو المعدنية الثقيلة تَكشف وزنها للزائر بحركة دقيقة لا تُكسر هيبتها. ÊLAN يُترجم هذا إلى انحناء ≤ 1.5° يَكفي ليَشعر المُستخدم بـ "اهتزاز معدنيّ مُحسوب".
+**User-Visible:** yes — كل تحرّك للمؤشر داخل الـ sidebar على desktop يَنتج tilt محسوس؛ على mobile (بعد منح إذن iOS) ميل الجهاز يُترجَم مباشرة. عند `prefers-reduced-motion: reduce` لا شيء يَتحرك (CSS guard + JS guard معاً).
+**Originality Self-Score:** 4/5 — pointer-tilt + gyroscope كلٌّ منهما معروف في الويب؛ ربط فيزياء الميل بـ tokens العوالم (نفس العنصر بثماني شخصيات معدنية) + iOS-honest permission flow بنص بحت بلا emoji + استقرار-جاذبية صريح بدلاً من spring = توليفة غير شائعة. Claim: most "magnetic" UIs lean uniformly; few inherit per-context easing tokens to give the same element distinct material identities.
+**Files touched:** platform/index.html · platform/assets/css/chrome.css · platform/assets/js/elan/sidebar-magnetic.js · platform/assets/app.js
+**Verified at commit:** d3194f7
+**Pillar open:** δ1 opens Pillar δ KINETIC SHELL on branch elan-δ-kinetic-shell. Same branch carries δ2..δ6.

@@ -871,3 +871,100 @@ world. Next: open PR `elan-γ-eight-worlds → main`, then start Pillar δ
 KINETIC SHELL on a fresh branch.
 
 — Entry end —
+
+
+
+---
+
+## δ1 — Magnetic Sidebar
+**Pillar:** δ KINETIC SHELL · Stage 1 of 6
+**Branch:** `elan-δ-kinetic-shell`
+**Commit:** `d3194f7`
+**Date:** 2026-05-24
+
+### Before (verified by grep on `main` baseline)
+
+| Domain | Key | Value |
+|---|---|---:|
+| HTML | `data-elan-magnetic` hooks | 0 |
+| CSS | `chrome.css` lines | 1398 |
+| CSS | per-world magnetic personality rules | 0 |
+| JS | `platform/assets/js/elan/sidebar-magnetic.js` | absent |
+| JS | `app.js` import of `elan/sidebar-magnetic.js` | 0 |
+| JS | `Upg.elan.sidebar` namespace | absent |
+| Sensors | `DeviceOrientationEvent` usage in repo | 0 |
+
+### After (verified by grep + node --check)
+
+| Domain | Key | Value |
+|---|---|---:|
+| HTML | `data-elan-magnetic="sidebar"` hook on `#sidebar` | 1 |
+| CSS | `chrome.css` lines | 1572 |
+| CSS — Block | δ1 block lines appended to `chrome.css` | 174 |
+| CSS — Beacon | per-world magnetic personality rules | 8 (hibr/naar/nada/hadeed/dhahab/tayyar/warsha/saloon) |
+| CSS — Cap | `--magnet-tilt-max` hard cap (CSS hint) | 1.5deg |
+| CSS — Easing | gravity-settle ease | `cubic-bezier(0.32, -0.04, 0.4, 1)` |
+| CSS — Easing | `steps(4, end)` reserved for Warsha (gritty bench) | 1 |
+| CSS — Guards | `prefers-reduced-motion` | 1 |
+| CSS — Guards | `@media print` | 1 |
+| CSS — Guards | `forced-colors: active` | 1 |
+| JS | `sidebar-magnetic.js` lines | 395 |
+| JS | `node --check` (`env -u NODE_OPTIONS node`) | pass |
+| JS — Cap | `TILT_MAX_HARD_CAP` constant | 1.5 |
+| JS — Cap | `SHADOW_MAX_PX` constant | 14 |
+| JS — Sensor | `GYRO_DIVISOR_GAMMA / BETA` | 28 / 60 |
+| JS — Public API | `Upg.elan.sidebar` methods | enable · disable · isActive · requestGyro · config |
+| JS — A11y | live `prefers-reduced-motion` listener | 1 (auto-disables on toggle) |
+| JS — A11y | iOS 13+ permission flow (`DeviceOrientationEvent.requestPermission`) | 1 (gated by `اسمح بالحركة` chip) |
+| App | `app.js` imports `elan/sidebar-magnetic.js` | 1 |
+| Sacred | `#sidebar .nav-item` count (preserved) | 17 |
+| Sacred | sidebar logo `<svg viewBox>` (preserved) | 1 |
+| Sacred | `Upg.*` top-level APIs | 31 (unchanged — `sidebar` nests under `Upg.elan`) |
+| Forbidden | `<svg viewBox>` introduced in NEW markup (JS-rendered chip) | 0 |
+| Forbidden | emoji in NEW DOM markup | 0 (chip uses `textContent`) |
+| Forbidden | `spring`/`bounce` in executable code | 0 (only in doc-comment listing what we DON'T do) |
+| Forbidden | `font-awesome` / `material-icons` / `unDraw` | 0 |
+| Stage budget | `lines_added / deleted` | 573 / 1 |
+| Stage budget | `files_modified / added` | 3 / 1 |
+
+### Files
+**Modified (3):**
+- `platform/index.html` (single 1-line edit: `data-elan-magnetic="sidebar"` on `<aside id="sidebar">`)
+- `platform/assets/css/chrome.css` (1398 → 1572 lines; +174-line δ1 block)
+- `platform/assets/app.js` (+3 lines: comment + import)
+
+**Created (1):**
+- `platform/assets/js/elan/sidebar-magnetic.js` (395 lines, ESM, frozen `Upg.elan.sidebar`)
+
+**Untouched (sacred):**
+- 17 existing `.nav-item` entries inside `#sidebar`
+- 1 existing logo `<svg viewBox>` (the wordmark star)
+- All world CSS files (`worlds/_*.css`)
+- 31 top-level `Upg.*` APIs
+- `archive/`, `prompts/v1`, `prompts/v2`, `prompts/v3`
+
+### Beacon (declared)
+**Type:** 🌊 MOTION_BEACON — "Eight Materials, One Slab"
+**Surprise:** the sidebar inherits each world's `--ease-<world>` /
+`--duration-<world>` tokens, so the SAME element behaves like paper in
+Hibr (0.9°, 600ms), like a forge anvil in Naar (1.5°, 180ms), like
+mountain mist in Nada (0.6°, 520ms), like a Hadeed cinema reel snap
+(1.4°, 220ms), like a balanced gold pan in Dhahab (0.9°, 360ms), like an
+elastic wave in Tayyar (1.2°, 520ms), like a stair-stepped workshop
+bench in Warsha (1.3°, `steps(4, end)`), like polished walnut in Saloon
+(1.0°, 380ms). On touch devices, real `DeviceOrientationEvent` drives
+the same vars within a 1.5° hard cap. iOS 13+ permission requested via
+an unobtrusive text-only chip ("اسمح بالحركة") — never an emoji icon,
+never a popup. Settle is GRAVITY (single half-cycle,
+`cubic-bezier(0.32, -0.04, 0.4, 1)`) NOT SPRING (Forbidden #13).
+**Avoided:** Forbidden #13 (spring-bounce hover) + #3 (floating-pill sidebar / Notion clone)
+**Inspired-by:** Wild Card #2 — Iraqi Brutalism (Chadirji)
+**Self-Score:** 4 / 5
+
+### Verdict
+🟢 **complete** — δ1 ships on branch `elan-δ-kinetic-shell` with no
+Forbidden Library violations, no Sacred Asset disturbance, no toy SVG
+emitted, no emoji in any rendered markup. Pillar δ KINETIC SHELL has
+opened. Next: δ2 BENTO_DASHBOARD on the same branch.
+
+— Entry end —
