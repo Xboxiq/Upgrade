@@ -5,10 +5,11 @@
    ============================================================ */
 'use strict';
 
-const VERSION = 'atelier-v16-2026-05';
+const VERSION = 'devotio-v3-w23-p4-2026-05';
 const SHELL_CACHE = `shell-${VERSION}`;
 const ASSET_CACHE = `assets-${VERSION}`;
 const FONT_CACHE  = `fonts-${VERSION}`;
+const SHARD_CACHE = `shards-${VERSION}`;
 
 const PRECACHE = [
   './',
@@ -18,6 +19,29 @@ const PRECACHE = [
   './manifest.webmanifest',
   './favicon.svg',
   './offline.html',
+  // Worker 23 / Phase 3 — CSS shatter (6 logical files)
+  './assets/css/tokens.css',
+  './assets/css/base.css',
+  './assets/css/utilities.css',
+  './assets/css/chrome.css',
+  './assets/css/pages.css',
+  './assets/css/motion.css',
+  // Worker 23 / Phase 4 — HTML page shards (15 files, 1:1 with inline sections)
+  './pages/dashboard.html',
+  './pages/callcenter.html',
+  './pages/fieldsales.html',
+  './pages/accountmgr.html',
+  './pages/social.html',
+  './pages/lab.html',
+  './pages/psych.html',
+  './pages/eq.html',
+  './pages/negotiation.html',
+  './pages/customercare.html',
+  './pages/programming.html',
+  './pages/accounting.html',
+  './pages/phonerepair.html',
+  './pages/hrmastery.html',
+  './pages/myprogress.html',
 ];
 
 self.addEventListener('install', (event) => {
@@ -34,7 +58,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((keys) =>
       Promise.all(
         keys
-          .filter((k) => k !== SHELL_CACHE && k !== ASSET_CACHE && k !== FONT_CACHE)
+          .filter((k) => k !== SHELL_CACHE && k !== ASSET_CACHE && k !== FONT_CACHE && k !== SHARD_CACHE)
           .map((k) => caches.delete(k))
       )
     ).then(() => self.clients.claim())
@@ -69,6 +93,25 @@ self.addEventListener('fetch', (event) => {
 
   // Same-origin assets: stale-while-revalidate
   if (url.origin === self.location.origin) {
+    // Page shards: cache-first against SHARD_CACHE (offline-critical, rarely changes)
+    if (/\/pages\/[a-z]+\.html$/.test(url.pathname)) {
+      event.respondWith(
+        caches.match(req).then((cached) => {
+          const fetchPromise = fetch(req)
+            .then((res) => {
+              if (res && res.ok && res.type === 'basic') {
+                const copy = res.clone();
+                caches.open(SHARD_CACHE).then((c) => c.put(req, copy)).catch(() => {});
+              }
+              return res;
+            })
+            .catch(() => cached);
+          return cached || fetchPromise;
+        })
+      );
+      return;
+    }
+
     event.respondWith(
       caches.match(req).then((cached) => {
         const fetchPromise = fetch(req)

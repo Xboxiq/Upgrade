@@ -1,9 +1,27 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-24T13:35:00Z",
+  "last_updated": "2026-05-24T15:10:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
+    "pack": "v3",
+    "worker": "23",
+    "worker_name": "DECONSTRUCTION",
+    "phase": 4,
+    "phases_total": 5,
+    "phase_order": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "branch": "worker-23-devotio-p4",
+    "status": "in-progress",
+    "blocker": null,
+    "next_action": "Continue Worker 23 Phase 5 (JS ESM Migration — replace app.js IIFE monolith with thin ESM entry + 24+ modules + _compat.js shim; finalize inline→shard cutover by rewriting navigateTo to live queries)"
+  },
+  "previous": {
     "pack": "v3",
     "worker": "23",
     "worker_name": "DECONSTRUCTION",
@@ -17,11 +35,11 @@
       "5"
     ],
     "branch": "worker-23-devotio-p3",
-    "status": "in-progress",
-    "blocker": null,
-    "next_action": "Continue Worker 23 Phase 4 (HTML Template Split — break index.html monolith into shell + 14 page-shards via <template> injection)"
+    "status": "merged",
+    "merged_pr": 101,
+    "blocker": null
   },
-  "previous": {
+  "before_previous": {
     "pack": "v3",
     "worker": "23",
     "worker_name": "DECONSTRUCTION",
@@ -37,24 +55,6 @@
     "branch": "worker-23-devotio-p2",
     "status": "merged",
     "merged_pr": 100,
-    "blocker": null
-  },
-  "before_previous": {
-    "pack": "v3",
-    "worker": "23",
-    "worker_name": "DECONSTRUCTION",
-    "phase": 1,
-    "phases_total": 5,
-    "phase_order": [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5"
-    ],
-    "branch": "worker-23-devotio-p1",
-    "status": "merged",
-    "merged_pr": 99,
     "blocker": null
   },
   "completed_phases": [
@@ -801,9 +801,17 @@
       "branch": "worker-23-devotio-p3",
       "lines_added": 31747,
       "lines_deleted": 27976
+    },
+    {
+      "worker": "23",
+      "phase": 4,
+      "title": "HTML Template Split (STAGE) — extract 15 page sections from platform/index.html into platform/pages/<id>.html shards (byte-exact, balance-counter validated: every shard has open=close <section> tags with zero diff, qcalc inline 391 = qcalc shards 391 exact 1:1) + Upg.shards IIFE (29th top-level Upg.* namespace, ~180 JS lines APPENDED to app.js) with frozen surface (list 15 ids / loadShard async fetch+cache / preloadAll {idle:true} via requestIdleCallback / audit returns {declared,cached,cached_ids,pending,errored,inline_count,pages_dir,phase,pack,mode:STAGE-ONLY,note} / verify async returns {match,inlineLength,shardLength,qcalcInline,qcalcShard} / mountShard refuses while inline copy is present unless {force:true} so accidental swaps are impossible / discipline returns 6 frozen rules) + sw.js v3 precache rewrite (cache version atelier-v16-2026-05 → devotio-v3-w23-p4-2026-05 / dedicated SHARD_CACHE bucket added to activate cleanup whitelist / cache-first strategy installed for /pages/*.html paths / PRECACHE list expanded from 7 → 28 entries: original 7 shell + 6 CSS shards from W23 P3 + 15 page shards) + 15 data-shard-id annotations on inline <section class=\"page\"> opening tags so future tooling can pair inline-with-shard without parsing class/id strings + 12-line Phase 4 discipline comment block before #rit-entry-portal + per-shard 7-line banner pointing back to source line range + Stage-and-Replace conservative path: navigateTo at app.js line 153-169 captures document.querySelectorAll('.page') as a STATIC NodeList at IIFE init, so live-injection would silently break navigation; therefore Phase 4 STAGES the architecture (shards exist, API exists, SW caches them, annotations connect them) but defers the actual inline→shard cutover to Phase 5 (which migrates JS to ESM and rewrites navigateTo to live queries — a one-line change inside the captured-NodeList consumer at that point). file:// users keep working because loadShard catches network failures silently and the inline copy still renders. Cleanup: scripts/split-html.mjs (one-shot balance-counter splitter using <section>/</section> depth tracking, NOT regex) deleted post-extraction (one-shot logic remains in git history under deletion). Sacred preserved 100% (15 page sections inline still rendering / 391 qcalc inline + 391 qcalc in shards / 28 → 29 Upg.* APIs / 0 google fonts / 0 CDN / 0 framework / 7 @layer cascade from W23 P1 untouched / 308 !important rules from W23 P2 untouched / 6 CSS shards from W23 P3 untouched / W12 P2 Linen-Bone + W21 P2 Mihrab themes untouched / W22 entry portal/halo/threshold/inkpot/atmosphere/aura preserved). 18 files changed: 31487 insertions (15 shards × 31187 lines content + 7-line banner each + Upg.shards IIFE 180 lines + sw.js +30 / 35 lines + index.html +12 lines comment + 15 attribute annotations) / 17 deletions (sw.js precache rewrite). Strategy spec: \"كل phase يَنتهي بمنصة شغّالة\" — honored absolutely.",
+      "branch": "worker-23-devotio-p4",
+      "lines_added": 31487,
+      "lines_deleted": 17
     }
   ],
-  "next_action": "Continue Worker 23 Phase 4 — HTML Template Split (break index.html monolith into shell ~5K + 14 page-shards via <template> injection)",
+  "next_action": "Continue Worker 23 Phase 5 — JS ESM Migration (replace app.js IIFE monolith with thin ESM entry + 24+ modules + _compat.js shim; finalize inline→shard cutover by rewriting navigateTo to live queries)",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",

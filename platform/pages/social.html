@@ -1,0 +1,2606 @@
+<!-- ════════════════════════════════════════════════════════════════════
+     DEVOTIO v3 / Worker 23 / Phase 4 — Page Shard: page-social
+     Source: platform/index.html (lines 8918..11515)
+     Status: STAGED. Inline copy still lives in index.html (Stage-and-Replace doctrine).
+     Loaded via: Upg.shards.loadShard("social").
+     Cached by: service worker (sw.js PRECACHE list).
+     Edit policy: edit BOTH inline + shard until Phase 5 finalizes the swap.
+     ════════════════════════════════════════════════════════════════════ -->
+<section class="page" id="page-social" data-page-personality="social">
+
+      <header class="page-h" data-tint="social">
+        <span class="h-eyebrow">وحدة تخصصية</span>
+        <h1 class="type-display tas-kashida" lang="ar"><i class="qi qi-lg" data-icon="megaphone" aria-hidden="true"></i> وحدة السوشيال ميديا</h1>
+        <p class="h-lede">إتقان إدارة المنصات الرقمية وبناء المحتوى الجذاب</p>
+        <div class="page-mastery-progress" data-page-progress="social">
+          <div class="page-mastery-progress-meta">
+            <span class="type-eyebrow">تقدّم الإتقان</span>
+            <span class="type-num">
+              <span data-page-mastered-count="0">0</span> /
+              <span data-page-total-count="17">17</span> blocks
+            </span>
+            <span class="type-num" aria-hidden="true">·</span>
+            <span class="type-num">
+              <span data-page-mastered-pct="0">0</span>%
+            </span>
+          </div>
+          <div class="page-mastery-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="page-mastery-progress-fill" style="--progress: 0%" data-page-progress-fill></div>
+          </div>
+          <div class="page-mastery-progress-tiers">
+            <span class="tier-marker tier-marker--foundation">
+              <span data-tier-foundation-mastered>0</span> / <span data-tier-foundation-total>11</span>
+            </span>
+            <span class="tier-marker tier-marker--practitioner">
+              <span data-tier-practitioner-mastered>0</span> / <span data-tier-practitioner-total>6</span>
+            </span>
+            <span class="tier-marker tier-marker--expert">
+              <span data-tier-expert-mastered>0</span> / <span data-tier-expert-total>0</span>
+            </span>
+          </div>
+        </div>
+      </header>
+
+      <!-- ══════════════════ Cathedral v14 — qcalc A/B Test (Worker 11 / Phase 4) ══════════════════ -->
+      <aside class="block-tldr" data-tldr-for="so-001" aria-label="ملخص سريع">
+        <header class="block-tldr-h">
+          <span class="block-tldr-eyebrow type-eyebrow">حاسبة</span>
+          <span class="block-tldr-meta">
+            <span class="block-tldr-time" data-reading-time="3">3 دقائق قراءة</span>
+            <span class="block-tldr-diff" aria-label="صعوبة 3 من 5">⭐⭐⭐</span>
+          </span>
+        </header>
+        <p class="block-tldr-body type-body-lead">حاسبة A/B testing: تُحدِّد ما إذا كان الفرق بين متغيّرين دلالةً إحصائية أم ضوضاء عشوائية، بناءً على حجم العينة ومعدّل التحوّل.</p>
+        <p class="block-tldr-why type-quote-literary"><strong>لماذا يهم:</strong> بدون significance، تُعمِّم نتيجة مئة مستخدم على مئة ألف وتقع.</p>
+      </aside>
+      <div class="block-pacing" data-pacing-for="so-001" data-block-est="8">
+        <div class="block-pacing-mastery">
+          <button class="mastery-toggle" type="button" data-mastery-for="so-001" data-mastery-state="not-started" aria-label="حالة الإتقان">
+            <span class="mastery-icon" aria-hidden="true">○</span>
+            <span class="mastery-label">لم أبدأ</span>
+          </button>
+        </div>
+        <div class="block-pacing-timer">
+          <span class="block-pacing-timer-label type-eyebrow">جلسة تركيز</span>
+          <div class="focus-presets" role="group" aria-label="اختر مدة التركيز">
+            <button class="focus-preset" type="button" data-focus-minutes="15" data-focus-for="so-001">15م</button>
+            <button class="focus-preset" type="button" data-focus-minutes="25" data-focus-for="so-001">25م</button>
+            <button class="focus-preset" type="button" data-focus-minutes="45" data-focus-for="so-001">45م</button>
+          </div>
+          <span class="focus-active" data-focus-active-for="so-001" hidden>
+            <span class="focus-active-time" data-focus-time>00:00</span>
+            <button class="focus-stop" type="button" data-focus-stop>إيقاف</button>
+          </span>
+        </div>
+      </div>
+      <div class="qcalc material-regular" data-block-id="so-001" data-reading-time="3" data-block-type="calc" data-difficulty="3" data-est-minutes="8" data-calc="ab-test">
+        <div class="qcalc-header">
+          <div class="qcalc-title">
+            <i class="qi qi-md" data-icon="bar-chart"></i>
+            <h3>حاسبة حجم العينة لاختبار A/B</h3>
+            <span class="qcalc-eyebrow">Two-proportion z-test</span>
+          </div>
+          <div class="qcalc-actions">
+            <button class="qcalc-btn-icon" type="button" data-action="reset" aria-label="إعادة تعيين"><i class="qi" data-icon="refresh"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="copy"  aria-label="نسخ النتيجة"><i class="qi" data-icon="copy"></i></button>
+            <button class="qcalc-btn-icon" type="button" data-action="export" aria-label="تصدير JSON"><i class="qi" data-icon="download"></i></button>
+          </div>
+        </div>
+        <div class="qcalc-body">
+          <div class="qcalc-inputs qcalc-inputs-2col">
+            <label class="qcalc-field">
+              <span class="qcalc-label">معدل التحويل الأساس (Baseline)</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="baseline" min="0.01" max="100" step="0.1" value="5">
+                <span class="qcalc-suffix">%</span>
+              </div>
+              <span class="qcalc-hint">CTR / CR / signup ratio حالي</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">التحسّن النسبي المراد كشفه (Lift)</span>
+              <div class="qcalc-input-wrap">
+                <input type="number" class="qcalc-input" name="lift" min="-90" max="500" step="1" value="10">
+                <span class="qcalc-suffix">%</span>
+              </div>
+              <span class="qcalc-hint">+10% يعني 5% → 5.5%</span>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">ألفا (مستوى الثقة)</span>
+              <div class="qcalc-input-wrap">
+                <select class="qcalc-input" name="alpha">
+                  <option value="0.05" selected>0.05 (95% ثقة)</option>
+                  <option value="0.01">0.01 (99% ثقة)</option>
+                  <option value="0.10">0.10 (90% ثقة)</option>
+                </select>
+              </div>
+            </label>
+            <label class="qcalc-field">
+              <span class="qcalc-label">القوة الإحصائية (Power)</span>
+              <div class="qcalc-input-wrap">
+                <select class="qcalc-input" name="power">
+                  <option value="0.80" selected>80%</option>
+                  <option value="0.90">90%</option>
+                  <option value="0.95">95%</option>
+                </select>
+              </div>
+            </label>
+          </div>
+          <div class="qcalc-summary">
+            <div class="qcalc-result-card qcalc-result-primary">
+              <span class="qcalc-result-label">حجم العينة لكل ذراع</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="nPerArm" data-format="int">0</span>
+              <span class="qcalc-result-unit">مستخدم</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">إجمالي الاختبار</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="totalN" data-format="int">0</span>
+            </div>
+            <div class="qcalc-result-card">
+              <span class="qcalc-result-label">معدل المتغيّر المتوقع</span>
+              <span class="qcalc-result-value tas-num-tabular" data-bind="variantRate" data-format="num2">0</span>
+              <span class="qcalc-result-unit">%</span>
+            </div>
+          </div>
+        </div>
+        <div class="qcalc-explain" data-bind="explain"></div>
+      </div>
+      <ul class="block-takeaways" data-takeaways-for="so-001" aria-label="نقاط مفتاحية للاسترجاع">
+        <li class="block-takeaway type-body">p-value < 0.05 يعني فرقاً موثوقاً به (٩٥٪ ثقة).</li>
+        <li class="block-takeaway type-body">حدّد حجم العينة قبل التجربة، لا بعدها.</li>
+        <li class="block-takeaway type-body">اختبر متغيّراً واحداً فقط لكل تجربة — وإلّا فقدتَ النسب.</li>
+        <li class="block-takeaway type-body">Lift صغير + sample كبير قد لا يستحق التطبيق — احسب ROI.</li>
+      </ul>
+
+      <!-- ====================================================
+           BLOCK A — هندسة المحتوى الجذاب
+      ==================================================== -->
+      <div class="social-section-header u-mb-5">
+        <div>
+          <h2 class="u-card-title">BLOCK A — هندسة المحتوى الجذاب</h2>
+          <p class="u-meta-lg">مختبر صياغة الخطافات — 5 أنواع × 4 منصات مع أمثلة عربية حقيقية</p>
+        </div>
+        <span class="tag accent">20 نموذج خطاف</span>
+      </div>
+
+      <!-- Hook Type Tabs -->
+      <div class="u-flex u-gap-2 u-flex-wrap u-mb-5" id="hookTypeTabs">
+        <button class="hook-type-btn active" data-hook="0" onclick="selectHookType(0)">⚡ خطاف الصدمة</button>
+        <button class="hook-type-btn" data-hook="1" onclick="selectHookType(1)">❓ خطاف السؤال المقلق</button>
+        <button class="hook-type-btn" data-hook="2" onclick="selectHookType(2)">📊 خطاف الإحصاء المفاجئ</button>
+        <button class="hook-type-btn" data-hook="3" onclick="selectHookType(3)">📖 خطاف القصة الشخصية</button>
+        <button class="hook-type-btn" data-hook="4" onclick="selectHookType(4)">🔥 خطاف الخلاف الجريء</button>
+      </div>
+
+      <!-- Hook Content Panel -->
+      <div id="hookPanel" class="u-anim-fadein">
+
+        <!-- Hook type panel will render here via JS -->
+
+      </div>
+
+      <!-- Platform Formula Cards -->
+      <div class="u-mt-6 u-mb-2">
+        <div class="u-fz-11 u-fw-800 u-ls-12 u-tt-up u-c-faint u-mb-3">صيغة الخطاف الأمثل لكل منصة</div>
+        <div class="grid-4">
+
+          <div class="card u-brand-linkedin">
+            <div class="u-h-20">💼</div>
+            <div class="u-fz-12 u-fw-800 u-c-linkedin-dark u-mb-2">LinkedIn</div>
+            <div class="u-meta-loose-mb">ابدأ بجملة خلافية أو إحصاء صادم → سطر فراغ → السؤال الاستفزازي → القصة.</div>
+            <div class="u-pill-danger">
+              ❌ الخطأ القاتل: البدء بـ «أنا سعيد بأن أشارككم...»
+            </div>
+          </div>
+
+          <div class="card u-brand-twitter">
+            <div class="u-h-20">𝕏</div>
+            <div class="u-fz-12 u-fw-800 u-c-twitter u-mb-2">X / تويتر</div>
+            <div class="u-meta-loose-mb">جملة واحدة لا تتجاوز 12 كلمة. الصدمة أو الرأي الصريح. لا مقدمات.</div>
+            <div class="u-pill-danger">
+              ❌ الخطأ القاتل: تغريدة طويلة بدون thread واضح
+            </div>
+          </div>
+
+          <div class="card u-brand-instagram">
+            <div class="u-h-20">📸</div>
+            <div class="u-fz-12 u-fw-800 u-c-pink u-mb-2">Instagram</div>
+            <div class="u-meta-loose-mb">السطر الأول قبل «المزيد» — 125 حرفاً فقط. صورة + سطر مكثّف = كل شيء.</div>
+            <div class="u-pill-danger">
+              ❌ الخطأ القاتل: وصف الصورة في الكابشن بدل إضافة قيمة
+            </div>
+          </div>
+
+          <div class="card u-brand-tiktok">
+            <div class="u-h-20">🎵</div>
+            <div class="u-fz-12 u-fw-800 u-c-tiktok u-mb-2">TikTok</div>
+            <div class="u-meta-loose-mb">أول 3 ثوانٍ هي كل شيء. ابدأ بالذروة — لا بالمقدمة. النص على الشاشة يُضاعف الـ retention.</div>
+            <div class="u-pill-danger">
+              ❌ الخطأ القاتل: «أهلاً وسهلاً» كبداية الفيديو
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- ====================================================
+           BLOCK B — نظام إدارة الأزمات الرقمية
+      ==================================================== -->
+      <div class="social-section-header u-mt-rh">
+        <div>
+          <h2 class="u-card-title">BLOCK B — نظام إدارة الأزمات الرقمية</h2>
+          <p class="u-meta-lg">5 مراحل مع timeline واضح — قوالب بيانات عربية جاهزة</p>
+        </div>
+        <span class="tag red">بروتوكول الأزمات</span>
+      </div>
+
+      <!-- Crisis Timeline -->
+      <div class="crisis-timeline">
+
+        <!-- Phase 1 -->
+        <aside class="block-tldr" data-tldr-for="so-002" aria-label="ملخص سريع">
+          <header class="block-tldr-h">
+            <span class="block-tldr-eyebrow type-eyebrow">مرحلة أزمة</span>
+            <span class="block-tldr-meta">
+              <span class="block-tldr-time" data-reading-time="4">4 دقائق قراءة</span>
+              <span class="block-tldr-diff" aria-label="صعوبة 3 من 5">⭐⭐⭐</span>
+            </span>
+          </header>
+          <p class="block-tldr-body type-body-lead">المرحلة الأولى من الأزمة الرقمية — أوّل ساعتين: الاحتواء الفوري. التركيز على التوثيق وإبلاغ القيادة وإيقاف المنشورات المجدولة، لا على الردّ.</p>
+          <p class="block-tldr-why type-quote-literary"><strong>لماذا يهم:</strong> الردّ المتسرّع في أوّل ساعتين يضاعف الأزمة. الصمت أفضل من خطأ.</p>
+        </aside>
+        <div class="block-pacing" data-pacing-for="so-002" data-block-est="10">
+          <div class="block-pacing-mastery">
+            <button class="mastery-toggle" type="button" data-mastery-for="so-002" data-mastery-state="not-started" aria-label="حالة الإتقان">
+              <span class="mastery-icon" aria-hidden="true">○</span>
+              <span class="mastery-label">لم أبدأ</span>
+            </button>
+          </div>
+          <div class="block-pacing-timer">
+            <span class="block-pacing-timer-label type-eyebrow">جلسة تركيز</span>
+            <div class="focus-presets" role="group" aria-label="اختر مدة التركيز">
+              <button class="focus-preset" type="button" data-focus-minutes="15" data-focus-for="so-002">15م</button>
+              <button class="focus-preset" type="button" data-focus-minutes="25" data-focus-for="so-002">25م</button>
+              <button class="focus-preset" type="button" data-focus-minutes="45" data-focus-for="so-002">45م</button>
+            </div>
+            <span class="focus-active" data-focus-active-for="so-002" hidden>
+              <span class="focus-active-time" data-focus-time>00:00</span>
+              <button class="focus-stop" type="button" data-focus-stop>إيقاف</button>
+            </span>
+          </div>
+        </div>
+        <div class="crisis-phase" data-block-id="so-002" data-reading-time="4" data-block-type="case" data-difficulty="3" data-est-minutes="10" id="cp-1" onclick="toggleCrisis(1)" data-related="so-005,so-010,cu-008,ps-010">
+          <div class="crisis-phase-header">
+            <div class="crisis-badge u-pill-out-red">⚡ الساعة 0-2</div>
+            <div class="crisis-title">الاحتواء الفوري</div>
+            <div class="crisis-status urgent">حرج</div>
+            <svg class="crisis-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="crisis-body">
+            <div class="crisis-grid">
+              <div>
+                <div class="crisis-action-label">✅ افعل فوراً</div>
+                <ul class="crisis-list">
+                  <li>حدّد مصدر الأزمة: هل هو منشور، تغريدة، مقطع فيديو؟</li>
+                  <li>لا تحذف المحتوى قبل التوثيق الكامل — الحذف يُشعل الأزمة</li>
+                  <li>أبلغ الفريق القيادي فوراً وأوقف كل المنشورات المجدولة</li>
+                  <li>راقب الـ hashtags والـ mentions كل 15 دقيقة</li>
+                </ul>
+              </div>
+              <div>
+                <div class="crisis-action-label u-c-red">🚫 تجنّب تماماً</div>
+                <ul class="crisis-list danger">
+                  <li>الرد الدفاعي أو إلقاء اللوم على الآخرين</li>
+                  <li>الصمت التام أكثر من ساعتين — يُفسَّر كاعتراف</li>
+                  <li>النشر عن موضوع آخر كأن شيئاً لم يحدث</li>
+                  <li>مهاجمة من ينتقدك علناً</li>
+                </ul>
+              </div>
+            </div>
+            <div class="crisis-template">
+              <div class="crisis-template-label">📋 قالب البيان الأولي</div>
+              <div class="crisis-template-text">«نحن على علم بالتداول حول [الموضوع]. نأخذ هذا الأمر بجدية بالغة ونحقق فيه الآن. سنشارككم تحديثاً رسمياً خلال [مدة]. شكراً لتفاعلكم.»</div>
+            </div>
+          </div>
+        </div>
+        <ul class="block-takeaways" data-takeaways-for="so-002" aria-label="نقاط مفتاحية للاسترجاع">
+          <li class="block-takeaway type-body">وثِّق المحتوى قبل أي حذف — الحذف يُشعل الأزمة.</li>
+          <li class="block-takeaway type-body">أوقف فوراً كل المنشورات المجدولة لأي قناة.</li>
+          <li class="block-takeaway type-body">راقب الـ hashtags و mentions كل ١٥ دقيقة.</li>
+          <li class="block-takeaway type-body">لا ترُدّ دفاعياً، ولا تلقِ اللوم على آخرين.</li>
+        </ul>
+        <details class="block-pitfalls" data-pitfalls-for="so-002">
+          <summary class="block-pitfalls-summary">
+            <span class="block-pitfalls-icon" aria-hidden="true">⚠️</span>
+            <span class="block-pitfalls-title">Crisis Stage — الخطأ الأول قاتل</span>
+            <span class="block-pitfalls-count">7</span>
+          </summary>
+          <div class="block-pitfalls-body">
+            <section class="pitfall-section pitfall-section--mistakes">
+              <h6 class="pitfall-section-h">أكثر الأخطاء شيوعاً</h6>
+              <ol class="pitfall-list pitfall-list--mistakes">
+                <li class="pitfall-item">
+                  <span class="pitfall-item-marker" aria-hidden="true">✗</span>
+                  <span class="pitfall-item-text">تحذف التعليقات السلبية — الـ crisis يتضاعف عبر screenshots.</span>
+                </li>
+                <li class="pitfall-item">
+                  <span class="pitfall-item-marker" aria-hidden="true">✗</span>
+                  <span class="pitfall-item-text">ترد بـ "defensive" قبل إعلان الحقائق — تفقد المصداقية.</span>
+                </li>
+                <li class="pitfall-item">
+                  <span class="pitfall-item-marker" aria-hidden="true">✗</span>
+                  <span class="pitfall-item-text">تستخدم AI-generated apology — الناس يكتشفون النبرة الميتة.</span>
+                </li>
+                <li class="pitfall-item">
+                  <span class="pitfall-item-marker" aria-hidden="true">✗</span>
+                  <span class="pitfall-item-text">تنتظر 24 ساعة قبل البيان الأول — internet لا ينام.</span>
+                </li>
+              </ol>
+            </section>
+            <section class="pitfall-section pitfall-section--diagnostic">
+              <h6 class="pitfall-section-h">علامات تظهر عليك أنت</h6>
+              <ul class="pitfall-list pitfall-list--checklist">
+                <li class="pitfall-item">
+                  <input class="pitfall-item-check" type="checkbox" disabled aria-hidden="true">
+                  <span class="pitfall-item-text">الـ engagement على البيان أقل من السلبي بـ 1/10 → الرد ضعيف.</span>
+                </li>
+                <li class="pitfall-item">
+                  <input class="pitfall-item-check" type="checkbox" disabled aria-hidden="true">
+                  <span class="pitfall-item-text">Influencers يتحدثون عنك دون تواصلك معهم → فشل early outreach.</span>
+                </li>
+                <li class="pitfall-item">
+                  <input class="pitfall-item-check" type="checkbox" disabled aria-hidden="true">
+                  <span class="pitfall-item-text">Trending hashtag مدته أكثر من 48 ساعة → استراتيجيتك انفعالية لا سردية.</span>
+                </li>
+              </ul>
+            </section>
+          </div>
+        </details>
+
+      <section class="block-practice" data-practice-for="so-002" aria-label="تمارين استدعاء نشط">
+        <header class="block-practice-h">
+          <span class="block-practice-eyebrow type-eyebrow">تمرين استدعاء</span>
+          <h4 class="block-practice-title type-display-h">تحقّق من فهمك</h4>
+          <span class="block-practice-meta type-num">
+            <span data-practice-count="3">3 أسئلة</span> ·
+            <span data-practice-est="6">~6 دقائق</span>
+          </span>
+        </header>
+        <ol class="practice-questions">
+    <li class="practice-question" data-q-id="so-002-q1">
+      <p class="practice-question-text type-body">ما مراحل أزمة السوشال ميديا الـ 5؟ وما أخطر مرحلة لتتدخل فيها؟</p>
+      <details class="practice-answer">
+        <summary class="practice-answer-summary type-ui-label">
+          <span class="practice-answer-icon" aria-hidden="true">↓</span>
+          <span>اكشف الإجابة</span>
+        </summary>
+        <div class="practice-answer-body type-body">اكتشاف → تصاعد → ذروة → تراجع → ما بعد. أخطر مرحلة للتدخل: بين اكتشاف وتصاعد — بعدها تفقد السيطرة.</div>
+      </details>
+      <button class="practice-tried-btn type-button" type="button" data-q-id="so-002-q1" aria-pressed="false">
+        <span class="practice-tried-icon" aria-hidden="true"></span>
+        <span class="practice-tried-label">حاولت</span>
+      </button>
+    </li>
+    <li class="practice-question" data-q-id="so-002-q2">
+      <p class="practice-question-text type-body">ما الفرق بين الرد الرسمي والرد الإنساني في أزمة؟ أيهما أفضل متى؟</p>
+      <details class="practice-answer">
+        <summary class="practice-answer-summary type-ui-label">
+          <span class="practice-answer-icon" aria-hidden="true">↓</span>
+          <span>اكشف الإجابة</span>
+        </summary>
+        <div class="practice-answer-body type-body">الرسمي: "نحقق في الأمر وسنوافيكم." الإنساني: "فهمنا الموقف وآسفين — هذا اللي نسويه." الإنساني أفضل في B2C والأزمات الشخصية. الرسمي في القانونية.</div>
+      </details>
+      <button class="practice-tried-btn type-button" type="button" data-q-id="so-002-q2" aria-pressed="false">
+        <span class="practice-tried-icon" aria-hidden="true"></span>
+        <span class="practice-tried-label">حاولت</span>
+      </button>
+    </li>
+    <li class="practice-question" data-q-id="so-002-q3">
+      <p class="practice-question-text type-body">أعطِ مثالاً عراقياً على أزمة سوشال وكيف كان يجب التعامل معها.</p>
+      <details class="practice-answer">
+        <summary class="practice-answer-summary type-ui-label">
+          <span class="practice-answer-icon" aria-hidden="true">↓</span>
+          <span>اكشف الإجابة</span>
+        </summary>
+        <div class="practice-answer-body type-body">مطعم يُصوَّر وفيه حشرة. الخطأ: حذف التعليقات. الصح: اعتراف + صورة مطبخ نظيف + دعوة لزيارة + خصم.</div>
+      </details>
+      <button class="practice-tried-btn type-button" type="button" data-q-id="so-002-q3" aria-pressed="false">
+        <span class="practice-tried-icon" aria-hidden="true"></span>
+        <span class="practice-tried-label">حاولت</span>
+      </button>
+    </li>
+        </ol>
+        <footer class="block-practice-reflect">
+          <h5 class="block-practice-reflect-h type-eyebrow">تأمّل ختامي</h5>
+          <p class="block-practice-reflect-prompt type-quote-literary">لو حصلت أزمة لعلامتك التجارية الآن: ما أول 3 خطوات ستتخذها في أول ساعة؟</p>
+          <textarea class="block-practice-reflect-input" data-reflect-for="so-002" placeholder="اكتب جوابك هنا (يُحفَظ محلياً، لا يُرسَل لأي خادم)" rows="3" maxlength="500"></textarea>
+          <div class="block-practice-reflect-meta type-num">
+            <span data-reflect-count="0">0</span> / 500 حرف
+          </div>
+        </footer>
+      </section>
+      <nav class="block-bridge" data-bridge-for="so-002" aria-label="تابع التعلم">
+        <header class="block-bridge-h">
+          <span class="block-bridge-eyebrow type-eyebrow">تابع التعلم</span>
+          <h4 class="block-bridge-title type-display-h">المسار التالي</h4>
+        </header>
+        <ul class="block-bridge-list">
+          <li class="block-bridge-item block-bridge-item--inpage">
+            <a class="block-bridge-link" href="#so-005" data-bridge-target="so-005" data-bridge-relation="extends">
+              <span class="block-bridge-relation type-eyebrow">يُعمّق</span>
+              <span class="block-bridge-target-title type-body-lead">Hook Frameworks — 15 إطار جاذب</span>
+              <span class="block-bridge-meta type-num"></span>
+            </a>
+          </li>
+          <li class="block-bridge-item block-bridge-item--crosspage">
+            <a class="block-bridge-link" href="#cu-008" data-bridge-target="cu-008" data-bridge-relation="applies-in">
+              <span class="block-bridge-relation type-eyebrow">يُطبَّق في</span>
+              <span class="block-bridge-target-title type-body-lead">خدمة الزبون — أزمة على مستوى الزبون</span>
+              <span class="block-bridge-meta type-num"><span class="block-bridge-page-tag">خدمة الزبون</span></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+        <!-- Phase 2 -->
+        <div class="block-pacing" data-pacing-for="so-003" data-block-est="10">
+          <div class="block-pacing-mastery">
+            <button class="mastery-toggle" type="button" data-mastery-for="so-003" data-mastery-state="not-started" aria-label="حالة الإتقان">
+              <span class="mastery-icon" aria-hidden="true">○</span>
+              <span class="mastery-label">لم أبدأ</span>
+            </button>
+          </div>
+          <div class="block-pacing-timer">
+            <span class="block-pacing-timer-label type-eyebrow">جلسة تركيز</span>
+            <div class="focus-presets" role="group" aria-label="اختر مدة التركيز">
+              <button class="focus-preset" type="button" data-focus-minutes="15" data-focus-for="so-003">15م</button>
+              <button class="focus-preset" type="button" data-focus-minutes="25" data-focus-for="so-003">25م</button>
+              <button class="focus-preset" type="button" data-focus-minutes="45" data-focus-for="so-003">45م</button>
+            </div>
+            <span class="focus-active" data-focus-active-for="so-003" hidden>
+              <span class="focus-active-time" data-focus-time>00:00</span>
+              <button class="focus-stop" type="button" data-focus-stop>إيقاف</button>
+            </span>
+          </div>
+        </div>
+        <div class="crisis-phase" data-block-id="so-003" data-block-type="case" data-difficulty="3" data-est-minutes="10" id="cp-2" onclick="toggleCrisis(2)">
+          <div class="crisis-phase-header">
+            <div class="crisis-badge u-pill-out-yellow">⏱ الساعة 2-24</div>
+            <div class="crisis-title">الاستجابة الرسمية</div>
+            <div class="crisis-status warning">مهم</div>
+            <svg class="crisis-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="crisis-body">
+            <div class="crisis-grid">
+              <div>
+                <div class="crisis-action-label">✅ افعل فوراً</div>
+                <ul class="crisis-list">
+                  <li>اكتب بياناً رسمياً بصوت الشركة — لا بأسلوب شخصي</li>
+                  <li>اعترف بالمشكلة إن كانت حقيقية — التنصّل يُضاعف الضرر</li>
+                  <li>أعلن الخطوات التصحيحية بشكل محدد وقابل للقياس</li>
+                  <li>تواصل مع المتضررين مباشرة على DM إن أمكن</li>
+                </ul>
+              </div>
+              <div>
+                <div class="crisis-action-label u-c-red">🚫 تجنّب تماماً</div>
+                <ul class="crisis-list danger">
+                  <li>الاعتذار الفضفاض بدون تحديد ما حدث</li>
+                  <li>وعود لا تستطيع تنفيذها — تُحوّل الأزمة لكارثة لاحقاً</li>
+                  <li>الرد على كل تعليق سلبي — يُبقي الأزمة حية</li>
+                </ul>
+              </div>
+            </div>
+            <div class="crisis-template">
+              <div class="crisis-template-label">📋 قالب الاستجابة الرسمية</div>
+              <div class="crisis-template-text">«نتحمّل المسؤولية الكاملة عمّا حدث في [التاريخ / الموضوع]. قرّرنا [الإجراء المحدد] اعتباراً من اليوم. كما نلتزم بـ [إجراء وقائي مستقبلي]. نقدّر ثقتكم ونعمل على استحقاقها.»</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="block-pacing" data-pacing-for="so-004" data-block-est="10">
+          <div class="block-pacing-mastery">
+            <button class="mastery-toggle" type="button" data-mastery-for="so-004" data-mastery-state="not-started" aria-label="حالة الإتقان">
+              <span class="mastery-icon" aria-hidden="true">○</span>
+              <span class="mastery-label">لم أبدأ</span>
+            </button>
+          </div>
+          <div class="block-pacing-timer">
+            <span class="block-pacing-timer-label type-eyebrow">جلسة تركيز</span>
+            <div class="focus-presets" role="group" aria-label="اختر مدة التركيز">
+              <button class="focus-preset" type="button" data-focus-minutes="15" data-focus-for="so-004">15م</button>
+              <button class="focus-preset" type="button" data-focus-minutes="25" data-focus-for="so-004">25م</button>
+              <button class="focus-preset" type="button" data-focus-minutes="45" data-focus-for="so-004">45م</button>
+            </div>
+            <span class="focus-active" data-focus-active-for="so-004" hidden>
+              <span class="focus-active-time" data-focus-time>00:00</span>
+              <button class="focus-stop" type="button" data-focus-stop>إيقاف</button>
+            </span>
+          </div>
+        </div>
+        <div class="crisis-phase" data-block-id="so-004" data-block-type="case" data-difficulty="3" data-est-minutes="10" id="cp-3" onclick="toggleCrisis(3)">
+          <div class="crisis-phase-header">
+            <div class="crisis-badge u-pill-out-orange">📅 الأسبوع الأول</div>
+            <div class="crisis-title">السيطرة على السرد</div>
+            <div class="crisis-status moderate">متابعة</div>
+            <svg class="crisis-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="crisis-body">
+            <div class="crisis-grid">
+              <div>
+                <div class="crisis-action-label">✅ افعل فوراً</div>
+                <ul class="crisis-list">
+                  <li>أنشر تحديثات تفصيلية عن الإجراءات المتخذة يومياً</li>
+                  <li>وثّق الخطوات التصحيحية بمحتوى بصري (صور، أرقام)</li>
+                  <li>اطلب من العملاء الراضين مشاركة تجاربهم الإيجابية</li>
+                  <li>تابع الـ media coverage وردّ على التحريف الإعلامي فوراً</li>
+                </ul>
+              </div>
+              <div>
+                <div class="crisis-action-label u-c-red">🚫 تجنّب تماماً</div>
+                <ul class="crisis-list danger">
+                  <li>إعلان «انتهاء الأزمة» قبل أوانها</li>
+                  <li>نشر محتوى ترويجي خلال هذه المرحلة</li>
+                  <li>التهجّم على وسائل الإعلام التي نشرت الخبر</li>
+                </ul>
+              </div>
+            </div>
+            <div class="crisis-template">
+              <div class="crisis-template-label">📋 قالب تحديث الأسبوع الأول</div>
+              <div class="crisis-template-text">«تحديث: منذ [التاريخ]، أتممنا [الخطوة 1] و[الخطوة 2]. الأرقام تقول: [إنجاز قابل للقياس]. نواصل العمل على [ما تبقّى] ونشاركم التحديث القادم [الموعد].»</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 4 -->
+        <div class="block-prereq-chip" data-prereq-for="so-005" aria-label="متطلبات معرفية">
+          <span class="block-prereq-chip-icon" aria-hidden="true">↑</span>
+          <span class="block-prereq-chip-label type-eyebrow">يحتاج فهم:</span>
+          <ol class="block-prereq-chip-list">
+            <li class="block-prereq-chip-item"><a href="#so-002" data-prereq-target="so-002">so-002</a></li>
+          </ol>
+        </div>
+        <div class="block-pacing" data-pacing-for="so-005" data-block-est="10">
+          <div class="block-pacing-mastery">
+            <button class="mastery-toggle" type="button" data-mastery-for="so-005" data-mastery-state="not-started" aria-label="حالة الإتقان">
+              <span class="mastery-icon" aria-hidden="true">○</span>
+              <span class="mastery-label">لم أبدأ</span>
+            </button>
+          </div>
+          <div class="block-pacing-timer">
+            <span class="block-pacing-timer-label type-eyebrow">جلسة تركيز</span>
+            <div class="focus-presets" role="group" aria-label="اختر مدة التركيز">
+              <button class="focus-preset" type="button" data-focus-minutes="15" data-focus-for="so-005">15م</button>
+              <button class="focus-preset" type="button" data-focus-minutes="25" data-focus-for="so-005">25م</button>
+              <button class="focus-preset" type="button" data-focus-minutes="45" data-focus-for="so-005">45م</button>
+            </div>
+            <span class="focus-active" data-focus-active-for="so-005" hidden>
+              <span class="focus-active-time" data-focus-time>00:00</span>
+              <button class="focus-stop" type="button" data-focus-stop>إيقاف</button>
+            </span>
+          </div>
+        </div>
+        <div class="crisis-phase" data-block-id="so-005" data-block-type="case" data-difficulty="3" data-est-minutes="10" id="cp-4" onclick="toggleCrisis(4)" data-related="so-010,fs-005,lb-001,lb-003" data-prereq="so-002">
+          <div class="crisis-phase-header">
+            <div class="crisis-badge u-pill-out-cyan">📈 الأسبوع الثاني</div>
+
+      <section class="block-practice" data-practice-for="so-005" aria-label="تمارين استدعاء نشط">
+        <header class="block-practice-h">
+          <span class="block-practice-eyebrow type-eyebrow">تمرين استدعاء</span>
+          <h4 class="block-practice-title type-display-h">تحقّق من فهمك</h4>
+          <span class="block-practice-meta type-num">
+            <span data-practice-count="3">3 أسئلة</span> ·
+            <span data-practice-est="6">~6 دقائق</span>
+          </span>
+        </header>
+        <ol class="practice-questions">
+    <li class="practice-question" data-q-id="so-005-q1">
+      <p class="practice-question-text type-body">ما هو CTR وما المعدل الجيد لكل منصة (Instagram, Facebook, TikTok)؟</p>
+      <details class="practice-answer">
+        <summary class="practice-answer-summary type-ui-label">
+          <span class="practice-answer-icon" aria-hidden="true">↓</span>
+          <span>اكشف الإجابة</span>
+        </summary>
+        <div class="practice-answer-body type-body">CTR = clicks / impressions. Instagram: 0.5-1%. Facebook: 1-2%. TikTok: 1-3%. أعلى من هذا = ممتاز.</div>
+      </details>
+      <button class="practice-tried-btn type-button" type="button" data-q-id="so-005-q1" aria-pressed="false">
+        <span class="practice-tried-icon" aria-hidden="true"></span>
+        <span class="practice-tried-label">حاولت</span>
+      </button>
+    </li>
+    <li class="practice-question" data-q-id="so-005-q2">
+      <p class="practice-question-text type-body">لماذا Reach عالي + Engagement منخفض = مشكلة؟</p>
+      <details class="practice-answer">
+        <summary class="practice-answer-summary type-ui-label">
+          <span class="practice-answer-icon" aria-hidden="true">↓</span>
+          <span>اكشف الإجابة</span>
+        </summary>
+        <div class="practice-answer-body type-body">يعني المحتوى يُعرض لكن لا يُحفّز. الخوارزمية ستعاقبك لاحقاً بتقليل الـ reach لأن الناس لا تتفاعل.</div>
+      </details>
+      <button class="practice-tried-btn type-button" type="button" data-q-id="so-005-q2" aria-pressed="false">
+        <span class="practice-tried-icon" aria-hidden="true"></span>
+        <span class="practice-tried-label">حاولت</span>
+      </button>
+    </li>
+    <li class="practice-question" data-q-id="so-005-q3">
+      <p class="practice-question-text type-body">ما الفرق بين Vanity Metrics و Actionable Metrics؟ أعطِ 3 أمثلة لكل.</p>
+      <details class="practice-answer">
+        <summary class="practice-answer-summary type-ui-label">
+          <span class="practice-answer-icon" aria-hidden="true">↓</span>
+          <span>اكشف الإجابة</span>
+        </summary>
+        <div class="practice-answer-body type-body">Vanity: followers, impressions, page views (تبدو جيدة لا تُحرّك business). Actionable: CTR, conversion rate, cost per lead (تُحرّك قرارات).</div>
+      </details>
+      <button class="practice-tried-btn type-button" type="button" data-q-id="so-005-q3" aria-pressed="false">
+        <span class="practice-tried-icon" aria-hidden="true"></span>
+        <span class="practice-tried-label">حاولت</span>
+      </button>
+    </li>
+        </ol>
+        <footer class="block-practice-reflect">
+          <h5 class="block-practice-reflect-h type-eyebrow">تأمّل ختامي</h5>
+          <p class="block-practice-reflect-prompt type-quote-literary">ما أهم metric تتابعه حالياً لحساباتك؟ هل هو vanity أم actionable؟</p>
+          <textarea class="block-practice-reflect-input" data-reflect-for="so-005" placeholder="اكتب جوابك هنا (يُحفَظ محلياً، لا يُرسَل لأي خادم)" rows="3" maxlength="500"></textarea>
+          <div class="block-practice-reflect-meta type-num">
+            <span data-reflect-count="0">0</span> / 500 حرف
+          </div>
+        </footer>
+      </section>
+      <nav class="block-bridge" data-bridge-for="so-005" aria-label="تابع التعلم">
+        <header class="block-bridge-h">
+          <span class="block-bridge-eyebrow type-eyebrow">تابع التعلم</span>
+          <h4 class="block-bridge-title type-display-h">المسار التالي</h4>
+        </header>
+        <ul class="block-bridge-list">
+          <li class="block-bridge-item block-bridge-item--inpage">
+            <a class="block-bridge-link" href="#so-010" data-bridge-target="so-010" data-bridge-relation="extends">
+              <span class="block-bridge-relation type-eyebrow">يُعمّق</span>
+              <span class="block-bridge-target-title type-body-lead">تقويم 30 يوم — Calendar Builder</span>
+              <span class="block-bridge-meta type-num"></span>
+            </a>
+          </li>
+          <li class="block-bridge-item block-bridge-item--crosspage">
+            <a class="block-bridge-link" href="#lb-003" data-bridge-target="lb-003" data-bridge-relation="applies-in">
+              <span class="block-bridge-relation type-eyebrow">يُطبَّق في</span>
+              <span class="block-bridge-target-title type-body-lead">Lab — اختبار الـ Hook قبل النشر</span>
+              <span class="block-bridge-meta type-num"><span class="block-bridge-page-tag">Lab</span></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+            <div class="crisis-title">محتوى التعافي</div>
+            <div class="crisis-status recovery">تعافٍ</div>
+            <svg class="crisis-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="crisis-body">
+            <div class="crisis-grid">
+              <div>
+                <div class="crisis-action-label">✅ افعل فوراً</div>
+                <ul class="crisis-list">
+                  <li>أعد إطلاق المحتوى التعليمي والقيمي — ليس الترويجي</li>
+                  <li>شارك شهادات عملاء حقيقية بشكل عضوي</li>
+                  <li>انشر «ما تعلّمناه» — يُظهر النضج المؤسسي</li>
+                  <li>أطلق مبادرة أو برنامجاً يخدم المجتمع المتضرر</li>
+                </ul>
+              </div>
+              <div>
+                <div class="crisis-action-label u-c-red">🚫 تجنّب تماماً</div>
+                <ul class="crisis-list danger">
+                  <li>الترويج المباشر للمنتجات — «سابق لأوانه»</li>
+                  <li>الإشارة للأزمة بأسلوب «لقد تجاوزناها»</li>
+                  <li>تجاهل من لا يزال يعبّر عن قلقه</li>
+                </ul>
+              </div>
+            </div>
+            <div class="crisis-template">
+              <div class="crisis-template-label">📋 قالب محتوى التعافي</div>
+              <div class="crisis-template-text">«ما تعلّمناه من الأسبوعين الماضيين: أولاً [درس]. ثانياً [درس]. هذا جعلنا نُعيد تصميم [شيء محدد] لخدمتكم أفضل. شكراً لصبركم ومصارحتكم.»</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 5 -->
+        <div class="block-pacing" data-pacing-for="so-006" data-block-est="10">
+          <div class="block-pacing-mastery">
+            <button class="mastery-toggle" type="button" data-mastery-for="so-006" data-mastery-state="not-started" aria-label="حالة الإتقان">
+              <span class="mastery-icon" aria-hidden="true">○</span>
+              <span class="mastery-label">لم أبدأ</span>
+            </button>
+          </div>
+          <div class="block-pacing-timer">
+            <span class="block-pacing-timer-label type-eyebrow">جلسة تركيز</span>
+            <div class="focus-presets" role="group" aria-label="اختر مدة التركيز">
+              <button class="focus-preset" type="button" data-focus-minutes="15" data-focus-for="so-006">15م</button>
+              <button class="focus-preset" type="button" data-focus-minutes="25" data-focus-for="so-006">25م</button>
+              <button class="focus-preset" type="button" data-focus-minutes="45" data-focus-for="so-006">45م</button>
+            </div>
+            <span class="focus-active" data-focus-active-for="so-006" hidden>
+              <span class="focus-active-time" data-focus-time>00:00</span>
+              <button class="focus-stop" type="button" data-focus-stop>إيقاف</button>
+            </span>
+          </div>
+        </div>
+        <div class="crisis-phase" data-block-id="so-006" data-block-type="case" data-difficulty="3" data-est-minutes="10" id="cp-5" onclick="toggleCrisis(5)">
+          <div class="crisis-phase-header">
+            <div class="crisis-badge u-pill-out-green">🏆 الشهر الأول</div>
+            <div class="crisis-title">إعادة بناء الثقة</div>
+            <div class="crisis-status rebuild">إعادة بناء</div>
+            <svg class="crisis-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="crisis-body">
+            <div class="crisis-grid">
+              <div>
+                <div class="crisis-action-label">✅ افعل فوراً</div>
+                <ul class="crisis-list">
+                  <li>أصدر تقريراً شفافاً عن ما تغيّر مقارنةً بما كان</li>
+                  <li>أطلق برنامج مكافأة للعملاء الأوفياء الذين بقوا</li>
+                  <li>ادعُ المنتقدين للحوار المفتوح — يُحوّل المعارضين لمؤيدين</li>
+                  <li>قِس مؤشرات الثقة (NPS، الـ sentiment) وأعلن عنها</li>
+                </ul>
+              </div>
+              <div>
+                <div class="crisis-action-label u-c-red">🚫 تجنّب تماماً</div>
+                <ul class="crisis-list danger">
+                  <li>الادعاء بأن كل شيء «أفضل من قبل» دون أرقام</li>
+                  <li>محو أي أثر للأزمة من حساباتك — اللامبالاة تُغضب</li>
+                  <li>الترويج المكثف قبل عودة الثقة الكاملة</li>
+                </ul>
+              </div>
+            </div>
+            <div class="crisis-template">
+              <div class="crisis-template-label">📋 قالب تقرير الشهر الأول</div>
+              <div class="crisis-template-text">«بعد 30 يوماً على [الحدث]: ✓ أتممنا [الإنجازات]. ✓ مؤشر رضا عملائنا ارتفع من [X]% إلى [Y]%. ✓ التغييرات الدائمة التي أجريناها: [قائمة]. هذا التزامنا بالشفافية معكم دائماً.»</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /crisis-timeline -->
+
+
+      <!-- ====================================================
+           BLOCK C — مقاييس النجاح التفاعلية
+      ==================================================== -->
+      <div class="social-section-header u-mt-rh">
+        <div>
+          <h2 class="u-card-title">BLOCK C — مقاييس النجاح التفاعلية</h2>
+          <p class="u-meta-lg">حاسبة Engagement Rate مع مقارنة بمعايير المنصات وتقييم فوري</p>
+        </div>
+        <span class="tag accent">حاسبة تفاعلية</span>
+      </div>
+
+      <div class="grid-2 u-gap-5 u-mb-6">
+
+        <!-- Calculator -->
+        <div class="card">
+          <div class="card-title">احسب معدل تفاعلك</div>
+
+          <div class="u-flex u-flex-col u-gap-35">
+            <div>
+              <label class="u-form-label">المنصة</label>
+              <div class="u-flex u-gap-2 u-flex-wrap">
+                <button class="er-platform-btn active" data-platform="instagram" onclick="selectERPlatform('instagram', this)">Instagram</button>
+                <button class="er-platform-btn" data-platform="linkedin" onclick="selectERPlatform('linkedin', this)">LinkedIn</button>
+                <button class="er-platform-btn" data-platform="twitter" onclick="selectERPlatform('twitter', this)">X</button>
+                <button class="er-platform-btn" data-platform="tiktok" onclick="selectERPlatform('tiktok', this)">TikTok</button>
+              </div>
+            </div>
+
+            <div class="er-input-group">
+              <label>عدد المتابعين</label>
+              <input type="number" id="er-followers" placeholder="مثال: 10000" oninput="calcER()" />
+            </div>
+            <div class="er-input-group">
+              <label>مجموع الإعجابات</label>
+              <input type="number" id="er-likes" placeholder="مثال: 450" oninput="calcER()" />
+            </div>
+            <div class="er-input-group">
+              <label>مجموع التعليقات</label>
+              <input type="number" id="er-comments" placeholder="مثال: 38" oninput="calcER()" />
+            </div>
+            <div class="er-input-group">
+              <label>مجموع المشاركات / الحفظ</label>
+              <input type="number" id="er-shares" placeholder="مثال: 22" oninput="calcER()" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Result -->
+        <div class="card u-flex u-flex-col u-justify-between">
+          <div>
+            <div class="card-title">نتيجتك</div>
+            <div id="er-result-wrap" class="u-empty-pad">
+              <div class="u-fz-13 u-c-faint u-mb-2">أدخل البيانات لرؤية النتيجة</div>
+              <div id="er-score" class="u-display-48">—</div>
+              <div class="u-fz-12 u-c-faint u-mt-1">معدل التفاعل</div>
+            </div>
+
+            <div id="er-gauge-wrap" style="margin:0 auto 16px; display:none;">
+              <!-- gauge bar -->
+              <div class="u-flex u-justify-between u-fz-9 u-c-faint u-mb-1">
+                <span>0%</span><span>معياري</span><span>ممتاز</span>
+              </div>
+              <div class="u-bar-track">
+                <div id="er-gauge-bar" style="height:100%; border-radius:99px; transition:width 0.6s ease; background:linear-gradient(90deg,#EF4444,#EAB308,#22C55E);"></div>
+                <div id="er-gauge-marker" style="position:absolute; top:-3px; width:4px; height:16px; border-radius:2px; background:var(--text); transition:left 0.6s ease;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="er-verdict" class="u-info-card">
+            المعدل يُقاس بـ: (إعجابات + تعليقات + مشاركات) ÷ متابعين × 100
+          </div>
+
+          <div id="er-benchmarks" class="u-mt-3 u-hidden">
+            <div class="u-fz-10 u-fw-800 u-ls-1 u-tt-up u-c-faint u-mb-2">معايير المنصة المختارة</div>
+            <div id="er-benchmark-list"></div>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- ====================================================
+           BLOCK D — تقويم المحتوى الذكي
+      ==================================================== -->
+      <div class="social-section-header u-mt-rh">
+        <div>
+          <h2 class="u-card-title">BLOCK D — تقويم المحتوى الذكي</h2>
+          <p class="u-meta-lg">نموذج أسبوعي قابل للتخصيص — توزيع 70/20/10 (تعليمي/ترفيهي/ترويجي)</p>
+        </div>
+        <span class="tag yellow">أسبوعي</span>
+      </div>
+
+      <!-- Mix Ratio Visualizer -->
+      <div class="card u-mb-5">
+        <div class="u-flex u-items-center u-justify-between u-mb-4">
+          <div class="card-title u-m-0">توزيع المحتوى الأسبوعي — 7 منشورات</div>
+          <div class="u-flex u-gap-2-5 u-fz-11 u-c-muted">
+            <span class="u-row-sm"><span class="u-dot u-dot-accent" ></span>تعليمي 70%</span>
+            <span class="u-row-sm"><span class="u-dot u-dot-yellow" ></span>ترفيهي 20%</span>
+            <span class="u-row-sm"><span class="u-dot u-dot-instagram" ></span>ترويجي 10%</span>
+          </div>
+        </div>
+        <div class="u-bar-trio">
+          <div class="u-bar-7-cyan-l"></div>
+          <div class="u-bar-2-yellow"></div>
+          <div class="u-bar-1-pink-r"></div>
+        </div>
+        <div class="u-meta-lh-md">
+          <strong class="u-c-text">لماذا 70/20/10؟</strong>
+          المحتوى التعليمي يبني الثقة ويجذب المتابعين الجدد. الترفيهي يُبقي الجمهور منتبهاً. الترويجي يُحوّل — لكنه يُحرق الجمهور إن تجاوز 10%.
+        </div>
+      </div>
+
+      <!-- Weekly Calendar -->
+      <div class="smart-calendar">
+        <div class="smart-cal-header">
+          <div class="u-t-card-title-tight">الأسبوع الحالي — مايو 2026</div>
+          <div class="u-flex u-gap-2">
+            <button class="btn btn-ghost u-chip-sm" onclick="prevCalWeek()">← السابق</button>
+            <button class="btn btn-ghost u-chip-sm" onclick="nextCalWeek()">التالي →</button>
+            <button class="btn btn-primary u-chip-md" onclick="addCalPost()">+ إضافة منشور</button>
+          </div>
+        </div>
+
+        <div class="smart-cal-grid" id="smartCalGrid">
+          <!-- rendered by JS -->
+        </div>
+
+      </div>
+
+      <!-- Content type legend + tips -->
+      <div class="grid-3 u-mt-5 u-gap-4">
+        <div class="card u-bc-cyan-soft">
+          <div class="u-t-h-md">📚</div>
+          <div class="u-fz-12 u-fw-800 u-c-cyan u-mb-2">محتوى تعليمي (70%)</div>
+          <div class="u-meta-tight">How-to، نصائح، شرح مفاهيم، أخطاء شائعة، دروس من التجربة، حقائق صناعية، مقارنات.</div>
+        </div>
+        <div class="card u-bc-yellow-soft">
+          <div class="u-t-h-md">🎭</div>
+          <div class="u-fz-12 u-fw-800 u-c-yellow u-mb-2">محتوى ترفيهي (20%)</div>
+          <div class="u-meta-tight">قصص خفيفة، ميمز مهني، استفتاءات، تحديات، كواليس العمل، «يوم من حياتي».</div>
+        </div>
+        <div class="card u-bc-instagram-soft">
+          <div class="u-t-h-md">📣</div>
+          <div class="u-fz-12 u-fw-800 u-c-pink u-mb-2">محتوى ترويجي (10%)</div>
+          <div class="u-meta-tight">عروض حصرية، إطلاق منتج، شهادة عميل، CTA مباشر — بشرط ربطه بقيمة واضحة.</div>
+        </div>
+      </div>
+
+
+      <!-- ============================================================
+           PSYCHOLOGY BLOCK 3 — SOCIAL MEDIA
+      ============================================================ -->
+      <!-- moved to assets/style.css :: block #4 -->
+
+      <div class="card u-mb-5">
+        <div class="psych-dm-header">
+          <div class="psych-dm-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15M14.25 3.104c.251.023.501.05.75.082M19.8 15l-3.45-3.805M19.8 15l.75 2.25m-16.8-2.25 3.45-3.805M4.5 17.25l-.75 2.25m0 0a23.64 23.64 0 0 0 16.5 0m-16.5 0 3.75-3.75m12.75 3.75-3.75-3.75"/>
+            </svg>
+          </div>
+          <div>
+            <div class="psych-section-title u-t-card-title">علم النفس الرقمي والدوبامين</div>
+            <div class="psych-section-sub u-meta-md">الآليات العصبية والسلوكية التي تحكم الانتباه الرقمي — من Dopamine Loops إلى Color Psychology</div>
+          </div>
+        </div>
+
+        <!-- Pills row -->
+        <div class="psych-dm-pills">
+
+          <!-- 1. Dopamine Loop -->
+          <div class="psych-dm-pill purple">
+            <div class="psych-dm-pill-glow"></div>
+            <div class="psych-dm-pill-top">
+              <div class="psych-dm-pill-emoji">🔁</div>
+              <div>
+                <div class="psych-dm-pill-name">Dopamine Loop</div>
+                <div class="psych-dm-pill-ref">Tristan Harris · The Social Dilemma (2020) | Schultz et al., Science 1997</div>
+              </div>
+            </div>
+            <div class="psych-dm-pill-body">الدوبامين لا يُفرز عند تلقّي المكافأة — بل عند <em>توقّعها</em>. المنصات تُصمّم حلقات: Action → Variable Reward → Action، حيث عدم اليقين في المكافأة يُعظّم الإفراز. هذا هو جوهر السحب للتحديث (Pull-to-Refresh).</div>
+            <div class="psych-dm-pill-app">
+              <strong>التطبيق الإبداعي:</strong> صمّم محتواك بتسلسل "Hook → Partial Reveal → CTA" — لا تُعطِ كل المعلومات في أول 3 ثوانٍ. الفضول يُنشئ الـ Loop قبل التمرير.
+            </div>
+          </div>
+
+          <!-- 2. Mere Exposure -->
+          <div class="psych-dm-pill blue">
+            <div class="psych-dm-pill-glow"></div>
+            <div class="psych-dm-pill-top">
+              <div class="psych-dm-pill-emoji">👁️</div>
+              <div>
+                <div class="psych-dm-pill-name">Mere Exposure Effect</div>
+                <div class="psych-dm-pill-ref">Zajonc, R. — Journal of Personality and Social Psychology, 1968</div>
+              </div>
+            </div>
+            <div class="psych-dm-pill-body">التكرار وحده يُولّد ألفة، والألفة تُولّد تفضيلاً. رؤية شعار أو وجه مألوف يُقلّل المقاومة المعرفية ويرفع درجة الثقة اللاواعية — حتى لو لم يُنشئ المستخدم أي تفاعل واعٍ.</div>
+            <div class="psych-dm-pill-app">
+              <strong>التطبيق الإبداعي:</strong> النشر المنتظم (3–5 مرات أسبوعياً) أهم من "الجودة" المتقطّعة. البقاء في Feed = بناء Familiarity = تقليل مقاومة الشراء عند العرض.
+            </div>
+          </div>
+
+          <!-- 3. Narrative Transportation -->
+          <div class="psych-dm-pill orange">
+            <div class="psych-dm-pill-glow"></div>
+            <div class="psych-dm-pill-top">
+              <div class="psych-dm-pill-emoji">📖</div>
+              <div>
+                <div class="psych-dm-pill-name">Narrative Transportation Theory</div>
+                <div class="psych-dm-pill-ref">Green &amp; Brock — Journal of Personality and Social Psychology, 2000</div>
+              </div>
+            </div>
+            <div class="psych-dm-pill-body">عندما ينغمس العقل في قصة (Transportation)، تنخفض المقاومة النقدية وتتعطّل آليات التشكيك. المحتوى السردي يُقنع بدون أن يُقنع — لأنه يُشغل الـ System 1 بالكامل ويُقيّد الـ System 2.</div>
+            <div class="psych-dm-pill-app">
+              <strong>التطبيق الإبداعي:</strong> ابدأ كل بوست بـ "أنا كنت في موقف صعب…" أو "عميل اتصل بي باكياً…" — الانغماس السردي يرفع معدل الإكمال (Completion Rate) بنسبة تتجاوز 40% وفق بيانات Meta.
+            </div>
+          </div>
+
+          <!-- 4. FOMO -->
+          <div class="psych-dm-pill red">
+            <div class="psych-dm-pill-glow"></div>
+            <div class="psych-dm-pill-top">
+              <div class="psych-dm-pill-emoji">⏰</div>
+              <div>
+                <div class="psych-dm-pill-name">FOMO Psychology</div>
+                <div class="psych-dm-pill-ref">Przybylski et al. — Computers in Human Behavior, 2013</div>
+              </div>
+            </div>
+            <div class="psych-dm-pill-body">Fear of Missing Out هو اضطراب مقارنة اجتماعية مُعزّز رقمياً. يُنشط اللوزة الدماغية (Amygdala) بنفس طريقة الخطر الحقيقي. المحتوى الذي يُحاكي التجارب الاجتماعية المُفوَّتة يُنتج ضغطاً سلوكياً حقيقياً.</div>
+            <div class="psych-dm-pill-app">
+              <strong>التطبيق الإبداعي:</strong> استخدم صيغ "الآن فقط / 48 ساعة / 12 شخصاً انضموا اليوم" — لكن بصدق. الـ FOMO المبني على حقائق يُحوّل الفضول لفعل؛ الـ FOMO الكاذب يُدمّر الثقة للأبد.
+            </div>
+          </div>
+
+          <!-- 5. Color Psychology -->
+          <div class="psych-dm-pill green u-fb-full">
+            <div class="psych-dm-pill-glow"></div>
+            <div class="psych-dm-pill-top">
+              <div class="psych-dm-pill-emoji">🎨</div>
+              <div>
+                <div class="psych-dm-pill-name">Color Psychology — علم نفس الألوان</div>
+                <div class="psych-dm-pill-ref">Elliot &amp; Maier — Annual Review of Psychology, 2014 | Heer &amp; Stone, IEEE 2012</div>
+              </div>
+            </div>
+            <div class="psych-dm-pill-body u-mxw-600">الألوان تُنشّط استجابات فيزيولوجية وعاطفية مختلفة قبل أن يُعالجها الوعي. الأحمر يرفع ضربات القلب ويُعجّل القرار. الأزرق يُعزّز الثقة ويُقلّل التوتر. الأصفر/البرتقالي يُحفّز الإبداع والتفاؤل. الأخضر يُشير للأمان والنمو.</div>
+            <div class="psych-dm-pill-app">
+              <strong>التطبيق:</strong> استخدم <span class="u-c-red-bold">الأحمر للـ CTA</span> و<span class="u-c-sky u-fw-700">الأزرق للـ Trust Signals</span> و<span class="u-c-green-bold">الأخضر للـ Results/Numbers</span>. تناسق اللون عبر جميع منشوراتك يبني هوية بصرية تُولّد Mere Exposure Effect تلقائياً.
+            </div>
+          </div>
+
+        </div><!-- end psych-dm-pills -->
+
+        <!-- Platform Psychology Table -->
+        <div class="psych-platform-table-wrap">
+          <div class="psych-platform-table-header">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="var(--accent)">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/>
+            </svg>
+            <div>
+              <div class="psych-pt-title">خريطة المنصات × الحالة النفسية للمستخدم</div>
+              <div class="psych-pt-sub">دليل اختيار نوع المحتوى بحسب السياق النفسي لكل منصة وتوقيتها الذهبي</div>
+            </div>
+          </div>
+          <table class="psych-platform-table">
+            <thead>
+              <tr>
+                <th>المنصة</th>
+                <th>الوقت الذهبي</th>
+                <th>الحالة النفسية السائدة</th>
+                <th>نوع المحتوى الأنسب</th>
+                <th>محرّك القرار</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="psych-pt-platform" data-block-id="so-007" data-block-type="lesson" data-difficulty="2" data-est-minutes="5">
+                    <div class="psych-pt-dot u-dot-glow-sky"></div>
+                    <strong>LinkedIn</strong>
+                  </div>
+                </td>
+                <td><span class="psych-pt-time">الثلاثاء–الخميس 8–10 ص</span></td>
+                <td><span class="psych-pt-mood tag blue">🧠 استعداد مهني / طموح</span></td>
+                <td>قصص نجاح + Insights + دراسات حالة + مقالات "تعلّمت من فشلي"</td>
+                <td>Authority Bias + Social Proof B2B</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="psych-pt-platform" data-block-id="so-008" data-block-type="lesson" data-difficulty="2" data-est-minutes="5">
+                    <div class="psych-pt-dot u-dot-glow-instagram"></div>
+                    <strong>Instagram</strong>
+                  </div>
+                </td>
+                <td><span class="psych-pt-time">يومياً 7–9 م</span></td>
+                <td><span class="psych-pt-mood tag u-brand-instagram-alt">✨ هروب / ترفيه / تطلّع</span></td>
+                <td>Reels قصيرة + Behind-the-scenes + Before/After + UGC + Stories تفاعلية</td>
+                <td>Dopamine Loop + Mere Exposure + FOMO</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="psych-pt-platform" data-block-id="so-009" data-block-type="lesson" data-difficulty="2" data-est-minutes="5">
+                    <div class="psych-pt-dot u-dot-glow-facebook"></div>
+                    <strong>Facebook</strong>
+                  </div>
+                </td>
+                <td><span class="psych-pt-time">أيام العمل 1–3 م</span></td>
+                <td><span class="psych-pt-mood tag blue">🤝 اجتماعي / مشاركة / ذكريات</span></td>
+                <td>محتوى تعليمي قابل للمشاركة + مجموعات + بث مباشر + قصص إنسانية</td>
+                <td>Narrative Transportation + Social Proof</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="block-prereq-chip" data-prereq-for="so-010" aria-label="متطلبات معرفية">
+                    <span class="block-prereq-chip-icon" aria-hidden="true">↑</span>
+                    <span class="block-prereq-chip-label type-eyebrow">يحتاج فهم:</span>
+                    <ol class="block-prereq-chip-list">
+                      <li class="block-prereq-chip-item"><a href="#so-002" data-prereq-target="so-002">so-002</a></li>
+                      <li class="block-prereq-chip-item"><a href="#so-005" data-prereq-target="so-005">so-005</a></li>
+                    </ol>
+                  </div>
+                  <div class="psych-pt-platform" data-block-id="so-010" data-block-type="lesson" data-difficulty="2" data-est-minutes="5" data-related="so-005,fs-010,lb-001,cu-001" data-prereq="so-002,so-005">
+                    <div class="psych-pt-dot u-dot-glow-tiktok"></div>
+
+      <section class="block-practice" data-practice-for="so-010" aria-label="تمارين استدعاء نشط">
+        <header class="block-practice-h">
+          <span class="block-practice-eyebrow type-eyebrow">تمرين استدعاء</span>
+          <h4 class="block-practice-title type-display-h">تحقّق من فهمك</h4>
+          <span class="block-practice-meta type-num">
+            <span data-practice-count="4">4 أسئلة</span> ·
+            <span data-practice-est="8">~8 دقائق</span>
+          </span>
+        </header>
+        <ol class="practice-questions">
+    <li class="practice-question" data-q-id="so-010-q1">
+      <p class="practice-question-text type-body">ما هي Hook Formula وما عناصرها الثلاثة؟</p>
+      <details class="practice-answer">
+        <summary class="practice-answer-summary type-ui-label">
+          <span class="practice-answer-icon" aria-hidden="true">↓</span>
+          <span>اكشف الإجابة</span>
+        </summary>
+        <div class="practice-answer-body type-body">1) Pattern interrupt (شي غير متوقع). 2) Curiosity gap (سؤال يُفتح). 3) Relevance (يخصّني أنا). الثلاثة في أول 3 ثوانٍ.</div>
+      </details>
+      <button class="practice-tried-btn type-button" type="button" data-q-id="so-010-q1" aria-pressed="false">
+        <span class="practice-tried-icon" aria-hidden="true"></span>
+        <span class="practice-tried-label">حاولت</span>
+      </button>
+    </li>
+    <li class="practice-question" data-q-id="so-010-q2">
+      <p class="practice-question-text type-body">اكتب hook لفيديو عن "أخطاء المبيعات" باستخدام Pattern Interrupt.</p>
+      <details class="practice-answer">
+        <summary class="practice-answer-summary type-ui-label">
+          <span class="practice-answer-icon" aria-hidden="true">↓</span>
+          <span>اكشف الإجابة</span>
+        </summary>
+        <div class="practice-answer-body type-body">مثال: "توقّف عن قول 'كيف أقدر أساعدك' — هالجملة تقتل البيعة قبل ما تبدأ." (يخالف المتوقع → فضول).</div>
+      </details>
+      <button class="practice-tried-btn type-button" type="button" data-q-id="so-010-q2" aria-pressed="false">
+        <span class="practice-tried-icon" aria-hidden="true"></span>
+        <span class="practice-tried-label">حاولت</span>
+      </button>
+    </li>
+    <li class="practice-question" data-q-id="so-010-q3">
+      <p class="practice-question-text type-body">لماذا أول 3 ثوانٍ أهم من باقي الفيديو؟ اشرح الآلية النفسية.</p>
+      <details class="practice-answer">
+        <summary class="practice-answer-summary type-ui-label">
+          <span class="practice-answer-icon" aria-hidden="true">↓</span>
+          <span>اكشف الإجابة</span>
+        </summary>
+        <div class="practice-answer-body type-body">Scroll behavior: الدماغ يقرر في 1-3 ثوانٍ إذا يكمل أو يتجاوز. لا hook = الخوارزمية تُسجّل skip = reach ينخفض.</div>
+      </details>
+      <button class="practice-tried-btn type-button" type="button" data-q-id="so-010-q3" aria-pressed="false">
+        <span class="practice-tried-icon" aria-hidden="true"></span>
+        <span class="practice-tried-label">حاولت</span>
+      </button>
+    </li>
+    <li class="practice-question" data-q-id="so-010-q4">
+      <p class="practice-question-text type-body">ما الفرق بين hook للـ Reels وhook لـ Twitter thread؟</p>
+      <details class="practice-answer">
+        <summary class="practice-answer-summary type-ui-label">
+          <span class="practice-answer-icon" aria-hidden="true">↓</span>
+          <span>اكشف الإجابة</span>
+        </summary>
+        <div class="practice-answer-body type-body">Reels: بصري + صوتي (حركة + صوت مفاجئ). Twitter: نصّي pure (جملة استفزازية أو رقم صادم). الوسيط يحدد الشكل.</div>
+      </details>
+      <button class="practice-tried-btn type-button" type="button" data-q-id="so-010-q4" aria-pressed="false">
+        <span class="practice-tried-icon" aria-hidden="true"></span>
+        <span class="practice-tried-label">حاولت</span>
+      </button>
+    </li>
+        </ol>
+        <footer class="block-practice-reflect">
+          <h5 class="block-practice-reflect-h type-eyebrow">تأمّل ختامي</h5>
+          <p class="block-practice-reflect-prompt type-quote-literary">اكتب 3 hooks مختلفة لنفس الموضوع — أيها الأقوى؟ لماذا؟</p>
+          <textarea class="block-practice-reflect-input" data-reflect-for="so-010" placeholder="اكتب جوابك هنا (يُحفَظ محلياً، لا يُرسَل لأي خادم)" rows="3" maxlength="500"></textarea>
+          <div class="block-practice-reflect-meta type-num">
+            <span data-reflect-count="0">0</span> / 500 حرف
+          </div>
+        </footer>
+      </section>
+      <nav class="block-bridge" data-bridge-for="so-010" aria-label="تابع التعلم">
+        <header class="block-bridge-h">
+          <span class="block-bridge-eyebrow type-eyebrow">تابع التعلم</span>
+          <h4 class="block-bridge-title type-display-h">المسار التالي</h4>
+        </header>
+        <ul class="block-bridge-list">
+          <li class="block-bridge-item block-bridge-item--crosspage">
+            <a class="block-bridge-link" href="#lb-001" data-bridge-target="lb-001" data-bridge-relation="applies-in">
+              <span class="block-bridge-relation type-eyebrow">يُطبَّق في</span>
+              <span class="block-bridge-target-title type-body-lead">Lab — اختبر مفاهيمك قبل التطبيق</span>
+              <span class="block-bridge-meta type-num"><span class="block-bridge-page-tag">Lab</span></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+                    <strong>TikTok</strong>
+                  </div>
+                </td>
+                <td><span class="psych-pt-time">7–9 م + 10 م–12 ص</span></td>
+                <td><span class="psych-pt-mood tag red">🌀 تشتّت / بحث عن إثارة</span></td>
+                <td>Hook في أول 1.5 ثانية + Pattern Interrupt + Trend Riding + محتوى "صادم"</td>
+                <td>Dopamine Loop + Variable Reward Schedule</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="psych-pt-platform" data-block-id="so-011" data-block-type="lesson" data-difficulty="2" data-est-minutes="5">
+                    <div class="psych-pt-dot u-dot-glow-whatsapp"></div>
+                    <strong>WhatsApp Broadcast</strong>
+                  </div>
+                </td>
+                <td><span class="psych-pt-time">9–10 ص أو 7–8 م</span></td>
+                <td><span class="psych-pt-mood tag green">🔒 خصوصية / ثقة / قناة مغلقة</span></td>
+                <td>محتوى حصري + عروض مخصصة + Micro-content + صوتي/مرئي شخصي</td>
+                <td>Reciprocity + Commitment &amp; Consistency</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="psych-pt-platform" data-block-id="so-012" data-block-type="lesson" data-difficulty="2" data-est-minutes="5">
+                    <div class="psych-pt-dot" style="background:#ff0000;box-shadow:0 0 5px #ff0000;"></div>
+                    <strong>YouTube</strong>
+                  </div>
+                </td>
+                <td><span class="psych-pt-time">الجمعة–السبت 8–11 م</span></td>
+                <td><span class="psych-pt-mood tag u-tint-bg-red-08 u-c-red" >🎯 نيّة تعلّم / بحث عن حل</span></td>
+                <td>Tutorials معمّقة + Case Studies + Vlogs خلف الكواليس + مقارنات + مراجعات</td>
+                <td>Authority Bias + Loss Aversion + Narrative Transportation</td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- end psych-platform-table-wrap -->
+
+      </div><!-- end card BLOCK 3 -->
+      <!-- ============================================================ END BLOCK 3 ============================================================ -->
+
+
+      <!-- ====================================================
+           BLOCK E — مصفوفة الردود السريعة للمتاجر
+      ==================================================== -->
+      <!-- moved to assets/style.css :: block #5 -->
+
+      <!-- Section header -->
+      <div class="store-matrix-header">
+        <div>
+          <h2 class="u-card-title">BLOCK E — مصفوفة الردود السريعة للمتاجر</h2>
+          <p class="u-meta-lg">خطافات Instagram & TikTok + سكريبتات إدارة الأزمات — للمتاجر الرقمية وخدمات التقنية</p>
+        </div>
+        <span class="tag red">🛡️ متاجر + أزمات</span>
+      </div>
+
+      <!-- ── SUB-BLOCK E1: الخطافات ── -->
+      <div class="u-flex u-items-center u-justify-between u-mb-3">
+        <div>
+          <div class="u-t-list-title">E1 — قوالب الخطافات الجاهزة</div>
+          <div class="u-meta-md">5 خطافات مخصصة للمتاجر التقنية والرقمية — Instagram و TikTok</div>
+        </div>
+        <span class="tag accent">5 قوالب</span>
+      </div>
+
+      <div class="hooks-grid">
+
+        <!-- Hook 1 -->
+        <div class="hook-card hk-teal" data-block-id="so-013" data-block-type="lesson" data-difficulty="2" data-est-minutes="5">
+          <div class="hook-num">خطاف ١ — إثارة الفضول</div>
+          <div class="hook-text">أكثر من 80% من الناس يدفعون الضعف…<br>ومش عارفين ليش 👀</div>
+          <div><span class="hook-type-badge">🔍 فضول</span></div>
+          <div class="hook-completion">
+            <strong>التكملة:</strong> «السبب بسيط — ما يعرفون وين يشترون. نحن هنا نغير هالمعادلة.»
+          </div>
+          <div class="hook-platforms">
+            <span class="hook-platform-tag">Instagram Reels</span>
+            <span class="hook-platform-tag">TikTok</span>
+          </div>
+        </div>
+
+        <!-- Hook 2 -->
+        <div class="hook-card hk-red" data-block-id="so-014" data-block-type="lesson" data-difficulty="2" data-est-minutes="5">
+          <div class="hook-num">خطاف ٢ — الألم الأمني</div>
+          <div class="hook-text">اشتريت حساباً من مكان ثاني وتفاجأت إنه محظور؟ 🔴<br>هذا اللي ما حدا يقولك إياه قبل الشراء ⬇️</div>
+          <div><span class="hook-type-badge">⚠️ مشكلة + حل</span></div>
+          <div class="hook-completion">
+            <strong>التكملة:</strong> «مو كل الحسابات متساوية. الفرق يكون في المصدر، والضمان، وطريقة التسليم.»
+          </div>
+          <div class="hook-platforms">
+            <span class="hook-platform-tag">Instagram Stories</span>
+            <span class="hook-platform-tag">TikTok</span>
+            <span class="hook-platform-tag">Reels</span>
+          </div>
+        </div>
+
+        <!-- Hook 3 -->
+        <div class="hook-card hk-yellow" data-block-id="so-015" data-block-type="lesson" data-difficulty="2" data-est-minutes="5">
+          <div class="hook-num">خطاف ٣ — الألم المباشر (Pain Point)</div>
+          <div class="hook-text">دفعت فلوس… وما استلمت شي؟ 😤<br>اسمعني قبل ما تشتري من أي مكان ثاني ⬇️</div>
+          <div><span class="hook-type-badge">😤 ألم مباشر</span></div>
+          <div class="hook-completion">
+            <strong>التكملة:</strong> «في فرق كبير بين البائع اللي يختفي بعد البيع، وبين اللي يقف معك لحين تكون راضي.»
+          </div>
+          <div class="hook-platforms">
+            <span class="hook-platform-tag">TikTok</span>
+            <span class="hook-platform-tag">Instagram Caption</span>
+          </div>
+        </div>
+
+        <!-- Hook 4 -->
+        <div class="hook-card hk-purple" data-block-id="so-016" data-block-type="lesson" data-difficulty="2" data-est-minutes="5">
+          <div class="hook-num">خطاف ٤ — الهوية والانتماء</div>
+          <div class="hook-text">إذا كنت من الناس اللي تبغى الجودة<br>بدون ما تدفع أكثر من اللازم 👇<br>هذا المنشور حرفياً ليك 🎯</div>
+          <div><span class="hook-type-badge">🎯 هوية</span></div>
+          <div class="hook-completion">
+            <strong>التكملة:</strong> «مش كل غالي يستاهل، ومش كل رخيص مشكلة — المهم تعرف الفرق.»
+          </div>
+          <div class="hook-platforms">
+            <span class="hook-platform-tag">Instagram</span>
+            <span class="hook-platform-tag">TikTok</span>
+          </div>
+        </div>
+
+        <!-- Hook 5 — full width -->
+        <div class="hook-card hk-green u-col-full" data-block-id="so-017" data-block-type="lesson" data-difficulty="2" data-est-minutes="5">
+          <div class="hook-num">خطاف ٥ — الصدمة الرقمية / التقنية</div>
+          <div class="hook-text">في خطأ واحد يرتكبه 9 من 10 مشترين 😬<br>وهو السبب الرئيسي لضياع فلوسهم ⬇️</div>
+          <div><span class="hook-type-badge">⚡ صدمة رقمية</span></div>
+          <div class="hook-completion">
+            <strong>التكملة:</strong> «لما تشتري خدمة رقمية أو حساب، أول سؤال تسأله مو "قديش السعر" — اسأل <em>[أكمل بما يناسب منتجك: هل هناك ضمان؟ / هل المصدر موثوق؟]</em>»
+          </div>
+          <div class="hook-platforms">
+            <span class="hook-platform-tag">TikTok</span>
+            <span class="hook-platform-tag">Instagram Reels</span>
+            <span class="hook-platform-tag">YouTube Shorts</span>
+          </div>
+        </div>
+
+      </div><!-- /hooks-grid -->
+
+
+      <!-- ── SUB-BLOCK E2: إدارة الأزمات ── -->
+      <div class="u-flex u-items-center u-justify-between u-mb-3 u-mt-2">
+        <div>
+          <div class="u-t-list-title">E2 — سكريبتات إدارة الأزمات الجاهزة</div>
+          <div class="u-meta-md">ردود ذكية عاطفياً — تمتص الغضب وتحمي صورة المتجر أمام الجمهور</div>
+        </div>
+        <span class="tag red">3 سيناريوهات</span>
+      </div>
+
+      <!-- Golden Rule Banner -->
+      <div class="u-flex u-items-center u-gap-3 u-bg-surface-2 u-b1-bdh u-r-md u-p-14-18 u-mb-45">
+        <div class="u-fz-22 u-shrink-0">🏆</div>
+        <div>
+          <div class="u-fz-11 u-fw-800 u-c-cyan u-ls-1 u-tt-up u-mb-1">القاعدة الذهبية</div>
+          <div class="u-fz-125 u-c-muted u-lh-165">الرد العلني = رسالة لـ 1000 شخص، مو للشخص الواحد. دائماً: <strong class="u-c-text">امتص → اعترف → تصرّف → انقل للخاص</strong></div>
+        </div>
+      </div>
+
+      <div class="crisis-scripts-accordion">
+
+        <!-- Crisis 1 -->
+        <div class="cs-item" id="soc-cs-1">
+          <div class="cs-header" onclick="this.closest('.cs-item').classList.toggle('open')">
+            <span class="cs-severity red">🔴 حرج</span>
+            <div class="cs-title-wrap">
+              <div class="cs-quote">«الحساب الذي اشتريته منكم تم حظره!»</div>
+              <div class="cs-subtitle">تعليق علني — أعلى خطر على صورة المتجر</div>
+            </div>
+            <svg class="cs-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="cs-body">
+            <div class="cs-rule-banner">
+              ⚡ الردّ خلال 15–30 دقيقة من ظهور التعليق — الصمت يُفسَّر كاعتراف
+            </div>
+            <div class="cs-grid">
+              <div class="cs-script-box">
+                <div class="cs-script-label public">📢 الرد العلني — في التعليقات</div>
+                <div class="cs-script-text">
+                  أهلاً [الاسم] 🙏<br>
+                  نقدر تماماً ردة فعلك، وهذا الموقف مزعج فعلاً — ما نتمناه لأي عميل عندنا.<br><br>
+                  نحن لا نترك أي عميل يمشي بدون حل ✅<br>
+                  تواصل معنا <em>مباشرة عبر الخاص أو الواتساب</em> حتى نراجع تفاصيل طلبك ونوفر لك الحل المناسب — سواء استبدال أو تعويض حسب الحالة.<br><br>
+                  شكراً إنك تواصلت معنا بدل ما تمشي بصمت 🤝
+                </div>
+              </div>
+              <div class="cs-script-box">
+                <div class="cs-script-label private">🔒 رسالة الخاص — بعد انتقاله</div>
+                <div class="cs-script-text">
+                  أهلاً [الاسم]، شكراً على تواصلك.<br>
+                  نحن جادين في حل موضوعك 100%.<br><br>
+                  محتاجين منك:<br>
+                  • رقم الطلب<br>
+                  • تفاصيل الحظر<br>
+                  • أي رسالة وصلتك من المنصة<br><br>
+                  بمجرد ما نشوف التفاصيل، راح نحدد إذا المشكلة من طرفنا أو من الاستخدام — وفي كلتا الحالتين ما راح تخسر 💯
+                </div>
+              </div>
+            </div>
+            <div class="cs-iq-box">
+              <div class="cs-iq-label">💡 ذكاء عاطفي</div>
+              <div class="cs-iq-text">لا تقل «هذا مو ذنبنا» في العلن أبداً. قلها في الخاص بعد التحقيق وبأسلوب تعليمي — مش دفاعي. الجمهور يقيّم كيف تتعامل مع المشكلة، لا من السبب.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Crisis 2 -->
+        <div class="cs-item" id="soc-cs-2">
+          <div class="cs-header" onclick="this.closest('.cs-item').classList.toggle('open')">
+            <span class="cs-severity yellow">🟡 تحدٍّ سعري</span>
+            <div class="cs-title-wrap">
+              <div class="cs-quote">«أقدر ألقى نفس الخدمة بنص السعر في مكان ثاني»</div>
+              <div class="cs-subtitle">تشكيك علني في القيمة — فرصة لبناء المصداقية</div>
+            </div>
+            <svg class="cs-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="cs-body">
+            <div class="cs-rule-banner">
+              ⚡ لا تهاجم المنافس — دع العميل يستنتج الفرق بنفسه
+            </div>
+            <div class="cs-grid">
+              <div class="cs-script-box u-col-full">
+                <div class="cs-script-label public">📢 الرد العلني — في التعليقات أو منشور</div>
+                <div class="cs-script-text">
+                  سؤال وجيه ويستاهل جواب صريح 💬<br><br>
+                  نعم — في السوق أسعار أقل. ونحن نعرف هذا تماماً.<br>
+                  الفرق مو في الرقم، الفرق في <em>اللي يجي بعد الشراء</em>:<br><br>
+                  ✅ ضمان موثّق<br>
+                  ✅ دعم فعلي لو صار أي إشكال<br>
+                  ✅ حسابات / خدمات تم التحقق منها<br><br>
+                  الرخيص أحياناً يكلّف أكثر — بس القرار قرارك في النهاية.<br>
+                  نحن هنا لمن يبغى يشتري بأمان 🔐
+                </div>
+              </div>
+            </div>
+            <div class="cs-iq-box">
+              <div class="cs-iq-label">💡 ذكاء عاطفي</div>
+              <div class="cs-iq-text">لا تهاجم المنافس بالاسم. اجعل العميل هو من يستنتج الفرق — مو أنت من تقوله. هذا يبني مصداقية أقوى بكثير من الدفاع المباشر. «القرار قرارك» يُشعر بالاحترام لا بالإهانة.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Crisis 3 -->
+        <div class="cs-item" id="soc-cs-3">
+          <div class="cs-header" onclick="this.closest('.cs-item').classList.toggle('open')">
+            <span class="cs-severity orange">🟠 تأخير</span>
+            <div class="cs-title-wrap">
+              <div class="cs-quote">تأخر في تسليم خدمة أو صيانة</div>
+              <div class="cs-subtitle">غضب مُبرَّر — الشفافية + التعويض هو المفتاح</div>
+            </div>
+            <svg class="cs-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="cs-body">
+            <div class="cs-rule-banner">
+              ⚡ البادر بالتواصل الاستباقي قبل أن يشتكي أفضل بكثير من الردّ بعد الشكوى
+            </div>
+            <div class="cs-grid">
+              <div class="cs-script-box">
+                <div class="cs-script-label public">📢 الرد العلني — لو علّق على منشور</div>
+                <div class="cs-script-text">
+                  [الاسم] نعتذر منك بصدق على هذا التأخير 🙏<br>
+                  هذا مو مستوانا المعتاد، ونتفهم تماماً إن وقتك له قيمة.<br><br>
+                  راسلنا في الخاص الآن وسنعطيك أولوية فورية + تحديث واضح على موعد التسليم ✅
+                </div>
+              </div>
+              <div class="cs-script-box">
+                <div class="cs-script-label private">🔒 رسالة الخاص — استباقية</div>
+                <div class="cs-script-text">
+                  أهلاً [الاسم] 👋<br>
+                  نتواصل معك بشأن طلبك رقم [X].<br><br>
+                  نعلم إننا تجاوزنا الوقت المتوقع، ونعتذر عن هذا التأخير.<br>
+                  السبب: <em>[اذكر سبباً حقيقياً — ولا تختلق واحداً]</em><br><br>
+                  الموعد الجديد المؤكد: <strong class="u-text-brand">[التاريخ / الوقت]</strong><br><br>
+                  وكتعويض عن وقتك — سنضيف لك [خصم / خدمة إضافية / أولوية مستقبلية] 🎁<br><br>
+                  شكراً على صبرك، ونتعهد إن هذا ما يتكرر معك.
+                </div>
+              </div>
+            </div>
+            <div class="cs-iq-box">
+              <div class="cs-iq-label">💡 ذكاء عاطفي</div>
+              <div class="cs-iq-text">التعويض لا يلزم أن يكون مالياً ضخماً. أحياناً <strong class="u-c-text">الاعتراف + الشفافية + الأولوية</strong> تكفي وتبني ولاء أقوى من الخصم نفسه. الشخص الذي شكا وحُلَّت مشكلته بذكاء يصبح أكثر ولاءً ممن لم تحصل له مشكلة أصلاً.</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /crisis-scripts-accordion -->
+
+
+      <!-- Reference Table -->
+      <div class="card u-mt-6 u-p-0 u-overflow-hidden">
+        <div class="u-p-16-20-12 u-bb-bd u-bg-surface-2 u-flex u-items-center u-justify-between">
+          <div class="u-fz-13 u-fw-700 u-c-text">🗂️ جدول المرجع السريع</div>
+          <span class="tag accent">دليل فوري</span>
+        </div>
+        <table class="matrix-ref-table">
+          <thead>
+            <tr>
+              <th>الأزمة</th>
+              <th>النبرة المطلوبة</th>
+              <th>الهدف الأساسي</th>
+              <th>الوقت المسموح</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="u-text-strong">🔴 حساب محظور</td>
+              <td>تعاطف + جدية</td>
+              <td>حماية الثقة العلنية</td>
+              <td><span class="tag red">أقل من 30 دقيقة</span></td>
+            </tr>
+            <tr>
+              <td class="u-text-strong">🟡 مقارنة الأسعار</td>
+              <td>ثقة + هدوء</td>
+              <td>تمييز القيمة لا السعر</td>
+              <td><span class="tag yellow">أقل من ساعة</span></td>
+            </tr>
+            <tr>
+              <td class="u-text-strong">🟠 تأخر التسليم</td>
+              <td>صدق + مسؤولية</td>
+              <td>امتصاص الغضب واحتواء العميل</td>
+              <td><span class="tag accent">استباقي — قبل الشكوى</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="u-bg-surface u-b1-bdh u-r-md u-p-16-20 u-mt-4 u-flex u-items-start u-gap-3">
+        <div class="u-fz-20 u-shrink-0">📌</div>
+        <div class="u-fz-125 u-c-muted u-lh-175">
+          <strong class="u-c-text">القاعدة الختامية:</strong> المتجر الناجح لا يُقاس بغياب المشاكل — بل بطريقة تعامله معها أمام الجمهور. كل أزمة تُدار بذكاء = <strong class="u-text-brand">إعلان مجاني عن احترافيتك</strong> 💡
+        </div>
+      </div>
+
+      <!-- ============================================================
+           PSYCHOLOGY INTEGRATION — السوشيال ميديا (إضافة جديدة)
+      ============================================================ -->
+      <div class="card u-mt-7b">
+        <div class="psych-section-header">
+          <div class="psych-section-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="psych-section-title">علم نفس المحتوى الرقمي — لماذا يتوقف المتصفّح؟</div>
+            <div class="psych-section-sub">الآليات العصبية التي تحكم السلوك في السوشيال — وكيف تستخدمها أخلاقيًا</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px;">
+          <div class="u-frame-card">
+            <div class="u-fz-11 u-fw-800 u-tt-up u-ls-1 u-c-pink u-mb-2">🧲 Pattern Interrupt</div>
+            <div class="u-meta-lh-md">الدماغ يتصفح بـ "Autopilot". لإيقافه: اكسر النمط المتوقع. أول 1.5 ثانية = الحكم بين Scroll و Stop. استخدم: صوت مفاجئ، حركة غير متوقعة، نص يُناقض التوقع.</div>
+          </div>
+          <div class="u-frame-card">
+            <div class="u-tag-orange">🔁 Variable Reward Schedule</div>
+            <div class="u-meta-lh-md">نفس مبدأ ماكينة القمار: المكافأة غير المتوقعة تُفرز دوبامين أكثر من المتوقعة. في المحتوى: لا تكن predictable. نوّع بين تعليمي / شخصي / مفاجئ / تفاعلي.</div>
+          </div>
+          <div class="u-frame-card">
+            <div class="u-eyebrow-cyan u-eyebrow-1">🪞 Self-Reference Effect</div>
+            <div class="u-meta-lh-md">الدماغ يُعالج المعلومات المتعلقة بالذات بعمق أكبر 3x. ابدأ بـ "إذا كنت من..." أو "هل سبق لك..." — تُجبر الدماغ على الربط الشخصي = تفاعل أعلى.</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;">
+          <div class="u-cell u-cell-red-soft" >
+            <div class="u-fz-11 u-fw-800 u-ls-1 u-tt-up u-c-red u-mb-15b">❌ أخطاء نفسية شائعة في المحتوى</div>
+            <div class="u-meta-lh">
+              • نشر في نفس الوقت يوميًا بنفس النمط = Habituation (الدماغ يتجاهل المألوف)<br>
+              • CTA ضعيف "تابعونا" = لا يُحرّك أي شيء عصبيًا<br>
+              • محتوى يتكلم عن "نحن" بدل "أنت" = يفقد Self-Reference Effect<br>
+              • ألوان باهتة + خط صغير = لا Pattern Interrupt
+            </div>
+          </div>
+          <div class="u-cell u-cell-green-soft" >
+            <div class="u-fz-11 u-fw-800 u-ls-1 u-tt-up u-c-green u-mb-15b">✅ تطبيقات نفسية فعّالة</div>
+            <div class="u-meta-lh">
+              • ابدأ بسؤال شخصي: "هل تعرف لماذا...؟" = Open Loop + Self-Reference<br>
+              • استخدم أرقام فردية: "7 أسباب" أقوى من "6 أسباب" (Oddity Effect)<br>
+              • اختم بـ CTA محدد: "اكتب 'جاهز' في التعليقات" = Micro-commitment<br>
+              • Story Format: البداية/المشكلة/الحل = Narrative Transportation
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ============================================================
+           WORKER 06 · PHASE 1 — ATTENTION PSYCHOLOGY + ALGO ANATOMY
+           Scope: page-social only. Additive sections, no edits to legacy hooks.
+      ============================================================ -->
+
+      <!-- ══════════════════════════════════════════════════════
+           BLOCK W6-A · علم نفس الانتباه — 6 محاور
+      ══════════════════════════════════════════════════════ -->
+      <div class="social-section-header" data-w6="block-a" class="u-section-gap-lg">
+        <div>
+          <h2 class="u-card-title">BLOCK W6-A — علم نفس الانتباه</h2>
+          <p class="u-meta-lg">6 محاور سلوكية تُحدّد لماذا يتوقف الإصبع — أو يستمر في التمرير.</p>
+        </div>
+        <span class="tag accent">Attention Economy · 2025</span>
+      </div>
+
+      <div class="w6-attn-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px;">
+
+        <!-- 1. Hook Window -->
+        <div class="ql-glass w6-attn-card u-p-18-r14">
+          <div class="u-row-tight">
+            <div class="u-chip u-chip-36 u-chip-amber" >⚡</div>
+            <div>
+              <div class="u-fz-105 u-fw-800 u-ls-1 u-tt-up u-c-amber">المحور 1</div>
+              <div class="u-h4">The Hook Window</div>
+            </div>
+          </div>
+          <div class="u-meta-md-mb">أول 1.5 ثانية على Reels/TikTok = 87% من قرار الإكمال. الدماغ البشري يحتاج &lt;400ms ليُقرّر "أكمل أو مرّر".</div>
+          <div class="u-info-chip u-info-amber" >
+            <b>تطبيق:</b> ضع "ذروة" المحتوى في الإطار الأول — لا في الثانية الخامسة. النص على الشاشة في الثانية الأولى = +34% retention.
+          </div>
+          <div class="u-meta-faint">📚 TikTok For Business — Watch Time Insights 2023</div>
+        </div>
+
+        <!-- 2. Pattern Interrupt -->
+        <div class="ql-glass w6-attn-card u-p-18-r14">
+          <div class="u-row-tight">
+            <div class="u-chip u-chip-36 u-chip-violet" >🌀</div>
+            <div>
+              <div class="u-fz-105 u-fw-800 u-ls-1 u-tt-up u-c-purple">المحور 2</div>
+              <div class="u-h4">Pattern Interrupt</div>
+            </div>
+          </div>
+          <div class="u-meta-md-mb">كسر التوقع البصري = إعادة تنشيط القشرة الجبهية. الدماغ يتجاهل المألوف (Habituation) ويستيقظ على الشاذ.</div>
+          <div class="u-info-chip u-info-violet" >
+            <b>تطبيق:</b> غيّر زاوية الكاميرا فجأة، أضف نص ضخم بعد لقطة هادئة، أو ابدأ بصوت غير متوقع.
+          </div>
+          <div class="u-meta-faint">📚 Eyal — Hooked (2014) ch. 3</div>
+        </div>
+
+        <!-- 3. Information Gap -->
+        <div class="ql-glass w6-attn-card u-p-18-r14">
+          <div class="u-row-tight">
+            <div class="u-chip u-chip-36 u-chip-cyan" >🧩</div>
+            <div>
+              <div class="u-fz-105 u-fw-800 u-ls-1 u-tt-up u-c-cyan6">المحور 3</div>
+              <div class="u-h4">Information Gap Theory</div>
+            </div>
+          </div>
+          <div class="u-meta-md-mb">الفضول = "ألم معرفي" حقيقي يحفّز الدوبامين. الفجوة بين ما تعرف وما تريد معرفته تجبرك على الإكمال.</div>
+          <div class="u-info-chip u-info-cyan" >
+            <b>تطبيق:</b> "3 أشياء كنت أفعلها وكلّفتني 10 ملايين..." → فجوة لا تُغلق إلا بالمشاهدة الكاملة.
+          </div>
+          <div class="u-meta-faint">📚 Loewenstein — Psych. Bulletin 1994</div>
+        </div>
+
+        <!-- 4. Variable Reward -->
+        <div class="ql-glass w6-attn-card u-p-18-r14">
+          <div class="u-row-tight">
+            <div class="u-chip u-chip-36 u-chip-emerald" >🎰</div>
+            <div>
+              <div class="u-fz-105 u-fw-800 u-ls-1 u-tt-up u-c-green">المحور 4</div>
+              <div class="u-h4">Variable Reward (Skinner)</div>
+            </div>
+          </div>
+          <div class="u-meta-md-mb">المكافأة غير المتوقعة تُفرز دوبامين أكثر 3x من المكافأة المتوقعة. هذا سرّ إدمان الـ scroll.</div>
+          <div class="u-info-chip u-info-green" >
+            <b>تطبيق:</b> نوّع: تعليمي → ترفيهي → شخصي → صادم. لا تكن predictable.
+          </div>
+          <div class="u-meta-faint">📚 Skinner — The Behavior of Organisms (1938)</div>
+        </div>
+
+        <!-- 5. Mirror Neurons -->
+        <div class="ql-glass w6-attn-card u-p-18-r14">
+          <div class="u-row-tight">
+            <div class="u-chip u-chip-36 u-chip-pink" >🪞</div>
+            <div>
+              <div class="u-fz-105 u-fw-800 u-ls-1 u-tt-up u-c-pink">المحور 5</div>
+              <div class="u-h4">Mirror Neurons</div>
+            </div>
+          </div>
+          <div class="u-meta-md-mb">عند رؤية إنسان يبتسم/يحزن، الدماغ "يحاكي" الشعور. لذلك Reels فيها وجوه تتفوق على نص جاف.</div>
+          <div class="u-info-chip u-info-pink" >
+            <b>تطبيق:</b> أظهر وجهك في أول 3 ثوان حتى لو الفيديو B-roll. التواصل البصري = +28% completion.
+          </div>
+          <div class="u-meta-faint">📚 Rizzolatti & Sinigaglia — Mirrors in the Brain (2008)</div>
+        </div>
+
+        <!-- 6. Negativity Bias -->
+        <div class="ql-glass w6-attn-card u-p-18-r14">
+          <div class="u-row-tight">
+            <div class="u-chip u-chip-36 u-chip-red" >⚠️</div>
+            <div>
+              <div class="u-fz-105 u-fw-800 u-ls-1 u-tt-up u-c-red">المحور 6</div>
+              <div class="u-h4">Negativity Bias</div>
+            </div>
+          </div>
+          <div class="u-meta-md-mb">الدماغ يُعطي وزن أكبر للتهديد/الخطأ من الفائدة. لذلك "5 أخطاء قاتلة" يتفوق على "5 نصائح ذهبية" بـ 2.4x.</div>
+          <div class="u-info-chip u-info-red" >
+            <b>تطبيق:</b> صياغة سلبية في الـ headline + إيجابية في المحتوى = أعلى CTR + أعلى ثقة.
+          </div>
+          <div class="u-meta-faint">📚 Rozin & Royzman — Pers. & Soc. Psych. Rev. 2001</div>
+        </div>
+
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════
+           BLOCK W6-B · تشريح خوارزميات المنصات (7 منصات)
+      ══════════════════════════════════════════════════════ -->
+      <div class="social-section-header" data-w6="block-b" class="u-section-gap-lg">
+        <div>
+          <h2 class="u-card-title">BLOCK W6-B — تشريح الخوارزميات (Algorithm Anatomy)</h2>
+          <p class="u-meta-lg">7 منصات · إشارات الترتيب · العقوبات · المحتوى المثالي · توصيات MENA</p>
+        </div>
+        <span class="tag accent">Updated 2024-2025</span>
+      </div>
+
+      <!-- Platform Tabs -->
+      <div class="w6-platform-tabs" id="w6PlatformTabs" class="u-flex u-gap-2 u-flex-wrap u-mb-45">
+        <button class="w6-pbtn active" data-w6plat="ig"  onclick="w6SelectPlatform('ig', this)">📸 Instagram</button>
+        <button class="w6-pbtn"        data-w6plat="tt"  onclick="w6SelectPlatform('tt', this)">🎵 TikTok</button>
+        <button class="w6-pbtn"        data-w6plat="x"   onclick="w6SelectPlatform('x', this)">𝕏 Twitter</button>
+        <button class="w6-pbtn"        data-w6plat="li"  onclick="w6SelectPlatform('li', this)">💼 LinkedIn</button>
+        <button class="w6-pbtn"        data-w6plat="yt"  onclick="w6SelectPlatform('yt', this)">▶️ YouTube</button>
+        <button class="w6-pbtn"        data-w6plat="sc"  onclick="w6SelectPlatform('sc', this)">👻 Snapchat</button>
+        <button class="w6-pbtn"        data-w6plat="th"  onclick="w6SelectPlatform('th', this)">🧵 Threads</button>
+      </div>
+
+      <!-- Platform Panel — rendered by JS -->
+      <div id="w6PlatformPanel" data-w6="platform-panel" class="u-min-h-280" >
+        <!-- Filled by w6.renderPlatform() -->
+      </div>
+
+      <!-- Quick Cross-Platform Comparison Table -->
+      <div class="u-mt-7b">
+        <div class="u-fz-11 u-fw-800 u-ls-12 u-tt-up u-c-faint u-mb-3">📊 جدول مقارن سريع · ما يُعزّز الـ reach في كل منصة</div>
+        <div class="ql-glass u-p-0 u-r-14 u-overflow-hidden">
+          <div class="w6-algo-table" style="display:grid; grid-template-columns:1.2fr 2fr 1.4fr 1.2fr; font-size:12px;">
+            <div class="w6-th">المنصة</div>
+            <div class="w6-th">أقوى إشارة ترتيب</div>
+            <div class="w6-th">أكبر عقوبة</div>
+            <div class="w6-th">طول مثالي</div>
+
+            <div class="w6-tr-h" style="color:#E4405F;">📸 Instagram</div>
+            <div class="w6-tr">Send-to-friend &gt; Save &gt; Comment</div>
+            <div class="w6-tr">Watermark TikTok / إعادة نشر</div>
+            <div class="w6-tr">Reels 7-15s · Carousel 8-10</div>
+
+            <div class="w6-tr-h u-c-tiktok">🎵 TikTok</div>
+            <div class="w6-tr">Watch-time + completion + replays</div>
+            <div class="w6-tr">روابط خارجية + موسيقى محذوفة</div>
+            <div class="w6-tr">9-21 ثانية</div>
+
+            <div class="w6-tr-h u-c-twitter">𝕏 Twitter</div>
+            <div class="w6-tr">Replies + dwell time</div>
+            <div class="w6-tr">روابط خارجية فوراً + bot-like</div>
+            <div class="w6-tr">Thread 5-9 tweets</div>
+
+            <div class="w6-tr-h u-c-linkedin-dark">💼 LinkedIn</div>
+            <div class="w6-tr">Comments + saves + dwell time</div>
+            <div class="w6-tr">روابط في النص الأصلي</div>
+            <div class="w6-tr">1200-1500 char + سطور قصيرة</div>
+
+            <div class="w6-tr-h" style="color:#FF0000;">▶️ YouTube</div>
+            <div class="w6-tr">CTR (thumbnail) + AVD</div>
+            <div class="w6-tr">Clickbait مخالف + reused content</div>
+            <div class="w6-tr">8-15 دقيقة (long) · &lt;60s (Shorts)</div>
+
+            <div class="w6-tr-h" style="color:#FFFC00;">👻 Snapchat</div>
+            <div class="w6-tr">Replies + screenshots + completion</div>
+            <div class="w6-tr">محتوى ثابت بدون animation</div>
+            <div class="w6-tr">5-15s vertical</div>
+
+            <div class="w6-tr-h u-c-black" >🧵 Threads</div>
+            <div class="w6-tr">Replies + reposts</div>
+            <div class="w6-tr">روابط خارجية كثيرة</div>
+            <div class="w6-tr">100-300 char · conversational</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MENA Best Time Note -->
+      <div class="ql-glass" style="margin-top:20px; padding:16px 18px; border-radius:12px; border-color:rgba(102,252,241,0.2); background:rgba(102,252,241,0.04);">
+        <div class="u-fz-11 u-fw-800 u-ls-11 u-tt-up u-c-cyan u-mb-15b">🇮🇶 ملاحظة MENA</div>
+        <div class="u-meta-md-loose">
+          التوقيت الذهبي للنشر في العراق/الخليج: <b class="u-c-text">9:00 - 11:30 مساءً</b> (بعد العشاء + قبل النوم). الجمعة بعد الظهر (3-6 PM) ذروة TikTok. الأحد صباحاً ذروة LinkedIn (بداية الأسبوع المهني).
+          المحتوى الديني/الثقافي يحتاج حساسية في رمضان (تجنّب الإعلانات الترويجية القوية بين 1-3 PM) وعاشوراء.
+        </div>
+      </div>
+
+      <!-- ============================================================
+           WORKER 06 · PHASE 2 — CONTENT PILLARS + 15 FRAMEWORKS + CALENDAR
+      ============================================================ -->
+
+      <!-- ══════════════════════════════════════════════════════
+           BLOCK W6-C · The Content Pillar System
+      ══════════════════════════════════════════════════════ -->
+      <div class="social-section-header" data-w6="block-c" class="u-section-gap-lg">
+        <div>
+          <h2 class="u-card-title">BLOCK W6-C — نظام الـ Content Pillars</h2>
+          <p class="u-meta-lg">5 ركائز محتوى · توزيع نسبي مُجرّب · مع حاسبة Pillar Calculator حسب الصناعة</p>
+        </div>
+        <span class="tag accent">5-Pillar Mix</span>
+      </div>
+
+      <div class="w6-pillars-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;">
+        <div class="ql-glass w6-pillar-card u-card-thin u-tint-cyan" data-pillar="edu" >
+          <div class="u-h2-card">🎓</div>
+          <div class="u-t-section-mini">تعليمي</div>
+          <div class="u-h1-card" data-pillar-pct="edu">40%</div>
+          <div class="u-meta-loose">شرح، قوائم، how-to، إحصاءات. يبني الـ authority ويُعزّز الـ saves.</div>
+        </div>
+        <div class="ql-glass w6-pillar-card u-card-thin u-tint-amber" data-pillar="ent" >
+          <div class="u-h2-card">😄</div>
+          <div class="u-fz-13 u-fw-800 u-c-amber u-mb-1">ترفيهي</div>
+          <div class="u-h1-card" data-pillar-pct="ent">25%</div>
+          <div class="u-meta-loose">Memes, ردود طريفة, كواليس. يُضاعف الـ shares والـ reach.</div>
+        </div>
+        <div class="ql-glass w6-pillar-card u-card-thin u-tint-violet" data-pillar="ins" >
+          <div class="u-h2-card">💡</div>
+          <div class="u-fz-13 u-fw-800 u-c-purple u-mb-1">ملهم</div>
+          <div class="u-h1-card" data-pillar-pct="ins">15%</div>
+          <div class="u-meta-loose">قصص نجاح، اقتباسات، تحديات. يبني العاطفة + الانتماء.</div>
+        </div>
+        <div class="ql-glass w6-pillar-card u-card-thin u-tint-green" data-pillar="prom" >
+          <div class="u-h2-card">💰</div>
+          <div class="u-fz-13 u-fw-800 u-c-green u-mb-1">ترويجي</div>
+          <div class="u-h1-card" data-pillar-pct="prom">15%</div>
+          <div class="u-meta-loose">عروض، demos، تجارب، testimonials. القاعدة 80/20 — لا تتجاوز هذي النسبة.</div>
+        </div>
+        <div class="ql-glass w6-pillar-card u-card-thin u-tint-pink" data-pillar="bts" >
+          <div class="u-h2-card">🎬</div>
+          <div class="u-fz-13 u-fw-800 u-c-pink u-mb-1">كواليس</div>
+          <div class="u-h1-card" data-pillar-pct="bts">5%</div>
+          <div class="u-meta-loose">يوم في حياتنا، الفريق، أخطاء صغيرة. يصنع الـ humanization.</div>
+        </div>
+      </div>
+
+      <!-- Pillar Calculator -->
+      <div class="ql-glass u-mt-45 u-p-18-20 u-r-14">
+        <div class="u-flex u-items-center u-justify-between u-flex-wrap u-gap-3 u-mb-3">
+          <div>
+            <div class="u-fz-13 u-fw-800 u-c-text u-mb-tiny">🧮 Pillar Calculator — اختر صناعتك</div>
+            <div class="u-meta">يُعدّل النسب تلقائياً حسب طبيعة الجمهور المتوقع</div>
+          </div>
+          <select id="w6IndustrySel" onchange="w6UpdatePillars(this.value)"
+            style="background:var(--surface-2); border:1px solid var(--border); color:var(--text); border-radius:10px; padding:9px 14px; font-family:inherit; font-size:12.5px; min-width:220px;">
+            <option value="default">⚖️ افتراضي (متوازن)</option>
+            <option value="b2b">💼 B2B / SaaS / استشارات</option>
+            <option value="ecom">🛒 تجارة إلكترونية</option>
+            <option value="restaurant">🍔 مطاعم / تجزئة</option>
+            <option value="education">📚 تعليم / كورسات</option>
+            <option value="fashion">👗 أزياء / تجميل</option>
+            <option value="tech">💻 تكنولوجيا / تطبيقات</option>
+            <option value="health">🏥 صحة / عافية</option>
+          </select>
+        </div>
+        <div id="w6IndustryHint" style="font-size:12px; color:var(--text-muted); line-height:1.7; padding:12px 14px; background:rgba(102,252,241,0.05); border-radius:10px; border:1px solid rgba(102,252,241,0.15);">
+          النسب الحالية = القيم الافتراضية. غيّر الصناعة لرؤية كيف يتعدّل المزيج.
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════
+           BLOCK W6-D · 15 Hook & Caption Frameworks
+      ══════════════════════════════════════════════════════ -->
+      <div class="social-section-header" data-w6="block-d" class="u-section-gap-lg">
+        <div>
+          <h2 class="u-card-title">BLOCK W6-D — 15 إطاراً للكتابة</h2>
+          <p class="u-meta-lg">كل إطار: التعريف · مثال عربي حقيقي · متى يُستخدم · متى يفشل</p>
+        </div>
+        <span class="tag accent">15 Frameworks</span>
+      </div>
+
+      <!-- Frameworks accordion -->
+      <div class="w6-fw-grid" id="w6FwGrid" data-w6="frameworks-list" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:12px;">
+        <!-- rendered by w6.renderFrameworks() -->
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════
+           BLOCK W6-E · Content Calendar Builder (30 days)
+      ══════════════════════════════════════════════════════ -->
+      <div class="social-section-header" data-w6="block-e" class="u-section-gap-lg">
+        <div>
+          <h2 class="u-card-title">BLOCK W6-E — Content Calendar Builder</h2>
+          <p class="u-meta-lg">شبكة 30 يوماً · اسحب pillar إلى يوم · يُحفظ تلقائياً (localStorage) · تصدير JSON</p>
+        </div>
+        <span class="tag accent">Drag & Drop</span>
+      </div>
+
+      <div class="w6-cal-wrap" style="display:grid; grid-template-columns:200px 1fr; gap:16px; align-items:flex-start;">
+
+        <!-- Sidebar: pillars draggable + actions -->
+        <div class="ql-glass" style="padding:14px; border-radius:14px; position:sticky; top:80px;">
+          <div class="u-fz-11 u-fw-800 u-ls-11 u-tt-up u-c-faint u-mb-25">السحب من هنا</div>
+          <div class="w6-cal-pills u-col">
+            <div class="w6-cal-pill u-drag-btn u-drag-accent" draggable="true" data-pill="edu"  >🎓 تعليمي</div>
+            <div class="w6-cal-pill u-drag-btn u-drag-amber" draggable="true" data-pill="ent"  >😄 ترفيهي</div>
+            <div class="w6-cal-pill" draggable="true" data-pill="ins"  class="u-bg-tint-purple u-c-purple u-b1-purple-30 u-p-8-10 u-r-8 u-fz-12 u-fw-700 u-cursor-grab">💡 ملهم</div>
+            <div class="w6-cal-pill" draggable="true" data-pill="prom" class="u-bg-tint-green u-c-green u-b1-green-30 u-p-8-10 u-r-8 u-fz-12 u-fw-700 u-cursor-grab">💰 ترويجي</div>
+            <div class="w6-cal-pill u-drag-btn u-drag-pink" draggable="true" data-pill="bts"  >🎬 كواليس</div>
+            <div class="w6-cal-pill u-drag-btn u-drag-ghost" draggable="true" data-pill="clear" >🗑️ مسح</div>
+          </div>
+
+          <div class="u-divider-h"></div>
+
+          <div class="u-col">
+            <button onclick="w6CalAuto()" class="u-btn-grad u-btn-grad-violet" >🎲 توزيع تلقائي</button>
+            <button onclick="w6CalReset()" class="u-bg-tint-red u-c-red u-b1-red-30 u-p-9-12 u-r-8 u-ff-inherit u-fz-12 u-fw-800 u-cursor-pointer">♻️ تصفير</button>
+            <button onclick="w6CalExport()" class="u-bg-tint-green u-c-green u-b1-green-30 u-p-9-12 u-r-8 u-ff-inherit u-fz-12 u-fw-800 u-cursor-pointer">📤 تصدير JSON</button>
+          </div>
+
+          <div class="u-divider-h"></div>
+
+          <div class="u-fz-105 u-fw-800 u-ls-1 u-tt-up u-c-faint u-mb-2">📊 التوزيع الفعلي</div>
+          <div id="w6CalStats" class="u-fz-115 u-c-muted u-lh-185">
+            <div>—</div>
+          </div>
+        </div>
+
+        <!-- Calendar grid -->
+        <div>
+          <div style="display:grid; grid-template-columns:repeat(7, 1fr); gap:6px; margin-bottom:8px; font-size:10.5px; font-weight:800; color:var(--text-faint); text-align:center;">
+            <div>سبت</div><div>أحد</div><div>اثنين</div><div>ثلاثاء</div><div>أربعاء</div><div>خميس</div><div>جمعة</div>
+          </div>
+          <div id="w6CalGrid" data-w6="cal-grid" style="display:grid; grid-template-columns:repeat(7, 1fr); gap:6px;">
+            <!-- 30 day cells rendered by w6.renderCalendar() -->
+          </div>
+          <div class="u-fz-11 u-c-faint u-mt-25 u-lh-17">
+            💡 <b>تلميح:</b> اسحب pillar من اليسار وأفلته على أي يوم. الجدول يُحفظ تلقائياً تحت <code>upg_calendar_drafts</code>.
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           WORKER 06 · PHASE 3 — FUNNEL + PERFORMANCE MATH + A/B TESTER
+      ============================================================ -->
+
+      <!-- ══════════════════════════════════════════════════════
+           BLOCK W6-F · Modern Marketing Funnel (TOFU/MOFU/BOFU + Loyalty + Advocacy)
+      ══════════════════════════════════════════════════════ -->
+      <div class="social-section-header" data-w6="block-f" class="u-section-gap-lg">
+        <div>
+          <h2 class="u-card-title">BLOCK W6-F — قمع التسويق الحديث</h2>
+          <p class="u-meta-lg">5 مراحل · KPIs لكل مرحلة · المحتوى المناسب · تكلفة تقديرية</p>
+        </div>
+        <span class="tag accent">TOFU → MOFU → BOFU → Loyalty → Advocacy</span>
+      </div>
+
+      <div class="w6-funnel-stack u-grid-2-1fr">
+
+        <!-- TOFU -->
+        <div class="ql-glass w6-funnel-card u-card-tint u-tint-cyan" data-funnel="tofu" >
+          <div class="u-row-between">
+            <div>
+              <div class="u-fz-105 u-fw-800 u-ls-11 u-c-cyan u-tt-up">TOFU · Top of Funnel</div>
+              <div class="u-h5">الوعي (Awareness)</div>
+            </div>
+            <div class="u-fz-22">🌍</div>
+          </div>
+          <div class="u-meta-loose-mb">
+            <b class="u-c-text">الهدف:</b> أن يعرفوك. الجمهور هنا واسع، لا يعرف منتجك بعد.
+          </div>
+          <div class="u-info-box u-info-cyan-soft" >
+            <b class="u-text-brand">KPIs:</b> Reach · Impressions · CPM · Brand Lift<br>
+            <b class="u-text-brand">المحتوى:</b> Reels تعليمية, hooks viral, infographics<br>
+            <b class="u-text-brand">CPM متوقع MENA:</b> $1.5 - $4 (Meta), $0.8 - $2 (TikTok)
+          </div>
+        </div>
+
+        <!-- MOFU -->
+        <div class="ql-glass w6-funnel-card u-card-tint u-tint-violet" data-funnel="mofu" >
+          <div class="u-row-between">
+            <div>
+              <div class="u-fz-105 u-fw-800 u-ls-11 u-c-purple u-tt-up">MOFU · Middle of Funnel</div>
+              <div class="u-h5">التفكير (Consideration)</div>
+            </div>
+            <div class="u-fz-22">🤔</div>
+          </div>
+          <div class="u-meta-loose-mb">
+            <b class="u-c-text">الهدف:</b> يقارن بينك وبين البدائل. يحتاج دليل وقيمة محددة.
+          </div>
+          <div class="u-info-box u-info-violet-soft" >
+            <b class="u-c-purple">KPIs:</b> CTR · Saves · Shares · Cost-per-Lead (CPL)<br>
+            <b class="u-c-purple">المحتوى:</b> Comparison · Case studies · Webinars · Lead magnets<br>
+            <b class="u-c-purple">CTR متوقع:</b> 1.2% - 2.5% (good) · CPL: $3 - $15
+          </div>
+        </div>
+
+        <!-- BOFU -->
+        <div class="ql-glass w6-funnel-card u-card-tint u-tint-green" data-funnel="bofu" >
+          <div class="u-row-between">
+            <div>
+              <div class="u-fz-105 u-fw-800 u-ls-11 u-c-green u-tt-up">BOFU · Bottom of Funnel</div>
+              <div class="u-h5">التحويل (Conversion)</div>
+            </div>
+            <div class="u-fz-22">💳</div>
+          </div>
+          <div class="u-meta-loose-mb">
+            <b class="u-c-text">الهدف:</b> يشتري الآن. اللحظة الحاسمة.
+          </div>
+          <div class="u-info-box u-info-green-soft" >
+            <b class="u-c-green">KPIs:</b> CVR · CAC · ROAS · Sales<br>
+            <b class="u-c-green">المحتوى:</b> Demos, testimonials, free trials, urgency offers<br>
+            <b class="u-c-green">CVR صحي:</b> 1-3% (e-com), 5-10% (B2B leads) · ROAS: 3x+
+          </div>
+        </div>
+
+        <!-- Loyalty -->
+        <div class="ql-glass w6-funnel-card u-card-tint u-tint-amber" data-funnel="loyalty" >
+          <div class="u-row-between">
+            <div>
+              <div class="u-fz-105 u-fw-800 u-ls-11 u-c-amber u-tt-up">Loyalty · ما بعد البيع</div>
+              <div class="u-h5">الولاء (Retention)</div>
+            </div>
+            <div class="u-fz-22">❤️</div>
+          </div>
+          <div class="u-meta-loose-mb">
+            <b class="u-c-text">الهدف:</b> يكرر الشراء. <b>تكلفة 5x أقل</b> من جذب عميل جديد.
+          </div>
+          <div class="u-info-box u-info-amber-soft" >
+            <b class="u-c-amber">KPIs:</b> NPS · Repeat Rate · Customer LTV · Churn<br>
+            <b class="u-c-amber">المحتوى:</b> مجتمع خاص, exclusive content, loyalty rewards<br>
+            <b class="u-c-amber">NPS صحي:</b> &gt; 30 · Repeat Rate: 20-40%
+          </div>
+        </div>
+
+        <!-- Advocacy -->
+        <div class="ql-glass w6-funnel-card u-card-tint u-tint-pink u-grid-span-full" data-funnel="advocacy" >
+          <div class="u-row-between">
+            <div>
+              <div class="u-fz-105 u-fw-800 u-ls-11 u-c-pink u-tt-up">Advocacy · المرحلة 5</div>
+              <div class="u-h5">المناصرة (Referral & UGC)</div>
+            </div>
+            <div class="u-fz-22">🌟</div>
+          </div>
+          <div class="u-meta-loose-mb">
+            <b class="u-c-text">الهدف:</b> يجلب لك عملاء جدد. الـ flywheel يكمل دورته. هنا تُقاس "العلامة التجارية".
+          </div>
+          <div class="u-info-box u-info-pink-soft" >
+            <b class="u-c-pink">KPIs:</b> Viral Coefficient (k) · UGC volume · Referral CAC<br>
+            <b class="u-c-pink">التكتيك:</b> Affiliate program · Hashtag UGC campaigns · Referral codes · Influencer collabs<br>
+            <b class="u-c-pink">k صحي:</b> &gt; 0.5 (لكل 100 عميل، 50 يجلب آخر)
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════
+           BLOCK W6-G · Performance Math Calculator (Live)
+      ══════════════════════════════════════════════════════ -->
+      <div class="social-section-header" data-w6="block-g" class="u-section-gap-lg">
+        <div>
+          <h2 class="u-card-title">BLOCK W6-G — حاسبة أداء الحملات</h2>
+          <p class="u-meta-lg">6 معادلات حية · مع benchmarks لكل قطاع · يحفظ آخر حملة</p>
+        </div>
+        <span class="tag accent">CPM · CPC · CTR · CVR · ROAS · CAC</span>
+      </div>
+
+      <div class="ql-glass u-p-20-r14">
+        <div class="w6-perf-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-bottom:18px;">
+          <div class="w6-perf-input-wrap">
+            <label>💰 الميزانية ($)</label>
+            <input type="number" id="w6PfSpend" value="500" min="0" step="10" oninput="w6Calc()">
+          </div>
+          <div class="w6-perf-input-wrap">
+            <label>👁️ Impressions</label>
+            <input type="number" id="w6PfImp" value="100000" min="0" step="1000" oninput="w6Calc()">
+          </div>
+          <div class="w6-perf-input-wrap">
+            <label>🖱️ Clicks</label>
+            <input type="number" id="w6PfClk" value="2000" min="0" step="10" oninput="w6Calc()">
+          </div>
+          <div class="w6-perf-input-wrap">
+            <label>🛒 Conversions</label>
+            <input type="number" id="w6PfCnv" value="40" min="0" step="1" oninput="w6Calc()">
+          </div>
+          <div class="w6-perf-input-wrap">
+            <label>💵 إيراد ($)</label>
+            <input type="number" id="w6PfRev" value="2400" min="0" step="50" oninput="w6Calc()">
+          </div>
+          <div class="w6-perf-input-wrap">
+            <label>👥 عملاء جدد</label>
+            <input type="number" id="w6PfCus" value="40" min="0" step="1" oninput="w6Calc()">
+          </div>
+        </div>
+
+        <div class="w6-perf-results" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px;">
+          <div class="w6-perf-out" data-metric="cpm">
+            <div class="w6-perf-label">CPM</div>
+            <div class="w6-perf-value" id="w6OutCpm">$0.00</div>
+            <div class="w6-perf-bench" id="w6BnchCpm">—</div>
+          </div>
+          <div class="w6-perf-out" data-metric="cpc">
+            <div class="w6-perf-label">CPC</div>
+            <div class="w6-perf-value" id="w6OutCpc">$0.00</div>
+            <div class="w6-perf-bench" id="w6BnchCpc">—</div>
+          </div>
+          <div class="w6-perf-out" data-metric="ctr">
+            <div class="w6-perf-label">CTR</div>
+            <div class="w6-perf-value" id="w6OutCtr">0.00%</div>
+            <div class="w6-perf-bench" id="w6BnchCtr">—</div>
+          </div>
+          <div class="w6-perf-out" data-metric="cvr">
+            <div class="w6-perf-label">CVR</div>
+            <div class="w6-perf-value" id="w6OutCvr">0.00%</div>
+            <div class="w6-perf-bench" id="w6BnchCvr">—</div>
+          </div>
+          <div class="w6-perf-out" data-metric="roas">
+            <div class="w6-perf-label">ROAS</div>
+            <div class="w6-perf-value" id="w6OutRoas">0.00x</div>
+            <div class="w6-perf-bench" id="w6BnchRoas">—</div>
+          </div>
+          <div class="w6-perf-out" data-metric="cac">
+            <div class="w6-perf-label">CAC</div>
+            <div class="w6-perf-value" id="w6OutCac">$0.00</div>
+            <div class="w6-perf-bench" id="w6BnchCac">—</div>
+          </div>
+        </div>
+
+        <div class="u-flex u-gap-2-5 u-mt-4 u-flex-wrap">
+          <button onclick="w6PfSave()" class="u-btn-grad u-btn-grad-emerald" >💾 حفظ هذي الحملة</button>
+          <button onclick="w6PfLoad()" class="u-btn-tinted u-btn-accent" >📂 استرجاع</button>
+          <button onclick="w6PfClear()" class="u-btn-tinted u-btn-red" >🗑️ مسح</button>
+        </div>
+      </div>
+
+      <!-- LTV:CAC Health Card -->
+      <div class="ql-glass" style="margin-top:14px; padding:16px 18px; border-radius:12px; border-color:rgba(245,158,11,0.25); background:rgba(245,158,11,0.04);">
+        <div class="u-fz-11 u-fw-800 u-ls-11 u-tt-up u-c-amber u-mb-15b">⚖️ نسبة LTV:CAC</div>
+        <div class="u-meta-md-loose">
+          <b>LTV (قيمة العميل مدى الحياة) ÷ CAC = نسبة الصحة المالية</b><br>
+          <b class="u-c-green">≥ 3:1</b> = صحي (شركة مستدامة) ·
+          <b class="u-c-amber">1:1 - 3:1</b> = ضيق · 
+          <b class="u-c-red">&lt; 1:1</b> = خسارة فعلية لكل عميل
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════
+           BLOCK W6-H · A/B Test Designer
+      ══════════════════════════════════════════════════════ -->
+      <div class="social-section-header" data-w6="block-h" class="u-section-gap-lg">
+        <div>
+          <h2 class="u-card-title">BLOCK W6-H — مصمم اختبار A/B</h2>
+          <p class="u-meta-lg">احسب حجم العينة المطلوب · مدة الاختبار · الدلالة الإحصائية</p>
+        </div>
+        <span class="tag accent">Statistical Significance</span>
+      </div>
+
+      <div class="ql-glass u-p-20-r14">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-bottom:18px;">
+          <div class="w6-perf-input-wrap">
+            <label>📊 معدل التحويل الحالي (%)</label>
+            <input type="number" id="w6AbBaseline" value="2.5" min="0.1" max="50" step="0.1" oninput="w6Ab()">
+          </div>
+          <div class="w6-perf-input-wrap">
+            <label>📈 التحسّن المستهدف (%)</label>
+            <input type="number" id="w6AbLift" value="20" min="1" max="200" step="1" oninput="w6Ab()">
+          </div>
+          <div class="w6-perf-input-wrap">
+            <label>👥 الزوار اليومي / variant</label>
+            <input type="number" id="w6AbDaily" value="500" min="10" step="10" oninput="w6Ab()">
+          </div>
+          <div class="w6-perf-input-wrap">
+            <label>🎯 مستوى الثقة</label>
+            <select id="w6AbConf" oninput="w6Ab()">
+              <option value="90">90%</option>
+              <option value="95" selected>95%</option>
+              <option value="99">99%</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px;">
+          <div class="w6-perf-out">
+            <div class="w6-perf-label">حجم العينة / variant</div>
+            <div class="w6-perf-value" id="w6AbSize">—</div>
+            <div class="w6-perf-bench">visitor</div>
+          </div>
+          <div class="w6-perf-out">
+            <div class="w6-perf-label">مدة الاختبار</div>
+            <div class="w6-perf-value" id="w6AbDays">—</div>
+            <div class="w6-perf-bench">يوم</div>
+          </div>
+          <div class="w6-perf-out">
+            <div class="w6-perf-label">المعدّل المتوقع</div>
+            <div class="w6-perf-value" id="w6AbTarget">—</div>
+            <div class="w6-perf-bench">للـ variant B</div>
+          </div>
+          <div class="w6-perf-out">
+            <div class="w6-perf-label">حالة الاختبار</div>
+            <div class="w6-perf-value" id="w6AbStatus" class="u-fz-14">—</div>
+            <div class="w6-perf-bench" id="w6AbHint">—</div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px; padding:12px 14px; background:rgba(102,252,241,0.05); border:1px solid rgba(102,252,241,0.18); border-radius:8px; font-size:11.5px; color:var(--text-muted); line-height:1.75;">
+          💡 <b>قاعدة عملية:</b> لا توقف الاختبار قبل أن تصل لحجم العينة المطلوب — حتى لو ظهر "فائز" مبكر. الـ <i>peeking problem</i> يضاعف معدل النتائج الزائفة.
+        </div>
+      </div>
+
+      <!-- ============================================================
+           WORKER 06 · PHASE 4 — EMAIL + WHATSAPP + INFLUENCER VETTING
+      ============================================================ -->
+
+      <!-- ══════════════════════════════════════════════════════
+           BLOCK W6-I · Email Marketing Essentials
+      ══════════════════════════════════════════════════════ -->
+      <div class="social-section-header" data-w6="block-i" class="u-section-gap-lg">
+        <div>
+          <h2 class="u-card-title">BLOCK W6-I — التسويق عبر البريد</h2>
+          <p class="u-meta-lg">5 أنواع رسائل · 10 صيغ subject lines · معدلات صحية · نظافة القائمة</p>
+        </div>
+        <span class="tag accent">Welcome → Re-engagement</span>
+      </div>
+
+      <!-- 5 Email Types -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-bottom:18px;">
+        <div class="ql-glass u-p-14-16 u-r-12 u-bc-cyan-25">
+          <div class="u-h3-card">👋</div>
+          <div class="u-t-section-mini">1. Welcome</div>
+          <div class="u-meta-loose">يُرسَل خلال أول 5 دقائق من التسجيل. <b class="u-c-text">Open rate 50-60%</b> = أعلى رسالة عمرك. اجعلها قصيرة + هدية + توقع للقادم.</div>
+        </div>
+        <div class="ql-glass u-p-14-16 u-r-12 u-bc-green-25">
+          <div class="u-h3-card">🎁</div>
+          <div class="u-fz-13 u-fw-800 u-c-green u-mb-1">2. Value</div>
+          <div class="u-meta-loose">رسالة قيمة بدون بيع — درس، PDF، نصيحة. <b class="u-c-text">5x أهم من رسالة بيع</b>. تبني الثقة قبل أن تطلب الشراء.</div>
+        </div>
+        <div class="ql-glass u-card-tile u-tint-violet" >
+          <div class="u-h3-card">📖</div>
+          <div class="u-fz-13 u-fw-800 u-c-purple u-mb-1">3. Story</div>
+          <div class="u-meta-loose">قصة عميل أو قصة شخصية. <b class="u-c-text">CTR أعلى 4x</b> من الرسائل الجافة. القصص = Narrative Transportation.</div>
+        </div>
+        <div class="ql-glass u-card-tile u-tint-amber" >
+          <div class="u-h3-card">💰</div>
+          <div class="u-fz-13 u-fw-800 u-c-amber u-mb-1">4. Offer</div>
+          <div class="u-meta-loose">العرض الفعلي بعد بناء الثقة. <b class="u-c-text">عرض محدد + deadline + bonus</b> = أعلى CVR.</div>
+        </div>
+        <div class="ql-glass u-card-tile u-tint-pink" >
+          <div class="u-h3-card">🔄</div>
+          <div class="u-fz-13 u-fw-800 u-c-pink u-mb-1">5. Re-engagement</div>
+          <div class="u-meta-loose">للمشتركين الصامتين 60+ يوم. <b class="u-c-text">"هل ما زلت معنا؟"</b> — يُنقذ 8-15% من القائمة قبل الإلغاء.</div>
+        </div>
+      </div>
+
+      <!-- 10 Subject Line Frameworks -->
+      <div class="ql-glass u-p-card-lg">
+        <div class="u-fz-11 u-fw-800 u-ls-11 u-tt-up u-c-faint u-mb-3">📨 10 صيغ Subject Line مُجرّبة</div>
+        <div class="u-grid-auto u-gap-2">
+          <div class="w6-sub-item">📊 <b>الإحصائي:</b> "87% من المسوّقين يخسرون هنا"</div>
+          <div class="w6-sub-item">❓ <b>السؤال:</b> "هل ترتكب هذا الخطأ في حملاتك؟"</div>
+          <div class="w6-sub-item">🤔 <b>الفضول:</b> "ما تعلّمته من خسارة 50K دولار"</div>
+          <div class="w6-sub-item">⚡ <b>العاجل:</b> "غداً تنتهي · 24 ساعة فقط"</div>
+          <div class="w6-sub-item">🎁 <b>الهدية:</b> "هذا لك (ملف 12 صفحة)"</div>
+          <div class="w6-sub-item">⚠️ <b>التحذير:</b> "توقف · لا تنشر قبل قراءة هذا"</div>
+          <div class="w6-sub-item">📋 <b>القائمة:</b> "5 أدوات أستخدمها يومياً"</div>
+          <div class="w6-sub-item">🔥 <b>الجريء:</b> "السبب الحقيقي وراء فشل حملتك"</div>
+          <div class="w6-sub-item">💬 <b>الشخصي:</b> "{اسم}, شيء أردت إخبارك به"</div>
+          <div class="w6-sub-item">🎯 <b>الخاص:</b> "للمسوّقين فقط (تجاوز إن لست منهم)"</div>
+        </div>
+      </div>
+
+      <!-- Email metrics + List Hygiene -->
+      <div class="u-grid-2-1fr">
+        <div class="ql-glass u-p-card-md">
+          <div class="u-eyebrow-cyan u-eyebrow-11">📊 معدلات صحية MENA</div>
+          <div class="u-fz-12 u-c-muted u-lh-195">
+            • <b class="u-c-text">Open Rate:</b> 18-25% (متوسط) · &gt; 30% ممتاز<br>
+            • <b class="u-c-text">Click Rate:</b> 2-5% · &gt; 5% ممتاز<br>
+            • <b class="u-c-text">Click-to-Open Ratio:</b> 10-15%<br>
+            • <b class="u-c-text">Unsubscribe:</b> &lt; 0.5% لكل رسالة<br>
+            • <b class="u-c-text">Bounce Rate:</b> &lt; 2% (أكثر = مشكلة قائمة)<br>
+            • <b class="u-c-text">Spam Complaints:</b> &lt; 0.1% (وإلا تُحظر)
+          </div>
+        </div>
+        <div class="ql-glass u-p-card-md">
+          <div class="u-eyebrow-amber u-eyebrow-11">🧹 نظافة القائمة (List Hygiene)</div>
+          <div class="u-fz-12 u-c-muted u-lh-195">
+            • احذف bouncing emails بعد 3 محاولات (يدمّر الـ deliverability)<br>
+            • Re-engagement campaign كل 90 يوم<br>
+            • Domain warmup للنطاقات الجديدة (50/يوم → 500/يوم خلال شهر)<br>
+            • SPF + DKIM + DMARC = إجباري للوصول للـ inbox<br>
+            • Segmentation: قائمة واحدة كبيرة = خطأ. قسّم حسب السلوك<br>
+            • Double opt-in &gt; Single opt-in (جودة أعلى، spam أقل)
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════
+           BLOCK W6-J · WhatsApp Marketing (محلي مهم جداً)
+      ══════════════════════════════════════════════════════ -->
+      <div class="social-section-header" data-w6="block-j" class="u-section-gap-lg">
+        <div>
+          <h2 class="u-card-title">BLOCK W6-J — التسويق عبر WhatsApp</h2>
+          <p class="u-meta-lg">القناة #1 في MENA للـ DM-driven sales · API · القوالب · النافذة 24h</p>
+        </div>
+        <span class="tag accent">WhatsApp Business API</span>
+      </div>
+
+      <div class="u-grid-2-1fr">
+        <!-- Do's -->
+        <div class="ql-glass u-card-row u-tint-green" >
+          <div style="font-size:12px; font-weight:800; color:#22C55E; margin-bottom:10px; letter-spacing:0.5px;">✅ افعل (Do's)</div>
+          <ul class="u-list-meta">
+            <li>اجعل أول رسالة دائماً طلب إذن: "هل أرسل لك التفاصيل؟"</li>
+            <li>استخدم WhatsApp Business API للحملات (لا App عادي)</li>
+            <li>قسّم القوائم: عملاء فعليون · مهتمون · باردون</li>
+            <li>أرسل في أوقات مهذّبة: 11AM-1PM أو 7PM-9PM</li>
+            <li>Click-to-WhatsApp ads من Meta Ads = أعلى ROI محلياً</li>
+            <li>Templates معتمدة (Marketing/Utility/Authentication)</li>
+            <li>قياس الـ delivery rate · read rate · reply rate</li>
+          </ul>
+        </div>
+        <!-- Don'ts -->
+        <div class="ql-glass u-card-row u-tint-red" >
+          <div style="font-size:12px; font-weight:800; color:#EF4444; margin-bottom:10px; letter-spacing:0.5px;">❌ لا تفعل (Don'ts)</div>
+          <ul class="u-list-meta">
+            <li>broadcast لـ 200 رقم بدون موافقة = حظر فوري</li>
+            <li>إرسال خارج النافذة الـ 24 ساعة بدون template معتمد</li>
+            <li>عبارات "اربح" "مجاناً" بدون سياق = spam filter</li>
+            <li>روابط مختصرة (bit.ly) = خفض الثقة + احتمال الحظر</li>
+            <li>إعادة إرسال نفس الرسالة لعميل لم يرد (3 محاولات كحد أقصى)</li>
+            <li>بيع B2B عبر WhatsApp قبل بناء علاقة = مرفوض</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 24-hour Window Card -->
+      <div class="ql-glass" style="margin-top:14px; padding:16px 18px; border-radius:14px; border-color:rgba(245,158,11,0.3); background:rgba(245,158,11,0.04);">
+        <div class="u-fz-12 u-fw-800 u-c-amber u-mb-2">⏱️ قاعدة الـ 24 ساعة (Customer Service Window)</div>
+        <div class="u-meta-md-loose">
+          عند تواصل عميل معك على WhatsApp، يُفتح "نافذة 24 ساعة" تستطيع فيها الرد بأي رسالة مجانية. بعد 24 ساعة، تحتاج <b class="u-c-text">قالب معتمد (Template)</b> لإعادة فتح المحادثة. القوالب 3 أنواع:
+          <b class="u-c-green">Utility</b> (تأكيدات/تنبيهات) ·
+          <b class="u-c-amber">Marketing</b> (عروض) ·
+          <b class="u-c-cyan6">Authentication</b> (OTP).
+        </div>
+      </div>
+
+      <!-- Iraq specific WhatsApp note -->
+      <div class="ql-glass" style="margin-top:14px; padding:14px 16px; border-radius:12px; border-color:rgba(102,252,241,0.2); background:rgba(102,252,241,0.04);">
+        <div class="u-fz-11 u-fw-800 u-c-cyan u-mb-15b">🇮🇶 ملاحظة العراق</div>
+        <div class="u-fz-115 u-c-muted u-lh-175">
+          70%+ من قرار الشراء B2C في العراق يمر عبر DM (WhatsApp/Instagram) قبل الدفع. الـ checkout المباشر أقل شيوعاً. <b class="u-c-text">الاستراتيجية:</b> اجعل الـ ads تنتهي بـ "أرسل WhatsApp لنا" (Click-to-WhatsApp) — تحويل أعلى من landing pages.
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════
+           BLOCK W6-K · Influencer Vetting Tool
+      ══════════════════════════════════════════════════════ -->
+      <div class="social-section-header" data-w6="block-k" class="u-section-gap-lg">
+        <div>
+          <h2 class="u-card-title">BLOCK W6-K — أداة فحص المؤثرين</h2>
+          <p class="u-meta-lg">أدخل الأرقام · تحصل على ER% + flags + توصية تعاون</p>
+        </div>
+        <span class="tag accent">Engagement Rate Calculator</span>
+      </div>
+
+      <div class="ql-glass u-p-20-r14">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-bottom:16px;">
+          <div class="w6-perf-input-wrap">
+            <label>👥 المتابعون</label>
+            <input type="number" id="w6InfFol" value="50000" min="0" step="100" oninput="w6Inf()">
+          </div>
+          <div class="w6-perf-input-wrap">
+            <label>❤️ متوسط Likes</label>
+            <input type="number" id="w6InfLikes" value="1500" min="0" step="10" oninput="w6Inf()">
+          </div>
+          <div class="w6-perf-input-wrap">
+            <label>💬 متوسط Comments</label>
+            <input type="number" id="w6InfCom" value="80" min="0" step="1" oninput="w6Inf()">
+          </div>
+          <div class="w6-perf-input-wrap">
+            <label>📊 متوسط Reach (اختياري)</label>
+            <input type="number" id="w6InfReach" value="0" min="0" step="100" oninput="w6Inf()">
+          </div>
+          <div class="w6-perf-input-wrap">
+            <label>💵 السعر المطلوب ($)</label>
+            <input type="number" id="w6InfPrice" value="500" min="0" step="50" oninput="w6Inf()">
+          </div>
+          <div class="w6-perf-input-wrap">
+            <label>🏷️ التصنيف</label>
+            <select id="w6InfTier" oninput="w6Inf()">
+              <option value="nano">Nano (1K-10K)</option>
+              <option value="micro" selected>Micro (10K-100K)</option>
+              <option value="mid">Mid (100K-500K)</option>
+              <option value="macro">Macro (500K-1M)</option>
+              <option value="mega">Mega (1M+)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-bottom:16px;">
+          <div class="w6-perf-out">
+            <div class="w6-perf-label">Engagement Rate</div>
+            <div class="w6-perf-value" id="w6InfER">—</div>
+            <div class="w6-perf-bench">(Likes+Comments) / Followers</div>
+          </div>
+          <div class="w6-perf-out">
+            <div class="w6-perf-label">Cost per Engagement</div>
+            <div class="w6-perf-value" id="w6InfCPE">—</div>
+            <div class="w6-perf-bench">Price / Engagements</div>
+          </div>
+          <div class="w6-perf-out">
+            <div class="w6-perf-label">Comment Ratio</div>
+            <div class="w6-perf-value" id="w6InfCR">—</div>
+            <div class="w6-perf-bench">Comments / Likes</div>
+          </div>
+          <div class="w6-perf-out">
+            <div class="w6-perf-label">التقييم</div>
+            <div class="w6-perf-value" id="w6InfVerdict" class="u-fz-14">—</div>
+            <div class="w6-perf-bench" id="w6InfVerdictNote">—</div>
+          </div>
+        </div>
+
+        <!-- Flags / red flags -->
+        <div id="w6InfFlags" class="u-col"></div>
+      </div>
+
+      <!-- Influencer Disclosure note -->
+      <div class="ql-glass" style="margin-top:14px; padding:14px 16px; border-radius:12px; border-color:rgba(139,92,246,0.25); background:rgba(139,92,246,0.04);">
+        <div class="u-fz-11 u-fw-800 u-c-purple u-mb-15b">⚖️ Disclosure Best Practices</div>
+        <div class="u-fz-115 u-c-muted u-lh-175">
+          FTC (USA) و ASA (UK) و ARPA (KSA): الإفصاح إجباري. استخدم #ad أو #sponsored في بداية الـ caption (لا في النهاية أو مخفي بين 30 hashtag). في العراق: لا توجد لائحة رسمية بعد، لكن الجمهور يميّز بسرعة — الإفصاح يبني ثقة، التخفي يدمّرها.
+        </div>
+      </div>
+
+      <!-- ============================================================
+           WORKER 06 · PHASE 5 — IRAQ BLOCK + CHEAT SHEET + CITATIONS
+      ============================================================ -->
+
+      <!-- ══════════════════════════════════════════════════════
+           BLOCK W6-L · 🇮🇶 السوق العراقي + الخليج
+      ══════════════════════════════════════════════════════ -->
+      <div class="social-section-header" data-w6="block-l" class="u-section-gap-lg">
+        <div>
+          <h2 class="u-card-title">BLOCK W6-L — 🇮🇶 السياق العراقي / MENA</h2>
+          <p class="u-meta-lg">رواتب · منصات سائدة · شركات · تكتيكات لهجوية · حساسيات ثقافية</p>
+        </div>
+        <span class="tag accent">Iraq + Gulf · 2026</span>
+      </div>
+
+      <!-- Salary Table -->
+      <div class="ql-glass u-p-card-lg">
+        <div class="u-fz-12 u-fw-800 u-c-cyan u-mb-3">💵 نطاقات الراتب — بغداد / أربيل / البصرة (IQD + USD)</div>
+        <div class="w6-iq-salary u-overflow-auto">
+          <table style="width:100%; border-collapse:collapse; font-size:12px; min-width:540px;">
+            <thead>
+              <tr class="u-bg-accent-06" >
+                <th class="u-th-eyebrow">الدور</th>
+                <th class="u-th-eyebrow">الخبرة</th>
+                <th class="u-th-eyebrow">IQD/شهر</th>
+                <th class="u-th-eyebrow">USD/شهر</th>
+              </tr>
+            </thead>
+            <tbody class="u-fz-12 u-c-text">
+              <tr><td class="u-row-dashed">Junior Social Media</td><td class="u-row-dashed-mut">0-1y</td><td class="u-row-dashed-num">500K - 850K</td><td class="u-row-dashed-ok">$380 - $650</td></tr>
+              <tr><td class="u-row-dashed">Mid Social Media Manager</td><td class="u-row-dashed-mut">2-4y</td><td class="u-row-dashed-num">900K - 1.6M</td><td class="u-row-dashed-ok">$690 - $1,220</td></tr>
+              <tr><td class="u-row-dashed">Senior SMM / Content Lead</td><td class="u-row-dashed-mut">5-8y</td><td class="u-row-dashed-num">1.7M - 3M</td><td class="u-row-dashed-ok">$1,300 - $2,290</td></tr>
+              <tr><td class="u-row-dashed">Junior Marketer</td><td class="u-row-dashed-mut">0-2y</td><td class="u-row-dashed-num">700K - 1.1M</td><td class="u-row-dashed-ok">$530 - $840</td></tr>
+              <tr><td class="u-row-dashed">Performance Marketer (Meta/TikTok Ads)</td><td class="u-row-dashed-mut">2-5y</td><td class="u-row-dashed-num">1.3M - 2.5M</td><td class="u-row-dashed-ok">$990 - $1,910</td></tr>
+              <tr><td class="u-row-dashed">Marketing Manager</td><td class="u-row-dashed-mut">5-8y</td><td class="u-row-dashed-num">2.5M - 4.5M+</td><td class="u-row-dashed-ok">$1,910 - $3,440+</td></tr>
+              <tr><td class="u-p-9-12">Brand Manager</td><td class="u-p-9-12 u-c-muted">5-10y</td><td class="u-p-9-12 u-num">2M - 4M</td><td class="u-p-9-12 u-c-green u-num">$1,530 - $3,050</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="u-fz-105 u-c-faint u-mt-25 u-lh-16">
+          📌 الأرقام مبنية على عينة من إعلانات Tanqeeb / Bayt / تجارب الميدان 2025-2026. سعر الصرف ≈ 1,310 IQD/USD. الفروقات بين أربيل/بغداد/البصرة ±15%.
+        </div>
+      </div>
+
+      <!-- Platforms ranking + Companies + Local hooks -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:18px;">
+        <div class="ql-glass u-p-card-md">
+          <div class="u-eyebrow-cyan u-eyebrow-11">📱 ترتيب المنصات محلياً (B2C)</div>
+          <ol style="font-size:12px; color:var(--text-muted); line-height:1.95; padding-inline-start:22px; margin:0;">
+            <li><b class="u-c-text">Instagram + Facebook (Meta)</b> — حصة الأسد، خصوصاً للـ ads</li>
+            <li><b class="u-c-text">TikTok</b> — نمو سريع، ذروة في 2025</li>
+            <li><b class="u-c-text">Snapchat</b> — قاعدة شبابية كبيرة في الخليج</li>
+            <li><b class="u-c-text">WhatsApp</b> — قناة DM-driven sales رقم 1</li>
+            <li><b class="u-c-text">YouTube</b> — long-form + how-to + أخبار</li>
+            <li><b class="u-c-text">LinkedIn</b> — B2B فقط، نمو في الشركات الكبيرة</li>
+            <li><b class="u-c-text">X (Twitter)</b> — نخبوية، صحفية</li>
+            <li><b class="u-c-text">Telegram</b> — قنوات (channels) بدل groups في العراق</li>
+          </ol>
+        </div>
+        <div class="ql-glass u-p-card-md">
+          <div class="u-eyebrow-amber u-eyebrow-11">🏢 شركات توظف في العراق</div>
+          <div class="u-fz-115 u-c-muted u-lh-195">
+            <b class="u-c-text">اتصالات:</b> Asiacell · Zain Iraq · Korek<br>
+            <b class="u-c-text">إنترنت:</b> Earthlink · Al-Saqer · Newroz<br>
+            <b class="u-c-text">بنوك:</b> TBI · MasterCard · IIB · Cihan Bank<br>
+            <b class="u-c-text">تجارة:</b> Miswag · Alibaba Group<br>
+            <b class="u-c-text">تطبيقات:</b> Lezzoo · Toters · Baly<br>
+            <b class="u-c-text">إعلام:</b> Al-Sumaria · NRT · Rudaw<br>
+            <b class="u-c-text">وكالات:</b> Vinson · Spectrum · Local Studio
+          </div>
+        </div>
+      </div>
+
+      <!-- Iraqi Hook Examples -->
+      <div class="ql-glass u-p-card-lg">
+        <div class="u-fz-12 u-fw-800 u-c-cyan u-mb-3">🗣️ أمثلة hooks باللهجة العراقية (تنفع للـ Reels)</div>
+        <div class="u-grid-auto u-gap-2">
+          <div class="w6-iq-hook"><b class="u-c-amber">للمطاعم:</b><br>"إلك بغداد وما جربت هاي البرغر؟ والله خسارة..."</div>
+          <div class="w6-iq-hook"><b class="u-c-green">للأزياء:</b><br>"شفتوا الدشداشة الجديدة؟ خوش لون يجنن — التفاصيل بالكومنتات."</div>
+          <div class="w6-iq-hook"><b class="u-c-purple">للخدمات الرقمية:</b><br>"3 غلطات أكبر يسوّيها كل صاحب محل بالنترنيت — والثالثة تخسره زبائن."</div>
+          <div class="w6-iq-hook"><b class="u-c-pink">للتعليم:</b><br>"دكتورة بكلية الطب قالتلي: <i>«هذا الكتاب لو كنت أنتي طالبة، لقريتيه من سنة أولى».</i>"</div>
+          <div class="w6-iq-hook"><b class="u-c-cyan6">للسيارات:</b><br>"شنو يفرّق بين تويوتا 2018 و 2024؟ ما تتوقع الجواب — تابع للنهاية."</div>
+          <div class="w6-iq-hook"><b class="u-c-red">للعقار:</b><br>"شقة بمنطقة الكرادة بـ 100 ألف دولار؟ <i>«حلم»</i> — لكن هاي 5 طرق تخليه ممكن."</div>
+        </div>
+      </div>
+
+      <!-- Cultural Sensitivity Card -->
+      <div class="ql-glass u-card-row u-tint-amber u-tint-fill" >
+        <div class="u-fz-11 u-fw-800 u-ls-11 u-tt-up u-c-amber u-mb-2">🕌 الحساسية الثقافية (مهم جداً)</div>
+        <div class="u-fz-115 u-c-muted u-lh-185">
+          • <b class="u-c-text">رمضان:</b> تجنّب الإعلانات الترويجية القوية بين 1-3 PM (وقت الصيام). محتوى التطوع/العطاء يتفوق.<br>
+          • <b class="u-c-text">عاشوراء:</b> امتنع عن الـ ads الترفيهية أو الترويجية. محتوى احترامي فقط.<br>
+          • <b class="u-c-text">العيدين:</b> ذروة الإنفاق — حملات مكثفة قبل العيد بـ 7-10 أيام.<br>
+          • <b class="u-c-text">اللهجة:</b> الفصحى للـ B2B، اللهجة العراقية للـ B2C الوجداني، الإنجليزية للنخبة التقنية.<br>
+          • <b class="u-c-text">code-switching:</b> "اشتركوا الحين قبل sale ينتهي" مقبول جداً ويبدو طبيعي.
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════
+           BLOCK W6-M · Cheat Sheet — البطاقة الذكية
+      ══════════════════════════════════════════════════════ -->
+      <div class="social-section-header" data-w6="block-m" class="u-section-gap-lg">
+        <div>
+          <h2 class="u-card-title">BLOCK W6-M — Cheat Sheet</h2>
+          <p class="u-meta-lg">ملخص قابل للطباعة — الأرقام والقواعد التي يجب أن يعرفها كل مسؤول سوشيال</p>
+        </div>
+        <span class="tag accent">Print-Ready</span>
+      </div>
+
+      <div class="ql-glass w6-cheat u-p-card u-r-14">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px;">
+
+          <div>
+            <div class="u-fz-12 u-fw-800 u-c-cyan u-mb-2">⚡ القواعد الذهبية (10)</div>
+            <ol style="font-size:11.5px; color:var(--text-muted); line-height:1.85; padding-inline-start:22px; margin:0;">
+              <li>أول 1.5s = 87% من قرار الإكمال (TikTok/Reels).</li>
+              <li>5-Pillar Mix: 40% تعليمي · 25% ترفيهي · 15% ملهم · 15% ترويجي · 5% BTS.</li>
+              <li>Reels مثالي 7-15s · Carousel 8-10 شرائح · LinkedIn 1200-1500 char.</li>
+              <li>LTV:CAC ≥ 3:1 = صحي.</li>
+              <li>ROAS &gt; 3x للـ e-commerce, &gt; 5x للـ subscription.</li>
+              <li>CTR صحي 1-2% · CVR صحي 1-3%.</li>
+              <li>WhatsApp: نافذة 24h · Templates معتمدة بعدها.</li>
+              <li>Instagram: روابط في النص = -50% reach. انقلها للـ comment.</li>
+              <li>Email: Open Rate 18-25% طبيعي. Subject line هو 80% من القرار.</li>
+              <li>Influencer: ER &lt; 1% للـ Macro (500K+) = أحمر/bots.</li>
+            </ol>
+          </div>
+
+          <div>
+            <div class="u-fz-12 u-fw-800 u-c-amber u-mb-2">📐 المعادلات السريعة</div>
+            <div style="font-size:11.5px; color:var(--text-muted); line-height:1.95; font-family:'Courier New',monospace; background:var(--surface-2); padding:12px 14px; border-radius:8px; border:1px dashed var(--border);">
+              CPM = (Spend / Impressions) × 1000<br>
+              CPC = Spend / Clicks<br>
+              CTR = Clicks / Impressions × 100<br>
+              CVR = Conversions / Clicks × 100<br>
+              ROAS = Revenue / Spend<br>
+              CAC = Spend / New Customers<br>
+              LTV = ARPU × Lifetime months<br>
+              ER = (Likes + Comments) / Followers × 100<br>
+              CPE = Spend / Engagements
+            </div>
+          </div>
+
+          <div>
+            <div class="u-fz-12 u-fw-800 u-c-green u-mb-2">✅ افعل دائماً</div>
+            <ul class="u-list-meta">
+              <li>اختبر hook قبل النشر (3 أصدقاء يقررون "أكمل أو لا").</li>
+              <li>قياس قبل التحسين — لا تعدّل بدون data.</li>
+              <li>UGC أرخص و أصدق من content مدفوع.</li>
+              <li>قسّم الجمهور (segmentation) — لا تكلم الكل بنفس الرسالة.</li>
+              <li>Repurpose: 1 فيديو long → 3-5 shorts.</li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="u-fz-12 u-fw-800 u-c-red u-mb-2">❌ تجنّب دائماً</div>
+            <ul class="u-list-meta">
+              <li>Vanity metrics (likes فقط) — ركّز على saves/shares/CVR.</li>
+              <li>Spam broadcast على WhatsApp = حظر فوري.</li>
+              <li>Clickbait مخالف للمحتوى = خسارة ثقة دائمة.</li>
+              <li>Watermark TikTok على Instagram = -40% reach.</li>
+              <li>"اشتركوا" بدون سبب — اعطِ لماذا.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════
+           BLOCK W6-N · Citations · 12 مصدر علمي/صناعي
+      ══════════════════════════════════════════════════════ -->
+      <div class="social-section-header" data-w6="block-n" class="u-section-gap-lg">
+        <div>
+          <h2 class="u-card-title">BLOCK W6-N — المصادر</h2>
+          <p class="u-meta-lg">12 مصدر — كتب، تقارير صناعية، أبحاث محكّمة</p>
+        </div>
+        <span class="tag accent">12 Citations</span>
+      </div>
+
+      <div class="ql-glass" style="padding:18px 22px; border-radius:14px;">
+        <ol class="w6-cite-list" style="font-size:11.5px; color:var(--text-muted); line-height:1.95; padding-inline-start:22px; margin:0;">
+          <li><b class="u-c-text">Cialdini, R.</b> — <i>Influence: The Psychology of Persuasion</i> (Harper Business, 2021 ed.)</li>
+          <li><b class="u-c-text">Eyal, N.</b> — <i>Hooked: How to Build Habit-Forming Products</i> (Portfolio, 2014)</li>
+          <li><b class="u-c-text">Loewenstein, G.</b> — "The Psychology of Curiosity" — Psychological Bulletin, Vol. 116(1), pp. 75-98 (1994)</li>
+          <li><b class="u-c-text">Rozin, P. &amp; Royzman, E.B.</b> — "Negativity Bias, Negativity Dominance, and Contagion" — Personality &amp; Social Psychology Review, 5(4), 296-320 (2001)</li>
+          <li><b class="u-c-text">Skinner, B.F.</b> — <i>The Behavior of Organisms</i> (Appleton-Century, 1938)</li>
+          <li><b class="u-c-text">Rizzolatti, G. &amp; Sinigaglia, C.</b> — <i>Mirrors in the Brain</i> (Oxford University Press, 2008)</li>
+          <li><b class="u-c-text">HubSpot</b> — <i>State of Marketing Report 2025</i> (annual industry survey)</li>
+          <li><b class="u-c-text">Sprout Social</b> — <i>The 2024 Sprout Social Index</i> (consumer + marketer behavior data)</li>
+          <li><b class="u-c-text">Meta Business Help Center</b> — <i>Algorithm Signals &amp; Ranking</i> (官方 documentation, updated 2025)</li>
+          <li><b class="u-c-text">TikTok For Business</b> — <i>What's Next: TikTok Trend Report 2025</i></li>
+          <li><b class="u-c-text">LinkedIn Marketing Solutions</b> — <i>The B2B Marketing Benchmark</i> (2024)</li>
+          <li><b class="u-c-text">FTC</b> — <i>Disclosures 101 for Social Media Influencers</i> + <strong>ARPA (KSA)</strong> Influencer Regulations 2024</li>
+        </ol>
+      </div>
+
+
+      <aside class="block-bridge block-bridge--cross-page" data-cross-bridge-from="page-social" data-cross-bridge-to="page-fieldsales" aria-label="جسر بين الصفحتين">
+        <header class="block-bridge-h">
+          <span class="block-bridge-eyebrow type-eyebrow">جسر تعلّمي</span>
+          <h3 class="block-bridge-title type-display">ما بعد التسويق الاجتماعي</h3>
+        </header>
+        <p class="block-bridge-desc type-body-lead">Hooks في المحتوى = Discovery في الميدان. مدارس البيع والـ Funnels تُتمّ ما بدأه الـ Hook.</p>
+        <a class="block-bridge-cta type-button" href="#page-fieldsales" data-cross-bridge-cta="fieldsales">
+          تابع لـ صفحة المبيعات الميدانية <span aria-hidden="true">←</span>
+        </a>
+      </aside>
+
+    </section><!-- /page-social -->

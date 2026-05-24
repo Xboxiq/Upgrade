@@ -1,0 +1,464 @@
+<!-- ════════════════════════════════════════════════════════════════════
+     DEVOTIO v3 / Worker 23 / Phase 4 — Page Shard: page-lab
+     Source: platform/index.html (lines 11521..11976)
+     Status: STAGED. Inline copy still lives in index.html (Stage-and-Replace doctrine).
+     Loaded via: Upg.shards.loadShard("lab").
+     Cached by: service worker (sw.js PRECACHE list).
+     Edit policy: edit BOTH inline + shard until Phase 5 finalizes the swap.
+     ════════════════════════════════════════════════════════════════════ -->
+<section class="page" id="page-lab" data-page-personality="lab">
+
+      <header class="page-h" data-tint="lab">
+        <span class="h-eyebrow">Sandbox</span>
+        <h1 class="type-display tas-kashida" lang="ar"><i class="qi qi-lg" data-icon="flask-conical" aria-hidden="true"></i> مختبر السيناريوهات</h1>
+        <p class="h-lede">بيئة محاكاة تفاعلية — اختر، تصرّف، وتعلّم من الخبراء</p>
+        <div class="page-mastery-progress" data-page-progress="lab">
+          <div class="page-mastery-progress-meta">
+            <span class="type-eyebrow">تقدّم الإتقان</span>
+            <span class="type-num">
+              <span data-page-mastered-count="0">0</span> /
+              <span data-page-total-count="4">4</span> blocks
+            </span>
+            <span class="type-num" aria-hidden="true">·</span>
+            <span class="type-num">
+              <span data-page-mastered-pct="0">0</span>%
+            </span>
+          </div>
+          <div class="page-mastery-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="page-mastery-progress-fill" style="--progress: 0%" data-page-progress-fill></div>
+          </div>
+          <div class="page-mastery-progress-tiers">
+            <span class="tier-marker tier-marker--foundation">
+              <span data-tier-foundation-mastered>0</span> / <span data-tier-foundation-total>4</span>
+            </span>
+            <span class="tier-marker tier-marker--practitioner">
+              <span data-tier-practitioner-mastered>0</span> / <span data-tier-practitioner-total>0</span>
+            </span>
+            <span class="tier-marker tier-marker--expert">
+              <span data-tier-expert-mastered>0</span> / <span data-tier-expert-total>0</span>
+            </span>
+          </div>
+        </div>
+      </header>
+
+      <!-- ============ LAB LOBBY ============ -->
+      <div id="sim-lobby">
+
+        <!-- Stats bar -->
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:24px;">
+          <div class="block-pacing" data-pacing-for="lb-001" data-block-est="6">
+            <div class="block-pacing-mastery">
+              <button class="mastery-toggle" type="button" data-mastery-for="lb-001" data-mastery-state="not-started" aria-label="حالة الإتقان">
+                <span class="mastery-icon" aria-hidden="true">○</span>
+                <span class="mastery-label">لم أبدأ</span>
+              </button>
+            </div>
+            <div class="block-pacing-timer">
+              <span class="block-pacing-timer-label type-eyebrow">جلسة تركيز</span>
+              <div class="focus-presets" role="group" aria-label="اختر مدة التركيز">
+                <button class="focus-preset" type="button" data-focus-minutes="15" data-focus-for="lb-001">15م</button>
+                <button class="focus-preset" type="button" data-focus-minutes="25" data-focus-for="lb-001">25م</button>
+                <button class="focus-preset" type="button" data-focus-minutes="45" data-focus-for="lb-001">45م</button>
+              </div>
+              <span class="focus-active" data-focus-active-for="lb-001" hidden>
+                <span class="focus-active-time" data-focus-time>00:00</span>
+                <button class="focus-stop" type="button" data-focus-stop>إيقاف</button>
+              </span>
+            </div>
+          </div>
+          <div class="call-card" data-block-id="lb-001" data-block-type="lesson" data-difficulty="2" data-est-minutes="6" data-related="lb-003,so-005,fs-030,pg-010">
+            <div class="num" id="sim-stat-total">0</div>
+
+      <section class="block-practice" data-practice-for="lb-001" aria-label="تمارين استدعاء نشط">
+        <header class="block-practice-h">
+          <span class="block-practice-eyebrow type-eyebrow">تمرين استدعاء</span>
+          <h4 class="block-practice-title type-display-h">تحقّق من فهمك</h4>
+          <span class="block-practice-meta type-num">
+            <span data-practice-count="3">3 أسئلة</span> ·
+            <span data-practice-est="6">~6 دقائق</span>
+          </span>
+        </header>
+        <ol class="practice-questions">
+    <li class="practice-question" data-q-id="lb-001-q1">
+      <p class="practice-question-text type-body">ما الفرق بين A/B test و multivariate test؟ متى تستخدم كل واحد؟</p>
+      <details class="practice-answer">
+        <summary class="practice-answer-summary type-ui-label">
+          <span class="practice-answer-icon" aria-hidden="true">↓</span>
+          <span>اكشف الإجابة</span>
+        </summary>
+        <div class="practice-answer-body type-body">A/B: تختبر متغير واحد (عنوان A vs B). Multivariate: متغيرات متعددة معاً (عنوان × صورة × زر). A/B: بسيط + سريع. Multivariate: شامل لكن يحتاج traffic أكبر.</div>
+      </details>
+      <button class="practice-tried-btn type-button" type="button" data-q-id="lb-001-q1" aria-pressed="false">
+        <span class="practice-tried-icon" aria-hidden="true"></span>
+        <span class="practice-tried-label">حاولت</span>
+      </button>
+    </li>
+    <li class="practice-question" data-q-id="lb-001-q2">
+      <p class="practice-question-text type-body">ما هي Statistical Significance ولماذا 95% هو المعيار الشائع؟</p>
+      <details class="practice-answer">
+        <summary class="practice-answer-summary type-ui-label">
+          <span class="practice-answer-icon" aria-hidden="true">↓</span>
+          <span>اكشف الإجابة</span>
+        </summary>
+        <div class="practice-answer-body type-body">= احتمال أن النتيجة ليست صدفة. 95% يعني: هناك 5% احتمال أن الفرق عشوائي. لماذا 95%: توازن بين certainty و practicality. 99% يحتاج عينة أكبر بكثير.</div>
+      </details>
+      <button class="practice-tried-btn type-button" type="button" data-q-id="lb-001-q2" aria-pressed="false">
+        <span class="practice-tried-icon" aria-hidden="true"></span>
+        <span class="practice-tried-label">حاولت</span>
+      </button>
+    </li>
+    <li class="practice-question" data-q-id="lb-001-q3">
+      <p class="practice-question-text type-body">اختبار A/B أظهر أن B أفضل بـ 2% لكن p-value = 0.15. هل تُطبّق B؟ لماذا؟</p>
+      <details class="practice-answer">
+        <summary class="practice-answer-summary type-ui-label">
+          <span class="practice-answer-icon" aria-hidden="true">↓</span>
+          <span>اكشف الإجابة</span>
+        </summary>
+        <div class="practice-answer-body type-body">لا. p-value 0.15 > 0.05 = غير مؤكد إحصائياً. الـ 2% قد يكون صدفة. الحل: أكمل الاختبار بعينة أكبر أو غيّر الـ hypothesis.</div>
+      </details>
+      <button class="practice-tried-btn type-button" type="button" data-q-id="lb-001-q3" aria-pressed="false">
+        <span class="practice-tried-icon" aria-hidden="true"></span>
+        <span class="practice-tried-label">حاولت</span>
+      </button>
+    </li>
+        </ol>
+        <footer class="block-practice-reflect">
+          <h5 class="block-practice-reflect-h type-eyebrow">تأمّل ختامي</h5>
+          <p class="block-practice-reflect-prompt type-quote-literary">ما آخر قرار اتخذته "بالحدس" بدون بيانات؟ كيف كنت ستختبره لو عندك وقت؟</p>
+          <textarea class="block-practice-reflect-input" data-reflect-for="lb-001" placeholder="اكتب جوابك هنا (يُحفَظ محلياً، لا يُرسَل لأي خادم)" rows="3" maxlength="500"></textarea>
+          <div class="block-practice-reflect-meta type-num">
+            <span data-reflect-count="0">0</span> / 500 حرف
+          </div>
+        </footer>
+      </section>
+      <nav class="block-bridge" data-bridge-for="lb-001" aria-label="تابع التعلم">
+        <header class="block-bridge-h">
+          <span class="block-bridge-eyebrow type-eyebrow">تابع التعلم</span>
+          <h4 class="block-bridge-title type-display-h">المسار التالي</h4>
+        </header>
+        <ul class="block-bridge-list">
+          <li class="block-bridge-item block-bridge-item--inpage">
+            <a class="block-bridge-link" href="#lb-003" data-bridge-target="lb-003" data-bridge-relation="extends">
+              <span class="block-bridge-relation type-eyebrow">يُعمّق</span>
+              <span class="block-bridge-target-title type-body-lead">Lab — التجربة الثانية، إعادة محاولة</span>
+              <span class="block-bridge-meta type-num"></span>
+            </a>
+          </li>
+          <li class="block-bridge-item block-bridge-item--crosspage">
+            <a class="block-bridge-link" href="#so-005" data-bridge-target="so-005" data-bridge-relation="applies-in">
+              <span class="block-bridge-relation type-eyebrow">يُطبَّق في</span>
+              <span class="block-bridge-target-title type-body-lead">Social — استخدم نتائج التجارب في المحتوى</span>
+              <span class="block-bridge-meta type-num"><span class="block-bridge-page-tag">Social</span></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+            <div class="lbl">سيناريو مكتمل</div>
+          </div>
+          <div class="block-pacing" data-pacing-for="lb-002" data-block-est="6">
+            <div class="block-pacing-mastery">
+              <button class="mastery-toggle" type="button" data-mastery-for="lb-002" data-mastery-state="not-started" aria-label="حالة الإتقان">
+                <span class="mastery-icon" aria-hidden="true">○</span>
+                <span class="mastery-label">لم أبدأ</span>
+              </button>
+            </div>
+            <div class="block-pacing-timer">
+              <span class="block-pacing-timer-label type-eyebrow">جلسة تركيز</span>
+              <div class="focus-presets" role="group" aria-label="اختر مدة التركيز">
+                <button class="focus-preset" type="button" data-focus-minutes="15" data-focus-for="lb-002">15م</button>
+                <button class="focus-preset" type="button" data-focus-minutes="25" data-focus-for="lb-002">25م</button>
+                <button class="focus-preset" type="button" data-focus-minutes="45" data-focus-for="lb-002">45م</button>
+              </div>
+              <span class="focus-active" data-focus-active-for="lb-002" hidden>
+                <span class="focus-active-time" data-focus-time>00:00</span>
+                <button class="focus-stop" type="button" data-focus-stop>إيقاف</button>
+              </span>
+            </div>
+          </div>
+          <div class="call-card" data-block-id="lb-002" data-block-type="lesson" data-difficulty="2" data-est-minutes="6">
+            <div class="num" id="sim-stat-points" class="u-text-brand">0</div>
+            <div class="lbl">مجموع النقاط</div>
+          </div>
+          <div class="block-prereq-chip" data-prereq-for="lb-003" aria-label="متطلبات معرفية">
+            <span class="block-prereq-chip-icon" aria-hidden="true">↑</span>
+            <span class="block-prereq-chip-label type-eyebrow">يحتاج فهم:</span>
+            <ol class="block-prereq-chip-list">
+              <li class="block-prereq-chip-item"><a href="#lb-001" data-prereq-target="lb-001">lb-001</a></li>
+            </ol>
+          </div>
+          <div class="block-pacing" data-pacing-for="lb-003" data-block-est="6">
+            <div class="block-pacing-mastery">
+              <button class="mastery-toggle" type="button" data-mastery-for="lb-003" data-mastery-state="not-started" aria-label="حالة الإتقان">
+                <span class="mastery-icon" aria-hidden="true">○</span>
+                <span class="mastery-label">لم أبدأ</span>
+              </button>
+            </div>
+            <div class="block-pacing-timer">
+              <span class="block-pacing-timer-label type-eyebrow">جلسة تركيز</span>
+              <div class="focus-presets" role="group" aria-label="اختر مدة التركيز">
+                <button class="focus-preset" type="button" data-focus-minutes="15" data-focus-for="lb-003">15م</button>
+                <button class="focus-preset" type="button" data-focus-minutes="25" data-focus-for="lb-003">25م</button>
+                <button class="focus-preset" type="button" data-focus-minutes="45" data-focus-for="lb-003">45م</button>
+              </div>
+              <span class="focus-active" data-focus-active-for="lb-003" hidden>
+                <span class="focus-active-time" data-focus-time>00:00</span>
+                <button class="focus-stop" type="button" data-focus-stop>إيقاف</button>
+              </span>
+            </div>
+          </div>
+          <div class="call-card" data-block-id="lb-003" data-block-type="lesson" data-difficulty="2" data-est-minutes="6" data-related="lb-001,so-005,so-010,pg-010" data-prereq="lb-001">
+            <div class="num" id="sim-stat-streak">0🔥</div>
+
+      <section class="block-practice" data-practice-for="lb-003" aria-label="تمارين استدعاء نشط">
+        <header class="block-practice-h">
+          <span class="block-practice-eyebrow type-eyebrow">تمرين استدعاء</span>
+          <h4 class="block-practice-title type-display-h">تحقّق من فهمك</h4>
+          <span class="block-practice-meta type-num">
+            <span data-practice-count="3">3 أسئلة</span> ·
+            <span data-practice-est="6">~6 دقائق</span>
+          </span>
+        </header>
+        <ol class="practice-questions">
+    <li class="practice-question" data-q-id="lb-003-q1">
+      <p class="practice-question-text type-body">ما هو Funnel Analysis وما المراحل الخمسة الكلاسيكية؟</p>
+      <details class="practice-answer">
+        <summary class="practice-answer-summary type-ui-label">
+          <span class="practice-answer-icon" aria-hidden="true">↓</span>
+          <span>اكشف الإجابة</span>
+        </summary>
+        <div class="practice-answer-body type-body">تحليل مسار المستخدم: Awareness → Interest → Consideration → Conversion → Retention. كل مرحلة يتسرّب جزء. الهدف: تقليل التسرّب.</div>
+      </details>
+      <button class="practice-tried-btn type-button" type="button" data-q-id="lb-003-q1" aria-pressed="false">
+        <span class="practice-tried-icon" aria-hidden="true"></span>
+        <span class="practice-tried-label">حاولت</span>
+      </button>
+    </li>
+    <li class="practice-question" data-q-id="lb-003-q2">
+      <p class="practice-question-text type-body">Conversion rate = 1%. هل هذا جيد؟ يعتمد على ماذا؟</p>
+      <details class="practice-answer">
+        <summary class="practice-answer-summary type-ui-label">
+          <span class="practice-answer-icon" aria-hidden="true">↓</span>
+          <span>اكشف الإجابة</span>
+        </summary>
+        <div class="practice-answer-body type-body">يعتمد على: 1) الصناعة (e-commerce ~2-3%, SaaS ~7%, luxury ~0.5%). 2) مصدر الترافيك (organic > paid). 3) مرحلة الـ funnel. 1% قد يكون ممتاز أو كارثي.</div>
+      </details>
+      <button class="practice-tried-btn type-button" type="button" data-q-id="lb-003-q2" aria-pressed="false">
+        <span class="practice-tried-icon" aria-hidden="true"></span>
+        <span class="practice-tried-label">حاولت</span>
+      </button>
+    </li>
+    <li class="practice-question" data-q-id="lb-003-q3">
+      <p class="practice-question-text type-body">ما أسرع طريقة لتحسين conversion في أسفل الـ funnel (checkout)؟</p>
+      <details class="practice-answer">
+        <summary class="practice-answer-summary type-ui-label">
+          <span class="practice-answer-icon" aria-hidden="true">↓</span>
+          <span>اكشف الإجابة</span>
+        </summary>
+        <div class="practice-answer-body type-body">1) قلل عدد الخطوات. 2) أضف trust signals (شعارات أمان). 3) قدّم خيارات دفع متعددة. 4) وضّح التكلفة النهائية (لا مفاجآت). 5) guest checkout.</div>
+      </details>
+      <button class="practice-tried-btn type-button" type="button" data-q-id="lb-003-q3" aria-pressed="false">
+        <span class="practice-tried-icon" aria-hidden="true"></span>
+        <span class="practice-tried-label">حاولت</span>
+      </button>
+    </li>
+        </ol>
+        <footer class="block-practice-reflect">
+          <h5 class="block-practice-reflect-h type-eyebrow">تأمّل ختامي</h5>
+          <p class="block-practice-reflect-prompt type-quote-literary">ارسم funnel لمنتجك/خدمتك: أين أكبر نقطة تسرّب؟ ما فرضيتك لتحسينها؟</p>
+          <textarea class="block-practice-reflect-input" data-reflect-for="lb-003" placeholder="اكتب جوابك هنا (يُحفَظ محلياً، لا يُرسَل لأي خادم)" rows="3" maxlength="500"></textarea>
+          <div class="block-practice-reflect-meta type-num">
+            <span data-reflect-count="0">0</span> / 500 حرف
+          </div>
+        </footer>
+      </section>
+      <nav class="block-bridge" data-bridge-for="lb-003" aria-label="تابع التعلم">
+        <header class="block-bridge-h">
+          <span class="block-bridge-eyebrow type-eyebrow">تابع التعلم</span>
+          <h4 class="block-bridge-title type-display-h">المسار التالي</h4>
+        </header>
+        <ul class="block-bridge-list">
+          <li class="block-bridge-item block-bridge-item--crosspage">
+            <a class="block-bridge-link" href="#so-005" data-bridge-target="so-005" data-bridge-relation="applies-in">
+              <span class="block-bridge-relation type-eyebrow">يُطبَّق في</span>
+              <span class="block-bridge-target-title type-body-lead">Social — حوّل التجربة لمحتوى جاهز</span>
+              <span class="block-bridge-meta type-num"><span class="block-bridge-page-tag">Social</span></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+            <div class="lbl">تسلسل الإجابات الصحيحة</div>
+          </div>
+          <div class="block-pacing" data-pacing-for="lb-004" data-block-est="6">
+            <div class="block-pacing-mastery">
+              <button class="mastery-toggle" type="button" data-mastery-for="lb-004" data-mastery-state="not-started" aria-label="حالة الإتقان">
+                <span class="mastery-icon" aria-hidden="true">○</span>
+                <span class="mastery-label">لم أبدأ</span>
+              </button>
+            </div>
+            <div class="block-pacing-timer">
+              <span class="block-pacing-timer-label type-eyebrow">جلسة تركيز</span>
+              <div class="focus-presets" role="group" aria-label="اختر مدة التركيز">
+                <button class="focus-preset" type="button" data-focus-minutes="15" data-focus-for="lb-004">15م</button>
+                <button class="focus-preset" type="button" data-focus-minutes="25" data-focus-for="lb-004">25م</button>
+                <button class="focus-preset" type="button" data-focus-minutes="45" data-focus-for="lb-004">45م</button>
+              </div>
+              <span class="focus-active" data-focus-active-for="lb-004" hidden>
+                <span class="focus-active-time" data-focus-time>00:00</span>
+                <button class="focus-stop" type="button" data-focus-stop>إيقاف</button>
+              </span>
+            </div>
+          </div>
+          <div class="call-card" data-block-id="lb-004" data-block-type="lesson" data-difficulty="2" data-est-minutes="6">
+            <div class="num" id="sim-stat-rank">مبتدئ</div>
+            <div class="lbl">المستوى الحالي</div>
+          </div>
+        </div>
+
+        <!-- Category filters -->
+        <div class="u-flex u-gap-2 u-mb-5 u-flex-wrap u-items-center">
+          <span class="u-fz-11 u-fw-700 u-c-faint u-ls-1 u-tt-up u-ml-1">الفئة:</span>
+          <button class="sim-cat-btn active" onclick="filterSimCat('all', this)">الكل (81)</button>
+          <button class="sim-cat-btn" onclick="filterSimCat('callcenter', this)">📞 كول سنتر (20)</button>
+          <button class="sim-cat-btn" onclick="filterSimCat('sales', this)">💼 مبيعات (18)</button>
+          <button class="sim-cat-btn" onclick="filterSimCat('account', this)">🤝 أكونت منجر (5)</button>
+          <button class="sim-cat-btn" onclick="filterSimCat('repair', this)">🔧 مركز الصيانة (15)</button>
+          <button class="sim-cat-btn" onclick="filterSimCat('social', this)">📱 سوشيال ميديا (5)</button>
+          <button class="sim-cat-btn" onclick="filterSimCat('negotiation', this)">💼 تفاوض وظيفي (12)</button>
+          <button class="sim-cat-btn u-grad-cyan-violet-soft" onclick="filterSimCat('programming', this)" >💻 برمجة نخبوية (3)</button>
+          <button class="sim-cat-btn u-grad-amber-soft" onclick="filterSimCat('accounting', this)" >🧮 محاسبة احترافية (3)</button>
+        </div>
+
+        <!-- Scenario cards grid -->
+        <div id="sim-cards-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:32px;"></div>
+
+      </div><!-- /sim-lobby -->
+
+      <!-- ============ SIMULATION ENGINE ============ -->
+      <div id="sim-engine" class="u-hidden">
+
+        <!-- Top bar inside engine -->
+        <div class="u-flex u-items-center u-justify-between u-mb-5 u-flex-wrap u-gap-3">
+          <button class="btn btn-ghost u-fz-12" onclick="exitSimulation()">
+            ← العودة للقائمة
+          </button>
+          <div class="u-flex u-items-center u-gap-4">
+            <div class="u-row-8">
+              <span class="u-meta-sm">نقاطك:</span>
+              <span id="eng-score-display" class="u-fz-15 u-fw-900 u-c-cyan">0</span>
+            </div>
+            <div id="eng-progress-wrap" class="u-row-8">
+              <span class="u-meta-sm">التقدم:</span>
+              <div class="u-track u-track-120" >
+                <div id="eng-progress-bar" style="height:100%; background:linear-gradient(90deg,var(--accent),#0EA5E9); border-radius:99px; transition:width 0.5s ease; width:0%;"></div>
+              </div>
+              <span id="eng-progress-text" class="u-meta-sm"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scenario meta -->
+        <div id="eng-meta" class="u-flex u-items-center u-gap-2-5 u-mb-45 u-flex-wrap"></div>
+
+        <!-- Scene card -->
+        <div class="card" style="margin-bottom:16px; border-color:var(--border-hover);">
+          <div class="u-fz-9 u-fw-800 u-ls-15 u-tt-up u-c-faint u-mb-3">📍 المشهد</div>
+          <p id="eng-setup" class="u-fz-14 u-c-text u-lh-18 u-mb-4"></p>
+
+          <div class="u-bg-surface-2 u-b1-bd u-r-md u-p-14 u-mb-3">
+            <div class="u-fz-9 u-fw-800 u-ls-12 u-tt-up u-c-faint u-mb-2">🗣 الطرف الآخر يقول</div>
+            <p id="eng-opener" class="u-fz-14 u-fw-600 u-c-text u-lh-17 u-italic"></p>
+          </div>
+
+          <div id="eng-psych-wrap" class="u-pad-card u-pad-card-accent" >
+            <div class="u-t-eyebrow">🧠 السياق النفسي</div>
+            <p id="eng-psych" class="u-fz-125 u-c-muted u-lh-17"></p>
+          </div>
+        </div>
+
+        <!-- Choices -->
+        <div id="eng-choices-wrap" class="u-mb-4">
+          <div style="font-size:11px; font-weight:700; color:var(--text-muted); letter-spacing:0.5px; margin-bottom:12px; text-transform:uppercase;">كيف ستتصرف؟</div>
+          <div id="eng-choices" class="u-flex u-flex-col u-gap-2-5"></div>
+        </div>
+
+        <!-- Feedback panel (hidden until choice) -->
+        <div id="eng-feedback-panel" class="u-hidden">
+          <div class="card" id="eng-feedback-card" class="u-mb-4">
+            <div class="u-flex u-items-center u-gap-2-5 u-mb-3">
+              <div id="eng-feedback-icon" style="font-size:28px;"></div>
+              <div>
+                <div id="eng-score-gained" class="u-fz-18 u-fw-900"></div>
+                <div id="eng-feedback-title" class="u-fz-13 u-fw-700 u-c-text u-mt-tiny"></div>
+              </div>
+            </div>
+            <div class="u-bg-surface-2 u-b1-bd u-r-md u-p-12 u-mb-3">
+              <div class="u-fz-9 u-fw-800 u-ls-12 u-tt-up u-c-faint u-mb-15b">💬 ردّ الطرف الآخر</div>
+              <p id="eng-consequence" class="u-fz-13 u-c-text u-lh-17 u-italic"></p>
+            </div>
+            <div class="u-pad-card u-pad-card-accent u-mb-12" >
+              <div class="u-t-eyebrow">⚡ تصرّف الخبير</div>
+              <p id="eng-expert" class="u-fz-13 u-c-muted u-lh-17"></p>
+            </div>
+            <div class="u-pad-card u-pad-card-violet" >
+              <div class="u-fz-9 u-fw-800 u-ls-12 u-tt-up u-c-purple u-mb-15b">🎯 المبدأ النفسي</div>
+              <p id="eng-principle" class="u-fz-13 u-c-muted u-lh-17"></p>
+            </div>
+          </div>
+
+          <div class="u-flex u-justify-center">
+            <button class="btn btn-primary" id="eng-next-btn" onclick="nextScenario()" style="padding:12px 32px; font-size:14px;">
+              السيناريو التالي ←
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /sim-engine -->
+
+      <!-- ============ ROUND REPORT ============ -->
+      <div id="sim-report" class="u-hidden">
+        <div class="card u-stack-center u-max-600" >
+          <div style="font-size:64px; margin-bottom:16px;" id="report-emoji"></div>
+          <h2 class="u-fz-24 u-fw-900 u-c-text u-mb-2" id="report-title"></h2>
+          <p class="u-fz-13 u-c-muted u-mb-7" id="report-subtitle"></p>
+
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:28px;">
+            <div class="u-frame-card">
+              <div class="u-stat-26 u-c-accent"  id="report-score">0</div>
+              <div class="u-meta-tiny">النقاط المكتسبة</div>
+            </div>
+            <div class="u-frame-card">
+              <div class="u-stat-26 u-c-green"  id="report-correct">0/5</div>
+              <div class="u-meta-tiny">إجابات ممتازة</div>
+            </div>
+            <div class="u-frame-card">
+              <div class="u-stat-26 u-c-violet"  id="report-accuracy">0%</div>
+              <div class="u-meta-tiny">الدقة</div>
+            </div>
+          </div>
+
+          <div id="report-breakdown" class="u-text-end u-mb-6"></div>
+
+          <div class="u-flex u-gap-3 u-justify-center">
+            <button class="btn btn-primary" onclick="startNewRound()" class="u-pad-card-md">
+              جولة جديدة 🎯
+            </button>
+            <button class="btn btn-ghost" onclick="exitSimulation()" class="u-pad-card-md">
+              العودة للقائمة
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+      <aside class="block-bridge block-bridge--cross-page" data-cross-bridge-from="page-lab" data-cross-bridge-to="page-social" aria-label="جسر بين الصفحتين">
+        <header class="block-bridge-h">
+          <span class="block-bridge-eyebrow type-eyebrow">جسر تعلّمي</span>
+          <h3 class="block-bridge-title type-display">ما بعد المختبر</h3>
+        </header>
+        <p class="block-bridge-desc type-body-lead">كل تجربة في الـ Lab تنتج مادة جاهزة للنشر. حوّل ما تعلّمته لمحتوى يُلهم متابعيك.</p>
+        <a class="block-bridge-cta type-button" href="#page-social" data-cross-bridge-cta="social">
+          تابع لـ صفحة Social <span aria-hidden="true">←</span>
+        </a>
+      </aside>
+
+    </section><!-- /page-lab -->

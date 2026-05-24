@@ -1,0 +1,113 @@
+<!-- ════════════════════════════════════════════════════════════════════
+     DEVOTIO v3 / Worker 23 / Phase 4 — Page Shard: page-myprogress
+     Source: platform/index.html (lines 31783..31887)
+     Status: STAGED. Inline copy still lives in index.html (Stage-and-Replace doctrine).
+     Loaded via: Upg.shards.loadShard("myprogress").
+     Cached by: service worker (sw.js PRECACHE list).
+     Edit policy: edit BOTH inline + shard until Phase 5 finalizes the swap.
+     ════════════════════════════════════════════════════════════════════ -->
+<section class="page" id="page-myprogress" data-page-personality="myprogress">
+    <header class="page-h" data-tint="myprogress">
+      <span class="h-eyebrow">Personal Progress</span>
+      <h1 class="type-display tas-kashida" lang="ar"><i class="qi qi-lg" data-icon="trending-up" aria-hidden="true"></i> تقدمي</h1>
+      <p class="h-lede">صورة كاملة لكل ما أنجزته على المنصة — لا أرقام مزيّفة.</p>
+    </header>
+
+    <div class="cath-dash-stats">
+      <article class="cath-stat">
+        <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="check-circle"></i></div>
+        <div class="cath-stat-body">
+          <div><span class="cath-stat-value tas-num-hero" data-cath-stat="unitsCompleted" data-type-voice="numeric">0</span></div>
+          <span class="cath-stat-label">وحدة مُكتملة</span>
+        </div>
+      </article>
+      <article class="cath-stat">
+        <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="bar-chart"></i></div>
+        <div class="cath-stat-body">
+          <div><span class="cath-stat-value tas-num-hero" data-cath-stat="quizzesTaken" data-type-voice="numeric">0</span></div>
+          <span class="cath-stat-label">تقييمات نفسية</span>
+        </div>
+      </article>
+      <article class="cath-stat">
+        <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="bookmark"></i></div>
+        <div class="cath-stat-body">
+          <div><span class="cath-stat-value tas-num-hero" data-cath-stat="draftCount" data-type-voice="numeric">0</span></div>
+          <span class="cath-stat-label">مسوّدة محفوظة</span>
+        </div>
+      </article>
+      <article class="cath-stat">
+        <div class="cath-stat-icon"><i class="qi qi-lg" data-icon="star"></i></div>
+        <div class="cath-stat-body">
+          <div><span class="cath-stat-value tas-num-hero" data-cath-stat="topScore" data-type-voice="numeric">0</span></div>
+          <span class="cath-stat-label">أعلى درجة لاب</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="progress-grid">
+      <div class="cath-dash-card material-regular">
+        <header>
+          <h2><i class="qi" data-icon="line-chart"></i> النشاط — آخر 30 يوم</h2>
+          <span style="font-size:.78rem;color:var(--color-text-faint,rgba(255,255,255,.5));">حدث / يوم</span>
+        </header>
+        <div class="progress-chart-wrap">
+          <canvas id="progress-chart" width="600" height="180"></canvas>
+        </div>
+      </div>
+      <div class="cath-dash-card material-regular">
+        <header><h2><i class="qi" data-icon="layout-dashboard"></i> شجرة المهارات</h2></header>
+        <div class="cath-skill-grid" id="cath-skill-grid-progress"></div>
+      </div>
+    </div>
+
+    <div class="progress-grid">
+      <div class="cath-dash-card material-regular">
+        <header><h2><i class="qi" data-icon="bookmark"></i> مسوّداتي</h2></header>
+        <ul class="cath-activity-list" id="my-drafts-list"></ul>
+      </div>
+      <div class="cath-dash-card material-regular">
+        <header><h2><i class="qi" data-icon="trending-up"></i> أعلى الدرجات</h2></header>
+        <ul class="cath-activity-list" id="my-achievements-list"></ul>
+      </div>
+    </div>
+
+    <div class="progress-footer">
+      <button class="cath-quick-action" type="button" data-action="export-progress">
+        <i class="qi qi-lg" data-icon="download"></i><span>تصدير كل البيانات (JSON)</span>
+      </button>
+      <button class="cath-quick-action" type="button" data-action="import-progress">
+        <i class="qi qi-lg" data-icon="upload"></i><span>استيراد ملف</span>
+      </button>
+      <button class="cath-quick-action cath-action-danger" type="button" data-action="reset-progress">
+        <i class="qi qi-lg" data-icon="trash"></i><span>حذف كل التقدم</span>
+      </button>
+    </div>
+    <section class="mp-heatmap-section">
+      <header class="mp-heatmap-header">
+        <span class="type-eyebrow">إتقان شامل</span>
+        <h2 class="type-display">خريطة الإتقان</h2>
+        <p class="type-body-lead">تابع تقدمك عبر صفحات المحتوى.</p>
+      </header>
+      <div class="mastery-heatmap" data-mastery-heatmap-root>
+        <!-- Rendered by Upg.pace.renderHeatmap() -->
+      </div>
+      <div class="mastery-summary">
+        <div class="mastery-stat">
+          <span class="mastery-stat-label type-eyebrow">إجمالي البلوكات</span>
+          <span class="mastery-stat-value type-num-display" data-mastery-total>0</span>
+        </div>
+        <div class="mastery-stat">
+          <span class="mastery-stat-label type-eyebrow">أتقنته</span>
+          <span class="mastery-stat-value type-num-display mastery-stat-value--mastered" data-mastery-mastered>0</span>
+        </div>
+        <div class="mastery-stat">
+          <span class="mastery-stat-label type-eyebrow">قيد العمل</span>
+          <span class="mastery-stat-value type-num-display mastery-stat-value--inprogress" data-mastery-inprogress>0</span>
+        </div>
+        <div class="mastery-stat">
+          <span class="mastery-stat-label type-eyebrow">ساعات تركيز</span>
+          <span class="mastery-stat-value type-num-display" data-mastery-focus-hours>0</span>
+        </div>
+      </div>
+    </section>
+  </section>
