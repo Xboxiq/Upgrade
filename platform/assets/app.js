@@ -130,3 +130,6 @@ import './js/elan/world-tayyar.js';
 import './js/elan/world-warsha.js';
 // ÊLAN v4 — γ9: Saloon world (meta-mirror — closes Pillar γ)
 import './js/elan/world-saloon.js';
+
+// ÊLAN v4 — δ1: Magnetic Sidebar (Pillar δ KINETIC SHELL — Stage 1 of 6)
+import './js/elan/sidebar-magnetic.js';

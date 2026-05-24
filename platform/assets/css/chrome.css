@@ -1396,3 +1396,177 @@ body[data-haptic-enabled="true"] .dual-haptic-toggle::after {
 }
 
 /* End DUAL-FORM v3 / Phase 4 — Haptic Toggle ──────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — δ1 — Magnetic Sidebar (Pillar δ KINETIC SHELL / Stage 1 of 6)
+   ════════════════════════════════════════════════════════════════════════
+   🌊 MOTION_BEACON
+   The Surprise: ONE sidebar element, EIGHT magnetic personalities.
+   The tilt response (max angle + settle duration + easing) inherits from
+   each world's --ease-<world> / --duration-<world> tokens — so the same
+   slab behaves like paper in Hibr, like a forge anvil in Naar, like
+   mountain mist in Nada, like a Hadeed cinema reel snap, like a balanced
+   gold pan in Dhahab, like an elastic wave in Tayyar, like a stair-step
+   workshop bench in Warsha, like polished walnut in Saloon. On touch
+   devices, DeviceOrientationEvent drives the same tilt — phone leans,
+   sidebar leans (≤ ±1.5°). Settle is GRAVITY (one half-cycle) not SPRING
+   (Forbidden #13).
+
+   Reference Avoided: #13 spring-bounce hover · #3 Notion-pill sidebar
+   Inspired-by: Wild Card #2 — Iraqi Brutalism (Chadirji)
+   Sacred preserved: existing 17 .nav-item + .qi icons untouched; this
+   layer AUGMENTS via [data-elan-magnetic="sidebar"] hook only. CSS adds
+   tilt + per-world materiality only; layout & icon path unchanged.
+   ──────────────────────────────────────────────────────────────────── */
+
+#sidebar[data-elan-magnetic="sidebar"] {
+  /* JS writes these three; CSS handles the visual. */
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --tilt-shadow: 0px;
+
+  /* Per-element fallbacks; per-world overrides below replace them. */
+  --magnet-tilt-max: 1.2deg;
+  --magnet-duration-rest: 320ms;
+  --magnet-ease-rest: var(--ease-elan, cubic-bezier(0.16, 1, 0.3, 1));
+
+  /* Brutalist gravity-settle: one half-cycle damped curve, NOT a spring.
+     Negative starting Y produces a tiny undershoot then ease — like an
+     iron plate returning to rest after a magnet is pulled away. */
+  --magnet-ease-settle: cubic-bezier(0.32, -0.04, 0.4, 1);
+
+  transform-style: preserve-3d;
+  transform: perspective(900px)
+             rotateX(var(--tilt-y))
+             rotateY(var(--tilt-x));
+  transition:
+    transform var(--magnet-duration-rest) var(--magnet-ease-rest),
+    box-shadow var(--magnet-duration-rest) var(--magnet-ease-rest);
+  will-change: transform;
+}
+
+/* Active-state: sidebar is currently being magnetised by pointer or gyro.
+   JS toggles [data-magnet-state="active"]; on release JS removes it and
+   the rest-transition (settle ease) runs. */
+#sidebar[data-elan-magnetic="sidebar"][data-magnet-state="active"] {
+  transition:
+    transform 80ms linear,
+    box-shadow 80ms linear;
+}
+
+#sidebar[data-elan-magnetic="sidebar"][data-magnet-state="resting"] {
+  transition:
+    transform var(--magnet-duration-rest) var(--magnet-ease-settle),
+    box-shadow var(--magnet-duration-rest) var(--magnet-ease-settle);
+}
+
+/* Per-world magnetic materiality — each world overrides three vars to
+   give the slab its own physical personality. Token chain reuses the
+   --ease-<world> / --duration-<world> declared in worlds/_<name>.css. */
+body[data-world="hibr"]   #sidebar[data-elan-magnetic="sidebar"] {
+  --magnet-tilt-max: 0.9deg;
+  --magnet-duration-rest: var(--duration-hibr-dry, 600ms);
+  --magnet-ease-rest: var(--ease-hibr, cubic-bezier(0.5, 0, 0.5, 1));
+}
+body[data-world="naar"]   #sidebar[data-elan-magnetic="sidebar"] {
+  --magnet-tilt-max: 1.5deg;
+  --magnet-duration-rest: var(--duration-naar, 180ms);
+  --magnet-ease-rest: var(--ease-naar, cubic-bezier(0.7, 0, 0.2, 1.2));
+}
+body[data-world="nada"]   #sidebar[data-elan-magnetic="sidebar"] {
+  --magnet-tilt-max: 0.6deg;
+  --magnet-duration-rest: var(--duration-nada-condense, 520ms);
+  --magnet-ease-rest: var(--ease-nada, cubic-bezier(0.25, 0.46, 0.45, 0.94));
+}
+body[data-world="hadeed"] #sidebar[data-elan-magnetic="sidebar"] {
+  --magnet-tilt-max: 1.4deg;
+  --magnet-duration-rest: var(--duration-hadeed, 220ms);
+  --magnet-ease-rest: var(--ease-hadeed, cubic-bezier(0.85, 0, 0.15, 1));
+}
+body[data-world="dhahab"] #sidebar[data-elan-magnetic="sidebar"] {
+  --magnet-tilt-max: 0.9deg;
+  --magnet-duration-rest: var(--duration-dhahab, 360ms);
+  --magnet-ease-rest: var(--ease-dhahab, cubic-bezier(0.32, 0.72, 0.28, 1));
+}
+body[data-world="tayyar"] #sidebar[data-elan-magnetic="sidebar"] {
+  --magnet-tilt-max: 1.2deg;
+  --magnet-duration-rest: var(--duration-tayyar, 520ms);
+  --magnet-ease-rest: var(--ease-tayyar, cubic-bezier(0.45, -0.4, 0.55, 1.4));
+}
+body[data-world="warsha"] #sidebar[data-elan-magnetic="sidebar"] {
+  --magnet-tilt-max: 1.3deg;
+  --magnet-duration-rest: var(--duration-warsha, 280ms);
+  /* Warsha uses a stair-stepped feel via steps() — gritty bench */
+  --magnet-ease-rest: steps(4, end);
+}
+body[data-world="saloon"] #sidebar[data-elan-magnetic="sidebar"] {
+  --magnet-tilt-max: 1.0deg;
+  --magnet-duration-rest: var(--duration-saloon, 380ms);
+  --magnet-ease-rest: var(--ease-saloon, cubic-bezier(0.4, 0.05, 0.2, 0.95));
+}
+
+/* iOS 13+ Gyroscope permission prompt — rendered only when needed.
+   Unobtrusive: small chip pinned bottom-end of the sidebar; auto-hides
+   after the user grants or denies. NO emoji, NO inline SVG — text only. */
+.elan-magnet-permit {
+  position: absolute;
+  inset-inline-end: var(--s-3, 12px);
+  inset-block-end: calc(var(--s-12, 48px) + env(safe-area-inset-bottom, 0px));
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2, 8px);
+  padding: var(--s-2, 8px) var(--s-3, 12px);
+  border: 1px solid var(--line, hsl(0 0% 50% / 0.2));
+  border-radius: var(--r-pill, 999px);
+  background: var(--anchor-1, hsl(0 0% 100% / 0.6));
+  color: var(--ink-muted, currentColor);
+  font: 500 12px/1.2 var(--voice-ui, system-ui), sans-serif;
+  cursor: pointer;
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+.elan-magnet-permit:hover {
+  background: var(--anchor-2, hsl(0 0% 100% / 0.8));
+  color: var(--ink, currentColor);
+}
+.elan-magnet-permit:focus-visible {
+  outline: 2px solid var(--focus, var(--color-primary, hsl(220 80% 50%)));
+  outline-offset: 2px;
+}
+.elan-magnet-permit[hidden] { display: none; }
+
+/* Accessibility — silence the entire system when the user prefers. */
+@media (prefers-reduced-motion: reduce) {
+  #sidebar[data-elan-magnetic="sidebar"] {
+    --tilt-x: 0deg !important;
+    --tilt-y: 0deg !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .elan-magnet-permit { display: none !important; }
+}
+
+/* Print — never tilt, never magnetic, never permission button. */
+@media print {
+  #sidebar[data-elan-magnetic="sidebar"] {
+    transform: none !important;
+    transition: none !important;
+  }
+  .elan-magnet-permit { display: none !important; }
+}
+
+/* Forced-colors — system surface only, no transforms. */
+@media (forced-colors: active) {
+  #sidebar[data-elan-magnetic="sidebar"] {
+    transform: none !important;
+  }
+  .elan-magnet-permit {
+    border: 1px solid CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+}
+
+/* End ÊLAN v4 — δ1 ─────────────────────────────────────────────────── */
