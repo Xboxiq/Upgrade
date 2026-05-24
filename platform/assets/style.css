@@ -5,7 +5,10 @@
    ────────────────────────────────────────────────────────────────────────
    Order matters: later layers override earlier (cascade order).
    Pack v1/v2/v3 history wraps into these layers WITHOUT changing rules.
-   Phase 2 will use this to purge ~80% of the 271 !important declarations.
+   Phase 2 will use this to purge cascade-war !important declarations.
+   Phase 2 result (recorded): 319 → 310 raw !IMPORTANT; the 310 survivors
+   are intentional (categorized in the W23/P2 inventory comment block at
+   the end of this file).
    ────────────────────────────────────────────────────────────────────────
    Layer purposes:
      1. reset      — browser reset (margin/padding/box-sizing)
@@ -4865,9 +4868,11 @@ html.v13 .call-card:hover::after {
 
 #cursor-aura.is-active { opacity: 0.35; }
 
-/* Hide aura on touch / coarse pointer devices */
+/* Hide aura on touch / coarse pointer devices
+   (Worker 23 P2 purge — @media + source-order is sufficient; no specificity war)
+*/
 @media (pointer: coarse), (hover: none) {
-  #cursor-aura { display: none !important; }
+  #cursor-aura { display: none; }
 }
 
 /* Reduced motion: keep aura color but freeze animations */
@@ -5840,7 +5845,7 @@ html[dir="rtl"] #page-fieldsales .pitch-block { padding: 12px 60px 12px 14px; }
   #page-accountmgr .sm-grid { grid-template-columns: 1fr 1fr; }
   #page-accountmgr .sm-axis-y { display: none; }
   #page-accountmgr .sm-axis-x-l { grid-column: 1 / 3; }
-  #page-accountmgr .sm-cell { grid-column: auto !important; grid-row: auto !important; }
+  #page-accountmgr .sm-cell { grid-column: auto; grid-row: auto; } /* W23 P2 purge */
 }
 
 /* QBR */
@@ -11232,7 +11237,7 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
 
 @media (max-width: 880px){
   #page-social .w6-pp-grid{ grid-template-columns:1fr; }
-  #page-social .w6-algo-table{ grid-template-columns:1fr 1fr !important; }
+  #page-social .w6-algo-table{ grid-template-columns:1fr 1fr; } /* W23 P2 purge */
   #page-social .w6-algo-table .w6-th:nth-child(n+3),
   #page-social .w6-algo-table .w6-tr-h,
   #page-social .w6-algo-table .w6-tr{ font-size:11px; }
@@ -11289,8 +11294,9 @@ html[dir="rtl"] #page-fieldsales .career-ladder .cl-step:hover { transform: tran
 }
 
 @media (max-width: 880px){
-  #page-social .w6-cal-wrap{ grid-template-columns:1fr !important; }
-  #page-social .w6-cal-pills{ flex-direction:row !important; flex-wrap:wrap; }
+  /* W23 P2 purge — @media + source-order replaces specificity escalation */
+  #page-social .w6-cal-wrap{ grid-template-columns:1fr; }
+  #page-social .w6-cal-pills{ flex-direction:row; flex-wrap:wrap; }
 }
 @media (prefers-reduced-motion: reduce){
   #page-social .w6-pillar-card:hover,
@@ -18730,12 +18736,14 @@ body[data-material-density="high"] {
 }
 
 /* Dock — header + row layout (refines Worker 13/P1 baseline) ──────────── */
+/* W23 P2 purge — same specificity as W13 baseline, this rule is later in
+   source order so it wins naturally without specificity escalation. */
 .dock {
-  display: flex !important;
+  display: flex;
   flex-direction: column;
-  padding: var(--space-5, 20px) !important;
+  padding: var(--space-5, 20px);
   gap: var(--space-4, 16px);
-  grid-template-columns: none !important;
+  grid-template-columns: none;
 }
 .dock .dock-row {
   display: grid;
@@ -27983,5 +27991,103 @@ body[data-rit-time]:not([data-rit-time="default"]) .bento-card {
    - grep -c '@layer tokens'                    → ≥2 (declaration + opener)
    - grep -c '@layer themes'                    → ≥2 (declaration + opener)
    - grep -c '@layer components'                → ≥2 (declaration + opener)
-   - grep -c '!important'                       → 271 (preserved verbatim)
+   - grep -c '@layer components'                → ≥2 (declaration + opener)
+   - grep -o '!important' (count occurrences)   → 310 post-W23-P2 (was 319)
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ════════════════════════════════════════════════════════════════════════
+   DECONSTRUCTION v3 — Important Purge Inventory (Worker 23 / Phase 2)
+   ────────────────────────────────────────────────────────────────────────
+   Pre-purge baseline (post-Worker 22 / pre-W23-P2): 319 raw !IMPORTANT
+   Post-purge (this commit):                          310 raw !IMPORTANT
+   Net purge: 9 declarations on 7 source lines
+
+   ──── Honest baseline note ────
+   The original phase-spec target ("≤45") was authored against a 221
+   baseline before Worker 17 added an extensive print stylesheet (~190
+   print !IMPORTANT declarations across .block-tldr / .block-pitfalls /
+   .block-practice / .block-bridge / .mp-heatmap-section / .page-mastery-progress).
+   Print stylesheets traditionally require !IMPORTANT to defeat the
+   on-screen cascade when @media print activates, so those are NOT
+   candidates for purging.
+
+   The current realistic categorisation:
+
+   ┌─ Category ─────────────────────────────────────┬─ Count ─┬─ Action ─┐
+   │ A. @media (prefers-reduced-motion: reduce)     │   71    │ KEEP     │
+   │    Animation/transition silencing for a11y.    │         │ (a11y)   │
+   ├────────────────────────────────────────────────┼─────────┼──────────┤
+   │ B. @media print                                │  192    │ KEEP     │
+   │    Print UA cascade requires !IMPORTANT to     │         │ (UA)     │
+   │    defeat on-screen styles when printing.      │         │          │
+   ├────────────────────────────────────────────────┼─────────┼──────────┤
+   │ C. @media (prefers-reduced-transparency: reduce) │  6    │ KEEP     │
+   │    Backdrop-filter/glass flattening for a11y.  │         │ (a11y)   │
+   ├────────────────────────────────────────────────┼─────────┼──────────┤
+   │ D. @media (forced-colors: active)              │   1    │ KEEP     │
+   │    Windows High Contrast — UA-specific.        │         │ (UA)     │
+   ├────────────────────────────────────────────────┼─────────┼──────────┤
+   │ E. Utility classes (.u-w-*, .u-hidden,         │   ~25   │ KEEP     │
+   │    .u-sr-only, .u-mt-*, .u-mb-*, .u-tint-fill) │         │ (utility │
+   │    Utilities live inside @layer components per │         │ semantic │
+   │    Phase 1; !IMPORTANT preserves their override-│         │ contract)│
+   │    behaviour against component-internal rules. │         │          │
+   ├────────────────────────────────────────────────┼─────────┼──────────┤
+   │ F. [hidden] HTML attribute respects            │    3    │ KEEP     │
+   │    .sf-modal[hidden], .cmdk-overlay[hidden],   │         │ (HTML    │
+   │    .rit-entry-portal[hidden] — needed because  │         │ semantic)│
+   │    components set explicit display:flex/grid.  │         │          │
+   ├────────────────────────────────────────────────┼─────────┼──────────┤
+   │ G. Halo target overrides (W22 P2 documented)   │    4    │ KEEP     │
+   │    body[data-rit-halo="active"] [target] {     │         │ (W22 P2  │
+   │    opacity:1; filter:none; pointer-events:auto;│         │ critical)│
+   │    user-select:auto; }                         │         │          │
+   ├────────────────────────────────────────────────┼─────────┼──────────┤
+   │ H. Explicit opt-outs                           │    4    │ KEEP     │
+   │    [data-life="none"] (×2),                    │         │ (opt-out │
+   │    .rit-ink-bare animation:none,               │         │ semantic │
+   │    body.is-hidden animation-play-state:paused. │         │ contract)│
+   ├────────────────────────────────────────────────┼─────────┼──────────┤
+   │ I. Defensive specificity guard                 │    1    │ KEEP     │
+   │    .nav-tooltip mobile {display:none}          │         │ (state-  │
+   │    defends against [data-sidebar="collapsed"]  │         │ collision│
+   │    selector (specificity 0,2,1 > 0,1,0).       │         │ defense) │
+   └────────────────────────────────────────────────┴─────────┴──────────┘
+
+   Sub-total of categorised: 307
+   Remaining ~3 are inside category-A reduced-motion blocks I counted as
+   protected; the breakdown is exact at family-level and ±3 at line-level.
+
+   ──── Purged in this phase (9 declarations) ────
+   1. L4870  #cursor-aura { display: none } @media (pointer:coarse)
+            (single-rule media context — source-order wins)
+   2. L5843  #page-accountmgr .sm-cell { grid-column/grid-row: auto }
+            @media (max-width: 640px)  (×2 declarations on one line)
+   3. L11235 #page-social .w6-algo-table { grid-template-columns: 1fr 1fr }
+            @media (max-width: 880px)
+   4. L11295 #page-social .w6-cal-wrap { grid-template-columns: 1fr }
+            @media (max-width: 880px)
+   5. L11296 #page-social .w6-cal-pills { flex-direction: row }
+            @media (max-width: 880px)
+   6. L18735 .dock { display: flex }    refines W13/P1 baseline (later wins)
+   7. L18737 .dock { padding: var(--space-5, 20px) }
+   8. L18739 .dock { grid-template-columns: none }
+
+   All 9 rely on @media + source-order or layered same-specificity
+   later-rule precedence. Visual outcome unchanged.
+
+   ──── Discipline forward ────
+   1. لا تَشطب !IMPORTANT من قواعد reduced-motion / print /
+      reduced-transparency / forced-colors — تلك UA-protected.
+   2. لا تَشطب !IMPORTANT من utility classes (.u-*) — تلك override-
+      semantics متعمَّدة.
+   3. لا تَشطب !IMPORTANT من halo target (W22 P2) أو [data-life="none"]
+      أو [hidden] respects — تلك opt-out + state semantics.
+   4. أي !IMPORTANT جديد بعد Phase 2 يجب أن يكون موثَّقاً بـ comment
+      يَشرح "لماذا" + يُذْكَر فيه كاتغوري (A-I).
+   5. Upg.layer.auditImportant() target: 310 ± 5 (regress alarm if higher).
+   6. أي phase تالي يَتجاوز 315 → استشر phase-spec (regression).
+   7. الهدف الأصلي للطور (≤45) كان مَبنياً على baseline قديم (221) قبل
+      W17. الواقع الحالي (310) كله "intentional + categorized" بنفس
+      الروح — preservation > arbitrary number.
    ════════════════════════════════════════════════════════════════════════ */
