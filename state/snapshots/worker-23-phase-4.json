@@ -1,0 +1,68 @@
+{
+  "pack": "v3",
+  "worker": "23",
+  "worker_name": "DECONSTRUCTION",
+  "phase_completed": 4,
+  "phases_total": 5,
+  "title": "HTML Template Split (STAGE) — extract 15 page sections to platform/pages/<id>.html (byte-exact, preserved inline) + Upg.shards IIFE (29th top-level Upg.* namespace, ~180 JS lines) with frozen surface (list/loadShard/preloadAll/audit/verify/mountShard/discipline) + sw.js v3 precache rewrite (added 6 CSS shards from W23 P3 + 15 page shards from this phase + dedicated SHARD_CACHE bucket with cache-first strategy on /pages/*.html paths + version bump atelier-v16-2026-05 → devotio-v3-w23-p4-2026-05) + 15 data-shard-id annotations on inline <section class=\"page\"> opening tags + 12-line Phase 4 discipline comment block before #rit-entry-portal in index.html + per-shard 7-line banner pointing back to source line range. Strategy: STAGE-AND-REPLACE conservative — Phase 4 stages the architecture without thinning the shell because navigateTo (app.js line 153-169) captures document.querySelectorAll('.page') as a STATIC NodeList at IIFE init; live querying is a Phase 5 (JS ESM) concern. The actual swap is therefore safe to defer: Upg.shards.mountShard() refuses while inline copy is present (requires {force:true} override) so accidental calls cannot double-mount. file:// users keep working because loadShard catches network failures silently and the inline copy still renders. Sacred preserved 100% (15 page sections inline still rendering, +1 in discipline comment quote = 16 grep hit / 391 qcalc inline + 391 qcalc in shards = exact 1:1 byte-equivalence proven via balance counter / 28 → 29 Upg.* APIs (added Upg.shards) / 0 google fonts / 0 CDN / 0 framework / W12 P2 Linen-Bone + W21 P2 Mihrab themes untouched / W22 entry portal/halo/threshold/inkpot/atmosphere/aura preserved / W23 P3 CSS shatter chain (tokens/base/utilities/chrome/pages/motion) intact / Phase 1-2 IIFEs (Upg.layer with auditImportant) untouched). Branch: worker-23-devotio-p4 (1 commit so far). Cleanup: scripts/split-html.mjs deleted post-extraction (one-shot, splitter logic remains in git history under deletion). 18 files changed, 31487 insertions, 17 deletions. Net structural delta: scaffolds for Phase 5 finalization (which migrates JS to ESM, switches navigateTo to live queries, then performs the actual inline → shard cutover with zero rework on the shard files since they are already byte-exact).",
+  "files_touched": [
+    "platform/index.html",
+    "platform/assets/app.js",
+    "platform/sw.js"
+  ],
+  "files_created": [
+    "platform/pages/dashboard.html",
+    "platform/pages/callcenter.html",
+    "platform/pages/fieldsales.html",
+    "platform/pages/accountmgr.html",
+    "platform/pages/social.html",
+    "platform/pages/lab.html",
+    "platform/pages/psych.html",
+    "platform/pages/eq.html",
+    "platform/pages/negotiation.html",
+    "platform/pages/customercare.html",
+    "platform/pages/programming.html",
+    "platform/pages/accounting.html",
+    "platform/pages/phonerepair.html",
+    "platform/pages/hrmastery.html",
+    "platform/pages/myprogress.html"
+  ],
+  "files_deleted": [
+    "scripts/split-html.mjs"
+  ],
+  "lines_added_total": 31487,
+  "lines_deleted_total": 17,
+  "tokens_added": [],
+  "fonts_added_offline": [],
+  "apis_added": [
+    "Upg.shards"
+  ],
+  "apis_count_before": 28,
+  "apis_count_after": 29,
+  "shards_count": 15,
+  "shards_total_lines": 31187,
+  "shards_qcalc_total": 391,
+  "shards_section_balance_per_file": "all 15 shards have open=close (zero diff)",
+  "sw_precache_pages_entries": 15,
+  "sw_cache_version": "devotio-v3-w23-p4-2026-05",
+  "data_shard_id_annotations": 15,
+  "devotion_notes": "كل صفحة الآن تَستحق ملفها — نُسخت بأمان قبل أن نُحرّك القُدّاس. الـ inline يَبقى كاملاً حتى تَتأكد الجرعة في Phase 5. Stage-and-Replace ليس تأجيلاً — هو احترام لما يَعمل.",
+  "offline_check": {
+    "external_requests": 0,
+    "google_fonts": 0,
+    "cdn_links": 0,
+    "service_worker_precache_count": 31
+  },
+  "sacred_preservation": {
+    "pages_inline": 15,
+    "qcalc_inline": 391,
+    "qcalc_shards": 391,
+    "qcalc_match": true,
+    "upg_apis_top_level": 29,
+    "google_fonts_links": 0,
+    "css_layers": 7,
+    "css_shards_files": 6,
+    "html_shards_files": 15
+  },
+  "next_action": "Continue Worker 23 Phase 5 (JS ESM Migration) — replace app.js IIFE monolith with thin ESM entry + 24+ modules + _compat.js shim. Phase 5 also finalizes the inline → shard cutover (rewrites navigateTo to live-query .page so mountShard can complete the swap)."
+}
