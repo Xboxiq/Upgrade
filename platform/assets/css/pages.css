@@ -406,7 +406,7 @@
       grid-template-areas:
         "sidebar topbar"
         "sidebar main";
-      height: 100vh;
+      height: 100dvh;
       width: 100vw;
     }
 
@@ -419,7 +419,7 @@
       border-left: 1px solid var(--border);
       display: flex;
       flex-direction: column;
-      height: 100vh;
+      height: 100dvh;
       position: relative;
       overflow: hidden;
       z-index: 100;
@@ -2663,7 +2663,7 @@
         position: fixed;
         top: 0; right: -260px;
         width: 260px;
-        height: 100vh;
+        height: 100dvh;
         z-index: 200;
         transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: var(--shadow-md);
@@ -4622,7 +4622,7 @@ body[data-theme="light"] .theme-toggle:hover {
 
 .v12-quiz-overlay.active { display:flex; }
 
-.v12-quiz-modal { background:var(--surface);border:1px solid var(--border-hover);border-radius:var(--radius-xl);width:100%;max-width:680px;max-height:85vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.6); }
+.v12-quiz-modal { background:var(--surface);border:1px solid var(--border-hover);border-radius:var(--radius-xl);width:100%;max-width:680px;max-height:85dvh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.6); }
 
 .v12-quiz-header { display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--border); }
 
@@ -5342,7 +5342,7 @@ html[dir="rtl"] #page-fieldsales .sf-row-solution   td:first-child { box-shadow:
 #page-fieldsales .sf-modal-card {
   position: relative;
   inline-size: min(820px, 100%);
-  max-block-size: 88vh;
+  max-block-size: 88dvh;
   overflow-y: auto;
   padding: 26px 26px 22px;
   border-radius: var(--radius-lg, 18px);
@@ -16398,7 +16398,7 @@ select.qcalc-input { text-align: start; }
   z-index: 9998;
   display: grid;
   place-items: start center;
-  padding: 12vh 16px 16px;
+  padding: 12dvh 16px 16px;
   background: color-mix(in oklch, var(--color-bg, #0b0d12) 70%, transparent);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
@@ -16406,7 +16406,7 @@ select.qcalc-input { text-align: start; }
 }
 
 /* Cheatsheet variant */
-.cmdk-modal-cheatsheet { max-height: 80vh; width: min(720px, 94vw); }
+.cmdk-modal-cheatsheet { max-height: 80dvh; width: min(720px, 94vw); }
 
 @media (max-width: 600px) { .cmdk-cheat-body { grid-template-columns: 1fr; } }
 
