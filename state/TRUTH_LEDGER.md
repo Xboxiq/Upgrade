@@ -267,3 +267,65 @@ on a workstation where ordinary HTTPS reaches github / 29lt.com / sil.org, then 
 🟡 **scaffolded** — β1 deliverables complete on the AI side. Visible behavioural change is gated on operator running the bootstrap; until then voice tokens fall back to `system-ui` (β2 will route the new families).
 
 — Entry end —
+
+
+
+---
+
+## β2 — Voice Casting — 2026-05-24
+**Pillar:** β TYPE SOUL
+**Stage:** 2 of 3
+**Branch:** `elan-β-type-soul`
+**Verified at commit:** `1a91a70`
+
+### Before
+- `tokens/_type.css`: 18 voice slots, **16** of them set to literal `system-ui, sans-serif`, 2 set to `ui-monospace, monospace`. No actual stack discipline.
+- `tokens/_voice-utilities.css`: did not exist.
+- `tokens.css`: 13 @imports, none for voice utilities.
+- `base.css`: body used `var(--font)` and `var(--font-text)` (legacy v3 vars, not the β2 voice tokens).
+- `platform/voice-test.html`: did not exist.
+
+### After (verified by grep)
+
+| Domain | Key | Value |
+|---|---|---:|
+| Voice | `voice_tokens_in__type.css` | 23 (18 base + 5 `:lang(en)` overrides) |
+| Voice | `voice_tokens_using_system_ui` | **0** (Beacon) |
+| Voice | `voice_tokens_with_arabic_first_chain` | 20 (18 base + Latin overrides for body/body-lead) |
+| Voice | `v_utility_classes` | 18 |
+| Imports | `tokens.css_imports_voice_util` | 1 |
+| Imports | `tokens.css_total_imports` | 14 |
+| Body | `base.css_body_uses_voice_body` | 2 (both `body` rules switched) |
+| HTML | `google_fonts_in_index.html` | 0 |
+| Test | `voice-test.html_exists` | yes |
+| Test | `voice-test.html_v_class_refs` | 20 |
+| Test | `voice-test.html_inline_font_family` | 1 (intentional fallback test row) |
+
+### Files
+**Created (2):**
+- `platform/assets/css/tokens/_voice-utilities.css` (18 `.v-*` utility classes — group A display, B body, C ui, D numeric, E special, F latin)
+- `platform/voice-test.html` (verifier sheet — 6 sections, 18 utility-class rows, 1 deliberate fallback row to prove the chain rotates through siblings, not system-ui)
+
+**Modified (3):**
+- `platform/assets/css/tokens/_type.css` (18 voice slots filled; `:lang(en)` block adds 5 Latin-primary overrides; **zero** `system-ui` literals after this stage)
+- `platform/assets/css/tokens.css` (added `@import url("./tokens/_voice-utilities.css")` after the 5 token imports, before the world imports — cascade preserved)
+- `platform/assets/css/base.css` (both `body` rules switched to `var(--voice-body, var(--font-text, var(--font)))` with cascade-safe fallback)
+
+**Untouched (Sacred):**
+- `platform/index.html` (no edits — google fonts links remain 0)
+- `archive/**`
+- `app.js`, all 92 legacy IIFEs
+- `pages.css` (deferred to ζ)
+- `_legacy-fontface.css` (left as deprecation stub from β1)
+
+### Beacon (recorded in CREATIVITY_LOG.md)
+**Type:** ✍️ TYPOGRAPHIC_BEACON
+**The Surprise:** Arabic chains never terminate in `system-ui`. Each voice falls back through other families in the 9-pack (e.g. `body`: Markazi → Lateef → Vazirmatn → Boutros → serif). A font-load failure rotates the **character** of the typography rather than breaking it.
+**Reference Avoided:** Forbidden #19 — generic `system-ui` fallback.
+**Inspired-by:** Wild Card #10 — Nasta'liq (layered Naskh as resilience).
+**Originality Self-Score:** 4/5.
+
+### Verdict
+🟢 **type-bound** — voice slots speak. Until the operator runs the β1 bootstrap and produces the binaries, the slots resolve to their secondary candidates (`Markazi Text` → `Lateef` → terminal `serif`). The cascade is honest: the system never silently uses `system-ui` for Arabic content.
+
+— Entry end —
