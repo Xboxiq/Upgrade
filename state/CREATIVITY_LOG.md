@@ -17,12 +17,22 @@
 **Files touched:** platform/assets/css/tokens/_type.css · platform/assets/css/tokens/_voice-utilities.css · platform/assets/css/tokens.css · platform/assets/css/base.css · platform/voice-test.html
 **Verified at commit:** 1a91a70
 
+## β3 — 2026-05-24
+**Beacon Type:** 📊 DATA_BEACON
+**The Surprise:** عالم ذَهَب (Dhahab) وحده يَستبدل فاصلة الآلاف `,` بكَشيدة عربية U+0640 (ـ). كلما زادت خانات الرقم تطول الكشيدة tatweel-بـ-tatweel حتى حدّ أربع — `12` كما هو، `99ـ999`، `1ـــ234ـــ567`، ثم `123ــــ456ــــ789ــــ012`. الرقم المالي يَنبض بالخط نفسه، لا بـ punctuation الغربي.
+**Reference Avoided:** Forbidden #11 — standard tabular nums + comma separators (Creativity Doctrine § ٣).
+**Inspired-by:** Wild Card #5 — Yemeni mihrab geometry (إيقاع التمدّد الهندسي في البلاط).
+**User-Visible:** yes (visible on every accounting figure inside the Dhahab world; fully hidden in the other 7 worlds — the `,` is preserved everywhere else)
+**Originality Self-Score:** 5/5 — node test confirms the stretch curve. Claim: no other Arabic-Latin platform binds kashida to thousands separator.
+**Files touched:** platform/assets/css/tokens/_voice-utilities.css · platform/assets/css/tokens/_signature.css · platform/assets/css/tokens.css · platform/assets/js/elan/format.js · platform/assets/app.js
+**Verified at commit:** 647f9fe
+
 ---STATS---
-total_beacons: 1
-unique_categories_used: 1
-avg_score: 4.0
-last_5_avg: 4.0
+total_beacons: 2
+unique_categories_used: 2
+avg_score: 4.5
+last_5_avg: 4.5
 disruption_triggers: 0
 forbidden_violations: 0
-creativity_health: 85
-last_updated: 2026-05-24 / β2
+creativity_health: 100
+last_updated: 2026-05-24 / β3

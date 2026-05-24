@@ -329,3 +329,87 @@ on a workstation where ordinary HTTPS reaches github / 29lt.com / sil.org, then 
 🟢 **type-bound** — voice slots speak. Until the operator runs the β1 bootstrap and produces the binaries, the slots resolve to their secondary candidates (`Markazi Text` → `Lateef` → terminal `serif`). The cascade is honest: the system never silently uses `system-ui` for Arabic content.
 
 — Entry end —
+
+
+
+---
+
+## β3 — Numeric Discipline + Kashida + Per-Page Signature — 2026-05-24
+**Pillar:** β TYPE SOUL
+**Stage:** 3 of 3 — **closes Pillar β**
+**Branch:** `elan-β-type-soul`
+**Verified at commit:** `647f9fe`
+
+### Before
+- `tokens/_voice-utilities.css`: 18 `.v-*` classes only — 0 numeric, 0 kashida.
+- `tokens/_signature.css`: did not exist.
+- `platform/assets/js/elan/`: directory did not exist.
+- `platform/assets/js/elan/format.js`: did not exist.
+- `Upg.format` API: not registered anywhere.
+- `data-world` attributes in `index.html`: 0 (γ pillar will add them).
+
+### After (verified by grep + node functional test)
+
+| Domain | Key | Value |
+|---|---|---:|
+| Numeric | `n_classes_in_voice_utilities` | 9 |
+| Kashida | `k_classes_in_voice_utilities` | 6 |
+| Signatures | `world_signatures_in__signature_css` | 8 |
+| Signatures | `voice_refs_in__signature_css` | 8 |
+| Imports | `tokens_css_imports_signature` | 1 |
+| Imports | `tokens_css_total_imports` | 15 |
+| JS | `format_js_exists` | yes |
+| JS | `KASHIDA_const_in_format_js` | yes (codepoint 0x640) |
+| JS | `app_js_imports_format` | 1 |
+| JS | `Upg_format_registered` | yes (Object.frozen) |
+| Test | `formatCurrency(1234567,{kashida:true})` | `"1ـــ234ـــ567.00"` (3 tatweels) |
+| Test | `formatCurrency(1234567,{kashida:false})` | `"1,234,567.00"` |
+| Test | `formatCurrency(99999,{kashida:true})` | `"99ـ999.00"` (1 tatweel) |
+| Test | `formatCurrency(123456789012,{kashida:true})` | 4 tatweels (capped) |
+
+### Files
+**Created (2):**
+- `platform/assets/css/tokens/_signature.css` (8 per-world signatures)
+- `platform/assets/js/elan/format.js` (ESM module + window.Upg.format frozen surface + DOMContentLoaded / `upg:world:change` / `upg:nav:change` listeners)
+
+**Modified (3):**
+- `platform/assets/css/tokens/_voice-utilities.css` (appended 9 `.n-*` + 6 `.k-*` utilities)
+- `platform/assets/css/tokens.css` (+1 `@import url("./tokens/_signature.css")`)
+- `platform/assets/app.js` (+2 lines: comment + ESM import for `./js/elan/format.js`)
+
+**Untouched (Sacred):**
+- `platform/index.html` (no edits — Beacon activates only when γ adds `data-world` attributes)
+- `archive/**`
+- All 92 legacy IIFEs
+- `_legacy-fontface.css` (β1 deprecation stub)
+- `_legacy-globals.js`
+
+### Beacon (recorded in CREATIVITY_LOG.md)
+**Type:** 📊 DATA_BEACON
+**The Surprise:** عالم ذَهَب وحده يحوّل فاصلة الآلاف من `,` إلى كَشيدة عربية (U+0640 ـ). كلما زادت الخانات، تَنمو الكشيدة بـ 1 character لكل خانة فوق الأربع — حتى حدّ أقصى 4 tatweels.
+**Reference Avoided:** Forbidden #11 — standard tabular nums + comma separators.
+**Inspired-by:** Wild Card #5 — Yemeni mihrab geometry (rhythmic stretching like geometric tile).
+**Originality Self-Score:** 5/5 (claim: no other Arabic platform binds kashida to thousands separator; node test verifies the API).
+
+### Verdict
+🟢 **type-complete** — Pillar β finished. The voice tokens speak, the signature fingerprints each world, the kashida pulses in Dhahab. Pending operator: run `bash scripts/elan-β1-fonts.sh` to bind woff2 binaries; until then voices fall through to secondary candidates.
+**Next pillar:** γ EIGHT WORLDS — branch `elan-γ-eight-worlds` (new branch from `main` once Pillar β PR merges).
+
+— Entry end —
+
+
+
+---
+
+## ▣ Pillar β — TYPE SOUL — COMPLETE — 2026-05-24
+
+**Stages done:** β1 (Local Font Procurement) · β2 (Voice Casting) · β3 (Numeric+Kashida+Signature)
+**Branch:** `elan-β-type-soul`
+**Beacons produced:** 2
+- β2 ✍️ TYPOGRAPHIC_BEACON — Arabic chains never terminate in `system-ui` (Score 4/5)
+- β3 📊 DATA_BEACON — Kashida thousands separator in Dhahab world (Score 5/5)
+**Forbidden Library violations:** 0
+**Avg Beacon score:** 4.5/5
+**Sacred preserved:** 14 page sections · 30 Upg.* APIs · all 92 legacy IIFEs · `archive/` untouched · `_legacy-fontface.css` deprecation stub kept for cascade-compat
+**Operator follow-up:** `bash scripts/elan-β1-fonts.sh` to bind 9 woff2 binaries; CI/Lighthouse can then verify FOUT < 200ms.
+
