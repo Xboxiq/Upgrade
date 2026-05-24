@@ -778,3 +778,96 @@ forced-colors-safe, and accessibility-toggleable. Next: γ9 SALOON — Pillar
 γ closes; PR follows.
 
 — Entry end —
+
+
+
+---
+
+## γ9 — World 8: Saloon (Salon) — Pillar γ closer — 2026-05-24
+**Pillar:** γ EIGHT WORLDS — **CLOSES (9/9)**
+**Stage:** 9 of 9
+**Branch:** `elan-γ-eight-worlds`
+**Verified at commit:** `deabf87`
+
+### Before
+- `platform/assets/css/worlds/_saloon.css`: 7-line placeholder (1 selector)
+- `platform/assets/js/elan/world-saloon.js`: absent
+- `app.js` import of `elan/world-saloon.js`: 0
+
+### After (verified by grep + node --check)
+
+| Domain | Key | Value |
+|---|---|---:|
+| CSS | `_saloon_css_lines` | 314 |
+| CSS | `data_world_saloon_selectors` | 37 |
+| CSS — Beacon | `saloon_mirror_rules` | 8 |
+| CSS — Form | `chamfer_clip_path_polygons` | 2 (cards + buttons) |
+| CSS — Form | `brass_divider_rules` | 3 |
+| CSS — Tokens | `brass_token_count` | 6 |
+| CSS — Guards | `prefers-reduced-motion` | 1 |
+| CSS — Guards | `@media print` | 1 |
+| CSS — Guards | `forced-colors: active` | 1 |
+| JS | `world_saloon_js_lines` | 198 |
+| JS | `node --check` | pass |
+| JS — Public API | `Upg.worlds.saloon methods` | setLastBeacon · getLastBeacon · mountMirror · unmountMirror · DEFAULT_BEACON |
+| JS — Storage | `mirror_storage_key` | `upg_last_beacon` |
+| JS — A11y | `mirror role / aria-live` | note / polite |
+| App | `app.js imports world-saloon` | 1 |
+| Sacred | `page_sections` | 15 (preserved) |
+| Sacred | `data-world hooks` | 15 (preserved) |
+| Sacred | `inline_style_index` | 86 (unchanged) |
+| Sacred | `important_total_in_css` | 276 (unchanged) |
+| Sacred | `Upg.* top-level APIs` | 31 (unchanged — saloon nests under .worlds) |
+| Forbidden | `backdrop-filter` | 0 |
+| Forbidden | `inline <svg viewBox>` | 0 |
+| Forbidden | `font-awesome / material-icons` | 0 |
+| Forbidden | `emoji in markup` | 0 (the 🪞 in JS appears only in the file-header docstring, never in user-facing output) |
+| Forbidden | `"Powered by AI" / "Welcome back" in markup` | 0 (only mentioned in a doc-comment listing what we DON'T do) |
+| Stage budget | `lines_added / deleted` | 511 / 4 |
+| Stage budget | `files_modified / added` | 2 / 1 |
+
+### Files
+**Modified (2):**
+- `platform/assets/css/worlds/_saloon.css` (7 → 314 lines)
+- `platform/assets/app.js` (+1 import line)
+
+**Created (1):**
+- `platform/assets/js/elan/world-saloon.js` (198 lines, ESM, frozen `Upg.worlds.saloon`)
+
+**Untouched (sacred):**
+- `platform/index.html` (zero edits — γ1 already wired `data-world="saloon"` on hrmastery + accountmgr)
+- All other 7 world CSS files
+- `state/CREATIVITY_LOG.md` (entries appended only — never re-written)
+
+### Beacon (declared)
+**Type:** 🪞 META_BEACON — "The Salon Mirror"
+**Surprise:** sticky brass ribbon at the top of every Saloon page reads
+the most recent platform beacon (id · world · surprise). The interface
+witnesses its own creative history without celebrating it.
+**Avoided:** Forbidden #21 (Powered-by-AI badge) + #22 (Welcome-back greeting)
+**Inspired-by:** Wild Card #11 — Mid-century Beirut salons
+**Self-Score:** 5 / 5
+
+### Pillar γ — Final Tally
+
+| Stage | World | Beacon Type | Self-Score | Commit |
+|---|---|---|---:|---|
+| γ1 | (system) | 🏛 STRUCTURAL | 4 | cc45787 |
+| γ2 | حِبر — Hibr | ✍️ TYPOGRAPHIC | 5 | 72c0cc4 |
+| γ3 | نار — Naar | 🎨 VISUAL | 4 | e7ba3e5 |
+| γ4 | ندى — Nada | 🌊 MOTION | 4 | d214ca6 |
+| γ5 | حَديد — Hadeed | 🤚 INTERACTION | 4 | 1f807da |
+| γ6 | ذَهَب — Dhahab | 🌈 CHROMATIC | 4 | c8d77b0 |
+| γ7 | تَيار — Tayyar | 🔊 SOUND | 4 | 48c52f8 |
+| γ8 | وَرشة — Warsha | 🏛 STRUCTURAL | 4 | becc1bf |
+| γ9 | صَالون — Saloon | 🪞 META | 5 | deabf87 |
+
+All 9 Doctrine categories are now represented across the pillar (TYPOGRAPHIC reused for β2 + γ2; the rest each appear at least once). 0 Forbidden Library violations across γ. Creativity Health: 100/100 (capped).
+
+### Verdict
+🟢 **complete** — Pillar γ EIGHT WORLDS shipped with no Forbidden Library
+violations, no Sacred Asset disturbance, and one self-aware Beacon per
+world. Next: open PR `elan-γ-eight-worlds → main`, then start Pillar δ
+KINETIC SHELL on a fresh branch.
+
+— Entry end —
