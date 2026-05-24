@@ -132,3 +132,89 @@
 }
 
 /* End ÊLAN v4 / β2 — Voice Utility Classes ───────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — β3 — Numeric Discipline + Kashida Policy
+   ────────────────────────────────────────────────────────────────────────
+   Eight numeric utilities + four kashida utilities. Kashida is OFF by
+   default everywhere (typography hygiene). Only Dhahab world's currency
+   cells receive the kashida thousands separator (β3 DATA_BEACON).
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Numeric utility classes ─── */
+.n-lining {
+  font-feature-settings: "lnum" 1;
+  font-variant-numeric: lining-nums;
+}
+.n-oldstyle {
+  font-feature-settings: "onum" 1;
+  font-variant-numeric: oldstyle-nums;
+}
+.n-tabular {
+  font-feature-settings: "tnum" 1;
+  font-variant-numeric: tabular-nums;
+}
+.n-proportional {
+  font-feature-settings: "pnum" 1;
+  font-variant-numeric: proportional-nums;
+}
+.n-fraction {
+  font-feature-settings: "frac" 1;
+}
+
+/* Currency / stat / data cells get tabular lining numerals automatically */
+.n-currency,
+.n-stat,
+.n-data {
+  font-family: var(--voice-num-tabular);
+  font-variant-numeric: tabular-nums lining-nums;
+  unicode-bidi: isolate;
+}
+
+/* Hooks for the JS auto-formatter (format.js) — keyless on render */
+.n-currency-auto[data-amount] {
+  font-family: var(--voice-num-tabular);
+  font-variant-numeric: tabular-nums lining-nums;
+  unicode-bidi: isolate;
+}
+
+/* Arabic-Indic vs Latin numerals — toggle by lang attribute */
+[lang="ar-u-nu-arab"] {
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: isolate;
+}
+[lang="ar-u-nu-latn"] {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Kashida policy ─── */
+:where(*) {
+  font-feature-settings: "calt" 1, "liga" 1, "kern" 1;
+}
+
+.k-on {
+  text-justify: inter-word;
+  word-spacing: 0.05em;
+}
+.k-rhythm {
+  letter-spacing: 0.02em;
+  word-spacing: 0.06em;
+}
+
+/* The β3 BEACON anchor — applied via JS to currency cells inside
+   data-world="dhahab" only. Visual harness only; the actual U+0640
+   characters are produced by formatCurrency() in format.js. */
+.k-currency-thousands {
+  font-family: var(--voice-num-tabular);
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: 0;
+  unicode-bidi: isolate;
+  display: inline-block;
+}
+.k-currency-thousands[data-stretch="2"] { letter-spacing: 0.012em; }
+.k-currency-thousands[data-stretch="3"] { letter-spacing: 0.024em; }
+.k-currency-thousands[data-stretch="4"] { letter-spacing: 0.036em; }
+
+/* End ÊLAN v4 / β3 — Numeric + Kashida ───────────────────────────────── */

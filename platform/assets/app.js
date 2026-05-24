@@ -109,3 +109,7 @@ import './js/upg-touch-1.js';
 
 // Phase 5/C: verify backward-compat shim (window.Upg.* checklist)
 import './js/_compat.js';
+
+
+// ÊLAN v4 — β3: format helpers (kashida-thousands in Dhahab world)
+import './js/elan/format.js';

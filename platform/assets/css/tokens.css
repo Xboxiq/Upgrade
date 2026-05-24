@@ -15,6 +15,9 @@
 /* Voice utilities — β2 (Voice Casting) */
 @import url("./tokens/_voice-utilities.css");
 
+/* Per-world type signatures — β3 (Numeric+Kashida+Signature) */
+@import url("./tokens/_signature.css");
+
 /* Worlds — placeholders now, filled in γ2-γ9 */
 @import url("./worlds/_hibr.css");
 @import url("./worlds/_naar.css");
