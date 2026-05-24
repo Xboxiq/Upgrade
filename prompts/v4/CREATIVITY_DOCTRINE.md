@@ -73,11 +73,19 @@ Originality Self-Score: 4/5
 
 ### المحظور النصي/الـ AI:
 19. ❌ **placeholder "Lorem ipsum"** أو ترجمة عربية فضفاضة
-20. ❌ **emoji بدل icon** بدون قصد جمالي
-21. ❌ **"Powered by AI ✨"** أو أي self-congratulation
+20. ❌ **emoji بدل icon** — مهما كانت الحالة، حتى ☎ في button text
+21. ❌ **"Powered by AI"** أو أي self-congratulation
 22. ❌ **"Welcome back, [Name]!"** بدون شخصية مكتوبة
 
-**كيف تُكسَر هذه القاعدة؟** فقط لو spec الـ stage يقول صراحة `EXEMPT_PATTERN: <رقم>` ويبرر السبب.
+### المحظور الأيقوني (Iconography — تفصيل في ICONOGRAPHY_DOCTRINE):
+23. ❌ **Toy SVG inline** — `<svg viewBox><path d="M..."/></svg>` يدوي ارتجالي
+24. ❌ **خلط مكتبات icons** (Lucide + Phosphor + غيرهم في chrome واحد)
+25. ❌ **Material Icons / FontAwesome / Bootstrap Icons** — أي مكتبة خارج Lucide + Phosphor
+26. ❌ **unDraw / Storyset / Material 3D / isometric tech blobs** كـ illustrations
+27. ❌ **icon size خارج السلم** (--icon-xs=14px إلى --icon-2xl=48px)
+28. ❌ **hardcoded fill="#xxxxxx"** في icon markup (currentColor + tokens فقط)
+
+**كيف تُكسَر هذه القاعدة؟** فقط لو spec الـ stage يقول صراحة `EXEMPT_PATTERN: <رقم>` ويبرر السبب. Iconography violations (#23-#28) **لا يمكن استثناؤها** — صارمة 100%.
 
 ---
 

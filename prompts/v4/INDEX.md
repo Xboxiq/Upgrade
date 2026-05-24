@@ -39,6 +39,7 @@
 | α1 | Forensic Audit | قياس قبل تعديل بـ grep |
 | α2 | Token Architecture | 5 ملفات tokens (color/space/type/motion/breakpoint) |
 | α3 | Module Manifest | 92→28 ملف JS بـ ESM حقيقي |
+| α4 | Icon Foundation | Lucide + Phosphor sprite + Upg.icons API + ICONOGRAPHY_DOCTRINE |
 
 ### Pillar β — TYPE SOUL
 | Stage | اسم | الدور |
@@ -102,11 +103,11 @@
 | البُعد | القيمة |
 |---|---:|
 | Pillars | 6 |
-| Stages إجمالاً | 38 (3+3+9+6+12+5) |
+| Stages إجمالاً | 39 (4+3+9+6+12+5) |
 | Branches متوقَّعة | 6 (واحد per pillar) |
 | PRs نهائية | 6 |
 | Beacons مطلوبة دنيا | ~27 (في γ + δ + ε، 27 stage × 1 minimum) |
-| Sessions تقديرية | 15-20 |
+| Sessions تقديرية | 16-20 |
 
 ---
 

@@ -22,7 +22,7 @@ DEVOTIO v3 (والـ Cathedral قبله) أنتجت واجهة جميلة لكن
 
 ---
 
-## ٢. الأسس الجذرية (8 مبادئ، ليس 6)
+## ٢. الأسس الجذرية (9 مبادئ)
 
 ### ١. **Eight Worlds, One Constitution** — ثمانية عوالم بدستور واحد
 كل صفحة (أو زوج صفحات) لها **عالمها** البصري الخاص: لوحة ألوان مختلفة، voice خط مختلف، إيقاع حركة مختلف، إلهام تاريخي مختلف. **النظام** يحفظ الترابط عبر tokens موحَّدة (4pt scale, ease tokens, focus discipline)، **العوالم** تحفظ الإثارة.
@@ -70,6 +70,18 @@ DEVOTIO v3 (والـ Cathedral قبله) أنتجت واجهة جميلة لكن
 - Apple/Stripe/Linear/Vercel surface clone
 
 القائمة الكاملة في `CREATIVITY_DOCTRINE.md` § Forbidden Library.
+
+### ٩. **Iconography Sovereignty** — لا emoji، لا SVG هاوٍ ✦ (مذهب مستقل)
+الأيقونات قاتلة الجمال لو تُركَت للـ AI الافتراضي. ÊLAN يُحرِّم:
+- أي emoji نصي في markup (☎ ✓ 📊 → forbidden)
+- أي inline `<svg viewBox path>` يكتبه AI يدوياً
+- خلط مكتبات أيقونات في نفس chrome
+- أي size خارج السلم القياسي (14-48px)
+
+الأيقونات تأتي من **مكتبتين فقط**: **Phosphor** (primary content) و **Lucide** (chrome).
+sprite system + semantic map صارم + accessibility-first.
+
+التفاصيل في `ICONOGRAPHY_DOCTRINE.md`.
 
 ---
 
@@ -138,6 +150,7 @@ DEVOTIO v3 (والـ Cathedral قبله) أنتجت واجهة جميلة لكن
 الـ AUTO_PILOT يقرأ:
 - هذا الملف (المذهب)
 - `CREATIVITY_DOCTRINE.md`
+- `ICONOGRAPHY_DOCTRINE.md`
 - `WORLDS_ATLAS.md`
 - `state/PROGRESS.json`
 - آخر 3 entries من `state/CREATIVITY_LOG.md`

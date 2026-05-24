@@ -20,9 +20,10 @@
 
 📚 بروتوكول البدء (نفّذ هذي الخطوات بالضبط، بهذا الترتيب):
 
-١) اقرأ هذي الملفات الأربعة فقط (≤ 1500 سطر إجمالاً، آمن على context):
+١) اقرأ هذي الملفات الخمسة فقط (≤ 1900 سطر إجمالاً، آمن على context):
    ◽ prompts/v4/00_ELAN_MANIFESTO.md      (الدستور)
    ◽ prompts/v4/CREATIVITY_DOCTRINE.md   (مذهب الإبداع + Forbidden Library)
+   ◽ prompts/v4/ICONOGRAPHY_DOCTRINE.md  (مذهب الأيقونات — لا emoji، لا toy SVG)
    ◽ prompts/v4/WORLDS_ATLAS.md          (8 عوالم — لوحات + tokens)
    ◽ state/PROGRESS.json                 (نقطة الاستئناف)
 
@@ -128,11 +129,23 @@
 
 🚫 ممنوع منعاً باتاً:
 - ادعاء رقم في PR description بدون verify بـ grep
-- تكرار pattern من Forbidden Library (≤ 22 بنداً، § ٤ في CREATIVITY_DOCTRINE)
+- تكرار pattern من Forbidden Library (CREATIVITY_DOCTRINE § ٤)
+- استخدام أي emoji في markup (ICONOGRAPHY_DOCTRINE § ٣.أ)
+- كتابة inline <svg viewBox path...> يدوياً (Toy SVG)
+- استخدام مكتبة icon خارج Lucide + Phosphor (locked stack)
+- استخدام unDraw / Storyset / Material 3D / isometric tech illustrations
+- icon size خارج السلم (--icon-xs..2xl)
+- hardcoded fill="#xxxxxx" في markup
+- خلط Lucide + Phosphor في نفس الـ chrome region
 - تجاوز ≥ 2 stages بنفس فئة Beacon (يجب pivot)
 - تجاوز 600 سطر مُضاف per stage
 - لمس archive/ نهائياً
 - تعديل state/CREATIVITY_LOG.md سوى append (لا حذف، لا rewrite)
+
+🛡 Iconography pre-flight (قبل كتابة أي markup فيه icon):
+1. ابحث في ICONOGRAPHY_DOCTRINE § ٤.د Semantic Map للـ name الصحيح
+2. لو لم يوجد → استخدم Upg.icons.icon('<name>') وحَدِّث الـ map
+3. ممنوع <svg viewBox> يدوي. ممنوع emoji. ممنوع size خارج السلم.
 
 ✅ في نهاية الـ session اطبع:
    🛑 SESSION CHECKPOINT
