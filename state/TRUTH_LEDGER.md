@@ -528,3 +528,61 @@ on a workstation where ordinary HTTPS reaches github / 29lt.com / sil.org, then 
 
 ### Forbidden Library violations
 0
+
+
+
+---
+
+## γ3 — World Naar (Fire)
+**Date:** 2026-05-24
+**Pillar:** γ (EIGHT WORLDS) / Stage 3 of 9 — World 2 of 8
+**Branch:** elan-gamma-eight-worlds
+**Commit:** 761d0e2
+**Pages skinned:** lab, programming (via `data-world="naar"`)
+
+### Verified by grep on commit 761d0e2
+
+| Metric | Value | Command |
+|---|---:|---|
+| `worlds/_naar.css` line count | 220 | `wc -l platform/assets/css/worlds/_naar.css` |
+| `worlds/_naar.css` line count BEFORE γ3 | 7 (placeholder) | git show 63485cd:.../_naar.css |
+| `js/elan/world-naar.js` line count | 128 | `wc -l platform/assets/js/elan/world-naar.js` |
+| `data-world="naar"` selectors in `_naar.css` | 33 | grep -c |
+| Spark-beacon rules (--mx, --my, ::after, .spark-host) | 15 | grep -cE |
+| `prefers-reduced-motion` guard | 1 | grep -c |
+| `pointer: coarse` guard | 1 | grep -c |
+| `app.js` imports `world-naar.js` | 1 | grep -c |
+| `Upg.worlds.naar` API methods | 3 (host, unhost, isActive) | source |
+| Token uses (`--ember`, `--focus`) | 14 | grep -cE |
+| Voice tokens referenced | 3 (display-h, body, code) | grep |
+| Inline `<svg>` added | 0 | grep -c |
+| Hardcoded `fill="#"` | 0 | grep -c |
+| Emoji in DOM markup | 0 | (1 in source comment as doctrine label `🎨 VISUAL_BEACON`) |
+| `<section class="page">` count (sacred) | 16 | unchanged |
+| `core/theme.js` modified | false | unchanged from γ1 |
+
+### Beacon
+**Type:** 🎨 VISUAL_BEACON
+**The Surprise:** كل سطح hover-able في عالم نار (.card, .panel, .bento-cell, .btn) يَنبت تحت المؤشر شَرارة قطرها 28px — `radial-gradient` بـ `mix-blend-mode: screen` فوق ember+focus، ومضة 60ms كأنها مطرقة لمست المعدن. الـ JS مهمته الوحيدة تَغذية إحداثيتَي `--mx` و `--my` كـ percent-coords من `getBoundingClientRect`، rAF-throttled على pointermove واحد على body. الـ CSS هو الذي يَرسم. على الـ touch-devices الشَرارة تَختفي تماماً (لا cursor، لا hover ثابت كاذب).
+**Reference Avoided:** Forbidden #13 — spring-bounce hover (Framer Motion default cliché) + Forbidden #5 — soft-shadow + 12px-radius card pattern.
+**Inspired-by:** Wild Card #2 — Iraqi Brutalism (Mohammed Makiya + Rifat Chadirji concrete forms; the forge sound when steel hits the anvil).
+**User-Visible:** yes (visible on every hover inside lab + programming pages — the spark moves with the cursor in real time).
+**Originality Self-Score:** 4/5 — pointer-tracked spotlight is a known pattern (Vercel, Apple Vision Pro), but tying it to Brutalist hard-edged buttons + ember-temperature palette + Naar world entry only is a coherent signature I haven't seen on Arabic platforms.
+
+### Files touched
+- `platform/assets/css/worlds/_naar.css` — placeholder (7 lines) → full skin (220 lines)
+- `platform/assets/js/elan/world-naar.js` — new (128 lines, ESM)
+- `platform/assets/app.js` — +1 import line
+
+### Sacred preserved
+- 16 `<section class="page">` count unchanged
+- `core/theme.js` byte-identical
+- 33rd Upg.* surface added (`Upg.worlds.naar`); 30 baseline APIs intact
+- 0 emoji in DOM, 0 inline `<svg>`, 0 manual icon paths, 0 hardcoded fill colors
+- nav/dock/cmdk/gateway buttons explicitly excluded from Naar's button re-skin
+  via `:not([class*="cmdk-"]):not([class*="dock-"]):not([class*="nav-"]):not([class*="gateway-"])`
+  — chrome stays consistent across worlds
+- `archive/` untouched
+
+### Forbidden Library violations
+0

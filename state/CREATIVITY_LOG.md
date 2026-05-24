@@ -47,12 +47,22 @@
 **Files touched:** platform/assets/css/worlds/_hibr.css · platform/assets/js/elan/world-hibr.js · platform/assets/app.js
 **Verified at commit:** fdec01f
 
+## γ3 — 2026-05-24
+**Beacon Type:** 🎨 VISUAL_BEACON
+**The Surprise:** كل سطح hover-able في عالم نار يَنبت شرارة pointer-tracked قطرها 28px تَتبع المؤشر بدقة. الـ CSS يَرسم بـ `radial-gradient` فوق `mix-blend-mode: screen` على ember+focus colors، ومضة 60ms كأنها مطرقة لمست المعدن. الـ JS فقط يَتعقَّب الإحداثيات في rAF-throttled pointermove ويَكتبها كـ `--mx` / `--my` على أقرب host. كل سطح في .card/.panel/.bento-cell/.btn يَصبح spark-host تلقائياً بدون HTML edits. على touch-devices الشرارة تَختفي تماماً، وعلى prefers-reduced-motion تَختفي. الأزرار في Naar Brutalist: 0-radius + outlined ember + flat-shadow على hover (translate -2px,-2px).
+**Reference Avoided:** Forbidden #13 (spring-bounce hover — Framer Motion cliché) + Forbidden #5 (soft-shadow + 12px-radius card).
+**Inspired-by:** Wild Card #2 — Iraqi Brutalism (Mohammed Makiya مَعمار + Rifat Chadirji + ورش الحدادة).
+**User-Visible:** yes (visible on every hover inside lab + programming pages).
+**Originality Self-Score:** 4/5 — pointer-tracked spotlight ليس جديداً مطلقاً، لكن ربطه بـ Brutalist hard-edge palette + ember-temperature gradient + Naar-only activation = توقيع متماسك.
+**Files touched:** platform/assets/css/worlds/_naar.css · platform/assets/js/elan/world-naar.js · platform/assets/app.js
+**Verified at commit:** 761d0e2
+
 ---STATS---
-total_beacons: 4
-unique_categories_used: 3
-avg_score: 4.5
-last_5_avg: 4.5
+total_beacons: 5
+unique_categories_used: 4
+avg_score: 4.4
+last_5_avg: 4.4
 disruption_triggers: 0
 forbidden_violations: 0
 creativity_health: 100
-last_updated: 2026-05-24 / γ2
+last_updated: 2026-05-24 / γ3
