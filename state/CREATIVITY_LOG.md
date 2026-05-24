@@ -37,12 +37,22 @@
 **Files touched:** platform/index.html · platform/assets/css/worlds/_index.css · platform/assets/js/elan/world.js · platform/assets/css/tokens.css · platform/assets/app.js
 **Verified at commit:** 63485cd
 
+## γ2 — 2026-05-24
+**Beacon Type:** ✍️ TYPOGRAPHIC_BEACON
+**The Surprise:** عند دخول عالم حِبر، الأرقام الأربعة في dashboard (bento-stat-value + stat-tile-value) تَكتب نفسها في الصفحة كأن قلم نَسخ يَعبر السطر — `background-clip: text` على gradient يتمدد من 0% إلى 100% في 720ms مع stagger 90ms بين الأرقام. وكلّ زرّ نجاح (`.btn-success-action`, `[data-track="completed"]`, `[data-action="completed"]`) يَستقبل نفس المسحة عند الضغط. لا ✓ check، لا confetti، لا counter-from-0. الحرف نفسه IS الحبر، يَنزل من اليسار إلى اليمين كأن الـ katib أنهى السطر للتو. كل شيء يَحترم prefers-reduced-motion ويَتدرّج على المتصفحات بدون background-clip:text.
+**Reference Avoided:** Forbidden #16 (standard ✓ checkmark toast) + Forbidden #11 (animated counter from 0). كل منصة AI تَستخدم checkmark — هذه تَستخدم خطّاً يَكتب.
+**Inspired-by:** Wild Card #1 — Najaf calligraphy manuscript (الكاتب يُنهي سطر النَسخ بحركة قلم واحدة).
+**User-Visible:** yes (مرئي على أول paint للـ dashboard، قبل أي تفاعل من المستخدم).
+**Originality Self-Score:** 5/5 — الـ ink IS the text, not a fill behind it. ربط هذا بـ stat-tile قائم بالفعل + مع زر النجاح كنمط واحد متماسك = توقيع لا أعرف منصة أخرى أنتجته.
+**Files touched:** platform/assets/css/worlds/_hibr.css · platform/assets/js/elan/world-hibr.js · platform/assets/app.js
+**Verified at commit:** fdec01f
+
 ---STATS---
-total_beacons: 3
+total_beacons: 4
 unique_categories_used: 3
-avg_score: 4.33
-last_5_avg: 4.33
+avg_score: 4.5
+last_5_avg: 4.5
 disruption_triggers: 0
 forbidden_violations: 0
 creativity_health: 100
-last_updated: 2026-05-24 / γ1
+last_updated: 2026-05-24 / γ2

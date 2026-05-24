@@ -472,3 +472,59 @@ on a workstation where ordinary HTTPS reaches github / 29lt.com / sil.org, then 
 
 ### Forbidden Library violations
 0
+
+
+
+---
+
+## γ2 — World Hibr (Ink)
+**Date:** 2026-05-24
+**Pillar:** γ (EIGHT WORLDS) / Stage 2 of 9 — World 1 of 8
+**Branch:** elan-gamma-eight-worlds
+**Commit:** fdec01f
+**Pages skinned:** dashboard, myprogress (via `data-world="hibr"`)
+
+### Verified by grep on commit fdec01f
+
+| Metric | Value | Command |
+|---|---:|---|
+| `worlds/_hibr.css` line count | 222 | `wc -l platform/assets/css/worlds/_hibr.css` |
+| `worlds/_hibr.css` line count BEFORE γ2 | 7 (placeholder) | git show 63485cd:.../_hibr.css |
+| `js/elan/world-hibr.js` line count | 122 | `wc -l platform/assets/js/elan/world-hibr.js` |
+| `data-world="hibr"` selectors in `_hibr.css` | 40 (target ≥ 5) | `grep -c 'data-world="hibr"' platform/assets/css/worlds/_hibr.css` |
+| Beacon rules (`is-drying` OR `background-clip`) | 15 | `grep -cE 'is-drying\|background-clip' …/_hibr.css` |
+| `prefers-reduced-motion` guard | 1 | `grep -c 'prefers-reduced-motion' …/_hibr.css` |
+| `@supports not (background-clip:text)` fallback | 1 | manual + grep |
+| `app.js` imports `world-hibr.js` | 1 | `grep -c 'world-hibr' platform/assets/app.js` |
+| `Upg.worlds.hibr` API surface | 4 methods (dry, dryAll, refresh, demo) | source inspection |
+| Voice tokens referenced (`--voice-*`) | 2 (--voice-body, --voice-signature) | grep |
+| Token vars referenced total | 30 | `grep -cE -- '--voice-body\|--ink\|--line\\b' …/_hibr.css` |
+| `<section class="page">` count (sacred) | 16 | unchanged from γ1 |
+| Emoji in DOM markup | 0 | (doctrine emoji labels in source comments only) |
+| Inline `<svg>` added | 0 | grep |
+| Icons changed | 0 | n/a |
+| `core/theme.js` modified | false | unchanged from γ1 |
+
+### Beacon
+**Type:** ✍️ TYPOGRAPHIC_BEACON
+**The Surprise:** عند فتح الـ dashboard في عالم حِبر، الأرقام الأربعة في bento-stat-value و stat-tile-value تَكتب نفسها في الصفحة على شكل قَلَم نَسخ يَعبر النص بمسحة حبر — gradient يتمدد من 0% إلى 100% خلال 720ms. الحرف لا يَظهر فجأة كما في AI counter-from-0 — يَتشكَّل تدريجياً، كأن الكاتب أنهى السطر للتو. وعندما يَضغط المستخدم زراً ناجحاً (data-track="completed" أو .btn-success-action)، نفس المسحة تَكتب نص النجاح. لا ✓، لا confetti.
+**Reference Avoided:** Forbidden #16 (standard ✓ checkmark toast) + Forbidden #11 (animated counter from 0).
+**Inspired-by:** Wild Card #1 — Najaf calligraphy manuscript (the calligrapher who finishes a line of naskh on the page in front of you).
+**User-Visible:** yes (visible at first paint of the dashboard — the four countup tiles each write themselves in on a 90ms stagger).
+**Originality Self-Score:** 5/5 — the trick is ink-as-text-mask, not ink-as-button-fill. The word IS the gradient.
+
+### Files touched
+- `platform/assets/css/worlds/_hibr.css` — placeholder (7 lines) → full skin (222 lines)
+- `platform/assets/js/elan/world-hibr.js` — new (122 lines, ESM)
+- `platform/assets/app.js` — +1 import line
+
+### Sacred preserved
+- 16 `<section class="page">` count unchanged
+- `core/theme.js` byte-identical
+- 30 baseline Upg.* APIs intact; `Upg.worlds.hibr` is an additive (32nd surface)
+- 0 emoji in DOM, 0 inline `<svg>`, 0 manual icon paths
+- `archive/` untouched
+- The 107 `:root[data-theme=...]` rules in pages.css coexist (the `[data-world]` cascade wins on hibr pages only)
+
+### Forbidden Library violations
+0
