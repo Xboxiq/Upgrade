@@ -5,7 +5,7 @@
    ============================================================ */
 'use strict';
 
-const VERSION = 'devotio-v3-w24-p2-2026-05';
+const VERSION = 'devotio-v3-w24-p3-2026-05';
 const SHELL_CACHE = `shell-${VERSION}`;
 const ASSET_CACHE = `assets-${VERSION}`;
 const FONT_CACHE  = `fonts-${VERSION}`;
@@ -135,6 +135,8 @@ const PRECACHE = [
   './assets/js/upg-shards-1.js',
   // Worker 24 / Phase 2 — Bottom Nav (mobile-only)
   './assets/js/upg-nav-2.js',
+  // Worker 24 / Phase 3 — Swipe Gestures (PointerEvents, mobile-only, RTL-aware)
+  './assets/js/upg-touch-1.js',
 ];
 
 self.addEventListener('install', (event) => {

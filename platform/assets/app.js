@@ -104,6 +104,8 @@ import './js/upg-layer-1.js';
 import './js/upg-layer-2.js';
 import './js/upg-shards-1.js';
 import './js/upg-nav-2.js';
+// Worker 24 / Phase 3 — Swipe Gestures (PointerEvents-based, mobile-only)
+import './js/upg-touch-1.js';
 
 // Phase 5/C: verify backward-compat shim (window.Upg.* checklist)
 import './js/_compat.js';

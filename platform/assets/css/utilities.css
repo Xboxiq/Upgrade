@@ -2639,3 +2639,70 @@ kbd.type-kbd {
 }
 
 /* End utilities.css ───────────────────────────────────────────────────── */
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   DUAL-FORM v3 — Swipe Gestures (Worker 24 / Phase 3)
+   ──────────────────────────────────────────────────────────────────────
+   Touch-action shaping so PointerEvents fire cleanly on mobile without
+   stealing native vertical scroll. Mobile-only (≤720px). Desktop = no-op.
+
+   Discipline (Phase 3):
+     1. Only `touch-action` is shaped — no transforms, no animations here.
+        Visual feedback during swipe is the navigation layer's job.
+     2. Mobile breakpoint mirrors JS module (720px).
+     3. `.dual-swipe-hint` is opt-in (no automatic instantiation), reserved
+        for future onboarding nudge. Sits above bottom-nav via dvh-aware
+        --dual-bottom-nav-h + --safe-bottom (Worker 24 P1+P2 tokens).
+     4. RTL handled via `inset-inline-end` (logical, not physical).
+     5. Reduced-motion freezes the hint's fade.
+   ════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 720px) {
+  /* Page host: allow vertical scroll, intercept horizontal page-swipes. */
+  #main {
+    touch-action: pan-y;
+  }
+
+  /* qcalc roots: vertical scroll inside, horizontal cycles instances. */
+  .qcalc,
+  [data-qcalc-group] {
+    touch-action: pan-y;
+  }
+}
+
+/* Desktop: explicit reset (safety belt against shard mounts). */
+@media (min-width: 721px) {
+  #main,
+  .qcalc,
+  [data-qcalc-group] {
+    touch-action: auto;
+  }
+}
+
+/* Subtle swipe hint surface — opt-in only. Sits above bottom-nav (W24 P2)
+   and below cmdk trigger (W11 P5). RTL aware via logical end inset. */
+.dual-swipe-hint {
+  position: fixed;
+  bottom: calc(var(--dual-bottom-nav-h, 64px) + var(--space-2, 0.5rem) +
+               max(var(--space-2, 0.5rem), var(--safe-bottom, 0px)));
+  inset-inline-end: var(--space-3, 0.75rem);
+  font-family: var(--type-voice-label, var(--font-text));
+  font-size: 0.75rem;
+  color: var(--color-text-faint, var(--color-text-muted));
+  opacity: 0.6;
+  pointer-events: none;
+  transition: opacity 1500ms ease 3000ms;
+  z-index: 600;
+}
+.dual-swipe-hint.dual-swipe-hint--fade { opacity: 0; }
+
+@media (min-width: 721px) {
+  .dual-swipe-hint { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dual-swipe-hint { transition: none; }
+}
+
+/* End DUAL-FORM v3 / Phase 3 — Swipe ─────────────────────────────────── */
