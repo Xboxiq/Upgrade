@@ -27,12 +27,22 @@
 **Files touched:** platform/assets/css/tokens/_voice-utilities.css · platform/assets/css/tokens/_signature.css · platform/assets/css/tokens.css · platform/assets/js/elan/format.js · platform/assets/app.js
 **Verified at commit:** 647f9fe
 
+## γ1 — 2026-05-24
+**Beacon Type:** 🏛 STRUCTURAL_BEACON
+**The Surprise:** نظام العوالم الثمانية يُفعَّل من DOM وحده — `body:has(section.page.active[data-world="…"])`. لو الـ JS لم يُحمَّل، أو فَشِل، أو تَأخَّر، 8 لوحات tokens (anchor + ink + ember + focus + voice + ease) تَتبدَّل آنياً مع تنقُّل الصفحات بدون أي runtime. الـ JS طبقة enhancement فقط، تَكتب `body[data-world]` لتُسبِق الـ `:has()` (specificity أعلى) وتَدعم View Transitions في δ5. الفرق بين theme switcher و world *system*: النظام يبقى صحيحاً عند فشل runtime.
+**Reference Avoided:** Forbidden #14 — standard JS-driven theme switcher (Creativity Doctrine § ٣).
+**Inspired-by:** Wild Card #6 — Müller-Brockmann Grid (النظام يُظهِر نفسه بنفسه؛ الـ structure تَحلّ بدلاً من الـ animation).
+**User-Visible:** yes (token swap happens on the first paint of a navigated page, not after the JS module boots — measurable on slow connections)
+**Originality Self-Score:** 4/5 — `:has()` is now broadly supported but binding it to a worlds taxonomy as the *primary* activation path (instead of fallback) is uncommon.
+**Files touched:** platform/index.html · platform/assets/app.js · platform/assets/css/tokens.css · platform/assets/style.css · platform/assets/js/elan/world.js · platform/assets/css/worlds/_index.css
+**Verified at commit:** cc45787
+
 ---STATS---
-total_beacons: 2
-unique_categories_used: 2
-avg_score: 4.5
-last_5_avg: 4.5
+total_beacons: 3
+unique_categories_used: 3
+avg_score: 4.33
+last_5_avg: 4.33
 disruption_triggers: 0
 forbidden_violations: 0
 creativity_health: 100
-last_updated: 2026-05-24 / β3
+last_updated: 2026-05-24 / γ1

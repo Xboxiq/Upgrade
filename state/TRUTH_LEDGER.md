@@ -413,3 +413,47 @@ on a workstation where ordinary HTTPS reaches github / 29lt.com / sil.org, then 
 **Sacred preserved:** 14 page sections · 30 Upg.* APIs · all 92 legacy IIFEs · `archive/` untouched · `_legacy-fontface.css` deprecation stub kept for cascade-compat
 **Operator follow-up:** `bash scripts/elan-β1-fonts.sh` to bind 9 woff2 binaries; CI/Lighthouse can then verify FOUT < 200ms.
 
+
+
+---
+
+## γ1 — World Foundation — 2026-05-24
+**Branch:** `elan-γ-eight-worlds`
+**Commit:** `cc45787`
+**Files modified:** 4 — `platform/index.html`, `platform/assets/app.js`, `platform/assets/css/tokens.css`, `platform/assets/style.css`
+**Files added:** 2 — `platform/assets/js/elan/world.js`, `platform/assets/css/worlds/_index.css`
+**Lines:** +306 / −15 (net +291)
+
+### Verified by grep on commit cc45787
+| key | value | verified-by |
+|---|---:|---|
+| `data-world=` count in `platform/index.html` | **15** | `grep -c 'data-world=' platform/index.html` |
+| world distribution | hibr=2 · naar=2 · nada=2 · hadeed=2 · dhahab=1 · tayyar=2 · warsha=2 · saloon=2 | `grep -oE 'data-world="[a-z]+"' \| sort \| uniq -c` |
+| `:has(section.page` selectors in `_index.css` | **17** | `grep -c ':has(section.page' platform/assets/css/worlds/_index.css` |
+| `tokens.css` imports `worlds/_index.css` | **1** | `grep -c '_index.css' platform/assets/css/tokens.css` |
+| `app.js` imports `elan/world.js` | **1** | `grep -c 'elan/world.js' platform/assets/app.js` |
+| `world.js` syntax | **OK** | `node --check platform/assets/js/elan/world.js` |
+| `app.js` syntax | **OK** | `node --check platform/assets/app.js` |
+| `Upg.world` registered | **yes** | `grep 'window.Upg.world' platform/assets/js/elan/world.js` |
+| `Upg.*` total registrations | **31** (was 30) | `grep -roEh 'window\.Upg\.[a-zA-Z]+\s*=' platform/assets/js \| sort -u` |
+| `@layer themes` blocks in `style.css` | **2** preserved | `grep -c '@layer themes' platform/assets/style.css` |
+| `data-theme="light"` selector occurrences | **4** preserved | `grep -c 'data-theme="light"' platform/assets/style.css` |
+
+### Beacon
+- **Type:** 🏛 STRUCTURAL_BEACON
+- **The Surprise:** 8 world tokens are activated by `body:has(section.page.active[data-world="…"])` — fully functional with **zero JS**. The runtime layer is enhancement only.
+- **Reference avoided:** Forbidden #14 — JS-driven theme switcher.
+- **Inspired-by:** Wild Card #6 — Müller-Brockmann grid (the system reveals itself).
+- **User-Visible:** yes (worlds activate on first paint, not after JS boot)
+- **Originality Self-Score:** 4/5
+
+### Pragmatic Deviation from γ1 spec
+The spec asked for an empty `@layer themes` block in `style.css` (themes "deprecated"). The ~1000-line legacy `data-theme="light"|"dark"` cascade was **preserved** as a Sacred Asset (Manifesto §٥ — backward-compat). Worlds were imported AFTER themes via `tokens.css`, so when both are present, the world wins by source-order specificity. Worlds extend, themes remain. No legacy caller was broken.
+
+### Sacred preserved
+- 14 page sections (15 incl. gateway) — unchanged
+- 30 prior Upg.* APIs — unchanged (`Upg.world` is the 31st, additive only)
+- `archive/` — untouched
+- 391 qcalc references — unchanged
+- 9 typeface families + β1/β2/β3 voice tokens — unchanged
+- All 8 `worlds/_<name>.css` stubs — unchanged (γ2..γ9 will fill them)
