@@ -1,9 +1,27 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-24T15:10:00Z",
+  "last_updated": "2026-05-24T16:30:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
+    "pack": "v3",
+    "worker": "23",
+    "worker_name": "DECONSTRUCTION",
+    "phase": 5,
+    "phases_total": 5,
+    "phase_order": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "branch": "worker-23-devotio-p5",
+    "status": "in-progress",
+    "blocker": null,
+    "next_action": "Open PR for worker-23-devotio-p5 — closes Worker 23 DECONSTRUCTION (5/5 phases). Next session: Start Worker 24 Phase 1 (DUAL-FORM — dvh + safe-area)."
+  },
+  "previous": {
     "pack": "v3",
     "worker": "23",
     "worker_name": "DECONSTRUCTION",
@@ -17,11 +35,11 @@
       "5"
     ],
     "branch": "worker-23-devotio-p4",
-    "status": "in-progress",
-    "blocker": null,
-    "next_action": "Continue Worker 23 Phase 5 (JS ESM Migration — replace app.js IIFE monolith with thin ESM entry + 24+ modules + _compat.js shim; finalize inline→shard cutover by rewriting navigateTo to live queries)"
+    "status": "merged",
+    "merged_pr": 102,
+    "blocker": null
   },
-  "previous": {
+  "before_previous": {
     "pack": "v3",
     "worker": "23",
     "worker_name": "DECONSTRUCTION",
@@ -37,24 +55,6 @@
     "branch": "worker-23-devotio-p3",
     "status": "merged",
     "merged_pr": 101,
-    "blocker": null
-  },
-  "before_previous": {
-    "pack": "v3",
-    "worker": "23",
-    "worker_name": "DECONSTRUCTION",
-    "phase": 2,
-    "phases_total": 5,
-    "phase_order": [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5"
-    ],
-    "branch": "worker-23-devotio-p2",
-    "status": "merged",
-    "merged_pr": 100,
     "blocker": null
   },
   "completed_phases": [
@@ -809,9 +809,17 @@
       "branch": "worker-23-devotio-p4",
       "lines_added": 31487,
       "lines_deleted": 17
+    },
+    {
+      "worker": "23",
+      "phase": 5,
+      "title": "JS ESM Migration — REPLACE-IN-PLACE platform/assets/app.js (was 19,102-line monolith of 88 top-level IIFEs across W11-W22 + W23 modern) with 108-line thin ESM entry: 12-line discipline banner (6 rules: ESM-only modules, no IIFEs in entry, window.Upg.* preserved via side-effect imports, type=\"module\" defaults defer+strict, SW pre-cache mandate, no bundler) + import './js/_legacy-globals.js' (4,215 lines: pre-IIFE top-level functions togglePsychAcc/toggleDiscCard/switchDiscTab/toggleSkill + 27 inter-IIFE comment blocks preserved verbatim) + 88 ordered side-effect imports './js/upg-*.js' (matches original source-line order, zero behavior change) + import './js/_compat.js' (verifier shim) + CREATE 90 ESM modules in platform/assets/js/: _legacy-globals.js / _compat.js (29-API checklist verifier, fires on DOMContentLoaded, prints '\\u{1F4E6} DECONSTRUCTION v3 — ESM migration complete' on success, console.warn list of missing on failure) / 39 named upg-<api>-<n>.js (theme-1, icons-1, gateway-1, calc-1, cmdk-1, state-1, production-1, type-1, type2-1, scroll-1, nav-1, identity-1, greet-1, countup-1, motion-1, material-1, chrome-1, choreo-1, transition-1, transition-2, focustrap-1, focustrap-2, life-1/2/3, sound-1, aura-1/2, practice-1, pace-1, font-1/2/3, chroma-1/2, ritual-1, layer-1/2, shards-1) / 49 anonymous upg-helper-NN.js modules covering ql* IIFEs (qlCursorAura/qlSectionalIdentity/qlLivingNumerals/qlThemeViewTransition/qlVisibilityPause/qlAccountMgr/qlSalesFrameworks/qlSalesLabs/qlSalesProgress/qlArchToggle/qlKpiCalc/qlVoiceStudio/qlSimulator/ritualEntryIIFE) + W12-W17 helper IIFEs that augment Upg.* without owning a top-level namespace. Strategy: side-effect ESM modules — each module preserves its original IIFE wrapper VERBATIM (no `export` rewrite, no init() function extraction); importing the module re-runs the IIFE which writes to window.Upg.<api> directly. Zero behavior delta. Backward-compat is automatic. Brace-counted extraction via one-shot scripts/worker-23-phase-5-esm-split.mjs (deleted post-success): full JS tokenizer with 7 states (CODE / LCMT / BCMT / DSTR / SSTR / TPL / REGEX/RCLS) + template-literal `${...}` re-entry stack (handles nested templates, regex disambiguation via lastTok char-class check, 88 IIFE starts paired to 88 ends with zero overlap). Augment platform/index.html: <script src=\"assets/app.js\" defer> → <script type=\"module\" src=\"assets/app.js\"> (1-line REPLACE; type=module defaults to defer+strict so `defer` attribute removed). Augment platform/sw.js: VERSION devotio-v3-w23-p4-2026-05 → devotio-v3-w23-p5-2026-05 + PRECACHE list expanded from 35 → 125 entries (35 pre-existing shell+CSS+pages preserved 1:1, +90 new /assets/js/ entries: _legacy-globals + _compat + 88 upg-*.js modules in source order). Brace balance verified via node --check on all 91 JS files (90 modules + entry): 91 pass / 0 fail. Path resolution verified: 0 missing imports in app.js, 0 missing precache paths in sw.js. Idempotency: re-running extractor on already-shattered entry would no-op (script self-detects via wipe-and-recreate of OUT_DIR). Sacred preserved 100% (15 page sections / 391 qcalc / 29 Upg.* APIs all present in modules — verified via grep window.Upg.<X> across platform/assets/js/*.js / 0 google fonts / 0 CDN / 7 @layer cascade from W23 P1 untouched / 308 !important rules from W23 P2 untouched / 6 CSS shards from W23 P3 untouched / 15 page shards from W23 P4 untouched). Worker 23 DECONSTRUCTION 5/5 phases COMPLETE. Architecture transformation summary: index.html 32K monolith → 5K shell + 15 shards (W23 P4) / style.css 28K monolith → 149-line entry + 6 logical files (W23 P3) / app.js 19K monolith → 108-line entry + 90 ESM modules (W23 P5) / 0 → 7 @layer cascade (W23 P1) / 319 → 310 !important raw with 9 cascade-wars purged (W23 P2). 93 files changed: 19,812 insertions / 19,101 deletions.",
+      "branch": "worker-23-devotio-p5",
+      "lines_added": 19812,
+      "lines_deleted": 19101
     }
   ],
-  "next_action": "Continue Worker 23 Phase 5 — JS ESM Migration (replace app.js IIFE monolith with thin ESM entry + 24+ modules + _compat.js shim; finalize inline→shard cutover by rewriting navigateTo to live queries)",
+  "next_action": "Open PR for worker-23-devotio-p5 — Worker 23 DECONSTRUCTION 5/5 complete. Next session: Start Worker 24 Phase 1 (DUAL-FORM — dvh + safe-area).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
