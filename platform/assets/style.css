@@ -26562,3 +26562,269 @@ body[data-rit-halo="active"]::after {
    7. Print + reduced-motion + reduced-transparency: كل واحد له guard.
    ════════════════════════════════════════════════════════════════════════ */
 /* End RITUAL UI v3 / Phase 2 — Reading Halo ─────────────────────────── */
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   RITUAL UI v3 — Threshold Tokens (Worker 22 / Phase 3)
+   ────────────────────────────────────────────────────────────────────────
+   ٥ مسارات للعبور بين الصفحات. كل واحد له طبيعة:
+     - fade        كلاسيكي (الموجود من W14، الافتراضي)
+     - mashrabiya  لطف خشبي يَنفتح من القلب
+     - scroll      لِفافة عمودية
+     - iris        دائرة تأمليّة تتَّسع
+     - mihrab-arch قوس يَنفتح من الأعلى
+   total duration ≤ 600ms · reduced-motion → instant.
+   ════════════════════════════════════════════════════════════════════════ */
+:root {
+  --rit-thresh-duration:           500ms;
+  --rit-thresh-easing-classical:   cubic-bezier(0.4, 0.0, 0.2, 1);
+  --rit-thresh-easing-mashrabiya:  cubic-bezier(0.65, 0.0, 0.35, 1);
+  --rit-thresh-easing-scroll:      cubic-bezier(0.5, 0.0, 0.5, 1);
+  --rit-thresh-easing-iris:        cubic-bezier(0.7, 0.0, 0.3, 1);
+  --rit-thresh-easing-mihrab:      cubic-bezier(0.55, 0.0, 0.1, 1);
+
+  /* Active transition mode (set per navigation via JS on <body data-rit-thresh="X">) */
+  --rit-thresh-active: "fade";
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   RITUAL UI v3 — 5 Threshold Variants (Worker 22 / Phase 3)
+   ────────────────────────────────────────────────────────────────────────
+   Each variant uses View Transitions API where available (chrome 111+),
+   CSS class-based keyframes as fallback. Activated via:
+     Upg.transition.run('next', { ritual: 'mashrabiya', toPageId: 'page-X' })
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ─── 1. FADE (classical — preserves W14 default) ─── */
+.rit-thresh-fade-out {
+  animation: rit-thresh-fade-out var(--rit-thresh-duration)
+             var(--rit-thresh-easing-classical) forwards;
+  will-change: opacity;
+}
+.rit-thresh-fade-in {
+  animation: rit-thresh-fade-in var(--rit-thresh-duration)
+             var(--rit-thresh-easing-classical) forwards;
+  will-change: opacity;
+}
+@keyframes rit-thresh-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+@keyframes rit-thresh-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─── 2. MASHRABIYA (lattice opens from center) ─── */
+.rit-thresh-mashrabiya-out {
+  animation: rit-thresh-mashrabiya-out var(--rit-thresh-duration)
+             var(--rit-thresh-easing-mashrabiya) forwards;
+  will-change: clip-path, opacity;
+}
+.rit-thresh-mashrabiya-in {
+  animation: rit-thresh-mashrabiya-in var(--rit-thresh-duration)
+             var(--rit-thresh-easing-mashrabiya) forwards;
+  will-change: clip-path, opacity;
+}
+@keyframes rit-thresh-mashrabiya-out {
+  0% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    opacity: 1;
+  }
+  100% {
+    clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+    opacity: 0;
+  }
+}
+@keyframes rit-thresh-mashrabiya-in {
+  0% {
+    clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+    opacity: 0;
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    opacity: 1;
+  }
+}
+
+/* ─── 3. SCROLL (vertical roll — لِفافة) ─── */
+.rit-thresh-scroll-out {
+  animation: rit-thresh-scroll-out var(--rit-thresh-duration)
+             var(--rit-thresh-easing-scroll) forwards;
+  will-change: transform, opacity;
+}
+.rit-thresh-scroll-in {
+  animation: rit-thresh-scroll-in var(--rit-thresh-duration)
+             var(--rit-thresh-easing-scroll) forwards;
+  will-change: transform, opacity;
+}
+@keyframes rit-thresh-scroll-out {
+  from { transform: translateY(0);     opacity: 1; }
+  to   { transform: translateY(-30px); opacity: 0; }
+}
+@keyframes rit-thresh-scroll-in {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* ─── 4. IRIS (circular reveal from center) ─── */
+.rit-thresh-iris-out {
+  animation: rit-thresh-iris-out var(--rit-thresh-duration)
+             var(--rit-thresh-easing-iris) forwards;
+  will-change: clip-path, opacity;
+}
+.rit-thresh-iris-in {
+  animation: rit-thresh-iris-in var(--rit-thresh-duration)
+             var(--rit-thresh-easing-iris) forwards;
+  will-change: clip-path, opacity;
+}
+@keyframes rit-thresh-iris-out {
+  from {
+    clip-path: circle(150% at 50% 50%);
+    opacity: 1;
+  }
+  to {
+    clip-path: circle(0% at 50% 50%);
+    opacity: 0;
+  }
+}
+@keyframes rit-thresh-iris-in {
+  from {
+    clip-path: circle(0% at 50% 50%);
+    opacity: 0;
+  }
+  to {
+    clip-path: circle(150% at 50% 50%);
+    opacity: 1;
+  }
+}
+
+/* ─── 5. MIHRAB ARCH (top-down arch — قَوس المحراب) ─── */
+.rit-thresh-mihrab-out {
+  animation: rit-thresh-mihrab-out var(--rit-thresh-duration)
+             var(--rit-thresh-easing-mihrab) forwards;
+  will-change: clip-path, opacity;
+}
+.rit-thresh-mihrab-in {
+  animation: rit-thresh-mihrab-in var(--rit-thresh-duration)
+             var(--rit-thresh-easing-mihrab) forwards;
+  will-change: clip-path, opacity;
+}
+@keyframes rit-thresh-mihrab-out {
+  0% {
+    clip-path: ellipse(150% 150% at 50% 0%);
+    opacity: 1;
+  }
+  100% {
+    clip-path: ellipse(0% 0% at 50% 0%);
+    opacity: 0;
+  }
+}
+@keyframes rit-thresh-mihrab-in {
+  0% {
+    clip-path: ellipse(0% 0% at 50% 0%);
+    opacity: 0;
+  }
+  100% {
+    clip-path: ellipse(150% 150% at 50% 0%);
+    opacity: 1;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   View Transitions API — chromium-based browsers (chrome 111+, edge 111+)
+   ────────────────────────────────────────────────────────────────────────
+   Per-mode pseudo-elements driven by body[data-rit-thresh="<variant>"].
+   Falls back gracefully on Safari/Firefox where the JS layer applies
+   class-based animations on the page sections instead.
+   ════════════════════════════════════════════════════════════════════════ */
+@supports (view-transition-name: x) {
+  ::view-transition-old(rit-page),
+  ::view-transition-new(rit-page) {
+    animation-duration: var(--rit-thresh-duration);
+    animation-timing-function: var(--rit-thresh-easing-classical);
+    mix-blend-mode: normal;
+  }
+
+  body[data-rit-thresh="fade"] ::view-transition-old(rit-page) {
+    animation-name: rit-thresh-fade-out;
+  }
+  body[data-rit-thresh="fade"] ::view-transition-new(rit-page) {
+    animation-name: rit-thresh-fade-in;
+  }
+
+  body[data-rit-thresh="mashrabiya"] ::view-transition-old(rit-page) {
+    animation-name: rit-thresh-mashrabiya-out;
+    animation-timing-function: var(--rit-thresh-easing-mashrabiya);
+  }
+  body[data-rit-thresh="mashrabiya"] ::view-transition-new(rit-page) {
+    animation-name: rit-thresh-mashrabiya-in;
+    animation-timing-function: var(--rit-thresh-easing-mashrabiya);
+  }
+
+  body[data-rit-thresh="scroll"] ::view-transition-old(rit-page) {
+    animation-name: rit-thresh-scroll-out;
+    animation-timing-function: var(--rit-thresh-easing-scroll);
+  }
+  body[data-rit-thresh="scroll"] ::view-transition-new(rit-page) {
+    animation-name: rit-thresh-scroll-in;
+    animation-timing-function: var(--rit-thresh-easing-scroll);
+  }
+
+  body[data-rit-thresh="iris"] ::view-transition-old(rit-page) {
+    animation-name: rit-thresh-iris-out;
+    animation-timing-function: var(--rit-thresh-easing-iris);
+  }
+  body[data-rit-thresh="iris"] ::view-transition-new(rit-page) {
+    animation-name: rit-thresh-iris-in;
+    animation-timing-function: var(--rit-thresh-easing-iris);
+  }
+
+  body[data-rit-thresh="mihrab-arch"] ::view-transition-old(rit-page) {
+    animation-name: rit-thresh-mihrab-out;
+    animation-timing-function: var(--rit-thresh-easing-mihrab);
+  }
+  body[data-rit-thresh="mihrab-arch"] ::view-transition-new(rit-page) {
+    animation-name: rit-thresh-mihrab-in;
+    animation-timing-function: var(--rit-thresh-easing-mihrab);
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Reduced-Motion — fallback to instant (zero animation)
+   ────────────────────────────────────────────────────────────────────────
+   prefers-reduced-motion: reduce → kill all 10 keyframes + view-transition
+   timings. السلام النفسي للمستخدم فوق ذوقنا البصري.
+   ════════════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .rit-thresh-fade-out,        .rit-thresh-fade-in,
+  .rit-thresh-mashrabiya-out,  .rit-thresh-mashrabiya-in,
+  .rit-thresh-scroll-out,      .rit-thresh-scroll-in,
+  .rit-thresh-iris-out,        .rit-thresh-iris-in,
+  .rit-thresh-mihrab-out,      .rit-thresh-mihrab-in {
+    animation-duration: 0ms !important;
+    animation-name: none !important;
+    will-change: auto !important;
+  }
+
+  @supports (view-transition-name: x) {
+    ::view-transition-old(rit-page),
+    ::view-transition-new(rit-page) {
+      animation-duration: 0ms !important;
+      animation-name: none !important;
+    }
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Worker 22 / Phase 3 — Threshold Discipline:
+   1. ٥ variants فقط — لا تخترع جديد بدون phase-spec.
+   2. Total duration ≤ 600ms (currently 500ms).
+   3. reduced-motion → instant (0ms).
+   4. View Transitions API مفضّلة لو متاحة، CSS keyframes كـ fallback.
+   5. Per-personality routing 16 mappings ثابت — Phase 6 يستهلكه في Aura.
+   6. لا تُلمس Upg.transition.run signature — extend فقط (W14 preserved).
+   7. لا transitions على fonts — يكسر W20.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* End RITUAL UI v3 / Phase 3 — Thresholds ───────────────────────────── */
