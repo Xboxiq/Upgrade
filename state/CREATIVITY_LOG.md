@@ -57,12 +57,22 @@
 **Files touched:** platform/assets/css/worlds/_naar.css · platform/assets/js/elan/world-naar.js · platform/assets/app.js
 **Verified at commit:** e7ba3e5
 
+## γ4 — 2026-05-24
+**Beacon Type:** 🌊 MOTION_BEACON
+**The Surprise:** عالم ندى يَستبدل الظهور المفاجئ للـ cards بتكاثف مائي — كل card يَنبت من نقطته المركزية (scale 0.7 → 1) بترتيب شعاعي: الأقرب لمركز الشاشة يتكثَّف أولاً، الأبعد أخيراً. ليس waterfall من أعلى لأسفل (Forbidden #14)، وليس fade-in-on-scroll يتكرر (Forbidden #12) — IntersectionObserver يُشغَّل مرة واحدة per card ثم يُلغي المراقبة. الحركة `cubic-bezier(0.25, 0.46, 0.45, 0.94)` تُحاكي انسياب قطرة على زجاج بارد. بعد اكتمال التكثُّف يُنظَّف `will-change` لإعادة الذاكرة.
+**Reference Avoided:** Forbidden #12 — fade-in على scroll بدون داعٍ + Forbidden #14 — stagger animation على card grids "waterfall" (Creativity Doctrine § ٣).
+**Inspired-by:** WORLDS_ATLAS § Nada Beacon Identity — "cards appear as dew drops forming (radial gradient → expand)."
+**User-Visible:** yes (every card/panel in psych + eq pages condenses on first view; reduced-motion users get instant appear without scale)
+**Originality Self-Score:** 4/5 — IntersectionObserver fire-once is standard; radial-distance stagger from viewport center (not top-down) with CSS `--card-index` custom property is uncommon. Claim: most entry animations are either scroll-triggered-repeatable or sequential; few compute radial distance and stagger outward.
+**Files touched:** platform/assets/css/worlds/_nada.css · platform/assets/js/elan/world-nada.js · platform/assets/app.js
+**Verified at commit:** d214ca6
+
 ---STATS---
-total_beacons: 5
-unique_categories_used: 4
-avg_score: 4.4
+total_beacons: 6
+unique_categories_used: 5
+avg_score: 4.33
 last_5_avg: 4.4
 disruption_triggers: 0
 forbidden_violations: 0
 creativity_health: 100
-last_updated: 2026-05-24 / γ3
+last_updated: 2026-05-24 / γ4

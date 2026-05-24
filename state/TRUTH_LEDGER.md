@@ -551,3 +551,38 @@ The spec asked for an empty `@layer themes` block in `style.css` (themes "deprec
 - 31 top-level Upg.* APIs — unchanged (Upg.worlds.naar nested)
 - `archive/` — untouched
 - Hibr world (γ2) — untouched
+
+
+---
+
+## γ4 — عالم ندى (Nada) — 2026-05-24
+**Commit:** d214ca6
+**Branch:** elan-γ-eight-worlds
+
+### Verified metrics (grep)
+| Metric | Value |
+|---|---|
+| `_nada.css` lines | 238 |
+| `[data-world="nada"]` selectors | 28 |
+| `.is-condensed` beacon markers | 2 |
+| `:has()` no-JS fallback selectors | 4 |
+| `prefers-reduced-motion` guards | 1 |
+| `backdrop-filter` (forbidden) | 0 |
+| `fill="#` hardcoded (forbidden) | 0 |
+| `world-nada.js` lines | 161 |
+| `app.js` import added | 1 |
+| Upg.worlds.nada registered | yes |
+| Lines added total | 397 |
+| Lines deleted | 4 |
+
+### Beacon
+- Type: MOTION_BEACON
+- Avoided: Forbidden #12 (fade-in-on-scroll), #14 (waterfall stagger)
+- Self-score: 4/5
+
+### Sacred preserved
+- 14 page sections — unchanged
+- 31 top-level Upg.* APIs — unchanged (Upg.worlds.nada nested)
+- `archive/` — untouched
+- Hibr world (γ2) — untouched
+- Naar world (γ3) — untouched
