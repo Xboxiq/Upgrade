@@ -115,3 +115,76 @@ Backward-compat aliases preserve every legacy var name still referenced.
 Next priority: α3 Module Manifest (92 → ≤ 28 JS files via ESM consolidation).
 
 — Entry end —
+
+
+
+---
+
+## α3 — Module Manifest — 2026-05-24
+**Pillar:** α FOUNDATION
+**Stage:** 3 of 3 — **closes Pillar α**
+**Branch:** `elan-α-foundation`
+**Verified at commit:** `1e6fd84`
+
+### Before
+- 0 ESM modules anywhere in `platform/assets/js/`
+- 0 directories under `js/` (flat layout: 92 IIFE files at one level)
+- No `MANIFEST.md`, no `_legacy-bridge.js`
+
+### After (verified by grep + find)
+
+| Domain | Key | Value |
+|---|---|---:|
+| Architecture | `js_subdirs_added` | 5 (core, chrome, pages, motion, ux) |
+| Architecture | `esm_modules_in_core` | 6 |
+| Architecture | `esm_export_files_total` | 6 |
+| Architecture | `manifest_md_lines` | 48 |
+| Architecture | `legacy_bridge_lines` | 14 |
+| Stability | `app_js_diff_bytes` | 0 (untouched) |
+| Stability | `legacy_iife_files` | 92 (unchanged) |
+| Stability | `total_js_files` | 99 (was 92; +6 core, +1 bridge — no deletions) |
+| Stability | `important_total` | 276 (unchanged) |
+
+### Files
+**Created (12):**
+- `platform/assets/js/MANIFEST.md` (legacy → ESM migration map)
+- `platform/assets/js/_legacy-bridge.js` (14-line buffer)
+- `platform/assets/js/core/state.js` (4 exports — Upg.state guarded)
+- `platform/assets/js/core/nav.js` (10 exports — Upg.nav guarded)
+- `platform/assets/js/core/theme.js` (5 exports — Upg.theme guarded)
+- `platform/assets/js/core/icons.js` (3 exports — α4 stub)
+- `platform/assets/js/core/font.js` (4 exports — β stub)
+- `platform/assets/js/core/compat.js` (3 exports — `__elanCompat` audit utility)
+- `platform/assets/js/{chrome,pages,motion,ux}/README.md` (4 dir-anchor placeholders)
+
+**Untouched (sacred preserve):**
+- `platform/assets/app.js` (111 lines — zero edits)
+- All 92 legacy `upg-*.js` IIFE files
+- `_legacy-globals.js` (4,215 lines — survives until β/γ/δ/ε migrate consumers)
+- `_compat.js` (existing v3 boot sanity)
+- `platform/index.html`
+
+### Migration safety
+Every ESM module that registers on `window.Upg.<X>` does so behind an
+`if (!window.Upg.<X>)` guard. Legacy `upg-*.js` IIFEs are imported
+earlier in `app.js`, so they populate the surface first and the new
+ESM modules become a no-op at runtime today. Removal of legacy IIFEs
+(in β/γ/δ/ε) flips the guard naturally and the new modules take over.
+
+### Verdict
+🟢 **scaffold-clean** — Pillar α complete. Foundation ready for β + γ.
+
+— Entry end —
+
+---
+
+## ▣ Pillar α — FOUNDATION — COMPLETE — 2026-05-24
+
+**Stages done:** α1 (Forensic Audit) · α2 (Token Architecture) · α3 (Module Manifest)
+**Branch:** `elan-α-foundation`
+**Beacons produced:** 0 (Pillar α is structural, no Beacons required)
+**Lines added (cumulative on branch):** see PR diff stat
+**Sacred preserved:** 14 page sections · 30 Upg.* APIs · all 92 legacy IIFEs · `archive/` untouched
+**Forbidden Library violations:** 0
+**Originality Self-Score:** N/A (foundation pillar)
+**Next pillar:** β TYPE SOUL — branch `elan-β-type-soul` (new branch from main once Pillar α PR merges)
