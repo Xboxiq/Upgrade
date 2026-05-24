@@ -128,3 +128,5 @@ import './js/elan/world-dhahab.js';
 import './js/elan/world-tayyar.js';
 // ÊLAN v4 — γ8: Warsha world (workshop bench beacon + long-press utility)
 import './js/elan/world-warsha.js';
+// ÊLAN v4 — γ9: Saloon world (meta-mirror — closes Pillar γ)
+import './js/elan/world-saloon.js';
