@@ -134,3 +134,7 @@ import './js/elan/world-saloon.js';
 
 // ÊLAN v4 — δ1: Magnetic Sidebar (perspective tilt + gyroscope on mobile)
 import './js/elan/delta1-magnetic-sidebar.js';
+
+
+// ÊLAN v4 — δ2: Time-Aware Bento (dashboard cells reshape by time-of-day)
+import './js/elan/delta2-time-bento.js';

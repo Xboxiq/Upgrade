@@ -1,0 +1,148 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — δ2 — Time-Aware Bento System
+   Pillar δ (KINETIC SHELL), Stage 2/6
+   Augments existing .bento grid with:
+   - container-type: inline-size for container queries
+   - data-axis (focal/supporting/marginalia) semantic hierarchy
+   - data-priority (morning,afternoon,evening,night) time-awareness
+   - Per-world bento treatment overrides
+   Beacon: 🏛 STRUCTURAL_BEACON — cells rearrange by time-of-day.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer elan-delta {
+
+  /* --- Container query enrollment --- */
+  .bento[data-bento] {
+    container-type: inline-size;
+    container-name: bento;
+  }
+
+  /* --- Axis: focal (most important cell, larger type, gradient bg) --- */
+  .bento > [data-axis="focal"] {
+    background: linear-gradient(135deg, var(--anchor-1, hsl(36 14% 88%)), var(--anchor-2, hsl(36 12% 82%)));
+    border-color: var(--line-strong, hsl(0 0% 72%));
+    z-index: 1;
+  }
+
+  .bento > [data-axis="focal"] .stat-tile-value,
+  .bento > [data-axis="focal"] .bento-value,
+  .bento > [data-axis="focal"] h1 {
+    font-family: var(--voice-display, var(--font-display, serif));
+    letter-spacing: -0.015em;
+  }
+
+  /* --- Axis: supporting (standard) --- */
+  .bento > [data-axis="supporting"] {
+    background: var(--anchor-1, hsl(36 14% 88%));
+  }
+
+  /* --- Axis: marginalia (de-emphasized, dashed border, muted) --- */
+  .bento > [data-axis="marginalia"] {
+    background: transparent;
+    border-style: dashed;
+    opacity: 0.85;
+  }
+
+  .bento > [data-axis="marginalia"] .stat-tile-value,
+  .bento > [data-axis="marginalia"] .bento-value {
+    color: var(--ink-muted, hsl(225 22% 28%));
+    font-size: 0.9em;
+  }
+
+  /* --- Time-of-day promotion: promoted cells grow --- */
+  .bento > [data-time-promoted="true"] {
+    grid-column: span 6 !important;
+    grid-row: span 2 !important;
+    order: -1;
+    transition: grid-column 380ms var(--ease-elan, cubic-bezier(0.16, 1, 0.3, 1)),
+                grid-row 380ms var(--ease-elan, cubic-bezier(0.16, 1, 0.3, 1));
+  }
+
+  /* --- Time-of-day indicator on body --- */
+  body[data-time-of-day="morning"]   .bento { --time-accent: var(--ember, hsl(42 95% 45%)); }
+  body[data-time-of-day="afternoon"] .bento { --time-accent: var(--focus, hsl(45 80% 35%)); }
+  body[data-time-of-day="evening"]   .bento { --time-accent: var(--ember, hsl(0 65% 32%)); }
+  body[data-time-of-day="night"]     .bento { --time-accent: var(--focus, hsl(280 50% 52%)); }
+
+  .bento > [data-time-promoted="true"]::after {
+    content: '';
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    width: 4px;
+    height: 100%;
+    border-radius: var(--r-pill, 999px);
+    background: var(--time-accent, var(--ember));
+    opacity: 0.7;
+  }
+
+  /* --- Per-world bento overrides --- */
+
+  /* naar: Brutalist — no radius, hard shadow */
+  body[data-world="naar"] .bento > [data-axis="focal"],
+  body[data-world="naar"] .bento > .stat-tile,
+  body[data-world="naar"] .bento > article {
+    border-radius: 0;
+    box-shadow: 3px 3px 0 var(--anchor-bg, hsl(15 8% 6%));
+  }
+
+  /* nada: soft glass */
+  body[data-world="nada"] .bento > [data-axis="focal"],
+  body[data-world="nada"] .bento > article {
+    backdrop-filter: blur(6px) saturate(150%);
+    border-radius: var(--r-4, 16px);
+    background: linear-gradient(180deg,
+      color-mix(in oklch, var(--anchor-1) 85%, transparent),
+      color-mix(in oklch, var(--anchor-2) 70%, transparent));
+  }
+
+  /* dhahab: gold frame on focal */
+  body[data-world="dhahab"] .bento > [data-axis="focal"] {
+    border: 1px solid var(--ember, hsl(42 95% 45%));
+    box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--ember) 20%, transparent);
+  }
+
+  /* tayyar: neon edge */
+  body[data-world="tayyar"] .bento > [data-axis="focal"] {
+    border-color: color-mix(in oklch, var(--focus, hsl(180 85% 55%)) 40%, transparent);
+    box-shadow: 0 0 12px color-mix(in oklch, var(--focus) 15%, transparent);
+  }
+
+  /* warsha: tilted cards already from γ8, just strengthen focal */
+  body[data-world="warsha"] .bento > [data-axis="focal"] {
+    border-width: 2px;
+    border-color: var(--ember, hsl(25 85% 52%));
+  }
+
+  /* saloon: chamfer corners on focal */
+  body[data-world="saloon"] .bento > [data-axis="focal"] {
+    clip-path: polygon(4px 0, calc(100% - 4px) 0, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0 calc(100% - 4px), 0 4px);
+    border: none;
+    outline: 1px solid var(--ember, hsl(35 75% 58%));
+    outline-offset: -1px;
+  }
+
+  /* --- Container query: mobile collapse (all cells single column) --- */
+  @container bento (max-width: 600px) {
+    .bento > [data-time-promoted="true"] {
+      grid-column: 1 / -1 !important;
+      grid-row: auto !important;
+    }
+  }
+
+  /* --- Reduced motion: no grid transition --- */
+  @media (prefers-reduced-motion: reduce) {
+    .bento > [data-time-promoted="true"] {
+      transition: none !important;
+    }
+  }
+
+  /* --- Print: flatten --- */
+  @media print {
+    .bento > [data-time-promoted="true"]::after {
+      display: none;
+    }
+  }
+
+}
+/* End ÊLAN v4 — δ2 — Time-Aware Bento ─────────────────────────────────── */

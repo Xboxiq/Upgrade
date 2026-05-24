@@ -30,6 +30,7 @@
 @import url("./css/chrome.css")    layer(components);
 @import url("./css/pages.css")     layer(components);
 @import url("./css/motion.css")    layer(components);
+@import url("./css/elan-bento.css") layer(components);  /* δ2 — time-aware bento */
 
 @layer themes {
 /* ────────────────────────────────────────────────────────────────────────

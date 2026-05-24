@@ -740,7 +740,7 @@
       <div class="bento" data-bento="dashboard" data-cath-dash data-life="mesh" aria-label="لوحة التحكم — إحصاءاتك الحقيقية">
 
         <!-- ══════════ Cell 1 — Greeting Hero (b-4x1) ══════════ -->
-        <article class="bento-greet b-4x1 material-regular" data-reveal data-life="ambient">
+        <article class="bento-greet b-4x1 material-regular" data-reveal data-life="ambient" data-priority="morning,afternoon">
           <span class="h-eyebrow">لوحة التحكم</span>
           <h1 data-greet-title class="type-hero type-hero--lg">أهلاً <span data-cath-bind="profile.name">صديقي</span></h1>
           <p data-greet-sub class="h-lede" data-cath-bind="profile.streakLine">تابع رحلتك التدريبية — اليوم خطوة جديدة بانتظارك.</p>
@@ -751,27 +751,27 @@
         </article>
 
         <!-- ══════════ Cells 2-5 — 4 count-up Stat Tiles (canonical, single instance) ══════════ -->
-        <article class="stat-tile b-1x1 material-regular" data-reveal>
+        <article class="stat-tile b-1x1 material-regular" data-reveal data-priority="morning,afternoon">
           <div class="stat-tile-icon"><i class="qi" data-icon="check-circle" aria-hidden="true"></i></div>
           <div class="stat-tile-value u-num tas-num-hero"><span class="type-num-display tas-num-ticker" data-countup data-cath-stat="unitsCompleted">0</span></div>
           <div class="stat-tile-label">وحدة مُكتملة</div>
           <span class="stat-tile-trend is-up"><i class="qi" data-icon="trending-up" aria-hidden="true"></i> +3 هذا الأسبوع</span>
         </article>
 
-        <article class="stat-tile b-1x1 material-regular" data-reveal>
+        <article class="stat-tile b-1x1 material-regular" data-reveal data-priority="afternoon">
           <div class="stat-tile-icon"><i class="qi" data-icon="bar-chart" aria-hidden="true"></i></div>
           <div class="stat-tile-value u-num tas-num-hero"><span class="type-num-display tas-num-ticker" data-countup data-cath-stat="avgCompletionRate">0</span>%</div>
           <div class="stat-tile-label">معدل الإتمام</div>
           <span class="stat-tile-trend is-up"><i class="qi" data-icon="trending-up" aria-hidden="true"></i> +5%</span>
         </article>
 
-        <article class="stat-tile b-1x1 material-regular" data-reveal>
+        <article class="stat-tile b-1x1 material-regular" data-reveal data-priority="evening,night">
           <div class="stat-tile-icon"><i class="qi" data-icon="clock" aria-hidden="true"></i></div>
           <div class="stat-tile-value u-num tas-num-hero"><span class="type-num-display tas-num-ticker" data-countup data-cath-stat="trainingHours">0</span></div>
           <div class="stat-tile-label">ساعة تدريب</div>
         </article>
 
-        <article class="stat-tile b-1x1 material-regular" data-reveal>
+        <article class="stat-tile b-1x1 material-regular" data-reveal data-priority="morning">
           <div class="stat-tile-icon"><i class="qi" data-icon="flame" aria-hidden="true"></i></div>
           <div class="stat-tile-value u-num tas-num-hero"><span class="type-num-display tas-num-ticker" data-countup data-cath-stat="streak">0</span></div>
           <div class="stat-tile-label">يوم streak</div>
@@ -795,7 +795,7 @@
         </article>
 
         <!-- ══════════ Cell 8 — Today's Challenge (b-2x1) — preserves #v12ChallengeLevel + #v12ChallengeBody ══════════ -->
-        <article class="bento-challenge b-2x1 material-regular" data-reveal>
+        <article class="bento-challenge b-2x1 material-regular" data-reveal data-priority="evening,night">
           <header class="bento-h">
             <h2><i class="qi" data-icon="zap" aria-hidden="true"></i> تحدي اليوم</h2>
             <span id="v12ChallengeLevel" class="bento-pill">—</span>
@@ -806,7 +806,7 @@
         </article>
 
         <!-- ══════════ Cell 9 — Skills Heatmap (b-2x1) — preserves #v12Heatmap ══════════ -->
-        <article class="bento-heatmap b-2x1 material-regular" data-reveal>
+        <article class="bento-heatmap b-2x1 material-regular" data-reveal data-priority="afternoon,evening">
           <header class="bento-h">
             <h2><i class="qi" data-icon="calendar" aria-hidden="true"></i> خريطة مهاراتك</h2>
             <span class="bento-h-meta u-text-xs u-c-faint">اضغط على أي خلية لتقييم نفسك</span>
