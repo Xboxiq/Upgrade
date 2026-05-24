@@ -1,0 +1,76 @@
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — β3 — Per-World Type Signature
+   ────────────────────────────────────────────────────────────────────────
+   Each of the 8 worlds fingerprints its headings via three properties:
+   font-family + letter-spacing + a third character marker (font-stretch
+   or font-feature-settings or font-style or text-shadow). The signature
+   activates only when the body / page section carries `data-world="X"`.
+   Worlds inherit the rest of the rhythm (line-height, scale) from the
+   common type tokens; only the signature differs.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ─── 1. Hibr (ink) — dashboard / myprogress ─────────────────────────── */
+[data-world="hibr"] :where(h1, h2, h3) {
+  font-family: var(--voice-display);
+  font-feature-settings: "calt" 1, "kern" 1;
+  letter-spacing: var(--track-snug);
+  text-shadow: 0 1px 0 hsl(0 0% 100% / 0.30);
+}
+
+/* ─── 2. Naar (fire) — lab / programming ─────────────────────────────── */
+[data-world="naar"] :where(h1, h2, h3) {
+  font-family: var(--voice-display-h);
+  font-weight: 800;
+  letter-spacing: var(--track-tight);
+  font-stretch: 95%;
+  text-shadow: 0 0 12px color-mix(in oklch, var(--ember, hsl(18 95% 56%)) 30%, transparent);
+}
+
+/* ─── 3. Nada (dew) — psych / eq ─────────────────────────────────────── */
+[data-world="nada"] :where(h1, h2, h3) {
+  font-family: var(--voice-display-l);
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: var(--track-loose);
+}
+
+/* ─── 4. Hadeed (iron) — negotiation / fieldsales ────────────────────── */
+[data-world="hadeed"] :where(h1, h2, h3) {
+  font-family: var(--voice-display-h);
+  font-weight: 800;
+  letter-spacing: var(--track-tight);
+  font-stretch: 100%;
+}
+
+/* ─── 5. Dhahab (gold) — accounting ──────────────────────────────────── */
+[data-world="dhahab"] :where(h1, h2, h3) {
+  font-family: var(--voice-display);
+  font-feature-settings: "swsh" 1, "calt" 1, "lnum" 1;
+  letter-spacing: var(--track-snug);
+}
+
+/* ─── 6. Tayyar (current) — social / callcenter ──────────────────────── */
+[data-world="tayyar"] :where(h1, h2, h3) {
+  font-family: var(--voice-display-h);
+  font-weight: 700;
+  font-stretch: 105%;
+  letter-spacing: var(--track-loose);
+}
+
+/* ─── 7. Warsha (workshop) — phonerepair / customercare ──────────────── */
+[data-world="warsha"] :where(h1, h2, h3) {
+  font-family: var(--voice-display);
+  font-weight: 700;
+  letter-spacing: var(--track-snug);
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+/* ─── 8. Saloon (salon) — hrmastery ──────────────────────────────────── */
+[data-world="saloon"] :where(h1, h2, h3) {
+  font-family: var(--voice-display-l);
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: var(--track-loose);
+}
+
+/* End ÊLAN v4 / β3 — Per-World Signature ─────────────────────────────── */

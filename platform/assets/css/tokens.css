@@ -1,8 +1,8 @@
 /* ════════════════════════════════════════════════════════════════════════
-   ÊLAN v4 — α2 — Token Entry Point
+   ÊLAN v4 — α2 + β2 — Token Entry Point
    ────────────────────────────────────────────────────────────────────────
-   Pure imports. 5 foundational token files + 8 world placeholders.
-   No @font-face here (relocated to ../_legacy-fontface.css until β1).
+   Pure imports. 5 foundational token files + 1 voice utilities + 8 worlds.
+   No @font-face here (relocated to tokens/_type.css in β1).
    No theme blocks here (theme rules live in style.css @layer themes).
    ════════════════════════════════════════════════════════════════════════ */
 
@@ -11,6 +11,12 @@
 @import url("./tokens/_type.css");
 @import url("./tokens/_motion.css");
 @import url("./tokens/_breakpoint.css");
+
+/* Voice utilities — β2 (Voice Casting) */
+@import url("./tokens/_voice-utilities.css");
+
+/* Per-world type signatures — β3 (Numeric+Kashida+Signature) */
+@import url("./tokens/_signature.css");
 
 /* Worlds — placeholders now, filled in γ2-γ9 */
 @import url("./worlds/_hibr.css");

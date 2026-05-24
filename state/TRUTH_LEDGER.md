@@ -188,3 +188,228 @@ ESM modules become a no-op at runtime today. Removal of legacy IIFEs
 **Forbidden Library violations:** 0
 **Originality Self-Score:** N/A (foundation pillar)
 **Next pillar:** β TYPE SOUL — branch `elan-β-type-soul` (new branch from main once Pillar α PR merges)
+
+
+
+---
+
+## β1 — Local Font Procurement — 2026-05-24
+**Pillar:** β TYPE SOUL
+**Stage:** 1 of 3
+**Branch:** `elan-β-type-soul`
+**Verified at commit:** `43be524`
+
+### Before
+- `MANIFEST.json`: 9 v3 / TASMEEM families (Aref Ruqaa, Reem Kufi, Cairo, Tajawal, IBM Plex Arabic, Readex Pro, Inter, JetBrains Mono, Fraunces) — all ultimately routed to Google Fonts mirror URLs.
+- `tokens/_type.css`: 0 @font-face (placeholder voice slots only).
+- `_legacy-fontface.css`: 20 @font-face for v3 fonts referencing woff2 files that do not exist on disk.
+- `pages.css`: 17 transitional @font-face (TASMEEM v3 P3 block) — out of scope for β1, deferred to ζ.
+- `scripts/elan-β1-fonts.sh`: not present.
+- `platform/index.html`: 0 Google Fonts CDN links.
+- woff2_on_disk: 0.
+
+### After (verified by grep)
+
+| Domain | Key | Value |
+|---|---|---:|
+| Manifest | `manifest_families` | 9 (replaced) |
+| Manifest | `manifest_files_listed` | 10 (Almarai split 400/700) |
+| Manifest | `manifest_files_expected_minimum` | 11 |
+| Manifest | `manifest_googleapis_refs` | 0 |
+| CSS | `font_face_in_tokens.css` | 0 |
+| CSS | `font_face_in__legacy_fontface.css` | 0 (was 20) |
+| CSS | `font_face_in__type.css` | 10 (was 0) |
+| CSS | `font_face_in_pages.css` | 17 (unchanged — out of β1 scope) |
+| CSS | `voice_tokens_declared` | 18 (preserved verbatim from α2) |
+| HTML | `google_fonts_in_index.html` | 0 |
+| Tooling | `bootstrap_script_executable` | yes |
+| Tooling | `bootstrap_script_lines` | 154 |
+| Filesystem | `new_font_subdirs_created` | 8 (boutros-modern-kufi · bukra · markazi-text · vazirmatn · almarai · amiri-quran · lateef · geist) |
+| Filesystem | `legacy_font_subdirs_kept` | 10 (deferred cleanup) |
+| Filesystem | `woff2_on_disk` | 0 (sandbox 403 — operator runs script) |
+
+### Files
+**Created (10):**
+- `scripts/elan-β1-fonts.sh` (idempotent procurement; jq + curl + pyftsubset; fallback_static_urls path; license placement; verify pass)
+- `platform/assets/fonts/boutros-modern-kufi/README.md`
+- `platform/assets/fonts/bukra/README.md`
+- `platform/assets/fonts/markazi-text/README.md`
+- `platform/assets/fonts/vazirmatn/README.md`
+- `platform/assets/fonts/almarai/README.md`
+- `platform/assets/fonts/amiri-quran/README.md`
+- `platform/assets/fonts/lateef/README.md`
+- `platform/assets/fonts/geist/README.md`
+- 8 new font directories (each with a README documenting role + license + voice + after-bootstrap expectations)
+
+**Modified (3):**
+- `platform/assets/fonts/MANIFEST.json` (9 families replaced; license_filename per family; fallback_static_urls; subset_targets extended with `arabic_quranic`)
+- `platform/assets/css/tokens/_type.css` (10 @font-face added at top; 18 voice slots + scale + leading + tracking preserved verbatim from α2)
+- `platform/assets/css/_legacy-fontface.css` (20 @font-face stripped; deprecation stub remains imported for cascade-compat)
+
+**Untouched (Sacred):**
+- `platform/index.html` (no edits — 0 Google Fonts links remain 0)
+- `archive/**` (untouched)
+- `app.js` (untouched)
+- All 92 legacy IIFEs
+- `pages.css` 17 transitional @font-face (deferred to ζ1 per scope discipline)
+
+### Sandbox Caveat (transparency)
+Sandbox network mode `INTEGRATIONS_ONLY` — `curl https://github.com/.../woff2` returns `403 Forbidden` (verified). Therefore β1 ships the **procurement scaffolding** only:
+- MANIFEST + bootstrap script + @font-face declarations + 8 family stubs.
+
+The `woff2 ≥ 11` acceptance bar is met after the operator runs:
+```
+bash scripts/elan-β1-fonts.sh
+```
+on a workstation where ordinary HTTPS reaches github / 29lt.com / sil.org, then commits the resulting `platform/assets/fonts/*/*.woff2` artifacts.
+
+### Verdict
+🟡 **scaffolded** — β1 deliverables complete on the AI side. Visible behavioural change is gated on operator running the bootstrap; until then voice tokens fall back to `system-ui` (β2 will route the new families).
+
+— Entry end —
+
+
+
+---
+
+## β2 — Voice Casting — 2026-05-24
+**Pillar:** β TYPE SOUL
+**Stage:** 2 of 3
+**Branch:** `elan-β-type-soul`
+**Verified at commit:** `1a91a70`
+
+### Before
+- `tokens/_type.css`: 18 voice slots, **16** of them set to literal `system-ui, sans-serif`, 2 set to `ui-monospace, monospace`. No actual stack discipline.
+- `tokens/_voice-utilities.css`: did not exist.
+- `tokens.css`: 13 @imports, none for voice utilities.
+- `base.css`: body used `var(--font)` and `var(--font-text)` (legacy v3 vars, not the β2 voice tokens).
+- `platform/voice-test.html`: did not exist.
+
+### After (verified by grep)
+
+| Domain | Key | Value |
+|---|---|---:|
+| Voice | `voice_tokens_in__type.css` | 23 (18 base + 5 `:lang(en)` overrides) |
+| Voice | `voice_tokens_using_system_ui` | **0** (Beacon) |
+| Voice | `voice_tokens_with_arabic_first_chain` | 20 (18 base + Latin overrides for body/body-lead) |
+| Voice | `v_utility_classes` | 18 |
+| Imports | `tokens.css_imports_voice_util` | 1 |
+| Imports | `tokens.css_total_imports` | 14 |
+| Body | `base.css_body_uses_voice_body` | 2 (both `body` rules switched) |
+| HTML | `google_fonts_in_index.html` | 0 |
+| Test | `voice-test.html_exists` | yes |
+| Test | `voice-test.html_v_class_refs` | 20 |
+| Test | `voice-test.html_inline_font_family` | 1 (intentional fallback test row) |
+
+### Files
+**Created (2):**
+- `platform/assets/css/tokens/_voice-utilities.css` (18 `.v-*` utility classes — group A display, B body, C ui, D numeric, E special, F latin)
+- `platform/voice-test.html` (verifier sheet — 6 sections, 18 utility-class rows, 1 deliberate fallback row to prove the chain rotates through siblings, not system-ui)
+
+**Modified (3):**
+- `platform/assets/css/tokens/_type.css` (18 voice slots filled; `:lang(en)` block adds 5 Latin-primary overrides; **zero** `system-ui` literals after this stage)
+- `platform/assets/css/tokens.css` (added `@import url("./tokens/_voice-utilities.css")` after the 5 token imports, before the world imports — cascade preserved)
+- `platform/assets/css/base.css` (both `body` rules switched to `var(--voice-body, var(--font-text, var(--font)))` with cascade-safe fallback)
+
+**Untouched (Sacred):**
+- `platform/index.html` (no edits — google fonts links remain 0)
+- `archive/**`
+- `app.js`, all 92 legacy IIFEs
+- `pages.css` (deferred to ζ)
+- `_legacy-fontface.css` (left as deprecation stub from β1)
+
+### Beacon (recorded in CREATIVITY_LOG.md)
+**Type:** ✍️ TYPOGRAPHIC_BEACON
+**The Surprise:** Arabic chains never terminate in `system-ui`. Each voice falls back through other families in the 9-pack (e.g. `body`: Markazi → Lateef → Vazirmatn → Boutros → serif). A font-load failure rotates the **character** of the typography rather than breaking it.
+**Reference Avoided:** Forbidden #19 — generic `system-ui` fallback.
+**Inspired-by:** Wild Card #10 — Nasta'liq (layered Naskh as resilience).
+**Originality Self-Score:** 4/5.
+
+### Verdict
+🟢 **type-bound** — voice slots speak. Until the operator runs the β1 bootstrap and produces the binaries, the slots resolve to their secondary candidates (`Markazi Text` → `Lateef` → terminal `serif`). The cascade is honest: the system never silently uses `system-ui` for Arabic content.
+
+— Entry end —
+
+
+
+---
+
+## β3 — Numeric Discipline + Kashida + Per-Page Signature — 2026-05-24
+**Pillar:** β TYPE SOUL
+**Stage:** 3 of 3 — **closes Pillar β**
+**Branch:** `elan-β-type-soul`
+**Verified at commit:** `647f9fe`
+
+### Before
+- `tokens/_voice-utilities.css`: 18 `.v-*` classes only — 0 numeric, 0 kashida.
+- `tokens/_signature.css`: did not exist.
+- `platform/assets/js/elan/`: directory did not exist.
+- `platform/assets/js/elan/format.js`: did not exist.
+- `Upg.format` API: not registered anywhere.
+- `data-world` attributes in `index.html`: 0 (γ pillar will add them).
+
+### After (verified by grep + node functional test)
+
+| Domain | Key | Value |
+|---|---|---:|
+| Numeric | `n_classes_in_voice_utilities` | 9 |
+| Kashida | `k_classes_in_voice_utilities` | 6 |
+| Signatures | `world_signatures_in__signature_css` | 8 |
+| Signatures | `voice_refs_in__signature_css` | 8 |
+| Imports | `tokens_css_imports_signature` | 1 |
+| Imports | `tokens_css_total_imports` | 15 |
+| JS | `format_js_exists` | yes |
+| JS | `KASHIDA_const_in_format_js` | yes (codepoint 0x640) |
+| JS | `app_js_imports_format` | 1 |
+| JS | `Upg_format_registered` | yes (Object.frozen) |
+| Test | `formatCurrency(1234567,{kashida:true})` | `"1ـــ234ـــ567.00"` (3 tatweels) |
+| Test | `formatCurrency(1234567,{kashida:false})` | `"1,234,567.00"` |
+| Test | `formatCurrency(99999,{kashida:true})` | `"99ـ999.00"` (1 tatweel) |
+| Test | `formatCurrency(123456789012,{kashida:true})` | 4 tatweels (capped) |
+
+### Files
+**Created (2):**
+- `platform/assets/css/tokens/_signature.css` (8 per-world signatures)
+- `platform/assets/js/elan/format.js` (ESM module + window.Upg.format frozen surface + DOMContentLoaded / `upg:world:change` / `upg:nav:change` listeners)
+
+**Modified (3):**
+- `platform/assets/css/tokens/_voice-utilities.css` (appended 9 `.n-*` + 6 `.k-*` utilities)
+- `platform/assets/css/tokens.css` (+1 `@import url("./tokens/_signature.css")`)
+- `platform/assets/app.js` (+2 lines: comment + ESM import for `./js/elan/format.js`)
+
+**Untouched (Sacred):**
+- `platform/index.html` (no edits — Beacon activates only when γ adds `data-world` attributes)
+- `archive/**`
+- All 92 legacy IIFEs
+- `_legacy-fontface.css` (β1 deprecation stub)
+- `_legacy-globals.js`
+
+### Beacon (recorded in CREATIVITY_LOG.md)
+**Type:** 📊 DATA_BEACON
+**The Surprise:** عالم ذَهَب وحده يحوّل فاصلة الآلاف من `,` إلى كَشيدة عربية (U+0640 ـ). كلما زادت الخانات، تَنمو الكشيدة بـ 1 character لكل خانة فوق الأربع — حتى حدّ أقصى 4 tatweels.
+**Reference Avoided:** Forbidden #11 — standard tabular nums + comma separators.
+**Inspired-by:** Wild Card #5 — Yemeni mihrab geometry (rhythmic stretching like geometric tile).
+**Originality Self-Score:** 5/5 (claim: no other Arabic platform binds kashida to thousands separator; node test verifies the API).
+
+### Verdict
+🟢 **type-complete** — Pillar β finished. The voice tokens speak, the signature fingerprints each world, the kashida pulses in Dhahab. Pending operator: run `bash scripts/elan-β1-fonts.sh` to bind woff2 binaries; until then voices fall through to secondary candidates.
+**Next pillar:** γ EIGHT WORLDS — branch `elan-γ-eight-worlds` (new branch from `main` once Pillar β PR merges).
+
+— Entry end —
+
+
+
+---
+
+## ▣ Pillar β — TYPE SOUL — COMPLETE — 2026-05-24
+
+**Stages done:** β1 (Local Font Procurement) · β2 (Voice Casting) · β3 (Numeric+Kashida+Signature)
+**Branch:** `elan-β-type-soul`
+**Beacons produced:** 2
+- β2 ✍️ TYPOGRAPHIC_BEACON — Arabic chains never terminate in `system-ui` (Score 4/5)
+- β3 📊 DATA_BEACON — Kashida thousands separator in Dhahab world (Score 5/5)
+**Forbidden Library violations:** 0
+**Avg Beacon score:** 4.5/5
+**Sacred preserved:** 14 page sections · 30 Upg.* APIs · all 92 legacy IIFEs · `archive/` untouched · `_legacy-fontface.css` deprecation stub kept for cascade-compat
+**Operator follow-up:** `bash scripts/elan-β1-fonts.sh` to bind 9 woff2 binaries; CI/Lighthouse can then verify FOUT < 200ms.
+
