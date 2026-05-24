@@ -1036,3 +1036,55 @@
 }
 
 /* End chrome.css ──────────────────────────────────────────────────────── */
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   DUAL-FORM v3 — Safe-Area Chrome Padding (Worker 24 / Phase 1)
+   ────────────────────────────────────────────────────────────────────────
+   On notched devices, chrome respects the notch (top) and home-indicator
+   (bottom). On desktop and non-notched devices, env(safe-area-inset-*)
+   resolves to 0px, so all rules below are visual no-ops there.
+   max(token, safe) preserves the W12/W14 design intent while gracefully
+   absorbing the device inset whenever it exceeds the design padding.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Top chrome / app header / topbar island — respect notch */
+#topbar,
+.app-header,
+.top-chrome,
+header[role="banner"] {
+  padding-top: max(var(--space-3, 0.75rem), var(--safe-top));
+  padding-inline-start: max(var(--space-4, 1rem), var(--safe-left));
+  padding-inline-end:   max(var(--space-4, 1rem), var(--safe-right));
+}
+
+/* Sidebar / nav-rail — respect left/right inset in landscape + bottom inset */
+#sidebar,
+.sidebar,
+.nav-rail {
+  padding-inline-start: max(var(--space-3, 0.75rem), var(--safe-left));
+  padding-block-end:    max(var(--space-3, 0.75rem), var(--safe-bottom));
+}
+
+/* Footer / bottom region — respect home indicator */
+footer.app-footer,
+.app-footer,
+footer[role="contentinfo"] {
+  padding-bottom: max(var(--space-3, 0.75rem), var(--safe-bottom));
+  padding-inline-start: max(var(--space-4, 1rem), var(--safe-left));
+  padding-inline-end:   max(var(--space-4, 1rem), var(--safe-right));
+}
+
+/* Main page-host slot — content respects bottom inset (esp. before bottom-nav lands in P2) */
+#main,
+#page-host,
+main[data-shard-host] {
+  padding-bottom: max(var(--space-6, 1.5rem), var(--safe-bottom));
+}
+
+/* Body min-height = dvh (already enforced by tokens consumers, reaffirm here) */
+html, body {
+  min-height: var(--dvh-100, 100vh);
+}
+
+/* End DUAL-FORM v3 / Phase 1 — Safe-Area Chrome ──────────────────────── */

@@ -206,3 +206,56 @@
 }
 
 /* End tokens.css ──────────────────────────────────────────────────────── */
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   DUAL-FORM v3 — Viewport + Safe Area Tokens (Worker 24 / Phase 1)
+   ────────────────────────────────────────────────────────────────────────
+   Foundation for Pack v3 final Worker. Three viewport flavors are exposed
+   so component CSS never has to choose between progressive enhancement
+   and a stable fallback:
+     --dvh-100  → dynamic viewport height. Adapts as the iOS/Chrome mobile
+                  address bar slides in & out. Prevents layout jump.
+     --svh-100  → smallest possible viewport (chrome fully expanded).
+     --lvh-100  → largest possible viewport (chrome fully collapsed).
+   Safe-area inserts read from the device. On desktop they resolve to 0,
+   so all consumers can `max(var(--space-X), var(--safe-Y))` unconditionally.
+   ════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* Safe-area inserts (notch + home indicator + landscape ears) */
+  --safe-top:    env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left:   env(safe-area-inset-left, 0px);
+  --safe-right:  env(safe-area-inset-right, 0px);
+
+  /* Dynamic viewport units (handles mobile address-bar shift) */
+  --vh-fallback: 100vh;   /* legacy fallback */
+  --dvh-100:     100dvh;  /* dynamic — preferred */
+  --svh-100:     100svh;  /* small (chrome shown) */
+  --lvh-100:     100lvh;  /* large (chrome hidden) */
+
+  /* Chrome heights (per-form — desktop vs mobile) */
+  --dual-chrome-h-desktop: 64px;
+  --dual-chrome-h-mobile:  56px;
+  --dual-bottom-nav-h:     64px;  /* W24 P2 will consume */
+}
+
+/* Fallback for engines without dynamic-viewport units */
+@supports not (height: 100dvh) {
+  :root {
+    --dvh-100: 100vh;
+    --svh-100: 100vh;
+    --lvh-100: 100vh;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Worker 24 / Phase 1 — Viewport Discipline:
+   1. كل قاعدة جديدة بعد P1 يجب أن تَستعمل --dvh-100 (لا 100vh).
+   2. الـ chrome يَستهلك --safe-top/bottom/left/right.
+   3. viewport-fit=cover meta يَفتح env() values.
+   4. على الديسكتوب صفر تأثير (env() = 0 في desktop).
+   5. على iOS Safari: bottom indicator + notch محترم.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* End DUAL-FORM v3 / Phase 1 — Tokens ───────────────────────────────── */

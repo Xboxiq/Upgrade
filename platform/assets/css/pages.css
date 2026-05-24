@@ -406,7 +406,8 @@
       grid-template-areas:
         "sidebar topbar"
         "sidebar main";
-      height: 100vh;
+      /* W24 P1 — dvh prevents iOS address-bar jump; vh fallback via tokens */
+      height: var(--dvh-100, 100vh);
       width: 100vw;
     }
 
@@ -419,7 +420,8 @@
       border-left: 1px solid var(--border);
       display: flex;
       flex-direction: column;
-      height: 100vh;
+      /* W24 P1 — dvh keeps sidebar full height under iOS chrome shifts */
+      height: var(--dvh-100, 100vh);
       position: relative;
       overflow: hidden;
       z-index: 100;
@@ -2663,7 +2665,8 @@
         position: fixed;
         top: 0; right: -260px;
         width: 260px;
-        height: 100vh;
+        /* W24 P1 — dvh on mobile drawer ensures it always reaches the home indicator */
+        height: var(--dvh-100, 100vh);
         z-index: 200;
         transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: var(--shadow-md);
