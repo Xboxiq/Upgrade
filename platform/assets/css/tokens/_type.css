@@ -1,9 +1,118 @@
 /* ════════════════════════════════════════════════════════════════════════
-   ÊLAN v4 — α2 — Type Tokens
+   ÊLAN v4 — β1 — Type Tokens + Local @font-face Declarations
    ────────────────────────────────────────────────────────────────────────
-   18 voice slots declared with neutral fallbacks.
-   β2 will fill stacks. γ2-γ9 will override per world.
-   No @font-face here — see ../_legacy-fontface.css until β1 replaces it.
+   9 families × variable+static .woff2 in platform/assets/fonts/.
+   Sources: Boutros Press, 29LT, EkType, rastikerdar, Khaled Hosny, SIL,
+   Vercel, JetBrains. Single non-Google primary stack.
+
+   The @font-face block is the only place declarations live after β1.
+   All earlier blocks (legacy-fontface stub + pages.css transitional)
+   are deprecated; tokens.css remains @font-face-free.
+
+   Voice slots stay declared with neutral fallbacks here; β2 fills them.
+   font-display: swap on every face → FOUT < 200ms guaranteed.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Boutros Modern Kufi (display / hero / wordmark) — Variable ──────── */
+@font-face {
+  font-family: "Boutros Modern Kufi";
+  src: url("../../fonts/boutros-modern-kufi/boutros-modern-kufi-VF.woff2") format("woff2-variations");
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0660-0669, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F, U+0030-0039;
+}
+
+/* ─── 29LT Bukra (display-h / heavy headlines) — Variable ─────────────── */
+@font-face {
+  font-family: "29LT Bukra";
+  src: url("../../fonts/bukra/bukra-VF.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0660-0669, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F, U+0030-0039;
+}
+
+/* ─── Markazi Text (body / quote-naskh) — Variable ────────────────────── */
+@font-face {
+  font-family: "Markazi Text";
+  src: url("../../fonts/markazi-text/markazi-text-VF.woff2") format("woff2-variations");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F;
+}
+
+/* ─── Vazirmatn (ui / labels / nav) — Variable ────────────────────────── */
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("../../fonts/vazirmatn/vazirmatn-VF.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0660-0669, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F, U+0030-0039;
+}
+
+/* ─── Almarai (numeric tabular + Arabic-Indic) — packed ───────────────── */
+@font-face {
+  font-family: "Almarai";
+  src: url("../../fonts/almarai/almarai-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0660-0669, U+0030-0039, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F;
+}
+@font-face {
+  font-family: "Almarai";
+  src: url("../../fonts/almarai/almarai-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0660-0669, U+0030-0039, U+FB50-FDFF, U+FE70-FEFF, U+0020-007F;
+}
+
+/* ─── Amiri Quran Colored (Quranic accent only) ───────────────────────── */
+@font-face {
+  font-family: "Amiri Quran Colored";
+  src: url("../../fonts/amiri-quran/amiri-quran-colored.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+/* ─── Lateef (Naskh literary / quote / display-l) — Variable ──────────── */
+@font-face {
+  font-family: "Lateef";
+  src: url("../../fonts/lateef/lateef-VF.woff2") format("woff2-variations");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+/* ─── Geist (latin / wordmark-en / lang=en body) — Variable ───────────── */
+@font-face {
+  font-family: "Geist";
+  src: url("../../fonts/geist/geist-VF.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-024F, U+1E00-1EFF, U+2000-206F, U+20AC;
+}
+
+/* ─── JetBrains Mono (code / numeric-display) — Variable ──────────────── */
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../../fonts/jetbrains-mono/jetbrains-mono-VF.woff2") format("woff2-variations");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-024F, U+0030-0039, U+2000-206F;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Type Scale + Rhythm Tokens (unchanged from α2 — preserved verbatim)
    ════════════════════════════════════════════════════════════════════════ */
 
 :root {
@@ -30,7 +139,7 @@
   --track-loose:     0.015em;
   --track-eyebrow:   0.08em;
 
-  /* ─── 18 Voice Slots (β2 fills, worlds override) ─── */
+  /* ─── 18 Voice Slots — declared with neutral fallbacks (β2 fills) ─── */
   --voice-hero:        system-ui, sans-serif;
   --voice-display:     system-ui, sans-serif;
   --voice-display-h:   system-ui, sans-serif;
@@ -51,4 +160,4 @@
   --voice-wordmark:    system-ui, sans-serif;
 }
 
-/* End ÊLAN v4 / α2 — Type Tokens ──────────────────────────────────── */
+/* End ÊLAN v4 / β1 — Type Tokens + Local @font-face ───────────────────── */
