@@ -652,3 +652,52 @@ The spec asked for an empty `@layer themes` block in `style.css` (themes "deprec
 - 31 top-level Upg.* APIs — unchanged (Upg.worlds.dhahab nested)
 - `archive/` — untouched
 - Hibr (γ2), Naar (γ3), Nada (γ4), Hadeed (γ5) — untouched
+
+
+
+---
+
+## γ7 — World Tayyar (Synthwave Cue) — 2026-05-24
+**Branch:** `elan-γ-eight-worlds`
+**Commit:** `48c52f8`
+**Pages assigned:** social, callcenter
+**Inspiration:** Synthwave horizon + Memphis Group + 1980s Iraqi graphic design + Cairo Jazz cover art
+
+### Verified metrics
+| metric | value |
+|---|---|
+| `_tayyar.css` lines | 292 |
+| `[data-world="tayyar"]` selectors in `_tayyar.css` | 40 |
+| `:has()` no-JS fallback selectors in `_tayyar.css` | 2 |
+| `prefers-reduced-motion` guards | 1 |
+| `backdrop-filter` (forbidden glass) | 0 |
+| `<svg viewBox path>` toy SVG (forbidden) | 0 |
+| Emoji in markup (forbidden) | 0 |
+| `world-tayyar.js` lines | 216 |
+| `app.js` imports `world-tayyar.js` | yes |
+| `Upg.worlds.tayyar` registered | yes |
+| Audio files added | 0 (procedural WebAudio only) |
+| WebAudio arpeggio (Hz) | 220 → 330 → 440 |
+| WebAudio filter sweep (Hz) | 600 → 3200 over 180ms |
+| WebAudio peak gain | 0.07 |
+| Debounce window | 200ms |
+| Respects autoplay policy | yes (first call may warmup silently) |
+| Respects prefers-reduced-motion | yes (silent + no pulse) |
+| Mute persists via localStorage | yes |
+| `world.js` `to:` alias added | yes (revives γ4/γ5/γ6 listeners) |
+| Lines added total | 507 |
+| Lines deleted | 5 |
+
+### Beacon
+- Type: SOUND_BEACON
+- Avoided: Forbidden #16 (toast-with-checkmark + generic notification ding)
+- Inspired-by: Wild Card #15 (Synthwave + Khat)
+- Self-score: 4/5
+
+### Sacred preserved
+- 16 page sections — unchanged
+- 31 top-level Upg.* APIs — unchanged (`Upg.worlds.tayyar` nested)
+- `archive/` — untouched
+- Hibr (γ2), Naar (γ3), Nada (γ4), Hadeed (γ5), Dhahab (γ6) — untouched
+- 391 qcalc references — unaffected
+- No Google Fonts, no CDN, no audio assets

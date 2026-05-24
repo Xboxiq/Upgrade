@@ -87,12 +87,22 @@
 **Files touched:** platform/assets/css/worlds/_dhahab.css · platform/assets/js/elan/world-dhahab.js · platform/assets/app.js
 **Verified at commit:** c8d77b0
 
+## γ7 — 2026-05-24
+**Beacon Type:** 🔊 SOUND_BEACON
+**The Surprise:** عند كل إنجاز في صفحات تَيار (social/callcenter) يَنطلق accord من ثلاث nodes في WebAudio: arpeggio صعودي 220Hz→330Hz→440Hz (sine, A3-E4-A4) متباعد 50ms بين النوتة والأخرى + biquad lowpass يَفتح exponential من 600Hz إلى 3200Hz في أول 180ms + ADSR ناعم: 0 → 0.07 attack 8ms → 0.001 release 130ms. ليس ملف صوت، ليست notification ding من iOS، ليست chime جرس. كل بايت بَيْتٌ procedural. الـ debounce 200ms يَمنع spam، والـ autoplay policy مُحترَم: لو الـ AudioContext معلَّق، أول ضغطة تُفعِّل (ولا تَسمع) — الثانية تَصدِر. هذا ليس bug، هذا respect صادق لـ user gesture، يُعرَض كـ "first-tap warmup". المُتمِّم البصري: pulse cyan شعاعي 360ms يَرتفع من الزر بـ keyframes، يُلغَى تلقائياً بـ `animationend`. mute عبر `Upg.worlds.tayyar.mute()` يُحفَظ في localStorage. صامت تماماً عند `prefers-reduced-motion: reduce`.
+**Reference Avoided:** Forbidden #16 — modal بـ overlay داكن + center card + ✓ checkmark afterward (Creativity Doctrine § ٣) + الـ chime/ding الكليشيه في إشعارات iOS/Android.
+**Inspired-by:** Wild Card #15 — Synthwave + Khat (procedural electronic warmth ≠ borrowed sample؛ الـ accord يَستحضر pad synth-y بدفء اصطناعي).
+**User-Visible:** yes (every completion CTA in social + callcenter plays the swell + cyan pulse; reduced-motion users get neither sound nor pulse but the click still toggles state)
+**Originality Self-Score:** 4/5 — WebAudio for UI cues isn't novel; binding a 3-note arpeggio + filter sweep specifically to an Arabic platform's accomplishment moments inside a synthwave-coded world (with `:has()` no-JS fallback for the visual layer + autoplay-policy-honest first-tap warmup) is uncommon. Claim: most procedural UI sounds use single short blips; few schedule arpeggios with envelope per node.
+**Files touched:** platform/assets/css/worlds/_tayyar.css · platform/assets/js/elan/world-tayyar.js · platform/assets/js/elan/world.js · platform/assets/app.js
+**Verified at commit:** 48c52f8
+
 ---STATS---
-total_beacons: 8
-unique_categories_used: 7
-avg_score: 4.25
+total_beacons: 9
+unique_categories_used: 8
+avg_score: 4.22
 last_5_avg: 4.0
 disruption_triggers: 0
 forbidden_violations: 0
 creativity_health: 100
-last_updated: 2026-05-24 / γ6
+last_updated: 2026-05-24 / γ7
