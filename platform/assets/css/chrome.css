@@ -1396,3 +1396,73 @@ body[data-haptic-enabled="true"] .dual-haptic-toggle::after {
 }
 
 /* End DUAL-FORM v3 / Phase 4 — Haptic Toggle ──────────────────────────── */
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — δ1 — Magnetic Sidebar
+   Pillar δ (KINETIC SHELL), Stage 1/6
+   The sidebar gains 3D tilt tracking (pointer on desktop, gyroscope on mobile).
+   Per-world accent applied via [data-world] selectors.
+   Beacon: MOTION_BEACON — physical-tilt on mobile via DeviceOrientationEvent.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer elan-delta {
+
+  /* --- Magnetic tilt surface --- */
+  #sidebar.material-chrome {
+    --tilt-x: 0deg;
+    --tilt-y: 0deg;
+    --tilt-shadow-offset: 0px;
+    transform: perspective(800px)
+               rotateX(var(--tilt-y))
+               rotateY(var(--tilt-x));
+    transform-style: preserve-3d;
+    transition: transform 280ms var(--ease-elan, cubic-bezier(0.16, 1, 0.3, 1)),
+                box-shadow 280ms var(--ease-elan, cubic-bezier(0.16, 1, 0.3, 1));
+    will-change: transform;
+  }
+
+  /* Dynamic shadow follows tilt direction */
+  #sidebar.material-chrome[data-tilt-active] {
+    box-shadow:
+      calc(var(--tilt-shadow-offset) * -1) 2px 24px hsl(0 0% 0% / 0.10),
+      calc(var(--tilt-shadow-offset) * -0.5) 1px 8px hsl(0 0% 0% / 0.06);
+  }
+
+  /* Per-world sidebar accents — border + subtle background shift */
+  body[data-world="hibr"]   #sidebar.material-chrome { border-inline-end: 1px solid var(--anchor-2, hsl(36 12% 82%)); }
+  body[data-world="naar"]   #sidebar.material-chrome { border-inline-end: 2px solid var(--ember, hsl(18 95% 56%)); }
+  body[data-world="nada"]   #sidebar.material-chrome { border-inline-end: 1px solid var(--focus, hsl(280 50% 52%)); }
+  body[data-world="hadeed"] #sidebar.material-chrome { border-inline-end: 1px solid var(--ember, hsl(355 75% 52%)); }
+  body[data-world="dhahab"] #sidebar.material-chrome { border-inline-end: 1px solid color-mix(in oklch, var(--ember, hsl(42 95% 45%)) 50%, transparent); }
+  body[data-world="tayyar"] #sidebar.material-chrome { border-inline-end: 2px solid var(--focus, hsl(180 85% 55%)); }
+  body[data-world="warsha"] #sidebar.material-chrome { border-inline-end: 1px dashed var(--ember, hsl(25 85% 52%)); }
+  body[data-world="saloon"] #sidebar.material-chrome { border-inline-end: 1px solid var(--ember, hsl(35 75% 58%)); }
+
+  /* Nav item world-aware active indicator */
+  body[data-world] #sidebar .nav-item.active {
+    color: var(--ember, currentColor);
+  }
+
+  /* --- Reduced-motion: kill tilt entirely --- */
+  @media (prefers-reduced-motion: reduce) {
+    #sidebar.material-chrome {
+      --tilt-x: 0deg !important;
+      --tilt-y: 0deg !important;
+      --tilt-shadow-offset: 0px !important;
+      transform: none !important;
+      transition: none !important;
+      will-change: auto !important;
+    }
+  }
+
+  /* --- Print: no 3D --- */
+  @media print {
+    #sidebar.material-chrome {
+      transform: none !important;
+      box-shadow: none !important;
+    }
+  }
+
+}
+/* End ÊLAN v4 — δ1 — Magnetic Sidebar ─────────────────────────────────── */
