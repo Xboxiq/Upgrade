@@ -26251,42 +26251,298 @@ html[dir="rtl"] {
 
 
 /* ════════════════════════════════════════════════════════════════════════
-   RITUAL UI v3 — Entry Ritual (Worker 22 / Phase 1)
+   RITUAL UI v3 — Entry Ritual (Worker 22 / Phase 1)  ·  REVISED FIX
+   ────────────────────────────────────────────────────────────────────────
+   The opening of the platform is a 4-second rite. Veil descends in Mihrab
+   indigo, a Lapis halo blooms, the wordmark surfaces in Aref Ruqaa, then
+   one of seven Arabic phrases settles below it. The halo finally expands
+   outward, dissolving the veil into the day's first surface. Once-per-day
+   only (localStorage gated). Skipped instantly under reduced-motion or by
+   Esc / click / "تخطَّ" button.
+
+   Sacred Boundaries:
+     · Reads chr-* tokens from W21. Never mutates them.
+     · Animations are token-driven; magic numbers live nowhere.
+     · prefers-reduced-motion + prefers-reduced-transparency both honored.
+     · Print: portal hidden entirely (no ritual on paper).
    ════════════════════════════════════════════════════════════════════════ */
+
 :root {
-  --rit-entry-duration: 4000ms;
-  --rit-entry-wordmark-delay: 400ms;
-  --rit-entry-poetry-delay: 900ms;
+  /* Timeline (4 seconds total — feel sacred, not slow) */
+  --rit-entry-duration:           4000ms;
+  --rit-entry-veil-fade-in:        400ms;
+  --rit-entry-wordmark-delay:      400ms;
+  --rit-entry-wordmark-duration:   500ms;
+  --rit-entry-poetry-delay:        900ms;
+  --rit-entry-poetry-duration:    1000ms;
   --rit-entry-glow-expand-delay: 2000ms;
-  --rit-entry-fade-out-delay: 3500ms;
-  --rit-entry-fade-out-duration: 500ms;
-  --rit-entry-veil-color: var(--chr-mihrab-900);
-  --rit-entry-glow-color: var(--chr-lapis-500);
-  --rit-entry-wordmark-color: var(--chr-marble-50);
-  --rit-entry-poetry-color: var(--chr-pearl-300);
-  --rit-entry-easing: cubic-bezier(0.45,0.05,0.55,0.95);
+  --rit-entry-glow-duration:     1500ms;
+  --rit-entry-fade-out-delay:    3500ms;
+  --rit-entry-fade-out-duration:  500ms;
+
+  /* Visual — every color flows from chr-* (W21 CHROMATIC SOUL) */
+  --rit-entry-veil-color:        var(--chr-mihrab-900);
+  --rit-entry-glow-color:        var(--chr-lapis-500);
+  --rit-entry-wordmark-color:    var(--chr-marble-50);
+  --rit-entry-poetry-color:      var(--chr-pearl-300);
+
+  /* Easing — gentle s-curve, not playful, not cinematic */
+  --rit-entry-easing:            cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
 
-.rit-entry-portal {position: fixed; inset: 0; z-index: 9999; isolation: isolate;}
-.rit-entry-portal[hidden] {display: none !important;}
-.rit-entry-veil {position: absolute; inset: 0; background: var(--rit-entry-veil-color); opacity: .98;}
-.rit-entry-stage {position: absolute; inset: 0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.5rem; padding:2rem; text-align:center;}
-.rit-entry-glow {position:absolute; top:50%; left:50%; width:12rem; height:12rem; transform:translate(-50%,-50%); background:radial-gradient(circle,color-mix(in oklch,var(--rit-entry-glow-color) 82%,transparent) 0%,transparent 70%); filter: blur(16px); opacity:0;}
-.rit-entry-wordmark {position:relative; z-index:2; font-size:clamp(3rem,8vw,5rem); line-height:1; color:var(--rit-entry-wordmark-color); opacity:0;}
-.rit-entry-poetry {position:relative; z-index:2; font-size:clamp(1.125rem,2.5vw,1.5rem); color:var(--rit-entry-poetry-color); opacity:0; max-width:28rem; line-height:1.7;}
-.rit-entry-skip {position:absolute; bottom:2rem; inset-inline-end:2rem; background:transparent; border:1px solid color-mix(in oklch,var(--rit-entry-poetry-color) 30%,transparent); color:var(--rit-entry-poetry-color); padding:.4rem 1rem; border-radius:.5rem;}
-body.rit-entry-active {overflow:hidden;}
-body.rit-entry-active .rit-entry-glow {animation: ritGlow 1500ms var(--rit-entry-easing) var(--rit-entry-wordmark-delay) forwards, ritGlowExpand 1500ms var(--rit-entry-easing) var(--rit-entry-glow-expand-delay) forwards;}
-body.rit-entry-active .rit-entry-wordmark {animation: ritWord 500ms var(--rit-entry-easing) var(--rit-entry-wordmark-delay) forwards, ritFade var(--rit-entry-fade-out-duration) var(--rit-entry-easing) var(--rit-entry-fade-out-delay) forwards;}
-body.rit-entry-active .rit-entry-poetry {animation: ritPoetry 1000ms var(--rit-entry-easing) var(--rit-entry-poetry-delay) forwards, ritFade var(--rit-entry-fade-out-duration) var(--rit-entry-easing) var(--rit-entry-fade-out-delay) forwards;}
-@keyframes ritWord {from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)}}
-@keyframes ritPoetry {from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)}}
-@keyframes ritGlow {from{opacity:0;transform:translate(-50%,-50%) scale(.65)} to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
-@keyframes ritGlowExpand {to{opacity:0;transform:translate(-50%,-50%) scale(10)}}
-@keyframes ritFade {to{opacity:0}}
-@media (prefers-reduced-motion: reduce){
-  .rit-entry-glow,.rit-entry-wordmark,.rit-entry-poetry{animation:none !important;opacity:1;}
+.rit-entry-portal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: auto;
+  isolation: isolate;
+  contain: layout paint style;
 }
+
+.rit-entry-portal[hidden] {
+  display: none !important;
+}
+
+.rit-entry-veil {
+  position: absolute;
+  inset: 0;
+  background: var(--rit-entry-veil-color);
+  opacity: 0;
+  animation:
+    rit-entry-veil-in   var(--rit-entry-veil-fade-in)
+                        var(--rit-entry-easing)
+                        forwards,
+    rit-entry-veil-out  var(--rit-entry-fade-out-duration)
+                        var(--rit-entry-easing)
+                        var(--rit-entry-fade-out-delay)
+                        forwards;
+}
+
+.rit-entry-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.rit-entry-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12rem;
+  height: 12rem;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle,
+    color-mix(in oklch, var(--rit-entry-glow-color) 80%, transparent) 0%,
+    color-mix(in oklch, var(--rit-entry-glow-color) 40%, transparent) 30%,
+    transparent 70%);
+  filter: blur(16px);
+  opacity: 0;
+  animation:
+    rit-entry-glow-pulse  var(--rit-entry-glow-duration)
+                          var(--rit-entry-easing)
+                          var(--rit-entry-wordmark-delay)
+                          forwards,
+    rit-entry-glow-expand var(--rit-entry-glow-duration)
+                          var(--rit-entry-easing)
+                          var(--rit-entry-glow-expand-delay)
+                          forwards;
+}
+
+.rit-entry-wordmark {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.005em;
+  color: var(--rit-entry-wordmark-color);
+  opacity: 0;
+  animation:
+    rit-entry-wordmark-in var(--rit-entry-wordmark-duration)
+                          var(--rit-entry-easing)
+                          var(--rit-entry-wordmark-delay)
+                          forwards,
+    rit-entry-fade-out    var(--rit-entry-fade-out-duration)
+                          var(--rit-entry-easing)
+                          var(--rit-entry-fade-out-delay)
+                          forwards;
+}
+
+.rit-entry-poetry {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  max-width: 28rem;
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.7;
+  letter-spacing: -0.005em;
+  color: var(--rit-entry-poetry-color);
+  opacity: 0;
+  animation:
+    rit-entry-poetry-in   var(--rit-entry-poetry-duration)
+                          var(--rit-entry-easing)
+                          var(--rit-entry-poetry-delay)
+                          forwards,
+    rit-entry-fade-out    var(--rit-entry-fade-out-duration)
+                          var(--rit-entry-easing)
+                          var(--rit-entry-fade-out-delay)
+                          forwards;
+}
+
+.rit-entry-skip {
+  position: absolute;
+  bottom: 2rem;
+  inset-inline-end: 2rem;
+  z-index: 3;
+  background: transparent;
+  border: 1px solid color-mix(in oklch, var(--rit-entry-poetry-color) 30%, transparent);
+  color: var(--rit-entry-poetry-color);
+  padding: 0.4rem 1rem;
+  border-radius: 0.5rem;
+  font-family: var(--type-voice-ui, var(--font-ui, inherit));
+  font-size: 0.875rem;
+  cursor: pointer;
+  opacity: 0;
+  animation: rit-entry-skip-in 200ms ease-out 1500ms forwards;
+  transition:
+    background-color 160ms ease,
+    border-color     160ms ease,
+    color            160ms ease;
+}
+
+.rit-entry-skip:hover,
+.rit-entry-skip:focus-visible {
+  background: color-mix(in oklch, var(--rit-entry-glow-color) 20%, transparent);
+  border-color: color-mix(in oklch, var(--rit-entry-glow-color) 60%, transparent);
+  color: var(--rit-entry-wordmark-color);
+  outline: none;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Keyframes — entry ritual choreography (8 frames, all opacity+transform)
+   ════════════════════════════════════════════════════════════════════════ */
+@keyframes rit-entry-veil-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes rit-entry-veil-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes rit-entry-wordmark-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes rit-entry-poetry-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 0.85;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rit-entry-glow-pulse {
+  0%   { opacity: 0;    transform: translate(-50%, -50%) scale(0.6); }
+  60%  { opacity: 0.55; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0.45; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes rit-entry-glow-expand {
+  from {
+    opacity: 0.45;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(20);
+  }
+}
+
+@keyframes rit-entry-fade-out {
+  from { opacity: 1; filter: blur(0); }
+  to   { opacity: 0; filter: blur(8px); }
+}
+
+@keyframes rit-entry-skip-in {
+  from { opacity: 0; }
+  to   { opacity: 0.6; }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   A11y guards — silence under reduced-motion, flatten under reduced-transparency
+   ════════════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .rit-entry-veil,
+  .rit-entry-glow,
+  .rit-entry-wordmark,
+  .rit-entry-poetry,
+  .rit-entry-skip {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1;
+    filter: none;
+    transform: translate(0, 0);
+  }
+  .rit-entry-glow {
+    /* preserve centering but silence the scale animation */
+    transform: translate(-50%, -50%);
+    opacity: 0.35;
+  }
+  /* JS sets data-rit-rm="reduce" so it can auto-dismiss in ~800ms */
+  .rit-entry-portal[data-rit-rm="reduce"] {
+    /* visible state, JS handles the timeout */
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .rit-entry-veil {
+    opacity: 1;
+    background: var(--chr-mihrab-900);
+  }
+  .rit-entry-glow {
+    filter: none;
+  }
+}
+
+@media print {
+  .rit-entry-portal { display: none !important; }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Worker 22 / Phase 1 — Entry Discipline:
+   1. Entry ritual يعمل مرة في اليوم — gated عبر localStorage upg_ritual_last_entry.
+   2. Total duration ≤ 4s — مقدّس، لا تطوّله.
+   3. كل keyframe له reduced-motion guard — instant-skip للمستخدم الحسّاس.
+   4. الـ poetry lines ٧ فقط — لا تخترع، لا تنقص.
+   5. Skip button يظهر بعد 1.5s، لا قبل.
+   6. Esc + click on portal/veil + skip button = dismiss.
+   7. Print = hidden — الورق مكان آخر.
+   8. لا CDN، لا audio، لا fetch — عرض synth بحت.
+   ════════════════════════════════════════════════════════════════════════ */
+/* End RITUAL UI v3 / Phase 1 — Entry Ritual ─────────────────────────── */
 
 
 
