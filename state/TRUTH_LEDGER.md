@@ -413,3 +413,62 @@ on a workstation where ordinary HTTPS reaches github / 29lt.com / sil.org, then 
 **Sacred preserved:** 14 page sections · 30 Upg.* APIs · all 92 legacy IIFEs · `archive/` untouched · `_legacy-fontface.css` deprecation stub kept for cascade-compat
 **Operator follow-up:** `bash scripts/elan-β1-fonts.sh` to bind 9 woff2 binaries; CI/Lighthouse can then verify FOUT < 200ms.
 
+
+
+
+---
+
+## γ1 — World Foundation
+**Date:** 2026-05-24
+**Pillar:** γ (EIGHT WORLDS) / Stage 1 of 9
+**Branch:** elan-gamma-eight-worlds (ASCII fallback — Greek γ in original branch name conflicted with stale remote state)
+**Commit:** 63485cd
+
+### Verified by grep on commit 63485cd
+
+| Metric | Value | Command |
+|---|---:|---|
+| `data-world=` matches in `platform/index.html` | 15 | `grep -c 'data-world=' platform/index.html` |
+| `data-world="hibr"` count | 2 | `grep -oE 'data-world="hibr"' platform/index.html \| wc -l` |
+| `data-world="naar"` count | 2 | same |
+| `data-world="nada"` count | 2 | same |
+| `data-world="hadeed"` count | 2 | same |
+| `data-world="dhahab"` count | 1 | same |
+| `data-world="tayyar"` count | 2 | same |
+| `data-world="warsha"` count | 2 | same |
+| `data-world="saloon"` count | 2 | same |
+| `:has()` rules in `worlds/_index.css` | 8 (one per world) | manual count of @supports body |
+| `:has()` total in `platform/assets/css/` | 17 | `grep -rn ':has(' platform/assets/css/ \| wc -l` |
+| `worlds/_index.css` line count | 53 | `wc -l platform/assets/css/worlds/_index.css` |
+| `js/elan/world.js` line count | 151 | `wc -l platform/assets/js/elan/world.js` |
+| `tokens.css` imports `_index.css` | 1 | `grep -c 'worlds/_index.css' platform/assets/css/tokens.css` |
+| `app.js` imports `world.js` | 1 | `grep -c 'elan/world.js' platform/assets/app.js` |
+| `<section class="page">` count (sacred) | 16 | `grep -cE '<section[^>]*class="page' platform/index.html` |
+| `core/theme.js` modified | false | `git diff main -- platform/assets/js/core/theme.js` is empty |
+| `core/theme.js` line count | 79 | unchanged from β-end |
+
+### Beacon
+**Type:** 🏛 STRUCTURAL_BEACON
+**The Surprise:** نظام العوالم لا يبدأ من JS — يبدأ من cascade. ثمانية `:has()` rules تَستنسخ data-world من أول `.page.active` إلى :root كـ `--active-world`. عَطِّل JS تماماً — العوالم ما زالت تشتغل عند التنقّل عبر `.active` toggle. world.js مُجَرَّد enhancement يَنشر event ويتعامل مع View Transitions.
+**Reference Avoided:** Forbidden #14 — standard JS-driven theme switcher (every Notion/Linear/Stripe clone)
+**Inspired-by:** Wild Card #6 — Müller-Brockmann Grid (the system reveals itself via the system)
+**User-Visible:** yes (during page navigation; first paint shows correct world before any JS executes)
+**Originality Self-Score:** 4/5 — `:has()` is widely shipped now, but binding world activation to it as the *primary* substrate (with JS as enhancement, not requirement) is uncommon.
+
+### Files touched
+- `platform/index.html` — +15 `data-world` attributes (one per `<section class="page">`)
+- `platform/assets/css/worlds/_index.css` — new (53 lines)
+- `platform/assets/js/elan/world.js` — new (151 lines, ESM)
+- `platform/assets/css/tokens.css` — +1 import line
+- `platform/assets/app.js` — +1 import line
+
+### Sacred preserved
+- 16 `<section class="page">` count unchanged
+- `core/theme.js` byte-identical to β-end (legacy theme bridge built INSIDE world.js as a non-invasive `upg:theme-change` listener)
+- All 30 baseline Upg.* APIs intact; `Upg.world` is a pure addition (31st)
+- 0 emoji introduced in markup; 0 inline `<svg>` written (no icon work in γ1)
+- `archive/` untouched
+- `prompts/v1, v2, v3` untouched
+
+### Forbidden Library violations
+0

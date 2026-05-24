@@ -27,12 +27,22 @@
 **Files touched:** platform/assets/css/tokens/_voice-utilities.css · platform/assets/css/tokens/_signature.css · platform/assets/css/tokens.css · platform/assets/js/elan/format.js · platform/assets/app.js
 **Verified at commit:** 647f9fe
 
+## γ1 — 2026-05-24
+**Beacon Type:** 🏛 STRUCTURAL_BEACON
+**The Surprise:** نظام العوالم الثمانية لا يَستيقظ مع JavaScript — يَستيقظ مع cascade. ثمانية `:has()` rules في `worlds/_index.css` تَقرأ `data-world` من أول `.page.active` في DOM وتَعرض النتيجة عبر `:root { --active-world }`. لو عُطِّل JS كاملاً، التنقّل بين الصفحات (toggle `.active`) يُغيِّر العالم بصرياً بدون سطر سكربت واحد. الـ controller (world.js) مُحوِّل enhancement فقط — يَنشر `upg:world:change`، ويَستهلك View Transitions API، ويَجسِر تَيمات v3 القديمة عبر استماع `upg:theme-change`.
+**Reference Avoided:** Forbidden #14 — JS-driven theme switcher (نمط كلّ منصة AI افتراضية).
+**Inspired-by:** Wild Card #6 — Müller-Brockmann Grid (الشبكة تُظهر الشبكة).
+**User-Visible:** yes (التنقّل بين الصفحات يُفعِّل العالم قبل DOMContentLoaded أحياناً، خصوصاً مع caching).
+**Originality Self-Score:** 4/5 — `:has()` متاح في كل المتصفحات الحديثة، لكن استخدامه كـ substrate رئيسي للـ theming بدل JS أمر غير شائع. لا أعرف منصة AI أخرى تَفعل هذا.
+**Files touched:** platform/index.html · platform/assets/css/worlds/_index.css · platform/assets/js/elan/world.js · platform/assets/css/tokens.css · platform/assets/app.js
+**Verified at commit:** 63485cd
+
 ---STATS---
-total_beacons: 2
-unique_categories_used: 2
-avg_score: 4.5
-last_5_avg: 4.5
+total_beacons: 3
+unique_categories_used: 3
+avg_score: 4.33
+last_5_avg: 4.33
 disruption_triggers: 0
 forbidden_violations: 0
 creativity_health: 100
-last_updated: 2026-05-24 / β3
+last_updated: 2026-05-24 / γ1
