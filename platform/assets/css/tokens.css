@@ -268,3 +268,22 @@
 }
 
 /* End DUAL-FORM v3 / Phase 2 — Bottom Nav Tokens ─────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   DUAL-FORM v3 — Print Atelier Tokens (Worker 24 / Phase 5 — final)
+   ────────────────────────────────────────────────────────────────────────
+   ٦ tokens فقط. الورق له لُغة. لا magic numbers في motion.css.
+   كل القياسات بـ mm/pt — وحدات الورق الحقيقية.
+   ════════════════════════════════════════════════════════════════════════ */
+:root {
+  --print-page-margin:    18mm 16mm 22mm 16mm;          /* top / right / bottom / left — مَجال للـ footer + breath */
+  --print-text-color:     var(--chr-mihrab-900, #16213a); /* dark text on white paper */
+  --print-text-muted:     var(--chr-mihrab-600, #4a5b80); /* footer + eyebrow */
+  --print-paper-color:    white;                        /* always white — لا paper-tone في الورق الحقيقي */
+  --print-paper-tint:     var(--chr-pearl-50, #fafbf8);  /* للـ qcalc box subtle bg */
+  --print-rule-color:     color-mix(in oklch, var(--chr-mihrab-900, #16213a) 22%, transparent); /* hairlines */
+}
+
+/* End DUAL-FORM v3 / Phase 5 — Print Tokens ─────────────────────────── */
