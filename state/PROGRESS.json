@@ -1,9 +1,27 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-24T16:30:00Z",
+  "last_updated": "2026-05-24T18:00:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
+    "pack": "v3",
+    "worker": "24",
+    "worker_name": "DUAL-FORM",
+    "phase": 1,
+    "phases_total": 5,
+    "phase_order": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "branch": "worker-24-devotio-p1",
+    "status": "in-progress",
+    "blocker": null,
+    "next_action": "Open PR for worker-24-devotio-p1 (Phase 1 — dvh & safe-area). Next session: Worker 24 Phase 2 (Bottom Nav — mobile-only ≤720px, 5 destinations, RTL-aware)."
+  },
+  "previous": {
     "pack": "v3",
     "worker": "23",
     "worker_name": "DECONSTRUCTION",
@@ -17,11 +35,11 @@
       "5"
     ],
     "branch": "worker-23-devotio-p5",
-    "status": "in-progress",
-    "blocker": null,
-    "next_action": "Open PR for worker-23-devotio-p5 — closes Worker 23 DECONSTRUCTION (5/5 phases). Next session: Start Worker 24 Phase 1 (DUAL-FORM — dvh + safe-area)."
+    "status": "merged",
+    "merged_pr": 103,
+    "blocker": null
   },
-  "previous": {
+  "before_previous": {
     "pack": "v3",
     "worker": "23",
     "worker_name": "DECONSTRUCTION",
@@ -37,24 +55,6 @@
     "branch": "worker-23-devotio-p4",
     "status": "merged",
     "merged_pr": 102,
-    "blocker": null
-  },
-  "before_previous": {
-    "pack": "v3",
-    "worker": "23",
-    "worker_name": "DECONSTRUCTION",
-    "phase": 3,
-    "phases_total": 5,
-    "phase_order": [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5"
-    ],
-    "branch": "worker-23-devotio-p3",
-    "status": "merged",
-    "merged_pr": 101,
     "blocker": null
   },
   "completed_phases": [
@@ -817,9 +817,17 @@
       "branch": "worker-23-devotio-p5",
       "lines_added": 19812,
       "lines_deleted": 19101
+    },
+    {
+      "worker": "24",
+      "phase": 1,
+      "title": "dvh & Safe-Area — REPLACE-IN-PLACE 9 vh→dvh occurrences across pages.css (3× height:100vh sidebar/grid + 85vh quiz modal + 88vh fieldsales modal + 12vh cmdk overlay padding + 80vh cmdk cheatsheet) and chrome.css (92vh gateway modal + 70vh cmdk modal) + APPEND ~46 lines to tokens.css (4 --safe-* tokens consuming env(safe-area-inset-top/bottom/left/right) with 0px fallback + --vh-fallback (100vh) + --dvh-100 (100dvh) + --svh-100 + --lvh-100 + 3 dual-form chrome height tokens for Phase 2 use + @supports not(height: 100dvh) graceful-degradation block reverting --dvh-100/--svh-100/--lvh-100 to 100vh + Phase 1 viewport discipline comment) + APPEND ~68 lines to chrome.css (Safe-Area Chrome Padding block: 6 selector groups using max() merge of --space-* token with --safe-* token — topbar/header/.app-header for notch padding-top + #sidebar/.nav-rail for landscape edge + .app-footer/footer[role=contentinfo] for home-indicator padding-bottom + #main/#page-host/main[role=main] for content bottom safe-area + #mobile-drawer for top notch + .cmdk-overlay padding-top:max(12dvh, var(--safe-top)) preserving original 12dvh + html/body min-height:var(--dvh-100) re-affirmation). Viewport meta already had viewport-fit=cover from prior worker (verified, no change needed). Acceptance: 0 stray 100vh in code (only intentional @supports fallback) / 14 dvh occurrences (≥9 spec target) / 4 env(safe-area-inset-*) token defs / 13 var(--safe-*) uses in chrome.css (≥6 spec target). Sacred preserved 100% (15 page sections / 391 qcalc / 76 Upg.* matches / 0 google fonts / 7 @layer cascade untouched / app.js untouched / no HTML changes). On desktop: env() resolves to 0 → zero visual change. On iOS Safari: notch + home-indicator respected, no layout jump on address-bar toggle.",
+      "branch": "worker-24-devotio-p1",
+      "lines_added": 119,
+      "lines_deleted": 9
     }
   ],
-  "next_action": "Open PR for worker-23-devotio-p5 — Worker 23 DECONSTRUCTION 5/5 complete. Next session: Start Worker 24 Phase 1 (DUAL-FORM — dvh + safe-area).",
+  "next_action": "Open PR for worker-24-devotio-p1 (Worker 24 / Phase 1 — dvh & safe-area). Next session: Worker 24 Phase 2 (Bottom Nav — mobile-only ≤720px, 5 destinations, RTL-aware).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",

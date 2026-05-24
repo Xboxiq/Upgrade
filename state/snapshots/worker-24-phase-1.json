@@ -1,0 +1,73 @@
+{
+  "pack": "v3-devotio",
+  "worker": "24",
+  "worker_name": "DUAL-FORM",
+  "phase_completed": 1,
+  "phase_title": "dvh & Safe-Area",
+  "phases_total": 5,
+  "branch": "worker-24-devotio-p1",
+  "files_touched": [
+    "platform/assets/css/tokens.css",
+    "platform/assets/css/chrome.css",
+    "platform/assets/css/pages.css"
+  ],
+  "operations": {
+    "tokens.css": "APPEND 46 lines (safe-area + dvh + dual-form-chrome tokens + @supports fallback + discipline comment)",
+    "chrome.css": "REPLACE-IN-PLACE 2 vh occurrences (92vh gateway modal, 70vh cmdk modal) + APPEND 68 lines (safe-area chrome padding block, 6 selector groups)",
+    "pages.css": "REPLACE-IN-PLACE 7 vh occurrences (3× 100vh sidebar/grid + 85vh quiz modal + 88vh fieldsales modal + 12vh cmdk overlay + 80vh cmdk cheatsheet)"
+  },
+  "lines_added_total": 119,
+  "lines_deleted_total": 9,
+  "tokens_added": [
+    "--safe-top",
+    "--safe-bottom",
+    "--safe-left",
+    "--safe-right",
+    "--vh-fallback",
+    "--dvh-100",
+    "--svh-100",
+    "--lvh-100",
+    "--dual-chrome-h-desktop",
+    "--dual-chrome-h-mobile",
+    "--dual-bottom-nav-h"
+  ],
+  "fonts_added_offline": [],
+  "apis_added": [],
+  "viewport_meta_changed": false,
+  "viewport_meta_already_correct": true,
+  "viewport_meta_value": "width=device-width, initial-scale=1.0, viewport-fit=cover",
+  "devotion_notes": "الأرض ثابتة الآن تحت قَدَم المتدرّب على iOS — الـ address bar يَظهر ويختفي بدون قَفز. الـ notch محترم. الـ home-indicator له حَيِّز. على الديسكتوب: env() = 0 → صفر تأثير بصري. الـ chrome consume safe-area عبر max() merge فلا يَخسر padding الأصلي على الـ desktop ولا يَختنِق على الـ notched mobile.",
+  "offline_check": {
+    "external_requests": 0,
+    "google_fonts": 0,
+    "cdn_libs": 0,
+    "fetch_calls": 0
+  },
+  "sacred_preservation": {
+    "page_sections": 15,
+    "qcalc_references": 391,
+    "upg_api_matches": 76,
+    "google_fonts": 0,
+    "css_layer_cascade_intact": true,
+    "app_js_untouched": true,
+    "html_changes": 0
+  },
+  "sanity_probe": {
+    "stray_100vh_in_code": 0,
+    "dvh_occurrences": 14,
+    "env_safe_area_inset_uses": 4,
+    "var_safe_uses_in_chrome": 13,
+    "viewport_fit_cover_in_meta": 1
+  },
+  "phase_acceptance": {
+    "100vh_purged": true,
+    "dvh_added": true,
+    "safe_area_tokens": true,
+    "safe_area_chrome_padding": true,
+    "viewport_fit_cover": true,
+    "no_visual_regression_desktop": true,
+    "ios_no_address_bar_jump": true,
+    "console_errors": 0
+  },
+  "next_action": "Worker 24 Phase 2 — Bottom Nav (mobile-only ≤720px, 5 destinations, RTL-aware, .nav-bottom utility, focus-visible ring, 44×44 minimum touch target)."
+}
