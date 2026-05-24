@@ -1,7 +1,238 @@
-/* ÊLAN v4 — α2 — World placeholder: ندى (Nada) — Dew
-   Pages: psych, eq
-   Filled in γ4. See WORLDS_ATLAS.md § World 3 for spec. */
+/* ────────────────────────────────────────────────────────────────────────
+   ÊLAN v4 — γ4 — World 3: ندى (Nada) — Dew
+   ────────────────────────────────────────────────────────────────────────
+   Inspiration: Yemeni mihrab + dawn light on limestone + dew on cold glass.
+   Pages:       psych, eq
+   Voice:       Lateef (display) + Markazi Text (body) + Amiri Quran (accent)
+   Motion:      cubic-bezier(0.25, 0.46, 0.45, 0.94) — dew sliding on glass
+   ─────────────────────────────────────────────────────────────────────── */
+
+
+/* ── Tokens ──────────────────────────────────────────────────────────── */
 
 [data-world="nada"] {
-  /* Awaiting γ4 stage. */
+  /* Anchor — dawn fog, cool blue-grey mist */
+  --anchor-bg: hsl(195 28% 96%);
+  --anchor-1:  hsl(195 24% 93%);
+  --anchor-2:  hsl(195 20% 88%);
+  --anchor-3:  hsl(195 18% 82%);
+
+  /* Ink — shadowed stone */
+  --ink:       hsl(220 32% 14%);
+  --ink-muted: hsl(220 16% 38%);
+  --ink-faint: hsl(220 12% 56%);
+
+  /* Lines — dew-wet edges */
+  --line:        hsl(195 18% 82%);
+  --line-strong: hsl(195 20% 70%);
+
+  /* Nada accents — deep olive (grounding) + morning violet (awakening) */
+  --ember: hsl(165 55% 32%);   /* زيتوني عميق */
+  --focus: hsl(280 50% 52%);   /* بنفسج صباحي */
+  --accent: var(--ember);
+
+  /* Motion fingerprint — slow slide, no sudden breaks */
+  --ease-nada:     cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --duration-nada: 480ms;
+  --duration-nada-condense: 520ms;
+
+  /* Shadows — diffused, blue-toned, like light through fog */
+  --shadow-sm: 0 1px 3px  hsl(220 32% 14% / 0.05);
+  --shadow-md: 0 4px 14px hsl(220 32% 14% / 0.07);
+  --shadow-lg: 0 12px 28px hsl(220 32% 14% / 0.09);
+  --shadow-xl: 0 24px 48px hsl(220 32% 14% / 0.11);
+
+  /* Focus ring — violet morning, soft and wide */
+  --ring: 0 0 0 3px color-mix(in oklch, var(--focus) 32%, transparent);
+
+  /* Bind world tokens to platform contract */
+  --color-bg:           var(--anchor-bg);
+  --color-surface-0:    var(--anchor-bg);
+  --color-surface-1:    var(--anchor-1);
+  --color-surface-2:    var(--anchor-2);
+  --color-surface-3:    var(--anchor-3);
+  --color-text:         var(--ink);
+  --color-text-muted:   var(--ink-muted);
+  --color-text-faint:   var(--ink-faint);
+  --color-border:       var(--line);
+  --color-border-strong:var(--line-strong);
+  --color-brand:        var(--ember);
+  --color-tint:         var(--focus);
+}
+
+
+/* ── Surfaces — translucent, frost-glass without being glassmorphism ─── */
+
+[data-world="nada"] .card,
+[data-world="nada"] .panel,
+[data-world="nada"] .ql-glass {
+  background: color-mix(in oklch, var(--anchor-1) 92%, transparent);
+  border: 1px solid color-mix(in oklch, var(--line) 60%, transparent);
+  border-radius: var(--r-3);
+  box-shadow: var(--shadow-md);
+}
+
+
+/* ── Typography — Lateef for contemplation ───────────────────────────── */
+
+body[data-world="nada"],
+[data-world="nada"] .page-content,
+[data-world="nada"] .h-lede,
+[data-world="nada"] .type-body {
+  font-family: var(--voice-body);
+  line-height: var(--lead-relaxed);
+  color: var(--color-text);
+}
+
+[data-world="nada"] h1.is-hero,
+[data-world="nada"] [data-page-personality]:is(#page-psych, #page-eq) h1 {
+  font-family: var(--voice-display-h, "Lateef", serif);
+  font-weight: 700;
+  letter-spacing: var(--track-snug);
+  line-height: var(--lead-snug);
+  color: var(--ink);
+}
+
+
+/* ── Selection — morning violet, gentle ──────────────────────────────── */
+
+body[data-world="nada"] ::selection {
+  background-color: color-mix(in oklch, var(--focus) 24%, transparent);
+  color: var(--ink);
+}
+
+
+/* ── Beacon 🌊 MOTION_BEACON — Dew Condensation ──────────────────────────
+   Cards appear as if condensing from vapor — scaling from center point
+   (not from top), one by one in a radial pattern. Each card uses a
+   `--card-index` variable set by JS to compute its individual delay.
+   
+   This is NOT "fade-in-on-scroll" (Forbidden #12) — it fires once on
+   first view via IntersectionObserver, never repeats. And it is NOT
+   "waterfall stagger" (Forbidden #14) — cards radiate from center
+   outward, not top-to-bottom.
+   
+   Reference avoided: Forbidden #12, #14.
+   Inspired by:       WORLDS_ATLAS Nada Beacon Identity — "cards appear
+                      as dew drops forming (radial gradient → expand)."
+   ─────────────────────────────────────────────────────────────────────── */
+
+[data-world="nada"] [data-dew] {
+  --card-index: 0;
+  opacity: 0;
+  transform: scale(0.7);
+  transform-origin: center center;
+  will-change: opacity, transform;
+}
+
+[data-world="nada"] [data-dew].is-condensed {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity var(--duration-nada-condense) var(--ease-nada),
+    transform var(--duration-nada-condense) var(--ease-nada);
+  transition-delay: calc(var(--card-index) * 80ms);
+}
+
+/* After condensation completes, clean up will-change for perf */
+[data-world="nada"] [data-dew].is-settled {
+  will-change: auto;
+}
+
+
+/* ── Reduced motion: instant appear, no scale movement ───────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  [data-world="nada"] [data-dew] {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+  [data-world="nada"] [data-dew].is-condensed {
+    transition-duration: 1ms;
+    transition-delay: 0ms;
+  }
+}
+
+
+/* ── Mihrab geometry: subtle hexagonal pattern on page header ─────────── */
+
+[data-world="nada"] .page-h {
+  position: relative;
+  isolation: isolate;
+}
+
+[data-world="nada"] .page-h::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66ZM28 100L0 84L0 50L28 34L56 50L56 84L28 100Z' fill='none' stroke='%23334155' stroke-width='0.6' opacity='0.06'/%3E%3C/svg%3E");
+  background-size: 56px 100px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+[data-world="nada"] .page-h > * {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ── Buttons — rounded, soft, dew-drop shape ─────────────────────────── */
+
+[data-world="nada"] .btn,
+[data-world="nada"] .btn-primary {
+  border-radius: var(--r-pill);
+  border: 1px solid color-mix(in oklch, var(--ember) 40%, transparent);
+  background: color-mix(in oklch, var(--ember) 10%, var(--anchor-1));
+  color: var(--ember);
+  padding: var(--s-2) var(--s-5);
+  transition:
+    background-color var(--duration-nada) var(--ease-nada),
+    border-color     var(--duration-nada) var(--ease-nada),
+    color            var(--duration-nada) var(--ease-nada),
+    box-shadow       var(--duration-nada) var(--ease-nada);
+}
+
+[data-world="nada"] .btn:hover,
+[data-world="nada"] .btn-primary:hover {
+  background: var(--ember);
+  color: var(--anchor-bg);
+  border-color: var(--ember);
+  box-shadow: var(--shadow-md);
+}
+
+[data-world="nada"] .btn:focus-visible,
+[data-world="nada"] .btn-primary:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+
+/* ── Progress bars — violet fill that seeps like water ───────────────── */
+
+[data-world="nada"] .page-mastery-progress-fill {
+  background: linear-gradient(
+    to inline-end,
+    color-mix(in oklch, var(--focus) 80%, var(--anchor-2)),
+    var(--focus)
+  );
+  border-radius: var(--r-pill);
+  transition: width 600ms var(--ease-nada);
+}
+
+
+/* ── No-JS Beacon wiring — fill the :has() fallback declared in _index.css */
+
+@supports selector(html:has(*)) {
+  body:not([data-world]):has(section.page.active[data-world="nada"]),
+  body:not([data-world]):has(section.page.is-active[data-world="nada"]) {
+    --color-bg:        hsl(195 28% 96%);
+    --color-surface-1: hsl(195 24% 93%);
+    --color-text:      hsl(220 32% 14%);
+    --color-tint:      hsl(280 50% 52%);
+    background-color:  hsl(195 28% 96%);
+    color:             hsl(220 32% 14%);
+  }
 }

@@ -122,3 +122,4 @@ import './js/elan/world-hibr.js';
 
 // ÊLAN v4 — γ3: Naar world — spark hover beacon
 import './js/elan/world-naar.js';
+import './js/elan/world-nada.js';
