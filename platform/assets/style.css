@@ -27084,3 +27084,311 @@ body[data-rit-halo="active"]::after {
    ════════════════════════════════════════════════════════════════════════ */
 
 /* End RITUAL UI v3 / Phase 3 — Thresholds ───────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   RITUAL UI v3 — Inkpot Tokens (Worker 22 / Phase 4)
+   ────────────────────────────────────────────────────────────────────────
+   ٦ tokens فقط.  ink color routes through --color-tint (W21 P3 cascade).
+   ════════════════════════════════════════════════════════════════════════ */
+:root {
+  --rit-ink-duration:        420ms;
+  --rit-ink-easing:          cubic-bezier(0.4, 0, 0.2, 1);
+  --rit-ink-color:           color-mix(in oklch, var(--color-tint, var(--chr-lapis-500)) 60%, transparent);
+  --rit-ink-color-soft:      color-mix(in oklch, var(--color-tint, var(--chr-lapis-500)) 25%, transparent);
+  --rit-ink-spread-size:     220%;
+  --rit-ink-kalam-thickness: 2px;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   RITUAL UI v3 — Inkpot Feedback (Worker 22 / Phase 4)
+   ────────────────────────────────────────────────────────────────────────
+   ٣ variants عربية الجذر:
+     1. ink-spread     → نقطة حِبر تنتشر من نقطة اللمس     (radial fade)
+     2. kashida-pull   → خط أفقي يمتدّ من اللمس نحو الحافة (horizontal stretch)
+     3. kalam-stroke   → ضربة قطرية كقَلَم القَصَب          (diagonal sweep)
+   Apply via [data-rit-ink="<variant>|auto"] أو class .rit-ink-<variant>.
+   JS sets --rit-ink-x / --rit-ink-y / --rit-ink-size على click.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Container setup (host needs position:relative + overflow:hidden) ─── */
+[data-rit-ink],
+.rit-ink-spread,
+.rit-ink-kashida,
+.rit-ink-kalam {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Ensure host content stays above ink layer */
+[data-rit-ink] > *,
+.rit-ink-spread > *,
+.rit-ink-kashida > *,
+.rit-ink-kalam > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── 1. INK-SPREAD (radial fade from click point) ─── */
+[data-rit-ink="ink-spread"]::before,
+.rit-ink-spread::before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    var(--rit-ink-color)      0%,
+    var(--rit-ink-color-soft) 50%,
+    transparent               80%);
+  opacity: 0;
+  z-index: 0;
+  top:    var(--rit-ink-y, 50%);
+  left:   var(--rit-ink-x, 50%);
+  width:  0;
+  height: 0;
+  transform: translate(-50%, -50%);
+  will-change: width, height, opacity;
+}
+
+[data-rit-ink="ink-spread"][data-rit-ink-active="true"]::before,
+.rit-ink-spread.rit-ink-active::before {
+  animation: rit-ink-spread var(--rit-ink-duration) var(--rit-ink-easing) forwards;
+}
+
+@keyframes rit-ink-spread {
+  0% {
+    width:  0;
+    height: 0;
+    opacity: 0.7;
+  }
+  60% {
+    opacity: 0.45;
+  }
+  100% {
+    width:  var(--rit-ink-size, 220%);
+    height: var(--rit-ink-size, 220%);
+    opacity: 0;
+  }
+}
+
+/* ─── 2. KASHIDA-PULL (horizontal stretch line) ─── */
+[data-rit-ink="kashida-pull"]::after,
+.rit-ink-kashida::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  height: var(--rit-ink-kalam-thickness, 2px);
+  background: linear-gradient(90deg,
+    transparent              0%,
+    var(--rit-ink-color)    50%,
+    transparent             100%);
+  opacity: 0;
+  bottom: 0;
+  left:   var(--rit-ink-x, 50%);
+  width:  0;
+  transform: translateX(-50%);
+  z-index: 0;
+  will-change: width, opacity;
+}
+
+[data-rit-ink="kashida-pull"][data-rit-ink-active="true"]::after,
+.rit-ink-kashida.rit-ink-active::after {
+  animation: rit-ink-kashida-pull var(--rit-ink-duration) var(--rit-ink-easing) forwards;
+}
+
+@keyframes rit-ink-kashida-pull {
+  0% {
+    width:   0;
+    opacity: 0.9;
+  }
+  60% {
+    width:   80%;
+    opacity: 0.7;
+  }
+  100% {
+    width:   100%;
+    opacity: 0;
+  }
+}
+
+/* ─── 3. KALAM-STROKE (diagonal sweep — calligraphic pen) ─── */
+[data-rit-ink="kalam-stroke"]::before,
+.rit-ink-kalam::before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+  background: linear-gradient(135deg,
+    transparent          0%,
+    transparent          45%,
+    var(--rit-ink-color) 50%,
+    transparent          55%,
+    transparent          100%);
+  background-size: 300% 300%;
+  background-position: 100% 100%;
+  opacity: 0;
+  z-index: 0;
+  will-change: background-position, opacity;
+}
+
+[data-rit-ink="kalam-stroke"][data-rit-ink-active="true"]::before,
+.rit-ink-kalam.rit-ink-active::before {
+  animation: rit-ink-kalam-stroke var(--rit-ink-duration) var(--rit-ink-easing) forwards;
+}
+
+@keyframes rit-ink-kalam-stroke {
+  0% {
+    opacity: 0;
+    background-position: 100% 100%;
+  }
+  40% {
+    opacity: 0.8;
+    background-position: 50% 50%;
+  }
+  100% {
+    opacity: 0;
+    background-position: 0% 0%;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Per-personality auto-routing for [data-rit-ink="auto"]
+   ────────────────────────────────────────────────────────────────────────
+   The JS resolver picks variant from the active page's data-page-personality
+   (W12 P5 / W15 P6 cascade). These CSS rules ensure the correct ::before
+   or ::after pattern paints when the JS-derived variant is reflected back
+   onto the [data-rit-ink="<variant>"] attribute. Self-documenting.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Pages routed to kalam-stroke: callcenter, lab, negotiation, programming */
+[data-page-personality="callcenter"]    [data-rit-ink="auto"][data-rit-ink-active="true"]::before,
+[data-page-personality="lab"]           [data-rit-ink="auto"][data-rit-ink-active="true"]::before,
+[data-page-personality="negotiation"]   [data-rit-ink="auto"][data-rit-ink-active="true"]::before,
+[data-page-personality="programming"]   [data-rit-ink="auto"][data-rit-ink-active="true"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg,
+    transparent 0%, transparent 45%,
+    var(--rit-ink-color) 50%,
+    transparent 55%, transparent 100%);
+  background-size: 300% 300%;
+  z-index: 0;
+  animation: rit-ink-kalam-stroke var(--rit-ink-duration) var(--rit-ink-easing) forwards;
+}
+
+/* Pages routed to kashida-pull: psych, eq, hrmastery, accounting, accountmgr */
+[data-page-personality="psych"]         [data-rit-ink="auto"][data-rit-ink-active="true"]::after,
+[data-page-personality="eq"]            [data-rit-ink="auto"][data-rit-ink-active="true"]::after,
+[data-page-personality="hrmastery"]     [data-rit-ink="auto"][data-rit-ink-active="true"]::after,
+[data-page-personality="accounting"]    [data-rit-ink="auto"][data-rit-ink-active="true"]::after,
+[data-page-personality="accountmgr"]    [data-rit-ink="auto"][data-rit-ink-active="true"]::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  height: var(--rit-ink-kalam-thickness, 2px);
+  background: linear-gradient(90deg, transparent 0%, var(--rit-ink-color) 50%, transparent 100%);
+  bottom: 0;
+  left:   var(--rit-ink-x, 50%);
+  width:  0;
+  transform: translateX(-50%);
+  z-index: 0;
+  animation: rit-ink-kashida-pull var(--rit-ink-duration) var(--rit-ink-easing) forwards;
+}
+
+/* Default (auto) on all other personalities → ink-spread radial */
+[data-rit-ink="auto"][data-rit-ink-active="true"]::before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    var(--rit-ink-color)      0%,
+    var(--rit-ink-color-soft) 50%,
+    transparent               80%);
+  top:    var(--rit-ink-y, 50%);
+  left:   var(--rit-ink-x, 50%);
+  width:  0;
+  height: 0;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  animation: rit-ink-spread var(--rit-ink-duration) var(--rit-ink-easing) forwards;
+}
+
+/* Kalam-stroke pages override the default ::before above */
+[data-page-personality="callcenter"]    [data-rit-ink="auto"][data-rit-ink-active="true"]::before,
+[data-page-personality="lab"]           [data-rit-ink="auto"][data-rit-ink-active="true"]::before,
+[data-page-personality="negotiation"]   [data-rit-ink="auto"][data-rit-ink-active="true"]::before,
+[data-page-personality="programming"]   [data-rit-ink="auto"][data-rit-ink-active="true"]::before {
+  border-radius: 0;
+  width: auto;
+  height: auto;
+  top: 0;
+  left: 0;
+  transform: none;
+}
+
+/* Kashida-pull pages: hide the default ::before so only ::after paints */
+[data-page-personality="psych"]         [data-rit-ink="auto"][data-rit-ink-active="true"]::before,
+[data-page-personality="eq"]            [data-rit-ink="auto"][data-rit-ink-active="true"]::before,
+[data-page-personality="hrmastery"]     [data-rit-ink="auto"][data-rit-ink-active="true"]::before,
+[data-page-personality="accounting"]    [data-rit-ink="auto"][data-rit-ink-active="true"]::before,
+[data-page-personality="accountmgr"]    [data-rit-ink="auto"][data-rit-ink-active="true"]::before {
+  display: none;
+}
+
+/* ─── Bare opt-out class (escapes auto-attach) ─── */
+.rit-ink-bare,
+.rit-ink-bare::before,
+.rit-ink-bare::after {
+  animation: none !important;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Reduced-Motion — instant micro-flash (≤80ms)
+   ════════════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  [data-rit-ink][data-rit-ink-active="true"]::before,
+  [data-rit-ink][data-rit-ink-active="true"]::after,
+  .rit-ink-spread.rit-ink-active::before,
+  .rit-ink-kashida.rit-ink-active::after,
+  .rit-ink-kalam.rit-ink-active::before {
+    animation-duration: 80ms !important;
+    transition-duration: 80ms !important;
+  }
+  /* Cap the spread radius too so reduced motion is genuinely instant */
+  @keyframes rit-ink-spread {
+    0%, 100% { opacity: 0.4; width: 50%; height: 50%; }
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Print — never paint inkpot on paper
+   ════════════════════════════════════════════════════════════════════════ */
+@media print {
+  [data-rit-ink]::before,
+  [data-rit-ink]::after,
+  .rit-ink-spread::before,
+  .rit-ink-kashida::after,
+  .rit-ink-kalam::before {
+    display: none !important;
+    animation: none !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Worker 22 / Phase 4 — Inkpot Discipline:
+   1. ٣ variants فقط (+ "auto" روتنج تلقائي حسب data-page-personality).
+   2. Total duration ≤ 420ms (reduced-motion → 80ms).
+   3. لا inkpot على عناصر غير تفاعلية (labels, headers محرّمة).
+   4. .rit-ink-bare يُخرج العنصر من auto-attach نهائياً.
+   5. الـ ink color يستهلك --color-tint من W21 P3 — تلقائياً يأخذ صبغة الصفحة.
+   6. لا يُلمس Upg.ritual.{start, enterHalo, setTransition} — extend فقط (P1+P2+P3 محفوظة).
+   7. JS auto-attach عبر [data-rit-ink="auto"] على button/a[role=button]/.bento-card/.qcalc-button.
+   8. لا keyframe جديد بدون reduced-motion guard — هذا Phase أضاف 3 keyframes.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* End RITUAL UI v3 / Phase 4 — Inkpot Feedback ──────────────────────── */

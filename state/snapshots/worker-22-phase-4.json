@@ -1,0 +1,96 @@
+{
+  "pack": "v3",
+  "worker": "22",
+  "worker_name": "RITUAL_UI",
+  "phase_completed": 4,
+  "phases_total": 6,
+  "phase_title": "Inkpot Feedback — Arabic-rooted click effects",
+  "branch": "worker-22-devotio-p4",
+  "files_touched": [
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "lines_added_total": 522,
+  "lines_added_css": 308,
+  "lines_added_js": 214,
+  "tokens_added": [
+    "--rit-ink-duration",
+    "--rit-ink-easing",
+    "--rit-ink-color",
+    "--rit-ink-color-soft",
+    "--rit-ink-spread-size",
+    "--rit-ink-kalam-thickness"
+  ],
+  "keyframes_added": [
+    "rit-ink-spread",
+    "rit-ink-kashida-pull",
+    "rit-ink-kalam-stroke"
+  ],
+  "fonts_added_offline": [],
+  "css_utilities_added": [
+    "[data-rit-ink=\"ink-spread\"]",
+    "[data-rit-ink=\"kashida-pull\"]",
+    "[data-rit-ink=\"kalam-stroke\"]",
+    "[data-rit-ink=\"auto\"] (per-personality routed)",
+    ".rit-ink-spread / .rit-ink-kashida / .rit-ink-kalam class aliases",
+    ".rit-ink-bare opt-out class"
+  ],
+  "api_extensions": [
+    "Upg.ritual.inkpot.trigger(elOrSelector, evt)",
+    "Upg.ritual.inkpot.attach(root?)",
+    "Upg.ritual.inkpot.listVariants()",
+    "Upg.ritual.inkpot.personalityMap()",
+    "Upg.ritual.inkpot.setPersonalityVariant(personality, variant)",
+    "Upg.ritual.inkpot.resolveFor(personality)"
+  ],
+  "personality_routings": {
+    "dashboard": "ink-spread",
+    "callcenter": "kalam-stroke",
+    "fieldsales": "ink-spread",
+    "accountmgr": "kashida-pull",
+    "social": "ink-spread",
+    "lab": "kalam-stroke",
+    "psych": "kashida-pull",
+    "eq": "kashida-pull",
+    "negotiation": "kalam-stroke",
+    "customercare": "ink-spread",
+    "programming": "kalam-stroke",
+    "accounting": "kashida-pull",
+    "phonerepair": "ink-spread",
+    "hrmastery": "kashida-pull",
+    "myprogress": "ink-spread",
+    "curriculum": "ink-spread"
+  },
+  "a11y_guards": [
+    "@media (prefers-reduced-motion: reduce) — duration capped to 80ms + spread radius capped at 50%",
+    "@media print — display: none on all ::before/::after layers"
+  ],
+  "devotion_notes": "كل نَقْرة صارت طقساً عربياً: حِبر يَنتشر، كَشيدة تَمتدّ، أو ضربة قَلَم قَصَب تَنطلق. لون الحِبر يُسحب من --color-tint الصفحة الحالية تلقائياً، فالنقر على dashboard أَصفر سَفَر، وعلى psych أزرق لازورد. الـ reduced-motion يَختصر إلى ومضة 80ms — لا يَحرم بل يُهدّئ.",
+  "offline_check": {
+    "external_requests": 0,
+    "google_fonts": 0,
+    "cdn_libraries": 0,
+    "audio_assets": 0
+  },
+  "sacred_preservation": {
+    "pages": 14,
+    "qcalc": 391,
+    "upg_top_level_apis": 27,
+    "chr_tokens": 518,
+    "tint_tokens": 198,
+    "google_fonts": 0,
+    "phase_1_intact": true,
+    "phase_2_intact": true,
+    "phase_3_intact": true,
+    "html_dom_changes": 0
+  },
+  "discipline_notes": [
+    "AUGMENT-only on existing API surface (Upg.ritual.inkpot is a sub-namespace; Upg.ritual top-level signature unchanged).",
+    "Idempotent install via window.Upg.ritual._inkpotInstalled flag (mirrors Phase 3 _threshInstalled pattern).",
+    "Click coords drive --rit-ink-x / --rit-ink-y CSS custom props (no inline style spam).",
+    "Auto-attach via single MutationObserver + DOMContentLoaded + upg:nav:change re-sweep.",
+    "Single delegated click listener (passive) — zero per-element listeners.",
+    "Zero new HTML mutations — the schema attaches at runtime."
+  ],
+  "next_action": "Continue Worker 22 Phase 5 — Time-of-Day (5 atmospheres: Dawn/Forenoon/Asr/Maghrib/Isha)"
+}
