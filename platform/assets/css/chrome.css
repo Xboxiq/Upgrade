@@ -1283,3 +1283,116 @@ html, body {
 }
 
 /* End DUAL-FORM v3 / Phase 2 — Bottom Nav ──────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   DUAL-FORM v3 — Haptic Toggle (Worker 24 / Phase 4)
+   Mobile-only chip in topbar-actions. Reflects body[data-haptic-enabled].
+   ════════════════════════════════════════════════════════════════════════ */
+
+.dual-haptic-toggle {
+  display: none;                          /* hidden on desktop by default */
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  padding: 0;
+  border: 1px solid var(--color-border, var(--border, rgba(255, 255, 255, 0.10)));
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-text-muted, var(--text-muted, rgba(255, 255, 255, 0.60)));
+  cursor: pointer;
+  transition:
+    color 160ms var(--ease-out, ease-out),
+    border-color 160ms var(--ease-out, ease-out),
+    background 160ms var(--ease-out, ease-out),
+    transform 200ms var(--ease-out, ease-out);
+}
+
+.dual-haptic-toggle:hover,
+.dual-haptic-toggle:focus-visible {
+  color: var(--color-text, var(--text, currentColor));
+  border-color: var(--color-tint, var(--chr-lapis-500, var(--accent, #5B7AC9)));
+  background: color-mix(
+    in oklch,
+    var(--color-tint, var(--chr-lapis-500, var(--accent, #5B7AC9))) 12%,
+    transparent
+  );
+  outline: none;
+}
+
+.dual-haptic-toggle:focus-visible {
+  box-shadow: 0 0 0 2px color-mix(
+    in oklch,
+    var(--color-tint, var(--chr-lapis-500, var(--accent, #5B7AC9))) 40%,
+    transparent
+  );
+}
+
+/* Active state — when haptic is enabled. Identity-aware via --color-tint. */
+body[data-haptic-enabled="true"] .dual-haptic-toggle {
+  color: var(--color-tint, var(--chr-lapis-500, var(--accent, #5B7AC9)));
+  border-color: var(--color-tint, var(--chr-lapis-500, var(--accent, #5B7AC9)));
+}
+
+body[data-haptic-enabled="true"] .dual-haptic-toggle::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  inset-inline-end: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-tint, var(--chr-lapis-500, var(--accent, #5B7AC9)));
+  box-shadow: 0 0 6px currentColor;
+  pointer-events: none;
+}
+
+.dual-haptic-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+/* Visual pulse on click — purely cosmetic. Actual haptic via JS. */
+@keyframes dual-haptic-pulse {
+  0%,
+  100% { transform: scale(1); }
+  50%  { transform: scale(1.18); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dual-haptic-toggle:active .dual-haptic-icon {
+    animation: dual-haptic-pulse 220ms var(--ease-out, ease-out);
+  }
+}
+
+/* Mobile-only visibility — primary purpose of this chip. */
+@media (max-width: 720px) {
+  .dual-haptic-toggle {
+    display: inline-flex;
+  }
+}
+
+/* Reduced-motion guard — silence visual pulse + transitions. Haptic itself
+   is still allowed (it is a tactile dialect, not a motion). */
+@media (prefers-reduced-motion: reduce) {
+  .dual-haptic-toggle {
+    transition: none;
+  }
+  .dual-haptic-toggle:active .dual-haptic-icon {
+    animation: none;
+  }
+}
+
+/* Print — hide chrome control entirely. */
+@media print {
+  .dual-haptic-toggle {
+    display: none !important;
+  }
+}
+
+/* End DUAL-FORM v3 / Phase 4 — Haptic Toggle ──────────────────────────── */
