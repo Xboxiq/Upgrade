@@ -1,0 +1,94 @@
+{
+  "pack": "v3",
+  "worker": "23",
+  "worker_name": "DECONSTRUCTION",
+  "phase_completed": 1,
+  "phases_total": 5,
+  "phase_title": "CSS @layer Cascade Intro",
+  "branch": "worker-23-devotio",
+  "files_touched": [
+    "platform/assets/style.css",
+    "platform/assets/app.js",
+    "scripts/add-css-layers.mjs",
+    "state/PROGRESS.json",
+    "state/snapshots/worker-23-phase-1.json"
+  ],
+  "lines_added_total": 326,
+  "lines_added_breakdown": {
+    "platform/assets/style.css": 49,
+    "platform/assets/app.js": 167,
+    "scripts/add-css-layers.mjs": 110
+  },
+  "lines_deleted": 0,
+  "tokens_added": [
+    "--upg-layer-reset",
+    "--upg-layer-tokens",
+    "--upg-layer-base",
+    "--upg-layer-utilities",
+    "--upg-layer-themes",
+    "--upg-layer-overrides"
+  ],
+  "fonts_added_offline": [],
+  "css_layer_cascade": {
+    "declared_order": [
+      "reset",
+      "tokens",
+      "base",
+      "utilities",
+      "components",
+      "themes",
+      "overrides"
+    ],
+    "populated_layers": [
+      "reset",
+      "tokens",
+      "base",
+      "utilities",
+      "components",
+      "themes",
+      "overrides"
+    ],
+    "populated_count": 7,
+    "rules_in_components": "approx 27,938 lines (entire pre-Phase-1 monolith)",
+    "seed_strategy": ":where(:root) zero-specificity custom-property anchors per non-bulk layer",
+    "wrap_strategy": "single @layer components wrap of entire body — source order preserved, cross-rule specificity unchanged, theme/component selectors retain native specificity wins"
+  },
+  "new_apis": [
+    {
+      "name": "Upg.layer",
+      "ordinal": 28,
+      "surface": ["list", "cascadeOrder", "audit", "status"],
+      "frozen": true,
+      "idempotent": true,
+      "fallback_safe": "pre-CSSLayerBlockRule engines"
+    }
+  ],
+  "sacred_preservation": {
+    "pages": { "expected": "14+", "actual": 14, "status": "preserved" },
+    "qcalc": { "expected": 391, "actual": 391, "status": "preserved" },
+    "upg_apis": { "expected": 28, "actual": 28, "status": "preserved (was 27 post-W22, +Upg.layer)" },
+    "google_fonts": { "expected": 0, "actual": 0, "status": "preserved" },
+    "important_rules": { "baseline_pre_p1": 271, "actual_post_p1": 271, "status": "preserved (Phase 2 will purge ~80%)" },
+    "keyframes": { "expected": 70, "actual": 70, "status": "preserved" },
+    "font_face": { "expected": 33, "actual": 33, "status": "preserved" },
+    "reduced_motion_blocks": { "expected": 56, "actual": 56, "status": "preserved" },
+    "print_blocks": { "expected": 50, "actual": 50, "status": "preserved" },
+    "reduced_transparency_blocks": { "expected": 12, "actual": 12, "status": "preserved" }
+  },
+  "devotion_notes": "هذا أول phase معماري في Pack v3. الـ @layer cascade دخل بهدوء: 0 طبقة → 7 طبقات معلنة + 7 طبقات مأهولة. كل القواعد القديمة (W11-W22 من 2026 كاملة) تنام الآن في @layer components، سَتنُقَّى وتُعاد توزيعها في Phase 2-5. Devotion: نَكسّر بحُكم لا بحطّب — Stage-and-Replace ضمن safety-first، صفر visual regression risk. الـ Upg.layer الجديد يَفتح الباب للـ introspection البرمجي للنظام الجديد. الجمال الآن مَحفوظ تحت بنية مُنظَّمة، جاهزة لـ purge الـ 80% من الـ !important.",
+  "offline_check": {
+    "external_requests": 0,
+    "google_fonts_check": "platform/index.html grep fonts.googleapis.com → 0",
+    "cdn_imports_check": "platform/assets/style.css grep '@import' → 0",
+    "external_fetch_check": "all assets local in platform/assets/"
+  },
+  "context_remaining_estimate_pct": 60,
+  "next_action": "Continue Worker 23 Phase 2 — !important Purge",
+  "phase_2_handoff_notes": [
+    "Phase 2 will MOVE :root { ... } blocks from @layer components into @layer tokens.",
+    "Phase 2 will MOVE :root[data-theme=...] / html[data-theme=...] / body[data-theme=...] into @layer themes.",
+    "Phase 2 will MOVE @media (prefers-reduced-motion: reduce) / @media print / @media (prefers-reduced-transparency: reduce) into @layer overrides.",
+    "Phase 2 will purge !important from rules where the new layer cascade order makes it unnecessary (target: 271 → ≤45).",
+    "Phase 2 should keep scripts/add-css-layers.mjs alive (could be useful for future re-classification); P3 may remove."
+  ]
+}
