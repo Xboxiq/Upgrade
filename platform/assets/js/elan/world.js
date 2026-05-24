@@ -112,7 +112,7 @@ function applyWorld(world, pageId) {
   }
 
   document.dispatchEvent(new CustomEvent('upg:world:change', {
-    detail: { world, prevWorld: prev || null, pageId: pageId || null },
+    detail: { world, to: world, prevWorld: prev || null, pageId: pageId || null },
   }));
   return true;
 }
