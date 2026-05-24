@@ -26287,3 +26287,240 @@ body.rit-entry-active .rit-entry-poetry {animation: ritPoetry 1000ms var(--rit-e
 @media (prefers-reduced-motion: reduce){
   .rit-entry-glow,.rit-entry-wordmark,.rit-entry-poetry{animation:none !important;opacity:1;}
 }
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   RITUAL UI v3 — Reading Halo (Worker 22 / Phase 2)
+   ────────────────────────────────────────────────────────────────────────
+   Activated by [data-rit-halo="active"] on body. Selected element gets
+   [data-rit-halo-target] attribute. Cmd+. (or Ctrl+.) toggles. Chrome
+   dims to 0.15 opacity + 4px blur. Target raises with Lapis halo glow.
+   Veil dims background to Mihrab (dark) or Marble (light).
+   ════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --rit-halo-duration:        480ms;
+  --rit-halo-easing:          cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --rit-halo-chrome-opacity:  0.15;
+  --rit-halo-chrome-blur:     4px;
+  --rit-halo-glow-color:      var(--chr-lapis-500);
+  --rit-halo-bg-veil:         color-mix(in oklch, var(--chr-mihrab-900) 78%, transparent);
+}
+
+[data-theme="light"] {
+  --rit-halo-bg-veil:         color-mix(in oklch, var(--chr-marble-50) 88%, transparent);
+}
+
+/* Body in halo state — establish stacking context */
+body[data-rit-halo="active"] {
+  position: relative;
+}
+
+/* Chrome elements dim — sidebar, topbar, breadcrumb, headers, footers, rails,
+   trigger buttons, qcalc toolbars, stat tile rows. We do NOT use display:none
+   so keyboard navigation and skip-links remain reachable for screen-readers. */
+body[data-rit-halo="active"] .sidebar,
+body[data-rit-halo="active"] .topbar,
+body[data-rit-halo="active"] .top-chrome,
+body[data-rit-halo="active"] .breadcrumb,
+body[data-rit-halo="active"] header.app-header,
+body[data-rit-halo="active"] footer.app-footer,
+body[data-rit-halo="active"] .nav-rail,
+body[data-rit-halo="active"] .cmdk-trigger,
+body[data-rit-halo="active"] .qcalc-toolbar,
+body[data-rit-halo="active"] .stat-tile-row {
+  opacity: var(--rit-halo-chrome-opacity);
+  filter: blur(var(--rit-halo-chrome-blur));
+  pointer-events: none;
+  user-select: none;
+  transition: opacity var(--rit-halo-duration) var(--rit-halo-easing),
+              filter  var(--rit-halo-duration) var(--rit-halo-easing);
+}
+
+/* Halo toggle button itself remains fully usable while halo is active */
+body[data-rit-halo="active"] .rit-halo-toggle,
+body[data-rit-halo="active"] [data-rit-halo-toggle] {
+  opacity: 1 !important;
+  filter: none !important;
+  pointer-events: auto !important;
+  user-select: auto !important;
+}
+
+/* Veil over background — backdrop dims toward Mihrab/Marble */
+body[data-rit-halo="active"]::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 800;
+  background: var(--rit-halo-bg-veil);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  pointer-events: none;
+  opacity: 0;
+  animation: rit-halo-veil-in var(--rit-halo-duration) var(--rit-halo-easing) forwards;
+}
+
+@keyframes rit-halo-veil-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Selected target — raised, glowing, focused, centered */
+[data-rit-halo-target] {
+  position: relative;
+  z-index: 900;
+  border-radius: 1rem;
+  background: var(--color-surface-1);
+  box-shadow:
+    0 0 0 1px color-mix(in oklch, var(--rit-halo-glow-color) 30%, transparent),
+    0 0 60px color-mix(in oklch, var(--rit-halo-glow-color) 25%, transparent),
+    var(--shadow-c-xl);
+  transition:
+    box-shadow var(--rit-halo-duration) var(--rit-halo-easing),
+    transform  var(--rit-halo-duration) var(--rit-halo-easing);
+  transform: scale(1.005);
+  margin: clamp(1rem, 4vw, 3rem) auto;
+  max-width: min(72ch, 90vw);
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+/* Edge pulse on target — subtle Lapis sheen, ~4s loop */
+[data-rit-halo-target]::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(135deg,
+    color-mix(in oklch, var(--rit-halo-glow-color) 40%, transparent),
+    transparent 50%,
+    color-mix(in oklch, var(--rit-halo-glow-color) 25%, transparent));
+  opacity: 0;
+  z-index: -1;
+  animation: rit-halo-edge-pulse 4s ease-in-out infinite;
+}
+
+@keyframes rit-halo-edge-pulse {
+  0%, 100% { opacity: 0.20; }
+  50%      { opacity: 0.45; }
+}
+
+/* Halo exit button — top-end of target, circular */
+.rit-halo-exit {
+  position: absolute;
+  top: 0.75rem;
+  inset-inline-end: 0.75rem;
+  background: color-mix(in oklch, var(--color-surface-2, var(--color-surface-1)) 80%, transparent);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: background 160ms, color 160ms, border-color 160ms;
+  z-index: 10;
+}
+.rit-halo-exit:hover,
+.rit-halo-exit:focus-visible {
+  background: color-mix(in oklch, var(--rit-halo-glow-color) 18%, var(--color-surface-1));
+  color: var(--color-text);
+  border-color: var(--rit-halo-glow-color);
+  outline: none;
+}
+
+/* Toggle button in chrome — small pill with ring icon */
+.rit-halo-toggle {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.7rem;
+  font-family: var(--type-voice-ui);
+  font-size: 0.875rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  line-height: 1;
+  transition: background 160ms, color 160ms, border-color 160ms;
+}
+.rit-halo-toggle::before {
+  content: "";
+  width: 0.6rem;
+  height: 0.6rem;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  display: inline-block;
+}
+.rit-halo-toggle:hover,
+.rit-halo-toggle:focus-visible {
+  background: color-mix(in oklch, var(--rit-halo-glow-color) 12%, transparent);
+  border-color: var(--rit-halo-glow-color);
+  color: var(--color-text);
+  outline: none;
+}
+body[data-rit-halo="active"] .rit-halo-toggle::after {
+  content: "نَشَط";
+  font-size: 0.72rem;
+  color: var(--rit-halo-glow-color);
+}
+body[data-rit-halo="active"] .rit-halo-toggle::before {
+  background: var(--rit-halo-glow-color);
+  border-color: var(--rit-halo-glow-color);
+  box-shadow: 0 0 8px color-mix(in oklch, var(--rit-halo-glow-color) 60%, transparent);
+}
+
+/* Reduced-Motion — instant toggle, no transitions, no edge pulse */
+@media (prefers-reduced-motion: reduce) {
+  body[data-rit-halo="active"] .sidebar,
+  body[data-rit-halo="active"] .topbar,
+  body[data-rit-halo="active"] .top-chrome,
+  body[data-rit-halo="active"] .breadcrumb,
+  body[data-rit-halo="active"] header.app-header,
+  body[data-rit-halo="active"] footer.app-footer,
+  body[data-rit-halo="active"] .nav-rail,
+  body[data-rit-halo="active"] .cmdk-trigger,
+  body[data-rit-halo="active"] .qcalc-toolbar,
+  body[data-rit-halo="active"] .stat-tile-row,
+  body[data-rit-halo="active"]::after,
+  [data-rit-halo-target],
+  [data-rit-halo-target]::before {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Reduced-Transparency — drop blur layers, keep solid veil */
+@media (prefers-reduced-transparency: reduce) {
+  body[data-rit-halo="active"] .sidebar,
+  body[data-rit-halo="active"] .topbar,
+  body[data-rit-halo="active"] header.app-header,
+  body[data-rit-halo="active"] footer.app-footer,
+  body[data-rit-halo="active"] .nav-rail {
+    filter: none;
+  }
+  body[data-rit-halo="active"]::after {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Worker 22 / Phase 2 — Halo Discipline:
+   1. Halo opt-in فقط — Cmd+. أو button (لا يبدأ تلقائياً).
+   2. Chrome يَخفت إلى 0.15 + 4px blur — لا يَختفي (a11y، skip-links).
+   3. Esc + outside-click + exit button = exit.
+   4. Total transition ≤ 480ms.
+   5. localStorage يحفظ آخر target ID — phases لاحقة قد تستعمله.
+   6. keyboard nav يبقى يعمل داخل الـ target.
+   7. لا keyframes جديدة سوى veil-in + edge-pulse (≤2، ضمن ميزانية W22 = +2).
+   8. reduced-motion + reduced-transparency guards مُلتزمة.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* End RITUAL UI v3 / Phase 2 — Reading Halo ───────────────────────────── */
