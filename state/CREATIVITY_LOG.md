@@ -98,14 +98,14 @@
 **Verified at commit:** 48c52f8
 
 ---STATS---
-total_beacons: 11
+total_beacons: 12
 unique_categories_used: 9
-avg_score: 4.27
+avg_score: 4.25
 last_5_avg: 4.2
 disruption_triggers: 1
 forbidden_violations: 0
 creativity_health: 100
-last_updated: 2026-05-24 / γ9 — Pillar γ COMPLETE (9/9)
+last_updated: 2026-05-24 / δ1 — Pillar δ KINETIC SHELL in-progress (1/6)
 
 
 
@@ -132,3 +132,14 @@ last_updated: 2026-05-24 / γ9 — Pillar γ COMPLETE (9/9)
 **Files touched:** platform/assets/css/worlds/_saloon.css · platform/assets/js/elan/world-saloon.js · platform/assets/app.js
 **Verified at commit:** deabf87
 **Pillar close:** γ9 closes Pillar γ EIGHT WORLDS — 9 stages, 9 distinct worlds, 9 unique beacon families across the pillar (one per category × 8, plus γ1 STRUCTURAL system foundation).
+
+
+## δ1 — 2026-05-24
+**Beacon Type:** 🌊 MOTION_BEACON
+**The Surprise:** الـ sidebar المعدني يَتمايل فعلياً مع ميلان الجهاز المادي عبر DeviceOrientationEvent (gamma→X, beta→Y) بحدود ±1.5 درجة — كأنه صفيحة حديد معلَّقة تستجيب للجاذبية. على desktop: يتتبَّع المؤشر بنفس المنطق (pointer→tilt). الظل يتحرَّك عكس الإمالة كما يفعل الضوء الطبيعي. rAF-throttled لمنع jank. Permission request صريح على iOS 13+. لا spring bounce، لا elastic — حركة خام صادقة كـ Brutalist mass shift.
+**Reference Avoided:** Forbidden #3 — floating sidebar with pill icons (Notion/Linear/Stripe clone) + Forbidden #13 — spring bounce on hover (Framer Motion cliché).
+**Inspired-by:** Wild Card #1 — Brutalist Iraqi Modernism (Rifat Chadirji): الكتلة الخرسانية لا تقفز — تَميل بوزنها.
+**User-Visible:** yes (every sidebar interaction on desktop tilts 3D; every device lean on mobile tilts the sidebar physically)
+**Originality Self-Score:** 4/5 — pointer-tracked 3D tilt exists in card hover patterns; applying it to an entire navigation sidebar via real device gyroscope (not just pointer) with Brutalist mass-shift metaphor and per-world accent borders = uncommon. Claim: most sidebars are flat or slide; few physically lean with device orientation.
+**Files touched:** platform/assets/css/chrome.css · platform/assets/js/elan/delta1-magnetic-sidebar.js · platform/assets/app.js · platform/index.html
+**Verified at commit:** 64086f6

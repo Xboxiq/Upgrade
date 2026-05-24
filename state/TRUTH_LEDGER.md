@@ -871,3 +871,21 @@ world. Next: open PR `elan-γ-eight-worlds → main`, then start Pillar δ
 KINETIC SHELL on a fresh branch.
 
 — Entry end —
+
+
+## δ1 — Sidebar Magnetic — 2026-05-24
+
+| Key | Value |
+|-----|-------|
+| perspective_in_css | 1 |
+| tilt_max_deg | 1.5 |
+| gyro_mobile | on (DeviceOrientationEvent) |
+| world_accents | 8 |
+| reduced_motion_guard | yes |
+| toy_svg | 0 |
+| emoji_in_markup | 0 |
+| lines_added | 75 CSS + 144 JS = 219 total |
+| branch | elan-delta-kinetic-shell |
+| commit | 64086f6 |
+| sacred_preserved | 14 pages, 16 sections, Upg.* APIs intact |
+| forbidden_violations | 0 |
