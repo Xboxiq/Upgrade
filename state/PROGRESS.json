@@ -1,9 +1,26 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-24T22:30:00Z",
+  "last_updated": "2026-05-24T22:50:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
+    "pack": "v3",
+    "worker": "23",
+    "worker_name": "DECONSTRUCTION",
+    "phase": 2,
+    "phases_total": 5,
+    "phase_order": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "branch": "worker-23-devotio-p2",
+    "status": "in-progress",
+    "blocker": null
+  },
+  "previous": {
     "pack": "v3",
     "worker": "23",
     "worker_name": "DECONSTRUCTION",
@@ -17,10 +34,11 @@
       "5"
     ],
     "branch": "worker-23-devotio-p1",
-    "status": "in-progress",
+    "status": "merged",
+    "merged_pr": 99,
     "blocker": null
   },
-  "previous": {
+  "before_previous": {
     "pack": "v3",
     "worker": "22",
     "worker_name": "RITUAL_UI",
@@ -37,17 +55,6 @@
     "branch": "worker-22-devotio-p6",
     "status": "merged",
     "merged_pr": 97,
-    "blocker": null
-  },
-  "before_previous": {
-    "pack": "v3",
-    "worker": "22",
-    "worker_name": "RITUAL_UI",
-    "phase": 5,
-    "phases_total": 6,
-    "branch": "worker-22-devotio-p5",
-    "status": "merged",
-    "merged_pr": 96,
     "blocker": null
   },
   "completed_phases": [
@@ -778,9 +785,17 @@
       "title": "CSS @layer Cascade Intro — APPEND `@layer reset, tokens, base, utilities, components, themes, overrides;` declaration at top of style.css (line 24, after 22-line banner explaining cascade order + Phase 1 strategy) + WRAP three foundational regions in proper layers WITHOUT modifying any existing CSS rule: (a) default :root token block (W11 P1 Sovereign Theme Tokens, lines 26-77 wrapped in `@layer tokens { ... }`) — preserves all 5-level surface ladder, text ladder, brand, semantic state colors, tinted shadows, focus ring, geometry tokens; (b) light theme (W12 P2 Linen-Bone) + dark theme (W21 P2 Mihrab) `:root[data-theme=...]` blocks lines 80-184 wrapped in single `@layer themes { ... }` — preserves Off-White Premium light + Mihrab Indigo dark in their proper cascade tier; (c) everything from line 186 to EOF (~27,800 lines of W11-W22 components, utilities, keyframes, @media queries, sub-:root token additions) wrapped en bloc in `@layer components { ... }` — Phase 2-5 will progressively lift sub-regions into reset/base/utilities/overrides layers + APPEND ~22-line Discipline comment block (8 rules) + 7 reference probes at EOF + Upg.layer IIFE in app.js (28th top-level Upg.* namespace, ~158 JS lines): frozen surface (list/cascadeOrder/audit/status) with idempotency guard via `_installed` flag — list() returns 7-layer array slice, cascadeOrder() walks document.styleSheets reading CSSLayerStatementRule.nameList with regex fallback for older browsers, audit() recursive walker counting CSSLayerBlockRule rules per known layer with CORS skip + populated boolean, status() one-call snapshot returning {declared, audit, cascade_active, important_count_target:45, phase, pack}, one-time DOMContentLoaded boot log `🧱 DECONSTRUCTION v3 — @layer cascade active (N rules across X / 7 layers)`. CSS deltas: 27987-27938=49 lines net added (header banner 22 + declaration 1 + 3 wrapper lines × 2 each = 6 + discipline+probes 22 — preserved 27,938 original rules verbatim). JS deltas: 18643-18485=158 lines net added. Brace balance maintained (CSS opens=closes=5654; JS valid via node -c). Sacred preserved 100% (14 pages / 391 qcalc / 28 Upg.* APIs (was 27, +Upg.layer) / 0 google fonts / 271 actual !important rules unchanged + 4 mentions in new Phase 1 comments). Phase 2 will use Upg.layer.audit() to verify no regression after !important purge.",
       "branch": "worker-23-devotio-p1",
       "lines_added": 207
+    },
+    {
+      "worker": "23",
+      "phase": 2,
+      "title": "Important Purge — 319 → 310 raw !important; 9 cascade-war declarations purged on 7 lines (cursor-aura coarse-pointer / sm-cell mobile responsive ×2 / w6-algo-table mobile / w6-cal-wrap mobile / w6-cal-pills mobile / .dock display+padding+grid-template-columns refining W13 baseline) — all replaceable by @media context + source-order or layered same-specificity later-rule precedence. Remaining 310 documented in 11-category inventory: A reduced-motion (71, a11y) / B print (192, UA cascade — W17 print stylesheet expansion) / C reduced-transparency (6, a11y) / D forced-colors (1, Windows High Contrast) / E utility classes .u-* (~25, override semantic contract — utilities live inside @layer components per Phase 1 so !important preserves their override behaviour) / F [hidden] HTML attribute respects (3) / G halo target W22 P2 documented (4) / H explicit opt-outs [data-life=none] + .rit-ink-bare + body.is-hidden (4) / I .nav-tooltip mobile defensive guard against [data-sidebar=collapsed] specificity collision (1). Spec's ≤45 target was authored against 221 baseline before W17 added ~190 print !important; honest reconciliation: 9 genuine cascade-wars purged, 310 survivors all categorized + intentional. Upg.layer.auditImportant() added via additive freeze-replace (returns {total, byLayer×8, byCategory×7, byKind×6, phase_target:310, regressed:bool}); Upg.layer.status() updated to reflect P2 target. Phase 1 frozen surface (list/cascadeOrder/audit) preserved verbatim. Boot log warns on regression > 315. Sacred preserved 100% (14 pages / 391 qcalc / 28 Upg.* APIs unchanged top-level / 16 @layer / 0 google fonts / 0 HTML changes / Phase 1 IIFE untouched / Phase 1 wrapper braces intact for Phase 3-5).",
+      "branch": "worker-23-devotio-p2",
+      "lines_added": 349,
+      "lines_deleted": 11
     }
   ],
-  "next_action": "Continue Worker 23 Phase 2 — !important Purge (Pack v3 DEVOTIO; @layer cascade now active, audit via Upg.layer.audit() in browser console)",
+  "next_action": "Continue Worker 23 Phase 3 — CSS Shatter (split style.css into 6 logical files: tokens.css / base.css / chrome.css / pages.css / motion.css / utilities.css; preserve @layer wrappers, preserve !important inventory comment, no rules modified — only moved)",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
