@@ -1,7 +1,227 @@
-/* ÊLAN v4 — α2 — World placeholder: نار (Naar) — Fire
-   Pages: lab, programming
-   Filled in γ3. See WORLDS_ATLAS.md § World 2 for spec. */
+/* ────────────────────────────────────────────────────────────────────────
+   ÊLAN v4 — γ3 — World 2: نار (Naar) — Fire
+   ────────────────────────────────────────────────────────────────────────
+   Inspiration: Iraqi Brutalist modernism (Mohammed Makiya · Rifat Chadirji)
+                + forge-workshop hammer-and-anvil discipline.
+   Pages:       lab, programming
+   Voice:       29LT Bukra (display) + Vazirmatn (body) + JetBrains Mono (code)
+   Motion:      cubic-bezier(0.7, 0, 0.2, 1.2) — sharp ignition curve
+   ─────────────────────────────────────────────────────────────────────── */
+
+
+/* ── Tokens ──────────────────────────────────────────────────────────── */
 
 [data-world="naar"] {
-  /* Awaiting γ3 stage. */
+  /* Anchor — burnt charcoal, NOT navy-black */
+  --anchor-bg: hsl(15 8% 6%);
+  --anchor-1:  hsl(15 8% 9%);
+  --anchor-2:  hsl(15 10% 13%);
+  --anchor-3:  hsl(15 12% 18%);
+
+  /* Ink — hot ash on cooled charcoal */
+  --ink:       hsl(40 18% 96%);
+  --ink-muted: hsl(40 12% 78%);
+  --ink-faint: hsl(40 8% 56%);
+
+  /* Lines and edges */
+  --line:        hsl(15 12% 18%);
+  --line-strong: hsl(15 14% 28%);
+
+  /* Naar accents — ember (forge fire) + spark (welding flash) */
+  --ember: hsl(18 95% 56%);   /* نار حدادة */
+  --focus: hsl(48 100% 60%);  /* شرارة */
+  --accent: var(--ember);
+
+  /* Motion fingerprint — fast ignition, slight overshoot */
+  --ease-naar:     cubic-bezier(0.7, 0, 0.2, 1.2);
+  --duration-naar: 180ms;
+  --duration-naar-spark: 60ms;
+
+  /* Brutalist shadows — solid, no blur. Concrete blocks don't fade. */
+  --shadow-sm: 0 1px 0 hsl(15 30% 0% / 0.6);
+  --shadow-md: 0 4px 0 hsl(15 30% 0% / 0.7),
+               inset 0 1px 0 hsl(40 18% 96% / 0.05);
+  --shadow-lg: 0 8px 0 hsl(15 30% 0% / 0.8),
+               inset 0 1px 0 hsl(40 18% 96% / 0.06);
+  --shadow-xl: 0 12px 0 hsl(15 30% 0% / 0.85),
+               inset 0 1px 0 hsl(40 18% 96% / 0.08);
+
+  /* Focus ring — spark-yellow, audible on dark anchor */
+  --ring: 0 0 0 2px var(--focus);
+
+  /* Bind world tokens to platform contract */
+  --color-bg:           var(--anchor-bg);
+  --color-surface-0:    var(--anchor-bg);
+  --color-surface-1:    var(--anchor-1);
+  --color-surface-2:    var(--anchor-2);
+  --color-surface-3:    var(--anchor-3);
+  --color-text:         var(--ink);
+  --color-text-muted:   var(--ink-muted);
+  --color-text-faint:   var(--ink-faint);
+  --color-border:       var(--line);
+  --color-border-strong:var(--line-strong);
+  --color-brand:        var(--ember);
+  --color-tint:         var(--ember);
+}
+
+
+/* ── Brutalist surfaces — sharp, no radius softening ─────────────────── */
+
+[data-world="naar"] .card,
+[data-world="naar"] .panel,
+[data-world="naar"] .ql-glass {
+  background: var(--anchor-1);
+  border: 2px solid var(--line);
+  border-radius: 0;
+  box-shadow: var(--shadow-md);
+}
+
+
+/* ── Buttons — concrete blocks with ember outline ────────────────────── */
+
+[data-world="naar"] .btn,
+[data-world="naar"] .btn-primary,
+[data-world="naar"] .btn-secondary {
+  border-radius: 0;
+  border: 2px solid var(--ember);
+  background: transparent;
+  color: var(--ember);
+  font-family: var(--voice-display-h);
+  font-weight: 800;
+  letter-spacing: var(--track-tight);
+  padding: var(--s-3) var(--s-5);
+  position: relative;
+  transition:
+    background-color var(--duration-naar) var(--ease-naar),
+    color            var(--duration-naar) var(--ease-naar),
+    transform        var(--duration-naar) var(--ease-naar),
+    box-shadow       var(--duration-naar) var(--ease-naar);
+}
+
+[data-world="naar"] .btn:hover,
+[data-world="naar"] .btn-primary:hover,
+[data-world="naar"] .btn-secondary:hover {
+  background: var(--ember);
+  color: var(--anchor-bg);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--anchor-3);
+}
+
+[data-world="naar"] .btn:focus-visible,
+[data-world="naar"] .btn-primary:focus-visible,
+[data-world="naar"] .btn-secondary:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+
+/* ── Beacon 🎨 VISUAL_BEACON — Spark on hover ────────────────────────────
+   The spark is a 24px radial-gradient pinned to the cursor via two
+   custom properties (--mx --my) updated by JS at pointer-rate (rAF
+   throttled). No backdrop-filter, no blur, no decay glow — sharp
+   60ms welding-flash that follows the hand exactly.
+
+   Hosts opt in by adding the `.spark-host` class. ε5 (lab) and ε8
+   (programming) wire this onto their interactive surfaces.
+
+   Reference avoided: Forbidden #13 spring-bounce hover.
+   Inspired by:       Wild Card #2 — Iraqi Brutalism (concrete + steel).
+   ─────────────────────────────────────────────────────────────────────── */
+
+[data-world="naar"] .spark-host {
+  position: relative;
+  --mx: 50%;
+  --my: 50%;
+}
+
+[data-world="naar"] .spark-host::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 24px at var(--mx) var(--my),
+    color-mix(in oklch, var(--focus) 70%, transparent) 0%,
+    color-mix(in oklch, var(--focus) 24%, transparent) 35%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity var(--duration-naar-spark) var(--ease-naar);
+  mix-blend-mode: screen;
+}
+
+[data-world="naar"] .spark-host:hover::after,
+[data-world="naar"] .spark-host:focus-within::after {
+  opacity: 1;
+}
+
+/* Reduced-motion: the spark still appears on hover (information),
+   but it does not chase the cursor. The radial centers fixed at 50%. */
+@media (prefers-reduced-motion: reduce) {
+  [data-world="naar"] .spark-host {
+    --mx: 50%;
+    --my: 50%;
+  }
+  [data-world="naar"] .spark-host::after {
+    transition-duration: 1ms;
+  }
+}
+
+
+/* ── Code surfaces — programming page identity ───────────────────────── */
+
+[data-world="naar"] code,
+[data-world="naar"] :not(pre) > code {
+  font-family: var(--voice-code);
+  background: var(--anchor-bg);
+  color: var(--ember);
+  padding: var(--s-1) var(--s-2);
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+}
+
+[data-world="naar"] pre {
+  font-family: var(--voice-code);
+  background: var(--anchor-bg);
+  color: var(--ink);
+  padding: var(--s-4);
+  border: 1px solid var(--line-strong);
+  border-inline-start: 3px solid var(--ember);
+  border-radius: 0;
+}
+
+
+/* ── Heroes — heavy Bukra with forge glow ────────────────────────────── */
+
+[data-world="naar"] h1.is-hero,
+[data-world="naar"] [data-page-personality]:is(#page-lab, #page-programming) h1 {
+  font-family: var(--voice-display-h);
+  font-weight: 900;
+  font-stretch: 95%;
+  letter-spacing: var(--track-tight);
+  color: var(--ink);
+  text-shadow: 0 0 30px color-mix(in oklch, var(--ember) 25%, transparent);
+}
+
+
+/* ── Selection — molten ember on charcoal ───────────────────────────── */
+
+body[data-world="naar"] ::selection {
+  background-color: color-mix(in oklch, var(--ember) 50%, transparent);
+  color: var(--anchor-bg);
+}
+
+
+/* ── No-JS Beacon wiring — fill the :has() fallback declared in _index.css */
+
+@supports selector(html:has(*)) {
+  body:not([data-world]):has(section.page.active[data-world="naar"]),
+  body:not([data-world]):has(section.page.is-active[data-world="naar"]) {
+    --color-bg:        hsl(15 8% 6%);
+    --color-surface-1: hsl(15 8% 9%);
+    --color-text:      hsl(40 18% 96%);
+    --color-tint:      hsl(18 95% 56%);
+    background-color:  hsl(15 8% 6%);
+    color:             hsl(40 18% 96%);
+  }
 }

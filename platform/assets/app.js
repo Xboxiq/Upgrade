@@ -119,3 +119,6 @@ import './js/elan/world.js';
 
 // ÊLAN v4 — γ2: Hibr world — ink-drying CTA beacon
 import './js/elan/world-hibr.js';
+
+// ÊLAN v4 — γ3: Naar world — spark hover beacon
+import './js/elan/world-naar.js';
