@@ -413,3 +413,25 @@ on a workstation where ordinary HTTPS reaches github / 29lt.com / sil.org, then 
 **Sacred preserved:** 14 page sections · 30 Upg.* APIs · all 92 legacy IIFEs · `archive/` untouched · `_legacy-fontface.css` deprecation stub kept for cascade-compat
 **Operator follow-up:** `bash scripts/elan-β1-fonts.sh` to bind 9 woff2 binaries; CI/Lighthouse can then verify FOUT < 200ms.
 
+
+
+---
+
+## γ1 — World Foundation — 2026-05-24
+
+| Key | Value |
+|-----|-------|
+| data_world_in_html | 15 |
+| has_fallback_worlds | 8 |
+| world_js_exists | true |
+| upg_world_api | true (Upg.world: set/current/map/worlds/pageWorld) |
+| app_js_imports_world | 1 |
+| theme_bridge_active | true |
+| pages_preserved | 16 (15 .page + 1 .gateway) |
+| upg_apis_total | 31 |
+| lines_added | 184 |
+| branch | elan-g-worlds-v4 |
+| commit | 6ff4e2b |
+
+**Sacred preserved:** 16 page sections intact, 30 prior Upg.* APIs untouched, archive/ untouched, data-theme selectors preserved (light/dark still operational within worlds).
+**Beacon:** 🏛 STRUCTURAL_BEACON — `:has()` CSS fallback activates worlds without JS. Avoided: Forbidden #14 (JS-only theme switcher).
