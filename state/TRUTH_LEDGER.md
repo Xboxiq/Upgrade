@@ -504,3 +504,50 @@ The spec asked for an empty `@layer themes` block in `style.css` (themes "deprec
 - 30 prior + Upg.world (31) top-level Upg.* APIs — unchanged
 - `archive/` — untouched
 - Worlds CSS imported AFTER themes — legacy `[data-theme]` cascade still honored when a world isn't active
+
+
+---
+
+## γ3 — World Naar (نار) — 2026-05-24
+**Branch:** `elan-γ-eight-worlds`
+**Commit:** `e7ba3e5`
+**Files modified:** 1 — `platform/assets/app.js`
+**Files added:** 2 — `platform/assets/css/worlds/_naar.css` (filled from stub), `platform/assets/js/elan/world-naar.js`
+**Lines:** +331 / −4 (net +327)
+
+### Verified by grep on commit e7ba3e5
+| key | value | verified-by |
+|---|---:|---|
+| `_naar.css` total lines | **227** | `wc -l platform/assets/css/worlds/_naar.css` |
+| `data-world="naar"` selectors in `_naar.css` | **27** | `grep -c 'data-world="naar"' platform/assets/css/worlds/_naar.css` |
+| spark beacon markers (`spark-host` / `--mx` / `--my`) | **13** | `grep -c 'spark-host\|--mx\|--my' platform/assets/css/worlds/_naar.css` |
+| `:has()` no-JS fallback selectors for naar | **2** | `grep -c ':has(section.page' platform/assets/css/worlds/_naar.css` |
+| reduced-motion guards in `_naar.css` | **1** | `grep -c 'prefers-reduced-motion' platform/assets/css/worlds/_naar.css` |
+| `world-naar.js` syntax | **OK** | `node --check platform/assets/js/elan/world-naar.js` |
+| `app.js` syntax | **OK** | `node --check platform/assets/app.js` |
+| `app.js` imports `elan/world-naar.js` | **1** | `grep -c 'elan/world-naar.js' platform/assets/app.js` |
+| `Upg.worlds.naar` registered | **yes** | `grep 'window.Upg.worlds.naar' platform/assets/js/elan/world-naar.js` |
+| Top-level `Upg.*` APIs | **31** (unchanged) | nested under `Upg.worlds` |
+
+### Beacon
+- **Type:** 🎨 VISUAL_BEACON
+- **The Surprise:** Hover any `.spark-host` in the Naar world and a 24px radial-gradient spark appears at the cursor — pinned to `--mx --my` updated at pointer rate (rAF-throttled). 60ms welding-flash. `mix-blend-mode: screen` keeps the spark visible across every Brutalist surface tone.
+- **Reference avoided:** Forbidden #13 spring-bounce hover + #5 shadow + radius card.
+- **Inspired-by:** Wild Card #2 — Iraqi Brutalism (Makiya / Chadirji).
+- **User-Visible:** yes (every interactive surface in lab + programming when ε5/ε8 wires it)
+- **Originality Self-Score:** 4/5
+
+### Surface adopted by this world
+- **Anchor:** `hsl(15 8% 6%)` burnt charcoal
+- **Ink:** `hsl(40 18% 96%)` hot ash
+- **Ember:** `hsl(18 95% 56%)` نار حدادة
+- **Focus:** `hsl(48 100% 60%)` شرارة
+- **Voice:** 29LT Bukra (display 900) + Vazirmatn (body) + JetBrains Mono (code)
+- **Motion:** `cubic-bezier(0.7, 0, 0.2, 1.2)` × 180ms baseline / 60ms spark
+- **Brutalism rules:** `border-radius: 0` on all surfaces · solid (no-blur) shadows · button hover translates `-2px -2px` with `4px 4px 0` solid drop · pre code carries `border-inline-start: 3px solid var(--ember)`
+
+### Sacred preserved
+- 14 page sections — unchanged
+- 31 top-level Upg.* APIs — unchanged (Upg.worlds.naar nested)
+- `archive/` — untouched
+- Hibr world (γ2) — untouched

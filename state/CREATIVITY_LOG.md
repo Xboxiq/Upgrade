@@ -47,12 +47,22 @@
 **Files touched:** platform/assets/css/worlds/_hibr.css · platform/assets/js/elan/world-hibr.js · platform/assets/app.js
 **Verified at commit:** 72c0cc4
 
+## γ3 — 2026-05-24
+**Beacon Type:** 🎨 VISUAL_BEACON
+**The Surprise:** عالم نار يَستبدل bounce-spring الكليشيه على hover بشرارة CSS-only تلتصق بدقّة بمؤشّر اليد. radial-gradient حجمه 24px مُربَط بـ `--mx` و `--my` يُحدِّثهما JS pointermove (rAF-throttled، single delegated listener على body). 60ms welding-flash، `mix-blend-mode: screen` فيظهر الـ spark بنفس الإشراق على كل أسطح Brutalism (charcoal anchor + concrete blocks). الـ JS يَتعلَّق ويَنفصل تلقائياً مع `upg:world:change`، يَحترم `pointer:fine` و `prefers-reduced-motion: reduce`. عند reduced-motion: الـ spark يَبقى لكن مركزه ثابت 50% — معلومة لا مطاردة. كأن مطرقة لمست المعدن.
+**Reference Avoided:** Forbidden #13 — spring-bounce hover (Framer Motion default cliché)، #5 — card بـ shadow ناعم + 12px radius (Creativity Doctrine § ٣).
+**Inspired-by:** Wild Card #2 — Iraqi Brutalism (Mohammed Makiya, Rifat Chadirji — concrete + steel + zero softening).
+**User-Visible:** yes (every `.spark-host` in lab + programming when ε5/ε8 wires the class onto buttons / cards)
+**Originality Self-Score:** 4/5 — single-element radial via two custom props isn't novel; pinning it to a Brutalist context with screen-blend + auto-detach on world-change + reduced-motion graceful degrade is. Claim: most "spotlight" hovers are full-card mesh; few are 24px sharp.
+**Files touched:** platform/assets/css/worlds/_naar.css · platform/assets/js/elan/world-naar.js · platform/assets/app.js
+**Verified at commit:** e7ba3e5
+
 ---STATS---
-total_beacons: 4
-unique_categories_used: 3
-avg_score: 4.5
-last_5_avg: 4.5
+total_beacons: 5
+unique_categories_used: 4
+avg_score: 4.4
+last_5_avg: 4.4
 disruption_triggers: 0
 forbidden_violations: 0
 creativity_health: 100
-last_updated: 2026-05-24 / γ2
+last_updated: 2026-05-24 / γ3
