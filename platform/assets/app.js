@@ -119,3 +119,6 @@ import './js/elan/world.js';
 
 // ÊLAN v4 — γ2: hibr (ink) world beacon — ink-drying text reveal
 import './js/elan/world-hibr.js';
+
+// ÊLAN v4 — γ3: naar (fire) world beacon — pointer-tracked forge spark
+import './js/elan/world-naar.js';

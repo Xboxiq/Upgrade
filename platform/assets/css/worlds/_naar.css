@@ -1,7 +1,220 @@
-/* ÊLAN v4 — α2 — World placeholder: نار (Naar) — Fire
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — γ3 — World 2: نار (Naar) — Fire
+   ────────────────────────────────────────────────────────────────────────
    Pages: lab, programming
-   Filled in γ3. See WORLDS_ATLAS.md § World 2 for spec. */
+   Mood: Brutalism العراقي + ورشة حدادة. فحم تحت لهب.
+   Inspiration: Mohammed Makiya · Rifat Chadirji · forge-shop signage.
+   Beacon (γ3): 🎨 VISUAL — pointer-tracked spark on hover. 60ms flash,
+                CSS-only render, JS feeds pointer coords as custom props.
+   ════════════════════════════════════════════════════════════════════════ */
 
-[data-world="naar"] {
-  /* Awaiting γ3 stage. */
+@layer worlds {
+
+  /* ─── Palette + System Tokens ─────────────────────────────────────── */
+
+  [data-world="naar"] {
+    /* Anchor — charcoal, four steps cooled down */
+    --anchor-bg: hsl(15 8% 6%);
+    --anchor-1:  hsl(15 8% 9%);
+    --anchor-2:  hsl(15 10% 13%);
+    --anchor-3:  hsl(15 12% 18%);
+
+    /* Ink — warm ash above the coal bed */
+    --ink:        hsl(40 18% 96%);
+    --ink-muted:  hsl(40 12% 78%);
+    --ink-faint:  hsl(40 8% 56%);
+
+    /* Lines — Brutalist border discipline */
+    --line:        hsl(15 12% 18%);
+    --line-strong: hsl(15 14% 28%);
+
+    /* Forge fire + spark (anchor + ember + focus per Atlas) */
+    --ember:  hsl(18 95% 56%);
+    --focus:  hsl(48 100% 60%);
+    --accent: var(--ember);
+
+    /* Naar motion fingerprint — اشتعال حاد */
+    --ease-naar:     cubic-bezier(0.7, 0, 0.2, 1.2);
+    --duration-naar: 180ms;
+
+    /* Brutalist shadow stack — hard offset, no softness */
+    --shadow-sm: 0 1px 0 hsl(15 30% 0% / 0.6);
+    --shadow-md: 0 4px 0 hsl(15 30% 0% / 0.7),
+                 inset 0 1px 0 hsl(40 18% 96% / 0.05);
+    --shadow-lg: 0 8px 0 hsl(15 30% 0% / 0.8),
+                 inset 0 1px 0 hsl(40 18% 96% / 0.06);
+    --shadow-xl: 0 12px 0 hsl(15 30% 0% / 0.85),
+                 inset 0 1px 0 hsl(40 18% 96% / 0.08);
+
+    --ring: 0 0 0 2px var(--focus);
+
+    --color-bg:            var(--anchor-bg);
+    --color-surface-0:     var(--anchor-bg);
+    --color-surface-1:     var(--anchor-1);
+    --color-surface-2:     var(--anchor-2);
+    --color-surface-3:     var(--anchor-3);
+    --color-text:          var(--ink);
+    --color-text-muted:    var(--ink-muted);
+    --color-text-faint:    var(--ink-faint);
+    --color-border:        var(--line);
+    --color-border-strong: var(--line-strong);
+    --color-brand:         var(--ember);
+  }
+
+  /* ─── World skin: body + page ─────────────────────────────────────── */
+
+  body[data-world="naar"],
+  body[data-world="naar"] .page,
+  body[data-world="naar"] .page-content {
+    background-color: var(--anchor-bg);
+    color: var(--ink);
+    font-family: var(--voice-body);
+    line-height: var(--lead-normal);
+  }
+
+  /* H1 — heavy Bukra display with low ember halo */
+  body[data-world="naar"] h1,
+  body[data-world="naar"] h1.is-hero,
+  body[data-world="naar"] .hero-title,
+  body[data-world="naar"] .type-display,
+  body[data-world="naar"] .type-hero {
+    font-family: var(--voice-display-h);
+    font-weight: 900;
+    letter-spacing: var(--track-tight);
+    color: var(--ink);
+    text-shadow: 0 0 30px color-mix(in oklch, var(--ember) 25%, transparent);
+  }
+
+  /* ─── Brutalist surfaces — sharp, no radius softening ─────────────── */
+
+  body[data-world="naar"] .card,
+  body[data-world="naar"] .panel,
+  body[data-world="naar"] .bento-cell {
+    background-color: var(--anchor-1);
+    border: 2px solid var(--line-strong);
+    border-radius: 0;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    isolation: isolate;
+  }
+
+  /* Brutalist buttons — outlined ember, hard offset on hover */
+  body[data-world="naar"] .btn,
+  body[data-world="naar"] button:not(.unstyled):not([class*="cmdk-"]):not([class*="dock-"]):not([class*="nav-"]):not([class*="gateway-"]) {
+    border-radius: 0;
+    border: 2px solid var(--ember);
+    background-color: transparent;
+    color: var(--ember);
+    font-family: var(--voice-display-h);
+    font-weight: 800;
+    letter-spacing: var(--track-tight);
+    padding: var(--s-3) var(--s-5);
+    position: relative;
+    isolation: isolate;
+    transition:
+      background-color var(--duration-naar) var(--ease-naar),
+      color            var(--duration-naar) var(--ease-naar),
+      transform        var(--duration-naar) var(--ease-naar),
+      box-shadow       var(--duration-naar) var(--ease-naar);
+  }
+
+  body[data-world="naar"] .btn:hover,
+  body[data-world="naar"] button:not(.unstyled):not([class*="cmdk-"]):not([class*="dock-"]):not([class*="nav-"]):not([class*="gateway-"]):hover {
+    background-color: var(--ember);
+    color: var(--anchor-bg);
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--anchor-3);
+  }
+
+  /* ─── Beacon: Spark on hover (CSS-only render) ─────────────────────
+     The spark is a 24-px radial gradient positioned at (--mx, --my),
+     custom properties fed by world-naar.js on pointermove. The flash
+     transition is intentionally fast (60ms) so the spark feels struck,
+     not faded.
+
+     Implicit hosts — every hover-able surface inside Naar acts as a
+     spark host without explicit class. Explicit `.spark-host` opt-in
+     is also supported for content that wants targeted treatment.
+
+     The spark renders behind hover-content via z-index manipulation
+     on the ::after pseudo so text remains crisp. */
+
+  body[data-world="naar"] .spark-host,
+  body[data-world="naar"] :is(.card, .panel, .bento-cell, .btn) {
+    --mx: 50%;
+    --my: 50%;
+  }
+
+  body[data-world="naar"] .spark-host::after,
+  body[data-world="naar"] :is(.card, .panel, .bento-cell, .btn)::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: radial-gradient(
+      circle 28px at var(--mx) var(--my),
+      color-mix(in oklch, var(--focus) 75%, transparent) 0%,
+      color-mix(in oklch, var(--ember) 35%, transparent) 30%,
+      transparent 65%
+    );
+    mix-blend-mode: screen;
+    opacity: 0;
+    transition: opacity 60ms var(--ease-naar);
+  }
+
+  body[data-world="naar"] .spark-host:hover::after,
+  body[data-world="naar"] :is(.card, .panel, .bento-cell, .btn):hover::after {
+    opacity: 1;
+  }
+
+  /* Reduced-motion: spark goes away — it's a stylized hammer-strike
+     visualization, not essential information. */
+  @media (prefers-reduced-motion: reduce) {
+    body[data-world="naar"] .spark-host::after,
+    body[data-world="naar"] :is(.card, .panel, .bento-cell, .btn)::after {
+      display: none;
+    }
+  }
+
+  /* ─── Code styling — programming page lives here ──────────────────── */
+
+  body[data-world="naar"] code,
+  body[data-world="naar"] :is(pre, .type-code, .type-code-inline) {
+    font-family: var(--voice-code);
+    background-color: var(--anchor-bg);
+    color: var(--ember);
+    border: 1px solid var(--line-strong);
+    border-radius: 0;
+  }
+
+  body[data-world="naar"] code,
+  body[data-world="naar"] .type-code-inline {
+    padding: var(--s-1) var(--s-2);
+  }
+
+  body[data-world="naar"] pre,
+  body[data-world="naar"] .type-code {
+    padding: var(--s-4);
+    border-left: 3px solid var(--ember);
+    overflow-x: auto;
+  }
+
+  /* ─── Focus ring — sharp spark outline ────────────────────────────── */
+
+  body[data-world="naar"] :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 0;
+    box-shadow: var(--ring);
+  }
+
+  /* Coarse-pointer (touch) gets no spark — there is no cursor to
+     follow, and the hover state would lock to a stale position. */
+  @media (pointer: coarse) {
+    body[data-world="naar"] .spark-host::after,
+    body[data-world="naar"] :is(.card, .panel, .bento-cell, .btn)::after {
+      display: none;
+    }
+  }
+
 }
