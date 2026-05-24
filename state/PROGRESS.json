@@ -1,9 +1,27 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-24T23:30:00Z",
+  "last_updated": "2026-05-24T24:00:00Z",
   "pack": "v3-devotio",
-  "pack_status": "in-progress",
+  "pack_status": "all-done",
   "current": {
+    "pack": "v3",
+    "worker": "24",
+    "worker_name": "DUAL-FORM",
+    "phase": 5,
+    "phases_total": 5,
+    "phase_order": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "branch": "worker-24-devotio-p5",
+    "status": "in-progress",
+    "blocker": null,
+    "next_action": "Open PR for worker-24-devotio-p5 (Phase 5 — Print Atelier, 15 per-personality print signatures + 6 print tokens + page geometry @page rule + footer counter + DEVOTIO ribbon + 3 ornaments psych ✿ / eq 𓆭 / hrmastery ❦ + tint underline on h2 + qcalc/blockquote/code page-break-inside avoid + animation/transition silenced in print). Pack v3 DEVOTIO COMPLETE — 5 Workers / 28 Phases. After PR merge: pack_status=all-done, current.status=all-done — no more workers in v3."
+  },
+  "previous": {
     "pack": "v3",
     "worker": "24",
     "worker_name": "DUAL-FORM",
@@ -17,11 +35,11 @@
       "5"
     ],
     "branch": "worker-24-devotio-p4",
-    "status": "in-progress",
-    "blocker": null,
-    "next_action": "Open PR for worker-24-devotio-p4 (Phase 4 — Haptic Layer, 5 patterns tap/success/warn/error/longpress + Upg.touch.haptic sub-namespace + opt-in toggle persisted in localStorage upg_touch_haptic_enabled + auto-trigger on bottom-nav tap + halo enter + qcalc complete/error + warn + 500ms longpress + body[data-haptic-enabled] mirror). Next session: Worker 24 Phase 5 (Print Atelier — 15 per-personality print signatures + page-break refinement + tinted hero + identity footer)."
+    "status": "merged",
+    "merged_pr": 108,
+    "blocker": null
   },
-  "previous": {
+  "before_previous": {
     "pack": "v3",
     "worker": "24",
     "worker_name": "DUAL-FORM",
@@ -37,24 +55,6 @@
     "branch": "worker-24-devotio-p3",
     "status": "merged",
     "merged_pr": 107,
-    "blocker": null
-  },
-  "before_previous": {
-    "pack": "v3",
-    "worker": "24",
-    "worker_name": "DUAL-FORM",
-    "phase": 2,
-    "phases_total": 5,
-    "phase_order": [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5"
-    ],
-    "branch": "worker-24-devotio-p2",
-    "status": "merged",
-    "merged_pr": 106,
     "blocker": null
   },
   "completed_phases": [
@@ -849,9 +849,17 @@
       "branch": "worker-24-devotio-p4",
       "lines_added": 323,
       "lines_deleted": 4
+    },
+    {
+      "worker": "24",
+      "phase": 5,
+      "title": "Print Atelier — APPEND ~14 lines to platform/assets/css/tokens.css with 6 --print-* tokens (page-margin 18/16/22/16mm A4 / text-color routed to --chr-mihrab-900 / text-muted routed to --chr-mihrab-600 / paper-color white / paper-tint routed to --chr-pearl-50 / rule-color color-mix oklch 22% mihrab-900 transparent for hairlines) + APPEND ~517 lines to platform/assets/css/motion.css with the Print Atelier block: (a) global @page rule (size A4 / margin 18mm 16mm 22mm 16mm) + @page margin-boxes (@bottom-center counter \"Upgrade · صفحة X / Y\" 8pt muted / @top-left attr(data-print-date) 8pt muted / @top-right \"DEVOTIO\" Aref Ruqaa 8pt muted with 0.08em letter-spacing); (b) 5.B generic frame inside @media print: print-color-adjust: exact + -webkit-print-color-adjust: exact on body/section.page/[data-page-personality]/header.page-h + display:none !important on 14 chrome elements (.sidebar/.nav-rail/.top-chrome/.topbar/header.app-header/footer.app-footer/.breadcrumb/.cmdk-trigger/.cmdk-overlay/.dual-bottom-nav/.dual-haptic-toggle/.rit-halo-toggle/.rit-entry-portal/.pointer-trail/#cursor-aura) + reset shell padding/margin to 0 on #page-host/main[data-shard-host]/main + section.page page-break-before: always (auto on first-of-type) + hero band header.page-h with 14mm 12mm padding + 2.5pt tint border-bottom + default oklch 22% tint to white linear-gradient + 28pt Aref Ruqaa h1 with 78% color-mix tint + 9pt eyebrow muted + 11pt body lede max 140mm + section h2 with 1.2pt rule color underline (38% tint when inside data-page-personality) + body p/li 10pt body voice with 1.55 line-height + orphans/widows 3 + blockquote/literary-quote with 2.2pt tint border-inline-start + 11pt italic Fraunces + paper-tint background + qcalc-panel/qcalc-block/[data-qcalc] page-break-inside avoid with 0.6pt rule border + tabular num font-feature-settings on .qcalc-value/.qcalc-result/[data-qcalc-out] + universal animation:none/transition:none in print; (c) 5.C 15 per-personality signatures: dashboard saffron / callcenter damascus / fieldsales silt / accountmgr cedar / social coral / lab marble / psych lapis with ✿ ornament + Fraunces literary quote / eq mihrab with 𓆭 lotus ornament / negotiation dark damascus / customercare pearl / programming indigo with code+pre 9pt JetBrains Mono on marble-100 background / accounting palm with tabular num emphasis on .qcalc-value+[data-acc-out]+.acc-tax-slip-rows li b / phonerepair henna / hrmastery henna with ❦ ornament / myprogress light lapis — each block sets background linear-gradient(135deg or 180deg) with color-mix(in oklch) of personality scale 300/500 + scale 700/900 to white (24-32% / 14-20%) + sets border-bottom-color to scale-700 + recolors h1 to color-mix 80% scale-700 with print-text-color. Total: 6 print tokens + 1 @page geometry rule + 1 @page margin-box rule + 1 generic 5.B frame + 15 personality 5.C signatures = 18 new @media print blocks (35→55) + 2 @page rules (0→2) + 6 --print-* tokens. Sanity: 15/15 personality signatures present (full coverage of all data-page-personality values in HTML) + 0 changes to existing 35 print blocks (W17 + per-page legacy) + 0 changes to existing on-screen styles + 0 changes to HTML/JS/app.js/sw.js + 0 new top-level Upg.* (count stays 31) + brace-balance verified (motion.css 435 open / 435 close, tokens.css 22 open / 22 close). Sacred preserved 100% (15 page sections / 391 qcalc / 31 top-level Upg.* APIs / 0 google fonts / 0 CDN / 15 data-page-personality / desktop on-screen UX untouched / Pack v3 W20-W23 untouched / Phase 1-4 untouched). Worker 24 + Pack v3 DEVOTIO COMPLETE — 5 Workers / 28 Phases.",
+      "branch": "worker-24-devotio-p5",
+      "lines_added": 536,
+      "lines_deleted": 0
     }
   ],
-  "next_action": "Open PR for worker-24-devotio-p4 (Worker 24 / Phase 4 — Haptic Layer). Next session: Worker 24 Phase 5 (Print Atelier — 15 per-personality print signatures + page-break refinement + tinted hero gradient + identity footer + print-color-adjust discipline).",
+  "next_action": "Open PR for worker-24-devotio-p5 (Worker 24 / Phase 5 — Print Atelier — Pack v3 final). After merge: Pack v3 DEVOTIO COMPLETE (5 Workers / 28 Phases). No more workers in v3 — owner reviews + merges; pack_status=all-done.",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",

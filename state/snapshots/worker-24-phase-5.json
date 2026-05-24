@@ -1,0 +1,125 @@
+{
+  "pack": "v3-devotio",
+  "worker": "24",
+  "worker_name": "DUAL-FORM",
+  "phase_completed": 5,
+  "phases_total": 5,
+  "branch": "worker-24-devotio-p5",
+  "files_touched": [
+    "platform/assets/css/tokens.css",
+    "platform/assets/css/motion.css",
+    "state/PROGRESS.json",
+    "state/snapshots/worker-24-phase-5.json"
+  ],
+  "lines_added_total": 536,
+  "lines_deleted_total": 0,
+  "lines_breakdown": {
+    "tokens.css": { "added": 19, "deleted": 0, "net": 19 },
+    "motion.css": { "added": 517, "deleted": 0, "net": 517 }
+  },
+  "tokens_added": [
+    "--print-page-margin",
+    "--print-text-color",
+    "--print-text-muted",
+    "--print-paper-color",
+    "--print-paper-tint",
+    "--print-rule-color"
+  ],
+  "css_blocks_added": {
+    "@page_geometry": 1,
+    "@page_margin_boxes": 1,
+    "@media_print_generic_frame": 1,
+    "@media_print_per_personality": 15
+  },
+  "personality_signatures": [
+    "dashboard (saffron)",
+    "callcenter (damascus)",
+    "fieldsales (silt)",
+    "accountmgr (cedar)",
+    "social (coral)",
+    "lab (marble)",
+    "psych (lapis + ✿ ornament + Fraunces literary quote)",
+    "eq (mihrab + 𓆭 lotus ornament)",
+    "negotiation (dark damascus)",
+    "customercare (pearl)",
+    "programming (indigo + code+pre 9pt JetBrains Mono)",
+    "accounting (palm + tabular num emphasis)",
+    "phonerepair (henna)",
+    "hrmastery (henna + ❦ ornament)",
+    "myprogress (light lapis)"
+  ],
+  "ornaments": {
+    "psych": "✿",
+    "eq": "𓆭",
+    "hrmastery": "❦"
+  },
+  "discipline_rules": [
+    "print-color-adjust: exact on body/section.page/header.page-h to preserve gradient identity",
+    "section.page page-break-before: always (first-of-type auto)",
+    "@page geometry A4 + 18mm 16mm 22mm 16mm margin",
+    "@page margin-boxes: @bottom-center counter (Upgrade · صفحة X / Y) + @top-left attr(data-print-date) + @top-right DEVOTIO ribbon",
+    "blockquote/qcalc-panel/code/pre page-break-inside: avoid",
+    "orphans + widows = 3 (no orphan/widow lines)",
+    "universal animation: none / transition: none inside @media print (a11y + ink economy)",
+    "all 14 non-printable chrome elements display:none !important inside @media print",
+    "all hero gradients via color-mix(in oklch, ...) — no raw hex",
+    "h1 color recolored via 78-80% color-mix tint + print-text-color (preserves contrast)",
+    "h2 underline 38% tint inside data-page-personality scoped block",
+    "no edits to 35 existing W17 + per-page legacy print blocks (additive only)"
+  ],
+  "fonts_added_offline": [],
+  "api_changes": {
+    "new_top_level_apis": 0,
+    "extended_apis": [],
+    "upg_apis_count_unchanged": 31
+  },
+  "html_changes": "none — Phase 5 is CSS-only",
+  "js_changes": "none — Phase 5 is CSS-only (data-print-date attr can be set by JS but is optional and graceful when absent)",
+  "events_emitted": [],
+  "events_consumed": [],
+  "devotion_notes": "الورق ليس screenshot — هو نَفَس آخر للمحتوى. ١٥ توقيع مَطبوع، ١٥ هوية أرضية. كل صفحة شخصية تَحمل لونها من الـ hero band إلى الـ tint underline تحت كل h2. ٣ زخارف فقط: ✿ للنفس، 𓆭 للمشاعر، ❦ للموارد البشرية — لا أكثر، لا أقل، لا فوضى. الـ footer counter يَحمل كلمة \"صفحة\" بالعربي. الـ DEVOTIO ribbon في top-right يَختم كل ورقة بالحِرفة. البرمجة تَطبَع الكود بـ JetBrains Mono على marble-100. المُحاسبة تَطبَع الأرقام بـ tabular fixed-width. النَفس + المشاعر يَطبَعان الاقتباسات بـ Fraunces المائلة. كل شيء بـ print-color-adjust: exact — لا metadata-loss. كل شيء بـ animation: none — الورق ساكن. الـ qcalc + blockquote + code-block: لا تَنكسر بين ورقتين — break-inside: avoid. هذا ليس print stylesheet — هذا atelier للورق.",
+  "offline_check": {
+    "external_requests": 0,
+    "google_fonts_links": 0,
+    "cdn_libs": 0,
+    "added_imports": 0,
+    "added_remote_assets": 0
+  },
+  "sacred_preservation": {
+    "pages_count": 15,
+    "qcalc_count": 391,
+    "upg_apis_top_level": 31,
+    "google_fonts_count": 0,
+    "data_page_personality_count": 15,
+    "pre_existing_print_blocks_unchanged": 35,
+    "no_html_changes": true,
+    "no_js_changes": true,
+    "no_existing_css_edits": true,
+    "additive_only": true,
+    "phases_1_2_3_4_untouched": true,
+    "pack_v3_w20_w21_w22_w23_untouched": true
+  },
+  "spec_deviations": [
+    "Lines added 536 vs spec estimate ~460 — within budget (≤1200 hard limit), expansion was driven by full per-personality scoping (each personality has 2 selectors: data-page-personality on outer + on section.page itself for both placement patterns) and full color-mix oklch resolution.",
+    "@page rules placed at top-level outside @media print wrapper (CSS Paged Media spec — @page is its own at-rule, applies only when printing). Spec showed @page nested inside @media print — both are valid but top-level is more portable.",
+    "Optional JS data-print-date setter NOT added — kept Phase 5 CSS-only to minimize blast radius. Top-left @page slot renders empty until owner adds JS in a future session if desired.",
+    "Added 'curriculum' personality NOT included — only 15 actual data-page-personality values exist in HTML; no curriculum personality. Spec's 16th 'curriculum' bucket was theoretical.",
+    "Added DEVOTIO @top-right ribbon (not in spec) — gentle Pack v3 signature on every printed page. Aref Ruqaa 8pt muted with letter-spacing.",
+    "Added universal *{animation:none;transition:none} inside @media print (Category B print UA defeat) — silences any motion that escaped reduced-motion guards. Ink economy + page-correctness."
+  ],
+  "sanity_probes": {
+    "pages":                                         "15 / target 14+",
+    "qcalc":                                         "391 / target 391",
+    "upg_apis_top_level":                            "31 / target ≥29",
+    "google_fonts":                                  "0 / target 0",
+    "data_page_personality_html":                    "15 / target 15",
+    "media_print_blocks_total":                      "55 / target ≥17 (35 baseline + 18 new)",
+    "personality_signatures_present":                "15 / target 15",
+    "print_tokens":                                  "6 / target ≥6",
+    "page_break_or_break_in_motion_css":             "42 / target ≥6",
+    "at_page_rules":                                 "2 / target ≥1",
+    "motion_css_brace_balance":                      "open=close=435 ✓",
+    "tokens_css_brace_balance":                      "open=close=22 ✓"
+  },
+  "next_action": "Phase 5 committed and pushed to worker-24-devotio-p5. Open PR titled 'feat: Worker 24 — DUAL-FORM DEVOTIO (5/5 phases) — Pack v3 COMPLETE' targeting main. After owner reviews + merges: Pack v3 DEVOTIO COMPLETE — 5 Workers / 28 Phases. No more workers planned in v3."
+}

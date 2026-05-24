@@ -1029,3 +1029,520 @@
    ════════════════════════════════════════════════════════════════════════ */
 
 /* End motion.css ──────────────────────────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   DUAL-FORM v3 — Print Atelier (Worker 24 / Phase 5 — Pack v3 final)
+   ────────────────────────────────────────────────────────────────────────
+   ١٥ توقيع مَطبوع — كل صفحة شخصية تَطبَع بهويتها (hero gradient + tint
+   underline + footer + page-break refinement). يَبني فوق W21 P5 baseline
+   و ٣٥ block @media print موجودة (W17 + per-page localized) — هذه القواعد
+   GENERIC على header.page-h و section.page، لا تَتعارض مع الـ blocks
+   per-page المُتخصصة.
+
+   Discipline:
+   1. كل selector مَكَنوَن عن طريق [data-page-personality="X"] header.page-h
+      → لا تَطغى على أي page-localized print block سَبَقَها.
+   2. print-color-adjust: exact على كل block — preserve tint identity.
+   3. لا hover/animation/transition داخل @media print (الورق ساكن).
+   4. Hero gradient via color-mix(in oklch) — مَلوَّن ولكن خفيف.
+   5. orphans/widows = 3 — لا أسطر يتيمة.
+   6. break-inside: avoid على qcalc-panel + blockquote + .qcalc-block.
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* ─── 5.A Page geometry — once globally ─── */
+@page {
+  size:   A4;
+  margin: 18mm 16mm 22mm 16mm;
+}
+
+/* Footer counter on every printed page (CSS Paged Media — supported in Chromium/Edge/Safari prepress) */
+@page {
+  @bottom-center {
+    content: "Upgrade · صفحة " counter(page) " / " counter(pages);
+    font-family: var(--type-voice-ui, "IBM Plex Sans Arabic", system-ui, sans-serif);
+    font-size: 8pt;
+    color: var(--print-text-muted, #4a5b80);
+  }
+  @top-left {
+    content: attr(data-print-date);     /* set on body via Phase 5 boot block (optional) */
+    font-family: var(--type-voice-eyebrow, "IBM Plex Sans Arabic", system-ui, sans-serif);
+    font-size: 8pt;
+    color: var(--print-text-muted, #4a5b80);
+  }
+  @top-right {
+    content: "DEVOTIO";
+    font-family: var(--type-voice-ribbon, "Aref Ruqaa", "Reem Kufi", serif);
+    font-size: 8pt;
+    color: var(--print-text-muted, #4a5b80);
+    letter-spacing: 0.08em;
+  }
+}
+
+/* ─── 5.B Generic print frame — applied to every page ─── */
+@media print {
+  /* Color preservation — preserve gradient + tint */
+  body,
+  section.page,
+  [data-page-personality],
+  [data-page-personality] header.page-h {
+    print-color-adjust:         exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  /* Hide non-printable chrome (DUAL-FORM controls + RITUAL portals + sound + nav) */
+  .sidebar,
+  .nav-rail,
+  .top-chrome,
+  .topbar,
+  header.app-header,
+  footer.app-footer,
+  .breadcrumb,
+  .cmdk-trigger,
+  .cmdk-overlay,
+  .dual-bottom-nav,
+  .dual-haptic-toggle,
+  .rit-halo-toggle,
+  .rit-entry-portal,
+  .pointer-trail,
+  #cursor-aura {
+    display: none !important;   /* Category B — UA print cascade defeat */
+  }
+
+  /* Reset shell padding for print */
+  #page-host,
+  main[data-shard-host],
+  main {
+    padding: 0 !important;
+    margin:  0 !important;
+  }
+
+  /* Each page section starts on its own paper sheet */
+  section.page {
+    display: block !important;
+    page-break-before: always;
+    break-before: page;
+    background: white;
+    color:      var(--print-text-color, #16213a);
+  }
+  section.page:first-of-type {
+    page-break-before: auto;
+    break-before:      auto;
+  }
+
+  /* ─── Hero band — top of first sheet of each page section ─── */
+  section.page > header.page-h {
+    position:           relative;
+    margin:             0 0 10mm 0;
+    padding:            14mm 12mm 12mm;
+    page-break-after:   avoid;
+    break-after:        avoid;
+    page-break-inside:  avoid;
+    break-inside:       avoid;
+    border-bottom:      2.5pt solid var(--color-tint, var(--chr-lapis-500, #4a6ea8));
+    color:              var(--print-text-color, #16213a);
+    /* Default hero gradient — overridden per personality below */
+    background:
+      linear-gradient(135deg,
+        color-mix(in oklch, var(--color-tint, var(--chr-lapis-500, #4a6ea8)) 22%, white) 0%,
+        color-mix(in oklch, var(--color-tint-edge, var(--chr-mihrab-700, #2c3a5e)) 12%, white) 100%);
+  }
+  section.page > header.page-h h1 {
+    font-family: var(--type-voice-hero, "Aref Ruqaa", "Reem Kufi", serif);
+    font-size:   28pt;
+    font-weight: 700;
+    line-height: 1.15;
+    margin:      0 0 4mm 0;
+    color:       color-mix(in oklch, var(--color-tint, var(--chr-lapis-500, #4a6ea8)) 78%, var(--print-text-color, #16213a));
+  }
+  section.page > header.page-h .h-eyebrow,
+  section.page > header.page-h [data-type-voice="accent"] {
+    font-family:    var(--type-voice-eyebrow, "IBM Plex Sans Arabic", system-ui, sans-serif);
+    font-size:      9pt;
+    color:          var(--print-text-muted, #4a5b80);
+    letter-spacing: 0.06em;
+    text-transform: none;
+  }
+  section.page > header.page-h .h-lede {
+    font-family: var(--type-voice-body, "Tajawal", "Readex Pro", system-ui, sans-serif);
+    font-size:   11pt;
+    line-height: 1.55;
+    color:       var(--print-text-color, #16213a);
+    margin:      4mm 0 0 0;
+    max-width:   140mm;
+  }
+
+  /* ─── Section h2 — tint underline (page-localized via data-page-personality, applies broadly) ─── */
+  section.page h2 {
+    border-bottom:    1.2pt solid var(--print-rule-color, color-mix(in oklch, #16213a 22%, transparent));
+    padding-bottom:   2mm;
+    margin-top:       8mm;
+    page-break-after: avoid;
+    break-after:      avoid;
+    color:            var(--print-text-color, #16213a);
+  }
+  /* Mihrab/lapis tint accent on h2 below hero */
+  [data-page-personality] section.page h2,
+  section.page[data-page-personality] h2 {
+    border-bottom-color: color-mix(in oklch, var(--color-tint, var(--chr-lapis-500, #4a6ea8)) 38%, transparent);
+  }
+
+  /* Body text — economical sizing for paper */
+  section.page p,
+  section.page .h-body,
+  section.page li {
+    font-family: var(--type-voice-body, "Tajawal", "Readex Pro", system-ui, sans-serif);
+    font-size:   10pt;
+    line-height: 1.55;
+    color:       var(--print-text-color, #16213a);
+    orphans:     3;
+    widows:      3;
+  }
+
+  /* Quotes — tint border-inline-start (psych, eq, customercare especially) */
+  section.page blockquote,
+  section.page .literary-quote,
+  section.page .type-quote-literary,
+  section.page .type-quote-block {
+    font-family:           var(--type-voice-quote, "Fraunces", Georgia, serif);
+    font-size:             11pt;
+    font-style:            italic;
+    border-inline-start:   2.2pt solid var(--color-tint, var(--chr-lapis-500, #4a6ea8));
+    padding:               4mm 6mm;
+    margin:                5mm 0;
+    color:                 var(--print-text-color, #16213a);
+    page-break-inside:     avoid;
+    break-inside:          avoid;
+    background:            var(--print-paper-tint, #fafbf8);
+  }
+
+  /* qcalc panels — generic frame (per-page rules above already handle most) */
+  .qcalc-panel,
+  .qcalc-block,
+  [data-qcalc] {
+    page-break-inside: avoid;
+    break-inside:      avoid;
+    border:            0.6pt solid var(--print-rule-color, color-mix(in oklch, #16213a 22%, transparent));
+    padding:           3mm 4mm;
+    margin:            3mm 0;
+    border-radius:     2mm;
+    background:        var(--print-paper-tint, #fafbf8);
+  }
+  .qcalc-value,
+  .qcalc-result,
+  [data-qcalc-out] {
+    font-family:           var(--type-voice-num-tabular, "JetBrains Mono", "IBM Plex Sans Arabic", monospace);
+    font-feature-settings: "tnum" 1, "lnum" 1;
+  }
+
+  /* Anti-leak: silence any animation/transition on print (a11y + ink economy) */
+  *, *::before, *::after {
+    animation: none !important;        /* Category B — print UA defeat */
+    transition: none !important;       /* Category B — print UA defeat */
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   5.C — ١٥ توقيع شخصي per-page (hero gradient + ornamental flourish)
+   كل block مكَنون داخل @media print — لا تَطغى on-screen styles.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ─── 1. Dashboard — saffron warmth ─── */
+@media print {
+  [data-page-personality="dashboard"] section.page > header.page-h,
+  section.page[data-page-personality="dashboard"] > header.page-h {
+    background: linear-gradient(135deg,
+      color-mix(in oklch, var(--chr-saffron-300, #f1c074) 30%, white) 0%,
+      color-mix(in oklch, var(--chr-saffron-500, #c8932e) 18%, white) 100%);
+    border-bottom-color: var(--chr-saffron-600, #a47820);
+  }
+  [data-page-personality="dashboard"] section.page > header.page-h h1,
+  section.page[data-page-personality="dashboard"] > header.page-h h1 {
+    color: color-mix(in oklch, var(--chr-saffron-700, #82601a) 80%, var(--print-text-color));
+  }
+}
+
+/* ─── 2. Callcenter — damascus precision ─── */
+@media print {
+  [data-page-personality="callcenter"] section.page > header.page-h,
+  section.page[data-page-personality="callcenter"] > header.page-h {
+    background: linear-gradient(135deg,
+      color-mix(in oklch, var(--chr-damascus-400, #6c8aa8) 26%, white) 0%,
+      color-mix(in oklch, var(--chr-damascus-700, #2f4866) 16%, white) 100%);
+    border-bottom-color: var(--chr-damascus-700, #2f4866);
+  }
+  [data-page-personality="callcenter"] section.page > header.page-h h1,
+  section.page[data-page-personality="callcenter"] > header.page-h h1 {
+    color: var(--chr-damascus-800, #243854);
+  }
+}
+
+/* ─── 3. Fieldsales — silt grounded ─── */
+@media print {
+  [data-page-personality="fieldsales"] section.page > header.page-h,
+  section.page[data-page-personality="fieldsales"] > header.page-h {
+    background: linear-gradient(135deg,
+      color-mix(in oklch, var(--chr-silt-300, #bcad8f) 28%, white) 0%,
+      color-mix(in oklch, var(--chr-silt-500, #8c7c5e) 16%, white) 100%);
+    border-bottom-color: var(--chr-silt-600, #6f6248);
+  }
+  [data-page-personality="fieldsales"] section.page > header.page-h h1,
+  section.page[data-page-personality="fieldsales"] > header.page-h h1 {
+    color: var(--chr-silt-800, #4d4329);
+  }
+}
+
+/* ─── 4. Accountmgr — cedar executive ─── */
+@media print {
+  [data-page-personality="accountmgr"] section.page > header.page-h,
+  section.page[data-page-personality="accountmgr"] > header.page-h {
+    background: linear-gradient(135deg,
+      color-mix(in oklch, var(--chr-cedar-400, #6d8a76) 24%, white) 0%,
+      color-mix(in oklch, var(--chr-cedar-700, #2f4a37) 14%, white) 100%);
+    border-bottom-color: var(--chr-cedar-700, #2f4a37);
+  }
+  [data-page-personality="accountmgr"] section.page > header.page-h h1,
+  section.page[data-page-personality="accountmgr"] > header.page-h h1 {
+    color: var(--chr-cedar-800, #243a2c);
+  }
+}
+
+/* ─── 5. Social — coral vibrant ─── */
+@media print {
+  [data-page-personality="social"] section.page > header.page-h,
+  section.page[data-page-personality="social"] > header.page-h {
+    background: linear-gradient(135deg,
+      color-mix(in oklch, var(--chr-coral-300, #ec9b8a) 30%, white) 0%,
+      color-mix(in oklch, var(--chr-coral-600, #b45748) 20%, white) 100%);
+    border-bottom-color: var(--chr-coral-700, #8d3f33);
+  }
+  [data-page-personality="social"] section.page > header.page-h h1,
+  section.page[data-page-personality="social"] > header.page-h h1 {
+    color: var(--chr-coral-800, #6b2f26);
+  }
+}
+
+/* ─── 6. Lab — marble experimental ─── */
+@media print {
+  [data-page-personality="lab"] section.page > header.page-h,
+  section.page[data-page-personality="lab"] > header.page-h {
+    background: linear-gradient(135deg,
+      color-mix(in oklch, var(--chr-marble-400, #888fa0) 26%, white) 0%,
+      color-mix(in oklch, var(--chr-marble-700, #3e445c) 16%, white) 100%);
+    border-bottom-color: var(--chr-marble-700, #3e445c);
+  }
+  [data-page-personality="lab"] section.page > header.page-h h1,
+  section.page[data-page-personality="lab"] > header.page-h h1 {
+    color: var(--chr-marble-800, #2d3346);
+  }
+}
+
+/* ─── 7. Psych — lapis literary + ✿ ornament ─── */
+@media print {
+  [data-page-personality="psych"] section.page > header.page-h,
+  section.page[data-page-personality="psych"] > header.page-h {
+    background: linear-gradient(135deg,
+      color-mix(in oklch, var(--chr-lapis-300, #8aa3d3) 28%, white) 0%,
+      color-mix(in oklch, var(--chr-lapis-700, #2a4480) 18%, white) 100%);
+    border-bottom-color: var(--chr-lapis-700, #2a4480);
+  }
+  [data-page-personality="psych"] section.page > header.page-h h1,
+  section.page[data-page-personality="psych"] > header.page-h h1 {
+    color: var(--chr-lapis-800, #1f3460);
+  }
+  [data-page-personality="psych"] section.page > header.page-h::after {
+    content: "✿";
+    position: absolute;
+    inset-block-end:  4mm;
+    inset-inline-end: 6mm;
+    font-size: 14pt;
+    color: var(--chr-lapis-600, #3658a0);
+  }
+  [data-page-personality="psych"] section.page blockquote,
+  [data-page-personality="psych"] section.page .type-quote-block {
+    font-family: var(--type-voice-quote-literary, "Fraunces", Georgia, serif);
+  }
+}
+
+/* ─── 8. EQ — mihrab emotional + 𓆭 lotus ornament ─── */
+@media print {
+  [data-page-personality="eq"] section.page > header.page-h,
+  section.page[data-page-personality="eq"] > header.page-h {
+    background: linear-gradient(180deg,
+      color-mix(in oklch, var(--chr-mihrab-400, #4a5985) 24%, white) 0%,
+      color-mix(in oklch, var(--chr-mihrab-700, #1f2c52) 16%, white) 100%);
+    border-bottom-color: var(--chr-mihrab-700, #1f2c52);
+  }
+  [data-page-personality="eq"] section.page > header.page-h h1,
+  section.page[data-page-personality="eq"] > header.page-h h1 {
+    color: var(--chr-mihrab-800, #182242);
+  }
+  [data-page-personality="eq"] section.page > header.page-h::before {
+    content: "𓆭";
+    position: absolute;
+    inset-block-end:    4mm;
+    inset-inline-start: 6mm;
+    font-size: 14pt;
+    color: var(--chr-mihrab-500, #344575);
+  }
+}
+
+/* ─── 9. Negotiation — dark damascus persuasive ─── */
+@media print {
+  [data-page-personality="negotiation"] section.page > header.page-h,
+  section.page[data-page-personality="negotiation"] > header.page-h {
+    background: linear-gradient(135deg,
+      color-mix(in oklch, var(--chr-damascus-600, #3a587a) 26%, white) 0%,
+      color-mix(in oklch, var(--chr-damascus-900, #16243a) 18%, white) 100%);
+    border-bottom-color: var(--chr-damascus-900, #16243a);
+  }
+  [data-page-personality="negotiation"] section.page > header.page-h h1,
+  section.page[data-page-personality="negotiation"] > header.page-h h1 {
+    color: var(--chr-damascus-900, #16243a);
+  }
+}
+
+/* ─── 10. Customercare — pearl warm ─── */
+@media print {
+  [data-page-personality="customercare"] section.page > header.page-h,
+  section.page[data-page-personality="customercare"] > header.page-h {
+    background: linear-gradient(135deg,
+      color-mix(in oklch, var(--chr-pearl-300, #d8d6c8) 32%, white) 0%,
+      color-mix(in oklch, var(--chr-pearl-700, #807d6b) 16%, white) 100%);
+    border-bottom-color: var(--chr-pearl-700, #807d6b);
+  }
+  [data-page-personality="customercare"] section.page > header.page-h h1,
+  section.page[data-page-personality="customercare"] > header.page-h h1 {
+    color: var(--chr-pearl-800, #5e5b4d);
+  }
+}
+
+/* ─── 11. Programming — indigo technical (code blocks polished) ─── */
+@media print {
+  [data-page-personality="programming"] section.page > header.page-h,
+  section.page[data-page-personality="programming"] > header.page-h {
+    background: linear-gradient(135deg,
+      color-mix(in oklch, var(--chr-indigo-400, #6e7ab2) 24%, white) 0%,
+      color-mix(in oklch, var(--chr-indigo-800, #1d2654) 18%, white) 100%);
+    border-bottom-color: var(--chr-indigo-800, #1d2654);
+  }
+  [data-page-personality="programming"] section.page > header.page-h h1,
+  section.page[data-page-personality="programming"] > header.page-h h1 {
+    color: var(--chr-indigo-800, #1d2654);
+  }
+  [data-page-personality="programming"] section.page code,
+  [data-page-personality="programming"] section.page pre {
+    background:        var(--chr-marble-100, #ebecef);
+    color:             var(--chr-mihrab-900, #16213a);
+    font-family:       var(--type-voice-code, "JetBrains Mono", monospace);
+    font-size:         9pt;
+    page-break-inside: avoid;
+    break-inside:      avoid;
+    padding:           2mm 3mm;
+    border-radius:     1.5mm;
+    border:            0.4pt solid var(--print-rule-color, color-mix(in oklch, #16213a 22%, transparent));
+  }
+  [data-page-personality="programming"] section.page pre {
+    margin:  3mm 0;
+    padding: 3mm 4mm;
+  }
+}
+
+/* ─── 12. Accounting — palm precise + tabular nums emphasis ─── */
+@media print {
+  [data-page-personality="accounting"] section.page > header.page-h,
+  section.page[data-page-personality="accounting"] > header.page-h {
+    background: linear-gradient(135deg,
+      color-mix(in oklch, var(--chr-palm-400, #6e9078) 26%, white) 0%,
+      color-mix(in oklch, var(--chr-palm-700, #2e4f38) 16%, white) 100%);
+    border-bottom-color: var(--chr-palm-700, #2e4f38);
+  }
+  [data-page-personality="accounting"] section.page > header.page-h h1,
+  section.page[data-page-personality="accounting"] > header.page-h h1 {
+    color: var(--chr-palm-800, #233e2c);
+  }
+  [data-page-personality="accounting"] section.page .qcalc-value,
+  [data-page-personality="accounting"] section.page [data-acc-out],
+  [data-page-personality="accounting"] section.page .acc-tax-slip-rows li b {
+    font-family: var(--type-voice-num-tabular, "JetBrains Mono", monospace);
+    font-weight: 600;
+    font-feature-settings: "tnum" 1, "lnum" 1, "zero" 1;
+  }
+}
+
+/* ─── 13. Phonerepair — henna industrial ─── */
+@media print {
+  [data-page-personality="phonerepair"] section.page > header.page-h,
+  section.page[data-page-personality="phonerepair"] > header.page-h {
+    background: linear-gradient(135deg,
+      color-mix(in oklch, var(--chr-henna-400, #b87b6e) 26%, white) 0%,
+      color-mix(in oklch, var(--chr-henna-700, #6a3a30) 16%, white) 100%);
+    border-bottom-color: var(--chr-henna-700, #6a3a30);
+  }
+  [data-page-personality="phonerepair"] section.page > header.page-h h1,
+  section.page[data-page-personality="phonerepair"] > header.page-h h1 {
+    color: var(--chr-henna-800, #4f2b24);
+  }
+}
+
+/* ─── 14. HRMastery — henna formal + ❦ ornament ─── */
+@media print {
+  [data-page-personality="hrmastery"] section.page > header.page-h,
+  section.page[data-page-personality="hrmastery"] > header.page-h {
+    background: linear-gradient(135deg,
+      color-mix(in oklch, var(--chr-henna-300, #d6a597) 30%, white) 0%,
+      color-mix(in oklch, var(--chr-henna-600, #7e4a3e) 18%, white) 100%);
+    border-bottom-color: var(--chr-henna-700, #6a3a30);
+  }
+  [data-page-personality="hrmastery"] section.page > header.page-h h1,
+  section.page[data-page-personality="hrmastery"] > header.page-h h1 {
+    color: var(--chr-henna-800, #4f2b24);
+  }
+  [data-page-personality="hrmastery"] section.page > header.page-h::after {
+    content: "❦";
+    position: absolute;
+    inset-block-end:  4mm;
+    inset-inline-end: 6mm;
+    font-size: 14pt;
+    color: var(--chr-henna-600, #7e4a3e);
+  }
+}
+
+/* ─── 15. MyProgress — light lapis reflective ─── */
+@media print {
+  [data-page-personality="myprogress"] section.page > header.page-h,
+  section.page[data-page-personality="myprogress"] > header.page-h {
+    background: linear-gradient(135deg,
+      color-mix(in oklch, var(--chr-lapis-200, #b3c2e0) 32%, white) 0%,
+      color-mix(in oklch, var(--chr-lapis-500, #4a6ea8) 18%, white) 100%);
+    border-bottom-color: var(--chr-lapis-600, #36568a);
+  }
+  [data-page-personality="myprogress"] section.page > header.page-h h1,
+  section.page[data-page-personality="myprogress"] > header.page-h h1 {
+    color: var(--chr-lapis-800, #1f3460);
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Worker 24 / Phase 5 — Print Discipline Forward:
+   1. ١٥ توقيع شخصي + موروث W21 P5 baseline + ٣٥ block per-page legacy.
+   2. print-color-adjust: exact على body + section.page + page-h.
+   3. page-break-before: always على كل section.page (إلا الأولى).
+   4. footer counter "صفحة X / Y" ثابت + DEVOTIO ribbon top-right.
+   5. blockquote, qcalc-panel, code, pre: page-break-inside: avoid.
+   6. orphans + widows = 3 (no orphan/widow lines).
+   7. animation/transition silenced via reduced-motion + universal selector.
+   8. ٣ ornaments (psych ✿ / eq 𓆭 / hrmastery ❦) — لا أكثر، لا أقل.
+   9. الـ data-print-date يُمكن set بـ JS (اختياري) — top-left footer slot.
+
+   PRESERVATION:
+   - W17 + per-page print blocks (٣٥ blocks above) أوْلى — لا تَطغى عليها.
+   - W21 P5 baseline @media print موجود في pages.css — نُكمِلُه لا نُكسره.
+   - 14 page sections + curriculum محفوظة.
+   - ٠ Upg.* APIs مُتأثّرة — هذه phase CSS-only.
+
+   PACK v3 DEVOTIO COMPLETE — 5 Workers / 28 Phases.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* End DUAL-FORM v3 / Phase 5 — Print Atelier — Pack v3 COMPLETE ──────── */
