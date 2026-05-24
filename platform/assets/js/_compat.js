@@ -36,7 +36,8 @@ const EXPECTED = [
   "chroma",
   "ritual",
   "layer",
-  "shards"
+  "shards",
+  "touch"
 ];
 
 function verify() {
