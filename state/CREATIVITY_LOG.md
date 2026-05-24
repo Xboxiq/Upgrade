@@ -28,14 +28,14 @@
 **Verified at commit:** 647f9fe
 
 ---STATS---
-total_beacons: 3
+total_beacons: 4
 unique_categories_used: 3
-avg_score: 4.33
-last_5_avg: 4.33
+avg_score: 4.5
+last_5_avg: 4.5
 disruption_triggers: 0
 forbidden_violations: 0
 creativity_health: 100
-last_updated: 2026-05-24 / γ1
+last_updated: 2026-05-24 / γ2
 
 
 ## γ1 — 2026-05-24
@@ -47,3 +47,15 @@ last_updated: 2026-05-24 / γ1
 **Originality Self-Score:** 4/5
 **Files touched:** platform/index.html · platform/assets/js/elan/world.js · platform/assets/css/worlds/_index.css · platform/assets/app.js · platform/assets/js/core/theme.js
 **Verified at commit:** 6ff4e2b
+
+
+
+## γ2 — 2026-05-24
+**Beacon Type:** ✍️ TYPOGRAPHIC_BEACON
+**The Surprise:** أزرار الإنجاز في عالم حِبر لا تَستخدم checkmark. النص يُملأ بحبر يجف تدريجياً من اليمين لليسار عبر CSS @property --ink-fill + background-clip:text + linear-gradient transition 600ms — كأن قَلَم نَسخ يُسجِّل الإنجاز على ورق التحبير.
+**Reference Avoided:** Forbidden #16 — standard checkmark toast / Forbidden #11 — animated counter from 0 (Creativity Doctrine § ٣).
+**Inspired-by:** Wild Card #1 — Najaf calligraphy manuscripts (الحبر الجاف على الورق).
+**User-Visible:** yes (visible on every .btn-success-action click in dashboard + myprogress pages)
+**Originality Self-Score:** 5/5
+**Files touched:** platform/assets/css/worlds/_hibr.css · platform/assets/js/elan/world-hibr.js · platform/assets/app.js
+**Verified at commit:** 73599eb
