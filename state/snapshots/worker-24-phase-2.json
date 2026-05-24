@@ -1,0 +1,56 @@
+{
+  "pack": "v3",
+  "worker": "24",
+  "worker_name": "DUAL-FORM",
+  "phase_completed": 2,
+  "phases_total": 5,
+  "title": "Bottom Nav — mobile-only ≤720px + 5 destinations + center FAB cmdk + RTL-aware + safe-area + slide-up",
+  "files_touched": [
+    "platform/index.html",
+    "platform/assets/css/tokens.css",
+    "platform/assets/css/chrome.css",
+    "platform/assets/js/upg-nav-2.js",
+    "platform/assets/app.js",
+    "platform/sw.js"
+  ],
+  "lines_added_total": 247,
+  "tokens_added": [
+    "--dual-bottom-nav-bg",
+    "--dual-bottom-nav-border",
+    "--dual-bottom-nav-radius",
+    "--dual-bottom-nav-shadow",
+    "--dual-bottom-nav-h"
+  ],
+  "fonts_added_offline": [],
+  "devotion_notes": "الموبايل صار يَفكّر بالإبهام — ٥ destinations في متناول اليد، الـ FAB (مَركز الأوامر) يَرتفع 16px فوق صف الـ tabs، وعلى الديسكتوب الـ sidebar يَبقى كما هو بلا أدنى لمسة. الترتيب RTL ينعكس تلقائياً عبر dir=rtl، والـ active tab يَستعير --color-tint من شخصية الصفحة الحالية.",
+  "offline_check": {
+    "external_requests": 0,
+    "google_fonts_links": 0,
+    "cdn_libraries": 0
+  },
+  "sacred_preservation": {
+    "pages": 15,
+    "qcalc_instances": 391,
+    "upg_apis_unique": 29,
+    "google_fonts": 0,
+    "desktop_sidebar_intact": true,
+    "phase_1_dvh_intact": true
+  },
+  "phase_2_features": {
+    "destinations": ["dashboard", "lab (التدريب)", "cmdk-center FAB", "myprogress", "more-drawer"],
+    "mobile_breakpoint": "(max-width: 720px)",
+    "touch_target_min": "44x44px",
+    "fab_size": "56x56px",
+    "fab_lift": "-16px",
+    "active_indicator": "currentColor 4px dot, top 4px",
+    "animation": "dual-bottom-nav-rise 400ms cubic-bezier(0.4, 0, 0.2, 1)",
+    "reduced_motion_guard": true,
+    "reduced_transparency_guard": true,
+    "rtl_aware": true,
+    "safe_area_aware": true,
+    "click_delegation": "navigateTo → mountShard fallback → location.hash",
+    "cmdk_wiring": "Upg.cmdk.open()",
+    "more_drawer_wiring": "Upg.nav.openDrawer() → toggleDrawer fallback"
+  },
+  "next_action": "Worker 24 Phase 3 — Swipe Gestures (PointerEvents-based: page-swipe + calc-swipe + dismiss-swipe + Upg.touch.swipe API surface introduction)"
+}
