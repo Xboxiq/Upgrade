@@ -1,7 +1,167 @@
-/* ÊLAN v4 — α2 — World placeholder: نار (Naar) — Fire
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — γ3 — World: نار (Naar) — Fire
+   ────────────────────────────────────────────────────────────────────────
+   Iraqi Brutalism + forge workshop. Fire on charcoal.
    Pages: lab, programming
-   Filled in γ3. See WORLDS_ATLAS.md § World 2 for spec. */
+   See WORLDS_ATLAS.md § World 2 for spec.
+   ════════════════════════════════════════════════════════════════════════ */
 
 [data-world="naar"] {
-  /* Awaiting γ3 stage. */
+  /* ─── Anchor (surface ladder — charcoal) ─── */
+  --anchor-bg: hsl(15 8% 6%);
+  --anchor-1:  hsl(15 8% 9%);
+  --anchor-2:  hsl(15 10% 13%);
+  --anchor-3:  hsl(15 12% 18%);
+
+  /* ─── Ink (text ladder — hot ash) ─── */
+  --ink:       hsl(40 18% 96%);
+  --ink-muted: hsl(40 12% 78%);
+  --ink-faint: hsl(40 8% 56%);
+
+  /* ─── Lines ─── */
+  --line:        hsl(15 12% 18%);
+  --line-strong: hsl(15 14% 28%);
+
+  /* ─── Accent pair ─── */
+  --ember: hsl(18 95% 56%);
+  --focus: hsl(48 100% 60%);
+  --accent: var(--ember);
+
+  /* ─── Motion fingerprint ─── */
+  --ease-naar:     cubic-bezier(0.7, 0, 0.2, 1.2);
+  --duration-naar: 180ms;
+
+  /* ─── Shadows (brutalist hard) ─── */
+  --shadow-sm: 0 1px 0 hsl(15 30% 0% / 0.6);
+  --shadow-md: 0 4px 0 hsl(15 30% 0% / 0.7), inset 0 1px 0 hsl(40 18% 96% / 0.05);
+  --shadow-lg: 0 8px 0 hsl(15 30% 0% / 0.8), inset 0 1px 0 hsl(40 18% 96% / 0.06);
+  --shadow-xl: 0 12px 0 hsl(15 30% 0% / 0.85), inset 0 1px 0 hsl(40 18% 96% / 0.08);
+
+  /* ─── Focus ring ─── */
+  --ring: 0 0 0 2px var(--focus);
+
+  /* ─── System bridge ─── */
+  --color-bg: var(--anchor-bg);
+  --color-surface-0: var(--anchor-bg);
+  --color-surface-1: var(--anchor-1);
+  --color-surface-2: var(--anchor-2);
+  --color-surface-3: var(--anchor-3);
+  --color-text: var(--ink);
+  --color-text-muted: var(--ink-muted);
+  --color-text-faint: var(--ink-faint);
+  --color-border: var(--line);
+  --color-border-strong: var(--line-strong);
+  --color-brand: var(--ember);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Brutalist surfaces — sharp edges, hard shadows, zero radius
+   ═══════════════════════════════════════════════════════════════════ */
+
+[data-world="naar"] .card,
+[data-world="naar"] .bento-card,
+[data-world="naar"] .glass-card {
+  background: var(--anchor-1);
+  border: 2px solid var(--line);
+  border-radius: 0;
+  box-shadow: var(--shadow-md);
+}
+
+[data-world="naar"] .btn,
+[data-world="naar"] button:not(.unstyled):not(.dual-bottom-nav-item):not(.dual-haptic-toggle) {
+  border-radius: 0;
+  border: 2px solid var(--ember);
+  background: transparent;
+  color: var(--ember);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  position: relative;
+  transition: background-color var(--duration-naar) var(--ease-naar),
+              color var(--duration-naar) var(--ease-naar),
+              transform var(--duration-naar) var(--ease-naar);
+}
+
+[data-world="naar"] .btn:hover,
+[data-world="naar"] button:not(.unstyled):not(.dual-bottom-nav-item):not(.dual-haptic-toggle):hover {
+  background: var(--ember);
+  color: var(--anchor-bg);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--anchor-3);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Beacon: Spark on Hover (VISUAL_BEACON)
+   ─────────────────────────────────────────────────────────────────
+   A radial flash at pointer position on .spark-host elements.
+   JS updates --mx/--my via pointermove (rAF throttled).
+   Like a hammer striking hot metal — 60ms flash, no more.
+   ═══════════════════════════════════════════════════════════════════ */
+
+[data-world="naar"] .spark-host {
+  position: relative;
+  --mx: 50%;
+  --my: 50%;
+}
+
+[data-world="naar"] .spark-host::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 24px at var(--mx) var(--my),
+    color-mix(in oklch, var(--focus) 70%, transparent) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 60ms var(--ease-naar);
+  z-index: 1;
+}
+
+[data-world="naar"] .spark-host:hover::after {
+  opacity: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Code blocks — ember monospace
+   ═══════════════════════════════════════════════════════════════════ */
+
+[data-world="naar"] code,
+[data-world="naar"] pre {
+  background: var(--anchor-bg);
+  color: var(--ember);
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+}
+
+[data-world="naar"] pre {
+  padding: var(--s-4, 16px);
+  border-left: 3px solid var(--ember);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Hero — heavy, brutalist, glowing
+   ═══════════════════════════════════════════════════════════════════ */
+
+[data-world="naar"] .hero-title,
+[data-world="naar"] h1.is-hero {
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 30px color-mix(in oklch, var(--ember) 25%, transparent);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Reduced-motion: no transform shift on hover
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  [data-world="naar"] .btn:hover,
+  [data-world="naar"] button:not(.unstyled):hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  [data-world="naar"] .spark-host::after {
+    transition-duration: 0ms;
+  }
 }

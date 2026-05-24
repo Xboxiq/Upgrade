@@ -115,3 +115,4 @@ import './js/_compat.js';
 import './js/elan/format.js';
 import './js/elan/world.js';
 import './js/elan/world-hibr.js';
+import './js/elan/world-naar.js';
