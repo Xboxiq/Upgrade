@@ -67,12 +67,22 @@
 **Files touched:** platform/assets/css/worlds/_nada.css · platform/assets/js/elan/world-nada.js · platform/assets/app.js
 **Verified at commit:** d214ca6
 
+## γ5 — 2026-05-24
+**Beacon Type:** 🤚 INTERACTION_BEACON
+**The Surprise:** عالم حَديد يُعامل الـ practice buttons كأختام حديدية — عند النقر، الزر يدور 180° أفقياً (rotateY) بـ `cubic-bezier(0.85, 0, 0.15, 1)` في 200ms ثم يُكشف الوجه الآخر (aria-pressed toggled). ميكانيكي، حاسم، بدون spring أو bounce. أسطُر الـ sales-frameworks table تستجيب بمسحة حمراء RTL (80ms) تَعبر الـ row كأنها لوحة مغادرات split-flap في مطار بيروت 1965. كلاهما keyboard-accessible (Enter/Space).
+**Reference Avoided:** Forbidden #13 — spring-bounce hover (Framer Motion default) + Forbidden #15 — modal بـ overlay داكن بدون reason (Creativity Doctrine § ٣).
+**Inspired-by:** WORLDS_ATLAS § Hadeed Beacon Identity — "tabs switch with vertical snap + red line sweeps RTL in 80ms (split-flap signage)."
+**User-Visible:** yes (every practice button in negotiation/fieldsales stamps on click; every framework row sweeps red on activation)
+**Originality Self-Score:** 4/5 — rotateY toggle is known in card-flip patterns; using it as a "stamp" metaphor on small buttons (not cards) with a mechanical easing + coupling it with a directional sweep on table rows = uncommon pairing. Claim: most toggle buttons either scale or color-shift; few physically flip.
+**Files touched:** platform/assets/css/worlds/_hadeed.css · platform/assets/js/elan/world-hadeed.js · platform/assets/app.js
+**Verified at commit:** 1f807da
+
 ---STATS---
-total_beacons: 6
-unique_categories_used: 5
-avg_score: 4.33
-last_5_avg: 4.4
+total_beacons: 7
+unique_categories_used: 6
+avg_score: 4.29
+last_5_avg: 4.2
 disruption_triggers: 0
 forbidden_violations: 0
 creativity_health: 100
-last_updated: 2026-05-24 / γ4
+last_updated: 2026-05-24 / γ5

@@ -586,3 +586,36 @@ The spec asked for an empty `@layer themes` block in `style.css` (themes "deprec
 - `archive/` — untouched
 - Hibr world (γ2) — untouched
 - Naar world (γ3) — untouched
+
+
+---
+
+## γ5 — عالم حَديد (Hadeed) — 2026-05-24
+**Commit:** 1f807da
+**Branch:** elan-γ-eight-worlds
+
+### Verified metrics (grep)
+| Metric | Value |
+|---|---|
+| `_hadeed.css` lines | 267 |
+| `[data-world="hadeed"]` selectors | 33 |
+| `.is-stamping` + `.is-swept` beacon markers | 3 |
+| `:has()` no-JS fallback selectors | 3 |
+| `prefers-reduced-motion` guards | 1 |
+| `backdrop-filter` (forbidden) | 0 |
+| `world-hadeed.js` lines | 126 |
+| `app.js` import added | 1 |
+| Upg.worlds.hadeed registered | yes |
+| Lines added total | 391 |
+| Lines deleted | 4 |
+
+### Beacon
+- Type: INTERACTION_BEACON
+- Avoided: Forbidden #13 (spring-bounce hover), #15 (generic modal)
+- Self-score: 4/5
+
+### Sacred preserved
+- 14 page sections — unchanged
+- 31 top-level Upg.* APIs — unchanged (Upg.worlds.hadeed nested)
+- `archive/` — untouched
+- Hibr (γ2), Naar (γ3), Nada (γ4) — untouched
