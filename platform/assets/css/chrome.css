@@ -1570,3 +1570,142 @@ body[data-world="saloon"] #sidebar[data-elan-magnetic="sidebar"] {
 }
 
 /* End ÊLAN v4 — δ1 ─────────────────────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — δ2 — Bento Temporal (additive block, end of chrome.css)
+   ────────────────────────────────────────────────────────────────────────
+   Beacon: 📊 DATA_BEACON — same dashboard, attention shifts with the hour.
+   Cells declare data-temporal-priority="morning,afternoon"; the JS layer
+   stamps data-temporal-active="true" + data-temporal-axis="focal" on
+   matching cells. This stylesheet ONLY promotes — it never demotes
+   (inactive cells stay completely neutral). The existing bento layout
+   (b-4x1, b-2x2, b-1x1, etc.) is untouched; this is a transparent
+   emphasis layer that sits on top.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Active-cell emphasis — outline + lift + tinted box-shadow.
+   Uses the active world's --ember (hibr=red, naar=fire, dhahab=gold, ...)
+   so the cell glows in the personality of the page it lives on. */
+[data-temporal-priority][data-temporal-active="true"] {
+  position: relative;
+  outline: 1px solid color-mix(in oklch,
+    var(--ember, var(--accent, hsl(45 80% 50%))) 38%,
+    transparent);
+  outline-offset: -2px;
+  box-shadow:
+    0 8px 28px hsl(0 0% 0% / 0.10),
+    0 0 0 1px color-mix(in oklch,
+      var(--ember, var(--accent, hsl(45 80% 50%))) 20%,
+      transparent);
+  transform: translateY(-1px);
+  transition:
+    outline-color 480ms cubic-bezier(0.32, 0.72, 0.28, 1),
+    box-shadow   480ms cubic-bezier(0.32, 0.72, 0.28, 1),
+    transform    480ms cubic-bezier(0.32, 0.72, 0.28, 1);
+}
+
+/* Subtle ribbon — "الأهم الآن" — appears at top-end of the focal cell.
+   Pure CSS, no SVG, no emoji. Pseudo-element only; the underlying markup
+   is never modified by this stage. The ribbon respects RTL (top/inset-end)
+   and reads as decorative (aria-hidden via content: ""). */
+[data-temporal-priority][data-temporal-active="true"]::before {
+  content: "الأهم الآن";
+  position: absolute;
+  top: var(--s-2, 8px);
+  inset-inline-end: var(--s-3, 12px);
+  z-index: 2;
+  font-family: var(--voice-ui, var(--font-ui, system-ui));
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: color-mix(in oklch,
+    var(--ember, var(--accent, hsl(45 80% 50%))) 78%,
+    var(--ink, currentColor));
+  background: color-mix(in oklch,
+    var(--ember, var(--accent, hsl(45 80% 50%))) 14%,
+    transparent);
+  padding: 2px var(--s-2, 8px);
+  border-radius: var(--r-pill, 999px);
+  border: 1px solid color-mix(in oklch,
+    var(--ember, var(--accent, hsl(45 80% 50%))) 28%,
+    transparent);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-2px);
+  animation: elan-ribbon-in 520ms cubic-bezier(0.32, 0.72, 0.28, 1) forwards;
+  animation-delay: 80ms;
+}
+
+@keyframes elan-ribbon-in {
+  from { opacity: 0; transform: translateY(-2px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Per-world ribbon tonal adjustments — Hadeed/Tayyar/Naar dark surfaces
+   need a more luminous ribbon background to remain legible. */
+body[data-world="naar"]   [data-temporal-active="true"]::before,
+body[data-world="hadeed"] [data-temporal-active="true"]::before,
+body[data-world="tayyar"] [data-temporal-active="true"]::before,
+body[data-world="warsha"] [data-temporal-active="true"]::before,
+body[data-world="saloon"] [data-temporal-active="true"]::before {
+  background: color-mix(in oklch,
+    var(--ember, hsl(45 80% 50%)) 20%,
+    transparent);
+  color: var(--ink, currentColor);
+}
+
+/* Body data-temporal-slice hooks — let each world tint the slice
+   subtly so the dashboard reads its own time-of-day mood. These are
+   ambient page-level cues, not cell-level. */
+body[data-temporal-slice="morning"]   { --temporal-mood: 1.0; }
+body[data-temporal-slice="afternoon"] { --temporal-mood: 0.92; }
+body[data-temporal-slice="evening"]   { --temporal-mood: 0.85; }
+body[data-temporal-slice="night"]     { --temporal-mood: 0.8; }
+
+/* Reduced-motion guard — flatten the entrance animation + transition.
+   The visual emphasis (outline, tinted shadow, ribbon copy) remains —
+   it is signal, not motion. The emphasis simply appears at full strength
+   immediately, no slide-in. */
+@media (prefers-reduced-motion: reduce) {
+  [data-temporal-priority][data-temporal-active="true"] {
+    transition: none !important;
+    transform: none !important;
+  }
+  [data-temporal-priority][data-temporal-active="true"]::before {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Forced-colors / high-contrast — strip tinted shadows + tinted ribbon
+   bg; rely on system Highlight color for the outline and ButtonText for
+   the ribbon copy. Signal preserved, system colours respected. */
+@media (forced-colors: active) {
+  [data-temporal-priority][data-temporal-active="true"] {
+    outline: 2px solid Highlight !important;
+    box-shadow: none !important;
+  }
+  [data-temporal-priority][data-temporal-active="true"]::before {
+    background: Canvas !important;
+    color: ButtonText !important;
+    border-color: ButtonText !important;
+  }
+}
+
+/* Print — hide the ribbon entirely; outline collapses to 1px hairline.
+   Print should be a calm document, not a UI. */
+@media print {
+  [data-temporal-priority][data-temporal-active="true"]::before {
+    display: none !important;
+  }
+  [data-temporal-priority][data-temporal-active="true"] {
+    outline: 1px solid var(--ink, CanvasText) !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+}
+
+/* End ÊLAN v4 — δ2 ─────────────────────────────────────────────────── */

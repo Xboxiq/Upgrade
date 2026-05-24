@@ -133,3 +133,6 @@ import './js/elan/world-saloon.js';
 
 // ÊLAN v4 — δ1: Magnetic Sidebar (Pillar δ KINETIC SHELL — Stage 1 of 6)
 import './js/elan/sidebar-magnetic.js';
+
+// ÊLAN v4 — δ2: Bento Temporal (data-priority hours → focal cell emphasis)
+import './js/elan/bento-temporal.js';
