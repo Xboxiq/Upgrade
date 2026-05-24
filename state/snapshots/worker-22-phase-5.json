@@ -1,0 +1,104 @@
+{
+  "pack": "v3",
+  "worker": "22",
+  "worker_name": "RITUAL_UI",
+  "phase_completed": 5,
+  "phases_total": 6,
+  "branch": "worker-22-devotio-p5",
+  "files_touched": [
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "lines_added_total": 418,
+  "lines_added_css": 231,
+  "lines_added_js": 187,
+  "lines_deleted": 0,
+  "tokens_added": [
+    "--rit-atmo-veil",
+    "--rit-atmo-tint-shift",
+    "--rit-atmo-leading-shift",
+    "--rit-atmo-name"
+  ],
+  "atmospheres_added": [
+    { "id": "dawn",     "ar": "فَجْر",   "range_hours": "04:30 - 07:00", "tint_palette": "lapis + pearl",   "leading_shift": "-0.02em" },
+    { "id": "forenoon", "ar": "ضُحى",   "range_hours": "07:00 - 13:00", "tint_palette": "saffron + marble", "leading_shift": "-0.01em" },
+    { "id": "asr",      "ar": "عَصْر",   "range_hours": "13:00 - 17:00", "tint_palette": "henna + saffron",  "leading_shift": "0em"     },
+    { "id": "maghrib",  "ar": "مَغْرِب", "range_hours": "17:00 - 19:30", "tint_palette": "coral + henna",    "leading_shift": "+0.005em"},
+    { "id": "isha",     "ar": "عِشاء",  "range_hours": "19:30 - 04:30", "tint_palette": "mihrab + indigo",  "leading_shift": "+0.01em" }
+  ],
+  "fonts_added_offline": [],
+  "css_blocks_added": [
+    "5 default --rit-atmo-* tokens",
+    "5 atmosphere blocks (body[data-rit-time=X])",
+    "5 [data-theme=light] softening overrides (W12 P2 Linen-Bone sanctity)",
+    "body[data-rit-time]:not(default)::after fixed veil layer (z-index:-1, 1200ms transition)",
+    "tracking shift binding on .tas-voice-body/-quote/-body-lead (1500ms ease)",
+    "glass/bento surface atmospheric tint overlay (1200ms ease)",
+    "reduced-transparency guard (veil flattens to solid tint)",
+    "reduced-motion guard (transitions:none)",
+    "print guard (veil display:none + tracking reset + glass tint cleared)"
+  ],
+  "js_apis_added": [
+    "Upg.ritual.atmosphere.detect()",
+    "Upg.ritual.atmosphere.apply(atmoId)",
+    "Upg.ritual.atmosphere.set(atmoId)",
+    "Upg.ritual.atmosphere.clearOverride()",
+    "Upg.ritual.atmosphere.refresh()",
+    "Upg.ritual.atmosphere.disable()",
+    "Upg.ritual.atmosphere.enable()",
+    "Upg.ritual.atmosphere.status()",
+    "Upg.ritual.atmosphere.list()",
+    "Upg.ritual.atmosphere.listArabic()"
+  ],
+  "events_dispatched": [
+    "upg:ritual:atmosphere:change (detail: { atmosphere, ar })"
+  ],
+  "localStorage_keys_used": [
+    "upg_ritual_atmo_disabled",
+    "upg_ritual_atmo_override"
+  ],
+  "auto_triggers": [
+    "DOMContentLoaded (or immediate if already loaded)",
+    "setInterval 20-minute refresh",
+    "visibilitychange (tab-return + wake-from-sleep)"
+  ],
+  "a11y_guards": [
+    "@media (prefers-reduced-motion: reduce) → all transitions:none",
+    "@media (prefers-reduced-transparency: reduce) → veil flattens to solid tint",
+    "@media print → veil + tracking + glass tint disabled"
+  ],
+  "sacred_preserved": {
+    "pages_count": 14,
+    "qcalc_count": 391,
+    "upg_top_level_apis": 27,
+    "google_fonts": 0,
+    "chr_tokens": 518,
+    "tint_tokens": 198,
+    "voice_tokens": 263,
+    "reduced_motion_guards_before": 61,
+    "reduced_motion_guards_after": 62,
+    "phases_1_2_3_4_iifes_untouched": true,
+    "w12_p2_linen_bone_light_theme_untouched": true,
+    "w21_p2_mihrab_body_before_veil_intact": true,
+    "w16_p1_life_ambient_token_names_preserved": true,
+    "w20_voice_tokens_consumed_read_only": true,
+    "html_changes": 0,
+    "audio_assets_added": 0,
+    "cdn_added": 0
+  },
+  "devotion_notes": "الواجهة الآن تَحس وقتها. الفجر يَنشَر ضوءاً أزرق نَدِيّاً فوق الـ chrome. الضحى يَلمَع بذهب الزعفران. العصر يَدفأ بحُمرة الحناء. المغرب يَتلَفَّح بقرمز المرجان. العشاء يَسكُن في عُمق المحراب. التراكم في الـ tracking يقول صراحة: الفجر = نشاط (-0.02em)، العشاء = تأمل (+0.01em). الـ veil يَنتقِل في 1200ms — لا فلاش، لا قطع. والـ Linen-Bone النهاري يَلبَس الـ atmospheres برِقّة (drop one chr-* tier) كي لا يَكسِر طُهر الورق.",
+  "offline_check": {
+    "external_requests": 0,
+    "google_fonts_links": 0,
+    "cdn_imports": 0,
+    "audio_files": 0
+  },
+  "sanity_probe_results": {
+    "data_rit_time_selectors_in_css": 15,
+    "rit_atmo_tokens_in_css": 33,
+    "ATMOSPHERES_const_refs_in_js": 12,
+    "Upg_ritual_atmosphere_refs_in_js": 3,
+    "upg_apis_top_level": 27
+  },
+  "next_action": "Continue Worker 22 Phase 6 — Aura Deepening (final phase, closes RITUAL UI 6/6)"
+}

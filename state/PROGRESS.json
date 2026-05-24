@@ -1,9 +1,27 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-24T18:00:00Z",
+  "last_updated": "2026-05-24T19:30:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
+    "pack": "v3",
+    "worker": "22",
+    "worker_name": "RITUAL_UI",
+    "phase": 5,
+    "phases_total": 6,
+    "phase_order": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "branch": "worker-22-devotio-p5",
+    "status": "completed",
+    "blocker": null
+  },
+  "previous": {
     "pack": "v3",
     "worker": "22",
     "worker_name": "RITUAL_UI",
@@ -18,38 +36,20 @@
       "6"
     ],
     "branch": "worker-22-devotio-p4",
-    "status": "completed",
-    "blocker": null
-  },
-  "previous": {
-    "pack": "v3",
-    "worker": "22",
-    "worker_name": "RITUAL_UI",
-    "phase": 1,
-    "phases_total": 6,
-    "phase_order": [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6"
-    ],
-    "branch": "worker-22-devotio-p1-fix",
     "status": "merged",
-    "merged_pr": 94,
-    "blocker": null,
-    "fix_notes": "Phase 1 originally shipped with lines_added=0 and broken keyframe names. Fix branch worker-22-devotio-p1-fix replaced broken CSS+JS with full spec-compliant implementation (8 keyframes, 15 tokens, POETRY_LINES const, status()+stop() API, reduced-motion + reduced-transparency + print guards, legacy storage migration). PR #94 merged into main."
+    "merged_pr": 95,
+    "blocker": null
   },
   "before_previous": {
     "pack": "v3",
     "worker": "22",
     "worker_name": "RITUAL_UI",
-    "phase": 3,
+    "phase": 1,
     "phases_total": 6,
-    "branch": "worker-22-devotio-p3",
-    "status": "completed",
-    "merged_pr": null
+    "branch": "worker-22-devotio-p1-fix",
+    "status": "merged",
+    "merged_pr": 94,
+    "fix_notes": "Phase 1 originally shipped with lines_added=0 and broken keyframe names. Fix branch worker-22-devotio-p1-fix replaced broken CSS+JS with full spec-compliant implementation. PR #94 merged into main."
   },
   "completed_phases": [
     {
@@ -758,9 +758,16 @@
       "title": "Inkpot Feedback — APPEND 6 --rit-ink-* tokens (duration 420ms / easing cubic-bezier(0.4,0,0.2,1) / color routed to --color-tint via color-mix in oklch / soft 25% / spread-size 220% / kalam-thickness 2px) + APPEND 3 keyframes (rit-ink-spread radial 0→220% with opacity 0.7→0.45→0 / rit-ink-kashida-pull horizontal stretch 0→100% width with opacity 0.9→0.7→0 / rit-ink-kalam-stroke diagonal 135deg sweep with bg-position 100%→50%→0%) + APPEND 3 base ::before/::after rules with [data-rit-ink=\"<variant>\"] + .rit-ink-<variant> class aliases + container setup (position:relative + overflow:hidden + isolation:isolate) + child z-index:1 elevation rule + APPEND auto-routing cascade for [data-rit-ink=\"auto\"] (kalam-stroke pages: callcenter/lab/negotiation/programming / kashida-pull pages: psych/eq/hrmastery/accounting/accountmgr / default ink-spread for the rest) with kalam pages overriding ::before geometry + kashida pages hiding default ::before via display:none + APPEND .rit-ink-bare opt-out class (animation:none !important on host + ::before + ::after) + reduced-motion guard (animation/transition-duration capped to 80ms + rit-ink-spread keyframe overridden to opacity 0.4 + width/height 50% so flash is genuinely instant) + @media print guard (display:none + animation:none on all 5 pseudo-element selectors) + Discipline comment block (8 rules) + APPEND ~214 JS lines: idempotent IIFE guarded by window.Upg.ritual._inkpotInstalled / VARIANTS frozen ['ink-spread','kashida-pull','kalam-stroke','auto'] / 16 PERSONALITY_INK_VARIANTS routings (dashboard ink / callcenter kalam / fieldsales ink / accountmgr kashida / social ink / lab kalam / psych kashida / eq kashida / negotiation kalam / customercare ink / programming kalam / accounting kashida / phonerepair ink / hrmastery kashida / myprogress ink / curriculum ink) / getCurrentPersonality() walks visible section.page → body[data-page-personality] → location.hash fallback / resolveVariant(rawVariant) returns explicit variant or routes 'auto' through personality map / trigger(el, e) computes bounding rect + sets --rit-ink-x/--rit-ink-y custom props (percentage of host) + computes spread size as max(width, height) * 2.2 → --rit-ink-size + reflects resolved variant on data-rit-ink (except 'auto' which is kept so per-personality cascade applies) + double rAF reset (removeAttribute → forced reflow → setAttribute('data-rit-ink-active', 'true')) + per-element timer (el._ritInkTimer) cleared and reset to 500ms cleanup / attachToInteractive(root?) querySelectorAll on 6 INTERACTIVE_SELECTORS (button / a[role=button] / .bento-card / .qcalc-button / .cath-card / [data-cmd]) + skips .rit-ink-bare hosts + only adds data-rit-ink=\"auto\" if missing + returns count / single delegated document click listener (passive, capture:false) + .closest('[data-rit-ink]') traversal + bare-class skip / DOMContentLoaded init + upg:nav:change 30ms re-sweep / MutationObserver subtree+childList on document.body for lazy-injected interactives + try/catch fallback for legacy environments / Upg.ritual.inkpot frozen surface (trigger/attach/listVariants/personalityMap (deep-copy)/setPersonalityVariant (validates variant ≠ 'auto')/resolveFor) + window.Upg.ritual._inkpotInstalled = true. Sacred preserved 100% (14 pages / 391 qcalc / 27 Upg.* top-level APIs unchanged — Upg.ritual.inkpot is sub-namespace under existing Upg.ritual created in P1 / 0 google fonts / 518 chr-* tokens (was 516, +2 from --chr-lapis-500 fallback in tokens) / 198 --tint-* tokens / Phases 1+2+3 IIFEs untouched / W14 Upg.transition.run signature intact / no HTML changes / no audio assets / no CDN). 522 net lines added (308 CSS + 214 JS, 0 deletions).",
       "branch": "worker-22-devotio-p4",
       "lines_added": 522
+    },
+    {
+      "worker": "22",
+      "phase": 5,
+      "title": "Time-of-Day Atmospheres — APPEND 4 default --rit-atmo-* tokens (veil/tint-shift/leading-shift/name) + 5 atmosphere blocks (body[data-rit-time=dawn|forenoon|asr|maghrib|isha]) each defining 5 tokens (--rit-atmo-name + --rit-atmo-veil radial-gradient + --rit-atmo-tint-shift overlay + --life-ambient-from/to W16+W21 reroute + --rit-atmo-leading-shift -0.02em→+0.01em vibrant→contemplative arc) + 5 [data-theme=light] softening overrides (chr-* stops dropped one tier for Linen-Bone sanctity W12 P2) + body[data-rit-time]:not(default)::after fixed veil layer (z-index:-1, mix-blend-mode:normal to avoid W21 P2 mihrab body::before clash, 1200ms ease-in-out background transition) + tracking shift binding on .tas-voice-body/.tas-voice-quote/.tas-voice-body-lead (calc tracking-body + atmo-leading-shift, 1500ms ease) + glass surface tint shift on .glass/.glass-card/.bento-card (linear-gradient overlay, 1200ms ease) + reduced-transparency guard (veil flattens to solid tint, no gradient) + reduced-motion guard (all transitions:none) + print guard (veil display:none + letter-spacing reset + glass tint cleared) + Discipline comment block (8 rules) + APPEND ~187 JS lines: idempotent IIFE guarded by Upg.ritual._atmosphereInstalled / frozen ATMOSPHERES catalogue (5 entries, ar names, decimal-hour ranges with isha midnight wrap [19.5, 28.5]) / detectAtmosphere() walks ranges with wrap-aware logic / safeGet/safeSet/safeRemove localStorage helpers (try/catch swallowed for legacy environments) / apply(atmoId) idempotent body attr set + upg:ritual:atmosphere:change CustomEvent dispatch / setOverride/clearOverride/refresh/disable/enable/status/list/listArabic public surface / DOMContentLoaded auto-fire (or immediate if already loaded) / setInterval refresh every 20 minutes (handles maghrib→isha transitions mid-session) / visibilitychange refresh on tab-return + sleep-wake / Object.frozen Upg.ritual.atmosphere surface (10 methods) preserving Phases 1-4 verbatim. Sacred preserved 100% (14 pages / 391 qcalc / 27 Upg.* top-level APIs unchanged — atmosphere is sub-namespace under Upg.ritual created in P1 / 0 google fonts / 518 chr-* tokens / 198 --tint-* tokens / W12 P2 Linen-Bone Light theme verbatim untouched / W21 P2 mihrab body::before veil intact / W16 P1 --life-ambient-* token names preserved (only values reroute under [data-rit-time]) / W20 voice tokens consumed read-only / Phases 1+2+3+4 IIFEs untouched / no HTML changes / no audio assets / no CDN). 418 net lines added (231 CSS + 187 JS, 0 deletions).",
+      "branch": "worker-22-devotio-p5",
+      "lines_added": 418
     }
   ],
-  "next_action": "Continue Worker 22 Phase 5 — Time-of-Day (5 atmospheres: Dawn/Forenoon/Asr/Maghrib/Isha)",
+  "next_action": "Continue Worker 22 Phase 6 — Aura Deepening (extend W16 P6 auras with chr-* + ritual tie-in + Upg.ritual API + per-personality choreography)",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
