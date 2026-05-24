@@ -889,3 +889,22 @@ KINETIC SHELL on a fresh branch.
 | commit | 64086f6 |
 | sacred_preserved | 14 pages, 16 sections, Upg.* APIs intact |
 | forbidden_violations | 0 |
+
+
+## δ2 — Bento Dashboard — 2026-05-24
+
+| Key | Value |
+|-----|-------|
+| container_type | 2 (inline-size + container-name) |
+| axis_types | 3 (focal/supporting/marginalia) |
+| world_overrides | 6 (naar/nada/dhahab/tayyar/warsha/saloon) |
+| data_priority_cells | 7 |
+| time_aware_logic | getHours() → 4 slots (morning/afternoon/evening/night) |
+| reduced_motion_guard | yes |
+| toy_svg | 0 |
+| emoji_in_markup | 0 |
+| lines_added | 277 (135 CSS + 105 JS + 37 augments) |
+| branch | elan-delta-kinetic-shell |
+| commit | aa1c978 |
+| sacred_preserved | 14 pages, #cath-skill-grid, #cath-activity-list, #v12Heatmap, #v12ChallengeLevel, #v12ChallengeBody, 4× data-cath-stat |
+| forbidden_violations | 0 |
