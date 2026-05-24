@@ -113,3 +113,20 @@ import './js/_compat.js';
 
 // ÊLAN v4 — β3: format helpers (kashida-thousands in Dhahab world)
 import './js/elan/format.js';
+
+// ÊLAN v4 — γ1: world controller (mirrors active page → body[data-world])
+import './js/elan/world.js';
+
+// ÊLAN v4 — γ2: Hibr world — ink-drying CTA beacon
+import './js/elan/world-hibr.js';
+
+// ÊLAN v4 — γ3: Naar world — spark hover beacon
+import './js/elan/world-naar.js';
+import './js/elan/world-nada.js';
+import './js/elan/world-hadeed.js';
+import './js/elan/world-dhahab.js';
+import './js/elan/world-tayyar.js';
+// ÊLAN v4 — γ8: Warsha world (workshop bench beacon + long-press utility)
+import './js/elan/world-warsha.js';
+// ÊLAN v4 — γ9: Saloon world (meta-mirror — closes Pillar γ)
+import './js/elan/world-saloon.js';

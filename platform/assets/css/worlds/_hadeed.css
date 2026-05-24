@@ -1,7 +1,267 @@
-/* ÊLAN v4 — α2 — World placeholder: حَديد (Hadeed) — Iron
-   Pages: negotiation, fieldsales
-   Filled in γ5. See WORLDS_ATLAS.md § World 4 for spec. */
+/* ────────────────────────────────────────────────────────────────────────
+   ÊLAN v4 — γ5 — World 4: حَديد (Hadeed) — Iron
+   ────────────────────────────────────────────────────────────────────────
+   Inspiration: Lebanese cinema posters 1950-70 (Khoury studio) + Beirut
+                modernist typography + stamped-iron bureaucratic authority.
+   Pages:       negotiation, fieldsales
+   Voice:       29LT Bukra (display) + Vazirmatn (body) + Almarai (accent)
+   Motion:      cubic-bezier(0.85, 0, 0.15, 1) — metallic snap
+   ─────────────────────────────────────────────────────────────────────── */
+
+
+/* ── Tokens ──────────────────────────────────────────────────────────── */
 
 [data-world="hadeed"] {
-  /* Awaiting γ5 stage. */
+  /* Anchor — polished iron, blue-black cold */
+  --anchor-bg: hsl(220 6% 14%);
+  --anchor-1:  hsl(220 8% 18%);
+  --anchor-2:  hsl(220 8% 22%);
+  --anchor-3:  hsl(220 10% 28%);
+
+  /* Ink — warm copper on cold iron */
+  --ink:       hsl(35 22% 92%);
+  --ink-muted: hsl(35 14% 68%);
+  --ink-faint: hsl(35 10% 48%);
+
+  /* Lines — sharp iron edges */
+  --line:        hsl(220 10% 28%);
+  --line-strong: hsl(220 12% 36%);
+
+  /* Hadeed accents — cinema crimson + neon blue marble */
+  --ember: hsl(355 75% 52%);   /* قاني سينما */
+  --focus: hsl(195 90% 55%);   /* أزرق نيون رخامي */
+  --accent: var(--ember);
+
+  /* Motion fingerprint — hard snap, no cushion */
+  --ease-hadeed:     cubic-bezier(0.85, 0, 0.15, 1);
+  --duration-hadeed: 220ms;
+  --duration-hadeed-sweep: 80ms;
+  --duration-hadeed-stamp: 200ms;
+
+  /* Shadows — hard-edged cinema poster drop */
+  --shadow-sm: 0 1px 0 hsl(220 20% 4% / 0.5);
+  --shadow-md: 3px 3px 0 hsl(220 20% 4% / 0.6);
+  --shadow-lg: 6px 6px 0 hsl(220 20% 4% / 0.7);
+  --shadow-xl: 10px 10px 0 hsl(220 20% 4% / 0.8);
+
+  /* Focus ring — neon marble, cold and precise */
+  --ring: 0 0 0 2px var(--focus);
+
+  /* Bind world tokens to platform contract */
+  --color-bg:           var(--anchor-bg);
+  --color-surface-0:    var(--anchor-bg);
+  --color-surface-1:    var(--anchor-1);
+  --color-surface-2:    var(--anchor-2);
+  --color-surface-3:    var(--anchor-3);
+  --color-text:         var(--ink);
+  --color-text-muted:   var(--ink-muted);
+  --color-text-faint:   var(--ink-faint);
+  --color-border:       var(--line);
+  --color-border-strong:var(--line-strong);
+  --color-brand:        var(--ember);
+  --color-tint:         var(--ember);
+}
+
+
+/* ── Surfaces — hard poster-board cuts ───────────────────────────────── */
+
+[data-world="hadeed"] .card,
+[data-world="hadeed"] .panel,
+[data-world="hadeed"] .ql-glass {
+  background: var(--anchor-1);
+  border: 1px solid var(--line);
+  border-radius: var(--r-1);
+  box-shadow: var(--shadow-md);
+}
+
+
+/* ── Typography — heavy Bukra for authority ──────────────────────────── */
+
+body[data-world="hadeed"],
+[data-world="hadeed"] .page-content,
+[data-world="hadeed"] .h-lede,
+[data-world="hadeed"] .type-body {
+  font-family: var(--voice-body);
+  line-height: var(--lead-normal);
+  color: var(--color-text);
+}
+
+[data-world="hadeed"] h1.is-hero,
+[data-world="hadeed"] [data-page-personality]:is(#page-negotiation, #page-fieldsales) h1 {
+  font-family: var(--voice-display-h, "29LT Bukra", sans-serif);
+  font-weight: 900;
+  letter-spacing: var(--track-tight);
+  line-height: var(--lead-tight);
+  color: var(--ink);
+  text-transform: none;
+}
+
+
+/* ── Selection — crimson stamp on iron ──────────────────────────────── */
+
+body[data-world="hadeed"] ::selection {
+  background-color: color-mix(in oklch, var(--ember) 45%, transparent);
+  color: var(--anchor-bg);
+}
+
+
+/* ── Buttons — cinema-poster CTA blocks ──────────────────────────────── */
+
+[data-world="hadeed"] .btn,
+[data-world="hadeed"] .btn-primary {
+  border-radius: var(--r-1);
+  border: 2px solid var(--ember);
+  background: transparent;
+  color: var(--ember);
+  font-family: var(--voice-accent, "Almarai", sans-serif);
+  font-weight: 700;
+  padding: var(--s-2) var(--s-5);
+  transition:
+    background-color var(--duration-hadeed) var(--ease-hadeed),
+    color            var(--duration-hadeed) var(--ease-hadeed),
+    box-shadow       var(--duration-hadeed) var(--ease-hadeed);
+}
+
+[data-world="hadeed"] .btn:hover,
+[data-world="hadeed"] .btn-primary:hover {
+  background: var(--ember);
+  color: var(--anchor-bg);
+  box-shadow: var(--shadow-md);
+}
+
+[data-world="hadeed"] .btn:focus-visible,
+[data-world="hadeed"] .btn-primary:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+
+/* ── Beacon 🤚 INTERACTION_BEACON — Iron Stamp ────────────────────────────
+   Practice buttons (.practice-tried-btn) respond with a stamp flip:
+   press → flip 180° horizontally → reveal toggled state. Mechanical,
+   decisive, no bounce, no spring.
+
+   Sales framework rows (.sf-row) respond with a red sweep line (RTL,
+   80ms) that crosses the row on activation, referencing split-flap
+   departure-board signage from 1960s Beirut airport/cinema.
+
+   Reference avoided: Forbidden #13 spring-bounce, #15 generic modal.
+   Inspired by:       WORLDS_ATLAS Hadeed Beacon Identity — split-flap
+                      snap + red sweep RTL 80ms.
+   ─────────────────────────────────────────────────────────────────────── */
+
+/* ── Stamp flip on practice buttons ─────────────── */
+
+[data-world="hadeed"] .practice-tried-btn {
+  perspective: 600px;
+  transform-style: preserve-3d;
+  transition: transform var(--duration-hadeed-stamp) var(--ease-hadeed);
+}
+
+[data-world="hadeed"] .practice-tried-btn.is-stamping {
+  transform: rotateY(90deg);
+}
+
+[data-world="hadeed"] .practice-tried-btn[aria-pressed="true"] {
+  background: color-mix(in oklch, var(--ember) 15%, var(--anchor-1));
+  border-color: var(--ember);
+  color: var(--ember);
+}
+
+/* ── Red sweep on framework rows ────────────────── */
+
+[data-world="hadeed"] .sf-row {
+  position: relative;
+  overflow: hidden;
+}
+
+[data-world="hadeed"] .sf-row::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to left,
+    color-mix(in oklch, var(--ember) 40%, transparent) 0%,
+    transparent 100%
+  );
+  transform: translateX(100%);
+  pointer-events: none;
+  transition: transform var(--duration-hadeed-sweep) var(--ease-hadeed);
+}
+
+[data-world="hadeed"] .sf-row.is-swept::after {
+  transform: translateX(0);
+}
+
+[data-world="hadeed"] .sf-row:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+
+/* ── Progress bars — crimson iron fill ───────────────────────────────── */
+
+[data-world="hadeed"] .page-mastery-progress-fill {
+  background: linear-gradient(to inline-end, var(--ember), var(--focus));
+  border-radius: var(--r-1);
+  transition: width 300ms var(--ease-hadeed);
+}
+
+
+/* ── Cinema poster diagonal accent on page-h ─────────────────────────── */
+
+[data-world="hadeed"] .page-h {
+  position: relative;
+  isolation: isolate;
+}
+
+[data-world="hadeed"] .page-h::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 20px,
+    color-mix(in oklch, var(--line) 30%, transparent) 20px,
+    color-mix(in oklch, var(--line) 30%, transparent) 21px
+  );
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-world="hadeed"] .page-h > * {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ── Reduced motion: instant state, no flip or sweep ─────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  [data-world="hadeed"] .practice-tried-btn {
+    transition-duration: 1ms;
+  }
+  [data-world="hadeed"] .practice-tried-btn.is-stamping {
+    transform: none;
+  }
+  [data-world="hadeed"] .sf-row::after {
+    transition-duration: 1ms;
+  }
+}
+
+
+/* ── No-JS fallback ──────────────────────────────────────────────────── */
+
+@supports selector(html:has(*)) {
+  body:not([data-world]):has(section.page.active[data-world="hadeed"]),
+  body:not([data-world]):has(section.page.is-active[data-world="hadeed"]) {
+    --color-bg:        hsl(220 6% 14%);
+    --color-surface-1: hsl(220 8% 18%);
+    --color-text:      hsl(35 22% 92%);
+    --color-tint:      hsl(355 75% 52%);
+    background-color:  hsl(220 6% 14%);
+    color:             hsl(35 22% 92%);
+  }
 }

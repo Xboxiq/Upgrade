@@ -1,7 +1,193 @@
-/* ÊLAN v4 — α2 — World placeholder: حِبر (Hibr) — Ink
-   Pages: dashboard, myprogress
-   Filled in γ2. See WORLDS_ATLAS.md § World 1 for spec. */
+/* ────────────────────────────────────────────────────────────────────────
+   ÊLAN v4 — γ2 — World 1: حِبر (Hibr) — Ink
+   ────────────────────────────────────────────────────────────────────────
+   Inspiration: Najaf manuscript pages + Iraqi Naskh + Tahbeer paper.
+   Pages:       dashboard, myprogress
+   Voice:       Boutros Modern Kufi (display) + Markazi Text (body)
+   Motion:      cubic-bezier(0.5, 0, 0.5, 1) — the unhurried قَلَم النَّسخ
+   ─────────────────────────────────────────────────────────────────────── */
+
+
+/* ── Tokens ──────────────────────────────────────────────────────────── */
 
 [data-world="hibr"] {
-  /* Awaiting γ2 stage. */
+  /* Anchor — Tahbeer paper (warm linen, NOT bone-white) */
+  --anchor-bg: hsl(36 18% 92%);
+  --anchor-1:  hsl(36 14% 88%);
+  --anchor-2:  hsl(36 12% 82%);
+  --anchor-3:  hsl(36 14% 76%);
+
+  /* Ink — natural midnight, not flat black */
+  --ink:       hsl(225 35% 8%);
+  --ink-muted: hsl(225 22% 28%);
+  --ink-faint: hsl(225 14% 50%);
+
+  /* Ruling and rules */
+  --line:        hsl(36 14% 76%);
+  --line-strong: hsl(36 16% 64%);
+
+  /* Hibr accents — only two, by Doctrine §٢.٤ "Chromatic Sovereignty" */
+  --ember: hsl(0 65% 32%);    /* أحمر شنقريا — manuscript red */
+  --focus: hsl(45 80% 35%);   /* ذهب مخطوط — illumination gold */
+  --accent: var(--ember);
+
+  /* Motion fingerprint */
+  --ease-hibr:     cubic-bezier(0.5, 0, 0.5, 1);
+  --duration-hibr: 320ms;
+  --duration-hibr-dry: 600ms;
+
+  /* Shadows — paper-warm, not blue-grey */
+  --shadow-sm: 0 1px 2px  hsl(225 35% 8% / 0.06);
+  --shadow-md: 0 4px 12px hsl(225 35% 8% / 0.09);
+  --shadow-lg: 0 14px 32px hsl(225 35% 8% / 0.12);
+  --shadow-xl: 0 28px 60px hsl(225 35% 8% / 0.15);
+
+  /* Focus ring — gold leaf, audible without being loud */
+  --ring: 0 0 0 3px color-mix(in oklch, var(--focus) 36%, transparent);
+
+  /* Bind world tokens to the platform's base color contract */
+  --color-bg:           var(--anchor-bg);
+  --color-surface-0:    var(--anchor-bg);
+  --color-surface-1:    var(--anchor-1);
+  --color-surface-2:    var(--anchor-2);
+  --color-surface-3:    var(--anchor-3);
+  --color-text:         var(--ink);
+  --color-text-muted:   var(--ink-muted);
+  --color-text-faint:   var(--ink-faint);
+  --color-border:       var(--line);
+  --color-border-strong:var(--line-strong);
+  --color-brand:        var(--ember);
+  --color-tint:         var(--ember);
+}
+
+
+/* ── Beacon ✍️ TYPOGRAPHIC_BEACON — Ink-drying CTA ───────────────────────
+   When a "completion" CTA is acted on, the LABEL fills with ink from the
+   first letter to the last over var(--duration-hibr-dry). No checkmark,
+   no toast — the success IS the writing.
+
+   Selectors: .btn-success-action  ·  [data-cta="completed"]  ·  [data-ink-dry]
+   Trigger:   add `.is-drying` (or `data-ink-state="drying"`) — JS does this.
+   RTL-safe:  the gradient direction matches `direction:` (logical sweep).
+   ─────────────────────────────────────────────────────────────────────── */
+
+[data-world="hibr"] .btn-success-action,
+[data-world="hibr"] [data-cta="completed"],
+[data-world="hibr"] [data-ink-dry] {
+  position: relative;
+  font-family: var(--voice-display);
+  /* The label starts as a transparent silhouette so the gradient mask
+     can render the strokes one-by-one. */
+  background-image: linear-gradient(
+    to inline-end,
+    var(--ink)   0%,
+    var(--ink)   0%,
+    color-mix(in oklch, var(--ink) 18%, transparent) 0%,
+    color-mix(in oklch, var(--ink) 18%, transparent) 100%
+  );
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
+  transition: background-image var(--duration-hibr-dry) var(--ease-hibr);
+}
+
+[data-world="hibr"] .btn-success-action.is-drying,
+[data-world="hibr"] [data-cta="completed"].is-drying,
+[data-world="hibr"] [data-ink-dry].is-drying,
+[data-world="hibr"] [data-ink-state="drying"] {
+  background-image: linear-gradient(
+    to inline-end,
+    var(--ink)   100%,
+    var(--ink)   100%,
+    color-mix(in oklch, var(--ink) 18%, transparent) 100%,
+    color-mix(in oklch, var(--ink) 18%, transparent) 100%
+  );
+}
+
+/* Reduced-motion: the beacon still happens — the writer is fast, not absent. */
+@media (prefers-reduced-motion: reduce) {
+  [data-world="hibr"] .btn-success-action,
+  [data-world="hibr"] [data-cta="completed"],
+  [data-world="hibr"] [data-ink-dry] {
+    transition-duration: 1ms;
+  }
+}
+
+
+/* ── Manuscript ruling on cards (subtle, paper-grain) ────────────────── */
+
+[data-world="hibr"] .card,
+[data-world="hibr"] .panel,
+[data-world="hibr"] .ql-glass {
+  background-color: var(--anchor-1);
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+  position: relative;
+  isolation: isolate;
+}
+
+[data-world="hibr"] .card::before {
+  content: "";
+  position: absolute;
+  inset: 0 var(--s-4);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent calc(var(--lead-relaxed) * 1em - 1px),
+    color-mix(in oklch, var(--line) 60%, transparent) calc(var(--lead-relaxed) * 1em - 1px),
+    color-mix(in oklch, var(--line) 60%, transparent) calc(var(--lead-relaxed) * 1em)
+  );
+  opacity: 0.32;
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-world="hibr"] .card > * {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ── Body voice in the Hibr world ────────────────────────────────────── */
+
+body[data-world="hibr"],
+[data-world="hibr"] .page-content,
+[data-world="hibr"] .h-lede,
+[data-world="hibr"] .type-body {
+  font-family: var(--voice-body);
+  line-height: var(--lead-relaxed);
+  color: var(--color-text);
+}
+
+[data-world="hibr"] .hero-title,
+[data-world="hibr"] h1.is-hero,
+[data-world="hibr"] [data-page-personality]:is(#page-dashboard, #page-myprogress) h1 {
+  font-family: var(--voice-signature, var(--voice-display));
+  font-weight: 800;
+  letter-spacing: var(--track-snug);
+  line-height: var(--lead-tight);
+}
+
+
+/* ── Selection in the Hibr world: gold-leaf highlight (manuscript) ─── */
+
+body[data-world="hibr"] ::selection {
+  background-color: color-mix(in oklch, var(--focus) 28%, transparent);
+  color: var(--ink);
+}
+
+
+/* ── No-JS Beacon wiring — fill the :has() fallback declared in _index.css */
+
+@supports selector(html:has(*)) {
+  body:not([data-world]):has(section.page.active[data-world="hibr"]),
+  body:not([data-world]):has(section.page.is-active[data-world="hibr"]) {
+    --color-bg:        hsl(36 18% 92%);
+    --color-surface-1: hsl(36 14% 88%);
+    --color-text:      hsl(225 35% 8%);
+    --color-tint:      hsl(0 65% 32%);
+    background-color:  hsl(36 18% 92%);
+    color:             hsl(225 35% 8%);
+  }
 }

@@ -32,6 +32,21 @@
 @import url("./css/motion.css")    layer(components);
 
 @layer themes {
+/* ────────────────────────────────────────────────────────────────────────
+   ÊLAN v4 — γ1 — Themes superseded by Worlds (NON-DESTRUCTIVE NOTE)
+   ────────────────────────────────────────────────────────────────────────
+   The full [data-theme="light"|"dark"] cascade below is preserved as a
+   Sacred Asset (Manifesto §٥): legacy callers still set body[data-theme]
+   for accessibility presets and tests.
+
+   Pillar γ introduces an 8-world system that activates via
+   body[data-world="…"] (see worlds/_*.css). Worlds are imported AFTER
+   themes via tokens.css → so when both a theme and a world are present,
+   the world's tokens take precedence by source order.
+
+   Do not delete this layer. Worlds extend, themes remain.
+   ─────────────────────────────────────────────────────────────────────── */
+
 /* Off-White Premium (Stripe-grade — warm, not stark white) */
 :root[data-theme="light"],
 html[data-theme="light"],

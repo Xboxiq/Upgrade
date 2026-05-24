@@ -1,0 +1,87 @@
+/* ────────────────────────────────────────────────────────────────────────
+   ÊLAN v4 — γ1 — World Index + :has() Fallback (Beacon)
+   ────────────────────────────────────────────────────────────────────────
+   🏛 STRUCTURAL_BEACON
+
+   The world tokens (anchor, ink, ember, focus, voice, ease) are normally
+   activated by `body[data-world="…"]` — a small JS module mirrors the
+   active page's data-world onto body.
+
+   The beacon: the SAME tokens are also bound by the no-JS selector
+       body:has(section.page.active[data-world="…"])
+   which means the worlds activate from the DOM itself, with zero JS.
+   This is the difference between a theme switcher and a world *system*:
+   the system is true even when the runtime fails.
+
+   Reference avoided: Forbidden Library #14 — JS-driven theme switcher.
+   Inspired by:       Wild Card #6 — Müller-Brockmann grid (system shows itself).
+
+   This file ONLY wires the activation. Each world's actual palette /
+   voice / motion lives in worlds/_<name>.css and gets filled in γ2..γ9.
+   ─────────────────────────────────────────────────────────────────────── */
+
+/* ── 1. JS layer — body[data-world] is the canonical activator.
+      Already declared per-world in worlds/_<name>.css :
+        [data-world="hibr"] { … }
+      Nothing to do here for that path; it works today. */
+
+
+/* ── 2. No-JS Beacon — :has() fallback.
+      When body[data-world] hasn't been set yet (boot lag, JS off,
+      third-party page-render), the active <section.page> attribute
+      flows up the cascade through :has(). The 8 selectors below are
+      structural pre-declarations; γ2..γ9 will fill the bodies. */
+
+@supports selector(html:has(*)) {
+  body:not([data-world]):has(section.page.active[data-world="hibr"]),
+  body:not([data-world]):has(section.page.is-active[data-world="hibr"])    { /* filled by γ2 — HIBR */ }
+  body:not([data-world]):has(section.page.active[data-world="naar"]),
+  body:not([data-world]):has(section.page.is-active[data-world="naar"])    { /* filled by γ3 — NAAR */ }
+  body:not([data-world]):has(section.page.active[data-world="nada"]),
+  body:not([data-world]):has(section.page.is-active[data-world="nada"])    { /* filled by γ4 — NADA */ }
+  body:not([data-world]):has(section.page.active[data-world="hadeed"]),
+  body:not([data-world]):has(section.page.is-active[data-world="hadeed"])  { /* filled by γ5 — HADEED */ }
+  body:not([data-world]):has(section.page.active[data-world="dhahab"]),
+  body:not([data-world]):has(section.page.is-active[data-world="dhahab"])  { /* filled by γ6 — DHAHAB */ }
+  body:not([data-world]):has(section.page.active[data-world="tayyar"]),
+  body:not([data-world]):has(section.page.is-active[data-world="tayyar"])  { /* filled by γ7 — TAYYAR */ }
+  body:not([data-world]):has(section.page.active[data-world="warsha"]),
+  body:not([data-world]):has(section.page.is-active[data-world="warsha"])  { /* filled by γ8 — WARSHA */ }
+  body:not([data-world]):has(section.page.active[data-world="saloon"]),
+  body:not([data-world]):has(section.page.is-active[data-world="saloon"])  { /* filled by γ9 — SALOON */ }
+}
+
+
+/* ── 3. Smooth bridge between worlds.
+      A 280ms tween only on tokens that change — no layout, no paint
+      churn beyond what tokens already trigger.
+      Reduced-motion users get an instant swap. */
+
+@media (prefers-reduced-motion: no-preference) {
+  body[data-world] {
+    transition:
+      background-color 280ms cubic-bezier(0.16, 1, 0.3, 1),
+      color            280ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+
+/* ── 4. World system metadata (read by audits).
+      Exposed as inert custom properties so DevTools and Upg.world.audit
+      tooling can introspect the wiring without DOM probing. */
+
+:root {
+  --world-system:        "elan-v4";
+  --world-system-stage:  "γ1-foundation";
+  --world-count:         8;
+  --world-default:       "hibr";
+}
+
+
+/* ── 5. Legacy theme co-existence.
+      Pillar β preserved 14 Upg.* APIs; we keep the legacy
+      [data-theme="light"|"dark"] cascade intact. When BOTH a world
+      and a legacy theme are present, world wins (specificity ties
+      resolved by source order — worlds_*.css is imported AFTER themes
+      via tokens.css). This block is a comment, not a rule, but is
+      kept here for the audit trail. */

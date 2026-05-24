@@ -1,7 +1,314 @@
-/* ÊLAN v4 — α2 — World placeholder: صَالون (Saloon) — Salon
-   Pages: hrmastery
-   Filled in γ9. See WORLDS_ATLAS.md § World 8 for spec. */
+/* ────────────────────────────────────────────────────────────────────────
+   ÊLAN v4 — γ9 — World 8: صَالون (Saloon) — Salon
+   ────────────────────────────────────────────────────────────────────────
+   Inspiration : Mid-century Beirut salons (Camille Chamoun era 1958-66) +
+                 walnut-veneer and brushed-brass interiors + the way old
+                 mirrors reminded a visitor that they had arrived.
+   Pages       : hrmastery, accountmgr
+   Voice       : Boutros Modern Kufi (display) + Markazi Text (body) +
+                 Lateef (italic accent — for the mirror ribbon).
+   Motion      : cubic-bezier(0.4, 0.05, 0.2, 0.95) — wood + brass settle
+                 (380ms — slowest world easing in the Atlas).
+   ────────────────────────────────────────────────────────────────────────
+   🪞 META_BEACON — "The Salon Mirror"
+     The Surprise: a thin sticky brass ribbon at the top of every Saloon
+     page reads — in italic Lateef — the *most recent* creativity beacon
+     committed to the platform. The interface remembers itself. It does
+     not boast ("Powered by AI"); it observes ("آخر لقاء في الصالون: …").
+     The string is sourced from localStorage (set by world-saloon.js or by
+     any future beacon emitter via Upg.worlds.saloon.setLastBeacon),
+     falling back to a γ8-seeded baseline. Pure attribute consumption via
+     attr() means the CSS owns the chrome and JS owns the data.
+     Reference avoided  : #21 "Powered by AI" badge + #22 "Welcome back".
+     Wild-card inspired-by : #11 Mid-century Beirut salons.
+   ─────────────────────────────────────────────────────────────────────── */
+
+
+/* ── 1. Tokens ───────────────────────────────────────────────────────── */
 
 [data-world="saloon"] {
-  /* Awaiting γ9 stage. */
+  /* Anchor — burgundy room with low ceiling lamps */
+  --anchor-bg: hsl(8 28% 14%);
+  --anchor-1:  hsl(8 26% 18%);
+  --anchor-2:  hsl(8 24% 23%);
+  --anchor-3:  hsl(8 22% 28%);
+
+  /* Ink — ivory salon */
+  --ink:       hsl(38 28% 94%);
+  --ink-muted: hsl(38 18% 72%);
+  --ink-faint: hsl(38 12% 50%);
+
+  /* Lines — picture-rail edges */
+  --line:        hsl(8 22% 28%);
+  --line-strong: hsl(8 24% 38%);
+
+  /* Salon accents — brushed brass + parlor green */
+  --ember:  hsl(35 75% 58%);   /* نحاس مصقول */
+  --focus:  hsl(150 35% 50%);  /* أخضر رخامي */
+  --accent: var(--ember);
+
+  /* Mirror ribbon — translucent brass gradient */
+  --saloon-brass-1: hsl(35 75% 58%);
+  --saloon-brass-2: hsl(35 70% 48%);
+  --saloon-brass-3: hsl(35 80% 64%);
+
+  /* Motion fingerprint — settle of polished wood */
+  --ease-saloon:     cubic-bezier(0.4, 0.05, 0.2, 0.95);
+  --duration-saloon: 380ms;
+
+  /* Shadows — heavy room, light from the lamp */
+  --shadow-sm: 0 1px 2px hsl(8 30% 0% / 0.40);
+  --shadow-md:
+    0 4px 14px hsl(8 30% 0% / 0.45),
+    0 2px 4px hsl(8 30% 0% / 0.30);
+  --shadow-lg:
+    0 14px 36px hsl(8 30% 0% / 0.55),
+    0 6px 12px hsl(8 30% 0% / 0.35);
+  --shadow-xl:
+    0 28px 64px hsl(8 30% 0% / 0.65);
+
+  --ring: 0 0 0 3px color-mix(in oklch, var(--ember) 38%, transparent);
+
+  /* Bind world tokens to the platform contract */
+  --color-bg:           var(--anchor-bg);
+  --color-surface-0:    var(--anchor-bg);
+  --color-surface-1:    var(--anchor-1);
+  --color-surface-2:    var(--anchor-2);
+  --color-surface-3:    var(--anchor-3);
+  --color-text:         var(--ink);
+  --color-text-muted:   var(--ink-muted);
+  --color-text-faint:   var(--ink-faint);
+  --color-border:       var(--line);
+  --color-border-strong:var(--line-strong);
+  --color-brand:        var(--ember);
+  --color-tint:         var(--ember);
 }
+
+
+/* ── 2. Body voice ──────────────────────────────────────────────────── */
+
+[data-world="saloon"] body,
+[data-world="saloon"] .page-content,
+[data-world="saloon"] .page.active {
+  font-family: var(--voice-body);
+  color: var(--ink);
+  line-height: var(--lead-relaxed, 1.65);
+}
+
+[data-world="saloon"] :where(h1, h2, h3) {
+  color: var(--ink);
+}
+
+[data-world="saloon"] h1.is-hero,
+[data-world="saloon"] h1 {
+  font-family: var(--voice-display-l, var(--voice-display));
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: var(--track-loose, 0.02em);
+}
+
+
+/* ── 3. Chamfered cards (cut corners — not rounded) ──────────────────── */
+/* Eight-sided polygon clip evokes mid-century picture frames + chamfered
+   walnut joinery. NOT border-radius — the Atlas asks for cuts, not curves. */
+
+[data-world="saloon"] .card,
+[data-world="saloon"] .panel,
+[data-world="saloon"] .ql-glass {
+  background: linear-gradient(180deg, var(--anchor-1), var(--anchor-2));
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  box-shadow: var(--shadow-md);
+  padding: var(--s-5);
+  clip-path: polygon(
+    8px 0,
+    calc(100% - 8px) 0,
+    100% 8px,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    8px 100%,
+    0 calc(100% - 8px),
+    0 8px
+  );
+  transition:
+    box-shadow var(--duration-saloon) var(--ease-saloon),
+    transform  var(--duration-saloon) var(--ease-saloon);
+}
+
+[data-world="saloon"] .card:hover,
+[data-world="saloon"] .panel:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+}
+
+
+/* ── 4. Brass divider — between sections ─────────────────────────────── */
+
+[data-world="saloon"] .saloon-divider,
+[data-world="saloon"] hr.saloon,
+[data-world="saloon"] [data-divider="brass"] {
+  block-size: 1px;
+  border: 0;
+  margin-block: var(--s-6);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in oklch, var(--ember) 30%, transparent) 18%,
+    var(--ember) 50%,
+    color-mix(in oklch, var(--ember) 30%, transparent) 82%,
+    transparent 100%
+  );
+}
+
+
+/* ── 5. THE BEACON — Mirror ribbon (sticky meta-banner) ──────────────── */
+
+[data-world="saloon"] .saloon-mirror {
+  position: sticky;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-block-size: 28px;
+  padding-block: 4px;
+  padding-inline: var(--s-5);
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      color-mix(in oklch, var(--saloon-brass-1) 12%, transparent) 12%,
+      color-mix(in oklch, var(--saloon-brass-2) 22%, transparent) 50%,
+      color-mix(in oklch, var(--saloon-brass-1) 12%, transparent) 88%,
+      transparent 100%
+    );
+  border-block-end: 1px solid color-mix(in oklch, var(--ember) 32%, transparent);
+  font-family: var(--voice-quote, "Lateef", serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(11px, 0.78rem, 13px);
+  letter-spacing: var(--track-loose, 0.02em);
+  color: color-mix(in oklch, var(--ink) 65%, var(--ember));
+  user-select: none;
+  pointer-events: none; /* observation, not interaction */
+}
+
+[data-world="saloon"] .saloon-mirror::before {
+  content: "";
+  inline-size: 6px;
+  block-size: 6px;
+  border-radius: 50%;
+  background: var(--ember);
+  box-shadow: 0 0 8px color-mix(in oklch, var(--ember) 80%, transparent);
+  flex: 0 0 auto;
+  opacity: 0.75;
+}
+
+[data-world="saloon"] .saloon-mirror[data-empty="true"] {
+  /* Pre-first-beacon greeting (intentionally non-celebratory). */
+  color: color-mix(in oklch, var(--ink) 55%, var(--ember));
+  opacity: 0.85;
+}
+
+[data-world="saloon"] .saloon-mirror .saloon-mirror-id {
+  font-family: var(--voice-display, var(--voice-body));
+  font-style: normal;
+  font-weight: 600;
+  color: var(--ember);
+  letter-spacing: 0;
+}
+
+[data-world="saloon"] .saloon-mirror .saloon-mirror-sep {
+  opacity: 0.5;
+  margin-inline: 2px;
+}
+
+
+/* ── 6. Buttons — copper bezel, gentle chamfer (arrow-shape on edges) ── */
+
+[data-world="saloon"] .btn,
+[data-world="saloon"] .btn-primary {
+  background: var(--anchor-2);
+  color: var(--ink);
+  border: 1px solid var(--ember);
+  border-radius: 0;
+  padding: var(--s-3) var(--s-6);
+  font-family: var(--voice-display);
+  font-weight: 600;
+  letter-spacing: var(--track-snug, 0);
+  cursor: pointer;
+  position: relative;
+  /* Slim arrow-tail on inline-end + slight notch on inline-start */
+  clip-path: polygon(
+    6px 0,
+    calc(100% - 6px) 0,
+    100% 50%,
+    calc(100% - 6px) 100%,
+    6px 100%,
+    0 50%
+  );
+  transition:
+    background var(--duration-saloon) var(--ease-saloon),
+    color      var(--duration-saloon) var(--ease-saloon);
+}
+
+[data-world="saloon"] .btn:hover,
+[data-world="saloon"] .btn-primary:hover {
+  background: var(--ember);
+  color: hsl(8 28% 14%);
+}
+
+[data-world="saloon"] .btn-secondary {
+  background: transparent;
+  color: var(--ember);
+  border: 1px solid color-mix(in oklch, var(--ember) 50%, transparent);
+}
+
+[data-world="saloon"] .btn:focus-visible,
+[data-world="saloon"] .btn-primary:focus-visible,
+[data-world="saloon"] .btn-secondary:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+
+/* ── 7. Reduced-motion + print + forced-colors safeguards ────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  [data-world="saloon"] .card,
+  [data-world="saloon"] .panel {
+    transition: none;
+  }
+  [data-world="saloon"] .saloon-mirror::before {
+    box-shadow: none;
+  }
+}
+
+@media print {
+  [data-world="saloon"] .saloon-mirror { display: none; }
+  [data-world="saloon"] .card,
+  [data-world="saloon"] .panel {
+    clip-path: none;
+    border: 1px solid hsl(0 0% 60%);
+    background: white;
+    color: black;
+    box-shadow: none;
+  }
+}
+
+@media (forced-colors: active) {
+  [data-world="saloon"] .saloon-mirror {
+    background: Canvas;
+    color: CanvasText;
+    border-block-end: 1px solid CanvasText;
+  }
+  [data-world="saloon"] .card,
+  [data-world="saloon"] .panel {
+    clip-path: none;
+    border: 1px solid CanvasText;
+  }
+}
+
+/* End ÊLAN v4 / γ9 — Saloon (Salon) — closes Pillar γ ─────────────────── */

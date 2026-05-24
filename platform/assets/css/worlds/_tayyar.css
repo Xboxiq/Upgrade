@@ -1,7 +1,292 @@
-/* ÊLAN v4 — α2 — World placeholder: تَيار (Tayyar) — Current
-   Pages: social, callcenter
-   Filled in γ7. See WORLDS_ATLAS.md § World 6 for spec. */
+/* ────────────────────────────────────────────────────────────────────────
+   ÊLAN v4 — γ7 — World 6: تَيار (Tayyar) — Current
+   ────────────────────────────────────────────────────────────────────────
+   Inspiration: Synthwave horizon + Memphis Group postmodern + Iraqi
+                1980s graphic design + Cairo Jazz cover art.
+                Neon city seen through a window of dark glass.
+   Pages:       social, callcenter
+   Voice:       29LT Bukra (display, stretched) + Vazirmatn (body) +
+                Geist (latin/UI accents — the "synth label" face)
+   Motion:      cubic-bezier(0.45, -0.4, 0.55, 1.4) — wave elastic
+   ─────────────────────────────────────────────────────────────────────── */
+
+
+/* ── Tokens ──────────────────────────────────────────────────────────── */
 
 [data-world="tayyar"] {
-  /* Awaiting γ7 stage. */
+  /* Anchor — deep night-purple stage */
+  --anchor-bg: hsl(285 25% 8%);
+  --anchor-1:  hsl(285 22% 12%);
+  --anchor-2:  hsl(285 20% 18%);
+  --anchor-3:  hsl(285 18% 24%);
+
+  /* Ink — pale turquoise above neon haze */
+  --ink:       hsl(180 25% 95%);
+  --ink-muted: hsl(180 18% 72%);
+  --ink-faint: hsl(180 12% 50%);
+
+  /* Lines — quiet boundaries on dark */
+  --line:        hsl(285 18% 24%);
+  --line-strong: hsl(285 22% 36%);
+
+  /* Tayyar accents — magenta and cyan, the synth pair */
+  --ember:  hsl(335 90% 60%);    /* magenta */
+  --focus:  hsl(180 85% 55%);    /* cyan */
+  --accent: var(--ember);
+
+  /* Motion fingerprint — wave elastic */
+  --ease-tayyar:     cubic-bezier(0.45, -0.4, 0.55, 1.4);
+  --duration-tayyar: 520ms;
+
+  /* Shadows — neon halos rather than soft drop shadows */
+  --shadow-sm: 0 0 0 1px color-mix(in oklch, var(--ember) 22%, transparent);
+  --shadow-md: 0 4px 24px color-mix(in oklch, var(--focus) 18%, transparent);
+  --shadow-lg: 0 14px 40px color-mix(in oklch, var(--ember) 22%, transparent);
+  --shadow-xl: 0 28px 64px color-mix(in oklch, var(--focus) 24%, transparent);
+
+  /* Focus ring — cyan, vivid */
+  --ring: 0 0 0 3px color-mix(in oklch, var(--focus) 45%, transparent);
+
+  /* Bind world tokens to platform contract */
+  --color-bg:            var(--anchor-bg);
+  --color-surface-0:     var(--anchor-bg);
+  --color-surface-1:     var(--anchor-1);
+  --color-surface-2:     var(--anchor-2);
+  --color-surface-3:     var(--anchor-3);
+  --color-text:          var(--ink);
+  --color-text-muted:    var(--ink-muted);
+  --color-text-faint:    var(--ink-faint);
+  --color-border:        var(--line);
+  --color-border-strong: var(--line-strong);
+  --color-brand:         var(--ember);
+  --color-tint:          var(--ember);
+}
+
+
+/* ── Background — scan-lines + soft horizon glow ─────────────────────── */
+
+body[data-world="tayyar"] {
+  background-color: var(--anchor-bg);
+  background-image:
+    /* horizon glow — magenta low, cyan distant */
+    radial-gradient(
+      ellipse 120% 60% at 50% 110%,
+      color-mix(in oklch, var(--ember) 18%, transparent) 0%,
+      color-mix(in oklch, var(--focus) 8%, transparent) 35%,
+      transparent 70%
+    ),
+    /* scan-lines — 1px every 3px, signature mood */
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 2px,
+      color-mix(in oklch, var(--focus) 4%, transparent) 2px,
+      color-mix(in oklch, var(--focus) 4%, transparent) 3px
+    );
+  background-attachment: fixed, fixed;
+}
+
+
+/* ── Surfaces — neon-edge cards ──────────────────────────────────────── */
+
+[data-world="tayyar"] .card,
+[data-world="tayyar"] .panel,
+[data-world="tayyar"] .ql-glass,
+[data-world="tayyar"] .qcalc {
+  background: linear-gradient(135deg, var(--anchor-1), var(--anchor-2));
+  border: 1px solid color-mix(in oklch, var(--focus) 25%, transparent);
+  border-radius: var(--r-3);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  isolation: isolate;
+}
+
+[data-world="tayyar"] .card::after,
+[data-world="tayyar"] .panel::after,
+[data-world="tayyar"] .qcalc::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklch, var(--ember) 8%, transparent),
+    transparent 40%,
+    color-mix(in oklch, var(--focus) 8%, transparent)
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+/* ── Typography — stretched display + warm body ──────────────────────── */
+
+body[data-world="tayyar"],
+[data-world="tayyar"] .page-content,
+[data-world="tayyar"] .h-lede,
+[data-world="tayyar"] .type-body {
+  font-family: var(--voice-body);
+  line-height: var(--lead-relaxed);
+  color: var(--color-text);
+}
+
+[data-world="tayyar"] h1.is-hero,
+[data-world="tayyar"] [data-page-personality="callcenter"] h1,
+[data-world="tayyar"] [data-page-personality="social"] h1 {
+  font-family: var(--voice-display-h, "29LT Bukra", sans-serif);
+  font-stretch: 105%;
+  font-weight: 700;
+  letter-spacing: var(--track-loose);
+  line-height: var(--lead-tight);
+  background: linear-gradient(90deg, var(--ember), var(--focus));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  /* fallback for browsers without background-clip:text */
+  -webkit-text-fill-color: transparent;
+}
+
+[data-world="tayyar"] [data-type-voice="num-display"],
+[data-world="tayyar"] .type-num-display {
+  font-family: var(--voice-num-tabular, "JetBrains Mono", monospace);
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ── Selection — magenta neon ────────────────────────────────────────── */
+
+body[data-world="tayyar"] ::selection {
+  background-color: color-mix(in oklch, var(--ember) 38%, transparent);
+  color: var(--ink);
+}
+
+
+/* ── Buttons — neon pill (synthwave gradient) ────────────────────────── */
+
+[data-world="tayyar"] .btn,
+[data-world="tayyar"] .btn-primary {
+  background: linear-gradient(90deg, var(--ember), var(--focus));
+  color: hsl(285 30% 10%);
+  border: none;
+  border-radius: var(--r-pill);
+  padding: var(--s-3) var(--s-6);
+  font-family: var(--voice-display-h);
+  font-weight: 700;
+  letter-spacing: var(--track-loose);
+  cursor: pointer;
+  transition: filter var(--duration-tayyar) var(--ease-tayyar),
+              transform var(--duration-tayyar) var(--ease-tayyar),
+              box-shadow var(--duration-tayyar) var(--ease-tayyar);
+}
+
+[data-world="tayyar"] .btn:hover,
+[data-world="tayyar"] .btn-primary:hover {
+  filter: brightness(1.1) saturate(1.15);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+[data-world="tayyar"] .btn:focus-visible,
+[data-world="tayyar"] .btn-primary:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+[data-world="tayyar"] .btn:active,
+[data-world="tayyar"] .btn-primary:active {
+  transform: translateY(0);
+  filter: brightness(0.95);
+}
+
+
+/* ── Practice / completion buttons — get a quiet cue marker ──────────── */
+
+[data-world="tayyar"] .practice-tried-btn,
+[data-world="tayyar"] [data-cue="success"] {
+  position: relative;
+}
+
+/* The "synth pulse" aura — only applied when JS plays the cue.
+   JS adds .is-cued briefly; CSS draws the radial pulse. */
+[data-world="tayyar"] .practice-tried-btn.is-cued::after,
+[data-world="tayyar"] [data-cue="success"].is-cued::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: radial-gradient(
+    closest-side,
+    color-mix(in oklch, var(--focus) 35%, transparent),
+    transparent 70%
+  );
+  pointer-events: none;
+  animation: tayyar-cue-pulse 360ms var(--ease-tayyar) forwards;
+}
+
+@keyframes tayyar-cue-pulse {
+  0%   { opacity: 0;    transform: scale(0.92); }
+  35%  { opacity: 0.85; transform: scale(1.04); }
+  100% { opacity: 0;    transform: scale(1.18); }
+}
+
+
+/* ── Mute toggle widget — small chip ─────────────────────────────────── */
+
+[data-world="tayyar"] .tayyar-mute-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  padding: var(--s-1) var(--s-3);
+  border-radius: var(--r-pill);
+  border: 1px solid color-mix(in oklch, var(--focus) 30%, transparent);
+  background: color-mix(in oklch, var(--anchor-1) 80%, transparent);
+  color: var(--ink-muted);
+  font-family: var(--voice-display-h);
+  font-size: var(--fs-xs, 12px);
+  letter-spacing: var(--track-wide);
+  cursor: pointer;
+  transition: color 200ms var(--ease-tayyar),
+              border-color 200ms var(--ease-tayyar);
+}
+
+[data-world="tayyar"] .tayyar-mute-toggle:hover,
+[data-world="tayyar"] .tayyar-mute-toggle:focus-visible {
+  color: var(--focus);
+  border-color: var(--focus);
+  outline: none;
+}
+
+[data-world="tayyar"] .tayyar-mute-toggle[aria-pressed="true"] {
+  color: var(--ink-faint);
+  border-color: var(--line);
+}
+
+
+/* ── Reduced motion / silence ────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  [data-world="tayyar"] .practice-tried-btn.is-cued::after,
+  [data-world="tayyar"] [data-cue="success"].is-cued::after {
+    animation-duration: 1ms;
+    animation-iteration-count: 1;
+    opacity: 0;
+  }
+  body[data-world="tayyar"] {
+    background-attachment: scroll, scroll;
+  }
+}
+
+
+/* ── No-JS fallback (the worlds/_index.css reversed cascade) ─────────── */
+
+@supports selector(html:has(*)) {
+  body:not([data-world]):has(section.page.active[data-world="tayyar"]),
+  body:not([data-world]):has(section.page.is-active[data-world="tayyar"]) {
+    --color-bg:        hsl(285 25% 8%);
+    --color-surface-1: hsl(285 22% 12%);
+    --color-text:      hsl(180 25% 95%);
+    --color-tint:      hsl(335 90% 60%);
+    background-color:  hsl(285 25% 8%);
+    color:             hsl(180 25% 95%);
+  }
 }
