@@ -1,0 +1,126 @@
+<!-- ════════════════════════════════════════════════════════════════════
+     DEVOTIO v3 / Worker 23 / Phase 4 — Page Shard: page-dashboard
+     Source: platform/index.html (lines 710..827)
+     Status: STAGED. Inline copy still lives in index.html (Stage-and-Replace doctrine).
+     Loaded via: Upg.shards.loadShard("dashboard").
+     Cached by: service worker (sw.js PRECACHE list).
+     Edit policy: edit BOTH inline + shard until Phase 5 finalizes the swap.
+     ════════════════════════════════════════════════════════════════════ -->
+<section class="page active" id="page-dashboard" data-page-personality="dashboard">
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           ATELIER v16 / Worker 14 / Phase 3 — Bento Consolidation
+           Single .bento grid. Zero legacy duplication.
+           Sacred IDs preserved (relocated, not removed):
+             #cath-skill-grid, #cath-activity-list,
+             #v12Heatmap, #v12ChallengeLevel, #v12ChallengeBody,
+             4× data-cath-stat (unitsCompleted/avgCompletionRate/trainingHours/streak)
+           ══════════════════════════════════════════════════════════════ -->
+      <div class="bento" data-bento="dashboard" data-cath-dash data-life="mesh" aria-label="لوحة التحكم — إحصاءاتك الحقيقية">
+
+        <!-- ══════════ Cell 1 — Greeting Hero (b-4x1) ══════════ -->
+        <article class="bento-greet b-4x1 material-regular" data-reveal data-life="ambient">
+          <span class="h-eyebrow">لوحة التحكم</span>
+          <h1 data-greet-title class="type-hero type-hero--lg">أهلاً <span data-cath-bind="profile.name">صديقي</span></h1>
+          <p data-greet-sub class="h-lede" data-cath-bind="profile.streakLine">تابع رحلتك التدريبية — اليوم خطوة جديدة بانتظارك.</p>
+          <div class="bento-greet-meta">
+            <span class="cath-progress-pill" data-cath-bind="profile.role">—</span>
+            <span class="bento-greet-avatar" data-cath-bind="profile.initial" aria-hidden="true">U</span>
+          </div>
+        </article>
+
+        <!-- ══════════ Cells 2-5 — 4 count-up Stat Tiles (canonical, single instance) ══════════ -->
+        <article class="stat-tile b-1x1 material-regular" data-reveal>
+          <div class="stat-tile-icon"><i class="qi" data-icon="check-circle" aria-hidden="true"></i></div>
+          <div class="stat-tile-value u-num tas-num-hero"><span class="type-num-display tas-num-ticker" data-countup data-cath-stat="unitsCompleted">0</span></div>
+          <div class="stat-tile-label">وحدة مُكتملة</div>
+          <span class="stat-tile-trend is-up"><i class="qi" data-icon="trending-up" aria-hidden="true"></i> +3 هذا الأسبوع</span>
+        </article>
+
+        <article class="stat-tile b-1x1 material-regular" data-reveal>
+          <div class="stat-tile-icon"><i class="qi" data-icon="bar-chart" aria-hidden="true"></i></div>
+          <div class="stat-tile-value u-num tas-num-hero"><span class="type-num-display tas-num-ticker" data-countup data-cath-stat="avgCompletionRate">0</span>%</div>
+          <div class="stat-tile-label">معدل الإتمام</div>
+          <span class="stat-tile-trend is-up"><i class="qi" data-icon="trending-up" aria-hidden="true"></i> +5%</span>
+        </article>
+
+        <article class="stat-tile b-1x1 material-regular" data-reveal>
+          <div class="stat-tile-icon"><i class="qi" data-icon="clock" aria-hidden="true"></i></div>
+          <div class="stat-tile-value u-num tas-num-hero"><span class="type-num-display tas-num-ticker" data-countup data-cath-stat="trainingHours">0</span></div>
+          <div class="stat-tile-label">ساعة تدريب</div>
+        </article>
+
+        <article class="stat-tile b-1x1 material-regular" data-reveal>
+          <div class="stat-tile-icon"><i class="qi" data-icon="flame" aria-hidden="true"></i></div>
+          <div class="stat-tile-value u-num tas-num-hero"><span class="type-num-display tas-num-ticker" data-countup data-cath-stat="streak">0</span></div>
+          <div class="stat-tile-label">يوم streak</div>
+        </article>
+
+        <!-- ══════════ Cell 6 — Skill Tree (b-2x2) — preserves #cath-skill-grid ══════════ -->
+        <article class="bento-skill b-2x2 material-regular" data-reveal>
+          <header class="bento-h">
+            <h2><i class="qi" data-icon="layout-dashboard" aria-hidden="true"></i> شجرة المهارات</h2>
+            <button class="bento-link type-button" type="button" data-page="myprogress">عرض التفاصيل ←</button>
+          </header>
+          <div class="cath-skill-grid" id="cath-skill-grid" data-stagger data-stagger-step="60"></div>
+        </article>
+
+        <!-- ══════════ Cell 7 — Activity Feed (b-2x2) — preserves #cath-activity-list ══════════ -->
+        <article class="bento-activity b-2x2 material-regular" data-reveal>
+          <header class="bento-h">
+            <h2><i class="qi" data-icon="trending-up" aria-hidden="true"></i> آخر النشاط</h2>
+          </header>
+          <ul class="cath-activity-list" id="cath-activity-list" data-stagger data-stagger-step="40"></ul>
+        </article>
+
+        <!-- ══════════ Cell 8 — Today's Challenge (b-2x1) — preserves #v12ChallengeLevel + #v12ChallengeBody ══════════ -->
+        <article class="bento-challenge b-2x1 material-regular" data-reveal>
+          <header class="bento-h">
+            <h2><i class="qi" data-icon="zap" aria-hidden="true"></i> تحدي اليوم</h2>
+            <span id="v12ChallengeLevel" class="bento-pill">—</span>
+          </header>
+          <div id="v12ChallengeBody" class="bento-body">
+            <p class="u-c-muted">جاري تحميل تحدي اليوم…</p>
+          </div>
+        </article>
+
+        <!-- ══════════ Cell 9 — Skills Heatmap (b-2x1) — preserves #v12Heatmap ══════════ -->
+        <article class="bento-heatmap b-2x1 material-regular" data-reveal>
+          <header class="bento-h">
+            <h2><i class="qi" data-icon="calendar" aria-hidden="true"></i> خريطة مهاراتك</h2>
+            <span class="bento-h-meta u-text-xs u-c-faint">اضغط على أي خلية لتقييم نفسك</span>
+          </header>
+          <div class="v12-heatmap" id="v12Heatmap"></div>
+        </article>
+
+        <!-- ══════════ Cell 10 — Quick Dock (b-4x1) ══════════ -->
+        <nav class="dock b-4x1 material-regular" aria-label="إجراءات سريعة" data-reveal>
+          <header class="bento-h">
+            <h2><i class="qi" data-icon="command" aria-hidden="true"></i> إجراءات سريعة</h2>
+            <span class="bento-h-meta u-text-xs u-c-faint">Cmd+K للبحث الكامل</span>
+          </header>
+          <div class="dock-row" data-stagger data-stagger-step="80">
+            <button class="dock-btn" type="button" data-page="callcenter" data-magnet>
+              <i class="qi qi-lg" data-icon="phone" aria-hidden="true"></i><span>مكالمة تجريبية</span>
+            </button>
+            <button class="dock-btn" type="button" data-page="hrmastery" data-magnet>
+              <i class="qi qi-lg" data-icon="briefcase" aria-hidden="true"></i><span>مقابلة وهمية</span>
+            </button>
+            <button class="dock-btn" type="button" data-page="accounting" data-magnet>
+              <i class="qi qi-lg" data-icon="calculator" aria-hidden="true"></i><span>حاسبة راتب</span>
+            </button>
+            <button class="dock-btn" type="button" data-page="psych" data-magnet>
+              <i class="qi qi-lg" data-icon="brain" aria-hidden="true"></i><span>اختبار شخصية</span>
+            </button>
+            <button class="dock-btn" type="button" data-page="lab" data-magnet>
+              <i class="qi qi-lg" data-icon="flask-conical" aria-hidden="true"></i><span>سيناريو عشوائي</span>
+            </button>
+            <button class="dock-btn" type="button" data-page="myprogress" data-magnet>
+              <i class="qi qi-lg" data-icon="bar-chart" aria-hidden="true"></i><span>تقدمي الكامل</span>
+            </button>
+          </div>
+        </nav>
+
+      </div><!-- /.bento -->
+
+    </section><!-- /page-dashboard -->
