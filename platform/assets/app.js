@@ -116,3 +116,6 @@ import './js/elan/format.js';
 
 // ÊLAN v4 — γ1: world controller (mirrors active page → body[data-world])
 import './js/elan/world.js';
+
+// ÊLAN v4 — γ2: Hibr world — ink-drying CTA beacon
+import './js/elan/world-hibr.js';
