@@ -1,0 +1,103 @@
+{
+  "pack": "v3",
+  "worker": "24",
+  "worker_name": "DUAL-FORM",
+  "phase_completed": 2,
+  "phase_title": "Bottom Nav",
+  "phases_total": 5,
+  "branch": "worker-24-devotio",
+  "files_touched": [
+    "platform/assets/css/tokens.css",
+    "platform/assets/css/chrome.css",
+    "platform/assets/js/upg-nav-1.js",
+    "platform/index.html"
+  ],
+  "lines_added_total": 468,
+  "lines_deleted_total": 1,
+  "tokens_added": [
+    "--dual-bottom-nav-bg",
+    "--dual-bottom-nav-bg-solid",
+    "--dual-bottom-nav-border",
+    "--dual-bottom-nav-radius",
+    "--dual-bottom-nav-shadow",
+    "--dual-bottom-nav-fab-size",
+    "--dual-bottom-nav-fab-lift",
+    "--dual-bottom-nav-icon-size",
+    "--dual-bottom-nav-icon-fab",
+    "--dual-bottom-nav-z",
+    "--dual-bottom-nav-mq",
+    "--dual-touch-min (consumed from W24 P1)"
+  ],
+  "fonts_added_offline": [],
+  "css_changes": {
+    "tokens_css_appended": "DUAL-FORM v3 bottom-nav tokens block (~22 lines) — 12 tokens consumed by chrome.css and JS",
+    "chrome_css_appended": "Bottom nav visual block (~245 lines) — .dual-bottom-nav fixed-bottom + 5-column grid + center FAB + slide-up keyframe + reduced-motion guard + page-host offset"
+  },
+  "html_changes": {
+    "bottom_nav_inserted_before_body_close": true,
+    "items_count": 5,
+    "destinations": [
+      "الرئيسية -> data-page=dashboard",
+      "المعمل -> data-page=lab",
+      "مَركز (FAB) -> data-action=cmdk-open",
+      "التقدّم -> data-page=myprogress",
+      "المزيد -> data-action=more-open"
+    ],
+    "viewport_meta": "preserved — viewport-fit=cover already set"
+  },
+  "js_changes": {
+    "module": "platform/assets/js/upg-nav-1.js",
+    "extension_strategy": "additive — W11 surface (collapse/expand/toggle/isCollapsed/openDrawer/closeDrawer/toggleDrawer) preserved verbatim; new helpers append two new frozen members (syncBottomNav + goToPage)",
+    "new_helpers": [
+      "BOTTOM_NAV_SEL constant",
+      "resolveActivePageId()",
+      "updateBottomNavActive()",
+      "goToPage(pageId)",
+      "handleBottomNavClick(e)"
+    ],
+    "listeners_added": [
+      "document click delegate (handleBottomNavClick)",
+      "document upg:nav:change -> updateBottomNavActive",
+      "document upg:shards:mounted -> updateBottomNavActive",
+      "DOMContentLoaded once -> updateBottomNavActive"
+    ],
+    "syntax_check": "node --check pass",
+    "lines_total": 179
+  },
+  "sacred_preservation": {
+    "pages": 14,
+    "qcalc": 391,
+    "upg_apis": 29,
+    "google_fonts_in_index": 0,
+    "data_page_personality": 15,
+    "css_layers": 7,
+    "esm_modules": 90
+  },
+  "ux_metrics": {
+    "bottom_nav_items": 5,
+    "touch_target_min_px": 44,
+    "fab_size_px": 56,
+    "fab_lift_px": 16,
+    "mobile_breakpoint_px": 720,
+    "rtl_aware": true,
+    "reduced_motion_guarded": true,
+    "print_hidden": true,
+    "active_state_uses_color_tint": true,
+    "safe_area_inset_bottom_consumer": true,
+    "haptic": "absent (Phase 4 adds opt-in)"
+  },
+  "devotion_notes": "الموبايل صار يَفكّر بالإبهام — الخمس destinations الأهمّ في متناول اليد. الـ FAB في الوسط يَفتح مَركز الأوامر بضغطة واحدة، يَأخذ صبغة الصفحة الحالية. على الديسكتوب: مَخفي تماماً، السيدبار يَستمر في عَملِه. على الورق: مَخفي — لا مَكان لِنَافذة تَنقُّل في الكتاب المَطبوع. التَنفُّس متَّصل: P1 ثَبَّت الأرض، P2 وَضَع المُلاح فوقها.",
+  "offline_check": {
+    "external_requests": 0,
+    "google_fonts_link": 0,
+    "cdn_link": 0,
+    "fetch_calls_to_external": 0
+  },
+  "discipline_check": {
+    "served_training_ritual": "yes — bottom nav makes the 5 most-used destinations one-thumb away on mobile",
+    "arabic_rooted": "yes — labels in Arabic (الرئيسية، المعمل، مَركز، التقدّم، المزيد), aria-labels in Arabic, RTL-native layout",
+    "works_offline_100": "yes — pure CSS + vanilla JS + no network calls",
+    "would_miss_if_gone": "yes — once every mobile session uses it, sidebar tap-to-open feels archaic"
+  },
+  "next_action": "Continue Worker 24 Phase 3 (Swipe Gestures — PointerEvents-based page-swipe between sibling pages + calc-swipe between qcalc tabs + dismiss-swipe for halo overlays + Upg.touch.swipe API as 30th Upg.* namespace, vanilla — no Hammer.js, threshold 40-60px). Same branch worker-24-devotio."
+}

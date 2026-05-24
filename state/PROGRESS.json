@@ -1,9 +1,27 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-24T17:45:00Z",
+  "last_updated": "2026-05-24T18:30:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
+    "pack": "v3",
+    "worker": "24",
+    "worker_name": "DUAL-FORM",
+    "phase": 2,
+    "phases_total": 5,
+    "phase_order": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "branch": "worker-24-devotio",
+    "status": "in-progress",
+    "blocker": null,
+    "next_action": "Continue Worker 24 Phase 3 (Swipe Gestures — PointerEvents-based page-swipe / calc-swipe / dismiss-swipe + Upg.touch.swipe API). Same branch worker-24-devotio (linear branch rule, single PR at end of Worker 24)."
+  },
+  "previous": {
     "pack": "v3",
     "worker": "24",
     "worker_name": "DUAL-FORM",
@@ -17,11 +35,11 @@
       "5"
     ],
     "branch": "worker-24-devotio",
-    "status": "in-progress",
-    "blocker": null,
-    "next_action": "Continue Worker 24 Phase 2 (Bottom Nav — 5 mobile destinations, RTL-aware, max-width:720px gate, safe-area-inset-bottom consumer). Same branch worker-24-devotio (linear branch rule)."
+    "status": "in-branch",
+    "merged_pr": null,
+    "blocker": null
   },
-  "previous": {
+  "before_previous": {
     "pack": "v3",
     "worker": "23",
     "worker_name": "DECONSTRUCTION",
@@ -37,24 +55,6 @@
     "branch": "worker-23-devotio-p5",
     "status": "merged",
     "merged_pr": 103,
-    "blocker": null
-  },
-  "before_previous": {
-    "pack": "v3",
-    "worker": "23",
-    "worker_name": "DECONSTRUCTION",
-    "phase": 4,
-    "phases_total": 5,
-    "phase_order": [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5"
-    ],
-    "branch": "worker-23-devotio-p4",
-    "status": "merged",
-    "merged_pr": 102,
     "blocker": null
   },
   "completed_phases": [
@@ -825,9 +825,17 @@
       "branch": "worker-24-devotio",
       "lines_added": 111,
       "lines_deleted": 3
+    },
+    {
+      "worker": "24",
+      "phase": 2,
+      "title": "Bottom Nav — APPEND 12 nav tokens to tokens.css (--dual-bottom-nav-bg/bg-solid/border/radius/shadow/fab-size/fab-lift/icon-size/icon-fab/z/mq, all rooted in W24 P1 + W12 P5 chains) + APPEND ~245-line block to chrome.css (.dual-bottom-nav fixed-bottom 88% surface-1 backdrop-filter blur(20px) saturate(150%) with @supports-not solid fallback / 5-column grid via @media (max-width:720px) / display:none on @media (min-width:721px) and @media print / .dual-bottom-nav-item 44×44 minimum hit area + tas-voice-label font + tap-highlight zero / hover:focus-visible color-mix tint 12% / focus-visible 2px+4px ring / [data-active=true] tinted color + ::before centered pip + RTL transform flip / :active scale(0.96) press / .dual-bottom-nav-icon 22px / .dual-bottom-nav-label 0.65rem ellipsis / .dual-bottom-nav-center FAB 56px circle margin-block-start:-16px tinted bg + box-shadow + label hidden + ::before suppressed / @keyframes dual-bottom-nav-rise translateY(110%)→0 over 400ms with delay 120ms / prefers-reduced-motion guard silences animation+transitions+:active scale / page-host padding-bottom adds nav-h + fab-lift + max(space-4, safe-bottom) on mobile / [data-hidden=true] translateY(120%) for programmatic sleep) + AUGMENT platform/index.html with <nav id=\"dual-bottom-nav\" aria-label=\"التنقّل السريع\"> right before </body> with 5 children: anchor الرئيسية data-page=dashboard data-shard=dashboard + anchor المعمل data-page=lab data-shard=lab + button مَركز data-action=cmdk-open (FAB center) + anchor التقدّم data-page=myprogress data-shard=myprogress + button المزيد data-action=more-open / each item carries inline 24×24 stroke-currentColor SVG icon (house/flask/circle-plus/spark-line/triple-dot) + .tas-voice-label span + EXTEND platform/assets/js/upg-nav-1.js with 6 helpers (BOTTOM_NAV_SEL constant + resolveActivePageId reading section.page.active fallback :not([hidden]) + updateBottomNavActive toggling data-active across [data-page] items + goToPage tri-strategy: window.navigateTo first → Upg.shards.mountShard force=false fallback → scrollIntoView smooth last resort + handleBottomNavClick delegating data-page anchors via goToPage (closes drawer if open + rAF re-sync) and data-action buttons via Upg.cmdk.open or Upg.chrome.openDrawer/Upg.nav.toggleDrawer chain) + add 4 listeners (click delegate + upg:nav:change + upg:shards:mounted + DOMContentLoaded once) + extend frozen Upg.nav surface with syncBottomNav + goToPage members (W11 collapse/expand/toggle/isCollapsed/openDrawer/closeDrawer/toggleDrawer all preserved verbatim — additive only). Sacred preserved 100% (14 page sections / 391 qcalc / 29 Upg.* APIs / 15 data-page-personality / W23 ESM module shape / desktop sidebar untouched / no haptic — Phase 4 adds opt-in). Mobile-only by gate, prefers-reduced-motion safe, hidden on print, RTL via inset-inline-* + transform flip, touch targets ≥44px on every interactive child, FAB color follows --color-tint of active page, JS syntax verified via node --check.",
+      "branch": "worker-24-devotio",
+      "lines_added": 468,
+      "lines_deleted": 1
     }
   ],
-  "next_action": "Continue Worker 24 Phase 2 (Bottom Nav — 5 mobile destinations, RTL-aware, max-width:720px gate, safe-area-inset-bottom consumer). Same branch worker-24-devotio (linear branch rule).",
+  "next_action": "Continue Worker 24 Phase 3 (Swipe Gestures — PointerEvents-based page-swipe between pages + calc-swipe between qcalc tabs + dismiss-swipe for halo, plus Upg.touch.swipe API as 30th Upg.* namespace). Same branch worker-24-devotio (linear branch rule, single PR at end of Worker).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",
