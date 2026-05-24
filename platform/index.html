@@ -32039,5 +32039,49 @@ const bird = { ...canMove(), ...canFly() };
   <button type="button" class="rit-entry-skip" aria-label="تَخَطَّ طقس الفتح" data-rit-skip>تخطَّ</button>
 </div>
 
+<!-- ════════════════════════════════════════════════════════════════════════
+     DUAL-FORM v3 — Bottom Nav (Worker 24 / Phase 2)
+     Mobile-only. Hidden via CSS on >720px. RTL-aware (dir="rtl" auto-flips).
+     5 destinations: dashboard / lab (training) / cmdk-center / myprogress / more
+     ════════════════════════════════════════════════════════════════════════ -->
+<nav id="dual-bottom-nav" class="dual-bottom-nav" aria-label="التنقّل السريع" data-mobile-only>
+  <a href="#page-dashboard" class="dual-bottom-nav-item" data-shard="dashboard" aria-label="الرئيسية">
+    <svg class="dual-bottom-nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M3 12 12 3l9 9v9h-6v-6H9v6H3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    </svg>
+    <span class="dual-bottom-nav-label">الرئيسية</span>
+  </a>
+
+  <a href="#page-lab" class="dual-bottom-nav-item" data-shard="lab" aria-label="التدريب">
+    <svg class="dual-bottom-nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 4h16v16H4z M8 8h8 M8 12h8 M8 16h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    </svg>
+    <span class="dual-bottom-nav-label">التدريب</span>
+  </a>
+
+  <button type="button" class="dual-bottom-nav-item dual-bottom-nav-center" data-action="cmdk-open" aria-label="مَركز الأوامر">
+    <svg class="dual-bottom-nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" fill="currentColor"/>
+      <path d="M12 7v10 M7 12h10" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
+
+  <a href="#page-myprogress" class="dual-bottom-nav-item" data-shard="myprogress" aria-label="التقدّم">
+    <svg class="dual-bottom-nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M3 17l4-6 4 4 4-7 6 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+    <span class="dual-bottom-nav-label">التقدّم</span>
+  </a>
+
+  <button type="button" class="dual-bottom-nav-item" data-action="more-open" aria-label="المزيد">
+    <svg class="dual-bottom-nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="6" cy="12" r="2" fill="currentColor"/>
+      <circle cx="12" cy="12" r="2" fill="currentColor"/>
+      <circle cx="18" cy="12" r="2" fill="currentColor"/>
+    </svg>
+    <span class="dual-bottom-nav-label">المزيد</span>
+  </button>
+</nav>
+
 </body>
 </html>
