@@ -1,6 +1,6 @@
 /* ════════════════════════════════════════════════════════════════════════
    DEVOTIO v3 — ESM Module: upg-touch-1.js
-   Worker 24 / Phase 3 — Swipe Gestures (PointerEvents-based, 3 variants).
+   Worker 24 / Phase 3-4 — Swipe Gestures + Haptic Layer.
    Side-effect module — importing this file runs the IIFE once.
 
    Worker 24 / Phase 3 — Swipe Discipline:
@@ -19,6 +19,16 @@
           a) page-swipe   — horizontal on `#main` → next/previous page.
           b) calc-swipe   — horizontal on `.qcalc` → upg:calc:next/prev event.
           c) dismiss-swipe — vertical down on body → exits Reading Halo (W22 P2).
+
+   Worker 24 / Phase 4 — Haptic Discipline:
+     1. opt-in only — localStorage.upg_touch_haptic_enabled = '1'.
+     2. ٥ patterns ثابتة — لا تَخلق pattern جديد (tap/success/warn/error/longpress).
+     3. Vibration API check قبل كل call (silent no-op on iOS Safari etc.).
+     4. Debounce 200 ms — لا spam.
+     5. Mouse / pen events لا تُفعّل haptic — pointerType === 'touch' فقط.
+     6. لو navigator.vibrate غير موجود, API يَعمل no-op silently — never throws.
+     7. Toggle UI mobile-only — `[data-haptic-toggle]` يَنقلب الحالة في localStorage.
+     8. Body[data-haptic-enabled="true|false"] يَعكس الحالة للـ CSS.
    ════════════════════════════════════════════════════════════════════════ */
 (function (window, document) {
   'use strict';
@@ -222,6 +232,158 @@
     });
   }
 
+  // ════════════════════════════════════════════════════════════════════
+  // Worker 24 / Phase 4 — Haptic Layer (Vibration API, 5 patterns)
+  // ════════════════════════════════════════════════════════════════════
+
+  var STORAGE_HAPTIC_KEY  = 'upg_touch_haptic_enabled';
+  var HAPTIC_DEBOUNCE_MS  = 200;
+  var LONG_PRESS_DELAY_MS = 500;
+
+  // 5 fixed patterns. لا تَخلق pattern جديد — هذي اللُغة كاملة.
+  var HAPTIC_PATTERNS = Object.freeze({
+    tap:       Object.freeze([10]),
+    success:   Object.freeze([15, 50, 15]),
+    warn:      Object.freeze([40, 30, 40]),
+    error:     Object.freeze([80, 50, 80, 50, 80]),
+    longpress: Object.freeze([25, 40, 25, 40, 25])
+  });
+
+  var lastHapticAt = 0;
+  var hapticAttached = false;
+  var longPressTimer = null;
+
+  function isHapticSupported() {
+    return typeof navigator !== 'undefined' &&
+           typeof navigator.vibrate === 'function';
+  }
+
+  function isHapticEnabled() {
+    try { return window.localStorage && localStorage.getItem(STORAGE_HAPTIC_KEY) === '1'; }
+    catch (e) { return false; }
+  }
+
+  function syncHapticBodyAttr() {
+    if (!document.body) return;
+    document.body.setAttribute('data-haptic-enabled', isHapticEnabled() ? 'true' : 'false');
+  }
+
+  function setHapticEnabled(on) {
+    try {
+      if (window.localStorage) {
+        if (on) localStorage.setItem(STORAGE_HAPTIC_KEY, '1');
+        else    localStorage.removeItem(STORAGE_HAPTIC_KEY);
+      }
+    } catch (e) { /* swallow — private mode etc. */ }
+    syncHapticBodyAttr();
+    // Fire signal for any listeners (e.g., toggle UI re-render).
+    try {
+      document.dispatchEvent(new CustomEvent('upg:haptic:change', {
+        bubbles: true,
+        detail: { enabled: !!on }
+      }));
+    } catch (e) { /* old browsers: ignore */ }
+  }
+
+  function triggerHaptic(patternId) {
+    if (!isHapticSupported() || !isHapticEnabled()) return false;
+
+    var pattern = HAPTIC_PATTERNS[patternId];
+    if (!pattern) {
+      try { console.warn('[Upg.touch.haptic] Unknown pattern:', patternId); } catch (e) {}
+      return false;
+    }
+
+    var now = Date.now();
+    if (now - lastHapticAt < HAPTIC_DEBOUNCE_MS) return false;
+    lastHapticAt = now;
+
+    try { navigator.vibrate(pattern.slice()); } catch (e) { return false; }
+    return true;
+  }
+
+  function listHapticPatterns() { return Object.keys(HAPTIC_PATTERNS); }
+
+  function getHapticPattern(id) {
+    return HAPTIC_PATTERNS[id] ? HAPTIC_PATTERNS[id].slice() : null;
+  }
+
+  // ─── Auto-trigger on existing platform events ────────────────────────
+
+  function attachAutoHaptic() {
+    if (hapticAttached) return;
+    hapticAttached = true;
+
+    // Tap on bottom nav items (mobile primary navigation, P2 W24).
+    document.addEventListener('click', function (e) {
+      var t = e.target && e.target.closest && e.target.closest('.dual-bottom-nav-item');
+      if (t) triggerHaptic('tap');
+    }, { passive: true });
+
+    // Success — Reading Halo enter (Cmd+. or Ctrl+. — W22 P2).
+    document.addEventListener('keydown', function (e) {
+      if (!(e.metaKey || e.ctrlKey)) return;
+      if (e.key !== '.') return;
+      // Trigger after halo activation has settled.
+      setTimeout(function () {
+        if (window.Upg && window.Upg.ritual &&
+            typeof window.Upg.ritual.isHaloActive === 'function' &&
+            window.Upg.ritual.isHaloActive()) {
+          triggerHaptic('success');
+        }
+      }, 100);
+    });
+
+    // Domain events — qcalc + warnings.
+    document.addEventListener('upg:calc:complete', function () { triggerHaptic('success'); });
+    document.addEventListener('upg:calc:error',    function () { triggerHaptic('error');   });
+    document.addEventListener('upg:warning',       function () { triggerHaptic('warn');    });
+
+    // Long-press — only true touch (excludes mouse + pen).
+    document.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'touch') return;
+      if (longPressTimer) { clearTimeout(longPressTimer); longPressTimer = null; }
+      longPressTimer = setTimeout(function () {
+        triggerHaptic('longpress');
+        longPressTimer = null;
+      }, LONG_PRESS_DELAY_MS);
+    }, { passive: true });
+
+    function cancelLongPress() {
+      if (longPressTimer) { clearTimeout(longPressTimer); longPressTimer = null; }
+    }
+    document.addEventListener('pointerup',     cancelLongPress, { passive: true });
+    document.addEventListener('pointercancel', cancelLongPress, { passive: true });
+    document.addEventListener('pointermove',   function (e) {
+      // Cancel long-press on noticeable drag (so swipe gestures don't double-fire).
+      if (longPressTimer && e.pointerType === 'touch') {
+        cancelLongPress();
+      }
+    }, { passive: true });
+  }
+
+  // ─── Toggle button delegation ────────────────────────────────────────
+
+  function setupHapticToggle() {
+    syncHapticBodyAttr();
+
+    document.addEventListener('click', function (e) {
+      var btn = e.target && e.target.closest && e.target.closest('[data-haptic-toggle]');
+      if (!btn) return;
+
+      var wasEnabled = isHapticEnabled();
+      setHapticEnabled(!wasEnabled);
+
+      // Reflect on the button itself for screen-reader / styling.
+      btn.setAttribute('aria-pressed', !wasEnabled ? 'true' : 'false');
+
+      // Confirmation pulse — only on transition off→on, after debounce window.
+      if (!wasEnabled && isHapticSupported()) {
+        setTimeout(function () { triggerHaptic('success'); }, HAPTIC_DEBOUNCE_MS + 20);
+      }
+    });
+  }
+
   // ── Audit ────────────────────────────────────────────────────────────
   function audit() {
     return {
@@ -232,7 +394,15 @@
       listenersAttached: {
         pageSwipe:    !!pageSwipeDetach,
         calcSwipe:    calcDetachers.length,
-        dismissSwipe: !!dismissDetach
+        dismissSwipe: !!dismissDetach,
+        haptic:       hapticAttached
+      },
+      haptic: {
+        supported:    isHapticSupported(),
+        enabled:      isHapticEnabled(),
+        patterns:     listHapticPatterns(),
+        debounceMs:   HAPTIC_DEBOUNCE_MS,
+        longPressMs:  LONG_PRESS_DELAY_MS
       },
       config: {
         threshold:   SWIPE_THRESHOLD_PX,
@@ -240,7 +410,7 @@
         timeMax:     SWIPE_TIME_MAX,
         mobileBreak: MOBILE_MAX_WIDTH
       },
-      phase: 'worker-24-phase-3'
+      phase: 'worker-24-phase-4'
     };
   }
 
@@ -249,6 +419,9 @@
     setupPageSwipe();
     setupCalcSwipe();
     setupDismissSwipe();
+    // W24 P4 — haptic layer (graceful no-op if Vibration API absent).
+    attachAutoHaptic();
+    setupHapticToggle();
   }
 
   if (document.readyState !== 'loading') {
@@ -278,6 +451,19 @@
       timeMax:     SWIPE_TIME_MAX,
       mobileBreak: MOBILE_MAX_WIDTH
     }),
-    refresh: function () { boot(); }
+    refresh: function () { boot(); },
+    // W24 P4 — Haptic Layer (sub-namespace, opt-in, 5 patterns).
+    haptic: Object.freeze({
+      enable:      function () { setHapticEnabled(true);  },
+      disable:     function () { setHapticEnabled(false); },
+      toggle:      function () { setHapticEnabled(!isHapticEnabled()); },
+      isEnabled:   isHapticEnabled,
+      isSupported: isHapticSupported,
+      trigger:     triggerHaptic,
+      list:        listHapticPatterns,
+      pattern:     getHapticPattern,
+      PATTERNS:    HAPTIC_PATTERNS,
+      DEBOUNCE_MS: HAPTIC_DEBOUNCE_MS
+    })
   });
 })(window, document);

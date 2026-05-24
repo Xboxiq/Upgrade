@@ -1,9 +1,27 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-24T22:00:00Z",
+  "last_updated": "2026-05-24T23:30:00Z",
   "pack": "v3-devotio",
   "pack_status": "in-progress",
   "current": {
+    "pack": "v3",
+    "worker": "24",
+    "worker_name": "DUAL-FORM",
+    "phase": 4,
+    "phases_total": 5,
+    "phase_order": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "branch": "worker-24-devotio-p4",
+    "status": "in-progress",
+    "blocker": null,
+    "next_action": "Open PR for worker-24-devotio-p4 (Phase 4 — Haptic Layer, 5 patterns tap/success/warn/error/longpress + Upg.touch.haptic sub-namespace + opt-in toggle persisted in localStorage upg_touch_haptic_enabled + auto-trigger on bottom-nav tap + halo enter + qcalc complete/error + warn + 500ms longpress + body[data-haptic-enabled] mirror). Next session: Worker 24 Phase 5 (Print Atelier — 15 per-personality print signatures + page-break refinement + tinted hero + identity footer)."
+  },
+  "previous": {
     "pack": "v3",
     "worker": "24",
     "worker_name": "DUAL-FORM",
@@ -17,11 +35,11 @@
       "5"
     ],
     "branch": "worker-24-devotio-p3",
-    "status": "in-progress",
-    "blocker": null,
-    "next_action": "Open PR for worker-24-devotio-p3 (Phase 3 — Swipe Gestures, 3 variants page/calc/dismiss + PointerEvents + RTL-aware + mobile-only ≤720px + Upg.touch API). Next session: Worker 24 Phase 4 (Haptic Layer — Vibration API patterns tap/success/warn/error/longpress + Upg.touch.haptic + opt-in toggle persisted)."
+    "status": "merged",
+    "merged_pr": 107,
+    "blocker": null
   },
-  "previous": {
+  "before_previous": {
     "pack": "v3",
     "worker": "24",
     "worker_name": "DUAL-FORM",
@@ -37,24 +55,6 @@
     "branch": "worker-24-devotio-p2",
     "status": "merged",
     "merged_pr": 106,
-    "blocker": null
-  },
-  "before_previous": {
-    "pack": "v3",
-    "worker": "24",
-    "worker_name": "DUAL-FORM",
-    "phase": 1,
-    "phases_total": 5,
-    "phase_order": [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5"
-    ],
-    "branch": "worker-24-devotio-p1",
-    "status": "merged",
-    "merged_pr": 105,
     "blocker": null
   },
   "completed_phases": [
@@ -841,9 +841,17 @@
       "branch": "worker-24-devotio-p3",
       "lines_added": 357,
       "lines_deleted": 0
+    },
+    {
+      "worker": "24",
+      "phase": 4,
+      "title": "Haptic Layer — EXTEND platform/assets/js/upg-touch-1.js (~186 lines added) inside the existing W24 P3 IIFE with a frozen 5-pattern HAPTIC_PATTERNS table (tap [10] / success [15,50,15] / warn [40,30,40] / error [80,50,80,50,80] / longpress [25,40,25,40,25]) + isHapticSupported() (navigator.vibrate function probe) + isHapticEnabled() (localStorage upg_touch_haptic_enabled === '1', wrapped in try/catch for private mode) + setHapticEnabled(on) (writes localStorage + body[data-haptic-enabled] mirror + dispatches upg:haptic:change CustomEvent) + triggerHaptic(patternId) (support gate + enabled gate + 200ms global debounce via lastHapticAt + console.warn on unknown id + try/catch around navigator.vibrate(pattern.slice())) + listHapticPatterns() + getHapticPattern(id) returning shallow copy + attachAutoHaptic() one-shot delegation: tap on .dual-bottom-nav-item → tap pattern / Cmd+. or Ctrl+. with 100ms settle then Upg.ritual.isHaloActive() gate → success / upg:calc:complete → success / upg:calc:error → error / upg:warning → warn / pointerdown pointerType==='touch' starts 500ms longPressTimer → longpress, cleared on pointerup/pointercancel/pointermove drift) + setupHapticToggle() one-shot click delegation on [data-haptic-toggle] (toggles localStorage + flips aria-pressed + queues confirmation 'success' pulse on off→on after debounce window) + boot() now calls attachAutoHaptic + setupHapticToggle (graceful no-op when navigator.vibrate absent — never throws) + audit() extended with haptic{supported,enabled,patterns,debounceMs:200,longPressMs:500} + listenersAttached.haptic flag + phase string bumped to 'worker-24-phase-4' + Upg.touch surface re-frozen with new haptic sub-namespace Object.freeze({enable, disable, toggle, isEnabled, isSupported, trigger, list, pattern, PATTERNS, DEBOUNCE_MS}) preserving original attachSwipe/audit/PAGE_ORDER/config/refresh verbatim — sub-namespace adds NO new top-level Upg.* (count stays 30) + AUGMENT platform/index.html topbar-actions with mobile-only <button id=\"dual-haptic-toggle\" class=\"dual-haptic-toggle\" data-haptic-toggle data-mobile-only aria-pressed=\"false\" aria-label=\"تَفعيل الإحساس اللمسي\"> wrapping a 24×24 inline triple-circle SVG icon (3 concentric rings, dashed outermost) inserted just before the existing tb-divider + APPEND ~113 lines to platform/assets/css/chrome.css with .dual-haptic-toggle 44×44 rounded-full chip (display:none default + display:inline-flex inside @media (max-width: 720px)) consuming --color-border/--color-text-muted/--color-tint identity-aware tokens with W14 fallbacks + hover/focus-visible color-mix oklch 12% tint background + 2px focus-visible ring (40% tint) + body[data-haptic-enabled=\"true\"] active state recolors border+icon to --color-tint and adds 6px ::after dot in inset-inline-end with currentColor box-shadow glow + dual-haptic-pulse 220ms scale 1→1.18→1 keyframes + visual pulse gated dual @media (prefers-reduced-motion: no-preference) + reduced-motion guard zeros transition+animation (haptic itself still allowed — it is a tactile dialect, not a motion) + @media print display:none !important. Haptic discipline: opt-in only / 5 fixed patterns / Vibration API support check / 200ms debounce / pointerType==='touch' gate / pointermove drift cancels pending longpress so it never double-fires with W24 P3 swipe / silent no-op on Safari iOS where vibrate is absent. Sacred preserved 100% (15 page sections / 391 qcalc / 30 unique top-level Upg.* APIs UNCHANGED / 0 google fonts / 0 CDN / W24 P3 swipe untouched / W24 P2 bottom-nav untouched / W24 P1 dvh untouched / W22 P2 reading-halo consumed read-only / desktop chrome unaffected — toggle hidden behind 720px breakpoint). Spec deviations from 24_PHASE_4_HAPTIC_LAYER.md: (1) module remains IIFE not ESM export — extends existing W24 P3 file in place rather than spec's `export function init()` pattern (preserves W23 P5 / W24 P3 convention); (2) toggle CSS appended to chrome.css (not utilities.css as spec suggested) since chrome.css already hosts dual-bottom-nav from P2 — keeps DUAL-FORM controls colocated; (3) added pointermove drift cancel for longpress (spec didn't require but prevents double-fire with horizontal swipe gesture); (4) reused existing W22 P2 isHaloActive gate for success-on-halo trigger (spec used identical approach). Module passes node --check; brace balance verified.",
+      "branch": "worker-24-devotio-p4",
+      "lines_added": 323,
+      "lines_deleted": 4
     }
   ],
-  "next_action": "Open PR for worker-24-devotio-p3 (Worker 24 / Phase 3 — Swipe Gestures). Next session: Worker 24 Phase 4 (Haptic Layer — Vibration API patterns tap/success/warn/error/longpress + Upg.touch.haptic sub-namespace + opt-in toggle persisted via localStorage upg.touch.haptic.enabled).",
+  "next_action": "Open PR for worker-24-devotio-p4 (Worker 24 / Phase 4 — Haptic Layer). Next session: Worker 24 Phase 5 (Print Atelier — 15 per-personality print signatures + page-break refinement + tinted hero gradient + identity footer + print-color-adjust discipline).",
   "pack_v2_scaffold": {
     "created_at": "2026-05-19T19:15:00Z",
     "philosophy": "RESONANCE — Resonance over noise. Soul over shine.",

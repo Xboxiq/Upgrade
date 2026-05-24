@@ -1,0 +1,118 @@
+{
+  "pack": "v3-devotio",
+  "worker": "24",
+  "worker_name": "DUAL-FORM",
+  "phase_completed": 4,
+  "phases_total": 5,
+  "branch": "worker-24-devotio-p4",
+  "files_touched": [
+    "platform/assets/js/upg-touch-1.js",
+    "platform/index.html",
+    "platform/assets/css/chrome.css",
+    "state/PROGRESS.json",
+    "state/snapshots/worker-24-phase-4.json"
+  ],
+  "lines_added_total": 323,
+  "lines_deleted_total": 4,
+  "lines_breakdown": {
+    "upg-touch-1.js": { "added": 190, "deleted": 4, "net": 186 },
+    "chrome.css":     { "added": 113, "deleted": 0, "net": 113 },
+    "index.html":     { "added": 20,  "deleted": 0, "net": 20  }
+  },
+  "tokens_added": [],
+  "css_classes_added": [
+    ".dual-haptic-toggle",
+    ".dual-haptic-icon",
+    "@keyframes dual-haptic-pulse"
+  ],
+  "css_attribute_selectors_added": [
+    "body[data-haptic-enabled=\"true\"] .dual-haptic-toggle",
+    "body[data-haptic-enabled=\"true\"] .dual-haptic-toggle::after"
+  ],
+  "data_attributes_added": [
+    "data-haptic-toggle",
+    "data-haptic-enabled"
+  ],
+  "html_elements_added": [
+    "button#dual-haptic-toggle (mobile-only chip in topbar-actions, before tb-divider)"
+  ],
+  "fonts_added_offline": [],
+  "haptic_patterns": {
+    "tap":       [10],
+    "success":   [15, 50, 15],
+    "warn":      [40, 30, 40],
+    "error":     [80, 50, 80, 50, 80],
+    "longpress": [25, 40, 25, 40, 25]
+  },
+  "haptic_triggers": {
+    "tap":       ".dual-bottom-nav-item click",
+    "success":   "Cmd/Ctrl+. (halo enter, gated by Upg.ritual.isHaloActive) | upg:calc:complete event",
+    "warn":      "upg:warning event",
+    "error":     "upg:calc:error event",
+    "longpress": "pointerdown pointerType==='touch' held 500ms (cancels on up/cancel/drift)"
+  },
+  "api_surface": {
+    "namespace": "window.Upg.touch.haptic (sub-namespace under existing Upg.touch from P3 — no new top-level Upg.*)",
+    "methods": ["enable", "disable", "toggle", "isEnabled", "isSupported", "trigger", "list", "pattern"],
+    "constants": ["PATTERNS (frozen)", "DEBOUNCE_MS"],
+    "frozen": true
+  },
+  "events_emitted": [
+    "upg:haptic:change { enabled: boolean }"
+  ],
+  "events_consumed_readonly": [
+    "upg:calc:complete",
+    "upg:calc:error",
+    "upg:warning",
+    "click on .dual-bottom-nav-item (W24 P2)",
+    "keydown Cmd/Ctrl+.",
+    "pointerdown / pointerup / pointercancel / pointermove (touch only)"
+  ],
+  "discipline_rules": [
+    "opt-in only — localStorage upg_touch_haptic_enabled === '1'",
+    "5 fixed patterns — never coin a new one",
+    "Vibration API support check before every call (silent no-op on iOS Safari)",
+    "200ms global debounce — no spam",
+    "pointerType === 'touch' gate — mouse + pen excluded",
+    "pointermove drift cancels pending longpress (no double-fire with W24 P3 swipe)",
+    "navigator.vibrate wrapped in try/catch — never throws"
+  ],
+  "devotion_notes": "الـ haptic ليس feature — هو لمسة لُغة. ٥ patterns كافية لكل اللغة: tap (لمسة) / success (نجاح) / warn (تحذير) / error (خطأ) / longpress (ضَغطة طويلة). كله opt-in، لا spam، debounce 200ms. على iOS Safari (لا Vibration API): silent no-op — كأنه لم يكن. على Android Chrome: يَنبض الإصبع قبل أن تَقرأ العين.",
+  "offline_check": {
+    "external_requests": 0,
+    "google_fonts_links": 0,
+    "cdn_libs": 0,
+    "added_imports": 0,
+    "added_remote_assets": 0
+  },
+  "sacred_preservation": {
+    "pages_count": 15,
+    "qcalc_count": 391,
+    "upg_apis_top_level": 30,
+    "google_fonts_count": 0,
+    "no_html_layout_changes": "topbar-actions augmented only — 1 button inserted, no removals",
+    "no_existing_api_changed": "Upg.touch from P3 preserved verbatim — haptic added as sub-namespace inside the same Object.freeze",
+    "phases_1_2_3_untouched": true,
+    "desktop_unaffected": "toggle hidden behind @media (max-width: 720px); haptic only fires on pointerType=='touch'"
+  },
+  "spec_deviations": [
+    "Module remains IIFE (extends W24 P3 in place) instead of spec's ESM `export function init()` — preserves W23 P5 / W24 P3 convention.",
+    "CSS appended to chrome.css (where dual-bottom-nav lives) instead of utilities.css — keeps DUAL-FORM controls colocated.",
+    "Added pointermove drift cancel for longpress to prevent double-fire with W24 P3 horizontal swipe gestures.",
+    "Reused existing W22 P2 Upg.ritual.isHaloActive() gate for halo-success trigger (matches spec intent)."
+  ],
+  "sanity_probes": {
+    "pages": "15 / target 14+",
+    "qcalc": "391 / target 391",
+    "upg_apis_top_level": "30 / target ≥29",
+    "google_fonts": "0 / target 0",
+    "HAPTIC_PATTERNS_occurrences": "5 / target ≥3",
+    "tap_pattern_present": "1 / target 1",
+    "dual_haptic_toggle_in_html": "2 / target 1+",
+    "dual_haptic_toggle_in_css": "11 / target ≥3",
+    "max_width_720_in_haptic_block": "1 / target ≥1",
+    "haptic_object_freeze_in_surface": "1 / target 1",
+    "node_check_upg_touch_1_js": "OK"
+  },
+  "next_action": "Phase 4 committed and pushed to worker-24-devotio-p4. Open PR (Phase 4) and merge to main. Next session: Worker 24 Phase 5 — Print Atelier (15 per-personality print signatures + page-break refinement + tinted hero + identity footer + print-color-adjust discipline). Phase 5 is the final phase of Worker 24 and closes Pack v3 DEVOTIO."
+}

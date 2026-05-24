@@ -690,6 +690,26 @@
         <span class="u-fz-11 u-fw-700 u-mr-1">اختبر نفسك</span>
       </div>
 
+      <!-- ════════════════════════════════════════════════════════════════════
+           DUAL-FORM v3 — Haptic Toggle (Worker 24 / Phase 4)
+           Mobile-only. Hidden on desktop. Wires into Upg.touch.haptic via
+           [data-haptic-toggle]. Reflects state via body[data-haptic-enabled].
+           ════════════════════════════════════════════════════════════════════ -->
+      <button type="button"
+              id="dual-haptic-toggle"
+              class="dual-haptic-toggle"
+              data-haptic-toggle
+              data-mobile-only
+              aria-label="تَفعيل الإحساس اللمسي"
+              title="تَفعيل الإحساس اللمسي (Haptic)"
+              aria-pressed="false">
+        <svg class="dual-haptic-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="3" fill="currentColor"/>
+          <circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3"/>
+        </svg>
+      </button>
+
       <div class="tb-divider"></div>
 
       <div class="tb-avatar" title="حسابي">أح</div>
