@@ -1,0 +1,21 @@
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — α2 — Breakpoint Tokens
+   ────────────────────────────────────────────────────────────────────────
+   Container query thresholds. Container queries before media queries.
+   Mobile-Sovereign: tokens written for 360px first.
+   ════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --bp-xs:  360px;
+  --bp-sm:  480px;
+  --bp-md:  720px;
+  --bp-lg:  1024px;
+  --bp-xl:  1280px;
+  --bp-2xl: 1440px;
+}
+
+/* Container helpers — opt-in via class */
+.elan-page-container { container: page / inline-size; }
+.elan-card-container { container: card / inline-size; }
+
+/* End ÊLAN v4 / α2 — Breakpoint Tokens ────────────────────────────── */

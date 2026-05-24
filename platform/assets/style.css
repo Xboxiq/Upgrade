@@ -23,8 +23,9 @@
 @layer reset, tokens, base, utilities, components, themes, overrides;
 
 /* Imports — must precede any other non-@import non-@charset rule */
-@import url("./css/tokens.css")    layer(tokens);
-@import url("./css/base.css")      layer(base);
+@import url("./css/tokens.css")           layer(tokens);
+@import url("./css/_legacy-fontface.css") layer(tokens);  /* α2 — relocated from tokens.css */
+@import url("./css/base.css")             layer(base);
 @import url("./css/utilities.css") layer(components);
 @import url("./css/chrome.css")    layer(components);
 @import url("./css/pages.css")     layer(components);

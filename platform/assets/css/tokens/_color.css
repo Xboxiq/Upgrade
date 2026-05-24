@@ -1,0 +1,74 @@
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — α2 — Color Slots
+   ────────────────────────────────────────────────────────────────────────
+   Neutral defaults. Worlds override per-page via [data-world="<name>"].
+   Backward-compat aliases preserved (legacy --color-* point to new slots).
+   ════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ─── Anchor ladder (placeholder — overridden by [data-world]) ─── */
+  --anchor-bg:  hsl(220 10% 96%);
+  --anchor-1:   hsl(220 8% 92%);
+  --anchor-2:   hsl(220 8% 88%);
+  --anchor-3:   hsl(220 10% 82%);
+
+  /* ─── Ink ladder ─── */
+  --ink:        hsl(220 30% 12%);
+  --ink-muted:  hsl(220 14% 38%);
+  --ink-faint:  hsl(220 10% 55%);
+
+  /* ─── Lines ─── */
+  --line:        hsl(220 8% 84%);
+  --line-strong: hsl(220 12% 70%);
+
+  /* ─── Three-color discipline (per-world: ember + focus only) ─── */
+  --ember:      hsl(28 80% 52%);
+  --focus:      hsl(252 65% 50%);
+  --accent:     var(--ember);
+
+  /* ─── Semantic state (cross-world consistent) ─── */
+  --state-success: hsl(152 56% 38%);
+  --state-warning: hsl(34 92% 50%);
+  --state-danger:  hsl(0 70% 52%);
+  --state-info:    hsl(210 78% 48%);
+
+  /* ─── Tinted shadows (Refactoring UI — never pure black) ─── */
+  --shadow-sm: 0 1px 2px hsl(220 30% 12% / 0.06);
+  --shadow-md: 0 4px 12px hsl(220 30% 12% / 0.09);
+  --shadow-lg: 0 14px 32px hsl(220 30% 12% / 0.11);
+  --shadow-xl: 0 28px 60px hsl(220 30% 12% / 0.14);
+
+  /* ─── Focus ring ─── */
+  --ring: 0 0 0 3px color-mix(in oklch, var(--focus) 28%, transparent);
+  --ring-offset: 2px;
+
+  /* ─── Backward-compat aliases (preserved) ─── */
+  --color-bg:           var(--anchor-bg);
+  --color-surface-0:    var(--anchor-bg);
+  --color-surface-1:    var(--anchor-1);
+  --color-surface-2:    var(--anchor-2);
+  --color-surface-3:    var(--anchor-3);
+  --color-text:         var(--ink);
+  --color-text-muted:   var(--ink-muted);
+  --color-text-faint:   var(--ink-faint);
+  --color-border:       var(--line);
+  --color-border-strong:var(--line-strong);
+  --color-brand:        var(--ember);
+  --color-brand-hover:  var(--ember);
+  --color-brand-soft:   color-mix(in oklch, var(--ember) 14%, transparent);
+  --color-brand-strong: var(--ember);
+  --color-success:      var(--state-success);
+  --color-warning:      var(--state-warning);
+  --color-danger:       var(--state-danger);
+  --color-info:         var(--state-info);
+  --shadow-c-sm: var(--shadow-sm);
+  --shadow-c-md: var(--shadow-md);
+  --shadow-c-lg: var(--shadow-lg);
+  --shadow-c-xl: var(--shadow-xl);
+
+  /* ─── Geometry preserved from v3 (used in legacy chrome) ─── */
+  --radius-xs:   4px;
+  --radius-full: 999px;
+}
+
+/* End ÊLAN v4 / α2 — Color Slots ──────────────────────────────────── */
