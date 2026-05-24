@@ -77,12 +77,22 @@
 **Files touched:** platform/assets/css/worlds/_hadeed.css · platform/assets/js/elan/world-hadeed.js · platform/assets/app.js
 **Verified at commit:** 1f807da
 
+## γ6 — 2026-05-24
+**Beacon Type:** 🌈 CHROMATIC_BEACON
+**The Surprise:** في عالم ذَهَب، الأرقام المالية تتلوّن تلقائياً حسب حجمها — ثلاث درجات ذهب (light/mid/heavy) تُفعَّل عبر `data-magnitude` attribute يحسبه JS من textContent كل `.qcalc-result-value` و `[data-format="money"]`. أرقام < 100K = بُن مخفف، 100K–1M = ذهب قياسي، > 1M = ذهب مصهور مع `text-shadow` دافئ كأن المال يشعّ. MutationObserver يُعيد التصنيف عند كل تغيير. ليس rainbow — ثلاث درجات فقط من عائلة ذهبية واحدة.
+**Reference Avoided:** Forbidden #4 — generic mesh gradient (purple-orange-pink) + Forbidden #11 — animated counter from 0 (Creativity Doctrine § ٣).
+**Inspired-by:** WORLDS_ATLAS § Dhahab Beacon Identity — "every financial figure inside thin gold frame (1px) + Almarai wght 600 + tabular-nums."
+**User-Visible:** yes (every financial result in accounting page shifts gold intensity in real-time as user adjusts calculator inputs)
+**Originality Self-Score:** 4/5 — color-by-magnitude exists in trading dashboards (red/green); using gold-weight as the metaphor (light→heavy gold, not positive/negative) for an Arabic accounting platform = uncommon. Claim: most financial UIs use red/green polarity; few use a single-hue weight system tied to cultural gold symbolism.
+**Files touched:** platform/assets/css/worlds/_dhahab.css · platform/assets/js/elan/world-dhahab.js · platform/assets/app.js
+**Verified at commit:** c8d77b0
+
 ---STATS---
-total_beacons: 7
-unique_categories_used: 6
-avg_score: 4.29
-last_5_avg: 4.2
+total_beacons: 8
+unique_categories_used: 7
+avg_score: 4.25
+last_5_avg: 4.0
 disruption_triggers: 0
 forbidden_violations: 0
 creativity_health: 100
-last_updated: 2026-05-24 / γ5
+last_updated: 2026-05-24 / γ6

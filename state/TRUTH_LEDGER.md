@@ -619,3 +619,36 @@ The spec asked for an empty `@layer themes` block in `style.css` (themes "deprec
 - 31 top-level Upg.* APIs — unchanged (Upg.worlds.hadeed nested)
 - `archive/` — untouched
 - Hibr (γ2), Naar (γ3), Nada (γ4) — untouched
+
+
+---
+
+## γ6 — عالم ذَهَب (Dhahab) — 2026-05-24
+**Commit:** c8d77b0
+**Branch:** elan-γ-eight-worlds
+
+### Verified metrics (grep)
+| Metric | Value |
+|---|---|
+| `_dhahab.css` lines | 251 |
+| `[data-world="dhahab"]` selectors | 30 |
+| `data-magnitude` chromatic markers | 4 |
+| `:has()` no-JS fallback selectors | 3 |
+| `prefers-reduced-motion` guards | 1 |
+| `backdrop-filter` (forbidden) | 0 |
+| `world-dhahab.js` lines | 158 |
+| `app.js` import added | 1 |
+| Upg.worlds.dhahab registered | yes |
+| Lines added total | 407 |
+| Lines deleted | 4 |
+
+### Beacon
+- Type: CHROMATIC_BEACON
+- Avoided: Forbidden #4 (generic mesh gradient), #11 (animated counter from 0)
+- Self-score: 4/5
+
+### Sacred preserved
+- 14 page sections — unchanged
+- 31 top-level Upg.* APIs — unchanged (Upg.worlds.dhahab nested)
+- `archive/` — untouched
+- Hibr (γ2), Naar (γ3), Nada (γ4), Hadeed (γ5) — untouched
