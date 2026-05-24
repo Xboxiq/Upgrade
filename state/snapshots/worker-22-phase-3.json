@@ -1,0 +1,123 @@
+{
+  "pack": "v3",
+  "worker": "22",
+  "worker_name": "RITUAL_UI",
+  "phase_completed": 3,
+  "phases_total": 6,
+  "title": "Threshold Transitions — 5 variants (fade/mashrabiya/scroll/iris/mihrab-arch), View Transitions API + CSS fallback, 16 personality routing, Upg.transition.run extended, Upg.ritual.{setTransition,getTransition,listTransitions,transitionMap}",
+  "branch": "worker-22-devotio-p3",
+  "files_touched": [
+    "platform/assets/style.css",
+    "platform/assets/app.js"
+  ],
+  "lines_added_total": 443,
+  "lines_added_breakdown": {
+    "platform/assets/style.css": 266,
+    "platform/assets/app.js": 177
+  },
+  "tokens_added": [
+    "--rit-thresh-duration",
+    "--rit-thresh-easing-classical",
+    "--rit-thresh-easing-mashrabiya",
+    "--rit-thresh-easing-scroll",
+    "--rit-thresh-easing-iris",
+    "--rit-thresh-easing-mihrab",
+    "--rit-thresh-active"
+  ],
+  "tokens_added_count": 7,
+  "fonts_added_offline": [],
+  "keyframes_added": [
+    "rit-thresh-fade-out",
+    "rit-thresh-fade-in",
+    "rit-thresh-mashrabiya-out",
+    "rit-thresh-mashrabiya-in",
+    "rit-thresh-scroll-out",
+    "rit-thresh-scroll-in",
+    "rit-thresh-iris-out",
+    "rit-thresh-iris-in",
+    "rit-thresh-mihrab-out",
+    "rit-thresh-mihrab-in"
+  ],
+  "keyframes_added_count": 10,
+  "css_classes_added": [
+    ".rit-thresh-fade-out",
+    ".rit-thresh-fade-in",
+    ".rit-thresh-mashrabiya-out",
+    ".rit-thresh-mashrabiya-in",
+    ".rit-thresh-scroll-out",
+    ".rit-thresh-scroll-in",
+    ".rit-thresh-iris-out",
+    ".rit-thresh-iris-in",
+    ".rit-thresh-mihrab-out",
+    ".rit-thresh-mihrab-in"
+  ],
+  "transition_variants": [
+    "fade",
+    "mashrabiya",
+    "scroll",
+    "iris",
+    "mihrab-arch"
+  ],
+  "personality_transitions_map": {
+    "dashboard": "mashrabiya",
+    "callcenter": "iris",
+    "fieldsales": "fade",
+    "accountmgr": "mihrab-arch",
+    "social": "mashrabiya",
+    "lab": "iris",
+    "psych": "scroll",
+    "eq": "scroll",
+    "negotiation": "mihrab-arch",
+    "customercare": "mashrabiya",
+    "programming": "iris",
+    "accounting": "mihrab-arch",
+    "phonerepair": "fade",
+    "hrmastery": "scroll",
+    "myprogress": "fade",
+    "curriculum": "mashrabiya"
+  },
+  "personality_mappings_count": 16,
+  "api_extensions": {
+    "Upg.transition": [
+      "run(name, opts) — EXTENDED: opts.ritual + opts.toPageId; W14 signature preserved via originalRun.call"
+    ],
+    "Upg.ritual": [
+      "setTransition(variant, pagePersonality?)",
+      "getTransition(pagePersonality?)",
+      "listTransitions()",
+      "transitionMap()"
+    ]
+  },
+  "events_observed": [
+    "upg:nav:change (W12 P4) → triggers syncFromActivePage to reset body[data-rit-thresh]"
+  ],
+  "browser_support": {
+    "view_transitions_api": "chrome 111+, edge 111+ (native pseudo-elements)",
+    "fallback": "CSS class-based animation on section.page (Safari, Firefox)",
+    "reduced_motion": "instant fade, both paths silenced"
+  },
+  "a11y_guards": [
+    "@media (prefers-reduced-motion: reduce) — all 10 keyframes + view-transition pseudo-elements silenced (animation-duration: 0ms, animation-name: none)",
+    "JS prefersReducedMotion() check forces fade variant + skips startViewTransition entirely",
+    "will-change hints scoped to specific properties (opacity / clip-path / transform) — released after animation"
+  ],
+  "devotion_notes": "العبور صار طقساً متنوّعاً. لوحة التحكم تَنفتح كمشربية، نفسية تُلَفّ كَلِفافة، البرمجة تَتأمَّل كإيريس، المحاسبة تَدخُل قَوس المحراب. كل صفحة لها إيقاع عبورها — والسرعة موحَّدة 500ms حتى لا يُتعب الذاكرة العضلية. reduced-motion يصمّت كل شيء فوراً.",
+  "offline_check": {
+    "external_requests": 0,
+    "google_fonts": 0,
+    "cdn_links": 0
+  },
+  "sacred_preserved": {
+    "section_page_count": 14,
+    "qcalc_count": 391,
+    "upg_top_level_apis": 27,
+    "google_fonts_links": 0,
+    "rit_entry_phase1": "intact",
+    "rit_halo_phase2": "intact",
+    "Upg_transition_W14_signature": "preserved (originalRun.call + idempotency guard)",
+    "keyframes_total": 60,
+    "data_page_personality_count": 15,
+    "reduced_motion_guards": 59
+  },
+  "next_action": "Continue Worker 22 Phase 4 (Inkpot Feedback)"
+}
