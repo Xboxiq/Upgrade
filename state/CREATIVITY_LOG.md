@@ -146,3 +146,27 @@ last_updated: 2026-05-24 / δ1 — Pillar δ KINETIC SHELL OPENED (1/6)
 **Files touched:** platform/index.html · platform/assets/css/chrome.css · platform/assets/js/elan/sidebar-magnetic.js · platform/assets/app.js
 **Verified at commit:** d3194f7
 **Pillar open:** δ1 opens Pillar δ KINETIC SHELL on branch elan-δ-kinetic-shell. Same branch carries δ2..δ6.
+
+
+
+
+## δ2 — 2026-05-24
+**Beacon Type:** 📊 DATA_BEACON
+**The Surprise:** لوحة التحكم نفسها — عشر خلايا نفسها، تخطيط `b-4x1` و `b-2x2` و `b-1x1` نفسها — لكن الانتباه يَتنفس مع ساعة اليوم. كل خلية تَكتب أهميتها على حافتها بـ `data-temporal-priority="morning,afternoon"`؛ موديول `bento-temporal.js` يَقرأ `getHours()` كل عشر دقائق ويَختم `data-temporal-active="true"` على المطابقة. الـ CSS layer **يُروِّج فقط، لا يَخفض**: الخلية المختارة تَكتسب outline بـ ember العالم النَّشط + lift 1px + ribbon "الأهم الآن" (pseudo-element، CSS بحت، صفر SVG، صفر emoji). الخلايا الأخرى تَبقى محايدة تماماً، لا انكماش، لا اعتذار. صباحاً يَلمع الترحيب + streak + التحدّي + المهارات (طاقة بداية اليوم)؛ ظهراً يَستمر التحدّي + المهارات + الوحدات (إنجاز نشط)؛ مساءً يَنتقل التركيز إلى معدل الإتمام + الخريطة الحرارية (تأمل ما أنجزتَه)؛ ليلاً يَلمع آخر النشاط + ساعات التدريب + الخريطة (مراجعة اليوم). الـ JS يَبث `upg:bento:temporal-shift` فيَستطيع أي module آخر أن يَقرأ `{slice, hour, activeCount}`. التحوُّل بين الساعات بـ `cubic-bezier(0.32, 0.72, 0.28, 1)` ميزان لطيف، 480ms. `MutationObserver` يَلتقط أي خلية تَنزل لاحقاً ويُطبّق عليها. `prefers-reduced-motion: reduce` يُلغي الـ animation مع إبقاء العَلامة (إشارة، لا حركة). `forced-colors` يَعتمد `Highlight + Canvas + ButtonText`. الطباعة تَخفي الـ ribbon وتَستبدل الـ outline بـ hairline. صفر emoji أُضيف، صفر class string عُدِّل، خمس IDs مُقدَّسة محفوظة كما هي.
+**Reference Avoided:** Forbidden #7 — bento grid مستطيلات بنفس padding (الإيقاع بصري لا بنيوي) + Forbidden #11 — animated counter من 0 (الأرقام لا نَلمسها أبداً، `data-countup` الموجود يَعمل كما هو) + Forbidden #12 — fade-in-on-scroll بدون داعٍ (الحركة الوحيدة هنا حدود ساعة فعلية، سبب صادق).
+**Pivot:** spec δ2 اقترحت 🏛 STRUCTURAL_BEACON؛ pivot إلى 📊 DATA_BEACON تطبيقاً لـ Creativity Doctrine § ٤ — γ8 استخدمت STRUCTURAL مؤخراً، فاختيار DATA يَزيد تنوّع الفئات على نافذة الـ 4 stages (γ8/γ9/δ1/δ2 → STRUCTURAL/META/MOTION/DATA). مفهوم "الترقية حسب الوقت" بقي كما اقترحت spec، لكن الترقية صارت visual-emphasis layer لا grid-area mutation (احتراماً للـ Sacred bento الموجود من Worker 14 / Phase 3).
+**Inspired-by:** Wild Card #4 — Maqamat music notation. مقام صَبا للفجر، البَيّاتي للظهيرة، الحجاز لليل. لوحة التحكم تَصير مقاماً: نفس الآلات، نفس النوتات، لكن أيّ نغمة تَتقدَّم تَختلف بحسب الساعة. هذا هو الـ DATA البِكر: ساعة اليوم بُعدٌ بياني أصيل، لا مجرّد filter UI.
+**User-Visible:** yes — كل تحميل للوحة التحكم يَكشف العَلامة على الخلايا المختلفة بحسب الساعة الحالية؛ المُستخدم يَرى لوحته في الصباح مختلفة عنها في المساء بدون فعل أي شيء، بدون toggle، بدون إعداد.
+**Originality Self-Score:** 4/5 — time-of-day theming موجود (Apple, Things 3 hint colours)؛ ربط ذلك بـ **بُعد عربي ثقافي محدد (الـ Maqamat)** + تطبيقه على **emphasis layer لا palette** + إبقاءه **promotion-only لا demotion** + ربطه بكل عوالم γ عبر `--ember` ينتج توليفة غير شائعة. Claim: most temporal UIs change colour palette; few re-rank attention itself, and fewer still do it as a reversible additive layer that never demotes any cell.
+**Files touched:** platform/assets/js/elan/bento-temporal.js · platform/assets/css/chrome.css · platform/index.html · platform/assets/app.js
+**Verified at commit:** 33f0553
+
+---STATS---
+total_beacons: 13
+unique_categories_used: 9
+avg_score: 4.23
+last_5_avg: 4.2
+disruption_triggers: 2
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-24 / δ2 — Pillar δ stage 2/6

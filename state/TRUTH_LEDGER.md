@@ -968,3 +968,89 @@ emitted, no emoji in any rendered markup. Pillar δ KINETIC SHELL has
 opened. Next: δ2 BENTO_DASHBOARD on the same branch.
 
 — Entry end —
+
+
+
+---
+
+## δ2 — Bento Temporal — 2026-05-24
+**Pillar:** δ KINETIC SHELL (Stage 2 of 6)
+**Branch:** `elan-δ-kinetic-shell`
+**Commit:** `33f0553`
+**Author:** ÊLAN AUTO_PILOT v4
+
+### Forensic — before
+| metric | value |
+|---|---:|
+| dashboard cells (existing bento) | 10 |
+| sacred IDs in dashboard (cath-skill-grid, cath-activity-list, v12Heatmap, v12ChallengeLevel, v12ChallengeBody) | 5 |
+| `data-cath-stat` hooks | 4 |
+| `data-temporal-priority` hooks | 0 |
+| pre-existing emoji in dashboard markup (inherited; ζ1 territory) | 290 |
+| `Upg.bento.*` namespace | absent |
+
+### Forensic — after
+| metric | value |
+|---|---:|
+| `data-temporal-priority` hooks added (one per cell, 9 cells) | 9 |
+| slot coverage: morning / afternoon / evening / night | 4 / 3 / 3 / 3 (every slot ≥ 1) |
+| `data-temporal-active` toggled by JS at `getHours()` | yes |
+| `data-temporal-axis` (focal / supporting) stamped for downstream consumers | yes |
+| `body[data-temporal-slice]` (morning/afternoon/evening/night) stamped | yes |
+| sacred IDs preserved (cath-skill-grid, cath-activity-list, v12Heatmap, v12ChallengeLevel, v12ChallengeBody) | 5 / 5 |
+| `data-cath-stat` hooks preserved | 4 / 4 |
+| existing class strings mutated | 0 / 9 |
+| dashboard cell count (was 10, still 10) | unchanged |
+| toy `<svg viewBox>` in `bento-temporal.js` | 0 |
+| emoji added by δ2 (diff scan: `git diff HEAD -- index.html`) | 0 |
+| hardcoded hex in δ2 CSS block | 0 (print fallback uses `CanvasText` system colour) |
+| reduced-motion guard | 1 |
+| forced-colors guard | 1 |
+| @media print guard | 1 |
+| `Upg.bento.temporal` (frozen surface: current/list/refresh/matches) | registered (additive; never overwrites prior) |
+| `upg:bento:temporal-shift` CustomEvent (carries `{slice, hour, activeCount}`) | dispatched on hour boundaries + nav/world change + visibilitychange |
+
+### Files
+| file | type | lines |
+|---|---|---:|
+| `platform/assets/js/elan/bento-temporal.js` | created | 167 |
+| `platform/assets/css/chrome.css` | appended δ2 block | +135 |
+| `platform/index.html` | data-* hooks (no class / id changes) | +9 attrs across 9 cells |
+| `platform/assets/app.js` | import wired (header + 1 import) | +3 |
+| **TOTAL** | 4 files | +318 / −9 |
+
+### Beacon (declared)
+**Type:** 📊 DATA_BEACON — "The Dashboard Breathes With The Day"
+**Surprise:** same dashboard, same ten cells, same layout — but
+attention itself shifts with the hour. Each cell declares the slice(s)
+that matter most for it: greeting + streak + challenge + skills glow in
+the morning; challenge + skills + units stay active in the afternoon;
+completion-rate + heatmap take focus in the evening; activity feed +
+training-hours + heatmap headline at night. The CSS layer ONLY
+promotes — it never demotes. Inactive cells stay completely neutral. A
+ribbon "الأهم الآن" appears (pure CSS pseudo-element, no SVG, no emoji)
+at the focal cell, tinted in the active world's `--ember`. The shift
+itself is a 480ms cubic-bezier(0.32, 0.72, 0.28, 1) ease — gentle as
+the hour boundary is gentle.
+**Avoided:** Forbidden #7 (bento = identical rectangles) + #11
+(animated counter from 0 — we never touch numeric values; existing
+`data-countup` is preserved verbatim) + #12 (fade-in-on-scroll without
+reason — the only motion is at hour boundaries, with honest cause).
+**Inspired-by:** Wild Card #4 — Maqamat music notation (Saba at dawn,
+Bayati afternoon, Hijaz at night). The dashboard becomes a maqam: same
+instruments, different emphasis.
+**Pivot:** spec proposed STRUCTURAL_BEACON; pivoted to DATA_BEACON per
+Creativity Doctrine § ٤ (γ8 used STRUCTURAL recently — DATA increases
+category variety across the 4-stage window γ8/γ9/δ1/δ2 →
+STRUCTURAL/META/MOTION/DATA).
+**Self-Score:** 4 / 5
+
+### Verdict
+🟢 **complete** — δ2 ships on branch `elan-δ-kinetic-shell` with no
+Forbidden Library violations, zero Sacred Asset disturbance (all 5
+preserved IDs intact, all 4 data-cath-stat hooks intact, 0 class
+strings mutated, 0 cells removed/relocated), no toy SVG emitted, no
+emoji added in any rendered markup. The dashboard now breathes with
+the hour. Next: δ3 TOPBAR_LIVING on the same branch.
+
+— Entry end —
