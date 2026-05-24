@@ -206,3 +206,49 @@
 }
 
 /* End tokens.css ──────────────────────────────────────────────────────── */
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   DUAL-FORM v3 — Viewport + Safe-Area Tokens (Worker 24 / Phase 1)
+   ────────────────────────────────────────────────────────────────────────
+   هدف الـ phase: تثبيت الأرض تحت الموبايل. لا قَفز عند ظهور address bar.
+   الـ notch محترم. الـ home-indicator محترم. على الديسكتوب صفر تأثير.
+   ──────────────────────────────────────────────────────────────────────── */
+:root {
+  /* Safe-area insets (notch + home indicator + landscape edges).
+     Browsers بدون viewport-fit=cover: env() يَرجع 0 → fallback 0. */
+  --safe-top:    env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left:   env(safe-area-inset-left, 0px);
+  --safe-right:  env(safe-area-inset-right, 0px);
+
+  /* Dynamic viewport height — يتجاوب مع الـ address bar */
+  --vh-fallback: 100vh;   /* fallback for older browsers */
+  --dvh-100:     100dvh;  /* dynamic — adapts to chrome shifts */
+  --svh-100:     100svh;  /* small — minimum viewport (chrome visible) */
+  --lvh-100:     100lvh;  /* large — maximum viewport (chrome hidden) */
+
+  /* Chrome heights (per-form awareness — DUAL-FORM body discipline) */
+  --dual-chrome-h-desktop: 64px;
+  --dual-chrome-h-mobile:  56px;
+  --dual-bottom-nav-h:     64px;  /* Phase 2 يَستهلك هذا */
+}
+
+/* Fallback for browsers بدون دعم dvh (Safari < 15.4 / older Android WebView) */
+@supports not (height: 100dvh) {
+  :root {
+    --dvh-100: 100vh;
+    --svh-100: 100vh;
+    --lvh-100: 100vh;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────────────
+   Worker 24 / Phase 1 — Viewport Discipline (forward-binding):
+   1. كل قاعدة جديدة بعد P1 تَستعمل --dvh-100 (لا 100vh).
+   2. الـ chrome يَستهلك --safe-top/bottom/left/right عبر max() merge.
+   3. viewport-fit=cover meta (HTML) يَفتح env() values.
+   4. على الديسكتوب: env() = 0 → صفر تأثير بصري.
+   5. على iOS Safari: home-indicator + notch محترَمان.
+   ──────────────────────────────────────────────────────────────────────── */
+/* End DUAL-FORM v3 / Phase 1 — Tokens ────────────────────────────────── */

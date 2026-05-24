@@ -187,7 +187,7 @@
   box-shadow: var(--shadow-c-xl);
   -webkit-backdrop-filter: blur(24px);
           backdrop-filter: blur(24px);
-  max-height: 92vh;
+  max-height: 92dvh;
   overflow-y: auto;
 }
 
@@ -584,7 +584,7 @@
 
 .cmdk-modal {
   width: min(640px, 92vw);
-  max-height: 70vh;
+  max-height: 70dvh;
   display: flex; flex-direction: column;
   background: var(--color-surface-1, #181a26);
   border: 1px solid var(--color-border-strong, rgba(255,255,255,0.14));
@@ -1036,3 +1036,67 @@
 }
 
 /* End chrome.css ──────────────────────────────────────────────────────── */
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   DUAL-FORM v3 — Safe-Area Chrome Padding (Worker 24 / Phase 1)
+   ────────────────────────────────────────────────────────────────────────
+   هدف الـ block: chrome على الديسكتوب يَبقى كما هو، على الموبايل
+   (notched/iOS) يَستهلك safe-area inserts. على الديسكتوب env() = 0.
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* Top chrome / topbar / app header — يَحترم الـ notch */
+#topbar,
+.topbar,
+.app-header,
+.top-chrome,
+header[role="banner"] {
+  padding-top: max(var(--space-3, 0.75rem), var(--safe-top));
+  padding-inline-start: max(var(--space-4, 1rem), var(--safe-left));
+  padding-inline-end:   max(var(--space-4, 1rem), var(--safe-right));
+}
+
+/* Sidebar — landscape iPad/iPhone notch awareness على الجانب */
+#sidebar,
+.sidebar,
+.nav-rail {
+  padding-inline-start: max(var(--space-2, 0.5rem), var(--safe-left));
+  padding-block-end:    max(var(--space-3, 0.75rem), var(--safe-bottom));
+}
+
+/* Footer / app footer — يَحترم home-indicator */
+.app-footer,
+.bottom-region,
+footer[role="contentinfo"] {
+  padding-bottom:       max(var(--space-3, 0.75rem), var(--safe-bottom));
+  padding-inline-start: max(var(--space-4, 1rem), var(--safe-left));
+  padding-inline-end:   max(var(--space-4, 1rem), var(--safe-right));
+}
+
+/* Main page-host slot — content يَحترم home-indicator على الموبايل */
+#main,
+#page-host,
+main[role="main"],
+main[data-shard-host] {
+  padding-bottom: max(var(--space-4, 1rem), var(--safe-bottom));
+}
+
+/* Mobile drawer (W12 P4) — top edge yields to notch */
+#mobile-drawer,
+.mobile-drawer {
+  padding-top: max(var(--space-4, 1rem), var(--safe-top));
+  padding-inline-start: max(var(--space-3, 0.75rem), var(--safe-left));
+  padding-inline-end:   max(var(--space-3, 0.75rem), var(--safe-right));
+}
+
+/* CMDK modal overlay (W11 P5) — top padding respects notch (keeps 12dvh original) */
+.cmdk-overlay {
+  padding-top: max(12dvh, var(--safe-top));
+}
+
+/* Body min-height — re-affirm on dvh-base */
+html, body {
+  min-height: var(--dvh-100);
+}
+
+/* End DUAL-FORM v3 / Phase 1 — Safe-Area Chrome ──────────────────────── */
