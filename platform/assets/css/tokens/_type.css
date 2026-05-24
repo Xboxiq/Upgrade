@@ -1,0 +1,54 @@
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — α2 — Type Tokens
+   ────────────────────────────────────────────────────────────────────────
+   18 voice slots declared with neutral fallbacks.
+   β2 will fill stacks. γ2-γ9 will override per world.
+   No @font-face here — see ../_legacy-fontface.css until β1 replaces it.
+   ════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ─── Fluid scale (clamp-based) ─── */
+  --fs-xs:   clamp(0.75rem,  0.7rem  + 0.15vw, 0.8125rem);
+  --fs-sm:   clamp(0.875rem, 0.83rem + 0.15vw, 0.9375rem);
+  --fs-base: clamp(1rem,     0.95rem + 0.15vw, 1.0625rem);
+  --fs-lg:   clamp(1.125rem, 1.05rem + 0.25vw, 1.25rem);
+  --fs-xl:   clamp(1.375rem, 1.25rem + 0.5vw,  1.625rem);
+  --fs-2xl:  clamp(1.75rem,  1.5rem  + 1vw,    2.25rem);
+  --fs-3xl:  clamp(2.25rem,  1.85rem + 1.6vw,  3.125rem);
+  --fs-4xl:  clamp(2.875rem, 2.25rem + 2.5vw,  4.5rem);
+
+  /* ─── Leading ─── */
+  --lead-tight:   1.18;
+  --lead-snug:    1.32;
+  --lead-normal:  1.55;
+  --lead-relaxed: 1.72;
+
+  /* ─── Tracking ─── */
+  --track-tight:    -0.022em;
+  --track-snug:     -0.012em;
+  --track-normal:    0;
+  --track-loose:     0.015em;
+  --track-eyebrow:   0.08em;
+
+  /* ─── 18 Voice Slots (β2 fills, worlds override) ─── */
+  --voice-hero:        system-ui, sans-serif;
+  --voice-display:     system-ui, sans-serif;
+  --voice-display-h:   system-ui, sans-serif;
+  --voice-display-l:   system-ui, sans-serif;
+  --voice-body:        system-ui, sans-serif;
+  --voice-body-lead:   system-ui, sans-serif;
+  --voice-ui:          system-ui, sans-serif;
+  --voice-label:       system-ui, sans-serif;
+  --voice-numeric:     system-ui, sans-serif;
+  --voice-num-tabular: ui-monospace, monospace;
+  --voice-code:        ui-monospace, monospace;
+  --voice-accent:      system-ui, sans-serif;
+  --voice-eyebrow:     system-ui, sans-serif;
+  --voice-signature:   system-ui, sans-serif;
+  --voice-ribbon:      system-ui, sans-serif;
+  --voice-quote:       system-ui, serif;
+  --voice-latin:       system-ui, sans-serif;
+  --voice-wordmark:    system-ui, sans-serif;
+}
+
+/* End ÊLAN v4 / α2 — Type Tokens ──────────────────────────────────── */

@@ -1,0 +1,83 @@
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — α2 — Space Tokens
+   ────────────────────────────────────────────────────────────────────────
+   Spacing scale (4pt grid) + safe-area + chrome heights + radius scale.
+   Legacy aliases (--dual-*, --print-*, --vh-*, --dvh-*) preserved verbatim
+   for backward-compat with motion.css print rules and DUAL-FORM v3 chrome.
+   ════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ─── 4pt scale ─── */
+  --s-1:  0.25rem;
+  --s-2:  0.5rem;
+  --s-3:  0.75rem;
+  --s-4:  1rem;
+  --s-5:  1.25rem;
+  --s-6:  1.5rem;
+  --s-8:  2rem;
+  --s-10: 2.5rem;
+  --s-12: 3rem;
+  --s-16: 4rem;
+  --s-24: 6rem;
+
+  /* ─── Safe-area insets (notch + home indicator) ─── */
+  --safe-top:    env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left:   env(safe-area-inset-left, 0px);
+  --safe-right:  env(safe-area-inset-right, 0px);
+
+  /* ─── Container padding per breakpoint ─── */
+  --container-px-mobile:  var(--s-4);
+  --container-px-tablet:  var(--s-6);
+  --container-px-desktop: var(--s-8);
+
+  /* ─── Chrome heights (canonical names) ─── */
+  --chrome-topbar-mobile:  56px;
+  --chrome-topbar-desktop: 64px;
+  --chrome-bottom-nav:     64px;
+  --chrome-sidebar:        264px;
+
+  /* ─── Radius scale ─── */
+  --r-1: 4px;
+  --r-2: 8px;
+  --r-3: 12px;
+  --r-4: 16px;
+  --r-5: 20px;
+  --r-pill: 999px;
+
+  /* ─── Dynamic viewport (DUAL-FORM v3 — preserved) ─── */
+  --vh-fallback: 100vh;
+  --dvh-100:     100dvh;
+  --svh-100:     100svh;
+  --lvh-100:     100lvh;
+
+  /* ─── Backward-compat: DUAL-FORM v3 chrome aliases ─── */
+  --dual-chrome-h-desktop: var(--chrome-topbar-desktop);
+  --dual-chrome-h-mobile:  var(--chrome-topbar-mobile);
+  --dual-bottom-nav-h:     var(--chrome-bottom-nav);
+
+  /* ─── Backward-compat: DUAL-FORM v3 bottom-nav surface tokens ─── */
+  --dual-bottom-nav-bg:     color-mix(in oklch, var(--anchor-1) 88%, transparent);
+  --dual-bottom-nav-border: var(--line);
+  --dual-bottom-nav-radius: 20px;
+  --dual-bottom-nav-shadow: var(--shadow-lg);
+
+  /* ─── Print Atelier tokens (DUAL-FORM v3 / W24 P5 — preserved verbatim) ─── */
+  --print-page-margin: 18mm 16mm 22mm 16mm;
+  --print-text-color:  hsl(220 30% 12%);
+  --print-text-muted:  hsl(220 18% 36%);
+  --print-paper-color: white;
+  --print-paper-tint:  hsl(40 38% 99.2%);
+  --print-rule-color:  color-mix(in oklch, hsl(220 30% 12%) 22%, transparent);
+}
+
+/* Fallback for browsers without dvh support (Safari < 15.4) */
+@supports not (height: 100dvh) {
+  :root {
+    --dvh-100: 100vh;
+    --svh-100: 100vh;
+    --lvh-100: 100vh;
+  }
+}
+
+/* End ÊLAN v4 / α2 — Space Tokens ─────────────────────────────────── */
