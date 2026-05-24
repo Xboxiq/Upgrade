@@ -1,15 +1,13 @@
 /* ════════════════════════════════════════════════════════════════════════
-   ÊLAN v4 — β1 — Type Tokens + Local @font-face Declarations
+   ÊLAN v4 — β1 + β2 — Type Tokens + Local @font-face + Voice Casting
    ────────────────────────────────────────────────────────────────────────
-   9 families × variable+static .woff2 in platform/assets/fonts/.
-   Sources: Boutros Press, 29LT, EkType, rastikerdar, Khaled Hosny, SIL,
-   Vercel, JetBrains. Single non-Google primary stack.
+   β1 (Local Font Procurement) defined the 9 @font-face declarations below.
+   β2 (Voice Casting) fills the 18 voice tokens with Arabic-first fallback
+   chains. Each chain layers through other families in the 9-pack before
+   terminating in a generic family — Arabic chains NEVER drop to system-ui.
+   This is the TYPOGRAPHIC_BEACON of β2: a font-load failure rotates the
+   character of the typography, it does not break it.
 
-   The @font-face block is the only place declarations live after β1.
-   All earlier blocks (legacy-fontface stub + pages.css transitional)
-   are deprecated; tokens.css remains @font-face-free.
-
-   Voice slots stay declared with neutral fallbacks here; β2 fills them.
    font-display: swap on every face → FOUT < 200ms guaranteed.
    ════════════════════════════════════════════════════════════════════════ */
 
@@ -138,26 +136,65 @@
   --track-normal:    0;
   --track-loose:     0.015em;
   --track-eyebrow:   0.08em;
-
-  /* ─── 18 Voice Slots — declared with neutral fallbacks (β2 fills) ─── */
-  --voice-hero:        system-ui, sans-serif;
-  --voice-display:     system-ui, sans-serif;
-  --voice-display-h:   system-ui, sans-serif;
-  --voice-display-l:   system-ui, sans-serif;
-  --voice-body:        system-ui, sans-serif;
-  --voice-body-lead:   system-ui, sans-serif;
-  --voice-ui:          system-ui, sans-serif;
-  --voice-label:       system-ui, sans-serif;
-  --voice-numeric:     system-ui, sans-serif;
-  --voice-num-tabular: ui-monospace, monospace;
-  --voice-code:        ui-monospace, monospace;
-  --voice-accent:      system-ui, sans-serif;
-  --voice-eyebrow:     system-ui, sans-serif;
-  --voice-signature:   system-ui, sans-serif;
-  --voice-ribbon:      system-ui, sans-serif;
-  --voice-quote:       system-ui, serif;
-  --voice-latin:       system-ui, sans-serif;
-  --voice-wordmark:    system-ui, sans-serif;
 }
 
-/* End ÊLAN v4 / β1 — Type Tokens + Local @font-face ───────────────────── */
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — β2 — Voice Casting
+   ────────────────────────────────────────────────────────────────────────
+   18 voice slots filled with Arabic-first fallback chains.
+   Six stack groups:
+     A. DISPLAY   — Boutros / Bukra / Lateef → serif
+     B. BODY      — Markazi / Lateef / Vazirmatn → serif
+     C. UI        — Vazirmatn / Bukra / Almarai → sans-serif
+     D. NUMERIC   — Almarai / JetBrains Mono / Vazirmatn → monospace|sans-serif
+     E. SPECIAL   — Amiri Quran / Lateef / Markazi → serif
+     F. LATIN     — Geist / ui-sans-serif → sans-serif (Latin-only, system fallback OK)
+
+   TYPOGRAPHIC BEACON: Arabic chains do NOT contain `system-ui`. A failed
+   primary load rotates to a sibling Naskh / Kufi family, never to the
+   browser's anonymous Arabic system fallback (which on most desktop OSes
+   is a generic Times-clone that demolishes character).
+   ════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ─── Group A — DISPLAY ─── */
+  --voice-hero:        "Boutros Modern Kufi", "29LT Bukra", "Lateef", "Markazi Text", serif;
+  --voice-display:     "Boutros Modern Kufi", "29LT Bukra", "Lateef", "Markazi Text", serif;
+  --voice-display-h:   "29LT Bukra", "Boutros Modern Kufi", "Vazirmatn", "Almarai", sans-serif;
+  --voice-display-l:   "Lateef", "Markazi Text", "Boutros Modern Kufi", serif;
+
+  /* ─── Group B — BODY ─── */
+  --voice-body:        "Markazi Text", "Lateef", "Vazirmatn", "Boutros Modern Kufi", serif;
+  --voice-body-lead:   "Markazi Text", "Lateef", "Vazirmatn", serif;
+  --voice-quote:       "Lateef", "Markazi Text", "Amiri Quran Colored", "Boutros Modern Kufi", serif;
+
+  /* ─── Group C — UI ─── */
+  --voice-ui:          "Vazirmatn", "29LT Bukra", "Almarai", "Boutros Modern Kufi", sans-serif;
+  --voice-label:       "Vazirmatn", "Almarai", "29LT Bukra", sans-serif;
+  --voice-eyebrow:     "29LT Bukra", "Vazirmatn", "Almarai", "Boutros Modern Kufi", sans-serif;
+
+  /* ─── Group D — NUMERIC + STRUCTURAL ─── */
+  --voice-numeric:     "Almarai", "Vazirmatn", "29LT Bukra", "Boutros Modern Kufi", sans-serif;
+  --voice-num-tabular: "Almarai", "JetBrains Mono", "Vazirmatn", "Geist", monospace;
+  --voice-code:        "JetBrains Mono", "Geist", ui-monospace, monospace;
+
+  /* ─── Group E — SPECIAL ─── */
+  --voice-accent:      "Amiri Quran Colored", "Lateef", "Markazi Text", "Boutros Modern Kufi", serif;
+  --voice-signature:   "Boutros Modern Kufi", "Amiri Quran Colored", "Lateef", "Markazi Text", serif;
+  --voice-ribbon:      "29LT Bukra", "Vazirmatn", "Almarai", "Boutros Modern Kufi", sans-serif;
+
+  /* ─── Group F — LATIN-ONLY ─── */
+  --voice-latin:       "Geist", "Vazirmatn", ui-sans-serif, sans-serif;
+  --voice-wordmark:    "Geist", "Boutros Modern Kufi", ui-sans-serif, sans-serif;
+}
+
+/* ─── Latin override — when content is explicitly english ──────────────── */
+:lang(en) {
+  --voice-body:        "Geist", "Markazi Text", ui-sans-serif, serif;
+  --voice-body-lead:   "Geist", "Markazi Text", ui-sans-serif, serif;
+  --voice-ui:          "Geist", "Vazirmatn", ui-sans-serif, sans-serif;
+  --voice-label:       "Geist", "Vazirmatn", ui-sans-serif, sans-serif;
+  --voice-numeric:     "Geist", "Almarai", "JetBrains Mono", monospace;
+}
+
+/* End ÊLAN v4 / β1 + β2 — Type Tokens + Voice Casting ─────────────────── */

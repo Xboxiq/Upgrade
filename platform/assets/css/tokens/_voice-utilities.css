@@ -1,0 +1,134 @@
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — β2 — Voice Utility Classes
+   ────────────────────────────────────────────────────────────────────────
+   18 utility classes binding one voice slot each. Apply via class instead
+   of inline styles (ζ1 will purge inline font-family writes).
+   Each class declares: family + weight + line-height baseline + (where
+   appropriate) tracking + feature settings. Worlds (γ2-γ9) override the
+   underlying voice tokens; the utility class consumers do not change.
+
+   The classes never reach for `system-ui` directly — they consume
+   var(--voice-*) which carries the β2 Arabic-first fallback chain.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Group A — DISPLAY ─── */
+.v-hero {
+  font-family: var(--voice-hero);
+  font-weight: 800;
+  line-height: var(--lead-tight);
+  letter-spacing: var(--track-tight);
+}
+.v-display {
+  font-family: var(--voice-display);
+  font-weight: 700;
+  line-height: var(--lead-snug);
+  letter-spacing: var(--track-snug);
+}
+.v-display-h {
+  font-family: var(--voice-display-h);
+  font-weight: 800;
+  line-height: var(--lead-tight);
+  letter-spacing: var(--track-tight);
+}
+.v-display-l {
+  font-family: var(--voice-display-l);
+  font-weight: 500;
+  line-height: var(--lead-snug);
+  letter-spacing: var(--track-loose);
+  font-style: italic;
+}
+
+/* ─── Group B — BODY ─── */
+.v-body {
+  font-family: var(--voice-body);
+  font-weight: 400;
+  line-height: var(--lead-normal);
+}
+.v-body-lead {
+  font-family: var(--voice-body-lead);
+  font-weight: 500;
+  line-height: var(--lead-relaxed);
+  font-size: var(--fs-lg);
+}
+.v-quote {
+  font-family: var(--voice-quote);
+  font-weight: 400;
+  line-height: var(--lead-relaxed);
+  font-style: italic;
+}
+
+/* ─── Group C — UI ─── */
+.v-ui {
+  font-family: var(--voice-ui);
+  font-weight: 500;
+  line-height: var(--lead-normal);
+}
+.v-label {
+  font-family: var(--voice-label);
+  font-weight: 500;
+  line-height: var(--lead-snug);
+  letter-spacing: var(--track-snug);
+}
+.v-eyebrow {
+  font-family: var(--voice-eyebrow);
+  font-weight: 600;
+  line-height: 1.0;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  font-size: var(--fs-xs);
+}
+
+/* ─── Group D — NUMERIC + STRUCTURAL ─── */
+.v-numeric {
+  font-family: var(--voice-numeric);
+  font-weight: 600;
+  font-feature-settings: "lnum" 1;
+  font-variant-numeric: lining-nums;
+}
+.v-num-tabular {
+  font-family: var(--voice-num-tabular);
+  font-weight: 600;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.v-code {
+  font-family: var(--voice-code);
+  font-weight: 400;
+  font-feature-settings: "calt" 0;
+  line-height: var(--lead-normal);
+}
+
+/* ─── Group E — SPECIAL ─── */
+.v-accent {
+  font-family: var(--voice-accent);
+  font-weight: 400;
+  line-height: var(--lead-tight);
+}
+.v-signature {
+  font-family: var(--voice-signature);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: var(--track-snug);
+}
+.v-ribbon {
+  font-family: var(--voice-ribbon);
+  font-weight: 600;
+  line-height: 1.0;
+  letter-spacing: var(--track-loose);
+  text-transform: uppercase;
+}
+
+/* ─── Group F — LATIN-ONLY ─── */
+.v-latin {
+  font-family: var(--voice-latin);
+  font-weight: 400;
+  line-height: var(--lead-normal);
+}
+.v-wordmark {
+  font-family: var(--voice-wordmark);
+  font-weight: 700;
+  letter-spacing: var(--track-tight);
+  line-height: 1.0;
+}
+
+/* End ÊLAN v4 / β2 — Voice Utility Classes ───────────────────────────── */

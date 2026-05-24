@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ÊLAN v4 — Voice Test Sheet (β2)</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    /* Local-only sheet styling — not shipped beyond β2 verification.
+       Uses voice tokens themselves so this page is itself a verifier. */
+    body {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 6rem;
+      overflow: visible;
+      height: auto;
+      background: var(--bg, #faf7f2);
+      color: var(--text, #1a1a1a);
+    }
+    section {
+      margin-bottom: 2.25rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line, rgba(0,0,0,.12));
+    }
+    h2.test-h {
+      font-family: var(--voice-eyebrow);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .75rem;
+      color: var(--ink-faint, #666);
+      margin: 0 0 .5rem;
+      font-weight: 600;
+    }
+    .voice-row {
+      display: grid;
+      grid-template-columns: 9.5rem 1fr;
+      gap: 1rem;
+      align-items: baseline;
+      padding-block: .25rem;
+    }
+    .voice-row .tag {
+      font-family: var(--voice-code);
+      font-size: .8rem;
+      color: var(--ink-faint, #888);
+    }
+    pre.code-block {
+      background: rgba(0,0,0,.04);
+      padding: .75rem 1rem;
+      border-radius: .5rem;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2 class="test-h">ÊLAN v4 / Pillar β / Stage 2 / Voice Casting / verify sheet</h2>
+    <p class="v-body" style="margin:.5rem 0 0">
+      هذه الصفحة لا تَستهلك أي inline font-family. كل سطر أدناه يَختبر voice token واحد عبر utility class،
+      ويُظهر نتيجة β1 (الخطوط على القرص) + β2 (الـ stack المربوط) معاً.
+    </p>
+  </header>
+
+  <section>
+    <h2 class="test-h">A — Display</h2>
+    <div class="voice-row"><span class="tag">.v-hero</span>
+      <p class="v-hero">العَودة إلى الأصل — Hero</p></div>
+    <div class="voice-row"><span class="tag">.v-display</span>
+      <p class="v-display">العَودة إلى الأصل — Display</p></div>
+    <div class="voice-row"><span class="tag">.v-display-h</span>
+      <p class="v-display-h">العَودة إلى الأصل — Display Heavy</p></div>
+    <div class="voice-row"><span class="tag">.v-display-l</span>
+      <p class="v-display-l">العَودة إلى الأصل — Display Lyric</p></div>
+  </section>
+
+  <section>
+    <h2 class="test-h">B — Body / Quote</h2>
+    <div class="voice-row"><span class="tag">.v-body</span>
+      <p class="v-body">يجب أن يَقرأ هذا النص بسلاسة في فقرات طويلة، تتشكَّل فيها الكلمات كأنها تتنفس على الورق دون عَرَج. النَّسخ هنا ليس زخرفة — هو معمار يحمل الفكرة على ظهره.</p></div>
+    <div class="voice-row"><span class="tag">.v-body-lead</span>
+      <p class="v-body-lead">مقدمة كبيرة قليلاً تجذب القارئ إلى متن المقالة قبل أن يَستسلم للفقرة الطويلة.</p></div>
+    <div class="voice-row"><span class="tag">.v-quote</span>
+      <blockquote class="v-quote">«من بَطُؤَ به عَمَلُه لم يُسرع به نَسَبُه».</blockquote></div>
+  </section>
+
+  <section>
+    <h2 class="test-h">C — UI</h2>
+    <div class="voice-row"><span class="tag">.v-ui</span>
+      <button class="v-ui" type="button" style="padding:.5rem 1rem;border-radius:.5rem;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer">
+        ابدأ التحدي
+      </button></div>
+    <div class="voice-row"><span class="tag">.v-label</span>
+      <span class="v-label">التقدُّم اليومي</span></div>
+    <div class="voice-row"><span class="tag">.v-eyebrow</span>
+      <span class="v-eyebrow">المرحلة الثانية</span></div>
+  </section>
+
+  <section>
+    <h2 class="test-h">D — Numeric / Code</h2>
+    <div class="voice-row"><span class="tag">.v-numeric</span>
+      <span class="v-numeric">1234 / ١٢٣٤</span></div>
+    <div class="voice-row"><span class="tag">.v-num-tabular</span>
+      <span class="v-num-tabular">12,345.67</span></div>
+    <div class="voice-row"><span class="tag">.v-code</span>
+      <pre class="code-block v-code">const x = 42;
+const y = await fetch("/data");</pre></div>
+  </section>
+
+  <section>
+    <h2 class="test-h">E — Special</h2>
+    <div class="voice-row"><span class="tag">.v-accent</span>
+      <p class="v-accent">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p></div>
+    <div class="voice-row"><span class="tag">.v-signature</span>
+      <p class="v-signature">Upgrade · أَب-جَد</p></div>
+    <div class="voice-row"><span class="tag">.v-ribbon</span>
+      <p class="v-ribbon">مكافأة 500 نقطة</p></div>
+  </section>
+
+  <section>
+    <h2 class="test-h">F — Latin</h2>
+    <div class="voice-row"><span class="tag">.v-latin</span>
+      <p class="v-latin" lang="en">Latin sample text 1234.56 — Geist primary.</p></div>
+    <div class="voice-row"><span class="tag">.v-wordmark</span>
+      <p class="v-wordmark" lang="en">Upgrade.</p></div>
+  </section>
+
+  <section>
+    <h2 class="test-h">Fallback test (force missing primary)</h2>
+    <p class="v-body" style="font-family: 'Markazi-Missing-FAKE', var(--voice-body); ">
+      نص بفقدان متعمَّد للخط الرئيسي — يجب أن ينزل إلى Lateef ثم Vazirmatn ثم Boutros، ولا يَنزل إلى system-ui.
+    </p>
+  </section>
+</body>
+</html>
