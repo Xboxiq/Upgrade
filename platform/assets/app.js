@@ -175,3 +175,11 @@ import './js/elan/epsilon5-lab.js';
 // ÊLAN v4 — ε6: Psych/EQ/Negotiation Content Revival (Nada + Hadeed worlds)
 // Registers Upg.elan.breath — breath-pause (Nada) + stamp-mark (Hadeed).
 import './js/elan/epsilon6-psych.js';
+
+// ÊLAN v4 — ε7: Customer Care Content Revival (Warsha world)
+// CHROMATIC_BEACON — sentiment-tinted bench textarea. Keyword-lemma Iraqi-
+// Arabic scoring drives 3-state surface tint (warm-olive / neutral-terra /
+// harsh-brick). The bench IS the meter. Inspired-by: Wild Card #13 Iraqi
+// Marsh Architecture — mudhif reed walls signal state through ambient
+// material shift, not signage. Registers Upg.elan.customercare (frozen).
+import './js/elan/epsilon7-customercare.js';
