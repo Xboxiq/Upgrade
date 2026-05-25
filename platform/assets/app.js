@@ -192,3 +192,12 @@ import './js/elan/epsilon7-customercare.js';
 // by: Wild Card #1 Brutalist Iraqi Modernism (Makiya/Chadirji structural
 // diagrams). Registers Upg.elan.programming (frozen).
 import './js/elan/epsilon8-programming.js';
+
+// ÊLAN v4 — ε9: Accounting Content Revival (Dhahab world)
+// DATA_BEACON — Memphis tax IQ ladder. 5 gold-leaf asymmetric ovals
+// stacked column-reverse, slider drives --bracket-fill + --bracket-width
+// per bracket via progressive computation. Tax amount displayed with β3
+// kashida thousands separator. Inspired-by: Mughal accounting books
+// (visual ledgers as weight scales) + Memphis Group asymmetric ovals.
+// Registers Upg.elan.accounting (frozen, exposes compute + brackets).
+import './js/elan/epsilon9-accounting.js';

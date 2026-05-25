@@ -24623,6 +24623,88 @@ const bird = { ...canMove(), ...canFly() };
         </a>
       </aside>
 
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           ÊLAN v4 — ε9 — DATA_BEACON: Memphis Tax IQ Ladder (Dhahab world)
+           5 brackets as gold-leaf Memphis ovals stacked column-reverse.
+           Slider drives --bracket-fill + --bracket-width per bracket.
+           β3 kashida thousands separator on the tax amount.
+           ══════════════════════════════════════════════════════════════════ -->
+      <section class="dhahab-tax-iq-section" data-elan-section="dhahab-tax-iq" aria-labelledby="elan-tax-iq-h">
+        <header class="dhahab-tax-iq-head">
+          <i class="qi qi-md" data-icon="scale" aria-hidden="true"></i>
+          <h2 id="elan-tax-iq-h" class="type-display">ضريبة الدخل العراقية — سلَّم الذهب</h2>
+        </header>
+        <p class="dhahab-tax-iq-lede" data-type-voice="body">حرّك الـ slider ليَتمدَّد كل bracket بقدر ما يَأخذ من راتبك. الـ ovals الذهبية تَتلوَّن وتَكبُر مع الـ progressive computation. الفاصل العشَري في المبلغ كَشيدَة (ـ)، ليس فاصلة لاتينية.</p>
+
+        <label class="dhahab-tax-input-label" for="dhahab-tax-input">الراتب الشهري (دينار عراقي)</label>
+        <input
+          id="dhahab-tax-input"
+          class="tax-input"
+          type="range"
+          min="0"
+          max="10000000"
+          step="50000"
+          value="1500000"
+          data-elan-tax-input
+          aria-describedby="elan-tax-iq-summary">
+
+        <output class="tax-input-readout" data-elan-tax-readout aria-live="polite">١٬٥٠٠٬٠٠٠ د.ع</output>
+
+        <ol class="tax-ladder" data-elan-tax-ladder aria-label="السلَّم الضريبي المتدرِّج">
+          <li class="tax-bracket" data-bracket="0" style="--bracket-fill: 0%; --bracket-width: 50%;">
+            <span class="tax-bracket__rate">٠٪</span>
+            <span class="tax-bracket__range">٠ – ٢٥٠٬٠٠٠</span>
+            <span class="tax-bracket__note">معفى</span>
+          </li>
+          <li class="tax-bracket" data-bracket="1" style="--bracket-fill: 0%; --bracket-width: 50%;">
+            <span class="tax-bracket__rate">٣٪</span>
+            <span class="tax-bracket__range">٢٥٠٬٠٠١ – ٥٠٠٬٠٠٠</span>
+            <span class="tax-bracket__note">الفئة الأولى</span>
+          </li>
+          <li class="tax-bracket" data-bracket="2" style="--bracket-fill: 0%; --bracket-width: 50%;">
+            <span class="tax-bracket__rate">٥٪</span>
+            <span class="tax-bracket__range">٥٠٠٬٠٠١ – ١٬٠٠٠٬٠٠٠</span>
+            <span class="tax-bracket__note">الفئة الثانية</span>
+          </li>
+          <li class="tax-bracket" data-bracket="3" style="--bracket-fill: 0%; --bracket-width: 50%;">
+            <span class="tax-bracket__rate">١٠٪</span>
+            <span class="tax-bracket__range">١٬٠٠٠٬٠٠١ – ٥٬٠٠٠٬٠٠٠</span>
+            <span class="tax-bracket__note">الفئة الثالثة</span>
+          </li>
+          <li class="tax-bracket" data-bracket="4" style="--bracket-fill: 0%; --bracket-width: 50%;">
+            <span class="tax-bracket__rate">١٥٪</span>
+            <span class="tax-bracket__range">فوق ٥٬٠٠٠٬٠٠٠</span>
+            <span class="tax-bracket__note">الفئة العليا</span>
+          </li>
+        </ol>
+
+        <div class="tax-summary" id="elan-tax-iq-summary" role="status" aria-live="polite">
+          <div class="tax-summary__cell">
+            <span class="tax-summary__label">الضريبة الشهرية</span>
+            <strong class="tax-summary__value" data-elan-tax-output="amount">٠</strong>
+            <small class="tax-summary__cur">د.ع</small>
+          </div>
+          <div class="tax-summary__cell">
+            <span class="tax-summary__label">المعدَّل الفعلي</span>
+            <strong class="tax-summary__value tabular" data-elan-tax-output="rate">٠٫٠٠٪</strong>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           ÊLAN v4 — ε9 — Iraq Block (PROVE-IT, citation visible)
+           ══════════════════════════════════════════════════════════════════ -->
+      <aside class="iraq-block iraq-block--dhahab" data-elan-iraq="accounting" aria-label="حقيقة من قانون الضريبة العراقية">
+        <header class="iraq-block__head">
+          <i class="qi qi-md" data-icon="receipt" aria-hidden="true"></i>
+          <span>قانون الضريبة العراقية</span>
+        </header>
+        <p>على راتب <strong>١٬٥٠٠٬٠٠٠ د.ع</strong> شهرياً، الضريبة الفعلية ليست ١٠٪. هي <strong>~٥٫٥٪</strong> فقط (٨٢٬٥٠٠ د.ع) — لأن الـ progressive computation يَطبَّق على كل bracket على حِدَة، وأول ٢٥٠٬٠٠٠ معفية تماماً، ثم ٣٪ على الـ ٢٥٠٠٠٠ التالية، ثم ٥٪ على الـ ٥٠٠٠٠٠ التالية، ثم ١٠٪ على ٥٠٠٠٠٠ فقط.</p>
+        <cite class="iraq-block__cite">المصدر: هيئة الضرائب العراقية — نشرة شرائح ضريبة الدخل، ٢٠٢٤</cite>
+      </aside>
+
     </section><!-- /page-accounting -->
 
 
