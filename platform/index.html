@@ -750,6 +750,74 @@
           </div>
         </article>
 
+        <!-- ══════════ ε1 Cell A — Daily Progress with Manuscript Margin (b-2x2, focal) ══════════
+             DATA_BEACON: vertical ink reservoir, top→bottom fill, 5 ribbed ticks (20% each).
+             Avoids Forbidden #11 (horizontal fill cliché) + #12 (scroll fade).
+             ═════════════════════════════════════════════════════════════════════════ -->
+        <article class="bento-progress b-2x2 material-regular" data-reveal data-elan-stage="ε1" aria-labelledby="elan-progress-h">
+          <header class="bento-h">
+            <h2 id="elan-progress-h"><i class="qi" data-icon="book-open" aria-hidden="true"></i> تقدُّم اليوم</h2>
+            <span class="bento-h-meta v-eyebrow" data-type-voice="accent">هامش المخطوطة</span>
+          </header>
+          <div class="progress-margin-host">
+            <div class="progress-body">
+              <p class="progress-headline v-display"><span data-elan-progress-done>0</span> <span class="v-faint">من</span> <span data-elan-progress-total>50</span></p>
+              <p class="progress-percent" data-tabular><span data-elan-progress-pct>0</span>٪</p>
+              <p class="progress-prose v-body">أَتممتَ <span data-elan-progress-done-text>0</span> وحدة من أصل <span data-elan-progress-total-text>50</span> هذا الأسبوع. الهامش يَمتلئ كَما تَمتلئ صفحات المخطوطة — من فوق إلى تحت، حِبراً لا شريطاً.</p>
+            </div>
+            <div class="progress-margin" role="progressbar"
+                 aria-labelledby="elan-progress-h"
+                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+                 data-elan-progress-margin
+                 style="--progress-pct: 0%">
+              <div class="progress-margin__fill" aria-hidden="true"></div>
+              <ul class="progress-margin__ribs" aria-hidden="true">
+                <li style="--rib-pos: 20%"></li>
+                <li style="--rib-pos: 40%"></li>
+                <li style="--rib-pos: 60%"></li>
+                <li style="--rib-pos: 80%"></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- ══════════ ε1 Cell B — Continue Last Unit (b-2x1, focal) ══════════ -->
+        <article class="bento-continue b-2x1 material-regular" data-reveal data-temporal-priority="morning,afternoon">
+          <header class="bento-h">
+            <h2><i class="qi" data-icon="bookmark" aria-hidden="true"></i> تابِع وحدتك</h2>
+          </header>
+          <div class="continue-body">
+            <p class="continue-eyebrow v-eyebrow" data-type-voice="accent">آخر وحدة مفتوحة</p>
+            <p class="continue-title v-display" data-elan-continue-title>المهارات الأساسية للمكالمة الواردة</p>
+            <p class="continue-meta v-body-sm">
+              <span data-elan-continue-page="callcenter">مركز الاتصال</span>
+              <span class="continue-dot" aria-hidden="true">·</span>
+              <span><span data-elan-continue-pos>الفصل 3</span> من <span data-elan-continue-total>7</span></span>
+            </p>
+            <button class="btn-success-action continue-cta" type="button" data-page="callcenter" data-ink-dry data-elan-continue-cta>
+              تابِع من حيث وقفت
+            </button>
+          </div>
+        </article>
+
+        <!-- ══════════ ε1 Cell C — Recent Achievement (b-1x1) ══════════ -->
+        <article class="bento-achievement b-1x1 material-regular" data-reveal data-temporal-priority="evening">
+          <header class="bento-h"><h2><i class="qi" data-icon="trophy" aria-hidden="true"></i> آخر إنجاز</h2></header>
+          <div class="achievement-body">
+            <p class="achievement-name v-display" data-elan-achievement-name>سبعة أيام متتالية</p>
+            <p class="achievement-when v-body-sm v-muted" data-elan-achievement-when>قبل ساعتين</p>
+          </div>
+        </article>
+
+        <!-- ══════════ ε1 Cell D — Time Remaining Today (b-1x1, marginalia) ══════════ -->
+        <article class="bento-countdown b-1x1 material-regular" data-reveal data-temporal-priority="evening,night">
+          <header class="bento-h"><h2><i class="qi" data-icon="clock" aria-hidden="true"></i> ما تبقّى اليوم</h2></header>
+          <div class="countdown-body">
+            <p class="countdown-value u-num"><span class="type-num-display" data-tabular data-elan-countdown-h>00</span><span class="countdown-sep">:</span><span class="type-num-display" data-tabular data-elan-countdown-m>00</span></p>
+            <p class="countdown-label v-body-sm v-muted">ساعة · دقيقة قبل منتصف الليل</p>
+          </div>
+        </article>
+
         <!-- ══════════ Cells 2-5 — 4 count-up Stat Tiles (canonical, single instance) ══════════ -->
         <article class="stat-tile b-1x1 material-regular" data-reveal data-temporal-priority="afternoon,evening">
           <div class="stat-tile-icon"><i class="qi" data-icon="check-circle" aria-hidden="true"></i></div>
@@ -841,6 +909,22 @@
             </button>
           </div>
         </nav>
+
+        <!-- ══════════ ε1 Cell E — Iraq Block (b-4x1, marginalia + PROVE-IT citation) ══════════ -->
+        <aside class="iraq-block b-4x1 material-regular" data-reveal data-elan-stage="ε1" aria-labelledby="elan-iraq-h">
+          <header class="iraq-block__h">
+            <i class="qi" data-icon="globe" aria-hidden="true"></i>
+            <h2 id="elan-iraq-h" class="iraq-block__title v-eyebrow" data-type-voice="accent">في السوق العراقية</h2>
+          </header>
+          <p class="iraq-block__claim v-body-lead">
+            نحو <strong data-tabular>٦٢٪</strong> من الموظفين العراقيين يُفضِّلون
+            الراتب <strong>الأسبوعي</strong> على الشهري — اعتبرها حين تُخطّط KPIs الفريق.
+          </p>
+          <small class="iraq-block__source v-eyebrow">
+            <span class="iraq-block__source-label">المصدر</span>
+            <span class="iraq-block__source-name">IFC Iraq Workforce Survey 2024</span>
+          </small>
+        </aside>
 
       </div><!-- /.bento -->
 
