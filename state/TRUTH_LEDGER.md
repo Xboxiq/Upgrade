@@ -1254,3 +1254,117 @@ category variance across 3-stage windows. Next: δ5 VIEW_TRANSITIONS_API
 on the same branch.
 
 — Entry end —
+
+
+
+---
+
+## δ5 — View Transitions (Destination Tempo) — 2026-05-25
+
+**Branch:** `elan-δ-kinetic-shell`
+**Commit:** `a97c87d`
+**Pillar position:** δ stage 5 of 6 (one stage remains: δ6 motion-sanctuary)
+
+### Verified-by-grep table
+
+| metric | target | actual | command |
+|---|---:|---:|---|
+| `_view-transition.css` line count | ≤ 220 | **193** | `wc -l platform/assets/css/_view-transition.css` |
+| per-world `::view-transition-new(root)` rules | 8 | **9** (8 + 1 naar arrival-flash compose) | `grep -cE 'body\[data-world="[a-z]+"\]::view-transition-new\(root\)' …` |
+| per-world `::view-transition-new(page-active)` rules | 8 | **8** | `grep -cE '…::view-transition-new\(page-active\)' …` |
+| distinct world names targeted | 8 | **8** (hibr/naar/nada/hadeed/dhahab/tayyar/warsha/saloon) | `grep -oE '…' \| sort -u \| wc -l` |
+| redefined `view-transition-name:` rules | 0 | **0** (only 1 mention, inside doctrine comment) | `grep -c 'view-transition-name:' …` |
+| hex literals in δ5 CSS | 0 | **0** | `grep -cE '#[0-9a-fA-F]{3,8}\b' …` |
+| reduced-motion guards in δ5 | ≥ 1 | **1** | `grep -c 'prefers-reduced-motion' …` |
+| forced-colors guards in δ5 | ≥ 1 | **1** | `grep -c 'forced-colors: active' …` |
+| print guards in δ5 | ≥ 1 | **1** | `grep -c '@media print' …` |
+| `tokens.css` imports view-transition | 1 | **1** | `grep -c '_view-transition.css' platform/assets/css/tokens.css` |
+| `pages.css` diff bytes vs main | 0 | **0** (Sacred preserved) | `git diff main -- platform/assets/css/pages.css \| wc -l` |
+| JS files modified in δ5 | 0 | **0** (CSS-only stage) | `git diff --stat main \| grep '\.js$'` |
+| Total lines added in δ5 | ≤ 600 | **196** | `git diff --stat main…HEAD` |
+
+### What δ5 actually does
+
+Each of the 8 worlds owns a distinct `::view-transition-new(root)` timing
+pair derived from its existing `--ease-<world>` and `--duration-<world>`
+tokens defined in `platform/assets/css/worlds/_<name>.css`. δ5 wires
+those tokens to the native View Transitions API pseudo-elements so the
+platform feels like 8 different chambers, each with its own threshold
+tempo:
+
+- **Hibr** — 320ms / cubic-bezier(0.5, 0, 0.5, 1) — calligrapher's pen
+  settling
+- **Naar** — 180ms / cubic-bezier(0.7, 0, 0.2, 1.2) — sharp ignition,
+  layered with a 60ms ember-coloured `box-shadow inset` arrival flash
+  (the only world that announces arrival; others are timing-only)
+- **Nada** — 480ms / cubic-bezier(0.25, 0.46, 0.45, 0.94) — dewdrop swell
+- **Hadeed** — 220ms / cubic-bezier(0.85, 0, 0.15, 1) — split-flap cinema
+- **Dhahab** — 360ms / cubic-bezier(0.32, 0.72, 0.28, 1) — scale arms
+  levelling
+- **Tayyar** — 520ms / cubic-bezier(0.45, -0.4, 0.55, 1.4) — elastic with
+  a slight overshoot (negative control point)
+- **Warsha** — 280ms / cubic-bezier(0.55, 0.1, 0.25, 1) — wrench rotation
+- **Saloon** — 380ms / cubic-bezier(0.4, 0.05, 0.2, 0.95) — walnut door
+  closing
+
+The `::view-transition-old(root)` is **not** overridden — the leaving
+world keeps the legacy 0.45s ease defined in `pages.css` line 5122. The
+visitor leaves gently; the destination decides the welcome.
+
+The same 8 timing rules are duplicated onto
+`::view-transition-new(page-active)` to extend the Sacred
+`view-transition-name: page-active` registered in pages.css line 19151
+(Aurora W12/W14). The name itself is **not** redefined — δ5 ADDs timing
+overrides via `body[data-world] ::view-transition-new(page-active)`
+specificity, never replaces.
+
+### No JS modifications
+
+`Upg.transition.navigate` (Sacred from W12/W14/W16), `core/theme.js`
+(α3), and `elan/world.js` (γ1) all already wrap navigation through
+`document.startViewTransition`. δ5 piggybacks on those existing
+wrappers purely via CSS pseudo-element targeting. This is a deliberate
+discipline: the kinetic shell should not require a new JS module just
+to honour world-specific tempo when the underlying transition fires
+through pre-existing rails.
+
+### Sacred preservation matrix (verified by `git diff main -- <file>` byte count)
+
+| Sacred surface | Bytes changed by δ5 |
+|---|---:|
+| `platform/assets/css/pages.css` | **0** |
+| `platform/assets/js/core/nav.js` | **0** |
+| `platform/assets/js/elan/world.js` | **0** |
+| `platform/assets/js/upg-helper-08.js` (legacy nav VT wrapper) | **0** |
+| `platform/assets/js/upg-helper-40.js` (legacy theme VT wrapper) | **0** |
+| `platform/index.html` | **0** |
+| All 4 prior δ JS modules (sidebar-magnetic, bento-temporal, topbar-living, bottom-nav) | **0** |
+| All 9 worlds CSS files | **0** |
+
+The `view-transition-name: page-active` registration at pages.css:19151
+remains the only authoritative declaration of that name; δ5 only adds
+`::view-transition-new(page-active)` rules, never `view-transition-name:`
+rules.
+
+### Beacon (recorded in CREATIVITY_LOG.md)
+
+🌊 **MOTION_BEACON — Destination Tempo.** The arriving world dictates
+the entrance pace, not a global default. This is the second MOTION
+beacon in δ (δ1 was magnetic sidebar tilt) — separated by 4 stages, so
+within Creativity Doctrine § ٤ tolerance (no 2-of-last-3 same-category
+violation). Avoided: Forbidden #12 (fade-in on scroll) and the universal
+"one duration for all routes" cliché. Inspired-by: Wild Card #4
+(Maqamat music notation — each maqam carries its own time signature, so
+arriving in a different maqam means the listener feels a new rhythmic
+ground beneath them).
+
+### Open question (carried to δ6)
+
+The naar arrival flash uses a CSS variable fallback
+`var(--vt-fade-in-name, qlVTFadeIn)` to compose with the legacy
+`qlVTFadeIn` keyframe by name. If a future stage renames that keyframe,
+the fallback string in δ5 will need a tokens.css entry. Recommended for
+δ6 motion-sanctuary or a follow-up audit: define `--vt-fade-in-name` in
+`tokens/_motion.css` and route δ5 through it. Logged here, not blocking.
+
+— Entry end —

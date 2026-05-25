@@ -220,3 +220,27 @@ disruption_triggers: 4
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-25 / δ4 — Pillar δ stage 4/6
+
+
+
+## δ5 — 2026-05-25
+**Beacon Type:** 🌊 MOTION_BEACON
+**The Surprise:** كل عالم من الثمانية يَستقبل الزائر بإيقاعه الخاص. لا crossfade موحَّد، لا duration واحدة لكل المنصة. الـ `::view-transition-new(root)` تَستهلك ease+duration الخاصَّين بالعالم الـ destination — `body[data-world="naar"]` يَفتح في 180ms بـ ease حادّ (cubic-bezier(0.7,0,0.2,1.2)) مع omash 60ms ember box-shadow inset، `body[data-world="nada"]` يَنبثق في 480ms بـ dewdrop curve، `body[data-world="tayyar"]` يَدخل بـ elastic 520ms بـ overshoot سالب (-0.4 control point)، `body[data-world="hadeed"]` يَقطع كـ split-second cinema cut في 220ms. الـ `::view-transition-old(root)` يَبقى على ease الـ legacy (0.45s) — الزائر يُغادر بنفس الهدوء، الـ destination يُقرِّر طريقة استقباله. **الانتقال نفسه لا يَنقل، يَستضيف.** الـ `view-transition-name: page-active` المسجَّل في pages.css سطر 19151 من W12/W14 محفوظ بالكامل — δ5 يَضيف 8 timing overrides عبر `body[data-world] ::view-transition-new(page-active)` ولا يَلمس الاسم. zero JS — `Upg.transition.navigate` و `core/theme.js` و `elan/world.js` كلها تَلتفّ على `document.startViewTransition` منذ Phases سابقة، δ5 يَركَب على البنية الموجودة. zero hex literals (8 ease curves نَسخ من tokens الـ worlds). reduced-motion / forced-colors / print كلها تُسكِت الـ animation تماماً.
+**Reference Avoided:** Forbidden #12 — fade-in على scroll بدون داعٍ + الكليشيه المعماري لكل platform-AI: "duration واحدة + ease واحد لكل route" (Creativity Doctrine § ٣).
+**Inspired-by:** Wild Card #4 — Maqamat music notation. كل maqam له time signature خاص؛ الوصول إلى maqam مختلف يعني أن المُستمع يَشعر بإيقاع جديد تحت قدميه. هنا: الوصول إلى عالم مختلف يعني أن المستخدم يَشعر بـ tempo مختلف يَستقبله.
+**User-Visible:** yes (every world transition — 8 distinct welcomes; reduced-motion users get instant cuts but otherwise identical to before)
+**Originality Self-Score:** 4/5 — view-transitions are now mainstream (Chrome 111+). What's uncommon is binding the *destination* to the timing rather than the route or the page-type, and exposing it through CSS specificity alone (zero JS). Most platforms either use one global timing or per-route timing; few make the destination identity dictate the pace.
+**Files touched:** platform/assets/css/_view-transition.css (NEW) · platform/assets/css/tokens.css (+3)
+**Verified at commit:** a97c87d
+
+
+
+---STATS---
+total_beacons: 16
+unique_categories_used: 9
+avg_score: 4.19
+last_5_avg: 4.0
+disruption_triggers: 4
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / δ5 — Pillar δ stage 5/6
