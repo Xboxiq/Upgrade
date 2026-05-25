@@ -191,3 +191,281 @@ body[data-world="hibr"] ::selection {
     color:             hsl(225 35% 8%);
   }
 }
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — ε1 — Dashboard Content Revival (Hibr world)
+   ────────────────────────────────────────────────────────────────────────
+   📊 DATA_BEACON — Manuscript Marginalia
+
+   The 4 stat-tiles become manuscript pages: the VALUE is the body text,
+   the TREND becomes a هامش (marginal gloss) positioned at the inline-end
+   edge with a thin vertical ruling line separating it from the number.
+   This inverts the AI-cliché "small subtext below big number" pattern.
+
+   Inspired-by: Wild Card #2 — Persian Miniature (Bihzad marginalia)
+   Avoided: Forbidden #6 (bento identical rectangles) — marginalia breaks
+            the visual monotony; each tile has unique gloss positioning.
+            Forbidden #5 (card shadow + 12px radius) — manuscript ruling.
+            Forbidden #11 (counter from 0) — untouched, values already flow.
+   ════════════════════════════════════════════════════════════════════════ */
+
+
+/* ── ε1.1 — Stat-tile Manuscript Mode ────────────────────────────────── */
+
+[data-world="hibr"] .stat-tile[data-hibr-ms] {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr auto;
+  gap: 0;
+  position: relative;
+  padding: var(--s-4, 16px) var(--s-5, 20px);
+  background: var(--anchor-1);
+  border: 1px solid var(--line);
+  border-radius: var(--r-2, 8px);
+  overflow: visible;
+}
+
+/* The icon row spans full width */
+[data-world="hibr"] .stat-tile[data-hibr-ms] .stat-tile-icon {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  margin-block-end: var(--s-2, 8px);
+}
+
+/* Value sits in main body column */
+[data-world="hibr"] .stat-tile[data-hibr-ms] .stat-tile-value {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: end;
+  font-family: var(--voice-display, "Boutros Modern Kufi", serif);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+/* Label below the value */
+[data-world="hibr"] .stat-tile[data-hibr-ms] .stat-tile-label {
+  grid-column: 1;
+  grid-row: 3;
+  font-family: var(--voice-body, "Markazi Text", serif);
+  font-size: var(--text-sm, 0.875rem);
+  color: var(--ink-muted);
+  margin-block-start: var(--s-1, 4px);
+}
+
+/* ── The Marginalia: trend becomes gloss ─────────────────────────────── */
+
+[data-world="hibr"] .stat-tile[data-hibr-ms] .stat-tile-trend {
+  grid-column: 2;
+  grid-row: 1 / -1;
+  align-self: center;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  direction: rtl;
+
+  /* Manuscript marginalia voice */
+  font-family: var(--voice-accent, "Amiri Quran Colored", serif);
+  font-size: var(--text-xs, 0.75rem);
+  line-height: 1.3;
+  color: var(--ember);
+  letter-spacing: 0.02em;
+
+  /* Ruling line between body and margin */
+  border-inline-start: 1px solid color-mix(in oklch, var(--line) 70%, transparent);
+  padding-inline-start: var(--s-2, 8px);
+  margin-inline-start: var(--s-3, 12px);
+
+  /* The gloss floats subtly inward */
+  opacity: 0.88;
+  transition: opacity var(--duration-hibr, 320ms) var(--ease-hibr);
+}
+
+[data-world="hibr"] .stat-tile[data-hibr-ms] .stat-tile-trend:hover {
+  opacity: 1;
+}
+
+/* The trend icon inside marginalia — rotated to match vertical flow */
+[data-world="hibr"] .stat-tile[data-hibr-ms] .stat-tile-trend .qi {
+  display: inline-block;
+  transform: rotate(90deg);
+  margin-block-end: var(--s-1, 4px);
+  font-size: 0.625rem;
+}
+
+/* Tile without trend: collapse the margin column */
+[data-world="hibr"] .stat-tile[data-hibr-ms]:not(:has(.stat-tile-trend)) {
+  grid-template-columns: 1fr;
+}
+
+
+/* ── ε1.2 — Greeting Hero: Manuscript Colophon ──────────────────────── */
+
+[data-world="hibr"] .bento-greet[data-hibr-colophon] {
+  position: relative;
+  background: var(--anchor-bg);
+  border: 1px solid var(--line);
+  border-radius: var(--r-2, 8px);
+}
+
+/* Colophon ornamental top-rule (manuscript header line) */
+[data-world="hibr"] .bento-greet[data-hibr-colophon]::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: var(--s-6, 24px);
+  block-size: 3px;
+  background: linear-gradient(
+    to inline-end,
+    transparent,
+    var(--ember) 20%,
+    var(--focus) 50%,
+    var(--ember) 80%,
+    transparent
+  );
+  border-radius: 0 0 2px 2px;
+  opacity: 0.72;
+}
+
+/* The eyebrow becomes a بسملة-style inscription */
+[data-world="hibr"] .bento-greet[data-hibr-colophon] .h-eyebrow {
+  font-family: var(--voice-accent, "Amiri Quran Colored", serif);
+  font-size: var(--text-sm, 0.875rem);
+  color: var(--ember);
+  letter-spacing: 0.04em;
+  opacity: 0.80;
+}
+
+/* Time-of-day greeting injection — scribe salutation */
+[data-world="hibr"] .bento-greet[data-hibr-colophon] [data-greet-title] {
+  font-family: var(--voice-display, "Boutros Modern Kufi", serif);
+  color: var(--ink);
+}
+
+/* Scribe progress line (injected via JS) */
+[data-world="hibr"] .hibr-scribe-line {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2, 8px);
+  margin-block-start: var(--s-3, 12px);
+  font-family: var(--voice-accent, "Amiri Quran Colored", serif);
+  font-size: var(--text-xs, 0.75rem);
+  color: var(--ink-faint);
+}
+
+/* Progress quill: a thin ink-line that grows with mastery */
+[data-world="hibr"] .hibr-scribe-quill {
+  flex: 1;
+  block-size: 2px;
+  background: var(--anchor-2);
+  border-radius: 1px;
+  overflow: hidden;
+  position: relative;
+}
+
+[data-world="hibr"] .hibr-scribe-quill::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: var(--hibr-quill-progress, 0%);
+  background: linear-gradient(
+    to inline-end,
+    var(--ink),
+    var(--ember)
+  );
+  border-radius: 1px;
+  transition: inline-size 600ms var(--ease-hibr);
+}
+
+/* Quill label */
+[data-world="hibr"] .hibr-scribe-label {
+  white-space: nowrap;
+  color: var(--ink-muted);
+}
+
+
+/* ── ε1.3 — Bento cells: manuscript column headers ──────────────────── */
+
+[data-world="hibr"] [data-bento="dashboard"] .bento-h h2 {
+  font-family: var(--voice-display, "Boutros Modern Kufi", serif);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+/* Ruling below each bento-h (manuscript section separator) */
+[data-world="hibr"] [data-bento="dashboard"] .bento-h {
+  border-block-end: 1px solid color-mix(in oklch, var(--line) 50%, transparent);
+  padding-block-end: var(--s-2, 8px);
+  margin-block-end: var(--s-3, 12px);
+}
+
+
+/* ── ε1.4 — Dock: خاتمة (colophon dock) ─────────────────────────────── */
+
+[data-world="hibr"] [data-bento="dashboard"] .dock {
+  background: var(--anchor-2);
+  border-block-start: 2px solid var(--line-strong);
+}
+
+[data-world="hibr"] [data-bento="dashboard"] .dock .dock-btn {
+  font-family: var(--voice-body, "Markazi Text", serif);
+  color: var(--ink-muted);
+  transition: color var(--duration-hibr) var(--ease-hibr);
+}
+
+[data-world="hibr"] [data-bento="dashboard"] .dock .dock-btn:hover {
+  color: var(--ember);
+}
+
+
+/* ── ε1.5 — Mobile adaptations (< 480px) ────────────────────────────── */
+
+@media (max-width: 479px) {
+  [data-world="hibr"] .stat-tile[data-hibr-ms] .stat-tile-trend {
+    writing-mode: horizontal-tb;
+    direction: rtl;
+    grid-column: 1 / -1;
+    grid-row: 4;
+    border-inline-start: none;
+    border-block-start: 1px solid color-mix(in oklch, var(--line) 50%, transparent);
+    padding-inline-start: 0;
+    padding-block-start: var(--s-2, 8px);
+    margin-inline-start: 0;
+    margin-block-start: var(--s-2, 8px);
+  }
+
+  [data-world="hibr"] .stat-tile[data-hibr-ms] .stat-tile-trend .qi {
+    transform: none;
+  }
+}
+
+
+/* ── ε1.6 — Reduced-motion: marginalia still visible, no transitions ── */
+
+@media (prefers-reduced-motion: reduce) {
+  [data-world="hibr"] .stat-tile[data-hibr-ms] .stat-tile-trend {
+    transition: none;
+  }
+  [data-world="hibr"] .hibr-scribe-quill::after {
+    transition: none;
+  }
+}
+
+
+/* ── ε1.7 — Print: marginalia appears inline ─────────────────────────── */
+
+@media print {
+  [data-world="hibr"] .stat-tile[data-hibr-ms] .stat-tile-trend {
+    writing-mode: horizontal-tb;
+    border-inline-start: none;
+    padding-inline-start: 0;
+    margin-inline-start: 0;
+    color: var(--ink-muted);
+  }
+  [data-world="hibr"] .bento-greet[data-hibr-colophon]::before {
+    display: none;
+  }
+}
