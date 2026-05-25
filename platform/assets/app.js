@@ -130,3 +130,21 @@ import './js/elan/world-tayyar.js';
 import './js/elan/world-warsha.js';
 // ÊLAN v4 — γ9: Saloon world (meta-mirror — closes Pillar γ)
 import './js/elan/world-saloon.js';
+
+// ÊLAN v4 — δ1: Magnetic Sidebar (Pillar δ KINETIC SHELL — Stage 1 of 6)
+import './js/elan/sidebar-magnetic.js';
+
+// ÊLAN v4 — δ2: Bento Temporal (data-priority hours → focal cell emphasis)
+import './js/elan/bento-temporal.js';
+
+// ÊLAN v4 — δ3: Living Topbar (Reading Tide — INTERACTION beacon)
+import './js/elan/topbar-living.js';
+
+// ÊLAN v4 — δ4: Mobile Bottom Nav (Plinth Mode + Maqamat Haptics — STRUCTURAL beacon)
+import './js/elan/bottom-nav.js';
+
+
+// ÊLAN v4 — δ6: Motion Sanctuary (closes Pillar δ; META beacon — three-state
+// preference graph + «ساكن» chrome confession; CSS owns the per-world
+// static-signature transposition in _motion-sanctuary.css)
+import './js/elan/delta6-motion.js';

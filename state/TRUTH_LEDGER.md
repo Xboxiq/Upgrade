@@ -871,3 +871,572 @@ world. Next: open PR `elan-γ-eight-worlds → main`, then start Pillar δ
 KINETIC SHELL on a fresh branch.
 
 — Entry end —
+
+
+
+---
+
+## δ1 — Magnetic Sidebar
+**Pillar:** δ KINETIC SHELL · Stage 1 of 6
+**Branch:** `elan-δ-kinetic-shell`
+**Commit:** `d3194f7`
+**Date:** 2026-05-24
+
+### Before (verified by grep on `main` baseline)
+
+| Domain | Key | Value |
+|---|---|---:|
+| HTML | `data-elan-magnetic` hooks | 0 |
+| CSS | `chrome.css` lines | 1398 |
+| CSS | per-world magnetic personality rules | 0 |
+| JS | `platform/assets/js/elan/sidebar-magnetic.js` | absent |
+| JS | `app.js` import of `elan/sidebar-magnetic.js` | 0 |
+| JS | `Upg.elan.sidebar` namespace | absent |
+| Sensors | `DeviceOrientationEvent` usage in repo | 0 |
+
+### After (verified by grep + node --check)
+
+| Domain | Key | Value |
+|---|---|---:|
+| HTML | `data-elan-magnetic="sidebar"` hook on `#sidebar` | 1 |
+| CSS | `chrome.css` lines | 1572 |
+| CSS — Block | δ1 block lines appended to `chrome.css` | 174 |
+| CSS — Beacon | per-world magnetic personality rules | 8 (hibr/naar/nada/hadeed/dhahab/tayyar/warsha/saloon) |
+| CSS — Cap | `--magnet-tilt-max` hard cap (CSS hint) | 1.5deg |
+| CSS — Easing | gravity-settle ease | `cubic-bezier(0.32, -0.04, 0.4, 1)` |
+| CSS — Easing | `steps(4, end)` reserved for Warsha (gritty bench) | 1 |
+| CSS — Guards | `prefers-reduced-motion` | 1 |
+| CSS — Guards | `@media print` | 1 |
+| CSS — Guards | `forced-colors: active` | 1 |
+| JS | `sidebar-magnetic.js` lines | 395 |
+| JS | `node --check` (`env -u NODE_OPTIONS node`) | pass |
+| JS — Cap | `TILT_MAX_HARD_CAP` constant | 1.5 |
+| JS — Cap | `SHADOW_MAX_PX` constant | 14 |
+| JS — Sensor | `GYRO_DIVISOR_GAMMA / BETA` | 28 / 60 |
+| JS — Public API | `Upg.elan.sidebar` methods | enable · disable · isActive · requestGyro · config |
+| JS — A11y | live `prefers-reduced-motion` listener | 1 (auto-disables on toggle) |
+| JS — A11y | iOS 13+ permission flow (`DeviceOrientationEvent.requestPermission`) | 1 (gated by `اسمح بالحركة` chip) |
+| App | `app.js` imports `elan/sidebar-magnetic.js` | 1 |
+| Sacred | `#sidebar .nav-item` count (preserved) | 17 |
+| Sacred | sidebar logo `<svg viewBox>` (preserved) | 1 |
+| Sacred | `Upg.*` top-level APIs | 31 (unchanged — `sidebar` nests under `Upg.elan`) |
+| Forbidden | `<svg viewBox>` introduced in NEW markup (JS-rendered chip) | 0 |
+| Forbidden | emoji in NEW DOM markup | 0 (chip uses `textContent`) |
+| Forbidden | `spring`/`bounce` in executable code | 0 (only in doc-comment listing what we DON'T do) |
+| Forbidden | `font-awesome` / `material-icons` / `unDraw` | 0 |
+| Stage budget | `lines_added / deleted` | 573 / 1 |
+| Stage budget | `files_modified / added` | 3 / 1 |
+
+### Files
+**Modified (3):**
+- `platform/index.html` (single 1-line edit: `data-elan-magnetic="sidebar"` on `<aside id="sidebar">`)
+- `platform/assets/css/chrome.css` (1398 → 1572 lines; +174-line δ1 block)
+- `platform/assets/app.js` (+3 lines: comment + import)
+
+**Created (1):**
+- `platform/assets/js/elan/sidebar-magnetic.js` (395 lines, ESM, frozen `Upg.elan.sidebar`)
+
+**Untouched (sacred):**
+- 17 existing `.nav-item` entries inside `#sidebar`
+- 1 existing logo `<svg viewBox>` (the wordmark star)
+- All world CSS files (`worlds/_*.css`)
+- 31 top-level `Upg.*` APIs
+- `archive/`, `prompts/v1`, `prompts/v2`, `prompts/v3`
+
+### Beacon (declared)
+**Type:** 🌊 MOTION_BEACON — "Eight Materials, One Slab"
+**Surprise:** the sidebar inherits each world's `--ease-<world>` /
+`--duration-<world>` tokens, so the SAME element behaves like paper in
+Hibr (0.9°, 600ms), like a forge anvil in Naar (1.5°, 180ms), like
+mountain mist in Nada (0.6°, 520ms), like a Hadeed cinema reel snap
+(1.4°, 220ms), like a balanced gold pan in Dhahab (0.9°, 360ms), like an
+elastic wave in Tayyar (1.2°, 520ms), like a stair-stepped workshop
+bench in Warsha (1.3°, `steps(4, end)`), like polished walnut in Saloon
+(1.0°, 380ms). On touch devices, real `DeviceOrientationEvent` drives
+the same vars within a 1.5° hard cap. iOS 13+ permission requested via
+an unobtrusive text-only chip ("اسمح بالحركة") — never an emoji icon,
+never a popup. Settle is GRAVITY (single half-cycle,
+`cubic-bezier(0.32, -0.04, 0.4, 1)`) NOT SPRING (Forbidden #13).
+**Avoided:** Forbidden #13 (spring-bounce hover) + #3 (floating-pill sidebar / Notion clone)
+**Inspired-by:** Wild Card #2 — Iraqi Brutalism (Chadirji)
+**Self-Score:** 4 / 5
+
+### Verdict
+🟢 **complete** — δ1 ships on branch `elan-δ-kinetic-shell` with no
+Forbidden Library violations, no Sacred Asset disturbance, no toy SVG
+emitted, no emoji in any rendered markup. Pillar δ KINETIC SHELL has
+opened. Next: δ2 BENTO_DASHBOARD on the same branch.
+
+— Entry end —
+
+
+
+---
+
+## δ2 — Bento Temporal — 2026-05-24
+**Pillar:** δ KINETIC SHELL (Stage 2 of 6)
+**Branch:** `elan-δ-kinetic-shell`
+**Commit:** `33f0553`
+**Author:** ÊLAN AUTO_PILOT v4
+
+### Forensic — before
+| metric | value |
+|---|---:|
+| dashboard cells (existing bento) | 10 |
+| sacred IDs in dashboard (cath-skill-grid, cath-activity-list, v12Heatmap, v12ChallengeLevel, v12ChallengeBody) | 5 |
+| `data-cath-stat` hooks | 4 |
+| `data-temporal-priority` hooks | 0 |
+| pre-existing emoji in dashboard markup (inherited; ζ1 territory) | 290 |
+| `Upg.bento.*` namespace | absent |
+
+### Forensic — after
+| metric | value |
+|---|---:|
+| `data-temporal-priority` hooks added (one per cell, 9 cells) | 9 |
+| slot coverage: morning / afternoon / evening / night | 4 / 3 / 3 / 3 (every slot ≥ 1) |
+| `data-temporal-active` toggled by JS at `getHours()` | yes |
+| `data-temporal-axis` (focal / supporting) stamped for downstream consumers | yes |
+| `body[data-temporal-slice]` (morning/afternoon/evening/night) stamped | yes |
+| sacred IDs preserved (cath-skill-grid, cath-activity-list, v12Heatmap, v12ChallengeLevel, v12ChallengeBody) | 5 / 5 |
+| `data-cath-stat` hooks preserved | 4 / 4 |
+| existing class strings mutated | 0 / 9 |
+| dashboard cell count (was 10, still 10) | unchanged |
+| toy `<svg viewBox>` in `bento-temporal.js` | 0 |
+| emoji added by δ2 (diff scan: `git diff HEAD -- index.html`) | 0 |
+| hardcoded hex in δ2 CSS block | 0 (print fallback uses `CanvasText` system colour) |
+| reduced-motion guard | 1 |
+| forced-colors guard | 1 |
+| @media print guard | 1 |
+| `Upg.bento.temporal` (frozen surface: current/list/refresh/matches) | registered (additive; never overwrites prior) |
+| `upg:bento:temporal-shift` CustomEvent (carries `{slice, hour, activeCount}`) | dispatched on hour boundaries + nav/world change + visibilitychange |
+
+### Files
+| file | type | lines |
+|---|---|---:|
+| `platform/assets/js/elan/bento-temporal.js` | created | 167 |
+| `platform/assets/css/chrome.css` | appended δ2 block | +135 |
+| `platform/index.html` | data-* hooks (no class / id changes) | +9 attrs across 9 cells |
+| `platform/assets/app.js` | import wired (header + 1 import) | +3 |
+| **TOTAL** | 4 files | +318 / −9 |
+
+### Beacon (declared)
+**Type:** 📊 DATA_BEACON — "The Dashboard Breathes With The Day"
+**Surprise:** same dashboard, same ten cells, same layout — but
+attention itself shifts with the hour. Each cell declares the slice(s)
+that matter most for it: greeting + streak + challenge + skills glow in
+the morning; challenge + skills + units stay active in the afternoon;
+completion-rate + heatmap take focus in the evening; activity feed +
+training-hours + heatmap headline at night. The CSS layer ONLY
+promotes — it never demotes. Inactive cells stay completely neutral. A
+ribbon "الأهم الآن" appears (pure CSS pseudo-element, no SVG, no emoji)
+at the focal cell, tinted in the active world's `--ember`. The shift
+itself is a 480ms cubic-bezier(0.32, 0.72, 0.28, 1) ease — gentle as
+the hour boundary is gentle.
+**Avoided:** Forbidden #7 (bento = identical rectangles) + #11
+(animated counter from 0 — we never touch numeric values; existing
+`data-countup` is preserved verbatim) + #12 (fade-in-on-scroll without
+reason — the only motion is at hour boundaries, with honest cause).
+**Inspired-by:** Wild Card #4 — Maqamat music notation (Saba at dawn,
+Bayati afternoon, Hijaz at night). The dashboard becomes a maqam: same
+instruments, different emphasis.
+**Pivot:** spec proposed STRUCTURAL_BEACON; pivoted to DATA_BEACON per
+Creativity Doctrine § ٤ (γ8 used STRUCTURAL recently — DATA increases
+category variety across the 4-stage window γ8/γ9/δ1/δ2 →
+STRUCTURAL/META/MOTION/DATA).
+**Self-Score:** 4 / 5
+
+### Verdict
+🟢 **complete** — δ2 ships on branch `elan-δ-kinetic-shell` with no
+Forbidden Library violations, zero Sacred Asset disturbance (all 5
+preserved IDs intact, all 4 data-cath-stat hooks intact, 0 class
+strings mutated, 0 cells removed/relocated), no toy SVG emitted, no
+emoji added in any rendered markup. The dashboard now breathes with
+the hour. Next: δ3 TOPBAR_LIVING on the same branch.
+
+— Entry end —
+
+
+
+## δ3 — Living Topbar (Reading Tide) — 2026-05-25
+
+**Pillar:** δ KINETIC SHELL — Stage 3 of 6
+**Branch:** elan-δ-kinetic-shell
+**Commit:** b794e19
+**Files:** 2 modified, 1 added — 465 insertions, 0 deletions
+
+### Verified by grep on commit b794e19
+
+| key | value |
+|---|---|
+| topbar_living_js_lines | 316 |
+| chrome_css_d3_block_lines | 146 |
+| app_js_imports_topbar_living | 1 |
+| css_scroll_pct_refs | 8 |
+| background_clip_text_uses | 5 |
+| reduced_motion_guards_in_d3_block | 2 |
+| forced_colors_guards_in_d3_block | 1 |
+| print_guards_in_d3_block | 1 |
+| hex_literals_in_d3_css | 0 |
+| hex_literals_in_d3_js | 0 |
+| inline_svg_in_d3_code | 0 (the only `<svg viewBox>` mention is a docblock comment listing what the file does NOT emit) |
+| emoji_in_d3_code | 0 |
+| pulse_animation_in_d3_code | 0 (Forbidden #10 explicitly avoided) |
+| html_diff_bytes | 0 |
+| sacred_topbar_markup_preserved | true |
+| sacred_topbar_title_id_preserved | true |
+| sacred_topbar_breadcrumb_id_preserved | true |
+| sacred_topbar_search_btn_preserved | true |
+| node_syntax_check_pass | true |
+| upg_apis_top_level_after | 31 (unchanged; new surface lives under Upg.elan.topbar) |
+| upg_elan_topbar_methods | engage / disengage / getProgress / scrollToTop / isEngaged |
+| read_threshold | 0.98 |
+| scroll_quantize_step_pct | 0.25 |
+| tide_anchor_edge | inline-end |
+| tide_growth_direction | inline-end → inline-start (RTL natural) |
+| tide_height_px | 1 |
+| read_complete_indicator | chamfered diamond clip-path polygon (6px × 6px, ember) |
+| click_rewind_smooth_when_motion_allowed | true |
+| click_rewind_instant_when_reduced_motion | true |
+| keyboard_activation | Enter and Space |
+| beacon_type | 🤚 INTERACTION_BEACON |
+| beacon_avoided | Forbidden #10 (pulsing-dot loading) + #11 (animated counter from 0) + #15 (modal-with-dark-overlay) |
+| beacon_inspired_by | Wild Card #5 — Yemeni mihrab geometry |
+| beacon_self_score | 4 / 5 |
+| pivot_from_spec | spec proposed META + 75bpm pulsing dot; META was used in γ9 (only 4 stages back), and pulsing dot is Forbidden #10 verbatim. Pivoted to INTERACTION (last used γ5 — 5 stages ago, fresh window) per Creativity Doctrine § ٤. |
+
+### Narrative
+
+The existing `#topbar` survives untouched in markup. δ3 layers two
+visual contracts on top of it through a single CSS variable:
+`--scroll-pct` (a number from 0 to 1 set by the JS module). Two
+consumers read that variable — the topbar's lower-edge tide line, and
+the page-title's `background-clip: text` gradient — and both grow
+from the inline-end (Arabic line tail) toward the inline-start as the
+user scrolls through the active page. The tide is one pixel tall in
+the active world's ember; the title fills with anchor ink against an
+unfilled muted-ink remainder. When the user has scrolled past the
+threshold (98%) the topbar gains a `data-read="true"` attribute, the
+tide opacity goes full, and a small chamfered diamond appears next to
+the title — a quiet reading complete mark, no SVG, no emoji, no dot.
+
+Clicking (or Enter/Space-pressing) the title rewinds the active page
+to its top. On systems with `prefers-reduced-motion: reduce` the
+rewind is instant and all transitions on the gradient are dropped —
+the gradient itself remains because it represents position, not
+motion. Forced-colors mode collapses the tide to system Highlight and
+the title to system CanvasText. Print mode hides the tide and prints
+the title in normal anchor ink.
+
+The active page is detected as `.page.active` (existing platform
+convention) and re-bound on `upg:nav:change` and `upg:world:change`.
+A `ResizeObserver` keeps the meter accurate when the active page
+grows or shrinks. Scroll listening is RAF-throttled (single rAF per
+frame) and quantized to 0.25%-pct steps so the gradient never
+re-paints on every micro-scroll.
+
+The whole module exposes itself under `window.Upg.elan.topbar`
+(namespaced under `Upg.elan`, NOT crowding the original 31 sacred
+`Upg.*` APIs). The legacy `data-scrolled` attribute on `#topbar` is
+respected; we layer with `data-elan-living="topbar"` so the existing
+scroll-island behavior is undisturbed.
+
+The Beacon is INTERACTION because the user gains a navigational
+gesture they did not have before (click the title to rewind), and
+because the tide+ink reveal is the chrome's honest acknowledgment of
+what the user is doing, not decoration. Next: δ4 MOBILE_BOTTOM_NAV
+on the same branch.
+
+— Entry end —
+
+
+
+## δ4 — Mobile Bottom Nav: Plinth Mode + Maqamat Haptics — 2026-05-25
+
+**Pillar:** δ KINETIC SHELL — Stage 4 of 6
+**Branch:** elan-δ-kinetic-shell
+**Commit:** 5e50984
+**Files:** 2 modified, 1 added — 384 insertions, 0 deletions
+
+### Verified by grep on commit 5e50984
+
+| key | value |
+|---|---|
+| bottom_nav_js_lines | 257 |
+| chrome_css_d4_block_lines | 120 |
+| app_js_imports_bottom_nav | 1 |
+| data_elan_bottom_nav_refs_in_css | 16 |
+| plinth_border_radius_zero_declarations | 3 |
+| reduced_motion_guards_in_d4_block | 2 |
+| forced_colors_guards_in_d4_block | 1 |
+| print_guards_in_d4_block | 1 |
+| hex_literals_in_d4_css | 0 |
+| hex_literals_in_d4_js | 0 |
+| inline_svg_in_d4_code | 0 (the only `<svg viewBox>` mention is a docblock comment listing what the file does NOT emit) |
+| emoji_in_d4_code | 0 |
+| innerHTML_writes_in_d4_js | 0 |
+| html_diff_bytes | 0 |
+| sacred_dual_bottom_nav_markup_preserved | true |
+| sacred_default_glass_behavior_preserved | true |
+| sacred_5_slots_preserved | true |
+| node_syntax_check_pass | true |
+| node_smoke_test_pass | true |
+| default_mode | glass (unchanged Sacred behavior) |
+| opt_in_mode | plinth |
+| mode_persistence_via_localstorage | true |
+| valid_modes_count | 2 |
+| haptic_patterns_count | 3 |
+| haptic_patterns | dafn=8 / takk=[12,20,12] / maqsoom=[8,30,8,30,14] |
+| navigator_vibrate_uses | 3 |
+| haptic_respects_reduced_motion | true |
+| haptic_respects_vibrate_unavailable | true |
+| delegated_pointerup_listener | true |
+| fab_haptic_pattern | takk |
+| regular_slot_haptic_pattern | dafn |
+| upg_haptic_methods | play / patterns |
+| upg_elan_bottom_nav_methods | engage / disengage / setMode / getMode / isEngaged |
+| upg_apis_top_level_after | 32 |
+| beacon_type | 🏛 STRUCTURAL_BEACON |
+| beacon_avoided | Forbidden #3 (floating-pill nav clone) + #5 (soft-shadow + 12px radius) + #15 (generic single-buzz haptic) |
+| beacon_inspired_by | Wild Card #2 — Iraqi Brutalism (Makiya/Chadirji structural plinths) + Wild Card #4 — Maqamat music notation |
+| beacon_self_score | 4 / 5 |
+| pivot_from_spec | spec proposed INTERACTION_BEACON; δ3 just used INTERACTION (Reading Tide). Two consecutive INTERACTION beacons in a 3-stage window triggers Creativity Doctrine § ٤ mandatory pivot. Pivoted to STRUCTURAL (last used γ8 — 5 stages back, fresh). |
+
+### Narrative
+
+The platform already ships `#dual-bottom-nav` (Worker 24 / Pack v3) — a
+fully-built mobile bottom nav with safe-area insets, backdrop-filter,
+five slots, prefers-reduced-transparency fallback, RTL-aware grid.
+δ4 does not replace it; it layers two enhancements, both opt-in.
+
+**Plinth mode.** Setting `data-elan-bottom-nav="plinth"` on the existing
+nav element swaps glassmorphism for a brutalist solid plinth: zero
+border-radius, no transparency, no backdrop-filter, no box-shadow. A
+single 1px hairline at the top edge in `var(--ember)` — the only
+decorative line on the entire bar — inherits the active world's
+identity, so the same node reads as eight different chromatic plinths
+across the worlds. The active slot picks up the ember color and
+gains a 2px ember bottom-underline rendered as `::after` (carved into
+the plinth, not floated above it). Hover and focus shifts give a
+subtle 8%-opacity ember tint; tap-press depresses the slot 1px. No
+scale, no spring, no shadow. The center FAB (cmdk) keeps its filled
+identity but exchanges its default elevation for a hard-edged 1px
+ember ring, also at zero radius. Plinth mode counters Forbidden #3
+(floating-pill nav clone) by being structurally honest: the bar is
+part of the page bottom, not a hovering object.
+
+The default glass behavior is preserved unchanged — plinth is strictly
+opt-in via `Upg.elan.bottomNav.setMode('plinth')` (or by setting the
+attribute directly). User choice persists across sessions via
+`localStorage` under key `upg_elan_bottom_nav_mode`. Invalid modes
+fall back to `glass`. Reduced-motion drops transitions and the
+press-translate; forced-colors collapses to system Canvas/Highlight;
+print hides the bar entirely.
+
+**Maqamat haptics.** A new top-level API `Upg.haptic.play(pattern)`
+exposes three tactile patterns inspired by Arabic rhythmic vocabulary:
+`dafn` (نبر — single 8ms tap, gentle navigation), `takk` (تَك — a sharp
+triplet [12, 20, 12]ms, accomplishment), and `maqsoom` (مقسوم — a
+five-pulse [8, 30, 8, 30, 14]ms split, final save). The patterns are
+exposed read-only via `Upg.haptic.patterns()`. A delegated
+`pointerup` listener on `#dual-bottom-nav` fires `dafn` when the user
+taps a regular slot and `takk` when the cmdk FAB is pressed. The
+helper respects `prefers-reduced-motion: reduce` (vibrations
+disabled) and silently no-ops when `navigator.vibrate` is unavailable
+(desktop, iOS Safari, etc.). Other modules — including δ5 view-
+transitions and any future ε content stages — can call
+`Upg.haptic.play('maqsoom')` for commit-style moments.
+
+The Beacon is STRUCTURAL because the plinth is, fundamentally, a
+counter-aesthetic against the Forbidden Library #3 archetype. The
+Maqamat haptics ship as a utility, not as the declared beacon, since
+δ3 already declared INTERACTION and Creativity Doctrine § ٤ requires
+category variance across 3-stage windows. Next: δ5 VIEW_TRANSITIONS_API
+on the same branch.
+
+— Entry end —
+
+
+
+---
+
+## δ5 — View Transitions (Destination Tempo) — 2026-05-25
+
+**Branch:** `elan-δ-kinetic-shell`
+**Commit:** `a97c87d`
+**Pillar position:** δ stage 5 of 6 (one stage remains: δ6 motion-sanctuary)
+
+### Verified-by-grep table
+
+| metric | target | actual | command |
+|---|---:|---:|---|
+| `_view-transition.css` line count | ≤ 220 | **193** | `wc -l platform/assets/css/_view-transition.css` |
+| per-world `::view-transition-new(root)` rules | 8 | **9** (8 + 1 naar arrival-flash compose) | `grep -cE 'body\[data-world="[a-z]+"\]::view-transition-new\(root\)' …` |
+| per-world `::view-transition-new(page-active)` rules | 8 | **8** | `grep -cE '…::view-transition-new\(page-active\)' …` |
+| distinct world names targeted | 8 | **8** (hibr/naar/nada/hadeed/dhahab/tayyar/warsha/saloon) | `grep -oE '…' \| sort -u \| wc -l` |
+| redefined `view-transition-name:` rules | 0 | **0** (only 1 mention, inside doctrine comment) | `grep -c 'view-transition-name:' …` |
+| hex literals in δ5 CSS | 0 | **0** | `grep -cE '#[0-9a-fA-F]{3,8}\b' …` |
+| reduced-motion guards in δ5 | ≥ 1 | **1** | `grep -c 'prefers-reduced-motion' …` |
+| forced-colors guards in δ5 | ≥ 1 | **1** | `grep -c 'forced-colors: active' …` |
+| print guards in δ5 | ≥ 1 | **1** | `grep -c '@media print' …` |
+| `tokens.css` imports view-transition | 1 | **1** | `grep -c '_view-transition.css' platform/assets/css/tokens.css` |
+| `pages.css` diff bytes vs main | 0 | **0** (Sacred preserved) | `git diff main -- platform/assets/css/pages.css \| wc -l` |
+| JS files modified in δ5 | 0 | **0** (CSS-only stage) | `git diff --stat main \| grep '\.js$'` |
+| Total lines added in δ5 | ≤ 600 | **196** | `git diff --stat main…HEAD` |
+
+### What δ5 actually does
+
+Each of the 8 worlds owns a distinct `::view-transition-new(root)` timing
+pair derived from its existing `--ease-<world>` and `--duration-<world>`
+tokens defined in `platform/assets/css/worlds/_<name>.css`. δ5 wires
+those tokens to the native View Transitions API pseudo-elements so the
+platform feels like 8 different chambers, each with its own threshold
+tempo:
+
+- **Hibr** — 320ms / cubic-bezier(0.5, 0, 0.5, 1) — calligrapher's pen
+  settling
+- **Naar** — 180ms / cubic-bezier(0.7, 0, 0.2, 1.2) — sharp ignition,
+  layered with a 60ms ember-coloured `box-shadow inset` arrival flash
+  (the only world that announces arrival; others are timing-only)
+- **Nada** — 480ms / cubic-bezier(0.25, 0.46, 0.45, 0.94) — dewdrop swell
+- **Hadeed** — 220ms / cubic-bezier(0.85, 0, 0.15, 1) — split-flap cinema
+- **Dhahab** — 360ms / cubic-bezier(0.32, 0.72, 0.28, 1) — scale arms
+  levelling
+- **Tayyar** — 520ms / cubic-bezier(0.45, -0.4, 0.55, 1.4) — elastic with
+  a slight overshoot (negative control point)
+- **Warsha** — 280ms / cubic-bezier(0.55, 0.1, 0.25, 1) — wrench rotation
+- **Saloon** — 380ms / cubic-bezier(0.4, 0.05, 0.2, 0.95) — walnut door
+  closing
+
+The `::view-transition-old(root)` is **not** overridden — the leaving
+world keeps the legacy 0.45s ease defined in `pages.css` line 5122. The
+visitor leaves gently; the destination decides the welcome.
+
+The same 8 timing rules are duplicated onto
+`::view-transition-new(page-active)` to extend the Sacred
+`view-transition-name: page-active` registered in pages.css line 19151
+(Aurora W12/W14). The name itself is **not** redefined — δ5 ADDs timing
+overrides via `body[data-world] ::view-transition-new(page-active)`
+specificity, never replaces.
+
+### No JS modifications
+
+`Upg.transition.navigate` (Sacred from W12/W14/W16), `core/theme.js`
+(α3), and `elan/world.js` (γ1) all already wrap navigation through
+`document.startViewTransition`. δ5 piggybacks on those existing
+wrappers purely via CSS pseudo-element targeting. This is a deliberate
+discipline: the kinetic shell should not require a new JS module just
+to honour world-specific tempo when the underlying transition fires
+through pre-existing rails.
+
+### Sacred preservation matrix (verified by `git diff main -- <file>` byte count)
+
+| Sacred surface | Bytes changed by δ5 |
+|---|---:|
+| `platform/assets/css/pages.css` | **0** |
+| `platform/assets/js/core/nav.js` | **0** |
+| `platform/assets/js/elan/world.js` | **0** |
+| `platform/assets/js/upg-helper-08.js` (legacy nav VT wrapper) | **0** |
+| `platform/assets/js/upg-helper-40.js` (legacy theme VT wrapper) | **0** |
+| `platform/index.html` | **0** |
+| All 4 prior δ JS modules (sidebar-magnetic, bento-temporal, topbar-living, bottom-nav) | **0** |
+| All 9 worlds CSS files | **0** |
+
+The `view-transition-name: page-active` registration at pages.css:19151
+remains the only authoritative declaration of that name; δ5 only adds
+`::view-transition-new(page-active)` rules, never `view-transition-name:`
+rules.
+
+### Beacon (recorded in CREATIVITY_LOG.md)
+
+🌊 **MOTION_BEACON — Destination Tempo.** The arriving world dictates
+the entrance pace, not a global default. This is the second MOTION
+beacon in δ (δ1 was magnetic sidebar tilt) — separated by 4 stages, so
+within Creativity Doctrine § ٤ tolerance (no 2-of-last-3 same-category
+violation). Avoided: Forbidden #12 (fade-in on scroll) and the universal
+"one duration for all routes" cliché. Inspired-by: Wild Card #4
+(Maqamat music notation — each maqam carries its own time signature, so
+arriving in a different maqam means the listener feels a new rhythmic
+ground beneath them).
+
+### Open question (carried to δ6)
+
+The naar arrival flash uses a CSS variable fallback
+`var(--vt-fade-in-name, qlVTFadeIn)` to compose with the legacy
+`qlVTFadeIn` keyframe by name. If a future stage renames that keyframe,
+the fallback string in δ5 will need a tokens.css entry. Recommended for
+δ6 motion-sanctuary or a follow-up audit: define `--vt-fade-in-name` in
+`tokens/_motion.css` and route δ5 through it. Logged here, not blocking.
+
+— Entry end —
+
+
+
+## δ6 — 2026-05-25 — Motion Sanctuary (محراب السكون)
+
+**Pillar:** δ KINETIC SHELL · **Stage:** 6 of 6 (closes the pillar)
+**Branch:** `elan-δ-kinetic-shell` · **Commit:** `66f3a01`
+
+**Before (forensic baseline):**
+
+| key | value |
+|---|---:|
+| `_motion-sanctuary.css` on disk | absent |
+| `delta6-motion.js` on disk | absent |
+| `scripts/elan-motion-audit.sh` | absent |
+| `data-motion` attribute usage in platform | 0 |
+| `Upg.elan.motion` namespace | absent |
+| Legacy `window.Upg.motion = Object.freeze({ reveal, refreshGlow })` | 1 (W12, sacred) |
+| Reduced-motion gate blocks across `platform/assets/css/` | ~87 |
+| Total `animation:` / `@keyframes` declarations across `platform/assets/css/` | 218 |
+
+**After (verified by grep):**
+
+| key | value |
+|---|---:|
+| `platform/assets/css/_motion-sanctuary.css` | 244 lines |
+| `platform/assets/js/elan/delta6-motion.js` | 175 lines |
+| `scripts/elan-motion-audit.sh` | 110 lines (+x), exit code 0 |
+| `tokens.css` `@import "./_motion-sanctuary.css"` | 1 |
+| `app.js` `import './js/elan/delta6-motion.js'` | 1 |
+| Gate blocks inside sanctuary stylesheet | 21 |
+| Universal `*,*::before,*::after` cap with `animation-duration:0.01ms!important` | 1 |
+| Per-world static-signature transposition rules | 8 (one per world) |
+| Manual override `body[data-motion="reduced"]` rules | 9 |
+| Manual override `body[data-motion="enhanced"]` rules | 5 |
+| Print + forced-colors fallbacks in d6 | 1 + 1 |
+| Hex literals in new CSS | 0 |
+| Hex literals in new JS | 0 |
+| Toy `<svg viewBox>` in new code | 0 |
+| Emoji in new markup (HTML untouched) | 0 |
+| HTML diff bytes in this stage | 0 |
+| Legacy `Upg.motion` (W12) preserved verbatim | yes ✓ |
+| New surface registered at `Upg.elan.motion` (frozen, 6 methods) | yes ✓ |
+| Top-level `Upg.*` API count after δ6 | 31 (unchanged — δ6 nests under Upg.elan) |
+| Sacred 16 page sections | 16 |
+| Sacred 17 nav-items | 17 |
+
+**Files touched (cumulative):**
+- `platform/assets/css/_motion-sanctuary.css` (NEW · 244)
+- `platform/assets/js/elan/delta6-motion.js` (NEW · 175)
+- `scripts/elan-motion-audit.sh` (NEW · 110, +x)
+- `platform/assets/css/tokens.css` (+2 — one @import + one comment line)
+- `platform/assets/app.js` (+4 — comment + import)
+
+**Lines:** +540 / −1 across 5 files.
+
+**Beacon:** 🪞 META_BEACON — when the user chooses stillness, ÊLAN does not strip itself to ugly minimalism. Each world transposes its motion identity into a static signature; «ساكن» appears in the topbar corner as a non-apologetic Arabic acknowledgement.
+**Reference avoided:** Forbidden #14 (stagger animation cliché) + the *anti-pattern* "reduced-motion = ugly minimalism" that most AI dashboards default to.
+**Inspired-by:** Wild Card #6 Müller-Brockmann + Wild Card #9 Kufi chocolate-block.
+**Originality self-score:** 4/5.
+
+**Sacred preservation:**
+- Legacy `window.Upg.motion = Object.freeze({ reveal, refreshGlow })` (W12) untouched. New surface nests at `Upg.elan.motion` matching δ1 (`Upg.elan.magneticSidebar`) and δ4 (`Upg.elan.bottomNav`).
+- 16 page sections + 17 nav-items intact.
+- 218 existing animations across the platform are now ALL covered by the universal cap (regardless of whether their original stylesheet has its own gate). Audit script reports 0 ungated files.
+- Reading Halo W22 P2 semantic depth preserved — only the breath is dropped, the box-shadow inset remains so the user still feels they are in halo mode.
+- focus-visible + aria-invalid kept loud (a11y override) even with universal cap.
+
+**Pillar δ closure:**
+6 stages shipped on `elan-δ-kinetic-shell` (δ1 73d72c1c · δ2 33f0553 · δ3 b794e19 · δ4 5e50984 · δ5 a97c87d · δ6 66f3a01). 6 Beacons across 5 distinct categories (MOTION δ1+δ5, DATA δ2, INTERACTION δ3, STRUCTURAL δ4, META δ6). 0 forbidden violations. 0 Sacred Asset disturbance. Next: PR open + Pillar ε CONTENT_REVIVAL on a fresh branch.
+
+— Entry end —

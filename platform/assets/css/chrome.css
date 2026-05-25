@@ -1396,3 +1396,586 @@ body[data-haptic-enabled="true"] .dual-haptic-toggle::after {
 }
 
 /* End DUAL-FORM v3 / Phase 4 — Haptic Toggle ──────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — δ1 — Magnetic Sidebar (Pillar δ KINETIC SHELL / Stage 1 of 6)
+   ════════════════════════════════════════════════════════════════════════
+   🌊 MOTION_BEACON
+   The Surprise: ONE sidebar element, EIGHT magnetic personalities.
+   The tilt response (max angle + settle duration + easing) inherits from
+   each world's --ease-<world> / --duration-<world> tokens — so the same
+   slab behaves like paper in Hibr, like a forge anvil in Naar, like
+   mountain mist in Nada, like a Hadeed cinema reel snap, like a balanced
+   gold pan in Dhahab, like an elastic wave in Tayyar, like a stair-step
+   workshop bench in Warsha, like polished walnut in Saloon. On touch
+   devices, DeviceOrientationEvent drives the same tilt — phone leans,
+   sidebar leans (≤ ±1.5°). Settle is GRAVITY (one half-cycle) not SPRING
+   (Forbidden #13).
+
+   Reference Avoided: #13 spring-bounce hover · #3 Notion-pill sidebar
+   Inspired-by: Wild Card #2 — Iraqi Brutalism (Chadirji)
+   Sacred preserved: existing 17 .nav-item + .qi icons untouched; this
+   layer AUGMENTS via [data-elan-magnetic="sidebar"] hook only. CSS adds
+   tilt + per-world materiality only; layout & icon path unchanged.
+   ──────────────────────────────────────────────────────────────────── */
+
+#sidebar[data-elan-magnetic="sidebar"] {
+  /* JS writes these three; CSS handles the visual. */
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --tilt-shadow: 0px;
+
+  /* Per-element fallbacks; per-world overrides below replace them. */
+  --magnet-tilt-max: 1.2deg;
+  --magnet-duration-rest: 320ms;
+  --magnet-ease-rest: var(--ease-elan, cubic-bezier(0.16, 1, 0.3, 1));
+
+  /* Brutalist gravity-settle: one half-cycle damped curve, NOT a spring.
+     Negative starting Y produces a tiny undershoot then ease — like an
+     iron plate returning to rest after a magnet is pulled away. */
+  --magnet-ease-settle: cubic-bezier(0.32, -0.04, 0.4, 1);
+
+  transform-style: preserve-3d;
+  transform: perspective(900px)
+             rotateX(var(--tilt-y))
+             rotateY(var(--tilt-x));
+  transition:
+    transform var(--magnet-duration-rest) var(--magnet-ease-rest),
+    box-shadow var(--magnet-duration-rest) var(--magnet-ease-rest);
+  will-change: transform;
+}
+
+/* Active-state: sidebar is currently being magnetised by pointer or gyro.
+   JS toggles [data-magnet-state="active"]; on release JS removes it and
+   the rest-transition (settle ease) runs. */
+#sidebar[data-elan-magnetic="sidebar"][data-magnet-state="active"] {
+  transition:
+    transform 80ms linear,
+    box-shadow 80ms linear;
+}
+
+#sidebar[data-elan-magnetic="sidebar"][data-magnet-state="resting"] {
+  transition:
+    transform var(--magnet-duration-rest) var(--magnet-ease-settle),
+    box-shadow var(--magnet-duration-rest) var(--magnet-ease-settle);
+}
+
+/* Per-world magnetic materiality — each world overrides three vars to
+   give the slab its own physical personality. Token chain reuses the
+   --ease-<world> / --duration-<world> declared in worlds/_<name>.css. */
+body[data-world="hibr"]   #sidebar[data-elan-magnetic="sidebar"] {
+  --magnet-tilt-max: 0.9deg;
+  --magnet-duration-rest: var(--duration-hibr-dry, 600ms);
+  --magnet-ease-rest: var(--ease-hibr, cubic-bezier(0.5, 0, 0.5, 1));
+}
+body[data-world="naar"]   #sidebar[data-elan-magnetic="sidebar"] {
+  --magnet-tilt-max: 1.5deg;
+  --magnet-duration-rest: var(--duration-naar, 180ms);
+  --magnet-ease-rest: var(--ease-naar, cubic-bezier(0.7, 0, 0.2, 1.2));
+}
+body[data-world="nada"]   #sidebar[data-elan-magnetic="sidebar"] {
+  --magnet-tilt-max: 0.6deg;
+  --magnet-duration-rest: var(--duration-nada-condense, 520ms);
+  --magnet-ease-rest: var(--ease-nada, cubic-bezier(0.25, 0.46, 0.45, 0.94));
+}
+body[data-world="hadeed"] #sidebar[data-elan-magnetic="sidebar"] {
+  --magnet-tilt-max: 1.4deg;
+  --magnet-duration-rest: var(--duration-hadeed, 220ms);
+  --magnet-ease-rest: var(--ease-hadeed, cubic-bezier(0.85, 0, 0.15, 1));
+}
+body[data-world="dhahab"] #sidebar[data-elan-magnetic="sidebar"] {
+  --magnet-tilt-max: 0.9deg;
+  --magnet-duration-rest: var(--duration-dhahab, 360ms);
+  --magnet-ease-rest: var(--ease-dhahab, cubic-bezier(0.32, 0.72, 0.28, 1));
+}
+body[data-world="tayyar"] #sidebar[data-elan-magnetic="sidebar"] {
+  --magnet-tilt-max: 1.2deg;
+  --magnet-duration-rest: var(--duration-tayyar, 520ms);
+  --magnet-ease-rest: var(--ease-tayyar, cubic-bezier(0.45, -0.4, 0.55, 1.4));
+}
+body[data-world="warsha"] #sidebar[data-elan-magnetic="sidebar"] {
+  --magnet-tilt-max: 1.3deg;
+  --magnet-duration-rest: var(--duration-warsha, 280ms);
+  /* Warsha uses a stair-stepped feel via steps() — gritty bench */
+  --magnet-ease-rest: steps(4, end);
+}
+body[data-world="saloon"] #sidebar[data-elan-magnetic="sidebar"] {
+  --magnet-tilt-max: 1.0deg;
+  --magnet-duration-rest: var(--duration-saloon, 380ms);
+  --magnet-ease-rest: var(--ease-saloon, cubic-bezier(0.4, 0.05, 0.2, 0.95));
+}
+
+/* iOS 13+ Gyroscope permission prompt — rendered only when needed.
+   Unobtrusive: small chip pinned bottom-end of the sidebar; auto-hides
+   after the user grants or denies. NO emoji, NO inline SVG — text only. */
+.elan-magnet-permit {
+  position: absolute;
+  inset-inline-end: var(--s-3, 12px);
+  inset-block-end: calc(var(--s-12, 48px) + env(safe-area-inset-bottom, 0px));
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2, 8px);
+  padding: var(--s-2, 8px) var(--s-3, 12px);
+  border: 1px solid var(--line, hsl(0 0% 50% / 0.2));
+  border-radius: var(--r-pill, 999px);
+  background: var(--anchor-1, hsl(0 0% 100% / 0.6));
+  color: var(--ink-muted, currentColor);
+  font: 500 12px/1.2 var(--voice-ui, system-ui), sans-serif;
+  cursor: pointer;
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+.elan-magnet-permit:hover {
+  background: var(--anchor-2, hsl(0 0% 100% / 0.8));
+  color: var(--ink, currentColor);
+}
+.elan-magnet-permit:focus-visible {
+  outline: 2px solid var(--focus, var(--color-primary, hsl(220 80% 50%)));
+  outline-offset: 2px;
+}
+.elan-magnet-permit[hidden] { display: none; }
+
+/* Accessibility — silence the entire system when the user prefers. */
+@media (prefers-reduced-motion: reduce) {
+  #sidebar[data-elan-magnetic="sidebar"] {
+    --tilt-x: 0deg !important;
+    --tilt-y: 0deg !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .elan-magnet-permit { display: none !important; }
+}
+
+/* Print — never tilt, never magnetic, never permission button. */
+@media print {
+  #sidebar[data-elan-magnetic="sidebar"] {
+    transform: none !important;
+    transition: none !important;
+  }
+  .elan-magnet-permit { display: none !important; }
+}
+
+/* Forced-colors — system surface only, no transforms. */
+@media (forced-colors: active) {
+  #sidebar[data-elan-magnetic="sidebar"] {
+    transform: none !important;
+  }
+  .elan-magnet-permit {
+    border: 1px solid CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+}
+
+/* End ÊLAN v4 — δ1 ─────────────────────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — δ2 — Bento Temporal (additive block, end of chrome.css)
+   ────────────────────────────────────────────────────────────────────────
+   Beacon: 📊 DATA_BEACON — same dashboard, attention shifts with the hour.
+   Cells declare data-temporal-priority="morning,afternoon"; the JS layer
+   stamps data-temporal-active="true" + data-temporal-axis="focal" on
+   matching cells. This stylesheet ONLY promotes — it never demotes
+   (inactive cells stay completely neutral). The existing bento layout
+   (b-4x1, b-2x2, b-1x1, etc.) is untouched; this is a transparent
+   emphasis layer that sits on top.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Active-cell emphasis — outline + lift + tinted box-shadow.
+   Uses the active world's --ember (hibr=red, naar=fire, dhahab=gold, ...)
+   so the cell glows in the personality of the page it lives on. */
+[data-temporal-priority][data-temporal-active="true"] {
+  position: relative;
+  outline: 1px solid color-mix(in oklch,
+    var(--ember, var(--accent, hsl(45 80% 50%))) 38%,
+    transparent);
+  outline-offset: -2px;
+  box-shadow:
+    0 8px 28px hsl(0 0% 0% / 0.10),
+    0 0 0 1px color-mix(in oklch,
+      var(--ember, var(--accent, hsl(45 80% 50%))) 20%,
+      transparent);
+  transform: translateY(-1px);
+  transition:
+    outline-color 480ms cubic-bezier(0.32, 0.72, 0.28, 1),
+    box-shadow   480ms cubic-bezier(0.32, 0.72, 0.28, 1),
+    transform    480ms cubic-bezier(0.32, 0.72, 0.28, 1);
+}
+
+/* Subtle ribbon — "الأهم الآن" — appears at top-end of the focal cell.
+   Pure CSS, no SVG, no emoji. Pseudo-element only; the underlying markup
+   is never modified by this stage. The ribbon respects RTL (top/inset-end)
+   and reads as decorative (aria-hidden via content: ""). */
+[data-temporal-priority][data-temporal-active="true"]::before {
+  content: "الأهم الآن";
+  position: absolute;
+  top: var(--s-2, 8px);
+  inset-inline-end: var(--s-3, 12px);
+  z-index: 2;
+  font-family: var(--voice-ui, var(--font-ui, system-ui));
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: color-mix(in oklch,
+    var(--ember, var(--accent, hsl(45 80% 50%))) 78%,
+    var(--ink, currentColor));
+  background: color-mix(in oklch,
+    var(--ember, var(--accent, hsl(45 80% 50%))) 14%,
+    transparent);
+  padding: 2px var(--s-2, 8px);
+  border-radius: var(--r-pill, 999px);
+  border: 1px solid color-mix(in oklch,
+    var(--ember, var(--accent, hsl(45 80% 50%))) 28%,
+    transparent);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-2px);
+  animation: elan-ribbon-in 520ms cubic-bezier(0.32, 0.72, 0.28, 1) forwards;
+  animation-delay: 80ms;
+}
+
+@keyframes elan-ribbon-in {
+  from { opacity: 0; transform: translateY(-2px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Per-world ribbon tonal adjustments — Hadeed/Tayyar/Naar dark surfaces
+   need a more luminous ribbon background to remain legible. */
+body[data-world="naar"]   [data-temporal-active="true"]::before,
+body[data-world="hadeed"] [data-temporal-active="true"]::before,
+body[data-world="tayyar"] [data-temporal-active="true"]::before,
+body[data-world="warsha"] [data-temporal-active="true"]::before,
+body[data-world="saloon"] [data-temporal-active="true"]::before {
+  background: color-mix(in oklch,
+    var(--ember, hsl(45 80% 50%)) 20%,
+    transparent);
+  color: var(--ink, currentColor);
+}
+
+/* Body data-temporal-slice hooks — let each world tint the slice
+   subtly so the dashboard reads its own time-of-day mood. These are
+   ambient page-level cues, not cell-level. */
+body[data-temporal-slice="morning"]   { --temporal-mood: 1.0; }
+body[data-temporal-slice="afternoon"] { --temporal-mood: 0.92; }
+body[data-temporal-slice="evening"]   { --temporal-mood: 0.85; }
+body[data-temporal-slice="night"]     { --temporal-mood: 0.8; }
+
+/* Reduced-motion guard — flatten the entrance animation + transition.
+   The visual emphasis (outline, tinted shadow, ribbon copy) remains —
+   it is signal, not motion. The emphasis simply appears at full strength
+   immediately, no slide-in. */
+@media (prefers-reduced-motion: reduce) {
+  [data-temporal-priority][data-temporal-active="true"] {
+    transition: none !important;
+    transform: none !important;
+  }
+  [data-temporal-priority][data-temporal-active="true"]::before {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Forced-colors / high-contrast — strip tinted shadows + tinted ribbon
+   bg; rely on system Highlight color for the outline and ButtonText for
+   the ribbon copy. Signal preserved, system colours respected. */
+@media (forced-colors: active) {
+  [data-temporal-priority][data-temporal-active="true"] {
+    outline: 2px solid Highlight !important;
+    box-shadow: none !important;
+  }
+  [data-temporal-priority][data-temporal-active="true"]::before {
+    background: Canvas !important;
+    color: ButtonText !important;
+    border-color: ButtonText !important;
+  }
+}
+
+/* Print — hide the ribbon entirely; outline collapses to 1px hairline.
+   Print should be a calm document, not a UI. */
+@media print {
+  [data-temporal-priority][data-temporal-active="true"]::before {
+    display: none !important;
+  }
+  [data-temporal-priority][data-temporal-active="true"] {
+    outline: 1px solid var(--ink, CanvasText) !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+}
+
+/* End ÊLAN v4 — δ2 ─────────────────────────────────────────────────── */
+
+
+
+/* ╭───────────────────────────────────────────────────────────────────╮
+ * │  ÊLAN v4 — δ3 — Living Topbar (Reading Tide)                      │
+ * │  🤚 INTERACTION_BEACON                                            │
+ * │  Targets the existing #topbar (data-elan-living="topbar" hook).   │
+ * │  Single contract:  --scroll-pct (0..1) is set by                  │
+ * │  /platform/assets/js/elan/topbar-living.js                        │
+ * │  Two layers consume it:                                           │
+ * │    1. #topbar-title fills with ink from inline-end → inline-start │
+ * │    2. A 1px ember tide line at the topbar's lower edge grows in   │
+ * │       lockstep                                                    │
+ * │  Click on the title → page rewinds to its top.                    │
+ * │  No emoji. No inline SVG. No hex literals. Per-world ember only.  │
+ * ╰───────────────────────────────────────────────────────────────────╯ */
+
+#topbar[data-elan-living="topbar"] {
+  --scroll-pct: 0;
+  position: relative;
+}
+
+/* The tide line. Sits just above the existing border-bottom of the
+ * topbar. RTL-natural: anchored to inline-end (right in ar dir),
+ * grows toward inline-start as the user reads. */
+#topbar[data-elan-living="topbar"]::after {
+  content: "";
+  position: absolute;
+  inset-inline-end: 0;
+  inset-block-end: 0;
+  block-size: 1px;
+  inline-size: calc(var(--scroll-pct) * 100%);
+  background: var(--ember, currentColor);
+  opacity: 0.85;
+  pointer-events: none;
+  transform-origin: inline-end center;
+  /* Smooth follow without animation library: pure CSS transition on
+     the inline-size as the JS pushes new --scroll-pct values. */
+  transition: inline-size 80ms linear;
+}
+
+#topbar[data-elan-living="topbar"][data-read="true"]::after {
+  opacity: 1;
+}
+
+/* The Reading Tide on the title text itself. The existing #topbar-title
+ * is plain text in a div; we use background-clip: text so the ink fills
+ * from inline-end (Arabic line tail) toward inline-start. The
+ * `currentColor` fallback path keeps the title legible if the browser
+ * lacks background-clip support, and forced-colors mode opts out. */
+#topbar[data-elan-living="topbar"] #topbar-title[data-elan-living="title"] {
+  /* The unfilled side uses the muted ink; the filled side uses the
+     anchor ink. Linear gradient with a single hard stop, positioned
+     by the scroll fraction. */
+  background-image: linear-gradient(
+    to left,
+    var(--ink, currentColor) 0,
+    var(--ink, currentColor) calc(var(--scroll-pct, 0) * 100%),
+    var(--ink-faint, color-mix(in oklch, currentColor 55%, transparent)) calc(var(--scroll-pct, 0) * 100%),
+    var(--ink-faint, color-mix(in oklch, currentColor 55%, transparent)) 100%
+  );
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
+  cursor: pointer;
+  transition: background-image 80ms linear;
+}
+
+/* When the user has read to the end, the title gets a small chamfered
+ * dot at its inline-start (the Arabic head of the line) — a quiet "I
+ * see you finished this page" mark. CSS-only, no SVG. */
+#topbar[data-elan-living="topbar"][data-read="true"] #topbar-title[data-elan-living="title"]::before {
+  content: "";
+  display: inline-block;
+  inline-size: 6px;
+  block-size: 6px;
+  margin-inline-end: var(--s-2, 6px);
+  background: var(--ember, currentColor);
+  /* Chamfered diamond, not a circle (avoid pulse-dot semantics). */
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  vertical-align: middle;
+}
+
+/* Title hover — subtle hint that it's interactive. The cursor is
+ * already pointer; the ink-faint side gains a touch of ink for a
+ * 120ms moment. */
+@media (prefers-reduced-motion: no-preference) {
+  #topbar[data-elan-living="topbar"] #topbar-title[data-elan-living="title"]:hover,
+  #topbar[data-elan-living="topbar"] #topbar-title[data-elan-living="title"]:focus-visible {
+    background-image: linear-gradient(
+      to left,
+      var(--ink, currentColor) 0,
+      var(--ink, currentColor) calc(var(--scroll-pct, 0) * 100%),
+      color-mix(in oklch, var(--ink, currentColor) 78%, transparent) calc(var(--scroll-pct, 0) * 100%),
+      color-mix(in oklch, var(--ink, currentColor) 78%, transparent) 100%
+    );
+  }
+}
+
+#topbar[data-elan-living="topbar"] #topbar-title[data-elan-living="title"]:focus-visible {
+  outline: 2px solid var(--focus, currentColor);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Reduced motion: drop transitions but keep the gradient (it is a
+ * static representation of position, not a motion effect). */
+@media (prefers-reduced-motion: reduce) {
+  #topbar[data-elan-living="topbar"]::after {
+    transition: none;
+  }
+  #topbar[data-elan-living="topbar"] #topbar-title[data-elan-living="title"] {
+    transition: none;
+  }
+}
+
+/* Forced colors (Windows high-contrast): collapse the tide to a system
+ * Highlight bar; let the title fall back to system text color so the
+ * meter remains legible without depending on background-clip. */
+@media (forced-colors: active) {
+  #topbar[data-elan-living="topbar"]::after {
+    background: Highlight;
+    opacity: 1;
+  }
+  #topbar[data-elan-living="topbar"] #topbar-title[data-elan-living="title"] {
+    background-image: none;
+    -webkit-text-fill-color: CanvasText;
+            color: CanvasText;
+  }
+}
+
+/* Print: hide the tide, drop the gradient. The page-title prints as
+ * normal text (anchor ink). */
+@media print {
+  #topbar[data-elan-living="topbar"]::after {
+    display: none !important;
+  }
+  #topbar[data-elan-living="topbar"] #topbar-title[data-elan-living="title"] {
+    background-image: none !important;
+    -webkit-text-fill-color: currentColor !important;
+            color: currentColor !important;
+  }
+}
+
+/* End ÊLAN v4 — δ3 ─────────────────────────────────────────────────── */
+
+
+
+/* ╭───────────────────────────────────────────────────────────────────╮
+ * │  ÊLAN v4 — δ4 — Mobile Bottom Nav (Plinth Mode)                   │
+ * │  🏛 STRUCTURAL_BEACON — "Plinth, Not Pill"                        │
+ * │                                                                   │
+ * │  Targets the existing #dual-bottom-nav (Worker 24 / Pack v3).     │
+ * │  Default glass behavior preserved unchanged. Plinth mode is       │
+ * │  opt-in via [data-elan-bottom-nav="plinth"] on the same node      │
+ * │  (set by /platform/assets/js/elan/bottom-nav.js).                 │
+ * │                                                                   │
+ * │  Counter-aesthetic to Forbidden #3 (floating sidebar/pill nav     │
+ * │  Notion clone). The plinth is structurally honest: no float, no   │
+ * │  glass, no rounded corners — a flat horizontal slab with a single │
+ * │  ember top-edge that inherits the active world's identity.        │
+ * ╰───────────────────────────────────────────────────────────────────╯ */
+
+#dual-bottom-nav[data-elan-bottom-nav="plinth"] {
+  /* Solid surface — no transparency, no backdrop filter. */
+  background: var(--anchor-1, var(--color-surface-1, var(--dual-bottom-nav-bg)));
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  /* Plinth has zero border-radius and a single ember hairline at the
+     top edge — the only decorative line on the entire bar. */
+  border-radius: 0;
+  border-top: 1px solid var(--ember, currentColor);
+  /* No shadow. The plinth doesn't pretend to hover. */
+  box-shadow: none;
+}
+
+/* Active slot — 2px ember bottom-underline, like a structural tab
+ * indicator carved into the plinth. Drawn as ::after so the legacy
+ * .dual-bottom-nav-item--active styles (if any) don't conflict. */
+#dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item[data-elan-active="true"] {
+  color: var(--ember, currentColor);
+  position: relative;
+}
+
+#dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item[data-elan-active="true"]::after {
+  content: "";
+  position: absolute;
+  inset-inline: 12%;
+  inset-block-end: 0;
+  block-size: 2px;
+  background: var(--ember, currentColor);
+  pointer-events: none;
+}
+
+/* Active slot icon picks up the ember color via currentColor inheritance. */
+#dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item[data-elan-active="true"] .dual-bottom-nav-icon {
+  color: var(--ember, currentColor);
+}
+
+/* Hover/focus on plinth items — subtle, no shadow, no scale. */
+@media (prefers-reduced-motion: no-preference) {
+  #dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item {
+    transition:
+      color var(--t-2, 200ms) var(--ease-elan, cubic-bezier(0.16, 1, 0.3, 1)),
+      background-color var(--t-2, 200ms) var(--ease-elan, cubic-bezier(0.16, 1, 0.3, 1));
+  }
+}
+
+#dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item:hover,
+#dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item:focus-visible {
+  color: var(--ink, currentColor);
+  background: color-mix(in oklch, var(--ember, currentColor) 8%, transparent);
+}
+
+#dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item:focus-visible {
+  outline: 2px solid var(--focus, var(--ember, currentColor));
+  outline-offset: -2px;
+  border-radius: 0;
+}
+
+/* Tap-press feedback — instant 1px depression, no scale, no spring.
+ * Brutalist honesty: the slot is a key being pressed, not a balloon. */
+@media (prefers-reduced-motion: no-preference) {
+  #dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item:active {
+    transform: translateY(1px);
+  }
+}
+
+/* The center FAB (cmdk) keeps its filled-circle identity but sits on
+ * the plinth with a hard-edged ember ring instead of the default
+ * floating shadow. */
+#dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-center {
+  /* Override any default elevation on the center slot. */
+  box-shadow: none;
+  background: transparent;
+  border: 1px solid var(--ember, currentColor);
+  border-radius: 0;
+}
+
+/* Reduced motion — kill transitions and the press translate. */
+@media (prefers-reduced-motion: reduce) {
+  #dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item {
+    transition: none;
+    transform: none !important;
+  }
+}
+
+/* Forced colors (Windows high-contrast). */
+@media (forced-colors: active) {
+  #dual-bottom-nav[data-elan-bottom-nav="plinth"] {
+    background: Canvas;
+    border-top: 1px solid CanvasText;
+  }
+  #dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item[data-elan-active="true"]::after {
+    background: Highlight;
+  }
+  #dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item:focus-visible {
+    outline: 2px solid Highlight;
+  }
+}
+
+/* Print — the plinth is a navigation layer; hide it entirely. */
+@media print {
+  #dual-bottom-nav[data-elan-bottom-nav="plinth"] {
+    display: none !important;
+  }
+}
+
+/* End ÊLAN v4 — δ4 ─────────────────────────────────────────────────── */
