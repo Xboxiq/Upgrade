@@ -26402,3 +26402,133 @@ body[data-rit-time]:not([data-rit-time="default"]) .bento-card {
 /* End RITUAL UI v3 / Phase 6 — Aura Deepening — Worker 22 COMPLETE 6/6 ── */
 
 /* End pages.css ───────────────────────────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — ε1 — Dashboard Revival (Hibr World)
+   ════════════════════════════════════════════════════════════════════════
+   Beacon: 📊 DATA_BEACON — Manuscript Margin Progress
+   The progress indicator is a 12px vertical ink strip on the bento's
+   inline-end edge, filling top-to-bottom like a scribe's marginal gloss.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ── Manuscript Margin Progress ──────────────────────────────────────── */
+
+[data-world="hibr"] .progress-margin {
+  position: absolute;
+  inset-inline-end: var(--s-3);
+  inset-block: var(--s-4);
+  inline-size: 12px;
+  background: var(--anchor-2);
+  border-radius: 1px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+[data-world="hibr"] .progress-margin__fill {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 0;
+  block-size: var(--progress-pct, 0%);
+  background: var(--ink);
+  border-radius: 1px;
+  transition: block-size var(--duration-hibr) var(--ease-hibr);
+}
+
+[data-world="hibr"] .progress-margin__note {
+  position: absolute;
+  inset-block-end: calc(-1 * var(--s-6));
+  inset-inline-end: 0;
+  writing-mode: horizontal-tb;
+  font-family: var(--voice-body, "Markazi Text", serif);
+  font-size: var(--text-xs, 0.75rem);
+  color: var(--ink-muted);
+  white-space: nowrap;
+  pointer-events: auto;
+}
+
+/* ── Iraq Block (ε1+ reusable) ───────────────────────────────────────── */
+
+.iraq-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-3);
+  border-inline-start: 3px solid var(--ember, hsl(0 65% 32%));
+  background: color-mix(in oklch, var(--ember, hsl(0 65% 32%)) 4%, transparent);
+}
+
+.iraq-block .bento-h {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.iraq-block-source {
+  opacity: 0.72;
+  font-size: var(--text-2xs, 0.65rem);
+}
+
+/* ── Continue Last Unit ──────────────────────────────────────────────── */
+
+[data-world="hibr"] .bento-continue-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+[data-world="hibr"] .bento-continue-unit {
+  font-family: var(--voice-body, "Markazi Text", serif);
+  color: var(--ink);
+}
+
+[data-world="hibr"] .bento-continue-cta {
+  align-self: flex-start;
+  padding: var(--s-2) var(--s-4);
+  background: var(--ember);
+  color: var(--anchor-bg);
+  border: none;
+  border-radius: var(--r-1);
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity var(--duration-hibr) var(--ease-hibr);
+}
+
+[data-world="hibr"] .bento-continue-cta:hover {
+  opacity: 0.85;
+}
+
+[data-world="hibr"] .bento-continue-cta:focus-visible {
+  box-shadow: var(--ring);
+  outline: none;
+}
+
+/* ── Bento relative for progress-margin absolute ─────────────────────── */
+
+[data-world="hibr"] [data-bento="dashboard"] {
+  position: relative;
+}
+
+/* ── Reduced motion: instant fill, no animation ──────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  [data-world="hibr"] .progress-margin__fill {
+    transition-duration: 1ms;
+  }
+}
+
+/* ── Print: progress-margin as solid, iraq-block visible ─────────────── */
+
+@media print {
+  .progress-margin {
+    display: none;
+  }
+  .iraq-block {
+    border-inline-start-color: #333;
+    background: transparent;
+  }
+}

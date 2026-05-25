@@ -149,7 +149,8 @@ import './js/elan/bottom-nav.js';
 // static-signature transposition in _motion-sanctuary.css)
 import './js/elan/delta6-motion.js';
 
-
+// ─── Pillar ε: CONTENT REVIVAL ─────────────────────────────────────────
+import './js/elan/epsilon1-dashboard.js';
 
 // ÊLAN v4 — ε3: Fieldsales Content Revival (Hadeed / INTERACTION beacon —
 // hand-drawn route canvas, 8 Baghdad pins, no Google Maps, no external API.
