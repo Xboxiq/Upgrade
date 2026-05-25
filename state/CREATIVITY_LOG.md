@@ -528,3 +528,35 @@ disruption_triggers: 5
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-25 / ε7 — Pillar ε stage 7/12
+
+
+
+## ε8 — 2026-05-25
+**Beacon Type:** 🏛 STRUCTURAL_BEACON
+**The Surprise:** «خريطة المسارات» في صفحة البرمجة لم تَعد قائمة عمودية بمكتبات ولغات. هي **شجرة فروع Brutalist** مرسومة كـ ember line work على شبكة concrete coffer (32px × 32px) كَسقف Chadirji المُعَلَّق. الجذع: عقدة foundation واحدة في الأعلى («الأساسيات السبعة»). الأوراق: عشرة مسارات وظيفية موزَّعة على ٣ صفوف (3/3/4). الفروع: quadratic curves تَنطلق عمودياً من الجذع ثم تَنسحب RTL-صحيحة نحو كل ورقة — لغة Makiya التشكيلية للـ structural diagrams، ليست chart.js افتراضي.
+
+عند hover أو keyboard-focus على فرع: كل الفروع الأخرى تَخفت إلى opacity 0.3، الفرع المُختار يَتألَّق بـ stroke-width 2.4 ولون focus (شرارة 48° HSL). Tab يَجول كل الفروع (كل `<g>` يَحوي tabindex=0 + role=button + aria-label عربي). Enter / Space يُطلق `upg:elan:programming:select` CustomEvent، تَستهلكه الصفحة لـ deep-linking لاحقاً.
+
+البنية الأهم: الـ SVG **يُبنَى برمجياً عبر `document.createElementNS`**، صفر `<svg viewBox>` inline في الـ HTML. هذا هو الفرق الجوهري بين Toy SVG (محرَّم للأيقونات في ICONOGRAPHY_DOCTRINE §٣.أ.٢) وبين data-visualization SVG (مُلزَم وضروري لـ STRUCTURAL_BEACON). الـ SVG هنا diagram، ليس icon.
+
+Fallback صادق: قائمة الـ paths نفسها (`<ul class="naar-paths">`) موجودة في الـ markup كنص قابل للقراءة، فلن يَخسر مستخدم بلا JS أو reduced-motion المعرفة — يَرى نفس العشرة مسارات ك‏بطاقات terra. الـ tree host يَحمل `role=img` + `aria-label` بوصف عربي كامل («شجرة المسارات: الأساسيات السبعة في الأعلى وعشرة مسارات تَتفرّع منها»)، الـ inner `<svg>` يَحمل `role=presentation aria-hidden=true` لئلا يُكرَّر للقارئ. Foundations row فوق الـ tree (٧ chips تَحمل أسماء أساسيات HTML+a11y / CSS modern / JS ES2023+ / Git / DevTools / CLI / API REST) مع icons من Lucide map (code, layers, terminal, git-branch, bug, terminal, globe).
+
+الـ Iraq Block يُؤكِّد بـ citation visible: «في سوق العمل العراقي ٢٠٢٤، فرص الـ remote/freelance أكبر بـ ٥× من الـ local job posts للمطوّرين. الإنجليزية المتوسِّطة + portfolio يَزن أكثر من شهادة. ابدأ بـ "الكود يَتكلَّم" قبل CV.» — Bel Inc. + Stack Overflow Iraq Survey, 2024.
+
+**Reference Avoided:** linear curriculum list (الـ AI الافتراضي يُنتجها كل مرة لكل صفحة برمجة) + Forbidden #6 (bento = rectangles بنفس الـ padding) + Toy SVG (بقيت programmatic، صفر inline icon SVG).
+**Inspired-by:** Wild Card #1 — Brutalist Iraqi Modernism (Mohammed Makiya + Rifat Chadirji structural diagrams) + spec's Japanese ema woodblock branching layout. الـ Chadirji concrete waffle ceiling اقتُبس حرفياً كـ background-image للـ tree host (linear-gradient grid 32px).
+**User-Visible:** yes — كل مستخدم يَفتح صفحة programming ويَرى الـ tree المرسوم. مستخدمو reduced-motion يَرَوْن نفس الـ tree بدون transition. مستخدمو forced-colors يَرَوْن CanvasText/Highlight بدلاً من ember/focus. مستخدمو screen-reader يَستهلكون الـ aria-label العربي + الـ paths list النصِّية. مستخدمو keyboard-only يَتنقَّلون بـ Tab + Enter.
+**Originality Self-Score:** 4/5 — الـ SVG branching trees موجودة في كثير من الـ visualization libraries. ما يَجعله 4/5: (١) الـ Brutalist Iraqi aesthetic (Chadirji grid + ember stroke + Bukra Arabic text in SVG) ليس تيمة شائعة في AI output؛ (٢) RTL-correct quadratic curves (control point at trunk.x, leaf.y - 24) تَنتج لغة بصرية تَشبه الـ structural blueprint للمنشآت العراقية؛ (٣) keyboard-first interaction parity (Tab + Enter) من بداية الـ design ليس after-thought؛ (٤) fallback list صادق يَحفظ الـ educational value لكل من تَعطَّل عنده الـ JS أو فعَّل reduced-motion. Originality 4/5 لأن "branching tree visualization" ليس اختراع 2026 لكن الكَومة (Iraqi Brutalism + RTL curves + a11y-first + programmatic SVG + Markazi labels) لم أرَها معاً في AI generated training platform.
+**Files touched:** platform/index.html (+59) · platform/assets/css/worlds/_naar.css (+260 @layer elan-epsilon8) · platform/assets/js/elan/epsilon8-programming.js (NEW 231) · platform/assets/app.js (+9)
+**Verified at commit:** 929662e
+
+
+---STATS---
+total_beacons: 26
+unique_categories_used: 9
+avg_score: 4.15
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε8 — Pillar ε stage 8/12

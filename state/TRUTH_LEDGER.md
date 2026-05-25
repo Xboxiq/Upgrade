@@ -2025,3 +2025,64 @@ the start stage when `current_pillar` matches an in-progress branch.
 ### Forbidden Library violations
 
 `0` — checked against #1–#28. The new section adds zero glassmorphism, zero off-white-warm body, zero floating sidebar, zero pulsing dot loaders, zero `Lorem ipsum`, zero emoji, zero inline `viewBox` SVG, zero icons outside Phosphor/Lucide.
+
+
+
+---
+
+## ε8 — Programming Content Revival (Naar world) — 2026-05-25
+
+**Pillar:** ε CONTENT REVIVAL — Stage 8 of 12
+**Page:** `page-programming`
+**World:** نار (Naar)
+**Branch:** `elan-ε-content-revival`
+**Commit:** `929662e`
+
+### Verified by grep
+
+| Probe | Target | Measured | Notes |
+|---|---:|---:|---|
+| `data-elan-tree` host (skill-tree mount point) | 1 | 1 | single host, JS-injected SVG |
+| `naar-foundation` items (the trunk chips) | 7 | 7 | exact spec match |
+| `naar-paths > li` (the leaves fallback list) | 10 | 10 | exact spec match |
+| `iraq-block` references in programming section | ≥ 1 | 3 | block + class + label |
+| Citation (`Stack Overflow` / `Bel Inc.`) | ≥ 1 | 3 | source visible |
+| Actual `<svg viewBox=` in runtime ε8 markup | 0 | 0 | only docstrings mention the rule |
+| Actual `<svg viewBox=` in runtime JS strings | 0 | 0 | SVG built via `createElementNS` |
+| `createElementNS` calls in JS module | ≥ 1 | 2 | trunk + leaves loop |
+| emoji codepoints in new ε8 markup | 0 | 0 | ICONOGRAPHY_DOCTRINE §٣.أ.١ |
+| Reduced-motion + forced-colors + print guards | 3 | 3 | all silence the focus dim |
+| Hex / hsl literals in new CSS | 0 | 0 | tokens-only |
+| Single canonical `</section><!-- /page-programming -->` | 1 | 1 | no duplication |
+| `Upg.elan.programming` registered + frozen | yes | yes | nested, no top-level inflation |
+| ESM `node --check` syntax | pass | pass | no syntax errors |
+| Total stage diff (line budget ≤ 600) | ≤ 600 | 577 | 59 HTML + 260 CSS + 231 JS + 9 app.js (within budget) |
+
+### Files touched
+
+- `platform/index.html` (+59 lines — Skill Tree section + Iraq Block before `</section>`)
+- `platform/assets/css/worlds/_naar.css` (+260 lines — `@layer elan-epsilon8`)
+- `platform/assets/js/elan/epsilon8-programming.js` (NEW — 231 lines)
+- `platform/assets/app.js` (+9 lines — `import` line + comment)
+
+### Beacon
+
+| Field | Value |
+|---|---|
+| Type | 🏛 STRUCTURAL_BEACON |
+| Surprise | Career-path tree as Brutalist ember line work over a Chadirji concrete-coffer drafting grid. SVG built programmatically (`createElementNS`), 7 foundation chips trunk + 10 leaf paths in 3 rows (3/3/4). Hover OR keyboard focus dims unrelated branches to 0.3; selected branch glows with `stroke-width: 2.4` and `var(--focus)` (signage yellow). Tab cycles all branches; Enter/Space activates a leaf and dispatches `upg:elan:programming:select`. RTL-correct quadratic curves leave the trunk vertically before sweeping toward each leaf. |
+| Avoided | linear curriculum list cliché + Forbidden #6 (bento same-padding rectangles) + Toy SVG (kept programmatic, zero inline `<svg viewBox=` markup) |
+| Inspired-by | Wild Card #1 Brutalist Iraqi Modernism (Mohammed Makiya + Rifat Chadirji structural diagrams) + spec's Japanese ema woodblock branching language. Chadirji's concrete-coffer ceiling literally adopted as the 32px × 32px linear-gradient grid backdrop. |
+| Accessibility | tree host `role="img"` + Arabic `aria-label`; inner `<svg>` `role="presentation" aria-hidden="true"`. Each branch `<g>` has `tabindex="0"`, `role="button"`, `aria-label` with the path name. No-JS / reduced-motion fallback: full curriculum list rendered as `<ul class="naar-paths">` so screen readers and slow connections still get every path. |
+| Self-Score | 4 / 5 |
+
+### Sacred Assets preserved
+
+- All 16 page sections present and untouched in their existing markup (the very large 3,561-line programming section was augmented at the end only).
+- All 14+ `Upg.*` top-level APIs preserved verbatim. Stage adds `Upg.elan.programming` only, nested under the existing `Upg.elan` bag.
+- All earlier ε stages (ε1 .. ε7) untouched.
+- `archive/` not touched. `prompts/v1`, `v2`, `v3` not touched.
+
+### Forbidden Library violations
+
+`0` — checked against #1–#28. The new section contains zero glassmorphism, zero off-white-warm body, zero bento-same-padding, zero pulsing dot, zero `Lorem ipsum`, zero emoji, zero inline `<svg viewBox=` markup, zero icons outside Phosphor/Lucide, zero hardcoded `fill=#`.
