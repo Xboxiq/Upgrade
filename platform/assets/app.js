@@ -142,3 +142,9 @@ import './js/elan/topbar-living.js';
 
 // ÊLAN v4 — δ4: Mobile Bottom Nav (Plinth Mode + Maqamat Haptics — STRUCTURAL beacon)
 import './js/elan/bottom-nav.js';
+
+
+// ÊLAN v4 — δ6: Motion Sanctuary (closes Pillar δ; META beacon — three-state
+// preference graph + «ساكن» chrome confession; CSS owns the per-world
+// static-signature transposition in _motion-sanctuary.css)
+import './js/elan/delta6-motion.js';

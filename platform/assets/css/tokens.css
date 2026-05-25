@@ -34,3 +34,7 @@
 
 /* δ5 — View Transitions: per-world destination tempo */
 @import url("./_view-transition.css");
+
+
+/* δ6 — Motion Sanctuary: universal reduce gate + per-world static signatures */
+@import url("./_motion-sanctuary.css");
