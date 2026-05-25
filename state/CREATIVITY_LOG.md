@@ -244,3 +244,32 @@ disruption_triggers: 4
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-25 / δ5 — Pillar δ stage 5/6
+
+
+
+
+## δ6 — 2026-05-25
+**Beacon Type:** 🪞 META_BEACON
+**The Surprise:** حين يَختار المستخدم السكون (نظامياً أو يدوياً)، ÊLAN لا يَستسلم لـ minimalism قبيح كَما يَفعل الـ AI الافتراضي. كل عالم من الثمانية يَنقُل بَصمته الحركية إلى **توقيع ساكن** يَحفظ هويته. شرارة نار (γ3 — pointer hover spark) تَتجمَّد في هالة `outline + box-shadow ember`. حِبر يَجف (γ2 — ink-drying CTA gradient) يَنقُل ثقله إلى `font-weight: 800` + ember underline. ندى يَتكاثف (γ4 — radial dewdrop emergence) يَستقر إلى `outline ring`. حَديد يَختم (γ5 — iron-stamp flip) يَصير `1px ember outline + tabular-num`. ذَهَب يَلمع (γ6 — magnitude shimmer) يَصير `text-decoration: underline solid` ذهبي. تَيار يَسحب (γ7 — synthwave sweep) يَتحوَّل إلى `tinge magenta-cyan` ثابت. وَرشة تَميل (γ8 — bench skew) تَستوي على `dashed border`. صَالون يَنبض (γ9 — brass mirror dot) يَهدأ إلى `underline نحاسي`. الواجهة لا تَفقد ذاكرتها — تَعرف أي عالم أنت فيه حتى مَجرَّدةً من الحركة.
+
+إضافة meta حقيقية: عند تَفعيل reduced-motion، تَظهر كلمة واحدة في زاوية الـ topbar — **«ساكن»** — بـ Aref Ruqaa، ember-tinted، opacity 0.72، صفر animation، صفر pulse، صفر "♿ Reduced Motion ON" بنجليزية أو emoji وصلة. الواجهة تُقرّ باختيار المستخدم بلسانه، بكلمة واحدة عربية، بدون اعتذار. لو كان المستخدم اختار `data-motion="enhanced"` (تَجاوز عمدي للـ system pref)، الكلمة لا تَظهر — لأنه لم يَختر السكون، اختار التَجاوز.
+
+البنية: `_motion-sanctuary.css` (244 سطر) يَحوي 21 gate block + universal cap (`*,*::before,*::after { animation-duration: 0.01ms !important }`) يُغطّي كل 218 animation في المنصة (audit script يُؤكِّد 0 ungated files). `delta6-motion.js` (175 سطر) IIFE-style يَحفظ legacy `window.Upg.motion` (W12 reveal/refreshGlow) verbatim ويُسجّل surface جديد عند `Upg.elan.motion` بـ 6 methods (set / current / isReduced / override / cycle / modes). ثلاث حالات: normal (system) / reduced (manual or system) / enhanced (manual override of system). localStorage key `upg_motion_pref` + system MediaQuery listener + `upg:motion:change` event. Audit shell script (110 سطر، executable) يَفحص أن كل ملف animation له على الأقل gate واحد + يُؤكِّد universal cap + يَطبع تقرير شامل. exit code 0.
+
+**Reference Avoided:** Forbidden #14 — stagger animation cliché (Creativity Doctrine § ٣) + الـ AI-default الأكبر: "reduced-motion = strip everything to bare div with no character" (المنصات الـ AI كلها تَفعل هذا). δ6 يَرفُض ذلك صراحةً: السكون لا يَعني فقدان الهوية.
+**Inspired-by:** Wild Card #6 — Müller-Brockmann (the Swiss modernist principle that **typography carries meaning when motion is gone** — مَطبَّق هنا حرفياً: text-decoration + font-weight + outline تَحمل الإشارة) + Wild Card #9 — Kufi chocolate-block (روح الـ «ساكن» mark: مربَّع، صفوف نصِّية، لا decoration).
+**User-Visible:** yes — كل مستخدم يَفتح المنصة على نظام بـ `prefers-reduced-motion: reduce` نشط (٢-٤٪ من المستخدمين عادةً، أعلى عند ذوي الـ vestibular sensitivity) سَيَرى: (١) صفر animation عبر المنصة، (٢) كل عالم من الثمانية يَحتفِظ بهويته البصرية في صورة ساكنة، (٣) كلمة «ساكن» في زاوية الـ topbar تُؤكّد أن المنصة تَعرف اختياره. كل مستخدم يُشغّل `Upg.elan.motion.set('reduced')` يدوياً سَيَرى نفس الشيء حتى لو نظامه طبيعي. كل مستخدم يَختار `Upg.elan.motion.set('enhanced')` يَتجاوز system pref (للـ power users الذين يُريدون الحركة على نظام يَطلب reduce — حالة استخدام نادرة لكن مَخدومة).
+**Originality Self-Score:** 4/5 — universal reduce gates شائعة (every modern stylesheet)؛ per-world theming نسبياً شائع؛ three-state preference graph (normal/reduced/enhanced) ليس جديداً (Material 3 يَدعمه). الذي يَجعله 4/5: (١) **الصراحة المعمارية** — كل عالم يَنقُل بَصمته الحركية إلى توقيع ساكن مَكتوب مَعنوناً، ليس مجرَّد "remove all animations"؛ (٢) **الـ Arabic chrome confession** — كلمة واحدة بـ Aref Ruqaa عربية، بدون أي إنجليزي، بدون emoji، بدون "♿"، تُقرّ باختيار المستخدم؛ (٣) **التزام Sacred Asset** — preserved legacy `window.Upg.motion` (W12 reveal/refreshGlow) verbatim بدلاً من clobber؛ (٤) **الـ audit script القابل للتنفيذ** يَجعل المُتعهَّد قابلاً للتحقُّق ميكانيكياً. Claim: most reduced-motion implementations either strip everything to "no animation" minimalism, or hide the reduced state entirely (silent compliance). Few platforms acknowledge the user's choice IN THE INTERFACE in their language, AND preserve per-world identity through static transposition.
+**Files touched:** platform/assets/css/_motion-sanctuary.css · platform/assets/js/elan/delta6-motion.js · platform/assets/css/tokens.css · platform/assets/app.js · scripts/elan-motion-audit.sh
+**Verified at commit:** 66f3a01
+**Pillar close:** δ6 closes Pillar δ KINETIC SHELL — 6 stages (δ1 magnetic sidebar / δ2 bento temporal / δ3 reading tide / δ4 plinth bottom-nav / δ5 view transitions / δ6 motion sanctuary), 5 distinct beacon categories (MOTION δ1+δ5, DATA δ2, INTERACTION δ3, STRUCTURAL δ4, META δ6), 0 forbidden violations, 0 Sacred Asset disturbance.
+
+---STATS---
+total_beacons: 17
+unique_categories_used: 9
+avg_score: 4.18
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / δ6 — Pillar δ COMPLETE 6/6

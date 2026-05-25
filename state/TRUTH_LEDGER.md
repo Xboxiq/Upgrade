@@ -1368,3 +1368,75 @@ the fallback string in δ5 will need a tokens.css entry. Recommended for
 `tokens/_motion.css` and route δ5 through it. Logged here, not blocking.
 
 — Entry end —
+
+
+
+## δ6 — 2026-05-25 — Motion Sanctuary (محراب السكون)
+
+**Pillar:** δ KINETIC SHELL · **Stage:** 6 of 6 (closes the pillar)
+**Branch:** `elan-δ-kinetic-shell` · **Commit:** `66f3a01`
+
+**Before (forensic baseline):**
+
+| key | value |
+|---|---:|
+| `_motion-sanctuary.css` on disk | absent |
+| `delta6-motion.js` on disk | absent |
+| `scripts/elan-motion-audit.sh` | absent |
+| `data-motion` attribute usage in platform | 0 |
+| `Upg.elan.motion` namespace | absent |
+| Legacy `window.Upg.motion = Object.freeze({ reveal, refreshGlow })` | 1 (W12, sacred) |
+| Reduced-motion gate blocks across `platform/assets/css/` | ~87 |
+| Total `animation:` / `@keyframes` declarations across `platform/assets/css/` | 218 |
+
+**After (verified by grep):**
+
+| key | value |
+|---|---:|
+| `platform/assets/css/_motion-sanctuary.css` | 244 lines |
+| `platform/assets/js/elan/delta6-motion.js` | 175 lines |
+| `scripts/elan-motion-audit.sh` | 110 lines (+x), exit code 0 |
+| `tokens.css` `@import "./_motion-sanctuary.css"` | 1 |
+| `app.js` `import './js/elan/delta6-motion.js'` | 1 |
+| Gate blocks inside sanctuary stylesheet | 21 |
+| Universal `*,*::before,*::after` cap with `animation-duration:0.01ms!important` | 1 |
+| Per-world static-signature transposition rules | 8 (one per world) |
+| Manual override `body[data-motion="reduced"]` rules | 9 |
+| Manual override `body[data-motion="enhanced"]` rules | 5 |
+| Print + forced-colors fallbacks in d6 | 1 + 1 |
+| Hex literals in new CSS | 0 |
+| Hex literals in new JS | 0 |
+| Toy `<svg viewBox>` in new code | 0 |
+| Emoji in new markup (HTML untouched) | 0 |
+| HTML diff bytes in this stage | 0 |
+| Legacy `Upg.motion` (W12) preserved verbatim | yes ✓ |
+| New surface registered at `Upg.elan.motion` (frozen, 6 methods) | yes ✓ |
+| Top-level `Upg.*` API count after δ6 | 31 (unchanged — δ6 nests under Upg.elan) |
+| Sacred 16 page sections | 16 |
+| Sacred 17 nav-items | 17 |
+
+**Files touched (cumulative):**
+- `platform/assets/css/_motion-sanctuary.css` (NEW · 244)
+- `platform/assets/js/elan/delta6-motion.js` (NEW · 175)
+- `scripts/elan-motion-audit.sh` (NEW · 110, +x)
+- `platform/assets/css/tokens.css` (+2 — one @import + one comment line)
+- `platform/assets/app.js` (+4 — comment + import)
+
+**Lines:** +540 / −1 across 5 files.
+
+**Beacon:** 🪞 META_BEACON — when the user chooses stillness, ÊLAN does not strip itself to ugly minimalism. Each world transposes its motion identity into a static signature; «ساكن» appears in the topbar corner as a non-apologetic Arabic acknowledgement.
+**Reference avoided:** Forbidden #14 (stagger animation cliché) + the *anti-pattern* "reduced-motion = ugly minimalism" that most AI dashboards default to.
+**Inspired-by:** Wild Card #6 Müller-Brockmann + Wild Card #9 Kufi chocolate-block.
+**Originality self-score:** 4/5.
+
+**Sacred preservation:**
+- Legacy `window.Upg.motion = Object.freeze({ reveal, refreshGlow })` (W12) untouched. New surface nests at `Upg.elan.motion` matching δ1 (`Upg.elan.magneticSidebar`) and δ4 (`Upg.elan.bottomNav`).
+- 16 page sections + 17 nav-items intact.
+- 218 existing animations across the platform are now ALL covered by the universal cap (regardless of whether their original stylesheet has its own gate). Audit script reports 0 ungated files.
+- Reading Halo W22 P2 semantic depth preserved — only the breath is dropped, the box-shadow inset remains so the user still feels they are in halo mode.
+- focus-visible + aria-invalid kept loud (a11y override) even with universal cap.
+
+**Pillar δ closure:**
+6 stages shipped on `elan-δ-kinetic-shell` (δ1 73d72c1c · δ2 33f0553 · δ3 b794e19 · δ4 5e50984 · δ5 a97c87d · δ6 66f3a01). 6 Beacons across 5 distinct categories (MOTION δ1+δ5, DATA δ2, INTERACTION δ3, STRUCTURAL δ4, META δ6). 0 forbidden violations. 0 Sacred Asset disturbance. Next: PR open + Pillar ε CONTENT_REVIVAL on a fresh branch.
+
+— Entry end —
