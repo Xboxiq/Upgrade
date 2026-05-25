@@ -1709,3 +1709,149 @@ body[data-temporal-slice="night"]     { --temporal-mood: 0.8; }
 }
 
 /* End ÊLAN v4 — δ2 ─────────────────────────────────────────────────── */
+
+
+
+/* ╭───────────────────────────────────────────────────────────────────╮
+ * │  ÊLAN v4 — δ3 — Living Topbar (Reading Tide)                      │
+ * │  🤚 INTERACTION_BEACON                                            │
+ * │  Targets the existing #topbar (data-elan-living="topbar" hook).   │
+ * │  Single contract:  --scroll-pct (0..1) is set by                  │
+ * │  /platform/assets/js/elan/topbar-living.js                        │
+ * │  Two layers consume it:                                           │
+ * │    1. #topbar-title fills with ink from inline-end → inline-start │
+ * │    2. A 1px ember tide line at the topbar's lower edge grows in   │
+ * │       lockstep                                                    │
+ * │  Click on the title → page rewinds to its top.                    │
+ * │  No emoji. No inline SVG. No hex literals. Per-world ember only.  │
+ * ╰───────────────────────────────────────────────────────────────────╯ */
+
+#topbar[data-elan-living="topbar"] {
+  --scroll-pct: 0;
+  position: relative;
+}
+
+/* The tide line. Sits just above the existing border-bottom of the
+ * topbar. RTL-natural: anchored to inline-end (right in ar dir),
+ * grows toward inline-start as the user reads. */
+#topbar[data-elan-living="topbar"]::after {
+  content: "";
+  position: absolute;
+  inset-inline-end: 0;
+  inset-block-end: 0;
+  block-size: 1px;
+  inline-size: calc(var(--scroll-pct) * 100%);
+  background: var(--ember, currentColor);
+  opacity: 0.85;
+  pointer-events: none;
+  transform-origin: inline-end center;
+  /* Smooth follow without animation library: pure CSS transition on
+     the inline-size as the JS pushes new --scroll-pct values. */
+  transition: inline-size 80ms linear;
+}
+
+#topbar[data-elan-living="topbar"][data-read="true"]::after {
+  opacity: 1;
+}
+
+/* The Reading Tide on the title text itself. The existing #topbar-title
+ * is plain text in a div; we use background-clip: text so the ink fills
+ * from inline-end (Arabic line tail) toward inline-start. The
+ * `currentColor` fallback path keeps the title legible if the browser
+ * lacks background-clip support, and forced-colors mode opts out. */
+#topbar[data-elan-living="topbar"] #topbar-title[data-elan-living="title"] {
+  /* The unfilled side uses the muted ink; the filled side uses the
+     anchor ink. Linear gradient with a single hard stop, positioned
+     by the scroll fraction. */
+  background-image: linear-gradient(
+    to left,
+    var(--ink, currentColor) 0,
+    var(--ink, currentColor) calc(var(--scroll-pct, 0) * 100%),
+    var(--ink-faint, color-mix(in oklch, currentColor 55%, transparent)) calc(var(--scroll-pct, 0) * 100%),
+    var(--ink-faint, color-mix(in oklch, currentColor 55%, transparent)) 100%
+  );
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
+  cursor: pointer;
+  transition: background-image 80ms linear;
+}
+
+/* When the user has read to the end, the title gets a small chamfered
+ * dot at its inline-start (the Arabic head of the line) — a quiet "I
+ * see you finished this page" mark. CSS-only, no SVG. */
+#topbar[data-elan-living="topbar"][data-read="true"] #topbar-title[data-elan-living="title"]::before {
+  content: "";
+  display: inline-block;
+  inline-size: 6px;
+  block-size: 6px;
+  margin-inline-end: var(--s-2, 6px);
+  background: var(--ember, currentColor);
+  /* Chamfered diamond, not a circle (avoid pulse-dot semantics). */
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  vertical-align: middle;
+}
+
+/* Title hover — subtle hint that it's interactive. The cursor is
+ * already pointer; the ink-faint side gains a touch of ink for a
+ * 120ms moment. */
+@media (prefers-reduced-motion: no-preference) {
+  #topbar[data-elan-living="topbar"] #topbar-title[data-elan-living="title"]:hover,
+  #topbar[data-elan-living="topbar"] #topbar-title[data-elan-living="title"]:focus-visible {
+    background-image: linear-gradient(
+      to left,
+      var(--ink, currentColor) 0,
+      var(--ink, currentColor) calc(var(--scroll-pct, 0) * 100%),
+      color-mix(in oklch, var(--ink, currentColor) 78%, transparent) calc(var(--scroll-pct, 0) * 100%),
+      color-mix(in oklch, var(--ink, currentColor) 78%, transparent) 100%
+    );
+  }
+}
+
+#topbar[data-elan-living="topbar"] #topbar-title[data-elan-living="title"]:focus-visible {
+  outline: 2px solid var(--focus, currentColor);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Reduced motion: drop transitions but keep the gradient (it is a
+ * static representation of position, not a motion effect). */
+@media (prefers-reduced-motion: reduce) {
+  #topbar[data-elan-living="topbar"]::after {
+    transition: none;
+  }
+  #topbar[data-elan-living="topbar"] #topbar-title[data-elan-living="title"] {
+    transition: none;
+  }
+}
+
+/* Forced colors (Windows high-contrast): collapse the tide to a system
+ * Highlight bar; let the title fall back to system text color so the
+ * meter remains legible without depending on background-clip. */
+@media (forced-colors: active) {
+  #topbar[data-elan-living="topbar"]::after {
+    background: Highlight;
+    opacity: 1;
+  }
+  #topbar[data-elan-living="topbar"] #topbar-title[data-elan-living="title"] {
+    background-image: none;
+    -webkit-text-fill-color: CanvasText;
+            color: CanvasText;
+  }
+}
+
+/* Print: hide the tide, drop the gradient. The page-title prints as
+ * normal text (anchor ink). */
+@media print {
+  #topbar[data-elan-living="topbar"]::after {
+    display: none !important;
+  }
+  #topbar[data-elan-living="topbar"] #topbar-title[data-elan-living="title"] {
+    background-image: none !important;
+    -webkit-text-fill-color: currentColor !important;
+            color: currentColor !important;
+  }
+}
+
+/* End ÊLAN v4 — δ3 ─────────────────────────────────────────────────── */

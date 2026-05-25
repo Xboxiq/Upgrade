@@ -136,3 +136,6 @@ import './js/elan/sidebar-magnetic.js';
 
 // ÊLAN v4 — δ2: Bento Temporal (data-priority hours → focal cell emphasis)
 import './js/elan/bento-temporal.js';
+
+// ÊLAN v4 — δ3: Living Topbar (Reading Tide — INTERACTION beacon)
+import './js/elan/topbar-living.js';
