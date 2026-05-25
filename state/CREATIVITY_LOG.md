@@ -467,3 +467,26 @@ disruption_triggers: 5
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-25 / ε1-augment — Dashboard Manuscript Margin beacon shipped
+
+
+
+## ε6 — 2026-05-25
+**Beacon Type:** 🤚 INTERACTION_BEACON
+**The Surprise:** القارئ في صفحتَي الدوافع النفسية والذكاء العاطفي (عالم ندى) يَلتقي عند منتصف رحلته بـ «لحظة سكون» — خط بنفسجي شفّاف (focus color) يَظهر على الحافة الداخلية للبلوك الأوسط (ps-020 / eq-015) حين يَدخل 40% من viewport. الخط يَمكث 2.5 ثانية ثم يَختفي — كأن الصفحة أخذَت نَفَساً واحداً مع القارئ. لا modal يَقطع التدفُّق، لا toast يُشتِّت، لا scroll-hijack يُغضب. فقط إشارة بصرية خفيفة تَقول: «أنت في المنتصف، خُذ لحظة.» في عالم حَديد (صفحة المفاوضات)، نفس الآلية تُنتج ختماً أحمر (ember) عمودياً على الحافة اليمنى لبلوك ng-011 — يَبقى دائماً (permanent stamp) كعلامة "وصلتَ إلى هنا" بأسلوب أفيشات سينما بيروت. الختم لا يَختفي حتى يُغادر القارئ الصفحة — إقرار بالإنجاز بلا احتفال مبالغ. IntersectionObserver بـ rootMargin سالب (-30% لندى، -25% لحَديد) يَضمن أن الإشارة لا تَظهر عشوائياً بل عند التزام حقيقي بالقراءة. reduced-motion يَحترم: transition-duration 1ms، الإشارة تَظهر فوراً بلا تأثير.
+**Reference Avoided:** Forbidden #12 — fade-in على scroll بدون داعٍ (الـ breath/stamp ليست fade-in عامة بل إشارة مقصودة عند نقطة محددة فقط). Forbidden #15 — modal بـ overlay (لا يوجد interruption — الإشارة ambient فقط).
+**Inspired-by:** WORLDS_ATLAS Nada Beacon Identity (dewdrop condensation — هنا: concentration of attention at midpoint) + WORLDS_ATLAS Hadeed Beacon Identity (split-flap cinema marker — هنا: permanent stamp).
+**User-Visible:** yes — كل مستخدم يَقرأ psych/eq/negotiation سيَرى الإشارة عند وصوله لمنتصف المحتوى. Reduced-motion users يَرَون الإشارة فوراً (instant appearance).
+**Originality Self-Score:** 4/5 — IntersectionObserver + scroll-triggered indicators ليست جديدة بذاتها. الذي يَجعلها 4/5: (١) إشارة مقصودة عند نقطة واحدة فقط (ليست scroll-reveal عامة)، (٢) عالمان مختلفان يُعبِّران عن نفس المفهوم (midpoint) بلغتين بصريتين مختلفتين (breath vs stamp)، (٣) الـ stamp في حَديد دائم (يُقرّ بالإنجاز) بينما الـ breath في ندى عابر (يدعو للتأمل) — اختلاف فلسفي في نفس الآلية التقنية.
+**Files touched:** platform/assets/css/_epsilon6-psych-eq-neg.css (NEW) · platform/assets/js/elan/epsilon6-psych.js (NEW) · platform/assets/css/tokens.css · platform/assets/app.js · platform/index.html
+**Verified at commit:** f22dbd6
+
+---STATS---
+total_beacons: 24
+unique_categories_used: 9
+avg_score: 4.17
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε6 — Pillar ε stage 6/12
+

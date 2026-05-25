@@ -1939,3 +1939,27 @@ the start stage when `current_pillar` matches an in-progress branch.
 - Prior ε3/ε4/ε5 code rebased cleanly (conflict in app.js resolved by merging both import sets).
 - All `data-cath-stat` sacred IDs preserved verbatim.
 - `#cath-skill-grid`, `#cath-activity-list`, `#v12Heatmap`, `#v12ChallengeLevel`, `#v12ChallengeBody` all preserved.
+
+
+
+---
+
+## ε6 — 2026-05-25
+
+| Metric | Before | After | Method |
+|---|---|---|---|
+| nada-breath-hooks in index.html | 0 | 2 | `grep -c 'data-elan-breath' platform/index.html` |
+| hadeed-stamp-hooks in index.html | 0 | 1 | `grep -c 'data-elan-stamp' platform/index.html` |
+| _epsilon6-psych-eq-neg.css lines | 0 (new) | 240 | `wc -l` |
+| epsilon6-psych.js lines | 0 (new) | 180 | `wc -l` |
+| node --check epsilon6-psych.js | — | pass | `NODE_OPTIONS="" node --check` |
+| hardcoded fill="#" in ε6 files | — | 0 | `grep -c 'fill="#'` |
+| emoji in ε6 markup | — | 0 | `grep -Pc emoji-range` |
+| inline `<svg viewBox>` in ε6 | — | 0 | `grep -c 'svg viewBox'` |
+| Sacred pages preserved | 16 | 16 | `grep -c 'class="page"' index.html` |
+| Upg.* top-level APIs | 31 | 31 | nested under Upg.elan.breath |
+| Forbidden violations | 0 | 0 | Avoided #12 (fade-on-scroll) + #15 (modal overlay) |
+
+**Commit:** f22dbd6
+**Branch:** elan-ε-content-revival
+**Lines added:** 430 (5 files changed)
