@@ -949,8 +949,8 @@
   "notes": "Pack v2 RESONANCE scaffolded under prompts/v2/. Path C selected by user: Meta + Worker 15 (full 6 phases) + Ritual = 15 files. Workers 16-19 + Ritual execution to follow in subsequent sessions. Cathedral v16 baseline preserved. All 19 Upg.* APIs, 14 pages, 391 qcalc references preserved. Previous Pack v1 history (v16 ATELIER): Phase 6 of Worker 14 shipped on branch worker-14-phase-6-final via PR #53. Inline 215->76 (139 removed) via deterministic node script + 330 lines Final Utilities Pack. New Upg.focusTrap IIFE auto-attaches to dialog/modal/qmodal/data-modal via MutationObserver, ESC-to-close, return-focus. Lighthouse boot helper (lazy imgs, decoding=async, pointer-enter prefetch markers). Sanity v16 verifies 19 Upg.* modules. sw.js rewrite (74->119 lines) versioned shell/assets/fonts caches, navigation network-first then offline.html fallback, SWR for assets and Google Fonts. Manifest 4 shortcuts (#dashboard, #callcenter, #myprogress, #accounting), 192/512 icon entries. Favicon v2 100x100 squircle rx=22, dual-color stroke gradient (#66FCF1 to #4F46E5). offline.html RTL Cairo, online auto-reload, retry button + home link. CHANGELOG v16 added at top. All 14 page sections, 391 qcalc, 15 identity tints preserved.",
   "elan_v4": {
     "current_pillar": "δ",
-    "current_stage": 3,
-    "current_stage_id": "δ3",
+    "current_stage": 4,
+    "current_stage_id": "δ4",
     "status": "in-progress",
     "started_at": "2026-05-24T00:00:00Z",
     "branch": "elan-δ-kinetic-shell",
@@ -972,12 +972,13 @@
       "γ9",
       "δ1",
       "δ2",
-      "δ3"
+      "δ3",
+      "δ4"
     ],
-    "beacons_this_session": 1,
+    "beacons_this_session": 2,
     "creativity_health": 100,
-    "creativity_health_note": "After δ3: 14 Beacons total, 9 unique categories, 0 violations. avg ~4.21 → (4.21×20)+(9×5)−0 = 129.2 → capped at 100. δ3 INTERACTION reused (5 stages after γ5) on a fresh chrome surface; no pivot rule violated.",
-    "next_action": "Continue δ-pillar on branch elan-δ-kinetic-shell. Next stage: δ4 MOBILE_BOTTOM_NAV. PR opens at end of δ6 (Pillar δ KINETIC SHELL → main).",
+    "creativity_health_note": "After δ4: 15 Beacons total, 9 unique categories, 0 violations. avg ~4.20 → (4.20×20)+(9×5)−0 = 129 → capped at 100. STRUCTURAL re-used (5 stages after γ8) on a fresh chrome surface; DATA→INTERACTION→STRUCTURAL window across δ2/δ3/δ4 keeps category variance high.",
+    "next_action": "Continue δ-pillar on branch elan-δ-kinetic-shell. Next stage: δ5 VIEW_TRANSITIONS_API. PR opens at end of δ6 (Pillar δ KINETIC SHELL → main).",
     "β1_artifacts": {
       "branch": "elan-β-type-soul",
       "commit": "43be524",
@@ -1727,7 +1728,104 @@
       "beacon_inspired_by": "Wild Card #5 — Yemeni mihrab geometry (filling pattern from periphery toward niche center)",
       "beacon_self_score": 4,
       "pivot_note": "spec δ3 proposed META_BEACON + a 75bpm pulsing dot. γ9 used META_BEACON only 4 stages back (high-impact Saloon mirror), and a pulsing dot is Forbidden #10 verbatim regardless of adaptive timing. Pivoted to INTERACTION (last used γ5 — 5 stages ago, fresh window) per Creativity Doctrine § ٤. The Reading Tide replaces the pulse: title fills with ink as user scrolls, click rewinds. Spec's breadcrumb + cmdk-button + theme-toggle scaffolding all already exist in the platform's #topbar; we did not duplicate or replace them."
+    },
+    "δ4_artifacts": {
+      "branch": "elan-δ-kinetic-shell",
+      "commit": "5e50984",
+      "files_modified": 2,
+      "files_added": 1,
+      "lines_added": 384,
+      "lines_deleted": 0,
+      "bottom_nav_js_lines": 257,
+      "chrome_css_d4_block_lines": 120,
+      "app_js_imports_bottom_nav": 1,
+      "data_elan_bottom_nav_refs_in_css": 16,
+      "plinth_border_radius_zero_declarations": 3,
+      "reduced_motion_guards_in_d4_block": 2,
+      "forced_colors_guards_in_d4_block": 1,
+      "print_guards_in_d4_block": 1,
+      "hex_literals_in_d4_css": 0,
+      "hex_literals_in_d4_js": 0,
+      "inline_svg_in_d4_code": 0,
+      "emoji_in_d4_code": 0,
+      "innerHTML_writes_in_d4_js": 0,
+      "bad_core_icons_imports": 0,
+      "node_syntax_check_pass": true,
+      "node_smoke_test_pass": true,
+      "html_diff_bytes": 0,
+      "sacred_dual_bottom_nav_markup_preserved": true,
+      "sacred_default_glass_behavior_preserved": true,
+      "sacred_5_slots_preserved": true,
+      "default_mode": "glass",
+      "opt_in_mode": "plinth",
+      "mode_persistence_via_localstorage": true,
+      "mode_storage_key": "upg_elan_bottom_nav_mode",
+      "valid_modes_count": 2,
+      "data_attribute_hook": "data-elan-bottom-nav=\"plinth\"",
+      "active_slot_attribute": "data-elan-active=\"true\"",
+      "active_slot_underline_height_px": 2,
+      "active_slot_underline_color_token": "var(--ember, currentColor)",
+      "plinth_top_edge_color_token": "var(--ember, currentColor)",
+      "plinth_top_edge_height_px": 1,
+      "plinth_surface_color_token": "var(--anchor-1, var(--color-surface-1, var(--dual-bottom-nav-bg)))",
+      "plinth_backdrop_filter": "none",
+      "plinth_box_shadow": "none",
+      "plinth_border_radius": "0",
+      "tap_press_translateY_px": 1,
+      "haptic_patterns_count": 3,
+      "haptic_patterns": {
+        "dafn": 8,
+        "takk": [12, 20, 12],
+        "maqsoom": [8, 30, 8, 30, 14]
+      },
+      "haptic_pattern_arabic_meanings": {
+        "dafn": "نبر — gentle navigation tap",
+        "takk": "تَك — accomplishment confirmation",
+        "maqsoom": "مقسوم — final save / commit"
+      },
+      "navigator_vibrate_uses": 3,
+      "haptic_respects_reduced_motion": true,
+      "haptic_respects_vibrate_unavailable": true,
+      "delegated_pointerup_listener": true,
+      "fab_haptic_pattern": "takk",
+      "regular_slot_haptic_pattern": "dafn",
+      "active_slot_tracking_sources": [
+        "location.hash",
+        "Upg.nav.current()",
+        "body[data-current-page]"
+      ],
+      "rebinds_on_upg_nav_change": true,
+      "rebinds_on_hashchange": true,
+      "upg_haptic_registered": true,
+      "upg_haptic_methods": [
+        "play",
+        "patterns"
+      ],
+      "upg_elan_bottom_nav_registered": true,
+      "upg_elan_bottom_nav_methods": [
+        "engage",
+        "disengage",
+        "setMode",
+        "getMode",
+        "isEngaged"
+      ],
+      "upg_apis_top_level_after": 32,
+      "module_exports_keys": [
+        "engage",
+        "disengage",
+        "setMode",
+        "getMode",
+        "isEngaged",
+        "haptic",
+        "patterns"
+      ],
+      "beacon_type": "STRUCTURAL_BEACON",
+      "beacon_avoided": "Forbidden #3 (floating-pill nav clone) + #5 (soft-shadow + 12px radius) + #15 (generic single-buzz haptic)",
+      "beacon_inspired_by": "Wild Card #2 — Iraqi Brutalism (Makiya/Chadirji structural plinths) + Wild Card #4 — Maqamat music notation",
+      "beacon_self_score": 4,
+      "pivot_note": "spec δ4 declared INTERACTION_BEACON; δ3 just used INTERACTION (Reading Tide). Two consecutive INTERACTION beacons in last-3-stages window would trigger Creativity Doctrine § ٤ mandatory pivot. Pivoted to STRUCTURAL (last used γ8 — 5 stages back, fresh). Maqamat haptics (the spec's INTERACTION beacon idea) are still implemented and shipped as Upg.haptic.play utility, but the DECLARED beacon is the structural plinth identity that counters Forbidden #3 (floating pill nav). Default glass mode preserved unchanged — plinth is opt-in via Upg.elan.bottomNav.setMode('plinth'), persisted via localStorage."
     }
   }
 }
+
 

@@ -195,3 +195,28 @@ disruption_triggers: 3
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-25 / δ3 — Pillar δ stage 3/6
+
+
+
+
+## δ4 — 2026-05-25
+**Beacon Type:** 🏛 STRUCTURAL_BEACON
+**The Surprise:** الشريط السفلي على الموبايل (#dual-bottom-nav) موجود من قبل بهيئة زجاجية floating + backdrop-filter + box-shadow + border-radius — نمطٌ شائع جداً في الـ AI dashboards (Forbidden #3). δ4 يَترك السلوك الافتراضي كما هو ويُضيف **وضعاً معاكساً** اختيارياً: `data-elan-bottom-nav="plinth"`. عند تَفعيله، الشريط يَفقد كل ما يَجعله "يَطفو" — شفافيته، انحناءَه، ظلَّه، الـ blur خَلفه — ويَصير كتلةً خرسانية مسطَّحة (plinth) بحافة عُلوية واحدة 1px من ember العالم النَّشط. الخانة النشطة تَكتسب خط 2px من ember منقوش في الحافة السفلى — كلسانٍ هيكلي، ليس مؤشِّراً يَسبح. الـ FAB (المركز) يَستبدل ارتفاعَه الافتراضي بحلقة 1px ember عند صفر radius. النقر يُحْدِث انخفاضاً لحظياً 1px (translateY)، لا scale ولا spring. الوضع محفوظ عبر sessions في localStorage. صفر تَعديل على markup. الوضع الزجاجي الأصلي مَحفوظ كأصل مُقدَّس، وضع الـ plinth opt-in يُفعَّله المستخدم بـ `Upg.elan.bottomNav.setMode('plinth')`. إلى جانب ذلك، يَصدر API جديد عام `Upg.haptic.play(pattern)` يَختزن ثلاث رتلات عربية: **دفّن** (8ms — نَبر تنقُّل لطيف)، **تَك** ([12, 20, 12]ms — تأكيد إنجاز)، **مَقسوم** ([8, 30, 8, 30, 14]ms — حفظٌ نهائي). pointerup على الـ FAB يُطلق تَك، على الخانات الأخرى يُطلق دفّن. يَحترم `prefers-reduced-motion` (يَخمد الاهتزاز)، يَتعامل بصمت إذا navigator.vibrate غير متوفِّر. هذا الـ API top-level على Upg ليَستخدمه أي module لاحق (δ5 view-transitions, ε stages) لِلَّحظات الحاسمة.
+**Reference Avoided:** Forbidden #3 — floating sidebar / pill nav clone (Notion/Linear/Stripe). الـ plinth بُنيوي، يَستلقي على الحافة، لا يَطفو + Forbidden #5 — card بـ shadow ناعم + 12px radius (الـ plinth صفر radius، صفر shadow) + Forbidden #15 — generic single-buzz haptic (الرتلات الثلاث ليست buzz واحد بل أوزانٌ موسيقية حقيقية).
+**Pivot:** spec δ4 صَرَّحت بـ 🤚 INTERACTION_BEACON (الـ Maqamat haptics كان هو الـ beacon المقترَح). δ3 (Reading Tide) استَخدم INTERACTION للتو؛ ضمُّ INTERACTION ثانية في نافذة 3-stages يُفعِّل قاعدة Creativity Doctrine § ٤ "≥ 2 من نفس الفئة في آخر 3 stages → pivot إلزامي". التحوُّل إلى 🏛 STRUCTURAL (آخر استخدام γ8 — قبل 5 stages، نافذة آمنة). الـ Maqamat haptics لَم تَسقط من الكود — شُحِنَت كأداة عامة (`Upg.haptic.play`)، لكن الـ beacon المُعلَن صار الهوية البنيوية للـ plinth.
+**Inspired-by:** Wild Card #2 — Brutalism العراقي الحديث (محمد مكية / رفعت الجادرجي): الكتلة الصلبة لا تَطفو ولا تَعتذر عن وزنها؛ تَستلقي على الأرض كقاعدة. زاوجناه مع Wild Card #4 — موسيقى المقامات: الإيقاعات العربية (دفّن/تَك/مَقسوم) كقاموس tactile feedback، لا buzz مُستعار.
+**User-Visible:** yes — على الموبايل، أي مستخدم يُبدِّل الوضع إلى plinth (أو يُمكِنه أن يَفعل من console: `Upg.elan.bottomNav.setMode('plinth')`) يَرى الشريط فجأة "يَنزِل ويَستقر" بدلاً من أن "يَطفو ويَلمع" — تَعليقٌ بصري على فلسفة AI الكسول. على أي موبايل عربي يَدعم navigator.vibrate، كل tap على الشريط يُنتج نَبراً عربياً قصيراً (دفّن للتنقّل، تَك للـ FAB).
+**Originality Self-Score:** 4/5 — solid bottom-nav موجود (Material 3, iOS native)؛ الـ pill-vs-plinth toggle إنفسه ليس جديداً؛ لكن (١) ضَمُّ ذلك إلى مَنصَّة عربية كَموقفٍ واعٍ ضد Forbidden #3، (٢) ربط الـ plinth الـ ember edge بِـ tokens لكل عالَم من ثمانية، (٣) إضافة Maqamat haptic vocabulary (دفّن / تَك / مَقسوم) مُسمَّى بمصطلحات إيقاعية عربية حقيقية بدلاً من حروف لاتينية أو buzz رقم 1/2/3، (٤) الـ delegated pointerup listener يُفرِّق بين سياقي الـ FAB والـ regular slot ليَختار الإيقاع المناسب، (٥) كل ذلك بصفر تعديل على markup المُقدَّس + opt-in localStorage = توليفة غير شائعة. Claim: most "bottom-nav alternatives" replace the component; few preserve the original as default and ship a Brutalist counter-mode that the user can toggle, with culturally-specific haptic vocabulary as a parallel gift.
+**Files touched:** platform/assets/css/chrome.css · platform/assets/js/elan/bottom-nav.js · platform/assets/app.js
+**Verified at commit:** 5e50984
+**Stage:** 4 of 6 in Pillar δ KINETIC SHELL — δ5 VIEW_TRANSITIONS_API next on same branch.
+
+---STATS---
+total_beacons: 15
+unique_categories_used: 9
+avg_score: 4.20
+last_5_avg: 4.2
+disruption_triggers: 4
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / δ4 — Pillar δ stage 4/6

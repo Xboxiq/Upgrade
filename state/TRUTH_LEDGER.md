@@ -1147,3 +1147,110 @@ what the user is doing, not decoration. Next: δ4 MOBILE_BOTTOM_NAV
 on the same branch.
 
 — Entry end —
+
+
+
+## δ4 — Mobile Bottom Nav: Plinth Mode + Maqamat Haptics — 2026-05-25
+
+**Pillar:** δ KINETIC SHELL — Stage 4 of 6
+**Branch:** elan-δ-kinetic-shell
+**Commit:** 5e50984
+**Files:** 2 modified, 1 added — 384 insertions, 0 deletions
+
+### Verified by grep on commit 5e50984
+
+| key | value |
+|---|---|
+| bottom_nav_js_lines | 257 |
+| chrome_css_d4_block_lines | 120 |
+| app_js_imports_bottom_nav | 1 |
+| data_elan_bottom_nav_refs_in_css | 16 |
+| plinth_border_radius_zero_declarations | 3 |
+| reduced_motion_guards_in_d4_block | 2 |
+| forced_colors_guards_in_d4_block | 1 |
+| print_guards_in_d4_block | 1 |
+| hex_literals_in_d4_css | 0 |
+| hex_literals_in_d4_js | 0 |
+| inline_svg_in_d4_code | 0 (the only `<svg viewBox>` mention is a docblock comment listing what the file does NOT emit) |
+| emoji_in_d4_code | 0 |
+| innerHTML_writes_in_d4_js | 0 |
+| html_diff_bytes | 0 |
+| sacred_dual_bottom_nav_markup_preserved | true |
+| sacred_default_glass_behavior_preserved | true |
+| sacred_5_slots_preserved | true |
+| node_syntax_check_pass | true |
+| node_smoke_test_pass | true |
+| default_mode | glass (unchanged Sacred behavior) |
+| opt_in_mode | plinth |
+| mode_persistence_via_localstorage | true |
+| valid_modes_count | 2 |
+| haptic_patterns_count | 3 |
+| haptic_patterns | dafn=8 / takk=[12,20,12] / maqsoom=[8,30,8,30,14] |
+| navigator_vibrate_uses | 3 |
+| haptic_respects_reduced_motion | true |
+| haptic_respects_vibrate_unavailable | true |
+| delegated_pointerup_listener | true |
+| fab_haptic_pattern | takk |
+| regular_slot_haptic_pattern | dafn |
+| upg_haptic_methods | play / patterns |
+| upg_elan_bottom_nav_methods | engage / disengage / setMode / getMode / isEngaged |
+| upg_apis_top_level_after | 32 |
+| beacon_type | 🏛 STRUCTURAL_BEACON |
+| beacon_avoided | Forbidden #3 (floating-pill nav clone) + #5 (soft-shadow + 12px radius) + #15 (generic single-buzz haptic) |
+| beacon_inspired_by | Wild Card #2 — Iraqi Brutalism (Makiya/Chadirji structural plinths) + Wild Card #4 — Maqamat music notation |
+| beacon_self_score | 4 / 5 |
+| pivot_from_spec | spec proposed INTERACTION_BEACON; δ3 just used INTERACTION (Reading Tide). Two consecutive INTERACTION beacons in a 3-stage window triggers Creativity Doctrine § ٤ mandatory pivot. Pivoted to STRUCTURAL (last used γ8 — 5 stages back, fresh). |
+
+### Narrative
+
+The platform already ships `#dual-bottom-nav` (Worker 24 / Pack v3) — a
+fully-built mobile bottom nav with safe-area insets, backdrop-filter,
+five slots, prefers-reduced-transparency fallback, RTL-aware grid.
+δ4 does not replace it; it layers two enhancements, both opt-in.
+
+**Plinth mode.** Setting `data-elan-bottom-nav="plinth"` on the existing
+nav element swaps glassmorphism for a brutalist solid plinth: zero
+border-radius, no transparency, no backdrop-filter, no box-shadow. A
+single 1px hairline at the top edge in `var(--ember)` — the only
+decorative line on the entire bar — inherits the active world's
+identity, so the same node reads as eight different chromatic plinths
+across the worlds. The active slot picks up the ember color and
+gains a 2px ember bottom-underline rendered as `::after` (carved into
+the plinth, not floated above it). Hover and focus shifts give a
+subtle 8%-opacity ember tint; tap-press depresses the slot 1px. No
+scale, no spring, no shadow. The center FAB (cmdk) keeps its filled
+identity but exchanges its default elevation for a hard-edged 1px
+ember ring, also at zero radius. Plinth mode counters Forbidden #3
+(floating-pill nav clone) by being structurally honest: the bar is
+part of the page bottom, not a hovering object.
+
+The default glass behavior is preserved unchanged — plinth is strictly
+opt-in via `Upg.elan.bottomNav.setMode('plinth')` (or by setting the
+attribute directly). User choice persists across sessions via
+`localStorage` under key `upg_elan_bottom_nav_mode`. Invalid modes
+fall back to `glass`. Reduced-motion drops transitions and the
+press-translate; forced-colors collapses to system Canvas/Highlight;
+print hides the bar entirely.
+
+**Maqamat haptics.** A new top-level API `Upg.haptic.play(pattern)`
+exposes three tactile patterns inspired by Arabic rhythmic vocabulary:
+`dafn` (نبر — single 8ms tap, gentle navigation), `takk` (تَك — a sharp
+triplet [12, 20, 12]ms, accomplishment), and `maqsoom` (مقسوم — a
+five-pulse [8, 30, 8, 30, 14]ms split, final save). The patterns are
+exposed read-only via `Upg.haptic.patterns()`. A delegated
+`pointerup` listener on `#dual-bottom-nav` fires `dafn` when the user
+taps a regular slot and `takk` when the cmdk FAB is pressed. The
+helper respects `prefers-reduced-motion: reduce` (vibrations
+disabled) and silently no-ops when `navigator.vibrate` is unavailable
+(desktop, iOS Safari, etc.). Other modules — including δ5 view-
+transitions and any future ε content stages — can call
+`Upg.haptic.play('maqsoom')` for commit-style moments.
+
+The Beacon is STRUCTURAL because the plinth is, fundamentally, a
+counter-aesthetic against the Forbidden Library #3 archetype. The
+Maqamat haptics ship as a utility, not as the declared beacon, since
+δ3 already declared INTERACTION and Creativity Doctrine § ٤ requires
+category variance across 3-stage windows. Next: δ5 VIEW_TRANSITIONS_API
+on the same branch.
+
+— Entry end —
