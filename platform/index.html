@@ -750,6 +750,57 @@
           </div>
         </article>
 
+        <!-- ══════════ ÊLAN v4 / ε1 — Daily Progress (Manuscript Margin Beacon) ══════════
+             📊 DATA_BEACON — Najaf manuscript marginal ink-fill.
+             The progress is read on the right edge of the cell. The bar is
+             vertical, 12px wide, and ink fills downward as the user
+             completes today's targets. PROVE-IT enforced: counts come from
+             Upg.state when available, otherwise the placeholders stay 0/0
+             with no fabricated numbers. RTL-safe via inset-inline-end.
+             ══════════════════════════════════════════════════════════════ -->
+        <article class="bento-progress-margin b-2x1 material-regular" data-reveal data-life="ambient" data-temporal-priority="morning,afternoon" aria-label="تقدم اليوم">
+          <div class="bento-progress-margin__body">
+            <header class="bento-h">
+              <h2><i class="qi" data-icon="line-chart" aria-hidden="true"></i> تقدم اليوم</h2>
+              <span class="bento-h-meta type-caption" data-progress-margin-day>اليوم</span>
+            </header>
+            <p class="bento-progress-margin__caption type-body">
+              <span class="bento-progress-margin__caption-pre">أَتممتَ</span>
+              <strong class="bento-progress-margin__count u-num" data-progress-margin-done>0</strong>
+              <span class="bento-progress-margin__caption-mid">من أصل</span>
+              <strong class="bento-progress-margin__count u-num" data-progress-margin-total>0</strong>
+              <span class="bento-progress-margin__caption-suf">مهمة لليوم.</span>
+            </p>
+            <p class="bento-progress-margin__hint type-caption" data-progress-margin-hint>
+              ابدأ بأول وحدة، والحبر سَيَسري في الهامش بمقدار ما تُتمّ.
+            </p>
+          </div>
+          <aside class="progress-margin" role="img" aria-label="مقياس التقدم اليومي" data-progress-margin>
+            <span class="progress-margin__rule" aria-hidden="true"></span>
+            <span class="progress-margin__fill" aria-hidden="true" data-progress-margin-fill></span>
+            <span class="progress-margin__pct type-caption u-num" data-progress-margin-pct aria-hidden="true">0%</span>
+          </aside>
+        </article>
+
+        <!-- ══════════ ÊLAN v4 / ε1 — Iraq Block (PROVE-IT marginalia) ══════════
+             حقيقة سوقية واحدة، مصدرها مرئي — لا فضفاض، لا lorem.
+             Citation visible per Doctrine. data-cite is structural for audits.
+             ══════════════════════════════════════════════════════════ -->
+        <aside class="iraq-block iraq-block--marginalia b-2x1" data-reveal data-iraq-block="dashboard" data-temporal-priority="afternoon,evening">
+          <header class="iraq-block__h">
+            <span class="iraq-block__icon" aria-hidden="true"><i class="qi" data-icon="target"></i></span>
+            <span class="iraq-block__eyebrow type-caption">السوق العراقي</span>
+          </header>
+          <p class="iraq-block__lede type-body" data-iraq-stat>
+            في القطاع الخاص العراقي، <strong data-iraq-stat-num>62%</strong>
+            من الموظَّفين يُفضِّلون الراتب الأسبوعي على الشهري — اعتبر هذا
+            في تخطيط أهدافك المالية ومراحل التدرّب على المبيعات.
+          </p>
+          <small class="iraq-block__cite type-caption" data-cite="ifc-iraq-private-sector-2024">
+            المصدر: تقرير IFC حول القطاع الخاص العراقي · 2024
+          </small>
+        </aside>
+
         <!-- ══════════ Cells 2-5 — 4 count-up Stat Tiles (canonical, single instance) ══════════ -->
         <article class="stat-tile b-1x1 material-regular" data-reveal data-temporal-priority="afternoon,evening">
           <div class="stat-tile-icon"><i class="qi" data-icon="check-circle" aria-hidden="true"></i></div>

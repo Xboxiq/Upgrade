@@ -26402,3 +26402,263 @@ body[data-rit-time]:not([data-rit-time="default"]) .bento-card {
 /* End RITUAL UI v3 / Phase 6 — Aura Deepening — Worker 22 COMPLETE 6/6 ── */
 
 /* End pages.css ───────────────────────────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 / ε1 — Dashboard Revival (Hibr) — Manuscript Margin Beacon
+   ────────────────────────────────────────────────────────────────────────
+   📊 DATA_BEACON  ·  Pillar ε / Stage 1 of 12
+   Adds 2 bento cells inside #page-dashboard:
+     · .bento-progress-margin   — focal cell with vertical Najaf-margin fill
+     · .iraq-block--marginalia  — citation-visible market fact
+
+   Sacred preserved: bento grid, 10 existing cells, 17 nav-items, sprite
+   icons, voice tokens. No selector touches existing cells.
+   Hibr tokens consumed: --anchor-1, --ink, --ink-muted, --ember, --line,
+                          --ease-hibr, --duration-hibr.
+   ────────────────────────────────────────────────────────────────────── */
+
+@layer elan-epsilon-1 {
+
+  /* ── Focal cell surface ─────────────────────────────────────────────── */
+  #page-dashboard .bento-progress-margin {
+    position: relative;
+    background: var(--anchor-1, var(--color-surface-1));
+    border: 1px solid var(--line, var(--color-border));
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    padding-inline-end: calc(var(--space-6) + 28px);     /* room for margin */
+    box-shadow: var(--shadow-c-sm, var(--shadow-sm));
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  #page-dashboard .bento-progress-margin__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-block-size: 100%;
+  }
+
+  #page-dashboard .bento-progress-margin .bento-h {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-block-end: var(--space-2);
+  }
+
+  #page-dashboard .bento-progress-margin h2 {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--voice-display, inherit);
+    font-weight: 700;
+    font-size: var(--text-base, 1rem);
+    color: var(--ink, var(--color-text));
+    margin: 0;
+    line-height: var(--lead-tight, 1.2);
+  }
+
+  #page-dashboard .bento-progress-margin .bento-h-meta {
+    color: var(--ink-faint, var(--color-text-faint));
+  }
+
+  #page-dashboard .bento-progress-margin__caption {
+    margin: 0;
+    color: var(--ink, var(--color-text));
+    line-height: var(--lead-relaxed, 1.6);
+    font-family: var(--voice-body, inherit);
+  }
+
+  #page-dashboard .bento-progress-margin__caption-pre,
+  #page-dashboard .bento-progress-margin__caption-mid,
+  #page-dashboard .bento-progress-margin__caption-suf {
+    color: var(--ink-muted, var(--color-text-muted));
+  }
+
+  #page-dashboard .bento-progress-margin__count {
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    color: var(--ink, var(--color-text));
+    padding-inline: 0.15em;
+  }
+
+  #page-dashboard .bento-progress-margin__hint {
+    color: var(--ink-faint, var(--color-text-faint));
+    margin: 0;
+    font-style: italic;
+  }
+
+  /* ── The Beacon: vertical manuscript margin ─────────────────────────── */
+  #page-dashboard .progress-margin {
+    position: absolute;
+    inset-block: var(--space-5);
+    inset-inline-end: var(--space-4);
+    inline-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+  }
+
+  #page-dashboard .progress-margin__rule {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    background: color-mix(in oklch, var(--anchor-2, var(--color-surface-2)) 70%, transparent);
+    border-radius: 1.5px;
+  }
+
+  #page-dashboard .progress-margin__fill {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: 0;
+    inline-size: 100%;
+    block-size: var(--progress-pct, 0%);
+    background: linear-gradient(
+      to bottom,
+      var(--ink, var(--color-text)) 0%,
+      color-mix(in oklch, var(--ink, var(--color-text)) 86%, var(--ember) 14%) 100%
+    );
+    border-radius: 1.5px;
+    transition: block-size var(--duration-hibr, 320ms) var(--ease-hibr, cubic-bezier(0.5, 0, 0.5, 1));
+    box-shadow:
+      0 0 0 1px color-mix(in oklch, var(--ink, var(--color-text)) 18%, transparent),
+      0 1px 0 color-mix(in oklch, var(--ink, var(--color-text)) 30%, transparent);
+  }
+
+  /* When the day is fully closed, ember the bottom edge — completion ink. */
+  #page-dashboard .bento-progress-margin[data-progress-state="complete"] .progress-margin__fill {
+    background: linear-gradient(
+      to bottom,
+      var(--ink, var(--color-text)) 0%,
+      var(--ember, var(--color-brand)) 100%
+    );
+  }
+
+  /* Percent label sits below the bar in tabular-nums. */
+  #page-dashboard .progress-margin__pct {
+    position: absolute;
+    inset-block-end: -1.6em;
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-faint, var(--color-text-faint));
+    font-size: var(--text-xs, 0.75rem);
+    white-space: nowrap;
+  }
+
+  /* The first margin tick — baseline reminder, mirrors a manuscript ruling. */
+  #page-dashboard .progress-margin::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: -4px;
+    inline-size: 20px;
+    block-size: 1px;
+    background: color-mix(in oklch, var(--line, var(--color-border)) 80%, transparent);
+  }
+
+  /* ── Iraq Block — citation-visible market fact ──────────────────────── */
+  #page-dashboard .iraq-block.iraq-block--marginalia {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-5) var(--space-6);
+    background: color-mix(in oklch, var(--ember, var(--color-brand)) 4%, var(--anchor-1, var(--color-surface-1)));
+    border: 1px solid var(--line, var(--color-border));
+    border-inline-start: 3px solid var(--ember, var(--color-brand));
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-c-sm, var(--shadow-sm));
+  }
+
+  #page-dashboard .iraq-block__h {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--ink-muted, var(--color-text-muted));
+  }
+
+  #page-dashboard .iraq-block__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 28px;
+    block-size: 28px;
+    border-radius: 50%;
+    background: color-mix(in oklch, var(--ember, var(--color-brand)) 14%, transparent);
+    color: var(--ember, var(--color-brand));
+  }
+
+  #page-dashboard .iraq-block__eyebrow {
+    font-family: var(--voice-accent, var(--voice-display, inherit));
+    font-weight: 600;
+    letter-spacing: var(--track-wide, 0.04em);
+    color: var(--ember, var(--color-brand));
+  }
+
+  #page-dashboard .iraq-block__lede {
+    margin: 0;
+    color: var(--ink, var(--color-text));
+    font-family: var(--voice-body, inherit);
+    line-height: var(--lead-relaxed, 1.6);
+  }
+
+  #page-dashboard .iraq-block__lede strong {
+    font-variant-numeric: tabular-nums;
+    color: var(--ember, var(--color-brand));
+    font-weight: 700;
+  }
+
+  #page-dashboard .iraq-block__cite {
+    color: var(--ink-faint, var(--color-text-faint));
+    font-style: italic;
+  }
+
+  /* ── Reduced-motion: instant fill, no transition ─────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    #page-dashboard .progress-margin__fill {
+      transition-duration: 1ms;
+    }
+  }
+
+  /* ── Forced colors: explicit visibility ──────────────────────────────── */
+  @media (forced-colors: active) {
+    #page-dashboard .progress-margin__rule { background: ButtonFace; }
+    #page-dashboard .progress-margin__fill { background: CanvasText; }
+    #page-dashboard .iraq-block.iraq-block--marginalia {
+      border: 1px solid CanvasText;
+      border-inline-start-width: 3px;
+    }
+  }
+
+  /* ── Print: surface the fact, hide the marginal bar ──────────────────── */
+  @media print {
+    #page-dashboard .progress-margin { display: none; }
+    #page-dashboard .bento-progress-margin {
+      padding-inline-end: var(--space-6);
+      box-shadow: none;
+      border-color: #888;
+    }
+    #page-dashboard .iraq-block.iraq-block--marginalia {
+      box-shadow: none;
+      background: transparent;
+    }
+  }
+
+  /* ── Mobile: keep ratio, slightly reduce padding ─────────────────────── */
+  @media (max-width: 980px) {
+    #page-dashboard .bento-progress-margin {
+      padding: var(--space-5);
+      padding-inline-end: calc(var(--space-5) + 24px);
+    }
+    #page-dashboard .progress-margin {
+      inline-size: 10px;
+      inset-inline-end: var(--space-3);
+    }
+  }
+}
+
+/* End ÊLAN v4 / ε1 — Dashboard Revival ────────────────────────────────── */
