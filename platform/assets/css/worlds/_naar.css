@@ -225,3 +225,285 @@ body[data-world="naar"] ::selection {
     color:             hsl(40 18% 96%);
   }
 }
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — ε8 — STRUCTURAL_BEACON: The Brutalist Skill Tree
+   ════════════════════════════════════════════════════════════════════════
+   The career-path map is not a list of cards. It is a **branching tree**
+   drawn as ember line work over a Chadirji concrete-coffer grid.
+
+   Inspiration: Wild Card #1 — Brutalist Iraqi Modernism (Mohammed Makiya
+   structural diagrams, Rifat Chadirji concrete waffle ceilings) +
+   spec's Japanese ema woodblock branching language.
+
+   The grid backdrop is the engineer's drafting board. The trunk is a
+   row of seven foundation chips. The leaves are ten career paths,
+   reached through quadratic-curve branches that sweep RTL-correctly.
+
+   Hover a branch → the others fade to 0.3, the focused branch glows.
+   Tab cycles foundations and paths. Reduced-motion silences the fade.
+   ──────────────────────────────────────────────────────────────────── */
+
+@layer elan-epsilon8 {
+
+  /* ── The host section ──────────────────────────────────────────── */
+
+  [data-world="naar"] .naar-skill-tree-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3, 12px);
+    margin-block-start: var(--s-6, 24px);
+    padding: var(--s-4, 16px) var(--s-5, 20px);
+    border: 1px solid var(--line);
+    border-radius: var(--r-3, 12px);
+    background-color: var(--anchor-1);
+  }
+
+  [data-world="naar"] .naar-skill-tree-head {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2, 8px);
+    color: var(--ember);
+  }
+
+  [data-world="naar"] .naar-skill-tree-head h2 {
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--voice-display, "29LT Bukra", sans-serif);
+    font-size: var(--text-xl, 1.35rem);
+    font-weight: 700;
+    letter-spacing: var(--track-snug, normal);
+  }
+
+  [data-world="naar"] .naar-skill-tree-lede {
+    margin: 0;
+    color: var(--ink-muted);
+    font-family: var(--voice-body, "Vazirmatn", sans-serif);
+    line-height: var(--lead-relaxed, 1.55);
+  }
+
+  /* ── Foundations (the trunk) ───────────────────────────────────── */
+
+  [data-world="naar"] .naar-foundations {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--s-2, 8px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  [data-world="naar"] .naar-foundation {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2, 8px);
+    padding: var(--s-2, 8px) var(--s-3, 12px);
+    border: 1px solid var(--line);
+    border-radius: var(--r-2, 8px);
+    background-color: var(--anchor-2);
+    color: var(--ink);
+    font-family: var(--voice-body, "Vazirmatn", sans-serif);
+    font-size: var(--text-sm, 0.92rem);
+    font-weight: 500;
+  }
+
+  [data-world="naar"] .naar-foundation > .qi {
+    color: var(--ember);
+  }
+
+  /* ── The tree host — Chadirji concrete coffer drafting board ───── */
+
+  [data-world="naar"] .skill-tree {
+    position: relative;
+    block-size: clamp(420px, 60vw, 600px);
+    border: 2px solid var(--line);
+    border-radius: var(--r-2, 8px);
+    background-color: var(--anchor-bg);
+    /* concrete waffle grid — 32px × 32px ink lines at 10% opacity */
+    background-image:
+      linear-gradient(to right,  color-mix(in oklch, var(--ink) 10%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklch, var(--ink) 10%, transparent) 1px, transparent 1px);
+    background-size: 32px 32px;
+    overflow: hidden;
+    /* contain rendering for the SVG repaints */
+    contain: layout paint style;
+  }
+
+  [data-world="naar"] .skill-tree > svg {
+    inline-size: 100%;
+    block-size: 100%;
+    display: block;
+  }
+
+  /* ── The branches — ember line work ────────────────────────────── */
+
+  [data-world="naar"] .skill-tree .branch {
+    cursor: pointer;
+    transition: opacity var(--duration-naar, 180ms) var(--ease-naar, cubic-bezier(0.7, 0, 0.2, 1.2));
+  }
+
+  [data-world="naar"] .skill-tree .branch path,
+  [data-world="naar"] .skill-tree .branch line {
+    stroke: var(--ember);
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    fill: none;
+    transition:
+      stroke var(--duration-naar, 180ms) var(--ease-naar, ease),
+      stroke-width var(--duration-naar, 180ms) var(--ease-naar, ease);
+  }
+
+  [data-world="naar"] .skill-tree .branch text {
+    fill: var(--ink);
+    font-family: var(--voice-body, "Vazirmatn", sans-serif);
+    font-size: 13px;
+    font-weight: 600;
+    /* readable Arabic in SVG: keep the kashida balance */
+    direction: rtl;
+    pointer-events: none;
+  }
+
+  [data-world="naar"] .skill-tree .branch[data-foundation] text {
+    font-family: var(--voice-display, "29LT Bukra", sans-serif);
+    font-weight: 800;
+    fill: var(--focus);
+  }
+
+  /* ── Focus mode: hover or keyboard-focus a branch → dim the rest ── */
+
+  [data-world="naar"] .skill-tree[data-elan-focus]:not([data-elan-focus=""]) .branch {
+    opacity: 0.3;
+  }
+
+  [data-world="naar"] .skill-tree[data-elan-focus]:not([data-elan-focus=""]) .branch[data-id-active] {
+    opacity: 1;
+  }
+
+  [data-world="naar"] .skill-tree[data-elan-focus]:not([data-elan-focus=""]) .branch[data-id-active] path,
+  [data-world="naar"] .skill-tree[data-elan-focus]:not([data-elan-focus=""]) .branch[data-id-active] line {
+    stroke-width: 2.4;
+    stroke: var(--focus);
+  }
+
+  /* keyboard focus — same visual contract as hover */
+  [data-world="naar"] .skill-tree .branch:focus-visible {
+    outline: none;
+  }
+  [data-world="naar"] .skill-tree .branch:focus-visible[data-id-active] path,
+  [data-world="naar"] .skill-tree .branch:focus-visible[data-id-active] line {
+    stroke: var(--focus);
+  }
+
+  /* ── Path list (no-JS / reduced-motion fallback) ───────────────── */
+
+  [data-world="naar"] .naar-paths {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--s-2, 8px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  [data-world="naar"] .naar-paths li {
+    padding: var(--s-2, 8px) var(--s-3, 12px);
+    border: 1px solid var(--line);
+    border-radius: var(--r-2, 8px);
+    background-color: var(--anchor-2);
+    color: var(--ink-muted);
+    font-family: var(--voice-body, "Vazirmatn", sans-serif);
+    font-size: var(--text-sm, 0.92rem);
+    line-height: var(--lead-snug, 1.4);
+  }
+
+  [data-world="naar"] .naar-paths strong {
+    color: var(--ember);
+    font-family: var(--voice-display, "29LT Bukra", sans-serif);
+    font-weight: 700;
+  }
+
+  /* ── Iraq Block in Naar world ──────────────────────────────────── */
+
+  [data-world="naar"] .iraq-block,
+  [data-world="naar"] .iraq-block--naar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2, 8px);
+    margin-block-start: var(--s-5, 20px);
+    padding: var(--s-3, 12px) var(--s-4, 16px);
+    border-inline-start: 3px solid var(--ember);
+    border-radius: 0 var(--r-2, 8px) var(--r-2, 8px) 0;
+    background-color: color-mix(in oklch, var(--ember) 6%, var(--anchor-1));
+  }
+
+  [data-world="naar"] .iraq-block__head {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2, 8px);
+    color: var(--ember);
+    font-family: var(--voice-display, "29LT Bukra", sans-serif);
+    font-size: var(--text-sm, 0.92rem);
+    font-weight: 700;
+  }
+
+  [data-world="naar"] .iraq-block p {
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--voice-body, "Vazirmatn", sans-serif);
+    line-height: var(--lead-relaxed, 1.55);
+  }
+
+  [data-world="naar"] .iraq-block strong {
+    color: var(--ember);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  [data-world="naar"] .iraq-block cite,
+  [data-world="naar"] .iraq-block__cite {
+    display: block;
+    font-style: normal;
+    color: var(--ink-faint);
+    font-size: var(--text-xs, 0.78rem);
+    letter-spacing: var(--track-wide, 0.02em);
+  }
+
+  /* ── Reduced-motion: silence the focus dim transition ────────── */
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-world="naar"] .skill-tree .branch,
+    [data-world="naar"] .skill-tree .branch path,
+    [data-world="naar"] .skill-tree .branch line {
+      transition: none;
+    }
+  }
+
+  /* ── Forced-colors: make the tree semantic via outlines + Mark ── */
+
+  @media (forced-colors: active) {
+    [data-world="naar"] .skill-tree {
+      background-image: none;
+      background-color: ButtonFace;
+    }
+    [data-world="naar"] .skill-tree .branch path,
+    [data-world="naar"] .skill-tree .branch line {
+      stroke: CanvasText;
+    }
+    [data-world="naar"] .skill-tree[data-elan-focus]:not([data-elan-focus=""]) .branch[data-id-active] path,
+    [data-world="naar"] .skill-tree[data-elan-focus]:not([data-elan-focus=""]) .branch[data-id-active] line {
+      stroke: Highlight;
+    }
+    [data-world="naar"] .iraq-block { border-inline-start-color: CanvasText; background-color: ButtonFace; }
+  }
+
+  /* ── Print: hide the SVG, keep the prose path list ─────────────── */
+
+  @media print {
+    [data-world="naar"] .skill-tree { display: none; }
+    [data-world="naar"] .naar-foundations,
+    [data-world="naar"] .naar-paths { color: black; }
+  }
+
+}/* /@layer elan-epsilon8 */

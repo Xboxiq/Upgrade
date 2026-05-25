@@ -21538,6 +21538,61 @@ const bird = { ...canMove(), ...canFly() };
         </a>
       </aside>
 
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           ÊLAN v4 — ε8 — Skill Tree (STRUCTURAL_BEACON, Naar world)
+           Brutalist career-path tree built programmatically via JS
+           (createElementNS), NOT inline <svg viewBox> in HTML.
+           ══════════════════════════════════════════════════════════════════ -->
+      <section class="naar-skill-tree-section" data-elan-section="naar-skill-tree" aria-labelledby="elan-skill-tree-h">
+        <header class="naar-skill-tree-head">
+          <i class="qi qi-md" data-icon="zap" aria-hidden="true"></i>
+          <h2 id="elan-skill-tree-h" class="type-display">خريطة المسارات — جذع الأساس وعشرة فروع</h2>
+        </header>
+        <p class="naar-skill-tree-lede" data-type-voice="body">سبعة أساسيات تَجمع كل مسار. عشرة مسارات تَتفرّع منها. مرّر فوق فرع لتُهَدِّئ الباقي. اضغط Tab للتنقُّل بالمَفاتيح.</p>
+
+        <!-- Foundations row (the trunk) -->
+        <ul class="naar-foundations" data-elan-foundations aria-label="الأساسيات السبعة">
+          <li class="naar-foundation"><i class="qi qi-sm" data-icon="code" aria-hidden="true"></i><span>HTML semantic + a11y</span></li>
+          <li class="naar-foundation"><i class="qi qi-sm" data-icon="layers" aria-hidden="true"></i><span>CSS modern (grid + container queries)</span></li>
+          <li class="naar-foundation"><i class="qi qi-sm" data-icon="terminal" aria-hidden="true"></i><span>JS ES2023+ (modules + async)</span></li>
+          <li class="naar-foundation"><i class="qi qi-sm" data-icon="git-branch" aria-hidden="true"></i><span>Git fundamentals</span></li>
+          <li class="naar-foundation"><i class="qi qi-sm" data-icon="bug" aria-hidden="true"></i><span>Browser DevTools</span></li>
+          <li class="naar-foundation"><i class="qi qi-sm" data-icon="terminal" aria-hidden="true"></i><span>CLI + Linux basics</span></li>
+          <li class="naar-foundation"><i class="qi qi-sm" data-icon="globe" aria-hidden="true"></i><span>API (REST + JSON)</span></li>
+        </ul>
+
+        <!-- Tree host — the SVG is injected by epsilon8-programming.js -->
+        <div class="skill-tree" id="elan-skill-tree" data-elan-tree role="img" aria-label="شجرة المسارات: الأساسيات السبعة في الأعلى وعشرة مسارات تَتفرّع منها"></div>
+
+        <!-- Path list (sighted users with reduced-motion / no-JS still see the leaves) -->
+        <ul class="naar-paths" data-elan-paths aria-label="عشرة مسارات وظيفية">
+          <li><strong>Frontend Vanilla</strong> — لا framework، أساس قوي قبل أي مكتبة.</li>
+          <li><strong>Frontend React</strong> — modern stack، إنتاجية + سوق واسع.</li>
+          <li><strong>Frontend Vue</strong> — opinionated، منحنى تَعلُّم ألطف.</li>
+          <li><strong>Backend Node</strong> — Express + DB، نفس اللغة عبر الواجهتين.</li>
+          <li><strong>Backend Python</strong> — FastAPI، قوة ML + تكامل بيانات.</li>
+          <li><strong>Mobile Cross-Platform</strong> — Flutter، تطبيق واحد منصَّتان.</li>
+          <li><strong>DevOps starter</strong> — Docker + GitHub Actions.</li>
+          <li><strong>Data Science basics</strong> — Python pandas + matplotlib.</li>
+          <li><strong>AI Engineer track</strong> — LLM ops + prompt design.</li>
+          <li><strong>Game dev intro</strong> — Godot، 2D-first مفتوح المصدر.</li>
+        </ul>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           ÊLAN v4 — ε8 — Iraq Block (PROVE-IT, citation visible)
+           ══════════════════════════════════════════════════════════════════ -->
+      <aside class="iraq-block iraq-block--naar" data-elan-iraq="programming" aria-label="حقيقة من السوق العراقية للمطوّرين">
+        <header class="iraq-block__head">
+          <i class="qi qi-md" data-icon="globe" aria-hidden="true"></i>
+          <span>السوق العراقية للمطوّرين</span>
+        </header>
+        <p>في سوق العمل العراقي ٢٠٢٤، فرص الـ <strong>remote / freelance</strong> أكبر بـ <strong>~٥×</strong> من الـ local job posts للمطوّرين. الإنجليزية المتوسِّطة + portfolio يَزن أكثر من شهادة. ابدأ بـ «الكود يَتكلَّم» قبل CV.</p>
+        <cite class="iraq-block__cite">المصدر: Bel Inc. + Stack Overflow Iraq Survey, 2024</cite>
+      </aside>
+
     </section><!-- /page-programming -->
 
 

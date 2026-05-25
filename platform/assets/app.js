@@ -183,3 +183,12 @@ import './js/elan/epsilon6-psych.js';
 // Marsh Architecture — mudhif reed walls signal state through ambient
 // material shift, not signage. Registers Upg.elan.customercare (frozen).
 import './js/elan/epsilon7-customercare.js';
+
+// ÊLAN v4 — ε8: Programming Content Revival (Naar world)
+// STRUCTURAL_BEACON — Brutalist skill tree as ember line work over a
+// Chadirji concrete-coffer drafting grid. SVG is built programmatically
+// via createElementNS — no inline <svg viewBox> markup in HTML. Hover
+// or keyboard-focus on a branch dims unrelated leaves to 0.3. Inspired-
+// by: Wild Card #1 Brutalist Iraqi Modernism (Makiya/Chadirji structural
+// diagrams). Registers Upg.elan.programming (frozen).
+import './js/elan/epsilon8-programming.js';
