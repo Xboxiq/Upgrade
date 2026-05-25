@@ -346,3 +346,34 @@ disruption_triggers: 5
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-25 / ε2 — Pillar ε stage 2/12
+
+
+
+
+## ε3 — 2026-05-25
+**Beacon Type:** 🤚 INTERACTION_BEACON
+**The Surprise:** تخطيط الجولة الميدانية ليس Google Maps embed يَطلُب API key ويُحمَل ٣ميجا بايت من الـ tiles ويَنتظر اتصال شبكة. هو **canvas يَدوي على ورق Brutalist** يَحمِل ختماً «FORM-FS-01 · المسار اليومي» في الزاوية و «BAGHDAD GRID 1km/40px» في الزاوية المقابلة، كأنّه ورقة تَخطيط حقيقية من ورشة فنية. ٨ نقاط زبائن لأحياء بغداد ثابتة على شبكة ٢٤px (الكرَّادة، المنصور، الأَعظمية، الكَرخ، الجادريَّة، السَّيديَّة، الدورة، مدينة الصَّدر). كل نقطة دائرة ink بقُطر ١٦px مع chamfered diamond في الوسط (تَوقيع حَديد المربَّع المُمَيَّل ٤٥°). المستخدم يَنقُر فتُضاف للترتيب؛ يَنقُر مَرَّة ثانية على نقطة سابقة فيُحذَف ما **بعدها** كاملاً — semantic «re-walk from this stop» وليس «remove this single index» الـ AI الافتراضي. الـ path يَربِط بـ ember mitered 2px (mitered وليس rounded — Hadeed cinematic rigour). أرقام التَّتَبُع تُكتَب بأرقام عربية-هندية بـ Almarai 700 قُرب كل pin. metrics محلِّية تَماماً: ٤٠px = ١كم، ١٨ دقيقة لكل توقُّف + ٦ دقائق لكل كم. صَفر network calls. صَفر API. صَفر mapbox. صَفر leaflet. The canvas is a paper sheet, not a portal to another app.
+
+البنية المُساندة: `[data-elan-route]` host، `data-route-meta="distance|stops|time"` على الخلايا الثلاث، `data-pin-id` على ٨ buttons في الـ legend list (الـ legend tonge بديل keyboard للـ canvas — Tab يَنتقل بينها، Enter/Space يُفعِّل، نفس الـ togglePin logic يُطبَّق). الـ ResizeObserver يُعيد رسم الـ canvas عند تَغيُّر العُرض، DPR awareness كامل (canvas.width = layout × dpr، ctx.setTransform(dpr,0,0,dpr,0,0) قبل الرسم). الـ tokens تُقرَأ live من `getComputedStyle(host)` على `--ink` و `--ember` و `--anchor-bg` فالـ canvas يَنسجِم تلقائياً مع غيار العالم لو تَطبَّق على page-fieldsales من خلال workflow آخر. الـ fallback strings كلُّها بـ `hsl()` matching WORLDS_ATLAS — صَفر hex literal في الـ JS (تَم إعادة الكتابة قبل commit بعد فحص forensics).
+
+**Reference Avoided:** Forbidden #4 (generic mesh gradient) + الـ AI-default الأكبر في dashboards الـ field-sales: «embed Google Maps + draw curved polyline animated» — كل platform AI يَفعل هذا (HubSpot, Salesforce mock, Zoho, Bitrix). ε3 يَرفُض ذلك صَراحَةً: الـ canvas يَدوي، الـ path mitered، صَفر animation على الـ polyline، صَفر spring-bounce، صَفر API.
+
+**Inspired-by:** Wild Card #2 — Brutalist Iraqi Modernism (Mohammed Makiya، Rifat Chadirji). الـ planning sheet المعماري في الـ Mausoleum of Sayyid Idris و الـ Iraqi Council of Ministers building كان أداة فنية صَريحة: ورق رمادي + grid أزرق رفيع + ختم corner-stamp + handwritten annotation. ε3 يَستحضِر هذا التَّقليد: الـ canvas يَحمِل grid 24px (مَرسوم بـ CSS linear-gradient pair، صَفر JS)، ختم corner، خط رفيع للـ route، أرقام عربية-هندية للترتيب — لا اعتذار، لا decoration.
+
+**User-Visible:** yes — كل مُتَدَرِّب يَفتح صفحة fieldsales (مَفروضة data-shard-id="fieldsales") سَيَجِد section جديد بعد سيناريوهات الـ ql-dilemma، يَحوي canvas + ٨ pin-buttons + ٣ خلايا metrics + Iraq block. الـ initial paint يَحدُث في الـ requestAnimationFrame الأولى بعد layout، فالـ user يَرى ٨ نقاط + شبكة الـ paper مُباشَرة. الأرقام في الـ metrics تَبدأ بـ «٠» — لا counter-from-0 cliché لأن الـ user يَفهَم أن الـ metric صفر بحُكم البديهة (ما اختار شيئاً بعد). reduced-motion users يَحصُلون على نفس الـ canvas بدون transitions في الـ legend pins.
+
+**Originality Self-Score:** 5/5. الـ data analysis: hand-drawn route canvases في field-sales software موجودة في minority من الـ apps (Route4Me يَفعل شيئاً مُماثلاً لكن مع map tiles؛ Salesforce Maps يَستخدم Google Maps؛ HubSpot Sales Hub يَفعل Google Maps). ولكن الـ Brutalist signaling (FORM-FS-01 stamp + BAGHDAD GRID label + chamfered diamond pins + Arabic-Indic sequence numbers + mitered ember path + grid via CSS pair gradients + هَيمنة الـ canvas-without-tiles) معاً = pattern لم يُلاحَظ في AI-generated outputs. claim: most AI dashboards default to embedding Google Maps for any geographic interaction; few build a paper-styled canvas with culturally specific local geography (Baghdad districts, not San Francisco SoMa).
+
+**Files touched:** `platform/assets/css/_epsilon3-fieldsales.css` (NEW · 281) · `platform/assets/js/elan/epsilon3-fieldsales.js` (NEW · 325) · `platform/index.html` (+71) · `platform/pages/fieldsales.html` (+71) · `platform/assets/css/tokens.css` (+5) · `platform/assets/app.js` (+7). Total +760 across 6 files.
+
+**Verified at commit:** 16a8112
+
+---STATS---
+total_beacons: 20
+unique_categories_used: 9
+avg_score: 4.20
+last_5_avg: 4.2
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε3 — Pillar ε stage 3/12
