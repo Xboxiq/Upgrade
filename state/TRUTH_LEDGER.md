@@ -1440,3 +1440,29 @@ the fallback string in δ5 will need a tokens.css entry. Recommended for
 6 stages shipped on `elan-δ-kinetic-shell` (δ1 73d72c1c · δ2 33f0553 · δ3 b794e19 · δ4 5e50984 · δ5 a97c87d · δ6 66f3a01). 6 Beacons across 5 distinct categories (MOTION δ1+δ5, DATA δ2, INTERACTION δ3, STRUCTURAL δ4, META δ6). 0 forbidden violations. 0 Sacred Asset disturbance. Next: PR open + Pillar ε CONTENT_REVIVAL on a fresh branch.
 
 — Entry end —
+
+
+
+---
+
+## ε1 — Dashboard Content Revival (Hibr) — 2026-05-25
+
+| Metric | Before | After | Δ |
+|--------|--------|-------|---|
+| data-hibr-ms on stat-tiles | 0 | 4 | +4 |
+| data-hibr-colophon on greeting | 0 | 1 | +1 |
+| Lines in _hibr.css | 193 | 471 | +278 |
+| epsilon1-dashboard.js | 0 | 262 | +262 (new) |
+| app.js elan imports | 10 | 11 | +1 |
+| Emoji in markup | 0 | 0 | 0 |
+| Hardcoded fill= | 0 | 0 | 0 |
+| Inline SVG viewBox | 0 | 0 | 0 |
+| Forbidden Library violations | 0 | 0 | 0 |
+| Sacred Assets disturbed | 0 | 0 | 0 |
+
+**Commit:** 2dd1224f on `elan-e-content-revival-v2`
+**Beacon:** DATA_BEACON — Manuscript Marginalia (stat trend → vertical gloss)
+**Avoided:** Forbidden #5, #6, #11
+**Inspired-by:** Wild Card #2 — Persian Miniature (Bihzad marginalia)
+
+— Entry end —

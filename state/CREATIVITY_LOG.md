@@ -273,3 +273,28 @@ disruption_triggers: 5
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-25 / δ6 — Pillar δ COMPLETE 6/6
+
+
+
+
+## ε1 — 2026-05-25
+**Beacon Type:** 📊 DATA_BEACON
+**The Surprise:** الأربع بطاقات الإحصائية في لوحة التحكم تَتحوَّل إلى صفحات مخطوط: الرقم الكبير هو المَتن، والاتجاه ("+3 هذا الأسبوع") يَنتقل إلى الهامش الجانبي بالاتجاه العمودي — مكتوباً بخط أميري قرآن (voice-accent)، مفصولاً عن المَتن بخط تسطير رفيع كأنه مسطرة ناسخ. الأيقونة الصغيرة للاتجاه تدور ٩٠° لتُلائم الكتابة العمودية. على الجوال (< 480px)، الهامش يَنزل تحت المَتن بخط أفقي — لأن الهامش في المخطوطات الصغيرة كان يُكتَب في ذيل الصفحة. التحية تتحوَّل إلى "خاتمة المخطوط" (colophon) بخط زخرفي علوي ثلاثي الألوان (أحمر-ذهب-أحمر) يُشبه إطار بسملة. التحية نفسها تتبدَّل حسب وقت اليوم بأربع عبارات عربية أصيلة: "صباح الحِبر" / "عصر الكتابة" / "مساء المخطوط" / "ليل النُّسَّاخ". أسفل التحية: شريط "مسيرة الكاتب" — خط حبر يمتد بنسبة الإتقان الكلية، كأن القلم يَخُطّ تقدُّم المستخدم حرفياً.
+**Reference Avoided:** Forbidden #5 — card بـ shadow ناعم + 12px radius (استُبدل بمسطرة مخطوط + حد 1px); Forbidden #6 — bento = مستطيلات متطابقة (الهامش العمودي يَكسر التماثل بين البطاقات); Forbidden #11 — counter من 0 (القيم تبقى كما هي، الابتكار في العرض لا في القيمة).
+**Inspired-by:** Wild Card #2 — Persian Miniature (تقليد بهزاد في الحاشية المخطوطية: الناسخ يُضيف ملاحظات تأمُّلية في هوامش المنمنمات المُذهَّبة. هنا: الاتجاهات الإحصائية = حاشية الناسخ على متن الأرقام).
+**User-Visible:** yes — كل مستخدم يَفتح لوحة التحكم يَرى: (١) الاتجاهات بالعمودي في هامش كل بطاقة (desktop)، (٢) التحية تتغيّر حسب الوقت بعربية أدبية، (٣) شريط الحبر يمتد مع تقدُّمه. على الجوال: الهامش ينتقل إلى أسفل البطاقة بسلاسة.
+**Originality Self-Score:** 4/5 — vertical writing-mode في stat cards ليس شائعاً في AI dashboards. ربط الاتجاه بتقليد الحاشية المخطوطية (writing-mode: vertical-rl + Amiri Quran font + ruling line separator) نمط غير موجود في أي مكتبة dashboard. التحيات الأدبية المتغيّرة بالوقت ("صباح الحِبر") ليست greeting عادي. لكنه ليس 5/5 لأن vertical text في cards موجود في بعض التصاميم اليابانية.
+**Files touched:** platform/assets/css/worlds/_hibr.css (+278) · platform/assets/js/elan/epsilon1-dashboard.js (NEW 262) · platform/index.html (+5/-5) · platform/assets/app.js (+4)
+**Verified at commit:** 2dd1224f
+
+
+
+---STATS---
+total_beacons: 18
+unique_categories_used: 9
+avg_score: 4.17
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε1 — Pillar ε stage 1/12
