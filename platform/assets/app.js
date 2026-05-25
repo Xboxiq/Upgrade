@@ -162,3 +162,11 @@ import './js/elan/epsilon3-fieldsales.js';
 // 60ms glitch on snapshot crossfade). Inspired-by: Wild Card #15 Synthwave + Khat.
 // Registers Upg.elan.social (NOT a 15th top-level Upg.* — namespaced under Upg.elan).
 import './js/elan/epsilon4-social.js';
+
+// ÊLAN v4 — ε5: Lab Content Revival (Pillar ε — Stage 5 of 12)
+// TYPOGRAPHIC_BEACON — Brutalist blueprint notebook with 4 type-keyed voices
+// (thinking→Markazi serif / action→Bukra display / numeric→Almarai tabular /
+// negotiation→Vazirmatn UI). Inspired-by: Wild Card #1 Brutalist Iraqi
+// Modernism (Chadirji concrete coffer ceiling as dotted background).
+// Registers Upg.elan.lab — frozen surface SCENARIOS (10) + audit + getByType.
+import './js/elan/epsilon5-lab.js';
