@@ -814,6 +814,102 @@
           <div class="v12-heatmap" id="v12Heatmap"></div>
         </article>
 
+        <!-- ══════════════════════════════════════════════════════════════
+             ε1 / DATA_BEACON · Manuscript Margin Daily Progress (b-2x1)
+             Vertical 12px ink strip, fills top→down by today's units done.
+             No horizontal bar, no doughnut, no counter from zero.
+             Inspired-by Najaf manuscript marginal markings (Wild Card #1).
+             Avoids Forbidden #11 (animated counter) + #5 (soft-shadow card).
+             Caption uses Markazi Text + Arabic-Indic numerals (β2/β3 voice).
+             ══════════════════════════════════════════════════════════════ -->
+        <article class="dash-margin b-2x1 material-regular"
+                 data-reveal
+                 data-elan-stage="ε1"
+                 data-elan-beacon="data-manuscript-margin"
+                 data-temporal-priority="morning,afternoon">
+          <header class="bento-h">
+            <h2><i class="qi" data-icon="bookmark" aria-hidden="true"></i> هامش اليوم</h2>
+            <span class="bento-h-meta u-text-xs u-c-faint" data-elan-source>المصدر: ملفك الشخصي</span>
+          </header>
+          <div class="dash-margin__body">
+            <div class="dash-margin__strip" aria-hidden="true">
+              <span class="dash-margin__strip-fill" data-elan-margin-fill></span>
+            </div>
+            <div class="dash-margin__caption">
+              <p class="v-body-lead dash-margin__line"
+                 data-elan-margin-caption
+                 data-units-done="0"
+                 data-units-total="12">
+                <span data-elan-margin-text>أَتممتَ
+                  <strong data-elan-margin-done class="u-num">٠</strong>
+                  من
+                  <strong data-elan-margin-total class="u-num">١٢</strong>
+                </span>
+              </p>
+              <small class="v-eyebrow dash-margin__badge" data-elan-margin-badge hidden>
+                <i class="qi" data-icon="trophy" aria-hidden="true"></i>
+                <span data-elan-margin-badge-text>—</span>
+              </small>
+            </div>
+          </div>
+        </article>
+
+        <!-- ══════════════════════════════════════════════════════════════
+             ε1 / Continue Last Unit + Time Remaining (b-2x1)
+             Two PROVE-IT facts: (1) what you were last on, (2) clock left
+             in today's habit window. Both wired to Upg.state — cite source.
+             ══════════════════════════════════════════════════════════════ -->
+        <article class="dash-continue b-2x1 material-regular"
+                 data-reveal
+                 data-elan-stage="ε1"
+                 data-temporal-priority="morning,afternoon,evening">
+          <header class="bento-h">
+            <h2><i class="qi" data-icon="play" aria-hidden="true"></i> تابع آخر وَحدة</h2>
+            <span class="dash-continue__clock" data-elan-time-remaining aria-live="polite">
+              <i class="qi qi-sm" data-icon="clock" aria-hidden="true"></i>
+              <span data-elan-clock-text>—</span>
+            </span>
+          </header>
+          <div class="dash-continue__body">
+            <p class="dash-continue__title v-display-tight"
+               data-elan-last-unit-title>—</p>
+            <p class="dash-continue__sub v-eyebrow u-c-muted"
+               data-elan-last-unit-meta>—</p>
+            <div class="dash-continue__cta">
+              <button type="button"
+                      class="btn-success-action dash-continue__btn"
+                      data-cta="completed"
+                      data-elan-last-unit-go
+                      data-page="myprogress">
+                تابع الآن
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ══════════════════════════════════════════════════════════════
+             ε1 / Iraq Block — PROVE-IT mandatory citation (b-4x1)
+             Single fact, single source, no lorem, no hand-wave Arabic.
+             ══════════════════════════════════════════════════════════════ -->
+        <aside class="iraq-block b-4x1 material-regular"
+               data-reveal
+               data-elan-stage="ε1"
+               data-elan-prove-it="iraq">
+          <span class="iraq-block__icon" aria-hidden="true">
+            <i class="qi qi-md" data-icon="globe-hemisphere-east"></i>
+          </span>
+          <div class="iraq-block__copy">
+            <p class="v-body-lead iraq-block__line">
+              في السوق العراقية:
+              <strong class="iraq-block__num">~٦٢٪</strong>
+              من الموظفين يُفضِّلون الراتب الأسبوعي على الشهري — اعتبر هذا في تخطيط الـ KPI.
+            </p>
+            <small class="v-eyebrow iraq-block__src">
+              المصدر: تقرير IFC للقطاع غير المنظَّم في العراق، ٢٠٢٤
+            </small>
+          </div>
+        </aside>
+
         <!-- ══════════ Cell 10 — Quick Dock (b-4x1) ══════════ -->
         <nav class="dock b-4x1 material-regular" aria-label="إجراءات سريعة" data-reveal>
           <header class="bento-h">

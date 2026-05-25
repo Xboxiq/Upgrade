@@ -26402,3 +26402,268 @@ body[data-rit-time]:not([data-rit-time="default"]) .bento-card {
 /* End RITUAL UI v3 / Phase 6 — Aura Deepening — Worker 22 COMPLETE 6/6 ── */
 
 /* End pages.css ───────────────────────────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — ε1 — Dashboard Content Revival (Hibr world)
+   ────────────────────────────────────────────────────────────────────────
+   📊 DATA_BEACON: Manuscript Margin Progress
+   Vertical 12px ink strip on the trailing edge of the focal cell. It fills
+   downward by today's completed units, mimicking a scribe's margin mark on
+   a Najaf manuscript page. The bar IS the data — there is no horizontal
+   bar, no doughnut, no counter ramping up from zero. The number on display
+   is the truth on the first paint; the strip animates with Hibr's ease
+   (cubic-bezier(0.5, 0, 0.5, 1)) over var(--duration-hibr) when the
+   underlying daily-progress value changes.
+
+   Tokens consumed (no hex literals): --anchor-2 (strip rail), --ink (fill),
+   --ember (badge accent), --focus (border on strip when in focus context),
+   --duration-hibr, --ease-hibr, voice tokens via .v-body-lead/.v-eyebrow.
+
+   Avoids:
+     #5  — soft-shadow + 12px-radius card (the strip is sharp, no blur)
+     #11 — animated counter from 0 (number paints final, only the bar moves)
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Dashboard cell — Manuscript Margin (focal, b-2x1) ─────────────── */
+[data-world="hibr"] .dash-margin {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-4);
+  background: var(--anchor-1);
+  color: var(--ink);
+  border: 1px solid var(--anchor-2);
+  border-radius: var(--r-2);
+  /* manuscript paper hint: very subtle vertical rule on the trailing edge,
+     immediately adjacent to where the ink strip will lie. */
+  background-image:
+    linear-gradient(to right, transparent calc(100% - 22px),
+                              color-mix(in oklch, var(--ink) 6%, transparent) calc(100% - 22px),
+                              color-mix(in oklch, var(--ink) 6%, transparent) calc(100% - 21px),
+                              transparent calc(100% - 21px));
+}
+
+[data-world="hibr"] .dash-margin__body {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 12px;
+  gap: var(--s-4);
+  align-items: stretch;
+  min-block-size: 92px;
+}
+
+[data-world="hibr"] .dash-margin__caption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  justify-content: center;
+}
+
+[data-world="hibr"] .dash-margin__line {
+  margin: 0;
+  font-family: var(--voice-body, "Markazi Text", serif);
+  font-size: var(--t-3, 1.125rem);
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+[data-world="hibr"] .dash-margin__line strong {
+  font-family: var(--voice-display, "Boutros Modern Kufi", serif);
+  font-weight: 700;
+  font-size: 1.18em;
+  color: var(--ink);
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+[data-world="hibr"] .dash-margin__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-1) var(--s-2);
+  border-inline-start: 2px solid var(--ember);
+  background: color-mix(in oklch, var(--ember) 6%, transparent);
+  color: var(--ember);
+  font-family: var(--voice-accent, "Amiri Quran Colored", serif);
+  font-size: var(--t-1, 0.875rem);
+  inline-size: fit-content;
+}
+
+[data-world="hibr"] .dash-margin__badge[hidden] { display: none; }
+
+/* The strip itself — the BEACON */
+[data-world="hibr"] .dash-margin__strip {
+  position: relative;
+  inline-size: 12px;
+  block-size: 100%;
+  background: var(--anchor-2);
+  border-radius: 1px;
+  overflow: hidden;
+  /* very faint vellum hint inside the rail */
+  background-image:
+    repeating-linear-gradient(to bottom,
+      transparent 0,
+      transparent 7px,
+      color-mix(in oklch, var(--ink) 4%, transparent) 7px,
+      color-mix(in oklch, var(--ink) 4%, transparent) 8px);
+}
+
+[data-world="hibr"] .dash-margin__strip-fill {
+  display: block;
+  inline-size: 100%;
+  block-size: var(--elan-margin-pct, 0%);
+  background:
+    linear-gradient(to bottom,
+      var(--ink) 0%,
+      var(--ink) 60%,
+      color-mix(in oklch, var(--ink) 88%, var(--ember) 12%) 100%);
+  border-radius: 1px;
+  transition: block-size var(--duration-hibr, 320ms) var(--ease-hibr, cubic-bezier(0.5, 0, 0.5, 1));
+  /* "wet ink" hint: a 1px shadow at the bottom edge as the ink settles */
+  box-shadow:
+    inset 0 -1px 0 0 color-mix(in oklch, var(--ink) 40%, transparent);
+}
+
+/* When the day is complete, the strip carries a faint ember underline */
+[data-world="hibr"] .dash-margin[data-elan-margin-state="full"] .dash-margin__strip-fill {
+  background:
+    linear-gradient(to bottom,
+      var(--ink) 0%,
+      color-mix(in oklch, var(--ink) 80%, var(--ember) 20%) 100%);
+}
+
+[data-world="hibr"] .dash-margin[data-elan-margin-state="full"] .dash-margin__line strong {
+  color: var(--ember);
+}
+
+/* ─── Dashboard cell — Continue Last Unit (b-2x1) ────────────────────── */
+[data-world="hibr"] .dash-continue {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-4);
+  background: var(--anchor-bg);
+  color: var(--ink);
+  border: 1px solid var(--anchor-2);
+  border-radius: var(--r-2);
+}
+
+[data-world="hibr"] .dash-continue__clock {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  font-family: var(--voice-accent, "Amiri Quran Colored", serif);
+  color: var(--ink-muted);
+  font-size: var(--t-1, 0.875rem);
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+[data-world="hibr"] .dash-continue__title {
+  margin: 0;
+  font-family: var(--voice-display, "Boutros Modern Kufi", serif);
+  font-size: var(--t-4, 1.25rem);
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+[data-world="hibr"] .dash-continue__sub {
+  margin: 0;
+  color: var(--ink-faint);
+}
+
+[data-world="hibr"] .dash-continue__cta {
+  margin-block-start: auto;
+}
+
+[data-world="hibr"] .dash-continue__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-4);
+  background: var(--ink);
+  color: var(--anchor-bg);
+  border: 0;
+  border-radius: var(--r-1);
+  font-family: var(--voice-display, "Boutros Modern Kufi", serif);
+  font-size: var(--t-2, 1rem);
+  cursor: pointer;
+  /* No spring, no glassmorphic glow — manuscript ink. The Hibr ink-drying
+     beacon (γ2) takes over on click via .is-drying class.              */
+  transition: background var(--duration-hibr, 320ms) var(--ease-hibr);
+}
+
+[data-world="hibr"] .dash-continue__btn:hover {
+  background: color-mix(in oklch, var(--ink) 92%, var(--ember) 8%);
+}
+
+[data-world="hibr"] .dash-continue__btn:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* ─── Dashboard cell — Iraq Block (b-4x1, full-width supporting) ────── */
+[data-world="hibr"] .iraq-block {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-4);
+  padding: var(--s-4);
+  background: color-mix(in oklch, var(--ember) 4%, var(--anchor-1));
+  color: var(--ink);
+  border-inline-start: 3px solid var(--ember);
+  border-radius: var(--r-1);
+}
+
+[data-world="hibr"] .iraq-block__icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 32px;
+  block-size: 32px;
+  color: var(--ember);
+}
+
+[data-world="hibr"] .iraq-block__copy {
+  flex: 1;
+  min-inline-size: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+}
+
+[data-world="hibr"] .iraq-block__line {
+  margin: 0;
+  font-family: var(--voice-body, "Markazi Text", serif);
+  font-size: var(--t-3, 1.125rem);
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+[data-world="hibr"] .iraq-block__num {
+  font-family: var(--voice-display, "Boutros Modern Kufi", serif);
+  color: var(--ember);
+  font-weight: 700;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+[data-world="hibr"] .iraq-block__src {
+  display: inline-block;
+  color: var(--ink-faint);
+  font-family: var(--voice-accent, "Amiri Quran Colored", serif);
+  font-size: var(--t-1, 0.875rem);
+}
+
+/* ─── Reduced motion: the strip becomes a static bookmark, no transition */
+@media (prefers-reduced-motion: reduce) {
+  [data-world="hibr"] .dash-margin__strip-fill,
+  [data-world="hibr"] .dash-continue__btn { transition: none; }
+}
+
+/* ─── Fallback (no [data-world] resolved): keep markup readable ─────── */
+.dash-margin:not([data-world]) .dash-margin__line,
+.dash-continue:not([data-world]) .dash-continue__title,
+.iraq-block:not([data-world]) .iraq-block__line { color: inherit; }
+
+/* End ε1 — Dashboard (Hibr) ─────────────────────────────────────────── */
