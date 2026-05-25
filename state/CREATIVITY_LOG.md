@@ -490,3 +490,41 @@ forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-25 / ε6 — Pillar ε stage 6/12
 
+
+
+
+## ε7 — 2026-05-25
+**Beacon Type:** 🌈 CHROMATIC_BEACON
+**The Surprise:** المتدرب يَكتب رد على شكوى عميل في الـ textarea. السطح ذاته هو المسطرة — لا char counter، لا ✓ toast، لا shadow ناعم بـ 12px radius كالـ AI الافتراضي. الـ background-color للـ textarea يَتغيَّر لحظياً مع كل كلمة:
+
+- نَفَس دافئ (warm) → tint زيتوني خفيف (`var(--state-success)` 8% mixed in oklch مع `var(--anchor-1)` warsha) — كقطعة قماش هادئة على طاولة الورشة
+- محايد (neutral) → خشب مَسحوج خام (`var(--anchor-1)` بلا تعديل) — حالة البداية
+- حادّ — راجع (harsh) → احمرار طوبي (`var(--ember)` 12% mixed) — الطاولة سَخُنَت، أعد قراءة كلامك
+
+التغيير transition بـ `var(--duration-warsha, 280ms)` و `var(--ease-warsha)` — مَفَك يَلتفّ، ليس spring bounce. 
+
+الـ scoring keyword-lemma بسيط 100% offline — صفر مكتبة ML، صفر network call. القاموسان المحلِّيان: 50 كلمة دافئة (شكراً، حضرتك، يا أستاذ، بسيط لا تشيل هم، ابشر، تطمين، أنا معاك...) + 51 كلمة حادَّة (غير ممكن، هذي مشكلتك، مو فاهم، بعدين، ما عندي وقت...). تطبيع نَصِّي عربي حقيقي قبل المطابقة: حذف الحركات والشدَّة، توحيد الهمزات (أ/إ/آ → ا)، توحيد الياء (ى → ي)، تخفيف التاء المربوطة (ة → ه). debounce 120ms على كل input event. paste event يُعيد الحساب أيضاً (لا ينتظر input).
+
+Hysteresis مقصود: كلمة دافئة واحدة تَسبق ثلاث كلمات حادَّة في القرار النهائي — لأن «اعتذر، لكن ما عندي حلٍّ الآن» في فلسفة الورشة هو رد دافئ احترافي، ليس حادّاً. هذا انعكاس لمَنطق التدريب: الاحترافية الحازمة لا تُعاقَب لأنها بدت "حازمة".
+
+الـ meter Markazi-prose سطر واحد فقط («نَفَس دافئ» / «محايد» / «حادّ — راجع») يُؤكِّد بصوت الورشة، لا بإيموجي ولا بنسبة مئوية مزيَّفة. Dot صغير 10px يُلوَّن بنفس الـ semantic token كـ visual reinforcement للـ aria-live. role=status + aria-live=polite + aria-describedby على الـ textarea — كل اعلان يُقرَأ مرة واحدة فقط لقارئ الشاشة، ليس لكل ضربة keyboard.
+
+البنية التقنية: `_warsha.css` (+265 سطر داخل `@layer elan-epsilon7`) يَحوي 6 selectors لـ 3 sentiment states + 3 a11y guards (reduced-motion, forced-colors, print). `epsilon7-customercare.js` (228 سطر) IIFE-ESM module يُسجِّل `Upg.elan.customercare` (frozen) بـ 3 methods (score / bind / rebindAll). MutationObserver يَلتقط أي textarea يُحقَن لاحقاً تلقائياً. إعادة الربط على `upg:nav:change` → `customercare`. صفر mutation للـ markup الموجود. صفر تعديل على الـ 14 Upg.* APIs الـ top-level.
+
+**Reference Avoided:** Forbidden #6 (bento = rectangles with same padding) — الورشة هنا ليست cell بنفس الـ padding بل سطح يَتنفَّس ولاينتمي للـ bento grid. Forbidden #18 (search bar بـ magnifier + "Search...") — ليس متوقَّعاً هنا، لكن تَجنُّب الـ "generic textarea + char counter" المذكور صراحةً في spec ε7 هو نفس روح القاعدة. Forbidden #20 (emoji بدل icon) — `<i class="qi" data-icon="wrench">` فقط، صفر ✓ ✗ ⚠.
+**Inspired-by:** Wild Card #13 — Iraqi Marsh Architecture (مدائف الأهوار). جدران القَصَب في المُضِيف لا تَحمل لافتات؛ تَتغيَّر مع المطر والشمس وحرارة العمل بداخلها. الزائر يَعرف الحال من السطح ذاته. هنا: المتدرب يَعرف نَفَس رَدِّه من السطح، ليس من label أو char counter.
+**User-Visible:** yes — كل متدرِّب يَفتح صفحة customercare ويَكتب في الـ bench textarea سَيَرى السطح يَتلوَّن لحظياً مع كلامه. مستخدمو reduced-motion يَرَوْن نفس التلوين بلا transition (instant). مستخدمو forced-colors يَرَوْن outline 1-2px بدلاً من tinting (LinkText / CanvasText / Mark) — semantic preserved.
+**Originality Self-Score:** 4/5 — sentiment-tinted textareas exist في إضافات الـ writing-assistance مثل Grammarly. ما يَجعله 4/5: (١) Iraqi-Arabic lexicons محلية، ليس English-translated؛ (٢) السطح **نفسه** هو المسطرة، لا progress bar منفصلة؛ (٣) hysteresis متعمَّد ينحاز للدفء، انعكاس لفلسفة التدريب لا اللُّغويات المحضة؛ (٤) الـ Warsha-world aesthetic terracotta + ember + amber palette مع seam stripe رفيع كَخشب طاولة — ليس glassmorphism آخر.
+**Files touched:** platform/index.html (+47) · platform/assets/css/worlds/_warsha.css (+265) · platform/assets/js/elan/epsilon7-customercare.js (NEW 228) · platform/assets/app.js (+8)
+**Verified at commit:** 0c7b31b
+
+
+---STATS---
+total_beacons: 25
+unique_categories_used: 9
+avg_score: 4.16
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε7 — Pillar ε stage 7/12

@@ -1963,3 +1963,65 @@ the start stage when `current_pillar` matches an in-progress branch.
 **Commit:** f22dbd6
 **Branch:** elan-ε-content-revival
 **Lines added:** 430 (5 files changed)
+
+
+
+---
+
+## ε7 — Customer Care Content Revival (Warsha world) — 2026-05-25
+
+**Pillar:** ε CONTENT REVIVAL — Stage 7 of 12
+**Page:** `page-customercare`
+**World:** وَرشة (Warsha)
+**Branch:** `elan-ε-content-revival`
+**Commit:** `0c7b31b`
+
+### Verified by grep
+
+| Probe | Target | Measured | Notes |
+|---|---:|---:|---|
+| `response-area` references in customercare section | ≥ 1 | 6 | head/lede/prompt/label/textarea/meter all present |
+| `class="response-textarea"` elements | 1 | 1 | single bench textarea |
+| `data-elan-sentiment-input` host attribute | 1 | 1 | drives the JS binding |
+| `iraq-block` references in customercare section | ≥ 1 | 3 | block + class + label |
+| `IBC` citation visible | 1 | 1 | "IBC Service Standards 2024" |
+| inline `<svg viewBox=` in new ε7 markup | 0 | 0 | Iconography Doctrine §٣.أ.٢ |
+| emoji codepoints in new ε7 markup | 0 | 0 | ICONOGRAPHY_DOCTRINE §٣.أ.١ |
+| 3-state CSS sentiment selectors | 3 | 6 | warm/neutral/harsh × textarea+meter |
+| reduced-motion + forced-colors + print guards | 3 | 3 | all silence the chromatic transition |
+| hex / hsl literals in new CSS | 0 | 0 | replaced `hsl(95 55% 35%)` with `var(--state-success)` |
+| `Upg.elan.customercare` registered + frozen | yes | yes | nested, no top-level inflation |
+| ESM `node --check` syntax | pass | pass | no syntax errors |
+| Total stage diff (line budget ≤ 600) | ≤ 600 | 548 | 47 HTML + 265 CSS + 228 JS + 8 app.js |
+
+### Files touched
+
+- `platform/index.html` (+47 lines — workshop bench card + Iraq Block before `</section>`)
+- `platform/assets/css/worlds/_warsha.css` (+265 lines — `@layer elan-epsilon7`)
+- `platform/assets/js/elan/epsilon7-customercare.js` (NEW — 228 lines)
+- `platform/assets/app.js` (+8 lines — `import` line)
+
+### Beacon
+
+| Field | Value |
+|---|---|
+| Type | 🌈 CHROMATIC_BEACON |
+| Surprise | The bench surface IS the meter. Iraqi-Arabic keyword-lemma scoring drives a 3-state textarea tint (olive `var(--state-success)` for warmth, terra `var(--anchor-1)` for neutral, brick `var(--ember)` for harshness). No char counter. No checkmark toast. The trainee feels the tone of their reply before they read it. |
+| Avoided | #6 (bento same-padding rectangles) + spec's "generic textarea + char counter" cliché |
+| Inspired-by | Wild Card #13 — Iraqi Marsh Architecture (mudhif reed walls signal state via ambient material shift, not signage). |
+| Lexicon size | 50 warm + 51 harsh terms, normalized for diacritics + alef/yaa/taa variants. |
+| Hysteresis | A single warm term outweighs a wash of harsh, so apologetic-but-firm replies read as "warm" — matches workshop coaching philosophy. |
+| Self-Score | 4 / 5 |
+
+### Sacred Assets preserved
+
+- All 16 page sections present and untouched in their existing markup.
+- All 14+ `Upg.*` top-level APIs preserved verbatim (this stage only adds `Upg.elan.customercare`, nested under the existing `Upg.elan` bag).
+- All pre-existing customer-care lessons (4 frame cards + Maya Angelou rule + 8 unit list) untouched.
+- All earlier ε stages (ε1, ε2, ε3, ε4, ε5, ε6) untouched.
+- `archive/` not touched.
+- `prompts/v1, v2, v3` not touched.
+
+### Forbidden Library violations
+
+`0` — checked against #1–#28. The new section adds zero glassmorphism, zero off-white-warm body, zero floating sidebar, zero pulsing dot loaders, zero `Lorem ipsum`, zero emoji, zero inline `viewBox` SVG, zero icons outside Phosphor/Lucide.
