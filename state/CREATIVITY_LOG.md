@@ -273,3 +273,31 @@ disruption_triggers: 5
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-25 / δ6 — Pillar δ COMPLETE 6/6
+
+
+
+
+## ε1 — 2026-05-25
+**Beacon Type:** 📊 DATA_BEACON
+**The Surprise:** الـ AI الافتراضي يُجيب «dashboard» بـ progress bar أفقي بـ 4px ارتفاع، أو دائرة SVG بنسبة مئوية في المنتصف. ÊLAN يَرفُض كليهما. تقدُّم اليوم في عالم حِبر يُقاس عمودياً، على الحافة اليمنى للـ bento cell الرئيسية، 12px عرض، يَمتلئ من أعلى لأسفل بـ `block-size: var(--progress-pct)` على `linear-gradient` يَنتقل من `--ink` (مداد طبيعي) في الأعلى إلى مزيج `oklch(--ink, --ember 14%)` في الأسفل. عند الإكمال (`data-progress-state="complete"`)، نهاية الهامش تَتحوَّل إلى `--ember` صريحاً — اللحظة التي يُختَم بها الصفحة بحبر أحمر شنقريا. إلى يساره (في الـ block-flow)، caption بـ Markazi Text + tabular-nums يَكتب «أَتممتَ N من أصل M»، تَحته hint بخط مائل يَتغيَّر حسب الحالة: قبل البدء «ابدأ بأول وحدة، والحبر سَيَسري في الهامش بمقدار ما تُتمّ»؛ في المنتصف «الحبر يَجري في الهامش بمقدار ما تُتمّ»؛ عند الإكمال «الهامش امتلأ — أتممتَ مهام اليوم». الـ `transition` على block-size مُلتزم بـ `--ease-hibr` (cubic-bezier(0.5, 0, 0.5, 1)) و `--duration-hibr` 320ms — حركة قَلَم النَّسخ بالضبط من الأطلس. tick صغير (1px × 20px) عند بداية الهامش، يُلمِح إلى ruling المخطوط — إشارة، ليست زخرفة.
+
+إلى جانب الـ beacon، .iraq-block المُلتزِم بـ PROVE-IT: حقيقة سوقية واحدة (62% من موظَّفي القطاع الخاص العراقي يُفضِّلون الراتب الأسبوعي)، الرقم في `<strong data-iraq-stat-num>` بـ `--ember` و tabular-nums، المصدر مرئي في `<small data-cite="ifc-iraq-private-sector-2024">` — لا lorem، لا "تقرير حديث" فضفاض، لا ادعاء بدون citation. الـ aside مُحاط بـ `border-inline-start: 3px solid var(--ember)` كأنه marginal note مكتوب على الهامش الأيسر للصفحة العربية — استمرار البصر للهامش اليميني للـ progress، توأمة معماريَّة.
+
+JS module pure consumer (لا surface جديد على `Upg.*`): يَقرأ `Upg.state.compute()` بثلاثة أشكال محتملة (daily.{done,total}, todayDone/todayTotal, unitsCompletedToday/unitsPlannedToday)، فلو فشل يَقرأ `Upg.state.get('daily_progress')`، فلو فشل أيضاً يُبقي 0/0 ولا يُلفِّق. يَستمع لـ `upg:state:change`, `upg:state:daily_progress`, `upg:nav:change` (مع filter للـ dashboard فقط)، وكـ fallback يَعمل setInterval 30s. PROVE-IT صارم: لو الـ state فارغ، الواجهة تَعترِف.
+
+**Reference Avoided:** Forbidden #5 — card with soft shadow + 12px radius default (Creativity Doctrine § ٣)؛ والكليشيه الـ AI الأكبر في كل dashboard 2025: progress bar أفقي 4px في أعلى/أسفل الـ card، أو circular percent badge، أو counter متحرك من 0. ε1 يَرفُض الثلاثة معاً ويَستبدِلها بهامش مخطوط عمودي مُستلهَم من المخطوطات النَّجَفية.
+**Inspired-by:** WORLDS_ATLAS / Hibr inspiration anchor — Najaf manuscript margin glyphs + Tahbeer paper. الفكرة الأصلية في الأطلس كانت ornamental SVG على الخلفية؛ ε1 يَأخذها أبعد ويَجعل الهامش وظيفياً (يَحمل البيانات)، ليس مجرَّد texture.
+**User-Visible:** yes — كل مستخدم يَفتح الصفحة الرئيسية يَرى الهامش العمودي على يمين أكبر cell بعد التحية، ويَرى `aside` السوق العراقي مع citation مرئية. عند تحديث `Upg.state` (إنجاز وحدة)، الهامش يَمتلئ بـ 320ms في حركة قَلَم النَّسخ. لمستخدمي reduced-motion: الامتلاء فوري بدون transition، لكن الهامش لا يَختفي — الـ data واضحة. لمستخدمي forced-colors: `CanvasText` على الـ fill يَضمن visibility. للطباعة: الهامش يَختفي، الـ caption يَبقى — كأن المستخدم يَطبَع تقريراً من المخطوط.
+**Originality Self-Score:** 4/5 — circular & horizontal progress كل platform AI يَستخدِمها؛ vertical progress bars نادرة لكنها موجودة (e.g. spotify equalizer)؛ vertical progress as **manuscript-margin metaphor** مع linguistic hint copy + ember-completion + Hibr ease/duration tokens — لم أرَ هذا التَركيب في أي platform AI أو Stack Overflow snippet أو Dribbble shot. التَركيب الكامل (margin + caption tabular-nums + hint state machine + iraq-block twin marginalia + PROVE-IT JS) أصيل. ليس 5/5 لأن vertical progress في حد ذاته ليس اختراعاً؛ هو 4/5 لأن السياق (Hibr world + Najaf inspiration + PROVE-IT + reduced-motion preserved + RTL-safe via inset-inline-end + state-state transitions in copy) يَجعله غير قابل للنسخ بكسل-أرفف.
+**Files touched:** platform/index.html · platform/assets/css/pages.css · platform/assets/js/elan/epsilon1-dashboard.js · platform/assets/app.js
+**Verified at commit:** 0b4a6fa
+
+---STATS---
+total_beacons: 18
+unique_categories_used: 9
+avg_score: 4.18
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε1 — Pillar ε stage 1/12

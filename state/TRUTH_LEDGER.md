@@ -1440,3 +1440,45 @@ the fallback string in δ5 will need a tokens.css entry. Recommended for
 6 stages shipped on `elan-δ-kinetic-shell` (δ1 73d72c1c · δ2 33f0553 · δ3 b794e19 · δ4 5e50984 · δ5 a97c87d · δ6 66f3a01). 6 Beacons across 5 distinct categories (MOTION δ1+δ5, DATA δ2, INTERACTION δ3, STRUCTURAL δ4, META δ6). 0 forbidden violations. 0 Sacred Asset disturbance. Next: PR open + Pillar ε CONTENT_REVIVAL on a fresh branch.
 
 — Entry end —
+
+
+
+## ε1 — Dashboard Revival (Hibr) — 2026-05-25
+**Before:**
+  page_dashboard_data_world = "hibr" (from γ2)
+  page_dashboard_bento_cells = 10 (from W14 Phase 3 + W13 Phase 1)
+  iraq_block_in_dashboard = 0
+  manuscript_margin_beacon = 0
+  page_section_total = 16 (Sacred)
+
+**After:**
+  page_dashboard_data_world = "hibr"            # preserved
+  page_dashboard_bento_cells = 12               # +2 (progress-margin + iraq-block)
+  iraq_block_in_dashboard = 1                   # with visible IFC 2024 citation
+  manuscript_margin_beacon = 1                  # 12px vertical bar, ink fills downward
+  progress_margin_elements = 11                 # rule + fill + pct + caption pieces + hint
+  qi_data_icon_in_new_cells = 2                 # line-chart + target (sprite, no toy SVG)
+  toy_svg_in_new_markup = 0
+  emoji_in_new_markup = 0
+  hardcoded_hex_in_new_css = 0
+  layer_namespace = "elan-epsilon-1"
+  reduced_motion_guard_in_e1 = 1
+  forced_colors_guard_in_e1 = 1
+  print_guard_in_e1 = 1
+  rtl_safe_via_inset_inline_end = true
+  page_section_total = 16                       # Sacred preserved
+  hibr_tokens_consumed = ["--ink", "--ember", "--line", "--anchor-1", "--anchor-2", "--ease-hibr", "--duration-hibr"]
+  prove_it_zeros_when_state_empty = true        # JS never fabricates
+  upg_state_consumer_only = true                # no new Upg.* surface added
+  app_js_imports_epsilon1_dashboard = 1
+  esm_module_lines = 154
+
+**Files:**
+  platform/index.html (modified, +51)
+  platform/assets/css/pages.css (modified, +260)
+  platform/assets/js/elan/epsilon1-dashboard.js (created, 154)
+  platform/assets/app.js (modified, +4)
+
+**Lines:** +469 -0
+**Branch:** elan-epsilon-content-revival
+**Verified at commit:** 0b4a6fa
