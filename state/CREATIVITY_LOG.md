@@ -445,3 +445,25 @@ forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-25 / ε5 — Pillar ε stage 5/12
 
+
+
+
+## ε1-augment — 2026-05-25
+**Beacon Type:** 📊 DATA_BEACON
+**The Surprise:** الـ progress bar الرئيسية ليست خطاً أفقياً. هي **هامش مخطوط** — مسطح عمودي 12px على الحافة اليمنى للبنتو يَمتلئ بحبر تدريجي من أعلى لأسفل بمقدار التقدم اليومي. الأعلى = اليوم، الأسفل = نهاية الهدف. عند الإنجاز: مسطح كامل بحبر داكن. عبارة بـ Markazi Text تُكتَب أسفله: «أَتممتَ ٣٧ من أصل ٥٠» — بأرقام عربية شرقية. الـ annotation نفسها لا تتحرك — هي حبر جاف. فقط المسطح يَمتلئ، كأن ناسخاً يُكمل سطور صفحته. الـ ARIA role=progressbar يُعلن النسبة للـ screen-reader. الـ JS يَحسب progress من Upg.pace mastery system (Worker 17) ويَتحدَّث مع الحدث `upg:pace:mastery`. كل عالم يَحتفظ بهويته — لكن فقط عالم حِبر يَملك هذا الشكل.
+**Reference Avoided:** Forbidden #11 — animated counter from 0 (الـ progress bar لا تبدأ من صفر مرئي — تَعكس الواقع فوراً، لا theatrics). Forbidden #6 — bento = rectangles with same padding (الـ margin مسطح رفيع 12px يَكسر التناظر، ليس cell آخر بنفس الـ padding).
+**Inspired-by:** Najaf manuscript marginal markings — حيث كان الناسخ يُعلّم تقدمه في الهامش بنقاط حبر أو أرقام الأجزاء.
+**User-Visible:** yes — كل مستخدم يَفتح الـ dashboard يَرى الشريط العمودي على يمين البنتو مع annotation عربية.
+**Originality Self-Score:** 4/5 — vertical progress bars exist in some health/fitness apps; manuscript-margin metaphor applied to educational platform progress is uncommon in AI output. The Eastern Arabic numeral annotation + Markazi Text voice + ink-world theming makes it culturally specific.
+**Files touched:** platform/index.html (dashboard section) · platform/assets/css/pages.css (+105 lines) · platform/assets/js/elan/epsilon1-dashboard.js (NEW, 95 lines) · platform/assets/app.js (+3 lines import)
+**Verified at commit:** ac482fb
+
+---STATS---
+total_beacons: 23
+unique_categories_used: 9
+avg_score: 4.18
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε1-augment — Dashboard Manuscript Margin beacon shipped

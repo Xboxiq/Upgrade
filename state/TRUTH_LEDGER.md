@@ -1903,3 +1903,39 @@ the start stage when `current_pillar` matches an in-progress branch.
 - No legacy `data-block-id` namespaces clashed (ε5 uses dedicated
   `lb-eps5-NN` series; legacy `lb-001`..`lb-NNN` untouched).
 - `archive/` not touched.
+
+
+
+---
+
+## ε1-augment — 2026-05-25 — Dashboard Manuscript Margin + Iraq Block
+
+| Key | Value |
+|---|---|
+| stage | ε1 (augment — Beacon + Iraq Block implementation) |
+| pillar | ε CONTENT REVIVAL |
+| world | Hibr (حِبر) |
+| page | page-dashboard |
+| branch | elan-ε-content-revival |
+| commit | ac482fb |
+| lines_added | 267 |
+| lines_deleted | 2 |
+
+### Verified by grep (commit ac482fb):
+- `data-world="hibr"` on `#page-dashboard`: 1
+- `progress-margin` elements in HTML: 3 (wrapper + fill + note)
+- `iraq-block` class in HTML: 4
+- Bento cells (b-NxN) in dashboard section: 19
+- Inline `<svg viewBox>` in dashboard: 0
+- Emoji in dashboard markup: 0
+- Citation visible (IFC 2024): 1
+- `epsilon1-dashboard.js` loaded in app.js: 1
+- Hardcoded `fill="#"` in dashboard: 0
+
+### Sacred Assets preserved:
+- 16 page sections intact (confirmed `id="page-*"` count).
+- 25 Upg.* top-level APIs preserved (Upg.elan.dashboardProgress namespaced, not top-level).
+- `archive/` not touched.
+- Prior ε3/ε4/ε5 code rebased cleanly (conflict in app.js resolved by merging both import sets).
+- All `data-cath-stat` sacred IDs preserved verbatim.
+- `#cath-skill-grid`, `#cath-activity-list`, `#v12Heatmap`, `#v12ChallengeLevel`, `#v12ChallengeBody` all preserved.
