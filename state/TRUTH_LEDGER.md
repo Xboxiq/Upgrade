@@ -1054,3 +1054,96 @@ emoji added in any rendered markup. The dashboard now breathes with
 the hour. Next: δ3 TOPBAR_LIVING on the same branch.
 
 — Entry end —
+
+
+
+## δ3 — Living Topbar (Reading Tide) — 2026-05-25
+
+**Pillar:** δ KINETIC SHELL — Stage 3 of 6
+**Branch:** elan-δ-kinetic-shell
+**Commit:** b794e19
+**Files:** 2 modified, 1 added — 465 insertions, 0 deletions
+
+### Verified by grep on commit b794e19
+
+| key | value |
+|---|---|
+| topbar_living_js_lines | 316 |
+| chrome_css_d3_block_lines | 146 |
+| app_js_imports_topbar_living | 1 |
+| css_scroll_pct_refs | 8 |
+| background_clip_text_uses | 5 |
+| reduced_motion_guards_in_d3_block | 2 |
+| forced_colors_guards_in_d3_block | 1 |
+| print_guards_in_d3_block | 1 |
+| hex_literals_in_d3_css | 0 |
+| hex_literals_in_d3_js | 0 |
+| inline_svg_in_d3_code | 0 (the only `<svg viewBox>` mention is a docblock comment listing what the file does NOT emit) |
+| emoji_in_d3_code | 0 |
+| pulse_animation_in_d3_code | 0 (Forbidden #10 explicitly avoided) |
+| html_diff_bytes | 0 |
+| sacred_topbar_markup_preserved | true |
+| sacred_topbar_title_id_preserved | true |
+| sacred_topbar_breadcrumb_id_preserved | true |
+| sacred_topbar_search_btn_preserved | true |
+| node_syntax_check_pass | true |
+| upg_apis_top_level_after | 31 (unchanged; new surface lives under Upg.elan.topbar) |
+| upg_elan_topbar_methods | engage / disengage / getProgress / scrollToTop / isEngaged |
+| read_threshold | 0.98 |
+| scroll_quantize_step_pct | 0.25 |
+| tide_anchor_edge | inline-end |
+| tide_growth_direction | inline-end → inline-start (RTL natural) |
+| tide_height_px | 1 |
+| read_complete_indicator | chamfered diamond clip-path polygon (6px × 6px, ember) |
+| click_rewind_smooth_when_motion_allowed | true |
+| click_rewind_instant_when_reduced_motion | true |
+| keyboard_activation | Enter and Space |
+| beacon_type | 🤚 INTERACTION_BEACON |
+| beacon_avoided | Forbidden #10 (pulsing-dot loading) + #11 (animated counter from 0) + #15 (modal-with-dark-overlay) |
+| beacon_inspired_by | Wild Card #5 — Yemeni mihrab geometry |
+| beacon_self_score | 4 / 5 |
+| pivot_from_spec | spec proposed META + 75bpm pulsing dot; META was used in γ9 (only 4 stages back), and pulsing dot is Forbidden #10 verbatim. Pivoted to INTERACTION (last used γ5 — 5 stages ago, fresh window) per Creativity Doctrine § ٤. |
+
+### Narrative
+
+The existing `#topbar` survives untouched in markup. δ3 layers two
+visual contracts on top of it through a single CSS variable:
+`--scroll-pct` (a number from 0 to 1 set by the JS module). Two
+consumers read that variable — the topbar's lower-edge tide line, and
+the page-title's `background-clip: text` gradient — and both grow
+from the inline-end (Arabic line tail) toward the inline-start as the
+user scrolls through the active page. The tide is one pixel tall in
+the active world's ember; the title fills with anchor ink against an
+unfilled muted-ink remainder. When the user has scrolled past the
+threshold (98%) the topbar gains a `data-read="true"` attribute, the
+tide opacity goes full, and a small chamfered diamond appears next to
+the title — a quiet reading complete mark, no SVG, no emoji, no dot.
+
+Clicking (or Enter/Space-pressing) the title rewinds the active page
+to its top. On systems with `prefers-reduced-motion: reduce` the
+rewind is instant and all transitions on the gradient are dropped —
+the gradient itself remains because it represents position, not
+motion. Forced-colors mode collapses the tide to system Highlight and
+the title to system CanvasText. Print mode hides the tide and prints
+the title in normal anchor ink.
+
+The active page is detected as `.page.active` (existing platform
+convention) and re-bound on `upg:nav:change` and `upg:world:change`.
+A `ResizeObserver` keeps the meter accurate when the active page
+grows or shrinks. Scroll listening is RAF-throttled (single rAF per
+frame) and quantized to 0.25%-pct steps so the gradient never
+re-paints on every micro-scroll.
+
+The whole module exposes itself under `window.Upg.elan.topbar`
+(namespaced under `Upg.elan`, NOT crowding the original 31 sacred
+`Upg.*` APIs). The legacy `data-scrolled` attribute on `#topbar` is
+respected; we layer with `data-elan-living="topbar"` so the existing
+scroll-island behavior is undisturbed.
+
+The Beacon is INTERACTION because the user gains a navigational
+gesture they did not have before (click the title to rewind), and
+because the tide+ink reveal is the chrome's honest acknowledgment of
+what the user is doing, not decoration. Next: δ4 MOBILE_BOTTOM_NAV
+on the same branch.
+
+— Entry end —

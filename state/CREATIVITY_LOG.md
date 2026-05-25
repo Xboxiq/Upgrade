@@ -170,3 +170,28 @@ disruption_triggers: 2
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-24 / δ2 — Pillar δ stage 2/6
+
+
+
+
+## δ3 — 2026-05-25
+**Beacon Type:** 🤚 INTERACTION_BEACON
+**The Surprise:** الـ topbar الموجود (#topbar) يَكتسب حاسّةً جديدة بدون أن نُغيّر لاحقتَه markup-الأصلية. عقدٌ واحد بين CSS و JS: متغيّر مخصَّص اسمه `--scroll-pct` يَأخذ قيمة بين 0 و 1 يُحدِّثها الـ JS rAF-throttled كلَّما تَحرّك المُستخدم في الصفحة النشطة (`.page.active`). عَنصران يَستهلِكان نفس المتغيِّر: (١) سطرٌ نحاسي 1px على الحافة السفلى للـ topbar يَنمو من inline-end إلى inline-start بلون `var(--ember)` للعالَم النشط — مَدُّ الحبر ينحسر مع القراءة، (٢) العنوان نفسه (#topbar-title) يَمتلئ بالحبر من ذيل السطر العربي إلى رأسه عبر `background-clip: text` و gradient stop واحد محدَّد بـ `calc(var(--scroll-pct) * 100%)` — الجزء المملوء `var(--ink)` والجزء الباقي `var(--ink-faint)`. عند تجاوز 98% تَكتسب `[data-read="true"]` على الـ topbar فتَفتح مَعينٌ chamfered (clip-path: polygon 6px × 6px، ليس دائرة، ليس نقطة نابضة) جانبَ العنوان — اعترافٌ هادئ "لقد قرأتَ الصفحة". الـ click على العنوان يُعيد الصفحة النشطة إلى أعلاها (smooth افتراضياً، instant عند prefers-reduced-motion). Enter و Space أيضاً يَعملان (role="button" + tabindex=0 + aria-label عربي "العودة إلى أعلى الصفحة"). نقاط استماع scroll متعدِّدة (window + main + scrollingElement) لـ توافق مع shells القديمة والحديثة. ResizeObserver على الصفحة النشطة يُعيد الحساب عند نمو المحتوى. quantize إلى خطوات 0.25% يَمنع repaint غير ضروري. forced-colors يَنحسِر إلى Highlight + CanvasText. الطباعة تَخفي السطر وتَطبع العنوان عادياً. صفر markup أُضيف، صفر markup حُذِف، صفر `<svg viewBox>`، صفر emoji، صفر hex literal.
+**Reference Avoided:** Forbidden #10 — pulsing dot loading (مذهب الإبداع § ٣؛ كان هذا اقتراح spec الأصلي بـ 75bpm، وقد استُبدِل تماماً) + Forbidden #11 — animated counter from 0 (لا رقم يَتحرّك أبداً، فقط نسبة قراءة) + Forbidden #15 — modal بـ overlay داكن + center card (لا modal، لا overlay، الـ chrome نفسه هو السطح).
+**Pivot:** spec δ3 اقترَحت 🪞 META_BEACON. γ9 (مرآة الصالون) استخدمَت META قبل أربع stages فقط بأداء عالي 5/5؛ إعادتها بسرعة سَتُخفِّف من قيمتها. وأيضاً اقتراح spec الإضافي بـ pulsing-dot يَنتهك Forbidden #10 صراحةً. التحوّل إلى 🤚 INTERACTION_BEACON تطبيقاً لمذهب الإبداع § ٤ — INTERACTION آخر مرّة استُخدمَت في γ5 (Hadeed stamp+sweep)، أي 5 stages مضت، فالنافذة آمنة وتنويع الفئات يَزداد.
+**Inspired-by:** Wild Card #5 — هندسة المحراب اليمني. المحراب نِيشٌ، النَّقش يَتدفَّق من الأطراف نحو المركز. الـ Reading Tide يَملأ العنوان من ذيل السطر العربي (الأطراف) نحو رأسه (المركز الدلالي للصفحة)، بمعدَّل ثابت مَربوط بفعل القراءة الفعلي للمُستخدم.
+**User-Visible:** yes — كل مُستخدم يَنزل في صفحة طويلة (callcenter, fieldsales, lab) يَرى العنوان يَمتلئ بالحبر وسطراً نحاسياً يَنمو على الحافة السفلى للـ topbar؛ كل مَن يَنقر العنوان يَعود إلى أعلى الصفحة بسلاسة. المستخدم في صفحة قصيرة (شاشة واحدة) يَرى السطر فارغاً (نسبة 0)، لأن لا شيء يُقرَأ بعد — وهذه صَدق بصري لا embellishment.
+**Originality Self-Score:** 4/5 — scroll progress indicators بسيطة منتشرة (شَرائط فوق المُتصفِّح) وتَعبئة النص bg-clip معروفة في hero-text-effects؛ لكن دَمج (١) progress indicator مَربوط بـ active page section لا بـ window، (٢) ربط النصّ نفسه بنسبة القراءة عبر متغيِّر مُشترَك، (٣) chrome interactivity حقيقي (click rewind) بدلاً من decoration، (٤) شارة قراءة مكتمَلة بـ chamfered diamond بدلاً من dot نابض، (٥) tide line بـ ember العالم النشط، كل ذلك تحت بروتوكول مَنع كل forbidden patterns الـ AI = توليفة غير شائعة. Claim: most reading-progress UIs are either browser-only top-bars or pure decoration; few use the chrome's existing semantic node (page-title) as both the meter AND the rewind gesture in an Arabic-RTL-natural direction.
+**Files touched:** platform/assets/css/chrome.css · platform/assets/js/elan/topbar-living.js · platform/assets/app.js
+**Verified at commit:** b794e19
+**Stage:** 3 of 6 in Pillar δ KINETIC SHELL — δ4 MOBILE_BOTTOM_NAV next on same branch.
+
+---STATS---
+total_beacons: 14
+unique_categories_used: 9
+avg_score: 4.21
+last_5_avg: 4.2
+disruption_triggers: 3
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / δ3 — Pillar δ stage 3/6
