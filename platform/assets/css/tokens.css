@@ -51,3 +51,6 @@
 
 /* ÊLAN v4 — ε5: Lab blueprint notebooks (Naar world). Layer: pages. */
 @import url("./_epsilon5-lab.css");
+
+/* ÊLAN v4 — ε6: Psych/EQ (Nada) + Negotiation (Hadeed) content revival. */
+@import url("./_epsilon6-psych-eq-neg.css");

@@ -171,3 +171,7 @@ import './js/elan/epsilon4-social.js';
 // Modernism (Chadirji concrete coffer ceiling as dotted background).
 // Registers Upg.elan.lab — frozen surface SCENARIOS (10) + audit + getByType.
 import './js/elan/epsilon5-lab.js';
+
+// ÊLAN v4 — ε6: Psych/EQ/Negotiation Content Revival (Nada + Hadeed worlds)
+// Registers Upg.elan.breath — breath-pause (Nada) + stamp-mark (Hadeed).
+import './js/elan/epsilon6-psych.js';

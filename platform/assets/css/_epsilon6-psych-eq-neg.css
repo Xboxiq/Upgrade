@@ -1,0 +1,240 @@
+/* ────────────────────────────────────────────────────────────────────────
+   ÊLAN v4 — ε6 — Content Revival: Psych + EQ (Nada) / Negotiation (Hadeed)
+   ────────────────────────────────────────────────────────────────────────
+   Brings world identity into the content blocks:
+   - Nada: dew-fog visual language, contemplative rhythm, breath-pause
+   - Hadeed: iron-stamp snap, cinema-red accents, cut-sharp cards
+
+   🤚 INTERACTION_BEACON — Breath Pause (Nada) / Stamp Mark (Hadeed)
+   At 60% scroll depth, Nada pages offer a "breath" (CSS scroll-snap
+   proximity pause), Hadeed pages stamp a vertical redline mark.
+   ─────────────────────────────────────────────────────────────────────── */
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   NADA WORLD — Psych + EQ Pages
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── ε6.1 — Page header Nada treatment ──────────────────────────────── */
+
+[data-world="nada"] .page-h {
+  background-color: var(--anchor-bg);
+  border-block-end: 1px solid color-mix(in oklch, var(--line, hsl(195 20% 88%)) 50%, transparent);
+  padding-block-end: var(--s-6, 24px);
+}
+
+[data-world="nada"] .page-h h1 {
+  font-family: var(--voice-display, "Lateef", serif);
+  color: var(--ink);
+  font-weight: 400; /* Lateef sings at regular weight */
+  letter-spacing: 0;
+}
+
+[data-world="nada"] .page-h .h-eyebrow {
+  color: var(--ember);
+  font-family: var(--voice-body, "Markazi Text", serif);
+  font-size: var(--text-xs, 0.75rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+[data-world="nada"] .page-h .h-lede {
+  font-family: var(--voice-body, "Markazi Text", serif);
+  color: var(--ink-muted);
+  line-height: var(--lead-relaxed, 1.7);
+}
+
+
+/* ── ε6.2 — Content blocks: dew-fog cards ───────────────────────────── */
+
+[data-world="nada"] .block-tldr,
+[data-world="nada"] .u-callout {
+  background-color: var(--anchor-1);
+  border: 1px solid var(--line, hsl(195 20% 88%));
+  border-radius: var(--r-3, 12px);
+  border-inline-start: 3px solid color-mix(in oklch, var(--ember) 55%, transparent);
+}
+
+[data-world="nada"] .block-pitfalls {
+  border: 1px solid var(--line, hsl(195 20% 88%));
+  border-radius: var(--r-2, 8px);
+  background-color: var(--anchor-bg);
+}
+
+[data-world="nada"] .block-practice {
+  background-color: var(--anchor-1);
+  border: 1px solid var(--line, hsl(195 20% 88%));
+  border-radius: var(--r-2, 8px);
+}
+
+[data-world="nada"] .mastery-toggle {
+  border-color: var(--line, hsl(195 20% 88%));
+}
+
+[data-world="nada"] .mastery-toggle[data-mastery-state="mastered"] {
+  border-color: var(--ember);
+  color: var(--ember);
+}
+
+
+/* ── ε6.3 — Breath Pause zone marker ────────────────────────────────── */
+
+[data-world="nada"] [data-elan-breath] {
+  position: relative;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+[data-world="nada"] [data-elan-breath]::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    color-mix(in oklch, var(--focus) 40%, transparent) 40%,
+    color-mix(in oklch, var(--focus) 40%, transparent) 60%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity var(--duration-nada, 480ms) var(--ease-nada, ease);
+  pointer-events: none;
+}
+
+[data-world="nada"] [data-elan-breath].is-breathing::before {
+  opacity: 1;
+}
+
+
+/* ── ε6.4 — Nada selection + focus ──────────────────────────────────── */
+
+[data-world="nada"] ::selection {
+  background-color: color-mix(in oklch, var(--focus) 22%, transparent);
+  color: var(--ink);
+}
+
+[data-world="nada"] *:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   HADEED WORLD — Negotiation Page
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── ε6.5 — Page header Hadeed treatment ─────────────────────────────── */
+
+[data-world="hadeed"] .page-h {
+  background-color: var(--anchor-bg);
+  border-block-end: 2px solid var(--ember);
+  padding-block-end: var(--s-5, 20px);
+}
+
+[data-world="hadeed"] .page-h h1 {
+  font-family: var(--voice-display, "29LT Bukra", sans-serif);
+  color: var(--ink);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+[data-world="hadeed"] .page-h .h-eyebrow {
+  color: var(--focus);
+  font-family: var(--voice-body, "Vazirmatn", sans-serif);
+  font-size: var(--text-xs, 0.75rem);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+[data-world="hadeed"] .page-h .h-lede {
+  font-family: var(--voice-body, "Vazirmatn", sans-serif);
+  color: var(--ink-muted);
+}
+
+
+/* ── ε6.6 — Content blocks: iron-cut cards ──────────────────────────── */
+
+[data-world="hadeed"] .block-tldr,
+[data-world="hadeed"] .u-callout {
+  background-color: var(--anchor-1);
+  border: 1px solid var(--line-strong, hsl(220 8% 28%));
+  border-radius: var(--r-1, 4px);
+  border-inline-start: 3px solid var(--ember);
+}
+
+[data-world="hadeed"] .block-pitfalls {
+  border: 1px solid var(--line-strong, hsl(220 8% 28%));
+  border-radius: var(--r-1, 4px);
+  background-color: var(--anchor-bg);
+}
+
+[data-world="hadeed"] .block-practice {
+  background-color: var(--anchor-1);
+  border: 1px solid var(--line-strong, hsl(220 8% 28%));
+  border-radius: var(--r-1, 4px);
+}
+
+[data-world="hadeed"] .mastery-toggle[data-mastery-state="mastered"] {
+  border-color: var(--ember);
+  color: var(--ember);
+}
+
+
+/* ── ε6.7 — Stamp mark (Hadeed beacon complement) ───────────────────── */
+
+[data-world="hadeed"] [data-elan-stamp] {
+  position: relative;
+}
+
+[data-world="hadeed"] [data-elan-stamp]::after {
+  content: "";
+  position: absolute;
+  inset-inline-end: 0;
+  top: var(--s-4, 16px);
+  bottom: var(--s-4, 16px);
+  width: 1px;
+  background: var(--ember);
+  opacity: 0;
+  transition: opacity var(--duration-hadeed, 220ms) var(--ease-hadeed, ease);
+  pointer-events: none;
+}
+
+[data-world="hadeed"] [data-elan-stamp].is-stamped::after {
+  opacity: 1;
+}
+
+
+/* ── ε6.8 — Hadeed selection + focus ─────────────────────────────────── */
+
+[data-world="hadeed"] ::selection {
+  background-color: color-mix(in oklch, var(--focus) 25%, transparent);
+  color: var(--ink);
+}
+
+[data-world="hadeed"] *:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: var(--r-1, 4px);
+}
+
+
+/* ── ε6.9 — Print ────────────────────────────────────────────────────── */
+
+@media print {
+  [data-world="nada"] [data-elan-breath]::before,
+  [data-world="hadeed"] [data-elan-stamp]::after {
+    display: none;
+  }
+}
+
+/* ── ε6.10 — Reduced motion ──────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  [data-world="nada"] [data-elan-breath]::before,
+  [data-world="hadeed"] [data-elan-stamp]::after {
+    transition-duration: 1ms;
+  }
+}
