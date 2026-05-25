@@ -148,3 +148,10 @@ import './js/elan/bottom-nav.js';
 // preference graph + «ساكن» chrome confession; CSS owns the per-world
 // static-signature transposition in _motion-sanctuary.css)
 import './js/elan/delta6-motion.js';
+
+
+
+// ÊLAN v4 — ε3: Fieldsales Content Revival (Hadeed / INTERACTION beacon —
+// hand-drawn route canvas, 8 Baghdad pins, no Google Maps, no external API.
+// Reflective surface registers under Upg.elan.fieldsalesRoute.)
+import './js/elan/epsilon3-fieldsales.js';

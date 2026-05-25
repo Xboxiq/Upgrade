@@ -3445,4 +3445,75 @@
         </div>
       </div>
 
+      <!-- ══════════════════════════════════════════════════════════════════
+           ε3 / Pillar ε / Stage 3 — Hadeed Route Planner
+           INTERACTION_BEACON: hand-drawn route canvas. Tap pins to build
+           sequence; distance/stops/time computed locally. No Google Maps.
+           ══════════════════════════════════════════════════════════════ -->
+      <section class="route-planner" data-elan-route aria-labelledby="fs-route-h">
+        <header class="route-planner-h">
+          <h2 id="fs-route-h"><i class="qi" data-icon="target" aria-hidden="true"></i> تخطيط الجولة اليومية</h2>
+          <span class="route-planner-sub">انقر على نقطة الزبون لإضافتها للترتيب · انقر مجدداً للتراجع من تلك النقطة</span>
+        </header>
+
+        <div class="route-canvas-wrap">
+          <canvas class="route-canvas" role="img" aria-label="لوحة تخطيط جولة بغداد — ٨ نقاط زبائن قابلة للنقر"></canvas>
+        </div>
+
+        <ul class="route-pin-list" aria-label="نقاط الزبائن — لوحة المفاتيح يمكنها أيضاً تفعيلها">
+          <li><button type="button" class="route-pin" data-pin-id="krd" data-elan-pin-state="idle"><span class="route-pin-num">·</span>الكرَّادة</button></li>
+          <li><button type="button" class="route-pin" data-pin-id="mns" data-elan-pin-state="idle"><span class="route-pin-num">·</span>المنصور</button></li>
+          <li><button type="button" class="route-pin" data-pin-id="adh" data-elan-pin-state="idle"><span class="route-pin-num">·</span>الأَعظمية</button></li>
+          <li><button type="button" class="route-pin" data-pin-id="krk" data-elan-pin-state="idle"><span class="route-pin-num">·</span>الكَرخ</button></li>
+          <li><button type="button" class="route-pin" data-pin-id="jdr" data-elan-pin-state="idle"><span class="route-pin-num">·</span>الجادريَّة</button></li>
+          <li><button type="button" class="route-pin" data-pin-id="syd" data-elan-pin-state="idle"><span class="route-pin-num">·</span>السَّيديَّة</button></li>
+          <li><button type="button" class="route-pin" data-pin-id="dor" data-elan-pin-state="idle"><span class="route-pin-num">·</span>الدورة</button></li>
+          <li><button type="button" class="route-pin" data-pin-id="sdr" data-elan-pin-state="idle"><span class="route-pin-num">·</span>مدينة الصَّدر</button></li>
+        </ul>
+
+        <div class="route-meta" role="group" aria-label="ملخص المسار المخطَّط">
+          <div class="route-meta__cell" data-route-meta="distance">
+            <span class="route-meta__label">المسافة الإجمالية</span>
+            <span class="route-meta__value">٠<span class="route-meta__unit">كم</span></span>
+          </div>
+          <div class="route-meta__cell" data-route-meta="stops">
+            <span class="route-meta__label">عدد التوقُّفات</span>
+            <span class="route-meta__value">٠<span class="route-meta__unit">/ ٨</span></span>
+          </div>
+          <div class="route-meta__cell" data-route-meta="time">
+            <span class="route-meta__label">الوقت المتوقَّع</span>
+            <span class="route-meta__value">٠<span class="route-meta__unit">دقيقة</span></span>
+          </div>
+        </div>
+
+        <div class="route-actions">
+          <button type="button" class="route-action-btn" data-route-action="reset">
+            <i class="qi qi-sm" data-icon="refresh" aria-hidden="true"></i>
+            <span>إعادة تعيين</span>
+          </button>
+        </div>
+      </section><!-- /route-planner ε3 -->
+
+      <!-- ε3 PROVE-IT Iraq Block — visible citation for the field-visit timing claim -->
+      <article class="bento-iraq" data-temporal-priority="morning,afternoon" aria-labelledby="fs-iraq-h">
+        <header class="bento-h">
+          <h2 id="fs-iraq-h"><i class="qi" data-icon="bookmark" aria-hidden="true"></i> ركن العراق · توقيت الجولة</h2>
+          <span class="bento-h-meta type-caption">حقيقة من السوق المحلية</span>
+        </header>
+        <div class="iraq-fact">
+          <p class="iraq-fact-text type-body-lead">
+            في بغداد، الجولة الميدانية الأكثر فاعليَّة تَبدأ
+            <strong class="iraq-stat" data-elan-stat="9.5" lang="ar-IQ">٩:٣٠ صباحاً</strong>
+            (بعد نشاط محلَّات الجملة). تَجنَّب
+            <strong class="iraq-stat" data-elan-stat="12-14" lang="ar-IQ">١٢–٢ ظهراً</strong>
+            — ذروة الازدحام وانخفاض جاهزية الزبون.
+          </p>
+          <p class="iraq-cite">
+            <i class="qi qi-xs" data-icon="star" aria-hidden="true"></i>
+            <span>المصدر:</span>
+            <cite>تحليل ميداني لقطاع FMCG العراقي — ٢٠٢٤</cite>
+          </p>
+        </div>
+      </article>
+
     </section><!-- /page-fieldsales -->
