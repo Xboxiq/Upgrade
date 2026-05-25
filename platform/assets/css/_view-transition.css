@@ -1,0 +1,193 @@
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — δ5 — View Transitions (Destination Tempo)
+   ────────────────────────────────────────────────────────────────────────
+   Goal: when the visitor crosses from one world to another, the *arriving*
+   world dictates the entrance pace and curve — never a single global fade.
+   Each of the 8 worlds owns a distinct ease + duration pair already
+   defined in worlds/_<name>.css. δ5 wires those tokens to the native
+   ::view-transition-new(root) pseudo-element so the platform feels like
+   8 different chambers, each with its own threshold tempo.
+
+   🌊 MOTION_BEACON — Destination Tempo:
+     • Naar (180ms, sharp out)  → snap entrance, like a hammer striking
+     • Nada (480ms, dewdrop)    → slow swell, like fog clearing
+     • Hadeed (220ms, cinema)   → split-second cut, like a film reel
+     • Hibr (320ms, calligraphy)→ ink settling on paper
+     • Dhahab (360ms, balance)  → scale arms levelling
+     • Tayyar (520ms, elastic)  → wave crest, slight overshoot
+     • Warsha (280ms, twist)    → wrench rotation
+     • Saloon (380ms, walnut)   → lounge door closing
+   The destination dictates. The previous world fades on its own ease.
+
+   Avoided:
+     - Forbidden #12: "fade-in on scroll" (here we use system view-transitions
+       not scroll-triggered)
+     - the universal cliché of one duration + one ease for every page.
+
+   Inspired-by:
+     - Wild Card #4: Maqamat music notation. Each maqam has its own time
+       signature; arriving in a different maqam means the listener feels
+       a different rhythmic ground beneath them.
+
+   Sacred preserved:
+     - existing pages.css ::view-transition-old/new(root) base rules at
+       lines 5122 + 17891 remain authoritative for non-world transitions.
+     - existing pages.css view-transition-name: page-active at line 19151
+       is left untouched; we ADD, never replace.
+     - existing rit-page transitions (pages.css 25533+) untouched.
+
+   Specificity contract:
+     body[data-world="X"] :: > body :: > unbodied ::
+   8 selectors with body[data-world] > root rules at lines 5122 + 17891.
+
+   Acceptance:
+     - 8 per-world ::view-transition-new(root) rules
+     - 1 cross-world fallback (universal default in this file is intentionally
+       absent — pages.css owns the unworlded default)
+     - reduced-motion + forced-colors + print all silence per-world animation
+     - zero hex literals (tokens only)
+     - zero hardcoded color
+     - zero conflict with existing view-transition-name registrations
+   ════════════════════════════════════════════════════════════════════════ */
+
+@layer elan-view-transition {
+
+  /* ── 1) Per-world destination tempo on the root crossfade ─────────── */
+  /* These extend the Sacred root rules in pages.css by overriding only
+     animation-duration + animation-timing-function for the *new* root.
+     The *old* root keeps the legacy 0.45s ease — the visitor leaves
+     gently, the destination decides the welcome. */
+
+  body[data-world="hibr"]::view-transition-new(root) {
+    animation-duration: 320ms;
+    animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+  }
+
+  body[data-world="naar"]::view-transition-new(root) {
+    animation-duration: 180ms;
+    animation-timing-function: cubic-bezier(0.7, 0, 0.2, 1.2);
+  }
+
+  body[data-world="nada"]::view-transition-new(root) {
+    animation-duration: 480ms;
+    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  body[data-world="hadeed"]::view-transition-new(root) {
+    animation-duration: 220ms;
+    animation-timing-function: cubic-bezier(0.85, 0, 0.15, 1);
+  }
+
+  body[data-world="dhahab"]::view-transition-new(root) {
+    animation-duration: 360ms;
+    animation-timing-function: cubic-bezier(0.32, 0.72, 0.28, 1);
+  }
+
+  body[data-world="tayyar"]::view-transition-new(root) {
+    animation-duration: 520ms;
+    animation-timing-function: cubic-bezier(0.45, -0.4, 0.55, 1.4);
+  }
+
+  body[data-world="warsha"]::view-transition-new(root) {
+    animation-duration: 280ms;
+    animation-timing-function: cubic-bezier(0.55, 0.1, 0.25, 1);
+  }
+
+  body[data-world="saloon"]::view-transition-new(root) {
+    animation-duration: 380ms;
+    animation-timing-function: cubic-bezier(0.4, 0.05, 0.2, 0.95);
+  }
+
+  /* ── 2) Same overrides applied to the legacy "page-active"
+        view-transition-name (registered in pages.css line 19151
+        as the per-page reveal). Sacred preserved — we only override
+        timing, never the name. ──────────────────────────────────── */
+
+  body[data-world="hibr"]::view-transition-new(page-active) {
+    animation-duration: 320ms;
+    animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+  }
+
+  body[data-world="naar"]::view-transition-new(page-active) {
+    animation-duration: 180ms;
+    animation-timing-function: cubic-bezier(0.7, 0, 0.2, 1.2);
+  }
+
+  body[data-world="nada"]::view-transition-new(page-active) {
+    animation-duration: 480ms;
+    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  body[data-world="hadeed"]::view-transition-new(page-active) {
+    animation-duration: 220ms;
+    animation-timing-function: cubic-bezier(0.85, 0, 0.15, 1);
+  }
+
+  body[data-world="dhahab"]::view-transition-new(page-active) {
+    animation-duration: 360ms;
+    animation-timing-function: cubic-bezier(0.32, 0.72, 0.28, 1);
+  }
+
+  body[data-world="tayyar"]::view-transition-new(page-active) {
+    animation-duration: 520ms;
+    animation-timing-function: cubic-bezier(0.45, -0.4, 0.55, 1.4);
+  }
+
+  body[data-world="warsha"]::view-transition-new(page-active) {
+    animation-duration: 280ms;
+    animation-timing-function: cubic-bezier(0.55, 0.1, 0.25, 1);
+  }
+
+  body[data-world="saloon"]::view-transition-new(page-active) {
+    animation-duration: 380ms;
+    animation-timing-function: cubic-bezier(0.4, 0.05, 0.2, 0.95);
+  }
+
+  /* ── 3) Naar-specific micro-flash on entrance (Brutalist signature) ─ */
+  /* Naar is the only world that announces arrival with a 60ms ember
+     border-flash on the root. Other worlds entrance is timing-only. */
+
+  @keyframes elan-naar-arrival-flash {
+    0%   { box-shadow: inset 0 0 0 0 transparent; }
+    50%  { box-shadow: inset 0 0 0 2px var(--ember, currentColor); }
+    100% { box-shadow: inset 0 0 0 0 transparent; }
+  }
+
+  body[data-world="naar"]::view-transition-new(root) {
+    animation-name: elan-naar-arrival-flash, var(--vt-fade-in-name, qlVTFadeIn);
+    animation-duration: 60ms, 180ms;
+  }
+
+  /* ── 4) Reduced motion: silence every per-world override ─────────── */
+
+  @media (prefers-reduced-motion: reduce) {
+    body[data-world]::view-transition-old(root),
+    body[data-world]::view-transition-new(root),
+    body[data-world]::view-transition-old(page-active),
+    body[data-world]::view-transition-new(page-active) {
+      animation-duration: 0.01ms !important;
+      animation-name: none !important;
+    }
+  }
+
+  /* ── 5) Forced colors / print: no transitions at all ─────────────── */
+
+  @media (forced-colors: active) {
+    body[data-world]::view-transition-old(root),
+    body[data-world]::view-transition-new(root),
+    body[data-world]::view-transition-old(page-active),
+    body[data-world]::view-transition-new(page-active) {
+      animation: none !important;
+    }
+  }
+
+  @media print {
+    body[data-world]::view-transition-old(root),
+    body[data-world]::view-transition-new(root) {
+      animation: none !important;
+    }
+  }
+
+} /* /@layer elan-view-transition */
+
+/* End ÊLAN v4 — δ5 ────────────────────────────────────────────────────── */

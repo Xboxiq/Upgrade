@@ -31,3 +31,6 @@
 @import url("./worlds/_tayyar.css");
 @import url("./worlds/_warsha.css");
 @import url("./worlds/_saloon.css");
+
+/* δ5 — View Transitions: per-world destination tempo */
+@import url("./_view-transition.css");
