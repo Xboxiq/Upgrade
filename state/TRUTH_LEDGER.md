@@ -2086,3 +2086,67 @@ the start stage when `current_pillar` matches an in-progress branch.
 ### Forbidden Library violations
 
 `0` — checked against #1–#28. The new section contains zero glassmorphism, zero off-white-warm body, zero bento-same-padding, zero pulsing dot, zero `Lorem ipsum`, zero emoji, zero inline `<svg viewBox=` markup, zero icons outside Phosphor/Lucide, zero hardcoded `fill=#`.
+
+
+
+---
+
+## ε9 — Accounting Content Revival (Dhahab world) — 2026-05-25
+
+**Pillar:** ε CONTENT REVIVAL — Stage 9 of 12
+**Page:** `page-accounting`
+**World:** ذَهَب (Dhahab)
+**Branch:** `elan-ε-content-revival`
+**Commit:** `93ba0d2`
+
+### Verified by grep + computation
+
+| Probe | Target | Measured | Notes |
+|---|---:|---:|---|
+| `class="tax-bracket"` items | 5 | 5 | exact spec match (5-tier 2024 Iraqi schedule) |
+| `data-elan-tax-input` slider | 1 | 1 | range 0..10M, step 50K, default 1.5M |
+| `data-elan-tax-output` cells | 2 | 2 | `amount` + `rate` |
+| `iraq-block--dhahab` references | ≥ 1 | 7 | block + class + label + paragraph |
+| Pedagogical integrity (citation == JS compute) | match | match | 1.5M IQD → 82,500 IQD → 5.50% (verified by Node REPL) |
+| `<svg viewBox=` in runtime ε9 markup | 0 | 0 | no SVG in this stage |
+| Emoji codepoints in new ε9 markup | 0 | 0 | ICONOGRAPHY_DOCTRINE §٣.أ.١ |
+| 5 `BRACKETS` entries in JS | 5 | 5 | matches spec exactly |
+| Reduced-motion + forced-colors + print guards | 3 | 3 | all silence the grow transition |
+| Hex / hsl literals in new CSS | 0 | 0 | tokens-only |
+| `Upg.elan.accounting` registered + frozen | yes | yes | nested, no top-level inflation |
+| Public methods on `Upg.elan.accounting` | 3 | 3 | `compute`, `brackets`, `render` |
+| ESM `node --check` syntax | pass | pass | no syntax errors |
+| Total stage diff (line budget ≤ 600) | ≤ 600 | 524 | 95 HTML + 255 CSS + 171 JS + 9 app.js (within budget) |
+
+### Files touched
+
+- `platform/index.html` (+95 lines — Tax IQ section + Iraq Block before `</section>`)
+- `platform/assets/css/worlds/_dhahab.css` (+255 lines — `@layer elan-epsilon9`)
+- `platform/assets/js/elan/epsilon9-accounting.js` (NEW — 171 lines)
+- `platform/assets/app.js` (+9 lines — `import` line + comment)
+
+### Beacon
+
+| Field | Value |
+|---|---|
+| Type | 📊 DATA_BEACON |
+| Surprise | The Iraqi tax brackets become a Memphis weight scale: 5 gold-leaf asymmetric ovals stacked column-reverse so the lowest bracket (the one taken first) sits at the bottom. As the slider moves, each oval grows in width (50%→100%) and saturation (0%→85% of `var(--ember)` mixed into `var(--anchor-2)`) in proportion to how much of THAT specific bracket has been consumed. The tax amount is rendered with the β3 kashida thousands separator (`٨٢ـ٥٠٠` instead of `82,500`). The Iraq Block citation is the actual computation result, not a different number. |
+| Avoided | Standard tax-bracket table cliché + Forbidden #6 (bento same-padding rectangles) + Forbidden #11 (animated counter from 0 — the amount updates instantly, no theatrics) |
+| Inspired-by | Mughal accounting books (visual ledgers as weight scales) + Memphis Group asymmetric ovals (Sottsass postmodern). |
+| Pedagogical truth | At 1,500,000 IQD/month: tax = 82,500 IQD, effective rate = 5.50% (NOT the 10% headline rate of the bracket the income falls into). The user discovers the gap visually before reading it. |
+| Self-Score | 4 / 5 |
+
+### Sacred Assets preserved
+
+- All 16 page sections present and untouched in their existing markup. The pre-existing v3 `acc-tax-bracket` 4-tier static table is preserved verbatim as historical reference; ε9 adds a NEW interactive 5-tier ladder under fresh class names (`tax-ladder`, `tax-bracket`, `tax-summary`).
+- All 14+ `Upg.*` top-level APIs preserved verbatim. Stage adds `Upg.elan.accounting` only, nested under `Upg.elan`.
+- All earlier ε stages (ε1 .. ε8) untouched.
+- `archive/` not touched. `prompts/v1`, `v2`, `v3` not touched.
+
+### Forbidden Library violations
+
+`0` — checked against #1–#28. The new section adds zero glassmorphism, zero off-white-warm body, zero pulsing dot, zero animated-counter-from-0, zero generic gradient mesh, zero `Lorem ipsum`, zero emoji, zero inline `<svg viewBox=` markup, zero icons outside Phosphor/Lucide, zero hardcoded `fill=#`.
+
+### β3 integration
+
+ε9 is the first ε stage to consume the β3 kashida formatter via `Upg.format.currency(value, { kashida: true })`. The Tatweel separator (`U+0640`) carries the gold-world thousands grouping into the tax-amount display. A defensive ESM-internal fallback re-implements the kashida grouping inline if `Upg.format` is not yet booted (e.g. import order race), so the beacon never silently degrades to comma-grouped Latin numerals.

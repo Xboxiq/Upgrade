@@ -560,3 +560,42 @@ disruption_triggers: 5
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-25 / ε8 — Pillar ε stage 8/12
+
+
+
+## ε9 — 2026-05-25
+**Beacon Type:** 📊 DATA_BEACON
+**The Surprise:** الـ tax IQ ladder ليست جدول شرائح. هي **ميزان وزن مرئي**: ٥ ovals من Memphis Group (border-radius 64% 36% 58% 42% / 50% 60% 40% 50% — لا elliptical perfect أبداً) ذهبية اللون، مَكدَّسة column-reverse فلاحقاً الفئة الدنيا (٠٪ على أول ٢٥٠٬٠٠٠) تَجلس في الأسفل حيث تُؤخذ أولاً، والفئة العليا (١٥٪ فوق ٥M) تَطفو على القمة كَوزن أكبر.
+
+عند تحريك slider الراتب من 0 إلى 10M د.ع، كل oval يَختبر تَحوُّلَين متزامنين بـ `var(--duration-dhahab, 360ms)`:
+- `--bracket-fill` (0% → 100%) ← تُترجَم إلى نسبة `color-mix(in oklch, var(--ember) calc(var(--bracket-fill) * 0.85), var(--anchor-2))` — الـ bracket الذي اُسْتَهلِك بالكامل يَصبح ذهبياً مكتنزاً، الفارغ يَبقى رخصياً
+- `--bracket-width` (50% → 100%) ← العَرض يَنمو مع الفِيل، فالـ ovals تَزداد ثقلاً بصرياً مع تَرحُّب الراتب فيها
+
+الـ progressive computation الأصلية: على 1.5M د.ع، الـ JS يَحسب 82,500 د.ع (= 5.50% effective). الـ Iraq Block يُؤكِّد بنفس الرقم بالضبط — صفر تَناقُض بين الـ pedagogy والـ live compute. هذا هو الـ DATA_BEACON الحقيقي: الـ user يَكتشف الفرق بين الـ headline rate (الذي يَعتقده 10% لأنه في الـ bracket العاشر) والـ effective rate (5.5% لأن أول ثلاث شرائح أخفّ بكثير) — والـ ladder يُريه ذلك بـ vision قبل قراءة الأرقام.
+
+البنية التَفصيلية:
+- المبلغ الضريبي يُعرَض بفاصل الكَشيدَة من β3: '٨٢ـ٥٠٠' بدل '82,500'. الـ JS يَستهلك `Upg.format.currency(value, { kashida: true, fractionDigits: 0 })` كـ preferred path، مع fallback ESM-internal لو الـ β3 module لم يُحمَّل بعد (defensive).
+- الـ slider input استَخدم `accent-color: var(--ember)` لربطه بِلون العالم.
+- الـ readout `aria-live="polite"` يُعلَن لقارئ الشاشة بعد كل تحريك.
+- الـ summary cell يَفصل بين «الضريبة الشهرية» و «المعدَّل الفعلي» في grid بسيطة (1fr 1fr).
+- print mode يَفلطح الـ ovals إلى rectangles مع border أسود + يَحذف الـ slider.
+- forced-colors يَحفظ الـ semantic عبر 1px CanvasText outlines.
+- reduced-motion يُلغي الـ transition تماماً (الـ visual ladder يَبقى semantic لأن الـ width / color-mix custom properties تُحدَّث instantly بدلاً من الـ animation).
+
+**Reference Avoided:** standard tax-bracket table (الكل يَفعلها كذلك في كل tax calculator رأيتُه). Forbidden #6 (bento same-padding rectangles) — الـ ovals متفاوتة العَرض بطبيعتها، ليست نفس الـ padding. Forbidden #11 (animated counter from 0) — الـ amount value لا يَعدّ من 0؛ يَتحدَّث instantly مع الـ slider لأنه يَعكس الواقع، ليس theatrics.
+**Inspired-by:** Mughal accounting books (المنمنمات الفارسية + كتب المحاسبة كانت تَستخدم symbols معدنية أو ovals مَلوَّنة لتمثيل الـ scales والـ weights) + Memphis Group asymmetric ovals (Ettore Sottsass postmodern — رفض الـ geometric perfection لصالح الـ playful imperfection).
+**User-Visible:** yes — كل مستخدم يَفتح صفحة accounting يَجد slider مع قيمة افتراضية 1.5M د.ع، يُحرِّكه فيَرى الـ ovals تَكبُر وتَتلوَّن، والمبلغ الضريبي + المعدَّل الفعلي يَتحدَّثان لحظياً. الـ keyboard users يَتنقَّلون بـ arrow keys على الـ slider (default browser behavior). screen-reader users يَستهلكون الـ aria-live updates للـ readout والـ summary.
+**Originality Self-Score:** 4/5 — interactive tax calculators موجودة في كل حاسبة ضرائب على الإنترنت. الذي يَجعله 4/5: (١) Memphis Group asymmetric ovals مع gold-leaf gradient وkashida thousands separator هو combination لا أرى له شبيهاً في AI training output؛ (٢) الـ pedagogical truth-check: الـ Iraq Block citation تُحسَب من نفس الـ JS module — لو غَيَّرت الـ brackets يَتَحدَّث الادعاء تلقائياً؛ (٣) reading-direction-correct (column-reverse فلاحقاً الفئة الدنيا في الأسفل = حيث تُؤخذ أولاً، يَعكس فلسفة الـ progressive taxation)؛ (٤) full a11y story (reduced-motion / forced-colors / print) من بداية الـ design.
+**Files touched:** platform/index.html (+95) · platform/assets/css/worlds/_dhahab.css (+255 @layer elan-epsilon9) · platform/assets/js/elan/epsilon9-accounting.js (NEW 171) · platform/assets/app.js (+9)
+**Verified at commit:** 93ba0d2
+
+
+---STATS---
+total_beacons: 27
+unique_categories_used: 9
+avg_score: 4.14
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε9 — Pillar ε stage 9/12
