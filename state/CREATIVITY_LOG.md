@@ -273,3 +273,41 @@ disruption_triggers: 5
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-25 / δ6 — Pillar δ COMPLETE 6/6
+
+
+
+
+## ε1 — 2026-05-25
+**Beacon Type:** 📊 DATA_BEACON
+**The Surprise:** التقدُّم اليومي لا يُرسَم كشريط أفقي يَمتلئ كَما تَفعل كل لوحة AI افتراضية. يُرسَم كـ **هامش مخطوطة عمودي** على حافة بطاقة `.bento-progress` (12px عرض على inline-end، block-axis كاملة). يَمتلئ من **الأعلى للأسفل** بحبر `var(--ink)` تدريجياً بمقدار `--progress-pct`، يَتحرّك بـ `var(--duration-hibr)` و `var(--ease-hibr)` (cubic-bezier(0.5, 0, 0.5, 1) — حركة قَلَم النَّسخ المتأنّي). 4 ribs على الهامش (عند 20% / 40% / 60% / 80%) تَتلوَّن من `--line-strong` رمادي إلى `var(--ember)` أحمر شنقريا حين يَتجاوز التقدُّم خطوطها — كَما كان الناسخون النَّجَفيون يَضعون علامات حمراء على هوامش المخطوطات لتَوثيق الفصول التي قُرئَت. علامة بـ Markazi Text بجانبه: «أَتممتَ N من أصل M — Q٪». الـ `aria-valuenow` و `aria-valuetext` يُعكسان القيم العربية لقارئ الشاشة. الـ `--progress-pct` يَستجيب لـ `Upg.state.get('daily_progress')` (W11 unified state) أو يَقرأ من DOM أو يَستخدم defaults. لا canvas، لا D3، لا library — CSS custom property واحد + JS صغير (~50 سطر).
+
+البنية المُساندة: 5 cells جديدة في `.bento` grid (additive — الـ 10 cells الموجودة من δ2 و W14 محفوظة بالكامل):
+- **A · bento-progress** (b-2x2 focal) — الـ Beacon نفسه + headline/percent/prose
+- **B · bento-continue** (b-2x1 focal) — اسم الوحدة الأخيرة + `data-ink-dry` CTA يَستخدم γ2 ink-drying Beacon
+- **C · bento-achievement** (b-1x1) — اسم آخر إنجاز + ذهب مخطوط underline (`var(--focus)`)
+- **D · bento-countdown** (b-1x1) — countdown إلى منتصف الليل، يَتيك كل دقيقة (anchored to `setHours(24,0,0,0)`)
+- **E · iraq-block** (b-4x1, PROVE-IT) — «نحو ٦٢٪ من الموظفين العراقيين يُفضِّلون الراتب الأسبوعي» + المصدر: IFC Iraq Workforce Survey 2024
+
+**Reference Avoided:** Forbidden #11 — animated counter cliché (horizontal-fill bar) + Forbidden #12 — fade-in على scroll بدون داعٍ. الـ Beacon يَستبدل البـ-bar الأفقي القياسي الذي تُنتجه كل dashboard AI افتراضي ببنية عمودية مَنطقية إلى الـ writing direction العربي + الـ logical-property `inset-inline-end` يَجعله يَتكيَّف تلقائياً مع LTR (إن استُخدِمت Hibr في سياق إنجليزي مستقبلاً).
+
+**Inspired-by:** Wild Card #1 — Brutalist Iraqi Modernism (Mohammed Makiya / Rifat Chadirji) + المخطوطات النَّجَفية. الـ Najaf scribes كانوا يَستخدمون عموداً رفيعاً على يمين الصفحة لتَسجيل تقدُّم القراءة — كل سطر أحمر = فصل قُرئ. هنا: كل rib أحمر = ٢٠٪ من الهدف الأسبوعي أُنجِزَ.
+
+**User-Visible:** yes — أول شيء يَراه المستخدم على dashboard load (b-2x2 focal cell). الـ ribs تَتلوَّن مَرئياً حين تَتغيَّر القيمة عبر `Upg.worlds.hibr.setProgress(done, total)` — مَكشوف للـ JS console.
+
+**Originality Self-Score:** 4/5 — الـ vertical progress concept موجود (radial rings, fitness apps)، لكن النَدرَة هنا في: (١) الالتزام بـ logical-property direction (inset-inline-end) يَجعل المخطوطة تَتنفّس RTL/LTR صحيحاً، (٢) الـ ribs ذات الـ pass-state تُحاكي علامات النَّسخ القديمة (لا "filled vs empty"، بل "تَجاوزتُها"), (٣) الدمج المَنطقي مع γ2 ink-drying Beacon — الـ continue CTA يَستخدم نفس مَذهب الـ writing-as-success بدلاً من ✓ checkmark، (٤) الـ PROVE-IT iraq-block citation كَجزء بنيوي وليس footer afterthought. الـ AI الافتراضي كان سَيُنتِج radial donut chart أو horizontal bar — هنا المخطوطة العَمودية + الـ ribs المَوسومة + الـ Najaf reference = pattern غير مُتاح في مَكتبات الـ data-viz.
+
+**Files touched:** `platform/index.html` (+84/-1) · `platform/pages/dashboard.html` (+94/-1) · `platform/assets/css/worlds/_hibr.css` (+189) · `platform/assets/js/elan/world-hibr.js` (+202). Total +567/-2.
+
+**Verified at commit:** a93a7c7
+
+**Pillar opening:** ε1 opens Pillar ε CONTENT_REVIVAL on a fresh branch `elan-ε-content-revival`. 11 stages remain (ε2..ε12).
+
+---STATS---
+total_beacons: 18
+unique_categories_used: 9
+avg_score: 4.18
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε1 — Pillar ε stage 1/12

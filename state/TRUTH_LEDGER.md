@@ -1440,3 +1440,72 @@ the fallback string in δ5 will need a tokens.css entry. Recommended for
 6 stages shipped on `elan-δ-kinetic-shell` (δ1 73d72c1c · δ2 33f0553 · δ3 b794e19 · δ4 5e50984 · δ5 a97c87d · δ6 66f3a01). 6 Beacons across 5 distinct categories (MOTION δ1+δ5, DATA δ2, INTERACTION δ3, STRUCTURAL δ4, META δ6). 0 forbidden violations. 0 Sacred Asset disturbance. Next: PR open + Pillar ε CONTENT_REVIVAL on a fresh branch.
 
 — Entry end —
+
+
+
+---
+
+## ε1 — Dashboard Revival (Hibr world) — 2026-05-25
+
+**Pillar:** ε CONTENT_REVIVAL · stage 1 of 12
+**Branch:** `elan-ε-content-revival` (NEW for Pillar ε)
+**Commit:** `a93a7c7`
+**Spec:** `prompts/v4/ε1_DASHBOARD.md`
+
+### Verified by grep (before / after)
+
+| Metric | Before | After | Target |
+|---|---:|---:|---|
+| `data-world="hibr"` on dashboard section (shard) | 0 | 1 (≥1 inline incl. comment header) | ≥ 1 |
+| `data-world="hibr"` on dashboard section (inline) | 1 | 1 | ≥ 1 |
+| Manuscript-margin element (`data-elan-progress-margin`) | 0 | 1 inline + 1 shard | ≥ 1 |
+| `iraq-block__source-name` citation | 0 | 1 | ≥ 1 |
+| `bento-continue` cell | 0 | 1 inline + 1 shard | ≥ 1 |
+| `bento-achievement` cell | 0 | 1 inline + 1 shard | ≥ 1 |
+| `bento-countdown` cell | 0 | 1 inline + 1 shard | ≥ 1 |
+| `<svg viewBox` raw inline (in dashboard slice) | 0 | 0 | 0 |
+| Emoji `[☎✓📊🔥📈⏰🏆⭐🎯]` in dashboard markup | 0 | 0 | 0 |
+| `fill="#xxxxxx"` hardcoded in dashboard | 0 | 0 | 0 |
+| CSS `.progress-margin` rule blocks | 0 | 4 | ≥ 4 |
+| CSS `.iraq-block` rule blocks | 0 | 9 | ≥ 5 |
+| JS `setProgress` / refresh API on `Upg.worlds.hibr` | 0 | 2 | ≥ 2 |
+| JS reads `Upg.state.get('daily_progress')` | 0 | 4 references | ≥ 1 |
+| JS countdown anchored to next midnight (`setHours(24,0,0,0)`) | 0 | 1 | 1 |
+
+### Files touched (4 — within ≤ 4 cap)
+
+| File | Δ lines | Role |
+|---|---:|---|
+| `platform/index.html` (inline dashboard, lines 730-930) | +84 / -1 | 5 new bento cells inserted into existing `.bento` grid |
+| `platform/pages/dashboard.html` (shard, Stage-and-Replace) | +94 / -1 | mirror of inline; adds `data-world="hibr"` on section (was 0 → 1) |
+| `platform/assets/css/worlds/_hibr.css` | +189 | ε1 cell styles + Beacon `.progress-margin` + `.iraq-block` global shell + voice utilities |
+| `platform/assets/js/elan/world-hibr.js` | +202 | Manuscript-margin driver + countdown + `Upg.worlds.hibr` extension (no top-level surface added) |
+
+**Total:** **+567 / −2** lines across 4 files. **Under the 600-line/stage cap.**
+
+### Beacon registered
+
+📊 **DATA_BEACON** — *vertical ink reservoir on the inline-end edge of `.bento-progress`.* 12px wide, full block-axis, fills top→bottom by `--progress-pct`, 4 ribs at 20/40/60/80% turn ember when crossed. Markazi Text reads «أَتممتَ N من أصل M». Avoids Forbidden #11 (horizontal-fill cliché) + #12 (scroll fade). Inspired-by Wild Card #1 Najaf manuscript margins. Originality self-score 4/5.
+
+### Sacred preserved
+
+- `archive/` — untouched.
+- 16 page sections — intact (page-dashboard `<section>` only had attributes added: `data-world="hibr"` on shard).
+- 14 Upg.* top-level APIs — unchanged. ε1 nests under existing `Upg.worlds.hibr` (γ2 surface) — `setProgress / refreshProgress / refreshCountdown` added; `activateInkDry` + `selector` (γ2) preserved verbatim through a frozen-object replacement.
+- Existing 10 bento cells (greeting + 4 stat-tiles + skill / activity / challenge / heatmap / dock) — all preserved verbatim. ε1 cells are **additive** (5 new), bringing total to 15 cells in the `.bento` grid.
+- Stage-and-Replace doctrine (Worker 23) honored: inline (`platform/index.html` line 730 region) and shard (`platform/pages/dashboard.html`) edited in lockstep.
+- W11 `Upg.state` integration: optional, falls back to DOM read, then to `done=0/total=50` defaults — driver works whether or not state layer is wired.
+- Reduced-motion: `.progress-margin__fill` transition shrunk to 1ms via existing γ2 reduced-motion guard pattern.
+
+### Forbidden Library check
+
+| Pattern | Triggered? |
+|---|---|
+| #11 horizontal-fill progress bar cliché | NO — vertical reservoir replaces it |
+| #12 fade-in on scroll without reason | NO — manuscript margin uses `block-size` transition only |
+| #20 emoji in markup | NO (verified grep = 0) |
+| #23 Toy SVG inline | NO (verified grep = 0) |
+| #28 hardcoded `fill="#xxxxxx"` | NO (verified grep = 0) |
+| Iconography size out-of-scale | NO — all icons use `.qi` class system |
+
+— Entry end —
