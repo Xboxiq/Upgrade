@@ -377,3 +377,38 @@ disruption_triggers: 5
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-25 / ε3 — Pillar ε stage 3/12
+
+
+
+## ε4 — 2026-05-25
+**Beacon Type:** VISUAL_BEACON
+**The Surprise:** الـ engagement timeline ليس bar chart ولا area chart ولا line chart. هو **شريط VHS scrub أُفقي واحد** بـ scan-lines retrowave (1px every 3px، opacity 7% — تَحت سَقف Iconography Doctrine § ٣.ج #16 الـ 8%). الـ fill بـ gradient magenta من شفاف إلى ember 100%، الـ cursor cyan بـ glow مزدوج (12px + 24px box-shadow)، الـ handle دائري ١٤px فوق المسار بـ border 2px من anchor-bg. الـ readout الكبير **داخل** الـ track في الوسط (Boutros Modern Kufi، tabular-nums، clamp(1.25..1.875rem)) — يَعرض إجمالي engagement للموقع الحالي. خمسة tick labels على ٠/٢٥/٥٠/٧٥/١٠٠% (يناير/أبريل/يوليو/أكتوبر/ديسمبر) بـ background blur مَلصق على الـ scan-lines. المستخدم يَسحب يميناً ويساراً بـ pointer أو يَستخدم Tab→ArrowLeft/Right (RTL-aware) أو Home/End أو PageUp/Down، فيُحدِّث snapshot card بأسفل بـ glitch effect 60ms (4 keyframes hue-rotate ±15° + ±1px translate + saturate 1.6× في 42%) — كأنّ شريط فيديو يَتقدَّم بـ tracking error مَدروس.
+
+البنية المُساندة: posts dataset مُجمَّد (Object.freeze) — ٨ منشورات Q1-Q4 2024 بقيم representative للسوق العراقي (FMCG / retail / service vertical): caption-fasih (412 likes) → reel-fasih (980) → reel-iraqi (3420) → carousel (1560) → reel-iraqi (5180) → caption (720) → reel-iraqi (6920) → live (2840). كل post له date_iso + date_label + kind + icon (Phosphor: megaphone/sparkles/flame/image/message-square/phone — كلها مَرسوم في الـ sprite الـ α4) + breakdown (likes/comments/shares). الـ Upg.elan.social.posts() يُرجِع copy. data-fixture="true" على الـ host element لـ analytics integration وعَلامة صَريحة أن الـ data نموذجية حتى تُربَط بـ Meta Graph API لاحقاً.
+
+Iconography pre-flight: قبل كل markup فيه icon تَم فحص Semantic Map (§٤.د) — `sparkles` للـ section header (eyebrow accent)، `flag` للـ Iraq Block header، `info` للـ source citation، `megaphone/flame/image/message-square/phone` للـ post kinds (كلها سبَق وُجودها في sprite). صَفر `<svg viewBox>` يَدوي. صَفر emoji في markup الـ ε4 الجديد (ε4 لا يَلمس الـ 208 emoji الـ legacy في صفحة social — هذا عمل ζ1 لاحق). صَفر hex literal (الـ #444 في print branch تَم استبداله بـ named color `gray` قبل commit).
+
+ARIA: role=slider + aria-valuemin=1 + aria-valuemax=8 + aria-valuenow يَتحدَّث لكل تَغيُّر + aria-label عربي مَنطقي ("شريط زمني للتفاعل — 8 منشورات بين فبراير 2024 وديسمبر 2024"). الـ snapshot card aria-live="polite" + aria-atomic="true" — كل crossfade يَنطق محتواه كَاملاً لقارئ الشاشة. reduced-motion: شريط الـ fill يَصِل بدون transition، الـ glitch يُلغَى تَماماً، الـ scrub يُحرَّك على نَقرة واحدة. forced-colors: المسار خَلفية ButtonFace + border ButtonText + الـ fill Highlight + الـ cursor HighlightText. print: الـ scan-lines تَختفي + الـ fill يَصير gray + الـ cursor والـ handle يُحذَفان (cropped from sheet).
+
+**Reference Avoided:** Forbidden #4 (generic mesh gradient — استَخدمنا repeating linear-gradient pair بدل mesh) + bar-chart cliché الذي يَفتَرضه كل platform AI لـ "engagement over time" (Chart.js افتراضي، Recharts افتراضي، Highcharts افتراضي) — ε4 يَرفُض ذلك صَراحَةً: شريط واحد، scrub بـ pointer، snapshot crossfade بدل tooltip.
+
+**Inspired-by:** Wild Card #15 — Synthwave + Khat. الـ retrowave aesthetic للثمانينيات الإيرانية والعراقية (مَجلات الفيديو، الـ TV intros للـ FBC + INA + قنوات بغداد القديمة) دَمجَ scan-lines الكاثود + ألوان neon mauve-magenta-cyan + tape jitter كهوية بَصَرية. الـ scrub bar أَخذَ الـ scan-lines كـ texture مساند، الـ glitch كـ transition، الـ cursor cyan كنُقطة قراءة، والـ snapshot card كـ "frame freeze" — كأن الزائر يَضغط pause على شريط VHS لرؤية ما كان يُعرَض في تلك اللحظة.
+
+**User-Visible:** yes — كل مُتَدَرِّب يَفتح صفحة social سَيَجِد section جديد قبل block-bridge النهائية، يَحوي scrub bar + post snapshot + Iraq block. الـ initial render يُظهِر post #1 (فبراير 2024) في snapshot card و scrub-pct = 6.25% (cursor عند منتصف أوَّل bin). الـ keyboard users يَستطيعون التَنقُّل بـ Tab + Arrows. الـ pointer users يَسحبون مع feedback فوري (لا debounce — كل move event يُحدِّث الـ index لو تَجاوز bin boundary). reduced-motion users يَحصُلون على نفس البَصَر بدون glitch transitions — الإشارة بَصَرية كاملة (border + text update فوري).
+
+**Originality Self-Score:** 4/5. تحليل الـ landscape: VHS-styled charts/scrub-bars في dashboards الـ social media analytics **نادرة جداً** — Hootsuite, Buffer, Sprout Social, Later، Meta Business Suite كلهم يَستخدمون Chart.js / D3 / Recharts افتراضي بـ bar/area/line. الـ retrowave aesthetic موجود في some indie tools (Liquid Death's site, ssense.com archive views) لكن ليس في analytics. الـ pattern (scrub bar single-track + glitch transition + snapshot crossfade + RTL-aware pointer math + ARIA slider semantics + Iraqi-market post fixture) معاً = combination لم يُلاحَظ في AI-generated outputs. ليس 5/5 لأن: (١) الـ underlying UX paradigm (`<input type="range">` + onChange handler) شائع جداً في web forms — ε4 لَبَّسَه Tayyar dress فقط. (٢) glitch CSS animations مَوجودة في keyframes libraries (Animista, Magic Animations). (٣) الـ scan-line repeating-gradient شائع في retrowave templates. الذي يَرفَع الـ score إلى 4: الالتزام الصارم بـ Tayyar tokens (zero hex)، الـ RTL-aware pointer math (rare في analytics tooling)، الـ ARIA slider role (rare في chart components)، والـ posts fixture المُمَثِّل لسوق محلِّي محدَّد.
+
+**Files touched:** `platform/assets/css/_epsilon4-social.css` (NEW · 383) · `platform/assets/js/elan/epsilon4-social.js` (NEW · 322) · `platform/index.html` (+65) · `platform/pages/social.html` (+65) · `platform/assets/css/tokens.css` (+5) · `platform/assets/app.js` (+7). Total +847 across 6 files.
+
+**Verified at commit:** a458016
+
+---STATS---
+total_beacons: 21
+unique_categories_used: 9
+avg_score: 4.19
+last_5_avg: 4.2
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε4 — Pillar ε stage 4/12
+
