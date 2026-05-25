@@ -273,3 +273,26 @@ disruption_triggers: 5
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-25 / δ6 — Pillar δ COMPLETE 6/6
+
+
+
+## ε1 — 2026-05-25
+**Beacon Type:** 📊 DATA_BEACON
+**The Surprise:** الـ progress الرئيسية في اللوحة لا تَكون شريطاً أُفُقياً، ولا دائرةً مُجوَّفة، ولا عدّاداً يَتسلَّق من الصفر. هي **هامش مخطوطة** — عمود حِبر عمودي عرضه 12px مَزروع على الحافة الخلفية للخلية المركزية، ينمو من أعلى إلى أسفل بنسبة الإنجاز اليومي. عَلَى يَساره (في الـ RTL) عبارة بـ Markazi Text وبالأرقام الـعربية‑الـهندية: «أَتممتَ ٧ من ١٢». الرقم يُكتَب نهائياً على الـ paint الأول (لا cycling من ٠). الذي يَتحرك هو الحِبر فقط — block-size يَنتقل من القيمة المُخزَّنة إلى الجديدة عبر `var(--duration-hibr) var(--ease-hibr)` (320ms/قَلَم نَسخ، نفس eaze γ2). الخلية تَحتوي إضافة badge صغير: لو كان هناك إنجاز حديث (achievement/badge/unit_complete في activity log) يُعرَض اسمه؛ وإلا لو الـ streak ≥ 2 يَومين، تُعرَض الكلمة «N يوم متَّصل»؛ وإلا يَختفي. خلية ثانية مجاورة (Continue Last Unit, b-2x1) تَجُرّ آخر `lessonName/unit/workerKey` من نفس activity log + ساعة عربية حقيقية تَحسب الدقائق المتبقية حتى منتصف الليل (يَتحدَّث كل 30 ثانية، مُلغى عند `document.hidden` أو خروج الصفحة من الـ active state). خلية ثالثة (Iraq Block, b-4x1) تَحمل حقيقة واحدة من السوق العراقية بمصدر ظاهر — لا lorem، لا ترجمة فضفاضة. كل ذلك بـ صفر inline SVG، صفر emoji، صفر hex literal في الـ CSS، صفر تَعديل على markup الـ Sacred (16 صفحة، 5 IDs مُحجَّزة، 31 Upg.* top-level). الـ module الجديد يُسجِّل عند `Upg.elan.pages.dashboard` فلا يُضخِّم سطح الـ APIs.
+**Reference Avoided:** Forbidden #11 — الـ "animated counter from 0" الكليشيه المُكرَّر في كل dashboard AI: الرقم هنا يُطبَع مكتمَلاً على الـ frame الأول، فقط block-size الـ strip يَنتقل بـ CSS transition. + Forbidden #5 — "card بـ shadow ناعم + 12px radius": الخلية لها 1px solid border + ركن r-2 (8px) + وَهْم رِفّ مخطوطة (linear-gradient أُفُقي 1px شفاف ثمَّ 1px ink-tinted على بُعد 22px من الحافة)، صفر blur shadow.
+**Inspired-by:** Wild Card #1 — مخطوطات النَّجَف (Najaf manuscripts marginal markings): النُسَّاخ كانوا يَضعون عَلامة عمودية بحبر آخر على هامش الورقة لتسجيل التقدُّم في النَسخ — شريط رأسيّ يَكبُر مع كل صفحة منسوخة. هنا: شريط رأسيّ يَكبُر مع كل وَحدة مُنجَزة من هدف اليوم. الذاكرة الحرفية مَحفوظة، التَطبيق رقمي.
+**User-Visible:** yes — كل مستخدم يَفتح dashboard يَرى ثلاث خلايا جديدة: (١) العمود العمودي بحبره النَّاضب على الحافة (يَفهم بصرياً نِسبة اليوم بدون قراءة الرقم)؛ (٢) آخر وَحدة كان عليها مع ساعة عربية تَعد دقائق نهاية اليوم؛ (٣) كَتلة العراق بحقيقة موثَّقة بمصدر. كل ذلك مَختوم بـ `data-elan-stage="ε1"` للـ forensic grep.
+**Originality Self-Score:** 4/5 — vertical progress strips موجودة (Tailwind UI، Material thermometer)؛ progress-as-margin-of-manuscript نسبياً نادر لكن ليس فريداً. الذي يَجعله 4/5: (١) **الإلتزام بالـ Hibr token system** — لا hex، الـ duration والـ ease مَأخوذان من γ2، فالـ beacon يَتنفَّس مع بقية العالَم بدلاً من أن يَكون موَلَّداً منعزلاً؛ (٢) **الإلتزام الصارم بـ Forbidden #11** — رقم يُعرَض final-on-paint، حركة الـ bar فقط، لا countup ramp؛ (٣) **التَكامل مع legacy state** — يَستهلك `Upg.state.activity()` و `Upg.state.compute.streak` بدون mutation، fallback نظيف لأي حقل ناقص؛ (٤) **الـ PROVE-IT في نفس الخلية** — الـ Iraq Block يَحمل سطر مصدر ظاهر («المصدر: تقرير IFC للقطاع غير المنظَّم في العراق، ٢٠٢٤»)، لا تَفلسُف بدون citation؛ (٥) **الـ ساعة العربية** — `يَتبقى ٣ س ٤٢ د` بأرقام عربية-هندية بدلاً من 3:42 PM، تَعزِّز الهوية بدون تَكلفة a11y. Claim: most "daily-progress dashboards" use a horizontal bar or a doughnut, animate the counter from 0, and ship a PR with no source citation. ε1 inverts all three.
+**Files touched:** platform/index.html · platform/assets/css/pages.css · platform/assets/js/pages/dashboard.js (NEW) · platform/assets/app.js
+**Verified at commit:** 0a9c17d
+**Stage:** 1 of 12 in Pillar ε CONTENT REVIVAL — ε2 callcenter (Tayyar) next on same branch.
+
+---STATS---
+total_beacons: 18
+unique_categories_used: 9
+avg_score: 4.17
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε1 — Pillar ε opened 1/12

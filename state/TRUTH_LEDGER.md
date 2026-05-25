@@ -1440,3 +1440,72 @@ the fallback string in δ5 will need a tokens.css entry. Recommended for
 6 stages shipped on `elan-δ-kinetic-shell` (δ1 73d72c1c · δ2 33f0553 · δ3 b794e19 · δ4 5e50984 · δ5 a97c87d · δ6 66f3a01). 6 Beacons across 5 distinct categories (MOTION δ1+δ5, DATA δ2, INTERACTION δ3, STRUCTURAL δ4, META δ6). 0 forbidden violations. 0 Sacred Asset disturbance. Next: PR open + Pillar ε CONTENT_REVIVAL on a fresh branch.
 
 — Entry end —
+
+
+
+## ε1 — Dashboard Content Revival (Hibr) — 2026-05-25
+
+**Branch:** `elan-ε-content-revival-v2`
+**Commit:** `0a9c17d`
+**Pillar:** ε CONTENT REVIVAL — opens 1/12.
+**World:** حِبر (Hibr).
+
+### Forensic — before / after (verified by grep)
+
+| Metric | Before | After | Source |
+|---|---:|---:|---|
+| `id="page-dashboard" data-world="hibr"` | 1 | 1 | preserved (γ2 baseline) |
+| inline `<svg viewBox` inside dashboard section | 0 | 0 | preserved |
+| emoji decorations inside dashboard section | 0 | 0 | preserved |
+| `data-icon=` usages inside dashboard section | 17 | 22 | +5 (new cells: bookmark, play, clock, trophy, globe-hemisphere-east) |
+| `class="dash-margin"` markers | 0 | 1 cell + 4 sub-class refs | new BEACON |
+| `class="dash-continue"` markers | 0 | 1 cell + 5 sub-class refs | new |
+| `class="iraq-block"` (in dashboard) | 0 | 1 cell + 3 sub-class refs | new (PROVE-IT) |
+| `data-elan-stage="ε1"` markers | 0 | 3 | new |
+| `[data-world="hibr"] .dash-margin` selectors in pages.css | 0 | 13 | new (additive) |
+| `[data-world="hibr"] .iraq-block` selectors in pages.css | 0 | 6 | new (additive) |
+| `pages/dashboard.js` lines | 0 | 209 (new ESM) | new |
+| `app.js` import for `pages/dashboard.js` | 0 | 1 | new |
+| Top-level `Upg.*` API count | 31 | 31 | preserved (registers under `Upg.elan.pages.dashboard`) |
+| `Upg.elan.pages.dashboard.refresh` | undefined | function | new (frozen) |
+| Hex literals in the new ε1 CSS block | n/a | 0 | clean |
+| `<section class="page"` count in index.html | 16 | 16 | preserved |
+| Sacred IDs (#cath-skill-grid, #cath-activity-list, #v12Heatmap, #v12ChallengeLevel, #v12ChallengeBody) | intact | intact | preserved (γ2 / ATELIER v16 / W14) |
+| `node --check pages/dashboard.js` | n/a | OK | passing |
+
+### Diff stat
+
+```
+platform/assets/app.js                |   4 +
+platform/assets/css/pages.css         | 265 ++++++++++
+platform/assets/js/pages/dashboard.js | 209 +++++++++ (new)
+platform/index.html                   |  96 ++++
+4 files changed, 574 insertions(+)
+```
+
+574 ≤ 600 line cap → within Pillar ε per-stage budget.
+
+### Beacon
+
+| Field | Value |
+|---|---|
+| Type | 📊 **DATA_BEACON** — Manuscript Margin Daily Progress |
+| Surprise | Vertical 12px ink strip on the focal cell's trailing edge fills top→down by today's units done. Caption: «أَتممتَ N من K» in Markazi Text with Arabic-Indic numerals. The bar IS the data viz — no horizontal bar, no doughnut, no counter ramping from zero. Number paints final on first call; only the strip animates via CSS transition (var(--duration-hibr) / var(--ease-hibr) from γ2). |
+| Avoided | Forbidden #11 (animated counter from 0) + Forbidden #5 (soft-shadow + 12px-radius card cliché) |
+| Inspired-by | Wild Card #1 — Najaf manuscript marginal markings |
+| Self-score | 4/5 |
+
+### Sacred Asset audit (post-ε1)
+
+- 16 page sections — preserved (no removals).
+- 14 sacred Upg.* APIs — preserved.
+- 31 top-level `Upg.*` namespaces — preserved exactly (new pages module nests under `Upg.elan.pages.dashboard`, no inflation).
+- All legacy dashboard cells intact: greeting, 4 stat-tiles, skill-tree, activity-list, today's challenge, heatmap, quick-dock — none mutated.
+- Sacred IDs all preserved (cath-skill-grid, cath-activity-list, v12Heatmap, v12ChallengeLevel, v12ChallengeBody, 4× data-cath-stat).
+- All earlier δ surfaces (`Upg.elan.bottomNav`, `Upg.elan.motion`, `Upg.haptic`, `Upg.world`, `Upg.worlds.*`, view-transition `_view-transition.css`) — untouched.
+- `archive/`, `prompts/v1`, `prompts/v2`, `prompts/v3` — untouched.
+- `state/CHANGELOG.md` — untouched (ζ5 owns).
+
+### Branch policy note
+
+The canonical name `elan-ε-content-revival` already existed on the remote at SHA `9cbb164…` from a prior aborted run with no associated PR. AUTO_PILOT § branch rules forbid force-push without explicit user opt-in; the `-v2` suffix preserves the orphan for forensic review while letting Pillar ε proceed cleanly. All ε stages will land on `elan-ε-content-revival-v2`; the Pillar PR will mention this in the description.

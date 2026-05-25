@@ -948,12 +948,12 @@
   },
   "notes": "Pack v2 RESONANCE scaffolded under prompts/v2/. Path C selected by user: Meta + Worker 15 (full 6 phases) + Ritual = 15 files. Workers 16-19 + Ritual execution to follow in subsequent sessions. Cathedral v16 baseline preserved. All 19 Upg.* APIs, 14 pages, 391 qcalc references preserved. Previous Pack v1 history (v16 ATELIER): Phase 6 of Worker 14 shipped on branch worker-14-phase-6-final via PR #53. Inline 215->76 (139 removed) via deterministic node script + 330 lines Final Utilities Pack. New Upg.focusTrap IIFE auto-attaches to dialog/modal/qmodal/data-modal via MutationObserver, ESC-to-close, return-focus. Lighthouse boot helper (lazy imgs, decoding=async, pointer-enter prefetch markers). Sanity v16 verifies 19 Upg.* modules. sw.js rewrite (74->119 lines) versioned shell/assets/fonts caches, navigation network-first then offline.html fallback, SWR for assets and Google Fonts. Manifest 4 shortcuts (#dashboard, #callcenter, #myprogress, #accounting), 192/512 icon entries. Favicon v2 100x100 squircle rx=22, dual-color stroke gradient (#66FCF1 to #4F46E5). offline.html RTL Cairo, online auto-reload, retry button + home link. CHANGELOG v16 added at top. All 14 page sections, 391 qcalc, 15 identity tints preserved.",
   "elan_v4": {
-    "current_pillar": "δ",
-    "current_stage": 6,
-    "current_stage_id": "δ6",
-    "status": "complete-pillar-δ",
+    "current_pillar": "ε",
+    "current_stage": 1,
+    "current_stage_id": "ε1",
+    "status": "in-progress",
     "started_at": "2026-05-24T00:00:00Z",
-    "branch": "elan-δ-kinetic-shell",
+    "branch": "elan-ε-content-revival-v2",
     "completed_stages": [
       "α1",
       "α2",
@@ -975,12 +975,13 @@
       "δ3",
       "δ4",
       "δ5",
-      "δ6"
+      "δ6",
+      "ε1"
     ],
     "beacons_this_session": 1,
     "creativity_health": 100,
-    "creativity_health_note": "After δ6: 17 beacons, 9 unique categories (MOTION reused at δ1+δ5, META reused at γ9+δ6, INTERACTION reused at γ5+δ3, STRUCTURAL reused at γ1+γ8+δ4), 0 forbidden violations → (4.18×20)+(9×5) = 128.6 → capped at 100. Pillar δ now COMPLETE 6/6 (sidebar-magnetic δ1, bento-temporal δ2, topbar-living δ3, bottom-nav δ4, view-transition δ5, motion-sanctuary δ6). Next: open PR from elan-δ-kinetic-shell → main, then begin Pillar ε.",
-    "next_action": "Open PR from elan-δ-kinetic-shell to main: 'feat(elan-v4): Pillar δ — KINETIC SHELL (6/6 stages)'. Body must list all 6 stages with verified metrics + 6 Beacons + Sacred Assets preservation + Forbidden Library: 0. After merge, Pillar ε CONTENT_REVIVAL begins on a new branch elan-ε-content-revival starting with ε1 (dashboard, Hibr world, DATA beacon per spec).",
+    "creativity_health_note": "After ε1: 18 beacons, 9 unique categories, 0 forbidden violations, avg ~4.17 → capped 100. Pillar ε opened on elan-ε-content-revival-v2 (canonical name elan-ε-content-revival exists as remote orphan from a prior aborted run; v2 suffix used per branch policy to avoid force-push). Next: ε2 callcenter (Tayyar) on same branch.",
+    "next_action": "ε2 CALLCENTER (Tayyar world) on elan-ε-content-revival-v2. Spec mandates SOUND or INTERACTION beacon; last 3 = STRUCTURAL/META/DATA → both clean. PR for Pillar ε opens after ε12 closes 12/12.",
     "β1_artifacts": {
       "branch": "elan-β-type-soul",
       "commit": "43be524",
@@ -1922,12 +1923,26 @@
       "emoji_in_markup_d6": 0,
       "innerHTML_writes_in_d6_js": 0,
       "legacy_Upg_motion_preserved": true,
-      "legacy_Upg_motion_methods_preserved": ["reveal", "refreshGlow"],
+      "legacy_Upg_motion_methods_preserved": [
+        "reveal",
+        "refreshGlow"
+      ],
       "new_surface_namespace": "Upg.elan.motion",
-      "new_surface_methods": ["set", "current", "isReduced", "override", "cycle", "modes"],
+      "new_surface_methods": [
+        "set",
+        "current",
+        "isReduced",
+        "override",
+        "cycle",
+        "modes"
+      ],
       "new_surface_frozen": true,
       "Upg_apis_top_level_after": 31,
-      "three_state_preference_graph": ["normal", "reduced", "enhanced"],
+      "three_state_preference_graph": [
+        "normal",
+        "reduced",
+        "enhanced"
+      ],
       "localstorage_key": "upg_motion_pref",
       "system_mq_listener_attached": true,
       "system_mq_event_dispatched": "upg:motion:change",
@@ -1940,6 +1955,48 @@
       "beacon_inspired_by": "Wild Card #6 Müller-Brockmann (typography carries meaning when motion is gone) + Wild Card #9 Kufi chocolate-block (spirit of the «ساكن» mark)",
       "beacon_self_score": 4,
       "pillar_close_note": "δ6 closes Pillar δ KINETIC SHELL — 6 stages, 6 distinct beacons (MOTION δ1, DATA δ2, INTERACTION δ3, STRUCTURAL δ4, MOTION δ5, META δ6), 0 forbidden violations, all Sacred Assets preserved (16 pages / 17 nav-items / legacy Upg.* APIs verbatim including Upg.motion W12)."
+    },
+    "ε1_artifacts": {
+      "branch": "elan-ε-content-revival-v2",
+      "commit": "0a9c17d",
+      "world": "hibr",
+      "files_modified": 3,
+      "files_added": 1,
+      "lines_added_total": 574,
+      "lines_added_index_html": 96,
+      "lines_added_pages_css": 265,
+      "lines_added_dashboard_js": 209,
+      "lines_added_app_js": 4,
+      "data_world_hibr_on_dashboard": 1,
+      "inline_svg_in_dashboard": 0,
+      "emoji_decorations_in_dashboard": 0,
+      "data_icon_in_dashboard_total": 22,
+      "data_icon_in_dashboard_added": 5,
+      "dash_margin_cell_count": 1,
+      "dash_continue_cell_count": 1,
+      "iraq_block_in_dashboard_count": 1,
+      "data_elan_stage_epsilon1_markers": 3,
+      "css_dash_margin_selectors": 13,
+      "css_iraq_block_hibr_selectors": 6,
+      "hex_literals_in_epsilon1_css_block": 0,
+      "prove_it_citation_visible": 1,
+      "upg_top_level_apis_unchanged": true,
+      "upg_elan_pages_dashboard_registered": true,
+      "js_node_check_pass": true,
+      "sacred_16_sections_intact": true,
+      "sacred_legacy_bento_cells_intact": true,
+      "sacred_ids_preserved": [
+        "#cath-skill-grid",
+        "#cath-activity-list",
+        "#v12Heatmap",
+        "#v12ChallengeLevel",
+        "#v12ChallengeBody"
+      ],
+      "beacon_type": "DATA_BEACON",
+      "beacon_name": "manuscript-margin-daily-progress",
+      "beacon_avoided": "Forbidden #11 animated counter from 0 + Forbidden #5 soft-shadow + 12px-radius card",
+      "beacon_inspired_by": "Wild Card #1 Najaf manuscript marginal markings",
+      "beacon_self_score": 4
     }
   }
 }
