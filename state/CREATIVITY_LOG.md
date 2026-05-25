@@ -311,3 +311,38 @@ disruption_triggers: 5
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-25 / ε1 — Pillar ε stage 1/12
+
+
+
+
+## ε2 — 2026-05-25
+**Beacon Type:** 🔊 SOUND_BEACON
+**The Surprise:** نهاية كل مكالمة تَنتج إشارة صوتية مَنطقية حسب النَتيجة، لا dind قياسي ولا ✓ checkmark كَما تَفعل كل لوحات AI الافتراضية. ثلاث استجابات مَدروسة:
+
+- **success** يَعزِف tetrachord صاعد بـ Saba — ٣ نغمات sine: A4 (440Hz) → C#5 (554Hz) → D#5 (622Hz)، بـ stagger 60ms بينهم؛ كل نغمة تَمر عبر biquad lowpass يَفتَح من 600Hz إلى 3200Hz في 110ms — يُعطي إحساس "صدى يَفتَح" كَما يَنفتح صدر العميل بعد الاعتراض الناجح.
+- **neutral** sine soft واحدة 400Hz × 80ms مع نفس الـ ADSR (8ms attack، 130ms exponential release) — هي «دَفنة»، إقرار بالحَيد لا أكثر.
+- **lost** **صَمت تام**. صفر صوت. الـ function `_emitLost()` تُعيد `true` بدون استدعاء `_scheduleNote`. الـ visual mirror (border-color = ember، outline 1px، box-shadow inset قاتم 60px) هو الإشارة الوحيدة. **هذا قلب الـ Beacon**: AI dashboards الافتراضية تُنتِج dings للخسارة كَما للنَجاح؛ ε2 يَرفُض ذلك. الصَمت هو العقاب الأَصدق — كأنّ الخط قُطِع.
+
+البنية المُساندة: `[data-outcome]` على `.call-card` يُحرّك CSS و JS في نفس اللحظة (border-color + box-shadow + meter cells tint). الـ `Upg.worlds.tayyar.emitOutcome(outcome, target)` API مَكشوف للـ console + للـ simulator — الـ event الـ DOM `upg:call:outcome` كَهيكل لـ analytics integration. الـ frozen-surface استُبدِل بـ strict superset يَحفظ γ7 (play/mute/unmute/toggle/isMuted/available/arpeggio) verbatim ويُضيف ε2 (emitOutcome/outcomes/successNotes/neutralFreq).
+
+**Reference Avoided:** Forbidden #16 — toast بـ ✓ checkmark سطر واحد افتراضي (Creativity Doctrine § ٣)؛ والـ AI-default الأكبر: "negative ding" على الفشل (موجود في كل dashboard AI من Slack إلى Notion إلى Figma). ε2 يَستخدم الصَمت كإشارة، وهو pattern غير شائع في software UX.
+
+**Inspired-by:** Wild Card #4 — Maqamat music notation. كل maqam له مَزاج محدَّد: Saba ascending = صعود وأمل (success)، dafn واحدة = قرار حياد، السكون التام = فراق (lost). أَخذتُ هذا المنطق وحَوَّلته إلى دلالات صوتية للـ outcomes — كَما كان المُغنِّي العراقي يَختار maqam حسب نوع القَصيدة، كذلك الـ system يَختار صدى حسب نوع النتيجة.
+
+**User-Visible:** yes — كل مستخدم يَفتح callcenter ويَنقر على أحد الـ 3 outcome buttons سيَسمع/لا يَسمع وسيَرى التَغيُّر اللوني الفوري على البطاقة. الـ aria-live="polite" على الـ result chip يُؤكِّد الإشارة لقارئ الشاشة («اعتراض ناجح — صدى صاعد» / «حَيد — dafn واحد» / «خسارة العميل — صَمت»). reduced-motion users يَسمعون نفس الـ audio (الـ audio يُسكَت تحت reduced-motion للحَفاظ على الـ pattern من γ7) لكن الـ visual outline يَظَل واضحاً — الـ a11y لا يُقايَض.
+
+**Originality Self-Score:** 4/5 — الـ multi-tone arpeggio مَوجود (Slack uses one)، single-note dafn مَوجود (most apps have a click sound)، silence-as-feedback في software UX **نادر جداً** — هو الذي يَرفَع الـ score. الالتزام بـ data-outcome attribute كـ single source of truth (audio + visual + ARIA) أيضاً غير شائع — أكثر AI implementations تَفصِل بين الـ audio handler والـ CSS class. claim: most AI-generated dashboards either ding-everything or are mute-everything; few make silence semantically meaningful.
+
+**Files touched:** `platform/index.html` (+75) · `platform/pages/callcenter.html` (+77/-1) · `platform/assets/css/worlds/_tayyar.css` (+133) · `platform/assets/js/elan/world-tayyar.js` (+162). Total +446/-1.
+
+**Verified at commit:** 504e752
+
+---STATS---
+total_beacons: 19
+unique_categories_used: 9
+avg_score: 4.16
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε2 — Pillar ε stage 2/12

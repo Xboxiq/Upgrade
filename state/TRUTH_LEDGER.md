@@ -1509,3 +1509,68 @@ the fallback string in δ5 will need a tokens.css entry. Recommended for
 | Iconography size out-of-scale | NO — all icons use `.qi` class system |
 
 — Entry end —
+
+
+
+---
+
+## ε2 — Callcenter Outcome Cues (Tayyar world) — 2026-05-25
+
+**Pillar:** ε CONTENT_REVIVAL · stage 2 of 12
+**Branch:** `elan-ε-content-revival` (single-branch-per-pillar — same as ε1)
+**Commit:** `504e752`
+**Spec:** `prompts/v4/ε2_CALLCENTER.md`
+
+### Verified by grep (before / after)
+
+| Metric | Before | After | Target |
+|---|---:|---:|---|
+| `data-world="tayyar"` on callcenter section (shard) | 0 | 1 | ≥ 1 |
+| `data-world="tayyar"` on callcenter section (inline) | 1 | 1 | ≥ 1 |
+| ε2 outcome harness card (`.call-card[data-outcome="idle"]`) | 0 | 2 (shard + inline) | ≥ 2 |
+| Three outcome buttons (`data-elan-outcome="success/neutral/lost"`) | 0 | 6 (3×2) | ≥ 6 |
+| Formal `iraq-block__source-name` citation | 0 | 2 | ≥ 2 |
+| `function emitOutcome` exported from world-tayyar.js | 0 | 2 (decl + export) | ≥ 1 |
+| Three branched outcomes (`v === 'success/neutral/lost'`) | 0 | 3 | 3 |
+| `_emitLost` is provably silent (zero `_scheduleNote` calls in body) | n/a | 0 | 0 |
+| `upg:call:outcome` event hook | 0 | 3 references | ≥ 1 |
+| CSS `[data-outcome="success/neutral/lost"]` selectors | 0 | 8 | ≥ 3 |
+| CSS `.call-meter` rules | 0 | 8 | ≥ 1 |
+| Reuses γ7 `_scheduleNote` pipeline (no new AudioContext) | n/a | 4 calls | ≥ 1 |
+| Raw `<svg viewBox` in ε2-added content | 0 | 0 | 0 |
+| Emoji in ε2-added markup | 0 | 0 | 0 |
+
+### Files touched (4 — within ≤ 4 cap)
+
+| File | Δ lines | Role |
+|---|---:|---|
+| `platform/index.html` (inline page-callcenter section) | +75 | adds outcome harness + iraq-block before B. Iraq-Specific Block |
+| `platform/pages/callcenter.html` (shard) | +77 / -1 | mirror of inline; adds `data-world="tayyar"` on `<section>` (was 0 → 1) |
+| `platform/assets/css/worlds/_tayyar.css` | +133 | `.call-card`, `.call-meter`, `.call-out-btn`, `[data-outcome=*]` states |
+| `platform/assets/js/elan/world-tayyar.js` | +162 | `emitOutcome(outcome[, target])` + 3-way audio dispatch + click delegation + `upg:call:outcome` event listener + frozen-surface superset replacement preserving γ7 API |
+
+**Total:** **+446 / −1** lines across 4 files. **Under the 600-line/stage cap.**
+
+### Beacon registered
+
+🔊 **SOUND_BEACON** — *three semantically distinct outcome responses*. Success: ascending tetrachord 440 → 554 → 622Hz (3 sine notes, biquad lowpass sweep 600→3200Hz over 110ms each, 60ms note stagger). Neutral: single soft sine 400Hz × 80ms (a "dafn" micro-acknowledgement). Lost: *intentional silence* — `_emitLost()` returns `true` without calling `_scheduleNote`. Visual mirror via `[data-outcome]` flips border-color, box-shadow, and `.call-meter` cell tint in lockstep. Avoids Forbidden #16 (toast-checkmark cliché) + the AI-default "negative ding" pattern. Inspired-by Wild Card #4 — Maqamat scales as feedback semantics. Originality self-score 4/5.
+
+### Sacred preserved
+
+- γ7 SOUND_BEACON pipeline (`_scheduleNote`, `_isReduced`, `_isMuted`, `_getCtx`, `_hasAudio`, `_ctx`, `_lastFireAt`, `STORAGE_KEY`, `DEBOUNCE_MS`, `ARPEGGIO`, `play`, `mute`, `unmute`, `toggle`, `engage`, `disengage`, `_onClick`, `_flashPulse`, `_onWorldChange`, `init`) — **untouched verbatim**. ε2 only appends a new IIFE-style block at the file tail and *replaces* `window.Upg.worlds.tayyar` with `Object.freeze({ ...prev, emitOutcome, outcomes, successNotes, neutralFreq })` — strict superset, no removal.
+- `archive/` — untouched.
+- 14 Upg.* top-level APIs — unchanged. ε2 nests under `Upg.worlds.tayyar` (γ7's bag).
+- Existing `cc-section-header`, `sim-shell`, `cc-citations`, `block-bridge--cross-page`, and Iraq Lens block (Worker 03 phases 1-5) — all preserved verbatim. ε2 inserts the new `.call-card` + formal `.iraq-block` *between* `</div><!-- /.sim-shell -->` and `<!-- ====== B. Iraq-Specific Block ====== -->`.
+- Stage-and-Replace doctrine: inline (`platform/index.html` line 4459 region) + shard (`platform/pages/callcenter.html` line 3531 region) edited in lockstep.
+- `prefers-reduced-motion: reduce` honored: audio is muted; visual outline still applies (a11y-honest — losing a customer must still be visible).
+
+### Forbidden Library check
+
+| Pattern | Triggered? |
+|---|---|
+| #16 toast checkmark single-line | NO — replaced with aria-live result chip |
+| #20 emoji in markup | NO (verified grep = 0 in ε2-added content) |
+| #23 Toy SVG inline | NO (0) |
+| AI-default "negative ding" on failure | NO — silence is the deliberate response for `lost` |
+
+— Entry end —
