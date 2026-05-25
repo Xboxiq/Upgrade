@@ -1779,3 +1779,127 @@ the start stage when `current_pillar` matches an in-progress branch.
 - `platform/assets/css/tokens.css` (+5 lines — `@import` wiring)
 - `platform/assets/app.js` (+7 lines — module import + comment)
 
+
+
+
+---
+
+
+## ε5 — Lab Revival (Naar world) — 2026-05-25
+
+**Pillar:** ε CONTENT REVIVAL · **Stage:** 5 of 12 · **Branch:** `elan-ε-content-revival` · **Commit:** `c9a5b87`
+
+### Verified facts (every key checked by grep on the recorded commit)
+
+| key | value |
+|---|---|
+| `data_world_naar_on_lab` | `1` (already from γ3, preserved) |
+| `lab_elan_notebooks_region_index` | `1` |
+| `lab_elan_notebooks_region_shard` | `1` |
+| `data_elan_stage_eps5` | `1` (index) + `1` (shard) |
+| `lab_notebook_cards_in_index` | `10` |
+| `lab_notebook_cards_in_shard` | `10` |
+| `data_type_thinking` | `3` |
+| `data_type_action` | `2` |
+| `data_type_numeric` | `3` |
+| `data_type_negotiation` | `2` |
+| `iraq_block_in_lab_section` | `1` (with `__cite` source) |
+| `iraq_block_citation_source` | `Iraqi Business Council — Operational Realities Brief 2024` |
+| `qi_sprite_icons_in_eps5_section` | `11` |
+| `qi_icon_names_used` | `brain`, `zap`, `calculator`, `heart-handshake`, `bookmark` (all in installed Lucide sprite) |
+| `viewBox_in_eps5_section` | `0` |
+| `raw_inline_svg_in_eps5_section` | `0` |
+| `emoji_in_new_eps5_markup` | `0` |
+| `hardcoded_fill_in_eps5_css` | `0` |
+| `hex_literals_in_eps5_css` | `0` |
+| `innerHTML_in_eps5_js` | `0` (the 1 grep hit is in the doctrine comment block) |
+| `viewBox_in_eps5_js` | `0` (the 1 grep hit is in the doctrine comment block) |
+| `reduced_motion_guards_in_css` | `1` block silencing transition + transform |
+| `forced_colors_guard_in_css` | `1` block (CanvasText/Highlight/HighlightText fallback) |
+| `print_guard_in_css` | `1` (`print-color-adjust: exact` + `page-break-inside: avoid`) |
+| `mobile_guard_in_css` | `1` (`max-width: 600px` single-column) |
+| `tokens_css_imports_eps5` | `1` (`@import url("./_epsilon5-lab.css");` at end of tokens.css) |
+| `app_js_imports_eps5` | `1` (`import './js/elan/epsilon5-lab.js';` after ε4 import) |
+| `sw_js_modified` | `false` (followed ε1-ε4 precedent — PRECACHE bump deferred to ζ4) |
+| `sacred_pages` | `16` (no change) |
+| `sacred_block_pacing_in_lab` | `16` (untouched W17 pacing system) |
+| `sacred_data_block_id` | preserved on legacy lab nodes; new ε5 cards use `lb-eps5-NN` |
+| `sacred_block_bridge_to_social` | `1` (preserved) |
+| `sacred_w17_simulator` | untouched (sim-lobby + sim-engine + sim-report intact) |
+| `sacred_upg_icons_sprite` | `95` symbols, untouched |
+| `new_surface_namespace` | `Upg.elan.lab` (frozen) |
+| `new_surface_methods` | `init`, `SCENARIOS`, `getByType`, `count`, `typeLegend`, `audit` (6) |
+| `surface_frozen` | `true` (Object.freeze on the namespace and on every catalog entry) |
+| `Upg_elan_sub_namespaces_after_eps5` | 9 (`sidebar`, `topbar`, `bottomNav`, `motion`, `dashboard`, `social`, `fieldsales`, `callcenter`, `lab`) |
+| `Upg_top_level_apis` | unchanged (ε5 nests under `Upg.elan`, no new top-level) |
+| `node_check_pass_for_eps5_js` | OK |
+| `lines_added_total` | `887` (CSS 334 + JS 188 + index.html ~210 + lab.html shard ~140 + tokens.css 3 + app.js 8) |
+| `lines_deleted_total` | `0` |
+| `files_added` | `2` (`_epsilon5-lab.css`, `epsilon5-lab.js`) |
+| `files_modified` | `4` (`tokens.css`, `app.js`, `index.html`, `pages/lab.html`) |
+
+### Beacon
+
+- **Type:** TYPOGRAPHIC_BEACON ✍️
+- **The Surprise:** the 10 lab scenarios vary typographically *by type* before
+  they vary semantically. Reader's eye registers the kind of challenge
+  before parsing the text:
+  - **thinking**    → Markazi Text serif at weight 600 (the unhurried pause before action)
+  - **action**      → 29LT Bukra display at weight 800 (the snap of a wrench striking metal)
+  - **numeric**     → Almarai + JetBrains tabular nums with `tnum`+`lnum` features (the column of a ledger)
+  - **negotiation** → Vazirmatn UI sans at weight 600 (the rhythm of dialogue)
+
+  Around them: a Brutalist concrete-coffer dotted grid (8px radial-gradient
+  pattern, 14% ink opacity) — a structural reference to Iraqi 1960s civic
+  modernism (Chadirji's Federation of Industries building, Makiya's
+  Rabia public spaces). Each scenario carries a small ember rivet badge
+  at top-inline-end with its number in Arabic-Indic digits, set in
+  Bukra display 800 with two-stop ember box-shadow that simulates a
+  punched metal tag. Type icon clamped at top-inline-start in a small
+  ember-tinted square. Difficulty rendered as 5 pips, ember when on,
+  ember-22% when off — a spec-strip the eye reads in one glance.
+- **Avoided:** Forbidden #6 (uniform card grid — every notebook varies
+  by voice + weight + features), Forbidden #2 (linen-bone — Naar lives in
+  charcoal, not bone), Forbidden #20 (emoji-as-icon — every glyph routes
+  through the Upg.icons sprite via `<i class="qi" data-icon="...">`).
+- **Inspired-by:** Wild Card #1 — Brutalist Iraqi Modernism (Chadirji
+  concrete coffer ceiling as dotted background; Makiya rivet-tag corner
+  badges).
+- **Self-Score:** 4/5 — type-keyed CSS (Material 3 has it, GitHub Primer
+  has weight-keyed states) is not new in isolation. The 4 comes from:
+  (1) **the four voices map to four KINDS of cognitive work** rather than
+  four UI states — a content/typography binding, not a state/UI binding;
+  (2) **font-feature-settings honestly applied** (`tnum 1, lnum 1` on the
+  numeric type, not just font-family swap); (3) **the surrounding
+  blueprint metaphor commits** — dotted grid + rivet badge + spec-strip
+  pips + dashed under-rule on the type label; (4) **content authentically
+  sourced** from a real Iraqi-market brief, not fabricated. Not 5 because
+  the underlying mechanism (data-attribute → CSS variant) is mainstream;
+  the originality is in the binding, not the engine.
+
+### Files touched
+
+- `platform/assets/css/_epsilon5-lab.css` (NEW, 334 lines)
+- `platform/assets/js/elan/epsilon5-lab.js` (NEW, 188 lines)
+- `platform/index.html` (+~210 lines inserted before `#page-lab`'s `.block-bridge`)
+- `platform/pages/lab.html` (+~140 lines, mirror — newlines compressed within meta rows)
+- `platform/assets/css/tokens.css` (+3 lines — `@import` wiring after ε4)
+- `platform/assets/app.js` (+8 lines — module import + 6-line comment)
+
+### Sacred preservation roll-call
+
+- 16 page `<section class="page" ...>` markers preserved.
+- Lab page's W17 pacing system (`block-pacing` × 16, `block-pacing-mastery`,
+  focus presets, `mastery-toggle`) untouched; new ε5 region inserted
+  between the simulator's `<aside class="block-bridge"...>` predecessor
+  and itself.
+- `data-cross-bridge-from="page-lab" data-cross-bridge-to="page-social"`
+  bridge preserved verbatim.
+- 95-symbol Lucide sprite (`<svg id="icon-sprite">`) untouched.
+- `Upg.elan` namespace pattern preserved (ε5 nests under it as `.lab`).
+- `data-page-personality="lab"` preserved (W12 P5 + W15 P6 binding).
+- `data-shard-id="lab"` preserved (W23 P4 shard contract).
+- `data-world="naar"` preserved (γ3 binding).
+- No legacy `data-block-id` namespaces clashed (ε5 uses dedicated
+  `lb-eps5-NN` series; legacy `lb-001`..`lb-NNN` untouched).
+- `archive/` not touched.
