@@ -155,3 +155,10 @@ import './js/elan/delta6-motion.js';
 // hand-drawn route canvas, 8 Baghdad pins, no Google Maps, no external API.
 // Reflective surface registers under Upg.elan.fieldsalesRoute.)
 import './js/elan/epsilon3-fieldsales.js';
+
+
+// ÊLAN v4 — ε4: Social Content Revival (Pillar ε — Stage 4 of 12)
+// VISUAL_BEACON — VHS scrub-bar engagement timeline (retrowave scan-lines +
+// 60ms glitch on snapshot crossfade). Inspired-by: Wild Card #15 Synthwave + Khat.
+// Registers Upg.elan.social (NOT a 15th top-level Upg.* — namespaced under Upg.elan).
+import './js/elan/epsilon4-social.js';

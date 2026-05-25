@@ -1,0 +1,383 @@
+/* ────────────────────────────────────────────────────────────────────────
+   ÊLAN v4 — ε4 — Social Content Revival (Tayyar world)
+   ────────────────────────────────────────────────────────────────────────
+   VISUAL_BEACON — VHS Scrub Engagement Timeline
+
+   Inspired-by: Wild Card #15 — Synthwave + Khat. The retrowave video tape
+   was a domestic Iraqi 1980s-90s artifact — the act of scrubbing a tape
+   forward and back was tactile, lossy, and gave a felt sense of where in
+   the recording one was. Translating that to social-engagement: instead
+   of a bar chart that flattens N posts into N rectangles, we offer a
+   single horizontal track. The reader scrubs left-right; a snapshot card
+   below mutates with a 60ms glitch into the post that occupied that
+   moment in time. Engagement intensity is read in the track's filled
+   portion; *what* the post was is read by the snapshot.
+
+   Sacred:
+   - Zero hex literals in this file (every color → Tayyar token).
+   - Every scan-line direction stays within the 8% color-mix opacity
+     ceiling (Iconography Doctrine § ٣.ج #16).
+   - Reduced-motion gate per δ6 sanctuary contract.
+   ──────────────────────────────────────────────────────────────────── */
+
+@layer pages {
+
+  /* ── Outer container ───────────────────────────────────────────── */
+  [data-world="tayyar"] .vhs-section {
+    display: grid;
+    gap: var(--space-4, 16px);
+    padding-block: var(--space-6, 24px);
+    container-type: inline-size;
+  }
+
+  [data-world="tayyar"] .vhs-section__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3, 12px);
+    flex-wrap: wrap;
+  }
+
+  [data-world="tayyar"] .vhs-section__head h2 {
+    font-family: var(--voice-display);
+    color: var(--ink);
+    font-size: clamp(1.25rem, 1rem + 1.2vw, 1.625rem);
+    margin: 0;
+  }
+
+  [data-world="tayyar"] .vhs-section__head .meta {
+    color: var(--ink-faint);
+    font-family: var(--voice-body);
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── The scrub track ───────────────────────────────────────────── */
+  [data-world="tayyar"] .vhs-scrub {
+    position: relative;
+    block-size: 88px;
+    background: linear-gradient(180deg, var(--anchor-1), var(--anchor-2));
+    border: 1px solid color-mix(in oklch, var(--focus) 30%, transparent);
+    border-radius: var(--r-2, 8px);
+    overflow: hidden;
+    cursor: ew-resize;
+    touch-action: pan-y;
+    isolation: isolate;
+    user-select: none;
+  }
+
+  [data-world="tayyar"] .vhs-scrub:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  /* Scan-lines overlay — 1px every 3px, capped at 8% (Iconography § ٣.ج #16) */
+  [data-world="tayyar"] .vhs-scrub::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 2px,
+      color-mix(in oklch, var(--focus) 7%, transparent) 2px,
+      color-mix(in oklch, var(--focus) 7%, transparent) 3px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Date ticks at 0%, 25%, 50%, 75%, 100% — six-month marks */
+  [data-world="tayyar"] .vhs-scrub__ticks {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  [data-world="tayyar"] .vhs-scrub__tick {
+    position: absolute;
+    inset-block: 0;
+    inline-size: 1px;
+    background: color-mix(in oklch, var(--ink) 22%, transparent);
+  }
+
+  [data-world="tayyar"] .vhs-scrub__tick-label {
+    position: absolute;
+    inset-block-start: calc(100% - 18px);
+    transform: translateX(50%);
+    color: var(--ink-faint);
+    font-family: var(--voice-accent, var(--voice-body));
+    font-size: 0.6875rem;
+    font-variant-numeric: tabular-nums;
+    background: color-mix(in oklch, var(--anchor-bg) 80%, transparent);
+    padding-inline: 4px;
+    white-space: nowrap;
+  }
+
+  /* Filled track — magenta gradient */
+  [data-world="tayyar"] .vhs-scrub__fill {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    inline-size: var(--scrub-pct, 0%);
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--ember) 18%, transparent),
+      color-mix(in oklch, var(--ember) 55%, transparent) 70%,
+      var(--ember)
+    );
+    border-inline-end: 2px solid var(--focus);
+    transition: inline-size var(--t-2, 200ms) var(--ease-tayyar, cubic-bezier(0.45, -0.4, 0.55, 1.4));
+    z-index: 3;
+  }
+
+  /* Cursor — cyan glow line */
+  [data-world="tayyar"] .vhs-scrub__cursor {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: var(--scrub-pct, 0%);
+    transform: translateX(-50%);
+    inline-size: 2px;
+    background: var(--focus);
+    box-shadow:
+      0 0 12px color-mix(in oklch, var(--focus) 70%, transparent),
+      0 0 24px color-mix(in oklch, var(--focus) 30%, transparent);
+    pointer-events: none;
+    z-index: 4;
+  }
+
+  /* Cursor handle — circular grip at top */
+  [data-world="tayyar"] .vhs-scrub__handle {
+    position: absolute;
+    inset-block-start: -6px;
+    inset-inline-start: var(--scrub-pct, 0%);
+    transform: translateX(-50%);
+    inline-size: 14px;
+    block-size: 14px;
+    background: var(--focus);
+    border: 2px solid var(--anchor-bg);
+    border-radius: 50%;
+    box-shadow: 0 0 16px color-mix(in oklch, var(--focus) 60%, transparent);
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  /* Track readout — large numerator, small date — appears inside the track */
+  [data-world="tayyar"] .vhs-scrub__readout {
+    position: absolute;
+    inset-inline-start: 50%;
+    inset-block: 0;
+    transform: translateX(-50%);
+    display: grid;
+    place-items: center;
+    grid-auto-flow: row;
+    gap: 1px;
+    pointer-events: none;
+    z-index: 6;
+    color: var(--ink);
+    text-shadow: 0 1px 2px color-mix(in oklch, var(--anchor-bg) 70%, transparent);
+  }
+
+  [data-world="tayyar"] .vhs-scrub__readout .num {
+    font-family: var(--voice-display);
+    font-variant-numeric: tabular-nums;
+    font-size: clamp(1.25rem, 1rem + 1.5vw, 1.875rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  [data-world="tayyar"] .vhs-scrub__readout .date {
+    font-family: var(--voice-accent, var(--voice-body));
+    color: var(--ink-muted);
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Snapshot card (post detail at scrubbed moment) ─────────────── */
+  [data-world="tayyar"] .vhs-snapshot {
+    display: grid;
+    gap: var(--space-2, 8px);
+    padding: var(--space-4, 16px);
+    background: var(--anchor-bg);
+    border: 1px solid color-mix(in oklch, var(--focus) 22%, transparent);
+    border-radius: var(--r-2, 8px);
+    transition: filter var(--t-1, 110ms);
+  }
+
+  [data-world="tayyar"] .vhs-snapshot__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-3, 12px);
+    color: var(--ink-muted);
+    font-family: var(--voice-body);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+  }
+
+  [data-world="tayyar"] .vhs-snapshot__head .qi {
+    color: var(--ember);
+  }
+
+  [data-world="tayyar"] .vhs-snapshot__engagement {
+    font-family: var(--voice-display);
+    font-variant-numeric: tabular-nums;
+    font-size: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+    font-weight: 800;
+    color: var(--ember);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  [data-world="tayyar"] .vhs-snapshot__title {
+    font-family: var(--voice-body);
+    color: var(--ink);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  [data-world="tayyar"] .vhs-snapshot__breakdown {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--space-2, 8px);
+    margin-block-start: var(--space-2, 8px);
+  }
+
+  [data-world="tayyar"] .vhs-snapshot__cell {
+    display: grid;
+    gap: 2px;
+    padding: var(--space-2, 8px);
+    background: var(--anchor-1);
+    border: 1px solid color-mix(in oklch, var(--ink) 8%, transparent);
+    border-radius: var(--r-1, 4px);
+  }
+
+  [data-world="tayyar"] .vhs-snapshot__cell .label {
+    color: var(--ink-faint);
+    font-family: var(--voice-body);
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+  }
+
+  [data-world="tayyar"] .vhs-snapshot__cell .value {
+    color: var(--ink);
+    font-family: var(--voice-accent, var(--voice-body));
+    font-variant-numeric: tabular-nums;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  /* ── Glitch keyframe — 60ms hue/translate stutter on post change ── */
+  @keyframes ep4-vhs-glitch {
+    0%   { filter: none;            transform: translate(0, 0); }
+    18%  { filter: hue-rotate(15deg); transform: translate(-1px, 0); }
+    42%  { filter: saturate(1.6);   transform: translate(0.5px, 0.5px); }
+    72%  { filter: hue-rotate(-12deg); transform: translate(1px, 0); }
+    100% { filter: none;            transform: translate(0, 0); }
+  }
+
+  [data-world="tayyar"] .vhs-snapshot[data-glitching="true"] {
+    animation: ep4-vhs-glitch 60ms linear;
+  }
+
+  /* ── Iraq Block (Tayyar tint) ──────────────────────────────────── */
+  [data-world="tayyar"] .iraq-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2, 8px);
+    padding: var(--space-4, 16px);
+    border-inline-start: 3px solid var(--ember);
+    background: color-mix(in oklch, var(--ember) 6%, transparent);
+    border-radius: 0 var(--r-2, 8px) var(--r-2, 8px) 0;
+  }
+
+  [data-world="tayyar"] .iraq-block__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2, 8px);
+    color: var(--ink-muted);
+    font-family: var(--voice-body);
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+  }
+
+  [data-world="tayyar"] .iraq-block__header .qi {
+    color: var(--ember);
+  }
+
+  [data-world="tayyar"] .iraq-block__statement {
+    font-family: var(--voice-body);
+    color: var(--ink);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  [data-world="tayyar"] .iraq-block__statement strong {
+    color: var(--ember);
+    font-weight: 700;
+  }
+
+  [data-world="tayyar"] .iraq-block__source {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1, 4px);
+    color: var(--ink-faint);
+    font-family: var(--voice-body);
+    font-size: 0.75rem;
+    font-style: italic;
+    letter-spacing: 0.02em;
+  }
+
+  [data-world="tayyar"] .iraq-block__source::before {
+    content: "—";
+    color: var(--ember);
+    opacity: 0.6;
+    margin-inline-end: 0.15em;
+    font-style: normal;
+  }
+
+  /* ── Reduced motion / forced colors / print ─────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    [data-world="tayyar"] .vhs-scrub__fill { transition: none; }
+    [data-world="tayyar"] .vhs-snapshot { transition: none; }
+    [data-world="tayyar"] .vhs-snapshot[data-glitching="true"] {
+      animation: none;
+    }
+  }
+
+  [data-motion="reduced"] [data-world="tayyar"] .vhs-scrub__fill { transition: none; }
+  [data-motion="reduced"] [data-world="tayyar"] .vhs-snapshot[data-glitching="true"] { animation: none; }
+
+  @media (forced-colors: active) {
+    [data-world="tayyar"] .vhs-scrub {
+      border: 1px solid ButtonText;
+    }
+    [data-world="tayyar"] .vhs-scrub__fill {
+      background: Highlight;
+    }
+    [data-world="tayyar"] .vhs-scrub__cursor,
+    [data-world="tayyar"] .vhs-scrub__handle {
+      background: HighlightText;
+      border-color: Highlight;
+    }
+    [data-world="tayyar"] .vhs-scrub::before {
+      background: transparent;
+    }
+    [data-world="tayyar"] .iraq-block {
+      border-inline-start-color: Highlight;
+      background: transparent;
+    }
+  }
+
+  @media print {
+    [data-world="tayyar"] .vhs-scrub::before { background: none; }
+    [data-world="tayyar"] .vhs-scrub__fill { background: gray; }
+    [data-world="tayyar"] .vhs-scrub__cursor,
+    [data-world="tayyar"] .vhs-scrub__handle { display: none; }
+  }
+
+}
