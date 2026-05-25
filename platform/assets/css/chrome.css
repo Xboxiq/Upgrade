@@ -1855,3 +1855,127 @@ body[data-temporal-slice="night"]     { --temporal-mood: 0.8; }
 }
 
 /* End ÊLAN v4 — δ3 ─────────────────────────────────────────────────── */
+
+
+
+/* ╭───────────────────────────────────────────────────────────────────╮
+ * │  ÊLAN v4 — δ4 — Mobile Bottom Nav (Plinth Mode)                   │
+ * │  🏛 STRUCTURAL_BEACON — "Plinth, Not Pill"                        │
+ * │                                                                   │
+ * │  Targets the existing #dual-bottom-nav (Worker 24 / Pack v3).     │
+ * │  Default glass behavior preserved unchanged. Plinth mode is       │
+ * │  opt-in via [data-elan-bottom-nav="plinth"] on the same node      │
+ * │  (set by /platform/assets/js/elan/bottom-nav.js).                 │
+ * │                                                                   │
+ * │  Counter-aesthetic to Forbidden #3 (floating sidebar/pill nav     │
+ * │  Notion clone). The plinth is structurally honest: no float, no   │
+ * │  glass, no rounded corners — a flat horizontal slab with a single │
+ * │  ember top-edge that inherits the active world's identity.        │
+ * ╰───────────────────────────────────────────────────────────────────╯ */
+
+#dual-bottom-nav[data-elan-bottom-nav="plinth"] {
+  /* Solid surface — no transparency, no backdrop filter. */
+  background: var(--anchor-1, var(--color-surface-1, var(--dual-bottom-nav-bg)));
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  /* Plinth has zero border-radius and a single ember hairline at the
+     top edge — the only decorative line on the entire bar. */
+  border-radius: 0;
+  border-top: 1px solid var(--ember, currentColor);
+  /* No shadow. The plinth doesn't pretend to hover. */
+  box-shadow: none;
+}
+
+/* Active slot — 2px ember bottom-underline, like a structural tab
+ * indicator carved into the plinth. Drawn as ::after so the legacy
+ * .dual-bottom-nav-item--active styles (if any) don't conflict. */
+#dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item[data-elan-active="true"] {
+  color: var(--ember, currentColor);
+  position: relative;
+}
+
+#dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item[data-elan-active="true"]::after {
+  content: "";
+  position: absolute;
+  inset-inline: 12%;
+  inset-block-end: 0;
+  block-size: 2px;
+  background: var(--ember, currentColor);
+  pointer-events: none;
+}
+
+/* Active slot icon picks up the ember color via currentColor inheritance. */
+#dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item[data-elan-active="true"] .dual-bottom-nav-icon {
+  color: var(--ember, currentColor);
+}
+
+/* Hover/focus on plinth items — subtle, no shadow, no scale. */
+@media (prefers-reduced-motion: no-preference) {
+  #dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item {
+    transition:
+      color var(--t-2, 200ms) var(--ease-elan, cubic-bezier(0.16, 1, 0.3, 1)),
+      background-color var(--t-2, 200ms) var(--ease-elan, cubic-bezier(0.16, 1, 0.3, 1));
+  }
+}
+
+#dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item:hover,
+#dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item:focus-visible {
+  color: var(--ink, currentColor);
+  background: color-mix(in oklch, var(--ember, currentColor) 8%, transparent);
+}
+
+#dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item:focus-visible {
+  outline: 2px solid var(--focus, var(--ember, currentColor));
+  outline-offset: -2px;
+  border-radius: 0;
+}
+
+/* Tap-press feedback — instant 1px depression, no scale, no spring.
+ * Brutalist honesty: the slot is a key being pressed, not a balloon. */
+@media (prefers-reduced-motion: no-preference) {
+  #dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item:active {
+    transform: translateY(1px);
+  }
+}
+
+/* The center FAB (cmdk) keeps its filled-circle identity but sits on
+ * the plinth with a hard-edged ember ring instead of the default
+ * floating shadow. */
+#dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-center {
+  /* Override any default elevation on the center slot. */
+  box-shadow: none;
+  background: transparent;
+  border: 1px solid var(--ember, currentColor);
+  border-radius: 0;
+}
+
+/* Reduced motion — kill transitions and the press translate. */
+@media (prefers-reduced-motion: reduce) {
+  #dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item {
+    transition: none;
+    transform: none !important;
+  }
+}
+
+/* Forced colors (Windows high-contrast). */
+@media (forced-colors: active) {
+  #dual-bottom-nav[data-elan-bottom-nav="plinth"] {
+    background: Canvas;
+    border-top: 1px solid CanvasText;
+  }
+  #dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item[data-elan-active="true"]::after {
+    background: Highlight;
+  }
+  #dual-bottom-nav[data-elan-bottom-nav="plinth"] .dual-bottom-nav-item:focus-visible {
+    outline: 2px solid Highlight;
+  }
+}
+
+/* Print — the plinth is a navigation layer; hide it entirely. */
+@media print {
+  #dual-bottom-nav[data-elan-bottom-nav="plinth"] {
+    display: none !important;
+  }
+}
+
+/* End ÊLAN v4 — δ4 ─────────────────────────────────────────────────── */

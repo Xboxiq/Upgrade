@@ -139,3 +139,6 @@ import './js/elan/bento-temporal.js';
 
 // ÊLAN v4 — δ3: Living Topbar (Reading Tide — INTERACTION beacon)
 import './js/elan/topbar-living.js';
+
+// ÊLAN v4 — δ4: Mobile Bottom Nav (Plinth Mode + Maqamat Haptics — STRUCTURAL beacon)
+import './js/elan/bottom-nav.js';
