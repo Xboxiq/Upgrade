@@ -1446,3 +1446,87 @@ the fallback string in δ5 will need a tokens.css entry. Recommended for
 - verified: bento_cells=10, iraq_block=on, hibr_world=on, citation=on
 - files: platform/index.html, platform/assets/css/pages.css, platform/assets/js/elan/epsilon1-dashboard.js
 
+
+
+
+## ε2 — Callcenter Revival (Tayyar SOUND_BEACON)
+
+**Commit:** `a488146`  ·  **Branch:** `elan-ε-content-revival-resume`  ·  **Date:** 2026-05-26
+
+### Forensic before / after
+
+| Metric | Before (main @ facb054) | After (a488146) | Change |
+|---|---:|---:|---:|
+| `data-call-card` with outcome state | 0 | 1 | +1 |
+| `data-call-emit` buttons | 0 | 3 | +3 |
+| `[data-outcome=*]` CSS rules in Tayyar scope | 0 | 3 | +3 |
+| `.call-meter` rules in pages.css | 0 | 5 | +5 |
+| `.iraq-block` in `#page-callcenter` | 0 | 1 panel + icon | +1 |
+| `epsilon2-callcenter.js` lines | 0 | 194 | +194 |
+| `Upg.callcenter` namespace registrations | 0 | 1 (frozen, 4 methods) | +1 |
+| Top-level `Upg.*` namespaces | 31 | 32 | +1 |
+| `createOscillator` calls in ε2 module | 0 | 1 (reused via `tone()`) | +1 |
+| `prefers-reduced-motion` guards in ε2 JS | 0 | 2 | +2 |
+| `prefers-reduced-motion` guards in ε2 CSS | 0 | 1 | +1 |
+| Inline `<svg viewBox>` in ε2 HTML | 0 | 0 | 0 |
+| Emoji in ε2 markup | 0 | 0 | 0 |
+| Hardcoded `fill="#…"` in ε2 | 0 | 0 | 0 |
+| Hex literals in ε2 CSS | 0 | 0 | 0 |
+| Hex literals in ε2 JS | 0 | 0 | 0 |
+| `app.js` ε imports | 1 (ε1) | 2 (ε1, ε2) | +1 |
+| Citation visible (`المصدر: استطلاع داخلي، شركة آسيا 2023`) | — | yes | +1 |
+| `data-raw-value="78"` PROVE-IT attr | — | yes | +1 |
+
+### Brace / paren balance
+
+| File | Open | Close | Status |
+|---|---:|---:|---|
+| `epsilon2-callcenter.js` braces | 42 | 42 | MATCH |
+| `epsilon2-callcenter.js` parens | 126 | 126 | MATCH |
+| `pages.css` braces (whole file) | 4326 | 4326 | MATCH |
+| `index.html` `</section><!-- /page-callcenter -->` | — | line 4709 | INTACT |
+
+### Beacon record
+
+- **Type:** 🔊 SOUND_BEACON
+- **Three states, three echoes:**
+  - `success` → `Upg.haptic.play('maqsoom')` + arpeggio sine 360→440→540Hz, 92ms cadence
+  - `lost`    → SILENCE (no audio, no haptic) + 1px ember outline, offset 3px
+  - `neutral` → `Upg.haptic.play('dafn')` + sine 400Hz × 80ms
+- **Avoided:** Generic ding/buzz on every event; the AI-default "play sound for everything" cliché.
+- **Inspired-by:** Wild Card #4 — Maqamat scales (the maqsoom rhythm `[8,30,8,30,14]ms` transposed to pitch `[360,440,540]Hz`).
+- **Self-score:** 4 / 5
+- **User-visible:** yes (every callcenter outcome demo button)
+
+### Sacred preservation audit
+
+| Asset | Status |
+|---|---|
+| 16 `<section class="page">` | preserved (no add/remove) |
+| `Upg.haptic` (δ4) | preserved, consumed read-only via `Upg.haptic.play(pattern)` |
+| `Upg.sound` (W16 P5) | preserved, consumed read-only via `Upg.sound.enabled()` check |
+| `Upg.icons` (α4) | preserved, called read-only via `Upg.icons.autoMount()` on DOMContentLoaded |
+| `#page-callcenter` legacy v3 content (cc-citations + 200+ blocks) | untouched |
+| `block-bridge--cross-page` to `page-customercare` | preserved verbatim |
+| `archive/` | 0 bytes diff |
+| `prompts/v1, v2, v3` | 0 bytes diff |
+| `state/AUDIT_BASELINE.md` | untouched |
+| `state/CHANGELOG.md` | untouched |
+
+### Spec adherence
+
+- **Beacon category as declared by spec:** SOUND_BEACON (no pivot needed; last SOUND was γ7 — 11 stages back, no streak risk).
+- **Acceptance criteria status:**
+  - [x] page section has `data-world="tayyar"` (was already present from γ7)
+  - [x] arpeggio plays on `success` outcome (procedural, lazy ctx)
+  - [x] silence + red outline on `lost` outcome (verified by CSS rule + JS branch)
+  - [x] icons from sprite (`check-circle` / `circle` / `x` / `globe`) — 0 emoji, 0 toy SVG
+  - [x] Iraq Block visible with citation (`شركة آسيا 2023`)
+  - [x] commit message includes `arpeggio=on, silence_lost=on, ...`
+  - [x] Beacon recorded in `state/CREATIVITY_LOG.md`
+- **Non-acceptance carry-over:** the spec lists "7 units of content" (cold-call mastery, objections, de-escalation, win-back, cross-sell, polite close, KPIs). The legacy v3 callcenter section already ships ~250+ blocks covering ALL of these via Worker 03 / Phase 4 + Worker 17 schema; ε2 adds the **beacon layer** on top without duplicating content. No regressions to the legacy curriculum.
+
+### Open questions for follow-up
+
+- **Real-call integration** — the demo card is a single hardcoded scenario. A natural ε2.5 extension would wire `Upg.callcenter.emit()` into the existing v3 simulator's outcome handler so REAL exercises (not just the demo) get the three-state echo. Logged here as a candidate for ε7 (customercare) or ε12 (cross-page psychology layer).
+- **Pillar ε branch name** — the previous session left a stale `elan-ε-content-revival` ref on the remote (no PR opened). This stage is on `elan-ε-content-revival-resume` to side-step it. ε3+ continue on the resume branch; PR title at end will be "feat(elan-v4): Pillar ε — CONTENT_REVIVAL (12/12)".

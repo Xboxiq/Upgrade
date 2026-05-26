@@ -284,3 +284,32 @@ last_updated: 2026-05-25 / δ6 — Pillar δ COMPLETE 6/6
 **Files touched:** platform/index.html, platform/assets/css/pages.css, platform/assets/js/elan/epsilon1-dashboard.js
 **Verified at commit:** pending
 
+
+
+
+## ε2 — 2026-05-26
+**Beacon Type:** 🔊 SOUND_BEACON
+**The Surprise:** كل تمرين كول-سنتر يَنتهي بإحدى ثلاث ردود — صوتية أو صامتة. **اعتراض ناجح** = haptic مَقسوم (8/30/8/30/14ms من δ4) + arpeggio ثلاثي صاعد بـ WebAudio (360 → 440 → 540 Hz, sine, 80ms tone مع 12ms gap = 92ms cadence, attack خطي 10ms / release أسي 120ms, peak gain 0.08). **خسارة العميل** = صمت كامل + outline أحمر 1px + offset 3px. لا صوت، لا haptic. الـ silence هو العقاب — كل platform-AI أُخرى تَلعب «buzz error» (Forbidden #16 toast-checkmark cliché بصيغة معكوسة) فتُعلِم المستخدم كأنّه أخطأ في رفع زر؛ ÊLAN يُؤكِّد أن الخسارة غياب لا قَرع. **حياد** = haptic دَفّن (8ms) + sine 400Hz × 80ms peak 0.05. الإيقاع الثلاثي للأرپيج مُستعار من المَقسوم نفسه ([8,30,8,30,14] في الزمن → [360,440,540] في الذبذبة): الـ groove يَتحوَّل إلى ground→reach→close. الـ AudioContext يُبنى lazy على أول إيماءة (autoplay-policy آمن على Safari/iOS). prefers-reduced-motion يُسكِت كل الصوت (لكن البصري يَبقى). Upg.sound.enabled() المَوروث من W16 P5 يُحترَم: لو كان off، الصوت يَصمت كاملاً، الـ haptic يَفير (لأنه a11y وَلَيس entertainment). Upg.callcenter جديد (32nd top-level Upg.* API) frozen: emit / outcomes / silence / attach.
+
+البصري: `[data-call-card][data-outcome="success"]` يَرسم box-shadow بـ focus token الـ Tayyar (`color-mix(in oklch, var(--focus) 28%, transparent)`)؛ `[data-outcome="lost"]` يَنفي الـ box-shadow ويَفرض outline أحمر بـ ember عبر `color-mix(in oklch, var(--ember) 48%, transparent)` مع outline-offset 3px (ضوء mute + خط اعتزال)؛ `[data-outcome="neutral"]` halo focus متوسط 14%. الـ call-meter (5 خلايا 6px, gap 2px) يُكتَب فيها `data-active="true"` على عدد الخلايا حسب outcome (5 / 3 / 1) — visual cumulative score مَزروع داخل الكارد، ليس بجانبه.
+
+السياق العراقي مُمَوَّن داخل ε2: aside.iraq-block بـ ember تَيار، citation visible (شركة آسيا 2023، 78% من العملاء يُفضّلون WhatsApp على المكالمة الواردة)، data-raw-value=78 للـ PROVE-IT contract. اللغة عربية بحتة في كل المَنشور (لا «Success!» ولا emoji، لا «Welcome back»).
+
+**Reference Avoided:** Generic ding/buzz cliché — كل platform-AI تَلعب نغمة عند كل event (نجاح أو خسارة). ε2 يَكسِر هذه القاعدة: silence is the punishment. + Forbidden #20 (emoji as feedback) + Forbidden #16 (toast checkmark) + الـ AI-default 'play same sound for everything'.
+**Inspired-by:** Wild Card #4 — Maqamat scales as feedback. الـ maqsoom rhythm له pattern زمني محدَّد ([8,30,8,30,14]ms) — هنا هو يَتحوَّل إلى pitch pattern (360→440→540Hz), low→mid→high = ground→reach→close. الإيقاع الواحد يَعيش في الـ haptic (زمنياً) وفي الـ tone (تردُّدياً) — same musical idea, two senses.
+**User-Visible:** yes (every demo button click triggers a distinct outcome echo; the silence-on-lost is the most surprising — most users will tap «خسارة العميل» twice expecting a buzz, then realize the absence is the answer)
+**Originality Self-Score:** 4/5 — three-state outcome feedback ليس جديداً (Stripe Atlas يَفعل ذلك بـ green/red/grey)؛ procedural WebAudio أرپيج ليس جديداً (γ7 Tayyar فعله من قبل لكن بدون haptic + بدون ربط بـ outcome). الذي يَجعله 4/5: (١) **silence is the third state** — معظم المنصات تَلعب صوت سلبي على الخسارة؛ (٢) **maqsoom rhythm → maqsoom pitch** isomorphism — نفس الفكرة الموسيقية في حواسّ مختلفة؛ (٣) **Upg.sound.enabled() integrity** — الـ haptic لا يَنطفئ مع الصوت لأنه a11y not entertainment؛ (٤) **Arabic-only UI text** بدون اعتذار. Claim: very few platforms tie haptic+audio to a 3-outcome simulator AND let one of them be silence.
+**Files touched:** platform/assets/js/elan/epsilon2-callcenter.js (NEW, 194 lines, IIFE) · platform/assets/css/pages.css (+107 in @layer components) · platform/index.html (+36 inside #page-callcenter, before block-bridge--cross-page) · platform/assets/app.js (+5: import + comment banner)
+**Verified at commit:** a488146
+
+
+
+---STATS---
+total_beacons: 19
+unique_categories_used: 9
+avg_score: 4.16
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-26 / ε2 — Pillar ε stage 2/12
