@@ -225,3 +225,19 @@ import './js/elan/epsilon10-phonerepair.js';
 // salon recording rituals (the recording IS the lesson, not the byproduct).
 // Registers Upg.elan.hrmastery (start / stop / reset / verdict).
 import './js/elan/epsilon11-hrmastery.js';
+
+
+// ÊLAN v4 — ε12: Cross-page Psychology Layer (closes Pillar ε)
+// 🪞 META_BEACON — The Platform that Knows its Guest. A 4-dim mood
+// vector (confidence/focus/fatigue/curiosity) lives in localStorage,
+// decays toward neutrality at 5%/hour, and silently drives three
+// adaptations on every page: greeting prose (5 Arabic states swap
+// data-greet-title / data-greet-sub), body.dataset.suggestedDifficulty
+// (easy/medium/hard) and body.dataset.insightRate (high/normal/low).
+// Different temporal axis from ε11 META: ε11 reactive-acute (one input
+// → one prose answer); ε12 reactive-chronic (months of latent behaviour
+// crystallised in 4 numbers). Inspired-by: Iraqi salons (المضيف يَعرف
+// ضيفه) — host adjusts visit tempo silently, never asks how you feel.
+// Avoided: Forbidden #22 ("Welcome back, Name!" cliché) + the AI-default
+// XP/streak/level-up gamification chrome. Registers Upg.mood (frozen).
+import './js/elan/epsilon12-mood.js';
