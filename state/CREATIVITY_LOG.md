@@ -313,3 +313,34 @@ disruption_triggers: 5
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-26 / ε2 — Pillar ε stage 2/12
+
+
+
+## ε3 — 2026-05-26
+**Beacon Type:** 🤚 INTERACTION_BEACON
+**The Surprise:** كل platform-AI تَتعامل مع تخطيط الجولات بنفس الطريقة: `<iframe src="maps.googleapis.com/...">`، تَنتهي القصة. ε3 يَرفض هذا. ورقة الجولة هي **canvas 2D مَرسوم يدوياً**: شبكة 24px بـ `var(--ink-faint)` opacity 0.18 (paper-feel، ليست grid generic notion-style)، 6 محطات بغدادية كـ pins (الكرّادة 0.62/0.58، المنصور 0.34/0.42، الأعظمية 0.56/0.18، مدينة الصدر 0.84/0.30، الجادرية 0.70/0.74، الكاظمية 0.26/0.22 — إحداثيات normalized 0..1 على grid 12×8 يُعَيَّر على عرض الـ canvas). الـ pin غير المَزور دائرة فارغة بحد `--ink` 2px؛ المَزور دائرة ممتلئة بـ `--ember` Hadeed cinema-red مع رقم الترتيب (1..6) داخلها بـ `voice-num-tabular`. الـ polyline الحمراء تُرسَم بترتيب الـ taps (مع `shadowBlur 4` للإيحاء بـ "خَط مَختوم بحبر سينما"). أسماء المحطات مُحاذاة right خارج الـ pin بـ `voice-ui`. scale-bar حقيقية مَرسومة في الزاوية السفلى-اليمنى: «٢ كم» = 80px (مقياس الورقة 40 px/km). الـ canvas يَحسب 3 metric مُباشرة في الـ DOM: المسافة (px / 40 = km, 1-decimal)، عدد المحطات، الوقت بالدقائق (`stops × 18 + km × 6`، 18 دقيقة لكل محطة on-site + 6 دقائق لكل كم سَير).
+
+البَصمة الـ Hadeed: زر «إعادة الخريطة» يَستهلك `Upg.worlds.hadeed.flip(canvas)` — الـ iron-stamp engine من γ5 — كأن الورقة تُختَم بختم حديدي وتُمحى. الـ box-shadow inset 4px على `.route-canvas` يُلَوّن أربع pixels فارغة (نفس لون الـ anchor-bg) ثم 1px ember 22% — يُحاكي مَطار الفيلم السينمائي في إطار الورقة. كل CSS بدون hex literal، بدون hardcoded color؛ كل اللون عبر tokens. الـ ResizeObserver + DPR-aware re-layout يَجعل الكشف على شاشات الـ retina مَتيناً. `touch-action: none` + `user-select: none` يَجعل الـ tablet drawing نظيفاً (لا scroll bouncing عند رسم خط الجولة على iPad).
+
+PROVE-IT enforced: `data-raw-value="0930"` على وقت بدء الجولة الأمثل، citation visible (تحليل ميداني FMCG العراق 2024)، `12-2 ظهراً` مَرفوع كَـ <strong> avoid window. zero external network. zero audio. zero icon library خارج Lucide-aligned sprite. zero CDN.
+
+`Upg.fieldsales` (33rd top-level Upg.* API) frozen: init / reset / path / meta / customers. CustomEvent `upg:fieldsales:tap` يُطلَق على كل tap بـ payload `{id, code, order}` — قابل للتكامل مع الـ pacing system (W17 P6) لاحقاً (نقطة مفتوحة في TRUTH_LEDGER).
+
+**Reference Avoided:** Google Maps embed cliché — الـ AI الافتراضي يَقفز إلى iframe على أول مَهمَّة geo + Forbidden #25 (Material/FA/Bootstrap external libs) + Forbidden #15 (modal-with-overlay reset) + Forbidden #11 (counter-from-zero — الـ meta هو instant 0/0/0 → بعد tap → الرقم الحقيقي بدون easing). + الـ AI-default الأكبر: "أي canvas drawing لازم يكون مع spring physics + magnetic snap لـ grid" — هذا rejected؛ الورقة paper feel، السطور حادَّة، اللمس direct.
+**Inspired-by:** Wild Card #2 — Iraqi Brutalism (Chadirji): concrete-and-line geometry يَستخدم الـ raw عناصر، يَعرض البنية بدون تَجميل + paper FMCG sales-rep planning sheets — حين يَجلس مندوب توزيع في بغداد على ركن مَخزن الـ wholesale في الصباح، الورقة في حضنه ليست screen، هي عمود عمل. ε3 يَستحضر تلك الورقة على شاشة، بكاميرا الـ Hadeed cinema palette.
+**User-Visible:** yes — كل visit للـ fieldsales page يَكشف الـ canvas. كل tap على pin يَلوِّن المحطة بالأحمر ويَرسم الـ polyline ويُحدِّث المسافة + عدد المحطات + الوقت في الـ DOM. كل tap هو event مَنشور (`upg:fieldsales:tap`) على document — قابل للـ inspection في console للـ devs، وللاستهلاك في pacing system لاحقاً.
+**Originality Self-Score:** 4/5 — canvas-based route planning موجود في tools كثيرة (Adobe Illustrator paths، Figma vector tools، some FMCG-specific apps). الذي يَجعله 4/5: (١) **paper-grid Brutalist aesthetic** — ليس "modern map UI"، هو "ورقة عمل ميدانية 1972"؛ (٢) **integration with γ5's iron-stamp engine** — الزر «إعادة» ليس generic confirm، هو ختم Hadeed يُمحَى الورقة كأن الورق ورق فعلاً؛ (٣) **Baghdad districts hardcoded** — ليس generic placeholder data، هو six neighborhoods حقيقية بإحداثيات نسبية عَيَّنتُها يدوياً (الأعظمية شَمال نهر دجلة، مدينة الصدر شَرق، الجادرية جَنوب، الكاظمية شَمال-غرب)؛ (٤) **scale-bar مَرسومة على canvas** بـ النص «٢ كم» — paper-map convention مُحترَمة؛ (٥) **Arabic-only chrome** بدون كلمة إنجليزية واحدة في الواجهة. Claim: very few sales-training platforms ship a CUSTOM canvas instead of an iframe; even fewer style it as a 1970s field-sheet AND localize it to a specific city.
+**Files touched:** platform/assets/js/elan/epsilon3-fieldsales.js (NEW, 344 lines, IIFE, frozen Upg.fieldsales surface) · platform/assets/css/pages.css (+105 in @layer components) · platform/index.html (+41 inside #page-fieldsales just before block-bridge) · platform/assets/app.js (+5: import + comment banner)
+**Verified at commit:** fc9ae2e
+
+
+
+---STATS---
+total_beacons: 20
+unique_categories_used: 9
+avg_score: 4.15
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-26 / ε3 — Pillar ε stage 3/12

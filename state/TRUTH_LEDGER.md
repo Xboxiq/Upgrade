@@ -1530,3 +1530,93 @@ the fallback string in δ5 will need a tokens.css entry. Recommended for
 
 - **Real-call integration** — the demo card is a single hardcoded scenario. A natural ε2.5 extension would wire `Upg.callcenter.emit()` into the existing v3 simulator's outcome handler so REAL exercises (not just the demo) get the three-state echo. Logged here as a candidate for ε7 (customercare) or ε12 (cross-page psychology layer).
 - **Pillar ε branch name** — the previous session left a stale `elan-ε-content-revival` ref on the remote (no PR opened). This stage is on `elan-ε-content-revival-resume` to side-step it. ε3+ continue on the resume branch; PR title at end will be "feat(elan-v4): Pillar ε — CONTENT_REVIVAL (12/12)".
+
+
+
+## ε3 — Fieldsales Revival (Hadeed INTERACTION_BEACON)
+
+**Commit:** `fc9ae2e`  ·  **Branch:** `elan-ε-content-revival-resume`  ·  **Date:** 2026-05-26
+
+### Forensic before / after
+
+| Metric | Before (a97bcf0) | After (fc9ae2e) | Change |
+|---|---:|---:|---:|
+| `[data-elan-route-canvas]` in HTML | 0 | 1 | +1 |
+| `[data-elan-route-reset]` button | 0 | 1 | +1 |
+| `[data-route="km\|stops\|minutes"]` cells | 0 | 3 | +3 |
+| `[data-route-meta-value]` live spans | 0 | 3 | +3 |
+| `.route-canvas` / `.route-meta` rules | 0 | 7 | +7 |
+| `.iraq-block` in `#page-fieldsales` | 0 | 1 (panel + icon) | +1 |
+| `epsilon3-fieldsales.js` lines | 0 | 344 | +344 |
+| `Upg.fieldsales` namespace registrations | 0 | 1 (frozen, 5 methods) | +1 |
+| Top-level `Upg.*` namespaces | 32 | 33 | +1 |
+| External map APIs (gmaps/mapbox/leaflet) | 0 | 0 | 0 |
+| `createOscillator` / `AudioContext` (audio leak check) | 0 | 0 | 0 |
+| Hardcoded Baghdad districts | 0 | 6 | +6 |
+| Inline `<svg viewBox>` in ε3 panel | 0 | 0 | 0 |
+| Emoji in ε3 markup | 0 | 0 | 0 |
+| Hardcoded `fill="#…"` in ε3 CSS | 0 | 0 | 0 |
+| Hex literals in ε3 CSS | 0 | 0 | 0 |
+| Hex literals in ε3 JS | 0 | 5 | +5 (fallback defaults inside `readWorldColor`, only used when `getComputedStyle` returns empty) |
+| Hadeed iron-stamp engine consumed | — | 4 refs (`Upg.worlds.hadeed.flip`) | new integration |
+| Citation visible | — | "تحليل ميداني FMCG العراق 2024" | +1 |
+| `data-raw-value` PROVE-IT attr | — | yes (`0930`) | +1 |
+| `app.js` ε imports | 2 (ε1, ε2) | 3 (ε1, ε2, ε3) | +1 |
+
+### Brace / paren balance
+
+| File | Open | Close | Status |
+|---|---:|---:|---|
+| `epsilon3-fieldsales.js` braces | 65 | 65 | MATCH |
+| `epsilon3-fieldsales.js` parens | 218 | 218 | MATCH |
+| `pages.css` braces (whole file) | 4350 | 4350 | MATCH |
+| `index.html` `</section><!-- /page-fieldsales -->` | — | line 8190 | INTACT |
+
+### Beacon record
+
+- **Type:** 🤚 INTERACTION_BEACON
+- **Surface:** 2D canvas drawn from primitives (paper grid + 6 pins + polyline + scale bar). User taps pins; path drawn in tap order; meta computed instantly.
+- **Avoided:** Google Maps iframe cliché; Forbidden #25 (external icon libs); Forbidden #15 (modal-with-overlay reset); Forbidden #11 (counter-from-zero — meta is instant, no easing animation).
+- **Inspired-by:** Wild Card #2 — Iraqi Brutalism + paper FMCG planning sheets.
+- **Self-score:** 4 / 5
+- **User-visible:** yes (every fieldsales page render reveals the canvas; tapping any 2 pins reveals km/stops/minutes computed live).
+
+### Iraq scale parameters (transparent)
+
+- **Render scale:** 40 px = 1 km (drawn on canvas as a 2 km bar in the bottom-right corner with the legend «٢ كم»).
+- **Time formula:** `minutes = stops × 18 + km × 6` — 18 min on-site per stop + 6 min per driven km. Citation in the Iraq Block. The formula is exposed in `Upg.fieldsales.meta()` so trainees can reason about it.
+- **Optimal departure window:** 09:30 (after wholesale market activity peaks). Avoid 12:00–14:00 (peak congestion + low buyer readiness). Source in `data-fieldsales-iraq` aside.
+
+### Sacred preservation audit
+
+| Asset | Status |
+|---|---|
+| 16 `<section class="page">` | preserved |
+| `Upg.worlds.hadeed` (γ5 iron-stamp) | preserved, **consumed** read-only via `flip(canvas)` for the reset action |
+| `Upg.icons` (α4) | preserved, called read-only via `Upg.icons.autoMount()` |
+| `platform/assets/css/worlds/_hadeed.css` (267 lines from γ5) | unmodified |
+| `platform/assets/js/elan/world-hadeed.js` | unmodified |
+| `#page-fieldsales` legacy v3 content (350+ ql-dilemma + cath blocks) | untouched — ε3 inserts only *after* the last legacy block, immediately before the section close |
+| `archive/` | 0 bytes diff |
+| `prompts/v1, v2, v3` | 0 bytes diff |
+| `state/AUDIT_BASELINE.md` | untouched |
+
+### Spec adherence
+
+- **Beacon category:** INTERACTION as declared. No pivot needed (last INTERACTION at δ3 — 6 stages back).
+- **Acceptance criteria status:**
+  - [x] Canvas-based route planner — pure 2D, no Google Maps, no external library
+  - [x] Customer pins clickable, path drawn in tap order
+  - [x] Three meta cells update live: distance / stops / time
+  - [x] Pure pointer events (mouse + touch)
+  - [x] Iraq Block visible with citation
+  - [x] No emoji, no inline `<svg viewBox>`, no external icon library
+  - [x] Commit message includes `canvas_route=on, no_external_maps=true, hadeed=on`
+  - [x] Beacon recorded in `state/CREATIVITY_LOG.md`
+- **Spec divergence — icon set:** Spec recommends Phosphor `target / compass-tool / mountains`. ε3 ships with `globe` (in Iraq Block) and `rotate-ccw` (reset button) only — the canvas IS the map, additional icons would compete with it visually. Documented as a deliberate restraint.
+- **Carry-over:** Spec's "8 units of content" (cold-call mastery, KAM building, on-site product demo, competitor handling, in-place close, smart collection, 90-second tour report, weekly planning) are present in the legacy v3 fieldsales section as ~350 ql-dilemma + cath blocks — ε3 adds the Beacon canvas on top without duplicating content.
+
+### Open questions for follow-up
+
+- **Pacing integration:** the `upg:fieldsales:tap` CustomEvent fires on every pin tap with payload `{id, code, order}`. A natural extension would consume this in the W17 pacing system to award completion XP for "completing the route exercise" (visiting all 6 pins). Logged for ε12 (cross-page psychology layer) or a later pacing tweak.
+- **Real-coordinate option:** a pure mode could accept GeoJSON-style `{lat, lon}` and project to canvas via simple Mercator. Not added in ε3 to keep the file under 350 lines, but the `init(canvas, customers, opts)` shape supports it (`customers[].nx/ny` could be derived). Logged for ε7 customercare or a separate utility pass.
