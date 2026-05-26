@@ -677,3 +677,37 @@ disruption_triggers: 5
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-26 / ε11 — Pillar ε stage 11/12
+
+
+
+## ε12 — 2026-05-26
+**Beacon Type:** 🪞 META_BEACON
+**The Surprise:** المنصة تَتعلَّم ضَيفها بصمت. شُعاع المزاج رباعي الأبعاد (confidence / focus / fatigue / curiosity ∈ 0..1) يَسكُن localStorage تحت 'upg.mood.v1' ولا يَظهر أبداً كـ number في الواجهة (صفر XP bar، صفر streak counter، صفر «Achievement Unlocked!» toast — الـ AI-default للـ training apps مَرفوض صراحة). الـ vector يَستمع لخمسة أحداث: upg:exercise:complete (بـ detail.success يُعطي confidence/focus موجبة، بدون يُعطي confidence سالبة + fatigue موجبة) / upg:exercise:failed / upg:nav:change (curiosity صغيرة) / upg:call:outcome من ε2 (الـ Maqamat verdict من ε2 يَتَجَسَّد كَمزاج هنا — success⇒conf+، lost⇒conf−+fat+، neutral⇒focus+ — chromatic continuity حقيقية بين Pillar ε modules) / upg:mood:hint (للـ extension من modules مستقبلية).
+
+ثم يَتلاشى نحو الحياد بـ **5٪ كل ساعة** من الخمول — `decayed(v)` يُرجع object جديد، لا يَلمس الـ stored، فالقراءة referentially transparent. بعد ٢٠ ساعة من الإهمال، أي vector محفوظ يَنسى نَفسَه. هذا تَفصيل فلسفي: المنصة لا تَحتفظ بحُكم قديم على المستخدم — تَنسى مع الوقت كما يَنسى المُضيف الكريم زَلَّة الضَيف.
+
+ثلاث adaptations صامتة في كل صفحة (cross-page modifier حقيقي، ليس صفحة): (١) prose الـ greeting — `data-greet-title` و `data-greet-sub` المَوجودَين في dashboard يُكتَبان من 5 جُمَل عربية بحسب التَصنيف (fatigued «تَمَهَّل قليلاً — نَفَس عميق ثم نَكمل»، confident «مُستعِدّ للتحدّي الأكبر؟ — الثقة بِنية حَقَّقتَها»، curious «لديك سؤال يَستحق إجابة اليوم — الفُضول هو الـ compass»، focused «ركّز على هدف واحد — إنجاز نظيف خير من ثلاثة مَفتوحة»، baseline يُعيد الـ ORIGINAL_PROSE المَلتقَط في أول apply). (٢) `body.dataset.suggestedDifficulty` ∈ {easy/medium/hard} — CSS hook للـ filter exercises. (٣) `body.dataset.insightRate` ∈ {high/normal/low} — تَكرار الـ «هل تَعلم؟» insights.
+
+تَمييز ε12 META عن ε11 META — رغم نفس الفئة (وقد ناقَشتُ هذا في commit message): ε11 = **reactive-acute** (مدخل واحد سَمعي ⇒ جواب prose واحد في نفس اللحظة، الواجهة تَستمع لنَبضة)؛ ε12 = **reactive-chronic** (شهور من السلوك الكامن مَلخَّصة في أربعة أرقام تَتلاشى نحو الحياد عند الإهمال، الواجهة تَستمع لإيقاع). محور زَمني مُختلف للـ META — ε11 يَسمَع نَبضةً واحدة في حُجرة الصالون، ε12 يَسمَع جَلسات شهر كامل عبر سَتائر الصالون. هذه ليست تَكراراً للفئة، هي **استكمالها**: ε11 META في لحظة، ε12 META عبر زمن. المُؤذِّن يَسمَع أَذان الفجر وأَذان العصر — كِلاهُما أَذان لكنهما ليسا الأذان نفسه.
+
+البنية: 284 سطر JS ESM module + 16 سطر import note في app.js = 300 سطر total (cap 600). صفر hex literals، صفر inline-svg، صفر window.alert، صفر !important، صفر emoji في markup. localStorage write مُغَلَّفاً في try/catch (private-mode safe). JSON.parse مُدافِعٌ ضد malformed payloads (silent fallback للـ defaultVector). كل axis يُتحقَّق منه بـ Number.isFinite قبل القبول. lerp + clamp utility functions. الـ classify() ladder بترتيب precedence (fatigue أوّلاً، ثم confidence، ثم curiosity، ثم focus، ثم baseline). الـ ORIGINAL_PROSE captured **lazily** على أول apply — فالنص الأصلي يَبقى محفوظاً ليُرجَع إليه حين يَعود الـ user إلى baseline mood. الـ Upg.mood = Object.freeze({ get, update, reset, _module }) — surface ثابت، لا يُعدَّل بعد الإطلاق.
+
+**Reference Avoided:** Forbidden #22 — «Welcome back, [Name]!» chrome cliché (مَطعون به مباشرة في commit message + استَبدلتُه بـ 5 contextual states). الـ AI-default الأكبر للـ training apps: XP bar / streak counter / level-up toast / badge-unlocked notification (الشعاع لا يَظهر **كرقم** في الواجهة بأي حال — هو محرِّك صامت، ليس counter). الـ AI-default الثاني: «How are you feeling today?» modal عند session start — المنصة تَنظُر، لا تَسأل (هذه فلسفة مُضيف الصالون).
+**Inspired-by:** Wild Card #11 — Iraqi mid-century salons (المضيف يَعرف ضيفه). في صالونات بيروت + بغداد 1950-70، الـ host كان يَضبط إيقاع الزيارة صامتاً — يَصب القهوة أقوى لو الضيف بدا مُتعَباً، يُخرج السؤال الأصعب لو الضيف مال للأمام، يَترُك الموضوع الحَسّاس لو الضيف بَدا مُجهَداً. لا يَسأل أبداً «كيف تَشعر اليوم؟» — يَنظُر، يَستَنبِط، يَتَكَيَّف. هنا: الواجهة تَفعل نفس الشيء عبر event listeners صامتة + decay مَعقول + 4 numbers — صفر استبيانات، صفر check-ins، صفر «kindly rate your mood from 1-5».
+**User-Visible:** subtle — كل مستخدم يَفتح الـ dashboard بعد جَلسة fail-heavy سَيَرى الـ greeting يَكتب «تَمَهَّل قليلاً — نَفَس عميق ثم نَكمل» بدلاً من «أهلاً [اسم]». كل مستخدم يَفتح الـ dashboard بعد سلسلة نجاحات سَيَرى «مُستعِدّ للتحدّي الأكبر؟». كل مستخدم يَتَنقَّل بين كثير من الصفحات (curiosity rising) سَيَرى prose مُختلف. الـ adaptation **subtle**، ليست صادمة — لو لم يَلتفت المستخدم، لا تَظهر مشكلة (الـ original copy يُحفَظ ويُعاد عند الـ baseline). الـ a11y: greeting prose يُكتَب عبر textContent (لا innerHTML)، فلا يُكسَر screen-reader؛ الـ dataset writes صامتة لـ AT.
+**Originality Self-Score:** 4/5 — adaptive UI based on inferred user state موجودة في عشرات platforms (Spotify mood adjustments, Headspace adaptive content, Khan Academy difficulty adaptation, Duolingo XP+streak). الذي يَجعله 4/5: (١) **silent vector**: الـ mood vector لا يَظهر **أبداً** كرقم في UI — هذا قرار معماري غير شائع (الـ majority of adaptive systems تُظهر الـ score)؛ (٢) **decay فلسفي**: 5%/hour decay يَعني المنصة تَنسى مع الوقت — هذا parallels الـ Iraqi cultural norm of "letting go" بدلاً من الـ AI-default "remember everything forever"؛ (٣) **chromatic continuity مع ε2**: upg:call:outcome من ε2 يَتَغَذَّى مباشرة في الـ vector — pillar modules تَتَحَدَّث مع بَعضِها، ليست جَزائر معزولة؛ (٤) **lazily captured ORIGINAL_PROSE**: الـ original markup يُحفَظ في first apply ويُرجَع عند baseline — المنصة لا تَكتب فوق نَفسها بشكل دائم، تَهمس ثم تَنسحب. لا أَدَّعي 5 لأن: localStorage + 4-axis emotional model + decay + greeting adaptation كل واحدة منها معروفة في industry؛ الـ originality في الـ assemblage + الـ refusal-to-surface-as-number + الـ Iraqi salon framing.
+**Files touched:** platform/assets/js/elan/epsilon12-mood.js (NEW 284) · platform/assets/app.js (+16)
+**Verified at commit:** b422fb0
+**Pillar close:** ε12 closes Pillar ε CONTENT REVIVAL — 12 stages (ε1 dashboard / ε2 callcenter / ε3 fieldsales / ε4 social / ε5 lab / ε6 psych+eq+negotiation / ε7 customercare / ε8 programming / ε9 accounting / ε10 phonerepair / ε11 hrmastery / ε12 cross-page mood)، 12 beacons across 6 unique categories (DATA × 2 / SOUND × 1 / STRUCTURAL × 2 / INTERACTION × 4 / TYPOGRAPHIC × 1 / CHROMATIC × 1 / META × 2)، 0 forbidden violations، 0 Sacred Asset disturbance.
+
+
+
+---STATS---
+total_beacons: 30
+unique_categories_used: 9
+avg_score: 4.13
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-26 / ε12 — Pillar ε COMPLETE 12/12

@@ -2357,3 +2357,136 @@ window.Upg.elan.hrmastery = Object.freeze({
 Nested under `Upg.elan` (matches δ1 `magneticSidebar`, δ4 `bottomNav`, δ6 `motion`, ε3 `fieldsales`, ε4 `social`, ε5 `lab`, ε6 `psych`, ε7 `customercare`, ε8 `programming`, ε9 `accounting`, ε10 `phonerepair`).
 
 — Entry end —
+
+
+
+---
+
+## ε12 — Cross-Page Psychology Layer — The Platform that Knows its Guest
+**Date:** 2026-05-26
+**Pillar:** ε CONTENT REVIVAL · Stage 12 of 12 — **CLOSES PILLAR ε**
+**Branch:** elan-ε-content-revival
+**Commit:** `b422fb0`
+
+### Forensic baseline (before ε12)
+
+| Metric | Value |
+|---|---:|
+| `epsilon*` modules in `js/elan/` | 10 (ε1, ε3..ε11) |
+| `Upg.state.{progress,scores,drafts,...}` legacy surface | exists (structured store, no key/value contract) |
+| `Upg.mood` namespace | not registered |
+| `data-greet-title` hooks in `index.html` | 1 (dashboard) |
+| `data-greet-sub` hooks in `index.html` | 1 (dashboard) |
+| `body.dataset.suggestedDifficulty` consumers | 0 (introduced for future-page CSS hooks) |
+| `body.dataset.insightRate` consumers | 0 (introduced for future-page CSS hooks) |
+| Pages affected | all 16 (cross-page modifier, not a page) |
+
+### Verified (after ε12)
+
+| Metric | Value |
+|---|---:|
+| `epsilon12-mood.js` lines (NEW) | 284 |
+| `app.js` lines added | 16 |
+| **Total lines added (cap 600)** | **300** |
+| Hex literals in any new code | 0 |
+| Inline `<svg viewBox>` | 0 |
+| `window.alert` calls | 0 |
+| `!important` in any new code | 0 |
+| Emoji in markup | 0 |
+| Mood-axis identifiers used | 4 (confidence / focus / fatigue / curiosity) |
+| Mood-state prose entries | 5 (fatigued / confident / curious / focused / baseline) |
+| `addEventListener('upg:*')` hooks | 5 (exercise:complete / exercise:failed / nav:change / call:outcome / mood:hint) |
+| `body.dataset.*` writes | 3 (suggestedDifficulty / insightRate / moodTone) |
+| `localStorage.{getItem,setItem}` calls | 4 (load + save + try/catch boundaries) |
+| Decay function present | 1 (`decayed()` — pure, returns new object) |
+| Public surface | `window.Upg.mood` (frozen) |
+| Capability fallbacks | localStorage try/catch + JSON.parse try/catch + Number.isFinite per axis |
+| `node --check` syntax | clean |
+
+### What ε12 does
+
+**Storage layer.** A four-dimensional vector
+```ts
+{ confidence, focus, fatigue, curiosity, updatedAt }
+```
+lives in localStorage under `'upg.mood.v1'`. Each numeric axis is clamped to `[0, 1]`. Loading defends against malformed JSON, missing keys, and non-finite numbers — silent fallback to `defaultVector()` which sits at `(0.5, 0.5, 0.0, 0.5)` (mid-confidence, mid-focus, no fatigue, mid-curiosity).
+
+**Decay.** Every read passes through `decayed()` which interpolates each axis toward its baseline (0.5 for the first three, 0.0 for fatigue) at a rate of **5% per idle hour**. After ~20 hours of inactivity any saved vector has effectively forgotten itself. Decay never mutates the stored vector — it returns a new one — so reading is referentially transparent.
+
+**Listening.** Five DOM events feed the vector silently:
+
+| Event | Effect |
+|---|---|
+| `upg:exercise:complete` (detail.success === true) | confidence +0.06, focus +0.04, fatigue +0.03 |
+| `upg:exercise:complete` (detail.success === false) | confidence −0.04, fatigue +0.04 |
+| `upg:exercise:failed` | confidence −0.06, fatigue +0.05 |
+| `upg:nav:change` | curiosity +0.02 |
+| `upg:call:outcome` (success / lost / neutral) | conf +0.05 / conf −0.05 + fat +0.03 / focus +0.01 |
+| `upg:mood:hint` | arbitrary deltas dispatched by other modules |
+
+Every update fires `'upg:mood:vector'` carrying the full new vector — downstream listeners that want richer reactions can subscribe.
+
+**Three silent UI adaptations.**
+
+1. **Greeting prose.** When the classified tone is non-baseline, `[data-greet-title]` and `[data-greet-sub]` are rewritten with one of five Arabic states (one prompt-pair per tone). On baseline, the original copy is restored from a one-time captured snapshot. Pages that adopt a generic `[data-greeting]` hook receive the same treatment.
+
+   | Tone | Trigger | Title prose | Sub prose |
+   |---|---|---|---|
+   | fatigued | fatigue > 0.7 | تَمَهَّل قليلاً | نَفَس عميق ثم نَكمل — الإيقاع أهمّ من السرعة. |
+   | confident | confidence > 0.8 | مُستعِدّ للتحدّي الأكبر؟ | الثقة بِنية حَقَّقتَها — اِبنِ عليها اليوم. |
+   | curious | curiosity > 0.75 | لديك سؤال يَستحق إجابة اليوم | الفُضول هو الـ compass — اتبَعه إلى موضع جديد. |
+   | focused | focus > 0.75 | ركّز على هدف واحد | إنجاز نظيف خير من ثلاثة مَفتوحة. |
+   | baseline | else | (original copy preserved) | (original copy preserved) |
+
+2. **`body.dataset.suggestedDifficulty`** — `'easy' | 'medium' | 'hard'`. CSS hook any per-world page can use to tune which exercise levels surface.
+
+3. **`body.dataset.insightRate`** — `'high' | 'normal' | 'low'`. CSS hook for gating "هل تَعلم؟" insight-block render frequency.
+
+`document.body.dataset.moodTone` also exposes the classified tone for any markup that wants to react.
+
+### Sacred preservation
+
+- `window.Upg.state` (structured legacy store with `.progress / .scores / .drafts / .misc / .profile`) untouched — `Upg.mood` is a **new** namespace, not an override.
+- All 14 `Upg.*` legacy APIs intact.
+- All 16 page sections untouched.
+- Existing `data-greet-title` / `data-greet-sub` markup **re-used**, not duplicated. Original copy is captured lazily on first apply and restored when mood returns to baseline.
+- No new markup required from any page — pages that adopt the body data-* hooks gain adaptive behaviour; pages that ignore them work identically to before.
+- ε2 callcenter outcome events are listened-to but never re-dispatched.
+- localStorage writes wrapped in try/catch — private-browsing safe.
+- JSON.parse failure paths fall through to `defaultVector()` — no thrown exceptions surface to the page.
+
+### Forbidden Library violations
+
+`0` — verified against #1–#28. Specifically refused: Forbidden #22 ("Welcome back, Name!" cliché) — replaced with five contextual states; the AI-default XP/streak/level-up gamification chrome — the vector never surfaces as a number anywhere in the UI; the AI-default "How are you feeling today?" modal at session start — the platform watches, never asks.
+
+### Pillar ε close — full inventory
+
+| Stage | Page | World | Beacon | Score | Commit |
+|---|---|---|---|---:|---|
+| ε1 | dashboard | حِبر | 📊 DATA (manuscript margin) | 4 | a93a7c7 |
+| ε2 | callcenter | تَيار | 🔊 SOUND (Maqamat verdict) | 4 | 504e752 |
+| ε3 | fieldsales | حَديد | 🏛 STRUCTURAL (Baghdad route canvas) | 4 | 16a8112 |
+| ε4 | social | تَيار | 🤚 INTERACTION (VHS scrub) | 4 | a458016 |
+| ε5 | lab | نار | ✍️ TYPOGRAPHIC (engineer's notebook) | 4 | c9a5b87 |
+| ε6 | psych+eq+negotiation | ندى+حَديد | 🤚 INTERACTION (breath-line + stamp) | 4 | f22dbd6 |
+| ε7 | customercare | وَرشة | 🌈 CHROMATIC (sentiment-tinted bench) | 4 | 0c7b31b |
+| ε8 | programming | نار | 🏛 STRUCTURAL (Brutalist skill tree) | 4 | 929662e |
+| ε9 | accounting | ذَهَب | 📊 DATA (Memphis tax IQ ladder) | 4 | 93ba0d2 |
+| ε10 | phonerepair | وَرشة | 🤚 INTERACTION (drag-to-diagnose) | 4 | 408be87 |
+| ε11 | hrmastery | صَالون | 🪞 META (salon mirror) | 4 | 5f829d9 |
+| ε12 | (cross-page) | (all) | 🪞 META (mood vector) | 4 | b422fb0 |
+
+**12 stages, 12 beacons, 6 unique beacon categories** (DATA × 2, SOUND × 1, STRUCTURAL × 2, INTERACTION × 4, TYPOGRAPHIC × 1, CHROMATIC × 1, META × 2). 0 forbidden violations across the pillar. Average score 4.0.
+
+### Public surface added
+
+```js
+window.Upg.mood = Object.freeze({
+  get(),                  // → decayed { confidence, focus, fatigue, curiosity, updatedAt }
+  update(deltas),         // pure-additive deltas, clamped, dispatches 'upg:mood:vector'
+  reset(),                // restores defaultVector(), dispatches event, applies UI
+  _module: 'epsilon12-mood',
+});
+```
+
+— Entry end —
