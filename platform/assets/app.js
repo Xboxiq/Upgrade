@@ -148,3 +148,6 @@ import './js/elan/bottom-nav.js';
 // preference graph + «ساكن» chrome confession; CSS owns the per-world
 // static-signature transposition in _motion-sanctuary.css)
 import './js/elan/delta6-motion.js';
+
+// ÊLAN v4 — ε1: Dashboard revival
+import './js/elan/epsilon1-dashboard.js';

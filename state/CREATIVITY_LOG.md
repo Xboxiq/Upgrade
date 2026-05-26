@@ -273,3 +273,14 @@ disruption_triggers: 5
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-25 / δ6 — Pillar δ COMPLETE 6/6
+
+## ε1 — 2026-05-25
+**Beacon Type:** 📊 DATA_BEACON
+**The Surprise:** شريط التقدم تحوّل إلى هامش مخطوطة حِبرية عموديّة بدل الشريط الأفقي التقليدي.
+**Reference Avoided:** standard horizontal progress bar (#6 style cliché)
+**Inspired-by:** Najaf manuscript marginal markings
+**User-Visible:** yes
+**Originality Self-Score:** 4/5
+**Files touched:** platform/index.html, platform/assets/css/pages.css, platform/assets/js/elan/epsilon1-dashboard.js
+**Verified at commit:** pending
+

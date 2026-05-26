@@ -26402,3 +26402,40 @@ body[data-rit-time]:not([data-rit-time="default"]) .bento-card {
 /* End RITUAL UI v3 / Phase 6 — Aura Deepening — Worker 22 COMPLETE 6/6 ── */
 
 /* End pages.css ───────────────────────────────────────────────────────── */
+
+/* ÊLAN v4 — ε1 dashboard revival: manuscript margin progress + Iraq block */
+@layer components {
+  [data-world="hibr"] .bento-greet { position: relative; }
+  [data-world="hibr"] .progress-margin {
+    position: absolute;
+    inset-inline-end: var(--s-3);
+    inset-block-start: var(--s-4);
+    inline-size: 12px;
+    block-size: calc(100% - (var(--s-4) * 2));
+    background: var(--anchor-2);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+  [data-world="hibr"] .progress-margin__fill {
+    inline-size: 100%;
+    block-size: var(--progress-pct, 0%);
+    margin-block-start: auto;
+    background: linear-gradient(180deg, color-mix(in oklch, var(--ink) 62%, transparent), var(--ink));
+    transition: block-size var(--duration-hibr) var(--ease-hibr);
+  }
+  [data-world="hibr"] .progress-margin-note {
+    display: block;
+    margin-top: var(--s-2);
+    color: var(--ink-muted);
+    font-size: .82rem;
+  }
+  [data-world="hibr"] .iraq-block {
+    margin-top: var(--s-3);
+    display: grid;
+    gap: var(--s-2);
+    padding: var(--s-3);
+    border-inline-start: 3px solid var(--ember);
+    background: color-mix(in oklch, var(--ember) 4%, transparent);
+  }
+  [data-world="hibr"] .iraq-block__icon { color: var(--ink-faint); }
+}
