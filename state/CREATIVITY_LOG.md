@@ -637,3 +637,43 @@ disruption_triggers: 5
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-26 / ε10 — Pillar ε stage 10/12
+
+
+
+## ε11 — 2026-05-26
+**Beacon Type:** 🪞 META_BEACON
+**The Surprise:** صفحة hrmastery لا تَطبَع توست «تم حفظ التسجيل ✓» مثل كل interface AI. تَستمع، ثم تُجاوب. الـ MediaRecorder + canvas waveform يدوي بـ saloon-brass currentColor (لا مكتبة، لا library import) يَرسمان صَوتَ المستخدم وهو يُجاوب على prompt واحد بـ Lateef italic — _«حَدِّثني عن نَفسِك — ثلاثون ثانية، بدون قَصاصة CV.»_ على stop، ثلاث إحصائيات تَظهر **لحظياً** (WPM = speech-fraction × 145 wpm baseline من Goldman-Eisler 1968 / silence% = samples-below-3 / total / duration = perf-clock delta) — صفر animated-counter-from-0 (Forbidden #11 مَرفوض صراحة)، الأرقام تُكتَب مباشرة من derived stats إلى DOM textContent.
+
+ثم يَأتي الـ META twist الحقيقي: `<p class="interview-verdict">` يَستقبِل `data-tone="<state>"` و **سَطراً واحداً بـ Lateef italic** يَحكُم على الصوت بنَبر إنساني، خمس درجات بترتيب الأسبقية:
+- masterful (WPM 130–160 + silence 12–28%) → «نَبر المُحاوَر القَدير» (لون brass-1)
+- confident (WPM 100–170 + silence < 35%) → «وَقْعُك ثابت — تَبدو واثقاً» (لون state-success)
+- rushed (WPM > 180) → «أَسرَعتَ — تَنَفَّس بين الجُمَل» (لون state-warning)
+- silent (silence ≥ 50%) → «صَمتُك أكثر من كلامك — راجع البَدْء» (لون ink-faint × warning)
+- hesitant (else) → «المَقابِلة تَسمَع تَردُّداً — جَرِّب مَرَّة أُخرى» (لون state-danger)
+
+الـ verdict ليس نَصاً ثابتاً جانب الـ stats. هو **رَدّ المنصَّة** على تَسجيل المستخدم بلسانه، بنبرة فني ورشة عربي يَعرف ما يَستحق المديح وما يَستحق المراجعة. المنصة هي مرآة الصالون البيروتي القديم — يَرى المستخدم صوتَه بياناً (الـ canvas + الـ stats) وحُكماً (الـ verdict prose) في نفس اللحظة. هذا هو الـ META_BEACON: الواجهة تَتَحدَّث عن نفسها وعن المستخدم في نفس النَفَس.
+
+البنية التَفصيلية: `epsilon11-hrmastery.js` (٣٦٢ سطر، صفر inline-svg، صفر window.alert، صفر hex، صفر emoji في DOM، 3 MediaRecorder feature-detection guards، AudioContext + webkitAudioContext fallback مع suspended-state resume داخل user gesture، AnalyserNode FFT-256، sample buffer مَحدود بـ 240 entry لتجنُّب memory bloat، HiDPI-aware canvas pixel dim resync، stroke = currentColor (الـ CSS تَربطه بـ --saloon-brass-1)، الـ alternating dir = ((i % 2 === 0) ? -1 : 1) يُعطي الـ waveform نَفَساً بصرياً بدلاً من خط أملس مَيِّت). الـ CSS (`+221 @layer elan-epsilon11` على `_saloon.css`، صفر hex، صفر !important، 3 a11y guards: `prefers-reduced-motion` يُلغي الـ pulse animation + transitions، `forced-colors: active` يَستبدل بـ Mark/Highlight/ButtonText/CanvasText، `@media print` يُخفي button + canvas ويَطبع verdict على border-inline-start ladder، container query عند 480px يَنهار الـ stats triplet إلى عمود واحد).
+
+Capability fallback ladder: لو MediaRecorder غير مَدعوم → button disabled + courteous Arabic notice (لا UI silence). لو permission denied → inline `.interview-notice` بلسان عربي («الميكروفون لم يُمنَح صَلاحية. اسمح من شريط العنوان وأعِد المُحاوَلة.») — صفر window.alert بأي حال. لو AudioContext فَشَل → recorder يَعمل بدون waveform لكن stats تَحتسب من sample buffer الفارغ (تُعطي 0 wpm + 100% silence + duration واقعي → verdict='silent' → «صَمتُك أكثر من كلامك» — حتى الحالة الفاشلة تُجاوب بنبر معنوي).
+
+الـ Iraq Block (`Bel Inc. HR Iraq Brief 2024`) مَثبَّت كـ dashed brass-bordered `<aside>` تحت الـ verdict، يَحمل تَفاصيل التَفاوض القطاعي العراقي (الخاص ٨–١٥٪، العام جامد → اطلب مَنافع: مُواصلات، تأمين، ساعات مَرنة) — `cite` element داخل الـ aside (دلالة semantic) + screen-reader friendly + يَمتزج مع الـ verdict كَجزء من رد المنصة.
+
+**Reference Avoided:** AI-default «✓ Recording saved!» toast cliché (الذي يَستخدمه كل voice memo / interview-prep AI app في 2025-2026) + Forbidden #11 (animated counter from 0) + Forbidden #20 (emoji as feedback — لا توست بـ ✓، لا 🎉 على الـ verdict) + window.alert() permission denial (UX-hostile) + الكليشيه الأكبر للـ AI-generated recording UI: «play/pause/delete row of buttons» (الواجهة هنا فيها زر واحد: record/stop. لا playback، لا قائمة تسجيلات، لا delete — لأن التسجيل **ليس** الناتج، الـ verdict هو الناتج).
+**Inspired-by:** Wild Card #11 — Mid-century Beirut salon recording rituals. في صالونات بيروت 1950-70، المعلِّم كان يُسجِّل الشاعر وهو يُلقي قصيدة، ثم يُعيد التشغيل بنصف السرعة لتَعليم الإلقاء. التسجيل **هو الدرس**، ليس الناتج. هنا: التَسجيل ليس archive يُحفَظ ولا audio file يُشارَك (الـ chunks يُهمَلان عمداً — `mediaRecorder.ondataavailable = () => {}`)، التَسجيل **يَنتُج verdict** يَتعلَّم منه المستخدم. الواجهة هي المعلِّم.
+**User-Visible:** yes — كل مستخدم يَفتح صفحة hrmastery يَجد الـ interview-stage تحت الـ banner مباشرة. desktop + mobile + tablet — نفس الـ widget. mouse users يَنقرون. touch users يَنقرون. keyboard users يَنقرون بـ Tab + Enter (button native). screen-reader users يَستهلكون: `aria-label` العربية على الـ stage + `aria-live="polite"` على الـ stats triplet + `aria-live="polite"` على الـ verdict + `role="status"` على الـ notice. reduced-motion users يَرَوْن نفس الواجهة بدون pulse + بدون transitions (الـ verdict + stats + canvas يَبقى كاملاً — السكون لا يَحرم المستخدم من المعلومة). forced-colors users يَرَوْن system tokens (Mark/Highlight) بدلاً من brass tokens — الـ semantic preserved. print users يَطبعون verdict + stats كـ ladder semantic (button + canvas مُختفيان).
+**Originality Self-Score:** 4/5 — MediaRecorder + canvas waveform + WPM/silence stats موجودة في عشرات apps (voice memos, interview-prep, podcast apps, accent-coaching, خاصة Sonix / Otter / Speeko). الذي يَجعله 4/5: (١) **الـ verdict-as-prose layer**: 5-tone precedence ladder تَنتج جملة واحدة بـ Lateef italic بدل dashboard من badges، الـ verdict هو رد المنصة وليس metric report؛ (٢) **chromatic continuity مع γ9**: الـ canvas stroke = `currentColor` و الـ CSS يَربطه بـ `--saloon-brass-1` — فالـ waveform يَتغيَّر تلقائياً مع الـ world theme لو غُيِّر in the future، صفر hardcoded fill؛ (٣) **deliberate non-storage**: `mediaRecorder.ondataavailable = () => {}` يُهمل الـ chunks. لا playback. لا share. لا save. هذا يَعكس فلسفة المعلِّم البيروتي (الـ verdict هو الدرس، ليس الـ artifact)؛ (٤) **capability ladder كاملة من اليوم الأول**: لا فقط reduced-motion / forced-colors / print، بل MediaRecorder absence + permission denial + AudioContext suspend / failure — كل سيناريو لها رَد عربي محسوب. لا أَدَّعي 5 لأن الـ assemblage أصلية لكن الـ primitives (MediaRecorder + canvas + heuristic stats) معروفة في الصناعة.
+**Files touched:** platform/assets/css/worlds/_saloon.css (+221 @layer elan-epsilon11) · platform/assets/js/elan/epsilon11-hrmastery.js (NEW 362) · platform/assets/app.js (+13)
+**Verified at commit:** 5f829d9
+
+
+
+---STATS---
+total_beacons: 29
+unique_categories_used: 9
+avg_score: 4.13
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-26 / ε11 — Pillar ε stage 11/12

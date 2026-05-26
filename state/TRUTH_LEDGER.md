@@ -2239,3 +2239,121 @@ window.Upg.elan.phonerepair = Object.freeze({
 Nested under `Upg.elan` (matches δ1 `magneticSidebar`, δ4 `bottomNav`, δ6 `motion`, ε2 `callcenter`, ε3 `fieldsales`, ε4 `social`, ε5 `lab`, ε6 `psych`, ε7 `customercare`, ε8 `programming`, ε9 `accounting`).
 
 — Entry end —
+
+
+
+---
+
+## ε11 — HRMastery — The Salon Mirror that Listens
+**Date:** 2026-05-26
+**Pillar:** ε CONTENT REVIVAL · Stage 11 of 12
+**World:** صَالون (Saloon)
+**Branch:** elan-ε-content-revival
+**Commit:** `5f829d9`
+
+### Forensic baseline (before ε11)
+
+| Metric | Value |
+|---|---:|
+| `page-hrmastery` exists | 1 |
+| `data-world="saloon"` set on page | 1 |
+| `hr-*` content blocks on page | 76 |
+| PROVE-IT citations inside page | 55 |
+| Iraq markers (Iraq/Baghdad/Bel/etc.) | 25 |
+| `_saloon.css` lines (γ9 baseline) | 314 |
+| `_saloon.css` `@layer` count | 0 (γ9 written un-layered) |
+| MediaRecorder existing usage in repo | 2 (in `upg-helper-16.js`, unrelated path) |
+| `epsilon*` modules in `js/elan/` | 9 |
+
+### Verified (after ε11)
+
+| Metric | Value |
+|---|---:|
+| `_saloon.css` total lines now | 535 |
+| Lines added to `_saloon.css` (ε11) | 221 |
+| `epsilon11-hrmastery.js` lines (NEW) | 362 |
+| `app.js` lines added | 13 |
+| **Total lines added (cap 600)** | **596** |
+| `@layer elan-epsilon11` opened | 1 |
+| Hex literals in any new code | 0 |
+| `!important` in any new code | 0 |
+| Inline `<svg viewBox>` in JS | 0 |
+| `window.alert` / `alert(` calls in JS | 0 |
+| Verdict tones (5-state precedence ladder) | 5 |
+| Stat keys (`wpm` / `silence` / `duration`) | 3 |
+| `prefers-reduced-motion` gate in CSS adds | 1 |
+| `forced-colors: active` gate in CSS adds | 1 |
+| `@media print` gate in CSS adds | 1 |
+| Container query (≤480px stats collapse) | 1 |
+| `MediaRecorder` feature-detection guards | 3 |
+| `window.AudioContext` + webkit fallback | 1 + 1 |
+| Sacred `window.Upg.haptic` reads | 2 |
+| Sacred `window.Upg.icons` reads | 1 |
+| Public surface registered | `window.Upg.elan.hrmastery` |
+| `hr-*` content blocks after | 76 (unchanged) |
+| PROVE-IT citations after | 55 (unchanged) |
+| `data-world="saloon"` binding after | 1 (unchanged) |
+| `node --check` syntax | clean |
+
+### What ε11 does
+
+The user is presented with a chamfered "interview stage" card mounted directly under the `.hrm-banner` of `page-hrmastery`. A single Lateef italic prompt — _«حَدِّثني عن نَفسِك — ثلاثون ثانية، بدون قَصاصة CV.»_ — frames the session.
+
+A brass-bordered record button (≥48px hit area, sprite `mic` icon, pulsing dot only while active) opens a `getUserMedia({ audio: true })` stream, builds a one-shot `MediaRecorder`, and sets up an `AnalyserNode` (FFT 256). On every animation frame the loop reads `getByteTimeDomainData`, computes the mean abs-deviation from the 128 baseline, and pushes a sample (capped at 240) into a circular buffer. A canvas painter strokes that buffer in `currentColor` (which CSS binds to `--saloon-brass-1`) — a single hand-drawn waveform, no library, alternating excursion to give the line breath.
+
+On stop, the loop stops, the stream tracks are stopped, and three numbers are computed and written *instantly* to the DOM (no `count-from-zero`, Forbidden #11 avoided): WPM (= speech-fraction × 145, Goldman-Eisler 1968 baseline), silence% (samples below 3 / total), duration (perf-clock delta). Then — the META twist — a single `<p class="interview-verdict">` receives `data-tone="<state>"` and prose:
+
+| Stats | Tone | Verdict (Lateef italic) |
+|---|---|---|
+| WPM 130–160, silence 12–28% | masterful | نَبر المُحاوَر القَدير |
+| WPM 100–170, silence < 35% | confident | وَقْعُك ثابت — تَبدو واثقاً |
+| WPM > 180 | rushed | أَسرَعتَ — تَنَفَّس بين الجُمَل |
+| silence ≥ 50% | silent | صَمتُك أكثر من كلامك — راجع البَدْء |
+| else | hesitant | المَقابِلة تَسمَع تَردُّداً — جَرِّب مَرَّة أُخرى |
+
+The verdict colour shifts via tokens (`var(--state-success/warning/danger/ink-faint/saloon-brass-1)`, all `color-mix`'d) — so the same prose carries an additional chromatic register without ever stepping outside the world palette.
+
+The Iraq Block (`Bel Inc. HR Iraq Brief 2024` — 8–15% private-sector negotiation band; ask for benefits when salary is fixed) is pinned as a dashed brass-bordered annotation directly under the verdict — read-aloud-friendly cite element, never a tooltip-only afterthought.
+
+### Capability fallback
+
+- **No MediaRecorder API** → record button is `disabled` with a courteous Arabic notice; nothing else fails.
+- **Permission denied** → inline `.interview-notice` shows _«الميكروفون لم يُمنَح صَلاحية.»_ — never `window.alert()`.
+- **AudioContext suspended** → resumed inside the user-gesture click handler; if construction fails, recorder still works (no waveform draws but stats compute on stop).
+- **Reduced-motion preference** → pulse animation off, transition durations zeroed, but the verdict + stats + canvas still render (the salon still listens; it just stops blinking).
+- **forced-colors active** → corner-chamfer dropped, system tokens take over (`Mark`, `Highlight`, `ButtonText`, `CanvasText`).
+- **`@media print`** → button & canvas hidden, verdict prints in plain black on white border-inline-start ladder.
+
+### Sacred preservation
+
+- All 76 `hr-*` blocks intact.
+- All 55 PROVE-IT citations intact.
+- `data-world="saloon"` binding on `#page-hrmastery` intact.
+- γ9 corner-chamfer signature **reused** on `.interview-stage` (no new clip-path patterns introduced).
+- γ9 `--saloon-brass-1/2/3` tokens reused (no new colour tokens introduced).
+- β2 `--voice-accent` (Lateef italic) used for the verdict line — reuses the typographic register γ9 reserved for accent prose.
+- ε10 `Upg.elan.<page>` namespace pattern followed — `Upg.elan.hrmastery` joins the family.
+- `archive/` untouched. `prompts/v1`, `v2`, `v3` untouched.
+- Legacy `Upg.haptic` (δ4) consumed read-only.
+- Legacy `Upg.icons.renderAll` consumed read-only via fallback.
+- `window.MediaRecorder` and `window.AudioContext` consumed via feature-detection only.
+
+### Forbidden Library violations
+
+`0` — verified against #1–#28. Specifically refused: AI-default _"✓ Recording saved!"_ toast (replaced with prose verdict); Forbidden #11 (animated counter from 0 — stats appear instantly); Forbidden #20 (emoji-as-feedback — only sprite icons + Arabic prose carry meaning); `window.alert()` permission denial (replaced with inline `.interview-notice`).
+
+### Public surface added
+
+```js
+window.Upg.elan.hrmastery = Object.freeze({
+  start(),                      // begins recording on the mounted stage
+  stop(),                        // stops + computes stats + paints verdict
+  reset(),                       // clears stats, tone, canvas, notice
+  verdict(wpmNumber, silencePctNumber),  // pure: returns { tone, text }
+  _module: 'epsilon11-hrmastery',
+});
+```
+
+Nested under `Upg.elan` (matches δ1 `magneticSidebar`, δ4 `bottomNav`, δ6 `motion`, ε3 `fieldsales`, ε4 `social`, ε5 `lab`, ε6 `psych`, ε7 `customercare`, ε8 `programming`, ε9 `accounting`, ε10 `phonerepair`).
+
+— Entry end —
