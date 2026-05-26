@@ -282,5 +282,27 @@ last_updated: 2026-05-25 / δ6 — Pillar δ COMPLETE 6/6
 **User-Visible:** yes
 **Originality Self-Score:** 4/5
 **Files touched:** platform/index.html, platform/assets/css/pages.css, platform/assets/js/elan/epsilon1-dashboard.js
-**Verified at commit:** pending
+**Verified at commit:** 0bfd71b (ε1 was facb054 on main; ε2 verified fresh)
 
+
+
+
+## ε2 — 2026-05-26
+**Beacon Type:** 🔊 SOUND_BEACON
+**The Surprise:** ثلاث نتائج مكالمة = ثلاثة ردود صوتية مختلفة بالكامل — procedural WebAudio بدون ملفات. النجاح: أربيجيو مقامي صاعد (360→440→540Hz، ثلاث نوتات بفاصل 90ms، bayati intervals). الخسارة: صمت مطلق — العقوبة هي غياب الصوت + outline أحمر فقط. الحياد: نبضة sine واحدة 400Hz × 80ms بالكاد مسموعة. الصمت كعقاب — لا buzz، لا error ding، لا vibration. فقط الفراغ الصوتي يُخبر المتدرّب أن العميل ذهب.
+**Reference Avoided:** Forbidden #16 — toast بـ checkmark + generic ding/buzz notification cliché. أيضاً #10 — pulsing dot (لا loading indicator صوتي).
+**Inspired-by:** Wild Card #4 — Maqamat Music Notation. الفواصل 360→440→540 تقارب نسب البيتي العراقي (whole step + augmented second feel). كل maqam له إحساس مختلف؛ هنا: النجاح = صعود، الفشل = سكون.
+**User-Visible:** yes — كل متدرب يُكمل تمرين مكالمة (أو يخسر عميل) يسمع/لا-يسمع الفرق فوراً. reduced-motion users لا يسمعون شيئاً (محترم).
+**Originality Self-Score:** 4/5 — WebAudio procedural sound في UI ليس جديداً (Upg.sound في W16 P5 سبقنا). الجديد: (١) ثلاثة outcomes بثلاثة paradigms مختلفة (صوت/صمت/همسة) بدل gradient واحد من success→fail، (٢) الصمت كعقاب فلسفي (لا error beep)، (٣) الربط بالمقامات العربية كإطار ثقافي.
+**Files touched:** platform/assets/js/elan/epsilon2-callcenter.js · platform/assets/css/pages.css · platform/index.html · platform/assets/app.js
+**Verified at commit:** 0bfd71b
+
+---STATS---
+total_beacons: 18
+unique_categories_used: 9
+avg_score: 4.17
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-26 / ε2 — Pillar ε stage 2/12

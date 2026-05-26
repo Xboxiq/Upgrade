@@ -1446,3 +1446,24 @@ the fallback string in δ5 will need a tokens.css entry. Recommended for
 - verified: bento_cells=10, iraq_block=on, hibr_world=on, citation=on
 - files: platform/index.html, platform/assets/css/pages.css, platform/assets/js/elan/epsilon1-dashboard.js
 
+
+
+## ε2 — 2026-05-26
+**Stage:** Callcenter Content Revival (Tayyar World)
+**Branch:** elan-ε-content-revival-2
+**Commit:** 0bfd71b
+**Lines added:** 187 (4 files changed)
+**Verified metrics:**
+- iraq_block_in_callcenter = 2 (aside + icon ref)
+- data_outcome_css_selectors = 4 (success/lost/neutral + reduced-motion)
+- epsilon2_callcenter_js = YES (92 lines, syntax PASS)
+- epsilon2_import_in_app_js = 1
+- Upg_callcenter_frozen = YES
+- call_meter_css_rules = 5
+- emoji_in_new_markup = 0
+- new_inline_svg = 0
+- citation_present = 1 (آسيا 2023)
+- arpeggio_frequencies = 360, 440, 540 Hz
+- reduced_motion_guard = YES (CSS + JS)
+**Sacred Assets preserved:** 16 pages, 14+ Upg.* APIs (callcenter = new addition), archive/ untouched
+**Forbidden Library violations:** 0
