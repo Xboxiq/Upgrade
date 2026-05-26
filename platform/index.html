@@ -24748,6 +24748,77 @@ const bird = { ...canMove(), ...canFly() };
       </header>
 
       <!-- ============================================================
+           ÊLAN v4 · ε10 — Drag-to-Diagnose Workbench (🤚 INTERACTION_BEACON)
+      ============================================================ -->
+      <section class="pr-section" id="pr-diag-stage" data-pr-section="diag-stage" data-elan-stage="ε10">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow"><i class="qi qi-sm" data-icon="wrench" aria-hidden="true"></i> تشخيص بـ السحب · Drag to Diagnose</span>
+          <h2>اِسحب العَرض، اتركه على القطعة المتأثرة</h2>
+          <p>ورشة الجمهورية تَعمل بقاعدة ذهبية: «شَخِّص قبل أن تَفكّ، وأَرِ الزبون القطعة قبل وبعد». هذه الصفحة تُعلّمك التشخيص البصري أولاً.</p>
+        </header>
+
+        <div class="diag-stage" data-elan-diag-stage>
+
+          <ul class="diag-symptoms" role="list" aria-label="رفّ الأعراض — اختر عَرضاً واسحبه">
+            <li class="diag-symptoms-eyebrow type-eyebrow" aria-hidden="true">الأعراض</li>
+            <li class="diag-symptom" data-symptom="battery-drain"  draggable="true" tabindex="0" role="button" aria-grabbed="false" aria-label="نزف بطارية — اضغط Enter لالتقاطه">
+              <i class="qi qi-sm" data-icon="zap"     aria-hidden="true"></i>
+              <span class="type-body-sm">نزف بطارية</span>
+            </li>
+            <li class="diag-symptom" data-symptom="screen-flicker" draggable="true" tabindex="0" role="button" aria-grabbed="false" aria-label="ارتعاش شاشة — اضغط Enter لالتقاطه">
+              <i class="qi qi-sm" data-icon="monitor" aria-hidden="true"></i>
+              <span class="type-body-sm">ارتعاش شاشة</span>
+            </li>
+            <li class="diag-symptom" data-symptom="mic-cut"        draggable="true" tabindex="0" role="button" aria-grabbed="false" aria-label="انقطاع مايكروفون — اضغط Enter لالتقاطه">
+              <i class="qi qi-sm" data-icon="mic-off" aria-hidden="true"></i>
+              <span class="type-body-sm">انقطاع مايك</span>
+            </li>
+            <li class="diag-symptom" data-symptom="overheat"       draggable="true" tabindex="0" role="button" aria-grabbed="false" aria-label="تسخين زائد — اضغط Enter لالتقاطه">
+              <i class="qi qi-sm" data-icon="flame"   aria-hidden="true"></i>
+              <span class="type-body-sm">تسخين زائد</span>
+            </li>
+            <li class="diag-symptom" data-symptom="wifi-weak"      draggable="true" tabindex="0" role="button" aria-grabbed="false" aria-label="واي فاي ضعيف — اضغط Enter لالتقاطه">
+              <i class="qi qi-sm" data-icon="wifi"    aria-hidden="true"></i>
+              <span class="type-body-sm">واي فاي ضعيف</span>
+            </li>
+          </ul>
+
+          <div class="diag-phone" aria-label="هاتف ذكي مع خمس مناطق فحص — اِسحب أي عَرض إلى المنطقة المناسبة">
+            <i class="qi diag-phone-icon" data-icon="device-mobile-camera" aria-hidden="true"></i>
+            <button type="button" class="diag-zone diag-zone--screen"   data-zone="screen"   aria-label="منطقة الشاشة">الشاشة</button>
+            <button type="button" class="diag-zone diag-zone--battery"  data-zone="battery"  aria-label="منطقة البطارية">البطارية</button>
+            <button type="button" class="diag-zone diag-zone--speaker"  data-zone="speaker"  aria-label="منطقة السماعة">السماعة</button>
+            <button type="button" class="diag-zone diag-zone--mic"      data-zone="mic"      aria-label="منطقة المايكروفون">المايك</button>
+            <button type="button" class="diag-zone diag-zone--antenna"  data-zone="antenna"  aria-label="منطقة الهوائي">الهوائي</button>
+          </div>
+
+          <aside class="diag-cause" data-elan-diag-cause data-empty="true" aria-live="polite" aria-atomic="false" aria-label="شريط احتمالات السبب">
+            <p class="diag-cause-empty type-body">اسحب عَرَضاً لتظهر احتمالات السبب على شريط لاصق.</p>
+          </aside>
+        </div>
+
+        <button type="button" class="diag-reset type-button" data-elan-diag-reset aria-label="إعادة ضبط شاشة التشخيص">
+          <i class="qi qi-xs" data-icon="rotate-ccw" aria-hidden="true"></i>
+          <span>أعِد التشخيص</span>
+        </button>
+
+        <aside class="iraq-block iraq-block--warsha" data-elan-stage="ε10" aria-labelledby="elan-eps10-iraq-h">
+          <header class="iraq-block__h">
+            <i class="qi qi-sm" data-icon="map-pin" aria-hidden="true"></i>
+            <h3 id="elan-eps10-iraq-h" class="iraq-block__title v-eyebrow">في السوق العراقية</h3>
+          </header>
+          <p class="iraq-block__claim v-body-lead">
+            في بغداد، <strong>٦٥٪</strong> من زبائن إصلاح الهواتف يَفقدون ثقتهم لو الفنّي لم يَفسّر السبب.
+            الشفافية + «أُريك القطعة التالفة» يَرفع نسبة بقاء الزبون <strong>×٣٫٢</strong>.
+          </p>
+          <small class="iraq-block__source v-eyebrow">
+            <span class="iraq-block__source-label">المصدر</span>
+            <span class="iraq-block__source-name">تحليل ميداني — سوق الجمهورية، بغداد ٢٠٢٤</span>
+          </small>
+        </aside>
+      </section>
+
+      <!-- ============================================================
            PHASE 1 · A — Electronics Fundamentals (Knowledge Spine)
       ============================================================ -->
       <section class="pr-section" id="pr-electronics-fund" data-pr-section="electronics">

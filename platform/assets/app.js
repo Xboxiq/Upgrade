@@ -201,3 +201,14 @@ import './js/elan/epsilon8-programming.js';
 // (visual ledgers as weight scales) + Memphis Group asymmetric ovals.
 // Registers Upg.elan.accounting (frozen, exposes compute + brackets).
 import './js/elan/epsilon9-accounting.js';
+
+// ÊLAN v4 — ε10: Phonerepair Content Revival (Warsha world)
+// 🤚 INTERACTION_BEACON — Drag-to-Diagnose Workbench. Trainee picks a
+// symptom card from the rack, drops it on the affected component of a
+// phone outline. Three input modalities (HTML5 dnd / pointer events /
+// keyboard pick-and-drop). On drop: zone glows ember, Upg.haptic
+// 'takk' fires (δ4), and a tilted paper-tape "shop receipt" rolls out
+// listing root-cause hypotheses (typewritten, one row per cause).
+// Reuses Warsha --warsha-tape token from γ8 / ε7 for chromatic continuity.
+// Registers Upg.elan.phonerepair (diagnose / causes / reset / symptoms / zones).
+import './js/elan/epsilon10-phonerepair.js';

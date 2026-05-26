@@ -651,3 +651,243 @@
   }
 
 }/* /@layer elan-epsilon7 */
+
+
+
+
+/* ────────────────────────────────────────────────────────────────────────
+   ÊLAN v4 — ε10 — Drag-to-Diagnose Workbench (🤚 INTERACTION_BEACON)
+   Strictly additive. Reuses Warsha world tokens (declared at γ8 root):
+   --warsha-bench / --warsha-rule / --warsha-tape / --warsha-tape-shadow
+   / --ember / --focus / --ink / --ink-muted / --anchor-1 / --anchor-2
+   / --ease-warsha / --voice-display / --voice-body / --voice-accent.
+   ──────────────────────────────────────────────────────────────────── */
+@layer elan-epsilon10 {
+
+  [data-world="warsha"] .diag-stage {
+    display: grid;
+    grid-template-columns: minmax(180px, 220px) minmax(220px, 1fr);
+    grid-template-areas: "rack phone" "tape tape";
+    gap: var(--s-4);
+    margin-block-start: var(--s-5);
+    padding: var(--s-4);
+    background:
+      repeating-linear-gradient(0deg, var(--warsha-rule) 0 1px, transparent 1px 32px),
+      repeating-linear-gradient(90deg, var(--warsha-rule) 0 1px, transparent 1px 32px),
+      var(--warsha-bench);
+    border: 1px solid color-mix(in oklch, var(--ink) 22%, transparent);
+    border-radius: var(--r-2);
+  }
+
+  [data-world="warsha"] .diag-symptoms {
+    grid-area: rack;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+    margin: 0;
+    padding: var(--s-3);
+    list-style: none;
+    background: color-mix(in oklch, var(--anchor-1) 80%, transparent);
+    border: 1px dashed color-mix(in oklch, var(--ink) 28%, transparent);
+    border-radius: var(--r-2);
+  }
+
+  [data-world="warsha"] .diag-symptoms-eyebrow {
+    margin: 0 0 var(--s-1) 0;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
+  }
+
+  [data-world="warsha"] .diag-symptom {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    padding: var(--s-2) var(--s-3);
+    background: var(--anchor-2);
+    color: var(--ink);
+    border: 1px dashed color-mix(in oklch, var(--ink) 36%, transparent);
+    border-radius: var(--r-1);
+    cursor: grab;
+    user-select: none;
+    font-family: var(--voice-body);
+    transition: transform 160ms var(--ease-warsha), border-color 160ms var(--ease-warsha), background 160ms var(--ease-warsha);
+  }
+  [data-world="warsha"] .diag-symptom:hover {
+    border-color: color-mix(in oklch, var(--ember) 70%, transparent);
+    transform: translateY(-1px);
+  }
+  [data-world="warsha"] .diag-symptom:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+  [data-world="warsha"] .diag-symptom:active,
+  [data-world="warsha"] .diag-symptom[data-elan-dragging="true"] {
+    cursor: grabbing;
+    background: color-mix(in oklch, var(--ember) 16%, var(--anchor-2));
+    border-style: solid;
+  }
+  [data-world="warsha"] .diag-symptom[data-elan-picked="true"] {
+    border-color: var(--focus);
+    box-shadow: inset 0 0 0 1px var(--focus);
+  }
+  [data-world="warsha"] .diag-symptom .qi { flex: 0 0 auto; color: var(--focus); }
+
+  [data-world="warsha"] .diag-phone {
+    grid-area: phone;
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 5 / 8;
+    max-block-size: 380px;
+    padding: var(--s-3);
+    background: color-mix(in oklch, var(--anchor-1) 90%, transparent);
+    border: 1px solid color-mix(in oklch, var(--ink) 24%, transparent);
+    border-radius: var(--r-3);
+  }
+  [data-world="warsha"] .diag-phone-icon {
+    color: color-mix(in oklch, var(--ink) 32%, transparent);
+    pointer-events: none;
+  }
+  [data-world="warsha"] .diag-phone-icon.qi {
+    inline-size: 60%;
+    block-size: 60%;
+  }
+
+  [data-world="warsha"] .diag-zone {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--s-1) var(--s-2);
+    background: transparent;
+    border: 1px dashed color-mix(in oklch, var(--ink) 30%, transparent);
+    border-radius: var(--r-1);
+    color: var(--ink-muted);
+    font-family: var(--voice-body);
+    font-size: var(--text-xs);
+    cursor: pointer;
+    transition: border-color 200ms var(--ease-warsha), background 200ms var(--ease-warsha), color 200ms var(--ease-warsha);
+  }
+  [data-world="warsha"] .diag-zone--screen   { inset-block-start: 12%; inset-inline-start: 22%; inset-inline-end: 22%; block-size: 18%; }
+  [data-world="warsha"] .diag-zone--battery  { inset-block-end: 30%;   inset-inline-start: 22%; inset-inline-end: 22%; block-size: 14%; }
+  [data-world="warsha"] .diag-zone--speaker  { inset-block-end: 12%;   inset-inline-start: 18%; inline-size: 22%;       block-size: 10%; }
+  [data-world="warsha"] .diag-zone--mic      { inset-block-end: 12%;   inset-inline-end: 18%;   inline-size: 22%;       block-size: 10%; }
+  [data-world="warsha"] .diag-zone--antenna  { inset-block-start: 6%;  inset-inline-start: 36%; inset-inline-end: 36%;  block-size: 8%;  }
+  [data-world="warsha"] .diag-zone:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+  [data-world="warsha"] .diag-zone.is-target,
+  [data-world="warsha"] .diag-zone[data-affected="true"] {
+    border-style: solid;
+    border-color: var(--ember);
+    color: var(--ink);
+  }
+  [data-world="warsha"] .diag-zone.is-target          { background: color-mix(in oklch, var(--ember) 12%, transparent); }
+  [data-world="warsha"] .diag-zone[data-affected="true"] { background: color-mix(in oklch, var(--ember) 18%, transparent); }
+  [data-world="warsha"] .diag-zone.is-just-dropped {
+    box-shadow: 0 0 0 2px color-mix(in oklch, var(--ember) 50%, transparent);
+  }
+
+  /* paper-tape receipt — Beacon centerpiece */
+  [data-world="warsha"] .diag-cause {
+    grid-area: tape;
+    margin-block-start: var(--s-3);
+    padding: var(--s-4) var(--s-5) var(--s-3);
+    background: color-mix(in oklch, var(--warsha-tape) 92%, transparent);
+    color: var(--warsha-tape-shadow);
+    border-block-start: 2px solid color-mix(in oklch, var(--warsha-tape-shadow) 24%, transparent);
+    border-block-end: 1px dashed color-mix(in oklch, var(--warsha-tape-shadow) 22%, transparent);
+    transform: rotate(-1.2deg) translateY(-2px);
+    transform-origin: top right;
+    box-shadow:
+      inset 0 0 0 1px color-mix(in oklch, var(--warsha-tape-shadow) 12%, transparent),
+      0 4px 0 -1px color-mix(in oklch, var(--warsha-tape-shadow) 32%, transparent);
+  }
+  [data-world="warsha"] .diag-cause[data-empty="true"] {
+    transform: none;
+    background: transparent;
+    color: var(--ink-muted);
+    box-shadow: none;
+    border-block-start: 1px dashed color-mix(in oklch, var(--ink) 18%, transparent);
+    border-block-end: none;
+    padding-block: var(--s-3);
+  }
+  [data-world="warsha"] .diag-cause-empty { margin: 0; text-align: center; font-style: italic; }
+  [data-world="warsha"] .diag-cause-head  { margin-block-end: var(--s-2); }
+  [data-world="warsha"] .diag-cause-eyebrow {
+    font-family: var(--voice-display); font-size: var(--text-sm); letter-spacing: 0.05em;
+    color: color-mix(in oklch, var(--warsha-tape-shadow) 80%, transparent);
+  }
+  [data-world="warsha"] .diag-cause-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-1); }
+  [data-world="warsha"] .diag-cause-row {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s-2);
+    padding: 2px 0;
+    border-block-end: 1px dotted color-mix(in oklch, var(--warsha-tape-shadow) 22%, transparent);
+    opacity: 0;
+    transform: translateY(-3px);
+    animation: elan-eps10-tape-row 220ms var(--ease-warsha) forwards;
+    animation-delay: calc(var(--row-index, 0) * 70ms);
+  }
+  [data-world="warsha"] .diag-cause-bullet {
+    flex: 0 0 auto;
+    color: color-mix(in oklch, var(--warsha-tape-shadow) 70%, transparent);
+    margin-block-start: 2px;
+  }
+  [data-world="warsha"] .diag-cause-text { flex: 1 1 auto; line-height: 1.5; }
+  [data-world="warsha"] .diag-cause-foot {
+    margin: var(--s-3) 0 0 0;
+    padding-block-start: var(--s-2);
+    border-block-start: 1px dashed color-mix(in oklch, var(--warsha-tape-shadow) 32%, transparent);
+    color: color-mix(in oklch, var(--warsha-tape-shadow) 75%, transparent);
+    font-style: italic;
+  }
+
+  [data-world="warsha"] .diag-reset {
+    margin-block-start: var(--s-3);
+    padding: var(--s-1) var(--s-3);
+    background: transparent;
+    border: 1px solid color-mix(in oklch, var(--ink) 30%, transparent);
+    border-radius: var(--r-1);
+    color: var(--ink-muted);
+    font-family: var(--voice-body);
+    font-size: var(--text-xs);
+    cursor: pointer;
+  }
+  [data-world="warsha"] .diag-reset:hover { color: var(--ink); border-color: var(--ink); }
+  [data-world="warsha"] .diag-reset:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  @keyframes elan-eps10-tape-row { to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 640px) {
+    [data-world="warsha"] .diag-stage {
+      grid-template-columns: 1fr;
+      grid-template-areas: "rack" "phone" "tape";
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-world="warsha"] .diag-symptom,
+    [data-world="warsha"] .diag-zone { transition: none; }
+    [data-world="warsha"] .diag-cause { transform: none; }
+    [data-world="warsha"] .diag-cause-row { opacity: 1; transform: none; animation: none; }
+  }
+
+  @media (forced-colors: active) {
+    [data-world="warsha"] .diag-stage { background: ButtonFace; border: 1px solid CanvasText; }
+    [data-world="warsha"] .diag-symptom,
+    [data-world="warsha"] .diag-zone { border: 1px solid CanvasText; background: ButtonFace; color: CanvasText; }
+    [data-world="warsha"] .diag-zone[data-affected="true"],
+    [data-world="warsha"] .diag-zone.is-target { outline: 2px solid Highlight; background: Highlight; color: HighlightText; }
+    [data-world="warsha"] .diag-cause { background: ButtonFace; color: CanvasText; border: 1px solid CanvasText; box-shadow: none; transform: none; }
+  }
+
+  @media print {
+    [data-world="warsha"] .diag-stage { page-break-inside: avoid; background: none; border: 1px solid currentColor; }
+    [data-world="warsha"] .diag-cause { transform: none; background: none; box-shadow: none; color: inherit; border-block-start: 1px solid currentColor; }
+    [data-world="warsha"] .diag-cause-row { animation: none; opacity: 1; transform: none; }
+  }
+
+}/* /@layer elan-epsilon10 */
