@@ -212,3 +212,16 @@ import './js/elan/epsilon9-accounting.js';
 // Reuses Warsha --warsha-tape token from γ8 / ε7 for chromatic continuity.
 // Registers Upg.elan.phonerepair (diagnose / causes / reset / symptoms / zones).
 import './js/elan/epsilon10-phonerepair.js';
+
+
+// ÊLAN v4 — ε11: HRMastery Content Revival (Saloon world)
+// 🪞 META_BEACON — The Salon Mirror that Listens. MediaRecorder + a
+// hand-drawn canvas waveform in saloon-brass. After stop, three stats
+// (WPM / silence% / duration) appear instantly (no count-from-zero —
+// Forbidden #11 avoided), then the page speaks back a *prose verdict*
+// in voice-accent (Lateef italic) computed from the stats. The interface
+// does not toast "Recording saved" — it listens, then answers the user
+// in their own tongue. Inspired-by: Wild Card #11 — Mid-century Beirut
+// salon recording rituals (the recording IS the lesson, not the byproduct).
+// Registers Upg.elan.hrmastery (start / stop / reset / verdict).
+import './js/elan/epsilon11-hrmastery.js';
