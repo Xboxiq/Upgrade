@@ -1440,3 +1440,9 @@ the fallback string in δ5 will need a tokens.css entry. Recommended for
 6 stages shipped on `elan-δ-kinetic-shell` (δ1 73d72c1c · δ2 33f0553 · δ3 b794e19 · δ4 5e50984 · δ5 a97c87d · δ6 66f3a01). 6 Beacons across 5 distinct categories (MOTION δ1+δ5, DATA δ2, INTERACTION δ3, STRUCTURAL δ4, META δ6). 0 forbidden violations. 0 Sacred Asset disturbance. Next: PR open + Pillar ε CONTENT_REVIVAL on a fresh branch.
 
 — Entry end —
+
+## ε1 — 2026-05-25
+- stage: ε1
+- verified: bento_cells=10, iraq_block=on, hibr_world=on, citation=on
+- files: platform/index.html, platform/assets/css/pages.css, platform/assets/js/elan/epsilon1-dashboard.js
+
