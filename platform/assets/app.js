@@ -156,3 +156,8 @@ import './js/elan/epsilon1-dashboard.js';
 // outcome echo: maqsoom+arpeggio for success / silence for lost / dafn+
 // soft sine for neutral. Procedural WebAudio, lazy ctx, reduced-motion safe.)
 import './js/elan/epsilon2-callcenter.js';
+
+// ÊLAN v4 — ε3: Fieldsales revival (Hadeed; INTERACTION_BEACON — Brutalist
+// paper-grid 2D canvas route planner. 6 Baghdad districts as pins, polyline
+// drawn by tap order, distance/stops/time computed locally, no external API.)
+import './js/elan/epsilon3-fieldsales.js';

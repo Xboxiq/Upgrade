@@ -26546,3 +26546,116 @@ body[data-rit-time]:not([data-rit-time="default"]) .bento-card {
     [data-world="tayyar"] .elan-co-btn { transition: none; }
   }
 }
+
+
+/* ÊLAN v4 — ε3 fieldsales revival: brutalist paper-grid route canvas + iraq-block (Hadeed) */
+@layer components {
+  [data-world="hadeed"] .elan-fieldsales-route {
+    display: grid;
+    gap: var(--s-3);
+    margin-block: var(--s-6) var(--s-4);
+    padding: var(--s-4);
+    border: 2px solid color-mix(in oklch, var(--ink) 22%, transparent);
+    background: color-mix(in oklch, var(--anchor-1) 80%, transparent);
+  }
+  [data-world="hadeed"] .elan-fr-h { display: grid; gap: var(--s-1); }
+  [data-world="hadeed"] .elan-fr-h h2 { margin: 0; }
+  [data-world="hadeed"] .elan-fr-h .h-lede { margin: 0; color: var(--ink-muted); }
+
+  [data-world="hadeed"] .route-canvas {
+    display: block;
+    inline-size: 100%;
+    block-size: clamp(320px, 56vw, 480px);
+    background: var(--anchor-bg);
+    border: 1px solid color-mix(in oklch, var(--ink) 32%, transparent);
+    box-shadow: inset 0 0 0 4px color-mix(in oklch, var(--anchor-bg) 100%, transparent),
+                inset 0 0 0 5px color-mix(in oklch, var(--ember) 22%, transparent);
+    cursor: crosshair;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  [data-world="hadeed"] .route-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-3);
+  }
+  [data-world="hadeed"] .route-meta__cell {
+    display: grid;
+    gap: var(--s-1);
+    padding: var(--s-3);
+    background: var(--anchor-1);
+    border: 1px solid color-mix(in oklch, var(--ink) 16%, transparent);
+    border-block-end: 3px solid var(--ember);
+    border-radius: 0;
+  }
+  [data-world="hadeed"] .route-meta__label {
+    color: var(--ink-faint);
+    font-size: .80rem;
+    letter-spacing: .04em;
+  }
+  [data-world="hadeed"] .route-meta__value {
+    color: var(--ink);
+    font-family: var(--voice-num-tabular, var(--voice-ui), sans-serif);
+    font-feature-settings: "tnum" 1, "lnum" 1;
+    font-size: clamp(1.4rem, 2.6vw, 1.85rem);
+    font-weight: 800;
+    line-height: 1;
+  }
+  [data-world="hadeed"] .route-meta__unit {
+    color: var(--ink-muted);
+    font-size: .82rem;
+    margin-inline-start: var(--s-1);
+  }
+
+  [data-world="hadeed"] .elan-fr-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    align-items: center;
+  }
+  [data-world="hadeed"] .elan-fr-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    padding: var(--s-2) var(--s-3);
+    border: 1px solid color-mix(in oklch, var(--ink) 22%, transparent);
+    background: var(--anchor-1);
+    color: var(--ink);
+    cursor: pointer;
+    font: inherit;
+    border-radius: 0;
+    transition: border-color 160ms var(--ease-hadeed, ease),
+                background-color 160ms var(--ease-hadeed, ease),
+                transform 120ms var(--ease-hadeed, ease);
+  }
+  [data-world="hadeed"] .elan-fr-btn:hover { border-color: var(--ember); }
+  [data-world="hadeed"] .elan-fr-btn:active { transform: translateY(1px); }
+  [data-world="hadeed"] .elan-fr-btn:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+  [data-world="hadeed"] .elan-fr-hint {
+    color: var(--ink-faint);
+    font-size: .82rem;
+  }
+
+  [data-world="hadeed"] .iraq-block {
+    display: grid;
+    gap: var(--s-2);
+    padding: var(--s-3);
+    border-inline-start: 3px solid var(--ember);
+    background: color-mix(in oklch, var(--ember) 5%, transparent);
+    border-radius: 0;
+  }
+  [data-world="hadeed"] .iraq-block__icon { color: var(--ink-faint); }
+  [data-world="hadeed"] .iraq-block .v-eyebrow { color: var(--ink-faint); }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-world="hadeed"] .elan-fr-btn { transition: none; }
+  }
+  @media print {
+    [data-world="hadeed"] .route-canvas { display: none; }
+  }
+}
