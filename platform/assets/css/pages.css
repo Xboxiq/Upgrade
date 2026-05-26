@@ -26439,3 +26439,110 @@ body[data-rit-time]:not([data-rit-time="default"]) .bento-card {
   }
   [data-world="hibr"] .iraq-block__icon { color: var(--ink-faint); }
 }
+
+
+/* ÊLAN v4 — ε2 callcenter revival: outcome echo + call-meter + iraq-block (Tayyar) */
+@layer components {
+  [data-world="tayyar"] .elan-callcenter-outcome {
+    display: grid;
+    gap: var(--s-3);
+    margin-block: var(--s-6) var(--s-4);
+    padding: var(--s-4);
+    border: 1px solid color-mix(in oklch, var(--ink) 12%, transparent);
+    border-radius: var(--r-3, 12px);
+    background: color-mix(in oklch, var(--anchor-1) 78%, transparent);
+  }
+  [data-world="tayyar"] .elan-co-h { display: grid; gap: var(--s-1); }
+  [data-world="tayyar"] .elan-co-h h2 { margin: 0; }
+  [data-world="tayyar"] .elan-co-h .h-lede { margin: 0; color: var(--ink-muted); }
+
+  [data-world="tayyar"] [data-call-card] {
+    position: relative;
+    display: grid;
+    gap: var(--s-2);
+    padding: var(--s-3);
+    border: 1px solid color-mix(in oklch, var(--ink) 16%, transparent);
+    border-radius: var(--r-2, 8px);
+    background: var(--anchor-bg);
+    transition: border-color var(--duration-tayyar, 320ms) var(--ease-tayyar, ease),
+                box-shadow var(--duration-tayyar, 320ms) var(--ease-tayyar, ease),
+                outline-color var(--duration-tayyar, 320ms) var(--ease-tayyar, ease);
+  }
+  [data-world="tayyar"] [data-call-card] .call-card-eyebrow { color: var(--ink-faint); }
+  [data-world="tayyar"] [data-call-card] .call-card-title { margin: 0; color: var(--ink); }
+  [data-world="tayyar"] [data-call-card] .call-card-line { margin: 0; color: var(--ink-muted); }
+
+  [data-world="tayyar"] [data-call-card][data-outcome="success"] {
+    border-color: var(--state-success, var(--focus));
+    box-shadow: 0 0 24px color-mix(in oklch, var(--focus) 28%, transparent);
+  }
+  [data-world="tayyar"] [data-call-card][data-outcome="lost"] {
+    border-color: var(--state-danger, var(--ember));
+    outline: 1px solid color-mix(in oklch, var(--ember) 48%, transparent);
+    outline-offset: 3px;
+    box-shadow: none;
+  }
+  [data-world="tayyar"] [data-call-card][data-outcome="neutral"] {
+    border-color: color-mix(in oklch, var(--focus) 40%, transparent);
+    box-shadow: 0 0 12px color-mix(in oklch, var(--focus) 14%, transparent);
+  }
+
+  [data-world="tayyar"] .call-meter {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    block-size: 6px;
+    margin-block-start: var(--s-2);
+  }
+  [data-world="tayyar"] .call-meter span {
+    background: color-mix(in oklch, var(--ink) 14%, transparent);
+    transition: background-color 220ms var(--ease-tayyar, ease);
+  }
+  [data-world="tayyar"] .call-meter span[data-active="true"] {
+    background: var(--ember);
+  }
+
+  [data-world="tayyar"] .elan-co-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+  }
+  [data-world="tayyar"] .elan-co-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    padding: var(--s-2) var(--s-3);
+    border: 1px solid color-mix(in oklch, var(--ink) 18%, transparent);
+    border-radius: var(--r-pill, 999px);
+    background: var(--anchor-1);
+    color: var(--ink);
+    cursor: pointer;
+    font: inherit;
+    transition: transform 160ms var(--ease-tayyar, ease),
+                border-color 160ms var(--ease-tayyar, ease),
+                background-color 160ms var(--ease-tayyar, ease);
+  }
+  [data-world="tayyar"] .elan-co-btn:hover { border-color: var(--focus); }
+  [data-world="tayyar"] .elan-co-btn:active { transform: translateY(1px); }
+  [data-world="tayyar"] .elan-co-btn:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  [data-world="tayyar"] .iraq-block {
+    display: grid;
+    gap: var(--s-2);
+    padding: var(--s-3);
+    border-inline-start: 3px solid var(--ember);
+    background: color-mix(in oklch, var(--ember) 5%, transparent);
+    border-radius: 0 var(--r-2, 8px) var(--r-2, 8px) 0;
+  }
+  [data-world="tayyar"] .iraq-block__icon { color: var(--ink-faint); }
+  [data-world="tayyar"] .iraq-block .v-eyebrow { color: var(--ink-faint); }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-world="tayyar"] [data-call-card],
+    [data-world="tayyar"] .call-meter span,
+    [data-world="tayyar"] .elan-co-btn { transition: none; }
+  }
+}

@@ -151,3 +151,8 @@ import './js/elan/delta6-motion.js';
 
 // ÊLAN v4 — ε1: Dashboard revival
 import './js/elan/epsilon1-dashboard.js';
+
+// ÊLAN v4 — ε2: Callcenter revival (Tayyar; SOUND_BEACON — three-state
+// outcome echo: maqsoom+arpeggio for success / silence for lost / dafn+
+// soft sine for neutral. Procedural WebAudio, lazy ctx, reduced-motion safe.)
+import './js/elan/epsilon2-callcenter.js';
