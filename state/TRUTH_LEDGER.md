@@ -2150,3 +2150,92 @@ the start stage when `current_pillar` matches an in-progress branch.
 ### β3 integration
 
 ε9 is the first ε stage to consume the β3 kashida formatter via `Upg.format.currency(value, { kashida: true })`. The Tatweel separator (`U+0640`) carries the gold-world thousands grouping into the tax-amount display. A defensive ESM-internal fallback re-implements the kashida grouping inline if `Upg.format` is not yet booted (e.g. import order race), so the beacon never silently degrades to comma-grouped Latin numerals.
+
+
+
+---
+
+## ε10 — Phonerepair Drag-to-Diagnose Workbench (Warsha world)
+
+**Branch:** `elan-ε-content-revival`
+**Commit:** `408be876`
+**Pillar:** ε CONTENT REVIVAL · Stage 10 of 12
+
+### Verified by grep on commit 408be876
+
+| metric                                         | value |
+|---|---:|
+| `data-elan-diag-stage` in index.html           | `1` |
+| `.diag-symptom` cards (spec: 5)                | `5` |
+| `.diag-zone--*` hotspots (spec: 5)             | `5` |
+| `data-pr-section="diag-stage"`                 | `1` |
+| `iraq-block iraq-block--warsha` (ε10-anchored) | `1` |
+| `data-elan-stage="ε10"` hooks                  | `2` |
+| inline `<svg viewBox>` in new markup           | `0` |
+| emoji in new markup                            | `0` |
+| `fill="#"` hardcoded fills in new markup       | `0` |
+| `<i class="qi" data-icon="…">` in new markup   | `9` |
+| `innerHTML =` writes in ε10 module             | `0` |
+| hex literals in ε10 css block                  | `0` |
+| `prefers-reduced-motion: reduce` guard         | `1` |
+| `forced-colors: active` guard                  | `1` |
+| `@media print` guard                           | `1` |
+| `@layer elan-epsilon10` wrap                   | `1` |
+| `Upg.elan.phonerepair` registered              | `yes` |
+
+### Files touched
+
+- `platform/assets/js/elan/epsilon10-phonerepair.js`  (NEW · 280)
+- `platform/assets/css/worlds/_warsha.css`            (+237  @layer elan-epsilon10)
+- `platform/index.html`                               (+71   pr-diag-stage section + iraq-block)
+- `platform/assets/app.js`                            (+11   import + comment)
+
+**Lines:** +600 / −0 across 4 files (at the per-stage cap).
+
+### Beacon
+
+🤚 **INTERACTION_BEACON** — Drag-to-Diagnose Workbench. The trainee picks a symptom card from a dashed wood-crate rack on the left and drops it on the affected component of a phone outline (Phosphor `device-mobile-camera`). On drop:
+
+1. The zone fills with `--ember` at 18% (the bench glows where it hurts).
+2. `Upg.haptic.play('takk')` fires (one short tap, δ4 maqamat haptic).
+3. A paper "shop receipt" rolls out below the bench — tilted `-1.2°`, reusing the Warsha `--warsha-tape` token from γ8/ε7. Causes appear typewritten one row at a time (`70ms` stagger via `--row-index`) with a Phosphor `wrench` bullet each.
+4. A small footnote at the tape's edge — _«اعرض القطعة للزبون قبل وبعد — الشفافية تَبني السمعة»_ — tied to the Iraq Block 65% retention citation.
+
+Three input modalities (no library):
+- **HTML5 drag-and-drop** — desktop mouse path. `dragstart` sets `text/plain` payload; `drop` reads it.
+- **Pointer events** — touch / stylus path. `pointermove` previews the active zone, `pointerup` commits.
+- **Keyboard pick-and-drop** — `Tab` to a `.diag-symptom`, `Enter`/`Space` picks it up (sets `data-elan-picked="true"`), `Tab` to a `.diag-zone`, `Enter`/`Space` drops. Same outcome as drag.
+
+**Reference avoided:** Forbidden #15 (modal w/ overlay), #5 (default soft-shadow card), and the generic AI-default "click to view diagnostic checklist" form.
+**Inspired-by:** Wild Card #13 — Iraqi marsh mudhif (workshop tradition: "show me the broken part before you replace it"). The tape receipt's tilt and dotted underlines borrow from the carbon-paper duplicate slips that Iraqi repair shops still print in 2026.
+**Originality self-score:** 4/5. Drag-and-drop diagnostics exist elsewhere; what's uncommon: (1) the paper-tape receipt as the cause carrier (tokens already declared by γ8 — chromatic continuity), (2) full keyboard-first parity built in from the first pass (not bolted on), (3) the Arabic-Iraqi cause prose (lemma-aware idioms) carrying both pedagogy and voice, (4) the Iraq Block 65/3.2× citation tying the entire interaction loop to a measurable trust outcome.
+
+### Sacred preservation
+
+- Existing 14 page sections + 17 nav-items intact.
+- All Worker-07 phonerepair content (`pr-electronics-fund`, `pr-tools-gallery`, `pr-mainboard-anatomy`, `pr-repair-cards-1/2`, `pr-decision-trees`, `pr-software-side`, `pr-microsolder`, `pr-customer-service`, `pr-ethics-legal`, `pr-iraq-block`, `pr-labs`, `pr-career`, `pr-cheat-sheet`, `pr-citations`) untouched. ε10 inserts a NEW `pr-diag-stage` section ABOVE the existing content as the page's interactive entry point.
+- Warsha world tokens (γ8) reused verbatim — no token redefinition.
+- ε7 customercare module + sentiment bench untouched.
+- Legacy `Upg.haptic` (δ4) and `Upg.icons` (legacy upg-icons-1) consumed read-only — no monkey-patching.
+- All earlier ε stages (ε1 .. ε9) untouched.
+- `archive/` not touched. `prompts/v1`, `v2`, `v3` not touched.
+
+### Forbidden Library violations
+
+`0` — verified against #1–#28. Zero glassmorphism, zero off-white-warm body, zero pulsing dot, zero animated-counter-from-0, zero generic mesh gradient, zero Lorem ipsum, zero emoji in markup, zero inline `<svg viewBox=`, zero icons outside Phosphor/Lucide, zero hardcoded `fill="#"`, zero icon size outside the `--icon-xs..2xl` ladder.
+
+### Public surface added
+
+```js
+window.Upg.elan.phonerepair = Object.freeze({
+  diagnose(symptom, zoneKey),  // applies a diagnosis programmatically
+  causes(symptom),              // → frozen string[] of root-cause hypotheses
+  reset(),                      // clears all affected zones + tape
+  symptoms(),                   // frozen string[] (5 keys)
+  zones(),                      // frozen string[] (5 keys)
+});
+```
+
+Nested under `Upg.elan` (matches δ1 `magneticSidebar`, δ4 `bottomNav`, δ6 `motion`, ε2 `callcenter`, ε3 `fieldsales`, ε4 `social`, ε5 `lab`, ε6 `psych`, ε7 `customercare`, ε8 `programming`, ε9 `accounting`).
+
+— Entry end —

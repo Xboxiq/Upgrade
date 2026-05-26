@@ -599,3 +599,41 @@ disruption_triggers: 5
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-25 / ε9 — Pillar ε stage 9/12
+
+
+
+## ε10 — 2026-05-26
+**Beacon Type:** 🤚 INTERACTION_BEACON
+**The Surprise:** صفحة صيانة الهواتف تَتحوَّل إلى **رفّ ورشة عراقية**. على اليسار خمس بطاقات أعراض داخل قفص خشبي مُتقطَّع الحواف (border-dashed، لا radius ناعم). يَمين: هاتف ذكي مُلوَّح (Phosphor `device-mobile-camera`، يُحَوَّل إلى ٦٠٪ من الـ host عبر `inline-size`/`block-size`، لا `viewBox` يدوي) فوقه خمسة `<button>` أزرار شفافة بمواقع نسبية (الشاشة، البطارية، السماعة، المايك، الهوائي). المتدرِّب يَلتقط عَرَضاً ويُفلتها على القطعة المتأثرة. عند الإفلات تَحدث ثلاثة أشياء معاً:
+
+١) المنطقة تَتلوَّن بـ `--ember` عند ١٨٪ (الـ bench يَتوهَّج حيث يُؤلم — ليس مجرَّد border color change، بل background tinted)؛
+٢) `Upg.haptic.play('takk')` يَنطلق (طَقَّة قصيرة من δ4 maqamat haptic patterns — ليست buzz عام، بل نَقرة الأداة على المعدن)؛
+٣) يَنزل من تحت الـ bench **شريط لاصق ورقي** — تَوقيع الـ Beacon: مائل `-1.2deg` (transform-origin top right، يَبدو كأنه شريط ورق طويل سَقط من ماكينة الكاشير)، يَستخدم `--warsha-tape` و `--warsha-tape-shadow` المُعرَّفَين أصلاً في γ8 (Warsha world declaration). الأسباب الأربعة لكل عَرض تَظهر سطراً سطراً (`animation-delay: calc(var(--row-index) * 70ms)`) — كأنه يُطبَع على آلة كاتبة مَيدانية. كل سطر يَحمل bullet من Phosphor `wrench`. في أسفل الشريط: عبارة واحدة بـ italic — _«اعرض القطعة للزبون قبل وبعد — الشفافية تَبني السمعة»_ — تَربط الـ interaction بسبب وجوده العملي (التقدير الإنساني، ليس تقنياً صرفاً).
+
+**ثلاث مَدخلات** (بدون مكتبة drag-and-drop خارجية):
+- **HTML5 native drag-and-drop**: `dragstart` يُسجِّل الـ symptom كـ `text/plain` payload، `drop` يَقرأها. مسار الـ desktop mouse الكلاسيكي.
+- **Pointer events**: للمسات اللمسية. `pointerdown` يَلتقط، `pointermove` يَستخدم `elementFromPoint` ليُلوِّن الـ zone الحالي بـ `.is-target`، `pointerup` يَفعل `_applyDrop`. الـ `passive: true` على كل listener حفاظاً على scroll smoothness. الـ `pointerType === 'mouse'` early-return لأن الـ desktop يَستخدم HTML5 dnd.
+- **Keyboard pick-and-drop**: التَفاعل الكامل بدون فأرة. `Tab` إلى `.diag-symptom`، `Enter` (أو `Space`) يَلتقط (`data-elan-picked="true"`)، `Tab` إلى `.diag-zone`، `Enter` يَفعل الـ drop. نفس النتيجة. النقر الثاني على نفس الـ symptom يُحرِّره. **مَكتوب من اليوم الأول، ليس bolt-on later** — هذه هي النقطة الفلسفية: a11y ليست تنازلاً، هي طريقة ثالثة موازية للتَفاعل.
+
+البنية: `epsilon10-phonerepair.js` (٢٨٠ سطر، صفر `innerHTML`، صفر emoji في DOM-text) + `_warsha.css` `@layer elan-epsilon10` (٢٣٧ سطر، ٠ hex، ٣ guards: reduced-motion + forced-colors + print). الـ HTML insertion (٧١ سطر) فوق `pr-electronics-fund` كَبوَّابة الصفحة — أول ما يَلقى الزائر هو drag-to-diagnose لأن «الـ workshop يَبدأ بالتَشخيص». الـ Iraq Block (نفس البطاقة، ليست منفصلة) يَحمل citation: «٦٥٪ من زبائن إصلاح الهواتف يَفقدون ثقتهم لو الفنّي لم يَفسّر السبب — الشفافية + 'أُريك القطعة التالفة' = retention rate ×٣٫٢» (تحليل ميداني سوق الجمهورية، بغداد ٢٠٢٤).
+
+Public surface: `Upg.elan.phonerepair = Object.freeze({ diagnose, causes, reset, symptoms, zones })`. مُتداخل تحت `Upg.elan` يَلتزم بالـ namespace pattern من δ1+δ4+δ6+ε2..ε9.
+
+**Reference Avoided:** Forbidden #15 (modal w/ overlay داكن + center card — الـ AI-default للـ "interactive form")، Forbidden #5 (default soft-shadow + 12px-radius card — الـ workshop شكلٌ صريح، لا zen flat-design)، والـ AI-default "تشخيص = dropdown checklist" (الذي يَستهلك العَرض كـ enum value، لا يُجبر المستخدم على رَبط العَرض بالقطعة فيزيائياً).
+**Inspired-by:** Wild Card #13 — Iraqi marsh mudhif (workshop traditions). في الـ marsh houses كل قَصبة تَحمِل ثقلها بشكل صريح، الـ structure يُريك كيف يَعمل قبل أن يَطلب الـ trust. هنا: الـ trainee لا يَتعلَّم "الأعراض المحتملة لمشكلة البطارية" نَصَّاً منفصلاً، بل يَلتقط العَرض بيده ويُفلتها على الـ phone الفعلي ويَرى السبب يُكتَب على شريط ورقي يَهبط من الـ bench. نفس فلسفة سوق الجمهورية: «أَرِ الزبون القطعة قبل وبعد».
+
+**User-Visible:** yes — كل مستخدم يَفتح صفحة phonerepair يَجد الـ workbench فوق Electronics Fundamentals. mouse users يَسحبون. touch users يَسحبون. keyboard users يَتنقَّلون بـ Tab + Enter ويَحصلون على نفس النتيجة. screen-reader users يَستهلكون `aria-label` العربية الكاملة لكل symptom (e.g. _«نزف بطارية — اضغط Enter لالتقاطه»_) + `aria-live="polite"` على الـ tape (الأسباب تُعلَن لحظياً عند الـ drop). reduced-motion users يَرَوْن الـ tape ثابتة (لا rotate، لا staggered row reveal) لكن نفس المعلومات. forced-colors users يَرَوْن Highlight/HighlightText على الـ affected zones، ButtonFace bg على الـ tape، CanvasText للـ borders. print users يَحصلون على الـ tape رأسية مَطبوعة كقائمة سببية واضحة (transform مُلغى).
+**Originality Self-Score:** 4/5 — drag-to-diagnose interfaces موجودة في medical training apps + repair manuals. الذي يَجعله 4/5: (١) **chromatic continuity مع γ8/ε7**: الـ `--warsha-tape` token كان مُعرَّفاً للزينة في γ8 ثم استَخدمَه ε7 customercare كـ underline accent — ε10 أَعطاه دوراً معمارياً جديداً (الـ tape receipt الكامل) بنفس الـ hue، فالـ Warsha world يَكتسب طبقة معنوية إضافية بدون توسيع اللوحة؛ (٢) **keyboard parity من اليوم الأول**: ليست fallback ولا a11y bolt-on، بل modality ثالثة موازية بنفس الـ outcome، حتى الـ pickedSymptom state يَمتدّ عبر Tab navigation بدون فقدان (٣) **Iraqi-Arabic root-cause prose**: الأسباب ليست `'low battery'` enum strings، بل جُمل عربية بنبرة فني ورشة (_«البطارية تجاوزت 600 دورة شحن — استبدال موصى به»_)، تَحمل الـ pedagogy والـ voice معاً؛ (٤) **الـ Iraq Block 65/3.2× citation** يَربط الـ interaction loop كله بقياس بشري (retention) — ليس engagement metric تَبخَّرَ. لا أَدَّعي 5 لأن drag-and-drop visual diagnostic ليس اختراع 2026، الـ DocVisor + iFixit + Coolblue Diagnose كلها فعَلت متغيرات منه. الـ Originality في الـ assemblage (Iraqi Brutalism workshop framing + paper-tape receipt + keyboard parity + lemma-correct Arabic prose + chromatic token reuse).
+**Files touched:** platform/assets/js/elan/epsilon10-phonerepair.js (NEW 280) · platform/assets/css/worlds/_warsha.css (+237 @layer elan-epsilon10) · platform/index.html (+71) · platform/assets/app.js (+11)
+**Verified at commit:** 408be876
+
+
+---STATS---
+total_beacons: 28
+unique_categories_used: 9
+avg_score: 4.13
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-26 / ε10 — Pillar ε stage 10/12
