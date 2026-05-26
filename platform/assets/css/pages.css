@@ -26439,3 +26439,79 @@ body[data-rit-time]:not([data-rit-time="default"]) .bento-card {
   }
   [data-world="hibr"] .iraq-block__icon { color: var(--ink-faint); }
 }
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — ε2 Callcenter Revival: Tayyar outcome states + call-meter
+   SOUND_BEACON: visual counterpart to maqamat arpeggio/silence/neutral
+   ══════════════════════════════════════════════════════════════════════════ */
+@layer elan-epsilon {
+
+  /* --- Call card outcome states --- */
+  [data-world="tayyar"] .call-card[data-outcome="success"] {
+    border-color: var(--focus);
+    box-shadow: 0 0 24px color-mix(in oklch, var(--focus) 22%, transparent);
+    transition: border-color var(--duration-tayyar) var(--ease-tayyar),
+                box-shadow var(--duration-tayyar) var(--ease-tayyar);
+  }
+
+  [data-world="tayyar"] .call-card[data-outcome="lost"] {
+    border-color: var(--ember);
+    outline: 1px solid color-mix(in oklch, var(--ember) 36%, transparent);
+    outline-offset: 3px;
+    transition: border-color var(--duration-tayyar) var(--ease-tayyar),
+                outline var(--duration-tayyar) var(--ease-tayyar);
+  }
+
+  [data-world="tayyar"] .call-card[data-outcome="neutral"] {
+    border-color: var(--ink-muted);
+    transition: border-color var(--duration-tayyar) var(--ease-tayyar);
+  }
+
+  /* --- Call meter (5-segment KPI bar) --- */
+  [data-world="tayyar"] .call-meter {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    block-size: 4px;
+    margin-block-start: var(--s-2);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+
+  [data-world="tayyar"] .call-meter span {
+    background: color-mix(in oklch, var(--ink) 14%, transparent);
+    transition: background 260ms var(--ease-tayyar);
+  }
+
+  [data-world="tayyar"] .call-meter span[data-active="true"] {
+    background: var(--ember);
+  }
+
+  /* --- Iraq block inside Tayyar --- */
+  [data-world="tayyar"] .iraq-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+    padding: var(--s-3);
+    border-inline-start: 3px solid var(--ember);
+    background: color-mix(in oklch, var(--ember) 5%, transparent);
+    border-radius: 2px;
+    margin-block: var(--s-4);
+  }
+
+  [data-world="tayyar"] .iraq-block__icon {
+    color: var(--ink-faint);
+  }
+
+  /* --- Reduced motion: instant transitions --- */
+  @media (prefers-reduced-motion: reduce) {
+    [data-world="tayyar"] .call-card[data-outcome] {
+      transition: none;
+    }
+    [data-world="tayyar"] .call-meter span {
+      transition: none;
+    }
+  }
+
+}
