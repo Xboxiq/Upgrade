@@ -2490,3 +2490,54 @@ window.Upg.mood = Object.freeze({
 ```
 
 — Entry end —
+
+
+
+---
+
+## ε-CLOSE — Pillar ε CONTENT REVIVAL — Sealed — 2026-05-27
+**Pillar:** ε CONTENT REVIVAL
+**Stages:** 12 of 12 (COMPLETE)
+**Branch:** `elan-ε-content-revival`
+**Verified at commit:** 6541b53 (state ε12 ledger) — pillar tip
+**PR status:** pending-open (this commit prepares the PR body)
+
+### Pillar-level grep verification (executed at commit 6541b53)
+
+| Metric | Value | How verified |
+|---|---:|---|
+| Stages completed | 12 of 12 | `grep -cE '^## ε[0-9]+' state/CREATIVITY_LOG.md` (last 12 entries) |
+| Beacons recorded for ε | 12 | TRUTH_LEDGER table above (ε1..ε12 commits all present) |
+| Beacons total project-wide | 30 | `grep -cE '^## [αβγδεζ][0-9]+' state/CREATIVITY_LOG.md` |
+| Unique beacon categories used (project) | 9 of 9 | last STATS block `unique_categories_used: 9` |
+| Forbidden Library violations (project) | 0 | last STATS block `forbidden_violations: 0` |
+| Creativity Health (project) | 100 / 100 | last STATS block `creativity_health: 100` |
+| ε CSS shard files added | 4 | `ls platform/assets/css/_epsilon*.css | wc -l` |
+| ε JS modules added | 11 | `ls platform/assets/js/elan/epsilon*.js | wc -l` |
+| Worlds wired in HTML | 8 of 8 | `grep -oE 'data-world="[a-z]+"' platform/index.html | sort -u | wc -l` |
+| Bento cells in dashboard section | 9 (≥7 spec floor) | inline forensic on lines 730-856 |
+| `data-world="hibr"` on `#page-dashboard` | 1 | `grep -c 'id="page-dashboard"[^>]*data-world="hibr"' platform/index.html` |
+| `IFC 2024` citation visible in dashboard | 1 | `grep -c 'IFC 2024' platform/index.html` |
+| Public surface added (Upg.mood) | 1 (`get`/`update`/`reset`) | `grep -c 'window.Upg.mood' platform/assets/js/elan/epsilon12-mood.js` |
+
+### Sacred Assets — preservation audit at pillar close
+
+- 16 `<section class="page" …>` page roots — present and untouched in routing.
+- 14+ legacy `Upg.*` APIs — extended, never replaced. ε added `Upg.mood` (15th-pillar-era top-level surface) without clobbering W11/W12/W14/W16 namespaces.
+- `archive/arabic-training-platform-v12-original.html` — untouched at pillar close.
+- `prompts/v1`, `prompts/v2`, `prompts/v3` — untouched at pillar close.
+- `state/CREATIVITY_LOG.md` — append-only honored across all 12 ε commits (no `git diff` shows pre-existing entries rewritten).
+
+### Forbidden Library (final audit at pillar close)
+
+- emoji in markup: project-wide HTML still carries pre-existing emojis from v3 era (Pillar ζ territory); **no new emoji introduced by ε** (every per-stage commit verified `emoji=0` in its scope).
+- inline `<svg viewBox …>` written by AI: 0 in any ε-touched section. SVG-as-data-uri patterns in `worlds/*.css` are designer-fixed assets, not AI-improvised.
+- mixed icon families: 0. All ε content stayed on the `qi` icon system from α4 (Lucide + Phosphor sprite).
+- hardcoded `fill="#…"` in markup: 0 in any ε-touched file.
+- Cliché bypass requests: 0. No `EXEMPT_PATTERN` invocations in the pillar.
+
+### Pillar ε in one paragraph
+
+12 pages were not redesigned — they were **revived**. Each page received a world (per γ atlas), a beacon that the rest of AI doesn't ship as a default (per the doctrine), an Iraq Block with a real citation, and a JS module that consumes — never extends — the legacy `Upg.*` surface. The pillar closes with a META layer (ε12) that quietly reads what the user did across the 11 other pages and adapts the dashboard greeting prose without ever surfacing a number, a streak, or a "Welcome back" toast. The platform that knows its guest, in 12 stages, on one branch, with one PR.
+
+— Entry end —
