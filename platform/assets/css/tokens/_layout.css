@@ -116,3 +116,254 @@
   padding:       7px 10px;
   font-size:     11.5px;
 }
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — ζ1.5 — Truthful corrective pass
+   ────────────────────────────────────────────────────────────────────────
+   Authority: prompts/v4/ζ1_INLINE_PURGE.md (acceptance criterion:
+              "لا hardcoded color/spacing in inline").
+   Rationale: ζ1 commit ffa9c35 reached inline-count 46 but its claim of
+              "hardcoded=0" was inaccurate — re-grep showed 12 hex + 9 rgba
+              + 23 mixed (var+hardcoded) surviving. ζ1.5 finishes the work
+              honestly. Component classes are added below; HTML migration
+              moves the remaining 21 mixed inlines to these classes.
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* Token namespace (--callout-*, --brand-*, --gauge-*, --state-*-fg) lives
+   in tokens/_color.css ζ1.5 block. _layout.css only consumes them. */
+
+/* Brand reference colours — bound via class instead of inline --brand-c */
+.brand-label--instagram { color: var(--brand-instagram); }
+.brand-label--youtube   { color: var(--brand-youtube); }
+.brand-label--snapchat  { color: var(--brand-snapchat); }
+
+/* Engagement reaction gauge — hardcoded gradient lifted to token */
+.eng-gauge-bar {
+  block-size: 100%;
+  border-radius: 99px;
+  transition: width 0.6s ease;
+  background: var(--gauge-tri-gradient);
+}
+.eng-gauge-marker {
+  position: absolute;
+  inset-block-start: -3px;
+  inline-size: 4px;
+  block-size: 16px;
+  border-radius: 2px;
+  background: var(--ink, var(--text));
+  transition: left 0.6s ease;
+}
+.eng-progress-bar {
+  block-size: 100%;
+  background: var(--gauge-progress-gradient);
+  border-radius: 99px;
+  transition: width 0.5s ease;
+  inline-size: var(--eng-pct, 0%);
+}
+.gateway-load-bar {
+  block-size: 100%;
+  background: var(--gauge-progress-gradient);
+  border-radius: 99px;
+  animation: loadBar 2s ease forwards;
+}
+
+/* Psych pt-dot danger variant — replaces hardcoded #ff0000 inline */
+.psych-pt-dot--danger {
+  background: var(--state-negative-fg);
+  box-shadow: 0 0 5px var(--state-negative-fg);
+}
+
+/* W2 negotiation warning callout (gradient amber→red) — was inline rgba mix */
+.callout-warning-gradient {
+  padding: 18px 20px;
+  background: var(--callout-warn-grad-bg);
+  border: 1px solid var(--callout-amber-border);
+  border-radius: var(--radius-md, 12px);
+}
+
+/* W6 industry select dropdown — was inline 5-property mix */
+.w6-industry-select {
+  background: var(--surface-2, var(--anchor-2));
+  border: 1px solid var(--color-border, var(--line));
+  color: var(--color-text, var(--ink));
+  border-radius: 10px;
+  padding: 9px 14px;
+  font-family: inherit;
+  font-size: 12.5px;
+  min-width: 220px;
+}
+
+/* W6 industry hint inline callout */
+.cc-industry-hint {
+  font-size: 12px;
+  color: var(--color-text-muted, var(--ink-muted));
+  line-height: 1.7;
+  padding: 12px 14px;
+  background: var(--callout-cyan-soft-bg);
+  border-radius: 10px;
+  border: 1px solid var(--callout-cyan-soft-border);
+}
+
+/* W6 cal weekday strip (grid + typography combined) */
+.w6-cal-weekday-strip {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-bottom: 8px;
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--color-text-faint, var(--ink-faint));
+  text-align: center;
+}
+
+/* W6 micro hint at end of perf section */
+.cc-hint-micro {
+  margin-top: 16px;
+  padding: 12px 14px;
+  background: var(--callout-cyan-soft-bg);
+  border: 1px solid var(--callout-cyan-soft-border);
+  border-radius: 8px;
+  font-size: 11.5px;
+  color: var(--color-text-muted, var(--ink-muted));
+  line-height: 1.75;
+}
+
+/* W6 monospace cite block (Courier New dashed-border) */
+.w6-cite-block-mono {
+  font-size: 11.5px;
+  color: var(--color-text-muted, var(--ink-muted));
+  line-height: 1.95;
+  font-family: 'Courier New', monospace;
+  background: var(--surface-2, var(--anchor-2));
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px dashed var(--color-border, var(--line));
+}
+
+/* Card-strip header — three variants share the base */
+.card-strip-header {
+  padding: 14px 20px 12px;
+  border-bottom: 1px solid var(--color-border, var(--line));
+  background: var(--surface-2, var(--anchor-2));
+  display: flex;
+  align-items: center;
+}
+.card-strip-header--between { justify-content: space-between; }
+.card-strip-header--gap     { gap: 12px; }
+.card-strip-header--plain   {
+  display: block;
+  padding: 16px 22px;
+}
+
+/* HR orange-bordered callout (negotiation insight) */
+.callout-hr-orange {
+  background: var(--surface-2, var(--anchor-2));
+  border: 1px solid var(--callout-orange-border);
+  border-radius: var(--radius-md, 12px);
+  padding: 16px;
+}
+
+/* CAP theorem violet inline callout */
+.callout-violet-inline {
+  padding: 10px 12px;
+  background: var(--callout-violet-soft-bg);
+  border: 1px solid var(--callout-violet-soft-border);
+  border-radius: var(--radius-sm, 8px);
+}
+
+/* Citation right-border green callout */
+.callout-citation-green {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: var(--callout-positive-soft-bg);
+  border-right: 3px solid var(--state-positive-fg);
+  border-radius: var(--radius-sm, 8px);
+  font-size: 11.5px;
+  color: var(--ink, var(--text));
+}
+
+/* Negotiation cyan→violet gradient callout */
+.callout-cyan-violet-gradient {
+  margin-top: 18px;
+  padding: 16px 18px;
+  background: var(--callout-cyan-violet-grad-bg);
+  border: 1px solid var(--callout-cyan-border);
+  border-radius: var(--radius-md, 12px);
+}
+
+/* Lab fraud-sim emergency callout (amber→red gradient) */
+.callout-emergency-gradient {
+  padding: 12px 14px;
+  background: var(--callout-warn-grad-bg);
+  border: 1px solid var(--callout-amber-warn-border);
+  border-radius: var(--radius-sm, 8px);
+}
+
+/* Clear-progress micro link in dashboard footer */
+.clear-progress-link {
+  cursor: pointer;
+  color: var(--color-text-faint, var(--ink-faint));
+  font-size: 10.5px;
+  text-decoration: underline;
+  text-decoration-color: var(--color-border-strong, var(--line-strong));
+}
+.clear-progress-link:hover { color: var(--ink, var(--text)); }
+
+/* Loading overlay (initial app boot) — replaces multiline inline style */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--color-bg, var(--anchor-bg));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  transition: opacity 0.6s ease;
+}
+.loading-overlay__icon-frame {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--accent-dim, var(--color-brand-soft));
+  border: 1px solid var(--color-border-strong, var(--line-strong));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: loadPulse 1s ease infinite alternate;
+  font-size: 28px;
+}
+
+/* Badge toast — replaces multiline inline style; the legacy
+   `#badge-toast.show` rule in pages.css drives the slide-in state. */
+.badge-toast {
+  position: fixed;
+  bottom: 90px;
+  inset-inline-start: 24px;
+  z-index: 5000;
+  background: var(--color-surface-1, var(--anchor-1));
+  border: 1px solid var(--color-border-strong, var(--line-strong));
+  border-radius: var(--radius-lg, var(--r-4));
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--shadow-md), 0 0 24px var(--callout-cyan-border);
+  transform: translateY(120px);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+  pointer-events: none;
+  min-width: 260px;
+}
+
+/* End ÊLAN v4 / ζ1.5 — Truthful corrective pass ──────────────────── */
+
+
+
+/* ζ1.5 — final stragglers (last 2 mixed inlines retired) */
+.card--border-strong {
+  border-color: var(--color-border-strong, var(--line-strong, var(--border-hover)));
+}

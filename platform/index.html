@@ -8135,7 +8135,7 @@
             <div class="u-fz-11 u-fw-800 u-ls-15 u-c-purple u-mb-15b">P · PROBLEM</div>
             <div class="u-meta-lh-lg">«ما الصعوبات التي تواجهونها مع النظام الحالي؟» — لا تقترح مشكلة؛ دعهُ يسميها. الألم الذي يُسمّيه بنفسه أقوى 10x من الذي تُسمّيه أنت.</div>
           </div>
-          <div class="span-12" style="padding:18px 20px;background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(239,68,68,0.06));border:1px solid rgba(245,158,11,0.25);border-radius:var(--radius-md);">
+          <div class="span-12 callout-warning-gradient">
             <div class="u-fz-11 u-fw-800 u-ls-15 u-c-amber u-mb-15b">I · IMPLICATION — السلاح السرّي</div>
             <div class="u-fz-125 u-c-muted u-lh-185 u-mb-25">تحويل المشكلة الصغيرة (يسهل تجاهلها) إلى ألم مركّب (مستحيل تجاهله). رحلة من «عندي صداع بسيط» إلى «أدرك أني قد أُصاب».</div>
             <div class="u-grid-2-10">
@@ -10009,8 +10009,8 @@
                 <span>0%</span><span>معياري</span><span>ممتاز</span>
               </div>
               <div class="u-bar-track">
-                <div class="u-h-full u-rounded-99 u-transition-w-600" id="er-gauge-bar" style="background:linear-gradient(90deg, var(--er-gauge-from,#EF4444), var(--er-gauge-mid,#EAB308), var(--er-gauge-to,#22C55E))"></div>
-                <div id="er-gauge-marker" style="position:absolute; top:-3px; width:4px; height:16px; border-radius:2px; background:var(--text); transition:left 0.6s ease;"></div>
+                <div class="eng-gauge-bar" id="er-gauge-bar"></div>
+                <div id="er-gauge-marker" class="eng-gauge-marker"></div>
               </div>
             </div>
           </div>
@@ -11006,7 +11006,7 @@
             <div class="u-meta">يُعدّل النسب تلقائياً حسب طبيعة الجمهور المتوقع</div>
           </div>
           <select id="w6IndustrySel" onchange="w6UpdatePillars(this.value)"
-            style="background:var(--surface-2); border:1px solid var(--border); color:var(--text); border-radius:10px; padding:9px 14px; font-family:inherit; font-size:12.5px; min-width:220px;">
+            class="w6-industry-select">
             <option value="default">⚖️ افتراضي (متوازن)</option>
             <option value="b2b">💼 B2B / SaaS / استشارات</option>
             <option value="ecom">🛒 تجارة إلكترونية</option>
@@ -11017,7 +11017,7 @@
             <option value="health">🏥 صحة / عافية</option>
           </select>
         </div>
-        <div id="w6IndustryHint" style="font-size:12px; color:var(--text-muted); line-height:1.7; padding:12px 14px; background:rgba(102,252,241,0.05); border-radius:10px; border:1px solid rgba(102,252,241,0.15);">
+        <div id="w6IndustryHint" class="cc-industry-hint">
           النسب الحالية = القيم الافتراضية. غيّر الصناعة لرؤية كيف يتعدّل المزيج.
         </div>
       </div>
@@ -11081,7 +11081,7 @@
 
         <!-- Calendar grid -->
         <div>
-          <div style="display:grid; grid-template-columns:repeat(7, 1fr); gap:6px; margin-bottom:8px; font-size:10.5px; font-weight:800; color:var(--text-faint); text-align:center;">
+          <div class="w6-cal-weekday-strip">
             <div>سبت</div><div>أحد</div><div>اثنين</div><div>ثلاثاء</div><div>أربعاء</div><div>خميس</div><div>جمعة</div>
           </div>
           <div class="u-grid u-grid-7 u-gap-1-5" id="w6CalGrid" data-w6="cal-grid">
@@ -11354,7 +11354,7 @@
           </div>
         </div>
 
-        <div style="margin-top:16px; padding:12px 14px; background:rgba(102,252,241,0.05); border:1px solid rgba(102,252,241,0.18); border-radius:8px; font-size:11.5px; color:var(--text-muted); line-height:1.75;">
+        <div class="cc-hint-micro">
           💡 <b>قاعدة عملية:</b> لا توقف الاختبار قبل أن تصل لحجم العينة المطلوب — حتى لو ظهر "فائز" مبكر. الـ <i>peeking problem</i> يضاعف معدل النتائج الزائفة.
         </div>
       </div>
@@ -11714,7 +11714,7 @@
 
           <div>
             <div class="u-fz-12 u-fw-800 u-c-amber u-mb-2">📐 المعادلات السريعة</div>
-            <div style="font-size:11.5px; color:var(--text-muted); line-height:1.95; font-family:'Courier New',monospace; background:var(--surface-2); padding:12px 14px; border-radius:8px; border:1px dashed var(--border);">
+            <div class="w6-cite-block-mono">
               CPM = (Spend / Impressions) × 1000<br>
               CPC = Spend / Clicks<br>
               CTR = Clicks / Impressions × 100<br>
@@ -12206,7 +12206,7 @@
             <div id="eng-progress-wrap" class="u-row-8">
               <span class="u-meta-sm">التقدم:</span>
               <div class="u-track u-track-120" >
-                <div class="u-h-full u-rounded-99" id="eng-progress-bar" style="background:linear-gradient(90deg, var(--accent), var(--eng-grad-to,#0EA5E9)); transition:width 0.5s ease; width:var(--eng-pct, 0%)"></div>
+                <div id="eng-progress-bar" class="eng-progress-bar"></div>
               </div>
               <span id="eng-progress-text" class="u-meta-sm"></span>
             </div>
@@ -12217,7 +12217,7 @@
         <div id="eng-meta" class="u-flex u-items-center u-gap-2-5 u-mb-45 u-flex-wrap"></div>
 
         <!-- Scene card -->
-        <div class="card u-mb-4" style="border-color:var(--border-hover)">
+        <div class="card card--border-strong u-mb-4">
           <div class="u-fz-9 u-fw-800 u-ls-15 u-tt-up u-c-faint u-mb-3">📍 المشهد</div>
           <p id="eng-setup" class="u-fz-14 u-c-text u-lh-18 u-mb-4"></p>
 
@@ -12843,7 +12843,7 @@
 
       <!-- ── COMBO GUIDE (top) ── -->
       <div class="card u-frame-clip">
-        <div style="padding:14px 20px 12px;border-bottom:1px solid var(--border);background:var(--surface-2);display:flex;align-items:center;justify-content:space-between;">
+        <div class="card-strip-header card-strip-header--between">
           <div class="u-t-card-title-tight">⚡ تركيبات الأدوات الأعلى تأثيراً</div>
           <span class="tag accent">دليل فوري</span>
         </div>
@@ -14076,7 +14076,7 @@
 
         <!-- ═══ جدول تقاطع النمط × الدفاع النفسي ═══ -->
         <div class="card u-frame-clip-mt">
-          <div style="padding:14px 20px 12px;border-bottom:1px solid var(--border);background:var(--surface-2);display:flex;align-items:center;gap:12px;">
+          <div class="card-strip-header card-strip-header--gap">
             <span class="u-fz-20">&#x1F9E9;</span>
             <div>
               <div class="u-fz-135 u-fw-800 u-c-text">جدول تقاطع النمط × الدفاع النفسي</div>
@@ -17051,7 +17051,7 @@
             <div class="u-tag-green">🤝 Win-Win</div>
             <div class="u-meta-lh-md">الأفضل للعلاقات طويلة الأمد. كلا الطرفين يكسبان. يتطلب ثقة وانفتاح.</div>
           </div>
-          <div style="background:var(--surface-2);border:1px solid rgba(249,115,22,0.2);border-radius:var(--radius-md);padding:16px;">
+          <div class="callout-hr-orange">
             <div class="u-tag-orange">⚡ تنافسي</div>
             <div class="u-meta-lh-md">للمعاملات لمرة واحدة. يتطلب معلومات أكثر وBATNA قوي. مخاطرة في العلاقة.</div>
           </div>
@@ -18930,7 +18930,7 @@
             <div><strong class="u-c-text">C · Consistency:</strong> كل قارئ يرى آخر كتابة — دائماً.</div>
             <div><strong class="u-c-text">A · Availability:</strong> كل طلب يحصل على رد — دائماً.</div>
             <div><strong class="u-c-text">P · Partition Tolerance:</strong> النظام يعمل رغم انقطاع الشبكة.</div>
-            <div style="padding:10px 12px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.2);border-radius:var(--radius-sm);">في العالم الحقيقي P ليست خياراً — شبكات تتقطّع. فالاختيار الحقيقي بين <strong class="u-c-purple">CP</strong> (بنوك) و<strong class="u-c-purple">AP</strong> (سوشيال ميديا).</div>
+            <div class="callout-violet-inline">في العالم الحقيقي P ليست خياراً — شبكات تتقطّع. فالاختيار الحقيقي بين <strong class="u-c-purple">CP</strong> (بنوك) و<strong class="u-c-purple">AP</strong> (سوشيال ميديا).</div>
           </div>
         </div>
 
@@ -18939,7 +18939,7 @@
           <div class="u-meta-lh-lg">
             Idempotent = تكرار الطلب لا يُغيّر النتيجة. <strong class="u-c-text">POST /payments</strong> بدون idempotency key = كارثة عند retry. الحل: Client يُرسل <code class="u-inline-mark u-inline-mark-accent" >Idempotency-Key: UUID</code> والسيرفر يُخزّنه 24h. أي retry بنفس المفتاح = نفس النتيجة، بدون خصم مزدوج.
           </div>
-          <div style="margin-top:10px;padding:10px 12px;background:rgba(34,197,94,0.06);border-right:3px solid #22C55E;border-radius:var(--radius-sm);font-size:11.5px;color:var(--text);">
+          <div class="callout-citation-green">
             <strong>قاعدة:</strong> أي endpoint يُعدّل الحالة + يتعامل مع أموال = يجب أن يكون idempotent. لا استثناءات.
           </div>
         </div>
@@ -19324,7 +19324,7 @@
 
         </div>
 
-        <div style="margin-top:18px;padding:16px 18px;background:linear-gradient(135deg,rgba(102,252,241,0.08),rgba(139,92,246,0.06));border:1px solid rgba(102,252,241,0.2);border-radius:var(--radius-md);">
+        <div class="callout-cyan-violet-gradient">
           <div class="u-fz-11 u-fw-800 u-ls-15 u-tt-up u-c-cyan u-mb-15b">🧘 Behavioralism · قاعدة «15/5/1»</div>
           <div class="u-meta-lh-lg">
             <strong class="u-c-text">15 دقيقة</strong> تُجرّب بنفسك (بناء ثقة + تعلم مستقل) · <strong class="u-c-text">5 دقائق</strong> تبحث في التوثيق/Stack Overflow (مهارة بحث) · <strong class="u-c-text">1 دقيقة</strong> قبل طلب المساعدة: اكتب ما جرّبته، ما الفرضيات، ما المُتوقع مقابل ما يحدث. هذا يُوفّر وقت زميلك ويجعلك أسرع في الـ debug لاحقاً — كثير من الأسئلة تُجاب بنفسها أثناء الكتابة (Rubber Duck).
@@ -23433,7 +23433,7 @@ const bird = { ...canMove(), ...canFly() };
       <div class="ql-glass u-pad-card-lg">
         <div class="u-card-title-sm">🔍 Benford's Law — قانون الرقم الأول</div>
         <div class="u-fz-125 u-c-muted u-lh-185 u-mb-3">في البيانات الطبيعية، الأرقام التي تبدأ بـ <strong>1</strong> تظهر بنسبة ~30.1%، بـ <strong>2</strong> ~17.6%، بـ <strong>9</strong> فقط 4.6%. حين يُلفّق البشر أرقاماً — يُوزّعونها «عادلة» (10% لكل رقم). <strong class="u-c-text">الفجوة عن القانون = جرس إنذار.</strong></div>
-        <div style="padding:12px 14px;background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(239,68,68,0.05));border:1px solid rgba(245,158,11,0.22);border-radius:var(--radius-sm);">
+        <div class="callout-emergency-gradient">
           <div class="u-fs-11 u-font-black u-c-brand u-mb-1 u-track-wider u-uppercase" style="--brand-c:#F59E0B">🧪 محاكاة: اكتشف الاحتيال</div>
           <div class="u-fz-12 u-c-text u-lh-18">وصلتك 500 فاتورة من مورّد. الأرقام تبدأ بـ <code class="u-text-brand">1→12%</code>, <code class="u-text-brand">4→22%</code>, <code class="u-text-brand">5→19%</code>. هل تشك؟ <strong class="u-c-red">نعم</strong> — التوزيع ضد بنفورد. الاحتمال: أرقام مُلفّقة للبقاء تحت حد الموافقة (4999 بدلاً من 5000).</div>
         </div>
@@ -23441,7 +23441,7 @@ const bird = { ...canMove(), ...canFly() };
 
       <!-- Red Flags Table -->
       <div class="card u-frame-clip">
-        <div style="padding:16px 22px;border-bottom:1px solid var(--border);background:var(--surface-2);">
+        <div class="card-strip-header card-strip-header--plain">
           <div class="u-t-card-title-tight">🚩 Red Flags — مؤشرات التلاعب التي يعرفها المحاسب الجنائي</div>
         </div>
         <table class="data-table">
@@ -32598,7 +32598,7 @@ const bird = { ...canMove(), ...canFly() };
       <span class="footer-sep">·</span>
       <span>منصة التدريب الاحترافية</span>
       <span class="footer-sep">·</span>
-      <span onclick="if(confirm('هل تريد مسح كل بيانات التقدم المحفوظة؟')){localStorage.clear();location.reload();}" style="cursor:pointer;color:var(--text-faint);font-size:10.5px;text-decoration:underline;text-decoration-color:var(--border-hover);" title="مسح البيانات المحفوظة">مسح البيانات</span>
+      <span onclick="if(confirm('هل تريد مسح كل بيانات التقدم المحفوظة؟')){localStorage.clear();location.reload();}" class="clear-progress-link" title="مسح البيانات المحفوظة">مسح البيانات</span>
     </div>
   </footer>
 
@@ -32727,27 +32727,14 @@ const bird = { ...canMove(), ...canFly() };
 <!-- ============================================================
      LOADING OVERLAY
 ============================================================ -->
-<div id="loading-overlay" style="
-  position:fixed; inset:0; z-index:9999;
-  background:var(--bg);
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:24px;
-  transition: opacity 0.6s ease;
-">
-  <div style="
-    width:56px; height:56px;
-    border-radius:14px;
-    background:var(--accent-dim);
-    border:1px solid var(--border-hover);
-    display:flex; align-items:center; justify-content:center;
-    animation: loadPulse 1s ease infinite alternate;
-    font-size:28px;
-  ">🎓</div>
+<div id="loading-overlay" class="loading-overlay">
+  <div class="loading-overlay__icon-frame">🎓</div>
   <div class="u-text-center">
     <div class="u-fz-18 u-fw-800 u-c-text u-mb-15b">منصة التدريب الاحترافية</div>
     <div class="u-fz-13 u-c-muted">جارٍ تحميل بيئة التدريب...</div>
   </div>
   <div class="u-track u-track-200" >
-    <div class="u-h-full u-rounded-99" style="background:linear-gradient(90deg, var(--accent), var(--load-to,#0EA5E9)); animation:loadBar 2s ease forwards"></div>
+    <div class="gateway-load-bar"></div>
   </div>
 </div>
 
@@ -32757,20 +32744,7 @@ const bird = { ...canMove(), ...canFly() };
 <!-- ============================================================
      BADGE TOAST NOTIFICATION
 ============================================================ -->
-<div id="badge-toast" style="
-  position:fixed; bottom:90px; left:24px; z-index:5000;
-  background:var(--surface);
-  border:1px solid var(--border-hover);
-  border-radius:var(--radius-lg);
-  padding:14px 18px;
-  display:flex; align-items:center; gap:12px;
-  box-shadow:var(--shadow-md), 0 0 24px rgba(102,252,241,0.15);
-  transform:translateY(120px);
-  opacity:0;
-  transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s ease;
-  pointer-events:none;
-  min-width:260px;
-">
+<div id="badge-toast" class="badge-toast">
   <div class="badge-toast-emoji u-fs-26">🏆</div>
   <div>
     <div class="u-fz-10 u-fw-800 u-ls-1 u-tt-up u-c-cyan u-mb-tiny">شارة جديدة مفتوحة! 🎉</div>
