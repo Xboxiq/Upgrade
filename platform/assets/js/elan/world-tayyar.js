@@ -214,3 +214,165 @@ if (typeof window !== 'undefined') {
 
 export { play, mute, unmute, toggle };
 export default surface;
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — ε2 — Tayyar / callcenter outcome cues
+   ────────────────────────────────────────────────────────────────────────
+   🔊 SOUND_BEACON — three semantically distinct call outcomes:
+
+     • success → ascending tetrachord (440 → 554 → 622Hz, 3 sine notes,
+                 same biquad pipeline as γ7 but shifted up + 4-note arc)
+     • neutral → single soft sine 400Hz × 80ms (a "dafn" acknowledgement)
+     • lost    → SILENCE. Zero audio output. The visual mirror (red outline
+                 + inset darkness via [data-outcome="lost"]) is the only
+                 feedback. Most AI dashboards default to a negative ding —
+                 ε2 refuses that pattern. Silence IS the stronger feedback.
+
+   The cues are wired through the existing γ7 pipeline (AudioContext warmup,
+   reduced-motion guard, mute store, debounce). They do NOT clobber the γ7
+   .practice-tried-btn arpeggio. They add a NEW public method `emitOutcome`
+   to Upg.worlds.tayyar (replaces the frozen surface with a strict superset).
+
+   Visual driver: also flips [data-outcome] on the closest .call-card so CSS
+   in worlds/_tayyar.css applies the matching outline / meter color in lock-
+   step with the audio (or its absence).
+
+   Auto-binding:
+     - Click on [data-elan-outcome] inside a Tayyar page
+     - Listening to upg:call:outcome { detail.outcome: 'success'|'neutral'|'lost' }
+
+   Reduced-motion: no audio. Visual outline still applies (a11y is honest).
+   Muted: no audio. Visual outline still applies.
+   ════════════════════════════════════════════════════════════════════════ */
+
+const E2_SUCCESS_NOTES   = [440, 554, 622];   /* A4, C#5, D#5 — ascending Saba */
+const E2_NEUTRAL_FREQ    = 400;
+const E2_NEUTRAL_DUR_MS  = 80;
+const E2_NOTE_STAGGER_MS = 60;
+
+function _emitSuccess() {
+  if (_isReduced() || _isMuted()) return false;
+  const ctx = _getCtx();
+  if (!ctx) return false;
+  if (typeof ctx.resume === 'function' && ctx.state === 'suspended') {
+    try { ctx.resume(); } catch {}
+  }
+  const t0 = ctx.currentTime + 0.005;
+  E2_SUCCESS_NOTES.forEach((freq, i) => {
+    _scheduleNote(ctx, freq, t0 + (i * E2_NOTE_STAGGER_MS) / 1000, 110);
+  });
+  return true;
+}
+
+function _emitNeutral() {
+  if (_isReduced() || _isMuted()) return false;
+  const ctx = _getCtx();
+  if (!ctx) return false;
+  if (typeof ctx.resume === 'function' && ctx.state === 'suspended') {
+    try { ctx.resume(); } catch {}
+  }
+  const t0 = ctx.currentTime + 0.005;
+  _scheduleNote(ctx, E2_NEUTRAL_FREQ, t0, E2_NEUTRAL_DUR_MS);
+  return true;
+}
+
+function _emitLost() {
+  /* Intentional silence — the BEACON's core thesis. */
+  return true;
+}
+
+/**
+ * Public outcome emitter. Dispatches a CustomEvent for any listener that
+ * wants to track outcomes (analytics, simulator scoring) and runs the
+ * audio + visual response.
+ *
+ * @param {'success'|'neutral'|'lost'} outcome
+ * @param {Element} [target] - Optional element to flag with [data-outcome].
+ *                             If absent, falls back to the most recent
+ *                             [data-elan-outcome] click target.
+ */
+function emitOutcome(outcome, target) {
+  const v = String(outcome || '').toLowerCase();
+  if (v !== 'success' && v !== 'neutral' && v !== 'lost') return false;
+
+  /* visual mirror: flip the closest .call-card data-outcome */
+  let card = null;
+  if (target && target instanceof Element) {
+    card = target.closest('.call-card') || target;
+  } else {
+    /* fallback — find the visible call-card on this page */
+    card = document.querySelector('section.page.active .call-card, section.page.active .call-card[data-elan-stage="ε2"]');
+  }
+  if (card) {
+    card.setAttribute('data-outcome', v);
+    /* update the live result text honestly */
+    const resultEl = card.querySelector('[data-elan-outcome-result] .call-card__result-text');
+    if (resultEl) {
+      const labels = { success: 'اعتراض ناجح — صدى صاعد', neutral: 'حَيد — dafn واحد', lost: 'خسارة العميل — صَمت' };
+      resultEl.textContent = labels[v] || '—';
+    }
+  }
+
+  /* audio response */
+  if      (v === 'success') _emitSuccess();
+  else if (v === 'neutral') _emitNeutral();
+  else if (v === 'lost')    _emitLost();
+
+  return true;
+}
+
+/* Click delegation for [data-elan-outcome] buttons inside Tayyar pages */
+function _onOutcomeClick(e) {
+  const btn = e.target.closest('[data-elan-outcome]');
+  if (!btn) return;
+  const owningPage = btn.closest('section.page[data-world="tayyar"]');
+  if (!owningPage) return;
+  emitOutcome(btn.getAttribute('data-elan-outcome'), btn);
+}
+
+/* External event hook: pages can dispatch upg:call:outcome with detail.outcome */
+function _onOutcomeEvent(ev) {
+  const d = ev && ev.detail;
+  if (!d || !d.outcome) return;
+  emitOutcome(d.outcome, d.target instanceof Element ? d.target : null);
+}
+
+/* Bind once — survives DOM mutation, no re-bind on world change */
+if (typeof document !== 'undefined' && !document.body?.dataset?.tayyarOutcomeBound) {
+  const _bind = () => {
+    if (document.body.dataset.tayyarOutcomeBound === 'true') return;
+    document.body.dataset.tayyarOutcomeBound = 'true';
+    document.addEventListener('click', _onOutcomeClick, { passive: true });
+    document.addEventListener('upg:call:outcome', _onOutcomeEvent);
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', _bind, { once: true });
+  } else {
+    _bind();
+  }
+}
+
+/* Replace the γ7-frozen surface with a strict superset (preserves all γ7
+   methods + adds emitOutcome). The freeze is intentional — re-freezing here
+   means nothing else can mutate it after we've extended it. */
+try {
+  const prev = (typeof window !== 'undefined' && window.Upg && window.Upg.worlds && window.Upg.worlds.tayyar) || surface;
+  window.Upg.worlds.tayyar = Object.freeze({
+    play:        prev.play,
+    mute:        prev.mute,
+    unmute:      prev.unmute,
+    toggle:      prev.toggle,
+    isMuted:     prev.isMuted,
+    available:   prev.available,
+    arpeggio:    prev.arpeggio,
+    /* ε2 additions */
+    emitOutcome,
+    outcomes:    () => Object.freeze(['success', 'neutral', 'lost']),
+    successNotes:() => Object.freeze([...E2_SUCCESS_NOTES]),
+    neutralFreq: () => E2_NEUTRAL_FREQ,
+  });
+} catch (_e) {/* freeze refused (very old browser) — non-fatal */}
+
+export { emitOutcome };

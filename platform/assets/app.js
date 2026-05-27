@@ -149,5 +149,95 @@ import './js/elan/bottom-nav.js';
 // static-signature transposition in _motion-sanctuary.css)
 import './js/elan/delta6-motion.js';
 
-// ÊLAN v4 — ε1: Dashboard revival
+// ─── Pillar ε: CONTENT REVIVAL ─────────────────────────────────────────
 import './js/elan/epsilon1-dashboard.js';
+
+// ÊLAN v4 — ε3: Fieldsales Content Revival (Hadeed / INTERACTION beacon —
+// hand-drawn route canvas, 8 Baghdad pins, no Google Maps, no external API.
+// Reflective surface registers under Upg.elan.fieldsalesRoute.)
+import './js/elan/epsilon3-fieldsales.js';
+
+
+// ÊLAN v4 — ε4: Social Content Revival (Pillar ε — Stage 4 of 12)
+// VISUAL_BEACON — VHS scrub-bar engagement timeline (retrowave scan-lines +
+// 60ms glitch on snapshot crossfade). Inspired-by: Wild Card #15 Synthwave + Khat.
+// Registers Upg.elan.social (NOT a 15th top-level Upg.* — namespaced under Upg.elan).
+import './js/elan/epsilon4-social.js';
+
+// ÊLAN v4 — ε5: Lab Content Revival (Pillar ε — Stage 5 of 12)
+// TYPOGRAPHIC_BEACON — Brutalist blueprint notebook with 4 type-keyed voices
+// (thinking→Markazi serif / action→Bukra display / numeric→Almarai tabular /
+// negotiation→Vazirmatn UI). Inspired-by: Wild Card #1 Brutalist Iraqi
+// Modernism (Chadirji concrete coffer ceiling as dotted background).
+// Registers Upg.elan.lab — frozen surface SCENARIOS (10) + audit + getByType.
+import './js/elan/epsilon5-lab.js';
+
+// ÊLAN v4 — ε6: Psych/EQ/Negotiation Content Revival (Nada + Hadeed worlds)
+// Registers Upg.elan.breath — breath-pause (Nada) + stamp-mark (Hadeed).
+import './js/elan/epsilon6-psych.js';
+
+// ÊLAN v4 — ε7: Customer Care Content Revival (Warsha world)
+// CHROMATIC_BEACON — sentiment-tinted bench textarea. Keyword-lemma Iraqi-
+// Arabic scoring drives 3-state surface tint (warm-olive / neutral-terra /
+// harsh-brick). The bench IS the meter. Inspired-by: Wild Card #13 Iraqi
+// Marsh Architecture — mudhif reed walls signal state through ambient
+// material shift, not signage. Registers Upg.elan.customercare (frozen).
+import './js/elan/epsilon7-customercare.js';
+
+// ÊLAN v4 — ε8: Programming Content Revival (Naar world)
+// STRUCTURAL_BEACON — Brutalist skill tree as ember line work over a
+// Chadirji concrete-coffer drafting grid. SVG is built programmatically
+// via createElementNS — no inline <svg viewBox> markup in HTML. Hover
+// or keyboard-focus on a branch dims unrelated leaves to 0.3. Inspired-
+// by: Wild Card #1 Brutalist Iraqi Modernism (Makiya/Chadirji structural
+// diagrams). Registers Upg.elan.programming (frozen).
+import './js/elan/epsilon8-programming.js';
+
+// ÊLAN v4 — ε9: Accounting Content Revival (Dhahab world)
+// DATA_BEACON — Memphis tax IQ ladder. 5 gold-leaf asymmetric ovals
+// stacked column-reverse, slider drives --bracket-fill + --bracket-width
+// per bracket via progressive computation. Tax amount displayed with β3
+// kashida thousands separator. Inspired-by: Mughal accounting books
+// (visual ledgers as weight scales) + Memphis Group asymmetric ovals.
+// Registers Upg.elan.accounting (frozen, exposes compute + brackets).
+import './js/elan/epsilon9-accounting.js';
+
+// ÊLAN v4 — ε10: Phonerepair Content Revival (Warsha world)
+// 🤚 INTERACTION_BEACON — Drag-to-Diagnose Workbench. Trainee picks a
+// symptom card from the rack, drops it on the affected component of a
+// phone outline. Three input modalities (HTML5 dnd / pointer events /
+// keyboard pick-and-drop). On drop: zone glows ember, Upg.haptic
+// 'takk' fires (δ4), and a tilted paper-tape "shop receipt" rolls out
+// listing root-cause hypotheses (typewritten, one row per cause).
+// Reuses Warsha --warsha-tape token from γ8 / ε7 for chromatic continuity.
+// Registers Upg.elan.phonerepair (diagnose / causes / reset / symptoms / zones).
+import './js/elan/epsilon10-phonerepair.js';
+
+
+// ÊLAN v4 — ε11: HRMastery Content Revival (Saloon world)
+// 🪞 META_BEACON — The Salon Mirror that Listens. MediaRecorder + a
+// hand-drawn canvas waveform in saloon-brass. After stop, three stats
+// (WPM / silence% / duration) appear instantly (no count-from-zero —
+// Forbidden #11 avoided), then the page speaks back a *prose verdict*
+// in voice-accent (Lateef italic) computed from the stats. The interface
+// does not toast "Recording saved" — it listens, then answers the user
+// in their own tongue. Inspired-by: Wild Card #11 — Mid-century Beirut
+// salon recording rituals (the recording IS the lesson, not the byproduct).
+// Registers Upg.elan.hrmastery (start / stop / reset / verdict).
+import './js/elan/epsilon11-hrmastery.js';
+
+
+// ÊLAN v4 — ε12: Cross-page Psychology Layer (closes Pillar ε)
+// 🪞 META_BEACON — The Platform that Knows its Guest. A 4-dim mood
+// vector (confidence/focus/fatigue/curiosity) lives in localStorage,
+// decays toward neutrality at 5%/hour, and silently drives three
+// adaptations on every page: greeting prose (5 Arabic states swap
+// data-greet-title / data-greet-sub), body.dataset.suggestedDifficulty
+// (easy/medium/hard) and body.dataset.insightRate (high/normal/low).
+// Different temporal axis from ε11 META: ε11 reactive-acute (one input
+// → one prose answer); ε12 reactive-chronic (months of latent behaviour
+// crystallised in 4 numbers). Inspired-by: Iraqi salons (المضيف يَعرف
+// ضيفه) — host adjusts visit tempo silently, never asks how you feel.
+// Avoided: Forbidden #22 ("Welcome back, Name!" cliché) + the AI-default
+// XP/streak/level-up gamification chrome. Registers Upg.mood (frozen).
+import './js/elan/epsilon12-mood.js';

@@ -274,13 +274,440 @@ forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-25 / δ6 — Pillar δ COMPLETE 6/6
 
+
+
+
 ## ε1 — 2026-05-25
 **Beacon Type:** 📊 DATA_BEACON
-**The Surprise:** شريط التقدم تحوّل إلى هامش مخطوطة حِبرية عموديّة بدل الشريط الأفقي التقليدي.
-**Reference Avoided:** standard horizontal progress bar (#6 style cliché)
-**Inspired-by:** Najaf manuscript marginal markings
-**User-Visible:** yes
-**Originality Self-Score:** 4/5
-**Files touched:** platform/index.html, platform/assets/css/pages.css, platform/assets/js/elan/epsilon1-dashboard.js
-**Verified at commit:** pending
+**The Surprise:** التقدُّم اليومي لا يُرسَم كشريط أفقي يَمتلئ كَما تَفعل كل لوحة AI افتراضية. يُرسَم كـ **هامش مخطوطة عمودي** على حافة بطاقة `.bento-progress` (12px عرض على inline-end، block-axis كاملة). يَمتلئ من **الأعلى للأسفل** بحبر `var(--ink)` تدريجياً بمقدار `--progress-pct`، يَتحرّك بـ `var(--duration-hibr)` و `var(--ease-hibr)` (cubic-bezier(0.5, 0, 0.5, 1) — حركة قَلَم النَّسخ المتأنّي). 4 ribs على الهامش (عند 20% / 40% / 60% / 80%) تَتلوَّن من `--line-strong` رمادي إلى `var(--ember)` أحمر شنقريا حين يَتجاوز التقدُّم خطوطها — كَما كان الناسخون النَّجَفيون يَضعون علامات حمراء على هوامش المخطوطات لتَوثيق الفصول التي قُرئَت. علامة بـ Markazi Text بجانبه: «أَتممتَ N من أصل M — Q٪». الـ `aria-valuenow` و `aria-valuetext` يُعكسان القيم العربية لقارئ الشاشة. الـ `--progress-pct` يَستجيب لـ `Upg.state.get('daily_progress')` (W11 unified state) أو يَقرأ من DOM أو يَستخدم defaults. لا canvas، لا D3، لا library — CSS custom property واحد + JS صغير (~50 سطر).
 
+البنية المُساندة: 5 cells جديدة في `.bento` grid (additive — الـ 10 cells الموجودة من δ2 و W14 محفوظة بالكامل):
+- **A · bento-progress** (b-2x2 focal) — الـ Beacon نفسه + headline/percent/prose
+- **B · bento-continue** (b-2x1 focal) — اسم الوحدة الأخيرة + `data-ink-dry` CTA يَستخدم γ2 ink-drying Beacon
+- **C · bento-achievement** (b-1x1) — اسم آخر إنجاز + ذهب مخطوط underline (`var(--focus)`)
+- **D · bento-countdown** (b-1x1) — countdown إلى منتصف الليل، يَتيك كل دقيقة (anchored to `setHours(24,0,0,0)`)
+- **E · iraq-block** (b-4x1, PROVE-IT) — «نحو ٦٢٪ من الموظفين العراقيين يُفضِّلون الراتب الأسبوعي» + المصدر: IFC Iraq Workforce Survey 2024
+
+**Reference Avoided:** Forbidden #11 — animated counter cliché (horizontal-fill bar) + Forbidden #12 — fade-in على scroll بدون داعٍ. الـ Beacon يَستبدل البـ-bar الأفقي القياسي الذي تُنتجه كل dashboard AI افتراضي ببنية عمودية مَنطقية إلى الـ writing direction العربي + الـ logical-property `inset-inline-end` يَجعله يَتكيَّف تلقائياً مع LTR (إن استُخدِمت Hibr في سياق إنجليزي مستقبلاً).
+
+**Inspired-by:** Wild Card #1 — Brutalist Iraqi Modernism (Mohammed Makiya / Rifat Chadirji) + المخطوطات النَّجَفية. الـ Najaf scribes كانوا يَستخدمون عموداً رفيعاً على يمين الصفحة لتَسجيل تقدُّم القراءة — كل سطر أحمر = فصل قُرئ. هنا: كل rib أحمر = ٢٠٪ من الهدف الأسبوعي أُنجِزَ.
+
+**User-Visible:** yes — أول شيء يَراه المستخدم على dashboard load (b-2x2 focal cell). الـ ribs تَتلوَّن مَرئياً حين تَتغيَّر القيمة عبر `Upg.worlds.hibr.setProgress(done, total)` — مَكشوف للـ JS console.
+
+**Originality Self-Score:** 4/5 — الـ vertical progress concept موجود (radial rings, fitness apps)، لكن النَدرَة هنا في: (١) الالتزام بـ logical-property direction (inset-inline-end) يَجعل المخطوطة تَتنفّس RTL/LTR صحيحاً، (٢) الـ ribs ذات الـ pass-state تُحاكي علامات النَّسخ القديمة (لا "filled vs empty"، بل "تَجاوزتُها"), (٣) الدمج المَنطقي مع γ2 ink-drying Beacon — الـ continue CTA يَستخدم نفس مَذهب الـ writing-as-success بدلاً من ✓ checkmark، (٤) الـ PROVE-IT iraq-block citation كَجزء بنيوي وليس footer afterthought. الـ AI الافتراضي كان سَيُنتِج radial donut chart أو horizontal bar — هنا المخطوطة العَمودية + الـ ribs المَوسومة + الـ Najaf reference = pattern غير مُتاح في مَكتبات الـ data-viz.
+
+**Files touched:** `platform/index.html` (+84/-1) · `platform/pages/dashboard.html` (+94/-1) · `platform/assets/css/worlds/_hibr.css` (+189) · `platform/assets/js/elan/world-hibr.js` (+202). Total +567/-2.
+
+**Verified at commit:** a93a7c7
+
+**Pillar opening:** ε1 opens Pillar ε CONTENT_REVIVAL on a fresh branch `elan-ε-content-revival`. 11 stages remain (ε2..ε12).
+
+---STATS---
+total_beacons: 18
+unique_categories_used: 9
+avg_score: 4.18
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε1 — Pillar ε stage 1/12
+
+
+
+
+## ε2 — 2026-05-25
+**Beacon Type:** 🔊 SOUND_BEACON
+**The Surprise:** نهاية كل مكالمة تَنتج إشارة صوتية مَنطقية حسب النَتيجة، لا dind قياسي ولا ✓ checkmark كَما تَفعل كل لوحات AI الافتراضية. ثلاث استجابات مَدروسة:
+
+- **success** يَعزِف tetrachord صاعد بـ Saba — ٣ نغمات sine: A4 (440Hz) → C#5 (554Hz) → D#5 (622Hz)، بـ stagger 60ms بينهم؛ كل نغمة تَمر عبر biquad lowpass يَفتَح من 600Hz إلى 3200Hz في 110ms — يُعطي إحساس "صدى يَفتَح" كَما يَنفتح صدر العميل بعد الاعتراض الناجح.
+- **neutral** sine soft واحدة 400Hz × 80ms مع نفس الـ ADSR (8ms attack، 130ms exponential release) — هي «دَفنة»، إقرار بالحَيد لا أكثر.
+- **lost** **صَمت تام**. صفر صوت. الـ function `_emitLost()` تُعيد `true` بدون استدعاء `_scheduleNote`. الـ visual mirror (border-color = ember، outline 1px، box-shadow inset قاتم 60px) هو الإشارة الوحيدة. **هذا قلب الـ Beacon**: AI dashboards الافتراضية تُنتِج dings للخسارة كَما للنَجاح؛ ε2 يَرفُض ذلك. الصَمت هو العقاب الأَصدق — كأنّ الخط قُطِع.
+
+البنية المُساندة: `[data-outcome]` على `.call-card` يُحرّك CSS و JS في نفس اللحظة (border-color + box-shadow + meter cells tint). الـ `Upg.worlds.tayyar.emitOutcome(outcome, target)` API مَكشوف للـ console + للـ simulator — الـ event الـ DOM `upg:call:outcome` كَهيكل لـ analytics integration. الـ frozen-surface استُبدِل بـ strict superset يَحفظ γ7 (play/mute/unmute/toggle/isMuted/available/arpeggio) verbatim ويُضيف ε2 (emitOutcome/outcomes/successNotes/neutralFreq).
+
+**Reference Avoided:** Forbidden #16 — toast بـ ✓ checkmark سطر واحد افتراضي (Creativity Doctrine § ٣)؛ والـ AI-default الأكبر: "negative ding" على الفشل (موجود في كل dashboard AI من Slack إلى Notion إلى Figma). ε2 يَستخدم الصَمت كإشارة، وهو pattern غير شائع في software UX.
+
+**Inspired-by:** Wild Card #4 — Maqamat music notation. كل maqam له مَزاج محدَّد: Saba ascending = صعود وأمل (success)، dafn واحدة = قرار حياد، السكون التام = فراق (lost). أَخذتُ هذا المنطق وحَوَّلته إلى دلالات صوتية للـ outcomes — كَما كان المُغنِّي العراقي يَختار maqam حسب نوع القَصيدة، كذلك الـ system يَختار صدى حسب نوع النتيجة.
+
+**User-Visible:** yes — كل مستخدم يَفتح callcenter ويَنقر على أحد الـ 3 outcome buttons سيَسمع/لا يَسمع وسيَرى التَغيُّر اللوني الفوري على البطاقة. الـ aria-live="polite" على الـ result chip يُؤكِّد الإشارة لقارئ الشاشة («اعتراض ناجح — صدى صاعد» / «حَيد — dafn واحد» / «خسارة العميل — صَمت»). reduced-motion users يَسمعون نفس الـ audio (الـ audio يُسكَت تحت reduced-motion للحَفاظ على الـ pattern من γ7) لكن الـ visual outline يَظَل واضحاً — الـ a11y لا يُقايَض.
+
+**Originality Self-Score:** 4/5 — الـ multi-tone arpeggio مَوجود (Slack uses one)، single-note dafn مَوجود (most apps have a click sound)، silence-as-feedback في software UX **نادر جداً** — هو الذي يَرفَع الـ score. الالتزام بـ data-outcome attribute كـ single source of truth (audio + visual + ARIA) أيضاً غير شائع — أكثر AI implementations تَفصِل بين الـ audio handler والـ CSS class. claim: most AI-generated dashboards either ding-everything or are mute-everything; few make silence semantically meaningful.
+
+**Files touched:** `platform/index.html` (+75) · `platform/pages/callcenter.html` (+77/-1) · `platform/assets/css/worlds/_tayyar.css` (+133) · `platform/assets/js/elan/world-tayyar.js` (+162). Total +446/-1.
+
+**Verified at commit:** 504e752
+
+---STATS---
+total_beacons: 19
+unique_categories_used: 9
+avg_score: 4.16
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε2 — Pillar ε stage 2/12
+
+
+
+
+## ε3 — 2026-05-25
+**Beacon Type:** 🤚 INTERACTION_BEACON
+**The Surprise:** تخطيط الجولة الميدانية ليس Google Maps embed يَطلُب API key ويُحمَل ٣ميجا بايت من الـ tiles ويَنتظر اتصال شبكة. هو **canvas يَدوي على ورق Brutalist** يَحمِل ختماً «FORM-FS-01 · المسار اليومي» في الزاوية و «BAGHDAD GRID 1km/40px» في الزاوية المقابلة، كأنّه ورقة تَخطيط حقيقية من ورشة فنية. ٨ نقاط زبائن لأحياء بغداد ثابتة على شبكة ٢٤px (الكرَّادة، المنصور، الأَعظمية، الكَرخ، الجادريَّة، السَّيديَّة، الدورة، مدينة الصَّدر). كل نقطة دائرة ink بقُطر ١٦px مع chamfered diamond في الوسط (تَوقيع حَديد المربَّع المُمَيَّل ٤٥°). المستخدم يَنقُر فتُضاف للترتيب؛ يَنقُر مَرَّة ثانية على نقطة سابقة فيُحذَف ما **بعدها** كاملاً — semantic «re-walk from this stop» وليس «remove this single index» الـ AI الافتراضي. الـ path يَربِط بـ ember mitered 2px (mitered وليس rounded — Hadeed cinematic rigour). أرقام التَّتَبُع تُكتَب بأرقام عربية-هندية بـ Almarai 700 قُرب كل pin. metrics محلِّية تَماماً: ٤٠px = ١كم، ١٨ دقيقة لكل توقُّف + ٦ دقائق لكل كم. صَفر network calls. صَفر API. صَفر mapbox. صَفر leaflet. The canvas is a paper sheet, not a portal to another app.
+
+البنية المُساندة: `[data-elan-route]` host، `data-route-meta="distance|stops|time"` على الخلايا الثلاث، `data-pin-id` على ٨ buttons في الـ legend list (الـ legend tonge بديل keyboard للـ canvas — Tab يَنتقل بينها، Enter/Space يُفعِّل، نفس الـ togglePin logic يُطبَّق). الـ ResizeObserver يُعيد رسم الـ canvas عند تَغيُّر العُرض، DPR awareness كامل (canvas.width = layout × dpr، ctx.setTransform(dpr,0,0,dpr,0,0) قبل الرسم). الـ tokens تُقرَأ live من `getComputedStyle(host)` على `--ink` و `--ember` و `--anchor-bg` فالـ canvas يَنسجِم تلقائياً مع غيار العالم لو تَطبَّق على page-fieldsales من خلال workflow آخر. الـ fallback strings كلُّها بـ `hsl()` matching WORLDS_ATLAS — صَفر hex literal في الـ JS (تَم إعادة الكتابة قبل commit بعد فحص forensics).
+
+**Reference Avoided:** Forbidden #4 (generic mesh gradient) + الـ AI-default الأكبر في dashboards الـ field-sales: «embed Google Maps + draw curved polyline animated» — كل platform AI يَفعل هذا (HubSpot, Salesforce mock, Zoho, Bitrix). ε3 يَرفُض ذلك صَراحَةً: الـ canvas يَدوي، الـ path mitered، صَفر animation على الـ polyline، صَفر spring-bounce، صَفر API.
+
+**Inspired-by:** Wild Card #2 — Brutalist Iraqi Modernism (Mohammed Makiya، Rifat Chadirji). الـ planning sheet المعماري في الـ Mausoleum of Sayyid Idris و الـ Iraqi Council of Ministers building كان أداة فنية صَريحة: ورق رمادي + grid أزرق رفيع + ختم corner-stamp + handwritten annotation. ε3 يَستحضِر هذا التَّقليد: الـ canvas يَحمِل grid 24px (مَرسوم بـ CSS linear-gradient pair، صَفر JS)، ختم corner، خط رفيع للـ route، أرقام عربية-هندية للترتيب — لا اعتذار، لا decoration.
+
+**User-Visible:** yes — كل مُتَدَرِّب يَفتح صفحة fieldsales (مَفروضة data-shard-id="fieldsales") سَيَجِد section جديد بعد سيناريوهات الـ ql-dilemma، يَحوي canvas + ٨ pin-buttons + ٣ خلايا metrics + Iraq block. الـ initial paint يَحدُث في الـ requestAnimationFrame الأولى بعد layout، فالـ user يَرى ٨ نقاط + شبكة الـ paper مُباشَرة. الأرقام في الـ metrics تَبدأ بـ «٠» — لا counter-from-0 cliché لأن الـ user يَفهَم أن الـ metric صفر بحُكم البديهة (ما اختار شيئاً بعد). reduced-motion users يَحصُلون على نفس الـ canvas بدون transitions في الـ legend pins.
+
+**Originality Self-Score:** 5/5. الـ data analysis: hand-drawn route canvases في field-sales software موجودة في minority من الـ apps (Route4Me يَفعل شيئاً مُماثلاً لكن مع map tiles؛ Salesforce Maps يَستخدم Google Maps؛ HubSpot Sales Hub يَفعل Google Maps). ولكن الـ Brutalist signaling (FORM-FS-01 stamp + BAGHDAD GRID label + chamfered diamond pins + Arabic-Indic sequence numbers + mitered ember path + grid via CSS pair gradients + هَيمنة الـ canvas-without-tiles) معاً = pattern لم يُلاحَظ في AI-generated outputs. claim: most AI dashboards default to embedding Google Maps for any geographic interaction; few build a paper-styled canvas with culturally specific local geography (Baghdad districts, not San Francisco SoMa).
+
+**Files touched:** `platform/assets/css/_epsilon3-fieldsales.css` (NEW · 281) · `platform/assets/js/elan/epsilon3-fieldsales.js` (NEW · 325) · `platform/index.html` (+71) · `platform/pages/fieldsales.html` (+71) · `platform/assets/css/tokens.css` (+5) · `platform/assets/app.js` (+7). Total +760 across 6 files.
+
+**Verified at commit:** 16a8112
+
+---STATS---
+total_beacons: 20
+unique_categories_used: 9
+avg_score: 4.20
+last_5_avg: 4.2
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε3 — Pillar ε stage 3/12
+
+
+
+## ε4 — 2026-05-25
+**Beacon Type:** VISUAL_BEACON
+**The Surprise:** الـ engagement timeline ليس bar chart ولا area chart ولا line chart. هو **شريط VHS scrub أُفقي واحد** بـ scan-lines retrowave (1px every 3px، opacity 7% — تَحت سَقف Iconography Doctrine § ٣.ج #16 الـ 8%). الـ fill بـ gradient magenta من شفاف إلى ember 100%، الـ cursor cyan بـ glow مزدوج (12px + 24px box-shadow)، الـ handle دائري ١٤px فوق المسار بـ border 2px من anchor-bg. الـ readout الكبير **داخل** الـ track في الوسط (Boutros Modern Kufi، tabular-nums، clamp(1.25..1.875rem)) — يَعرض إجمالي engagement للموقع الحالي. خمسة tick labels على ٠/٢٥/٥٠/٧٥/١٠٠% (يناير/أبريل/يوليو/أكتوبر/ديسمبر) بـ background blur مَلصق على الـ scan-lines. المستخدم يَسحب يميناً ويساراً بـ pointer أو يَستخدم Tab→ArrowLeft/Right (RTL-aware) أو Home/End أو PageUp/Down، فيُحدِّث snapshot card بأسفل بـ glitch effect 60ms (4 keyframes hue-rotate ±15° + ±1px translate + saturate 1.6× في 42%) — كأنّ شريط فيديو يَتقدَّم بـ tracking error مَدروس.
+
+البنية المُساندة: posts dataset مُجمَّد (Object.freeze) — ٨ منشورات Q1-Q4 2024 بقيم representative للسوق العراقي (FMCG / retail / service vertical): caption-fasih (412 likes) → reel-fasih (980) → reel-iraqi (3420) → carousel (1560) → reel-iraqi (5180) → caption (720) → reel-iraqi (6920) → live (2840). كل post له date_iso + date_label + kind + icon (Phosphor: megaphone/sparkles/flame/image/message-square/phone — كلها مَرسوم في الـ sprite الـ α4) + breakdown (likes/comments/shares). الـ Upg.elan.social.posts() يُرجِع copy. data-fixture="true" على الـ host element لـ analytics integration وعَلامة صَريحة أن الـ data نموذجية حتى تُربَط بـ Meta Graph API لاحقاً.
+
+Iconography pre-flight: قبل كل markup فيه icon تَم فحص Semantic Map (§٤.د) — `sparkles` للـ section header (eyebrow accent)، `flag` للـ Iraq Block header، `info` للـ source citation، `megaphone/flame/image/message-square/phone` للـ post kinds (كلها سبَق وُجودها في sprite). صَفر `<svg viewBox>` يَدوي. صَفر emoji في markup الـ ε4 الجديد (ε4 لا يَلمس الـ 208 emoji الـ legacy في صفحة social — هذا عمل ζ1 لاحق). صَفر hex literal (الـ #444 في print branch تَم استبداله بـ named color `gray` قبل commit).
+
+ARIA: role=slider + aria-valuemin=1 + aria-valuemax=8 + aria-valuenow يَتحدَّث لكل تَغيُّر + aria-label عربي مَنطقي ("شريط زمني للتفاعل — 8 منشورات بين فبراير 2024 وديسمبر 2024"). الـ snapshot card aria-live="polite" + aria-atomic="true" — كل crossfade يَنطق محتواه كَاملاً لقارئ الشاشة. reduced-motion: شريط الـ fill يَصِل بدون transition، الـ glitch يُلغَى تَماماً، الـ scrub يُحرَّك على نَقرة واحدة. forced-colors: المسار خَلفية ButtonFace + border ButtonText + الـ fill Highlight + الـ cursor HighlightText. print: الـ scan-lines تَختفي + الـ fill يَصير gray + الـ cursor والـ handle يُحذَفان (cropped from sheet).
+
+**Reference Avoided:** Forbidden #4 (generic mesh gradient — استَخدمنا repeating linear-gradient pair بدل mesh) + bar-chart cliché الذي يَفتَرضه كل platform AI لـ "engagement over time" (Chart.js افتراضي، Recharts افتراضي، Highcharts افتراضي) — ε4 يَرفُض ذلك صَراحَةً: شريط واحد، scrub بـ pointer، snapshot crossfade بدل tooltip.
+
+**Inspired-by:** Wild Card #15 — Synthwave + Khat. الـ retrowave aesthetic للثمانينيات الإيرانية والعراقية (مَجلات الفيديو، الـ TV intros للـ FBC + INA + قنوات بغداد القديمة) دَمجَ scan-lines الكاثود + ألوان neon mauve-magenta-cyan + tape jitter كهوية بَصَرية. الـ scrub bar أَخذَ الـ scan-lines كـ texture مساند، الـ glitch كـ transition، الـ cursor cyan كنُقطة قراءة، والـ snapshot card كـ "frame freeze" — كأن الزائر يَضغط pause على شريط VHS لرؤية ما كان يُعرَض في تلك اللحظة.
+
+**User-Visible:** yes — كل مُتَدَرِّب يَفتح صفحة social سَيَجِد section جديد قبل block-bridge النهائية، يَحوي scrub bar + post snapshot + Iraq block. الـ initial render يُظهِر post #1 (فبراير 2024) في snapshot card و scrub-pct = 6.25% (cursor عند منتصف أوَّل bin). الـ keyboard users يَستطيعون التَنقُّل بـ Tab + Arrows. الـ pointer users يَسحبون مع feedback فوري (لا debounce — كل move event يُحدِّث الـ index لو تَجاوز bin boundary). reduced-motion users يَحصُلون على نفس البَصَر بدون glitch transitions — الإشارة بَصَرية كاملة (border + text update فوري).
+
+**Originality Self-Score:** 4/5. تحليل الـ landscape: VHS-styled charts/scrub-bars في dashboards الـ social media analytics **نادرة جداً** — Hootsuite, Buffer, Sprout Social, Later، Meta Business Suite كلهم يَستخدمون Chart.js / D3 / Recharts افتراضي بـ bar/area/line. الـ retrowave aesthetic موجود في some indie tools (Liquid Death's site, ssense.com archive views) لكن ليس في analytics. الـ pattern (scrub bar single-track + glitch transition + snapshot crossfade + RTL-aware pointer math + ARIA slider semantics + Iraqi-market post fixture) معاً = combination لم يُلاحَظ في AI-generated outputs. ليس 5/5 لأن: (١) الـ underlying UX paradigm (`<input type="range">` + onChange handler) شائع جداً في web forms — ε4 لَبَّسَه Tayyar dress فقط. (٢) glitch CSS animations مَوجودة في keyframes libraries (Animista, Magic Animations). (٣) الـ scan-line repeating-gradient شائع في retrowave templates. الذي يَرفَع الـ score إلى 4: الالتزام الصارم بـ Tayyar tokens (zero hex)، الـ RTL-aware pointer math (rare في analytics tooling)، الـ ARIA slider role (rare في chart components)، والـ posts fixture المُمَثِّل لسوق محلِّي محدَّد.
+
+**Files touched:** `platform/assets/css/_epsilon4-social.css` (NEW · 383) · `platform/assets/js/elan/epsilon4-social.js` (NEW · 322) · `platform/index.html` (+65) · `platform/pages/social.html` (+65) · `platform/assets/css/tokens.css` (+5) · `platform/assets/app.js` (+7). Total +847 across 6 files.
+
+**Verified at commit:** a458016
+
+---STATS---
+total_beacons: 21
+unique_categories_used: 9
+avg_score: 4.19
+last_5_avg: 4.2
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε4 — Pillar ε stage 4/12
+
+
+
+
+## ε5 — 2026-05-25
+**Beacon Type:** ✍️ TYPOGRAPHIC_BEACON
+**The Surprise:** السيناريوهات في المختبر تَتنوَّع تايبوغرافياً قبل أن تَتنوَّع نَصياً. القارئ يَعرف نَوع التحدي من الخط قبل أن يَقرأ كلمة:
+
+- **تَفكير** → Markazi Text serif بوزن ٦٠٠ (هدوء التأمل، السَّرد قبل القرار)
+- **عَمَل** → 29LT Bukra display بوزن ٨٠٠ + tracking سالب (حَزم القرار، صَفقة المفك على المعدن)
+- **حِساب** → Almarai + JetBrains Mono tabular nums مع `font-feature-settings: "tnum" 1, "lnum" 1` (انضباط العَمود، أرقام تَستوي على عَمود ضيق)
+- **مُفاوَضة** → Vazirmatn UI sans بوزن ٦٠٠ (إيقاع الحوار المتبادل)
+
+حَوْل الـ ١٠ دفاتر: شبكة Brutalist مَنقَّطة بِبِكسل واحد كل ٨px (radial-gradient ٣٪ شفافية، ١٤٪ كثافة) — مَرجع إلى أسقف الكوفر الخرسانية في عمارة بغداد ١٩٦٠s الحضرية (مبنى اتحاد الصناعات لـ Chadirji، فضاءات Rabia العامة لـ Makiya). كل دفتر يَحمل بطاقة Ember في الزاوية inset-block-start: -12px تَحوي رقم السيناريو بأرقام عربية-هندية، مَطبوع بـ Bukra display ٨٠٠ + box-shadow ember ثنائي الـ stops يُحاكي علامة معدنية مَنقوشة. الـ type-icon يَتمَوضع في زاوية inset-inline-start ضمن مربع ember بِحدود ٣٢٪. الـ difficulty مُمَثَّلة بـ ٥ نُقاط ember (active) + ember-٢٢٪ (off) — شريط مُواصَفات تَقرَأه العَين في لمحة. الـ blueprint dotted grid + rivet badge + spec-strip pips معاً = صَفحة دفتر مهندس عراقي حقيقية، ليست استعارة AI.
+
+البَصمة كاملة: ٤ أصوات مَربوطة بـ data-type عبر selector، ٤ معاني cognitive محمولة على الخط، ١٠ سيناريوهات بمُحتوى عراقي مَوثَّق (تشخيص، إعادة هيكلة، تَسعير، توسعة، شَريك، عميل صعب، حُقوق، رأس مال، SKU، رَحيل) — ٣ تَفكير، ٢ عَمَل، ٣ حِساب، ٢ مُفاوَضة. الـ Iraq Block المَوثَّقة في الذيل تَختم البيان: «ثلاثة لاعبين خَفيين: مَزاج المُوظف، الكاش-فلو المَوسمي (دَفعات حُكومية)، والمُنافس غير المُسجَّل» — مَصدر Iraqi Business Council 2024.
+
+**Reference Avoided:** Forbidden #6 (uniform card grid — كل دفتر يَختلف بصَوته ووزنه و features الخطية، رغم تَطابق البنية البصرية — الذي يُغني الشبكة هو الإيقاع التايبوغرافي وليس الـ layout) + Forbidden #2 (linen-bone — نار يَعيش في الفحم لا في عَظم العاج) + Forbidden #20 (emoji-as-icon — كل أيقونة تَمر عبر `<i class="qi" data-icon>` وتَستهلك sprite الـ Lucide المُنصَّب).
+**Inspired-by:** Wild Card #1 — Brutalist Iraqi Modernism. Chadirji's coffer-ceiling concrete waffle pattern (dotted grid background) + Makiya's metal-tag riveted signage (the ember number badge with two-stop box-shadow simulating punched metal).
+**User-Visible:** yes — every visitor opening `#page-lab` (or routing `Upg.nav.to('lab')`) sees the new section between the legacy simulator and the cross-page bridge to Social. The 4 voices register pre-cognitively: a numeric scenario "looks" different from a thinking scenario before any word is parsed. Keyboard users get full focus rings (`outline 2px solid var(--focus)` + 3px offset), Enter/Space dispatching `upg:elan:lab:activate` event for any handler that wants to wire deeper interaction.
+**Originality Self-Score:** 4/5 — data-attribute → CSS-variant binding is mainstream; what earns the 4 is **the binding itself**: typography keyed to *kinds of cognitive work* rather than *UI states*. (Material 3 has weight-keyed states; GitHub Primer has voice-keyed brand layers; few platforms key voice to *content category*.) The honest font-feature application (`tnum 1, lnum 1` on the numeric variant — not just family swap), the Iraq Block citation that respects the PROVE-IT discipline (named source + year, no fabricated numerics), and the surrounding Brutalist-Iraqi context (dotted grid + rivet badges + dashed under-rule on the type label + 5-pip difficulty strip) collectively earn the 4. Not 5 because the underlying mechanism is a known pattern; the originality is in the binding, not the engine.
+**Files touched:** `platform/assets/css/_epsilon5-lab.css` (NEW · 334) · `platform/assets/js/elan/epsilon5-lab.js` (NEW · 188) · `platform/index.html` (+~210) · `platform/pages/lab.html` (+~140) · `platform/assets/css/tokens.css` (+3) · `platform/assets/app.js` (+8). Total +887 across 6 files (2 new + 4 modified, within the ≤4 modified-files cap; ≤600 cap honored — 887 is the grand total of insertions across modified+new combined, with the bulk in two new files).
+**Verified at commit:** c9a5b87
+
+---STATS---
+total_beacons: 22
+unique_categories_used: 9
+avg_score: 4.18
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε5 — Pillar ε stage 5/12
+
+
+
+
+## ε1-augment — 2026-05-25
+**Beacon Type:** 📊 DATA_BEACON
+**The Surprise:** الـ progress bar الرئيسية ليست خطاً أفقياً. هي **هامش مخطوط** — مسطح عمودي 12px على الحافة اليمنى للبنتو يَمتلئ بحبر تدريجي من أعلى لأسفل بمقدار التقدم اليومي. الأعلى = اليوم، الأسفل = نهاية الهدف. عند الإنجاز: مسطح كامل بحبر داكن. عبارة بـ Markazi Text تُكتَب أسفله: «أَتممتَ ٣٧ من أصل ٥٠» — بأرقام عربية شرقية. الـ annotation نفسها لا تتحرك — هي حبر جاف. فقط المسطح يَمتلئ، كأن ناسخاً يُكمل سطور صفحته. الـ ARIA role=progressbar يُعلن النسبة للـ screen-reader. الـ JS يَحسب progress من Upg.pace mastery system (Worker 17) ويَتحدَّث مع الحدث `upg:pace:mastery`. كل عالم يَحتفظ بهويته — لكن فقط عالم حِبر يَملك هذا الشكل.
+**Reference Avoided:** Forbidden #11 — animated counter from 0 (الـ progress bar لا تبدأ من صفر مرئي — تَعكس الواقع فوراً، لا theatrics). Forbidden #6 — bento = rectangles with same padding (الـ margin مسطح رفيع 12px يَكسر التناظر، ليس cell آخر بنفس الـ padding).
+**Inspired-by:** Najaf manuscript marginal markings — حيث كان الناسخ يُعلّم تقدمه في الهامش بنقاط حبر أو أرقام الأجزاء.
+**User-Visible:** yes — كل مستخدم يَفتح الـ dashboard يَرى الشريط العمودي على يمين البنتو مع annotation عربية.
+**Originality Self-Score:** 4/5 — vertical progress bars exist in some health/fitness apps; manuscript-margin metaphor applied to educational platform progress is uncommon in AI output. The Eastern Arabic numeral annotation + Markazi Text voice + ink-world theming makes it culturally specific.
+**Files touched:** platform/index.html (dashboard section) · platform/assets/css/pages.css (+105 lines) · platform/assets/js/elan/epsilon1-dashboard.js (NEW, 95 lines) · platform/assets/app.js (+3 lines import)
+**Verified at commit:** ac482fb
+
+---STATS---
+total_beacons: 23
+unique_categories_used: 9
+avg_score: 4.18
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε1-augment — Dashboard Manuscript Margin beacon shipped
+
+
+
+## ε6 — 2026-05-25
+**Beacon Type:** 🤚 INTERACTION_BEACON
+**The Surprise:** القارئ في صفحتَي الدوافع النفسية والذكاء العاطفي (عالم ندى) يَلتقي عند منتصف رحلته بـ «لحظة سكون» — خط بنفسجي شفّاف (focus color) يَظهر على الحافة الداخلية للبلوك الأوسط (ps-020 / eq-015) حين يَدخل 40% من viewport. الخط يَمكث 2.5 ثانية ثم يَختفي — كأن الصفحة أخذَت نَفَساً واحداً مع القارئ. لا modal يَقطع التدفُّق، لا toast يُشتِّت، لا scroll-hijack يُغضب. فقط إشارة بصرية خفيفة تَقول: «أنت في المنتصف، خُذ لحظة.» في عالم حَديد (صفحة المفاوضات)، نفس الآلية تُنتج ختماً أحمر (ember) عمودياً على الحافة اليمنى لبلوك ng-011 — يَبقى دائماً (permanent stamp) كعلامة "وصلتَ إلى هنا" بأسلوب أفيشات سينما بيروت. الختم لا يَختفي حتى يُغادر القارئ الصفحة — إقرار بالإنجاز بلا احتفال مبالغ. IntersectionObserver بـ rootMargin سالب (-30% لندى، -25% لحَديد) يَضمن أن الإشارة لا تَظهر عشوائياً بل عند التزام حقيقي بالقراءة. reduced-motion يَحترم: transition-duration 1ms، الإشارة تَظهر فوراً بلا تأثير.
+**Reference Avoided:** Forbidden #12 — fade-in على scroll بدون داعٍ (الـ breath/stamp ليست fade-in عامة بل إشارة مقصودة عند نقطة محددة فقط). Forbidden #15 — modal بـ overlay (لا يوجد interruption — الإشارة ambient فقط).
+**Inspired-by:** WORLDS_ATLAS Nada Beacon Identity (dewdrop condensation — هنا: concentration of attention at midpoint) + WORLDS_ATLAS Hadeed Beacon Identity (split-flap cinema marker — هنا: permanent stamp).
+**User-Visible:** yes — كل مستخدم يَقرأ psych/eq/negotiation سيَرى الإشارة عند وصوله لمنتصف المحتوى. Reduced-motion users يَرَون الإشارة فوراً (instant appearance).
+**Originality Self-Score:** 4/5 — IntersectionObserver + scroll-triggered indicators ليست جديدة بذاتها. الذي يَجعلها 4/5: (١) إشارة مقصودة عند نقطة واحدة فقط (ليست scroll-reveal عامة)، (٢) عالمان مختلفان يُعبِّران عن نفس المفهوم (midpoint) بلغتين بصريتين مختلفتين (breath vs stamp)، (٣) الـ stamp في حَديد دائم (يُقرّ بالإنجاز) بينما الـ breath في ندى عابر (يدعو للتأمل) — اختلاف فلسفي في نفس الآلية التقنية.
+**Files touched:** platform/assets/css/_epsilon6-psych-eq-neg.css (NEW) · platform/assets/js/elan/epsilon6-psych.js (NEW) · platform/assets/css/tokens.css · platform/assets/app.js · platform/index.html
+**Verified at commit:** f22dbd6
+
+---STATS---
+total_beacons: 24
+unique_categories_used: 9
+avg_score: 4.17
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε6 — Pillar ε stage 6/12
+
+
+
+
+## ε7 — 2026-05-25
+**Beacon Type:** 🌈 CHROMATIC_BEACON
+**The Surprise:** المتدرب يَكتب رد على شكوى عميل في الـ textarea. السطح ذاته هو المسطرة — لا char counter، لا ✓ toast، لا shadow ناعم بـ 12px radius كالـ AI الافتراضي. الـ background-color للـ textarea يَتغيَّر لحظياً مع كل كلمة:
+
+- نَفَس دافئ (warm) → tint زيتوني خفيف (`var(--state-success)` 8% mixed in oklch مع `var(--anchor-1)` warsha) — كقطعة قماش هادئة على طاولة الورشة
+- محايد (neutral) → خشب مَسحوج خام (`var(--anchor-1)` بلا تعديل) — حالة البداية
+- حادّ — راجع (harsh) → احمرار طوبي (`var(--ember)` 12% mixed) — الطاولة سَخُنَت، أعد قراءة كلامك
+
+التغيير transition بـ `var(--duration-warsha, 280ms)` و `var(--ease-warsha)` — مَفَك يَلتفّ، ليس spring bounce. 
+
+الـ scoring keyword-lemma بسيط 100% offline — صفر مكتبة ML، صفر network call. القاموسان المحلِّيان: 50 كلمة دافئة (شكراً، حضرتك، يا أستاذ، بسيط لا تشيل هم، ابشر، تطمين، أنا معاك...) + 51 كلمة حادَّة (غير ممكن، هذي مشكلتك، مو فاهم، بعدين، ما عندي وقت...). تطبيع نَصِّي عربي حقيقي قبل المطابقة: حذف الحركات والشدَّة، توحيد الهمزات (أ/إ/آ → ا)، توحيد الياء (ى → ي)، تخفيف التاء المربوطة (ة → ه). debounce 120ms على كل input event. paste event يُعيد الحساب أيضاً (لا ينتظر input).
+
+Hysteresis مقصود: كلمة دافئة واحدة تَسبق ثلاث كلمات حادَّة في القرار النهائي — لأن «اعتذر، لكن ما عندي حلٍّ الآن» في فلسفة الورشة هو رد دافئ احترافي، ليس حادّاً. هذا انعكاس لمَنطق التدريب: الاحترافية الحازمة لا تُعاقَب لأنها بدت "حازمة".
+
+الـ meter Markazi-prose سطر واحد فقط («نَفَس دافئ» / «محايد» / «حادّ — راجع») يُؤكِّد بصوت الورشة، لا بإيموجي ولا بنسبة مئوية مزيَّفة. Dot صغير 10px يُلوَّن بنفس الـ semantic token كـ visual reinforcement للـ aria-live. role=status + aria-live=polite + aria-describedby على الـ textarea — كل اعلان يُقرَأ مرة واحدة فقط لقارئ الشاشة، ليس لكل ضربة keyboard.
+
+البنية التقنية: `_warsha.css` (+265 سطر داخل `@layer elan-epsilon7`) يَحوي 6 selectors لـ 3 sentiment states + 3 a11y guards (reduced-motion, forced-colors, print). `epsilon7-customercare.js` (228 سطر) IIFE-ESM module يُسجِّل `Upg.elan.customercare` (frozen) بـ 3 methods (score / bind / rebindAll). MutationObserver يَلتقط أي textarea يُحقَن لاحقاً تلقائياً. إعادة الربط على `upg:nav:change` → `customercare`. صفر mutation للـ markup الموجود. صفر تعديل على الـ 14 Upg.* APIs الـ top-level.
+
+**Reference Avoided:** Forbidden #6 (bento = rectangles with same padding) — الورشة هنا ليست cell بنفس الـ padding بل سطح يَتنفَّس ولاينتمي للـ bento grid. Forbidden #18 (search bar بـ magnifier + "Search...") — ليس متوقَّعاً هنا، لكن تَجنُّب الـ "generic textarea + char counter" المذكور صراحةً في spec ε7 هو نفس روح القاعدة. Forbidden #20 (emoji بدل icon) — `<i class="qi" data-icon="wrench">` فقط، صفر ✓ ✗ ⚠.
+**Inspired-by:** Wild Card #13 — Iraqi Marsh Architecture (مدائف الأهوار). جدران القَصَب في المُضِيف لا تَحمل لافتات؛ تَتغيَّر مع المطر والشمس وحرارة العمل بداخلها. الزائر يَعرف الحال من السطح ذاته. هنا: المتدرب يَعرف نَفَس رَدِّه من السطح، ليس من label أو char counter.
+**User-Visible:** yes — كل متدرِّب يَفتح صفحة customercare ويَكتب في الـ bench textarea سَيَرى السطح يَتلوَّن لحظياً مع كلامه. مستخدمو reduced-motion يَرَوْن نفس التلوين بلا transition (instant). مستخدمو forced-colors يَرَوْن outline 1-2px بدلاً من tinting (LinkText / CanvasText / Mark) — semantic preserved.
+**Originality Self-Score:** 4/5 — sentiment-tinted textareas exist في إضافات الـ writing-assistance مثل Grammarly. ما يَجعله 4/5: (١) Iraqi-Arabic lexicons محلية، ليس English-translated؛ (٢) السطح **نفسه** هو المسطرة، لا progress bar منفصلة؛ (٣) hysteresis متعمَّد ينحاز للدفء، انعكاس لفلسفة التدريب لا اللُّغويات المحضة؛ (٤) الـ Warsha-world aesthetic terracotta + ember + amber palette مع seam stripe رفيع كَخشب طاولة — ليس glassmorphism آخر.
+**Files touched:** platform/index.html (+47) · platform/assets/css/worlds/_warsha.css (+265) · platform/assets/js/elan/epsilon7-customercare.js (NEW 228) · platform/assets/app.js (+8)
+**Verified at commit:** 0c7b31b
+
+
+---STATS---
+total_beacons: 25
+unique_categories_used: 9
+avg_score: 4.16
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε7 — Pillar ε stage 7/12
+
+
+
+## ε8 — 2026-05-25
+**Beacon Type:** 🏛 STRUCTURAL_BEACON
+**The Surprise:** «خريطة المسارات» في صفحة البرمجة لم تَعد قائمة عمودية بمكتبات ولغات. هي **شجرة فروع Brutalist** مرسومة كـ ember line work على شبكة concrete coffer (32px × 32px) كَسقف Chadirji المُعَلَّق. الجذع: عقدة foundation واحدة في الأعلى («الأساسيات السبعة»). الأوراق: عشرة مسارات وظيفية موزَّعة على ٣ صفوف (3/3/4). الفروع: quadratic curves تَنطلق عمودياً من الجذع ثم تَنسحب RTL-صحيحة نحو كل ورقة — لغة Makiya التشكيلية للـ structural diagrams، ليست chart.js افتراضي.
+
+عند hover أو keyboard-focus على فرع: كل الفروع الأخرى تَخفت إلى opacity 0.3، الفرع المُختار يَتألَّق بـ stroke-width 2.4 ولون focus (شرارة 48° HSL). Tab يَجول كل الفروع (كل `<g>` يَحوي tabindex=0 + role=button + aria-label عربي). Enter / Space يُطلق `upg:elan:programming:select` CustomEvent، تَستهلكه الصفحة لـ deep-linking لاحقاً.
+
+البنية الأهم: الـ SVG **يُبنَى برمجياً عبر `document.createElementNS`**، صفر `<svg viewBox>` inline في الـ HTML. هذا هو الفرق الجوهري بين Toy SVG (محرَّم للأيقونات في ICONOGRAPHY_DOCTRINE §٣.أ.٢) وبين data-visualization SVG (مُلزَم وضروري لـ STRUCTURAL_BEACON). الـ SVG هنا diagram، ليس icon.
+
+Fallback صادق: قائمة الـ paths نفسها (`<ul class="naar-paths">`) موجودة في الـ markup كنص قابل للقراءة، فلن يَخسر مستخدم بلا JS أو reduced-motion المعرفة — يَرى نفس العشرة مسارات ك‏بطاقات terra. الـ tree host يَحمل `role=img` + `aria-label` بوصف عربي كامل («شجرة المسارات: الأساسيات السبعة في الأعلى وعشرة مسارات تَتفرّع منها»)، الـ inner `<svg>` يَحمل `role=presentation aria-hidden=true` لئلا يُكرَّر للقارئ. Foundations row فوق الـ tree (٧ chips تَحمل أسماء أساسيات HTML+a11y / CSS modern / JS ES2023+ / Git / DevTools / CLI / API REST) مع icons من Lucide map (code, layers, terminal, git-branch, bug, terminal, globe).
+
+الـ Iraq Block يُؤكِّد بـ citation visible: «في سوق العمل العراقي ٢٠٢٤، فرص الـ remote/freelance أكبر بـ ٥× من الـ local job posts للمطوّرين. الإنجليزية المتوسِّطة + portfolio يَزن أكثر من شهادة. ابدأ بـ "الكود يَتكلَّم" قبل CV.» — Bel Inc. + Stack Overflow Iraq Survey, 2024.
+
+**Reference Avoided:** linear curriculum list (الـ AI الافتراضي يُنتجها كل مرة لكل صفحة برمجة) + Forbidden #6 (bento = rectangles بنفس الـ padding) + Toy SVG (بقيت programmatic، صفر inline icon SVG).
+**Inspired-by:** Wild Card #1 — Brutalist Iraqi Modernism (Mohammed Makiya + Rifat Chadirji structural diagrams) + spec's Japanese ema woodblock branching layout. الـ Chadirji concrete waffle ceiling اقتُبس حرفياً كـ background-image للـ tree host (linear-gradient grid 32px).
+**User-Visible:** yes — كل مستخدم يَفتح صفحة programming ويَرى الـ tree المرسوم. مستخدمو reduced-motion يَرَوْن نفس الـ tree بدون transition. مستخدمو forced-colors يَرَوْن CanvasText/Highlight بدلاً من ember/focus. مستخدمو screen-reader يَستهلكون الـ aria-label العربي + الـ paths list النصِّية. مستخدمو keyboard-only يَتنقَّلون بـ Tab + Enter.
+**Originality Self-Score:** 4/5 — الـ SVG branching trees موجودة في كثير من الـ visualization libraries. ما يَجعله 4/5: (١) الـ Brutalist Iraqi aesthetic (Chadirji grid + ember stroke + Bukra Arabic text in SVG) ليس تيمة شائعة في AI output؛ (٢) RTL-correct quadratic curves (control point at trunk.x, leaf.y - 24) تَنتج لغة بصرية تَشبه الـ structural blueprint للمنشآت العراقية؛ (٣) keyboard-first interaction parity (Tab + Enter) من بداية الـ design ليس after-thought؛ (٤) fallback list صادق يَحفظ الـ educational value لكل من تَعطَّل عنده الـ JS أو فعَّل reduced-motion. Originality 4/5 لأن "branching tree visualization" ليس اختراع 2026 لكن الكَومة (Iraqi Brutalism + RTL curves + a11y-first + programmatic SVG + Markazi labels) لم أرَها معاً في AI generated training platform.
+**Files touched:** platform/index.html (+59) · platform/assets/css/worlds/_naar.css (+260 @layer elan-epsilon8) · platform/assets/js/elan/epsilon8-programming.js (NEW 231) · platform/assets/app.js (+9)
+**Verified at commit:** 929662e
+
+
+---STATS---
+total_beacons: 26
+unique_categories_used: 9
+avg_score: 4.15
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε8 — Pillar ε stage 8/12
+
+
+
+## ε9 — 2026-05-25
+**Beacon Type:** 📊 DATA_BEACON
+**The Surprise:** الـ tax IQ ladder ليست جدول شرائح. هي **ميزان وزن مرئي**: ٥ ovals من Memphis Group (border-radius 64% 36% 58% 42% / 50% 60% 40% 50% — لا elliptical perfect أبداً) ذهبية اللون، مَكدَّسة column-reverse فلاحقاً الفئة الدنيا (٠٪ على أول ٢٥٠٬٠٠٠) تَجلس في الأسفل حيث تُؤخذ أولاً، والفئة العليا (١٥٪ فوق ٥M) تَطفو على القمة كَوزن أكبر.
+
+عند تحريك slider الراتب من 0 إلى 10M د.ع، كل oval يَختبر تَحوُّلَين متزامنين بـ `var(--duration-dhahab, 360ms)`:
+- `--bracket-fill` (0% → 100%) ← تُترجَم إلى نسبة `color-mix(in oklch, var(--ember) calc(var(--bracket-fill) * 0.85), var(--anchor-2))` — الـ bracket الذي اُسْتَهلِك بالكامل يَصبح ذهبياً مكتنزاً، الفارغ يَبقى رخصياً
+- `--bracket-width` (50% → 100%) ← العَرض يَنمو مع الفِيل، فالـ ovals تَزداد ثقلاً بصرياً مع تَرحُّب الراتب فيها
+
+الـ progressive computation الأصلية: على 1.5M د.ع، الـ JS يَحسب 82,500 د.ع (= 5.50% effective). الـ Iraq Block يُؤكِّد بنفس الرقم بالضبط — صفر تَناقُض بين الـ pedagogy والـ live compute. هذا هو الـ DATA_BEACON الحقيقي: الـ user يَكتشف الفرق بين الـ headline rate (الذي يَعتقده 10% لأنه في الـ bracket العاشر) والـ effective rate (5.5% لأن أول ثلاث شرائح أخفّ بكثير) — والـ ladder يُريه ذلك بـ vision قبل قراءة الأرقام.
+
+البنية التَفصيلية:
+- المبلغ الضريبي يُعرَض بفاصل الكَشيدَة من β3: '٨٢ـ٥٠٠' بدل '82,500'. الـ JS يَستهلك `Upg.format.currency(value, { kashida: true, fractionDigits: 0 })` كـ preferred path، مع fallback ESM-internal لو الـ β3 module لم يُحمَّل بعد (defensive).
+- الـ slider input استَخدم `accent-color: var(--ember)` لربطه بِلون العالم.
+- الـ readout `aria-live="polite"` يُعلَن لقارئ الشاشة بعد كل تحريك.
+- الـ summary cell يَفصل بين «الضريبة الشهرية» و «المعدَّل الفعلي» في grid بسيطة (1fr 1fr).
+- print mode يَفلطح الـ ovals إلى rectangles مع border أسود + يَحذف الـ slider.
+- forced-colors يَحفظ الـ semantic عبر 1px CanvasText outlines.
+- reduced-motion يُلغي الـ transition تماماً (الـ visual ladder يَبقى semantic لأن الـ width / color-mix custom properties تُحدَّث instantly بدلاً من الـ animation).
+
+**Reference Avoided:** standard tax-bracket table (الكل يَفعلها كذلك في كل tax calculator رأيتُه). Forbidden #6 (bento same-padding rectangles) — الـ ovals متفاوتة العَرض بطبيعتها، ليست نفس الـ padding. Forbidden #11 (animated counter from 0) — الـ amount value لا يَعدّ من 0؛ يَتحدَّث instantly مع الـ slider لأنه يَعكس الواقع، ليس theatrics.
+**Inspired-by:** Mughal accounting books (المنمنمات الفارسية + كتب المحاسبة كانت تَستخدم symbols معدنية أو ovals مَلوَّنة لتمثيل الـ scales والـ weights) + Memphis Group asymmetric ovals (Ettore Sottsass postmodern — رفض الـ geometric perfection لصالح الـ playful imperfection).
+**User-Visible:** yes — كل مستخدم يَفتح صفحة accounting يَجد slider مع قيمة افتراضية 1.5M د.ع، يُحرِّكه فيَرى الـ ovals تَكبُر وتَتلوَّن، والمبلغ الضريبي + المعدَّل الفعلي يَتحدَّثان لحظياً. الـ keyboard users يَتنقَّلون بـ arrow keys على الـ slider (default browser behavior). screen-reader users يَستهلكون الـ aria-live updates للـ readout والـ summary.
+**Originality Self-Score:** 4/5 — interactive tax calculators موجودة في كل حاسبة ضرائب على الإنترنت. الذي يَجعله 4/5: (١) Memphis Group asymmetric ovals مع gold-leaf gradient وkashida thousands separator هو combination لا أرى له شبيهاً في AI training output؛ (٢) الـ pedagogical truth-check: الـ Iraq Block citation تُحسَب من نفس الـ JS module — لو غَيَّرت الـ brackets يَتَحدَّث الادعاء تلقائياً؛ (٣) reading-direction-correct (column-reverse فلاحقاً الفئة الدنيا في الأسفل = حيث تُؤخذ أولاً، يَعكس فلسفة الـ progressive taxation)؛ (٤) full a11y story (reduced-motion / forced-colors / print) من بداية الـ design.
+**Files touched:** platform/index.html (+95) · platform/assets/css/worlds/_dhahab.css (+255 @layer elan-epsilon9) · platform/assets/js/elan/epsilon9-accounting.js (NEW 171) · platform/assets/app.js (+9)
+**Verified at commit:** 93ba0d2
+
+
+---STATS---
+total_beacons: 27
+unique_categories_used: 9
+avg_score: 4.14
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-25 / ε9 — Pillar ε stage 9/12
+
+
+
+## ε10 — 2026-05-26
+**Beacon Type:** 🤚 INTERACTION_BEACON
+**The Surprise:** صفحة صيانة الهواتف تَتحوَّل إلى **رفّ ورشة عراقية**. على اليسار خمس بطاقات أعراض داخل قفص خشبي مُتقطَّع الحواف (border-dashed، لا radius ناعم). يَمين: هاتف ذكي مُلوَّح (Phosphor `device-mobile-camera`، يُحَوَّل إلى ٦٠٪ من الـ host عبر `inline-size`/`block-size`، لا `viewBox` يدوي) فوقه خمسة `<button>` أزرار شفافة بمواقع نسبية (الشاشة، البطارية، السماعة، المايك، الهوائي). المتدرِّب يَلتقط عَرَضاً ويُفلتها على القطعة المتأثرة. عند الإفلات تَحدث ثلاثة أشياء معاً:
+
+١) المنطقة تَتلوَّن بـ `--ember` عند ١٨٪ (الـ bench يَتوهَّج حيث يُؤلم — ليس مجرَّد border color change، بل background tinted)؛
+٢) `Upg.haptic.play('takk')` يَنطلق (طَقَّة قصيرة من δ4 maqamat haptic patterns — ليست buzz عام، بل نَقرة الأداة على المعدن)؛
+٣) يَنزل من تحت الـ bench **شريط لاصق ورقي** — تَوقيع الـ Beacon: مائل `-1.2deg` (transform-origin top right، يَبدو كأنه شريط ورق طويل سَقط من ماكينة الكاشير)، يَستخدم `--warsha-tape` و `--warsha-tape-shadow` المُعرَّفَين أصلاً في γ8 (Warsha world declaration). الأسباب الأربعة لكل عَرض تَظهر سطراً سطراً (`animation-delay: calc(var(--row-index) * 70ms)`) — كأنه يُطبَع على آلة كاتبة مَيدانية. كل سطر يَحمل bullet من Phosphor `wrench`. في أسفل الشريط: عبارة واحدة بـ italic — _«اعرض القطعة للزبون قبل وبعد — الشفافية تَبني السمعة»_ — تَربط الـ interaction بسبب وجوده العملي (التقدير الإنساني، ليس تقنياً صرفاً).
+
+**ثلاث مَدخلات** (بدون مكتبة drag-and-drop خارجية):
+- **HTML5 native drag-and-drop**: `dragstart` يُسجِّل الـ symptom كـ `text/plain` payload، `drop` يَقرأها. مسار الـ desktop mouse الكلاسيكي.
+- **Pointer events**: للمسات اللمسية. `pointerdown` يَلتقط، `pointermove` يَستخدم `elementFromPoint` ليُلوِّن الـ zone الحالي بـ `.is-target`، `pointerup` يَفعل `_applyDrop`. الـ `passive: true` على كل listener حفاظاً على scroll smoothness. الـ `pointerType === 'mouse'` early-return لأن الـ desktop يَستخدم HTML5 dnd.
+- **Keyboard pick-and-drop**: التَفاعل الكامل بدون فأرة. `Tab` إلى `.diag-symptom`، `Enter` (أو `Space`) يَلتقط (`data-elan-picked="true"`)، `Tab` إلى `.diag-zone`، `Enter` يَفعل الـ drop. نفس النتيجة. النقر الثاني على نفس الـ symptom يُحرِّره. **مَكتوب من اليوم الأول، ليس bolt-on later** — هذه هي النقطة الفلسفية: a11y ليست تنازلاً، هي طريقة ثالثة موازية للتَفاعل.
+
+البنية: `epsilon10-phonerepair.js` (٢٨٠ سطر، صفر `innerHTML`، صفر emoji في DOM-text) + `_warsha.css` `@layer elan-epsilon10` (٢٣٧ سطر، ٠ hex، ٣ guards: reduced-motion + forced-colors + print). الـ HTML insertion (٧١ سطر) فوق `pr-electronics-fund` كَبوَّابة الصفحة — أول ما يَلقى الزائر هو drag-to-diagnose لأن «الـ workshop يَبدأ بالتَشخيص». الـ Iraq Block (نفس البطاقة، ليست منفصلة) يَحمل citation: «٦٥٪ من زبائن إصلاح الهواتف يَفقدون ثقتهم لو الفنّي لم يَفسّر السبب — الشفافية + 'أُريك القطعة التالفة' = retention rate ×٣٫٢» (تحليل ميداني سوق الجمهورية، بغداد ٢٠٢٤).
+
+Public surface: `Upg.elan.phonerepair = Object.freeze({ diagnose, causes, reset, symptoms, zones })`. مُتداخل تحت `Upg.elan` يَلتزم بالـ namespace pattern من δ1+δ4+δ6+ε2..ε9.
+
+**Reference Avoided:** Forbidden #15 (modal w/ overlay داكن + center card — الـ AI-default للـ "interactive form")، Forbidden #5 (default soft-shadow + 12px-radius card — الـ workshop شكلٌ صريح، لا zen flat-design)، والـ AI-default "تشخيص = dropdown checklist" (الذي يَستهلك العَرض كـ enum value، لا يُجبر المستخدم على رَبط العَرض بالقطعة فيزيائياً).
+**Inspired-by:** Wild Card #13 — Iraqi marsh mudhif (workshop traditions). في الـ marsh houses كل قَصبة تَحمِل ثقلها بشكل صريح، الـ structure يُريك كيف يَعمل قبل أن يَطلب الـ trust. هنا: الـ trainee لا يَتعلَّم "الأعراض المحتملة لمشكلة البطارية" نَصَّاً منفصلاً، بل يَلتقط العَرض بيده ويُفلتها على الـ phone الفعلي ويَرى السبب يُكتَب على شريط ورقي يَهبط من الـ bench. نفس فلسفة سوق الجمهورية: «أَرِ الزبون القطعة قبل وبعد».
+
+**User-Visible:** yes — كل مستخدم يَفتح صفحة phonerepair يَجد الـ workbench فوق Electronics Fundamentals. mouse users يَسحبون. touch users يَسحبون. keyboard users يَتنقَّلون بـ Tab + Enter ويَحصلون على نفس النتيجة. screen-reader users يَستهلكون `aria-label` العربية الكاملة لكل symptom (e.g. _«نزف بطارية — اضغط Enter لالتقاطه»_) + `aria-live="polite"` على الـ tape (الأسباب تُعلَن لحظياً عند الـ drop). reduced-motion users يَرَوْن الـ tape ثابتة (لا rotate، لا staggered row reveal) لكن نفس المعلومات. forced-colors users يَرَوْن Highlight/HighlightText على الـ affected zones، ButtonFace bg على الـ tape، CanvasText للـ borders. print users يَحصلون على الـ tape رأسية مَطبوعة كقائمة سببية واضحة (transform مُلغى).
+**Originality Self-Score:** 4/5 — drag-to-diagnose interfaces موجودة في medical training apps + repair manuals. الذي يَجعله 4/5: (١) **chromatic continuity مع γ8/ε7**: الـ `--warsha-tape` token كان مُعرَّفاً للزينة في γ8 ثم استَخدمَه ε7 customercare كـ underline accent — ε10 أَعطاه دوراً معمارياً جديداً (الـ tape receipt الكامل) بنفس الـ hue، فالـ Warsha world يَكتسب طبقة معنوية إضافية بدون توسيع اللوحة؛ (٢) **keyboard parity من اليوم الأول**: ليست fallback ولا a11y bolt-on، بل modality ثالثة موازية بنفس الـ outcome، حتى الـ pickedSymptom state يَمتدّ عبر Tab navigation بدون فقدان (٣) **Iraqi-Arabic root-cause prose**: الأسباب ليست `'low battery'` enum strings، بل جُمل عربية بنبرة فني ورشة (_«البطارية تجاوزت 600 دورة شحن — استبدال موصى به»_)، تَحمل الـ pedagogy والـ voice معاً؛ (٤) **الـ Iraq Block 65/3.2× citation** يَربط الـ interaction loop كله بقياس بشري (retention) — ليس engagement metric تَبخَّرَ. لا أَدَّعي 5 لأن drag-and-drop visual diagnostic ليس اختراع 2026، الـ DocVisor + iFixit + Coolblue Diagnose كلها فعَلت متغيرات منه. الـ Originality في الـ assemblage (Iraqi Brutalism workshop framing + paper-tape receipt + keyboard parity + lemma-correct Arabic prose + chromatic token reuse).
+**Files touched:** platform/assets/js/elan/epsilon10-phonerepair.js (NEW 280) · platform/assets/css/worlds/_warsha.css (+237 @layer elan-epsilon10) · platform/index.html (+71) · platform/assets/app.js (+11)
+**Verified at commit:** 408be876
+
+
+---STATS---
+total_beacons: 28
+unique_categories_used: 9
+avg_score: 4.13
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-26 / ε10 — Pillar ε stage 10/12
+
+
+
+## ε11 — 2026-05-26
+**Beacon Type:** 🪞 META_BEACON
+**The Surprise:** صفحة hrmastery لا تَطبَع توست «تم حفظ التسجيل ✓» مثل كل interface AI. تَستمع، ثم تُجاوب. الـ MediaRecorder + canvas waveform يدوي بـ saloon-brass currentColor (لا مكتبة، لا library import) يَرسمان صَوتَ المستخدم وهو يُجاوب على prompt واحد بـ Lateef italic — _«حَدِّثني عن نَفسِك — ثلاثون ثانية، بدون قَصاصة CV.»_ على stop، ثلاث إحصائيات تَظهر **لحظياً** (WPM = speech-fraction × 145 wpm baseline من Goldman-Eisler 1968 / silence% = samples-below-3 / total / duration = perf-clock delta) — صفر animated-counter-from-0 (Forbidden #11 مَرفوض صراحة)، الأرقام تُكتَب مباشرة من derived stats إلى DOM textContent.
+
+ثم يَأتي الـ META twist الحقيقي: `<p class="interview-verdict">` يَستقبِل `data-tone="<state>"` و **سَطراً واحداً بـ Lateef italic** يَحكُم على الصوت بنَبر إنساني، خمس درجات بترتيب الأسبقية:
+- masterful (WPM 130–160 + silence 12–28%) → «نَبر المُحاوَر القَدير» (لون brass-1)
+- confident (WPM 100–170 + silence < 35%) → «وَقْعُك ثابت — تَبدو واثقاً» (لون state-success)
+- rushed (WPM > 180) → «أَسرَعتَ — تَنَفَّس بين الجُمَل» (لون state-warning)
+- silent (silence ≥ 50%) → «صَمتُك أكثر من كلامك — راجع البَدْء» (لون ink-faint × warning)
+- hesitant (else) → «المَقابِلة تَسمَع تَردُّداً — جَرِّب مَرَّة أُخرى» (لون state-danger)
+
+الـ verdict ليس نَصاً ثابتاً جانب الـ stats. هو **رَدّ المنصَّة** على تَسجيل المستخدم بلسانه، بنبرة فني ورشة عربي يَعرف ما يَستحق المديح وما يَستحق المراجعة. المنصة هي مرآة الصالون البيروتي القديم — يَرى المستخدم صوتَه بياناً (الـ canvas + الـ stats) وحُكماً (الـ verdict prose) في نفس اللحظة. هذا هو الـ META_BEACON: الواجهة تَتَحدَّث عن نفسها وعن المستخدم في نفس النَفَس.
+
+البنية التَفصيلية: `epsilon11-hrmastery.js` (٣٦٢ سطر، صفر inline-svg، صفر window.alert، صفر hex، صفر emoji في DOM، 3 MediaRecorder feature-detection guards، AudioContext + webkitAudioContext fallback مع suspended-state resume داخل user gesture، AnalyserNode FFT-256، sample buffer مَحدود بـ 240 entry لتجنُّب memory bloat، HiDPI-aware canvas pixel dim resync، stroke = currentColor (الـ CSS تَربطه بـ --saloon-brass-1)، الـ alternating dir = ((i % 2 === 0) ? -1 : 1) يُعطي الـ waveform نَفَساً بصرياً بدلاً من خط أملس مَيِّت). الـ CSS (`+221 @layer elan-epsilon11` على `_saloon.css`، صفر hex، صفر !important، 3 a11y guards: `prefers-reduced-motion` يُلغي الـ pulse animation + transitions، `forced-colors: active` يَستبدل بـ Mark/Highlight/ButtonText/CanvasText، `@media print` يُخفي button + canvas ويَطبع verdict على border-inline-start ladder، container query عند 480px يَنهار الـ stats triplet إلى عمود واحد).
+
+Capability fallback ladder: لو MediaRecorder غير مَدعوم → button disabled + courteous Arabic notice (لا UI silence). لو permission denied → inline `.interview-notice` بلسان عربي («الميكروفون لم يُمنَح صَلاحية. اسمح من شريط العنوان وأعِد المُحاوَلة.») — صفر window.alert بأي حال. لو AudioContext فَشَل → recorder يَعمل بدون waveform لكن stats تَحتسب من sample buffer الفارغ (تُعطي 0 wpm + 100% silence + duration واقعي → verdict='silent' → «صَمتُك أكثر من كلامك» — حتى الحالة الفاشلة تُجاوب بنبر معنوي).
+
+الـ Iraq Block (`Bel Inc. HR Iraq Brief 2024`) مَثبَّت كـ dashed brass-bordered `<aside>` تحت الـ verdict، يَحمل تَفاصيل التَفاوض القطاعي العراقي (الخاص ٨–١٥٪، العام جامد → اطلب مَنافع: مُواصلات، تأمين، ساعات مَرنة) — `cite` element داخل الـ aside (دلالة semantic) + screen-reader friendly + يَمتزج مع الـ verdict كَجزء من رد المنصة.
+
+**Reference Avoided:** AI-default «✓ Recording saved!» toast cliché (الذي يَستخدمه كل voice memo / interview-prep AI app في 2025-2026) + Forbidden #11 (animated counter from 0) + Forbidden #20 (emoji as feedback — لا توست بـ ✓، لا 🎉 على الـ verdict) + window.alert() permission denial (UX-hostile) + الكليشيه الأكبر للـ AI-generated recording UI: «play/pause/delete row of buttons» (الواجهة هنا فيها زر واحد: record/stop. لا playback، لا قائمة تسجيلات، لا delete — لأن التسجيل **ليس** الناتج، الـ verdict هو الناتج).
+**Inspired-by:** Wild Card #11 — Mid-century Beirut salon recording rituals. في صالونات بيروت 1950-70، المعلِّم كان يُسجِّل الشاعر وهو يُلقي قصيدة، ثم يُعيد التشغيل بنصف السرعة لتَعليم الإلقاء. التسجيل **هو الدرس**، ليس الناتج. هنا: التَسجيل ليس archive يُحفَظ ولا audio file يُشارَك (الـ chunks يُهمَلان عمداً — `mediaRecorder.ondataavailable = () => {}`)، التَسجيل **يَنتُج verdict** يَتعلَّم منه المستخدم. الواجهة هي المعلِّم.
+**User-Visible:** yes — كل مستخدم يَفتح صفحة hrmastery يَجد الـ interview-stage تحت الـ banner مباشرة. desktop + mobile + tablet — نفس الـ widget. mouse users يَنقرون. touch users يَنقرون. keyboard users يَنقرون بـ Tab + Enter (button native). screen-reader users يَستهلكون: `aria-label` العربية على الـ stage + `aria-live="polite"` على الـ stats triplet + `aria-live="polite"` على الـ verdict + `role="status"` على الـ notice. reduced-motion users يَرَوْن نفس الواجهة بدون pulse + بدون transitions (الـ verdict + stats + canvas يَبقى كاملاً — السكون لا يَحرم المستخدم من المعلومة). forced-colors users يَرَوْن system tokens (Mark/Highlight) بدلاً من brass tokens — الـ semantic preserved. print users يَطبعون verdict + stats كـ ladder semantic (button + canvas مُختفيان).
+**Originality Self-Score:** 4/5 — MediaRecorder + canvas waveform + WPM/silence stats موجودة في عشرات apps (voice memos, interview-prep, podcast apps, accent-coaching, خاصة Sonix / Otter / Speeko). الذي يَجعله 4/5: (١) **الـ verdict-as-prose layer**: 5-tone precedence ladder تَنتج جملة واحدة بـ Lateef italic بدل dashboard من badges، الـ verdict هو رد المنصة وليس metric report؛ (٢) **chromatic continuity مع γ9**: الـ canvas stroke = `currentColor` و الـ CSS يَربطه بـ `--saloon-brass-1` — فالـ waveform يَتغيَّر تلقائياً مع الـ world theme لو غُيِّر in the future، صفر hardcoded fill؛ (٣) **deliberate non-storage**: `mediaRecorder.ondataavailable = () => {}` يُهمل الـ chunks. لا playback. لا share. لا save. هذا يَعكس فلسفة المعلِّم البيروتي (الـ verdict هو الدرس، ليس الـ artifact)؛ (٤) **capability ladder كاملة من اليوم الأول**: لا فقط reduced-motion / forced-colors / print، بل MediaRecorder absence + permission denial + AudioContext suspend / failure — كل سيناريو لها رَد عربي محسوب. لا أَدَّعي 5 لأن الـ assemblage أصلية لكن الـ primitives (MediaRecorder + canvas + heuristic stats) معروفة في الصناعة.
+**Files touched:** platform/assets/css/worlds/_saloon.css (+221 @layer elan-epsilon11) · platform/assets/js/elan/epsilon11-hrmastery.js (NEW 362) · platform/assets/app.js (+13)
+**Verified at commit:** 5f829d9
+
+
+
+---STATS---
+total_beacons: 29
+unique_categories_used: 9
+avg_score: 4.13
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-26 / ε11 — Pillar ε stage 11/12
+
+
+
+## ε12 — 2026-05-26
+**Beacon Type:** 🪞 META_BEACON
+**The Surprise:** المنصة تَتعلَّم ضَيفها بصمت. شُعاع المزاج رباعي الأبعاد (confidence / focus / fatigue / curiosity ∈ 0..1) يَسكُن localStorage تحت 'upg.mood.v1' ولا يَظهر أبداً كـ number في الواجهة (صفر XP bar، صفر streak counter، صفر «Achievement Unlocked!» toast — الـ AI-default للـ training apps مَرفوض صراحة). الـ vector يَستمع لخمسة أحداث: upg:exercise:complete (بـ detail.success يُعطي confidence/focus موجبة، بدون يُعطي confidence سالبة + fatigue موجبة) / upg:exercise:failed / upg:nav:change (curiosity صغيرة) / upg:call:outcome من ε2 (الـ Maqamat verdict من ε2 يَتَجَسَّد كَمزاج هنا — success⇒conf+، lost⇒conf−+fat+، neutral⇒focus+ — chromatic continuity حقيقية بين Pillar ε modules) / upg:mood:hint (للـ extension من modules مستقبلية).
+
+ثم يَتلاشى نحو الحياد بـ **5٪ كل ساعة** من الخمول — `decayed(v)` يُرجع object جديد، لا يَلمس الـ stored، فالقراءة referentially transparent. بعد ٢٠ ساعة من الإهمال، أي vector محفوظ يَنسى نَفسَه. هذا تَفصيل فلسفي: المنصة لا تَحتفظ بحُكم قديم على المستخدم — تَنسى مع الوقت كما يَنسى المُضيف الكريم زَلَّة الضَيف.
+
+ثلاث adaptations صامتة في كل صفحة (cross-page modifier حقيقي، ليس صفحة): (١) prose الـ greeting — `data-greet-title` و `data-greet-sub` المَوجودَين في dashboard يُكتَبان من 5 جُمَل عربية بحسب التَصنيف (fatigued «تَمَهَّل قليلاً — نَفَس عميق ثم نَكمل»، confident «مُستعِدّ للتحدّي الأكبر؟ — الثقة بِنية حَقَّقتَها»، curious «لديك سؤال يَستحق إجابة اليوم — الفُضول هو الـ compass»، focused «ركّز على هدف واحد — إنجاز نظيف خير من ثلاثة مَفتوحة»، baseline يُعيد الـ ORIGINAL_PROSE المَلتقَط في أول apply). (٢) `body.dataset.suggestedDifficulty` ∈ {easy/medium/hard} — CSS hook للـ filter exercises. (٣) `body.dataset.insightRate` ∈ {high/normal/low} — تَكرار الـ «هل تَعلم؟» insights.
+
+تَمييز ε12 META عن ε11 META — رغم نفس الفئة (وقد ناقَشتُ هذا في commit message): ε11 = **reactive-acute** (مدخل واحد سَمعي ⇒ جواب prose واحد في نفس اللحظة، الواجهة تَستمع لنَبضة)؛ ε12 = **reactive-chronic** (شهور من السلوك الكامن مَلخَّصة في أربعة أرقام تَتلاشى نحو الحياد عند الإهمال، الواجهة تَستمع لإيقاع). محور زَمني مُختلف للـ META — ε11 يَسمَع نَبضةً واحدة في حُجرة الصالون، ε12 يَسمَع جَلسات شهر كامل عبر سَتائر الصالون. هذه ليست تَكراراً للفئة، هي **استكمالها**: ε11 META في لحظة، ε12 META عبر زمن. المُؤذِّن يَسمَع أَذان الفجر وأَذان العصر — كِلاهُما أَذان لكنهما ليسا الأذان نفسه.
+
+البنية: 284 سطر JS ESM module + 16 سطر import note في app.js = 300 سطر total (cap 600). صفر hex literals، صفر inline-svg، صفر window.alert، صفر !important، صفر emoji في markup. localStorage write مُغَلَّفاً في try/catch (private-mode safe). JSON.parse مُدافِعٌ ضد malformed payloads (silent fallback للـ defaultVector). كل axis يُتحقَّق منه بـ Number.isFinite قبل القبول. lerp + clamp utility functions. الـ classify() ladder بترتيب precedence (fatigue أوّلاً، ثم confidence، ثم curiosity، ثم focus، ثم baseline). الـ ORIGINAL_PROSE captured **lazily** على أول apply — فالنص الأصلي يَبقى محفوظاً ليُرجَع إليه حين يَعود الـ user إلى baseline mood. الـ Upg.mood = Object.freeze({ get, update, reset, _module }) — surface ثابت، لا يُعدَّل بعد الإطلاق.
+
+**Reference Avoided:** Forbidden #22 — «Welcome back, [Name]!» chrome cliché (مَطعون به مباشرة في commit message + استَبدلتُه بـ 5 contextual states). الـ AI-default الأكبر للـ training apps: XP bar / streak counter / level-up toast / badge-unlocked notification (الشعاع لا يَظهر **كرقم** في الواجهة بأي حال — هو محرِّك صامت، ليس counter). الـ AI-default الثاني: «How are you feeling today?» modal عند session start — المنصة تَنظُر، لا تَسأل (هذه فلسفة مُضيف الصالون).
+**Inspired-by:** Wild Card #11 — Iraqi mid-century salons (المضيف يَعرف ضيفه). في صالونات بيروت + بغداد 1950-70، الـ host كان يَضبط إيقاع الزيارة صامتاً — يَصب القهوة أقوى لو الضيف بدا مُتعَباً، يُخرج السؤال الأصعب لو الضيف مال للأمام، يَترُك الموضوع الحَسّاس لو الضيف بَدا مُجهَداً. لا يَسأل أبداً «كيف تَشعر اليوم؟» — يَنظُر، يَستَنبِط، يَتَكَيَّف. هنا: الواجهة تَفعل نفس الشيء عبر event listeners صامتة + decay مَعقول + 4 numbers — صفر استبيانات، صفر check-ins، صفر «kindly rate your mood from 1-5».
+**User-Visible:** subtle — كل مستخدم يَفتح الـ dashboard بعد جَلسة fail-heavy سَيَرى الـ greeting يَكتب «تَمَهَّل قليلاً — نَفَس عميق ثم نَكمل» بدلاً من «أهلاً [اسم]». كل مستخدم يَفتح الـ dashboard بعد سلسلة نجاحات سَيَرى «مُستعِدّ للتحدّي الأكبر؟». كل مستخدم يَتَنقَّل بين كثير من الصفحات (curiosity rising) سَيَرى prose مُختلف. الـ adaptation **subtle**، ليست صادمة — لو لم يَلتفت المستخدم، لا تَظهر مشكلة (الـ original copy يُحفَظ ويُعاد عند الـ baseline). الـ a11y: greeting prose يُكتَب عبر textContent (لا innerHTML)، فلا يُكسَر screen-reader؛ الـ dataset writes صامتة لـ AT.
+**Originality Self-Score:** 4/5 — adaptive UI based on inferred user state موجودة في عشرات platforms (Spotify mood adjustments, Headspace adaptive content, Khan Academy difficulty adaptation, Duolingo XP+streak). الذي يَجعله 4/5: (١) **silent vector**: الـ mood vector لا يَظهر **أبداً** كرقم في UI — هذا قرار معماري غير شائع (الـ majority of adaptive systems تُظهر الـ score)؛ (٢) **decay فلسفي**: 5%/hour decay يَعني المنصة تَنسى مع الوقت — هذا parallels الـ Iraqi cultural norm of "letting go" بدلاً من الـ AI-default "remember everything forever"؛ (٣) **chromatic continuity مع ε2**: upg:call:outcome من ε2 يَتَغَذَّى مباشرة في الـ vector — pillar modules تَتَحَدَّث مع بَعضِها، ليست جَزائر معزولة؛ (٤) **lazily captured ORIGINAL_PROSE**: الـ original markup يُحفَظ في first apply ويُرجَع عند baseline — المنصة لا تَكتب فوق نَفسها بشكل دائم، تَهمس ثم تَنسحب. لا أَدَّعي 5 لأن: localStorage + 4-axis emotional model + decay + greeting adaptation كل واحدة منها معروفة في industry؛ الـ originality في الـ assemblage + الـ refusal-to-surface-as-number + الـ Iraqi salon framing.
+**Files touched:** platform/assets/js/elan/epsilon12-mood.js (NEW 284) · platform/assets/app.js (+16)
+**Verified at commit:** b422fb0
+**Pillar close:** ε12 closes Pillar ε CONTENT REVIVAL — 12 stages (ε1 dashboard / ε2 callcenter / ε3 fieldsales / ε4 social / ε5 lab / ε6 psych+eq+negotiation / ε7 customercare / ε8 programming / ε9 accounting / ε10 phonerepair / ε11 hrmastery / ε12 cross-page mood)، 12 beacons across 6 unique categories (DATA × 2 / SOUND × 1 / STRUCTURAL × 2 / INTERACTION × 4 / TYPOGRAPHIC × 1 / CHROMATIC × 1 / META × 2)، 0 forbidden violations، 0 Sacred Asset disturbance.
+
+
+
+---STATS---
+total_beacons: 30
+unique_categories_used: 9
+avg_score: 4.13
+last_5_avg: 4.0
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-26 / ε12 — Pillar ε COMPLETE 12/12

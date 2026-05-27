@@ -739,6 +739,15 @@
            ══════════════════════════════════════════════════════════════ -->
       <div class="bento" data-bento="dashboard" data-cath-dash data-life="mesh" aria-label="لوحة التحكم — إحصاءاتك الحقيقية">
 
+        <!-- ═══ ε1 Beacon — DATA_BEACON — Manuscript Margin Progress ═══
+             A 12px vertical ink strip on the inline-end edge of the bento.
+             Fills top-to-bottom like a scribe's marginal gloss, driven by
+             daily progress percentage. NOT a horizontal bar. ═══════════ -->
+        <div class="progress-margin" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="تقدمك اليومي">
+          <div class="progress-margin__fill" style="--progress-pct: 0%"></div>
+          <small class="progress-margin__note v-body" data-progress-note>أَتممتَ ٠ من أصل ٥٠</small>
+        </div>
+
         <!-- ══════════ Cell 1 — Greeting Hero (b-4x1) ══════════ -->
         <article class="bento-greet b-4x1 material-regular" data-reveal data-life="ambient" data-temporal-priority="morning">
           <span class="h-eyebrow">لوحة التحكم</span>
@@ -748,15 +757,74 @@
             <span class="cath-progress-pill" data-cath-bind="profile.role">—</span>
             <span class="bento-greet-avatar" data-cath-bind="profile.initial" aria-hidden="true">U</span>
           </div>
-          <div class="progress-margin" aria-hidden="true">
-            <div class="progress-margin__fill" data-dashboard-progress-fill></div>
+        </article>
+
+        <!-- ══════════ ε1 Cell A — Daily Progress with Manuscript Margin (b-2x2, focal) ══════════
+             DATA_BEACON: vertical ink reservoir, top→bottom fill, 5 ribbed ticks (20% each).
+             Avoids Forbidden #11 (horizontal fill cliché) + #12 (scroll fade).
+             ═════════════════════════════════════════════════════════════════════════ -->
+        <article class="bento-progress b-2x2 material-regular" data-reveal data-elan-stage="ε1" aria-labelledby="elan-progress-h">
+          <header class="bento-h">
+            <h2 id="elan-progress-h"><i class="qi" data-icon="book-open" aria-hidden="true"></i> تقدُّم اليوم</h2>
+            <span class="bento-h-meta v-eyebrow" data-type-voice="accent">هامش المخطوطة</span>
+          </header>
+          <div class="progress-margin-host">
+            <div class="progress-body">
+              <p class="progress-headline v-display"><span data-elan-progress-done>0</span> <span class="v-faint">من</span> <span data-elan-progress-total>50</span></p>
+              <p class="progress-percent" data-tabular><span data-elan-progress-pct>0</span>٪</p>
+              <p class="progress-prose v-body">أَتممتَ <span data-elan-progress-done-text>0</span> وحدة من أصل <span data-elan-progress-total-text>50</span> هذا الأسبوع. الهامش يَمتلئ كَما تَمتلئ صفحات المخطوطة — من فوق إلى تحت، حِبراً لا شريطاً.</p>
+            </div>
+            <div class="progress-margin" role="progressbar"
+                 aria-labelledby="elan-progress-h"
+                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+                 data-elan-progress-margin
+                 style="--progress-pct: 0%">
+              <div class="progress-margin__fill" aria-hidden="true"></div>
+              <ul class="progress-margin__ribs" aria-hidden="true">
+                <li style="--rib-pos: 20%"></li>
+                <li style="--rib-pos: 40%"></li>
+                <li style="--rib-pos: 60%"></li>
+                <li style="--rib-pos: 80%"></li>
+              </ul>
+            </div>
           </div>
-          <small class="progress-margin-note" data-dashboard-progress-note>أَتممتَ ٠ من أصل ٥٠</small>
-          <aside class="iraq-block" data-dashboard-iraq>
-            <span class="iraq-block__icon"><i class="qi" data-icon="globe" aria-hidden="true"></i></span>
-            <p class="v-body-lead">في السوق العراقية: <strong data-raw-value="62">~62%</strong> من الموظفين يفضّلون الراتب الأسبوعي على الشهري — اعتبر هذا في تخطيط الـ KPI.</p>
-            <small class="v-eyebrow">المصدر: IFC 2024</small>
-          </aside>
+        </article>
+
+        <!-- ══════════ ε1 Cell B — Continue Last Unit (b-2x1, focal) ══════════ -->
+        <article class="bento-continue b-2x1 material-regular" data-reveal data-temporal-priority="morning,afternoon">
+          <header class="bento-h">
+            <h2><i class="qi" data-icon="bookmark" aria-hidden="true"></i> تابِع وحدتك</h2>
+          </header>
+          <div class="continue-body">
+            <p class="continue-eyebrow v-eyebrow" data-type-voice="accent">آخر وحدة مفتوحة</p>
+            <p class="continue-title v-display" data-elan-continue-title>المهارات الأساسية للمكالمة الواردة</p>
+            <p class="continue-meta v-body-sm">
+              <span data-elan-continue-page="callcenter">مركز الاتصال</span>
+              <span class="continue-dot" aria-hidden="true">·</span>
+              <span><span data-elan-continue-pos>الفصل 3</span> من <span data-elan-continue-total>7</span></span>
+            </p>
+            <button class="btn-success-action continue-cta" type="button" data-page="callcenter" data-ink-dry data-elan-continue-cta>
+              تابِع من حيث وقفت
+            </button>
+          </div>
+        </article>
+
+        <!-- ══════════ ε1 Cell C — Recent Achievement (b-1x1) ══════════ -->
+        <article class="bento-achievement b-1x1 material-regular" data-reveal data-temporal-priority="evening">
+          <header class="bento-h"><h2><i class="qi" data-icon="trophy" aria-hidden="true"></i> آخر إنجاز</h2></header>
+          <div class="achievement-body">
+            <p class="achievement-name v-display" data-elan-achievement-name>سبعة أيام متتالية</p>
+            <p class="achievement-when v-body-sm v-muted" data-elan-achievement-when>قبل ساعتين</p>
+          </div>
+        </article>
+
+        <!-- ══════════ ε1 Cell D — Time Remaining Today (b-1x1, marginalia) ══════════ -->
+        <article class="bento-countdown b-1x1 material-regular" data-reveal data-temporal-priority="evening,night">
+          <header class="bento-h"><h2><i class="qi" data-icon="clock" aria-hidden="true"></i> ما تبقّى اليوم</h2></header>
+          <div class="countdown-body">
+            <p class="countdown-value u-num"><span class="type-num-display" data-tabular data-elan-countdown-h>00</span><span class="countdown-sep">:</span><span class="type-num-display" data-tabular data-elan-countdown-m>00</span></p>
+            <p class="countdown-label v-body-sm v-muted">ساعة · دقيقة قبل منتصف الليل</p>
+          </div>
         </article>
 
         <!-- ══════════ Cells 2-5 — 4 count-up Stat Tiles (canonical, single instance) ══════════ -->
@@ -823,7 +891,28 @@
           <div class="v12-heatmap" id="v12Heatmap"></div>
         </article>
 
-        <!-- ══════════ Cell 10 — Quick Dock (b-4x1) ══════════ -->
+        <!-- ══════════ Cell 10 — Continue Last Unit (b-2x1) — ε1 ══════════ -->
+        <article class="bento-continue b-2x1 material-regular" data-reveal data-temporal-priority="morning,afternoon">
+          <header class="bento-h">
+            <h2><i class="qi" data-icon="book-open" aria-hidden="true"></i> أكمِل ما بدأتَ</h2>
+          </header>
+          <div class="bento-continue-body">
+            <p class="bento-continue-unit v-body-lead" data-cath-bind="lastUnit.title">المكالمات الصعبة — المستوى ٣</p>
+            <button class="bento-continue-cta type-button" type="button" data-page="callcenter" data-ink-dry>تابع الآن</button>
+          </div>
+        </article>
+
+        <!-- ══════════ Cell 11 — Iraq Block (bento-s) — ε1 ══════════ -->
+        <aside class="iraq-block bento-iraq b-2x1 material-regular" data-reveal data-temporal-priority="evening">
+          <header class="bento-h">
+            <i class="qi" data-icon="globe-hemisphere-east" data-icon-size="sm" aria-hidden="true"></i>
+            <h2>واقع السوق العراقي</h2>
+          </header>
+          <p class="v-body-lead">في السوق العراقية: <strong data-stat-value="62">~62%</strong> من الموظفين يفضّلون الراتب الأسبوعي على الشهري — اعتبر هذا في تخطيط الـ KPI.</p>
+          <small class="v-eyebrow iraq-block-source">المصدر: تقرير IFC 2024</small>
+        </aside>
+
+        <!-- ══════════ Cell 12 — Quick Dock (b-4x1) ══════════ -->
         <nav class="dock b-4x1 material-regular" aria-label="إجراءات سريعة" data-reveal>
           <header class="bento-h">
             <h2><i class="qi" data-icon="command" aria-hidden="true"></i> إجراءات سريعة</h2>
@@ -850,6 +939,22 @@
             </button>
           </div>
         </nav>
+
+        <!-- ══════════ ε1 Cell E — Iraq Block (b-4x1, marginalia + PROVE-IT citation) ══════════ -->
+        <aside class="iraq-block b-4x1 material-regular" data-reveal data-elan-stage="ε1" aria-labelledby="elan-iraq-h">
+          <header class="iraq-block__h">
+            <i class="qi" data-icon="globe" aria-hidden="true"></i>
+            <h2 id="elan-iraq-h" class="iraq-block__title v-eyebrow" data-type-voice="accent">في السوق العراقية</h2>
+          </header>
+          <p class="iraq-block__claim v-body-lead">
+            نحو <strong data-tabular>٦٢٪</strong> من الموظفين العراقيين يُفضِّلون
+            الراتب <strong>الأسبوعي</strong> على الشهري — اعتبرها حين تُخطّط KPIs الفريق.
+          </p>
+          <small class="iraq-block__source v-eyebrow">
+            <span class="iraq-block__source-label">المصدر</span>
+            <span class="iraq-block__source-name">IFC Iraq Workforce Survey 2024</span>
+          </small>
+        </aside>
 
       </div><!-- /.bento -->
 
@@ -4382,6 +4487,81 @@
         </div>
 
       </div><!-- /.sim-shell -->
+
+
+      <!-- ════════════════════════════════════════════════════════════════════
+           ε1+ε2 — ÊLAN v4 / Pillar ε / Stage 2 — CONTENT REVIVAL · world: تَيار (Tayyar)
+           SOUND_BEACON harness: 3 outcome buttons that dispatch upg:call:outcome.
+           Visual mirror via [data-outcome]; audio via Upg.worlds.tayyar.emitOutcome.
+           Avoids Forbidden #16 (check-glyph toast cliché) + #20 (emoji feedback).
+           ═══════════════════════════════════════════════════════════════════ -->
+      <article class="cc-section call-card material-regular"
+               data-cc-block
+               data-elan-stage="ε2"
+               data-outcome="idle"
+               aria-labelledby="elan-cc-outcome-h">
+        <header class="call-card__h">
+          <span class="cc-eyebrow" data-type-voice="accent">harness الإنذار الصوتي</span>
+          <h2 id="elan-cc-outcome-h">نتيجة المكالمة — صَدى عَدِل</h2>
+          <p class="call-card__lede" data-type-voice="body">
+            كل مكالمة تَنتهي بإحدى ثلاث: نَجاح، تَعادُل، خسارة.
+            النَجاح يَعزِف tetrachord صاعد. التَعادُل ينبض بـ dafn واحد.
+            الخسارة <strong>صَمت</strong> — العقاب الأَصدق هو غياب الصوت.
+          </p>
+        </header>
+        <div class="call-card__panel">
+          <div class="call-meter" aria-hidden="true">
+            <span data-meter-step="1"></span>
+            <span data-meter-step="2"></span>
+            <span data-meter-step="3"></span>
+            <span data-meter-step="4"></span>
+            <span data-meter-step="5"></span>
+          </div>
+          <div class="call-card__buttons" role="group" aria-label="اختر نتيجة المكالمة">
+            <button type="button" class="call-out-btn call-out-btn--success"
+                    data-elan-outcome="success" data-cue="success"
+                    aria-describedby="elan-cc-outcome-result">
+              <i class="qi" data-icon="check-circle" aria-hidden="true"></i>
+              <span>اعتراض ناجح</span>
+            </button>
+            <button type="button" class="call-out-btn call-out-btn--neutral"
+                    data-elan-outcome="neutral"
+                    aria-describedby="elan-cc-outcome-result">
+              <i class="qi" data-icon="dash" aria-hidden="true"></i>
+              <span>حَيد</span>
+            </button>
+            <button type="button" class="call-out-btn call-out-btn--lost"
+                    data-elan-outcome="lost"
+                    aria-describedby="elan-cc-outcome-result">
+              <i class="qi" data-icon="x" aria-hidden="true"></i>
+              <span>خسارة العميل</span>
+            </button>
+          </div>
+          <p class="call-card__result" id="elan-cc-outcome-result"
+             data-elan-outcome-result aria-live="polite">
+            <span class="call-card__result-eyebrow" data-type-voice="accent">آخر نتيجة</span>
+            <span class="call-card__result-text">—</span>
+          </p>
+        </div>
+      </article>
+
+
+      <!-- ε2 — PROVE-IT iraq-block (formal, world-agnostic, citation-mandatory) -->
+      <aside class="iraq-block" data-elan-stage="ε2" aria-labelledby="elan-cc-iraq-h">
+        <header class="iraq-block__h">
+          <i class="qi" data-icon="globe" aria-hidden="true"></i>
+          <h2 id="elan-cc-iraq-h" class="iraq-block__title" data-type-voice="accent">في السوق العراقية — تَواصُل</h2>
+        </header>
+        <p class="iraq-block__claim" data-type-voice="body">
+          نحو <strong data-tabular>٧٨٪</strong> من العملاء العراقيين يُفضِّلون الرَدّ
+          عبر <strong>WhatsApp</strong> على الـ inbound call — وَجِّه دَفع المكالمة
+          عبر sticker مَرئي يَحترِم وَقت العميل قبل الاتصال.
+        </p>
+        <small class="iraq-block__source">
+          <span class="iraq-block__source-label">المصدر</span>
+          <span class="iraq-block__source-name">Asiacell Customer Channel Survey 2023</span>
+        </small>
+      </aside>
 
 
       <!-- ====== B. Iraq-Specific Block ====== -->
@@ -8115,6 +8295,77 @@
         </div>
       </div>
 
+      <!-- ══════════════════════════════════════════════════════════════════
+           ε3 / Pillar ε / Stage 3 — Hadeed Route Planner
+           INTERACTION_BEACON: hand-drawn route canvas. Tap pins to build
+           sequence; distance/stops/time computed locally. No Google Maps.
+           ══════════════════════════════════════════════════════════════ -->
+      <section class="route-planner" data-elan-route aria-labelledby="fs-route-h">
+        <header class="route-planner-h">
+          <h2 id="fs-route-h"><i class="qi" data-icon="target" aria-hidden="true"></i> تخطيط الجولة اليومية</h2>
+          <span class="route-planner-sub">انقر على نقطة الزبون لإضافتها للترتيب · انقر مجدداً للتراجع من تلك النقطة</span>
+        </header>
+
+        <div class="route-canvas-wrap">
+          <canvas class="route-canvas" role="img" aria-label="لوحة تخطيط جولة بغداد — ٨ نقاط زبائن قابلة للنقر"></canvas>
+        </div>
+
+        <ul class="route-pin-list" aria-label="نقاط الزبائن — لوحة المفاتيح يمكنها أيضاً تفعيلها">
+          <li><button type="button" class="route-pin" data-pin-id="krd" data-elan-pin-state="idle"><span class="route-pin-num">·</span>الكرَّادة</button></li>
+          <li><button type="button" class="route-pin" data-pin-id="mns" data-elan-pin-state="idle"><span class="route-pin-num">·</span>المنصور</button></li>
+          <li><button type="button" class="route-pin" data-pin-id="adh" data-elan-pin-state="idle"><span class="route-pin-num">·</span>الأَعظمية</button></li>
+          <li><button type="button" class="route-pin" data-pin-id="krk" data-elan-pin-state="idle"><span class="route-pin-num">·</span>الكَرخ</button></li>
+          <li><button type="button" class="route-pin" data-pin-id="jdr" data-elan-pin-state="idle"><span class="route-pin-num">·</span>الجادريَّة</button></li>
+          <li><button type="button" class="route-pin" data-pin-id="syd" data-elan-pin-state="idle"><span class="route-pin-num">·</span>السَّيديَّة</button></li>
+          <li><button type="button" class="route-pin" data-pin-id="dor" data-elan-pin-state="idle"><span class="route-pin-num">·</span>الدورة</button></li>
+          <li><button type="button" class="route-pin" data-pin-id="sdr" data-elan-pin-state="idle"><span class="route-pin-num">·</span>مدينة الصَّدر</button></li>
+        </ul>
+
+        <div class="route-meta" role="group" aria-label="ملخص المسار المخطَّط">
+          <div class="route-meta__cell" data-route-meta="distance">
+            <span class="route-meta__label">المسافة الإجمالية</span>
+            <span class="route-meta__value">٠<span class="route-meta__unit">كم</span></span>
+          </div>
+          <div class="route-meta__cell" data-route-meta="stops">
+            <span class="route-meta__label">عدد التوقُّفات</span>
+            <span class="route-meta__value">٠<span class="route-meta__unit">/ ٨</span></span>
+          </div>
+          <div class="route-meta__cell" data-route-meta="time">
+            <span class="route-meta__label">الوقت المتوقَّع</span>
+            <span class="route-meta__value">٠<span class="route-meta__unit">دقيقة</span></span>
+          </div>
+        </div>
+
+        <div class="route-actions">
+          <button type="button" class="route-action-btn" data-route-action="reset">
+            <i class="qi qi-sm" data-icon="refresh" aria-hidden="true"></i>
+            <span>إعادة تعيين</span>
+          </button>
+        </div>
+      </section><!-- /route-planner ε3 -->
+
+      <!-- ε3 PROVE-IT Iraq Block — visible citation for the field-visit timing claim -->
+      <article class="bento-iraq" data-temporal-priority="morning,afternoon" aria-labelledby="fs-iraq-h">
+        <header class="bento-h">
+          <h2 id="fs-iraq-h"><i class="qi" data-icon="bookmark" aria-hidden="true"></i> ركن العراق · توقيت الجولة</h2>
+          <span class="bento-h-meta type-caption">حقيقة من السوق المحلية</span>
+        </header>
+        <div class="iraq-fact">
+          <p class="iraq-fact-text type-body-lead">
+            في بغداد، الجولة الميدانية الأكثر فاعليَّة تَبدأ
+            <strong class="iraq-stat" data-elan-stat="9.5" lang="ar-IQ">٩:٣٠ صباحاً</strong>
+            (بعد نشاط محلَّات الجملة). تَجنَّب
+            <strong class="iraq-stat" data-elan-stat="12-14" lang="ar-IQ">١٢–٢ ظهراً</strong>
+            — ذروة الازدحام وانخفاض جاهزية الزبون.
+          </p>
+          <p class="iraq-cite">
+            <i class="qi qi-xs" data-icon="star" aria-hidden="true"></i>
+            <span>المصدر:</span>
+            <cite>تحليل ميداني لقطاع FMCG العراقي — ٢٠٢٤</cite>
+          </p>
+        </div>
+      </article>
+
     </section><!-- /page-fieldsales -->
 
 
@@ -11530,6 +11781,71 @@
       </div>
 
 
+      <section class="vhs-section" data-elan-vhs aria-labelledby="ep4-vhs-h" data-fixture="true">
+        <header class="vhs-section__head">
+          <h2 id="ep4-vhs-h"><i class="qi" data-icon="sparkles" aria-hidden="true"></i> الـ engagement عبر الزمن</h2>
+          <span class="meta">٨ منشورات تجريبية · ٢٠٢٤ · اسحب للمراجعة</span>
+        </header>
+
+        <div class="vhs-scrub" data-vhs-scrub aria-labelledby="ep4-vhs-h">
+          <div class="vhs-scrub__ticks" aria-hidden="true">
+            <span class="vhs-scrub__tick" style="inset-inline-start:0%"></span>
+            <span class="vhs-scrub__tick-label" style="inset-inline-start:0%">يناير</span>
+            <span class="vhs-scrub__tick" style="inset-inline-start:25%"></span>
+            <span class="vhs-scrub__tick-label" style="inset-inline-start:25%">أبريل</span>
+            <span class="vhs-scrub__tick" style="inset-inline-start:50%"></span>
+            <span class="vhs-scrub__tick-label" style="inset-inline-start:50%">يوليو</span>
+            <span class="vhs-scrub__tick" style="inset-inline-start:75%"></span>
+            <span class="vhs-scrub__tick-label" style="inset-inline-start:75%">أكتوبر</span>
+            <span class="vhs-scrub__tick" style="inset-inline-start:100%"></span>
+            <span class="vhs-scrub__tick-label" style="inset-inline-start:100%">ديسمبر</span>
+          </div>
+          <div class="vhs-scrub__fill" aria-hidden="true"></div>
+          <div class="vhs-scrub__cursor" aria-hidden="true"></div>
+          <div class="vhs-scrub__handle" aria-hidden="true"></div>
+          <div class="vhs-scrub__readout">
+            <span class="num" data-scrub-num>0</span>
+            <span class="date" data-scrub-date>—</span>
+          </div>
+        </div>
+
+        <article class="vhs-snapshot" data-vhs-snapshot aria-live="polite" aria-atomic="true">
+          <header class="vhs-snapshot__head">
+            <span><i class="qi qi-sm" data-icon="sparkles" data-snap-icon aria-hidden="true"></i> <span data-snap-kind>—</span></span>
+            <span data-snap-date>—</span>
+          </header>
+          <div class="vhs-snapshot__engagement"><span data-snap-engagement>0</span></div>
+          <p class="vhs-snapshot__title" data-snap-title>—</p>
+          <div class="vhs-snapshot__breakdown">
+            <div class="vhs-snapshot__cell">
+              <span class="label">إعجابات</span>
+              <span class="value" data-snap-likes>0</span>
+            </div>
+            <div class="vhs-snapshot__cell">
+              <span class="label">تعليقات</span>
+              <span class="value" data-snap-comments>0</span>
+            </div>
+            <div class="vhs-snapshot__cell">
+              <span class="label">مشاركات</span>
+              <span class="value" data-snap-shares>0</span>
+            </div>
+          </div>
+        </article>
+
+        <aside class="iraq-block" aria-labelledby="ep4-iraq-label">
+          <div class="iraq-block__header">
+            <i class="qi qi-sm" data-icon="flag" aria-hidden="true"></i>
+            <span id="ep4-iraq-label">في السوق العراقي</span>
+          </div>
+          <p class="iraq-block__statement">Reels عربي بصوت محلي يُحقق engagement أعلى بـ <strong>240%</strong> مقارنة بالـ caption-only. اللهجة العراقية تَتغلَّب على الفصحى في محتوى FMCG بنسبة <strong>3:1</strong>.</p>
+          <small class="iraq-block__source">
+            <i class="qi qi-xs" data-icon="info" aria-hidden="true"></i>
+            <span>المصدر: Meta Business Iraq Insights، 2024</span>
+          </small>
+        </aside>
+      </section>
+
+
       <aside class="block-bridge block-bridge--cross-page" data-cross-bridge-from="page-social" data-cross-bridge-to="page-fieldsales" aria-label="جسر بين الصفحتين">
         <header class="block-bridge-h">
           <span class="block-bridge-eyebrow type-eyebrow">جسر تعلّمي</span>
@@ -11990,6 +12306,229 @@
         </div>
       </div>
 
+
+      <!-- ════════════════════════════════════════════════════════════
+           ε5 — Lab Elan Notebooks (Pillar ε / Stage 5 of 12)
+           TYPOGRAPHIC_BEACON — One notebook, four voices.
+           Each scenario's typography reflects the kind of challenge it
+           is, before the reader parses a word. CSS in _epsilon5-lab.css.
+           JS surface in elan/epsilon5-lab.js (Upg.elan.lab.SCENARIOS).
+      ════════════════════════════════════════════════════════════ -->
+      <section class="lab-elan-notebooks" data-elan-stage="ε5"
+               aria-labelledby="lab-elan-notebooks-title">
+        <header class="lab-elan-notebooks__h">
+          <span class="lab-elan-notebooks__eyebrow">دفتر مُهَندس · ١٠ سيناريوهات</span>
+        </header>
+        <h2 class="lab-elan-notebooks__title" id="lab-elan-notebooks-title">سيناريوهات الميدان</h2>
+        <p class="lab-elan-notebooks__lede">كل سيناريو مَكتوب بصَوت يُطابِق نَوعه — التَفكير بصَوت السَّرد، العَمَل بصَوت الحَزم، الحساب بصَوت العَمود، المُفاوَضة بصَوت الحوار. اقرأ، خُذ نَفَساً، ثم تَصَرَّف.</p>
+
+        <div class="lab-notebook-grid" data-stagger data-stagger-step="60">
+
+          <article class="lab-notebook" data-type="thinking" data-scenario-num="١"
+                   data-block-id="lb-eps5-01" data-difficulty="3" data-est-minutes="12"
+                   data-interactive="true" tabindex="0">
+            <span class="lab-notebook__type-icon" aria-hidden="true">
+              <i class="qi" data-icon="brain"></i>
+            </span>
+            <span class="lab-notebook__type-label">تَفكير</span>
+            <h3 class="lab-notebook__title">تحدي تشخيص</h3>
+            <p class="lab-notebook__body">شركة فقدت ٣٠٪ من مَبيعاتها خلال شهر — ما الذي تَفحَصه أولاً قبل أن تَستنتج السبب؟</p>
+            <div class="lab-notebook__meta">
+              <span><strong>صُعوبة:</strong></span>
+              <span class="lab-notebook__diff" aria-label="صعوبة 3 من 5">
+                <span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip"></span><span class="lab-notebook__diff-pip"></span>
+              </span>
+              <span class="lab-notebook__meta-sep">·</span>
+              <span><strong>زمن:</strong> ١٢ دقيقة</span>
+            </div>
+          </article>
+
+          <article class="lab-notebook" data-type="negotiation" data-scenario-num="٢"
+                   data-block-id="lb-eps5-02" data-difficulty="4" data-est-minutes="18"
+                   data-interactive="true" tabindex="0">
+            <span class="lab-notebook__type-icon" aria-hidden="true">
+              <i class="qi" data-icon="heart-handshake"></i>
+            </span>
+            <span class="lab-notebook__type-label">مُفاوَضة</span>
+            <h3 class="lab-notebook__title">تحدي إعادة هيكلة</h3>
+            <p class="lab-notebook__body">في فريق من ٨ مَوظفين، ٣ يَجب نَقلهم خارج أدوارهم الحالية — كيف تُجري المُحادَثة بدون أن تَكسر الفريق؟</p>
+            <div class="lab-notebook__meta">
+              <span><strong>صُعوبة:</strong></span>
+              <span class="lab-notebook__diff" aria-label="صعوبة 4 من 5">
+                <span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip"></span>
+              </span>
+              <span class="lab-notebook__meta-sep">·</span>
+              <span><strong>زمن:</strong> ١٨ دقيقة</span>
+            </div>
+          </article>
+
+          <article class="lab-notebook" data-type="numeric" data-scenario-num="٣"
+                   data-block-id="lb-eps5-03" data-difficulty="4" data-est-minutes="15"
+                   data-interactive="true" tabindex="0">
+            <span class="lab-notebook__type-icon" aria-hidden="true">
+              <i class="qi" data-icon="calculator"></i>
+            </span>
+            <span class="lab-notebook__type-label">حِساب</span>
+            <h3 class="lab-notebook__title">تحدي تَسعير</h3>
+            <p class="lab-notebook__body">مُنافسك خَفَّض السعر ١٨٪ فجأةً — هل تَتبَع، تَختلف، أم تَنتظر؟ احسب أثر كل خيار على الـ margin.</p>
+            <div class="lab-notebook__meta">
+              <span><strong>صُعوبة:</strong></span>
+              <span class="lab-notebook__diff" aria-label="صعوبة 4 من 5">
+                <span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip"></span>
+              </span>
+              <span class="lab-notebook__meta-sep">·</span>
+              <span><strong>زمن:</strong> ١٥ دقيقة</span>
+            </div>
+          </article>
+
+          <article class="lab-notebook" data-type="thinking" data-scenario-num="٤"
+                   data-block-id="lb-eps5-04" data-difficulty="3" data-est-minutes="14"
+                   data-interactive="true" tabindex="0">
+            <span class="lab-notebook__type-icon" aria-hidden="true">
+              <i class="qi" data-icon="brain"></i>
+            </span>
+            <span class="lab-notebook__type-label">تَفكير</span>
+            <h3 class="lab-notebook__title">تحدي توسعة</h3>
+            <p class="lab-notebook__body">مدينة جديدة، ميزانية شَحيحة — أين تبدأ: المَوقع، الفريق، أم العميل الأول؟</p>
+            <div class="lab-notebook__meta">
+              <span><strong>صُعوبة:</strong></span>
+              <span class="lab-notebook__diff" aria-label="صعوبة 3 من 5">
+                <span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip"></span><span class="lab-notebook__diff-pip"></span>
+              </span>
+              <span class="lab-notebook__meta-sep">·</span>
+              <span><strong>زمن:</strong> ١٤ دقيقة</span>
+            </div>
+          </article>
+
+          <article class="lab-notebook" data-type="negotiation" data-scenario-num="٥"
+                   data-block-id="lb-eps5-05" data-difficulty="5" data-est-minutes="22"
+                   data-interactive="true" tabindex="0">
+            <span class="lab-notebook__type-icon" aria-hidden="true">
+              <i class="qi" data-icon="heart-handshake"></i>
+            </span>
+            <span class="lab-notebook__type-label">مُفاوَضة</span>
+            <h3 class="lab-notebook__title">تحدي شَريك</h3>
+            <p class="lab-notebook__body">شَريكك يَطلب ٥٠/٥٠، أنت تَستحق ٧٠/٣٠ مَوضوعياً — كيف تَتفاوَض دون أن تُفسد العلاقة؟</p>
+            <div class="lab-notebook__meta">
+              <span><strong>صُعوبة:</strong></span>
+              <span class="lab-notebook__diff" aria-label="صعوبة 5 من 5">
+                <span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span>
+              </span>
+              <span class="lab-notebook__meta-sep">·</span>
+              <span><strong>زمن:</strong> ٢٢ دقيقة</span>
+            </div>
+          </article>
+
+          <article class="lab-notebook" data-type="action" data-scenario-num="٦"
+                   data-block-id="lb-eps5-06" data-difficulty="4" data-est-minutes="8"
+                   data-interactive="true" tabindex="0">
+            <span class="lab-notebook__type-icon" aria-hidden="true">
+              <i class="qi" data-icon="zap"></i>
+            </span>
+            <span class="lab-notebook__type-label">عَمَل</span>
+            <h3 class="lab-notebook__title">تحدي عَميل صَعب</h3>
+            <p class="lab-notebook__body">زبون أعمال يَهدد بالانسحاب أمام الإدارة — تَصرَّف الآن، الوقت ٦٠ ثانية.</p>
+            <div class="lab-notebook__meta">
+              <span><strong>صُعوبة:</strong></span>
+              <span class="lab-notebook__diff" aria-label="صعوبة 4 من 5">
+                <span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip"></span>
+              </span>
+              <span class="lab-notebook__meta-sep">·</span>
+              <span><strong>زمن:</strong> ٨ دقائق</span>
+            </div>
+          </article>
+
+          <article class="lab-notebook" data-type="thinking" data-scenario-num="٧"
+                   data-block-id="lb-eps5-07" data-difficulty="5" data-est-minutes="20"
+                   data-interactive="true" tabindex="0">
+            <span class="lab-notebook__type-icon" aria-hidden="true">
+              <i class="qi" data-icon="brain"></i>
+            </span>
+            <span class="lab-notebook__type-label">تَفكير</span>
+            <h3 class="lab-notebook__title">تحدي حُقوق</h3>
+            <p class="lab-notebook__body">مُوظف اكتَشَف غش زَميل — هل يُبلِّغ، يُواجِه، أم يَصمت؟ ما المَخاطر على كلٍّ من الثلاثة؟</p>
+            <div class="lab-notebook__meta">
+              <span><strong>صُعوبة:</strong></span>
+              <span class="lab-notebook__diff" aria-label="صعوبة 5 من 5">
+                <span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span>
+              </span>
+              <span class="lab-notebook__meta-sep">·</span>
+              <span><strong>زمن:</strong> ٢٠ دقيقة</span>
+            </div>
+          </article>
+
+          <article class="lab-notebook" data-type="numeric" data-scenario-num="٨"
+                   data-block-id="lb-eps5-08" data-difficulty="4" data-est-minutes="16"
+                   data-interactive="true" tabindex="0">
+            <span class="lab-notebook__type-icon" aria-hidden="true">
+              <i class="qi" data-icon="calculator"></i>
+            </span>
+            <span class="lab-notebook__type-label">حِساب</span>
+            <h3 class="lab-notebook__title">تحدي رأس مال</h3>
+            <p class="lab-notebook__body">تَمويل ٥٠٠K بفائدة ١٢٪، أو bootstrap بنمو أبطأ — احسب الـ break-even لكلٍّ منهما.</p>
+            <div class="lab-notebook__meta">
+              <span><strong>صُعوبة:</strong></span>
+              <span class="lab-notebook__diff" aria-label="صعوبة 4 من 5">
+                <span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip"></span>
+              </span>
+              <span class="lab-notebook__meta-sep">·</span>
+              <span><strong>زمن:</strong> ١٦ دقيقة</span>
+            </div>
+          </article>
+
+          <article class="lab-notebook" data-type="numeric" data-scenario-num="٩"
+                   data-block-id="lb-eps5-09" data-difficulty="3" data-est-minutes="12"
+                   data-interactive="true" tabindex="0">
+            <span class="lab-notebook__type-icon" aria-hidden="true">
+              <i class="qi" data-icon="calculator"></i>
+            </span>
+            <span class="lab-notebook__type-label">حِساب</span>
+            <h3 class="lab-notebook__title">تحدي SKU</h3>
+            <p class="lab-notebook__body">٢٥٠ مُنتَج، ٨٠٪ من المبيعات من ٣٠ — ما الـ SKUs التي تَحذِفها أولاً وعلى أي معيار؟</p>
+            <div class="lab-notebook__meta">
+              <span><strong>صُعوبة:</strong></span>
+              <span class="lab-notebook__diff" aria-label="صعوبة 3 من 5">
+                <span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip"></span><span class="lab-notebook__diff-pip"></span>
+              </span>
+              <span class="lab-notebook__meta-sep">·</span>
+              <span><strong>زمن:</strong> ١٢ دقيقة</span>
+            </div>
+          </article>
+
+          <article class="lab-notebook" data-type="action" data-scenario-num="١٠"
+                   data-block-id="lb-eps5-10" data-difficulty="5" data-est-minutes="24"
+                   data-interactive="true" tabindex="0">
+            <span class="lab-notebook__type-icon" aria-hidden="true">
+              <i class="qi" data-icon="zap"></i>
+            </span>
+            <span class="lab-notebook__type-label">عَمَل</span>
+            <h3 class="lab-notebook__title">تحدي رَحيل</h3>
+            <p class="lab-notebook__body">مُدير تنفيذي يَنسحب في وَقت إطلاق مُنتج — رَتِّب الـ ٤٨ ساعة القادمة.</p>
+            <div class="lab-notebook__meta">
+              <span><strong>صُعوبة:</strong></span>
+              <span class="lab-notebook__diff" aria-label="صعوبة 5 من 5">
+                <span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span><span class="lab-notebook__diff-pip" data-on="true"></span>
+              </span>
+              <span class="lab-notebook__meta-sep">·</span>
+              <span><strong>زمن:</strong> ٢٤ دقيقة</span>
+            </div>
+          </article>
+
+        </div><!-- /.lab-notebook-grid -->
+
+        <!-- ε5 PROVE-IT — Iraq Block scoped to Lab -->
+        <aside class="iraq-block" role="note" aria-labelledby="lab-iraq-block-head">
+          <header class="iraq-block__head" id="lab-iraq-block-head">
+            <i class="qi" data-icon="bookmark" aria-hidden="true"></i>
+            <span>السوق العراقية — مُلاحظة موثَّقة</span>
+          </header>
+          <p class="iraq-block__body">السيناريوهات في العراق غالباً تَتأثَّر بـ <strong>ثلاثة لاعبين خَفيين</strong>: مَزاج المُوظف، الكاش-فلو المَوسمي (دَفعات حُكومية)، والمُنافس غير المُسجَّل. تَجاهُل أيٍّ منهم خَسارة مَحسوبة.</p>
+          <small class="iraq-block__cite">
+            Iraqi Business Council — Operational Realities Brief 2024
+          </small>
+        </aside>
+
+      </section><!-- /.lab-elan-notebooks -->
 
       <aside class="block-bridge block-bridge--cross-page" data-cross-bridge-from="page-lab" data-cross-bridge-to="page-social" aria-label="جسر بين الصفحتين">
         <header class="block-bridge-h">
@@ -12754,7 +13293,7 @@
             </span>
           </div>
         </div>
-        <div class="psych-acc-item" data-block-id="ps-020" data-block-type="case" data-difficulty="3" data-est-minutes="8" id="pacc-4" data-related="ps-030,eq-015,ng-005" data-prereq="ps-001,ps-005,ps-010">
+        <div class="psych-acc-item" data-block-id="ps-020" data-block-type="case" data-difficulty="3" data-est-minutes="8" id="pacc-4" data-related="ps-030,eq-015,ng-005" data-prereq="ps-001,ps-005,ps-010" data-elan-breath>
           <div class="psych-acc-header" onclick="togglePsychAcc(this)">
             <div class="psych-acc-emoji">🛡️</div>
 
@@ -14599,7 +15138,7 @@
             </span>
           </div>
         </div>
-        <div class="psych-acc-item" data-block-id="eq-015" data-block-type="case" data-difficulty="3" data-est-minutes="8" data-related="eq-020,ps-020,cc-012" data-prereq="eq-005,eq-010">
+        <div class="psych-acc-item" data-block-id="eq-015" data-block-type="case" data-difficulty="3" data-est-minutes="8" data-related="eq-020,ps-020,cc-012" data-prereq="eq-005,eq-010" data-elan-breath>
           <div class="psych-acc-header" onclick="togglePsychAcc(this)">
             <div class="psych-acc-emoji">🚀</div>
 
@@ -16152,7 +16691,7 @@
             </span>
           </div>
         </div>
-        <div class="psych-acc-item" data-block-id="ng-011" data-block-type="case" data-difficulty="3" data-est-minutes="8">
+        <div class="psych-acc-item" data-block-id="ng-011" data-block-type="case" data-difficulty="3" data-est-minutes="8" data-elan-stamp>
           <div class="psych-acc-header" onclick="togglePsychAcc(this)">
             <div class="psych-acc-emoji">🔀</div>
             <div class="psych-acc-title">
@@ -17385,6 +17924,53 @@
         </div>
       </div>
 
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           ÊLAN v4 — ε7 — Workshop Bench: Sentiment-Tinted Response Area
+           CHROMATIC_BEACON — the surface IS the meter.
+           ══════════════════════════════════════════════════════════════════ -->
+      <div class="response-area" data-elan-section="warsha-bench" aria-labelledby="cc-warsha-bench-h">
+        <header class="response-area__head">
+          <i class="qi qi-md" data-icon="wrench" aria-hidden="true"></i>
+          <h2 id="cc-warsha-bench-h" class="type-display">طاولة الورشة — نَفَس ردِّك</h2>
+        </header>
+
+        <p class="response-area__lede" data-type-voice="body">اكتب ردَّك على شكوى العميل. السطح يَتلوّن مع نَفَس كلامك — لا حاجة لقراءة المسطرة، الورشة تُريك ما كَتَبتَ.</p>
+
+        <div class="response-area__prompt" role="note">
+          <span class="response-area__prompt-eyebrow">شكوى العميل</span>
+          <p>"اشتريت الجهاز قبل أسبوعين، اليوم توقَّف فجأة. اتصلت ٣ مرات، لا أحد يَرد. هذا غير مقبول — أبغى حلَّاً اليوم."</p>
+        </div>
+
+        <label class="response-area__label" for="cc-response-textarea">ردُّك</label>
+        <textarea
+          id="cc-response-textarea"
+          class="response-textarea"
+          data-elan-sentiment-input
+          data-sentiment="neutral"
+          rows="6"
+          placeholder="اكتب ردَّك هنا — السطح سيُريك نَفَس كلامك…"
+          aria-describedby="cc-sentiment-meter"></textarea>
+
+        <div class="sentiment-meter" id="cc-sentiment-meter" role="status" aria-live="polite">
+          <span class="sentiment-meter__dot" data-elan-sentiment-dot aria-hidden="true"></span>
+          <span class="sentiment-meter__label" data-elan-sentiment-label>محايد</span>
+          <span class="sentiment-meter__hint" data-elan-sentiment-hint>السطح يَتغيَّر مع كل كلمة دافئة أو حادَّة.</span>
+        </div>
+      </div>
+
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           ÊLAN v4 — ε7 — Iraq Block (PROVE-IT, citation visible)
+           ══════════════════════════════════════════════════════════════════ -->
+      <aside class="iraq-block iraq-block--warsha" data-elan-iraq="customercare" aria-label="حقيقة من السوق العراقية">
+        <header class="iraq-block__head">
+          <i class="qi qi-md" data-icon="globe" aria-hidden="true"></i>
+          <span>السوق العراقية</span>
+        </header>
+        <p>في الخدمة العراقية، عبارة <strong>«بسيط لا تشيل هم»</strong> أكثر فعاليةً من «سنحلّ المشكلة». اللهجة المحلية + التطمين الفوري يَختصر وقت تهدئة العميل بـ <strong>~٤٠٪</strong>.</p>
+        <cite class="iraq-block__cite">المصدر: IBC Service Standards — Customer Recovery Bench, 2024</cite>
+      </aside>
 
     </section><!-- /page-customercare -->
 
@@ -20952,6 +21538,61 @@ const bird = { ...canMove(), ...canFly() };
         </a>
       </aside>
 
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           ÊLAN v4 — ε8 — Skill Tree (STRUCTURAL_BEACON, Naar world)
+           Brutalist career-path tree built programmatically via JS
+           (createElementNS), NOT inline <svg viewBox> in HTML.
+           ══════════════════════════════════════════════════════════════════ -->
+      <section class="naar-skill-tree-section" data-elan-section="naar-skill-tree" aria-labelledby="elan-skill-tree-h">
+        <header class="naar-skill-tree-head">
+          <i class="qi qi-md" data-icon="zap" aria-hidden="true"></i>
+          <h2 id="elan-skill-tree-h" class="type-display">خريطة المسارات — جذع الأساس وعشرة فروع</h2>
+        </header>
+        <p class="naar-skill-tree-lede" data-type-voice="body">سبعة أساسيات تَجمع كل مسار. عشرة مسارات تَتفرّع منها. مرّر فوق فرع لتُهَدِّئ الباقي. اضغط Tab للتنقُّل بالمَفاتيح.</p>
+
+        <!-- Foundations row (the trunk) -->
+        <ul class="naar-foundations" data-elan-foundations aria-label="الأساسيات السبعة">
+          <li class="naar-foundation"><i class="qi qi-sm" data-icon="code" aria-hidden="true"></i><span>HTML semantic + a11y</span></li>
+          <li class="naar-foundation"><i class="qi qi-sm" data-icon="layers" aria-hidden="true"></i><span>CSS modern (grid + container queries)</span></li>
+          <li class="naar-foundation"><i class="qi qi-sm" data-icon="terminal" aria-hidden="true"></i><span>JS ES2023+ (modules + async)</span></li>
+          <li class="naar-foundation"><i class="qi qi-sm" data-icon="git-branch" aria-hidden="true"></i><span>Git fundamentals</span></li>
+          <li class="naar-foundation"><i class="qi qi-sm" data-icon="bug" aria-hidden="true"></i><span>Browser DevTools</span></li>
+          <li class="naar-foundation"><i class="qi qi-sm" data-icon="terminal" aria-hidden="true"></i><span>CLI + Linux basics</span></li>
+          <li class="naar-foundation"><i class="qi qi-sm" data-icon="globe" aria-hidden="true"></i><span>API (REST + JSON)</span></li>
+        </ul>
+
+        <!-- Tree host — the SVG is injected by epsilon8-programming.js -->
+        <div class="skill-tree" id="elan-skill-tree" data-elan-tree role="img" aria-label="شجرة المسارات: الأساسيات السبعة في الأعلى وعشرة مسارات تَتفرّع منها"></div>
+
+        <!-- Path list (sighted users with reduced-motion / no-JS still see the leaves) -->
+        <ul class="naar-paths" data-elan-paths aria-label="عشرة مسارات وظيفية">
+          <li><strong>Frontend Vanilla</strong> — لا framework، أساس قوي قبل أي مكتبة.</li>
+          <li><strong>Frontend React</strong> — modern stack، إنتاجية + سوق واسع.</li>
+          <li><strong>Frontend Vue</strong> — opinionated، منحنى تَعلُّم ألطف.</li>
+          <li><strong>Backend Node</strong> — Express + DB، نفس اللغة عبر الواجهتين.</li>
+          <li><strong>Backend Python</strong> — FastAPI، قوة ML + تكامل بيانات.</li>
+          <li><strong>Mobile Cross-Platform</strong> — Flutter، تطبيق واحد منصَّتان.</li>
+          <li><strong>DevOps starter</strong> — Docker + GitHub Actions.</li>
+          <li><strong>Data Science basics</strong> — Python pandas + matplotlib.</li>
+          <li><strong>AI Engineer track</strong> — LLM ops + prompt design.</li>
+          <li><strong>Game dev intro</strong> — Godot، 2D-first مفتوح المصدر.</li>
+        </ul>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           ÊLAN v4 — ε8 — Iraq Block (PROVE-IT, citation visible)
+           ══════════════════════════════════════════════════════════════════ -->
+      <aside class="iraq-block iraq-block--naar" data-elan-iraq="programming" aria-label="حقيقة من السوق العراقية للمطوّرين">
+        <header class="iraq-block__head">
+          <i class="qi qi-md" data-icon="globe" aria-hidden="true"></i>
+          <span>السوق العراقية للمطوّرين</span>
+        </header>
+        <p>في سوق العمل العراقي ٢٠٢٤، فرص الـ <strong>remote / freelance</strong> أكبر بـ <strong>~٥×</strong> من الـ local job posts للمطوّرين. الإنجليزية المتوسِّطة + portfolio يَزن أكثر من شهادة. ابدأ بـ «الكود يَتكلَّم» قبل CV.</p>
+        <cite class="iraq-block__cite">المصدر: Bel Inc. + Stack Overflow Iraq Survey, 2024</cite>
+      </aside>
+
     </section><!-- /page-programming -->
 
 
@@ -23982,6 +24623,88 @@ const bird = { ...canMove(), ...canFly() };
         </a>
       </aside>
 
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           ÊLAN v4 — ε9 — DATA_BEACON: Memphis Tax IQ Ladder (Dhahab world)
+           5 brackets as gold-leaf Memphis ovals stacked column-reverse.
+           Slider drives --bracket-fill + --bracket-width per bracket.
+           β3 kashida thousands separator on the tax amount.
+           ══════════════════════════════════════════════════════════════════ -->
+      <section class="dhahab-tax-iq-section" data-elan-section="dhahab-tax-iq" aria-labelledby="elan-tax-iq-h">
+        <header class="dhahab-tax-iq-head">
+          <i class="qi qi-md" data-icon="scale" aria-hidden="true"></i>
+          <h2 id="elan-tax-iq-h" class="type-display">ضريبة الدخل العراقية — سلَّم الذهب</h2>
+        </header>
+        <p class="dhahab-tax-iq-lede" data-type-voice="body">حرّك الـ slider ليَتمدَّد كل bracket بقدر ما يَأخذ من راتبك. الـ ovals الذهبية تَتلوَّن وتَكبُر مع الـ progressive computation. الفاصل العشَري في المبلغ كَشيدَة (ـ)، ليس فاصلة لاتينية.</p>
+
+        <label class="dhahab-tax-input-label" for="dhahab-tax-input">الراتب الشهري (دينار عراقي)</label>
+        <input
+          id="dhahab-tax-input"
+          class="tax-input"
+          type="range"
+          min="0"
+          max="10000000"
+          step="50000"
+          value="1500000"
+          data-elan-tax-input
+          aria-describedby="elan-tax-iq-summary">
+
+        <output class="tax-input-readout" data-elan-tax-readout aria-live="polite">١٬٥٠٠٬٠٠٠ د.ع</output>
+
+        <ol class="tax-ladder" data-elan-tax-ladder aria-label="السلَّم الضريبي المتدرِّج">
+          <li class="tax-bracket" data-bracket="0" style="--bracket-fill: 0%; --bracket-width: 50%;">
+            <span class="tax-bracket__rate">٠٪</span>
+            <span class="tax-bracket__range">٠ – ٢٥٠٬٠٠٠</span>
+            <span class="tax-bracket__note">معفى</span>
+          </li>
+          <li class="tax-bracket" data-bracket="1" style="--bracket-fill: 0%; --bracket-width: 50%;">
+            <span class="tax-bracket__rate">٣٪</span>
+            <span class="tax-bracket__range">٢٥٠٬٠٠١ – ٥٠٠٬٠٠٠</span>
+            <span class="tax-bracket__note">الفئة الأولى</span>
+          </li>
+          <li class="tax-bracket" data-bracket="2" style="--bracket-fill: 0%; --bracket-width: 50%;">
+            <span class="tax-bracket__rate">٥٪</span>
+            <span class="tax-bracket__range">٥٠٠٬٠٠١ – ١٬٠٠٠٬٠٠٠</span>
+            <span class="tax-bracket__note">الفئة الثانية</span>
+          </li>
+          <li class="tax-bracket" data-bracket="3" style="--bracket-fill: 0%; --bracket-width: 50%;">
+            <span class="tax-bracket__rate">١٠٪</span>
+            <span class="tax-bracket__range">١٬٠٠٠٬٠٠١ – ٥٬٠٠٠٬٠٠٠</span>
+            <span class="tax-bracket__note">الفئة الثالثة</span>
+          </li>
+          <li class="tax-bracket" data-bracket="4" style="--bracket-fill: 0%; --bracket-width: 50%;">
+            <span class="tax-bracket__rate">١٥٪</span>
+            <span class="tax-bracket__range">فوق ٥٬٠٠٠٬٠٠٠</span>
+            <span class="tax-bracket__note">الفئة العليا</span>
+          </li>
+        </ol>
+
+        <div class="tax-summary" id="elan-tax-iq-summary" role="status" aria-live="polite">
+          <div class="tax-summary__cell">
+            <span class="tax-summary__label">الضريبة الشهرية</span>
+            <strong class="tax-summary__value" data-elan-tax-output="amount">٠</strong>
+            <small class="tax-summary__cur">د.ع</small>
+          </div>
+          <div class="tax-summary__cell">
+            <span class="tax-summary__label">المعدَّل الفعلي</span>
+            <strong class="tax-summary__value tabular" data-elan-tax-output="rate">٠٫٠٠٪</strong>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════════════════════════════
+           ÊLAN v4 — ε9 — Iraq Block (PROVE-IT, citation visible)
+           ══════════════════════════════════════════════════════════════════ -->
+      <aside class="iraq-block iraq-block--dhahab" data-elan-iraq="accounting" aria-label="حقيقة من قانون الضريبة العراقية">
+        <header class="iraq-block__head">
+          <i class="qi qi-md" data-icon="receipt" aria-hidden="true"></i>
+          <span>قانون الضريبة العراقية</span>
+        </header>
+        <p>على راتب <strong>١٬٥٠٠٬٠٠٠ د.ع</strong> شهرياً، الضريبة الفعلية ليست ١٠٪. هي <strong>~٥٫٥٪</strong> فقط (٨٢٬٥٠٠ د.ع) — لأن الـ progressive computation يَطبَّق على كل bracket على حِدَة، وأول ٢٥٠٬٠٠٠ معفية تماماً، ثم ٣٪ على الـ ٢٥٠٠٠٠ التالية، ثم ٥٪ على الـ ٥٠٠٠٠٠ التالية، ثم ١٠٪ على ٥٠٠٠٠٠ فقط.</p>
+        <cite class="iraq-block__cite">المصدر: هيئة الضرائب العراقية — نشرة شرائح ضريبة الدخل، ٢٠٢٤</cite>
+      </aside>
+
     </section><!-- /page-accounting -->
 
 
@@ -24023,6 +24746,77 @@ const bird = { ...canMove(), ...canFly() };
           </div>
         </div>
       </header>
+
+      <!-- ============================================================
+           ÊLAN v4 · ε10 — Drag-to-Diagnose Workbench (🤚 INTERACTION_BEACON)
+      ============================================================ -->
+      <section class="pr-section" id="pr-diag-stage" data-pr-section="diag-stage" data-elan-stage="ε10">
+        <header class="pr-section-head">
+          <span class="pr-eyebrow"><i class="qi qi-sm" data-icon="wrench" aria-hidden="true"></i> تشخيص بـ السحب · Drag to Diagnose</span>
+          <h2>اِسحب العَرض، اتركه على القطعة المتأثرة</h2>
+          <p>ورشة الجمهورية تَعمل بقاعدة ذهبية: «شَخِّص قبل أن تَفكّ، وأَرِ الزبون القطعة قبل وبعد». هذه الصفحة تُعلّمك التشخيص البصري أولاً.</p>
+        </header>
+
+        <div class="diag-stage" data-elan-diag-stage>
+
+          <ul class="diag-symptoms" role="list" aria-label="رفّ الأعراض — اختر عَرضاً واسحبه">
+            <li class="diag-symptoms-eyebrow type-eyebrow" aria-hidden="true">الأعراض</li>
+            <li class="diag-symptom" data-symptom="battery-drain"  draggable="true" tabindex="0" role="button" aria-grabbed="false" aria-label="نزف بطارية — اضغط Enter لالتقاطه">
+              <i class="qi qi-sm" data-icon="zap"     aria-hidden="true"></i>
+              <span class="type-body-sm">نزف بطارية</span>
+            </li>
+            <li class="diag-symptom" data-symptom="screen-flicker" draggable="true" tabindex="0" role="button" aria-grabbed="false" aria-label="ارتعاش شاشة — اضغط Enter لالتقاطه">
+              <i class="qi qi-sm" data-icon="monitor" aria-hidden="true"></i>
+              <span class="type-body-sm">ارتعاش شاشة</span>
+            </li>
+            <li class="diag-symptom" data-symptom="mic-cut"        draggable="true" tabindex="0" role="button" aria-grabbed="false" aria-label="انقطاع مايكروفون — اضغط Enter لالتقاطه">
+              <i class="qi qi-sm" data-icon="mic-off" aria-hidden="true"></i>
+              <span class="type-body-sm">انقطاع مايك</span>
+            </li>
+            <li class="diag-symptom" data-symptom="overheat"       draggable="true" tabindex="0" role="button" aria-grabbed="false" aria-label="تسخين زائد — اضغط Enter لالتقاطه">
+              <i class="qi qi-sm" data-icon="flame"   aria-hidden="true"></i>
+              <span class="type-body-sm">تسخين زائد</span>
+            </li>
+            <li class="diag-symptom" data-symptom="wifi-weak"      draggable="true" tabindex="0" role="button" aria-grabbed="false" aria-label="واي فاي ضعيف — اضغط Enter لالتقاطه">
+              <i class="qi qi-sm" data-icon="wifi"    aria-hidden="true"></i>
+              <span class="type-body-sm">واي فاي ضعيف</span>
+            </li>
+          </ul>
+
+          <div class="diag-phone" aria-label="هاتف ذكي مع خمس مناطق فحص — اِسحب أي عَرض إلى المنطقة المناسبة">
+            <i class="qi diag-phone-icon" data-icon="device-mobile-camera" aria-hidden="true"></i>
+            <button type="button" class="diag-zone diag-zone--screen"   data-zone="screen"   aria-label="منطقة الشاشة">الشاشة</button>
+            <button type="button" class="diag-zone diag-zone--battery"  data-zone="battery"  aria-label="منطقة البطارية">البطارية</button>
+            <button type="button" class="diag-zone diag-zone--speaker"  data-zone="speaker"  aria-label="منطقة السماعة">السماعة</button>
+            <button type="button" class="diag-zone diag-zone--mic"      data-zone="mic"      aria-label="منطقة المايكروفون">المايك</button>
+            <button type="button" class="diag-zone diag-zone--antenna"  data-zone="antenna"  aria-label="منطقة الهوائي">الهوائي</button>
+          </div>
+
+          <aside class="diag-cause" data-elan-diag-cause data-empty="true" aria-live="polite" aria-atomic="false" aria-label="شريط احتمالات السبب">
+            <p class="diag-cause-empty type-body">اسحب عَرَضاً لتظهر احتمالات السبب على شريط لاصق.</p>
+          </aside>
+        </div>
+
+        <button type="button" class="diag-reset type-button" data-elan-diag-reset aria-label="إعادة ضبط شاشة التشخيص">
+          <i class="qi qi-xs" data-icon="rotate-ccw" aria-hidden="true"></i>
+          <span>أعِد التشخيص</span>
+        </button>
+
+        <aside class="iraq-block iraq-block--warsha" data-elan-stage="ε10" aria-labelledby="elan-eps10-iraq-h">
+          <header class="iraq-block__h">
+            <i class="qi qi-sm" data-icon="map-pin" aria-hidden="true"></i>
+            <h3 id="elan-eps10-iraq-h" class="iraq-block__title v-eyebrow">في السوق العراقية</h3>
+          </header>
+          <p class="iraq-block__claim v-body-lead">
+            في بغداد، <strong>٦٥٪</strong> من زبائن إصلاح الهواتف يَفقدون ثقتهم لو الفنّي لم يَفسّر السبب.
+            الشفافية + «أُريك القطعة التالفة» يَرفع نسبة بقاء الزبون <strong>×٣٫٢</strong>.
+          </p>
+          <small class="iraq-block__source v-eyebrow">
+            <span class="iraq-block__source-label">المصدر</span>
+            <span class="iraq-block__source-name">تحليل ميداني — سوق الجمهورية، بغداد ٢٠٢٤</span>
+          </small>
+        </aside>
+      </section>
 
       <!-- ============================================================
            PHASE 1 · A — Electronics Fundamentals (Knowledge Spine)

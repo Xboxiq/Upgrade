@@ -249,3 +249,265 @@ body[data-world="dhahab"] ::selection {
     color:             hsl(28 60% 14%);
   }
 }
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — ε9 — DATA_BEACON: The Memphis Tax IQ Ladder
+   ════════════════════════════════════════════════════════════════════════
+   The Iraqi income-tax brackets are visualised as five gold-leaf Memphis
+   ovals, stacked column-reverse so the lowest bracket sits at the bottom
+   (where it is taken first). Each oval grows in saturation AND width as
+   the slider raises the income, in proportion to how much of THAT
+   specific bracket has been consumed. Result: a literal weight scale.
+
+   Inspiration: Mughal accounting books (visual ledgers as weight scales)
+   + Memphis Group asymmetric ovals (Sottsass postmodern).
+
+   The displayed tax amount uses β3 kashida thousands separator:
+   '١ـ٢٣٤ـ٥٦٧'. The effective rate is shown beneath, so the user sees the
+   gap between the headline 10% and the reality of ~7.3% on a 1.5M salary.
+   ──────────────────────────────────────────────────────────────────── */
+
+@layer elan-epsilon9 {
+
+  /* ── The host section ──────────────────────────────────────────── */
+
+  [data-world="dhahab"] .dhahab-tax-iq-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3, 12px);
+    margin-block-start: var(--s-6, 24px);
+    padding: var(--s-4, 16px) var(--s-5, 20px);
+    border: 1px solid var(--line);
+    border-radius: var(--r-3, 12px);
+    background-color: var(--anchor-1);
+  }
+
+  [data-world="dhahab"] .dhahab-tax-iq-head {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2, 8px);
+    color: var(--ember);
+  }
+
+  [data-world="dhahab"] .dhahab-tax-iq-head h2 {
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--voice-display, "Boutros Modern Kufi", serif);
+    font-size: var(--text-xl, 1.35rem);
+    font-weight: 700;
+  }
+
+  [data-world="dhahab"] .dhahab-tax-iq-lede {
+    margin: 0;
+    color: var(--ink-muted);
+    font-family: var(--voice-body, "Markazi Text", serif);
+    line-height: var(--lead-relaxed, 1.55);
+  }
+
+  /* ── Slider input ──────────────────────────────────────────────── */
+
+  [data-world="dhahab"] .dhahab-tax-input-label {
+    color: var(--ink-muted);
+    font-family: var(--voice-display, "Boutros Modern Kufi", serif);
+    font-size: var(--text-sm, 0.92rem);
+    font-weight: 600;
+  }
+
+  [data-world="dhahab"] .tax-input {
+    inline-size: 100%;
+    accent-color: var(--ember);
+  }
+
+  [data-world="dhahab"] .tax-input-readout {
+    align-self: end;
+    color: var(--ember);
+    font-family: var(--voice-accent, "Almarai", sans-serif);
+    font-size: var(--text-lg, 1.18rem);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: var(--track-snug, normal);
+  }
+
+  /* ── The ladder — Memphis ovals stacked from the bottom up ─────── */
+
+  [data-world="dhahab"] .tax-ladder {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--s-2, 8px);
+    margin: 0;
+    padding: var(--s-3, 12px);
+    border: 1px solid var(--line);
+    border-radius: var(--r-3, 12px);
+    background-color: var(--anchor-bg);
+    list-style: none;
+  }
+
+  [data-world="dhahab"] .tax-bracket {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-3, 12px);
+    padding: var(--s-3, 12px) var(--s-5, 20px);
+    /* Memphis asymmetry — never a perfect ellipse */
+    border-radius: 64% 36% 58% 42% / 50% 60% 40% 50%;
+    /* progressive fill — JS writes --bracket-fill from 0% to 100% */
+    background-color: color-mix(in oklch, var(--ember) calc(var(--bracket-fill, 0%) * 0.85), var(--anchor-2));
+    color: var(--ink);
+    font-family: var(--voice-accent, "Almarai", sans-serif);
+    font-weight: 700;
+    /* progressive width — JS writes --bracket-width 50% .. 100% */
+    inline-size: var(--bracket-width, 50%);
+    margin-inline-start: auto;
+    transition:
+      background-color var(--duration-dhahab, 360ms) var(--ease-dhahab, cubic-bezier(0.32, 0.72, 0.28, 1)),
+      inline-size      var(--duration-dhahab, 360ms) var(--ease-dhahab, cubic-bezier(0.32, 0.72, 0.28, 1));
+    /* a hairline gold edge — Mughal accounting book inner ruling */
+    box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--ember) 32%, transparent);
+  }
+
+  [data-world="dhahab"] .tax-bracket__rate {
+    color: var(--ember);
+    font-family: var(--voice-display, "Boutros Modern Kufi", serif);
+    font-size: var(--text-lg, 1.18rem);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+  }
+
+  [data-world="dhahab"] .tax-bracket__range {
+    flex: 1 1 auto;
+    text-align: center;
+    color: var(--ink-muted);
+    font-size: var(--text-sm, 0.92rem);
+    font-variant-numeric: tabular-nums;
+  }
+
+  [data-world="dhahab"] .tax-bracket__note {
+    color: var(--ink-faint);
+    font-size: var(--text-xs, 0.78rem);
+    font-family: var(--voice-body, "Markazi Text", serif);
+  }
+
+  /* ── Summary row ───────────────────────────────────────────────── */
+
+  [data-world="dhahab"] .tax-summary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-3, 12px);
+    margin-block-start: var(--s-3, 12px);
+  }
+
+  [data-world="dhahab"] .tax-summary__cell {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-1, 4px);
+    padding: var(--s-3, 12px) var(--s-4, 16px);
+    border: 1px solid var(--line);
+    border-radius: var(--r-2, 8px);
+    background-color: var(--anchor-2);
+  }
+
+  [data-world="dhahab"] .tax-summary__label {
+    color: var(--ink-faint);
+    font-family: var(--voice-body, "Markazi Text", serif);
+    font-size: var(--text-xs, 0.78rem);
+    letter-spacing: var(--track-wide, 0.02em);
+  }
+
+  [data-world="dhahab"] .tax-summary__value {
+    color: var(--ember);
+    font-family: var(--voice-accent, "Almarai", sans-serif);
+    font-size: var(--text-2xl, 1.56rem);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: var(--track-snug, normal);
+  }
+
+  [data-world="dhahab"] .tax-summary__cur {
+    color: var(--ink-muted);
+    font-family: var(--voice-body, "Markazi Text", serif);
+    font-size: var(--text-sm, 0.92rem);
+  }
+
+  /* ── Iraq Block — Dhahab variant (gold-leaf rule) ──────────────── */
+
+  [data-world="dhahab"] .iraq-block,
+  [data-world="dhahab"] .iraq-block--dhahab {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2, 8px);
+    margin-block-start: var(--s-5, 20px);
+    padding: var(--s-3, 12px) var(--s-4, 16px);
+    border-inline-start: 3px solid var(--ember);
+    border-radius: 0 var(--r-2, 8px) var(--r-2, 8px) 0;
+    background-color: color-mix(in oklch, var(--ember) 6%, var(--anchor-1));
+  }
+
+  [data-world="dhahab"] .iraq-block__head {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2, 8px);
+    color: var(--ember);
+    font-family: var(--voice-display, "Boutros Modern Kufi", serif);
+    font-size: var(--text-sm, 0.92rem);
+    font-weight: 700;
+  }
+
+  [data-world="dhahab"] .iraq-block p {
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--voice-body, "Markazi Text", serif);
+    line-height: var(--lead-relaxed, 1.55);
+  }
+
+  [data-world="dhahab"] .iraq-block strong {
+    color: var(--ember);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  [data-world="dhahab"] .iraq-block cite,
+  [data-world="dhahab"] .iraq-block__cite {
+    display: block;
+    font-style: normal;
+    color: var(--ink-faint);
+    font-size: var(--text-xs, 0.78rem);
+    letter-spacing: var(--track-wide, 0.02em);
+  }
+
+  /* ── Reduced-motion: silence the bracket grow animation ────────── */
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-world="dhahab"] .tax-bracket {
+      transition: none;
+    }
+  }
+
+  /* ── Forced-colors: keep the ladder semantic via outlines ──────── */
+
+  @media (forced-colors: active) {
+    [data-world="dhahab"] .tax-bracket {
+      border: 1px solid CanvasText;
+      background-color: ButtonFace;
+      box-shadow: none;
+    }
+    [data-world="dhahab"] .tax-bracket__rate { color: LinkText; }
+    [data-world="dhahab"] .iraq-block { border-inline-start-color: CanvasText; background-color: ButtonFace; }
+  }
+
+  /* ── Print: flatten the ovals to plain rectangles, keep the data ─ */
+
+  @media print {
+    [data-world="dhahab"] .tax-bracket {
+      border-radius: var(--r-2, 8px);
+      inline-size: 100%;
+      background-color: white;
+      border: 1px solid black;
+      box-shadow: none;
+    }
+    [data-world="dhahab"] .tax-input,
+    [data-world="dhahab"] .tax-input-readout { display: none; }
+  }
+
+}/* /@layer elan-epsilon9 */

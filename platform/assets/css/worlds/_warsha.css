@@ -386,3 +386,508 @@
 }
 
 /* End ÊLAN v4 / γ8 — Warsha (Workshop) ───────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — ε7 — CHROMATIC_BEACON: The Bench is the Meter
+   ════════════════════════════════════════════════════════════════════════
+   The trainee's response textarea is no longer a generic textbox with a
+   character counter. It is a workshop bench: its surface absorbs the
+   tone of what is being written. Three states, lemma-aware Iraqi-Arabic:
+
+     warm    → olive-tinted bench (a calm tool resting on cloth)
+     neutral → terra-tinted bench (raw sanded wood, the default)
+     harsh   → brick-red flushed bench (a glowing iron, attention)
+
+   The colour is the meter. A single Markazi line confirms in workshop
+   voice. No progress bar. No char counter. No checkmark toast.
+
+   Inspiration: Iraqi Marsh Architecture — mudhif reed walls darken in
+   rain, lighten in noon. The bench changes with the work performed.
+
+   Reduced-motion silences the colour transition. Forced-colors falls
+   back to a 1px outline so the meter remains semantic but legible.
+   ──────────────────────────────────────────────────────────────────── */
+
+@layer elan-epsilon7 {
+
+  /* ── The bench card itself ─────────────────────────────────────── */
+
+  [data-world="warsha"] .response-area {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3, 12px);
+    padding: var(--s-4, 16px) var(--s-5, 20px);
+    margin-block-start: var(--s-6, 24px);
+    border: 1px solid var(--line);
+    border-radius: var(--r-3, 12px);
+    background-color: var(--anchor-1);
+    /* the bench has a faint vertical seam, like two planks joined */
+    background-image: linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(50% - 0.5px),
+      color-mix(in oklch, var(--ember) 8%, transparent) 50%,
+      transparent calc(50% + 0.5px),
+      transparent 100%
+    );
+  }
+
+  [data-world="warsha"] .response-area__head {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2, 8px);
+    color: var(--ember);
+  }
+
+  [data-world="warsha"] .response-area__head h2 {
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--voice-display, "Boutros Modern Kufi", serif);
+    font-size: var(--text-xl, 1.35rem);
+    font-weight: 700;
+    letter-spacing: var(--track-snug, normal);
+  }
+
+  [data-world="warsha"] .response-area__lede {
+    margin: 0;
+    color: var(--ink-muted);
+    font-family: var(--voice-body, "Vazirmatn", sans-serif);
+    line-height: var(--lead-relaxed, 1.55);
+  }
+
+  /* ── The customer prompt — a yellow workshop tag ─────────────────── */
+
+  [data-world="warsha"] .response-area__prompt {
+    padding: var(--s-3, 12px) var(--s-4, 16px);
+    border-inline-start: 3px solid var(--focus);
+    border-radius: 0 var(--r-2, 8px) var(--r-2, 8px) 0;
+    background-color: color-mix(in oklch, var(--focus) 6%, var(--anchor-2));
+  }
+
+  [data-world="warsha"] .response-area__prompt-eyebrow {
+    display: inline-block;
+    margin-block-end: var(--s-1, 4px);
+    color: var(--focus);
+    font-family: var(--voice-display, "Boutros Modern Kufi", serif);
+    font-size: var(--text-xs, 0.78rem);
+    font-weight: 700;
+    letter-spacing: var(--track-wide, 0.04em);
+    text-transform: uppercase;
+  }
+
+  [data-world="warsha"] .response-area__prompt p {
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--voice-body, "Vazirmatn", sans-serif);
+    line-height: var(--lead-relaxed, 1.55);
+  }
+
+  [data-world="warsha"] .response-area__label {
+    color: var(--ink-muted);
+    font-family: var(--voice-display, "Boutros Modern Kufi", serif);
+    font-size: var(--text-sm, 0.92rem);
+    font-weight: 600;
+    letter-spacing: var(--track-wide, 0.02em);
+  }
+
+  /* ── The textarea — the bench surface ────────────────────────────── */
+
+  [data-world="warsha"] .response-textarea {
+    min-block-size: 144px;
+    padding: var(--s-3, 12px) var(--s-4, 16px);
+    border: 2px solid var(--line);
+    border-radius: var(--r-2, 8px);
+    background-color: var(--anchor-1);
+    color: var(--ink);
+    font-family: var(--voice-body, "Vazirmatn", sans-serif);
+    font-size: var(--text-base, 1rem);
+    line-height: var(--lead-relaxed, 1.55);
+    resize: vertical;
+    transition:
+      background-color var(--duration-warsha, 280ms) var(--ease-warsha, cubic-bezier(0.55, 0.1, 0.25, 1)),
+      border-color     var(--duration-warsha, 280ms) var(--ease-warsha, cubic-bezier(0.55, 0.1, 0.25, 1)),
+      box-shadow       var(--duration-warsha, 280ms) var(--ease-warsha, cubic-bezier(0.55, 0.1, 0.25, 1));
+  }
+
+  [data-world="warsha"] .response-textarea:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  /* warm — olive cloth on the bench ─────────────────────────────────── */
+  [data-world="warsha"] .response-textarea[data-sentiment="warm"] {
+    background-color: color-mix(in oklch, var(--state-success) 8%, var(--anchor-1));
+    border-color:     color-mix(in oklch, var(--state-success) 50%, var(--line));
+    box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--state-success) 20%, transparent);
+  }
+
+  /* neutral — sanded raw wood (default) ─────────────────────────────── */
+  [data-world="warsha"] .response-textarea[data-sentiment="neutral"] {
+    background-color: var(--anchor-1);
+    border-color: var(--line);
+  }
+
+  /* harsh — flushed brick — pay attention ──────────────────────────── */
+  [data-world="warsha"] .response-textarea[data-sentiment="harsh"] {
+    background-color: color-mix(in oklch, var(--ember) 12%, var(--anchor-1));
+    border-color:     color-mix(in oklch, var(--ember) 60%, var(--line));
+    box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--ember) 35%, transparent);
+  }
+
+  /* ── The sentiment meter — Markazi prose, not a chart ─────────────── */
+
+  [data-world="warsha"] .sentiment-meter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-2, 8px);
+    color: var(--ink-muted);
+    font-family: var(--voice-body, "Vazirmatn", sans-serif);
+    font-size: var(--text-sm, 0.92rem);
+  }
+
+  [data-world="warsha"] .sentiment-meter__dot {
+    inline-size: 10px;
+    block-size: 10px;
+    border-radius: var(--r-pill, 999px);
+    background-color: var(--ink-faint);
+    transition: background-color var(--duration-warsha, 280ms) var(--ease-warsha, ease);
+  }
+
+  [data-world="warsha"] .sentiment-meter[data-sentiment-state="warm"]    .sentiment-meter__dot { background-color: var(--state-success); }
+  [data-world="warsha"] .sentiment-meter[data-sentiment-state="neutral"] .sentiment-meter__dot { background-color: var(--ink-faint); }
+  [data-world="warsha"] .sentiment-meter[data-sentiment-state="harsh"]   .sentiment-meter__dot { background-color: var(--ember); }
+
+  [data-world="warsha"] .sentiment-meter__label {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  [data-world="warsha"] .sentiment-meter__hint {
+    color: var(--ink-faint);
+    font-size: var(--text-xs, 0.78rem);
+  }
+
+  /* ── Iraq Block in Warsha world — workshop tag, not parchment ────── */
+
+  [data-world="warsha"] .iraq-block,
+  [data-world="warsha"] .iraq-block--warsha {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2, 8px);
+    margin-block-start: var(--s-5, 20px);
+    padding: var(--s-3, 12px) var(--s-4, 16px);
+    border-inline-start: 3px solid var(--ember);
+    border-radius: 0 var(--r-2, 8px) var(--r-2, 8px) 0;
+    background-color: color-mix(in oklch, var(--ember) 5%, var(--anchor-2));
+  }
+
+  [data-world="warsha"] .iraq-block__head {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2, 8px);
+    color: var(--ember);
+    font-family: var(--voice-display, "Boutros Modern Kufi", serif);
+    font-size: var(--text-sm, 0.92rem);
+    font-weight: 700;
+  }
+
+  [data-world="warsha"] .iraq-block p {
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--voice-body, "Vazirmatn", sans-serif);
+    line-height: var(--lead-relaxed, 1.55);
+  }
+
+  [data-world="warsha"] .iraq-block strong {
+    color: var(--ember);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  [data-world="warsha"] .iraq-block cite,
+  [data-world="warsha"] .iraq-block__cite {
+    display: block;
+    font-style: normal;
+    color: var(--ink-faint);
+    font-size: var(--text-xs, 0.78rem);
+    letter-spacing: var(--track-wide, 0.02em);
+  }
+
+  /* ── Reduced-motion: silence the bench tinting transition ────────── */
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-world="warsha"] .response-textarea {
+      transition: none;
+    }
+    [data-world="warsha"] .sentiment-meter__dot {
+      transition: none;
+    }
+  }
+
+  /* ── Forced-colors: keep the meter semantic via outline only ─────── */
+
+  @media (forced-colors: active) {
+    [data-world="warsha"] .response-textarea[data-sentiment="warm"]    { outline: 2px solid LinkText;    outline-offset: -2px; background-color: ButtonFace; }
+    [data-world="warsha"] .response-textarea[data-sentiment="neutral"] { outline: 1px solid CanvasText; outline-offset: -1px; background-color: ButtonFace; }
+    [data-world="warsha"] .response-textarea[data-sentiment="harsh"]   { outline: 2px solid Mark;        outline-offset: -2px; background-color: ButtonFace; }
+    [data-world="warsha"] .iraq-block { border-inline-start-color: CanvasText; background-color: ButtonFace; }
+  }
+
+  /* ── Print: drop the meter tinting, keep the prose ───────────────── */
+
+  @media print {
+    [data-world="warsha"] .response-textarea {
+      background-color: white;
+      border-color: black;
+      box-shadow: none;
+    }
+    [data-world="warsha"] .sentiment-meter,
+    [data-world="warsha"] .response-area__prompt {
+      box-shadow: none;
+    }
+  }
+
+}/* /@layer elan-epsilon7 */
+
+
+
+
+/* ────────────────────────────────────────────────────────────────────────
+   ÊLAN v4 — ε10 — Drag-to-Diagnose Workbench (🤚 INTERACTION_BEACON)
+   Strictly additive. Reuses Warsha world tokens (declared at γ8 root):
+   --warsha-bench / --warsha-rule / --warsha-tape / --warsha-tape-shadow
+   / --ember / --focus / --ink / --ink-muted / --anchor-1 / --anchor-2
+   / --ease-warsha / --voice-display / --voice-body / --voice-accent.
+   ──────────────────────────────────────────────────────────────────── */
+@layer elan-epsilon10 {
+
+  [data-world="warsha"] .diag-stage {
+    display: grid;
+    grid-template-columns: minmax(180px, 220px) minmax(220px, 1fr);
+    grid-template-areas: "rack phone" "tape tape";
+    gap: var(--s-4);
+    margin-block-start: var(--s-5);
+    padding: var(--s-4);
+    background:
+      repeating-linear-gradient(0deg, var(--warsha-rule) 0 1px, transparent 1px 32px),
+      repeating-linear-gradient(90deg, var(--warsha-rule) 0 1px, transparent 1px 32px),
+      var(--warsha-bench);
+    border: 1px solid color-mix(in oklch, var(--ink) 22%, transparent);
+    border-radius: var(--r-2);
+  }
+
+  [data-world="warsha"] .diag-symptoms {
+    grid-area: rack;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+    margin: 0;
+    padding: var(--s-3);
+    list-style: none;
+    background: color-mix(in oklch, var(--anchor-1) 80%, transparent);
+    border: 1px dashed color-mix(in oklch, var(--ink) 28%, transparent);
+    border-radius: var(--r-2);
+  }
+
+  [data-world="warsha"] .diag-symptoms-eyebrow {
+    margin: 0 0 var(--s-1) 0;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
+  }
+
+  [data-world="warsha"] .diag-symptom {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    padding: var(--s-2) var(--s-3);
+    background: var(--anchor-2);
+    color: var(--ink);
+    border: 1px dashed color-mix(in oklch, var(--ink) 36%, transparent);
+    border-radius: var(--r-1);
+    cursor: grab;
+    user-select: none;
+    font-family: var(--voice-body);
+    transition: transform 160ms var(--ease-warsha), border-color 160ms var(--ease-warsha), background 160ms var(--ease-warsha);
+  }
+  [data-world="warsha"] .diag-symptom:hover {
+    border-color: color-mix(in oklch, var(--ember) 70%, transparent);
+    transform: translateY(-1px);
+  }
+  [data-world="warsha"] .diag-symptom:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+  [data-world="warsha"] .diag-symptom:active,
+  [data-world="warsha"] .diag-symptom[data-elan-dragging="true"] {
+    cursor: grabbing;
+    background: color-mix(in oklch, var(--ember) 16%, var(--anchor-2));
+    border-style: solid;
+  }
+  [data-world="warsha"] .diag-symptom[data-elan-picked="true"] {
+    border-color: var(--focus);
+    box-shadow: inset 0 0 0 1px var(--focus);
+  }
+  [data-world="warsha"] .diag-symptom .qi { flex: 0 0 auto; color: var(--focus); }
+
+  [data-world="warsha"] .diag-phone {
+    grid-area: phone;
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 5 / 8;
+    max-block-size: 380px;
+    padding: var(--s-3);
+    background: color-mix(in oklch, var(--anchor-1) 90%, transparent);
+    border: 1px solid color-mix(in oklch, var(--ink) 24%, transparent);
+    border-radius: var(--r-3);
+  }
+  [data-world="warsha"] .diag-phone-icon {
+    color: color-mix(in oklch, var(--ink) 32%, transparent);
+    pointer-events: none;
+  }
+  [data-world="warsha"] .diag-phone-icon.qi {
+    inline-size: 60%;
+    block-size: 60%;
+  }
+
+  [data-world="warsha"] .diag-zone {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--s-1) var(--s-2);
+    background: transparent;
+    border: 1px dashed color-mix(in oklch, var(--ink) 30%, transparent);
+    border-radius: var(--r-1);
+    color: var(--ink-muted);
+    font-family: var(--voice-body);
+    font-size: var(--text-xs);
+    cursor: pointer;
+    transition: border-color 200ms var(--ease-warsha), background 200ms var(--ease-warsha), color 200ms var(--ease-warsha);
+  }
+  [data-world="warsha"] .diag-zone--screen   { inset-block-start: 12%; inset-inline-start: 22%; inset-inline-end: 22%; block-size: 18%; }
+  [data-world="warsha"] .diag-zone--battery  { inset-block-end: 30%;   inset-inline-start: 22%; inset-inline-end: 22%; block-size: 14%; }
+  [data-world="warsha"] .diag-zone--speaker  { inset-block-end: 12%;   inset-inline-start: 18%; inline-size: 22%;       block-size: 10%; }
+  [data-world="warsha"] .diag-zone--mic      { inset-block-end: 12%;   inset-inline-end: 18%;   inline-size: 22%;       block-size: 10%; }
+  [data-world="warsha"] .diag-zone--antenna  { inset-block-start: 6%;  inset-inline-start: 36%; inset-inline-end: 36%;  block-size: 8%;  }
+  [data-world="warsha"] .diag-zone:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+  [data-world="warsha"] .diag-zone.is-target,
+  [data-world="warsha"] .diag-zone[data-affected="true"] {
+    border-style: solid;
+    border-color: var(--ember);
+    color: var(--ink);
+  }
+  [data-world="warsha"] .diag-zone.is-target          { background: color-mix(in oklch, var(--ember) 12%, transparent); }
+  [data-world="warsha"] .diag-zone[data-affected="true"] { background: color-mix(in oklch, var(--ember) 18%, transparent); }
+  [data-world="warsha"] .diag-zone.is-just-dropped {
+    box-shadow: 0 0 0 2px color-mix(in oklch, var(--ember) 50%, transparent);
+  }
+
+  /* paper-tape receipt — Beacon centerpiece */
+  [data-world="warsha"] .diag-cause {
+    grid-area: tape;
+    margin-block-start: var(--s-3);
+    padding: var(--s-4) var(--s-5) var(--s-3);
+    background: color-mix(in oklch, var(--warsha-tape) 92%, transparent);
+    color: var(--warsha-tape-shadow);
+    border-block-start: 2px solid color-mix(in oklch, var(--warsha-tape-shadow) 24%, transparent);
+    border-block-end: 1px dashed color-mix(in oklch, var(--warsha-tape-shadow) 22%, transparent);
+    transform: rotate(-1.2deg) translateY(-2px);
+    transform-origin: top right;
+    box-shadow:
+      inset 0 0 0 1px color-mix(in oklch, var(--warsha-tape-shadow) 12%, transparent),
+      0 4px 0 -1px color-mix(in oklch, var(--warsha-tape-shadow) 32%, transparent);
+  }
+  [data-world="warsha"] .diag-cause[data-empty="true"] {
+    transform: none;
+    background: transparent;
+    color: var(--ink-muted);
+    box-shadow: none;
+    border-block-start: 1px dashed color-mix(in oklch, var(--ink) 18%, transparent);
+    border-block-end: none;
+    padding-block: var(--s-3);
+  }
+  [data-world="warsha"] .diag-cause-empty { margin: 0; text-align: center; font-style: italic; }
+  [data-world="warsha"] .diag-cause-head  { margin-block-end: var(--s-2); }
+  [data-world="warsha"] .diag-cause-eyebrow {
+    font-family: var(--voice-display); font-size: var(--text-sm); letter-spacing: 0.05em;
+    color: color-mix(in oklch, var(--warsha-tape-shadow) 80%, transparent);
+  }
+  [data-world="warsha"] .diag-cause-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-1); }
+  [data-world="warsha"] .diag-cause-row {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s-2);
+    padding: 2px 0;
+    border-block-end: 1px dotted color-mix(in oklch, var(--warsha-tape-shadow) 22%, transparent);
+    opacity: 0;
+    transform: translateY(-3px);
+    animation: elan-eps10-tape-row 220ms var(--ease-warsha) forwards;
+    animation-delay: calc(var(--row-index, 0) * 70ms);
+  }
+  [data-world="warsha"] .diag-cause-bullet {
+    flex: 0 0 auto;
+    color: color-mix(in oklch, var(--warsha-tape-shadow) 70%, transparent);
+    margin-block-start: 2px;
+  }
+  [data-world="warsha"] .diag-cause-text { flex: 1 1 auto; line-height: 1.5; }
+  [data-world="warsha"] .diag-cause-foot {
+    margin: var(--s-3) 0 0 0;
+    padding-block-start: var(--s-2);
+    border-block-start: 1px dashed color-mix(in oklch, var(--warsha-tape-shadow) 32%, transparent);
+    color: color-mix(in oklch, var(--warsha-tape-shadow) 75%, transparent);
+    font-style: italic;
+  }
+
+  [data-world="warsha"] .diag-reset {
+    margin-block-start: var(--s-3);
+    padding: var(--s-1) var(--s-3);
+    background: transparent;
+    border: 1px solid color-mix(in oklch, var(--ink) 30%, transparent);
+    border-radius: var(--r-1);
+    color: var(--ink-muted);
+    font-family: var(--voice-body);
+    font-size: var(--text-xs);
+    cursor: pointer;
+  }
+  [data-world="warsha"] .diag-reset:hover { color: var(--ink); border-color: var(--ink); }
+  [data-world="warsha"] .diag-reset:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  @keyframes elan-eps10-tape-row { to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 640px) {
+    [data-world="warsha"] .diag-stage {
+      grid-template-columns: 1fr;
+      grid-template-areas: "rack" "phone" "tape";
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-world="warsha"] .diag-symptom,
+    [data-world="warsha"] .diag-zone { transition: none; }
+    [data-world="warsha"] .diag-cause { transform: none; }
+    [data-world="warsha"] .diag-cause-row { opacity: 1; transform: none; animation: none; }
+  }
+
+  @media (forced-colors: active) {
+    [data-world="warsha"] .diag-stage { background: ButtonFace; border: 1px solid CanvasText; }
+    [data-world="warsha"] .diag-symptom,
+    [data-world="warsha"] .diag-zone { border: 1px solid CanvasText; background: ButtonFace; color: CanvasText; }
+    [data-world="warsha"] .diag-zone[data-affected="true"],
+    [data-world="warsha"] .diag-zone.is-target { outline: 2px solid Highlight; background: Highlight; color: HighlightText; }
+    [data-world="warsha"] .diag-cause { background: ButtonFace; color: CanvasText; border: 1px solid CanvasText; box-shadow: none; transform: none; }
+  }
+
+  @media print {
+    [data-world="warsha"] .diag-stage { page-break-inside: avoid; background: none; border: 1px solid currentColor; }
+    [data-world="warsha"] .diag-cause { transform: none; background: none; box-shadow: none; color: inherit; border-block-start: 1px solid currentColor; }
+    [data-world="warsha"] .diag-cause-row { animation: none; opacity: 1; transform: none; }
+  }
+
+}/* /@layer elan-epsilon10 */

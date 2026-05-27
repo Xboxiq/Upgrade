@@ -290,3 +290,136 @@ body[data-world="tayyar"] ::selection {
     color:             hsl(180 25% 95%);
   }
 }
+
+
+
+/* ────────────────────────────────────────────────────────────────────────
+   ÊLAN v4 — ε2 — Callcenter outcome visual mirror (Tayyar)
+   ────────────────────────────────────────────────────────────────────────
+   data-outcome on .call-card flips the visible state in lockstep with the
+   audio response. "lost" stays silent — the inset darkness + ember outline
+   IS the feedback, no ding required.
+   ─────────────────────────────────────────────────────────────────────── */
+
+[data-world="tayyar"] .call-card {
+  position: relative;
+  display: flex; flex-direction: column; gap: var(--s-3);
+  padding: var(--s-4);
+  background-color: var(--anchor-1, hsl(285 22% 12%));
+  border: 1px solid color-mix(in oklch, var(--ink, hsl(180 25% 95%)) 18%, transparent);
+  border-radius: var(--r-3, 12px);
+  overflow: hidden;
+  transition: border-color 220ms var(--ease-tayyar, cubic-bezier(0.45, -0.4, 0.55, 1.4)),
+              box-shadow   220ms var(--ease-tayyar, cubic-bezier(0.45, -0.4, 0.55, 1.4));
+}
+
+[data-world="tayyar"] .call-card .call-card__h {
+  display: flex; flex-direction: column; gap: var(--s-1);
+}
+
+[data-world="tayyar"] .call-card h2 {
+  margin: 0; font-family: var(--voice-display);
+  font-size: var(--text-xl); line-height: var(--lead-snug);
+  color: var(--ink, hsl(180 25% 95%));
+}
+
+[data-world="tayyar"] .call-card .call-card__lede {
+  margin: 0; color: var(--ink-muted, hsl(180 18% 72%));
+  line-height: var(--lead-relaxed);
+  max-inline-size: 58ch;
+}
+
+[data-world="tayyar"] .call-card__panel {
+  display: flex; flex-direction: column; gap: var(--s-3);
+}
+
+/* The 5-step progress meter (visual companion to outcome) */
+[data-world="tayyar"] .call-meter {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px;
+  block-size: 4px; border-radius: 2px; overflow: hidden;
+}
+[data-world="tayyar"] .call-meter span {
+  background-color: color-mix(in oklch, var(--ink, hsl(180 25% 95%)) 14%, transparent);
+  transition: background-color 220ms var(--ease-tayyar, ease);
+}
+
+/* Outcome buttons */
+[data-world="tayyar"] .call-card__buttons {
+  display: flex; flex-wrap: wrap; gap: var(--s-2);
+}
+[data-world="tayyar"] .call-out-btn {
+  display: inline-flex; align-items: center; gap: var(--s-2);
+  padding: var(--s-2) var(--s-4);
+  background-color: var(--anchor-2, hsl(285 20% 18%));
+  border: 1px solid color-mix(in oklch, var(--ink, hsl(180 25% 95%)) 16%, transparent);
+  border-radius: var(--r-2, 8px);
+  color: var(--ink, hsl(180 25% 95%));
+  font-family: var(--voice-display); font-weight: 600;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+[data-world="tayyar"] .call-out-btn:hover {
+  background-color: var(--anchor-3, hsl(285 18% 24%));
+  transform: translateY(-1px);
+}
+[data-world="tayyar"] .call-out-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--focus, hsl(180 85% 55%)) 36%, transparent);
+}
+[data-world="tayyar"] .call-out-btn--success { border-color: color-mix(in oklch, var(--focus, hsl(180 85% 55%)) 56%, transparent); }
+[data-world="tayyar"] .call-out-btn--neutral { border-color: color-mix(in oklch, var(--ink, hsl(180 25% 95%)) 32%, transparent); }
+[data-world="tayyar"] .call-out-btn--lost    { border-color: color-mix(in oklch, var(--ember, hsl(335 90% 60%)) 56%, transparent); }
+
+/* Result chip — aria-live announces the outcome to screen readers */
+[data-world="tayyar"] .call-card__result {
+  display: inline-flex; flex-direction: column; gap: var(--s-1);
+  margin: 0; padding: var(--s-2) var(--s-3);
+  background-color: color-mix(in oklch, var(--ink, hsl(180 25% 95%)) 4%, transparent);
+  border-radius: var(--r-2, 8px);
+  color: var(--ink, hsl(180 25% 95%));
+  font-size: var(--text-sm); line-height: var(--lead-snug);
+}
+[data-world="tayyar"] .call-card__result-eyebrow {
+  font-family: var(--voice-accent, var(--voice-display));
+  font-size: var(--text-xs); letter-spacing: var(--track-wide);
+  text-transform: uppercase; color: var(--ink-muted, hsl(180 18% 72%));
+}
+
+/* ── Outcome-driven visual states ─────────────────────────────────────── */
+
+/* SUCCESS — focus-cyan border + meter fills with focus tint */
+[data-world="tayyar"] .call-card[data-outcome="success"] {
+  border-color: color-mix(in oklch, var(--focus, hsl(180 85% 55%)) 70%, transparent);
+  box-shadow: 0 0 24px color-mix(in oklch, var(--focus, hsl(180 85% 55%)) 25%, transparent);
+}
+[data-world="tayyar"] .call-card[data-outcome="success"] .call-meter span { background-color: var(--focus, hsl(180 85% 55%)); }
+
+/* NEUTRAL — middling: 3 of 5 meter cells lit with mid-ink */
+[data-world="tayyar"] .call-card[data-outcome="neutral"] {
+  border-color: color-mix(in oklch, var(--ink, hsl(180 25% 95%)) 38%, transparent);
+}
+[data-world="tayyar"] .call-card[data-outcome="neutral"] .call-meter span[data-meter-step="1"],
+[data-world="tayyar"] .call-card[data-outcome="neutral"] .call-meter span[data-meter-step="2"],
+[data-world="tayyar"] .call-card[data-outcome="neutral"] .call-meter span[data-meter-step="3"] {
+  background-color: color-mix(in oklch, var(--ink, hsl(180 25% 95%)) 56%, transparent);
+}
+
+/* LOST — ember outline + inset darkness; NO audio (Beacon's core) */
+[data-world="tayyar"] .call-card[data-outcome="lost"] {
+  border-color: var(--ember, hsl(335 90% 60%));
+  outline: 1px solid color-mix(in oklch, var(--ember, hsl(335 90% 60%)) 40%, transparent);
+  outline-offset: 2px;
+  box-shadow: inset 0 0 60px color-mix(in oklch, hsl(0 0% 0%) 28%, transparent);
+}
+[data-world="tayyar"] .call-card[data-outcome="lost"] .call-meter span {
+  background-color: color-mix(in oklch, var(--ember, hsl(335 90% 60%)) 24%, transparent);
+}
+
+/* Reduced-motion honors the same outline rules but skips transitions */
+@media (prefers-reduced-motion: reduce) {
+  [data-world="tayyar"] .call-card,
+  [data-world="tayyar"] .call-meter span,
+  [data-world="tayyar"] .call-out-btn { transition-duration: 1ms; }
+  [data-world="tayyar"] .call-out-btn:hover { transform: none; }
+}
