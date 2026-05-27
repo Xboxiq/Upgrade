@@ -1,0 +1,118 @@
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — ζ1 — Layout Utility Pack (gap-fill only)
+   ────────────────────────────────────────────────────────────────────────
+   Purpose: Add only the utilities NOT already declared in utilities.css,
+            in service of ζ1 inline-style purge in platform/index.html.
+
+   Cascade: Imported via tokens.css after _voice-utilities. Sits in
+            layer(components) per worker-23 contract.
+
+   Authority: prompts/v4/ζ1_INLINE_PURGE.md
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* ──────────── Grid template extensions
+   utilities.css supplies u-grid-2/3/4/auto. ζ1 needs a wider vocabulary. */
+.u-grid-5     { grid-template-columns: repeat(5, 1fr); }
+.u-grid-7     { grid-template-columns: repeat(7, 1fr); }
+.u-grid-1-1   { grid-template-columns: 1fr 1fr; }
+.u-grid-w6-algo { grid-template-columns: 1.2fr 2fr 1.4fr 1.2fr; }
+.u-grid-w6-cal  { grid-template-columns: 200px 1fr; }
+.u-grid-auto-150 { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.u-grid-auto-160 { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+.u-grid-auto-180 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.u-grid-auto-220 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.u-grid-auto-280 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.u-grid-auto-320 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+
+/* ──────────── Padding utilities (none of these px-pairs in utilities.css) */
+.u-p-16-18 { padding: 16px 18px; }
+.u-p-18-22 { padding: 18px 22px; }
+.u-p-12-32 { padding: 12px 32px; }
+
+/* ──────────── Sizing helpers */
+.u-w-full        { inline-size: 100%; width: 100%; }
+.u-min-w-540     { min-inline-size: 540px; }
+.u-flex-shrink-0 { flex-shrink: 0; }
+
+/* ──────────── Display */
+.u-block        { display: block; }
+.u-display-none { display: none; }
+
+/* ──────────── Margin micro-helpers (only those absent from utilities.css) */
+.u-mt-0-5  { margin-top:    2px; }
+.u-mb-9    { margin-bottom: 36px; }
+.u-mx-auto { margin-inline: auto; }
+.u-gap-1-5 { gap: 6px; }
+
+/* ──────────── Typography helpers */
+.u-uppercase   { text-transform: uppercase; }
+.u-track-wide  { letter-spacing: 0.5px; }
+.u-track-wider { letter-spacing: 1.3px; }
+.u-fs-11       { font-size: 11px; }
+.u-fs-12       { font-size: 12px; }
+.u-fs-14       { font-size: 14px; }
+.u-fs-26       { font-size: 26px; }
+.u-fs-28       { font-size: 28px; }
+.u-fs-64       { font-size: 64px; }
+.u-fs-78r      { font-size: 0.78rem; }   /* one-off "حدث/يوم" caption */
+
+/* ──────────── Border-collapse + radius extras */
+.u-border-collapse { border-collapse: collapse; }
+.u-rounded-99      { border-radius: 99px; }
+.u-rounded-12      { border-radius: 12px; }
+.u-rounded-14      { border-radius: 14px; }
+
+/* ──────────── Position helpers (vhs-scrub ticks consume --tick-pos) */
+.u-pos-tick { inset-inline-start: var(--tick-pos, 0%); }
+
+/* ──────────── ql-glass tinted overlays — bundle border + bg pairs */
+.u-tint-cyan         { border-color: rgba(102, 252, 241, 0.20); background: rgba(102, 252, 241, 0.04); }
+.u-tint-cyan-strong  { border-color: rgba(102, 252, 241, 0.30); }
+.u-tint-amber        { border-color: rgba(245, 158,  11, 0.25); background: rgba(245, 158,  11, 0.04); }
+.u-tint-amber-strong { border-color: rgba(245, 158,  11, 0.30); }
+.u-tint-violet       { border-color: rgba(139,  92, 246, 0.25); background: rgba(139,  92, 246, 0.04); }
+.u-tint-rose         { border-color: rgba(239,  68,  68, 0.25); background: rgba(239,  68,  68, 0.04); }
+
+/* ──────────── Brand color hooks (Instagram, YouTube, Snapchat etc.)
+   Pair with inline `style="--brand-c:#XXXXXX"` to keep the value
+   in DOM yet bind through CSS variable (counts as `--var` inline). */
+.u-c-brand           { color:      var(--brand-c, currentColor); }
+.u-bg-brand          { background: var(--brand-c, transparent); }
+.u-shadow-brand-glow { box-shadow: 0 0 5px var(--brand-c, currentColor); }
+
+/* ──────────── Sticky-top helper */
+.u-sticky-top-80 { position: sticky; inset-block-start: 80px; }
+
+/* ──────────── Transition helper for er-gauge bar */
+.u-transition-w-600 { transition: width 0.6s ease; }
+
+/* ──────────── ζ1 — Hibr progress-margin ribs (4 fixed positions)
+   Replaces inline `style="--rib-pos: 20%/40%/60%/80%"` on <li>. */
+.progress-margin__ribs > li { --rib-pos: 50%; }
+.progress-margin__ribs > li:nth-child(1) { --rib-pos: 20%; }
+.progress-margin__ribs > li:nth-child(2) { --rib-pos: 40%; }
+.progress-margin__ribs > li:nth-child(3) { --rib-pos: 60%; }
+.progress-margin__ribs > li:nth-child(4) { --rib-pos: 80%; }
+
+/* ──────────── ζ1 — w6 citation lists (3 ol blocks across the social page).
+   Replaces 3 near-identical inline blocks of font/color/leading/padding. */
+.u-list-w6-cite {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.95;
+  padding-inline-start: 22px;
+  margin: 0;
+}
+.u-list-w6-cite--tight     { line-height: 1.85; }
+
+/* ──────────── ζ1 — spin-detail-text refinement.
+   Replaces inline `color:#EF4444; background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.15);
+                    border-radius:var(--radius-sm); padding:7px 10px; font-size:11.5px;` */
+.u-tint-rose-soft {
+  color:         var(--brand-c, #EF4444);
+  background:    rgba(239, 68, 68, 0.06);
+  border:        1px solid rgba(239, 68, 68, 0.15);
+  border-radius: var(--radius-sm, 8px);
+  padding:       7px 10px;
+  font-size:     11.5px;
+}

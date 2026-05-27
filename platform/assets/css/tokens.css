@@ -15,6 +15,9 @@
 /* Voice utilities — β2 (Voice Casting) */
 @import url("./tokens/_voice-utilities.css");
 
+/* Layout & spacing utilities — ζ1 (Inline Purge Truthful) */
+@import url("./tokens/_layout.css");
+
 /* Per-world type signatures — β3 (Numeric+Kashida+Signature) */
 @import url("./tokens/_signature.css");
 
