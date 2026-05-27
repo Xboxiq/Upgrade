@@ -1,0 +1,78 @@
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — ζ1 — Layout Utilities (Inline Purge Truthful)
+   ────────────────────────────────────────────────────────────────────────
+   Adds the missing utility set required to retire 58 hardcoded inline
+   styles in platform/index.html (mostly grid templates + pixel-precise
+   margins + a few font sizes + position percent helpers).
+   No new tokens introduced — every value either reuses an existing
+   --s-*/--text-* token (where the source value matched the 4pt grid) or
+   keeps the original pixel value verbatim (where the legacy markup used
+   off-grid 14px/18px/26px sizes).
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Grid templates (fixed columns) ─────────────────────────────────── */
+.u-grid-cols-2          { display: grid; grid-template-columns: repeat(2, 1fr); }
+.u-grid-cols-3          { display: grid; grid-template-columns: repeat(3, 1fr); }
+.u-grid-cols-4          { display: grid; grid-template-columns: repeat(4, 1fr); }
+.u-grid-cols-5          { display: grid; grid-template-columns: repeat(5, 1fr); }
+.u-grid-cols-7          { display: grid; grid-template-columns: repeat(7, 1fr); }
+.u-grid-cols-2-1fr      { display: grid; grid-template-columns: 1fr 1fr; }
+
+/* ─── Grid templates (auto-fit, content-shaped) ──────────────────────── */
+.u-grid-auto-150        { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.u-grid-auto-160        { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+.u-grid-auto-180        { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.u-grid-auto-220        { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.u-grid-auto-280        { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.u-grid-auto-320        { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+
+/* ─── Grid alignment side-helper ─────────────────────────────────────── */
+.u-grid-align-start     { align-items: flex-start; }
+
+/* ─── Gap utilities (legacy pixel widths still in use) ───────────────── */
+.u-gap-6px              { gap: 6px;  }
+.u-gap-10               { gap: 10px; }
+.u-gap-12               { gap: 12px; }
+.u-gap-14               { gap: 14px; }
+.u-gap-16               { gap: 16px; }
+.u-gap-18               { gap: 18px; }
+
+/* ─── Pixel-precise margin utilities (off-grid legacy values) ────────── */
+.u-mt-14                { margin-top: 14px; }
+.u-mt-18                { margin-top: 18px; }
+.u-mt-20                { margin-top: 20px; }
+.u-mt-24                { margin-top: 24px; }
+.u-mt-28                { margin-top: 28px; }
+.u-mt-32                { margin-top: 32px; }
+.u-mb-14                { margin-bottom: 14px; }
+.u-mb-16                { margin-bottom: 16px; }
+.u-mb-18                { margin-bottom: 18px; }
+.u-mb-24                { margin-bottom: 24px; }
+.u-mb-28                { margin-bottom: 28px; }
+.u-mb-32                { margin-bottom: 32px; }
+.u-mb-9                 { margin-bottom: 36px; }
+
+/* ─── Font sizes that survive from pre-α2 markup (off-grid) ──────────── */
+.u-fz-26                { font-size: 26px; }
+.u-fz-28                { font-size: 28px; }
+.u-fz-64                { font-size: 64px; }
+
+/* ─── Position percent helpers (VHS scrub ticks at 0/25/50/75/100%) ──── */
+.u-start-0              { inset-inline-start: 0%;   }
+.u-start-25             { inset-inline-start: 25%;  }
+.u-start-50             { inset-inline-start: 50%;  }
+.u-start-75             { inset-inline-start: 75%;  }
+.u-start-100            { inset-inline-start: 100%; }
+
+/* ─── Letter-spacing micro-helpers used by Do/Don't headings + 23437 ──── */
+.u-tracking-13          { letter-spacing: 1.3px; }
+.u-tracking-1           { letter-spacing: 1px;   }
+
+/* ─── Layout shorthands consumed by index.html migrations ────────────── */
+.u-flex-shrink-0        { flex-shrink: 0; }
+.u-w-full               { inline-size: 100%; }
+.u-min-w-540            { min-inline-size: 540px; }
+.u-border-collapse      { border-collapse: collapse; }
+.u-sticky-top-80        { position: sticky; inset-block-start: 80px; }
+.u-position-rel         { position: relative; }
+.u-position-abs         { position: absolute; }

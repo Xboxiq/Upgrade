@@ -26532,3 +26532,400 @@ body[data-rit-time]:not([data-rit-time="default"]) .bento-card {
     background: transparent;
   }
 }
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — ζ1 — Component-scoped helpers retired from inline styles
+   ────────────────────────────────────────────────────────────────────────
+   Tight rules that absorb specific inline-style clusters from index.html
+   (er-gauge, sp-fill baseline, psych-pt-dot dynamic colour, w6-algo-table
+   and w6-cal-wrap grid templates). All values verbatim from the original
+   markup so render output is byte-identical.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* sp-fill baseline (line 6558) — JS continues to drive width at runtime */
+.sp-fill {
+  inline-size: 0%;
+  width: 0%;
+}
+
+/* psych-pt-dot — last instance (line 10390) used a per-element dot colour.
+   Token --dot-color flows from the inline style="--dot-color: hsl(...)".  */
+.psych-pt-dot[style*="--dot-color"] {
+  background: var(--dot-color);
+  box-shadow: 0 0 5px var(--dot-color);
+}
+
+/* er-gauge — engagement-rate calculator gauge (lines 10006-10013) */
+.er-gauge-wrap {
+  margin: 0 auto 16px;
+  display: none;
+}
+#page-social .er-gauge-bar {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.6s ease;
+  background: linear-gradient(90deg, #EF4444, #EAB308, #22C55E);
+}
+#page-social .er-gauge-marker {
+  position: absolute;
+  top: -3px;
+  width: 4px;
+  height: 16px;
+  border-radius: 2px;
+  background: var(--text);
+  transition: left 0.6s ease;
+}
+
+/* w06 algo comparison table — needs explicit display:grid + columns */
+#page-social .w6-algo-table {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr 1.4fr 1.2fr;
+  font-size: 12px;
+}
+
+/* w06 content calendar — sidebar 200px + grid */
+#page-social .w6-cal-wrap {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+/* w06 reusable grid wrappers — display attribute supplied here so the
+   companion class names (already used in markup) become self-sufficient
+   without needing inline styles. */
+#page-social .w6-attn-grid,
+#page-social .w6-pillars-grid,
+#page-social .w6-fw-grid,
+#page-social .w6-perf-grid,
+#page-social .w6-perf-results {
+  display: grid;
+}
+#page-social .w6-attn-grid     { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+#page-social .w6-pillars-grid  { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+#page-social .w6-fw-grid       { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+#page-social .w6-perf-grid     { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-block-end: 18px; }
+#page-social .w6-perf-results  { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+
+/* Cyan / amber tint card variants used by ql-glass blocks in w06 area */
+.ql-glass.u-tint-cyan   { border-color: rgba(102, 252, 241, 0.20); background: rgba(102, 252, 241, 0.04); }
+.ql-glass.u-tint-amber  { border-color: rgba(245, 158, 11,  0.25); background: rgba(245, 158, 11,  0.04); }
+.ql-glass.u-tint-amberX { border-color: rgba(245, 158, 11,  0.30); background: rgba(245, 158, 11,  0.04); }
+.ql-glass.u-tint-violet { border-color: rgba(139,  92, 246, 0.25); background: rgba(139,  92, 246, 0.04); }
+
+/* Brand colour shorthands for w06 algo-table headings (Instagram / YouTube
+   / Snapchat). Kept as literal brand hex — these are platform identities,
+   not theme tokens. Aligned with existing utilities.css siblings
+   (u-c-twitter, u-c-tiktok, u-c-linkedin-dark). */
+.u-c-instagram-brand { color: #E4405F; }
+.u-c-youtube-brand   { color: #FF0000; }
+.u-c-snapchat-brand  { color: #FFFC00; }
+
+/* Reusable ql-glass body shell variants used by w06 callouts */
+.ql-glass.u-callout      { margin-block-start: 20px; padding: 16px 18px; border-radius: 12px; }
+.ql-glass.u-callout-sm   { margin-block-start: 14px; padding: 16px 18px; border-radius: 12px; }
+.ql-glass.u-callout-tall { margin-block-start: 14px; padding: 16px 18px; border-radius: 14px; }
+.ql-glass.u-callout-thin { margin-block-start: 14px; padding: 14px 16px; border-radius: 12px; }
+.ql-glass.u-callout-pad  { padding: 18px 22px; border-radius: 14px; }
+
+/* w06 calendar sidebar — sticky tinted card */
+.ql-glass.u-cal-side     { padding: 14px; border-radius: 14px; position: sticky; top: 80px; }
+
+/* Do / Don't compact heading band */
+.u-do-head    { font-size: 12px; font-weight: 800; color: #22C55E; margin-bottom: 10px; letter-spacing: 0.5px; }
+.u-dont-head  { font-size: 12px; font-weight: 800; color: #EF4444; margin-bottom: 10px; letter-spacing: 0.5px; }
+
+/* Section eyebrow used at line 23437 */
+.u-eyebrow-amber-strong { font-size: 11px; font-weight: 800; color: #F59E0B;
+  margin-bottom: 4px; letter-spacing: 1.3px; text-transform: uppercase; }
+
+/* Engagement-result emoji placeholders (28px / 64px static glyphs) */
+.u-emoji-icon-28   { font-size: 28px; }
+.u-emoji-icon-64   { font-size: 64px; margin-bottom: 16px; }
+
+/* "Notes" leading bullet at line 8138 — spans full bento row */
+.u-warm-callout {
+  padding: 18px 20px;
+  background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(239,68,68,0.06));
+  border: 1px solid rgba(245,158,11,0.25);
+  border-radius: var(--radius-md);
+}
+
+/* spin-detail-text danger callout at line 6749 */
+.u-spin-warn {
+  color: #EF4444;
+  background: rgba(239,68,68,0.06);
+  border: 1px solid rgba(239,68,68,0.15);
+  border-radius: var(--radius-sm);
+  padding: 7px 10px;
+  font-size: 11.5px;
+}
+
+/* Engagement next-button override (line 12266) */
+.btn-primary.u-btn-engage {
+  padding: 12px 32px;
+  font-size: 14px;
+}
+
+/* Engagement icon block + flex-shrink wrapper used by training cards
+   (line 12837) — title + 28px hero glyph aligned to top */
+.u-icon-glyph-28 {
+  font-size: 28px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Badge toast emoji (line 32774) */
+.badge-toast-emoji.u-fz-26 { font-size: 26px; }
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — ζ1 — Second-pass helpers (movable inline-tokenized -> class)
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* w06 industry select (line 11009) */
+.u-input-themed {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 9px 14px;
+  font-family: inherit;
+  font-size: 12.5px;
+  min-inline-size: 220px;
+}
+
+/* tinted cyan hint card (lines 11020, 11357) */
+.u-tinted-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  padding: 12px 14px;
+  background: rgba(102, 252, 241, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(102, 252, 241, 0.15);
+}
+.u-tinted-hint--soft {
+  margin-block-start: 16px;
+  padding: 12px 14px;
+  background: rgba(102, 252, 241, 0.05);
+  border: 1px solid rgba(102, 252, 241, 0.18);
+  border-radius: 8px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+/* w06 calendar 7-col header row (line 11084) */
+.u-cal-head-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-block-end: 8px;
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--text-faint);
+  text-align: center;
+}
+
+/* w06 ordered citation lists (lines 11635, 11701, 11767) */
+.u-ol-cite {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.95;
+  padding-inline-start: 22px;
+  margin: 0;
+}
+.u-ol-cite--sm {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.95;
+  padding-inline-start: 22px;
+  margin: 0;
+}
+.u-ol-cite--xs {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.85;
+  padding-inline-start: 22px;
+  margin: 0;
+}
+
+/* w06 monospace email-template block (line 11717) */
+.u-mono-block {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.95;
+  font-family: 'Courier New', monospace;
+  background: var(--surface-2);
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px dashed var(--border);
+}
+
+/* engagement scenario progress bar (line 12209) + entry-loadBar (line 32750) */
+.u-progress-bar-rich {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #0EA5E9);
+  border-radius: 99px;
+  transition: width 0.5s ease;
+  width: 0%;
+}
+.u-progress-bar-loadbar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #0EA5E9);
+  border-radius: 99px;
+  animation: loadBar 2s ease forwards;
+}
+
+/* engagement scenario card hover-bordered (line 12220) */
+.card.u-card-hovered {
+  margin-block-end: 16px;
+  border-color: var(--border-hover);
+}
+
+/* engagement eyebrow heading (line 12237) */
+.u-eyebrow-uc-faint {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  margin-block-end: 12px;
+  text-transform: uppercase;
+}
+
+/* shared section-header bar (lines 12846, 14079, 23444) */
+.u-section-header-bar {
+  padding: 14px 20px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.u-section-header-bar--gap {
+  padding: 14px 20px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.u-section-header-bar--quiet {
+  padding: 16px 22px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+/* tinted callouts on sales/social pages (lines 17054, 23436) */
+.u-tinted-card-orange {
+  background: var(--surface-2);
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+.u-tinted-card-amberred {
+  padding: 12px 14px;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(239, 68, 68, 0.05));
+  border: 1px solid rgba(245, 158, 11, 0.22);
+  border-radius: var(--radius-sm);
+}
+
+/* CAP theorem callouts (lines 18933, 18942) */
+.u-tinted-card-purple {
+  padding: 10px 12px;
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: var(--radius-sm);
+}
+.u-rule-ok-side {
+  margin-block-start: 10px;
+  padding: 10px 12px;
+  background: rgba(34, 197, 94, 0.06);
+  border-inline-end: 3px solid #22C55E;
+  border-radius: var(--radius-sm);
+  font-size: 11.5px;
+  color: var(--text);
+}
+
+/* cyan-violet split callout (line 19327) */
+.u-cyan-violet-callout {
+  margin-block-start: 18px;
+  padding: 16px 18px;
+  background: linear-gradient(135deg, rgba(102, 252, 241, 0.08), rgba(139, 92, 246, 0.06));
+  border: 1px solid rgba(102, 252, 241, 0.2);
+  border-radius: var(--radius-md);
+}
+
+/* data-clear inline trigger (line 32601) */
+.u-clear-data-link {
+  cursor: pointer;
+  color: var(--text-faint);
+  font-size: 10.5px;
+  text-decoration: underline;
+  text-decoration-color: var(--border-hover);
+}
+
+/* fetch-stat tiny meta (line 32648) */
+.u-stat-meta-tiny {
+  font-size: 0.78rem;
+  color: var(--color-text-faint, rgba(255, 255, 255, 0.5));
+}
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — ζ1 — Loading-overlay + badge-toast structural classes
+   (extracted from multi-line inline styles at index.html lines 32730+)
+   ════════════════════════════════════════════════════════════════════════ */
+
+.u-loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  transition: opacity 0.6s ease;
+}
+
+.u-loading-glyph {
+  inline-size: 56px;
+  block-size: 56px;
+  border-radius: 14px;
+  background: var(--accent-dim);
+  border: 1px solid var(--border-hover);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: loadPulse 1s ease infinite alternate;
+  font-size: 28px;
+}
+
+.u-badge-toast {
+  position: fixed;
+  inset-block-end: 90px;
+  inset-inline-start: 24px;
+  z-index: 5000;
+  background: var(--surface);
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--shadow-md), 0 0 24px rgba(102, 252, 241, 0.15);
+  transform: translateY(120px);
+  opacity: 0;
+  transition:
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.4s ease;
+  pointer-events: none;
+  min-inline-size: 260px;
+}

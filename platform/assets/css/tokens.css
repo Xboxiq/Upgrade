@@ -12,6 +12,9 @@
 @import url("./tokens/_motion.css");
 @import url("./tokens/_breakpoint.css");
 
+/* Layout utilities — ζ1 (Inline Purge Truthful) */
+@import url("./tokens/_layout.css");
+
 /* Voice utilities — β2 (Voice Casting) */
 @import url("./tokens/_voice-utilities.css");
 
