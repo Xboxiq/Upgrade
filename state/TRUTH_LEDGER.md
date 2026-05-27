@@ -2577,3 +2577,93 @@ Pillar ζ QUALITY GATE (5 stages) cannot begin until PR #117 merges:
 After merge: branch `elan-ζ-quality-gate` opens from `main`, beginning with ζ1.
 
 — Entry end —
+
+
+
+---
+
+## ζ1 — Inline Purge Truthful — 2026-05-27
+
+**Pillar:** ζ QUALITY GATE — Stage 1 of 5
+**Branch:** `elan-ζ-quality-gate-v2` (the unsuffixed name pre-existed on the
+remote from an abandoned earlier session; using `-v2` avoids force-push and
+preserves the prior history without entanglement)
+**Tip commit:** `b903f51`
+**Spec:** `prompts/v4/ζ1_INLINE_PURGE.md`
+**Beacon:** none (Pillar ζ is the quality gate; per CREATIVITY_DOCTRINE
+§ ٦.Originality scale, score 2 — "متوقَّع لكن نظيف" is the licensed posture
+for α/ζ stages).
+
+### Verified by grep on commit `b903f51`
+
+| Metric                                | Before | After | Target | Status |
+|---------------------------------------|-------:|------:|-------:|--------|
+| `style=` attribute count (total)      |    110 |    25 |  ≤ 30  | ✓      |
+| inline declares own `--var:`          |     32 |    25 |   any  | ✓      |
+| inline only consumes `var(--token)`   |     22 |     0 |     0  | ✓      |
+| inline with no `--` token at all      |     58 |     0 |     0  | ✓      |
+| multi-line `style="..."` attributes   |      3 |     0 |     0  | ✓      |
+| hex colours in inline                 |    ≥ 9 |     0 |     0  | ✓      |
+| `rgba(...)` in inline                 |   ≥ 12 |     0 |     0  | ✓      |
+| px values in inline                   |   ≥ 40 |     0 |     0  | ✓      |
+
+The 25 surviving inline styles all declare a custom property the JS or
+markup needs to set per-instance: `--progress` (page-mastery fills,
+14 instances), `--progress-pct` (manuscript margin + ribbon, 2),
+`--rib-pos` (Hibr ribbon ticks, 4), `--bracket-fill` + `--bracket-width`
+(tax brackets, 5), `--dot-color` (psych platform dot last-of-list, 1).
+None can be statically classed without a per-instance variant explosion.
+
+### Files touched (4)
+
+| File                                        | Change |
+|---------------------------------------------|-------:|
+| `platform/assets/css/tokens/_layout.css`    | NEW 74 |
+| `platform/assets/css/tokens.css`            |    +3 |
+| `platform/assets/css/pages.css`             |  +342 |
+| `platform/index.html`                       | +145 / -112 |
+
+**Net:** +564 / -112 lines (under the 600/stage cap; counts include the
+state-close commit's footprint absorbed in the same diff window).
+
+### Sacred Assets — preserved verbatim
+
+- 16 `<section class="page" id="page-*">` blocks: still 16, untouched
+  structurally (only attribute swaps inside)
+- `archive/`: untouched
+- `prompts/v1`, `v2`, `v3`: untouched
+- All `Upg.*` top-level APIs (24): no JS file modified
+- 391 `qcalc` references: untouched
+- 14 `data-page-personality` attributes: untouched
+- View Transitions, motion sanctuary, world data attrs: untouched
+
+### Iconography compliance
+
+- New emoji introduced: 0 (all preserved emojis are *legacy from
+  pre-v4 markup* in the Worker-06 social region — `📸 Instagram`,
+  `▶️ YouTube`, `👻 Snapchat`, `🎯`, `🏆`, `🎓`, `🧪`, `🎉`, etc.;
+  ζ1 only swapped their wrapper class, never reintroduced an emoji)
+- New inline `<svg viewBox path>` toy SVG: 0
+- New hardcoded `fill="#xxxxxx"`: 0
+- Mixed icon families: 0
+
+### Acceptance — final
+
+- [x] grep `style=` ≤ 30 (25)
+- [x] grep `style=` بدون `--` == 0
+- [x] لا hardcoded color/spacing in inline
+- [x] utilities جديدة في `tokens/_layout.css`
+- [x] لا تكسير لأي صفحة (visual sanity: every replaced inline-style block
+       maps 1-to-1 onto a class with byte-equivalent CSS)
+- [x] commit message includes `verified: ...`
+- [x] No beacon (quality stage) — confirmed
+
+### Note on the legacy emojis
+
+Worker-06 (social marketing) section still contains text-as-icon
+emojis (`📸`, `▶️`, `👻`, etc.) that violate ICONOGRAPHY_DOCTRINE § ٣.أ
+rule #1. ζ1 was scoped to inline-style purge **only**; the emoji purge is
+a separate concern that should be addressed under a future ε-revisit or
+a Pillar ζ extension. Documented here so it isn't lost.
+
+— Entry end —
