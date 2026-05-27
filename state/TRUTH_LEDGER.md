@@ -1446,3 +1446,71 @@ the fallback string in δ5 will need a tokens.css entry. Recommended for
 - verified: bento_cells=10, iraq_block=on, hibr_world=on, citation=on
 - files: platform/index.html, platform/assets/css/pages.css, platform/assets/js/elan/epsilon1-dashboard.js
 
+
+
+
+## ε2 — 2026-05-27 — Callcenter revived (Tayyar world)
+
+**Pillar:** ε CONTENT_REVIVAL (Stage 2 of 12)
+**Branch:** `elan-epsilon-revival`
+**Commit (local):** `3583475`
+**Pushed head SHA (remote):** `0589fbe`
+**Note on branch name:** Remote already held a stale `elan-ε-content-revival`
+ref from a prior session that was never tracked in PROGRESS.json (no PR
+opened, not referenced anywhere in state). Rather than force-overwrite that
+unknown work, this stage continues Pillar ε on a clean Latin-spelt branch
+`elan-epsilon-revival`. Subsequent ε stages stay on this same branch
+(Single-Branch-per-Pillar discipline preserved).
+
+| Verified key | Value |
+|---|---|
+| `platform/assets/js/elan/epsilon2-callcenter.js` line count | 189 |
+| `data-callcenter-outcome-lab` instances in HTML | 1 |
+| `data-call-outcome` buttons (success/neutral/lost) | 3 |
+| `iraq-block` aside inside #page-callcenter | 1 |
+| Citation in iraq-block | "المصدر: استطلاع داخلي شركة آسيا 2023" ✓ |
+| `data-raw-value="78"` in iraq-block strong | yes ✓ |
+| `[data-world="tayyar"] .call-*` CSS rules added | 20 |
+| `[data-world="tayyar"] .iraq-block` CSS rules added | 3 |
+| `app.js` `import './js/elan/epsilon2-callcenter.js'` | 1 |
+| Inline `<svg viewBox` in new ε2 markup | 0 |
+| Emoji in new ε2 markup | 0 |
+| Hardcoded `fill="#…"` in new ε2 markup | 0 |
+| `qi` icons used (Phosphor sprite) | `phone-call`, `globe` |
+| WebAudio `osc.frequency` calls (procedural synth) | 1 helper × 4 calls (3 arpeggio + 1 neutral) |
+| `Upg.callcenter = Object.freeze(…)` registered | yes ✓ |
+| `Upg.callcenter` methods | `emitOutcome`, `outcomes` |
+| Haptic patterns referenced (maqsoom/dafn) | 2 (success/neutral; lost is silent) |
+| `prefers-reduced-motion: reduce` guard in JS | 1 (early-out before all 3 branches) |
+| `prefers-reduced-motion: reduce` guard in new CSS | 1 (transitions: none) |
+| AudioContext built lazily (autoplay-policy safe) | yes ✓ |
+| Debounce window | 80 ms |
+| Legacy `Upg.haptic` (δ4) preserved | yes ✓ (consumed via global, not imported) |
+| Top-level `Upg.*` namespace count after ε2 | 24 (was 23 — +Upg.callcenter) |
+| Sacred 16 page sections | 16 (unchanged) |
+| Sacred 17 nav-items | 17 (unchanged) |
+| Forbidden Library violations | 0 |
+
+**Files touched:**
+- `platform/assets/js/elan/epsilon2-callcenter.js` (NEW · 189 lines)
+- `platform/assets/css/pages.css` (+95 lines appended after ε1 block)
+- `platform/index.html` (+~45 lines inserted before `</section><!-- /page-callcenter -->`)
+- `platform/assets/app.js` (+1 line — module import)
+
+**Lines:** +336 / −0 across 4 files (well under 600/stage cap).
+
+**Beacon:** 🔊 SOUND_BEACON — three procedural call-outcome responses without any audio file: **success** triggers maqsoom haptic + ascending sine arpeggio 360→440→540 Hz with linear-attack/exponential-release envelope (a maqam-ajam triadic seed, the call rises as it closes); **lost** is *deliberate silence* + red outline (punishment-as-quiet — most platforms ding on every state change, ÊLAN refuses to reward failure with sound); **neutral** is a soft 400 Hz / 80 ms sine + dafn haptic (acknowledgement without verdict).
+**Reference avoided:** Forbidden #15 (generic single-buzz haptic) + Forbidden #16 (toast-with-checkmark default ✓ verdict).
+**Inspired-by:** Wild Card #4 — Maqamat music notation. Each outcome rides a different scale degree; the listener feels *which maqam they are in* by the shape of the cadence.
+**Originality self-score:** 5/5 — silence-as-feedback paired with procedural maqam-shaped synthesis is rare in AI-generated callcenter UIs (which default to ding/buzz/toast). The challenge to that score will be tested in subsequent stages.
+
+**Sacred preservation:**
+- 16 page sections intact, all 17 nav-items intact.
+- Legacy `Upg.haptic` (δ4 / Worker 24) and `Upg.elan.bottomNav` (δ4) consumed verbatim via `window.Upg.*` — no imports, no shadowing.
+- Existing 4 legacy `.call-card` divs (lessons cc-002..cc-005) inherit the new tayyar default styling but their internal markup (`.num`, `.lbl`) is untouched and their layout cascade still works (additive styling only).
+- `epsilon1-dashboard.js` (ε1) remains imported first; ε2 imported after.
+
+**Stage close:**
+ε2 closes the second stage of Pillar ε. SOUND_BEACON joins ε1's DATA_BEACON. Next: ε3 fieldsales (Hadeed world — INTERACTION_BEACON per spec, but verify last-3-categories before locking).
+
+— Entry end —

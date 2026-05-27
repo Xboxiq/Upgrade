@@ -284,3 +284,37 @@ last_updated: 2026-05-25 / δ6 — Pillar δ COMPLETE 6/6
 **Files touched:** platform/index.html, platform/assets/css/pages.css, platform/assets/js/elan/epsilon1-dashboard.js
 **Verified at commit:** pending
 
+
+
+
+---
+
+## ε1 — verification reconciliation — 2026-05-27
+The ε1 entry above was logged in a prior session with `Verified at commit: pending`. Per Creativity Doctrine § ٥ (append-only, no rewrite), the original entry stays as-is. Reconciliation: ε1 implementation was actually completed and merged to `main` in **PR #116** (squash-merge `facb054`). The dashboard manuscript-margin progress, Iraq Block (IFC 2024 citation, 62% raw value), and `epsilon1-dashboard.js` import are all live on `main`. ε1 is therefore counted in the stats below.
+
+## ε2 — 2026-05-27
+**Beacon Type:** 🔊 SOUND_BEACON
+**The Surprise:** كل مكالمة محاكاة في عالم تَيار تَنتهي بأحد ثلاث استجابات صوتية مَحسوبة — لا ملف صوت، لا أيقونة عامَّة:
+
+- **اعتراض ناجح** → maqsoom haptic [8,30,8,30,14] + arpeggio صاعد 360 → 440 → 540 Hz بـ ADSR محسوب (linear attack 12ms، exponential release حتى 0.0001). الإيقاع مَأخوذ من بذرة maqam-ajam الثُلاثية: المكالمة "تَصعد" بصرياً (border-glow أخضر) وصوتياً (سُلَّم صاعد) معاً. كلما اقتربتَ من الإغلاق، ارتفع نَفَس المكالمة.
+- **خسارة العميل** → سكون كامل + outline أحمر فقط. لا tone، لا haptic، لا "buzz" تعبيري. **الصمت هو الحكم.** معظم منصات الـ AI تَدِنّ على كل state-change صغير؛ ÊLAN يَرفُض مكافأة الفشل بصوت. الصمت يُسمَع.
+- **حياد** → dafn haptic 8ms + sine 400 Hz لـ 80ms. اعتراف هادئ بانتهاء المكالمة بدون verdict. لا fanfare، لا notch.
+
+البنية: WebAudio خالص، AudioContext lazy (autoplay-policy safe، يُبنى على أول gesture)، debounce 80ms ضد النقر المتسارع، `prefers-reduced-motion: reduce` يُسكِت الـ synth في الفروع الثلاث (الـ outline البصري يَبقى — الإشارة لا تَعتمد على الحركة وحدها). Upg.callcenter Object.frozen بـ `emitOutcome` و `outcomes`. يَستهلِك `Upg.haptic.play()` (δ4) عبر window.Upg بدون import — تَفادي الـ tight coupling.
+
+**Reference Avoided:** Forbidden #15 — generic single-buzz haptic (Creativity Doctrine § ٣، الفئة التفاعلية) + Forbidden #16 — toast-with-checkmark default ✓ verdict (الفئة التفاعلية). الكليشيه الـ AI الافتراضي لكل callcenter UI: notification ✓ + buzz موحَّد لكل النتائج. ÊLAN يَستبدل ذلك بـ thee distinct cadences حيث **الصمت هو أحد الثلاثة**.
+**Inspired-by:** Wild Card #4 — Maqamat music notation. كل maqam له طبقة (degree) وحركة (cadence) خاصَّتان. هنا: كل outcome يَركَب على درجة مختلفة من السُلَّم — "النجاح" يَصعد ثلاث درجات، "الحياد" يَستقرّ على درجة واحدة، "الخسارة" تَختار **الصَّمت كَدَرَجة** (السكوت في الموسيقى العربية له قيمة إيقاعية معترَف بها — هنا نُعامله كنتيجة).
+**User-Visible:** yes — يَظهر في `#page-callcenter` كـ "حكم المكالمة الحيّ" (Outcome Lab). ثلاثة أزرار، call-card مع 5-pip meter، status text عربي يُكتَب حسب النتيجة، Iraq Block أسفله بإحصاء WhatsApp 78%.
+**Originality Self-Score:** 5/5 — procedural WebAudio synthesis مَوجودة في بعض المنصات. silence-as-feedback نادرة جداً (معظم الـ AI dashboards تَدِنّ على كل event). دمج maqam-shaped arpeggio + maqsoom haptic كنتيجة مفردة + outright silence كنتيجة مفردة + 400Hz محايد كنتيجة ثالثة، **بـ outline بصري يَحفظ الإشارة في reduced-motion**، يَجعل هذا 5/5. التحدي الذاتي: في المرحلة المقبلة، استبدال الـ outline-only-on-lost بشيء أقوى ربما (دفعة تكتيلية، vibration-pattern معكوس) — للمراجعة الإبداعية في ε3.
+**Files touched:** platform/assets/js/elan/epsilon2-callcenter.js (NEW · 189) · platform/assets/css/pages.css (+95) · platform/index.html (+~45) · platform/assets/app.js (+1)
+**Verified at commit:** 3583475 (local) · 0589fbe (pushed head SHA on `elan-epsilon-revival`)
+
+---STATS---
+total_beacons: 19
+unique_categories_used: 10
+avg_score: 4.21
+last_5_avg: 4.2
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-27 / ε2 — Pillar ε stage 2/12
