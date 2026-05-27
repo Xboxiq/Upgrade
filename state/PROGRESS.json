@@ -2276,6 +2276,10 @@
     "pillar_epsilon_complete": true,
     "epsilon_closed_at": "2026-05-27T00:00:00Z",
     "epsilon_total_lines": "see TRUTH_LEDGER.md (≈ 5500 added, all under per-stage caps)",
-    "epsilon_pr_status": "pending-open"
+    "epsilon_pr_status": "open",
+    "epsilon_pr_number": 117,
+    "epsilon_pr_url": "https://github.com/Xboxiq/Upgrade/pull/117",
+    "epsilon_pr_state_recorded_at": "2026-05-27T00:00:00Z",
+    "epsilon_pr_state_recorded_by": "AUTO_PILOT_v4 session resume — discovered existing PR via github_get_branch_name_from_pull_request"
   }
 }
