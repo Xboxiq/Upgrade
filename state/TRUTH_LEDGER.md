@@ -2760,3 +2760,91 @@ After merge: branch `elan-ζ-quality-gate` opens from `main`, beginning with ζ1
 branch `elan-ζ-quality-gate` per Single-Branch-per-Pillar contract.
 
 — Entry end —
+
+
+
+---
+
+## ÊLAN v4 / Pillar ζ — ζ1.5 Truthful Corrective Pass
+**Date:** 2026-05-27
+**Branch:** elan-ζ-quality-gate
+**Commit:** 6f1c135 (truthful corrective on top of ffa9c35)
+**Stage type:** ζ QUALITY GATE — no Beacon (CREATIVITY_DOCTRINE § ٧ exempt)
+
+### Why this entry exists
+ffa9c35 (the original ζ1 commit) carried the verified key=value claim
+"hardcoded=0" in its commit message, but a fresh truthful grep on the
+tip of branch `elan-ζ-quality-gate` showed **12 hex literals + 9 rgba()
+calls + 23 mixed (var() read alongside hardcoded property) inline styles
+surviving**. The claim was inaccurate. ÊLAN doctrine § ٦ (Truth Over
+Claims) requires an honest correction. ζ1.5 is that correction.
+
+### Forensic deltas — verified by `re.findall` on platform/index.html
+
+| Metric | α1 baseline | ffa9c35 claimed | ffa9c35 actual | ζ1.5 verified |
+|---|---:|---:|---:|---:|
+| Total inline `style=` | 89 | 46 | 46 | **23** |
+| Pure `style="--x: y"` (set-var only) | — | — | 23 | **23** |
+| `style="prop: var(...)"` (read-var only) | — | — | 0 | **0** |
+| Mixed (var read + hardcoded prop) | — | "0" | **23** | **0** |
+| Hex literal as primary value in inline | 12 | "0" | **12** | **0** |
+| `rgba()` as primary value in inline | 15 | "0" | **9** | **0** |
+| HTML `<div>` balance vs main | -13 | -13 | -13 | -13 (preserved) |
+| CSS brace balance `_layout.css` | n/a | 18/18 | 18/18 | **86/86** |
+| CSS brace balance `_color.css` | 1/1 | 1/1 | 1/1 | **1/1** |
+
+### Acceptance criteria from prompts/v4/ζ1_INLINE_PURGE.md
+- [x] grep `style=` ≤ 30 → **23** ✓
+- [x] grep `style=` بدون `--` == 0 → **0** ✓
+- [x] لا hardcoded color/spacing in inline → **0** ✓
+- [x] utilities جديدة في tokens/_layout.css → **+244 lines** (ζ1.5 component block)
+- [x] لا تكسير لأي صفحة → CSS balanced; HTML structure preserved
+- [x] commit message uses verified key=value format → ✓
+- [x] no beacon (quality stage) → ✓
+
+### Files
+| path | status | lines added |
+|---|---|---:|
+| platform/assets/css/tokens/_layout.css | edited | +244 |
+| platform/assets/css/tokens/_color.css | edited | +43 |
+| platform/index.html | edited | -49 net (mixed → classes) |
+| scripts/zeta1-truthful-corrective.py | NEW | 209 |
+
+### Component classes added (ζ1.5)
+brand-label--instagram/youtube/snapchat · eng-gauge-bar · eng-gauge-marker
+· eng-progress-bar · gateway-load-bar · psych-pt-dot--danger
+· callout-warning-gradient · w6-industry-select · cc-industry-hint
+· w6-cal-weekday-strip · cc-hint-micro · w6-cite-block-mono
+· card-strip-header[--between/--gap/--plain] · callout-hr-orange
+· callout-violet-inline · callout-citation-green
+· callout-cyan-violet-gradient · callout-emergency-gradient
+· clear-progress-link · loading-overlay · loading-overlay__icon-frame
+· badge-toast · card--border-strong
+
+### Tokens added (in tokens/_color.css)
+brand-instagram/youtube/snapchat · state-positive-fg · state-negative-fg
+· state-warn-fg · state-violet-fg · state-cyan-fg · callout-cyan-bg
+· callout-cyan-border · callout-cyan-soft-bg · callout-cyan-soft-border
+· callout-amber-bg · callout-amber-border · callout-amber-warn-border
+· callout-violet-bg · callout-violet-soft-bg · callout-violet-border
+· callout-violet-soft-border · callout-positive-soft-bg
+· callout-orange-border · callout-warn-grad-bg
+· callout-cyan-violet-grad-bg · gauge-tri-gradient
+· gauge-progress-gradient
+
+### Sacred preservation
+- 16 page sections intact
+- 32 top-level `Upg.*` APIs untouched (no JS file modified)
+- archive/ untouched
+- prompts/v1, v2, v3 untouched
+- All 8 worlds CSS preserved
+- All Pillar ε beacons preserved
+
+### Reconciliation note
+ζ1.5 does NOT undo ζ1 (ffa9c35) work — it builds on top, replacing 21
+remaining mixed inlines with proper classes. The ζ1 stage is now
+factually complete. PROGRESS.json keeps current_stage=ζ2 (also already
+complete on this branch via 7b4702d). Next session resumes from ζ3
+(Lighthouse + A11y) per the original AUTO_PILOT v4 contract.
+
+— Entry end —
