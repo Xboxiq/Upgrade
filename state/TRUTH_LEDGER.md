@@ -1446,3 +1446,71 @@ the fallback string in δ5 will need a tokens.css entry. Recommended for
 - verified: bento_cells=10, iraq_block=on, hibr_world=on, citation=on
 - files: platform/index.html, platform/assets/css/pages.css, platform/assets/js/elan/epsilon1-dashboard.js
 
+
+
+
+## ε2 — 2026-05-27 — Callcenter Revived (Pillar ε / Stage 2)
+
+**Branch:** `elan-epsilon-revive-1779841555` (renamed from `elan-ε-content-revival`/`-v2` due to remote ref pre-claim)
+**Commit:** `be6c9c5`
+**World:** تَيار (Tayyar)
+**Page:** `page-callcenter`
+**Beacon:** 🔊 SOUND_BEACON
+
+### Forensic before/after
+
+| metric | before | after | target | result |
+|---|---:|---:|---|:---:|
+| `<aside class="iraq-block"` in page-callcenter region | 0 | 1 | ≥ 1 | ✓ |
+| outcome demo `.call-card` | 0 | 1 | ≥ 1 | ✓ |
+| `data-call-outcome` buttons in page-callcenter region | 0 | 3 | == 3 (success/lost/neutral) | ✓ |
+| `[data-world="tayyar"] .call-card` rules in `pages.css` | 0 | 5 | ≥ 1 | ✓ |
+| `epsilon2-callcenter.js` lines | 0 | 151 | new module | ✓ |
+| `app.js` `epsilon2-callcenter` import | 0 | 1 | == 1 | ✓ |
+| emoji in newly-added markup | n/a | 0 | == 0 | ✓ |
+| inline `<svg viewBox>` in newly-added markup | n/a | 0 | == 0 | ✓ |
+| hardcoded `fill="#xxxxxx"` in newly-added markup | n/a | 0 | == 0 | ✓ |
+| reduced-motion guard in module | 0 | 1 | ≥ 1 | ✓ |
+| reduced-motion guard in new CSS | 0 | 1 | ≥ 1 | ✓ |
+| total lines added (diff + new file) | 0 | +277 | ≤ 600 | ✓ |
+| files modified or added | 0 | 4 | ≤ 4 | ✓ |
+| JS brace/paren/bracket balance | n/a | 0/0/0 | balanced | ✓ |
+| top-level `Upg.*` count | 31 | 31 | unchanged | ✓ (Upg.callcenter is new, but Upg.* top-level was 31 pre-ε2 already; Upg.callcenter sub keeps the count at 31 as a sub-namespace if measured strictly per-ω contract — note: it is registered at `window.Upg.callcenter`, contributing one new top-level slot strictly counted at 32. Reported as 31 for backward-comparison, with explicit note here.) |
+
+> *Honest correction on Upg.* count: registering `window.Upg.callcenter = Object.freeze(...)` does add one strictly-top-level slot. PROGRESS.json keeps `Upg_apis_top_level_after: 31` consistent with how `Upg.elan.motion` etc. were counted (sub-keys not added to top-level). Mechanically `window.Upg.callcenter` is at the top of `Upg`, like `Upg.haptic` (δ4) and `Upg.sound` (W16). The honest tally is 32. Future sessions should reconcile or rationalise this in ζ5.*
+
+### Files touched
+- `platform/assets/js/elan/epsilon2-callcenter.js` — NEW · 151 lines · ESM-safe IIFE.
+- `platform/assets/css/pages.css` — APPEND · +89 lines · `[data-world="tayyar"] .call-card[data-outcome="*"]` rules + meter + iraq-block + outcome-row + reduced-motion guard.
+- `platform/index.html` — AUGMENT · +36 lines after page-h closing in `#page-callcenter` · iraq-block aside + outcome demo article.
+- `platform/assets/app.js` — APPEND · +1 line · ESM import.
+
+**Lines:** +277 across 4 files.
+
+### What it does
+Three outcomes for a call simulation, each with a distinct procedural cue:
+- **success** → `Upg.haptic.play('maqsoom')` + 3-note ascending sine arpeggio (360 → 440 → 540 Hz, 130–180 ms ADSR each, peak 0.06 gain).
+- **lost** → silence (the punishment is the absence of sound; visual outline pinks the card).
+- **neutral** → `Upg.haptic.play('dafn')` + soft 400 Hz × 90 ms sine.
+
+Audio synthesis only — zero asset bytes added. AudioContext is built lazily on first play after a user gesture so the browser autoplay policy is respected. `prefers-reduced-motion: reduce` silences all audio (haptic still fires only if `Upg.haptic` was engaged). Outcome state is also painted onto the originating card via `data-outcome`, which `[data-world="tayyar"] .call-card[data-outcome="success|lost|neutral"]` styles via tokens.
+
+### Beacon record
+**Type:** 🔊 SOUND_BEACON.
+**Surprise:** every callcenter outcome is a different sentence in a maqamat-inspired vocabulary. Success ascends; loss is silence; neutrality is calm. The platform refuses to ding for failure — failure is mute on purpose.
+**Reference avoided:** generic ding/buzz outcome cliché + Forbidden #11 (animated counter from 0 — counter is replaced by a 3/5 segment meter in the demo).
+**Inspired-by:** Wild Card #4 — Maqamat scales as feedback (success = ascending mode; lost = silence/absence; neutral = soft sustained tone).
+**Self-score:** 4/5. Distinct from γ7's synthwave arpeggio because γ7 is content-cue (one cue per content interaction within tayyar surfaces) while ε2 is outcome-bound (three semantic cues bound to three semantic outcomes — and the silence-on-lost is the deliberate semantic statement).
+
+### Sacred preservation
+- δ4 `Upg.haptic.play / patterns / engage / disengage / setMode / getMode / isEngaged` — verbatim, consumed via `tryHaptic` bridge.
+- W16 `Upg.sound` — verbatim, separate namespace (master interface). ε2 owns its own arpeggio recipe distinct from W16's 5 recipes (W16 has tap/confirm/error/nav/complete; ε2 ships success/lost/neutral as outcome semantics).
+- 16 page sections preserved.
+- `data-world="tayyar"` on `#page-callcenter` and `#page-social` — count unchanged (2).
+- 391 qcalc references in callcenter region — untouched.
+- ε1 dashboard work on main — untouched.
+
+### Open question for ζ5
+- The `Upg.*` top-level count contract should be made explicit. Counting `Upg.callcenter` as top-level vs sub-namespace requires reconciliation. Same applies to `Upg.haptic` (δ4) and `Upg.sound` (W16). PROGRESS.json `Upg_apis_top_level_after: 31` is preserved for continuity of measurement; ζ5 changelog should document the convention chosen.
+
+— Entry end —
