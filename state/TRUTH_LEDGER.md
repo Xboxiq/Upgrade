@@ -1514,3 +1514,71 @@ unknown work, this stage continues Pillar ε on a clean Latin-spelt branch
 ε2 closes the second stage of Pillar ε. SOUND_BEACON joins ε1's DATA_BEACON. Next: ε3 fieldsales (Hadeed world — INTERACTION_BEACON per spec, but verify last-3-categories before locking).
 
 — Entry end —
+
+
+
+## ε3 — 2026-05-27 — Fieldsales revived (Hadeed world)
+
+**Pillar:** ε CONTENT_REVIVAL (Stage 3 of 12)
+**Branch:** `elan-epsilon-revival`
+**Commit (local):** `3b3394b`
+**Pushed head SHA (remote):** `3b3394bc1a79b4ec55aae189c25e1dadf9144d77`
+
+| Verified key | Value |
+|---|---|
+| `platform/assets/js/elan/epsilon3-fieldsales.js` line count | 284 |
+| `data-fieldsales-route-root` instances in HTML | 1 |
+| `data-route-canvas` instances | 1 |
+| `route-meta__cell` count (distance / stops / time) | 3 |
+| Iraq Block aside in #page-fieldsales | 1 |
+| Iraq Block citation | "المصدر: تحليل ميداني FMCG العراق 2024" ✓ |
+| Iraq Block raw-value attrs | `data-raw-value="930"` + `data-raw-value="1200-1400"` |
+| `[data-world="hadeed"] .route-*` CSS rules added | 16 |
+| `[data-world="hadeed"] .iraq-block` CSS rules added | 3 |
+| `app.js` `import './js/elan/epsilon3-fieldsales.js'` | 1 |
+| Customer fixture count (Baghdad neighbourhoods) | 7 |
+| Customer fixture is `Object.freeze`d | yes ✓ |
+| Inline `<svg viewBox>` in new ε3 markup | 0 |
+| Emoji in new ε3 markup | 0 |
+| Hardcoded `fill="#…"` in new ε3 markup | 0 |
+| Hardcoded `#hex` literals in `epsilon3-fieldsales.js` | **0** ✓ |
+| Token-aware palette probe via `getComputedStyle` | yes ✓ |
+| Palette tokens consumed | `--ink-faint`, `--ink-muted`, `--ember`, `--ink`, `--focus` |
+| External map / library refs (google / leaflet / mapbox / openstreetmap) | **0** ✓ |
+| Canvas tabindex + role=application + aria-label | yes ✓ |
+| Pointer Events handler (mouse + touch + pen) | yes ✓ |
+| Escape key resets path (a11y) | yes ✓ |
+| Re-paint on `upg:nav:change` and `upg:theme:change` | yes ✓ |
+| `Upg.fieldsales = Object.freeze(…)` | yes ✓ |
+| `Upg.fieldsales` methods | `customers`, `reset` |
+| Dispatched custom event | `upg:fieldsales:route` (on every path mutation) |
+| `prefers-reduced-motion: reduce` guard in CSS | 1 |
+| Top-level `Upg.*` namespace count after ε3 | 25 (was 24 — +Upg.fieldsales) |
+| Sacred 16 page sections | 16 (unchanged) |
+| Sacred 17 nav-items | 17 (unchanged) |
+| Forbidden Library violations | 0 |
+
+**Files touched:**
+- `platform/assets/js/elan/epsilon3-fieldsales.js` (NEW · 284 lines)
+- `platform/assets/css/pages.css` (+110 lines appended after ε2 block)
+- `platform/index.html` (+~50 lines inserted before `</section><!-- /page-fieldsales -->`)
+- `platform/assets/app.js` (+1 line — module import)
+
+**Lines:** +433 / −0 across 4 files (under 600/stage cap; total ε pillar so far = 769 added).
+
+**Beacon:** 🤚 INTERACTION_BEACON — the daily route map is **not** a Google Maps embed. It is a hand-built 2D Canvas with seven Baghdad customer pins drawn as pure JS objects (الأعظمية / الكرخ / المنصور / الكاظمية / مدينة الصدر / الكرّادة / الدورة) on a faint paper grid. The field-rep TAPS pins in the order they intend to visit; an iron-tinged (`--ember`) polyline draws between them; live meta (distance/stops/time) updates pin-by-pin. Tapping an active pin truncates the path at that stop (an interaction shape that read-only Maps embeds simply can't offer). Pointer Events handle mouse + touch + pen identically. Token-aware paint reads `--ember`, `--focus`, `--ink*` from the world via a hidden probe — re-reads on resize / `upg:nav:change` / `upg:theme:change`. **No tile server, no API key, no map library — the interaction IS the data structure.**
+**Reference avoided:** Google Maps embed cliché (industry-default for every fieldsales UI in 2025) + Forbidden #4 (generic mesh-gradient page-decoration) + Forbidden #11 (animated counter from 0 — the meter updates instantly, no rolling tween).
+**Inspired-by:** Wild Card #2 — Brutalist Iraqi modernism (Chadirji / Makiya paper field sheets — 4px ember bottom-border on the sheet echoes a stamped iron edge) + Wild Card #6 — Müller-Brockmann grid (24 px paper-grid as base layer, all spacing snaps to it).
+**Originality self-score:** 5/5 — most route-planning UIs in 2025 either (1) embed Google/Mapbox/Leaflet, or (2) ship a server-rendered SVG route. A *hand-drawn pointer-driven Canvas with token-aware paint and tap-to-truncate semantics* is rare; pairing it with a Brutalist paper-sheet treatment + RTL-correct Arabic labels + zero external dependency makes it 5/5. The challenge to that score: a future stage may need to add saving the route to `Upg.state` — keeping it 5/5 then would mean the storage shape itself becomes interesting (e.g. ribbon-style mark in `localStorage` rather than JSON).
+
+**Sacred preservation:**
+- 16 page sections + 17 nav-items intact.
+- All 24 prior `Upg.*` top-level APIs intact. `Upg.fieldsales` is the 25th.
+- Legacy 3 dilemma scenarios (#1/#2/#3) at end of fieldsales section retained verbatim — only ADDED the Route Sheet panel before `</section>`.
+- `epsilon1-dashboard.js` and `epsilon2-callcenter.js` imports order preserved.
+- `data-world="hadeed"` already on the section from γ5 — this stage only consumes it, does not redeclare.
+
+**Stage close:**
+ε3 closes the third stage of Pillar ε. INTERACTION_BEACON joins ε1 DATA + ε2 SOUND. Three distinct beacon categories in three stages — Pattern Disruption healthy. Next: ε4 social (Tayyar world — TYPOGRAPHIC_BEACON likely per spec).
+
+— Entry end —

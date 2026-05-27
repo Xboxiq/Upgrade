@@ -318,3 +318,32 @@ disruption_triggers: 5
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-27 / ε2 — Pillar ε stage 2/12
+
+
+
+## ε3 — 2026-05-27
+**Beacon Type:** 🤚 INTERACTION_BEACON
+**The Surprise:** خريطة الجولات اليومية في عالم حَديد ليست Google Maps embed كما تَفعل كل منصة fieldsales في 2025. هي **canvas 2D مرسوم يدوياً** يَحوي سبع نقاط زبائن بغدادية (الأعظمية / الكرخ / المنصور / الكاظمية / مدينة الصدر / الكرّادة / الدورة) كـ JS objects خام على شبكة ورقية خفيفة (24px paper grid، 18% opacity). المندوب الميداني **يَنقُر** على الـ pins بالترتيب الذي يَنوي زيارتهم — خط حديدي (`--ember`) يُرسَم بينهم، عدّاد حيّ يُحدِّث (مسافة بالكم / عدد محطات / دقائق متوقَّعة) عند كل نقرة. **النقر على pin مُفعَّل يَقطَع المسار عنده** — تفاعل لا يُتيحه أي embed: read-only، الـ Maps embed يَعرِض، الـ Canvas يُنصِت.
+
+البنية: Pointer Events خالصة (mouse + touch + pen متماثلة). Paint مُدرِك للـ tokens — probe element مَخفيّ يُحلّ `var(--ember, currentColor)` و `var(--focus, currentColor)` و `var(--ink*, currentColor)` عبر `getComputedStyle` ثم يَستهلِكها كـ fillStyle/strokeStyle. الـ canvas يُعيد القراءة على resize + `upg:nav:change` + `upg:theme:change` — لو المستخدم بدّل العالم أو الثيم، الـ canvas يَتلوَّن مع الجديد. **صفر hex literals في الـ JS** (currentColor كـ fallback). صفر API key. صفر tile server. صفر map library. الـ interaction نفسه هو الـ data structure — كل state للـ path هو array من ids، يُحفَظ في memory، يُبَثّ عبر `upg:fieldsales:route` event للمحاضِنين الخارجيين.
+
+Brutalist treatment للـ sheet: 4px ember bottom-border (يُحاكي الختم المعدني الذي ظَهَر أول مرة في γ5 hadeed كَـ "iron-stamp flip" beacon)، 3px ember على الـ meta cells، 1px line الكلاسيكي للـ canvas border. كأنها ورقة planning تَقليدية ختمها مفتش الجولة.
+
+A11y: tabindex + role=application + aria-label عربي ("لوحة تخطيط الجولة — انقر على نقاط الزبائن بالترتيب لرسم المسار")، Escape key reset، focus-visible outline بـ `--focus`.
+
+**Reference Avoided:** Google Maps embed cliché (الكليشيه الأكبر في كل fieldsales UI في 2025) + Forbidden #4 — generic mesh-gradient page-decoration (الـ canvas هو الـ decoration هنا، لا gradient لازم) + Forbidden #11 — animated counter from 0 (الـ meter يُحدِّث فوراً، لا tween رولينج).
+**Inspired-by:** Wild Card #2 — Brutalist Iraqi modernism (Chadirji + Makiya: paper field-sheets، stamps، grid lines، صدق المعدن) + Wild Card #6 — Müller-Brockmann grid (24px paper-grid كـ base layer، كل spacing يَنطبق عليه).
+**User-Visible:** yes — يَظهر في `#page-fieldsales` كـ "ورقة الجولة اليومية" بعد سيناريوهات الـ dilemma (الموقع الذي اختاره الـ AUTO_PILOT لأنه يَحفظ السرد التعليمي ثم يَنقَلِب إلى أداة عملية في النهاية، كما تَفعل ورقة planning حقيقية بعد قراءة دليل الإجراءات). كل مستخدم يَفتح الصفحة على pointer:fine يَرى canvas نَشط؛ على touch device يَعمل مع نقرة الإصبع نفسها؛ مع reduced-motion: الـ transitions تَختفي لكن الـ interaction تَبقى صحيحة (الـ pins تَتلوَّن، الـ polyline تَرتسم، الـ meter يُحدِّث — الحركة وحدها تُسكَت).
+**Originality Self-Score:** 5/5 — معظم route planners في 2025 يَستخدمون (١) embed خارجي (Google/Mapbox/Leaflet)، (٢) SVG مَرسوم خادمياً، أو (٣) ASCII text fallback. **canvas 2D pointer-driven بـ token-aware paint و tap-to-truncate semantics و RTL-correct Arabic labels و صفر external** نادر بهذا التركيب. التحدي الذاتي: في stage مقبل لو احتاج المسار حفظ في `Upg.state`، سَأُحافظ على 5/5 بأن أجعل الـ storage shape نفسه مُمَيَّزاً (e.g. ribbon-style مَرَكَز في localStorage بَدَلاً من JSON خام).
+**Files touched:** platform/assets/js/elan/epsilon3-fieldsales.js (NEW · 284) · platform/assets/css/pages.css (+110) · platform/index.html (+~50) · platform/assets/app.js (+1)
+**Verified at commit:** 3b3394b (local) · 3b3394bc1a79b4ec55aae189c25e1dadf9144d77 (pushed head SHA)
+
+---STATS---
+total_beacons: 20
+unique_categories_used: 10
+avg_score: 4.25
+last_5_avg: 4.4
+disruption_triggers: 5
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-27 / ε3 — Pillar ε stage 3/12
