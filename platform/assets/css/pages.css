@@ -26439,3 +26439,92 @@ body[data-rit-time]:not([data-rit-time="default"]) .bento-card {
   }
   [data-world="hibr"] .iraq-block__icon { color: var(--ink-faint); }
 }
+
+
+/* ÊLAN v4 — ε2 callcenter revival: call-card outcome + meter + tayyar iraq block */
+@layer components {
+  [data-world="tayyar"] .call-card {
+    position: relative;
+    display: grid;
+    gap: var(--s-2);
+    padding: var(--s-3);
+    border: 1px solid color-mix(in oklch, var(--ink) 14%, transparent);
+    border-radius: var(--r-3, 12px);
+    background: var(--anchor-1);
+    transition: border-color var(--duration-tayyar, 520ms) var(--ease-tayyar, cubic-bezier(0.45, -0.4, 0.55, 1.4)),
+                box-shadow var(--duration-tayyar, 520ms) var(--ease-tayyar, cubic-bezier(0.45, -0.4, 0.55, 1.4));
+  }
+  [data-world="tayyar"] .call-card[data-outcome="success"] {
+    border-color: color-mix(in oklch, var(--focus, hsl(180 85% 55%)) 60%, transparent);
+    box-shadow: 0 0 24px color-mix(in oklch, var(--focus, hsl(180 85% 55%)) 24%, transparent);
+  }
+  [data-world="tayyar"] .call-card[data-outcome="lost"] {
+    border-color: color-mix(in oklch, var(--ember, hsl(335 90% 60%)) 70%, transparent);
+    outline: 1px solid color-mix(in oklch, var(--ember, hsl(335 90% 60%)) 40%, transparent);
+    outline-offset: 2px;
+    box-shadow: none;
+  }
+  [data-world="tayyar"] .call-card[data-outcome="neutral"] {
+    border-color: color-mix(in oklch, var(--ink) 28%, transparent);
+  }
+  [data-world="tayyar"] .call-meter {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    block-size: 4px;
+    margin-block-start: var(--s-2);
+  }
+  [data-world="tayyar"] .call-meter span {
+    background: color-mix(in oklch, var(--ink) 14%, transparent);
+    border-radius: 1px;
+  }
+  [data-world="tayyar"] .call-meter span[data-active="true"] {
+    background: var(--ember, hsl(335 90% 60%));
+  }
+  [data-world="tayyar"] .iraq-block {
+    margin-block: var(--s-3) var(--s-4);
+    display: grid;
+    gap: var(--s-2);
+    padding: var(--s-3);
+    border-inline-start: 3px solid var(--ember, hsl(335 90% 60%));
+    background: color-mix(in oklch, var(--ember, hsl(335 90% 60%)) 6%, transparent);
+    border-radius: var(--r-2, 8px);
+  }
+  [data-world="tayyar"] .iraq-block__icon { color: var(--ink-faint, var(--ink-muted)); }
+  [data-world="tayyar"] .iraq-block small { color: var(--ink-muted); }
+
+  /* Outcome demo: 3 buttons row, RTL-aware, tayyar-tinted */
+  [data-world="tayyar"] .call-outcome-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    margin-block-start: var(--s-2);
+  }
+  [data-world="tayyar"] .call-outcome-btn {
+    appearance: none;
+    border: 1px solid color-mix(in oklch, var(--ink) 22%, transparent);
+    background: var(--anchor-2);
+    color: var(--ink);
+    padding: var(--s-2) var(--s-3);
+    border-radius: var(--r-pill, 999px);
+    font: inherit;
+    cursor: pointer;
+    transition: transform 140ms var(--ease-elan, cubic-bezier(0.16, 1, 0.3, 1)),
+                background-color 200ms ease;
+  }
+  [data-world="tayyar"] .call-outcome-btn:hover { background: var(--anchor-3); }
+  [data-world="tayyar"] .call-outcome-btn:active { transform: scale(0.97); }
+  [data-world="tayyar"] .call-outcome-btn[data-call-outcome="success"] {
+    border-color: color-mix(in oklch, var(--focus, hsl(180 85% 55%)) 50%, transparent);
+  }
+  [data-world="tayyar"] .call-outcome-btn[data-call-outcome="lost"] {
+    border-color: color-mix(in oklch, var(--ember, hsl(335 90% 60%)) 50%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-world="tayyar"] .call-card,
+  [data-world="tayyar"] .call-outcome-btn {
+    transition: none;
+  }
+}
