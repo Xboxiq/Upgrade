@@ -2848,3 +2848,125 @@ complete on this branch via 7b4702d). Next session resumes from ζ3
 (Lighthouse + A11y) per the original AUTO_PILOT v4 contract.
 
 — Entry end —
+
+
+
+---
+
+## ζ3 — Lighthouse + A11y (Static Audit + Critical-Font Preload)
+
+**Date:** 2026-05-27
+**Pillar:** ζ QUALITY GATE
+**Stage:** 3 of 5 (Lighthouse + A11y)
+**Branch:** `elan-ζ-quality-gate`
+**Verified at commit:** `5affdc9`
+**Beacon:** none (ζ pillar = quality gate, no Creativity Beacon required by spec)
+
+### Sandbox capability disclosure (read this first)
+
+The AUTO_PILOT v4 sandbox where this commit was produced has **no
+Chrome / Chromium binary** and `network=INTEGRATIONS_ONLY` (no public
+npm registry access). Therefore the runtime portion of ζ3's acceptance
+criteria — Mobile Performance ≥ 92, Accessibility ≥ 96, Best Practices
+≥ 95, Console errors == 0, color contrast ≥ 4.5:1 across the 8 worlds
+— **cannot be measured here**. They are explicitly **deferred to the
+user's local environment** and recorded as such in
+`state/LIGHTHOUSE_REPORT.md`'s deferred-measurement table.
+
+This honest deferral is the right move per ÊLAN's Truth-Over-Claims
+principle (`prompts/v4/00_ELAN_MANIFESTO.md` § ٢.٦): "ممنوع رقم في PR
+description بدون verify". No Lighthouse-shaped number lives in this
+commit, in `PROGRESS.json`, or in this ledger entry. They land later
+when the user runs the one-line command this commit ships.
+
+### What ζ3 *did* land
+
+| # | Change | Lines | File |
+|---:|---|---:|---|
+| 1 | `<link rel="preload">` for Markazi Text VF (body) | 2 | `platform/index.html` |
+| 2 | `<link rel="preload">` for Boutros Modern Kufi VF (display) | 2 | `platform/index.html` |
+| 3 | `<meta name="color-scheme" content="dark light">` | 1 | `platform/index.html` |
+| 4 | Block comment explaining the preload + fallback intent | 6 | `platform/index.html` |
+| 5 | Static audit script (deterministic grep over HTML + CSS tree) | 299 | `scripts/zeta3-static-audit.mjs` (NEW) |
+| 6 | Static audit report (auto-generated, append-friendly thereafter) | 177 | `state/LIGHTHOUSE_REPORT.md` (NEW) |
+
+**Total:** 487 insertions / 0 deletions across 3 files (1 platform + 1 tooling + 1 state). Under the 600-lines-per-stage cap.
+
+### Static signal counts (verified by `node scripts/zeta3-static-audit.mjs` at commit `5affdc9`)
+
+| Category | Signal | Value |
+|---|---|---:|
+| Document fundamentals | `<html lang dir>` | ✅ ar / rtl |
+| | viewport meta | ✅ |
+| | skip-to-main link | 1 |
+| | `<meta theme-color>` | 2 (light + dark) |
+| | `<meta color-scheme>` | 1 (added in ζ3) |
+| | `<link rel="manifest">` | 1 |
+| ARIA coverage | `aria-label` | 1008 |
+| | `aria-hidden` | 1132 |
+| | `aria-live` | 13 |
+| | `role="…"` | 395 |
+| Heading hierarchy | `<h1>` | 17 |
+| | `<h2>` | 139 |
+| | `<h3>` | 183 |
+| Images | `<img>` total | 0 (ÊLAN uses inline SVG sprite + per-world data-uri ornaments) |
+| | `<img>` without alt | 0 (vacuously true; no `<img>`) |
+| Forms | `<input>` total | 44 |
+| | `<input id>` | 39 |
+| | `<label for>` | 17 |
+| | implicit-label wraps (gateway form) | not detectable by grep — ✅ valid pattern in source |
+| Tabindex sanity | `tabindex="-1"` | 0 |
+| | `tabindex="0"` | 19 |
+| | `tabindex>0` (anti-pattern) | **0** ✅ |
+| CSS sensory accommodation | `:focus-visible` rules | 98 |
+| | reduced-motion guards | 47 |
+| | forced-colors guards | 13 |
+| | print guards | 14 |
+| Performance signals | `<link rel="preload">` | 2 (added in ζ3) |
+| | `<link rel="preconnect">` | 0 (not needed — local fonts) |
+| | `<link rel="dns-prefetch">` | 0 (not needed — local fonts) |
+| | `<link rel="stylesheet">` | 1 (one consolidated bundle) |
+| | `<script type="module">` | 1 (defers automatically) |
+| | inline scripts | minimal bootstrappers |
+| ζ1 cross-check | inline `style=` total | 23 (ζ1 target ≤ 30 ✅) |
+| | inline without --var (purge violations) | 0 (ζ1 target == 0 ✅) |
+| ζ2 cross-check | `!important` in CSS tree | 381 (ζ2 floor = 376; +5 normal evolution) |
+| Document weights | `platform/index.html` | 2265 KB uncompressed |
+| | `platform/assets/css/**.css` | 1340 KB uncompressed |
+
+### What this entry deliberately does NOT claim
+
+- It does **not** claim `Lighthouse Performance ≥ 92`.
+- It does **not** claim `Lighthouse Accessibility ≥ 96`.
+- It does **not** claim `Lighthouse Best Practices ≥ 95`.
+- It does **not** claim `Console errors == 0`.
+- It does **not** claim `Color contrast ≥ 4.5:1` per world.
+
+These five bullets remain on the **user-environment to-do list** in
+`state/LIGHTHOUSE_REPORT.md` until the user runs Lighthouse and fills
+in the deferred-measurement table. The Pillar ζ PR description must
+also reflect this deferral.
+
+### Sacred Assets — preservation audit at ζ3 close
+
+- 16 `<section class="page">` page roots — preserved (16/16 confirmed by grep).
+- 14+ legacy `Upg.*` APIs — untouched. ζ3 added zero JS modules.
+- 35 `Upg.elan.*` module imports in `app.js` — untouched.
+- `archive/arabic-training-platform-v12-original.html` — untouched.
+- `prompts/v1`, `prompts/v2`, `prompts/v3` — untouched.
+- `state/CREATIVITY_LOG.md` — untouched (ζ pillar = no beacons).
+- Forbidden Library — 0 new violations in ζ3:
+  · 0 emoji introduced in markup (only legacy emoji remain, ε territory inheritance).
+  · 0 inline `<svg viewBox>` written in this stage.
+  · 0 hardcoded `fill="#…"` introduced.
+  · 0 mixed icon families introduced.
+  · 0 cliché bypass (`EXEMPT_PATTERN`) invocations.
+
+### How to advance to ζ4
+
+ζ4 (PWA Installable) operates on `manifest.webmanifest` + `sw.js` +
+offline-ritual screen. It can run fully in this sandbox (file-only
+work, no Chrome required for the build itself). Resume next session
+on the same branch `elan-ζ-quality-gate`.
+
+— Entry end —
