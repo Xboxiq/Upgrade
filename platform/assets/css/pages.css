@@ -26553,3 +26553,113 @@ body[data-rit-time]:not([data-rit-time="default"]) .bento-card {
   [data-world="tayyar"] .call-card,
   [data-world="tayyar"] .call-meter span { transition: none; }
 }
+
+
+/* ÊLAN v4 — ε3 fieldsales revival: hand-drawn route canvas (Hadeed) */
+@layer components {
+  [data-world="hadeed"] .route-sheet {
+    margin-block: var(--s-4);
+    padding: var(--s-4);
+    background:
+      linear-gradient(180deg,
+        color-mix(in oklch, var(--anchor-1) 96%, transparent),
+        color-mix(in oklch, var(--anchor-2) 92%, transparent));
+    border: 2px solid var(--line-strong);
+    border-block-end: 4px solid var(--ember);
+    border-radius: var(--r-1, 4px);
+    display: grid;
+    gap: var(--s-3);
+  }
+  [data-world="hadeed"] .route-sheet__h {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-3);
+  }
+  [data-world="hadeed"] .route-sheet__h h3 {
+    margin: 0;
+    color: var(--ink);
+  }
+  [data-world="hadeed"] .route-sheet__h .qi { color: var(--ember); }
+  [data-world="hadeed"] .route-canvas {
+    display: block;
+    inline-size: 100%;
+    block-size: clamp(320px, 48vw, 480px);
+    background: var(--anchor-bg);
+    border: 1px solid var(--line);
+    border-radius: var(--r-1, 4px);
+    cursor: crosshair;
+    touch-action: none;
+    outline-offset: 4px;
+  }
+  [data-world="hadeed"] .route-canvas:focus-visible {
+    outline: 2px solid var(--focus);
+  }
+  [data-world="hadeed"] .route-meta {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s-3);
+  }
+  [data-world="hadeed"] .route-meta__cell {
+    padding: var(--s-3);
+    background: color-mix(in oklch, var(--anchor-1) 92%, transparent);
+    border: 1px solid var(--line);
+    border-block-end: 3px solid var(--ember);
+    border-radius: var(--r-1, 4px);
+  }
+  [data-world="hadeed"] .route-meta__label {
+    display: block;
+    color: var(--ink-muted);
+    font-size: .82rem;
+    margin-block-end: var(--s-1);
+  }
+  [data-world="hadeed"] .route-meta__value {
+    display: block;
+    color: var(--ink);
+    font-family: var(--voice-num-tabular, ui-monospace, monospace);
+    font-size: 1.6rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+  }
+  [data-world="hadeed"] .route-reset {
+    appearance: none;
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--ink-muted);
+    padding: var(--s-2) var(--s-3);
+    border-radius: var(--r-1, 4px);
+    font: inherit;
+    cursor: pointer;
+    transition: border-color 180ms ease, color 180ms ease, background 180ms ease;
+  }
+  [data-world="hadeed"] .route-reset:hover {
+    border-color: var(--ember);
+    color: var(--ink);
+    background: color-mix(in oklch, var(--ember) 8%, transparent);
+  }
+  [data-world="hadeed"] .route-reset:focus-visible {
+    box-shadow: var(--ring);
+    outline: none;
+  }
+  [data-world="hadeed"] .route-hint {
+    color: var(--ink-faint);
+    font-size: .85rem;
+    margin: 0;
+  }
+  [data-world="hadeed"] .iraq-block {
+    margin-block-start: var(--s-3);
+    display: grid;
+    gap: var(--s-2);
+    padding: var(--s-3);
+    border-inline-start: 3px solid var(--ember);
+    background: color-mix(in oklch, var(--ember) 4%, transparent);
+    border-radius: var(--r-1, 4px);
+  }
+  [data-world="hadeed"] .iraq-block__icon { color: var(--ember); }
+  [data-world="hadeed"] .iraq-block strong { color: var(--ink); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-world="hadeed"] .route-reset,
+  [data-world="hadeed"] .route-canvas { transition: none; }
+}

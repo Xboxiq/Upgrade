@@ -8147,6 +8147,44 @@
         </div>
       </div>
 
+      <!-- ══════════════════════════════════════════════════════════════════
+           ÊLAN v4 / ε3 — Hand-Drawn Route Sheet (INTERACTION_BEACON)
+           Pure 2D Canvas. No Google Maps. No external dependency.
+           Field-rep taps Baghdad customer pins in the order they will visit;
+           an iron-tinged polyline draws between them and live meta updates
+           (distance / stops / time). Tap an active pin to truncate the path.
+           Token-aware paint reads --ember / --focus / --ink from the world.
+           ══════════════════════════════════════════════════════════════ -->
+      <section class="route-sheet" data-fieldsales-route-root aria-labelledby="fs-route-title">
+        <header class="route-sheet__h">
+          <div>
+            <h3 id="fs-route-title" class="type-display"><i class="qi qi-md" data-icon="map-pin" aria-hidden="true"></i> ورقة الجولة اليومية</h3>
+            <p class="route-hint">انقر على نقاط الزبائن بالترتيب الذي ستزورهم فيه — انقر على نقطة مفعَّلة لقطع المسار عندها.</p>
+          </div>
+          <button type="button" class="route-reset" data-route-reset>إعادة الجولة</button>
+        </header>
+        <canvas class="route-canvas" data-route-canvas width="800" height="480" aria-label="لوحة تخطيط الجولة الميدانية في بغداد"></canvas>
+        <div class="route-meta" role="group" aria-label="مقاييس الجولة الحيّة">
+          <div class="route-meta__cell" data-route="distance">
+            <span class="route-meta__label">المسافة الإجمالية</span>
+            <span class="route-meta__value" data-route-meta-value>0.0 كم</span>
+          </div>
+          <div class="route-meta__cell" data-route="stops">
+            <span class="route-meta__label">عدد المحطات</span>
+            <span class="route-meta__value" data-route-meta-value>0</span>
+          </div>
+          <div class="route-meta__cell" data-route="time">
+            <span class="route-meta__label">الوقت المتوقَّع</span>
+            <span class="route-meta__value" data-route-meta-value>0 د</span>
+          </div>
+        </div>
+        <aside class="iraq-block" data-fieldsales-iraq>
+          <span class="iraq-block__icon"><i class="qi" data-icon="globe" aria-hidden="true"></i></span>
+          <p class="type-body-lead">في بغداد: الجولة الميدانية الأكثر فعالية تبدأ <strong data-raw-value="930">9:30 صباحاً</strong> بعد نشاط محلات الجملة. تجنّب فترة <strong data-raw-value="1200-1400">12-2 ظهراً</strong> — ذروة الازدحام وانخفاض جاهزية الزبون.</p>
+          <small class="v-eyebrow">المصدر: تحليل ميداني FMCG العراق 2024</small>
+        </aside>
+      </section>
+
     </section><!-- /page-fieldsales -->
 
 
