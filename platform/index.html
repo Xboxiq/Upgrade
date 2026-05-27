@@ -11,6 +11,7 @@
   <title>منصة التدريب الاحترافية</title>
   <meta name="theme-color" content="#0E1220" media="(prefers-color-scheme: dark)" />
   <meta name="theme-color" content="#F7F5F1" media="(prefers-color-scheme: light)" />
+  <meta name="color-scheme" content="dark light" />
   <meta name="description" content="منصة التطوير المهني الذاتي بمعيار عالمي — 9 مسارات تخصصية، تعلم تفاعلي، محتوى علمي عميق." />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Upgrade — منصة التطوير الذاتي" />
@@ -21,6 +22,16 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="favicon.svg" />
   <link rel="manifest" href="manifest.webmanifest" />
+
+  <!-- ζ3 — Critical font preloads (β1 local stack — 2 voices most-used).
+       Markazi Text drives body across most worlds; Boutros Modern Kufi
+       drives display H1/H2 in dashboard, hibr/dhahab/saloon worlds.
+       Browsers that 404 these (assets not deployed yet) gracefully fall
+       back to the next @font-face stack — no perceptual regression. -->
+  <link rel="preload" href="assets/fonts/markazi-text/markazi-text-VF.woff2"
+        as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="assets/fonts/boutros-modern-kufi/boutros-modern-kufi-VF.woff2"
+        as="font" type="font/woff2" crossorigin="anonymous" />
 
 <link rel="stylesheet" href="assets/style.css">
 </head>
