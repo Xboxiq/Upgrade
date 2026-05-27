@@ -151,3 +151,4 @@ import './js/elan/delta6-motion.js';
 
 // ÊLAN v4 — ε1: Dashboard revival
 import './js/elan/epsilon1-dashboard.js';
+import './js/elan/epsilon2-callcenter.js';

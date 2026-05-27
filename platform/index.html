@@ -4670,6 +4670,38 @@
         </a>
       </aside>
 
+      <!-- ══════════════════════════════════════════════════════════════════
+           ÊLAN v4 / ε2 — Outcome Lab (SOUND_BEACON)
+           Three procedural verdicts driven by Upg.callcenter.emitOutcome:
+             success → maqsoom haptic + ascending arpeggio (procedural sine)
+             lost    → silence + red outline (punishment-as-quiet)
+             neutral → dafn haptic + 400 Hz/80 ms sine
+           ══════════════════════════════════════════════════════════════ -->
+      <section class="call-outcome-lab" data-callcenter-outcome-lab aria-labelledby="cc-outcome-lab-title">
+        <header class="call-outcome-lab__h">
+          <i class="qi qi-md" data-icon="phone-call" aria-hidden="true"></i>
+          <h3 id="cc-outcome-lab-title" class="type-display">حكم المكالمة الحيّ</h3>
+        </header>
+        <p class="type-body-lead">جرّب كل احتمال — كل نتيجة لها استجابة مَحسوبة (ذبذبة + إيقاع صوتي مَولَّد) لا ملف صوت ولا أيقونة عامة.</p>
+        <div class="call-outcome-lab__buttons" role="group" aria-label="نتائج المكالمة">
+          <button type="button" class="call-outcome-btn" data-call-outcome="success">اعتراض ناجح</button>
+          <button type="button" class="call-outcome-btn" data-call-outcome="neutral">حياد</button>
+          <button type="button" class="call-outcome-btn" data-call-outcome="lost">خسارة العميل</button>
+        </div>
+        <article class="call-card" data-callcenter-outcome-card data-outcome="">
+          <p class="type-body">المؤشر الحيّ — مدى التزام العميل بالعرض</p>
+          <div class="call-meter" data-call-meter aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <p class="call-card__status" data-callcenter-outcome-status>اضغط زراً أعلاه لتسمع الحكم.</p>
+        </article>
+        <aside class="iraq-block" data-callcenter-iraq>
+          <span class="iraq-block__icon"><i class="qi" data-icon="globe" aria-hidden="true"></i></span>
+          <p class="type-body-lead">في السوق العراقية: <strong data-raw-value="78">~78%</strong> من العملاء يُفضّلون التواصل عبر WhatsApp بدل الـ inbound call — اضمن دفع المكالمة عبر sticker مرئي يَحترم وقت العميل.</p>
+          <small class="v-eyebrow">المصدر: استطلاع داخلي شركة آسيا 2023</small>
+        </aside>
+      </section>
+
     </section><!-- /page-callcenter -->
 
 

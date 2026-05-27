@@ -26439,3 +26439,117 @@ body[data-rit-time]:not([data-rit-time="default"]) .bento-card {
   }
   [data-world="hibr"] .iraq-block__icon { color: var(--ink-faint); }
 }
+
+
+/* ÊLAN v4 — ε2 callcenter revival: outcome lab + tayyar live verdict */
+@layer components {
+  [data-world="tayyar"] .call-outcome-lab {
+    margin-block: var(--s-4);
+    padding: var(--s-4);
+    background: linear-gradient(
+      180deg,
+      color-mix(in oklch, var(--anchor-1) 92%, transparent),
+      color-mix(in oklch, var(--anchor-2) 88%, transparent)
+    );
+    border: 1px solid var(--line);
+    border-radius: var(--r-3, 12px);
+    display: grid;
+    gap: var(--s-3);
+  }
+  [data-world="tayyar"] .call-outcome-lab__h {
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    color: var(--ink);
+  }
+  [data-world="tayyar"] .call-outcome-lab__h .qi { color: var(--focus); }
+  [data-world="tayyar"] .call-outcome-lab__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+  }
+  [data-world="tayyar"] .call-outcome-btn {
+    appearance: none;
+    border: 1px solid var(--line-strong);
+    background: color-mix(in oklch, var(--anchor-2) 80%, transparent);
+    color: var(--ink);
+    padding: var(--s-2) var(--s-3);
+    border-radius: var(--r-pill, 999px);
+    font: inherit;
+    cursor: pointer;
+    transition: transform var(--duration-tayyar, 220ms) var(--ease-tayyar, ease),
+                border-color 180ms ease,
+                background 180ms ease;
+  }
+  [data-world="tayyar"] .call-outcome-btn:hover {
+    border-color: var(--focus);
+    background: color-mix(in oklch, var(--focus) 12%, var(--anchor-2));
+  }
+  [data-world="tayyar"] .call-outcome-btn:focus-visible { box-shadow: var(--ring); outline: none; }
+  [data-world="tayyar"] .call-outcome-btn[data-call-outcome="success"]:hover { border-color: var(--state-success); }
+  [data-world="tayyar"] .call-outcome-btn[data-call-outcome="lost"]:hover    { border-color: var(--state-danger); }
+
+  [data-world="tayyar"] .call-card {
+    position: relative;
+    padding: var(--s-3);
+    background: color-mix(in oklch, var(--anchor-bg) 70%, transparent);
+    border: 1px solid var(--line);
+    border-radius: var(--r-2, 8px);
+    transition: border-color var(--duration-tayyar, 220ms) var(--ease-tayyar, ease),
+                box-shadow var(--duration-tayyar, 220ms) var(--ease-tayyar, ease),
+                outline-color 180ms ease;
+  }
+  [data-world="tayyar"] .call-card[data-outcome="success"] {
+    border-color: var(--state-success);
+    box-shadow: 0 0 24px color-mix(in oklch, var(--state-success) 28%, transparent);
+  }
+  [data-world="tayyar"] .call-card[data-outcome="lost"] {
+    border-color: var(--state-danger);
+    outline: 1px solid color-mix(in oklch, var(--state-danger) 50%, transparent);
+    outline-offset: 2px;
+    box-shadow: none; /* deliberate silence — visual quiet too */
+  }
+  [data-world="tayyar"] .call-card[data-outcome="neutral"] {
+    border-color: var(--ink-faint);
+  }
+  [data-world="tayyar"] .call-card__status {
+    color: var(--ink-muted);
+    font-size: .92rem;
+    margin-block-start: var(--s-2);
+  }
+
+  [data-world="tayyar"] .call-meter {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    block-size: 4px;
+    margin-block-start: var(--s-2);
+  }
+  [data-world="tayyar"] .call-meter span {
+    background: color-mix(in oklch, var(--ink) 14%, transparent);
+    border-radius: 1px;
+    transition: background var(--duration-tayyar, 220ms) var(--ease-tayyar, ease);
+  }
+  [data-world="tayyar"] .call-meter span[data-active="true"] {
+    background: var(--ember);
+    box-shadow: 0 0 8px color-mix(in oklch, var(--ember) 50%, transparent);
+  }
+
+  [data-world="tayyar"] .iraq-block {
+    margin-block-start: var(--s-3);
+    display: grid;
+    gap: var(--s-2);
+    padding: var(--s-3);
+    border-inline-start: 3px solid var(--ember);
+    background: color-mix(in oklch, var(--ember) 5%, transparent);
+    border-radius: var(--r-2, 8px);
+  }
+  [data-world="tayyar"] .iraq-block__icon { color: var(--focus); }
+  [data-world="tayyar"] .iraq-block strong { color: var(--ink); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-world="tayyar"] .call-outcome-btn,
+  [data-world="tayyar"] .call-card,
+  [data-world="tayyar"] .call-meter span { transition: none; }
+}
