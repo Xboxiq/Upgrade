@@ -1,0 +1,340 @@
+/* ════════════════════════════════════════════════════════════════════════
+   ÊLAN v4 — ζ1 — Layout Utilities (Inline Style Purge support)
+   ────────────────────────────────────────────────────────────────────────
+   Truthful migration target for index.html inline `style="..."` blocks.
+   Each utility is opt-in via class. Dynamic positions stay inline as
+   `style="--<token>: <value>"` and are consumed by the rules below.
+   Naming: u-* prefix to avoid colliding with legacy class lexicon.
+   ════════════════════════════════════════════════════════════════════════ */
+
+@layer elan-zeta1-utilities {
+
+  /* ── margin-top (raw px to match exact legacy values) ────────────── */
+  .u-mt-10 { margin-block-start: 10px; }
+  .u-mt-14 { margin-block-start: 14px; }
+  .u-mt-16 { margin-block-start: 16px; }
+  .u-mt-18 { margin-block-start: 18px; }
+  .u-mt-20 { margin-block-start: 20px; }
+
+  /* ── margin-bottom (raw px to match exact legacy values) ─────────── */
+  .u-mb-10 { margin-block-end: 10px; }
+  .u-mb-14 { margin-block-end: 14px; }
+  .u-mb-16 { margin-block-end: 16px; }
+  .u-mb-18 { margin-block-end: 18px; }
+  .u-mb-24 { margin-block-end: 24px; }
+  .u-mb-28 { margin-block-end: 28px; }
+  .u-mb-32 { margin-block-end: 32px; }
+
+  .u-mx-auto { margin-inline: auto; }
+
+  /* ── visibility ──────────────────────────────────────────────────── */
+  .u-hidden { display: none; }
+
+  /* ── flex helpers ────────────────────────────────────────────────── */
+  .u-flex-shrink-0 { flex-shrink: 0; }
+
+  /* ── auto-fit responsive grids — consumer may override --gap ────── */
+  .u-grid-auto-150 { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--gap, 10px); }
+  .u-grid-auto-160 { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--gap, 10px); }
+  .u-grid-auto-180 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--gap, 12px); }
+  .u-grid-auto-220 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--gap, 14px); }
+  .u-grid-auto-280 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--gap, 14px); }
+  .u-grid-auto-320 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--gap, 12px); }
+
+  /* ── fixed-column grids ──────────────────────────────────────────── */
+  .u-grid-2     { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap, 14px); }
+  .u-grid-2-16  { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .u-grid-2-lg  { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .u-grid-3     { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .u-grid-3-16  { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .u-grid-4     { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .u-grid-4-16  { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .u-grid-5     { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .u-grid-7     { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+
+  /* ── KPI/Metric block layout 1.2-2-1.4-1.2 ───────────────────────── */
+  .u-grid-table-w6h {
+    display: grid;
+    grid-template-columns: 1.2fr 2fr 1.4fr 1.2fr;
+    font-size: 12px;
+  }
+
+  /* ── calendar row layout ─────────────────────────────────────────── */
+  .u-grid-cal-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  /* ── sticky aside helper ─────────────────────────────────────────── */
+  .u-aside-sticky {
+    padding: 14px;
+    border-radius: 14px;
+    position: sticky;
+    inset-block-start: 80px;
+  }
+
+  /* ── padded cards (compact / regular / large / xl) ───────────────── */
+  .u-pad-card-sm   { padding: 14px 16px; border-radius: 12px; }
+  .u-pad-card      { padding: 16px 18px; border-radius: 12px; }
+  .u-pad-card-lg   { padding: 16px 18px; border-radius: 14px; }
+  .u-pad-card-xl   { padding: 18px 22px; border-radius: 14px; }
+
+  /* ── tinted-aside via dynamic --tint color (RGB triplet) ─────────── */
+  /* Consumer writes:  style="--tint: 245 158 11"  (raw RGB triplet, no rgba(...) needed) */
+  .u-tinted-aside {
+    border-color: rgb(var(--tint, 102 252 241) / 0.25);
+    background:   rgb(var(--tint, 102 252 241) / 0.04);
+  }
+  .u-tinted-aside--strong {
+    border-color: rgb(var(--tint, 245 158 11) / 0.30);
+    background:   rgb(var(--tint, 245 158 11) / 0.04);
+  }
+  .u-tinted-aside--soft {
+    border-color: rgb(var(--tint, 102 252 241) / 0.20);
+    background:   rgb(var(--tint, 102 252 241) / 0.04);
+  }
+
+  /* ── eyebrow text labels (Do/Don't, etc.) using --tint ───────────── */
+  .u-eyebrow-tinted {
+    font-size: 12px;
+    font-weight: 800;
+    color: rgb(var(--tint, 34 197 94));
+    margin-block-end: 10px;
+    letter-spacing: 0.5px;
+  }
+  .u-eyebrow-mini {
+    font-size: 11px;
+    font-weight: 800;
+    color: rgb(var(--tint, 245 158 11));
+    margin-block-end: 4px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+  }
+
+  /* ── platform palette tags (locked brand colours) ────────────────── */
+  .u-platform-ig { color: #E4405F; } /* Instagram brand pink */
+  .u-platform-yt { color: #FF0000; } /* YouTube brand red */
+  .u-platform-sc { color: #FFFC00; } /* Snapchat brand yellow */
+
+  /* ── emoji wrapper sizes ─────────────────────────────────────────── */
+  .u-emoji-lg     { font-size: 26px; }
+  .u-emoji-xl     { font-size: 28px; }
+  .u-emoji-2xl    { font-size: 64px; }
+  .u-emoji-icon-md {
+    font-size: 28px;
+    flex-shrink: 0;
+    margin-block-start: 2px;
+  }
+
+  /* ── button compact: large pad, small font (sim CTA) ─────────────── */
+  .u-btn-compact-lg { padding: 12px 32px; font-size: 14px; }
+
+  /* ── table inside scroll container ───────────────────────────────── */
+  .u-table-scroll {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    min-width: 540px;
+  }
+
+  /* ── start gauge wrap (initially hidden, JS reveals) ─────────────── */
+  .u-gauge-wrap {
+    margin: 0 auto 16px;
+    display: none;
+  }
+  .u-gauge-wrap.is-shown { display: block; }
+
+  .u-gauge-bar {
+    block-size: 100%;
+    border-radius: 99px;
+    transition: width 0.6s ease;
+    background: linear-gradient(90deg, #EF4444, #EAB308, #22C55E);
+  }
+
+  /* ── psych-pt-dot tinted via --pt-color RGB triplet ──────────────── */
+  /* Consumer writes:  style="--pt-color: 255 0 0" (red dot) */
+  .psych-pt-dot--tinted {
+    background: rgb(var(--pt-color, 255 0 0));
+    box-shadow: 0 0 5px rgb(var(--pt-color, 255 0 0));
+  }
+
+  /* ── progress fill (single-prop dynamic) ─────────────────────────── */
+  /* Used by .sp-fill — consumer writes: style="--sp-fill: 0%" */
+  [data-sp-fill] {
+    inline-size: var(--sp-fill, 0%);
+    width: var(--sp-fill, 0%); /* legacy fallback for older browsers */
+  }
+
+  /* ── tick rail positions (scrub timeline) ─────────────────────────── */
+  /* Consumer writes:  style="--tick-pos: 25%" */
+  .vhs-scrub__tick,
+  .vhs-scrub__tick-label {
+    inset-inline-start: var(--tick-pos, 0%);
+  }
+
+  /* ── reduced-motion respect: gauge transition silenced ───────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .u-gauge-bar { transition: none; }
+  }
+
+  /* ── print: tinted-aside collapses to system colours ─────────────── */
+  @media print {
+    .u-tinted-aside,
+    .u-tinted-aside--strong,
+    .u-tinted-aside--soft {
+      background: transparent;
+      border-color: ButtonText;
+    }
+    .u-eyebrow-tinted,
+    .u-eyebrow-mini { color: CanvasText; }
+  }
+
+  /* ── forced-colors compatibility ─────────────────────────────────── */
+  @media (forced-colors: active) {
+    .u-tinted-aside,
+    .u-tinted-aside--strong,
+    .u-tinted-aside--soft {
+      background: Canvas;
+      border-color: ButtonText;
+    }
+    .u-platform-ig,
+    .u-platform-yt,
+    .u-platform-sc { color: LinkText; }
+  }
+}
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   ζ1 — Round 2 utilities for mixed inline styles (hex/rgba + var alongside)
+   ──────────────────────────────────────────────────────────────────────── */
+
+@layer elan-zeta1-utilities {
+
+  /* ── small tinted tip pill (red/green/etc.) ─────────────────────────── */
+  /* Consumer writes: style="--tint: 239 68 68" */
+  .u-tip-tinted {
+    color:        rgb(var(--tint, 239 68 68));
+    background:   rgb(var(--tint, 239 68 68) / 0.06);
+    border:       1px solid rgb(var(--tint, 239 68 68) / 0.15);
+    border-radius: var(--radius-sm);
+    padding: 7px 10px;
+    font-size: 11.5px;
+  }
+
+  /* ── gradient-banded aside card (two-stop tint) ─────────────────────── */
+  /* Consumer writes: style="--tint-from: 245 158 11; --tint-to: 239 68 68" */
+  .u-aside-band {
+    padding: 12px 14px;
+    background:    linear-gradient(135deg,
+                     rgb(var(--tint-from, 245 158 11) / 0.08),
+                     rgb(var(--tint-to,   239 68 68)  / 0.06));
+    border:        1px solid rgb(var(--tint-from, 245 158 11) / 0.22);
+    border-radius: var(--radius-sm);
+  }
+  .u-aside-band--md  { padding: 16px 18px; border-radius: var(--radius-md); }
+  .u-aside-band--lg  { padding: 18px 20px; border-radius: var(--radius-md); }
+  .u-aside-band--soft {
+    border-color: rgb(var(--tint-from, 102 252 241) / 0.20);
+  }
+
+  /* ── small note pill with single tint, larger pad than tip-tinted ──── */
+  /* Consumer writes: style="--tint: 102 252 241" */
+  .u-tip-mini {
+    padding: 10px 12px;
+    background:   rgb(var(--tint, 102 252 241) / 0.05);
+    border:       1px solid rgb(var(--tint, 102 252 241) / 0.18);
+    border-radius: var(--radius-sm);
+    font-size: 11.5px;
+    color: var(--text-muted);
+    line-height: 1.75;
+  }
+  .u-tip-mini--rounded { border-radius: 8px; }
+
+  /* ── industry-hint callout ─────────────────────────────────────────── */
+  .u-tip-callout {
+    padding: 12px 14px;
+    background:    rgb(var(--tint, 102 252 241) / 0.05);
+    border:        1px solid rgb(var(--tint, 102 252 241) / 0.15);
+    border-radius: 10px;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* ── tinted note with leading inline-end coloured band ─────────────── */
+  /* Consumer writes: style="--tint: 34 197 94" */
+  .u-tip-banded-end {
+    padding: 10px 12px;
+    background:        rgb(var(--tint, 34 197 94) / 0.06);
+    border-inline-end: 3px solid rgb(var(--tint, 34 197 94));
+    border-radius:     var(--radius-sm);
+    font-size: 11.5px;
+    color: var(--text);
+  }
+
+  /* ── orange/sand surface aside ─────────────────────────────────────── */
+  .u-aside-surface-tinted {
+    background:    var(--surface-2);
+    border:        1px solid rgb(var(--tint, 249 115 22) / 0.20);
+    border-radius: var(--radius-md);
+    padding: 16px;
+  }
+
+  /* ── accent → sky-500 gauge bar gradient (loading + progress) ──────── */
+  .u-loading-bar-accent {
+    block-size: 100%;
+    background: linear-gradient(90deg, var(--accent), #0EA5E9);
+    border-radius: 99px;
+  }
+  .u-loading-bar-accent--progress {
+    transition: width 0.5s ease;
+    width: var(--bar-pct, 0%);
+  }
+  .u-loading-bar-accent--animated {
+    animation: loadBar 2s ease forwards;
+  }
+
+  /* ── meta-mini text (small subdued caption) ────────────────────────── */
+  .u-meta-mini {
+    font-size: 0.78rem;
+    color: var(--color-text-faint, var(--text-faint));
+  }
+
+  /* ── reduced-motion: silence loading bar transitions/animations ───── */
+  @media (prefers-reduced-motion: reduce) {
+    .u-loading-bar-accent--progress { transition: none; }
+    .u-loading-bar-accent--animated { animation: none; }
+  }
+
+  /* ── print: tinted utilities collapse to system colours ───────────── */
+  @media print {
+    .u-tip-tinted,
+    .u-aside-band, .u-aside-band--md, .u-aside-band--lg, .u-aside-band--soft,
+    .u-tip-mini, .u-tip-mini--rounded,
+    .u-tip-callout,
+    .u-tip-banded-end,
+    .u-aside-surface-tinted {
+      background: transparent;
+      border-color: ButtonText;
+      color: CanvasText;
+    }
+    .u-loading-bar-accent { background: ButtonText; }
+  }
+
+  /* ── forced-colors compatibility for new tinted utilities ─────────── */
+  @media (forced-colors: active) {
+    .u-tip-tinted,
+    .u-aside-band, .u-aside-band--md, .u-aside-band--lg, .u-aside-band--soft,
+    .u-tip-mini, .u-tip-mini--rounded,
+    .u-tip-callout,
+    .u-tip-banded-end,
+    .u-aside-surface-tinted {
+      background: Canvas;
+      border-color: ButtonText;
+      color: CanvasText;
+    }
+  }
+}
