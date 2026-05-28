@@ -3284,3 +3284,63 @@ sed -n '/TADAFFUQ v5 — α2/,/End TADAFFUQ v5 \/ α2/p' platform/assets/css/tok
 الأولوية التالية: **α3 Module Manifest** — audit للـ 126 ملف JS (24 IIFE + 21 ESM-export + 81 unclassified) → خريطة + توصيات load-order.
 
 — Entry end —
+
+
+
+---
+
+## TADAFFUQ v5 — α3 — Module Manifest — 2026-05-28
+**Pack:** v5 TADAFFUQ
+**Pillar:** α FOUNDATION
+**Stage:** 3 of 4
+**Branch:** `tadaffuq-α-foundation-bootstrap`
+**Verified at commit:** `51e85c5`
+**Pulse:** — (α stages do not require pulse)
+
+### Before
+- No JS architecture catalog existed for v5
+- 126 JS files in `platform/assets/js/` (verified at α1)
+- Ad-hoc knowledge of which Upg.* namespace lives where
+
+### After (verified by grep)
+
+| Domain | Key | Value |
+|---|---|---:|
+| Catalog | `manifest_lines` | 196 |
+| Catalog | `manifest_apis_catalogued` | 39 + 1 reserved (α4 slot) |
+| Architecture | `js_files_total` | 126 (preserved) |
+| Architecture | `imports_in_app_js` | 119 |
+| Architecture | `iife_pattern_files` | 24 |
+| Architecture | `esm_export_files` | 21 (build-time, in elan/) |
+| Architecture | `esm_import_files` | 0 (only app.js imports) |
+| Architecture | `single_browser_script_tag` | 1 (`assets/app.js` type=module) |
+| Sacred | `page_h_count` | 14 (preserved) |
+| Sacred | `qcalc_instances` | 384 (preserved) |
+| Sacred | `data_block_ids` | 513 (preserved) |
+| Sacred | `data_page_personality` | 15 (preserved) |
+| Sacred | `upg_apis_total` | 40 (preserved) |
+
+### Reproduction (Bash)
+```bash
+find platform/assets/js -name '*.js' | wc -l                              # → 126
+grep -c "^import '" platform/assets/app.js                                # → 119
+grep -rl '(function (' platform/assets/js/ | wc -l                        # → 24
+grep -rl '^export ' platform/assets/js/ | wc -l                           # → 21
+grep -rohE 'Upg\.[a-zA-Z][a-zA-Z0-9]*' platform/assets/js/ platform/assets/app.js | sort -u | wc -l   # → 40
+wc -l state/JS_MANIFEST_v5.md                                              # → 196
+```
+
+### Files
+**Created (1):**
+- `state/JS_MANIFEST_v5.md` (196 lines: load-order, 40-API source-of-truth table, v5 plan, anti-pattern audit)
+
+**Untouched (Sacred):**
+- `platform/**` — صفر تعديل
+- archive/, prompts/v1..v4
+
+### Verdict
+🟢 **green-light.** Architecture confirmed clean: ESM-as-loader + IIFE-as-module is the v3-W23 inheritance, mobile-safe per v4.0.2 lesson. v5 has a binding roadmap for ≤11 new modules across 7 stages, capped at +2 new top-level Upg.* APIs (target 41–42 final). Anti-pattern audit passes: zero `eval`/`document.write`/global pollution.
+
+الأولوية التالية: **α4 Sprite + Semantic Map** — يَسد آخر فجوة في pillar α قبل الانتقال إلى β.
+
+— Entry end —
