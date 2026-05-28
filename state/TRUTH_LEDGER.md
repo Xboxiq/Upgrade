@@ -3305,3 +3305,33 @@ Sacred Upg.* APIs touched in α: **1** — `Upg.icons` (NEW; supersedes v4 Upg.i
 Forbidden Library violations: **0**.
 
 ### Commit: `α4: icon sprite — verified: …`
+
+
+
+---
+
+## v5 TADAFFUQ — γ1 DOCK DESKTOP — 2026-05-28
+
+**Branch:** `tadaffuq-γ-spatial` · **Pillar:** γ · **Stage:** 1 of 3
+**Pulse:** ⚓ **DOCK_PULSE** *(first Pulse of v5)*
+
+### Files shipped
+- `platform-v5/assets/css/dock.css` (182 lines) — Glass 2.0 surface, RTL-symmetric, proximity-reveal CSS, single-accent-action dot
+- `platform-v5/assets/js/dock.js` (200 lines) — classic IIFE, builds dock from semantic-map, mousemove proximity watcher (96px from bottom), Upg.dock API
+- `platform-v5/index.html` updated to wire `dock.css` + `dock.js`
+
+### Verified
+| metric | got | expected |
+|---|---|---|
+| dock CSS token uses `var(--*)` | 35 | ≥ 6 |
+| emoji in dock files | 0 | 0 |
+| inline `<svg viewBox>` in dock.js | 0 | 0 (uses Upg.icons.use) |
+| hardcoded hex | 0 | 0 |
+| mousemove handlers (proximity) | 2 | ≥ 1 |
+| `Upg.icons.use` calls | 2 | ≥ 1 |
+| RTL logical properties | 7 | ≥ 6 |
+| physical `left:`/`right:` (RTL violation) | 0 | 0 |
+| `node --check` on dock.js | passed | passed |
+| HTTP serve test | 200 / 200 / 200 | all 200 |
+
+### Commit: `γ1: dock desktop — verified: …`

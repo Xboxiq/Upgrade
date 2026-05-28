@@ -1,0 +1,182 @@
+/* ════════════════════════════════════════════════════════════════════════
+   TADAFFUQ v5 — γ1 — Floating Dock (Desktop)
+   ────────────────────────────────────────────────────────────────────────
+   Glass 2.0 surface · proximity-reveal · 5 items · RTL-symmetric · single
+   --accent-action dot for the active route. No backdrop-filter blur ≥ 12px.
+   Mobile dock (γ2) and canvas-harmonic (γ3) ship next.
+
+   The Pulse — DOCK_PULSE:
+     The dock has two states: collapsed (icons silent) and expanded (labels
+     audible). The transition is driven by a JS proximity watcher (96px from
+     bottom-edge). CSS only describes the rest-state and the hover-state
+     transitions; the trigger is data-state="hover" set by dock.js.
+   ════════════════════════════════════════════════════════════════════════ */
+
+
+@layer components {
+
+  /* ── The dock surface — bottom-center, floating, never fixed-strip ─── */
+  .dock {
+    position: fixed;
+    inset-block-end: calc(var(--space-5) + env(safe-area-inset-bottom));
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+    z-index: var(--z-dock);
+
+    display: inline-flex;
+    align-items: stretch;
+    gap: var(--space-1);
+    padding: var(--space-2);
+
+    background: var(--surface-0);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-3);
+
+    /* Glass 2.0 — translucent base, NOT heavy blur. Mobile-safe. */
+    background-color: var(--glass-tint);
+    backdrop-filter: blur(8px) saturate(120%);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
+
+    /* Smooth two-state geometry */
+    transition:
+      gap        var(--duration-emerge) var(--ease-emerge),
+      padding    var(--duration-emerge) var(--ease-emerge),
+      box-shadow var(--duration-emerge) var(--ease-emerge);
+    will-change: padding, gap;
+  }
+
+  /* The DOCK_PULSE — proximity reveal */
+  .dock[data-state="hover"] {
+    gap: var(--space-2);
+    padding: var(--space-3);
+    box-shadow:
+      var(--shadow-3),
+      inset 0 1px 0 0 hsla(0 0% 100% / 0.06);  /* the "lid" highlight */
+  }
+
+  /* Top-edge hairline appears only on hover — Neon Cyan thread */
+  .dock[data-state="hover"]::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline: var(--space-6);
+    block-size: 1px;
+    background: linear-gradient(
+      to inline-end,
+      transparent,
+      var(--accent-progress) 50%,
+      transparent
+    );
+    opacity: 0.32;
+    pointer-events: none;
+  }
+
+
+  /* ── A dock item ────────────────────────────────────────────────────── */
+  .dock-item {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-lg);
+
+    color: var(--ink-muted);
+    font: inherit;
+    font-size: 0.875rem;            /* dock-tier label size */
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition:
+      color      var(--duration-quick) var(--ease-snap),
+      background var(--duration-quick) var(--ease-snap),
+      transform  var(--duration-snap)  var(--ease-snap);
+    will-change: transform;
+
+    /* Touch target floor — manifesto §5.20 */
+    min-block-size: 44px;
+    min-inline-size: 44px;
+  }
+
+  .dock-item:hover {
+    color: var(--ink);
+    background: var(--surface-2);
+  }
+
+  .dock-item:active {
+    transform: scale(0.96);          /* The Press — MOTION §3.1 */
+  }
+
+  .dock-item:focus-visible {
+    outline: 2px solid var(--accent-progress);
+    outline-offset: 2px;
+  }
+
+
+  /* ── The icon inside an item ────────────────────────────────────────── */
+  .dock-item .icon {
+    --icon-size: var(--icon-lg);
+    inline-size: var(--icon-size);
+    block-size:  var(--icon-size);
+    flex-shrink: 0;
+  }
+
+
+  /* ── The label — hidden in collapsed state, revealed on proximity ──── */
+  .dock-label {
+    display: inline-block;
+    max-inline-size: 0;
+    opacity: 0;
+    overflow: clip;
+    transition:
+      max-inline-size var(--duration-emerge) var(--ease-emerge),
+      opacity         var(--duration-quick)  var(--ease-snap);
+  }
+
+  .dock[data-state="hover"] .dock-label {
+    max-inline-size: 12ch;
+    opacity: 1;
+  }
+
+
+  /* ── The active dot — single --accent-action per screen ─────────────── */
+  .dock-item[aria-current="page"] {
+    color: var(--ink);
+  }
+
+  .dock-item[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    inset-block-start: -2px;
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+    inline-size: 4px;
+    block-size:  4px;
+    border-radius: var(--radius-full);
+    background: var(--accent-action);  /* Electric Orange — single per screen */
+    box-shadow: 0 0 8px hsl(from var(--accent-action) h s l / 0.6);
+  }
+
+
+  /* ── Mobile fallback (≤720px): hide desktop dock; mobile dock lands γ2 ─ */
+  @media (max-inline-size: 720px) {
+    .dock {
+      display: none;
+    }
+  }
+
+
+  /* ── Forced-colors fallback ─────────────────────────────────────────── */
+  @media (forced-colors: active) {
+    .dock {
+      background: Canvas;
+      border-color: ButtonText;
+      backdrop-filter: none;
+    }
+    .dock-item[aria-current="page"]::after { background: Mark; }
+  }
+
+}
