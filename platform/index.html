@@ -11,6 +11,7 @@
   <title>منصة التدريب الاحترافية</title>
   <meta name="theme-color" content="#0E1220" media="(prefers-color-scheme: dark)" />
   <meta name="theme-color" content="#F7F5F1" media="(prefers-color-scheme: light)" />
+  <meta name="color-scheme" content="dark light" />
   <meta name="description" content="منصة التطوير المهني الذاتي بمعيار عالمي — 9 مسارات تخصصية، تعلم تفاعلي، محتوى علمي عميق." />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Upgrade — منصة التطوير الذاتي" />
@@ -21,6 +22,16 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="favicon.svg" />
   <link rel="manifest" href="manifest.webmanifest" />
+
+  <!-- ζ3 — Critical font preloads (β1 local stack — 2 voices most-used).
+       Markazi Text drives body across most worlds; Boutros Modern Kufi
+       drives display H1/H2 in dashboard, hibr/dhahab/saloon worlds.
+       Browsers that 404 these (assets not deployed yet) gracefully fall
+       back to the next @font-face stack — no perceptual regression. -->
+  <link rel="preload" href="assets/fonts/markazi-text/markazi-text-VF.woff2"
+        as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href="assets/fonts/boutros-modern-kufi/boutros-modern-kufi-VF.woff2"
+        as="font" type="font/woff2" crossorigin="anonymous" />
 
 <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -744,7 +755,7 @@
              Fills top-to-bottom like a scribe's marginal gloss, driven by
              daily progress percentage. NOT a horizontal bar. ═══════════ -->
         <div class="progress-margin" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="تقدمك اليومي">
-          <div class="progress-margin__fill" style="--progress-pct: 0%"></div>
+          <div class="progress-margin__fill"></div>
           <small class="progress-margin__note v-body" data-progress-note>أَتممتَ ٠ من أصل ٥٠</small>
         </div>
 
@@ -778,13 +789,13 @@
                  aria-labelledby="elan-progress-h"
                  aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
                  data-elan-progress-margin
-                 style="--progress-pct: 0%">
+                 >
               <div class="progress-margin__fill" aria-hidden="true"></div>
               <ul class="progress-margin__ribs" aria-hidden="true">
-                <li style="--rib-pos: 20%"></li>
-                <li style="--rib-pos: 40%"></li>
-                <li style="--rib-pos: 60%"></li>
-                <li style="--rib-pos: 80%"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
               </ul>
             </div>
           </div>
@@ -983,7 +994,7 @@
             </span>
           </div>
           <div class="page-mastery-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <div class="page-mastery-progress-fill" style="--progress: 0%" data-page-progress-fill></div>
+            <div class="page-mastery-progress-fill" data-page-progress-fill></div>
           </div>
           <div class="page-mastery-progress-tiers">
             <span class="tier-marker tier-marker--foundation">
@@ -4875,7 +4886,7 @@
             </span>
           </div>
           <div class="page-mastery-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <div class="page-mastery-progress-fill" style="--progress: 0%" data-page-progress-fill></div>
+            <div class="page-mastery-progress-fill" data-page-progress-fill></div>
           </div>
           <div class="page-mastery-progress-tiers">
             <span class="tier-marker tier-marker--foundation">
@@ -6555,7 +6566,7 @@
 
       <!-- ── Progress Pill (auto-tracks reading via IntersectionObserver) ── -->
       <div class="sales-progress" data-sp-pill>
-        <div class="sp-track"><div class="sp-fill" data-sp-fill style="inline-size:0%;width:0%"></div></div>
+        <div class="sp-track"><div class="sp-fill" data-sp-fill></div></div>
         <div class="sp-meta"><span data-sp-pct>0</span>% من الوحدة · <span data-sp-blocks>0</span>/<span data-sp-total>0</span> بلوك</div>
       </div>
 
@@ -6746,7 +6757,7 @@
           </div>
           <div class="spin-detail-block">
             <div class="spin-detail-label">الأخطاء الشائعة</div>
-            <div class="spin-detail-text" style="color:#EF4444; background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.15); border-radius:var(--radius-sm); padding:7px 10px; font-size:11.5px;">لا تبدأ بـ«ما هي مشاكلكم؟» مباشرة — هذا يُحرج العميل ويضعه في موقف دفاعي.</div>
+            <div class="spin-detail-text u-tint-rose-soft" style="--brand-c:#EF4444">لا تبدأ بـ«ما هي مشاكلكم؟» مباشرة — هذا يُحرج العميل ويضعه في موقف دفاعي.</div>
           </div>
           <button class="spin-expand-btn" onclick="toggleSpin(this)">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
@@ -8135,7 +8146,7 @@
             <div class="u-fz-11 u-fw-800 u-ls-15 u-c-purple u-mb-15b">P · PROBLEM</div>
             <div class="u-meta-lh-lg">«ما الصعوبات التي تواجهونها مع النظام الحالي؟» — لا تقترح مشكلة؛ دعهُ يسميها. الألم الذي يُسمّيه بنفسه أقوى 10x من الذي تُسمّيه أنت.</div>
           </div>
-          <div class="span-12" style="padding:18px 20px;background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(239,68,68,0.06));border:1px solid rgba(245,158,11,0.25);border-radius:var(--radius-md);">
+          <div class="span-12 callout-warning-gradient">
             <div class="u-fz-11 u-fw-800 u-ls-15 u-c-amber u-mb-15b">I · IMPLICATION — السلاح السرّي</div>
             <div class="u-fz-125 u-c-muted u-lh-185 u-mb-25">تحويل المشكلة الصغيرة (يسهل تجاهلها) إلى ألم مركّب (مستحيل تجاهله). رحلة من «عندي صداع بسيط» إلى «أدرك أني قد أُصاب».</div>
             <div class="u-grid-2-10">
@@ -8394,7 +8405,7 @@
             </span>
           </div>
           <div class="page-mastery-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <div class="page-mastery-progress-fill" style="--progress: 0%" data-page-progress-fill></div>
+            <div class="page-mastery-progress-fill" data-page-progress-fill></div>
           </div>
           <div class="page-mastery-progress-tiers">
             <span class="tier-marker tier-marker--foundation">
@@ -9214,7 +9225,7 @@
             </span>
           </div>
           <div class="page-mastery-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <div class="page-mastery-progress-fill" style="--progress: 0%" data-page-progress-fill></div>
+            <div class="page-mastery-progress-fill" data-page-progress-fill></div>
           </div>
           <div class="page-mastery-progress-tiers">
             <span class="tier-marker tier-marker--foundation">
@@ -10003,14 +10014,14 @@
               <div class="u-fz-12 u-c-faint u-mt-1">معدل التفاعل</div>
             </div>
 
-            <div id="er-gauge-wrap" style="margin:0 auto 16px; display:none;">
+            <div class="u-mx-auto u-mb-4 u-display-none" id="er-gauge-wrap">
               <!-- gauge bar -->
               <div class="u-flex u-justify-between u-fz-9 u-c-faint u-mb-1">
                 <span>0%</span><span>معياري</span><span>ممتاز</span>
               </div>
               <div class="u-bar-track">
-                <div id="er-gauge-bar" style="height:100%; border-radius:99px; transition:width 0.6s ease; background:linear-gradient(90deg,#EF4444,#EAB308,#22C55E);"></div>
-                <div id="er-gauge-marker" style="position:absolute; top:-3px; width:4px; height:16px; border-radius:2px; background:var(--text); transition:left 0.6s ease;"></div>
+                <div class="eng-gauge-bar" id="er-gauge-bar"></div>
+                <div id="er-gauge-marker" class="eng-gauge-marker"></div>
               </div>
             </div>
           </div>
@@ -10387,7 +10398,7 @@
               <tr>
                 <td>
                   <div class="psych-pt-platform" data-block-id="so-012" data-block-type="lesson" data-difficulty="2" data-est-minutes="5">
-                    <div class="psych-pt-dot" style="background:#ff0000;box-shadow:0 0 5px #ff0000;"></div>
+                    <div class="psych-pt-dot u-bg-brand u-shadow-brand-glow" style="--brand-c:#ff0000"></div>
                     <strong>YouTube</strong>
                   </div>
                 </td>
@@ -10712,7 +10723,7 @@
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px;">
+        <div class="u-grid u-grid-3 u-gap-35 u-mt-4">
           <div class="u-frame-card">
             <div class="u-fz-11 u-fw-800 u-tt-up u-ls-1 u-c-pink u-mb-2">🧲 Pattern Interrupt</div>
             <div class="u-meta-lh-md">الدماغ يتصفح بـ "Autopilot". لإيقافه: اكسر النمط المتوقع. أول 1.5 ثانية = الحكم بين Scroll و Stop. استخدم: صوت مفاجئ، حركة غير متوقعة، نص يُناقض التوقع.</div>
@@ -10727,7 +10738,7 @@
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;">
+        <div class="u-grid u-grid-1-1 u-gap-35 u-mt-35">
           <div class="u-cell u-cell-red-soft" >
             <div class="u-fz-11 u-fw-800 u-ls-1 u-tt-up u-c-red u-mb-15b">❌ أخطاء نفسية شائعة في المحتوى</div>
             <div class="u-meta-lh">
@@ -10766,7 +10777,7 @@
         <span class="tag accent">Attention Economy · 2025</span>
       </div>
 
-      <div class="w6-attn-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px;">
+      <div class="w6-attn-grid u-grid u-grid-auto-280 u-gap-35">
 
         <!-- 1. Hook Window -->
         <div class="ql-glass w6-attn-card u-p-18-r14">
@@ -10897,13 +10908,13 @@
       <div class="u-mt-7b">
         <div class="u-fz-11 u-fw-800 u-ls-12 u-tt-up u-c-faint u-mb-3">📊 جدول مقارن سريع · ما يُعزّز الـ reach في كل منصة</div>
         <div class="ql-glass u-p-0 u-r-14 u-overflow-hidden">
-          <div class="w6-algo-table" style="display:grid; grid-template-columns:1.2fr 2fr 1.4fr 1.2fr; font-size:12px;">
+          <div class="w6-algo-table u-grid u-grid-w6-algo u-fs-12">
             <div class="w6-th">المنصة</div>
             <div class="w6-th">أقوى إشارة ترتيب</div>
             <div class="w6-th">أكبر عقوبة</div>
             <div class="w6-th">طول مثالي</div>
 
-            <div class="w6-tr-h" style="color:#E4405F;">📸 Instagram</div>
+            <div class="w6-tr-h u-c-brand" style="--brand-c:#E4405F">📸 Instagram</div>
             <div class="w6-tr">Send-to-friend &gt; Save &gt; Comment</div>
             <div class="w6-tr">Watermark TikTok / إعادة نشر</div>
             <div class="w6-tr">Reels 7-15s · Carousel 8-10</div>
@@ -10923,12 +10934,12 @@
             <div class="w6-tr">روابط في النص الأصلي</div>
             <div class="w6-tr">1200-1500 char + سطور قصيرة</div>
 
-            <div class="w6-tr-h" style="color:#FF0000;">▶️ YouTube</div>
+            <div class="w6-tr-h u-c-brand" style="--brand-c:#FF0000">▶️ YouTube</div>
             <div class="w6-tr">CTR (thumbnail) + AVD</div>
             <div class="w6-tr">Clickbait مخالف + reused content</div>
             <div class="w6-tr">8-15 دقيقة (long) · &lt;60s (Shorts)</div>
 
-            <div class="w6-tr-h" style="color:#FFFC00;">👻 Snapchat</div>
+            <div class="w6-tr-h u-c-brand" style="--brand-c:#FFFC00">👻 Snapchat</div>
             <div class="w6-tr">Replies + screenshots + completion</div>
             <div class="w6-tr">محتوى ثابت بدون animation</div>
             <div class="w6-tr">5-15s vertical</div>
@@ -10942,7 +10953,7 @@
       </div>
 
       <!-- MENA Best Time Note -->
-      <div class="ql-glass" style="margin-top:20px; padding:16px 18px; border-radius:12px; border-color:rgba(102,252,241,0.2); background:rgba(102,252,241,0.04);">
+      <div class="ql-glass u-mt-5 u-p-16-18 u-rounded-12 u-tint-cyan">
         <div class="u-fz-11 u-fw-800 u-ls-11 u-tt-up u-c-cyan u-mb-15b">🇮🇶 ملاحظة MENA</div>
         <div class="u-meta-md-loose">
           التوقيت الذهبي للنشر في العراق/الخليج: <b class="u-c-text">9:00 - 11:30 مساءً</b> (بعد العشاء + قبل النوم). الجمعة بعد الظهر (3-6 PM) ذروة TikTok. الأحد صباحاً ذروة LinkedIn (بداية الأسبوع المهني).
@@ -10965,7 +10976,7 @@
         <span class="tag accent">5-Pillar Mix</span>
       </div>
 
-      <div class="w6-pillars-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;">
+      <div class="w6-pillars-grid u-grid u-grid-auto-220 u-gap-35">
         <div class="ql-glass w6-pillar-card u-card-thin u-tint-cyan" data-pillar="edu" >
           <div class="u-h2-card">🎓</div>
           <div class="u-t-section-mini">تعليمي</div>
@@ -11006,7 +11017,7 @@
             <div class="u-meta">يُعدّل النسب تلقائياً حسب طبيعة الجمهور المتوقع</div>
           </div>
           <select id="w6IndustrySel" onchange="w6UpdatePillars(this.value)"
-            style="background:var(--surface-2); border:1px solid var(--border); color:var(--text); border-radius:10px; padding:9px 14px; font-family:inherit; font-size:12.5px; min-width:220px;">
+            class="w6-industry-select">
             <option value="default">⚖️ افتراضي (متوازن)</option>
             <option value="b2b">💼 B2B / SaaS / استشارات</option>
             <option value="ecom">🛒 تجارة إلكترونية</option>
@@ -11017,7 +11028,7 @@
             <option value="health">🏥 صحة / عافية</option>
           </select>
         </div>
-        <div id="w6IndustryHint" style="font-size:12px; color:var(--text-muted); line-height:1.7; padding:12px 14px; background:rgba(102,252,241,0.05); border-radius:10px; border:1px solid rgba(102,252,241,0.15);">
+        <div id="w6IndustryHint" class="cc-industry-hint">
           النسب الحالية = القيم الافتراضية. غيّر الصناعة لرؤية كيف يتعدّل المزيج.
         </div>
       </div>
@@ -11034,7 +11045,7 @@
       </div>
 
       <!-- Frameworks accordion -->
-      <div class="w6-fw-grid" id="w6FwGrid" data-w6="frameworks-list" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:12px;">
+      <div class="w6-fw-grid u-grid u-grid-auto-320 u-gap-3" id="w6FwGrid" data-w6="frameworks-list">
         <!-- rendered by w6.renderFrameworks() -->
       </div>
 
@@ -11049,10 +11060,10 @@
         <span class="tag accent">Drag & Drop</span>
       </div>
 
-      <div class="w6-cal-wrap" style="display:grid; grid-template-columns:200px 1fr; gap:16px; align-items:flex-start;">
+      <div class="w6-cal-wrap u-grid u-grid-w6-cal u-gap-4 u-items-start">
 
         <!-- Sidebar: pillars draggable + actions -->
-        <div class="ql-glass" style="padding:14px; border-radius:14px; position:sticky; top:80px;">
+        <div class="ql-glass u-p-14 u-rounded-14 u-sticky-top-80">
           <div class="u-fz-11 u-fw-800 u-ls-11 u-tt-up u-c-faint u-mb-25">السحب من هنا</div>
           <div class="w6-cal-pills u-col">
             <div class="w6-cal-pill u-drag-btn u-drag-accent" draggable="true" data-pill="edu"  >🎓 تعليمي</div>
@@ -11081,10 +11092,10 @@
 
         <!-- Calendar grid -->
         <div>
-          <div style="display:grid; grid-template-columns:repeat(7, 1fr); gap:6px; margin-bottom:8px; font-size:10.5px; font-weight:800; color:var(--text-faint); text-align:center;">
+          <div class="w6-cal-weekday-strip">
             <div>سبت</div><div>أحد</div><div>اثنين</div><div>ثلاثاء</div><div>أربعاء</div><div>خميس</div><div>جمعة</div>
           </div>
-          <div id="w6CalGrid" data-w6="cal-grid" style="display:grid; grid-template-columns:repeat(7, 1fr); gap:6px;">
+          <div class="u-grid u-grid-7 u-gap-1-5" id="w6CalGrid" data-w6="cal-grid">
             <!-- 30 day cells rendered by w6.renderCalendar() -->
           </div>
           <div class="u-fz-11 u-c-faint u-mt-25 u-lh-17">
@@ -11218,7 +11229,7 @@
       </div>
 
       <div class="ql-glass u-p-20-r14">
-        <div class="w6-perf-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-bottom:18px;">
+        <div class="w6-perf-grid u-grid u-grid-auto-180 u-gap-3 u-mb-45">
           <div class="w6-perf-input-wrap">
             <label>💰 الميزانية ($)</label>
             <input type="number" id="w6PfSpend" value="500" min="0" step="10" oninput="w6Calc()">
@@ -11245,7 +11256,7 @@
           </div>
         </div>
 
-        <div class="w6-perf-results" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px;">
+        <div class="w6-perf-results u-grid u-grid-auto-150 u-gap-2-5">
           <div class="w6-perf-out" data-metric="cpm">
             <div class="w6-perf-label">CPM</div>
             <div class="w6-perf-value" id="w6OutCpm">$0.00</div>
@@ -11286,7 +11297,7 @@
       </div>
 
       <!-- LTV:CAC Health Card -->
-      <div class="ql-glass" style="margin-top:14px; padding:16px 18px; border-radius:12px; border-color:rgba(245,158,11,0.25); background:rgba(245,158,11,0.04);">
+      <div class="ql-glass u-mt-35 u-p-16-18 u-rounded-12 u-tint-amber">
         <div class="u-fz-11 u-fw-800 u-ls-11 u-tt-up u-c-amber u-mb-15b">⚖️ نسبة LTV:CAC</div>
         <div class="u-meta-md-loose">
           <b>LTV (قيمة العميل مدى الحياة) ÷ CAC = نسبة الصحة المالية</b><br>
@@ -11308,7 +11319,7 @@
       </div>
 
       <div class="ql-glass u-p-20-r14">
-        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-bottom:18px;">
+        <div class="u-grid u-grid-auto-220 u-gap-35 u-mb-45">
           <div class="w6-perf-input-wrap">
             <label>📊 معدل التحويل الحالي (%)</label>
             <input type="number" id="w6AbBaseline" value="2.5" min="0.1" max="50" step="0.1" oninput="w6Ab()">
@@ -11331,7 +11342,7 @@
           </div>
         </div>
 
-        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px;">
+        <div class="u-grid u-grid-auto-160 u-gap-2-5">
           <div class="w6-perf-out">
             <div class="w6-perf-label">حجم العينة / variant</div>
             <div class="w6-perf-value" id="w6AbSize">—</div>
@@ -11354,7 +11365,7 @@
           </div>
         </div>
 
-        <div style="margin-top:16px; padding:12px 14px; background:rgba(102,252,241,0.05); border:1px solid rgba(102,252,241,0.18); border-radius:8px; font-size:11.5px; color:var(--text-muted); line-height:1.75;">
+        <div class="cc-hint-micro">
           💡 <b>قاعدة عملية:</b> لا توقف الاختبار قبل أن تصل لحجم العينة المطلوب — حتى لو ظهر "فائز" مبكر. الـ <i>peeking problem</i> يضاعف معدل النتائج الزائفة.
         </div>
       </div>
@@ -11375,7 +11386,7 @@
       </div>
 
       <!-- 5 Email Types -->
-      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-bottom:18px;">
+      <div class="u-grid u-grid-auto-220 u-gap-3 u-mb-45">
         <div class="ql-glass u-p-14-16 u-r-12 u-bc-cyan-25">
           <div class="u-h3-card">👋</div>
           <div class="u-t-section-mini">1. Welcome</div>
@@ -11460,7 +11471,7 @@
       <div class="u-grid-2-1fr">
         <!-- Do's -->
         <div class="ql-glass u-card-row u-tint-green" >
-          <div style="font-size:12px; font-weight:800; color:#22C55E; margin-bottom:10px; letter-spacing:0.5px;">✅ افعل (Do's)</div>
+          <div class="u-fs-12 u-font-black u-c-brand u-mb-25 u-track-wide" style="--brand-c:#22C55E">✅ افعل (Do's)</div>
           <ul class="u-list-meta">
             <li>اجعل أول رسالة دائماً طلب إذن: "هل أرسل لك التفاصيل؟"</li>
             <li>استخدم WhatsApp Business API للحملات (لا App عادي)</li>
@@ -11473,7 +11484,7 @@
         </div>
         <!-- Don'ts -->
         <div class="ql-glass u-card-row u-tint-red" >
-          <div style="font-size:12px; font-weight:800; color:#EF4444; margin-bottom:10px; letter-spacing:0.5px;">❌ لا تفعل (Don'ts)</div>
+          <div class="u-fs-12 u-font-black u-c-brand u-mb-25 u-track-wide" style="--brand-c:#EF4444">❌ لا تفعل (Don'ts)</div>
           <ul class="u-list-meta">
             <li>broadcast لـ 200 رقم بدون موافقة = حظر فوري</li>
             <li>إرسال خارج النافذة الـ 24 ساعة بدون template معتمد</li>
@@ -11486,7 +11497,7 @@
       </div>
 
       <!-- 24-hour Window Card -->
-      <div class="ql-glass" style="margin-top:14px; padding:16px 18px; border-radius:14px; border-color:rgba(245,158,11,0.3); background:rgba(245,158,11,0.04);">
+      <div class="ql-glass u-mt-35 u-p-16-18 u-rounded-14 u-tint-amber u-tint-amber-strong">
         <div class="u-fz-12 u-fw-800 u-c-amber u-mb-2">⏱️ قاعدة الـ 24 ساعة (Customer Service Window)</div>
         <div class="u-meta-md-loose">
           عند تواصل عميل معك على WhatsApp، يُفتح "نافذة 24 ساعة" تستطيع فيها الرد بأي رسالة مجانية. بعد 24 ساعة، تحتاج <b class="u-c-text">قالب معتمد (Template)</b> لإعادة فتح المحادثة. القوالب 3 أنواع:
@@ -11497,7 +11508,7 @@
       </div>
 
       <!-- Iraq specific WhatsApp note -->
-      <div class="ql-glass" style="margin-top:14px; padding:14px 16px; border-radius:12px; border-color:rgba(102,252,241,0.2); background:rgba(102,252,241,0.04);">
+      <div class="ql-glass u-mt-35 u-p-14-16 u-rounded-12 u-tint-cyan">
         <div class="u-fz-11 u-fw-800 u-c-cyan u-mb-15b">🇮🇶 ملاحظة العراق</div>
         <div class="u-fz-115 u-c-muted u-lh-175">
           70%+ من قرار الشراء B2C في العراق يمر عبر DM (WhatsApp/Instagram) قبل الدفع. الـ checkout المباشر أقل شيوعاً. <b class="u-c-text">الاستراتيجية:</b> اجعل الـ ads تنتهي بـ "أرسل WhatsApp لنا" (Click-to-WhatsApp) — تحويل أعلى من landing pages.
@@ -11516,7 +11527,7 @@
       </div>
 
       <div class="ql-glass u-p-20-r14">
-        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-bottom:16px;">
+        <div class="u-grid u-grid-auto-180 u-gap-3 u-mb-4">
           <div class="w6-perf-input-wrap">
             <label>👥 المتابعون</label>
             <input type="number" id="w6InfFol" value="50000" min="0" step="100" oninput="w6Inf()">
@@ -11549,7 +11560,7 @@
           </div>
         </div>
 
-        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-bottom:16px;">
+        <div class="u-grid u-grid-auto-150 u-gap-2-5 u-mb-4">
           <div class="w6-perf-out">
             <div class="w6-perf-label">Engagement Rate</div>
             <div class="w6-perf-value" id="w6InfER">—</div>
@@ -11577,7 +11588,7 @@
       </div>
 
       <!-- Influencer Disclosure note -->
-      <div class="ql-glass" style="margin-top:14px; padding:14px 16px; border-radius:12px; border-color:rgba(139,92,246,0.25); background:rgba(139,92,246,0.04);">
+      <div class="ql-glass u-mt-35 u-p-14-16 u-rounded-12 u-tint-violet">
         <div class="u-fz-11 u-fw-800 u-c-purple u-mb-15b">⚖️ Disclosure Best Practices</div>
         <div class="u-fz-115 u-c-muted u-lh-175">
           FTC (USA) و ASA (UK) و ARPA (KSA): الإفصاح إجباري. استخدم #ad أو #sponsored في بداية الـ caption (لا في النهاية أو مخفي بين 30 hashtag). في العراق: لا توجد لائحة رسمية بعد، لكن الجمهور يميّز بسرعة — الإفصاح يبني ثقة، التخفي يدمّرها.
@@ -11603,7 +11614,7 @@
       <div class="ql-glass u-p-card-lg">
         <div class="u-fz-12 u-fw-800 u-c-cyan u-mb-3">💵 نطاقات الراتب — بغداد / أربيل / البصرة (IQD + USD)</div>
         <div class="w6-iq-salary u-overflow-auto">
-          <table style="width:100%; border-collapse:collapse; font-size:12px; min-width:540px;">
+          <table class="u-w-full u-border-collapse u-fs-12 u-min-w-540">
             <thead>
               <tr class="u-bg-accent-06" >
                 <th class="u-th-eyebrow">الدور</th>
@@ -11629,10 +11640,10 @@
       </div>
 
       <!-- Platforms ranking + Companies + Local hooks -->
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:18px;">
+      <div class="u-grid u-grid-1-1 u-gap-35 u-mb-45">
         <div class="ql-glass u-p-card-md">
           <div class="u-eyebrow-cyan u-eyebrow-11">📱 ترتيب المنصات محلياً (B2C)</div>
-          <ol style="font-size:12px; color:var(--text-muted); line-height:1.95; padding-inline-start:22px; margin:0;">
+          <ol class="u-list-w6-cite u-fs-12">
             <li><b class="u-c-text">Instagram + Facebook (Meta)</b> — حصة الأسد، خصوصاً للـ ads</li>
             <li><b class="u-c-text">TikTok</b> — نمو سريع، ذروة في 2025</li>
             <li><b class="u-c-text">Snapchat</b> — قاعدة شبابية كبيرة في الخليج</li>
@@ -11694,11 +11705,11 @@
       </div>
 
       <div class="ql-glass w6-cheat u-p-card u-r-14">
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px;">
+        <div class="u-grid u-grid-1-1 u-gap-45">
 
           <div>
             <div class="u-fz-12 u-fw-800 u-c-cyan u-mb-2">⚡ القواعد الذهبية (10)</div>
-            <ol style="font-size:11.5px; color:var(--text-muted); line-height:1.85; padding-inline-start:22px; margin:0;">
+            <ol class="u-list-w6-cite u-list-w6-cite--tight">
               <li>أول 1.5s = 87% من قرار الإكمال (TikTok/Reels).</li>
               <li>5-Pillar Mix: 40% تعليمي · 25% ترفيهي · 15% ملهم · 15% ترويجي · 5% BTS.</li>
               <li>Reels مثالي 7-15s · Carousel 8-10 شرائح · LinkedIn 1200-1500 char.</li>
@@ -11714,7 +11725,7 @@
 
           <div>
             <div class="u-fz-12 u-fw-800 u-c-amber u-mb-2">📐 المعادلات السريعة</div>
-            <div style="font-size:11.5px; color:var(--text-muted); line-height:1.95; font-family:'Courier New',monospace; background:var(--surface-2); padding:12px 14px; border-radius:8px; border:1px dashed var(--border);">
+            <div class="w6-cite-block-mono">
               CPM = (Spend / Impressions) × 1000<br>
               CPC = Spend / Clicks<br>
               CTR = Clicks / Impressions × 100<br>
@@ -11763,8 +11774,8 @@
         <span class="tag accent">12 Citations</span>
       </div>
 
-      <div class="ql-glass" style="padding:18px 22px; border-radius:14px;">
-        <ol class="w6-cite-list" style="font-size:11.5px; color:var(--text-muted); line-height:1.95; padding-inline-start:22px; margin:0;">
+      <div class="ql-glass u-p-18-22 u-rounded-14">
+        <ol class="w6-cite-list u-list-w6-cite">
           <li><b class="u-c-text">Cialdini, R.</b> — <i>Influence: The Psychology of Persuasion</i> (Harper Business, 2021 ed.)</li>
           <li><b class="u-c-text">Eyal, N.</b> — <i>Hooked: How to Build Habit-Forming Products</i> (Portfolio, 2014)</li>
           <li><b class="u-c-text">Loewenstein, G.</b> — "The Psychology of Curiosity" — Psychological Bulletin, Vol. 116(1), pp. 75-98 (1994)</li>
@@ -11789,16 +11800,16 @@
 
         <div class="vhs-scrub" data-vhs-scrub aria-labelledby="ep4-vhs-h">
           <div class="vhs-scrub__ticks" aria-hidden="true">
-            <span class="vhs-scrub__tick" style="inset-inline-start:0%"></span>
-            <span class="vhs-scrub__tick-label" style="inset-inline-start:0%">يناير</span>
-            <span class="vhs-scrub__tick" style="inset-inline-start:25%"></span>
-            <span class="vhs-scrub__tick-label" style="inset-inline-start:25%">أبريل</span>
-            <span class="vhs-scrub__tick" style="inset-inline-start:50%"></span>
-            <span class="vhs-scrub__tick-label" style="inset-inline-start:50%">يوليو</span>
-            <span class="vhs-scrub__tick" style="inset-inline-start:75%"></span>
-            <span class="vhs-scrub__tick-label" style="inset-inline-start:75%">أكتوبر</span>
-            <span class="vhs-scrub__tick" style="inset-inline-start:100%"></span>
-            <span class="vhs-scrub__tick-label" style="inset-inline-start:100%">ديسمبر</span>
+            <span class="vhs-scrub__tick u-pos-tick" style="--tick-pos:0%"></span>
+            <span class="vhs-scrub__tick-label u-pos-tick" style="--tick-pos:0%">يناير</span>
+            <span class="vhs-scrub__tick u-pos-tick" style="--tick-pos:25%"></span>
+            <span class="vhs-scrub__tick-label u-pos-tick" style="--tick-pos:25%">أبريل</span>
+            <span class="vhs-scrub__tick u-pos-tick" style="--tick-pos:50%"></span>
+            <span class="vhs-scrub__tick-label u-pos-tick" style="--tick-pos:50%">يوليو</span>
+            <span class="vhs-scrub__tick u-pos-tick" style="--tick-pos:75%"></span>
+            <span class="vhs-scrub__tick-label u-pos-tick" style="--tick-pos:75%">أكتوبر</span>
+            <span class="vhs-scrub__tick u-pos-tick" style="--tick-pos:100%"></span>
+            <span class="vhs-scrub__tick-label u-pos-tick" style="--tick-pos:100%">ديسمبر</span>
           </div>
           <div class="vhs-scrub__fill" aria-hidden="true"></div>
           <div class="vhs-scrub__cursor" aria-hidden="true"></div>
@@ -11882,7 +11893,7 @@
             </span>
           </div>
           <div class="page-mastery-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <div class="page-mastery-progress-fill" style="--progress: 0%" data-page-progress-fill></div>
+            <div class="page-mastery-progress-fill" data-page-progress-fill></div>
           </div>
           <div class="page-mastery-progress-tiers">
             <span class="tier-marker tier-marker--foundation">
@@ -11902,7 +11913,7 @@
       <div id="sim-lobby">
 
         <!-- Stats bar -->
-        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:24px;">
+        <div class="u-grid u-grid-4 u-gap-35 u-mb-6">
           <div class="block-pacing" data-pacing-for="lb-001" data-block-est="6">
             <div class="block-pacing-mastery">
               <button class="mastery-toggle" type="button" data-mastery-for="lb-001" data-mastery-state="not-started" aria-label="حالة الإتقان">
@@ -12186,7 +12197,7 @@
         </div>
 
         <!-- Scenario cards grid -->
-        <div id="sim-cards-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:32px;"></div>
+        <div class="u-grid u-grid-3 u-gap-4 u-mb-8" id="sim-cards-grid"></div>
 
       </div><!-- /sim-lobby -->
 
@@ -12206,7 +12217,7 @@
             <div id="eng-progress-wrap" class="u-row-8">
               <span class="u-meta-sm">التقدم:</span>
               <div class="u-track u-track-120" >
-                <div id="eng-progress-bar" style="height:100%; background:linear-gradient(90deg,var(--accent),#0EA5E9); border-radius:99px; transition:width 0.5s ease; width:0%;"></div>
+                <div id="eng-progress-bar" class="eng-progress-bar"></div>
               </div>
               <span id="eng-progress-text" class="u-meta-sm"></span>
             </div>
@@ -12217,7 +12228,7 @@
         <div id="eng-meta" class="u-flex u-items-center u-gap-2-5 u-mb-45 u-flex-wrap"></div>
 
         <!-- Scene card -->
-        <div class="card" style="margin-bottom:16px; border-color:var(--border-hover);">
+        <div class="card card--border-strong u-mb-4">
           <div class="u-fz-9 u-fw-800 u-ls-15 u-tt-up u-c-faint u-mb-3">📍 المشهد</div>
           <p id="eng-setup" class="u-fz-14 u-c-text u-lh-18 u-mb-4"></p>
 
@@ -12234,7 +12245,7 @@
 
         <!-- Choices -->
         <div id="eng-choices-wrap" class="u-mb-4">
-          <div style="font-size:11px; font-weight:700; color:var(--text-muted); letter-spacing:0.5px; margin-bottom:12px; text-transform:uppercase;">كيف ستتصرف؟</div>
+          <div class="u-fs-11 u-font-bold u-text-muted u-track-wide u-mb-3 u-uppercase">كيف ستتصرف؟</div>
           <div id="eng-choices" class="u-flex u-flex-col u-gap-2-5"></div>
         </div>
 
@@ -12242,7 +12253,7 @@
         <div id="eng-feedback-panel" class="u-hidden">
           <div class="card" id="eng-feedback-card" class="u-mb-4">
             <div class="u-flex u-items-center u-gap-2-5 u-mb-3">
-              <div id="eng-feedback-icon" style="font-size:28px;"></div>
+              <div class="u-fs-28" id="eng-feedback-icon"></div>
               <div>
                 <div id="eng-score-gained" class="u-fz-18 u-fw-900"></div>
                 <div id="eng-feedback-title" class="u-fz-13 u-fw-700 u-c-text u-mt-tiny"></div>
@@ -12263,7 +12274,7 @@
           </div>
 
           <div class="u-flex u-justify-center">
-            <button class="btn btn-primary" id="eng-next-btn" onclick="nextScenario()" style="padding:12px 32px; font-size:14px;">
+            <button class="btn btn-primary u-p-12-32 u-fs-14" id="eng-next-btn" onclick="nextScenario()">
               السيناريو التالي ←
             </button>
           </div>
@@ -12274,11 +12285,11 @@
       <!-- ============ ROUND REPORT ============ -->
       <div id="sim-report" class="u-hidden">
         <div class="card u-stack-center u-max-600" >
-          <div style="font-size:64px; margin-bottom:16px;" id="report-emoji"></div>
+          <div class="u-fs-64 u-mb-4" id="report-emoji"></div>
           <h2 class="u-fz-24 u-fw-900 u-c-text u-mb-2" id="report-title"></h2>
           <p class="u-fz-13 u-c-muted u-mb-7" id="report-subtitle"></p>
 
-          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:28px;">
+          <div class="u-grid u-grid-3 u-gap-35 u-mb-7">
             <div class="u-frame-card">
               <div class="u-stat-26 u-c-accent"  id="report-score">0</div>
               <div class="u-meta-tiny">النقاط المكتسبة</div>
@@ -12565,7 +12576,7 @@
             </span>
           </div>
           <div class="page-mastery-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <div class="page-mastery-progress-fill" style="--progress: 0%" data-page-progress-fill></div>
+            <div class="page-mastery-progress-fill" data-page-progress-fill></div>
           </div>
           <div class="page-mastery-progress-tiers">
             <span class="tier-marker tier-marker--foundation">
@@ -12834,7 +12845,7 @@
 
       <!-- ── INTRO BANNER ── -->
       <div class="u-callout u-callout-violet u-callout-sm" >
-        <div style="font-size:28px;flex-shrink:0;margin-top:2px;">🎯</div>
+        <div class="u-fs-28 u-flex-shrink-0 u-mt-0-5">🎯</div>
         <div>
           <div class="u-fz-135 u-fw-800 u-c-text u-mb-15b">القاعدة الذهبية — قبل أن تبدأ</div>
           <div class="u-fz-125 u-c-muted u-lh-175">ألم الخسارة يُساوي ضعف لذة الربح. الإنسان لا يتحرك لأجل الكسب بقدر ما يتحرك لأجل تفادي الخسارة. <strong class="u-c-text">لا تستخدم أداة واحدة — ادمج اثنتين في جملة واحدة.</strong> الدماغ لا يقاوم تركيبتين معاً.</div>
@@ -12843,7 +12854,7 @@
 
       <!-- ── COMBO GUIDE (top) ── -->
       <div class="card u-frame-clip">
-        <div style="padding:14px 20px 12px;border-bottom:1px solid var(--border);background:var(--surface-2);display:flex;align-items:center;justify-content:space-between;">
+        <div class="card-strip-header card-strip-header--between">
           <div class="u-t-card-title-tight">⚡ تركيبات الأدوات الأعلى تأثيراً</div>
           <span class="tag accent">دليل فوري</span>
         </div>
@@ -14076,7 +14087,7 @@
 
         <!-- ═══ جدول تقاطع النمط × الدفاع النفسي ═══ -->
         <div class="card u-frame-clip-mt">
-          <div style="padding:14px 20px 12px;border-bottom:1px solid var(--border);background:var(--surface-2);display:flex;align-items:center;gap:12px;">
+          <div class="card-strip-header card-strip-header--gap">
             <span class="u-fz-20">&#x1F9E9;</span>
             <div>
               <div class="u-fz-135 u-fw-800 u-c-text">جدول تقاطع النمط × الدفاع النفسي</div>
@@ -14629,7 +14640,7 @@
             </span>
           </div>
           <div class="page-mastery-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <div class="page-mastery-progress-fill" style="--progress: 0%" data-page-progress-fill></div>
+            <div class="page-mastery-progress-fill" data-page-progress-fill></div>
           </div>
           <div class="page-mastery-progress-tiers">
             <span class="tier-marker tier-marker--foundation">
@@ -15458,7 +15469,7 @@
             <div class="u-meta-md">قيّم نفسك بصدق — النتيجة لك وحدك</div>
           </div>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;" id="eq-assessment">
+        <div class="u-grid u-grid-1-1 u-gap-4" id="eq-assessment">
           <div class="psych-info-block" data-block-id="eq-028" data-block-type="lesson" data-difficulty="2" data-est-minutes="5">
             <div class="psych-info-label u-c-pink">الوعي الذاتي</div>
             <div class="u-row-mt">
@@ -15845,7 +15856,7 @@
             </span>
           </div>
           <div class="page-mastery-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <div class="page-mastery-progress-fill" style="--progress: 0%" data-page-progress-fill></div>
+            <div class="page-mastery-progress-fill" data-page-progress-fill></div>
           </div>
           <div class="page-mastery-progress-tiers">
             <span class="tier-marker tier-marker--foundation">
@@ -17051,7 +17062,7 @@
             <div class="u-tag-green">🤝 Win-Win</div>
             <div class="u-meta-lh-md">الأفضل للعلاقات طويلة الأمد. كلا الطرفين يكسبان. يتطلب ثقة وانفتاح.</div>
           </div>
-          <div style="background:var(--surface-2);border:1px solid rgba(249,115,22,0.2);border-radius:var(--radius-md);padding:16px;">
+          <div class="callout-hr-orange">
             <div class="u-tag-orange">⚡ تنافسي</div>
             <div class="u-meta-lh-md">للمعاملات لمرة واحدة. يتطلب معلومات أكثر وBATNA قوي. مخاطرة في العلاقة.</div>
           </div>
@@ -17181,7 +17192,7 @@
             </span>
           </div>
           <div class="page-mastery-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <div class="page-mastery-progress-fill" style="--progress: 0%" data-page-progress-fill></div>
+            <div class="page-mastery-progress-fill" data-page-progress-fill></div>
           </div>
           <div class="page-mastery-progress-tiers">
             <span class="tier-marker tier-marker--foundation">
@@ -17400,7 +17411,7 @@
             <div class="u-meta-md">الأداة الأكثر استخداماً في أفضل مراكز الخدمة عالمياً</div>
           </div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+        <div class="u-grid u-grid-4 u-gap-4">
           <div class="u-text-center u-p-20-14 u-bg-surface-2 u-r-md u-b1-green-20">
             <div class="u-stat-36 u-c-green" >L</div>
             <div class="u-card-title-sm">Listen</div>
@@ -17899,7 +17910,7 @@
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px;">
+        <div class="u-grid u-grid-1-1 u-gap-35 u-mt-4">
           <div class="u-frame-card">
             <div class="u-fz-11 u-fw-800 u-tt-up u-ls-1 u-c-red u-mb-2">🔥 Amygdala Hijack — اختطاف اللوزة الدماغية</div>
             <div class="u-meta-lh-md">حين يغضب العميل، اللوزة الدماغية تتولى السيطرة — المنطق يتوقف. لا فائدة من الشرح المنطقي لشخص في هذه الحالة. الخطوة الأولى: خفّض الكورتيزول بالاعتراف العاطفي — ثم انتظر 8-10 ثوانٍ — ثم قدّم المنطق.</div>
@@ -17996,7 +18007,7 @@
             </span>
           </div>
           <div class="page-mastery-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <div class="page-mastery-progress-fill" style="--progress: 0%" data-page-progress-fill></div>
+            <div class="page-mastery-progress-fill" data-page-progress-fill></div>
           </div>
           <div class="page-mastery-progress-tiers">
             <span class="tier-marker tier-marker--foundation">
@@ -18875,7 +18886,7 @@
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;">
+        <div class="u-grid u-grid-1-1 u-gap-35">
           <div class="u-frame-card">
             <div class="u-eyebrow-cyan u-eyebrow-1">🧊 Impostor Syndrome</div>
             <div class="u-meta-lh-md">70% من المبرمجين يشعرون أنهم "لا يستحقون" مناصبهم. هذا طبيعي بيولوجيًا. الخبراء يعرفون حدود معرفتهم — المبتدئون يعتقدون أنهم يعرفون كل شيء (Dunning-Kruger). إحساسك بالنقص دليل وعي لا ضعف.</div>
@@ -18930,7 +18941,7 @@
             <div><strong class="u-c-text">C · Consistency:</strong> كل قارئ يرى آخر كتابة — دائماً.</div>
             <div><strong class="u-c-text">A · Availability:</strong> كل طلب يحصل على رد — دائماً.</div>
             <div><strong class="u-c-text">P · Partition Tolerance:</strong> النظام يعمل رغم انقطاع الشبكة.</div>
-            <div style="padding:10px 12px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.2);border-radius:var(--radius-sm);">في العالم الحقيقي P ليست خياراً — شبكات تتقطّع. فالاختيار الحقيقي بين <strong class="u-c-purple">CP</strong> (بنوك) و<strong class="u-c-purple">AP</strong> (سوشيال ميديا).</div>
+            <div class="callout-violet-inline">في العالم الحقيقي P ليست خياراً — شبكات تتقطّع. فالاختيار الحقيقي بين <strong class="u-c-purple">CP</strong> (بنوك) و<strong class="u-c-purple">AP</strong> (سوشيال ميديا).</div>
           </div>
         </div>
 
@@ -18939,7 +18950,7 @@
           <div class="u-meta-lh-lg">
             Idempotent = تكرار الطلب لا يُغيّر النتيجة. <strong class="u-c-text">POST /payments</strong> بدون idempotency key = كارثة عند retry. الحل: Client يُرسل <code class="u-inline-mark u-inline-mark-accent" >Idempotency-Key: UUID</code> والسيرفر يُخزّنه 24h. أي retry بنفس المفتاح = نفس النتيجة، بدون خصم مزدوج.
           </div>
-          <div style="margin-top:10px;padding:10px 12px;background:rgba(34,197,94,0.06);border-right:3px solid #22C55E;border-radius:var(--radius-sm);font-size:11.5px;color:var(--text);">
+          <div class="callout-citation-green">
             <strong>قاعدة:</strong> أي endpoint يُعدّل الحالة + يتعامل مع أموال = يجب أن يكون idempotent. لا استثناءات.
           </div>
         </div>
@@ -19324,7 +19335,7 @@
 
         </div>
 
-        <div style="margin-top:18px;padding:16px 18px;background:linear-gradient(135deg,rgba(102,252,241,0.08),rgba(139,92,246,0.06));border:1px solid rgba(102,252,241,0.2);border-radius:var(--radius-md);">
+        <div class="callout-cyan-violet-gradient">
           <div class="u-fz-11 u-fw-800 u-ls-15 u-tt-up u-c-cyan u-mb-15b">🧘 Behavioralism · قاعدة «15/5/1»</div>
           <div class="u-meta-lh-lg">
             <strong class="u-c-text">15 دقيقة</strong> تُجرّب بنفسك (بناء ثقة + تعلم مستقل) · <strong class="u-c-text">5 دقائق</strong> تبحث في التوثيق/Stack Overflow (مهارة بحث) · <strong class="u-c-text">1 دقيقة</strong> قبل طلب المساعدة: اكتب ما جرّبته، ما الفرضيات، ما المُتوقع مقابل ما يحدث. هذا يُوفّر وقت زميلك ويجعلك أسرع في الـ debug لاحقاً — كثير من الأسئلة تُجاب بنفسها أثناء الكتابة (Rubber Duck).
@@ -21617,7 +21628,7 @@ const bird = { ...canMove(), ...canFly() };
             </span>
           </div>
           <div class="page-mastery-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <div class="page-mastery-progress-fill" style="--progress: 0%" data-page-progress-fill></div>
+            <div class="page-mastery-progress-fill" data-page-progress-fill></div>
           </div>
           <div class="page-mastery-progress-tiers">
             <span class="tier-marker tier-marker--foundation">
@@ -22387,7 +22398,7 @@ const bird = { ...canMove(), ...canFly() };
         <div class="u-meta-lg">5 خطوات لا تُختصر — النظام الذي يحميك ويحمي المؤسسة</div>
       </div>
 
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:28px;">
+      <div class="u-grid u-grid-5 u-gap-3 u-mb-7">
         <div class="u-tile-card">
           <div class="u-stat-28 u-c-amber" >1</div>
           <div class="u-h6">تقرير X</div>
@@ -23433,15 +23444,15 @@ const bird = { ...canMove(), ...canFly() };
       <div class="ql-glass u-pad-card-lg">
         <div class="u-card-title-sm">🔍 Benford's Law — قانون الرقم الأول</div>
         <div class="u-fz-125 u-c-muted u-lh-185 u-mb-3">في البيانات الطبيعية، الأرقام التي تبدأ بـ <strong>1</strong> تظهر بنسبة ~30.1%، بـ <strong>2</strong> ~17.6%، بـ <strong>9</strong> فقط 4.6%. حين يُلفّق البشر أرقاماً — يُوزّعونها «عادلة» (10% لكل رقم). <strong class="u-c-text">الفجوة عن القانون = جرس إنذار.</strong></div>
-        <div style="padding:12px 14px;background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(239,68,68,0.05));border:1px solid rgba(245,158,11,0.22);border-radius:var(--radius-sm);">
-          <div style="font-size:11px;font-weight:800;color:#F59E0B;margin-bottom:4px;letter-spacing:1.3px;text-transform:uppercase;">🧪 محاكاة: اكتشف الاحتيال</div>
+        <div class="callout-emergency-gradient">
+          <div class="u-fs-11 u-font-black u-c-brand u-mb-1 u-track-wider u-uppercase" style="--brand-c:#F59E0B">🧪 محاكاة: اكتشف الاحتيال</div>
           <div class="u-fz-12 u-c-text u-lh-18">وصلتك 500 فاتورة من مورّد. الأرقام تبدأ بـ <code class="u-text-brand">1→12%</code>, <code class="u-text-brand">4→22%</code>, <code class="u-text-brand">5→19%</code>. هل تشك؟ <strong class="u-c-red">نعم</strong> — التوزيع ضد بنفورد. الاحتمال: أرقام مُلفّقة للبقاء تحت حد الموافقة (4999 بدلاً من 5000).</div>
         </div>
       </div>
 
       <!-- Red Flags Table -->
       <div class="card u-frame-clip">
-        <div style="padding:16px 22px;border-bottom:1px solid var(--border);background:var(--surface-2);">
+        <div class="card-strip-header card-strip-header--plain">
           <div class="u-t-card-title-tight">🚩 Red Flags — مؤشرات التلاعب التي يعرفها المحاسب الجنائي</div>
         </div>
         <table class="data-table">
@@ -24731,7 +24742,7 @@ const bird = { ...canMove(), ...canFly() };
             </span>
           </div>
           <div class="page-mastery-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <div class="page-mastery-progress-fill" style="--progress: 0%" data-page-progress-fill></div>
+            <div class="page-mastery-progress-fill" data-page-progress-fill></div>
           </div>
           <div class="page-mastery-progress-tiers">
             <span class="tier-marker tier-marker--foundation">
@@ -28626,7 +28637,7 @@ const bird = { ...canMove(), ...canFly() };
             </span>
           </div>
           <div class="page-mastery-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-            <div class="page-mastery-progress-fill" style="--progress: 0%" data-page-progress-fill></div>
+            <div class="page-mastery-progress-fill" data-page-progress-fill></div>
           </div>
           <div class="page-mastery-progress-tiers">
             <span class="tier-marker tier-marker--foundation">
@@ -32598,7 +32609,7 @@ const bird = { ...canMove(), ...canFly() };
       <span class="footer-sep">·</span>
       <span>منصة التدريب الاحترافية</span>
       <span class="footer-sep">·</span>
-      <span onclick="if(confirm('هل تريد مسح كل بيانات التقدم المحفوظة؟')){localStorage.clear();location.reload();}" style="cursor:pointer;color:var(--text-faint);font-size:10.5px;text-decoration:underline;text-decoration-color:var(--border-hover);" title="مسح البيانات المحفوظة">مسح البيانات</span>
+      <span onclick="if(confirm('هل تريد مسح كل بيانات التقدم المحفوظة؟')){localStorage.clear();location.reload();}" class="clear-progress-link" title="مسح البيانات المحفوظة">مسح البيانات</span>
     </div>
   </footer>
 
@@ -32645,7 +32656,7 @@ const bird = { ...canMove(), ...canFly() };
       <div class="cath-dash-card material-regular">
         <header>
           <h2><i class="qi" data-icon="line-chart"></i> النشاط — آخر 30 يوم</h2>
-          <span style="font-size:.78rem;color:var(--color-text-faint,rgba(255,255,255,.5));">حدث / يوم</span>
+          <span class="u-text-faint u-fs-78r">حدث / يوم</span>
         </header>
         <div class="progress-chart-wrap">
           <canvas id="progress-chart" width="600" height="180"></canvas>
@@ -32727,27 +32738,14 @@ const bird = { ...canMove(), ...canFly() };
 <!-- ============================================================
      LOADING OVERLAY
 ============================================================ -->
-<div id="loading-overlay" style="
-  position:fixed; inset:0; z-index:9999;
-  background:var(--bg);
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:24px;
-  transition: opacity 0.6s ease;
-">
-  <div style="
-    width:56px; height:56px;
-    border-radius:14px;
-    background:var(--accent-dim);
-    border:1px solid var(--border-hover);
-    display:flex; align-items:center; justify-content:center;
-    animation: loadPulse 1s ease infinite alternate;
-    font-size:28px;
-  ">🎓</div>
+<div id="loading-overlay" class="loading-overlay">
+  <div class="loading-overlay__icon-frame">🎓</div>
   <div class="u-text-center">
     <div class="u-fz-18 u-fw-800 u-c-text u-mb-15b">منصة التدريب الاحترافية</div>
     <div class="u-fz-13 u-c-muted">جارٍ تحميل بيئة التدريب...</div>
   </div>
   <div class="u-track u-track-200" >
-    <div style="height:100%; background:linear-gradient(90deg, var(--accent), #0EA5E9); border-radius:99px; animation:loadBar 2s ease forwards;"></div>
+    <div class="gateway-load-bar"></div>
   </div>
 </div>
 
@@ -32757,21 +32755,8 @@ const bird = { ...canMove(), ...canFly() };
 <!-- ============================================================
      BADGE TOAST NOTIFICATION
 ============================================================ -->
-<div id="badge-toast" style="
-  position:fixed; bottom:90px; left:24px; z-index:5000;
-  background:var(--surface);
-  border:1px solid var(--border-hover);
-  border-radius:var(--radius-lg);
-  padding:14px 18px;
-  display:flex; align-items:center; gap:12px;
-  box-shadow:var(--shadow-md), 0 0 24px rgba(102,252,241,0.15);
-  transform:translateY(120px);
-  opacity:0;
-  transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s ease;
-  pointer-events:none;
-  min-width:260px;
-">
-  <div style="font-size:26px;" class="badge-toast-emoji">🏆</div>
+<div id="badge-toast" class="badge-toast">
+  <div class="badge-toast-emoji u-fs-26">🏆</div>
   <div>
     <div class="u-fz-10 u-fw-800 u-ls-1 u-tt-up u-c-cyan u-mb-tiny">شارة جديدة مفتوحة! 🎉</div>
     <div class="u-fz-135 u-fw-700 u-c-text badge-toast-name">المحاور الذهبي</div>

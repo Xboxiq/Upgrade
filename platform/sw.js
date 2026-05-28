@@ -1,11 +1,12 @@
 /* ============================================================
-   ATELIER v16 — Service Worker (Worker 14 / Phase 6)
+   ÊLAN v4 / ζ4 — Service Worker (PWA Installable + Offline Ritual)
    Strategy: precache shell + stale-while-revalidate for assets
               navigation: network-first → offline.html fallback
+   Cache version is bumped per ÊLAN v4 stage to invalidate stale shells.
    ============================================================ */
 'use strict';
 
-const VERSION = 'devotio-v3-w24-p3-2026-05';
+const VERSION = 'elan-v4-zeta4-2026-05';
 const SHELL_CACHE = `shell-${VERSION}`;
 const ASSET_CACHE = `assets-${VERSION}`;
 const FONT_CACHE  = `fonts-${VERSION}`;
@@ -137,6 +138,68 @@ const PRECACHE = [
   './assets/js/upg-nav-2.js',
   // Worker 24 / Phase 3 — Swipe Gestures (PointerEvents, mobile-only, RTL-aware)
   './assets/js/upg-touch-1.js',
+
+  // ÊLAN v4 — α2/β1/β2/β3 — Token files (5 foundational + voice + signature + layout)
+  './assets/css/tokens/_color.css',
+  './assets/css/tokens/_space.css',
+  './assets/css/tokens/_type.css',
+  './assets/css/tokens/_motion.css',
+  './assets/css/tokens/_breakpoint.css',
+  './assets/css/tokens/_voice-utilities.css',
+  './assets/css/tokens/_signature.css',
+  './assets/css/tokens/_layout.css',
+
+  // ÊLAN v4 — γ1..γ9 — Eight Worlds + activation foundation
+  './assets/css/worlds/_index.css',
+  './assets/css/worlds/_hibr.css',
+  './assets/css/worlds/_naar.css',
+  './assets/css/worlds/_nada.css',
+  './assets/css/worlds/_hadeed.css',
+  './assets/css/worlds/_dhahab.css',
+  './assets/css/worlds/_tayyar.css',
+  './assets/css/worlds/_warsha.css',
+  './assets/css/worlds/_saloon.css',
+
+  // ÊLAN v4 — δ5/δ6 — Kinetic shell (view transitions + motion sanctuary)
+  './assets/css/_view-transition.css',
+  './assets/css/_motion-sanctuary.css',
+
+  // ÊLAN v4 — ε3..ε6 — Content revival shards (CSS)
+  './assets/css/_epsilon3-fieldsales.css',
+  './assets/css/_epsilon4-social.css',
+  './assets/css/_epsilon5-lab.css',
+  './assets/css/_epsilon6-psych-eq-neg.css',
+
+  // ÊLAN v4 — ESM modules (worlds + δ + ε + format helpers)
+  './assets/js/elan/format.js',
+  './assets/js/elan/world.js',
+  './assets/js/elan/world-hibr.js',
+  './assets/js/elan/world-naar.js',
+  './assets/js/elan/world-nada.js',
+  './assets/js/elan/world-hadeed.js',
+  './assets/js/elan/world-dhahab.js',
+  './assets/js/elan/world-tayyar.js',
+  './assets/js/elan/world-warsha.js',
+  './assets/js/elan/world-saloon.js',
+  './assets/js/elan/sidebar-magnetic.js',
+  './assets/js/elan/bento-temporal.js',
+  './assets/js/elan/topbar-living.js',
+  './assets/js/elan/bottom-nav.js',
+  './assets/js/elan/delta6-motion.js',
+  './assets/js/elan/epsilon1-dashboard.js',
+  './assets/js/elan/epsilon3-fieldsales.js',
+  './assets/js/elan/epsilon4-social.js',
+  './assets/js/elan/epsilon5-lab.js',
+  './assets/js/elan/epsilon6-psych.js',
+  './assets/js/elan/epsilon7-customercare.js',
+  './assets/js/elan/epsilon8-programming.js',
+  './assets/js/elan/epsilon9-accounting.js',
+  './assets/js/elan/epsilon10-phonerepair.js',
+  './assets/js/elan/epsilon11-hrmastery.js',
+  './assets/js/elan/epsilon12-mood.js',
+
+  // ÊLAN v4 — ζ4 — Install prompt capture
+  './assets/js/elan/zeta4-install.js',
 ];
 
 self.addEventListener('install', (event) => {

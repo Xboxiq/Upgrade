@@ -6,6 +6,13 @@
    No theme blocks here (theme rules live in style.css @layer themes).
    ════════════════════════════════════════════════════════════════════════ */
 
+/* ζ2 — Cascade architecture: declare layer order so future authors can
+   add overrides without !important by relying on layer precedence.
+   Order is from-lowest-to-highest precedence; later layers win.
+   Existing rules remain unlayered (highest precedence) until migrated
+   per file in subsequent ζ stages. */
+@layer reset, tokens, base, components, utilities, themes, overrides;
+
 @import url("./tokens/_color.css");
 @import url("./tokens/_space.css");
 @import url("./tokens/_type.css");
@@ -14,6 +21,9 @@
 
 /* Voice utilities — β2 (Voice Casting) */
 @import url("./tokens/_voice-utilities.css");
+
+/* Layout & spacing utilities — ζ1 (Inline Purge Truthful) */
+@import url("./tokens/_layout.css");
 
 /* Per-world type signatures — β3 (Numeric+Kashida+Signature) */
 @import url("./tokens/_signature.css");

@@ -1,7 +1,7 @@
 {
-  "name": "Upgrade — منصة التطوير المهني الذاتي",
+  "name": "Upgrade — منصة التدريب الذاتي",
   "short_name": "Upgrade",
-  "description": "9 مسارات تخصصية، تعلم تفاعلي، محتوى علمي عميق — Cathedral v16 (ATELIER).",
+  "description": "ثمانية عوالم بصرية، تعلم تفاعلي، محتوى علمي عميق — ÊLAN v4.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
@@ -17,9 +17,9 @@
     { "src": "favicon.svg", "type": "image/svg+xml", "sizes": "512x512", "purpose": "any maskable" }
   ],
   "shortcuts": [
-    { "name": "لوحة التحكم", "short_name": "لوحة", "url": "./index.html#dashboard", "description": "الذهاب إلى الـ Dashboard" },
-    { "name": "كول سنتر", "short_name": "كول", "url": "./index.html#callcenter", "description": "مسار الكول سنتر" },
-    { "name": "تقدمي", "short_name": "تقدم", "url": "./index.html#myprogress", "description": "صفحة تقدمي الشخصي" },
-    { "name": "محاسبة", "short_name": "محاسبة", "url": "./index.html#accounting", "description": "مسار المحاسبة" }
+    { "name": "لوحة التحكم", "short_name": "لوحة", "url": "./index.html#dashboard", "description": "الذهاب إلى الـ Dashboard (عالم حِبر)" },
+    { "name": "كول سنتر", "short_name": "كول", "url": "./index.html#callcenter", "description": "مسار الكول سنتر (عالم تَيار)" },
+    { "name": "تقدمي", "short_name": "تقدم", "url": "./index.html#myprogress", "description": "صفحة تقدمي الشخصي (عالم حِبر)" },
+    { "name": "محاسبة", "short_name": "محاسبة", "url": "./index.html#accounting", "description": "مسار المحاسبة (عالم ذَهَب)" }
   ]
 }

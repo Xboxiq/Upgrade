@@ -241,3 +241,11 @@ import './js/elan/epsilon11-hrmastery.js';
 // Avoided: Forbidden #22 ("Welcome back, Name!" cliché) + the AI-default
 // XP/streak/level-up gamification chrome. Registers Upg.mood (frozen).
 import './js/elan/epsilon12-mood.js';
+
+
+// ÊLAN v4 — ζ4 — PWA Installable: BeforeInstallPromptEvent capture +
+// Upg.elan.install API (prompt/available/installed/outcome) + 3 events
+// (upg:pwa:installable / upg:pwa:installed / upg:pwa:dismissed).
+// No UI surface here — module is consumed by cmdk + future settings.
+// Quality stage (ζ): no beacon, no emoji, no inline toy SVG.
+import './js/elan/zeta4-install.js';

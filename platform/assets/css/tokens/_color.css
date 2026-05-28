@@ -69,6 +69,49 @@
   /* ─── Geometry preserved from v3 (used in legacy chrome) ─── */
   --radius-xs:   4px;
   --radius-full: 999px;
+
+  /* ════════════════════════════════════════════════════════════════
+     ζ1.5 — Truthful corrective pass support tokens.
+     Brand colours, callout surfaces, gauge gradients. Consumed only
+     by tokens/_layout.css ζ1.5 block. Hex values are the source of
+     truth here; markup never embeds hex via inline style.
+     ════════════════════════════════════════════════════════════════ */
+
+  /* Brand reference (social platforms — used in W6 callcenter content) */
+  --brand-instagram: hsl(348 76% 56%);   /* ≈ #E4405F */
+  --brand-youtube:   hsl(0 100% 50%);     /* #FF0000 */
+  --brand-snapchat:  hsl(60 100% 50%);    /* #FFFC00 */
+
+  /* Semantic accent extras */
+  --state-positive-fg: hsl(142 71% 45%); /* ≈ #22C55E */
+  --state-negative-fg: hsl(0 84% 60%);   /* ≈ #EF4444 */
+  --state-warn-fg:     hsl(38 92% 50%);  /* ≈ #F59E0B */
+  --state-violet-fg:   hsl(258 90% 66%); /* ≈ #8B5CF6 */
+  --state-cyan-fg:     hsl(177 96% 67%); /* ≈ #66FCF1 */
+
+  /* Callout surface tokens — alpha-channel rgba kept verbatim so legacy
+     visual fidelity is preserved exactly. */
+  --callout-cyan-bg:           rgba(102, 252, 241, 0.04);
+  --callout-cyan-border:       rgba(102, 252, 241, 0.20);
+  --callout-cyan-soft-bg:      rgba(102, 252, 241, 0.05);
+  --callout-cyan-soft-border:  rgba(102, 252, 241, 0.18);
+  --callout-amber-bg:          rgba(245, 158, 11, 0.04);
+  --callout-amber-border:      rgba(245, 158, 11, 0.25);
+  --callout-amber-warn-border: rgba(245, 158, 11, 0.22);
+  --callout-violet-bg:         rgba(139, 92, 246, 0.04);
+  --callout-violet-soft-bg:    rgba(139, 92, 246, 0.08);
+  --callout-violet-border:     rgba(139, 92, 246, 0.25);
+  --callout-violet-soft-border: rgba(139, 92, 246, 0.20);
+  --callout-positive-soft-bg:  rgba(34, 197, 94, 0.06);
+  --callout-orange-border:     rgba(249, 115, 22, 0.20);
+
+  /* Gradient surfaces */
+  --callout-warn-grad-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(239, 68, 68, 0.06));
+  --callout-cyan-violet-grad-bg: linear-gradient(135deg, rgba(102, 252, 241, 0.08), rgba(139, 92, 246, 0.06));
+
+  /* Gauge spectral gradients */
+  --gauge-tri-gradient: linear-gradient(90deg, hsl(0 84% 60%), hsl(45 93% 47%), hsl(142 71% 45%));
+  --gauge-progress-gradient: linear-gradient(90deg, var(--accent), hsl(199 89% 48%));
 }
 
 /* End ÊLAN v4 / α2 — Color Slots ──────────────────────────────────── */
