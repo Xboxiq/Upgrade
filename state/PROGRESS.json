@@ -1,15 +1,16 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-28T17:40:00Z",
+  "last_updated": "2026-05-28T17:45:00Z",
   "tadaffuq_v5": {
     "current_pillar": "α",
     "current_stage": 1,
     "current_stage_id": "α1",
     "status": "in-progress",
     "started_at": "2026-05-28T17:38:49Z",
+    "last_commit_sha": "bc10a43",
     "completed_stages": ["α1"],
-    "branches_created": ["tadaffuq-α-foundation"],
-    "creativity_health": 50,
+    "branches_created": ["tadaffuq-α-foundation-bootstrap"],
+    "creativity_health": 58,
     "pulses_total": 0,
     "forbidden_violations": 0,
     "pillar_targets": {

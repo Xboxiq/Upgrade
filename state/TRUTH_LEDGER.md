@@ -3153,8 +3153,8 @@ After that, ÊLAN v4 is sealed. v5 (when desired) can begin from the same `state
 **Pack:** v5 TADAFFUQ
 **Pillar:** α FOUNDATION
 **Stage:** 1 of 4
-**Branch:** `tadaffuq-α-foundation`
-**Verified at commit:** (this commit — see `git log --oneline -1` after push)
+**Branch:** `tadaffuq-α-foundation-bootstrap` (renamed from `tadaffuq-α-foundation` due to remote-branch collision; this is the canonical α-pillar branch for v5)
+**Verified at commit:** `bc10a43` (push attribution amend of `cd6709a`)
 **Pulse:** — (α stages do not require pulse per PULSE_LIBRARY § ١)
 
 ### Before
