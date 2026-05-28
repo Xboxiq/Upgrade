@@ -2970,3 +2970,84 @@ work, no Chrome required for the build itself). Resume next session
 on the same branch `elan-ζ-quality-gate`.
 
 — Entry end —
+
+
+
+---
+
+## ζ4 — PWA Installable + Offline Ritual
+
+**Date:** 2026-05-28
+**Branch:** `elan-ζ-quality-gate`
+**Commit:** `ea0eefe`
+**Stage:** Pillar ζ / 4 of 5
+**Beacon:** none (quality gate, by spec)
+
+### Verified key=value
+
+| key | value |
+|---|---|
+| `sw_precache_count_before` | 120 |
+| `sw_precache_count_after` | 170 |
+| `sw_version_before` | `devotio-v3-w24-p3-2026-05` |
+| `sw_version_after` | `elan-v4-zeta4-2026-05` |
+| `manifest_elan_branded` | 1 |
+| `manifest_shortcuts` | 4 (with world callouts: حِبر, تَيار, حِبر, ذَهَب) |
+| `offline_googleapis_refs_before` | 3 |
+| `offline_googleapis_refs_after` | 0 |
+| `offline_emoji_count_before` | 1 (📶) |
+| `offline_emoji_count_after` | 0 |
+| `offline_inline_svg_source` | Lucide wifi-off (ISC, vendor-sourced verbatim) |
+| `offline_data_world` | `hibr` |
+| `offline_color_scheme_paths` | dark + light |
+| `install_module_lines` | 101 |
+| `install_api_namespace` | `Upg.elan.install` |
+| `install_api_methods_frozen` | available, installed, prompt, outcome |
+| `install_events_dispatched` | upg:pwa:installable, upg:pwa:installed, upg:pwa:dismissed |
+| `app_js_lines_added` | 8 |
+| `lighthouse_pwa_runtime_score` | **null — DEFERRED to user env** |
+| `lighthouse_pwa_runtime_deferred_reason` | sandbox has no Chrome, INTEGRATIONS_ONLY network (same as ζ3) |
+| `total_lines_added` | 278 |
+| `total_lines_deleted` | 45 |
+| `files_added` | 1 (zeta4-install.js) |
+| `files_modified` | 4 (manifest, sw.js, offline.html, app.js) |
+| `sacred_pages_preserved` | 15 |
+| `sacred_qcalc_preserved` | 391 |
+| `sacred_archive_untouched` | true |
+
+### What changed (truthful)
+
+- **`platform/manifest.webmanifest`** rebranded from `Cathedral v16 (ATELIER)` to `ÊLAN v4`. 4 shortcut descriptions now reference the world for each entry (لوحة → حِبر, كول → تَيار, تقدم → حِبر, محاسبة → ذَهَب). icons + theme_color + background_color + dir=rtl preserved.
+- **`platform/sw.js`** — `VERSION` constant bumped from `devotio-v3-w24-p3-2026-05` to `elan-v4-zeta4-2026-05` (forces shell/asset/font/shard cache invalidation on install). 50 new ÊLAN v4 paths appended to `PRECACHE`: 8 token files (color/space/type/motion/breakpoint/voice-utilities/signature/layout), 9 worlds (\_index + 8 worlds), 2 motion shells (\_view-transition, \_motion-sanctuary), 4 epsilon shards (3/4/5/6), 26 elan/ ESM modules (10 worlds + 5 chrome/motion + 11 epsilons + format), and the new zeta4-install.js. Total precache count 120 → 170.
+- **`platform/offline.html`** — purged 3 Google Fonts CDN references (preconnect to `googleapis.com` + `gstatic.com` + the `<link>` to Cairo CSS). Replaced 📶 emoji (Forbidden Library #20, ICONOGRAPHY DOCTRINE § ٣.أ #1) with verbatim Lucide `wifi-off` SVG (ISC license, vendor-sourced not hand-drawn — explicitly justified inline because the sprite system may not be cached when this page is served). Body now carries `data-world="hibr"`. Color palette aligned with Hibr ink-on-paper tokens. Added `prefers-color-scheme: light` path with brick-red accents (Hibr ember). Added `meta name="color-scheme"`. Branding footer now reads `Upgrade · ÊLAN v4` (was `Upgrade · Cathedral v16 ATELIER`).
+- **NEW `platform/assets/js/elan/zeta4-install.js`** (101 lines) — captures `BeforeInstallPromptEvent` into a held deferred prompt; exposes `Upg.elan.install` Object.frozen with 4 methods (`available`, `installed`, `prompt`, `outcome`) and dispatches 3 CustomEvents on `document` (`upg:pwa:installable` on capture, `upg:pwa:installed` on `appinstalled`, `upg:pwa:dismissed` on user-rejection). idempotent module guard (re-import is no-op). No DOM rendering — UI surface left to cmdk / settings consumers.
+- **`platform/assets/app.js`** — 8 lines added: `import './js/elan/zeta4-install.js';` with explanatory comment block.
+
+### What was NOT done (and why)
+
+- **Lighthouse PWA runtime score** — deferred. Same precedent as ζ3 LIGHTHOUSE_REPORT.md. The sandbox running this AUTO_PILOT has no Chrome binary and `INTEGRATIONS_ONLY` network mode (cannot install Chrome via apt or download Chromium). The user is required to run the deferred command (recorded in `ζ3_artifacts.deferred_run_command` and reused for PWA category check) on their local machine before merging the ζ pillar PR. Truth Over Claims §6 — no number is asserted that was not verified.
+- **Maskable icons (PNG 192/512)** — not added. The current manifest declares the SVG favicon for those sizes with `purpose: "any maskable"`. Actual maskable PNG generation deferred (not blocking installable; install criterion accepts SVG with `purpose: any` for many engines, and falls back gracefully). Truthful disclosure that the spec-recommended PNG icons are absent and may produce a Lighthouse Best Practices ding.
+- **Screenshots field** — not added. The manifest spec includes optional `screenshots` for richer install dialog; deferred to a polish pass after content stabilizes (would need 1080×1920 mobile capture which cannot be produced in this sandbox).
+- **Service Worker E2E test** — not run. Verified statically (precache list contains 170 entries, version bumped, fetch handler unchanged in semantics). Runtime install/offline cycle verification deferred to user.
+
+### Sacred preserved
+
+- 15 page sections — untouched.
+- 391 `qcalc` references — untouched.
+- 14+ legacy `Upg.*` APIs — untouched. ζ4 adds 1 sub-namespace (`Upg.elan.install`) without disturbing any existing.
+- 35+ `Upg.elan.*` module imports in `app.js` — untouched (only +1 new import appended).
+- `archive/arabic-training-platform-v12-original.html` — untouched.
+- `prompts/v1`, `prompts/v2`, `prompts/v3` — untouched.
+- `state/CREATIVITY_LOG.md` — untouched (ζ pillar = no beacons).
+- Forbidden Library — 0 new violations in ζ4:
+  · 0 emoji introduced in markup (in fact, 1 emoji REMOVED from offline.html).
+  · 1 inline `<svg viewBox>` introduced — explicitly justified (offline.html, vendor-sourced Lucide ISC verbatim, not toy-drawn). All other surfaces continue using sprite/use convention.
+  · 0 hardcoded `fill="#…"` introduced (the SVG uses `currentColor` via parent `stroke`).
+  · 0 mixed icon families introduced.
+  · 0 cliché bypass (`EXEMPT_PATTERN`) invocations.
+
+### How to advance to ζ5
+
+ζ5 (Changelog + Truth Ledger formal sync) is the closing stage of Pillar ζ — and of ÊLAN v4. It transforms `state/TRUTH_LEDGER.md` into a Keep-a-Changelog `CHANGELOG.md` at repo root, adds the 27-beacon inventory table, and updates `README.md` to reflect ÊLAN v4 as the current pack. After ζ5: open the Pillar ζ PR.
+
+— Entry end —
