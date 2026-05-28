@@ -3051,3 +3051,96 @@ on the same branch `elan-ζ-quality-gate`.
 ζ5 (Changelog + Truth Ledger formal sync) is the closing stage of Pillar ζ — and of ÊLAN v4. It transforms `state/TRUTH_LEDGER.md` into a Keep-a-Changelog `CHANGELOG.md` at repo root, adds the 27-beacon inventory table, and updates `README.md` to reflect ÊLAN v4 as the current pack. After ζ5: open the Pillar ζ PR.
 
 — Entry end —
+
+
+
+---
+
+## ζ5 — Changelog + Truth Ledger Sync (closes Pillar ζ + ÊLAN v4)
+
+**Date:** 2026-05-28
+**Branch:** `elan-ζ-quality-gate`
+**Commit:** `3ebae0b`
+**Stage:** Pillar ζ / 5 of 5 — final stage of ÊLAN v4
+**Beacon:** none (quality gate, by spec — ÊLAN Creativity Doctrine §7)
+
+### Verified key=value
+
+| key | value |
+|---|---|
+| `changelog_md_present` | true |
+| `changelog_format` | Keep a Changelog 1.1.0 |
+| `changelog_v4_entry_position` | top (latest) |
+| `changelog_beacon_inventory_rows` | 30 |
+| `changelog_quality_gate_disclosures` | 4 (Lighthouse runtime / maskable PNG / SW E2E / !important truthful target) |
+| `changelog_previous_packs_summarised` | 3 (DEVOTIO v3, RESONANCE v2, ATELIER v1) |
+| `readme_elan_v4_branded` | true (4 mentions) |
+| `readme_8worlds_table_present` | true |
+| `readme_directory_structure_updated` | true |
+| `readme_auto_pilot_v4_workflow_documented` | true |
+| `readme_sacred_assets_table_present` | true |
+| `readme_9_principles_listed` | true |
+| `readme_lighthouse_deferred_note_present` | true |
+| `progress_json_status` | complete |
+| `progress_json_completed_stages_count` | 38 |
+| `progress_json_elan_v4_final_summary_present` | true |
+| `total_lines_added` | 324 |
+| `total_lines_deleted` | 81 |
+| `files_added` | 1 (CHANGELOG.md) |
+| `files_modified` | 1 (README.md) |
+| `sacred_pages_preserved` | 15 |
+| `sacred_qcalc_preserved` | 391 |
+
+### What changed (truthful)
+
+- **NEW `CHANGELOG.md`** (150 lines added) at repo root. Keep-a-Changelog 1.1.0 format. ÊLAN v4 v4.0.0 entry at the top with: opening manifesto quote, Added section (8 worlds + iconography + fonts + voice tokens + kashida + δ pillar features + ε pillar revivals + ζ4 PWA), Changed section (themes / tokens / SW version / manifest / offline), Fixed section (inline-style + !important + preloads + brand-color extraction), Removed section (Google Fonts CDN + emoji + inline styles), Sacred Preserved section (archive / 15 pages / 391 qcalc / 14+ Upg.* APIs / prompts/v1-v3 / append-only ledgers), full **30-Beacon Inventory** table (β2 / β3 / γ1-γ9 / δ1-δ6 / ε1-ε12 + ε1-augment), and explicit **Quality Gate Truthful Disclosures** section listing four deferred / partial achievements: (1) Lighthouse runtime score deferred to user environment, (2) maskable PNG icons (192/512) deferred, (3) Service Worker installable runtime not yet end-to-end verified, (4) !important raw target ≤ 20 not met (376 actual) but truthful target zero unjustified cascade hacks IS met. Branches & PRs table at bottom of v4 entry. Previous packs (DEVOTIO v3, RESONANCE v2, ATELIER v1) summarised below.
+- **`README.md` REWRITE** (174 lines added, 81 deleted). Rebrand from generic ATELIER docs to ÊLAN v4 as current pack. New sections: (1) the four Doctrine reading order, (2) 8 Worlds table with inspirations + assigned pages, (3) full directory structure reflecting tokens/_layout, worlds/, elan/ modules, scripts/, state/, prompts/v4, (4) how to run + PWA install instructions, (5) AUTO_PILOT v4 workflow with 6 golden rules, (6) verified statistics block with **sources column** (every metric traces back to a state/ file), (7) sacred assets table, (8) 9 ÊLAN philosophy principles, (9) licensing block, (10) truthful Lighthouse runtime deferred note pointing to state/LIGHTHOUSE_REPORT.md.
+
+### What was NOT done (and why)
+
+- **`state/CREATIVITY_LOG.md` not modified.** ζ pillar produces zero beacons by spec. The append-only invariant is preserved — the log's final STATS line dated `2026-05-26 / ε12 — Pillar ε COMPLETE 12/12` already records the canonical totals (30 beacons / 9 unique categories / avg 4.13 / 0 forbidden violations / health 100). Re-writing it would violate the append-only contract.
+- **No version-tag / git-tag created.** ÊLAN v4 is sealed at the doctrine level (CHANGELOG entry + PROGRESS status:complete) but the user controls the branch merge + tag operation. Not assumed by automation.
+- **Lighthouse runtime measurement still deferred.** Same precedent as ζ3 + ζ4. The user must run the deferred command (recorded verbatim in `elan_v4.elan_v4_final_summary.lighthouse_runtime_deferred_command` and `ζ3_artifacts.deferred_run_command`) on their local machine before merging the ζ pillar PR. The CHANGELOG explicitly discloses this; no number is asserted that was not verified.
+- **α4 Icon Foundation sprite system was deferred.** The original spec proposed building Lucide + Phosphor SVG sprites at `platform/assets/icons/`. Across pillars, this was absorbed into individual stage work + the ICONOGRAPHY_DOCTRINE — markup avoided emoji and toy SVG, but a generated sprite was not produced. The CHANGELOG section "Iconography system" describes the doctrine without claiming a sprite exists. The truthful state: doctrine enforced, sprite mechanism postponed.
+
+### Sacred preserved
+
+- 15 page sections — untouched.
+- 391 `qcalc` references — untouched.
+- 14+ legacy `Upg.*` APIs — untouched.
+- All ζ1-ζ4 acceptance criteria still hold post-ζ5.
+- `archive/arabic-training-platform-v12-original.html` — untouched.
+- `prompts/v1`, `prompts/v2`, `prompts/v3` — untouched.
+- `state/CREATIVITY_LOG.md` — untouched (append-only contract preserved).
+- Forbidden Library — 0 new violations across all 38 stages of ÊLAN v4.
+
+### ÊLAN v4 IMPLEMENTATION COMPLETE (pending PR merge)
+
+| Pillar | Stages | Branch | PR Status |
+|---|---|---|---|
+| α FOUNDATION | 3/3 | `elan-α-foundation` | merged |
+| β TYPE SOUL | 3/3 | `elan-β-type-soul` | merged |
+| γ EIGHT WORLDS | 9/9 | `elan-γ-eight-worlds` | merged |
+| δ KINETIC SHELL | 6/6 | `elan-δ-kinetic-shell` | merged |
+| ε CONTENT REVIVAL | 12/12 | `elan-ε-content-revival` | #117 merged |
+| ζ QUALITY GATE | 5/5 (+ ζ1.5 corrective) | `elan-ζ-quality-gate` | **to be opened next** |
+
+**Project totals — verified at 2026-05-28:**
+
+- 38 stages complete (39 spec target — α4 sprite generator deferred, doctrine enforced)
+- 30 beacons across 9 unique categories
+- 0 Forbidden Library violations across all 38 stages
+- avg Originality Self-Score 4.13 / 5
+- Creativity Health 100 / 100
+- Sacred Assets preserved throughout (15 pages, 391 qcalc, 14+ Upg.* APIs, archive untouched)
+
+### How to seal the pack
+
+1. AUTO_PILOT will open the Pillar ζ PR from `elan-ζ-quality-gate` → `main` next.
+2. User runs the deferred Lighthouse command locally and appends scores to `state/LIGHTHOUSE_REPORT.md`.
+3. User reviews the PR, optionally tags `v4.0.0`, and merges.
+
+After that, ÊLAN v4 is sealed. v5 (when desired) can begin from the same `state/PROGRESS.json` machinery — but is **not** assumed to be required. v4 stands on its own.
+
+— Entry end —
+— ÊLAN v4 — مذهب مكتمل —

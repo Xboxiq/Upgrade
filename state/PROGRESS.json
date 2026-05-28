@@ -949,10 +949,11 @@
   "notes": "Pack v2 RESONANCE scaffolded under prompts/v2/. Path C selected by user: Meta + Worker 15 (full 6 phases) + Ritual = 15 files. Workers 16-19 + Ritual execution to follow in subsequent sessions. Cathedral v16 baseline preserved. All 19 Upg.* APIs, 14 pages, 391 qcalc references preserved. Previous Pack v1 history (v16 ATELIER): Phase 6 of Worker 14 shipped on branch worker-14-phase-6-final via PR #53. Inline 215->76 (139 removed) via deterministic node script + 330 lines Final Utilities Pack. New Upg.focusTrap IIFE auto-attaches to dialog/modal/qmodal/data-modal via MutationObserver, ESC-to-close, return-focus. Lighthouse boot helper (lazy imgs, decoding=async, pointer-enter prefetch markers). Sanity v16 verifies 19 Upg.* modules. sw.js rewrite (74->119 lines) versioned shell/assets/fonts caches, navigation network-first then offline.html fallback, SWR for assets and Google Fonts. Manifest 4 shortcuts (#dashboard, #callcenter, #myprogress, #accounting), 192/512 icon entries. Favicon v2 100x100 squircle rx=22, dual-color stroke gradient (#66FCF1 to #4F46E5). offline.html RTL Cairo, online auto-reload, retry button + home link. CHANGELOG v16 added at top. All 14 page sections, 391 qcalc, 15 identity tints preserved.",
   "elan_v4": {
     "current_pillar": "ζ",
-    "current_stage": 4,
-    "current_stage_id": "ζ4",
-    "status": "in-progress",
+    "current_stage": 5,
+    "current_stage_id": "ζ5",
+    "status": "complete",
     "started_at": "2026-05-24T00:00:00Z",
+    "completed_at": "2026-05-28T00:00:00Z",
     "branch": "elan-ζ-quality-gate",
     "previous_pillar_branch": "elan-ε-content-revival",
     "previous_pillar_pr": 117,
@@ -994,13 +995,14 @@
       "ζ1",
       "ζ2",
       "ζ3",
-      "ζ4"
+      "ζ4",
+      "ζ5"
     ],
     "beacons_this_session": 0,
     "creativity_health": 100,
-    "creativity_health_note": "30 total beacons project-wide across α..ε (ε CONTENT REVIVAL closed). Pillar ζ QUALITY GATE produces 0 beacons by spec. ζ1 (Inline Purge), ζ1.5 (truthful corrective), ζ2 (!important + @layer), ζ3 (Lighthouse static audit + font preload + color-scheme meta), and ζ4 (PWA Installable + Offline Ritual) shipped. Lighthouse RUNTIME measurement deferred to user env (sandbox has no Chrome and INTEGRATIONS_ONLY network). 0 Forbidden Library violations. 9/9 unique beacon categories used overall. avg_score 4.13.",
-    "last_commit_sha": "ea0eefe",
-    "next_action": "Pillar ζ QUALITY GATE in progress — 4 of 5 stages complete on branch elan-ζ-quality-gate (ζ1 + ζ1.5 corrective + ζ2 + ζ3 + ζ4). ζ4 commit ea0eefe shipped: manifest rebranded to ÊLAN v4 (3 shortcut descriptions reference world names), sw.js VERSION bumped to elan-v4-zeta4-2026-05 with +50 ÊLAN paths added to PRECACHE (8 token files + 9 worlds + 2 motion shells + 4 epsilon shards + 26 elan/ ESM modules + zeta4-install.js — total 170), offline.html purged of 3 Google Fonts CDN refs and the 📶 emoji (ICONOGRAPHY DOCTRINE § ٣.أ — emoji replaced with verbatim Lucide wifi-off SVG, vendor-sourced ISC), data-world=hibr surface aligned with cream/ink Hibr palette + prefers-color-scheme:light path, and platform/assets/js/elan/zeta4-install.js NEW captures BeforeInstallPromptEvent into Upg.elan.install (prompt/available/installed/outcome — 4 frozen methods + 3 CustomEvents). Lighthouse PWA RUNTIME score deferred to user env. Next session resumes with ζ5 (Changelog + Truth Ledger formal sync). After ζ5: open Pillar ζ PR. User must run Lighthouse mobile preset locally to fill in deferred rows of state/LIGHTHOUSE_REPORT.md before merging the ζ PR.",
+    "creativity_health_note": "30 total beacons project-wide across α..ε (ε CONTENT REVIVAL closed). Pillar ζ QUALITY GATE produced 0 beacons by spec. ζ1 (Inline Purge), ζ1.5 (truthful corrective), ζ2 (!important + @layer), ζ3 (Lighthouse static audit + font preload + color-scheme meta), ζ4 (PWA Installable + Offline Ritual), and ζ5 (Changelog + Truth Ledger sync) shipped. Pillar ζ COMPLETE 5/5. ÊLAN v4 implementation COMPLETE pending PR merge. Lighthouse RUNTIME measurement deferred to user env (sandbox has no Chrome and INTEGRATIONS_ONLY network). 0 Forbidden Library violations across all 38 stages. 9/9 unique beacon categories used overall. avg_score 4.13.",
+    "last_commit_sha": "3ebae0b",
+    "next_action": "ÊLAN v4 IMPLEMENTATION COMPLETE — Pillar ζ QUALITY GATE 5/5 stages on branch elan-ζ-quality-gate. ζ5 commit 3ebae0b shipped: CHANGELOG.md NEW (Keep-a-Changelog format, v4.0.0 entry as latest, full 30-beacon inventory table β2+β3+9γ+6δ+13ε+1augment, explicit Quality Gate Truthful Disclosures section listing Lighthouse runtime deferred + maskable PNG icons deferred + !important truthful-not-raw target met) + README.md REWRITE (rebrand to ÊLAN v4 with 8 worlds table, directory structure reflecting tokens/_layout/worlds/elan/scripts, AUTO_PILOT v4 workflow, verified statistics with sources, sacred assets table, 9 philosophy principles, truthful Lighthouse runtime deferred note). Final action required: open Pillar ζ PR from elan-ζ-quality-gate to main with title 'feat(elan-v4): Pillar ζ — QUALITY GATE (5/5 stages)' and full body listing ζ1+ζ1.5+ζ2+ζ3+ζ4+ζ5 verified metrics and Sacred Assets preserved (15 pages, 391 qcalc, 14+ Upg.* APIs). User must run `npx lighthouse http://127.0.0.1:8000 --preset=mobile ...` (full command in ζ3_artifacts.deferred_run_command) on local machine and append the runtime scores to state/LIGHTHOUSE_REPORT.md before merging. After merge: ÊLAN v4 sealed, ready for v5 if/when desired.",
     "ζ1_5_artifacts": {
       "branch": "elan-ζ-quality-gate",
       "commit": "6f1c135",
@@ -2589,6 +2591,105 @@
       "no_beacon_reason": "ζ pillar = QUALITY GATE; per ÊLAN Creativity Doctrine §7, only γ/δ/ε stages require beacons. ζ stages quality-only.",
       "verified_at_commit": "ea0eefe"
     },
-    "last_updated_zeta4": "2026-05-28T00:00:00Z"
+    "last_updated_zeta4": "2026-05-28T00:00:00Z",
+    "ζ5_artifacts": {
+      "branch": "elan-ζ-quality-gate",
+      "commit": "3ebae0b",
+      "stage_name": "Changelog + Truth Ledger Sync (closes Pillar ζ + ÊLAN v4)",
+      "files_added": 1,
+      "files_modified": 1,
+      "lines_added_total": 324,
+      "lines_deleted_total": 81,
+      "changelog_file": "CHANGELOG.md",
+      "changelog_format": "Keep a Changelog 1.1.0",
+      "changelog_v4_entry_position": "top (latest)",
+      "changelog_beacon_inventory_rows": 30,
+      "changelog_quality_gate_truthful_disclosures_present": true,
+      "changelog_quality_gate_disclosures": [
+        "Lighthouse runtime score deferred to user environment (sandbox has no Chrome, INTEGRATIONS_ONLY network)",
+        "Maskable PNG icons (192/512) deferred — manifest currently declares SVG with purpose:'any maskable'",
+        "Service Worker installable runtime not yet end-to-end verified (static config verified only)",
+        "!important raw target ≤20 not met (376 actual); truthful target zero unjustified cascade hacks IS met"
+      ],
+      "changelog_previous_packs_summarised": ["DEVOTIO v3.0.0", "RESONANCE v2.0.0", "ATELIER v1.0.0"],
+      "readme_file": "README.md",
+      "readme_elan_v4_branded": true,
+      "readme_8worlds_table_present": true,
+      "readme_directory_structure_updated": true,
+      "readme_auto_pilot_v4_workflow_documented": true,
+      "readme_verified_statistics_with_sources": true,
+      "readme_sacred_assets_table_present": true,
+      "readme_9_principles_listed": true,
+      "readme_lighthouse_deferred_note": true,
+      "acceptance_criteria_met": {
+        "changelog_md_exists": true,
+        "changelog_keep_a_changelog_format": true,
+        "beacon_inventory_30_rows": true,
+        "readme_updated": true,
+        "progress_json_status_complete": true,
+        "truth_ledger_final_entry_signed": true,
+        "creativity_log_final_stats_unchanged": true,
+        "verified_kv_commit": true,
+        "no_beacon": true
+      },
+      "sacred_pages_preserved": 15,
+      "sacred_qcalc_preserved": 391,
+      "sacred_archive_untouched": true,
+      "sacred_prompts_v1_v3_untouched": true,
+      "emoji_in_new_markup": 0,
+      "inline_svg_viewBox_in_new_markup": 0,
+      "hardcoded_fill_in_new_css": 0,
+      "ζ1_acceptance_still_holds_post_ζ5": true,
+      "ζ2_acceptance_still_holds_post_ζ5": true,
+      "ζ3_acceptance_still_holds_post_ζ5": true,
+      "ζ4_acceptance_still_holds_post_ζ5": true,
+      "no_beacon": true,
+      "no_beacon_reason": "ζ pillar = QUALITY GATE; per ÊLAN Creativity Doctrine §7, only γ/δ/ε stages require beacons. ζ stages quality-only.",
+      "verified_at_commit": "3ebae0b"
+    },
+    "last_updated_zeta5": "2026-05-28T00:00:00Z",
+    "elan_v4_final_summary": {
+      "pillars_total": 6,
+      "pillars_complete": 6,
+      "stages_total": 39,
+      "stages_complete": 38,
+      "stages_complete_note": "ζ1 + ζ1.5 corrective counts as a single completed stage. Effective stage count vs spec target: 38 of 39 with ζ1 truthful corrective recorded separately. The 39th expected stage — α4 (Icon Foundation) — was deferred and absorbed into γ-pillar work + ICONOGRAPHY_DOCTRINE; sprite system was not built, but no markup uses Forbidden icon families.",
+      "branches_created": [
+        "elan-α-foundation",
+        "elan-β-type-soul",
+        "elan-γ-eight-worlds",
+        "elan-δ-kinetic-shell",
+        "elan-ε-content-revival",
+        "elan-ζ-quality-gate"
+      ],
+      "prs_merged": [
+        "Pillar α PR (merged)",
+        "Pillar β PR (merged)",
+        "Pillar γ PR (merged)",
+        "Pillar δ PR (merged)",
+        "PR #117 (Pillar ε CONTENT REVIVAL — merged)"
+      ],
+      "prs_pending": [
+        "Pillar ζ QUALITY GATE — to be opened after ζ5 ledger commit"
+      ],
+      "beacons_total": 30,
+      "beacons_categories_used": 9,
+      "beacons_categories_available": 9,
+      "forbidden_library_violations": 0,
+      "creativity_health_final": 100,
+      "average_originality_self_score": 4.13,
+      "lighthouse_runtime_score_recorded": null,
+      "lighthouse_runtime_deferred_command": "npx lighthouse http://127.0.0.1:8000 --preset=mobile --output=html --output-path=/tmp/elan-lh.html --chrome-flags='--headless --no-sandbox' --only-categories=performance,accessibility,best-practices,pwa,seo",
+      "sacred_assets_preserved_throughout": {
+        "archive_html": true,
+        "page_sections": 15,
+        "qcalc_references": 391,
+        "upg_legacy_apis": "14+ preserved verbatim",
+        "prompts_v1_v2_v3": "untouched"
+      },
+      "implementation_complete_at": "2026-05-28T00:00:00Z",
+      "ready_for_pillar_zeta_pr": true,
+      "ready_for_v5": "yes (after Pillar ζ PR merged + Lighthouse runtime user-recorded)"
+    }
   }
 }
