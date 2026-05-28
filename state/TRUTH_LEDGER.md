@@ -3144,3 +3144,59 @@ After that, ÊLAN v4 is sealed. v5 (when desired) can begin from the same `state
 
 — Entry end —
 — ÊLAN v4 — مذهب مكتمل —
+
+
+
+---
+
+## v5 TADAFFUQ — α1 TABULA RASA — 2026-05-28
+
+**Branch:** `tadaffuq-α-foundation`
+**Pillar:** α (foundation) · **Stage:** 1 of 4 · **Pulse:** none (α has no pulses)
+
+### Forensic baseline (v4 chrome to demolish)
+
+| metric | value |
+|---|---|
+| classic-sidebar/topbar/drawer hits in `platform/index.html` | **1** |
+| `position: fixed` in `platform/assets/css/chrome.css` | **1** |
+| `max-width: …` containers in `platform/assets/css/pages.css` | **84** |
+| emoji in `platform/index.html` | **1 062** |
+| hardcoded hex in markup `style="…#…"` | **8** |
+| world palette files | **9** |
+| page shards | **15** |
+| JS modules | **126** |
+| CSS files | **30** |
+
+### Endgame targets (v5 sealed)
+
+```
+classic_chrome_hits             = 0
+fixed_position (excl. dock/scrim/overlay) = 0
+max_width_containers            = 0
+emoji                           = 0
+hardcoded_hex                   = 0
+world_palettes                  = 0
+```
+
+### Files created in α1
+
+```
+platform-v5/
+platform-v5/assets/.gitkeep
+platform-v5/assets/css/.gitkeep
+platform-v5/assets/js/.gitkeep
+platform-v5/assets/svg/.gitkeep
+platform-v5/DEMOLITION_LIST.md       (the contract: what v5 doesn't carry)
+state/PULSE_LOG.md                   (initialized; α produces 0)
+state/PROGRESS.json                  (tadaffuq_v5 section appended)
+state/TRUTH_LEDGER.md                (this entry)
+```
+
+### Acceptance
+
+- ✓ Skeleton exists.
+- ✓ DEMOLITION_LIST.md is grep-verifiable.
+- ✓ Baseline numbers recorded above.
+- ✓ Zero lines of code in `platform-v5/` beyond the demolition contract.
+- ✓ Zero changes outside `platform-v5/` and `state/`.
