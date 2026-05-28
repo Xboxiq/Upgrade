@@ -115,3 +115,55 @@
 }
 
 /* End ÊLAN v4 / α2 — Color Slots ──────────────────────────────────── */
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   TADAFFUQ v5 — α2 — Token Reconciliation (Surface + Ink + Accent)
+   ───────────────────────────────────────────────────────────────────────
+   Adds v5 semantic tokens on top of the v4 ÊLAN α2 ladder + W21 chr-* palette.
+   All NEW token names — no replacement, no breakage of v3/v4 consumers.
+   See: prompts/v5/CHROMA_DOCTRINE.md § ٢
+   ════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ─── 3-Surface tonal (paper) — bridges existing tone ladder ─── */
+  --paper-base:     var(--paper-tone-1, var(--anchor-bg));
+  --paper-raised:   var(--paper-tone-2, var(--anchor-1));
+  --paper-elevated: var(--paper-tone-3, var(--anchor-2));
+
+  /* ─── 4-level Ink ladder ─── */
+  --ink-primary:    var(--ink);
+  --ink-secondary:  var(--ink-muted);
+  --ink-tertiary:   var(--ink-faint);
+  --ink-disabled:   color-mix(in oklch, var(--ink-faint) 60%, transparent);
+
+  /* ─── 3-semantic Accent — single-accent rule applies (CHROMA § ٢.٤) ─── */
+  --accent-action:   var(--color-tint, var(--ember));
+  --accent-progress: color-mix(in oklch, var(--color-tint, var(--ember)) 88%, white);
+  --accent-signal:   var(--state-success);
+}
+
+/* Dark theme — Mihrab v5 refinements (additive over W21 P2 base) */
+:root[data-theme="dark"] {
+  --paper-base:     oklch(13% 0.04 280);
+  --paper-raised:   oklch(16% 0.05 280);
+  --paper-elevated: oklch(20% 0.06 280);
+  --ink-primary:    oklch(96% 0.012 80);
+  --ink-secondary:  oklch(74% 0.012 80);
+  --ink-tertiary:   oklch(54% 0.012 80);
+  --ink-disabled:   oklch(40% 0.012 80);
+}
+
+/* Light theme — Linen-Bone v5 alignment (additive over W12 P2 base) */
+:root[data-theme="light"] {
+  --paper-base:     oklch(98% 0.005 80);
+  --paper-raised:   oklch(96% 0.006 80);
+  --paper-elevated: oklch(94% 0.008 80);
+  --ink-primary:    oklch(20% 0.020 80);
+  --ink-secondary:  oklch(35% 0.020 80);
+  --ink-tertiary:   oklch(50% 0.020 80);
+  --ink-disabled:   oklch(70% 0.020 80);
+}
+
+/* End TADAFFUQ v5 / α2 — Token Reconciliation ─────────────────────── */
