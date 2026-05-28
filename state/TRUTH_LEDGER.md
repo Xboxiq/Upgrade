@@ -3144,3 +3144,83 @@ After that, ÊLAN v4 is sealed. v5 (when desired) can begin from the same `state
 
 — Entry end —
 — ÊLAN v4 — مذهب مكتمل —
+
+
+
+---
+
+## TADAFFUQ v5 — α1 — Forensic Audit — 2026-05-28
+**Pack:** v5 TADAFFUQ
+**Pillar:** α FOUNDATION
+**Stage:** 1 of 4
+**Branch:** `tadaffuq-α-foundation`
+**Verified at commit:** (this commit — see `git log --oneline -1` after push)
+**Pulse:** — (α stages do not require pulse per PULSE_LIBRARY § ١)
+
+### Before
+N/A — أول baseline لـ v5.
+الـ codebase موروث من v4 ÊLAN ζ pillar (PR #118 مَدموج على main).
+
+### After (verified by grep — see `state/AUDIT_BASELINE_v5.md` § ٣ Reproduction)
+
+| Domain | Key | Value |
+|---|---|---:|
+| Style | `inline_style_attrs` | 23 |
+| Style | `important_total_css` | 381 |
+| Style | `important_motion_sanctuary` | 27 |
+| Style | `important_outside_sanctuary` | 354 |
+| Style | `hex_in_pages_css` | 859 |
+| Type | `woff2_on_disk` | 0 |
+| Type | `fontface_total` | 35 |
+| Type | `font_family_uses` | 477 |
+| JS | `js_files_total` | 126 |
+| JS | `iife_pattern_files` | 24 |
+| JS | `esm_export_files` | 21 |
+| JS | `upg_apis_total` | 40 |
+| Sacred | `page_section_ids` | 16 |
+| Sacred | `page_h_count` | 14 |
+| Sacred | `qcalc_instances` | 384 |
+| Sacred | `data_block_ids` | 513 |
+| Sacred | `data_page_personality` | 15 |
+| Icon | `emoji_in_index` | 1111 |
+| Icon | `inline_svg_viewbox` | 128 |
+| Icon | `sprite_symbol_count` | 95 |
+| Spatial | `fixed_position_total` | 31 |
+| Spatial | `inset_zero_blocks` | 45 |
+| Motion | `reduced_motion_blocks` | 76 |
+| Forbid | `toast_class` | 0 |
+| Forbid | `spinner_keyframe_files` | 0 |
+| Forbid | `google_fonts_link` | 0 |
+| Size | `index_lines` | 32895 |
+| Size | `pages_css_lines` | 26534 |
+| Size | `total_css_lines` | 39558 |
+| Size | `total_js_lines` | 26543 |
+
+### Files
+**Created (10):**
+- `state/AUDIT_BASELINE_v5.md` (24 metrics + reproduction commands + emoji distribution + sacred floor)
+- `state/PULSE_LOG.md` (empty template per PULSE_LIBRARY § ٧)
+- `prompts/v5/00_TADAFFUQ_MANIFESTO.md` (constitution: 4 oaths + 3 pillars + 20 forbiddens)
+- `prompts/v5/SPATIAL_DOCTRINE.md` (canvas + dock + 3 surfaces + RTL discipline)
+- `prompts/v5/MOTION_DOCTRINE.md` (7 durations + 5 easings + 3 feedback patterns + sanctuary)
+- `prompts/v5/CHROMA_DOCTRINE.md` (4 token families + 12 cultural palettes + single-accent rule)
+- `prompts/v5/ICONOGRAPHY_DOCTRINE.md` (Lucide+Phosphor stack + sprite + Upg.icons API spec)
+- `prompts/v5/PULSE_LIBRARY.md` (9 categories + 25 forbidden + 25 wild cards + pivot rule)
+- `prompts/v5/INDEX.md` (8 pillars × 31 stages map)
+- `prompts/v5/α1_FORENSIC_AUDIT.md` (this stage spec)
+
+**Updated (1):**
+- `state/PROGRESS.json` (added `tadaffuq_v5` namespace; preserved v3+v4 namespaces verbatim)
+- `state/TRUTH_LEDGER.md` (this entry — append-only)
+
+**Untouched (Sacred):**
+- `platform/**` — صفر تعديل في α1 (forensic فقط)
+- `archive/**` — لا تُلمَس
+- `prompts/v1, v2, v3, v4` — تاريخ مُقدَّس
+
+### Verdict
+🟡 **yellow-light.** Sacred preserved 100% (16/16 sections, 14/14 page-h, 384/384 qcalc, 513/513 blocks, 15/15 personalities, 40/40 Upg.* APIs). Three legacy debts surface honestly: `hex_in_pages_css=859` (ε+η2 target), `emoji_in_index=1111` (η3 Phosphor swap), `logical_property_violations=76` (γ+η2 sweep). None block α/β/γ/δ.
+
+الأولوية التالية: **α2 Token Reconciliation** — `--paper-*` + `--ink-*` + `--accent-*` consolidation (CHROMA DOCTRINE § ٢).
+
+— Entry end —
