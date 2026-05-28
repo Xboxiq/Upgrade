@@ -19,17 +19,21 @@
    keeping it in the entry file avoids @import latency on theme toggle.
    ════════════════════════════════════════════════════════════════════════ */
 
-/* Layer declaration — MUST be the first non-charset rule */
-@layer reset, tokens, base, utilities, components, themes, overrides;
+/* Layer declaration — MUST be the first non-charset rule.
+   ÊLAN v4 — ζ2: utilities promoted AFTER components so utility classes
+   defeat component-layer rules without !important hacks (the long-promised
+   "Phase 4-5 utilities promotion" noted in the discipline block below). */
+@layer reset, tokens, base, components, utilities, themes, overrides;
 
 /* Imports — must precede any other non-@import non-@charset rule */
 @import url("./css/tokens.css")           layer(tokens);
 @import url("./css/_legacy-fontface.css") layer(tokens);  /* α2 — relocated from tokens.css */
 @import url("./css/base.css")             layer(base);
-@import url("./css/utilities.css") layer(components);
 @import url("./css/chrome.css")    layer(components);
 @import url("./css/pages.css")     layer(components);
 @import url("./css/motion.css")    layer(components);
+@import url("./css/utilities.css") layer(utilities);              /* ζ2 — promoted from components */
+@import url("./css/tokens/_layout.css") layer(utilities);         /* ζ2 — promoted from tokens */
 
 @layer themes {
 /* ────────────────────────────────────────────────────────────────────────

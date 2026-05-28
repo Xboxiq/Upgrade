@@ -15,8 +15,11 @@
 /* Voice utilities — β2 (Voice Casting) */
 @import url("./tokens/_voice-utilities.css");
 
-/* Layout utilities — ζ1 (Inline Style Purge support: grids/spacing/tinted-asides) */
-@import url("./tokens/_layout.css");
+/* Layout utilities — ζ1 (Inline Style Purge support):
+   ζ2 NOTE — _layout.css is now imported by style.css under layer(utilities)
+   to leverage cascade promotion (utilities now defeat components by layer
+   order alone, no force-keyword needed). Removed from tokens.css imports
+   here to avoid duplicate registration in two layers. */
 
 /* Per-world type signatures — β3 (Numeric+Kashida+Signature) */
 @import url("./tokens/_signature.css");
