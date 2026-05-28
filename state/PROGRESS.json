@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-28T07:37:46.000Z",
+  "last_updated": "2026-05-28T08:00:00Z",
   "pack": "v3-devotio",
   "pack_status": "all-done",
   "current": {
@@ -2714,19 +2714,20 @@
     }
   },
   "tadaffuq_v5": {
-    "current_pillar": "α",
-    "current_stage": 4,
-    "current_stage_id": "α4",
-    "status": "pillar-α-complete",
-    "branch": "tadaffuq-α-foundation",
+    "current_pillar": "β",
+    "current_stage": 1,
+    "current_stage_id": "β1",
+    "status": "in-progress",
+    "branch": "tadaffuq-β-voice",
     "completed_stages": [
       "α1",
       "α2",
       "α3",
-      "α4"
+      "α4",
+      "β1"
     ],
     "creativity_health": 100,
-    "creativity_health_note": "v5 just begun. α (foundation) produces 0 pulses by spec; pulse production starts at γ1.",
+    "creativity_health_note": "β-pillar (voice) is vocabulary; pulses begin at γ1.",
     "pulses_produced": 0,
     "pulse_categories_used": [],
     "forbidden_violations": 0,
@@ -2753,7 +2754,8 @@
       "α1",
       "α2",
       "α3",
-      "α4"
+      "α4",
+      "β1"
     ],
     "doctrine_files_count": 9,
     "α2_verified": {
@@ -2809,6 +2811,37 @@
       "pulses_produced": 0,
       "branch": "tadaffuq-α-foundation",
       "ready_for_pr": true
-    }
+    },
+    "current_pillar_name": "VOICE",
+    "current_branch": "tadaffuq-β-voice",
+    "pulses_total": 0,
+    "pulses_session": 0,
+    "β1_verified": {
+      "text_size_tokens": 9,
+      "leading_tokens": 5,
+      "tracking_tokens": 5,
+      "weight_tokens": 6,
+      "measure_tokens": 3,
+      "clamp_count": 9,
+      "font_family_decls": 6,
+      "prose_selectors": 59,
+      "new_important_in_type_css": 0,
+      "sanctioned_important_in_canvas_css": 5,
+      "hex_in_v5_css": 0,
+      "emoji_in_v5": 0,
+      "type_css_lines": 307,
+      "http_200": [
+        "index.html",
+        "tokens.css",
+        "canvas.css",
+        "type.css",
+        "_layers.css",
+        "icons.svg",
+        "icons.js"
+      ]
+    },
+    "α_pillar_pr": 120,
+    "α_pillar_status": "merged",
+    "last_updated": "2026-05-28T08:00:00Z"
   }
 }
