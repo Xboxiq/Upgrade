@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-28T07:37:46.000Z",
+  "last_updated": "2026-05-28T20:16:44.000Z",
   "pack": "v3-devotio",
   "pack_status": "all-done",
   "current": {
@@ -2714,21 +2714,31 @@
     }
   },
   "tadaffuq_v5": {
-    "current_pillar": "α",
-    "current_stage": 4,
-    "current_stage_id": "α4",
-    "status": "pillar-α-complete",
-    "branch": "tadaffuq-α-foundation",
+    "current_pillar": "γ",
+    "current_stage": 3,
+    "current_stage_id": "γ3",
+    "status": "pillar-γ-complete",
+    "branch": "tadaffuq-γ-spatial",
     "completed_stages": [
       "α1",
       "α2",
       "α3",
-      "α4"
+      "α4",
+      "β1",
+      "β2",
+      "β3",
+      "γ1",
+      "γ2",
+      "γ3"
     ],
     "creativity_health": 100,
     "creativity_health_note": "v5 just begun. α (foundation) produces 0 pulses by spec; pulse production starts at γ1.",
-    "pulses_produced": 0,
-    "pulse_categories_used": [],
+    "pulses_produced": 3,
+    "pulse_categories_used": [
+      "DOCK_PULSE",
+      "MORPH_PULSE",
+      "GLOW_PULSE"
+    ],
     "forbidden_violations": 0,
     "baseline_v4_chrome": {
       "classic_sidebar_topbar_drawer_hits": 1,
@@ -2809,6 +2819,41 @@
       "pulses_produced": 0,
       "branch": "tadaffuq-α-foundation",
       "ready_for_pr": true
+    },
+    "γ1_verified": {
+      "css_token_uses": 35,
+      "emoji_in_dock": 0,
+      "inline_svg_in_dock_js": 0,
+      "hardcoded_hex": 0,
+      "proximity_handlers": 2,
+      "uses_upg_icons_api": 2,
+      "rtl_logical_props": 7,
+      "physical_left_right": 0,
+      "node_check": "passed",
+      "http_serves": {
+        "index.html": 200,
+        "dock.css": 200,
+        "dock.js": 200
+      },
+      "lines_total": 434,
+      "first_visible_ui": true,
+      "first_pulse": true
+    },
+    "pillars_complete": [
+      "α",
+      "β",
+      "γ"
+    ],
+    "γ_pillar_summary": {
+      "stages_done": 3,
+      "pulses": [
+        "γ1 DOCK_PULSE",
+        "γ2 MORPH_PULSE",
+        "γ3 GLOW_PULSE"
+      ],
+      "files_shipped": 7,
+      "lines_added_total": 736,
+      "branch": "tadaffuq-γ-spatial"
     }
   }
 }
