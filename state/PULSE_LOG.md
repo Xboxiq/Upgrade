@@ -46,3 +46,29 @@ last_5_avg: 4.0
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-28 / γ1 — Pillar γ stage 1/3 — first Pulse shipped
+
+
+
+
+## γ2 — 2026-05-28
+**Pulse Category:** 🔁 MORPH_PULSE
+**The Surprise:** ليست نُسختَين من الـ Dock — واحدة لـ desktop وواحدة للموبايل. هذه نُسخة **واحِدة** تَتَحَوَّل في مَكانها. عند `inline-size ≤ 720px`، نَفس الـ `<nav class="dock">` (نَفس الـ DOM node، نَفس children) يُعيد ترتيب نَفسه عبر CSS فقط: يَنفُذ من المُنتصف إلى الحافَتَين، يَتمَدَّد لكامل العَرض، ينخفض ارتفاعه إلى 64px+safe-area، يَكشِف labels تلقائياً (الموبايل لا يَحتاج proximity-reveal، يَحتاج labels مُستَمِرَّة)، وعنصر "centre" (الـ cmdk trigger) يَرتفع 4px مع لون Neon Cyan. الـ aria-current يَبقى، الـ tab order يَبقى، الـ event listeners تَبقى. صفر JS يَتَدَخَّل في التَحَوُّل. هذا يَكسِر الـ AI-default الأكبر في responsive design: "ابني component لـ desktop، ابني component مُنفَصِل للموبايل، اعرض/أخفِ بـ JS."
+
+**Reference Avoided:** الـ AI-default للـ responsive nav: "two separate components — desktop sidebar + mobile bottom-nav — toggled by viewport JS." هنا واحِد فقط، يَتَحَوَّل. + Forbidden #14 ("Pro tip" floaters) + Forbidden #24 (Material FAB).
+**Inspired-by:** Wild Card #2 — Negative space of a Hokusai wave. الـ wave في رَسم Hokusai قُوَّتها ليست في الخَطّ المَرسوم — بل فيما **لم يَرسُمه**. هنا، الـ morph قُوَّته ليست في كَتَل الكود — بل في غِياب الكود. صفر JS toggleClass، صفر "if mobile then render X else Y". الـ @container query وحدها كافِية.
+**User-Visible:** yes — على الجوال، الـ Dock يَبدو كأنه كان مَخصوصاً للجوال، رَغم أنه نَفسه الذي على الـ desktop. على الـ desktop، نَفسه الذي على الجوال.
+**Originality Self-Score:** 4/5 — الـ "single component, dual layout" pattern موجود في Tailwind responsive utilities. الذي يَجعله 4/5: (١) **نَفس الـ DOM node**: لا duplicate رَغم اختلاف layout كبير؛ (٢) **a11y state preservation**: aria-current + tab order + event listeners تَبقى أثناء الـ morph؛ (٣) **morph transition**: الـ inline-size + block-size + border-radius + padding كلها تَنتَقِل بـ `--ease-morph` — التَحَوُّل مَحسوس بَصرياً عند تَدوير الجهاز؛ (٤) **centre-item lift**: عنصر cmdk يَرتَفع 4px ويَلبس Neon Cyan — single-accent-progress per screen rule مَحفوظة. لا أَدَّعي 5 لأن الـ container-query primitive معروف؛ الـ originality في الـ "no JS" التزام والـ a11y preservation.
+**Files touched:** platform-v5/assets/css/dock-mobile.css (NEW 141) · platform-v5/index.html (+1 wiring)
+**Verified at commit:** *(filled by next push)*
+
+
+
+---STATS---
+total_pulses: 2
+unique_categories_used: 2
+target_categories: 9 (DOCK · MORPH · GLOW · REVEAL · RING · GLASS · SPRING · VEIL · HAPTIC)
+avg_self_score: 4.0
+last_5_avg: 4.0
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-28 / γ2 — Pillar γ stage 2/3
