@@ -94,3 +94,24 @@
 - Creativity Health: 100 / 100
 - Forbidden Library violations: 0
 - Sacred Upg.* APIs: preserved (icons rebuilt for v5, theme rebuilt for v5)
+
+
+
+---
+
+## v5 TADAFFUQ — δ1 BENTO GRID — 2026-05-28
+- 1 file (bento.css, 160 lines) + 8 sample bento cards in index.html + 25-line autoPopulate extension to icons.js
+- Pulse: 🪟 GLASS_PULSE (single glass plane, hairline-only borders, Neon Cyan reveal on hover)
+- verified: cards=8 container_queries=2 media_breakpoints=6 emoji=0 hex=0 inline_svg=0 data_icons=8 token_uses=39 logical_props=36 audit_exit=0
+
+## v5 TADAFFUQ — δ2 BENTO EXPAND — 2026-05-28
+- 2 files (bento-expand.css 110 + bento-expand.js 149) + detail-section markup in focal card
+- Pulse: 🔓 REVEAL_PULSE (in-place expand via Grid template re-flow + View Transitions API; staggered detail reveal)
+- verified: vt_guard=4 escape_handler=1 click_handler=1 click_outside=1 data_expanded_rules=11 emoji=0 hex=0 inline_svg=0 detail_sections=3 node_check=ok
+
+### Cumulative state at end of δ stage 2
+- Stages done: 12 / 24
+- Pulses: 5 / 15
+- Unique pulse categories: 5 / 9 (DOCK · MORPH · GLOW · GLASS · REVEAL)
+- Creativity Health: 100 / 100
+- Forbidden Library violations: 0

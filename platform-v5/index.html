@@ -10,7 +10,7 @@
   <meta name="format-detection" content="telephone=no" />
   <title>Upgrade — تَدَفُّق</title>
 
-  <!-- cascade order + tokens + type + canvas + dock + dock-mobile + canvas-harmonic -->
+  <!-- cascade order + tokens + type + canvas + dock + dock-mobile -->
   <link rel="stylesheet" href="assets/css/_layers.css" />
   <link rel="stylesheet" href="assets/css/tokens.css" />
   <link rel="stylesheet" href="assets/css/type.css" />
@@ -18,7 +18,9 @@
   <link rel="stylesheet" href="assets/css/dock.css" />
   <link rel="stylesheet" href="assets/css/dock-mobile.css" />
   <link rel="stylesheet" href="assets/css/canvas-harmonic.css" />
-  <!-- δ1+: bento; ε1+: slide-over, sheet -->
+  <link rel="stylesheet" href="assets/css/bento.css" />
+  <link rel="stylesheet" href="assets/css/bento-expand.css" />
+  <!-- ε1+: slide-over, sheet -->
 </head>
 <body>
 
@@ -30,11 +32,105 @@
 
   <!-- ─── The Canvas — sovereign, edge-to-edge ─── -->
   <main id="main" class="canvas" tabindex="-1">
-    <!-- Content lands in subsequent pillars:
-         δ → bento grid + cards + progress rings
-         ε → slide-over + bottom sheet
-         ζ → zen mode workspace
-    -->
+
+    <!-- δ1: Bento grid — 8 sample cards. Content fills in ε pillar. -->
+    <section class="bento" aria-label="لَوحة التَدَفُّق">
+
+      <!-- Focal card — daily focus / current scenario -->
+      <article class="bento-card b-4x3" data-card="daily-focus" tabindex="0" aria-expanded="false">
+        <header class="bento-card-header">
+          <span class="bento-card-icon" data-icon="training.objective" aria-hidden="true"></span>
+          <h2 class="bento-card-title">تَركيز اليوم</h2>
+        </header>
+        <p class="bento-card-body">
+          سيناريو خِدمَة العَملاء — التَعامُل مع شَكوى مُتَكَرِّرة. يَفتَح في زِن مُود عند الضَغط.
+        </p>
+        <p class="bento-card-meta">آخر جَلسة قَبل ٣ ساعات · ٣ سيناريوهات مُتَبَقِّية</p>
+        <div class="bento-card-detail">
+          <div class="bento-card-detail-section">
+            <h3 class="h3">السيناريو</h3>
+            <p>عَميل يَشتَكي للمَرَّة الثالثة من تَأخير في الخِدمَة. يَتحَدَّث بصَوت مُرتَفِع، يَطلُب مَدير. الهَدَف: تَحويل الموقف من حادّ إلى مُتَحَكَّم به في أَقَل من ٩٠ ثانية.</p>
+          </div>
+          <div class="bento-card-detail-section">
+            <h3 class="h3">المَقامات الصَوتية المُتَوقَّعة</h3>
+            <p>افتَح بالمَقام البَيات (الهُدوء) · انتَقِل للحِجاز (التَعاطُف) · أَغلِق بالعَجَم (الحَزم اللطيف).</p>
+          </div>
+          <div class="bento-card-detail-section">
+            <h3 class="h3">PROVE-IT</h3>
+            <p>دِراسة Carnegie Mellon (2019) أَثبَتَت أن المُحادثات التي تَبدأ بصَوت مُتَوَسِّط الـ pitch وتَخفُض ٢٠Hz في أول ١٠ ثَواني تُنتج رِضا أَعلى بنِسبة ٣٤٪.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Metric — completion percent -->
+      <article class="bento-card b-1x1" data-card="metric-progress" tabindex="0">
+        <header class="bento-card-header">
+          <span class="bento-card-icon" data-icon="training.completed" aria-hidden="true"></span>
+          <span class="bento-card-meta">الإنجاز</span>
+        </header>
+        <p class="bento-card-metric">٤٧٪</p>
+      </article>
+
+      <!-- Metric — streak / hours -->
+      <article class="bento-card b-1x1" data-card="metric-hours" tabindex="0">
+        <header class="bento-card-header">
+          <span class="bento-card-icon" data-icon="training.spark" aria-hidden="true"></span>
+          <span class="bento-card-meta">ساعات هذا الأُسبوع</span>
+        </header>
+        <p class="bento-card-metric">٨٫٢</p>
+      </article>
+
+      <!-- Standard card — call center -->
+      <article class="bento-card b-2x2" data-card="callcenter" tabindex="0">
+        <header class="bento-card-header">
+          <span class="bento-card-icon" data-icon="training.scenario" aria-hidden="true"></span>
+          <h2 class="bento-card-title">خِدمَة العُملاء</h2>
+        </header>
+        <p class="bento-card-body">١٢ سيناريو · مَقامات الصَوت · حالات الشَكاوى المُعَقَّدة.</p>
+        <p class="bento-card-meta">٤ مُكتَمِلة من ١٢</p>
+      </article>
+
+      <!-- Standard card — field sales -->
+      <article class="bento-card b-2x2" data-card="fieldsales" tabindex="0">
+        <header class="bento-card-header">
+          <span class="bento-card-icon" data-icon="training.highlight" aria-hidden="true"></span>
+          <h2 class="bento-card-title">المَبيعات المَيدانية</h2>
+        </header>
+        <p class="bento-card-body">٨ تَمارين · إقناع · إدارة الاعتراض · إغلاق صَفقة.</p>
+        <p class="bento-card-meta">٢ مُكتَمِلة من ٨</p>
+      </article>
+
+      <!-- 1x1 — locked module -->
+      <article class="bento-card b-1x1" data-card="locked-prog" tabindex="0">
+        <header class="bento-card-header">
+          <span class="bento-card-icon" data-icon="training.locked" aria-hidden="true"></span>
+          <span class="bento-card-meta">مُغلَق</span>
+        </header>
+        <h2 class="bento-card-title">البَرمَجة</h2>
+        <p class="bento-card-meta">يُفتَح بعد إكمال ٦٠٪</p>
+      </article>
+
+      <!-- Wide card — recent activity -->
+      <article class="bento-card b-4x1" data-card="recent" tabindex="0">
+        <header class="bento-card-header">
+          <span class="bento-card-icon" data-icon="training.in-progress" aria-hidden="true"></span>
+          <h2 class="bento-card-title">آخر نَشاط</h2>
+        </header>
+        <p class="bento-card-body">قَبل ٣ ساعات — أَكمَلتَ سيناريو "التَعامُل مع شَكوى ثَلاثية" بنَتيجة ٤/٥ في الصَوت.</p>
+      </article>
+
+      <!-- Standard — psychology layer -->
+      <article class="bento-card b-2x2" data-card="psychology" tabindex="0">
+        <header class="bento-card-header">
+          <span class="bento-card-icon" data-icon="training.stack" aria-hidden="true"></span>
+          <h2 class="bento-card-title">عِلم النَفس + التَفاوُض</h2>
+        </header>
+        <p class="bento-card-body">DISC · ذَكاء عاطِفي · BATNA · ZOPA. ١٤ تَمريناً تَحت كُل عُنوان.</p>
+        <p class="bento-card-meta">٦ مُكتَمِلة من ١٤</p>
+      </article>
+
+    </section>
+
   </main>
 
   <!-- ─── Dock placeholder (mounted by dock.js) ─── -->
@@ -47,9 +143,10 @@
 
   <!-- ─── Runtime entries (classic IIFE; mobile-safe) ─── -->
   <script src="assets/js/theme.js"></script>
-  <script src="assets/js/icons.js"           defer></script>
-  <script src="assets/js/dock.js"            defer></script>
+  <script src="assets/js/icons.js" defer></script>
+  <script src="assets/js/dock.js"  defer></script>
   <script src="assets/js/canvas-harmonic.js" defer></script>
+  <script src="assets/js/bento-expand.js"    defer></script>
 
 </body>
 </html>

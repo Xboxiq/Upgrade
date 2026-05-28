@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-28T20:39:22.000Z",
+  "last_updated": "2026-05-28T20:46:37.000Z",
   "pack": "v3-devotio",
   "pack_status": "all-done",
   "current": {
@@ -2714,11 +2714,11 @@
     }
   },
   "tadaffuq_v5": {
-    "current_pillar": "γ",
-    "current_stage": 3,
-    "current_stage_id": "γ3",
-    "status": "pillar-γ-complete",
-    "branch": "tadaffuq-γ-spatial",
+    "current_pillar": "δ",
+    "current_stage": 2,
+    "current_stage_id": "δ2",
+    "status": "in-progress",
+    "branch": "tadaffuq-δ-clean",
     "completed_stages": [
       "α1",
       "α2",
@@ -2729,15 +2729,19 @@
       "β3",
       "γ1",
       "γ2",
-      "γ3"
+      "γ3",
+      "δ1",
+      "δ2"
     ],
     "creativity_health": 100,
     "creativity_health_note": "v5 just begun. α (foundation) produces 0 pulses by spec; pulse production starts at γ1.",
-    "pulses_produced": 3,
+    "pulses_produced": 5,
     "pulse_categories_used": [
       "DOCK_PULSE",
       "MORPH_PULSE",
-      "GLOW_PULSE"
+      "GLOW_PULSE",
+      "GLASS_PULSE",
+      "REVEAL_PULSE"
     ],
     "forbidden_violations": 0,
     "baseline_v4_chrome": {
@@ -2825,6 +2829,6 @@
       "β",
       "γ"
     ],
-    "next_stage": "δ1 BENTO_GRID (separate δ branch)"
+    "next_stage": "δ3 BENTO_RING (RING_PULSE — SVG progress ring on focal card)"
   }
 }
