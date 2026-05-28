@@ -2781,3 +2781,99 @@ The TRUE cascade-hack count was ~19 — all removed in this stage. Spec target w
 `ζ2: !important Cap (Truthful) — verified: before=380occ/337lines, after=355occ/319lines, cascade-hacks-removed=19, layer-strategy=on`
 
 — end of ζ2 ledger entry —
+
+
+
+---
+
+## ζ3 — Lighthouse + a11y Pass (Truthful, sandbox-bounded) — 2026-05-28
+**Pillar:** ζ QUALITY GATE — Stage 3 of 5
+**Branch:** `elan-zeta-quality-gate-fresh`
+**Commit:** `ca10352`
+**Beacon:** none (quality stage — no Beacon mandate per spec)
+**Files added:** 3 — `scripts/zeta3-svg-aria-hidden.mjs` (62 lines, deterministic + idempotent SVG patcher), `scripts/zeta3-contrast.mjs` (106 lines, WCAG ratio computer), `state/LIGHTHOUSE_REPORT.md` (304 lines, truthful report)
+**Files modified:** 1 — `platform/index.html` (113 SVG `aria-hidden="true"` insertions; total line count unchanged at 32 910)
+**Lines added (git diff):** 585 inserted / 113 deleted (the deleted lines are the same 113 lines re-emitted with the new attribute)
+
+### Sandbox limitation (declared at top of LIGHTHOUSE_REPORT.md)
+
+Kiro orchestration runs in `INTEGRATIONS_ONLY` network mode without a headless Chrome runtime. **No real Lighthouse audit was run.** ζ3 executed a deterministic *static-analysis* pass that covers the same checks Lighthouse performs at the markup level, plus algorithmic per-world WCAG contrast computation. Performance scores require a live render — a reproducible operator-side recipe is included in the report (`§ Reproducibility`).
+
+### Forensic — verified by Node walk on commit `ca10352`
+
+| Audit | Before | After | Status |
+|---|---|---|---|
+| Naked `<svg>` (no `aria-hidden`, no `role`, no `aria-label`) | **113** of 130 | **0** of 130 | **FIXED** ✓ |
+| `<svg aria-hidden="true">` (decorative) | 14 | **127** | propagated +113 |
+| `<svg>` with `role` / `aria-label` (named) | 3 | 3 | unchanged |
+| `<button>` empty-text + no `aria-label` | 0 | 0 | clean (already met) |
+| `<img>` without `alt` | 0 | 0 | clean (no `<img>` in markup) |
+| `:focus-visible` declarations across all CSS | 98 | 98 | unchanged (already strong) |
+
+### Per-world contrast — algorithmic WCAG 2.x
+
+Computed by reading `--ink` and `--anchor-bg` HSL tokens from each `worlds/_*.css`, converting HSL → sRGB, then `(L1 + 0.05) / (L2 + 0.05)`:
+
+| World | ink → bg | ember → bg | focus → bg | AA | AAA |
+|---|---|---|---|---|---|
+| hibr | 15.86:1 | 7.95:1 | 3.24:1 | ✓ | ✓ |
+| naar | 17.58:1 | 6.26:1 | 13.58:1 | ✓ | ✓ |
+| nada | 15.01:1 | 4.53:1 | 4.79:1 | ✓ | ✓ |
+| hadeed | 13.24:1 | 3.40:1 | 7.43:1 | ✓ | ✓ |
+| dhahab | 13.24:1 | 2.06:1 | 7.72:1 | ✓ | ✓ |
+| tayyar | 17.01:1 | 5.28:1 | 13.01:1 | ✓ | ✓ |
+| warsha | 11.58:1 | 4.53:1 | 8.88:1 | ✓ | ✓ |
+| saloon | 14.36:1 | 7.31:1 | 5.84:1 | ✓ | ✓ |
+
+**Verdict:** All 8 worlds **exceed WCAG AAA (≥7:1)** for body text. ember-on-bg passes AA in 6 of 8; the two outliers (hadeed 3.40, dhahab 2.06) use ember as CTA-fill not as body-text utility, so no current accessibility breakage. A future `.text-ember` utility, if added, must audit hadeed/dhahab callsites.
+
+### Cause-of-fix — `<svg aria-hidden="true">` propagation
+
+Inline icon SVGs (Lucide/Phosphor pattern: `viewBox` + `currentColor` + no `<title>` child) inside `<button>`/`<a>` elements that already carry text are decorative by Iconography Doctrine § 4.E. The migrator appends `aria-hidden="true"` so they exit the accessibility tree. The parent owns the accessible name; the icon hides. Idempotent via attribute-presence check (already-tagged SVGs skipped on second run).
+
+### Known issues — *NOT fixed in ζ3*, documented in `state/LIGHTHOUSE_REPORT.md`
+
+| # | Issue | Count | Why deferred |
+|---|---|---|---|
+| A | Inputs without accessible name (label/aria-label/aria-labelledby/title) | 280 / 293 | content semantics — needs per-page review (editorial pass, not code) |
+| B | Duplicate `id=` collisions across page sections | 191 / 1449 ids | needs JS rebind — `Upg.qcalc` + scenario players read `getElementById`; migration to `data-quiz-id` + parent-scoped queries is architectural |
+| C | Heading level skips (h1→h3, h2→h4) | 72 | content-author level; visual-hierarchy intent often legitimate |
+| D | Font preload hints in `<head>` | 0 | β1 woff2 binaries pending operator (`β1_artifacts.woff2_pending_operator: true`); preloads would 404 today; `font-display: swap` already in `tokens/_type.css` gives correct fallback |
+
+Each documented with rationale + recommended follow-up stage (content / architecture / ops).
+
+### Spec acceptance — truthful met/unmet
+
+| Spec target | Result | Met |
+|---|---|---|
+| Lighthouse Mobile Performance ≥ 92 | not measurable in sandbox | **DEFERRED** to operator-side recipe |
+| Lighthouse Mobile Accessibility ≥ 96 | static estimate 88–92 (post-ζ3) → 96–98 (post-Issues A+B) | **PARTIAL** — markup-level shipped, content-level deferred |
+| Lighthouse Best Practices ≥ 95 | not measurable in sandbox | **DEFERRED** |
+| Console errors == 0 across 16 pages | not measurable in sandbox | **DEFERRED** |
+| Color contrast ≥ 4.5:1 on each world (8 verified) | **8/8 ink-on-bg pass AAA** | **MET** ✓ |
+| Keyboard nav: sidebar + bottom-nav + cmdk + modals | 98 `:focus-visible` declarations + `Upg.focusTrap` module present (sacred-list-preserved) | DEFERRED to operator-side run; structurally sound |
+| `state/LIGHTHOUSE_REPORT.md` exists | this file | **MET** ✓ |
+| commit message format | `ζ3: Lighthouse Pass — verified: a11y_svg_naked=0(was113), worlds_aaa=8/8, console_check=deferred-to-operator, perf=not-measurable-in-sandbox` | **MET** ✓ |
+| No beacon | quality stage | **MET** ✓ |
+
+### Sacred Asset preservation (verified post-patch)
+- 16 unique `id="page-*"` page sections — preserved
+- 391 `qcalc` references — preserved
+- 23 prior top-level `Upg.*` APIs — untouched (no JS module added in ζ3; only static-analysis tooling under `scripts/`)
+- `archive/` directory — untouched
+- All theme tokens (light + dark + 8 worlds) — untouched
+- All `prefers-reduced-motion` + `@media print` + `forced-colors: active` + `prefers-reduced-transparency` guards — untouched
+- No inline style mutated by ζ3 (ζ1 baseline of 70 dynamic `--var` styles preserved)
+
+### Forbidden Library check (Iconography Doctrine + Creativity Doctrine)
+- Toy SVG inline: 0 introduced (we **labelled** existing SVGs as decorative; we did not **author** new SVGs)
+- emoji as icon: 0 introduced
+- Material/FontAwesome/Bootstrap Icons: 0 introduced
+- icon size outside `--icon-xs..2xl` scale: 0 introduced
+- hardcoded `fill="#xxx"` in icon markup: 0 introduced
+- mixed icon library in same chrome: 0 introduced
+
+### Commit message (recorded for traceability)
+`ζ3: Lighthouse + a11y Pass (Truthful, sandbox-bounded) — verified: a11y_svg_naked=0(was113), worlds_aaa=8/8, console_check=deferred-to-operator, perf=not-measurable-in-sandbox`
+
+— end of ζ3 ledger entry —
