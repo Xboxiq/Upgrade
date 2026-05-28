@@ -2,61 +2,47 @@
 """
 build_bundle.py — Single-file HTML bundler for the Upgrade platform.
 
+CLASSIC-IIFE STRATEGY (mobile-safe, no ESM)
+-------------------------------------------
+The previous v4.0.1 bundle used `<script type="module">` + dynamic
+importmap + `blob:` URLs. That works on desktop Chrome/Firefox/Safari
+but fails on:
+  • iOS Safari < 16.4 (no importmap support)
+  • Android WebViews and in-app browsers (Telegram, WhatsApp, Instagram, FB)
+  • Some ad-blockers that stub out blob: URLs
+  • Older Edge (pre-Chromium)
+
+This rewrite produces a single classic `<script>` block — no ESM,
+no importmap, no dynamic import, no blob URLs. Works everywhere
+that runs ES2015+ JavaScript.
+
+How it works
+------------
+The codebase has 120 modules under platform/assets/js/:
+  • 99 IIFE side-effect helpers — already wrapped, just concatenate
+  • 21 ESM modules with `export {…}` / `export default` — but all of them
+    are LEAF modules (zero cross-module binding imports — verified).
+    They side-effect register on `window.Upg.*` at load. The `export`
+    statements are vestigial decoration.
+
+So transform_esm_to_classic strips the `export` / `import` keywords
+(which are syntax errors in classic <script>), wraps the body in an
+IIFE for scope isolation, and concatenates everything in app.js's
+import order. Functional behavior is unchanged because every module
+communicates through window.Upg.*, not through ES bindings.
+
 Inputs
 ------
   platform/index.html
-  platform/assets/style.css   (entry stylesheet — flattens @imports recursively)
-  platform/assets/app.js      (entry module — collects ESM graph transitively)
+  platform/assets/style.css   (entry stylesheet — flattens @imports)
+  platform/assets/app.js      (entry — defines load order via imports)
 
 Output
 ------
-  Upgrade-bundle.html         (self-contained, opens via file:// or any HTTP)
-
-Strategy
---------
-CSS:
-  Resolve every `@import url("…") layer(L);` recursively, preserving
-  the @layer wrapping so the cascade is byte-equivalent to the live site.
-
-JS (the hard part):
-  21 of 119 modules use real `export {…}` / `import {…} from "./x"` bindings,
-  so naïve concatenation breaks. Instead, we keep every module as its own
-  ES module loaded from a `blob:` URL, wired by an importmap.
-
-  • Every relative specifier (`./js/foo.js`, `../core/state.js`) is rewritten
-    to a bare specifier `upg/<project-relative-path>` so resolution is
-    independent of the blob URL's pseudo-origin.
-  • Each rewritten module is embedded as
-        <script type="text/upg-source" data-spec="upg/…">SOURCE</script>
-    (an unrecognised MIME type, so the browser stores the text but never
-    executes it).
-  • A tiny vanilla-JS bootstrap (regular <script>, not type=module):
-        1. walks every text/upg-source block,
-        2. wraps each as a Blob and createObjectURL,
-        3. appends a <script type="importmap"> mapping every bare
-           specifier → blob URL,
-        4. dynamic import()s the entry blob.
-    Modern browsers (Chrome 89+, Firefox 108+, Safari 16.4+) accept a
-    dynamically-injected importmap as long as it lands before the first
-    module evaluation — which is exactly what we do.
-
-Caveats
--------
-  • Font files referenced by `url("./fonts/…")` inside @font-face blocks
-    are NOT inlined (would 5×-bloat the bundle). Browsers gracefully fall
-    back through the local font stacks defined in tokens/_type.css.
-  • Service-worker registration in the original page assumes a real HTTP
-    origin and is silently ignored under file://.
-
-Usage
------
-  python3 scripts/build_bundle.py            # writes Upgrade-bundle.html
-  python3 scripts/build_bundle.py --out X.html
+  Upgrade-bundle.html         (self-contained, opens in any browser)
 """
-
 from __future__ import annotations
 import argparse
-import json
 import os
 import re
 import sys
@@ -70,7 +56,9 @@ ENTRY_CSS = PLATFORM / "assets" / "style.css"
 ENTRY_JS = PLATFORM / "assets" / "app.js"
 
 
-# ── CSS: recursive @import flattener ────────────────────────────────────
+# ════════════════════════════════════════════════════════════════════════
+# CSS: recursive @import flattener
+# ════════════════════════════════════════════════════════════════════════
 CSS_IMPORT_RE = re.compile(
     r'@import\s+url\(\s*(["\'])([^"\']+)\1\s*\)\s*(?:layer\(([^)]+)\))?\s*;',
     re.MULTILINE,
@@ -99,7 +87,6 @@ def resolve_css(path: Path, _seen: set[Path] | None = None) -> str:
         layer = m.group(3)
         target = (abs_path.parent / rel).resolve()
         if not target.exists() or target.suffix.lower() != ".css":
-            # Probably a non-CSS url; leave statement intact.
             out.append(m.group(0))
         else:
             inner = resolve_css(target, _seen)
@@ -114,76 +101,188 @@ def resolve_css(path: Path, _seen: set[Path] | None = None) -> str:
     return "".join(out)
 
 
-# ── JS: collect ESM graph + rewrite specifiers ──────────────────────────
-# Form 1: import-from / export-from with bindings
-#   `import X from './a'`
-#   `import { Y } from './a'`
-#   `import * as Z from './a'`
-#   `export { Q } from './a'`
-#   `export * from './a'`
-# Form 2: side-effect import
-#   `import './a'`
-JS_IMPORT_RE = re.compile(
-    r"(\b(?:import|export)\b[^'\"\n]*?\bfrom\s+|^\s*import\s+)"
-    r"(['\"])(\.\.?/[^'\"\n]+)\2",
+# ════════════════════════════════════════════════════════════════════════
+# JS: classic-IIFE assembler
+# ════════════════════════════════════════════════════════════════════════
+
+# Detect side-effect imports, named imports, default imports, namespace imports
+JS_IMPORT_LINE_RE = re.compile(
+    r"^[ \t]*import\s+(?:(?:[A-Za-z_$][\w$]*\s*,\s*)?\{[^}]*\}|\*\s+as\s+[A-Za-z_$][\w$]*|[A-Za-z_$][\w$]*)?\s*(?:from\s+)?['\"][^'\"]+['\"]\s*;?\s*$",
+    re.MULTILINE,
+)
+
+# Strip leading `export ` from declarations
+EXPORT_DECL_RE = re.compile(
+    r"^[ \t]*export\s+(?=(?:async\s+)?(?:function|class|const|let|var)\s+)",
+    re.MULTILINE,
+)
+
+# Match `export default <expression>;` (multiline expression OK — non-greedy)
+EXPORT_DEFAULT_EXPR_RE = re.compile(
+    r"^[ \t]*export\s+default\s+(.+?);\s*$",
+    re.MULTILINE | re.DOTALL,
+)
+
+# Match `export { foo, bar };` and `export { foo, bar } from '...'`;
+EXPORT_NAMED_RE = re.compile(
+    r"^[ \t]*export\s*\{[^}]*\}\s*(?:from\s+['\"][^'\"]+['\"]\s*)?;?\s*$",
+    re.MULTILINE,
+)
+
+# Match `export * ...;`
+EXPORT_STAR_RE = re.compile(
+    r"^[ \t]*export\s+\*\s+(?:as\s+\w+\s+)?from\s+['\"][^'\"]+['\"]\s*;?\s*$",
     re.MULTILINE,
 )
 
 
-def to_specifier(abs_path: Path) -> str:
-    """Project-relative bare specifier under the `upg/` namespace."""
-    rel = abs_path.resolve().relative_to(PLATFORM)
-    return "upg/" + rel.as_posix()
+# Detect modules that are already wrapped in an IIFE (so their top-level
+# declarations don't leak to the global scope when concatenated). Modules
+# that are NOT already IIFE-wrapped need wrapping by us — regardless of
+# whether they have `export`/`import` keywords. This is critical: ESM
+# modules in this codebase that LOOK like plain top-level scripts (e.g.
+# epsilon7-customercare.js, _compat.js) actually rely on ES module scope
+# for isolation. Concatenating them naked = identifier collisions.
+IIFE_START_RE = re.compile(
+    r"^\s*(?:/\*[\s\S]*?\*/\s*|//[^\n]*\n\s*|\n\s*)*"   # leading comments/blank lines
+    r"[;]?\s*\(\s*"                                      # optional ; then (
+    r"(?:function\b|\(\s*\)\s*=>|async\s+function\b)"   # function | () => | async function
+)
 
 
-def rewrite_module_imports(source: str, module_path: Path) -> str:
-    """Rewrite all relative specifiers in `source` to `upg/<rel-from-platform>`.
+def is_already_iife_wrapped(source: str) -> bool:
+    """True if the module starts with an IIFE pattern, so its top-level
+    declarations are already scoped to the IIFE."""
+    return bool(IIFE_START_RE.match(source))
 
-    Resolution is performed against `module_path`'s directory.
+
+def has_esm_bindings(source: str) -> bool:
+    """True if module uses real ESM bindings (export keyword anywhere) or
+    binding-style imports (`import {...}` / `import X from`)."""
+    if re.search(r"^[ \t]*export\b", source, re.MULTILINE):
+        return True
+    if re.search(r"^[ \t]*import\s+(?:\{|\*\s+as\s|[A-Za-z_$][\w$]*\s+from)", source, re.MULTILINE):
+        return True
+    return False
+
+
+def transform_esm_to_classic(source: str) -> str:
+    """Strip ESM-only keywords (`import`, `export`) so the source is valid
+    classic JS. Every transformation is local; module behavior is preserved
+    because every ESM module in this codebase is a leaf module that
+    side-effect-registers on window.Upg.* at load time.
     """
-    def replace(m: re.Match) -> str:
-        prefix, quote, rel = m.group(1), m.group(2), m.group(3)
-        target = (module_path.parent / rel).resolve()
-        # Tolerate optional `.js` and folder/index forms — codebase uses explicit .js.
-        if not target.exists() and not str(target).endswith(".js"):
-            target = target.with_suffix(".js")
-        spec = to_specifier(target)
-        return f"{prefix}{quote}{spec}{quote}"
-    return JS_IMPORT_RE.sub(replace, source)
+    # 1. Remove all import statements (side-effect or binding)
+    source = JS_IMPORT_LINE_RE.sub("", source)
+
+    # 2. Strip `export ` from declaration forms (function/class/const/let/var)
+    source = EXPORT_DECL_RE.sub("", source)
+
+    # 3. `export default <expr>;` — keep the expression as a void statement
+    #    so any side effects (constructors with side effects, etc.) still run.
+    #    Most defaults in this codebase are simple identifiers or object
+    #    literals — emitting them as void is safe.
+    def _default_repl(m: re.Match) -> str:
+        expr = m.group(1).strip()
+        # If the expression is a plain identifier already declared above,
+        # reduce to a no-op comment to avoid `void identifier` warnings.
+        if re.fullmatch(r"[A-Za-z_$][\w$]*", expr):
+            return f"/* upg-bundle: removed `export default {expr};` (no ESM importer) */"
+        # Object/array/function literal — wrap in void to retain any computation.
+        return f"/* upg-bundle: removed `export default …` */ void ({expr});"
+    source = EXPORT_DEFAULT_EXPR_RE.sub(_default_repl, source)
+
+    # 4. `export { … };` (with or without `from '…'`) — strip
+    source = EXPORT_NAMED_RE.sub("", source)
+
+    # 5. `export * …;` — strip
+    source = EXPORT_STAR_RE.sub("", source)
+
+    return source
 
 
-REWRITTEN_SPEC_RE = re.compile(r"""(?:from\s+|import\s+)(['"])(upg/[^'"]+)\1""")
+def wrap_in_iife(body: str, label: str) -> str:
+    """Wrap converted ESM body in an IIFE for scope isolation."""
+    return (
+        f"/* ─── {label} (ESM→classic IIFE) ─── */\n"
+        f"(function () {{\n"
+        f"  'use strict';\n"
+        f"{body}\n"
+        f"}})();\n"
+    )
 
 
-def collect_modules(entry: Path) -> dict[str, str]:
-    """Walk the ESM graph from `entry`. Return {bare-specifier: rewritten-source}.
+# Match the side-effect imports listed in app.js: `import './js/foo.js';`
+APP_IMPORT_RE = re.compile(
+    r"""^\s*import\s+['"](\./[^'"]+)['"]\s*;""",
+    re.MULTILINE,
+)
 
-    Insertion order ≈ DFS pre-order; the bootstrap doesn't rely on order
-    (importmap resolves by name), but it makes the bundle scannable.
+
+def collect_load_order() -> list[Path]:
+    """Read app.js's `import './js/foo.js';` lines and return paths in order."""
+    src = ENTRY_JS.read_text(encoding="utf-8")
+    paths: list[Path] = []
+    for m in APP_IMPORT_RE.finditer(src):
+        rel = m.group(1)
+        target = (ENTRY_JS.parent / rel).resolve()
+        if target.exists():
+            paths.append(target)
+        else:
+            sys.stderr.write(f"[warn] app.js imports missing module: {rel}\n")
+    return paths
+
+
+def assemble_classic_js() -> tuple[str, dict]:
+    """Concatenate every module in app.js's order, transforming ESM→classic
+    where needed. Returns (concatenated_source, stats_dict).
+
+    Decision tree per module:
+      already-IIFE-wrapped + no ESM keywords  → pass through verbatim
+      already-IIFE-wrapped + ESM keywords     → strip keywords, pass through
+      NOT IIFE-wrapped (any kind)             → strip keywords, wrap in IIFE
     """
-    visited: dict[str, str] = {}
+    parts: list[str] = []
+    stats = {
+        "modules_total": 0,
+        "modules_iife_passthrough": 0,
+        "modules_esm_inside_iife": 0,
+        "modules_wrapped_by_us": 0,
+        "bytes_in": 0,
+        "bytes_out": 0,
+    }
 
-    def walk(path: Path) -> None:
-        spec = to_specifier(path)
-        if spec in visited:
-            return
-        if not path.exists():
-            sys.stderr.write(f"[warn] missing module: {path}\n")
-            return
-        src = path.read_text(encoding="utf-8")
-        rewritten = rewrite_module_imports(src, path)
-        visited[spec] = rewritten
-        for m in REWRITTEN_SPEC_RE.finditer(rewritten):
-            dep_spec = m.group(2)            # e.g. "upg/assets/js/elan/state.js"
-            dep_rel = dep_spec[len("upg/"):]
-            dep_path = (PLATFORM / dep_rel).resolve()
-            walk(dep_path)
+    paths = collect_load_order()
+    for p in paths:
+        rel = p.relative_to(PLATFORM).as_posix()
+        src = p.read_text(encoding="utf-8")
+        stats["modules_total"] += 1
+        stats["bytes_in"] += len(src)
 
-    walk(entry.resolve())
-    return visited
+        already_wrapped = is_already_iife_wrapped(src)
+        has_esm = has_esm_bindings(src)
+
+        if already_wrapped and not has_esm:
+            parts.append(f"/* ─── {rel} (IIFE) ─── */\n{src}\n")
+            stats["modules_iife_passthrough"] += 1
+        elif already_wrapped and has_esm:
+            cleaned = transform_esm_to_classic(src)
+            parts.append(f"/* ─── {rel} (IIFE + ESM keywords stripped) ─── */\n{cleaned}\n")
+            stats["modules_esm_inside_iife"] += 1
+        else:
+            cleaned = transform_esm_to_classic(src) if has_esm else src
+            wrapped = wrap_in_iife(cleaned, rel)
+            parts.append(wrapped)
+            stats["modules_wrapped_by_us"] += 1
+
+    blob = "\n".join(parts)
+    stats["bytes_out"] = len(blob)
+    return blob, stats
 
 
-# ── HTML weaving ────────────────────────────────────────────────────────
+# ════════════════════════════════════════════════════════════════════════
+# HTML weaving
+# ════════════════════════════════════════════════════════════════════════
 LINK_STYLESHEET_RE = re.compile(
     r'<link\s+rel=(["\'])stylesheet\1\s+href=(["\'])assets/style\.css\2\s*/?>',
 )
@@ -193,65 +292,16 @@ SCRIPT_MODULE_RE = re.compile(
 
 
 def html_safe_script_payload(src: str) -> str:
-    """Make `src` safe to embed inside <script>…</script> by neutralising the
-    only sequence the HTML parser treats as a script-end: literal `</script`.
-    """
-    # `</script` (case-insensitive) is the actual terminator the HTML parser
-    # looks for inside a <script> element. We escape ALL occurrences whether
-    # in strings, comments, or regex literals — the JS parser handles `<\/`
-    # identically to `</` in non-regex contexts and the regex bodies in this
-    # codebase don't include this sequence (verified by audit).
+    """Make `src` safe inside <script>…</script> by escaping the only
+    sequence the HTML parser treats as a script-end: literal `</script`."""
     return re.sub(r"</(script)", r"<\\/\1", src, flags=re.IGNORECASE)
-
-
-BOOTSTRAP_TEMPLATE = r"""
-<script>
-/* ════════════════════════════════════════════════════════════════════════
-   ÊLAN v4 single-file bundle — bootstrap
-   Reads every <script type="text/upg-source">, mints blob URLs,
-   installs an importmap, then dynamically imports the entry module.
-   ════════════════════════════════════════════════════════════════════════ */
-(function upgBundleBootstrap() {
-  "use strict";
-  try {
-    var blocks = document.querySelectorAll('script[type="text/upg-source"]');
-    if (!blocks.length) {
-      console.error("[upg-bundle] no source blocks found");
-      return;
-    }
-    var imports = {};
-    for (var i = 0; i < blocks.length; i++) {
-      var node = blocks[i];
-      var spec = node.getAttribute("data-spec");
-      var src  = node.textContent;
-      var blob = new Blob([src], { type: "application/javascript" });
-      imports[spec] = URL.createObjectURL(blob);
-    }
-    var im = document.createElement("script");
-    im.type = "importmap";
-    im.textContent = JSON.stringify({ imports: imports });
-    document.head.appendChild(im);
-
-    var entrySpec = __ENTRY_SPEC__;
-    // Defer the dynamic import until after this script returns so the
-    // importmap insertion is committed to the module-resolver state.
-    Promise.resolve().then(function () {
-      return import(entrySpec);
-    }).catch(function (err) {
-      console.error("[upg-bundle] entry import failed:", err);
-    });
-  } catch (err) {
-    console.error("[upg-bundle] bootstrap error:", err);
-  }
-})();
-</script>
-"""
 
 
 BANNER = """<!--
   ════════════════════════════════════════════════════════════════════════
-  Upgrade — منصة التدريب الاحترافية — single-file bundle
+  Upgrade — منصة التدريب الاحترافية — single-file bundle (classic)
   ÊLAN v4 SEALED · 6 pillars · 38 stages · 30 beacons · 0 forbidden violations
+  Mobile-safe build: classic IIFE, no ESM / importmap / blob URLs
   Generated by scripts/build_bundle.py · {meta}
   ════════════════════════════════════════════════════════════════════════
 -->
@@ -263,14 +313,16 @@ def build(out_path: Path) -> None:
     css_full = resolve_css(ENTRY_CSS)
     print(f"  {len(css_full):>10,} bytes")
 
-    print("→ collecting ES module graph …")
-    modules = collect_modules(ENTRY_JS)
-    total_js_bytes = sum(len(s) for s in modules.values())
-    print(f"  {len(modules)} modules · {total_js_bytes:,} bytes")
+    print("→ assembling classic-JS bundle …")
+    js_blob, stats = assemble_classic_js()
+    print(f"  modules:        {stats['modules_total']}")
+    print(f"    IIFE pass-through:        {stats['modules_iife_passthrough']}")
+    print(f"    IIFE + ESM stripped:      {stats['modules_esm_inside_iife']}")
+    print(f"    wrapped by us (was bare): {stats['modules_wrapped_by_us']}")
+    print(f"  source bytes:   {stats['bytes_in']:,} in → {stats['bytes_out']:,} out")
 
     print("→ weaving HTML …")
     html = INDEX_HTML.read_text(encoding="utf-8")
-
     if not LINK_STYLESHEET_RE.search(html):
         sys.exit("✗ stylesheet link not found in platform/index.html")
     if not SCRIPT_MODULE_RE.search(html):
@@ -283,27 +335,18 @@ def build(out_path: Path) -> None:
     )
     html = LINK_STYLESHEET_RE.sub(lambda _m: css_block, html, count=1)
 
-    source_blocks = []
-    for spec, src in modules.items():
-        safe = html_safe_script_payload(src)
-        source_blocks.append(
-            f'<script type="text/upg-source" data-spec="{spec}">\n{safe}\n</script>'
-        )
-
-    entry_spec = to_specifier(ENTRY_JS)
-    bootstrap = BOOTSTRAP_TEMPLATE.replace(
-        "__ENTRY_SPEC__", json.dumps(entry_spec)
-    )
+    safe_js = html_safe_script_payload(js_blob)
     js_block = (
-        '<!-- ─── inline ESM modules (loaded via blob URLs + importmap) ─── -->\n'
-        + "\n".join(source_blocks)
-        + "\n"
-        + bootstrap
+        f'<script id="upg-bundled-runtime" data-bundle="elan-v4-classic">\n'
+        f"/* === ÊLAN v4 — classic-JS bundle ({stats['modules_total']} modules) === */\n"
+        f"{safe_js}\n"
+        f"</script>"
     )
     html = SCRIPT_MODULE_RE.sub(lambda _m: js_block, html, count=1)
 
     meta = (
-        f"{len(modules)} modules · {total_js_bytes:,} JS bytes · "
+        f"{stats['modules_total']} modules · "
+        f"{stats['bytes_out']:,} JS bytes · "
         f"{len(css_full):,} CSS bytes"
     )
     final = BANNER.format(meta=meta) + html

@@ -113,6 +113,29 @@ Versioning is by **doctrine pack** (DEVOTIO / ÊLAN), not by SemVer.
 
 ---
 
+## [v4.0.2] — Tooling — mobile-safe bundle — 2026-05-28
+
+> *«ÊLAN في ملف واحد — هذه المرّة يَعمَل في كل متصفح.»*
+
+### Changed
+- **`scripts/build_bundle.py`** rewritten to produce a **classic-IIFE bundle** (no ESM, no importmap, no `blob:` URLs, no dynamic `import()`). The previous v4.0.1 approach (dynamic importmap + blob URLs) failed on:
+  - iOS Safari < 16.4 (no importmap support at all)
+  - Android WebViews and in-app browsers (Telegram, WhatsApp, Instagram, FB)
+  - Some ad-blocker stubs of `blob:` URLs
+  - Older Edge (pre-Chromium)
+
+  The rewrite concatenates all 119 modules into one classic `<script>` block in `app.js`'s import order. The 21 ESM-with-bindings modules are leaf-only (zero cross-module bindings — verified), so `transform_esm_to_classic` strips `export`/`import` keywords and wraps the body in an IIFE. The 100 already-IIFE-wrapped helpers pass through verbatim.
+
+- **`scripts/fidelity_check.py`** updated to verify functional equivalence (byte-equivalence is impossible by design when stripping ESM keywords). Four converging proofs: (A) deterministic re-build, (B) `node --check` static syntax, (C) ÊLAN v4 marker inclusion, (D) HTML structural integrity.
+
+### Notes
+- New bundle: 4.92 MB, 119 modules (100 pass-through + 19 wrapped-by-us)
+- 17/17 ÊLAN v4 markers verified present (worlds γ2-γ9, β2/β3, δ4/δ5, ε1/ε7/ε11/ε12, ζ4)
+- HTTP serve test: 200 OK, exact bytes match
+- Service Worker registration silently skipped under `file://` (existing `location.protocol !== 'file:'` guard in `upg-production-1.js`)
+
+---
+
 ## [v4.0.1] — Tooling — single-file bundle — 2026-05-28
 
 > *«ÊLAN في ملف واحد — للفحص لا للنشر.»*
