@@ -98,3 +98,42 @@ last_5_avg: 4.0
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-28 / γ3 — Pillar γ COMPLETE 3/3
+
+
+
+
+## δ1 — 2026-05-28
+**Pulse Category:** 🪟 GLASS_PULSE
+**The Surprise:** البطاقات في الـ bento ليست تَيلز عائمة مَنفصِلة على الكانفس. هي **شَرائح من سَطح زُجاجي واحد** — كل بطاقة تَحمل `border-block-start: 1px solid var(--line)` فقط، الحَواف الأخرى غائبة عَمداً. الـ grid-gap بينها هو الفَراغ بين الشُّقوق. الظلال (`var(--shadow-1)`) خَفيفة ومَحسوبة لتَدمج البطاقات لا لتَفصلها. عند `:focus-within` أو `:hover`، الـ hairline يُضيء بـ Neon Cyan ليَكشِف "أين انتَهى الزُجاج" — كأن السَطح يَتَنَفَّس مع المُستخدم. هذا يَكسِر الـ AI-default للـ bento grids: "كل card مَعزولة بـ 4 borders + drop-shadow ثَقيل".
+
+**Reference Avoided:** AI-default "every bento card is an island with 4 borders + drop-shadow" — السائد في dribbble shots للـ "premium dashboards".
+**Inspired-by:** Wild Card #15 — Andalusian zellige door. البلاطات في الزَلِّيج الأندلسي تَلتَقي بالأخرى في خَطّ مَكسور من الـ kufic — الفَراغ بين البلاطات هو ما يَكشِف نَمَط الجَميع، لا الحَواف.
+**User-Visible:** yes — أول محتوى مرئي على كانفس v5. ٨ بطاقات مُتَفاوِتة الأحجام (b-4x3 focal، b-2x2 standard، b-1x1 metric، b-4x1 wide).
+**Originality Self-Score:** 4/5 — bento grids موجودة بكَثرة (Apple iPad presentation pages، Notion، Linear). الذي يَجعله 4/5: (١) **single-edge border**: الحَواف الثلاث الباقية تَعتَمد على grid-gap لا borders — يُولِّد إحساس continuous glass plane؛ (٢) **container queries per card**: كل بطاقة تَتَكَيَّف مع عَرضها هي، ليس مع viewport — تَعمَل في b-1x1 وb-4x3 بنفس الـ markup؛ (٣) **chromatic continuity مع γ3**: hairline يَستَهلك `--accent-progress` نَفسه الذي يَستَخدِمه dock + canvas-harmonic — single accent system across pillars؛ (٤) **dense grid-auto-flow**: ٨ cards بأحجام مُتَفاوِتة تُعيد ترتيب نَفسها لتَملأ الفَراغات تَلقائياً.
+**Files touched:** platform-v5/assets/css/bento.css (NEW 160) · platform-v5/index.html (+85 lines content) · platform-v5/assets/js/icons.js (+25 autoPopulate)
+**Verified at commit:** *(filled by next push)*
+
+
+
+## δ2 — 2026-05-28
+**Pulse Category:** 🔓 REVEAL_PULSE
+**The Surprise:** الضَغط على بطاقة لا يَنقُل المُستخدم لصَفحة جَديدة. ولا يَفتَح modal. البطاقة **تَتَوَسَّع في مَكانها** عَبر CSS Grid template re-flow — تَأخُذ b-4x3، الباقيات يُعِدن ترتيب أنفسهن بـ `dense flow`. عند توافُر View Transitions API (Chrome 111+/Safari 18+)، الانتقال يَتم كَـ FLIP تلقائي — الـ DOM يَتغَيَّر، الـ browser يُؤدّي الـ choreography. على Firefox، الـ fallback يَستَخدِم `transition: grid-column var(--duration-morph)` — التَوَسُّع نَفسه يَحدُث، صفر page navigation. الـ detail body يَتَكَشَّف بـ **staggered reveal**: الـ section الأولى تَظهَر بعد ١٦٠ms، الثانية بعد ٣٢٠ms، الثالثة بعد ٤٨٠ms — كأن البطاقة تَروي قِصَّتها عُنواناً عُنواناً. Escape أو click-outside تُغلِق. radio-style: بطاقة واحدة مَفتوحة في كل لَحظة. كل البطاقات keyboard-accessible (Enter/Space).
+
+**Reference Avoided:** Forbidden #5 (modal popup for detail) + الـ AI-default الأكبر: "click card → navigate to /card/:id" — صَفحة مُنفَصِلة لكل تَفصيل. هنا، الكانفس لا يَفقُد سياقه أبداً، البطاقة تَتَفَرَّع في مَكانها.
+**Inspired-by:** Wild Card #21 — al-Jazari's water clock manuscript. آلة الزَمن في مَخطوطة الجَزَري لا تَحتاج شَرحاً مَكتوباً — تَستَعرِض غَرَضها بَصرياً، تُكشَف وَظائفها بالنَظَر إلى الحَرَكة. هنا، البطاقة المُتَوَسِّعة تُريك كل شيء بدون أن تَنقُلَك إلى مَكان آخر.
+**User-Visible:** yes — أول مَكان يَتَفاعَل فيه المُستخدم مع v5 بشكل ذي مَعنى. الضَغط على "تَركيز اليوم" يَكشِف PROVE-IT citation + المَقامات الصَوتية.
+**Originality Self-Score:** 4/5 — in-place expand pattern موجود (Linear's "+more" buttons، Notion toggle blocks)، لكن: (١) **CSS Grid template re-flow** بدلاً من manual height/width animation — الـ browser يُؤدّي الـ choreography؛ (٢) **View Transitions API integration** مع fallback نَظيف — البَرنامَج يَستَفيد من الـ API الحَديث ولا يَعتَمد عَليه؛ (٣) **staggered detail reveal**: الـ sections تَظهَر بـ `nth-child` cascade — قِصَّة لا blob؛ (٤) **single-card-radio**: فَتح بطاقة يُغلِق الأخرى تَلقائياً، يَحفَظ نَظافة الكانفس؛ (٥) **a11y first-class**: aria-expanded، tabindex، keyboard handlers، Escape، click-outside — كلها بَنيت من اليوم الأول.
+**Files touched:** platform-v5/assets/css/bento-expand.css (NEW 110) · platform-v5/assets/js/bento-expand.js (NEW 149) · platform-v5/index.html (+22 detail markup)
+**Verified at commit:** *(filled by next push)*
+
+
+
+---STATS---
+total_pulses: 5
+unique_categories_used: 5
+target_categories: 9 (DOCK · MORPH · GLOW · REVEAL · RING · GLASS · SPRING · VEIL · HAPTIC)
+avg_self_score: 4.0
+last_5_avg: 4.0
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-28 / δ2 — Pillar δ stage 2/3
