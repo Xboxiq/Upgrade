@@ -3224,3 +3224,63 @@ N/A — أول baseline لـ v5.
 الأولوية التالية: **α2 Token Reconciliation** — `--paper-*` + `--ink-*` + `--accent-*` consolidation (CHROMA DOCTRINE § ٢).
 
 — Entry end —
+
+
+
+---
+
+## TADAFFUQ v5 — α2 — Token Reconciliation — 2026-05-28
+**Pack:** v5 TADAFFUQ
+**Pillar:** α FOUNDATION
+**Stage:** 2 of 4
+**Branch:** `tadaffuq-α-foundation-bootstrap`
+**Verified at commit:** `f682343`
+**Pulse:** — (α stages do not require pulse)
+
+### Before
+- `_color.css`: 117 lines, 0 declarations of `--paper-base/raised/elevated`
+- 0 declarations of `--ink-primary/secondary/tertiary/disabled`
+- 0 declarations of `--accent-action/progress/signal`
+- v4 tokens: `--ink`, `--ink-muted`, `--ink-faint`, `--ember`, `--accent`, `--paper-tone-1/2/3` (live)
+
+### After (verified by grep)
+
+| Domain | Key | Value |
+|---|---|---:|
+| Architecture | `paper_v5_decls` (--paper-base/raised/elevated) | 9 |
+| Architecture | `ink_v5_decls` (--ink-primary/secondary/tertiary/disabled) | 12 |
+| Architecture | `accent_v5_decls` (--accent-action/progress/signal) | 3 |
+| Stability | `important_added_in_α2` | 0 |
+| Stability | `hex_added_in_α2_block` | 0 |
+| Stability | `color_css_lines` | 169 |
+| Sacred | `page_h_count` | 14 (preserved) |
+| Sacred | `qcalc_instances` | 384 (preserved) |
+| Sacred | `data_block_ids` | 513 (preserved) |
+| Sacred | `data_page_personality` | 15 (preserved) |
+| Sacred | `upg_apis_total` | 40 (preserved) |
+| Stability | `important_outside_sanctuary` | 354 (unchanged) |
+
+### Reproduction (Bash)
+```bash
+grep -cE '\-\-paper-(base|raised|elevated):' platform/assets/css/tokens/_color.css   # → 9
+grep -cE '\-\-ink-(primary|secondary|tertiary|disabled):' platform/assets/css/tokens/_color.css   # → 12
+grep -cE '\-\-accent-(action|progress|signal):' platform/assets/css/tokens/_color.css   # → 3
+sed -n '/TADAFFUQ v5 — α2/,/End TADAFFUQ v5 \/ α2/p' platform/assets/css/tokens/_color.css | grep -coE '#[0-9a-fA-F]{3,8}\b'   # → 0
+```
+
+### Files
+**Modified (1):**
+- `platform/assets/css/tokens/_color.css` (+52 lines, 0 deletions)
+
+**Untouched (Sacred):**
+- `platform/index.html` — صفر تعديل
+- All other CSS files
+- All JS files
+- archive/, prompts/v1..v4
+
+### Verdict
+🟢 **green-light.** v5 token families seeded clean. Universal defaults bridge to existing v4 ladders (zero break). Dark theme oklch values match CHROMA DOCTRINE § ٢.١. Light theme matches W12 P2 Linen-Bone alignment. Single-accent rule is now enforceable via `--accent-action`/`--accent-progress` token presence (single per screen).
+
+الأولوية التالية: **α3 Module Manifest** — audit للـ 126 ملف JS (24 IIFE + 21 ESM-export + 81 unclassified) → خريطة + توصيات load-order.
+
+— Entry end —
