@@ -3144,3 +3144,72 @@ After that, ÊLAN v4 is sealed. v5 (when desired) can begin from the same `state
 
 — Entry end —
 — ÊLAN v4 — مذهب مكتمل —
+
+
+
+---
+
+# ✦ TADAFFUQ v5 — TRUTH LEDGER (continues v4 ledger)
+
+> Append-only entries for Pack v5. Same contract as v4 above.
+
+---
+
+## α1 — Forensic Audit
+**Date:** 2026-05-28
+**Pillar:** α FOUNDATION (1/4)
+**Branch:** `tadaffuq-alpha-foundation`
+**Verified at commit:** `fdd330c`
+
+### Before (baseline as left by v4 finish, commit ce1af87):
+- inline_styles_index = 23
+- inline_styles_pages_total = 98
+- important_total = 338
+- woff2_files = 0
+- emoji_in_markup_index = 1111
+- emoji_in_pages_total = 1105
+- inline_svg_viewbox_index = 224
+- inline_svg_viewbox_pages = 108
+- hardcoded_hex_outside_tokens = 1209
+- position_fixed_total = 31
+- backdrop_blur_ge_12 = 6
+- js_files_total = 126
+- css_files_total = 30
+- upg_top_level_apis_defined = 38
+- page_sections_in_index = 15
+- qcalc_references_index = 391
+- data_page_personality_in_index = 15
+- reduced_motion_guards_in_css = 101
+- forced_colors_guards_in_css = 20
+
+### After (this stage measured-only — no platform/ change):
+- All of the above (identical — α1 captures, does not modify)
+
+### Files added (9):
+- `prompts/v5/00_TADAFFUQ_MANIFESTO.md`
+- `prompts/v5/SPATIAL_DOCTRINE.md`
+- `prompts/v5/MOTION_DOCTRINE.md`
+- `prompts/v5/CHROMA_DOCTRINE.md`
+- `prompts/v5/ICONOGRAPHY_DOCTRINE.md`
+- `prompts/v5/PULSE_LIBRARY.md`
+- `prompts/v5/INDEX.md`
+- `prompts/v5/α1_FORENSIC_AUDIT.md`
+- `state/AUDIT_BASELINE_V5.md`
+
+### Lines:
++1755 / -0
+
+### Sacred Assets (verified untouched):
+- `archive/arabic-training-platform-v12-original.html` — untouched
+- `prompts/v1/`, `prompts/v2/`, `prompts/v3/`, `prompts/v4/` — untouched
+- `platform/**` — untouched
+- `state/PROGRESS.json` previous entries (v3 pack, elan_v4) — preserved
+- `state/CREATIVITY_LOG.md` — read-only
+
+### Pulse:
+None — α-pillar carries no Pulse per `prompts/v5/PULSE_LIBRARY.md` §1 (pulses begin at γ).
+
+### Notes:
+- Branch identifier renamed at session start from `tadaffuq-α-foundation` to `tadaffuq-alpha-foundation` after a foreign-commit conflict was discovered on the unicode-named remote ref. Latin pillar names adopted for all 8 pillars (alpha/beta/gamma/delta/epsilon/zeta/eta/theta) for shell safety. Stage IDs (α1, α2, ...) remain unicode as they appear in commit subjects, file names, and ledger entries — they are display-layer identifiers, not branch identifiers.
+
+— α1 entry end —
