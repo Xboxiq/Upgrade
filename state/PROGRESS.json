@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-28T07:32:24.000Z",
+  "last_updated": "2026-05-28T07:34:44.000Z",
   "pack": "v3-devotio",
   "pack_status": "all-done",
   "current": {
@@ -2715,13 +2715,14 @@
   },
   "tadaffuq_v5": {
     "current_pillar": "α",
-    "current_stage": 2,
-    "current_stage_id": "α2",
+    "current_stage": 3,
+    "current_stage_id": "α3",
     "status": "in-progress",
     "branch": "tadaffuq-α-foundation",
     "completed_stages": [
       "α1",
-      "α2"
+      "α2",
+      "α3"
     ],
     "creativity_health": 100,
     "creativity_health_note": "v5 just begun. α (foundation) produces 0 pulses by spec; pulse production starts at γ1.",
@@ -2764,6 +2765,22 @@
       "emoji_in_html": 0,
       "layer_cascade_declared": 1,
       "lines_total": 190,
+      "http_serve": "200 OK"
+    },
+    "α3_verified": {
+      "hex_in_tokens": 0,
+      "duration_tokens": 7,
+      "ease_tokens": 5,
+      "icon_tokens": 6,
+      "space_tokens": 12,
+      "radius_tokens": 6,
+      "z_tokens": 5,
+      "colour_family_decls": 44,
+      "forced_colors_blocks": 1,
+      "light_theme_blocks": 2,
+      "auto_theme_blocks": 2,
+      "tokens_css_lines": 245,
+      "total_css_lines": 386,
       "http_serve": "200 OK"
     }
   }
