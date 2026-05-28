@@ -3144,3 +3144,164 @@ After that, ÊLAN v4 is sealed. v5 (when desired) can begin from the same `state
 
 — Entry end —
 — ÊLAN v4 — مذهب مكتمل —
+
+
+
+---
+
+## v5 TADAFFUQ — α1 TABULA RASA — 2026-05-28
+
+**Branch:** `tadaffuq-α-foundation`
+**Pillar:** α (foundation) · **Stage:** 1 of 4 · **Pulse:** none (α has no pulses)
+
+### Forensic baseline (v4 chrome to demolish)
+
+| metric | value |
+|---|---|
+| classic-sidebar/topbar/drawer hits in `platform/index.html` | **1** |
+| `position: fixed` in `platform/assets/css/chrome.css` | **1** |
+| `max-width: …` containers in `platform/assets/css/pages.css` | **84** |
+| emoji in `platform/index.html` | **1 062** |
+| hardcoded hex in markup `style="…#…"` | **8** |
+| world palette files | **9** |
+| page shards | **15** |
+| JS modules | **126** |
+| CSS files | **30** |
+
+### Endgame targets (v5 sealed)
+
+```
+classic_chrome_hits             = 0
+fixed_position (excl. dock/scrim/overlay) = 0
+max_width_containers            = 0
+emoji                           = 0
+hardcoded_hex                   = 0
+world_palettes                  = 0
+```
+
+### Files created in α1
+
+```
+platform-v5/
+platform-v5/assets/.gitkeep
+platform-v5/assets/css/.gitkeep
+platform-v5/assets/js/.gitkeep
+platform-v5/assets/svg/.gitkeep
+platform-v5/DEMOLITION_LIST.md       (the contract: what v5 doesn't carry)
+state/PULSE_LOG.md                   (initialized; α produces 0)
+state/PROGRESS.json                  (tadaffuq_v5 section appended)
+state/TRUTH_LEDGER.md                (this entry)
+```
+
+### Acceptance
+
+- ✓ Skeleton exists.
+- ✓ DEMOLITION_LIST.md is grep-verifiable.
+- ✓ Baseline numbers recorded above.
+- ✓ Zero lines of code in `platform-v5/` beyond the demolition contract.
+- ✓ Zero changes outside `platform-v5/` and `state/`.
+
+
+
+---
+
+## v5 TADAFFUQ — α2 EDGE CANVAS — 2026-05-28
+
+**Pillar:** α · **Stage:** 2 of 4 · **Pulse:** none
+
+### Files shipped
+- `platform-v5/index.html` (49 lines) — RTL Arabic shell, viewport-fit=cover, theme-color dual-scheme, skip-link, sprite-mount + dock-mount + overlay slots
+- `platform-v5/assets/css/_layers.css` (22 lines) — `@layer reset, tokens, base, components, utilities, themes, overrides;`
+- `platform-v5/assets/css/canvas.css` (119 lines) — modern reset + edge-to-edge `<html>/<body>/main.canvas` + safe-area envelope + reduced-motion sanctuary + forced-colors placeholder
+
+### Verified
+| metric | got | expected |
+|---|---|---|
+| sidebar selectors in CSS | 0 | 0 |
+| `position: fixed` chrome in CSS | 0 | 0 |
+| `max-width` on canvas | 0 | 0 |
+| `inline-size: 100%` (edge-to-edge proof) | 3 | ≥ 1 |
+| `viewport-fit=cover` in HTML | 1 | 1 |
+| hex colour values in CSS | 0 | 0 (tokens land α3) |
+| emoji in HTML | 0 | 0 |
+| `@layer` cascade declared | 1 | 1 |
+| HTTP serve via `python -m http.server` | 200 OK | 200 |
+
+### Commit: `α2: edge canvas — verified: …`
+
+
+
+---
+
+## v5 TADAFFUQ — α3 TOKEN RESET — 2026-05-28
+
+**Pillar:** α · **Stage:** 3 of 4 · **Pulse:** none
+
+### Files shipped
+- `platform-v5/assets/css/tokens.css` (245 lines after hex-comment stripping) — 8 token families across dark/light/auto/forced-colors modes
+- `platform-v5/index.html` (51 lines) — added `<link>` to tokens.css
+
+### Verified
+| metric | got | expected |
+|---|---|---|
+| hex literals anywhere in tokens.css | 0 | 0 (HSL only) |
+| `--duration-*` tokens defined | 7 | ≥ 7 |
+| `--ease-*` tokens defined | 5 | ≥ 5 |
+| `--icon-*` tokens defined | 6 | ≥ 6 |
+| `--space-*` tokens defined | 12 | ≥ 11 |
+| `--radius-*` tokens defined | 6 | ≥ 6 |
+| `--z-*` tokens defined | 5 | ≥ 5 |
+| colour-family declarations | 44 | ≥ 11 in dark + repeats in light |
+| `forced-colors: active` block | 1 | ≥ 1 |
+| `data-theme="light"` block | 2 | ≥ 1 |
+| `data-theme="auto"` block | 2 | ≥ 1 |
+| HTTP serve test | 200 OK | 200 |
+
+### Note on hex-in-comments
+Initial draft included documentation hexes in comments (`/* #0B0F19 */`) for human readability. The α3 spec reads strict — *zero hex anywhere*. Per the Truth Over Claims oath (Manifesto §6), the comments were stripped automatically. HSL values remain self-documenting.
+
+### Commit: `α3: token reset — verified: …`
+
+
+
+---
+
+## v5 TADAFFUQ — α4 ICON SPRITE — 2026-05-28
+
+**Pillar:** α · **Stage:** 4 of 4 · **Pulse:** none
+**Pillar α status:** COMPLETE (4/4 stages)
+
+### Files shipped
+- `platform-v5/assets/svg/icons.svg` (~280 lines, ~10 KB) — 30 Lucide symbols, ISC attribution preserved
+- `platform-v5/assets/svg/SEMANTIC_MAP.json` (1.7 KB) — 6 groups · 30 keys (navigation/actions/training/states/theme/chrome)
+- `platform-v5/assets/js/icons.js` (219 lines, 8.5 KB) — classic IIFE, exposes `Upg.icons.use()` + `Upg.icons.audit()`
+- `platform-v5/index.html` updated to wire `assets/js/icons.js` and the sprite-mount target
+
+### Verified
+| metric | got | expected |
+|---|---|---|
+| symbols in sprite | 30 | ≥ 30 |
+| hardcoded `fill="#"` | 0 | 0 |
+| hardcoded `stroke="#"` | 0 | 0 |
+| `stroke="currentColor"` | 31 (30 strokes + 1 fill on `circle-dot` interior) | ≥ 30 |
+| Lucide ISC attribution lines | 7 | ≥ 1 |
+| emoji in sprite | 0 | 0 |
+| semantic-map keys | 30 | ≥ 30 |
+| `node --check` on icons.js | passed | passed |
+| sprite XML well-formed | yes | yes |
+| HTTP serve test | 200 / 200 / 200 / 200 | all 200 |
+
+### Pillar α — final tally
+
+| stage | files | lines | pulse |
+|---|---|---|---|
+| α1 TABULA RASA | 5 (skeleton + DEMOLITION_LIST.md) | ~140 | — |
+| α2 EDGE CANVAS | 3 (index.html, _layers.css, canvas.css) | 190 | — |
+| α3 TOKEN RESET | 1 (tokens.css) + index.html update | 245 | — |
+| α4 ICON SPRITE | 3 (icons.svg, SEMANTIC_MAP.json, icons.js) + index.html update | ~525 | — |
+| **TOTAL** | **12 files** | **~1 100 lines** | **0 pulses** *(α produces 0 by spec)* |
+
+Sacred Upg.* APIs touched in α: **1** — `Upg.icons` (NEW; supersedes v4 Upg.icons stub).
+Forbidden Library violations: **0**.
+
+### Commit: `α4: icon sprite — verified: …`
