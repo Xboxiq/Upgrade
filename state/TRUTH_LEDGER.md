@@ -3228,3 +3228,36 @@ state/TRUTH_LEDGER.md                (this entry)
 | HTTP serve via `python -m http.server` | 200 OK | 200 |
 
 ### Commit: `α2: edge canvas — verified: …`
+
+
+
+---
+
+## v5 TADAFFUQ — α3 TOKEN RESET — 2026-05-28
+
+**Pillar:** α · **Stage:** 3 of 4 · **Pulse:** none
+
+### Files shipped
+- `platform-v5/assets/css/tokens.css` (245 lines after hex-comment stripping) — 8 token families across dark/light/auto/forced-colors modes
+- `platform-v5/index.html` (51 lines) — added `<link>` to tokens.css
+
+### Verified
+| metric | got | expected |
+|---|---|---|
+| hex literals anywhere in tokens.css | 0 | 0 (HSL only) |
+| `--duration-*` tokens defined | 7 | ≥ 7 |
+| `--ease-*` tokens defined | 5 | ≥ 5 |
+| `--icon-*` tokens defined | 6 | ≥ 6 |
+| `--space-*` tokens defined | 12 | ≥ 11 |
+| `--radius-*` tokens defined | 6 | ≥ 6 |
+| `--z-*` tokens defined | 5 | ≥ 5 |
+| colour-family declarations | 44 | ≥ 11 in dark + repeats in light |
+| `forced-colors: active` block | 1 | ≥ 1 |
+| `data-theme="light"` block | 2 | ≥ 1 |
+| `data-theme="auto"` block | 2 | ≥ 1 |
+| HTTP serve test | 200 OK | 200 |
+
+### Note on hex-in-comments
+Initial draft included documentation hexes in comments (`/* #0B0F19 */`) for human readability. The α3 spec reads strict — *zero hex anywhere*. Per the Truth Over Claims oath (Manifesto §6), the comments were stripped automatically. HSL values remain self-documenting.
+
+### Commit: `α3: token reset — verified: …`
