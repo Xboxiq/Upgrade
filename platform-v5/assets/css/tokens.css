@@ -130,6 +130,50 @@
     --font-arabic: "Boutros Modern Kufi VF", "Bukra VF", "IBM Plex Arabic", "Cairo", "Tajawal", system-ui, sans-serif;
     --font-latin:  "Geist VF", "Inter VF", system-ui, -apple-system, "Segoe UI", "Helvetica Neue", sans-serif;
     --font-mono:   "JetBrains Mono", "SFMono-Regular", "Menlo", "Consolas", monospace;
+
+
+    /* ── 9. Type scale (β1) — clamp-fluid, 360→1440px ── */
+    /* perfect-fourth (1.333) ratio; 9 slots: xs through display */
+    --text-xs:       clamp(11px, 0.70rem + 0.10vw, 12px);
+    --text-sm:       clamp(13px, 0.80rem + 0.15vw, 14px);
+    --text-base:     clamp(15px, 0.90rem + 0.25vw, 17px);
+    --text-lg:       clamp(17px, 1.00rem + 0.35vw, 19px);
+    --text-xl:       clamp(21px, 1.20rem + 0.55vw, 24px);
+    --text-2xl:      clamp(26px, 1.40rem + 0.85vw, 32px);
+    --text-3xl:      clamp(32px, 1.60rem + 1.40vw, 44px);
+    --text-4xl:      clamp(40px, 2.00rem + 2.00vw, 60px);
+    --text-display:  clamp(56px, 2.60rem + 3.40vw, 96px);
+
+
+    /* ── 10. Leading (β1) ── */
+    --leading-tight:    1.10;   /* display, hero */
+    --leading-snug:     1.25;   /* h1–h3 */
+    --leading-normal:   1.45;   /* h4–h6, lead, UI */
+    --leading-relaxed:  1.65;   /* Arabic body (default) */
+    --leading-loose:    1.85;   /* blockquote, generous prose */
+
+
+    /* ── 11. Tracking (β1) ── */
+    --tracking-tighter: -0.025em;
+    --tracking-tight:   -0.012em;
+    --tracking-normal:   0;
+    --tracking-wide:     0.025em;
+    --tracking-widest:   0.080em;
+
+
+    /* ── 12. Weight (β1) — variable-axis ready ── */
+    --weight-300: 300;
+    --weight-400: 400;
+    --weight-500: 500;
+    --weight-600: 600;
+    --weight-700: 700;
+    --weight-900: 900;
+
+
+    /* ── 13. Reading measure (β1) — comfortable line lengths ── */
+    --measure-narrow: 52ch;   /* dense lists, sidebars */
+    --measure-normal: 64ch;   /* body prose default */
+    --measure-wide:   76ch;   /* generous reading */
   }
 
 

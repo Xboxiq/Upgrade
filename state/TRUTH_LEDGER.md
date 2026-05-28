@@ -3305,3 +3305,84 @@ Sacred Upg.* APIs touched in α: **1** — `Upg.icons` (NEW; supersedes v4 Upg.i
 Forbidden Library violations: **0**.
 
 ### Commit: `α4: icon sprite — verified: …`
+
+
+
+---
+
+## β1 — Typo Hierarchy — 2026-05-28
+**Pack:** v5 TADAFFUQ
+**Pillar:** β VOICE
+**Stage:** 1 of 3
+**Branch:** `tadaffuq-β-voice` (forked from `v5-tadaffuq` @ `a4dc569`, after PR #120 merge)
+**Verified at commit:** `c7239cb`
+
+### Before (β1 baseline on `tadaffuq-β-voice` @ a4dc569)
+
+| Domain | Key | Value |
+|---|---|---:|
+| Type | `font_family_decls` | 1 |
+| Type | `clamp_count` | 0 |
+| Type | `text_size_tokens` | 0 |
+| Type | `leading_tokens` | 0 |
+| Type | `tracking_tokens` | 0 |
+| Type | `weight_tokens` | 0 |
+| Type | `prose_selectors_total` | 0 |
+| Type | `type_css_present` | no |
+| Stability | `hex_in_v5_css` | 0 |
+| Stability | `emoji_in_v5_markup` | 0 |
+| Stability | `important_in_v5_css_real` | 5 (sanctioned: 4 motion-sanctuary + 1 [hidden]) |
+
+### After (β1 verified by grep + py-strip-comments + curl)
+
+| Domain | Key | Value |
+|---|---|---:|
+| Type | `font_family_decls` | 6 |
+| Type | `clamp_count` | 9 |
+| Type | `text_size_tokens` | 9 |
+| Type | `leading_tokens` | 5 |
+| Type | `tracking_tokens` | 5 |
+| Type | `weight_tokens` | 6 |
+| Type | `measure_tokens` | 3 |
+| Type | `prose_selectors_total` | 59 |
+| Type | `type_css_lines` | 307 |
+| Stability | `new_important_in_type_css` | **0** (real declarations; the 1 grep-hit is in a doc comment) |
+| Stability | `total_important_in_v5_css` | 5 (unchanged — all sanctioned) |
+| Stability | `hex_in_v5_css` | 0 |
+| Stability | `emoji_in_v5_markup` | 0 |
+| Serving | `http_index_html` | 200 |
+| Serving | `http_type_css` | 200 |
+| Serving | `http_tokens_css` | 200 |
+| Serving | `http_canvas_css` | 200 |
+| Serving | `http__layers_css` | 200 |
+| Serving | `http_icons_svg` | 200 |
+| Serving | `http_icons_js` | 200 |
+
+### Files
+**Created (2):**
+- `platform-v5/assets/css/type.css` (307 lines, `@layer base`)
+- `prompts/v5/β1_TYPO_HIERARCHY.md` (this stage's spec)
+
+**Modified (2):**
+- `platform-v5/assets/css/tokens.css` (+44 lines — type tokens §9–13 added in `:root` of dark default)
+- `platform-v5/index.html` (+1 net line — `<link>` for type.css)
+
+**Untouched (Sacred):**
+- `platform/**` — v4 legacy reference, zero edits.
+- `archive/**` — sacred history.
+- `prompts/v[1-4]/**` — sacred history.
+- `state/CREATIVITY_LOG.md` — read-only v4 ledger.
+- `state/PULSE_LOG.md` — β has no pulses.
+- 14 sacred Upg.* APIs — none touched.
+
+### Design notes
+- Modular **Perfect-Fourth scale (1.333)** with `clamp()` interpolation across 360→1440px viewport. The hero `--text-display` peaks at 96px on 1440+, lands at 56px on a 360px phone — same proportion, different size.
+- **Arabic-first** body: `font-feature-settings: "kern", "liga", "calt", "rlig", "init", "medi", "fina"` activates Arabic positional forms by default. `font-optical-sizing: auto` lets variable-axis Arabic fonts (Boutros Modern Kufi VF / Bukra VF) adjust contrast at display sizes.
+- **Latin / Numeric / Code** all `unicode-bidi: isolate; direction: ltr` so they survive verbatim inside Arabic prose.
+- **Logical properties only** — `margin-block-*`, `padding-inline-*`, `border-inline-start`. Zero `left:`/`right:`/`top:`/`bottom:` introduced by β1.
+- **Forced-colors aware** — every type rule uses `currentColor`; OS palette wins by construction. `blockquote` and `code/pre/kbd` re-bind to `CanvasText`/`ButtonText`/`Canvas` under `forced-colors: active`.
+
+### Verdict
+🟢 **clean** — Voice installed without breaking any α contract. β2 (Theme Provider, `Upg.theme.set` rebuilt) and β3 (Lang Shim — RTL audit script) are the next steps; they do not require β1 amendments.
+
+— Entry end —
