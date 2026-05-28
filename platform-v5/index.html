@@ -1,0 +1,50 @@
+<!doctype html>
+<html dir="rtl" lang="ar" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#0B0F19" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#F7F5F1" media="(prefers-color-scheme: light)" />
+  <meta name="description" content="منصة التطوير المهني الذاتي — تَدَفُّق v5: نسخة احترافية بأُسلوب فضائي مُحَدَّث." />
+  <meta name="format-detection" content="telephone=no" />
+  <title>Upgrade — تَدَفُّق</title>
+
+  <!-- α2 / α3: cascade order (declared first, before any rule) + canvas + tokens -->
+  <link rel="stylesheet" href="assets/css/_layers.css" />
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/canvas.css" />
+  <!-- β1 will add: type.css; γ1+ will add: chrome.css, dock.css, etc. -->
+</head>
+<body>
+
+  <!-- a11y: skip link first focusable element -->
+  <a href="#main" class="skip-link">تَخطٍّ إلى المحتوى</a>
+
+  <!-- ─── SVG sprite mount (loaded by assets/js/icons.js into here) ─── -->
+  <div id="sprite-mount" hidden aria-hidden="true"></div>
+
+  <!-- ─── The Canvas — sovereign, edge-to-edge ─── -->
+  <main id="main" class="canvas" tabindex="-1">
+    <!-- Content lands in subsequent pillars:
+         γ → dock + canvas-harmonic
+         δ → bento grid + cards + progress rings
+         ε → slide-over + bottom sheet
+         ζ → zen mode workspace
+         The α stages produce no content — only the slot.
+    -->
+  </main>
+
+  <!-- ─── Dock placeholder (rendered in γ1 / γ2) ─── -->
+  <div id="dock-mount" hidden aria-hidden="true"></div>
+
+  <!-- ─── Overlay slots (slide-over + sheet land in ε1 / ε2) ─── -->
+  <div id="overlay-scrim" class="scrim" hidden aria-hidden="true"></div>
+  <aside id="overlay-panel" class="slide-over" hidden aria-hidden="true"></aside>
+  <aside id="overlay-sheet" class="sheet"      hidden aria-hidden="true"></aside>
+
+  <!-- ─── Runtime entry — α4: icon helper (Upg.icons.use / .audit) ─── -->
+  <script src="assets/js/icons.js" defer></script>
+
+</body>
+</html>
