@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="assets/css/dock-mobile.css" />
   <link rel="stylesheet" href="assets/css/canvas-harmonic.css" />
   <link rel="stylesheet" href="assets/css/bento.css" />
+  <link rel="stylesheet" href="assets/css/bento-expand.css" />
   <!-- ε1+: slide-over, sheet -->
 </head>
 <body>
@@ -36,7 +37,7 @@
     <section class="bento" aria-label="لَوحة التَدَفُّق">
 
       <!-- Focal card — daily focus / current scenario -->
-      <article class="bento-card b-4x3" data-card="daily-focus" tabindex="0">
+      <article class="bento-card b-4x3" data-card="daily-focus" tabindex="0" aria-expanded="false">
         <header class="bento-card-header">
           <span class="bento-card-icon" data-icon="training.objective" aria-hidden="true"></span>
           <h2 class="bento-card-title">تَركيز اليوم</h2>
@@ -45,6 +46,20 @@
           سيناريو خِدمَة العَملاء — التَعامُل مع شَكوى مُتَكَرِّرة. يَفتَح في زِن مُود عند الضَغط.
         </p>
         <p class="bento-card-meta">آخر جَلسة قَبل ٣ ساعات · ٣ سيناريوهات مُتَبَقِّية</p>
+        <div class="bento-card-detail">
+          <div class="bento-card-detail-section">
+            <h3 class="h3">السيناريو</h3>
+            <p>عَميل يَشتَكي للمَرَّة الثالثة من تَأخير في الخِدمَة. يَتحَدَّث بصَوت مُرتَفِع، يَطلُب مَدير. الهَدَف: تَحويل الموقف من حادّ إلى مُتَحَكَّم به في أَقَل من ٩٠ ثانية.</p>
+          </div>
+          <div class="bento-card-detail-section">
+            <h3 class="h3">المَقامات الصَوتية المُتَوقَّعة</h3>
+            <p>افتَح بالمَقام البَيات (الهُدوء) · انتَقِل للحِجاز (التَعاطُف) · أَغلِق بالعَجَم (الحَزم اللطيف).</p>
+          </div>
+          <div class="bento-card-detail-section">
+            <h3 class="h3">PROVE-IT</h3>
+            <p>دِراسة Carnegie Mellon (2019) أَثبَتَت أن المُحادثات التي تَبدأ بصَوت مُتَوَسِّط الـ pitch وتَخفُض ٢٠Hz في أول ١٠ ثَواني تُنتج رِضا أَعلى بنِسبة ٣٤٪.</p>
+          </div>
+        </div>
       </article>
 
       <!-- Metric — completion percent -->
@@ -131,6 +146,7 @@
   <script src="assets/js/icons.js" defer></script>
   <script src="assets/js/dock.js"  defer></script>
   <script src="assets/js/canvas-harmonic.js" defer></script>
+  <script src="assets/js/bento-expand.js"    defer></script>
 
 </body>
 </html>
