@@ -1,0 +1,67 @@
+{
+  "_meta": {
+    "doctrine": "ICONOGRAPHY_DOCTRINE.md §5",
+    "rule": "code addresses icons by semantic key, never by icon-id. Swapping the underlying icon (e.g. Lucide 'home' → 'house') is a one-line edit here.",
+    "family_per_region": {
+      "navigation": "lucide",
+      "actions":    "lucide",
+      "training":   "lucide",
+      "states":     "lucide",
+      "theme":      "lucide",
+      "chrome":     "lucide"
+    },
+    "phosphor_groups_reserved_for_later": [
+      "empty-state-illustrations",
+      "training-content-glyphs",
+      "slide-over-hero-art"
+    ]
+  },
+
+  "navigation": {
+    "home":      "icon-home",
+    "lab":       "icon-flask-conical",
+    "centre":    "icon-command",
+    "progress":  "icon-trending-up",
+    "more":      "icon-more-horizontal"
+  },
+
+  "actions": {
+    "add":         "icon-plus",
+    "edit":        "icon-pencil",
+    "delete":      "icon-trash-2",
+    "share":       "icon-share-2",
+    "close":       "icon-x",
+    "back":        "icon-arrow-left",
+    "next":        "icon-arrow-right",
+    "search":      "icon-search"
+  },
+
+  "training": {
+    "scenario":    "icon-clipboard-list",
+    "objective":   "icon-target",
+    "completed":   "icon-check-circle-2",
+    "locked":      "icon-lock",
+    "in-progress": "icon-circle-dot",
+    "stack":       "icon-layers-2",
+    "highlight":   "icon-sparkles",
+    "spark":       "icon-zap"
+  },
+
+  "states": {
+    "info":        "icon-info",
+    "warning":     "icon-alert-triangle",
+    "error":       "icon-alert-circle",
+    "success":     "icon-check"
+  },
+
+  "theme": {
+    "light":       "icon-sun",
+    "dark":        "icon-moon",
+    "auto":        "icon-monitor"
+  },
+
+  "chrome": {
+    "menu":        "icon-menu",
+    "panel-open":  "icon-panel-right-open"
+  }
+}

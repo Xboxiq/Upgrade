@@ -3261,3 +3261,47 @@ state/TRUTH_LEDGER.md                (this entry)
 Initial draft included documentation hexes in comments (`/* #0B0F19 */`) for human readability. The α3 spec reads strict — *zero hex anywhere*. Per the Truth Over Claims oath (Manifesto §6), the comments were stripped automatically. HSL values remain self-documenting.
 
 ### Commit: `α3: token reset — verified: …`
+
+
+
+---
+
+## v5 TADAFFUQ — α4 ICON SPRITE — 2026-05-28
+
+**Pillar:** α · **Stage:** 4 of 4 · **Pulse:** none
+**Pillar α status:** COMPLETE (4/4 stages)
+
+### Files shipped
+- `platform-v5/assets/svg/icons.svg` (~280 lines, ~10 KB) — 30 Lucide symbols, ISC attribution preserved
+- `platform-v5/assets/svg/SEMANTIC_MAP.json` (1.7 KB) — 6 groups · 30 keys (navigation/actions/training/states/theme/chrome)
+- `platform-v5/assets/js/icons.js` (219 lines, 8.5 KB) — classic IIFE, exposes `Upg.icons.use()` + `Upg.icons.audit()`
+- `platform-v5/index.html` updated to wire `assets/js/icons.js` and the sprite-mount target
+
+### Verified
+| metric | got | expected |
+|---|---|---|
+| symbols in sprite | 30 | ≥ 30 |
+| hardcoded `fill="#"` | 0 | 0 |
+| hardcoded `stroke="#"` | 0 | 0 |
+| `stroke="currentColor"` | 31 (30 strokes + 1 fill on `circle-dot` interior) | ≥ 30 |
+| Lucide ISC attribution lines | 7 | ≥ 1 |
+| emoji in sprite | 0 | 0 |
+| semantic-map keys | 30 | ≥ 30 |
+| `node --check` on icons.js | passed | passed |
+| sprite XML well-formed | yes | yes |
+| HTTP serve test | 200 / 200 / 200 / 200 | all 200 |
+
+### Pillar α — final tally
+
+| stage | files | lines | pulse |
+|---|---|---|---|
+| α1 TABULA RASA | 5 (skeleton + DEMOLITION_LIST.md) | ~140 | — |
+| α2 EDGE CANVAS | 3 (index.html, _layers.css, canvas.css) | 190 | — |
+| α3 TOKEN RESET | 1 (tokens.css) + index.html update | 245 | — |
+| α4 ICON SPRITE | 3 (icons.svg, SEMANTIC_MAP.json, icons.js) + index.html update | ~525 | — |
+| **TOTAL** | **12 files** | **~1 100 lines** | **0 pulses** *(α produces 0 by spec)* |
+
+Sacred Upg.* APIs touched in α: **1** — `Upg.icons` (NEW; supersedes v4 Upg.icons stub).
+Forbidden Library violations: **0**.
+
+### Commit: `α4: icon sprite — verified: …`
