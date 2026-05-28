@@ -3200,3 +3200,31 @@ state/TRUTH_LEDGER.md                (this entry)
 - ✓ Baseline numbers recorded above.
 - ✓ Zero lines of code in `platform-v5/` beyond the demolition contract.
 - ✓ Zero changes outside `platform-v5/` and `state/`.
+
+
+
+---
+
+## v5 TADAFFUQ — α2 EDGE CANVAS — 2026-05-28
+
+**Pillar:** α · **Stage:** 2 of 4 · **Pulse:** none
+
+### Files shipped
+- `platform-v5/index.html` (49 lines) — RTL Arabic shell, viewport-fit=cover, theme-color dual-scheme, skip-link, sprite-mount + dock-mount + overlay slots
+- `platform-v5/assets/css/_layers.css` (22 lines) — `@layer reset, tokens, base, components, utilities, themes, overrides;`
+- `platform-v5/assets/css/canvas.css` (119 lines) — modern reset + edge-to-edge `<html>/<body>/main.canvas` + safe-area envelope + reduced-motion sanctuary + forced-colors placeholder
+
+### Verified
+| metric | got | expected |
+|---|---|---|
+| sidebar selectors in CSS | 0 | 0 |
+| `position: fixed` chrome in CSS | 0 | 0 |
+| `max-width` on canvas | 0 | 0 |
+| `inline-size: 100%` (edge-to-edge proof) | 3 | ≥ 1 |
+| `viewport-fit=cover` in HTML | 1 | 1 |
+| hex colour values in CSS | 0 | 0 (tokens land α3) |
+| emoji in HTML | 0 | 0 |
+| `@layer` cascade declared | 1 | 1 |
+| HTTP serve via `python -m http.server` | 200 OK | 200 |
+
+### Commit: `α2: edge canvas — verified: …`

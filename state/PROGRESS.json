@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-28T07:30:22.000Z",
+  "last_updated": "2026-05-28T07:32:24.000Z",
   "pack": "v3-devotio",
   "pack_status": "all-done",
   "current": {
@@ -2715,11 +2715,14 @@
   },
   "tadaffuq_v5": {
     "current_pillar": "α",
-    "current_stage": 1,
-    "current_stage_id": "α1",
+    "current_stage": 2,
+    "current_stage_id": "α2",
     "status": "in-progress",
     "branch": "tadaffuq-α-foundation",
-    "completed_stages": [],
+    "completed_stages": [
+      "α1",
+      "α2"
+    ],
     "creativity_health": 100,
     "creativity_health_note": "v5 just begun. α (foundation) produces 0 pulses by spec; pulse production starts at γ1.",
     "pulses_produced": 0,
@@ -2750,6 +2753,18 @@
       "α3",
       "α4"
     ],
-    "doctrine_files_count": 9
+    "doctrine_files_count": 9,
+    "α2_verified": {
+      "sidebar_selectors_in_css": 0,
+      "fixed_chrome_in_css": 0,
+      "max_width_on_canvas": 0,
+      "edge_to_edge_inline_size_100": 3,
+      "viewport_fit_cover": 1,
+      "hex_in_css": 0,
+      "emoji_in_html": 0,
+      "layer_cascade_declared": 1,
+      "lines_total": 190,
+      "http_serve": "200 OK"
+    }
   }
 }

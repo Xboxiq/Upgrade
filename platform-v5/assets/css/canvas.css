@@ -1,0 +1,119 @@
+/* ════════════════════════════════════════════════════════════════════════
+   TADAFFUQ v5 — α2 — Edge-to-edge canvas + modern reset
+   ────────────────────────────────────────────────────────────────────────
+   Implements SPATIAL_DOCTRINE §1.
+   No colour values here (those land in α3 tokens.css).
+   No type values here (those land in β1 type.css).
+   No chrome here  (dock + cards + panels land in γ–ε).
+   ════════════════════════════════════════════════════════════════════════ */
+
+
+/* ─── reset (modern, opinionated) ─────────────────────────────────────── */
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  *      { margin: 0; padding: 0; }
+  html   { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+  body, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, figure, blockquote, pre, hr {
+    margin: 0;
+  }
+
+  ul, ol           { list-style: none; }
+  img, picture,
+  video, canvas,
+  svg              { display: block; max-inline-size: 100%; block-size: auto; }
+
+  input, button,
+  textarea, select { font: inherit; color: inherit; background: transparent; }
+
+  button           { border: 0; cursor: pointer; }
+
+  a                { color: inherit; text-decoration: none; }
+
+  table            { border-collapse: collapse; border-spacing: 0; }
+
+  /* Hide attribute respected globally */
+  [hidden]         { display: none !important; }   /* /* the single sanctioned !important — see manifesto §5.10 (motion-sanctuary block can carry too); browser default reliability */
+}
+
+
+/* ─── base — html / body / main.canvas — edge-to-edge contract ────────── */
+@layer base {
+
+  /* The page is the viewport. Always. */
+  html, body {
+    inline-size: 100%;
+    block-size:  100dvh;       /* dynamic viewport — survives mobile chrome */
+    overflow-x: clip;          /* no horizontal scroll, ever */
+  }
+
+  body {
+    /* canvas + ink + safe-area envelope come alive once tokens.css ships (α3).
+       Until then, browser defaults render — that's expected at α2. */
+    overscroll-behavior-y: none;        /* no pull-to-refresh inside the app */
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* The Canvas — sovereign, edge-to-edge, with safe-area envelope */
+  .canvas {
+    display: block;
+    inline-size:    100%;
+    min-block-size: 100dvh;
+    /* Padding tokens are token-driven (α3). We inline placeholders here so
+       the canvas is functional even before tokens load. */
+    padding-block-start:  var(--canvas-pad-top,    0px);
+    padding-block-end:    var(--canvas-pad-bottom, calc(96px + env(safe-area-inset-bottom)));
+    padding-inline-start: var(--canvas-pad-x,      max(16px, env(safe-area-inset-left)));
+    padding-inline-end:   var(--canvas-pad-x,      max(16px, env(safe-area-inset-right)));
+    /* Programmatically focusable for a11y (skip-link target) without a visible ring */
+    outline: none;
+  }
+
+  .canvas:focus-visible {
+    outline: 2px solid var(--accent-progress, currentColor);
+    outline-offset: 4px;
+  }
+
+  /* a11y skip link — visually hidden until focused */
+  .skip-link {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    padding: 8px 12px;
+    transform: translateY(-200%);
+    transition: transform var(--duration-quick, 160ms) var(--ease-snap, cubic-bezier(0.4, 0, 0.2, 1));
+    z-index: var(--z-overlay, 100);
+  }
+  .skip-link:focus-visible { transform: translateY(0); }
+
+}
+
+
+/* ─── reduced-motion sanctuary — the single sanctioned !important block ──
+   Quoting MOTION_DOCTRINE §4: when the user requests reduced motion, every
+   transition collapses to a snap. This is a contract, not a preference, and
+   so uses !important to defeat any later overzealous rule. */
+@layer base {
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+
+/* ─── forced-colors mode — placeholder ─────────────────────────────────
+   Token-level forced-colors mapping lands in α3 (tokens.css) once token
+   names exist. This stage ships only the structural commitment. */
+@layer base {
+  @media (forced-colors: active) {
+    *, *::before, *::after {
+      forced-color-adjust: auto;  /* let user-agent / OS theme own colours */
+    }
+  }
+}
