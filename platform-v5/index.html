@@ -21,7 +21,7 @@
   <!-- a11y: skip link first focusable element -->
   <a href="#main" class="skip-link">تَخطٍّ إلى المحتوى</a>
 
-  <!-- ─── SVG sprite mount (filled in α4 ICON_SPRITE) ─── -->
+  <!-- ─── SVG sprite mount (loaded by assets/js/icons.js into here) ─── -->
   <div id="sprite-mount" hidden aria-hidden="true"></div>
 
   <!-- ─── The Canvas — sovereign, edge-to-edge ─── -->
@@ -43,8 +43,8 @@
   <aside id="overlay-panel" class="slide-over" hidden aria-hidden="true"></aside>
   <aside id="overlay-sheet" class="sheet"      hidden aria-hidden="true"></aside>
 
-  <!-- ─── Runtime entry (registered in α4 / β2) ─── -->
-  <!-- <script type="module" src="assets/js/runtime.js"></script> -->
+  <!-- ─── Runtime entry — α4: icon helper (Upg.icons.use / .audit) ─── -->
+  <script src="assets/js/icons.js" defer></script>
 
 </body>
 </html>

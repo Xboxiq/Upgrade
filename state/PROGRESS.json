@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-28T07:34:44.000Z",
+  "last_updated": "2026-05-28T07:37:46.000Z",
   "pack": "v3-devotio",
   "pack_status": "all-done",
   "current": {
@@ -2715,14 +2715,15 @@
   },
   "tadaffuq_v5": {
     "current_pillar": "α",
-    "current_stage": 3,
-    "current_stage_id": "α3",
-    "status": "in-progress",
+    "current_stage": 4,
+    "current_stage_id": "α4",
+    "status": "pillar-α-complete",
     "branch": "tadaffuq-α-foundation",
     "completed_stages": [
       "α1",
       "α2",
-      "α3"
+      "α3",
+      "α4"
     ],
     "creativity_health": 100,
     "creativity_health_note": "v5 just begun. α (foundation) produces 0 pulses by spec; pulse production starts at γ1.",
@@ -2782,6 +2783,32 @@
       "tokens_css_lines": 245,
       "total_css_lines": 386,
       "http_serve": "200 OK"
+    },
+    "α4_verified": {
+      "symbols_in_sprite": 30,
+      "hardcoded_fills": 0,
+      "hardcoded_strokes": 0,
+      "currentcolor_strokes": 31,
+      "lucide_isc_attribution": true,
+      "emoji_in_sprite": 0,
+      "semantic_map_keys": 30,
+      "icons_js_lines": 219,
+      "node_check": "passed",
+      "http_serves": {
+        "index.html": 200,
+        "icons.svg": 200,
+        "SEMANTIC_MAP.json": 200,
+        "icons.js": 200
+      },
+      "sprite_xml_wellformed": true
+    },
+    "pillar_α_summary": {
+      "stages_done": 4,
+      "files_shipped": 9,
+      "lines_added_total": 1100,
+      "pulses_produced": 0,
+      "branch": "tadaffuq-α-foundation",
+      "ready_for_pr": true
     }
   }
 }
