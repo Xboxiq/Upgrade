@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-28T07:37:46.000Z",
+  "last_updated": "2026-05-28T19:31:16.661279+00:00",
   "pack": "v3-devotio",
   "pack_status": "all-done",
   "current": {
@@ -2714,11 +2714,11 @@
     }
   },
   "tadaffuq_v5": {
-    "current_pillar": "α",
-    "current_stage": 4,
-    "current_stage_id": "α4",
-    "status": "pillar-α-complete",
-    "branch": "tadaffuq-α-foundation",
+    "current_pillar": "β",
+    "current_stage": null,
+    "current_stage_id": null,
+    "status": "pillar-β-pending",
+    "branch": "tadaffuq-β-language",
     "completed_stages": [
       "α1",
       "α2",
@@ -2808,7 +2808,27 @@
       "lines_added_total": 1100,
       "pulses_produced": 0,
       "branch": "tadaffuq-α-foundation",
-      "ready_for_pr": true
+      "ready_for_pr": true,
+      "merged_pr": 120,
+      "merged_into": "v5-tadaffuq",
+      "merge_commit": "a4dc569",
+      "closed_at": "2026-05-28"
+    },
+    "previous_pillar": "α",
+    "previous_pillar_status": "merged",
+    "previous_pillar_pr": 120,
+    "next_action": "Execute β1 TYPO_HIERARCHY on tadaffuq-β-language: write prompts/v5/β1_TYPO_HIERARCHY.md spec; build platform-v5/assets/css/base.css with type scale via clamp(), Arabic-first stack consuming α3 voice/numeric tokens, optimal line-heights for body/display/quote/code; verify by grep that fluid clamp() steps land in tokens/base only and that no hardcoded px font-sizes leak into platform-v5/index.html. Files cap: ≤4. Lines cap: ≤600 net. Pulse: 0 (β-pillar produces no pulses by spec).",
+    "boot_files_present": {
+      "prompts/v5/00_TADAFFUQ_MANIFESTO.md": true,
+      "prompts/v5/SPATIAL_DOCTRINE.md": true,
+      "prompts/v5/MOTION_DOCTRINE.md": true,
+      "prompts/v5/CHROMA_DOCTRINE.md": true,
+      "prompts/v5/ICONOGRAPHY_DOCTRINE.md": true,
+      "prompts/v5/PULSE_LIBRARY.md": true,
+      "prompts/v5/INDEX.md": true,
+      "prompts/v5/AUTO_PILOT_v5.md": true,
+      "prompts/v5/README.md": true,
+      "state/PULSE_LOG.md": true
     }
   }
 }
