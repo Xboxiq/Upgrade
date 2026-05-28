@@ -169,6 +169,20 @@
     return true;
   }
 
+  // Auto-populate [data-icon="group.key"] elements with the resolved icon.
+  // Idempotent: skips elements that already contain an SVG child.
+  function autoPopulate(root) {
+    const scope = root || document;
+    const targets = scope.querySelectorAll('[data-icon]');
+    targets.forEach(function (host) {
+      if (host.querySelector('svg')) return;       // already populated
+      const key = host.getAttribute('data-icon');
+      if (!key) return;
+      const iconEl = use(key);
+      if (iconEl) host.appendChild(iconEl);
+    });
+  }
+
   function flushQueue() {
     while (PENDING_QUEUE.length) {
       const job = PENDING_QUEUE.shift();
@@ -192,6 +206,8 @@
       if (spriteText) mountSprite(spriteText);
       if (mapJson)    MAP = mapJson;
       flushQueue();
+      // δ1: auto-populate any [data-icon] elements present at boot.
+      autoPopulate(document);
     });
   }
 
@@ -207,9 +223,10 @@
     window.Upg.icons = Object.freeze({
       use: use,
       audit: audit,
+      autoPopulate: autoPopulate,
       // Diagnostic surface — useful for dev tools, harmless in prod.
       _meta: Object.freeze({
-        version: 'tadaffuq-v5/α4',
+        version: 'tadaffuq-v5/α4+δ1',
         sizeKeys: Array.from(SIZE_KEYS),
         loaded: function () { return SPRITE_LOADED && !!MAP; }
       })

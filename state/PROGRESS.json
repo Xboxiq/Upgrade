@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-28T07:37:46.000Z",
+  "last_updated": "2026-05-28T20:39:22.000Z",
   "pack": "v3-devotio",
   "pack_status": "all-done",
   "current": {
@@ -2714,21 +2714,31 @@
     }
   },
   "tadaffuq_v5": {
-    "current_pillar": "α",
-    "current_stage": 4,
-    "current_stage_id": "α4",
-    "status": "pillar-α-complete",
-    "branch": "tadaffuq-α-foundation",
+    "current_pillar": "γ",
+    "current_stage": 3,
+    "current_stage_id": "γ3",
+    "status": "pillar-γ-complete",
+    "branch": "tadaffuq-γ-spatial",
     "completed_stages": [
       "α1",
       "α2",
       "α3",
-      "α4"
+      "α4",
+      "β1",
+      "β2",
+      "β3",
+      "γ1",
+      "γ2",
+      "γ3"
     ],
     "creativity_health": 100,
     "creativity_health_note": "v5 just begun. α (foundation) produces 0 pulses by spec; pulse production starts at γ1.",
-    "pulses_produced": 0,
-    "pulse_categories_used": [],
+    "pulses_produced": 3,
+    "pulse_categories_used": [
+      "DOCK_PULSE",
+      "MORPH_PULSE",
+      "GLOW_PULSE"
+    ],
     "forbidden_violations": 0,
     "baseline_v4_chrome": {
       "classic_sidebar_topbar_drawer_hits": 1,
@@ -2809,6 +2819,12 @@
       "pulses_produced": 0,
       "branch": "tadaffuq-α-foundation",
       "ready_for_pr": true
-    }
+    },
+    "pillars_complete": [
+      "α",
+      "β",
+      "γ"
+    ],
+    "next_stage": "δ1 BENTO_GRID (separate δ branch)"
   }
 }

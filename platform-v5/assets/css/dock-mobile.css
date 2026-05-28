@@ -1,0 +1,141 @@
+/* ════════════════════════════════════════════════════════════════════════
+   TADAFFUQ v5 — γ2 — Dock Mobile (the MORPH_PULSE)
+   ────────────────────────────────────────────────────────────────────────
+   The same .dock node morphs into a mobile bottom-nav at ≤720px.
+   No duplicate component, no JS conditionals — pure CSS reflow.
+
+   Manifesto: SPATIAL §2 (mobile dock contract) + MOTION §1 (--duration-morph).
+
+   The Pulse — MORPH_PULSE:
+     The desktop dock floats at bottom-center as a capsule. At ≤720px,
+     the same node loses its centring transform, expands to full-width
+     minus safe-area, drops its capsule radius, gains a top-edge hairline,
+     and reveals labels permanently (mobile users need labels — proximity
+     detection doesn't apply to touch input).
+   ════════════════════════════════════════════════════════════════════════ */
+
+
+@layer components {
+
+  /* The desktop rule that hides the dock at ≤720px (defined in dock.css)
+     is REPLACED here. We instead morph it. */
+  @media (max-inline-size: 720px) {
+
+    .dock {
+      /* Override the desktop "display: none" from dock.css */
+      display: flex !important;  /* media-query level cascade beat — the single
+                                    sanctioned override aside from motion-sanctuary */
+
+      /* Anchor full-width to the bottom edge */
+      inset-block-end: 0;
+      inset-inline-start: 0;
+      inset-inline-end: 0;
+      transform: none;            /* lose the centring translate */
+
+      /* Full width with safe-area envelope */
+      inline-size: 100%;
+      max-inline-size: 100%;
+      block-size: calc(64px + env(safe-area-inset-bottom));
+      padding-block-start: var(--space-2);
+      padding-block-end:   calc(var(--space-2) + env(safe-area-inset-bottom));
+      padding-inline:      var(--space-3);
+
+      /* Lose the capsule corner — bottom edge is glued to viewport */
+      border-radius: 0;
+      border-inline: 0;
+      border-block-end: 0;
+      border-block-start: 1px solid var(--line);
+
+      /* Justify items evenly across the full width */
+      justify-content: space-around;
+      gap: var(--space-1);
+
+      /* Smooth the morph */
+      transition:
+        inline-size       var(--duration-morph) var(--ease-morph),
+        block-size        var(--duration-morph) var(--ease-morph),
+        border-radius     var(--duration-morph) var(--ease-morph),
+        padding           var(--duration-morph) var(--ease-morph);
+    }
+
+    /* Mobile: labels are permanent (no proximity-reveal applies to touch) */
+    .dock-label {
+      max-inline-size: none;
+      opacity: 1;
+      font-size: var(--type-micro);
+      margin-inline-start: 0;
+      margin-block-start: var(--space-1);
+    }
+
+    /* Re-shape items to vertical stack: icon-on-top, label-below */
+    .dock-item {
+      flex-direction: column;
+      gap: 0;
+      padding: var(--space-1) var(--space-2);
+      min-inline-size: 56px;
+      min-block-size: 48px;
+    }
+
+    /* Icon size shrinks slightly to fit two-row item */
+    .dock-item .icon {
+      --icon-size: var(--icon-md);
+    }
+
+    /* The active dot anchors above the icon (not the item top) */
+    .dock-item[aria-current="page"]::after {
+      inset-block-start: 4px;
+    }
+
+    /* Centre item — the cmdk trigger — gets a slight visual lift */
+    .dock-item[data-route="centre"] {
+      transform: translateY(-4px);
+    }
+    .dock-item[data-route="centre"] .icon {
+      --icon-size: var(--icon-lg);
+      color: var(--accent-progress);
+    }
+
+    /* The Glass 2.0 base inherits from the desktop rule — no need to redeclare */
+  }
+
+
+  /* ── Mobile: hairline accent on top edge (replaces the capsule lid) ── */
+  @media (max-inline-size: 720px) {
+    .dock::before {
+      /* Override the desktop ::before (centered hairline on hover only).
+         On mobile the hairline is permanent and full-width. */
+      content: "";
+      position: absolute;
+      inset-block-start: 0;
+      inset-inline: 0;
+      block-size: 1px;
+      background: linear-gradient(
+        to inline-end,
+        transparent 0%,
+        var(--accent-progress) 50%,
+        transparent 100%
+      );
+      opacity: 0.24;
+      pointer-events: none;
+    }
+  }
+
+
+  /* ── Reduced motion: collapse the morph to instant ── */
+  @media (prefers-reduced-motion: reduce) and (max-inline-size: 720px) {
+    .dock {
+      transition: none;
+    }
+  }
+
+
+  /* ── Forced colors fallback ── */
+  @media (forced-colors: active) and (max-inline-size: 720px) {
+    .dock {
+      background: Canvas;
+      border-block-start-color: ButtonText;
+      backdrop-filter: none;
+    }
+    .dock::before { background: Mark; }
+  }
+}
