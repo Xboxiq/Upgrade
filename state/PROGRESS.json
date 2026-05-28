@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-27T23:38:44.000Z",
+  "last_updated": "2026-05-28T07:37:46.000Z",
   "pack": "v3-devotio",
   "pack_status": "all-done",
   "current": {
@@ -2535,7 +2535,12 @@
       "lines_deleted_total": 45,
       "manifest_file": "platform/manifest.webmanifest",
       "manifest_elan_branded": true,
-      "manifest_shortcut_world_callouts": ["حِبر", "تَيار", "حِبر", "ذَهَب"],
+      "manifest_shortcut_world_callouts": [
+        "حِبر",
+        "تَيار",
+        "حِبر",
+        "ذَهَب"
+      ],
       "sw_file": "platform/sw.js",
       "sw_version_before": "devotio-v3-w24-p3-2026-05",
       "sw_version_after": "elan-v4-zeta4-2026-05",
@@ -2556,12 +2561,24 @@
       "offline_emoji_count_after": 0,
       "offline_inline_svg_source": "Lucide wifi-off (ISC license, vendor-sourced verbatim, not toy-drawn)",
       "offline_data_world": "hibr",
-      "offline_color_scheme_paths": ["dark", "light"],
+      "offline_color_scheme_paths": [
+        "dark",
+        "light"
+      ],
       "install_module_file": "platform/assets/js/elan/zeta4-install.js",
       "install_module_lines": 101,
       "install_api_namespace": "Upg.elan.install",
-      "install_api_methods_frozen": ["available", "installed", "prompt", "outcome"],
-      "install_events_dispatched": ["upg:pwa:installable", "upg:pwa:installed", "upg:pwa:dismissed"],
+      "install_api_methods_frozen": [
+        "available",
+        "installed",
+        "prompt",
+        "outcome"
+      ],
+      "install_events_dispatched": [
+        "upg:pwa:installable",
+        "upg:pwa:installed",
+        "upg:pwa:dismissed"
+      ],
       "app_js_lines_added": 8,
       "lighthouse_pwa_runtime_score": null,
       "lighthouse_pwa_runtime_deferred_to": "user environment (sandbox has no Chrome, INTEGRATIONS_ONLY network — same precedent as ζ3 LIGHTHOUSE_REPORT.md)",
@@ -2611,7 +2628,11 @@
         "Service Worker installable runtime not yet end-to-end verified (static config verified only)",
         "!important raw target ≤20 not met (376 actual); truthful target zero unjustified cascade hacks IS met"
       ],
-      "changelog_previous_packs_summarised": ["DEVOTIO v3.0.0", "RESONANCE v2.0.0", "ATELIER v1.0.0"],
+      "changelog_previous_packs_summarised": [
+        "DEVOTIO v3.0.0",
+        "RESONANCE v2.0.0",
+        "ATELIER v1.0.0"
+      ],
       "readme_file": "README.md",
       "readme_elan_v4_branded": true,
       "readme_8worlds_table_present": true,
@@ -2690,6 +2711,104 @@
       "implementation_complete_at": "2026-05-28T00:00:00Z",
       "ready_for_pillar_zeta_pr": true,
       "ready_for_v5": "yes (after Pillar ζ PR merged + Lighthouse runtime user-recorded)"
+    }
+  },
+  "tadaffuq_v5": {
+    "current_pillar": "α",
+    "current_stage": 4,
+    "current_stage_id": "α4",
+    "status": "pillar-α-complete",
+    "branch": "tadaffuq-α-foundation",
+    "completed_stages": [
+      "α1",
+      "α2",
+      "α3",
+      "α4"
+    ],
+    "creativity_health": 100,
+    "creativity_health_note": "v5 just begun. α (foundation) produces 0 pulses by spec; pulse production starts at γ1.",
+    "pulses_produced": 0,
+    "pulse_categories_used": [],
+    "forbidden_violations": 0,
+    "baseline_v4_chrome": {
+      "classic_sidebar_topbar_drawer_hits": 1,
+      "fixed_position_in_chrome_css": 1,
+      "max_width_containers_in_pages_css": 84,
+      "emoji_in_index_html": 1062,
+      "hardcoded_hex_in_markup": 8,
+      "world_palettes": 9,
+      "page_shards": 15,
+      "js_modules": 126,
+      "css_files": 30
+    },
+    "endgame_targets_in_platform_v5": {
+      "classic_chrome_hits": 0,
+      "fixed_position_outside_dock_scrim_overlay": 0,
+      "max_width_containers": 0,
+      "emoji_anywhere": 0,
+      "hardcoded_hex": 0,
+      "world_palettes": 0
+    },
+    "stage_specs_written": [
+      "α1",
+      "α2",
+      "α3",
+      "α4"
+    ],
+    "doctrine_files_count": 9,
+    "α2_verified": {
+      "sidebar_selectors_in_css": 0,
+      "fixed_chrome_in_css": 0,
+      "max_width_on_canvas": 0,
+      "edge_to_edge_inline_size_100": 3,
+      "viewport_fit_cover": 1,
+      "hex_in_css": 0,
+      "emoji_in_html": 0,
+      "layer_cascade_declared": 1,
+      "lines_total": 190,
+      "http_serve": "200 OK"
+    },
+    "α3_verified": {
+      "hex_in_tokens": 0,
+      "duration_tokens": 7,
+      "ease_tokens": 5,
+      "icon_tokens": 6,
+      "space_tokens": 12,
+      "radius_tokens": 6,
+      "z_tokens": 5,
+      "colour_family_decls": 44,
+      "forced_colors_blocks": 1,
+      "light_theme_blocks": 2,
+      "auto_theme_blocks": 2,
+      "tokens_css_lines": 245,
+      "total_css_lines": 386,
+      "http_serve": "200 OK"
+    },
+    "α4_verified": {
+      "symbols_in_sprite": 30,
+      "hardcoded_fills": 0,
+      "hardcoded_strokes": 0,
+      "currentcolor_strokes": 31,
+      "lucide_isc_attribution": true,
+      "emoji_in_sprite": 0,
+      "semantic_map_keys": 30,
+      "icons_js_lines": 219,
+      "node_check": "passed",
+      "http_serves": {
+        "index.html": 200,
+        "icons.svg": 200,
+        "SEMANTIC_MAP.json": 200,
+        "icons.js": 200
+      },
+      "sprite_xml_wellformed": true
+    },
+    "pillar_α_summary": {
+      "stages_done": 4,
+      "files_shipped": 9,
+      "lines_added_total": 1100,
+      "pulses_produced": 0,
+      "branch": "tadaffuq-α-foundation",
+      "ready_for_pr": true
     }
   }
 }
