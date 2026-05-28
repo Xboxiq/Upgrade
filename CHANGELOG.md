@@ -109,7 +109,22 @@ Versioning is by **doctrine pack** (DEVOTIO / ÊLAN), not by SemVer.
 | γ EIGHT WORLDS | `elan-γ-eight-worlds` | merged | ✅ |
 | δ KINETIC SHELL | `elan-δ-kinetic-shell` | merged | ✅ |
 | ε CONTENT REVIVAL | `elan-ε-content-revival` | #117 merged | ✅ |
-| ζ QUALITY GATE | `elan-ζ-quality-gate` | open at ζ5 | 🚪 |
+| ζ QUALITY GATE | `elan-ζ-quality-gate` | #118 merged | ✅ |
+
+---
+
+## [v4.0.1] — Tooling — single-file bundle — 2026-05-28
+
+> *«ÊLAN في ملف واحد — للفحص لا للنشر.»*
+
+### Added
+- **`scripts/build_bundle.py`** — produces `Upgrade-bundle.html`, a self-contained single-file viewer of the entire platform (HTML + 30 inlined stylesheets + 120 ES modules wired through a runtime importmap of `blob:` URLs). Useful for review, archival, and offline inspection of v4 changes; not a deployment artefact.
+- **`scripts/verify_bundle.py`** — sanity-checker (style block, source-block parity, residual relative imports, structural HTML markers).
+
+### Notes
+- Bundle is ~5 MB / ~99k lines. Font files are NOT inlined (size budget); the local font stacks gracefully fall back through their declared chains.
+- Service-worker registration is silently no-op under `file://`. Open via any HTTP origin (e.g. `python -m http.server`) for full PWA + offline behaviour.
+- All 120 bundled modules pass `node --check` after specifier rewriting (`./js/foo.js` → `upg/assets/js/foo.js`); ESM semantics preserved through dynamically-injected `<script type="importmap">` + dynamic `import()`.
 
 ---
 
