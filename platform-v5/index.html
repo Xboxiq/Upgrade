@@ -10,12 +10,14 @@
   <meta name="format-detection" content="telephone=no" />
   <title>Upgrade — تَدَفُّق</title>
 
-  <!-- cascade order + tokens + canvas + dock -->
+  <!-- cascade order + tokens + type + canvas + dock + dock-mobile -->
   <link rel="stylesheet" href="assets/css/_layers.css" />
   <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/type.css" />
   <link rel="stylesheet" href="assets/css/canvas.css" />
   <link rel="stylesheet" href="assets/css/dock.css" />
-  <!-- β1 will add: type.css; γ2 will add: dock-mobile; etc. -->
+  <link rel="stylesheet" href="assets/css/dock-mobile.css" />
+  <!-- γ3: canvas-harmonic; ε1+: slide-over, sheet -->
 </head>
 <body>
 
@@ -28,15 +30,13 @@
   <!-- ─── The Canvas — sovereign, edge-to-edge ─── -->
   <main id="main" class="canvas" tabindex="-1">
     <!-- Content lands in subsequent pillars:
-         γ → dock + canvas-harmonic
          δ → bento grid + cards + progress rings
          ε → slide-over + bottom sheet
          ζ → zen mode workspace
-         The α stages produce no content — only the slot.
     -->
   </main>
 
-  <!-- ─── Dock placeholder (rendered in γ1 / γ2) ─── -->
+  <!-- ─── Dock placeholder (mounted by dock.js) ─── -->
   <div id="dock-mount" hidden aria-hidden="true"></div>
 
   <!-- ─── Overlay slots (slide-over + sheet land in ε1 / ε2) ─── -->
@@ -45,6 +45,7 @@
   <aside id="overlay-sheet" class="sheet"      hidden aria-hidden="true"></aside>
 
   <!-- ─── Runtime entries (classic IIFE; mobile-safe) ─── -->
+  <script src="assets/js/theme.js"></script>
   <script src="assets/js/icons.js" defer></script>
   <script src="assets/js/dock.js"  defer></script>
 
