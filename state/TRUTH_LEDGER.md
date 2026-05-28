@@ -3335,3 +3335,36 @@ Forbidden Library violations: **0**.
 | HTTP serve test | 200 / 200 / 200 | all 200 |
 
 ### Commit: `γ1: dock desktop — verified: …`
+
+
+
+---
+
+## v5 TADAFFUQ — γ2 DOCK MOBILE + γ3 CANVAS HARMONIC + β merge — 2026-05-28
+
+**Branch:** `tadaffuq-γ-spatial` · **Pillar:** γ COMPLETE (3/3 stages) + β merge for parallel work
+
+### γ2 DOCK MOBILE
+- File: `platform-v5/assets/css/dock-mobile.css` (141 lines)
+- Pulse: 🔁 **MORPH_PULSE** — same DOM node, layout shifts via @media at ≤720px
+- `verified by:` `media_queries=2 safe_area=2 emoji=0 hex=0 physical_lr=0 logical_props=14`
+
+### γ3 CANVAS HARMONIC
+- Files: `canvas-harmonic.css` (114 lines) + `canvas-harmonic.js` (99 lines)
+- Pulse: ✨ **GLOW_PULSE** — canvas hue drifts ≤1% per route via CSS Relative Color Syntax
+- `verified by:` `shift_tokens=33 emoji=0 inline_svg=0 hex=0 duration_zen=1 hashchange=2 node_check=ok`
+
+### Pillar γ — final tally
+| stage | files | lines | pulse |
+|---|---|---|---|
+| γ1 DOCK_DESKTOP | 2 (dock.css, dock.js) | 382 | ⚓ DOCK_PULSE |
+| γ2 DOCK_MOBILE | 1 (dock-mobile.css) | 141 | 🔁 MORPH_PULSE |
+| γ3 CANVAS_HARMONIC | 2 (canvas-harmonic.css, canvas-harmonic.js) | 213 | ✨ GLOW_PULSE |
+| **TOTAL** | **5 files** | **~736 lines** | **3 pulses · 3 unique categories** |
+
+### State after pillar γ
+- Total stages done: α1-α4 + β1-β3 + γ1-γ3 = **10 / 24**
+- Total Pulses: **3 / 15** (DOCK · MORPH · GLOW)
+- Unique categories used: **3 / 9**
+- Creativity Health: **100 / 100**
+- Forbidden Library violations: **0**

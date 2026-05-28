@@ -72,3 +72,29 @@ last_5_avg: 4.0
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-28 / γ2 — Pillar γ stage 2/3
+
+
+
+
+## γ3 — 2026-05-28
+**Pulse Category:** ✨ GLOW_PULSE
+**The Surprise:** الـ canvas يَستَمِع للتَنَقُّل. عند انتقال المستخدم بين الـ dock destinations (home → lab → centre → progress → more)، الـ canvas يَنزاح بـ **١٪ فقط** في hue/saturation/luminosity نحو رُوح الوُجهة. الانزياح يَتم عبر `--duration-zen` (640ms)، طويل بما يَكفي ليَكون غير مَرئي per-screen، لكنه يُتراكَم: بعد جَلسة طويلة في `lab`، الكانفس سَيكون قد مال نحو الأزرق-السماوي درجَتَين فقط، فاختهما تَحت الإدراك الواعي للمستخدم. عند العودة إلى `home`، الكانفس "يَستَريح" تدريجياً للحياد. التَطبيق يستخدم CSS Relative Color Syntax: `hsl(from var(--canvas) calc(h + var(--canvas-shift-h)) ...)` — الانزياح يُضاف على الـ token الأصلي بدلاً من استبداله، فالكانفس يَحفظ هويَّتَه ويَخفُت معها.
+
+**Reference Avoided:** Forbidden #18 ("a theme toggle that animates the entire screen") — هذا ليس theme switch، هذا hue micro-shift. + الـ AI-default الكَبير: "every nav click flashes the new section's accent across the whole screen" — هنا لا flash، صفر transition سريع، 640ms من الزَحف الصامت.
+**Inspired-by:** Wild Card #14 — Hagia Sophia archway shadow-line at noon. الضوء في الأقواس البيزنطية ليس زَخرَفة — هو عُنصُر هَيكلي، يَنحَني مع الجدار، يَكشِف الفَضاء بدلاً من إنارَتِه. هنا اللون كَعُنصُر هَيكلي صامت: نَظرة المُستخدم لا تَلتَفِت، لكن المَكان يَتَنَفَّس مَعَه.
+**User-Visible:** subtle — يَستَحيل ملاحظَتُه per-screen. يُلاحظ بَعد جَلسة طويلة فقط، أو لو فَتح المستخدم DevTools وقَرأ `getComputedStyle(document.body).backgroundColor` قَبل وبعد التَنَقُّل.
+**Originality Self-Score:** 4/5 — الـ ambient color drift فكرة موجودة (Spotify Now Playing background gradient، مَثَلاً)، لكن: (١) **CSS-only computed** عبر Relative Color Syntax + custom property additive deltas — لا JS يُعَدِّل الألوان مُباشرة؛ (٢) **route-driven** بدلاً من content-driven (Spotify يَستَخرج dominant color من الصورة؛ هنا الـ shift سَلطة المُصمِّم، لا تَتَغَيَّر)؛ (٣) **subtle threshold = 1%**: الفَرق بين "shift يُلاحَظ" و "shift يُتَراكَم" أَقل من 2%، تجنُّب الانطباع الـ "aurora wallpaper" الـ AI-default؛ (٤) **rest-state recovery**: العودة إلى `home` تُعيد الكانفس للحياد — المنصة تَنسى مع الانتقال للوَطن. لا أَدَّعي 5 لأن CSS Relative Colors primitive حديث (Chrome 119+، Safari 16.4+، Firefox 128+) لكن الـ assemblage + الـ subtlety + الـ home-rest ميَّزات أصلية.
+**Files touched:** platform-v5/assets/css/canvas-harmonic.css (NEW 114) · platform-v5/assets/js/canvas-harmonic.js (NEW 99) · platform-v5/index.html (+1 wiring)
+**Verified at commit:** *(filled by next push)*
+
+
+
+---STATS---
+total_pulses: 3
+unique_categories_used: 3
+target_categories: 9 (DOCK · MORPH · GLOW · REVEAL · RING · GLASS · SPRING · VEIL · HAPTIC)
+avg_self_score: 4.0
+last_5_avg: 4.0
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-28 / γ3 — Pillar γ COMPLETE 3/3

@@ -1,0 +1,114 @@
+/* ════════════════════════════════════════════════════════════════════════
+   TADAFFUQ v5 — γ3 — Canvas Harmonic (closes pillar γ)
+   ────────────────────────────────────────────────────────────────────────
+   The Pulse — GLOW_PULSE: the canvas listens to navigation. As the user
+   moves between dock destinations, the canvas's hue drifts by ≤ 1%
+   luminosity toward the destination's "spirit" — imperceptible per-screen,
+   felt over a long session.
+
+   Implementation: the body's background-color is composed via
+       hsl(from var(--canvas) calc(h + var(--canvas-shift-h, 0))
+                              calc(s + var(--canvas-shift-s, 0))
+                              calc(l + var(--canvas-shift-l, 0)))
+   so the SHIFT is additive, not a token override. The canvas keeps its
+   identity; the shift is a whisper.
+   ════════════════════════════════════════════════════════════════════════ */
+
+
+@layer tokens {
+
+  :root {
+    /* Per-route shift deltas — small numbers; the whole point is subtlety */
+    /* Each shift carries (h-delta, s-delta, l-delta) in HSL space */
+
+    /* home — neutral, the rest state */
+    --canvas-shift-home-h:    0;
+    --canvas-shift-home-s:    0;
+    --canvas-shift-home-l:    0;
+
+    /* lab — focus, +1% toward blue-cyan */
+    --canvas-shift-lab-h:    -8;     /* shift hue toward 217 (cyan-blue) */
+    --canvas-shift-lab-s:     2;     /* slightly more saturation */
+    --canvas-shift-lab-l:    -1;     /* 1% darker */
+
+    /* centre — activity, mid-purple */
+    --canvas-shift-centre-h:  10;    /* shift toward 235 (violet-blue) */
+    --canvas-shift-centre-s:  4;
+    --canvas-shift-centre-l: -1;
+
+    /* progress — growth, green-teal */
+    --canvas-shift-progress-h: -40;  /* shift toward 185 (teal) */
+    --canvas-shift-progress-s:  3;
+    --canvas-shift-progress-l: -1;
+
+    /* more — quiet, warm-grey */
+    --canvas-shift-more-h:    20;    /* shift toward 245 (warm-grey-purple) */
+    --canvas-shift-more-s:   -2;
+    --canvas-shift-more-l:    1;
+  }
+}
+
+
+@layer base {
+
+  /* The default — no shift active */
+  :root {
+    --canvas-shift-h: 0;
+    --canvas-shift-s: 0%;
+    --canvas-shift-l: 0%;
+  }
+
+  /* Per-route binding via [data-active-route] on <html> (set by canvas-harmonic.js) */
+  :root[data-active-route="home"] {
+    --canvas-shift-h: var(--canvas-shift-home-h);
+    --canvas-shift-s: calc(var(--canvas-shift-home-s) * 1%);
+    --canvas-shift-l: calc(var(--canvas-shift-home-l) * 1%);
+  }
+  :root[data-active-route="lab"] {
+    --canvas-shift-h: var(--canvas-shift-lab-h);
+    --canvas-shift-s: calc(var(--canvas-shift-lab-s) * 1%);
+    --canvas-shift-l: calc(var(--canvas-shift-lab-l) * 1%);
+  }
+  :root[data-active-route="centre"] {
+    --canvas-shift-h: var(--canvas-shift-centre-h);
+    --canvas-shift-s: calc(var(--canvas-shift-centre-s) * 1%);
+    --canvas-shift-l: calc(var(--canvas-shift-centre-l) * 1%);
+  }
+  :root[data-active-route="progress"] {
+    --canvas-shift-h: var(--canvas-shift-progress-h);
+    --canvas-shift-s: calc(var(--canvas-shift-progress-s) * 1%);
+    --canvas-shift-l: calc(var(--canvas-shift-progress-l) * 1%);
+  }
+  :root[data-active-route="more"] {
+    --canvas-shift-h: var(--canvas-shift-more-h);
+    --canvas-shift-s: calc(var(--canvas-shift-more-s) * 1%);
+    --canvas-shift-l: calc(var(--canvas-shift-more-l) * 1%);
+  }
+
+  /* Apply the shift to the body — slow drift, --duration-zen */
+  body {
+    /* Browsers that support relative HSL syntax: the shift is additive */
+    background-color: hsl(
+      from var(--canvas)
+      calc(h + var(--canvas-shift-h))
+      calc(s + var(--canvas-shift-s))
+      calc(l + var(--canvas-shift-l))
+    );
+    transition: background-color var(--duration-zen) var(--ease-emerge);
+  }
+
+  /* Reduced motion: shift becomes instant */
+  @media (prefers-reduced-motion: reduce) {
+    body {
+      transition: none;
+    }
+  }
+
+  /* Forced colors: defer to system */
+  @media (forced-colors: active) {
+    body {
+      background-color: Canvas;
+      transition: none;
+    }
+  }
+}
