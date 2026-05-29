@@ -1,0 +1,22 @@
+/* ════════════════════════════════════════════════════════════════════════
+   TADAFFUQ v5 — α2 — Cascade order
+   ────────────────────────────────────────────────────────────────────────
+   Declared once, before any layered rule. Subsequent CSS files attach to
+   one of these layers via `@layer <name> { … }`. Source order between
+   layers does not matter — layer order does.
+
+   This file ONLY declares the order. No rules.
+   ════════════════════════════════════════════════════════════════════════ */
+
+@layer reset, tokens, base, components, utilities, themes, overrides;
+
+/*
+  The flow:
+    reset       — element baseline (modern reset, no chrome assumptions)
+    tokens      — :root { --canvas: …; --duration-snap: …; … } (α3)
+    base        — html / body / main.canvas / focus-visible / forced-colors (α2 + β1)
+    components  — dock, bento, slide-over, sheet (γ–ε)
+    utilities   — atomic helpers (.u-flex, .u-hide-mobile, …)
+    themes      — [data-theme="light|dark|auto"] overrides (β2)
+    overrides   — last-resort patches; expected to remain empty
+*/
