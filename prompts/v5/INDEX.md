@@ -14,6 +14,7 @@
 | `CHROMA_DOCTRINE.md` | colour | 4 token families, dark + light palettes, neon accents, single-accent-per-screen rule, forced-colors |
 | `ICONOGRAPHY_DOCTRINE.md` | iconography | zero emoji, Lucide + Phosphor only, sprite system, 6-step size scale, semantic map |
 | `PULSE_LIBRARY.md` | creativity | 9 pulse categories, 25-entry Forbidden Library, 25-card Wild Card deck, pivot rule, creativity-health metric |
+| `ATELIER_REFERENCE.md` | concrete reference (not a doctrine) | worked token values, Atelier→pillar stage map for δ→θ, emoji→icon inventory, runnable prototype anchor; **yields to doctrines on conflict** |
 | `AUTO_PILOT_v5.md` | execution | the boot protocol + the per-stage chain (12 steps) + per-pillar PR + permissions |
 
 ---
