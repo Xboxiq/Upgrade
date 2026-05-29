@@ -3368,3 +3368,146 @@ Forbidden Library violations: **0**.
 - Unique categories used: **3 / 9**
 - Creativity Health: **100 / 100**
 - Forbidden Library violations: **0**
+
+
+
+---
+
+## v5 TADAFFUQ — δ1 BENTO GRID — 2026-05-28 *(backfill — entry omitted at original commit)*
+
+**Branch:** `tadaffuq-δ-bento` · **Pillar:** δ · **Stage:** 1 of 3
+**Pulse:** 🪟 **GLASS_PULSE**
+**Verified at commit:** `ce545b2`
+**Note on backfill:** the δ1 commit (ce545b2) and the δ1+δ2 state commit (ee99fd4)
+shipped without a TRUTH_LEDGER entry — backfilled here for honesty. Numbers
+re-verified against the file tree at HEAD `a70a539`.
+
+### Files shipped
+- `platform-v5/assets/css/bento.css` (160 lines) — responsive 4-3-2-1 bento grid; container-query roots; Glass 2.0 surface; single-edge hairline that brightens to `--accent-progress` on hover/focus
+- `platform-v5/index.html` — 8 cards added (1 focal `b-4x3` + 5 standard + 1 wide + 1 locked); `data-icon` slots for sprite injection
+- `platform-v5/assets/js/icons.js` — `autoPopulate()` extension (idempotent post-mount of `[data-icon]` hosts)
+
+### Verified by grep on commit `ce545b2` (re-verified at `a70a539`)
+| metric | got | expected |
+|---|---|---|
+| `[data-icon]` hosts in index.html | 8 | ≥ 1 |
+| `@container card` queries in bento.css | 2 | ≥ 1 |
+| viewport `@media` breakpoints | 6 | ≥ 3 |
+| emoji in bento files | 0 | 0 |
+| hardcoded hex | 0 | 0 |
+| inline `<svg viewBox>` | 0 | 0 |
+| token uses `var(--*)` in bento.css | 39 | ≥ 6 |
+| logical-property uses | 36 | ≥ 6 |
+| `v5_logical_props_audit.py` exit | 0 | 0 |
+
+### Pulse — 🪟 GLASS_PULSE
+**The Surprise:** البطاقات شَرائح من سَطح زُجاجي واحد — single-edge hairline على الحَافة العُليا فقط، الفَراغ بين الشُّقوق هو grid-gap. عند `:focus-within`/`:hover` يُضيء الـ hairline بـ Neon Cyan ليَكشِف "أين انتَهى الزُجاج".
+**Avoided:** AI-default "every bento card is an island with 4 borders + drop-shadow"
+**Inspired-by:** Wild Card #15 — Andalusian zellige door (the gap is what reveals the pattern)
+**Originality Self-Score:** 4/5
+
+### Sacred preserved
+- 14 page sections — unchanged (v5 canvas only)
+- `archive/` — untouched
+- All v4 Upg.* APIs preserved (additive: Upg.bento not introduced; bento.js doesn't exist — markup-driven approach)
+
+
+
+---
+
+## v5 TADAFFUQ — δ2 BENTO EXPAND — 2026-05-28 *(backfill — entry omitted at original commit)*
+
+**Branch:** `tadaffuq-δ-bento` · **Pillar:** δ · **Stage:** 2 of 3
+**Pulse:** 🔓 **REVEAL_PULSE**
+**Verified at commit:** `b29621d`
+**Note on backfill:** same as δ1 — no ledger entry shipped at the time.
+
+### Files shipped
+- `platform-v5/assets/css/bento-expand.css` (110 lines) — `[data-expanded="true"]` rule expands the card to 4×3, View-Transitions API hooks for FLIP, staggered children reveal via `nth-child` cascade
+- `platform-v5/assets/js/bento-expand.js` (149 lines) — IIFE: click/Enter/Space toggles expand, single-card-radio (one open at a time), Escape closes, click-outside closes, View-Transition wrap when supported
+- `platform-v5/index.html` — focal card body extended with 3 detail sections (السيناريو · المَقامات الصَوتية · PROVE-IT)
+
+### Verified by grep on commit `b29621d`
+| metric | got | expected |
+|---|---|---|
+| view-transition guard checks | 4 | ≥ 1 |
+| Escape key handler | 1 | ≥ 1 |
+| click handler | 1 | ≥ 1 |
+| click-outside handler | 1 | ≥ 1 |
+| `[data-expanded="true"]` selectors | 11 | ≥ 1 |
+| detail sections in focal card | 3 | ≥ 3 |
+| emoji / hex / inline SVG | 0 / 0 / 0 | 0 / 0 / 0 |
+| `node --check` on bento-expand.js | OK | OK |
+
+### Pulse — 🔓 REVEAL_PULSE
+**The Surprise:** الضَغط على بطاقة لا يَنقُل المُستخدم لصَفحة جَديدة، ولا يَفتَح modal — البطاقة تَتَوَسَّع في مَكانها عَبر CSS Grid template re-flow. الـ View Transitions API يُؤدّي FLIP تلقائياً عند توافُره؛ Firefox يَستَخدِم fallback نَظيف بـ `transition: grid-column`. الـ detail يَتَكَشَّف بـ staggered reveal عَبر `nth-child` cascade — ١٦٠ms / ٣٢٠ms / ٤٨٠ms.
+**Avoided:** Forbidden #5 (modal popup) + AI-default "click → navigate to /card/:id"
+**Inspired-by:** Wild Card #21 — al-Jazari's water clock manuscript (the mechanism shows its purpose visually)
+**Originality Self-Score:** 4/5
+
+### Sacred preserved
+- δ1 markup intact — only `data-expanded` + detail subtree added
+- v4 Upg.* APIs preserved
+
+
+
+---
+
+## v5 TADAFFUQ — δ3 BENTO RING — 2026-05-29
+
+**Branch:** `tadaffuq-δ-bento` · **Pillar:** δ · **Stage:** 3 of 3 — **closes Pillar δ**
+**Pulse:** ◍ **RING_PULSE** *(first RING_PULSE of v5; 6th unique category)*
+**Verified at commit:** `a70a539`
+
+### Files shipped
+- `platform-v5/assets/css/ring.css` (124 lines) — `.ring` component; SVG circle r=28, viewBox 64×64 rotated -90° so progress starts at 12 o'clock; `--ring-stroke-w: calc(2px + var(--ring-p) * 0.04px)` (linearly grows 2 → 6px); `--ring-l-delta: clamp(0%, calc((var(--ring-p) - 80) * 1%), 12%)` deepens chroma past 80% via `hsl(from var(--accent-progress) h s calc(l - var(--ring-l-delta)))`; reduced-motion + forced-colors + print guards
+- `platform-v5/assets/js/ring.js` (172 lines) — IIFE exposing `Upg.ring.{mount,set,value,scan}` (4-method frozen surface); `createElementNS` only — zero markup-string assignment; `toLocaleString('ar-EG-u-nu-arab')` for Arabic-Indic centre numeral; CustomEvent `upg:ring:set` on actual change; idempotent boot via `[data-progress]` scan
+- `platform-v5/index.html` — focal `data-card="daily-focus"` card now carries `data-progress="47"`; `ring.css` linked; `ring.js` deferred
+- `prompts/v5/δ3_BENTO_RING.md` (113 lines) — stage spec authored before execution per AUTO_PILOT §4
+
+### Verified by grep on commit `a70a539`
+| metric | got | expected |
+|---|---|---|
+| `data-progress` hosts in index.html | 1 | ≥ 1 |
+| `var(--accent-progress)` actual uses in ring.css | 1 | ≥ 1 (and only one ring on screen) |
+| `hsl(from` Relative Color Syntax | 1 | ≥ 1 |
+| `stroke-dasharray:` decl | 1 | 1 |
+| `stroke-dashoffset:` decl | 1 | 1 |
+| `var(--ring-stroke-w)` uses | 2 | 2 (track + bar) |
+| `<progress>` / `progress-bar` (linear, forbidden) | 0 | 0 |
+| inline `<svg>` markup string in ring.js | 0 | 0 |
+| `innerHTML` writes in ring.js | 0 | 0 |
+| `createElementNS` calls in ring.js | 5 | ≥ 4 (svg + 2 circles + reachable) |
+| emoji in ring files + spec | 0 | 0 |
+| hex in ring.css/ring.js (ship) | 0 | 0 |
+| physical-direction CSS props | 0 | 0 |
+| `v5_logical_props_audit.py` exit | 0 | 0 |
+| `node --check` on ring.js | OK | OK |
+| `Upg.ring` API | 4 methods + `_meta` (frozen) | 4 |
+
+### Pulse — ◍ RING_PULSE
+**The Surprise:** الحَلقة لا تَنمو في طول الـ stroke فقط — تَنمو في عُمقه. كل ١٪ يُضيف ميكرون لسُمك السَطر (2px → 6px على المَدى الكامل عَبر calc()). عند تَجاوُز ٨٠٪، تَبدَأ chroma السِمسي في التَعَمُّق عَبر CSS Relative Color Syntax: `hsl(from var(--accent-progress) h s calc(l - var(--ring-l-delta)))` حيث `l-delta` يَنمو من 0% عند 80٪ إلى 12% عند 100٪. مَن أتقَنَ ٩٠٪ يَرى خَطّاً سَميكاً مُشبَعاً؛ مَن بَدَأ يَرى خَطاً رَفيعاً عاديا. الـ progress يُقاس بالعَين قَبل الرَقم.
+**Avoided:** Forbidden #11 (linear progress bar) + AI-default "every dashboard ring is the same uniform thin stroke"
+**Inspired-by:** Wild Card #20 — Damascus knife-pattern (many folds, one edge — the wootz pattern *is* the proof of effort)
+**Originality Self-Score:** 4/5
+
+### Pillar δ — final tally
+| stage | files | lines | pulse |
+|---|---|---|---|
+| δ1 BENTO_GRID | 1 (bento.css) + index.html | ~245 | 🪟 GLASS_PULSE |
+| δ2 BENTO_EXPAND | 2 (bento-expand.css, .js) | 259 | 🔓 REVEAL_PULSE |
+| δ3 BENTO_RING | 2 (ring.css, ring.js) + spec | 413 | ◍ RING_PULSE |
+| **TOTAL** | **5 css/js + 1 spec** | **~917 lines** | **3 pulses · 3 unique categories** |
+
+### State after pillar δ
+- Total stages done: α1-α4 + β1-β3 + γ1-γ3 + δ1-δ3 = **13 / 24**
+- Total Pulses: **6 / 15** (DOCK · MORPH · GLOW · GLASS · REVEAL · RING)
+- Unique categories used: **6 / 9** (remaining: SPRING · VEIL · HAPTIC)
+- Creativity Health: **100 / 100**
+- Forbidden Library violations: **0**
+
+### Sacred preserved
+- 14 page sections — unchanged
+- v4 Upg.* APIs preserved (Upg.ring is additive — nested under window.Upg, doesn't shadow legacy)
+- `archive/` — untouched
+- δ1, δ2 work intact — only `data-progress` attribute added to one focal card

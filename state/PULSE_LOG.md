@@ -137,3 +137,29 @@ last_5_avg: 4.0
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-28 / δ2 — Pillar δ stage 2/3
+
+
+
+## δ3 — 2026-05-29
+**Pulse Category:** ◍ RING_PULSE *(first RING_PULSE of v5; 6th unique category)*
+**The Surprise:** الحَلقة لا تَنمو في طول الـ stroke فقط — تَنمو في **عُمقه**. كل ١٪ من التَقَدُّم يُضيف ميكرون لسُمك السَطر (`--ring-stroke-w: calc(2px + var(--ring-p) * 0.04px)` — تَنمو خَطياً من 2px عند 0٪ إلى 6px عند 100٪)، فالـ ring يَتَطَوَّر تَدريجياً، يَنضُج كَنَصل دَمَشقي يَتَكاثَف بكل طَيَّة. ثم — الـ Pulse الثاني داخل الـ Pulse — عند تَجاوُز ٨٠٪، تَبدَأ chroma السِمسي بالتَعَمُّق عَبر CSS Relative Color Syntax: `hsl(from var(--accent-progress) h s calc(l - var(--ring-l-delta)))` حيث `l-delta` يَنمو من 0% عند 80٪ إلى 12% عند 100٪. النَتيجة: مَن أتقَنَ ٩٠٪ يَرى خَطّاً سَميكاً مُشبَعاً يَكاد يَلمَع؛ مَن بَدَأ يَرى خَطاً رَفيعاً عادياً. الـ progress يُقاس بالعَين قَبل أن يُقرَأ بالرَقم. الـ ring لا يَطول — يَنضُج. وعلى الـ home screen، هذا الـ ring هو **الـ accent-progress الوَحيد** المَرئي (CHROMA §٧)؛ بَطاقة `metric-progress` التي تَعرِض ٤٧٪ نَصاً تَستَخدِم `--ink` فقط، لا تَتَنازَع على الـ accent.
+
+**Reference Avoided:** Forbidden #11 (linear `<progress>` bar) — تم استبعاده مَنذ تَأسيس v5؛ هنا يَتم استبدال آخر مَوضِع كان يُمكِن أن يَظهَر فيه linear progress (نسبة الإنجاز على البَطاقة المِحوَرية). إضافة: الـ AI-default الأكبر للـ progress ring — "every dashboard ring is the same uniform thin stroke regardless of progress" — السائد في dribbble shots لـ "premium dashboards". هنا الـ stroke يَتَفاعَل مع الـ value نَفسه؛ الـ thickness هي الـ data.
+**Inspired-by:** Wild Card #20 — Damascus knife-pattern (many folds, one edge). نَصل دَمَشق يُصنَع بطَيّ المَعدِن مِئات المَرَّات؛ كل طَيَّة تُقَوّي الحافَّة، والنَمَط المَرئي على السَطح (الـ wootz pattern) هو ذاته بُرهان الجُهد. هنا، سُمك الـ ring هو بُرهان التَراكُم؛ ١٪ من التَقَدُّم = طَيَّة واحِدة. عند ٨٠٪، الحَديد يَبدَأ بالتَلَوُّن من حَرارة التَطريق المُتَكَرِّر — الـ chroma deepening يَعكِس هذا.
+**User-Visible:** yes — ring مَرئي عند كل تَحميل للـ home screen على البَطاقة المِحوَرية. التَغَيُّر في السُمك واللَون يُلاحَظ عَبر مُستخدِمين مُختَلِفين (أحدُهم ٢٠٪ والآخر ٨٥٪)، لا per-tick — المُستخدِم نَفسه يَرى الـ ring يَنضُج عَبر أيام/أسابيع، لا في جَلسة واحِدة. هذا تَوقيت قَصد.
+**Originality Self-Score:** 4/5 — progress-ring stroke-thickening فكرة ليست جَديدة كُلِّياً (Apple Watch activity rings تَتَفاوَت بأيام مُختَلِفة)، لكن: (١) **stroke-width مَربوط بـ progress fraction** عَبر calc() واحِد، لا animation — يُشبه القياس بالـ caliper لا الـ animation curve؛ (٢) **chroma deepening past 80%** عَبر CSS Relative Color Syntax — يَدمُج إشارَتَين (سُمك ولَون) في compute واحِد؛ (٣) **single ring per screen enforced** — كل بطاقات metric أُخرى تَستَخدِم `--ink` نَصاً، لا تَتَنازَع على الـ accent؛ (٤) **honest value rendering** — الـ centre num يَعرِض ٤٧٪ مُباشرَة بـ `toLocaleString('ar-EG-u-nu-arab')`، لا count-up من 0؛ (٥) **single-accent-progress rule preserved** — على viewport واحد، ring واحد، مع dock active dot على `--accent-action` (Electric Orange) فلا تَنازُع. لا أَدَّعي 5 لأن الـ stroke-width-tied-to-progress pattern مَوجود في بَعض الـ Apple Watch implementations، لكن الـ assemblage + الـ chroma deepening + الـ single-accent-discipline + الـ Arabic-Indic numerals = أصالة 4.
+**Files touched:** platform-v5/assets/css/ring.css (NEW 124) · platform-v5/assets/js/ring.js (NEW 172) · platform-v5/index.html (+4 lines: link + script + data-progress + ring slot) · prompts/v5/δ3_BENTO_RING.md (NEW 113 — spec authored before execution per AUTO_PILOT §4)
+**Verified at commit:** `a70a539`
+
+
+
+---STATS---
+total_pulses: 6
+unique_categories_used: 6
+target_categories: 9 (DOCK · MORPH · GLOW · REVEAL · RING · GLASS · SPRING · VEIL · HAPTIC)
+remaining_categories: 3 (SPRING · VEIL · HAPTIC)
+avg_self_score: 4.0
+last_5_avg: 4.0
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-29 / δ3 — Pillar δ COMPLETE 3/3 (BENTO LIVE)
