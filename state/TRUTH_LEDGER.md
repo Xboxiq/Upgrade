@@ -3566,3 +3566,78 @@ re-verified against the file tree at HEAD `a70a539`.
 - δ1/δ2/δ3 + γ + β + α work intact — slide-over is additive; only the focal card gained one neutral `.overlay-trigger` button inside its already-existing detail subtree
 - v4 Upg.* APIs preserved; `Upg.overlay` is a NEW additive namespace (does not shadow `Upg.nav` — v5 has no Upg.nav module)
 - `archive/` untouched
+
+
+
+---
+
+## v5 TADAFFUQ — ε2 BOTTOM_SHEET — 2026-05-29
+
+**Branch:** `tadaffuq-ε-disclosure` · **Pillar:** ε (DISCLOSURE) · **Stage:** 2 of 3
+**Pulse:** ⚡ **SPRING_PULSE** *(debut of the category in v5; 7th unique category)*
+**Verified at commit:** `933e3b7`
+
+### Files shipped
+- `platform-v5/assets/css/sheet.css` (NEW, ~135 lines) — `@layer components` inside
+  `@media (max-width:720px), (pointer:coarse)`: the SAME `.slide-over` re-anchored to
+  `inset-block-end:0` + `inset-inline:0`, full width, `block-size: clamp(40vh,70vh,92vh)`,
+  top corners rounded, hidden via `translateY(100%)`; `[data-open]` → `translateY(var(--sheet-drag))`;
+  `[data-dragging]` removes transition (finger-follow), `[data-settling]` adds the
+  `--ease-spring` overshoot; `.scrim[data-dragging]` no-transition; the 36×4 `::after` handle;
+  the ε1 specular `::before` repositioned to the block-start edge (horizontal) for GLASS
+  continuity; header `touch-action:none`; forced-colors guard
+- `platform-v5/assets/js/sheet.js` (NEW, ~210 lines) — classic IIFE exposing `Upg.sheet`
+  (frozen: `enabled / isDragging / _meta`); Pointer-Events drag engine on the header
+  (`pointerdown/move/up/cancel` + `setPointerCapture`); velocity tracking; dismissal when
+  `currentDy > 35% · sheetHeight` OR downward velocity `> 0.6 px/ms` (→ `Upg.overlay.close()`);
+  spring-back below threshold; rubber-band over-pull (×0.2, cap 24px); live scrim opacity;
+  `matchMedia` gating; resets on `upg:overlay:close` and on leaving sheet-mode mid-drag
+- `platform-v5/index.html` — linked `sheet.css` (after `slide-over.css`), deferred `sheet.js`
+- `prompts/v5/ε2_BOTTOM_SHEET.md` (NEW spec, authored before execution)
+
+### Verified by grep on commit `933e3b7`
+| metric | got | expected |
+|---|---|---|
+| sheet morph `@media` blocks | 2 | ≥ 1 |
+| `.slide-over::after` handle rule | 2 | ≥ 1 |
+| `--sheet-drag` uses (css) | 2 | ≥ 2 |
+| `--ease-spring` use in sheet.css | 2 | ≥ 1 |
+| `[data-dragging]` + `[data-settling]` rules | 4 | ≥ 2 |
+| pointer handlers (down/move/up/cancel/capture) | 5 | ≥ 4 |
+| velocity + threshold logic refs | 12 | ≥ 1 |
+| `Upg.sheet` frozen surface | 1 | 1 |
+| consumes `Upg.overlay.close` | 2 | ≥ 1 |
+| emoji in index.html + assets | 0 | 0 |
+| hex in sheet.css/js | 0 | 0 |
+| actual `.innerHTML=`/`createElementNS`/`<svg>`/`document.write` in js | 0 | 0 |
+| `!important` in sheet.css | 0 | 0 |
+| physical-direction props | 0 | 0 |
+| `v5_logical_props_audit.py` exit | 0 | 0 |
+| `node --check` sheet.js | OK | OK |
+
+### Pulse — ⚡ SPRING_PULSE
+**The Surprise:** على شاشة لَمس / ضَيِّقة، تُصبِح لوحة ε1 صَحيفة تَصعَد من الأسفل (نَفس الـ DOM، morph عَبر `@media`). لكن السُّلوك هو النَبضة: الصَحيفة تَتَصَرَّف كَدُرج مُثَقَّل بمَرونة. (١) **حَسَّاسة للسُرعة**: نَقرة-قَذف سَريعة (velocity > 0.6px/ms) تَطرُدها من سَحبة ضَحلة؛ السَحبة البطيئة يَجب أن تَتَجاوَز ٣٥٪ من ارتفاعها لِتُغادِر. (٢) **ارتِداد بزُنبُرك**: ما دون العَتَبة تَعود إلى مَقعَدها بـ `--ease-spring` (sub-bounce)، لا بقَفزة خَطية. (٣) **مُقاوَمة السَحب لأعلى**: فوق المَقعَد تُقاوِم (rubber-band ×0.2، سَقف 24px) — تَشعُر بالسَقف. (٤) **الحِجاب مَربوط بالسَحب**: الكانفس يَتَوَهَّج حَياً مع كل بِكسل سَحب، فالمُغادَرة تُعايَن طِوال الطَريق لا عِند النِهاية فَقَط.
+**Avoided:** Forbidden #23 (a bottom sheet that opens automatically on page load) — ours is
+strictly user-summoned via `Upg.overlay`. Also the AI-default "drag-to-dismiss that linearly
+snaps away the moment the finger lifts, regardless of speed or distance."
+**Inspired-by:** Wild Card #17 — A Nizari fortress's trick stairs (the path that subtly slows
+intruders). The sheet resists *accidental* dismissal: a careless brush springs it back; only
+a committed flick or a deliberate long pull lets it leave. Resistance as courtesy.
+**Originality Self-Score:** 4/5 — drag-to-dismiss sheets are common; the 4/5 comes from (1) the
+velocity gate AND distance gate together (accident springs back, intent passes); (2) the
+`--ease-spring` overshoot settle (felt, not linear); (3) the rubber-band ceiling on over-pull;
+(4) the scrim coupled live to the drag so dismissal is previewed continuously. Not 5 because
+momentum sheets exist in iOS/Material; originality is in the resist-then-yield tuning + the
+reuse of the *same* slide-over node (zero JS layout branch).
+
+### Distinction from γ2/δ MORPH (pivot compliance)
+The slide-over→sheet re-anchor IS a morph, but it rides the existing MORPH lineage and is not
+the surprise. The surprise is the **drag physics** (kinetic feedback = SPRING). Last three
+categories were RING(δ3) · GLASS(ε1) · SPRING(ε2) — SPRING is a fresh debut, no pivot issue.
+
+### Sacred preserved
+- ε1 slide-over intact — sheet.css only *adds* morph rules inside a media query; sheet.js only
+  *adds* a drag engine that calls the existing `Upg.overlay.close()`
+- v4 Upg.* APIs preserved; `Upg.sheet` is a NEW additive namespace
+- `#overlay-sheet` placeholder slot left reserved (doctrine morph approach used instead)
+- `archive/` untouched
