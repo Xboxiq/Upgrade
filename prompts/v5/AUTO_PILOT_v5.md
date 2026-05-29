@@ -31,6 +31,7 @@ prompts/v5/MOTION_DOCTRINE.md            (7 durations / 5 easings / 3 feedback p
 prompts/v5/CHROMA_DOCTRINE.md            (4 token families / dark + light / single-accent rule)
 prompts/v5/ICONOGRAPHY_DOCTRINE.md       (zero emoji / Lucide+Phosphor / sprite / size scale)
 prompts/v5/PULSE_LIBRARY.md              (9 categories / 25 forbidden / 25 wild cards)
+prompts/v5/ATELIER_REFERENCE.md          (concrete values + stage map for δ→θ + prototype anchor; reference, not doctrine — yields on conflict)
 state/PROGRESS.json                      (resume point under `tadaffuq_v5`)
 ```
 
