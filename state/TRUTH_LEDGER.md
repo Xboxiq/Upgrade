@@ -3511,3 +3511,225 @@ re-verified against the file tree at HEAD `a70a539`.
 - v4 Upg.* APIs preserved (Upg.ring is additive — nested under window.Upg, doesn't shadow legacy)
 - `archive/` — untouched
 - δ1, δ2 work intact — only `data-progress` attribute added to one focal card
+
+
+
+---
+
+## v5 TADAFFUQ — ε1 SLIDE_OVER — 2026-05-29
+
+**Branch:** `tadaffuq-ε-disclosure` · **Pillar:** ε (DISCLOSURE) · **Stage:** 1 of 3 — **opens Pillar ε**
+**Pulse:** 🪟 **GLASS_PULSE** *(2nd of category; distinct in kind from δ1)*
+**Verified at commit:** `42f1d0e`
+
+### Files shipped
+- `platform-v5/assets/css/slide-over.css` (NEW, ~265 lines) — `@layer components`: `.scrim` (the sanctioned dim layer, the ONLY `inset:0` in the file), `.slide-over` panel **anchored** to `inset-inline-end:0` with `inline-size: clamp(360px,38vw,560px)` (never `inset:0` — not a modal), direction-aware `--slide-dir` for RTL-correct off-screen translate, the GLASS leading-edge specular `::before` + `@keyframes glass-glint`, the `[data-scrolled]` header lid, command-palette + neutral-trigger + single accent CTA styles, forced-colors guard
+- `platform-v5/assets/js/slide-over.js` (NEW, ~285 lines) — classic IIFE exposing `Upg.overlay` (frozen: `open / openTemplate / close / toggle / isOpen / current` + `_meta`); history coupling (`pushState` on open, `popstate`/Back closes); focus trap + focus return; background `inert` (+ `aria-hidden` fallback); scrim/Escape/close-button dismiss; `[data-overlay-open]` / `[data-overlay-close]` / `[data-cmd]` delegation; ⌘/Ctrl+K and the dock `centre` item summon the command palette; templates cloned (zero `innerHTML`); `Upg.icons.autoPopulate` fills cloned-template icons; the GLASS scroll-lid toggles `[data-scrolled]` on body scroll
+- `platform-v5/index.html` — linked `slide-over.css`; deferred `slide-over.js`; filled `#overlay-panel` with a stable `role="dialog" aria-modal="true"` skeleton (header eyebrow+title+close, scrollable body); added `<template id="overlay-tpl-command">` (4 command rows) + `<template id="overlay-tpl-scenario">`; added a neutral `.overlay-trigger` button inside the focal card detail
+- `prompts/v5/ε1_SLIDE_OVER.md` (NEW spec, authored before execution per AUTO_PILOT §4)
+
+### Verified by grep on commit `42f1d0e`
+| metric | got | expected |
+|---|---|---|
+| `.slide-over` CSS selectors | 23 | ≥ 1 |
+| `.scrim` CSS selectors | 3 | ≥ 1 |
+| panel anchored (`inset-inline-end: 0`) | 1 | 1 |
+| panel literal `inset: 0` (forbidden modal) | 0 | 0 |
+| only `inset:0` is the scrim | true | true |
+| `@keyframes glass-glint` | 1 | 1 |
+| `[data-scrolled]` lid rules | 2 | ≥ 1 |
+| `pushState`/`popstate` in js | 3 | ≥ 2 |
+| `Upg.overlay` frozen methods | 6 (+`_meta`) | 6 |
+| `role="dialog" aria-modal="true"` | 1 | 1 |
+| `<template id="overlay-tpl…">` | 2 | 2 |
+| emoji in index.html + assets | 0 | 0 |
+| hex in slide-over.css/js | 0 | 0 |
+| actual `.innerHTML=` in js | 0 | 0 |
+| `createElementNS`/`<svg>`/`document.write` in js | 0 | 0 |
+| `!important` in ε1 css | 0 | 0 |
+| physical-direction props | 0 | 0 |
+| `v5_logical_props_audit.py` exit | 0 | 0 |
+| `node --check` slide-over.js | OK | OK |
+
+> Note: a single `grep` for the word `innerHTML` returns 1 — it is the doc comment "*no innerHTML — clone template fragments*", not a usage. Actual assignments = 0 (verified separately).
+
+### Pulse — 🪟 GLASS_PULSE
+**The Surprise:** الحافة القائدة للوحة (inline-start، المُواجِهة للكانفس) ليست حدّاً صُلباً مَرسوماً — بل خَيط ضَوء أبيض دَقيق (1px، `hsla(0 0% 100% / α)` — لا لون accent) يَلمَع لحظة وُصول اللوحة (`@keyframes glass-glint`: opacity 0 → 1 عند ٥٥٪ → يَستقِر عند 0.5) ثم يَهدَأ كأنه نَفَس ضَوئي. وفي الجُزء الثاني من النَبضة: رأس اللوحة (الـ "lid") يَكسِب hairline + ظِل خَفيف **فقط** بَينَما المحتوى يَنزلِق تحته (`[data-scrolled="true"]`)، ثم يَفقِده عند العودة للأعلى. السَطح يُقرَأ بالضوء الذي يَلمِس حافَّتَه، لا بحدٍّ مَرسوم حَولَه بالكامل.
+**Avoided:** Forbidden #5 (modal popup `position:fixed; inset:0`) — replaced by an inline-end slide-over + sanctioned scrim; also the AI-default "every drawer has a uniform hard 1px border all the way around"
+**Inspired-by:** Wild Card #22 — A Sana'a window's wooden lattice (قُمرية صنعاء): privacy without darkness — the panel focuses attention on the detail while the canvas stays faintly visible behind the scrim, its leading edge catching light like alabaster glass
+**Originality Self-Score:** 4/5 — leading-edge-only highlights + scroll-lid hairlines exist in premium drawer designs; the 4/5 comes from (1) the arrival *glint* keyed to entrance timing not just a static specular; (2) white-light discipline so the surface signal never competes with the screen's single accent (CHROMA §7); (3) RTL-correct via `--slide-dir`; (4) honest a11y posture (dialog/modal/trap/return/inert) built from line one. Not 5 because the specular-edge primitive itself is known.
+
+### Distinction from δ1 GLASS_PULSE (pivot compliance)
+δ1 = "bento as one cut glass plane" (single top-edge hairline that brightens to **cyan** on hover/focus). ε1 = "panel leading-edge **white** specular that glints on arrival + a scroll-triggered lid hairline". Different surface, different light behaviour, different trigger. Pivot rule satisfied: last three categories were GLASS(δ1) · REVEAL(δ2) · RING(δ3) — GLASS at ε1 is non-consecutive.
+
+### Sacred preserved
+- δ1/δ2/δ3 + γ + β + α work intact — slide-over is additive; only the focal card gained one neutral `.overlay-trigger` button inside its already-existing detail subtree
+- v4 Upg.* APIs preserved; `Upg.overlay` is a NEW additive namespace (does not shadow `Upg.nav` — v5 has no Upg.nav module)
+- `archive/` untouched
+
+
+
+---
+
+## v5 TADAFFUQ — ε2 BOTTOM_SHEET — 2026-05-29
+
+**Branch:** `tadaffuq-ε-disclosure` · **Pillar:** ε (DISCLOSURE) · **Stage:** 2 of 3
+**Pulse:** ⚡ **SPRING_PULSE** *(debut of the category in v5; 7th unique category)*
+**Verified at commit:** `933e3b7`
+
+### Files shipped
+- `platform-v5/assets/css/sheet.css` (NEW, ~135 lines) — `@layer components` inside
+  `@media (max-width:720px), (pointer:coarse)`: the SAME `.slide-over` re-anchored to
+  `inset-block-end:0` + `inset-inline:0`, full width, `block-size: clamp(40vh,70vh,92vh)`,
+  top corners rounded, hidden via `translateY(100%)`; `[data-open]` → `translateY(var(--sheet-drag))`;
+  `[data-dragging]` removes transition (finger-follow), `[data-settling]` adds the
+  `--ease-spring` overshoot; `.scrim[data-dragging]` no-transition; the 36×4 `::after` handle;
+  the ε1 specular `::before` repositioned to the block-start edge (horizontal) for GLASS
+  continuity; header `touch-action:none`; forced-colors guard
+- `platform-v5/assets/js/sheet.js` (NEW, ~210 lines) — classic IIFE exposing `Upg.sheet`
+  (frozen: `enabled / isDragging / _meta`); Pointer-Events drag engine on the header
+  (`pointerdown/move/up/cancel` + `setPointerCapture`); velocity tracking; dismissal when
+  `currentDy > 35% · sheetHeight` OR downward velocity `> 0.6 px/ms` (→ `Upg.overlay.close()`);
+  spring-back below threshold; rubber-band over-pull (×0.2, cap 24px); live scrim opacity;
+  `matchMedia` gating; resets on `upg:overlay:close` and on leaving sheet-mode mid-drag
+- `platform-v5/index.html` — linked `sheet.css` (after `slide-over.css`), deferred `sheet.js`
+- `prompts/v5/ε2_BOTTOM_SHEET.md` (NEW spec, authored before execution)
+
+### Verified by grep on commit `933e3b7`
+| metric | got | expected |
+|---|---|---|
+| sheet morph `@media` blocks | 2 | ≥ 1 |
+| `.slide-over::after` handle rule | 2 | ≥ 1 |
+| `--sheet-drag` uses (css) | 2 | ≥ 2 |
+| `--ease-spring` use in sheet.css | 2 | ≥ 1 |
+| `[data-dragging]` + `[data-settling]` rules | 4 | ≥ 2 |
+| pointer handlers (down/move/up/cancel/capture) | 5 | ≥ 4 |
+| velocity + threshold logic refs | 12 | ≥ 1 |
+| `Upg.sheet` frozen surface | 1 | 1 |
+| consumes `Upg.overlay.close` | 2 | ≥ 1 |
+| emoji in index.html + assets | 0 | 0 |
+| hex in sheet.css/js | 0 | 0 |
+| actual `.innerHTML=`/`createElementNS`/`<svg>`/`document.write` in js | 0 | 0 |
+| `!important` in sheet.css | 0 | 0 |
+| physical-direction props | 0 | 0 |
+| `v5_logical_props_audit.py` exit | 0 | 0 |
+| `node --check` sheet.js | OK | OK |
+
+### Pulse — ⚡ SPRING_PULSE
+**The Surprise:** على شاشة لَمس / ضَيِّقة، تُصبِح لوحة ε1 صَحيفة تَصعَد من الأسفل (نَفس الـ DOM، morph عَبر `@media`). لكن السُّلوك هو النَبضة: الصَحيفة تَتَصَرَّف كَدُرج مُثَقَّل بمَرونة. (١) **حَسَّاسة للسُرعة**: نَقرة-قَذف سَريعة (velocity > 0.6px/ms) تَطرُدها من سَحبة ضَحلة؛ السَحبة البطيئة يَجب أن تَتَجاوَز ٣٥٪ من ارتفاعها لِتُغادِر. (٢) **ارتِداد بزُنبُرك**: ما دون العَتَبة تَعود إلى مَقعَدها بـ `--ease-spring` (sub-bounce)، لا بقَفزة خَطية. (٣) **مُقاوَمة السَحب لأعلى**: فوق المَقعَد تُقاوِم (rubber-band ×0.2، سَقف 24px) — تَشعُر بالسَقف. (٤) **الحِجاب مَربوط بالسَحب**: الكانفس يَتَوَهَّج حَياً مع كل بِكسل سَحب، فالمُغادَرة تُعايَن طِوال الطَريق لا عِند النِهاية فَقَط.
+**Avoided:** Forbidden #23 (a bottom sheet that opens automatically on page load) — ours is
+strictly user-summoned via `Upg.overlay`. Also the AI-default "drag-to-dismiss that linearly
+snaps away the moment the finger lifts, regardless of speed or distance."
+**Inspired-by:** Wild Card #17 — A Nizari fortress's trick stairs (the path that subtly slows
+intruders). The sheet resists *accidental* dismissal: a careless brush springs it back; only
+a committed flick or a deliberate long pull lets it leave. Resistance as courtesy.
+**Originality Self-Score:** 4/5 — drag-to-dismiss sheets are common; the 4/5 comes from (1) the
+velocity gate AND distance gate together (accident springs back, intent passes); (2) the
+`--ease-spring` overshoot settle (felt, not linear); (3) the rubber-band ceiling on over-pull;
+(4) the scrim coupled live to the drag so dismissal is previewed continuously. Not 5 because
+momentum sheets exist in iOS/Material; originality is in the resist-then-yield tuning + the
+reuse of the *same* slide-over node (zero JS layout branch).
+
+### Distinction from γ2/δ MORPH (pivot compliance)
+The slide-over→sheet re-anchor IS a morph, but it rides the existing MORPH lineage and is not
+the surprise. The surprise is the **drag physics** (kinetic feedback = SPRING). Last three
+categories were RING(δ3) · GLASS(ε1) · SPRING(ε2) — SPRING is a fresh debut, no pivot issue.
+
+### Sacred preserved
+- ε1 slide-over intact — sheet.css only *adds* morph rules inside a media query; sheet.js only
+  *adds* a drag engine that calls the existing `Upg.overlay.close()`
+- v4 Upg.* APIs preserved; `Upg.sheet` is a NEW additive namespace
+- `#overlay-sheet` placeholder slot left reserved (doctrine morph approach used instead)
+- `archive/` untouched
+
+
+
+---
+
+## v5 TADAFFUQ — ε3 OVERLAY_CHOREO — 2026-05-29
+
+**Branch:** `tadaffuq-ε-disclosure` · **Pillar:** ε (DISCLOSURE) · **Stage:** 3 of 3 — **closes Pillar ε**
+**Pulse:** 🌙 **VEIL_PULSE** *(debut of the category in v5; 8th unique category)*
+**Verified at commit:** `adce8ca`
+
+### Files shipped
+- `platform-v5/assets/css/overlay-choreo.css` (NEW, ~45 lines) — `@layer components`:
+  `.dock[data-veiled="true"]` (opacity 0 + pointer-events none + dissolve transition over
+  `--duration-panel`/`--ease-panel`) and `.dock[data-veil-return="true"]` (slow return over
+  `--duration-zen`/`--ease-emerge`) + forced-colors note. **The base `.dock` rule (its
+  `translateX(-50%)` centring + gap/padding/box-shadow transition) is never redeclared** —
+  verified `0` bare `.dock {` selectors.
+- `platform-v5/assets/js/overlay-choreo.js` (NEW, ~120 lines) — classic IIFE exposing
+  `Upg.choreo` (frozen: `isVeiled / _meta`). Reads `--duration-panel` / `--duration-zen` via
+  `getComputedStyle`; on `upg:overlay:open` veils the dock; on `upg:overlay:close` schedules
+  the patient return (beat = one `--duration-panel` → unveil + `data-veil-return` → cleanup
+  after `--duration-zen`); cancels pending return on re-open.
+- `platform-v5/index.html` — linked `overlay-choreo.css`, deferred `overlay-choreo.js`
+- `prompts/v5/ε3_OVERLAY_CHOREO.md` (NEW spec, authored before execution)
+
+### Verified by grep on commit `adce8ca`
+| metric | got | expected |
+|---|---|---|
+| `[data-veiled]` + `[data-veil-return]` rules | 3 | ≥ 2 |
+| `opacity: 0` + `pointer-events: none` | 3 | present |
+| `--ease-panel` (dissolve) ref | 1 | ≥ 1 |
+| `--ease-emerge` (return) ref | 2 | ≥ 1 |
+| **bare `.dock {` redeclared (must be 0)** | 0 | 0 |
+| listens `upg:overlay:open` + `:close` | 4 | ≥ 2 |
+| reads `--duration-*` via `getComputedStyle` | 7 | ≥ 1 |
+| `Upg.choreo` frozen surface | 1 | 1 |
+| emoji in index.html + assets | 0 | 0 |
+| hex in ε3 files | 0 | 0 |
+| actual `.innerHTML=`/`createElementNS`/`<svg>`/`document.write` | 0 | 0 |
+| `!important` in ε3 css | 0 | 0 |
+| physical-direction props | 0 | 0 |
+| `v5_logical_props_audit.py` exit | 0 | 0 |
+| `node --check` overlay-choreo.js | OK | OK |
+
+### Pulse — 🌙 VEIL_PULSE
+**The Surprise:** عند فَتح أي لوحة، الـ dock لا يَنطَفِئ فَجأة — يَذوب (opacity → 0 عَبر `--duration-panel`) كأنه يَنصَهِر في الكانفس فتَملِك اللوحة المَسرَح كُلَّه. وعند الإغلاق لا يَعود مُسرِعاً: يَنتَظِر نَفَساً (≈ `--duration-panel`، حتى تَرحَل اللوحة ويَستَريح الكانفس عارياً لَحظة)، ثم يَطلُع ببُطء عَبر `--duration-zen` + `--ease-emerge`. التَباين هو المَقصِد: حِمايَة التَركيز فَوراً، ورَفع الحِجاب على مَهَل.
+**Avoided:** the AI-default "hide the nav with `display:none` the instant a modal opens and slam
+it back the instant it closes" — chrome that blinks jarringly on every open/close.
+**Inspired-by:** Wild Card #24 — A Quranic reciter's tarteel pacing (the slowness that opens
+meaning). The beat of stillness after the panel leaves is not lag — it is room for the canvas
+to breathe before the chrome speaks again.
+**Originality Self-Score:** 4/5 — hiding nav under a modal is common; the 4/5 comes from (1) the
+**dissolve** (opacity melt) instead of a `display:none` blink; (2) the **asymmetric cadence** —
+quick protect, slow patient return with a deliberate beat; (3) durations **read from tokens**
+(no invented timing); (4) zero clobber of the dock's own transform/transition (the veil rides on
+top via state attributes). Not 5 because hide-chrome-on-overlay is a known idea; originality is
+in the tarteel-paced asymmetry.
+
+### Distinction from the coming ζ ZEN VEILs (pivot + planning note)
+ε3 VEIL is **acute** — transient, bound to a single overlay open/close. ζ1/ζ2 will be **chronic**
+VEILs — a sustained focus mode for a whole training session. Same category, different temporal
+axis (the sanctioned reuse pattern, PULSE_LIBRARY §1). Pivot: last three were GLASS(ε1) ·
+SPRING(ε2) · VEIL(ε3) — VEIL is a fresh debut here.
+
+### Sacred preserved
+- γ1 dock intact — overlay-choreo.css only adds state-attribute rules; the base `.dock`
+  (centring transform + its transition) is untouched (0 redeclares)
+- ε1/ε2 intact — ε3 only listens to the events ε1 already dispatches
+- v4 Upg.* APIs preserved; `Upg.choreo` is a NEW additive namespace
+- `archive/` untouched
+
+---
+
+## v5 TADAFFUQ — PILLAR ε (DISCLOSURE) — CLOSED — 2026-05-29
+
+**Branch:** `tadaffuq-ε-disclosure` · **3/3 stages · 3 Pulses · 2 new unique categories**
+
+| stage | title | files | pulse | sha |
+|---|---|---|---|---|
+| ε1 | SLIDE_OVER | slide-over.css + slide-over.js (+spec) | 🪟 GLASS_PULSE | `42f1d0e` |
+| ε2 | BOTTOM_SHEET | sheet.css + sheet.js (+spec) | ⚡ SPRING_PULSE | `933e3b7` |
+| ε3 | OVERLAY_CHOREO | overlay-choreo.css + overlay-choreo.js (+spec) | 🌙 VEIL_PULSE | `adce8ca` |
+
+### Pillar ε tally
+- Stages done: α1–α4 + β1–β3 + γ1–γ3 + δ1–δ3 + ε1–ε3 = **16 / 24**
+- Total Pulses: **9 / 15** (DOCK · MORPH · GLOW · GLASS · REVEAL · RING · SPRING · VEIL)
+- Unique categories used: **8 / 9** — only **HAPTIC** remains (lands in η)
+- New v5 APIs this pillar: `Upg.overlay` (ε1), `Upg.sheet` (ε2), `Upg.choreo` (ε3) — all
+  additive, frozen; the third surface type (slide-over/sheet) of SPATIAL §3 is now live
+- Creativity Health: **100 / 100** · Forbidden Library violations: **0**
+- Sacred preserved: 14 v4 Upg.* APIs · `archive/` · `prompts/v[1-4]/` · γ/δ files untouched

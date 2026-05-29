@@ -1,0 +1,41 @@
+/* ════════════════════════════════════════════════════════════════════════
+   TADAFFUQ v5 — ε3 — Overlay ⇄ Dock choreography  (VEIL_PULSE)
+   ────────────────────────────────────────────────────────────────────────
+   When an overlay (ε1 slide-over / ε2 sheet) is summoned, the dock dissolves
+   to grant the panel the whole stage; when the overlay leaves, the dock
+   returns — but patiently, after a beat, on tarteel time.
+
+   CRITICAL: this file must NOT redeclare the base `.dock` transform or
+   transition. dock.css centres the dock with `transform: translateX(-50%)`
+   and transitions `gap/padding/box-shadow`. The veil is therefore an
+   OPACITY dissolve declared on the state attributes only — composed on top
+   of the dock's own geometry without disturbing it. overlay-choreo.js sets
+   the attributes; CSS performs the dissolve + the asymmetric return.
+   ════════════════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  /* ── The dissolve — chrome melts into the canvas when a panel opens ───
+     Quick (panel-paced). The transition lives on the state rule so it
+     overrides nothing on the base .dock while at rest. */
+  .dock[data-veiled="true"] {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration-panel) var(--ease-panel);
+  }
+
+  /* ── The patient return — the veil lifts slowly (zen-paced, ease-emerge)
+     Applied only during the return window by overlay-choreo.js, then removed.
+     Slower than the dissolve on purpose: focus is protected at once, but the
+     chrome is restored gently. */
+  .dock[data-veil-return="true"] {
+    transition: opacity var(--duration-zen) var(--ease-emerge);
+  }
+
+
+  /* ── Forced-colors: opacity still conveys the veil; nothing else needed.
+     (No colour is introduced; the dock simply fades.) */
+  @media (forced-colors: active) {
+    .dock[data-veiled="true"] { opacity: 0; }
+  }
+}

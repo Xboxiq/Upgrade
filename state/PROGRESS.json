@@ -2714,11 +2714,11 @@
     }
   },
   "tadaffuq_v5": {
-    "current_pillar": "δ",
+    "current_pillar": "ε",
     "current_stage": 3,
-    "current_stage_id": "δ3",
-    "status": "pillar-δ-complete",
-    "branch": "tadaffuq-δ-bento",
+    "current_stage_id": "ε3",
+    "status": "pillar-ε-complete",
+    "branch": "tadaffuq-ε-disclosure",
     "completed_stages": [
       "α1",
       "α2",
@@ -2732,25 +2732,29 @@
       "γ3",
       "δ1",
       "δ2",
-      "δ3"
+      "δ3",
+      "ε1",
+      "ε2",
+      "ε3"
     ],
     "creativity_health": 100,
-    "creativity_health_note": "v5 just begun. α (foundation) produces 0 pulses by spec; pulse production starts at γ1.",
-    "pulses_produced": 6,
+    "creativity_health_note": "Pillar ε (DISCLOSURE) COMPLETE 3/3. ε3 ships VEIL_PULSE — the 8th unique category (debut). Only HAPTIC remains for 9/9. Health = 100 (base 100 + 5×8 unique-category bonus, capped; 0 penalties).",
+    "pulses_produced": 9,
     "pulse_categories_used": [
       "DOCK_PULSE",
       "MORPH_PULSE",
       "GLOW_PULSE",
       "GLASS_PULSE",
       "REVEAL_PULSE",
-      "RING_PULSE"
+      "RING_PULSE",
+      "SPRING_PULSE",
+      "VEIL_PULSE"
     ],
     "remaining_pulse_categories": [
-      "SPRING_PULSE",
-      "VEIL_PULSE",
       "HAPTIC_PULSE"
     ],
     "forbidden_violations": 0,
+    "last_updated": "2026-05-29 ε3 — Pillar ε COMPLETE (disclosure)",
     "baseline_v4_chrome": {
       "classic_sidebar_topbar_drawer_hits": 1,
       "fixed_position_in_chrome_css": 1,
@@ -2777,7 +2781,9 @@
       "α4",
       "δ1",
       "δ2",
-      "δ3"
+      "δ3",
+      "ε1",
+      "ε2"
     ],
     "stage_specs_prewritten_note": "α1-α4 + δ1-δ3 authored ahead of execution; δ3 also has the as-shipped Damascus-pulse spec restored from main verbatim. β/γ specs also exist on disk.",
     "doctrine_files_count": 9,
@@ -2858,7 +2864,8 @@
       "α",
       "β",
       "γ",
-      "δ"
+      "δ",
+      "ε"
     ],
     "γ_pillar_summary": {
       "stages_done": 3,
@@ -2904,6 +2911,87 @@
       "first_ring_pulse": true,
       "single_accent_progress_per_screen_enforced": true
     },
-    "next_stage": "ε1 SLIDE_OVER (separate ε branch — pillar δ PR opens first)"
+    "ε1_verified": {
+      "slide_over_css_selectors": 23,
+      "scrim_css_selectors": 3,
+      "panel_anchored_inset_inline_end": 1,
+      "panel_literal_inset_0": 0,
+      "scrim_is_the_only_inset_0": true,
+      "glass_glint_keyframes": 1,
+      "data_scrolled_lid_rules": 2,
+      "pushstate_popstate": 3,
+      "upg_overlay_frozen_methods": 6,
+      "role_dialog_aria_modal": 1,
+      "templates_added": 2,
+      "node_check": "passed",
+      "lines_total": 727,
+      "pulse": "GLASS_PULSE"
+    },
+    "ε2_verified": {
+      "sheet_morph_media_blocks": 2,
+      "after_handle_rule": 2,
+      "sheet_drag_uses_css": 2,
+      "ease_spring_use_in_sheet_css": 2,
+      "data_dragging_settling_rules": 4,
+      "pointer_handlers_js": 5,
+      "velocity_threshold_logic": 12,
+      "upg_sheet_frozen_surface": 1,
+      "consumes_upg_overlay_close": 2,
+      "emoji_in_ship_files": 0,
+      "hex_in_sheet_files": 0,
+      "innerhtml_svg_write_in_js": 0,
+      "important_in_sheet_css": 0,
+      "physical_dirs": 0,
+      "logical_props_audit_exit": 0,
+      "node_check": "passed",
+      "lines_total": 419,
+      "pulse": "SPRING_PULSE",
+      "dismiss_fraction": 0.35,
+      "flick_velocity_px_per_ms": 0.6,
+      "rubber_band_factor": 0.2,
+      "morph_approach": "same #overlay-panel re-anchored via @media (no new DOM); #overlay-sheet slot left reserved",
+      "auto_open_on_load": false
+    },
+    "ε3_verified": {
+      "data_veiled_and_return_rules": 3,
+      "opacity0_pointer_events_none": 3,
+      "ease_panel_dissolve_ref": 1,
+      "ease_emerge_return_ref": 2,
+      "base_dock_rule_redeclared": 0,
+      "listens_overlay_open_close": 4,
+      "reads_duration_tokens_via_getcomputedstyle": 7,
+      "upg_choreo_frozen_surface": 1,
+      "emoji_in_ship_files": 0,
+      "hex_in_ε3_files": 0,
+      "innerhtml_svg_write_in_js": 0,
+      "important_in_ε3_css": 0,
+      "physical_dirs": 0,
+      "logical_props_audit_exit": 0,
+      "node_check": "passed",
+      "lines_total": 265,
+      "pulse": "VEIL_PULSE",
+      "veil_is_opacity_dissolve_not_transform": true,
+      "asymmetry": "dissolve = --duration-panel (quick); return = wait --duration-panel beat then --duration-zen slow re-emerge",
+      "acute_vs_zeta_chronic": "ε3 VEIL is acute (per overlay open/close); ζ VEIL will be chronic (sustained focus mode)"
+    },
+    "ε_pillar_summary": {
+      "stages_done": 3,
+      "stages_total": 3,
+      "pulses": [
+        "ε1 GLASS_PULSE",
+        "ε2 SPRING_PULSE",
+        "ε3 VEIL_PULSE"
+      ],
+      "unique_categories_added_this_pillar": [
+        "SPRING_PULSE",
+        "VEIL_PULSE"
+      ],
+      "files_shipped": 6,
+      "branch": "tadaffuq-ε-disclosure",
+      "ready_for_pr": true,
+      "pr_base": "main",
+      "pr_base_note": "follows the #126 precedent — pillar PRs target main directly; the v5-tadaffuq integration branch caused unresolvable state-file conflicts (#120–#123) and no longer exists on remote."
+    },
+    "next_stage": "ζ1 ZEN_TRIGGER — VEIL_PULSE (enter Focus Mode on training-scenario start, Upg.zen.enter(scope)); new pillar ζ branch tadaffuq-ζ-flow; opens after the Pillar ε PR"
   }
 }

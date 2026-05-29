@@ -163,3 +163,87 @@ last_5_avg: 4.0
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-29 / δ3 — Pillar δ COMPLETE 3/3 (BENTO LIVE)
+
+
+
+
+
+## ε1 — 2026-05-29
+**Pulse Category:** 🪟 GLASS_PULSE *(2nd GLASS of v5; opens Pillar ε — DISCLOSURE)*
+**The Surprise:** لِلوحة المُنزَلِقة حافَّتان مُختَلِفتان في الطَبع. الحافة الخَلفية (inline-end) تُسنِد اللوحة إلى طَرَف الكانفس، أما الحافة القائدة (inline-start، التي تُواجِه الكانفس وراء الحِجاب) فليست خَطّاً مَرسوماً — هي **خَيط ضَوء**. عند انزلاق اللوحة إلى مَوضِعها، يَلمَع هذا الخَيط الأبيض الدَقيق (1px) لَمعَة واحِدة: من العَدَم إلى الذُروة عند ٥٥٪ من زَمن الدُخول، ثم يَستَقِر على وَهَج خافِت (opacity 0.5) كأنه نَفَس ضَوئي أَخَذَه السَطح ثم كَتَمَه. الضوء أبيض صِرف عَبر `hsla(0 0% 100% / α)` — ليس Neon Cyan ولا Electric Orange — حتى لا يُنازِع البَطاقة المِحوَرية على الـ accent الوَحيد المَسموح في الشاشة (CHROMA §٧). ثم الجُزء الثاني من النَبضة، في الرأس: الـ "lid" الزُجاجي يَبقى بِلا حدٍّ سُفلي حتى اللحظة التي يَبدَأ فيها المحتوى بالانزلاق تحته؛ عِندَها فقط يَنبُت hairline + ظِل خَفيف (`[data-scrolled="true"]`)، ويَختَفي حين يَعود القارئ إلى القِمَّة. اللوحة لا تُعلِن عن زُجاجِها بإطار؛ تَترُك الضوء يَكشِفه عند الحافة وعند الانزلاق.
+
+**Reference Avoided:** Forbidden #5 (الـ modal popup — `position: fixed; inset: 0`). كل تَفصيل في v5 كان سَيَفتَح modal مَركزياً يُحاصِر الشاشة؛ هنا لَوحة تَنزَلِق من الحافة، والكانفس يَبقى مَرئياً خَلف حِجاب نِصف شَفّاف. وكذلك الـ AI-default الأصغر: "كل drawer له إطار 1px صُلب يُحيط به من جِهاته الأربع" — هنا لا إطار مُحيط، بل ضوء يَلمِس حافَّتَين فقط.
+**Inspired-by:** Wild Card #22 — قُمرية صنعاء (A Sana'a window's wooden lattice): خصوصية بلا ظلام. القُمرية تَعزِل الغُرفة عن الخارِج لكنها لا تُطفِئها — تُرشِّح الضوء وتُبقي الإحساس بالخارِج حاضِراً. اللوحة المُنزَلِقة كذلك: تُرَكِّز الانتباه على التَفصيل بينما يَبقى الكانفس خَلفها حاضِراً تَحت الحِجاب، وحافَّتُها القائدة تَلتَقِط الضوء كَزُجاج المَرمَر في ساعة بعَينِها.
+**User-Visible:** yes — أول لَوحة جانبية في v5. تُفتَح بالضَغط على عُنصُر "المَركز" في الـ dock أو بـ ⌘/Ctrl+K (لَوحة الأوامر)، وبزِرّ "افتَح السيناريو كامِلاً في لَوحة" داخِل البَطاقة المِحوَرية المُتَوَسِّعة. اللَمعَة تُرى مَرَّة عند كل فَتح؛ الـ lid hairline يُرى عند تَمرير المحتوى الطَويل.
+**Originality Self-Score:** 4/5 — الـ leading-edge specular والـ scroll-lid hairline مَوجودان في تَصاميم drawers راقية. الذي يَرفَعه إلى 4: (١) **اللَمعَة المَربوطة بزَمن الدُخول** لا مُجَرَّد specular ثابت — الضوء حَدَث، لا زَخرَفة؛ (٢) **انضِباط الضوء الأبيض** فلا يُنازِع الـ single-accent rule؛ (٣) **RTL صَحيح** عَبر `--slide-dir` (اللوحة تَنزَلِق من الحافة الصَحيحة في الاتجاهَين)؛ (٤) **a11y من السَطر الأول**: dialog / aria-modal / focus-trap / focus-return / background-inert / history-Back. لا أَدَّعي 5 لأن primitive الـ specular-edge مَعروف؛ الأصالة في التَجميع + الـ glint-timing + الانضِباط اللوني.
+**Files touched:** platform-v5/assets/css/slide-over.css (NEW ~265) · platform-v5/assets/js/slide-over.js (NEW ~285) · platform-v5/index.html (+panel skeleton + 2 templates + trigger + wiring) · prompts/v5/ε1_SLIDE_OVER.md (NEW spec)
+**Verified at commit:** `42f1d0e`
+
+
+
+---STATS---
+total_pulses: 7
+unique_categories_used: 6
+target_categories: 9 (DOCK · MORPH · GLOW · REVEAL · RING · GLASS · SPRING · VEIL · HAPTIC)
+remaining_categories: 3 (SPRING · VEIL · HAPTIC)
+avg_self_score: 4.0
+last_5_avg: 4.0
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-29 / ε1 — Pillar ε stage 1/3 — slide-over live (GLASS #2)
+
+
+
+
+
+## ε2 — 2026-05-29
+**Pulse Category:** ⚡ SPRING_PULSE *(first SPRING of v5; 7th unique category)*
+**The Surprise:** على الأجهزة اللَمسية والشاشات الضَيِّقة، لا تَأتي لوحة التَفصيل من الجَنب — تَصعَد من أسفل الكانفس كَصَحيفة، وهي **نَفس** الـ DOM node الذي يُصبِح slide-over على سَطح المَكتب (morph عَبر `@media` فَقَط، صفر فَرع JS للتَخطيط). لكن المُفاجأة ليست في الصُعود؛ هي في **كيف تَرفُض الرَحيل**. الصَحيفة تَتَصَرَّف كَدُرج خَشَبي مُثَقَّل له زُنبُرك: تَسحَبها لأسفل فتُلاحِق إصبَعَك بِلا تَأخير (الـ transition يُلغى أثناء السَحب)، والحِجاب خَلفَها يَتَوَهَّج تَدريجياً فتَرى الكانفس يَعود إلى الحياة بِقَدر ما تَسحَب — مُعايَنة حَيَّة للمُغادَرة. ثم لَحظة الإفلات تَحكُم: إن كانت السَحبة بَطيئة وقَصيرة (أَقَل من ٣٥٪ من الارتفاع، بِلا قَذف) **تَرتَدّ الصَحيفة إلى مَقعَدها بزُنبُرك** — `--ease-spring` يُعطيها تَجاوُزاً طَفيفاً (sub-bounce) كأنها دُرج فِعلي شَدَدتَه ثم أفلَتَّه. أما القَذفة السَريعة (velocity > ٠٫٦ بكسل/مِلّي) أو السَحبة الطَويلة فتُغادِر. وإن حاوَلتَ سَحبَها **لأعلى** فوق مَقعَدها، تُقاوِم (rubber-band ×٠٫٢، سَقف ٢٤ بكسل) — تَشعُر بالسَقف بأطراف أصابِعك. مُقاوَمة مَحسوبة: العَرَض العابِر يَرتَدّ، والقَصد الواضِح يَمُرّ.
+
+**Reference Avoided:** Forbidden #23 (صَحيفة سُفلية تَنفَتِح تِلقائياً عند تَحميل الصَفحة) — هنا الصَحيفة لا تَظهَر إلا باستِدعاء المُستخدِم عَبر `Upg.overlay`، أبداً من تِلقاء نَفسِها. وكذلك الـ AI-default الأكبر للـ bottom sheets: "drag-to-dismiss يَقفِز خَطياً ويَختَفي لَحظة رَفع الإصبَع، بِغَضِّ النَظَر عن السُرعة أو المَسافة" — هنا السُرعة والمَسافة كِلاهُما يُقَرِّران، والارتِداد بزُنبُرك لا بقَفزة.
+**Inspired-by:** Wild Card #17 — سَلالِم قِلاع النِزاريين الخادِعة (A Nizari fortress's trick stairs): الطَريق الذي يُبطِئ الدُخَلاء بلُطف. كانت تِلك السَلالِم تُصَمَّم بارتِفاعات غَير مُنتَظِمة تُربِك مَن لا يَعرِفها فيَتَعَثَّر، بَينَما يَمُرّ أهل القَلعة بسُهولة. الصَحيفة كذلك: تُقاوِم الرَحيل العَرَضي (اللَمسة الطائِشة تَرتَدّ) لكنها تَنصاع للقَصد (القَذفة أو السَحبة الطَويلة). المُقاوَمة حِمايَة، لا عِناد.
+**User-Visible:** yes — على الموبايل، أول إيماءة سَحب حَقيقية في v5. تُفتَح أي لوحة (⌘K / dock centre / زِرّ السيناريو) كَصَحيفة صاعِدة بِمَقبِض في الأعلى؛ السَحب لأسفل والارتِداد بالزُنبُرك مَحسوسان فَوراً. على سَطح المَكتب (pointer: fine، ≥ 720px) لا تَغَيُّر — تَبقى لوحة ε1 الجانبية.
+**Originality Self-Score:** 4/5 — الـ momentum bottom sheets مَوجودة في iOS / Material. الذي يَرفَعه إلى 4: (١) **بَوّابَتا السُرعة والمَسافة مَعاً** — العَرَض يَرتَدّ، القَصد يَمُرّ، وهذا التَمييز نادِر في التَطبيقات؛ (٢) **ارتِداد `--ease-spring` بتَجاوُز** بدل snap خَطي؛ (٣) **سَقف rubber-band** على السَحب لأعلى؛ (٤) **الحِجاب مَربوط حَياً بالسَحب** فالمُغادَرة مُعايَنة مُستَمِرَّة؛ (٥) إعادة استِخدام **نَفس** الـ slide-over node (صفر فَرع layout في الـ JS). لا أَدَّعي 5 لأن primitive السَحب-للإغلاق مَعروف؛ الأصالة في ضَبط المُقاوَمة-ثُمَّ-الانصِياع.
+**Files touched:** platform-v5/assets/css/sheet.css (NEW ~135) · platform-v5/assets/js/sheet.js (NEW ~210) · platform-v5/index.html (+2 wiring) · prompts/v5/ε2_BOTTOM_SHEET.md (NEW spec)
+**Verified at commit:** `933e3b7`
+
+
+
+---STATS---
+total_pulses: 8
+unique_categories_used: 7
+target_categories: 9 (DOCK · MORPH · GLOW · REVEAL · RING · GLASS · SPRING · VEIL · HAPTIC)
+remaining_categories: 2 (VEIL · HAPTIC)
+avg_self_score: 4.0
+last_5_avg: 4.0
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-29 / ε2 — Pillar ε stage 2/3 — bottom sheet live (SPRING debut)
+
+
+
+
+
+## ε3 — 2026-05-29
+**Pulse Category:** 🌙 VEIL_PULSE *(first VEIL of v5; 8th unique category; closes Pillar ε)*
+**The Surprise:** الـ dock والـ overlay لا يَتَزاحَمان على أسفل الشاشة — بَينَهُما مُناوَبة مُصَمَّمة. حين تُستَدعى أي لوحة (slide-over على سَطح المَكتب، أو صَحيفة على اللَمس)، الـ dock لا يَختَفي بـ `display:none` المُفاجِئ — **يَذوب**: شَفافِيَّتُه تَنزِل إلى الصِفر عَبر `--duration-panel` بـ `--ease-panel`، فيَنصَهِر في الكانفس بِهُدوء وتَملِك اللوحة المَسرَح كُلَّه. ثم — وهُنا الطَبع — حين تَرحَل اللوحة، الـ dock **لا يَعود مُسرِعاً**. يَنتَظِر نَفَساً مَقصوداً (≈ `--duration-panel`، تَكفي لأن تَكون اللوحة قد غادَرَت تَماماً ويَستَريح الكانفس عارياً لَحظة واحِدة من السُكون)، ثم يَطلُع ببُطء عَبر `--duration-zen` (٦٤٠ms، أبطأ مُدَّة في النِظام) بـ `--ease-emerge`. التَباين هو كُلّ شيء: الذوبان سَريع (حِمايَة التَركيز فَوراً)، والعَودة بَطيئة صَبورة (رَفع الحِجاب على مَهَل). المُدَّتان مَقروءتان من الـ tokens عَبر `getComputedStyle` — لا توقيت مُختَرَع. والـ dissolve لا يَلمِس الـ `transform: translateX(-50%)` الذي يُوَسِّط الـ dock ولا transition الـ gap/padding الخاص به — يَركَب فَوقَه عَبر سِمات الحالة فَقَط.
+
+**Reference Avoided:** الـ AI-default الأكبر للـ chrome مع الـ modals: "أخفِ شَريط التَنَقُّل بـ `display:none` لَحظة فَتح الـ modal، وأعِدْه بضَربة واحِدة لَحظة الإغلاق" — chrome يَرمُش (blink) مع كل فَتح وإغلاق، مُزعِج بَصرياً. هنا لا رَمشة: ذوبان ناعِم، وعَودة على مَهَل. وكذلك مَبدأ "الـ dock هو الـ chrome الوَحيد" (SPATIAL §2) مَحفوظ — لا toast يَظهَر، لا FAB يَطلُع؛ الـ dock يَنسَحِب ويَعود كإيماءة واحِدة.
+**Inspired-by:** Wild Card #24 — تَرتيل القارئ (A Quranic reciter's tarteel pacing): البُطء الذي يَفتَح المَعنى. التَرتيل تِلاوة مُتَمَهِّلة لا تَستَعجِل؛ سَكَناتُه ليست فَراغاً بَل مُتَّسَع يَستَقِرّ فيه المَعنى. عَودة الـ dock مُوَقَّتة كالتَرتيل: نَفَس السُكون بَعد رَحيل اللوحة ليس تأخيراً بَل غُرفة يَتَنَفَّس فيها الكانفس قَبل أن يَنطِق الـ chrome ثانيةً.
+**User-Visible:** yes — مَحسوس في كل فَتح/إغلاق لِلوحة. عند الفَتح يَذوب الـ dock؛ عند الإغلاق هُناك لَحظة كانفس عارٍ ثم يَطلُع الـ dock ببُطء. على سَطح المَكتب والموبايل مَعاً (الـ dissolve opacity-فَقَط يَعمَل على الحالتَين).
+**Originality Self-Score:** 4/5 — إخفاء الـ nav تَحت modal فِكرة مَعروفة. الذي يَرفَعه إلى 4: (١) **الذوبان** (opacity melt) بَدَل blink الـ `display:none`؛ (٢) **التَباين الزَمَني** — حِمايَة سَريعة، عَودة صَبورة بنَفَس مَقصود؛ (٣) **التوقيت مَقروء من الـ tokens** لا مُختَرَع؛ (٤) **صفر clobber** لِـ transform/transition الـ dock (الحِجاب يَركَب فَوق عَبر سِمات الحالة). لا أَدَّعي 5 لأن hide-chrome-on-overlay مَعروفة؛ الأصالة في الإيقاع التَرتيلي غَير المُتَماثِل.
+**Files touched:** platform-v5/assets/css/overlay-choreo.css (NEW ~45) · platform-v5/assets/js/overlay-choreo.js (NEW ~120) · platform-v5/index.html (+2 wiring) · prompts/v5/ε3_OVERLAY_CHOREO.md (NEW spec)
+**Verified at commit:** `adce8ca`
+
+
+
+---STATS---
+total_pulses: 9
+unique_categories_used: 8
+target_categories: 9 (DOCK · MORPH · GLOW · REVEAL · RING · GLASS · SPRING · VEIL · HAPTIC)
+remaining_categories: 1 (HAPTIC)
+avg_self_score: 4.0
+last_5_avg: 4.0
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-29 / ε3 — Pillar ε COMPLETE 3/3 (DISCLOSURE LIVE) — VEIL debut, 8/9 categories

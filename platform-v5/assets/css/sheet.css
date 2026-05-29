@@ -1,0 +1,113 @@
+/* ════════════════════════════════════════════════════════════════════════
+   TADAFFUQ v5 — ε2 — Bottom Sheet  (SPRING_PULSE)
+   ────────────────────────────────────────────────────────────────────────
+   SPATIAL_DOCTRINE §3.3 — on (max-width:720px) or (pointer:coarse), the SAME
+   #overlay-panel slide-over BECOMES a bottom sheet (a CSS morph of one DOM
+   node — parallel to the γ2 dock morph). Plus a drag-to-dismiss engine
+   (sheet.js) with momentum + spring-back overshoot.
+
+   The Pulse — SPRING_PULSE (the drawer that resists casual dismissal):
+     drag follows the finger (no transition while dragging); release below
+     35% / slow → springs back with --ease-spring overshoot; a flick or a long
+     pull → leaves; dragging UP past seated rubber-bands. Resistance as
+     courtesy — accident springs back, intent passes.
+
+   This file MUST load after slide-over.css (it overrides the ε1 transform
+   inside the media query). Zero physical left/right; RTL-symmetric.
+   ════════════════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  @media (max-width: 720px), (pointer: coarse) {
+
+    /* ── Morph: the slide-over re-anchors to the block-end edge ─────────*/
+    .slide-over {
+      --sheet-drag: 0px;                 /* live drag offset, set by sheet.js */
+
+      inset-block: auto 0;               /* pinned to the bottom */
+      inset-inline: 0;                   /* full width */
+      inline-size: auto;
+      max-inline-size: none;
+      block-size: var(--sheet-h, clamp(40vh, 70vh, 92vh));
+      max-block-size: 92vh;
+
+      border-inline-start: none;
+      border-block-start: 1px solid var(--line);
+      border-start-start-radius: var(--radius-xl);
+      border-start-end-radius: var(--radius-xl);
+
+      /* hidden rest position is now DOWN, not sideways */
+      transform: translateY(100%);
+    }
+
+    /* open / live-drag position */
+    .slide-over[data-open="true"] {
+      transform: translateY(var(--sheet-drag, 0px));
+    }
+
+    /* while the finger is down: follow it directly, no easing */
+    .slide-over[data-dragging="true"] {
+      transition: none;
+    }
+    /* on release below threshold: the spring-back settle (the SPRING_PULSE) */
+    .slide-over[data-settling="true"] {
+      transition: transform var(--duration-emerge) var(--ease-spring);
+    }
+
+    /* the scrim follows the drag directly (its opacity is set live by sheet.js);
+       no easing while the finger is down, so the canvas brightens in real time */
+    .scrim[data-dragging="true"] { transition: none; }
+
+
+    /* ── The handle — 36×4 capsule, top-centre, neutral (SPATIAL §3.3) ──*/
+    .slide-over::after {
+      content: "";
+      position: absolute;
+      inset-block-start: var(--space-2);
+      inset-inline: 0;
+      margin-inline: auto;
+      inline-size: 36px;
+      block-size: 4px;
+      border-radius: var(--radius-full);
+      background: var(--ink-muted);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+
+    /* ── GLASS continuity: the ε1 leading-edge specular becomes the sheet's
+         top edge (horizontal). The glint animation (opacity-only) still runs. */
+    .slide-over::before {
+      inset-block: 0 auto;
+      inset-inline: 0;
+      inline-size: auto;
+      block-size: 1px;
+      background: linear-gradient(
+        to right,
+        hsla(0 0% 100% / 0)    0%,
+        hsla(0 0% 100% / 0.10) 18%,
+        hsla(0 0% 100% / 0.30) 50%,
+        hsla(0 0% 100% / 0.10) 82%,
+        hsla(0 0% 100% / 0)    100%
+      );
+    }
+
+
+    /* ── Header is the drag grip: make room for the handle, own the touch ─*/
+    .slide-over-header {
+      padding-block-start: calc(var(--space-5) + var(--space-3));
+      touch-action: none;            /* we own vertical gestures here */
+      cursor: grab;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .slide-over[data-dragging="true"] .slide-over-header { cursor: grabbing; }
+
+
+    /* ── Forced-colors — keep handle + edge legible ────────────────────*/
+    @media (forced-colors: active) {
+      .slide-over::after  { background: ButtonText; opacity: 1; }
+      .slide-over::before { background: ButtonText; opacity: 1; }
+    }
+  }
+}

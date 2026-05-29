@@ -21,7 +21,12 @@
   <link rel="stylesheet" href="assets/css/bento.css" />
   <link rel="stylesheet" href="assets/css/bento-expand.css" />
   <link rel="stylesheet" href="assets/css/ring.css" />
-  <!-- ε1+: slide-over, sheet -->
+  <!-- ε1: slide-over panel + scrim -->
+  <link rel="stylesheet" href="assets/css/slide-over.css" />
+  <!-- ε2: bottom-sheet morph (loads after slide-over.css) -->
+  <link rel="stylesheet" href="assets/css/sheet.css" />
+  <!-- ε3: overlay ⇄ dock choreography (veil) -->
+  <link rel="stylesheet" href="assets/css/overlay-choreo.css" />
 </head>
 <body>
 
@@ -62,6 +67,10 @@
             <h3 class="h3">PROVE-IT</h3>
             <p>دِراسة Carnegie Mellon (2019) أَثبَتَت أن المُحادثات التي تَبدأ بصَوت مُتَوَسِّط الـ pitch وتَخفُض ٢٠Hz في أول ١٠ ثَواني تُنتج رِضا أَعلى بنِسبة ٣٤٪.</p>
           </div>
+          <button type="button" class="overlay-trigger" data-overlay-open="overlay-tpl-scenario">
+            <span class="overlay-trigger-ico" data-icon="training.scenario" aria-hidden="true"></span>
+            افتَح السيناريو كامِلاً في لَوحة
+          </button>
         </div>
       </article>
 
@@ -141,8 +150,58 @@
 
   <!-- ─── Overlay slots (slide-over + sheet land in ε1 / ε2) ─── -->
   <div id="overlay-scrim" class="scrim" hidden aria-hidden="true"></div>
-  <aside id="overlay-panel" class="slide-over" hidden aria-hidden="true"></aside>
+
+  <!-- ε1: the slide-over panel skeleton (content is cloned in from templates) -->
+  <aside id="overlay-panel" class="slide-over" hidden aria-hidden="true"
+         role="dialog" aria-modal="true" aria-labelledby="overlay-panel-title" tabindex="-1">
+    <header class="slide-over-header">
+      <div class="slide-over-heading">
+        <span class="slide-over-eyebrow" data-overlay-eyebrow hidden></span>
+        <h2 class="slide-over-title" id="overlay-panel-title" data-overlay-title></h2>
+      </div>
+      <button type="button" class="slide-over-close" data-overlay-close aria-label="إغلاق اللَوحة">
+        <span class="slide-over-close-ico" data-icon="actions.close" aria-hidden="true"></span>
+      </button>
+    </header>
+    <div class="slide-over-body" data-overlay-body></div>
+  </aside>
+
   <aside id="overlay-sheet" class="sheet"      hidden aria-hidden="true"></aside>
+
+  <!-- ─── Overlay content templates (cloned by Upg.overlay) ─── -->
+  <template id="overlay-tpl-command" data-eyebrow="لَوحة الأوامر" data-title="ماذا تُريد أن تَفعَل؟">
+    <nav class="cmdk-list" aria-label="الأوامر السَريعة">
+      <button type="button" class="cmdk-item" data-cmd="home">
+        <span data-icon="navigation.home" aria-hidden="true"></span>
+        <span class="cmdk-item-label">الذَهاب إلى الرَئيسية</span>
+        <span class="cmdk-item-hint">G H</span>
+      </button>
+      <button type="button" class="cmdk-item" data-cmd="lab">
+        <span data-icon="navigation.lab" aria-hidden="true"></span>
+        <span class="cmdk-item-label">فَتح التَدريب</span>
+        <span class="cmdk-item-hint">G L</span>
+      </button>
+      <button type="button" class="cmdk-item" data-cmd="progress">
+        <span data-icon="navigation.progress" aria-hidden="true"></span>
+        <span class="cmdk-item-label">عَرض التَقَدُّم</span>
+        <span class="cmdk-item-hint">G P</span>
+      </button>
+      <button type="button" class="cmdk-item" data-cmd="theme">
+        <span data-icon="theme.dark" aria-hidden="true"></span>
+        <span class="cmdk-item-label">تَبديل السِمَة (داكِن / فاتِح / تِلقائي)</span>
+        <span class="cmdk-item-hint">T</span>
+      </button>
+    </nav>
+  </template>
+
+  <template id="overlay-tpl-scenario" data-eyebrow="سيناريو خِدمَة العُملاء" data-title="شَكوى مُتَكَرِّرة — التَهدِئة في ٩٠ ثانية">
+    <p>عَميل يَشتَكي للمَرَّة الثالثة من تَأخير في الخِدمَة. يَتحَدَّث بصَوت مُرتَفِع، يَطلُب مَديراً. الهَدَف: تَحويل الموقِف من حادّ إلى مُتَحَكَّم به في أَقَل من ٩٠ ثانية — دون تَصعيد ودون وَعد لا يُمكِن الوَفاء به.</p>
+    <h3 class="h3">خَطوات التَنفيذ</h3>
+    <p>افتَح بالمَقام البَيات (الهُدوء، تَخفيض الـ pitch ٢٠Hz) · انتَقِل إلى الحِجاز (التَعاطُف الصَريح: «أَفهَم لماذا أنتَ غاضِب») · أَغلِق بالعَجَم (الحَزم اللطيف: خُطوة واحِدة واضِحة بمَوعِد).</p>
+    <h3 class="h3">PROVE-IT</h3>
+    <p>دِراسة Carnegie Mellon (2019): المُحادثات التي تَبدأ بصَوت مُتَوَسِّط الـ pitch وتَخفُض ٢٠Hz في أول ١٠ ثَواني تُنتِج رِضا أَعلى بنِسبة ٣٤٪.</p>
+    <button type="button" class="slide-over-cta" data-cmd="lab">ابدَأ هذا السيناريو</button>
+  </template>
 
   <!-- ─── Runtime entries (classic IIFE; mobile-safe) ─── -->
   <script src="assets/js/theme.js"></script>
@@ -151,6 +210,9 @@
   <script src="assets/js/canvas-harmonic.js" defer></script>
   <script src="assets/js/bento-expand.js"    defer></script>
   <script src="assets/js/ring.js"            defer></script>
+  <script src="assets/js/slide-over.js"      defer></script>
+  <script src="assets/js/sheet.js"           defer></script>
+  <script src="assets/js/overlay-choreo.js"  defer></script>
 
 </body>
 </html>
