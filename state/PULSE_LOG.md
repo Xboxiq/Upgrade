@@ -219,3 +219,31 @@ last_5_avg: 4.0
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-29 / ε2 — Pillar ε stage 2/3 — bottom sheet live (SPRING debut)
+
+
+
+
+
+## ε3 — 2026-05-29
+**Pulse Category:** 🌙 VEIL_PULSE *(first VEIL of v5; 8th unique category; closes Pillar ε)*
+**The Surprise:** الـ dock والـ overlay لا يَتَزاحَمان على أسفل الشاشة — بَينَهُما مُناوَبة مُصَمَّمة. حين تُستَدعى أي لوحة (slide-over على سَطح المَكتب، أو صَحيفة على اللَمس)، الـ dock لا يَختَفي بـ `display:none` المُفاجِئ — **يَذوب**: شَفافِيَّتُه تَنزِل إلى الصِفر عَبر `--duration-panel` بـ `--ease-panel`، فيَنصَهِر في الكانفس بِهُدوء وتَملِك اللوحة المَسرَح كُلَّه. ثم — وهُنا الطَبع — حين تَرحَل اللوحة، الـ dock **لا يَعود مُسرِعاً**. يَنتَظِر نَفَساً مَقصوداً (≈ `--duration-panel`، تَكفي لأن تَكون اللوحة قد غادَرَت تَماماً ويَستَريح الكانفس عارياً لَحظة واحِدة من السُكون)، ثم يَطلُع ببُطء عَبر `--duration-zen` (٦٤٠ms، أبطأ مُدَّة في النِظام) بـ `--ease-emerge`. التَباين هو كُلّ شيء: الذوبان سَريع (حِمايَة التَركيز فَوراً)، والعَودة بَطيئة صَبورة (رَفع الحِجاب على مَهَل). المُدَّتان مَقروءتان من الـ tokens عَبر `getComputedStyle` — لا توقيت مُختَرَع. والـ dissolve لا يَلمِس الـ `transform: translateX(-50%)` الذي يُوَسِّط الـ dock ولا transition الـ gap/padding الخاص به — يَركَب فَوقَه عَبر سِمات الحالة فَقَط.
+
+**Reference Avoided:** الـ AI-default الأكبر للـ chrome مع الـ modals: "أخفِ شَريط التَنَقُّل بـ `display:none` لَحظة فَتح الـ modal، وأعِدْه بضَربة واحِدة لَحظة الإغلاق" — chrome يَرمُش (blink) مع كل فَتح وإغلاق، مُزعِج بَصرياً. هنا لا رَمشة: ذوبان ناعِم، وعَودة على مَهَل. وكذلك مَبدأ "الـ dock هو الـ chrome الوَحيد" (SPATIAL §2) مَحفوظ — لا toast يَظهَر، لا FAB يَطلُع؛ الـ dock يَنسَحِب ويَعود كإيماءة واحِدة.
+**Inspired-by:** Wild Card #24 — تَرتيل القارئ (A Quranic reciter's tarteel pacing): البُطء الذي يَفتَح المَعنى. التَرتيل تِلاوة مُتَمَهِّلة لا تَستَعجِل؛ سَكَناتُه ليست فَراغاً بَل مُتَّسَع يَستَقِرّ فيه المَعنى. عَودة الـ dock مُوَقَّتة كالتَرتيل: نَفَس السُكون بَعد رَحيل اللوحة ليس تأخيراً بَل غُرفة يَتَنَفَّس فيها الكانفس قَبل أن يَنطِق الـ chrome ثانيةً.
+**User-Visible:** yes — مَحسوس في كل فَتح/إغلاق لِلوحة. عند الفَتح يَذوب الـ dock؛ عند الإغلاق هُناك لَحظة كانفس عارٍ ثم يَطلُع الـ dock ببُطء. على سَطح المَكتب والموبايل مَعاً (الـ dissolve opacity-فَقَط يَعمَل على الحالتَين).
+**Originality Self-Score:** 4/5 — إخفاء الـ nav تَحت modal فِكرة مَعروفة. الذي يَرفَعه إلى 4: (١) **الذوبان** (opacity melt) بَدَل blink الـ `display:none`؛ (٢) **التَباين الزَمَني** — حِمايَة سَريعة، عَودة صَبورة بنَفَس مَقصود؛ (٣) **التوقيت مَقروء من الـ tokens** لا مُختَرَع؛ (٤) **صفر clobber** لِـ transform/transition الـ dock (الحِجاب يَركَب فَوق عَبر سِمات الحالة). لا أَدَّعي 5 لأن hide-chrome-on-overlay مَعروفة؛ الأصالة في الإيقاع التَرتيلي غَير المُتَماثِل.
+**Files touched:** platform-v5/assets/css/overlay-choreo.css (NEW ~45) · platform-v5/assets/js/overlay-choreo.js (NEW ~120) · platform-v5/index.html (+2 wiring) · prompts/v5/ε3_OVERLAY_CHOREO.md (NEW spec)
+**Verified at commit:** `adce8ca`
+
+
+
+---STATS---
+total_pulses: 9
+unique_categories_used: 8
+target_categories: 9 (DOCK · MORPH · GLOW · REVEAL · RING · GLASS · SPRING · VEIL · HAPTIC)
+remaining_categories: 1 (HAPTIC)
+avg_self_score: 4.0
+last_5_avg: 4.0
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-29 / ε3 — Pillar ε COMPLETE 3/3 (DISCLOSURE LIVE) — VEIL debut, 8/9 categories

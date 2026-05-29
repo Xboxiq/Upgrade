@@ -2715,9 +2715,9 @@
   },
   "tadaffuq_v5": {
     "current_pillar": "ε",
-    "current_stage": 2,
-    "current_stage_id": "ε2",
-    "status": "in-progress",
+    "current_stage": 3,
+    "current_stage_id": "ε3",
+    "status": "pillar-ε-complete",
     "branch": "tadaffuq-ε-disclosure",
     "completed_stages": [
       "α1",
@@ -2734,11 +2734,12 @@
       "δ2",
       "δ3",
       "ε1",
-      "ε2"
+      "ε2",
+      "ε3"
     ],
     "creativity_health": 100,
-    "creativity_health_note": "Pillar ε mid-flight. ε2 ships SPRING_PULSE — the 7th unique category (debut). Health = 100 (base 100 + 5×7 unique-category bonus, capped; 0 penalties).",
-    "pulses_produced": 8,
+    "creativity_health_note": "Pillar ε (DISCLOSURE) COMPLETE 3/3. ε3 ships VEIL_PULSE — the 8th unique category (debut). Only HAPTIC remains for 9/9. Health = 100 (base 100 + 5×8 unique-category bonus, capped; 0 penalties).",
+    "pulses_produced": 9,
     "pulse_categories_used": [
       "DOCK_PULSE",
       "MORPH_PULSE",
@@ -2746,14 +2747,14 @@
       "GLASS_PULSE",
       "REVEAL_PULSE",
       "RING_PULSE",
-      "SPRING_PULSE"
+      "SPRING_PULSE",
+      "VEIL_PULSE"
     ],
     "remaining_pulse_categories": [
-      "VEIL_PULSE",
       "HAPTIC_PULSE"
     ],
     "forbidden_violations": 0,
-    "last_updated": "2026-05-29 ε2 — bottom sheet shipped",
+    "last_updated": "2026-05-29 ε3 — Pillar ε COMPLETE (disclosure)",
     "baseline_v4_chrome": {
       "classic_sidebar_topbar_drawer_hits": 1,
       "fixed_position_in_chrome_css": 1,
@@ -2863,7 +2864,8 @@
       "α",
       "β",
       "γ",
-      "δ"
+      "δ",
+      "ε"
     ],
     "γ_pillar_summary": {
       "stages_done": 3,
@@ -2950,18 +2952,46 @@
       "morph_approach": "same #overlay-panel re-anchored via @media (no new DOM); #overlay-sheet slot left reserved",
       "auto_open_on_load": false
     },
+    "ε3_verified": {
+      "data_veiled_and_return_rules": 3,
+      "opacity0_pointer_events_none": 3,
+      "ease_panel_dissolve_ref": 1,
+      "ease_emerge_return_ref": 2,
+      "base_dock_rule_redeclared": 0,
+      "listens_overlay_open_close": 4,
+      "reads_duration_tokens_via_getcomputedstyle": 7,
+      "upg_choreo_frozen_surface": 1,
+      "emoji_in_ship_files": 0,
+      "hex_in_ε3_files": 0,
+      "innerhtml_svg_write_in_js": 0,
+      "important_in_ε3_css": 0,
+      "physical_dirs": 0,
+      "logical_props_audit_exit": 0,
+      "node_check": "passed",
+      "lines_total": 265,
+      "pulse": "VEIL_PULSE",
+      "veil_is_opacity_dissolve_not_transform": true,
+      "asymmetry": "dissolve = --duration-panel (quick); return = wait --duration-panel beat then --duration-zen slow re-emerge",
+      "acute_vs_zeta_chronic": "ε3 VEIL is acute (per overlay open/close); ζ VEIL will be chronic (sustained focus mode)"
+    },
     "ε_pillar_summary": {
-      "stages_done": 2,
+      "stages_done": 3,
       "stages_total": 3,
       "pulses": [
         "ε1 GLASS_PULSE",
-        "ε2 SPRING_PULSE"
+        "ε2 SPRING_PULSE",
+        "ε3 VEIL_PULSE"
       ],
-      "files_shipped": 4,
+      "unique_categories_added_this_pillar": [
+        "SPRING_PULSE",
+        "VEIL_PULSE"
+      ],
+      "files_shipped": 6,
       "branch": "tadaffuq-ε-disclosure",
+      "ready_for_pr": true,
       "pr_base": "main",
       "pr_base_note": "follows the #126 precedent — pillar PRs target main directly; the v5-tadaffuq integration branch caused unresolvable state-file conflicts (#120–#123) and no longer exists on remote."
     },
-    "next_stage": "ε3 OVERLAY_CHOREO — VEIL_PULSE (opening a panel hides the dock; closing returns it with delay); closes Pillar ε; same ε branch"
+    "next_stage": "ζ1 ZEN_TRIGGER — VEIL_PULSE (enter Focus Mode on training-scenario start, Upg.zen.enter(scope)); new pillar ζ branch tadaffuq-ζ-flow; opens after the Pillar ε PR"
   }
 }

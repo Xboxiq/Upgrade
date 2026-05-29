@@ -3641,3 +3641,95 @@ categories were RING(δ3) · GLASS(ε1) · SPRING(ε2) — SPRING is a fresh deb
 - v4 Upg.* APIs preserved; `Upg.sheet` is a NEW additive namespace
 - `#overlay-sheet` placeholder slot left reserved (doctrine morph approach used instead)
 - `archive/` untouched
+
+
+
+---
+
+## v5 TADAFFUQ — ε3 OVERLAY_CHOREO — 2026-05-29
+
+**Branch:** `tadaffuq-ε-disclosure` · **Pillar:** ε (DISCLOSURE) · **Stage:** 3 of 3 — **closes Pillar ε**
+**Pulse:** 🌙 **VEIL_PULSE** *(debut of the category in v5; 8th unique category)*
+**Verified at commit:** `adce8ca`
+
+### Files shipped
+- `platform-v5/assets/css/overlay-choreo.css` (NEW, ~45 lines) — `@layer components`:
+  `.dock[data-veiled="true"]` (opacity 0 + pointer-events none + dissolve transition over
+  `--duration-panel`/`--ease-panel`) and `.dock[data-veil-return="true"]` (slow return over
+  `--duration-zen`/`--ease-emerge`) + forced-colors note. **The base `.dock` rule (its
+  `translateX(-50%)` centring + gap/padding/box-shadow transition) is never redeclared** —
+  verified `0` bare `.dock {` selectors.
+- `platform-v5/assets/js/overlay-choreo.js` (NEW, ~120 lines) — classic IIFE exposing
+  `Upg.choreo` (frozen: `isVeiled / _meta`). Reads `--duration-panel` / `--duration-zen` via
+  `getComputedStyle`; on `upg:overlay:open` veils the dock; on `upg:overlay:close` schedules
+  the patient return (beat = one `--duration-panel` → unveil + `data-veil-return` → cleanup
+  after `--duration-zen`); cancels pending return on re-open.
+- `platform-v5/index.html` — linked `overlay-choreo.css`, deferred `overlay-choreo.js`
+- `prompts/v5/ε3_OVERLAY_CHOREO.md` (NEW spec, authored before execution)
+
+### Verified by grep on commit `adce8ca`
+| metric | got | expected |
+|---|---|---|
+| `[data-veiled]` + `[data-veil-return]` rules | 3 | ≥ 2 |
+| `opacity: 0` + `pointer-events: none` | 3 | present |
+| `--ease-panel` (dissolve) ref | 1 | ≥ 1 |
+| `--ease-emerge` (return) ref | 2 | ≥ 1 |
+| **bare `.dock {` redeclared (must be 0)** | 0 | 0 |
+| listens `upg:overlay:open` + `:close` | 4 | ≥ 2 |
+| reads `--duration-*` via `getComputedStyle` | 7 | ≥ 1 |
+| `Upg.choreo` frozen surface | 1 | 1 |
+| emoji in index.html + assets | 0 | 0 |
+| hex in ε3 files | 0 | 0 |
+| actual `.innerHTML=`/`createElementNS`/`<svg>`/`document.write` | 0 | 0 |
+| `!important` in ε3 css | 0 | 0 |
+| physical-direction props | 0 | 0 |
+| `v5_logical_props_audit.py` exit | 0 | 0 |
+| `node --check` overlay-choreo.js | OK | OK |
+
+### Pulse — 🌙 VEIL_PULSE
+**The Surprise:** عند فَتح أي لوحة، الـ dock لا يَنطَفِئ فَجأة — يَذوب (opacity → 0 عَبر `--duration-panel`) كأنه يَنصَهِر في الكانفس فتَملِك اللوحة المَسرَح كُلَّه. وعند الإغلاق لا يَعود مُسرِعاً: يَنتَظِر نَفَساً (≈ `--duration-panel`، حتى تَرحَل اللوحة ويَستَريح الكانفس عارياً لَحظة)، ثم يَطلُع ببُطء عَبر `--duration-zen` + `--ease-emerge`. التَباين هو المَقصِد: حِمايَة التَركيز فَوراً، ورَفع الحِجاب على مَهَل.
+**Avoided:** the AI-default "hide the nav with `display:none` the instant a modal opens and slam
+it back the instant it closes" — chrome that blinks jarringly on every open/close.
+**Inspired-by:** Wild Card #24 — A Quranic reciter's tarteel pacing (the slowness that opens
+meaning). The beat of stillness after the panel leaves is not lag — it is room for the canvas
+to breathe before the chrome speaks again.
+**Originality Self-Score:** 4/5 — hiding nav under a modal is common; the 4/5 comes from (1) the
+**dissolve** (opacity melt) instead of a `display:none` blink; (2) the **asymmetric cadence** —
+quick protect, slow patient return with a deliberate beat; (3) durations **read from tokens**
+(no invented timing); (4) zero clobber of the dock's own transform/transition (the veil rides on
+top via state attributes). Not 5 because hide-chrome-on-overlay is a known idea; originality is
+in the tarteel-paced asymmetry.
+
+### Distinction from the coming ζ ZEN VEILs (pivot + planning note)
+ε3 VEIL is **acute** — transient, bound to a single overlay open/close. ζ1/ζ2 will be **chronic**
+VEILs — a sustained focus mode for a whole training session. Same category, different temporal
+axis (the sanctioned reuse pattern, PULSE_LIBRARY §1). Pivot: last three were GLASS(ε1) ·
+SPRING(ε2) · VEIL(ε3) — VEIL is a fresh debut here.
+
+### Sacred preserved
+- γ1 dock intact — overlay-choreo.css only adds state-attribute rules; the base `.dock`
+  (centring transform + its transition) is untouched (0 redeclares)
+- ε1/ε2 intact — ε3 only listens to the events ε1 already dispatches
+- v4 Upg.* APIs preserved; `Upg.choreo` is a NEW additive namespace
+- `archive/` untouched
+
+---
+
+## v5 TADAFFUQ — PILLAR ε (DISCLOSURE) — CLOSED — 2026-05-29
+
+**Branch:** `tadaffuq-ε-disclosure` · **3/3 stages · 3 Pulses · 2 new unique categories**
+
+| stage | title | files | pulse | sha |
+|---|---|---|---|---|
+| ε1 | SLIDE_OVER | slide-over.css + slide-over.js (+spec) | 🪟 GLASS_PULSE | `42f1d0e` |
+| ε2 | BOTTOM_SHEET | sheet.css + sheet.js (+spec) | ⚡ SPRING_PULSE | `933e3b7` |
+| ε3 | OVERLAY_CHOREO | overlay-choreo.css + overlay-choreo.js (+spec) | 🌙 VEIL_PULSE | `adce8ca` |
+
+### Pillar ε tally
+- Stages done: α1–α4 + β1–β3 + γ1–γ3 + δ1–δ3 + ε1–ε3 = **16 / 24**
+- Total Pulses: **9 / 15** (DOCK · MORPH · GLOW · GLASS · REVEAL · RING · SPRING · VEIL)
+- Unique categories used: **8 / 9** — only **HAPTIC** remains (lands in η)
+- New v5 APIs this pillar: `Upg.overlay` (ε1), `Upg.sheet` (ε2), `Upg.choreo` (ε3) — all
+  additive, frozen; the third surface type (slide-over/sheet) of SPATIAL §3 is now live
+- Creativity Health: **100 / 100** · Forbidden Library violations: **0**
+- Sacred preserved: 14 v4 Upg.* APIs · `archive/` · `prompts/v[1-4]/` · γ/δ files untouched
