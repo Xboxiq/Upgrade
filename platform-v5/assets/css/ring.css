@@ -1,0 +1,124 @@
+/* ════════════════════════════════════════════════════════════════════════
+   TADAFFUQ v5 — δ3 — Bento Ring (RING_PULSE)
+   ────────────────────────────────────────────────────────────────────────
+   The single accent-progress ring of the screen (CHROMA §7).
+   Value is rendered, never counted up from 0 (Forbidden #4).
+
+   The Pulse — Damascus knife-pattern (Wild Card #20):
+     • stroke-width grows with progress: 2px @ 0% → 6px @ 100% (linear calc)
+     • past 80%, chroma deepens via Relative Color Syntax — the lightness
+       drops up to 12% as the ring approaches mastery. Same hue, more weight.
+   The ring does not lengthen alone; it MATURES.
+
+   SVG circle, viewBox 0 0 64 64, r=28 (so 2*pi*r ≈ 175.929 unit-less).
+   Stroke is rotated -90° so progress starts at 12 o'clock.
+   Layer: components.
+   ════════════════════════════════════════════════════════════════════════ */
+
+
+@layer components {
+
+  /* ── The ring container (the [data-progress] host's child) ─────────── */
+  .ring {
+    /* Public knobs */
+    --ring-size:  64px;        /* outer box */
+    --ring-p:     0;           /* 0..100 — set by ring.js per host */
+    --ring-circ:  175.929;     /* 2 × π × 28 — viewBox-units */
+
+    /* Derived: stroke-width matures linearly with progress (2px → 6px). */
+    --ring-stroke-w:  calc(2px + var(--ring-p) * 0.04px);
+
+    /* Derived: chroma deepening past 80% — clamp(0%, (p-80)*1%, 12%). */
+    --ring-l-delta:   clamp(0%, calc((var(--ring-p) - 80) * 1%), 12%);
+
+    inline-size: var(--ring-size);
+    block-size:  var(--ring-size);
+    position:    relative;
+    flex:        none;
+    color:       var(--ink);
+    line-height: 1;
+  }
+
+  /* The SVG itself — rotated so 0deg sits at 12 o'clock */
+  .ring .ring-svg {
+    inline-size: 100%;
+    block-size:  100%;
+    transform: rotate(-90deg);
+    transform-origin: center;
+    overflow: visible;             /* keep the rounded cap from clipping */
+  }
+
+  /* Track — the unfilled circle behind the bar */
+  .ring .ring-track {
+    fill: none;
+    stroke: var(--line-strong);
+    stroke-width: var(--ring-stroke-w);
+  }
+
+  /* Bar — the actual progress arc. Single accent-progress on the screen. */
+  .ring .ring-bar {
+    fill: none;
+    /* Relative Color Syntax — deepens past 80% via --ring-l-delta. */
+    stroke: hsl(from var(--accent-progress) h s calc(l - var(--ring-l-delta)));
+    stroke-width: var(--ring-stroke-w);
+    stroke-linecap: round;
+    stroke-dasharray:  var(--ring-circ);
+    stroke-dashoffset: calc(var(--ring-circ) - var(--ring-circ) * var(--ring-p) / 100);
+    transition:
+      stroke-dashoffset var(--duration-morph) var(--ease-emerge),
+      stroke-width      var(--duration-morph) var(--ease-emerge),
+      stroke            var(--duration-morph) var(--ease-emerge);
+  }
+
+  /* Centre numeral — Arabic-Indic digits (rendered, never counted up) */
+  .ring .ring-num {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size:    var(--type-meta);
+    font-weight:  var(--weight-semibold);
+    color:        var(--ink);
+    font-variant-numeric: tabular-nums;
+    pointer-events: none;
+    user-select: none;
+  }
+
+
+  /* ── Size variants ─────────────────────────────────────────────────── */
+  .ring--sm { --ring-size: 40px; }
+  .ring--sm .ring-num { font-size: var(--type-micro); }
+
+  .ring--lg { --ring-size: 96px; }
+  .ring--lg .ring-num { font-size: var(--type-h3); }
+
+
+  /* ── Inside a bento-card-header, the ring floats to the inline-end ── */
+  .bento-card-header .ring { margin-inline-start: auto; }
+
+
+  /* ── Reduced motion: collapse the dashoffset settle to instant ─────── */
+  @media (prefers-reduced-motion: reduce) {
+    .ring .ring-bar {
+      transition: none;
+    }
+  }
+
+
+  /* ── Forced colors mode: map ring strokes to system tokens ─────────── */
+  @media (forced-colors: active) {
+    .ring .ring-track { stroke: ButtonText; }
+    .ring .ring-bar   { stroke: Highlight; }
+    .ring .ring-num   { color:  CanvasText; }
+  }
+
+
+  /* ── Print: render as a static, AA-readable mark ───────────────────── */
+  @media print {
+    .ring .ring-bar {
+      stroke: black;
+      transition: none;
+    }
+    .ring .ring-num { color: black; }
+  }
+}

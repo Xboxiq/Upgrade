@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-28T20:39:22.000Z",
+  "last_updated": "2026-05-29T11:00:00.000Z",
   "pack": "v3-devotio",
   "pack_status": "all-done",
   "current": {
@@ -2714,11 +2714,11 @@
     }
   },
   "tadaffuq_v5": {
-    "current_pillar": "γ",
+    "current_pillar": "δ",
     "current_stage": 3,
-    "current_stage_id": "γ3",
-    "status": "pillar-γ-complete",
-    "branch": "tadaffuq-γ-spatial",
+    "current_stage_id": "δ3",
+    "status": "pillar-δ-complete",
+    "branch": "tadaffuq-δ-bento",
     "completed_stages": [
       "α1",
       "α2",
@@ -2729,15 +2729,26 @@
       "β3",
       "γ1",
       "γ2",
-      "γ3"
+      "γ3",
+      "δ1",
+      "δ2",
+      "δ3"
     ],
     "creativity_health": 100,
     "creativity_health_note": "v5 just begun. α (foundation) produces 0 pulses by spec; pulse production starts at γ1.",
-    "pulses_produced": 3,
+    "pulses_produced": 6,
     "pulse_categories_used": [
       "DOCK_PULSE",
       "MORPH_PULSE",
-      "GLOW_PULSE"
+      "GLOW_PULSE",
+      "GLASS_PULSE",
+      "REVEAL_PULSE",
+      "RING_PULSE"
+    ],
+    "remaining_pulse_categories": [
+      "SPRING_PULSE",
+      "VEIL_PULSE",
+      "HAPTIC_PULSE"
     ],
     "forbidden_violations": 0,
     "baseline_v4_chrome": {
@@ -2768,7 +2779,7 @@
       "δ2",
       "δ3"
     ],
-    "stage_specs_prewritten_note": "δ1-δ3 authored ahead of execution from ATELIER_REFERENCE §3; next_stage = δ1 (pillar δ BENTO LIVE). β/γ specs also exist on disk.",
+    "stage_specs_prewritten_note": "α1-α4 + δ1-δ3 authored ahead of execution; δ3 also has the as-shipped Damascus-pulse spec restored from main verbatim. β/γ specs also exist on disk.",
     "doctrine_files_count": 9,
     "α2_verified": {
       "sidebar_selectors_in_css": 0,
@@ -2824,11 +2835,75 @@
       "branch": "tadaffuq-α-foundation",
       "ready_for_pr": true
     },
+    "γ1_verified": {
+      "css_token_uses": 35,
+      "emoji_in_dock": 0,
+      "inline_svg_in_dock_js": 0,
+      "hardcoded_hex": 0,
+      "proximity_handlers": 2,
+      "uses_upg_icons_api": 2,
+      "rtl_logical_props": 7,
+      "physical_left_right": 0,
+      "node_check": "passed",
+      "http_serves": {
+        "index.html": 200,
+        "dock.css": 200,
+        "dock.js": 200
+      },
+      "lines_total": 434,
+      "first_visible_ui": true,
+      "first_pulse": true
+    },
     "pillars_complete": [
       "α",
       "β",
-      "γ"
+      "γ",
+      "δ"
     ],
-    "next_stage": "δ1 BENTO_GRID (separate δ branch)"
+    "γ_pillar_summary": {
+      "stages_done": 3,
+      "pulses": [
+        "γ1 DOCK_PULSE",
+        "γ2 MORPH_PULSE",
+        "γ3 GLOW_PULSE"
+      ],
+      "files_shipped": 7,
+      "lines_added_total": 736,
+      "branch": "tadaffuq-γ-spatial"
+    },
+    "δ_pillar_summary": {
+      "stages_done": 3,
+      "pulses": [
+        "δ1 GLASS_PULSE",
+        "δ2 REVEAL_PULSE",
+        "δ3 RING_PULSE"
+      ],
+      "files_shipped": 5,
+      "lines_added_total": 917,
+      "branch": "tadaffuq-δ-bento",
+      "ready_for_pr": true
+    },
+    "δ3_verified": {
+      "data_progress_hosts": 1,
+      "accent_progress_actual_uses_in_ring_css": 1,
+      "hsl_from_relative_color_syntax": 1,
+      "stroke_dasharray_decl": 1,
+      "stroke_dashoffset_decl": 1,
+      "ring_stroke_w_uses": 2,
+      "linear_progress_in_ship": 0,
+      "inline_svg_string_in_ring_js": 0,
+      "innerhtml_in_ring_js": 0,
+      "create_element_ns_calls": 5,
+      "emoji": 0,
+      "hex_in_ship_files": 0,
+      "physical_dirs": 0,
+      "logical_props_audit_exit": 0,
+      "node_check": "passed",
+      "upg_ring_methods": 4,
+      "lines_total": 413,
+      "first_ring_pulse": true,
+      "single_accent_progress_per_screen_enforced": true
+    },
+    "next_stage": "ε1 SLIDE_OVER (separate ε branch — pillar δ PR opens first)"
   }
 }

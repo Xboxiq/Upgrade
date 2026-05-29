@@ -3145,94 +3145,369 @@ After that, ÊLAN v4 is sealed. v5 (when desired) can begin from the same `state
 — Entry end —
 — ÊLAN v4 — مذهب مكتمل —
 
+
+
 ---
 
 ## v5 TADAFFUQ — α1 TABULA RASA — 2026-05-28
 
 **Branch:** `tadaffuq-α-foundation`
-**Pillar:** α (foundation) · **Stage:** 1 of 4 · **Pulse:** none
+**Pillar:** α (foundation) · **Stage:** 1 of 4 · **Pulse:** none (α has no pulses)
 
 ### Forensic baseline (v4 chrome to demolish)
+
 | metric | value |
 |---|---|
-| classic-sidebar/topbar/drawer hits in `platform/index.html` | 1 |
-| `position: fixed` in `platform/assets/css/chrome.css` | 1 |
-| `max-width: …` containers in `platform/assets/css/pages.css` | 84 |
-| emoji in `platform/index.html` | 1 062 |
-| hardcoded hex in markup `style="…#…"` | 8 |
-| world palette files | 9 |
-| page shards | 15 |
-| JS modules | 126 |
-| CSS files | 30 |
+| classic-sidebar/topbar/drawer hits in `platform/index.html` | **1** |
+| `position: fixed` in `platform/assets/css/chrome.css` | **1** |
+| `max-width: …` containers in `platform/assets/css/pages.css` | **84** |
+| emoji in `platform/index.html` | **1 062** |
+| hardcoded hex in markup `style="…#…"` | **8** |
+| world palette files | **9** |
+| page shards | **15** |
+| JS modules | **126** |
+| CSS files | **30** |
 
 ### Endgame targets (v5 sealed)
-- 0 classic chrome
-- 0 fixed-position chrome (excluding dock/scrim/overlay)
-- 0 max-width containers
-- 0 emoji
-- 0 hardcoded hex
-- 0 world palettes
+
+```
+classic_chrome_hits             = 0
+fixed_position (excl. dock/scrim/overlay) = 0
+max_width_containers            = 0
+emoji                           = 0
+hardcoded_hex                   = 0
+world_palettes                  = 0
+```
+
+### Files created in α1
+
+```
+platform-v5/
+platform-v5/assets/.gitkeep
+platform-v5/assets/css/.gitkeep
+platform-v5/assets/js/.gitkeep
+platform-v5/assets/svg/.gitkeep
+platform-v5/DEMOLITION_LIST.md       (the contract: what v5 doesn't carry)
+state/PULSE_LOG.md                   (initialized; α produces 0)
+state/PROGRESS.json                  (tadaffuq_v5 section appended)
+state/TRUTH_LEDGER.md                (this entry)
+```
+
+### Acceptance
+
+- ✓ Skeleton exists.
+- ✓ DEMOLITION_LIST.md is grep-verifiable.
+- ✓ Baseline numbers recorded above.
+- ✓ Zero lines of code in `platform-v5/` beyond the demolition contract.
+- ✓ Zero changes outside `platform-v5/` and `state/`.
+
+
 
 ---
 
 ## v5 TADAFFUQ — α2 EDGE CANVAS — 2026-05-28
-- 3 files (190 lines): index.html (49) · _layers.css (22) · canvas.css (119)
-- verified: sidebar=0 fixed=0 max_width=0 edge_to_edge=3 viewport_fit=1 hex=0 emoji=0 layers_decl=1 http=200
 
-## v5 TADAFFUQ — α3 TOKEN RESET — 2026-05-28
-- 1 file (245 lines): tokens.css (8 token families across dark/light/auto/forced-colors)
-- verified: hex=0 durations=7 easings=5 icons=6 spaces=12 radii=6 z=5 forced_colors=1 light=2 auto=2
+**Pillar:** α · **Stage:** 2 of 4 · **Pulse:** none
 
-## v5 TADAFFUQ — α4 ICON SPRITE — 2026-05-28
-- 3 files: icons.svg (30 Lucide symbols) · SEMANTIC_MAP.json (30 keys) · icons.js (219 lines)
-- verified: symbols=30 currentcolor_strokes=31 hex=0 emoji=0 keys=30 node_check=ok http=all_200
+### Files shipped
+- `platform-v5/index.html` (49 lines) — RTL Arabic shell, viewport-fit=cover, theme-color dual-scheme, skip-link, sprite-mount + dock-mount + overlay slots
+- `platform-v5/assets/css/_layers.css` (22 lines) — `@layer reset, tokens, base, components, utilities, themes, overrides;`
+- `platform-v5/assets/css/canvas.css` (119 lines) — modern reset + edge-to-edge `<html>/<body>/main.canvas` + safe-area envelope + reduced-motion sanctuary + forced-colors placeholder
 
-### Pillar α — final tally
-12 files · ~1 100 lines · 0 pulses (α produces 0 by spec) · 0 forbidden violations
+### Verified
+| metric | got | expected |
+|---|---|---|
+| sidebar selectors in CSS | 0 | 0 |
+| `position: fixed` chrome in CSS | 0 | 0 |
+| `max-width` on canvas | 0 | 0 |
+| `inline-size: 100%` (edge-to-edge proof) | 3 | ≥ 1 |
+| `viewport-fit=cover` in HTML | 1 | 1 |
+| hex colour values in CSS | 0 | 0 (tokens land α3) |
+| emoji in HTML | 0 | 0 |
+| `@layer` cascade declared | 1 | 1 |
+| HTTP serve via `python -m http.server` | 200 OK | 200 |
+
+### Commit: `α2: edge canvas — verified: …`
+
+
 
 ---
 
-## v5 TADAFFUQ — β1 TYPO HIERARCHY — 2026-05-28
-- File: type.css (148 lines)
-- verified: type_tokens=7 lh_tokens=4 hex=0 emoji=0 inline_font_size=0 font_arabic=1 http=200
+## v5 TADAFFUQ — α3 TOKEN RESET — 2026-05-28
 
-## v5 TADAFFUQ — β2 THEME PROVIDER — 2026-05-28
-- File: theme.js (164 lines, classic IIFE)
-- verified: emoji=0 inline_svg=0 try_catch=6 prefers_color_scheme=4 idempotent=1 node_check=ok
+**Pillar:** α · **Stage:** 3 of 4 · **Pulse:** none
 
-## v5 TADAFFUQ — β3 LANG SHIM — 2026-05-28
-- File: scripts/v5_logical_props_audit.py (100 lines)
-- verified: physical_left_right=0 logical_uses=6 audit_exit=0 files_scanned=4
+### Files shipped
+- `platform-v5/assets/css/tokens.css` (245 lines after hex-comment stripping) — 8 token families across dark/light/auto/forced-colors modes
+- `platform-v5/index.html` (51 lines) — added `<link>` to tokens.css
 
-### Pillar β — final tally
-3 files · 412 lines · 0 pulses (β produces 0 by spec) · 0 forbidden violations
+### Verified
+| metric | got | expected |
+|---|---|---|
+| hex literals anywhere in tokens.css | 0 | 0 (HSL only) |
+| `--duration-*` tokens defined | 7 | ≥ 7 |
+| `--ease-*` tokens defined | 5 | ≥ 5 |
+| `--icon-*` tokens defined | 6 | ≥ 6 |
+| `--space-*` tokens defined | 12 | ≥ 11 |
+| `--radius-*` tokens defined | 6 | ≥ 6 |
+| `--z-*` tokens defined | 5 | ≥ 5 |
+| colour-family declarations | 44 | ≥ 11 in dark + repeats in light |
+| `forced-colors: active` block | 1 | ≥ 1 |
+| `data-theme="light"` block | 2 | ≥ 1 |
+| `data-theme="auto"` block | 2 | ≥ 1 |
+| HTTP serve test | 200 OK | 200 |
+
+### Note on hex-in-comments
+Initial draft included documentation hexes in comments (`/* #0B0F19 */`) for human readability. The α3 spec reads strict — *zero hex anywhere*. Per the Truth Over Claims oath (Manifesto §6), the comments were stripped automatically. HSL values remain self-documenting.
+
+### Commit: `α3: token reset — verified: …`
+
+
+
+---
+
+## v5 TADAFFUQ — α4 ICON SPRITE — 2026-05-28
+
+**Pillar:** α · **Stage:** 4 of 4 · **Pulse:** none
+**Pillar α status:** COMPLETE (4/4 stages)
+
+### Files shipped
+- `platform-v5/assets/svg/icons.svg` (~280 lines, ~10 KB) — 30 Lucide symbols, ISC attribution preserved
+- `platform-v5/assets/svg/SEMANTIC_MAP.json` (1.7 KB) — 6 groups · 30 keys (navigation/actions/training/states/theme/chrome)
+- `platform-v5/assets/js/icons.js` (219 lines, 8.5 KB) — classic IIFE, exposes `Upg.icons.use()` + `Upg.icons.audit()`
+- `platform-v5/index.html` updated to wire `assets/js/icons.js` and the sprite-mount target
+
+### Verified
+| metric | got | expected |
+|---|---|---|
+| symbols in sprite | 30 | ≥ 30 |
+| hardcoded `fill="#"` | 0 | 0 |
+| hardcoded `stroke="#"` | 0 | 0 |
+| `stroke="currentColor"` | 31 (30 strokes + 1 fill on `circle-dot` interior) | ≥ 30 |
+| Lucide ISC attribution lines | 7 | ≥ 1 |
+| emoji in sprite | 0 | 0 |
+| semantic-map keys | 30 | ≥ 30 |
+| `node --check` on icons.js | passed | passed |
+| sprite XML well-formed | yes | yes |
+| HTTP serve test | 200 / 200 / 200 / 200 | all 200 |
+
+### Pillar α — final tally
+
+| stage | files | lines | pulse |
+|---|---|---|---|
+| α1 TABULA RASA | 5 (skeleton + DEMOLITION_LIST.md) | ~140 | — |
+| α2 EDGE CANVAS | 3 (index.html, _layers.css, canvas.css) | 190 | — |
+| α3 TOKEN RESET | 1 (tokens.css) + index.html update | 245 | — |
+| α4 ICON SPRITE | 3 (icons.svg, SEMANTIC_MAP.json, icons.js) + index.html update | ~525 | — |
+| **TOTAL** | **12 files** | **~1 100 lines** | **0 pulses** *(α produces 0 by spec)* |
+
+Sacred Upg.* APIs touched in α: **1** — `Upg.icons` (NEW; supersedes v4 Upg.icons stub).
+Forbidden Library violations: **0**.
+
+### Commit: `α4: icon sprite — verified: …`
+
+
 
 ---
 
 ## v5 TADAFFUQ — γ1 DOCK DESKTOP — 2026-05-28
-- 2 files: dock.css (182) · dock.js (200)
-- Pulse: ⚓ DOCK_PULSE
-- verified: css_tokens=35 emoji=0 inline_svg=0 hex=0 proximity=2 upg_icons_calls=2 rtl_logical=7 physical_lr=0 node_check=ok http=200/200/200
 
-## v5 TADAFFUQ — γ2 DOCK MOBILE — 2026-05-28
-- File: dock-mobile.css (141 lines)
-- Pulse: 🔁 MORPH_PULSE
-- verified: media_queries=2 safe_area=2 emoji=0 hex=0 physical_lr=0 logical_props=14 audit_exit=0
+**Branch:** `tadaffuq-γ-spatial` · **Pillar:** γ · **Stage:** 1 of 3
+**Pulse:** ⚓ **DOCK_PULSE** *(first Pulse of v5)*
 
-## v5 TADAFFUQ — γ3 CANVAS HARMONIC — 2026-05-28
-- 2 files: canvas-harmonic.css (114) · canvas-harmonic.js (99)
-- Pulse: ✨ GLOW_PULSE
-- verified: shift_tokens=33 emoji=0 inline_svg=0 hex=0 duration_zen=1 hashchange=2 node_check=ok
+### Files shipped
+- `platform-v5/assets/css/dock.css` (182 lines) — Glass 2.0 surface, RTL-symmetric, proximity-reveal CSS, single-accent-action dot
+- `platform-v5/assets/js/dock.js` (200 lines) — classic IIFE, builds dock from semantic-map, mousemove proximity watcher (96px from bottom), Upg.dock API
+- `platform-v5/index.html` updated to wire `dock.css` + `dock.js`
 
-### Pillar γ — final tally
-5 files · ~736 lines · 3 pulses (DOCK · MORPH · GLOW) · 3 unique categories · 0 forbidden violations
+### Verified
+| metric | got | expected |
+|---|---|---|
+| dock CSS token uses `var(--*)` | 35 | ≥ 6 |
+| emoji in dock files | 0 | 0 |
+| inline `<svg viewBox>` in dock.js | 0 | 0 (uses Upg.icons.use) |
+| hardcoded hex | 0 | 0 |
+| mousemove handlers (proximity) | 2 | ≥ 1 |
+| `Upg.icons.use` calls | 2 | ≥ 1 |
+| RTL logical properties | 7 | ≥ 6 |
+| physical `left:`/`right:` (RTL violation) | 0 | 0 |
+| `node --check` on dock.js | passed | passed |
+| HTTP serve test | 200 / 200 / 200 | all 200 |
+
+### Commit: `γ1: dock desktop — verified: …`
+
+
 
 ---
 
-### Cumulative state at end of γ pillar
-- Stages done: 10 / 24
-- Pulses: 3 / 15
-- Unique pulse categories: 3 / 9
-- Creativity Health: 100 / 100
-- Forbidden Library violations: 0
-- Sacred Upg.* APIs: preserved (icons rebuilt for v5, theme rebuilt for v5)
+## v5 TADAFFUQ — γ2 DOCK MOBILE + γ3 CANVAS HARMONIC + β merge — 2026-05-28
+
+**Branch:** `tadaffuq-γ-spatial` · **Pillar:** γ COMPLETE (3/3 stages) + β merge for parallel work
+
+### γ2 DOCK MOBILE
+- File: `platform-v5/assets/css/dock-mobile.css` (141 lines)
+- Pulse: 🔁 **MORPH_PULSE** — same DOM node, layout shifts via @media at ≤720px
+- `verified by:` `media_queries=2 safe_area=2 emoji=0 hex=0 physical_lr=0 logical_props=14`
+
+### γ3 CANVAS HARMONIC
+- Files: `canvas-harmonic.css` (114 lines) + `canvas-harmonic.js` (99 lines)
+- Pulse: ✨ **GLOW_PULSE** — canvas hue drifts ≤1% per route via CSS Relative Color Syntax
+- `verified by:` `shift_tokens=33 emoji=0 inline_svg=0 hex=0 duration_zen=1 hashchange=2 node_check=ok`
+
+### Pillar γ — final tally
+| stage | files | lines | pulse |
+|---|---|---|---|
+| γ1 DOCK_DESKTOP | 2 (dock.css, dock.js) | 382 | ⚓ DOCK_PULSE |
+| γ2 DOCK_MOBILE | 1 (dock-mobile.css) | 141 | 🔁 MORPH_PULSE |
+| γ3 CANVAS_HARMONIC | 2 (canvas-harmonic.css, canvas-harmonic.js) | 213 | ✨ GLOW_PULSE |
+| **TOTAL** | **5 files** | **~736 lines** | **3 pulses · 3 unique categories** |
+
+### State after pillar γ
+- Total stages done: α1-α4 + β1-β3 + γ1-γ3 = **10 / 24**
+- Total Pulses: **3 / 15** (DOCK · MORPH · GLOW)
+- Unique categories used: **3 / 9**
+- Creativity Health: **100 / 100**
+- Forbidden Library violations: **0**
+
+
+
+---
+
+## v5 TADAFFUQ — δ1 BENTO GRID — 2026-05-28 *(backfill — entry omitted at original commit)*
+
+**Branch:** `tadaffuq-δ-bento` · **Pillar:** δ · **Stage:** 1 of 3
+**Pulse:** 🪟 **GLASS_PULSE**
+**Verified at commit:** `ce545b2`
+**Note on backfill:** the δ1 commit (ce545b2) and the δ1+δ2 state commit (ee99fd4)
+shipped without a TRUTH_LEDGER entry — backfilled here for honesty. Numbers
+re-verified against the file tree at HEAD `a70a539`.
+
+### Files shipped
+- `platform-v5/assets/css/bento.css` (160 lines) — responsive 4-3-2-1 bento grid; container-query roots; Glass 2.0 surface; single-edge hairline that brightens to `--accent-progress` on hover/focus
+- `platform-v5/index.html` — 8 cards added (1 focal `b-4x3` + 5 standard + 1 wide + 1 locked); `data-icon` slots for sprite injection
+- `platform-v5/assets/js/icons.js` — `autoPopulate()` extension (idempotent post-mount of `[data-icon]` hosts)
+
+### Verified by grep on commit `ce545b2` (re-verified at `a70a539`)
+| metric | got | expected |
+|---|---|---|
+| `[data-icon]` hosts in index.html | 8 | ≥ 1 |
+| `@container card` queries in bento.css | 2 | ≥ 1 |
+| viewport `@media` breakpoints | 6 | ≥ 3 |
+| emoji in bento files | 0 | 0 |
+| hardcoded hex | 0 | 0 |
+| inline `<svg viewBox>` | 0 | 0 |
+| token uses `var(--*)` in bento.css | 39 | ≥ 6 |
+| logical-property uses | 36 | ≥ 6 |
+| `v5_logical_props_audit.py` exit | 0 | 0 |
+
+### Pulse — 🪟 GLASS_PULSE
+**The Surprise:** البطاقات شَرائح من سَطح زُجاجي واحد — single-edge hairline على الحَافة العُليا فقط، الفَراغ بين الشُّقوق هو grid-gap. عند `:focus-within`/`:hover` يُضيء الـ hairline بـ Neon Cyan ليَكشِف "أين انتَهى الزُجاج".
+**Avoided:** AI-default "every bento card is an island with 4 borders + drop-shadow"
+**Inspired-by:** Wild Card #15 — Andalusian zellige door (the gap is what reveals the pattern)
+**Originality Self-Score:** 4/5
+
+### Sacred preserved
+- 14 page sections — unchanged (v5 canvas only)
+- `archive/` — untouched
+- All v4 Upg.* APIs preserved (additive: Upg.bento not introduced; bento.js doesn't exist — markup-driven approach)
+
+
+
+---
+
+## v5 TADAFFUQ — δ2 BENTO EXPAND — 2026-05-28 *(backfill — entry omitted at original commit)*
+
+**Branch:** `tadaffuq-δ-bento` · **Pillar:** δ · **Stage:** 2 of 3
+**Pulse:** 🔓 **REVEAL_PULSE**
+**Verified at commit:** `b29621d`
+**Note on backfill:** same as δ1 — no ledger entry shipped at the time.
+
+### Files shipped
+- `platform-v5/assets/css/bento-expand.css` (110 lines) — `[data-expanded="true"]` rule expands the card to 4×3, View-Transitions API hooks for FLIP, staggered children reveal via `nth-child` cascade
+- `platform-v5/assets/js/bento-expand.js` (149 lines) — IIFE: click/Enter/Space toggles expand, single-card-radio (one open at a time), Escape closes, click-outside closes, View-Transition wrap when supported
+- `platform-v5/index.html` — focal card body extended with 3 detail sections (السيناريو · المَقامات الصَوتية · PROVE-IT)
+
+### Verified by grep on commit `b29621d`
+| metric | got | expected |
+|---|---|---|
+| view-transition guard checks | 4 | ≥ 1 |
+| Escape key handler | 1 | ≥ 1 |
+| click handler | 1 | ≥ 1 |
+| click-outside handler | 1 | ≥ 1 |
+| `[data-expanded="true"]` selectors | 11 | ≥ 1 |
+| detail sections in focal card | 3 | ≥ 3 |
+| emoji / hex / inline SVG | 0 / 0 / 0 | 0 / 0 / 0 |
+| `node --check` on bento-expand.js | OK | OK |
+
+### Pulse — 🔓 REVEAL_PULSE
+**The Surprise:** الضَغط على بطاقة لا يَنقُل المُستخدم لصَفحة جَديدة، ولا يَفتَح modal — البطاقة تَتَوَسَّع في مَكانها عَبر CSS Grid template re-flow. الـ View Transitions API يُؤدّي FLIP تلقائياً عند توافُره؛ Firefox يَستَخدِم fallback نَظيف بـ `transition: grid-column`. الـ detail يَتَكَشَّف بـ staggered reveal عَبر `nth-child` cascade — ١٦٠ms / ٣٢٠ms / ٤٨٠ms.
+**Avoided:** Forbidden #5 (modal popup) + AI-default "click → navigate to /card/:id"
+**Inspired-by:** Wild Card #21 — al-Jazari's water clock manuscript (the mechanism shows its purpose visually)
+**Originality Self-Score:** 4/5
+
+### Sacred preserved
+- δ1 markup intact — only `data-expanded` + detail subtree added
+- v4 Upg.* APIs preserved
+
+
+
+---
+
+## v5 TADAFFUQ — δ3 BENTO RING — 2026-05-29
+
+**Branch:** `tadaffuq-δ-bento` · **Pillar:** δ · **Stage:** 3 of 3 — **closes Pillar δ**
+**Pulse:** ◍ **RING_PULSE** *(first RING_PULSE of v5; 6th unique category)*
+**Verified at commit:** `a70a539`
+
+### Files shipped
+- `platform-v5/assets/css/ring.css` (124 lines) — `.ring` component; SVG circle r=28, viewBox 64×64 rotated -90° so progress starts at 12 o'clock; `--ring-stroke-w: calc(2px + var(--ring-p) * 0.04px)` (linearly grows 2 → 6px); `--ring-l-delta: clamp(0%, calc((var(--ring-p) - 80) * 1%), 12%)` deepens chroma past 80% via `hsl(from var(--accent-progress) h s calc(l - var(--ring-l-delta)))`; reduced-motion + forced-colors + print guards
+- `platform-v5/assets/js/ring.js` (172 lines) — IIFE exposing `Upg.ring.{mount,set,value,scan}` (4-method frozen surface); `createElementNS` only — zero markup-string assignment; `toLocaleString('ar-EG-u-nu-arab')` for Arabic-Indic centre numeral; CustomEvent `upg:ring:set` on actual change; idempotent boot via `[data-progress]` scan
+- `platform-v5/index.html` — focal `data-card="daily-focus"` card now carries `data-progress="47"`; `ring.css` linked; `ring.js` deferred
+- `prompts/v5/δ3_BENTO_RING.md` (113 lines) — stage spec authored before execution per AUTO_PILOT §4
+
+### Verified by grep on commit `a70a539`
+| metric | got | expected |
+|---|---|---|
+| `data-progress` hosts in index.html | 1 | ≥ 1 |
+| `var(--accent-progress)` actual uses in ring.css | 1 | ≥ 1 (and only one ring on screen) |
+| `hsl(from` Relative Color Syntax | 1 | ≥ 1 |
+| `stroke-dasharray:` decl | 1 | 1 |
+| `stroke-dashoffset:` decl | 1 | 1 |
+| `var(--ring-stroke-w)` uses | 2 | 2 (track + bar) |
+| `<progress>` / `progress-bar` (linear, forbidden) | 0 | 0 |
+| inline `<svg>` markup string in ring.js | 0 | 0 |
+| `innerHTML` writes in ring.js | 0 | 0 |
+| `createElementNS` calls in ring.js | 5 | ≥ 4 (svg + 2 circles + reachable) |
+| emoji in ring files + spec | 0 | 0 |
+| hex in ring.css/ring.js (ship) | 0 | 0 |
+| physical-direction CSS props | 0 | 0 |
+| `v5_logical_props_audit.py` exit | 0 | 0 |
+| `node --check` on ring.js | OK | OK |
+| `Upg.ring` API | 4 methods + `_meta` (frozen) | 4 |
+
+### Pulse — ◍ RING_PULSE
+**The Surprise:** الحَلقة لا تَنمو في طول الـ stroke فقط — تَنمو في عُمقه. كل ١٪ يُضيف ميكرون لسُمك السَطر (2px → 6px على المَدى الكامل عَبر calc()). عند تَجاوُز ٨٠٪، تَبدَأ chroma السِمسي في التَعَمُّق عَبر CSS Relative Color Syntax: `hsl(from var(--accent-progress) h s calc(l - var(--ring-l-delta)))` حيث `l-delta` يَنمو من 0% عند 80٪ إلى 12% عند 100٪. مَن أتقَنَ ٩٠٪ يَرى خَطّاً سَميكاً مُشبَعاً؛ مَن بَدَأ يَرى خَطاً رَفيعاً عاديا. الـ progress يُقاس بالعَين قَبل الرَقم.
+**Avoided:** Forbidden #11 (linear progress bar) + AI-default "every dashboard ring is the same uniform thin stroke"
+**Inspired-by:** Wild Card #20 — Damascus knife-pattern (many folds, one edge — the wootz pattern *is* the proof of effort)
+**Originality Self-Score:** 4/5
+
+### Pillar δ — final tally
+| stage | files | lines | pulse |
+|---|---|---|---|
+| δ1 BENTO_GRID | 1 (bento.css) + index.html | ~245 | 🪟 GLASS_PULSE |
+| δ2 BENTO_EXPAND | 2 (bento-expand.css, .js) | 259 | 🔓 REVEAL_PULSE |
+| δ3 BENTO_RING | 2 (ring.css, ring.js) + spec | 413 | ◍ RING_PULSE |
+| **TOTAL** | **5 css/js + 1 spec** | **~917 lines** | **3 pulses · 3 unique categories** |
+
+### State after pillar δ
+- Total stages done: α1-α4 + β1-β3 + γ1-γ3 + δ1-δ3 = **13 / 24**
+- Total Pulses: **6 / 15** (DOCK · MORPH · GLOW · GLASS · REVEAL · RING)
+- Unique categories used: **6 / 9** (remaining: SPRING · VEIL · HAPTIC)
+- Creativity Health: **100 / 100**
+- Forbidden Library violations: **0**
+
+### Sacred preserved
+- 14 page sections — unchanged
+- v4 Upg.* APIs preserved (Upg.ring is additive — nested under window.Upg, doesn't shadow legacy)
+- `archive/` — untouched
+- δ1, δ2 work intact — only `data-progress` attribute added to one focal card

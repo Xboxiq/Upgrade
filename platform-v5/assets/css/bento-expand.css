@@ -1,0 +1,110 @@
+/* ════════════════════════════════════════════════════════════════════════
+   TADAFFUQ v5 — δ2 — Bento Expand (REVEAL_PULSE)
+   ────────────────────────────────────────────────────────────────────────
+   Click a card → it expands to span 4×3, other cards reflow around it.
+   Detail content reveals with stagger. Escape or click-outside collapses.
+
+   Browsers with View Transitions API get a FLIP transition automatically
+   (Chrome 111+, Safari 18+). Firefox falls back to a CSS-only smooth
+   grid-area transition; same outcome, no flicker.
+
+   Manifesto: SPATIAL_DOCTRINE §3.1 + MOTION_DOCTRINE §1 §5.
+   ════════════════════════════════════════════════════════════════════════ */
+
+
+@layer components {
+
+  /* ── Detail region — hidden by default, revealed when expanded ── */
+  .bento-card-detail {
+    display: none;
+    margin-block-start: var(--space-4);
+    padding-block-start: var(--space-4);
+    border-block-start: 1px solid var(--line);
+    color: var(--ink);
+  }
+
+  .bento-card-detail-section {
+    margin-block-start: var(--space-3);
+    /* Staggered reveal — each section appears with a brief delay */
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity   var(--duration-emerge) var(--ease-emerge),
+      transform var(--duration-emerge) var(--ease-emerge);
+  }
+
+
+  /* ── Expanded state — the card spans more cells ── */
+  .bento-card[data-expanded="true"] {
+    grid-column: span 4 !important;     /* explicit override at media-query level */
+    grid-row:    span 3 !important;
+    background:  var(--surface-2);
+    border-block-start-color: var(--accent-progress);
+    box-shadow:  var(--shadow-3);
+    z-index:     var(--z-bento-expanded);
+
+    /* Smooth the area transition for browsers without view-transitions */
+    transition:
+      grid-column var(--duration-morph) var(--ease-morph),
+      grid-row    var(--duration-morph) var(--ease-morph),
+      background  var(--duration-quick) var(--ease-snap),
+      box-shadow  var(--duration-quick) var(--ease-snap);
+  }
+
+  .bento-card[data-expanded="true"] .bento-card-detail {
+    display: block;
+  }
+
+  /* Stagger the detail children — each lands one tick after the previous */
+  .bento-card[data-expanded="true"] .bento-card-detail-section {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: calc(var(--reveal-stagger, 0) * var(--duration-quick));
+  }
+  .bento-card[data-expanded="true"] .bento-card-detail-section:nth-child(1) { --reveal-stagger: 1; }
+  .bento-card[data-expanded="true"] .bento-card-detail-section:nth-child(2) { --reveal-stagger: 2; }
+  .bento-card[data-expanded="true"] .bento-card-detail-section:nth-child(3) { --reveal-stagger: 3; }
+  .bento-card[data-expanded="true"] .bento-card-detail-section:nth-child(4) { --reveal-stagger: 4; }
+
+
+  /* ── Constrain expand spans on smaller viewports ── */
+  @media (max-inline-size: 1080px) {
+    .bento-card[data-expanded="true"] {
+      grid-column: span 3 !important;
+    }
+  }
+  @media (max-inline-size: 720px) {
+    .bento-card[data-expanded="true"] {
+      grid-column: span 2 !important;
+      grid-row: auto !important;
+    }
+  }
+  @media (max-inline-size: 480px) {
+    .bento-card[data-expanded="true"] {
+      grid-column: span 1 !important;
+      grid-row: auto !important;
+    }
+  }
+
+
+  /* ── View Transitions API — FLIP-style auto-morph in supporting browsers ── */
+  ::view-transition-old(bento-card),
+  ::view-transition-new(bento-card) {
+    animation-duration: var(--duration-morph);
+    animation-timing-function: var(--ease-morph);
+  }
+
+
+  /* ── Reduced motion: collapse the morph to instant ── */
+  @media (prefers-reduced-motion: reduce) {
+    .bento-card,
+    .bento-card[data-expanded="true"],
+    .bento-card-detail-section {
+      transition: none !important;
+    }
+    .bento-card-detail-section {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
