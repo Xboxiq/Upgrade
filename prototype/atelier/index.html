@@ -1,0 +1,261 @@
+<!doctype html>
+<html dir="rtl" lang="ar" data-theme="dark" data-domain="dashboard">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#0d1117" />
+  <title>Upgrade · Atelier — تطبيق مرجعي</title>
+  <meta name="description" content="تطبيق مرجعي لنظام تصميم Atelier: واجهة تعلّم حيّة، تفاعلية وسلسة ومرنة." />
+  <link rel="stylesheet" href="assets/atelier.css" />
+</head>
+<body>
+  <a href="#main" class="skip-link">تخطٍّ إلى المحتوى</a>
+  <div id="sprite-mount" hidden aria-hidden="true"></div>
+
+  <div class="app">
+    <!-- ───────────────────────── RAIL (expands on intent) ───────────────────────── -->
+    <aside class="rail" aria-label="التنقّل الرئيسي">
+      <div class="rail-brand">
+        <span class="mark"><svg class="ico"><use href="#i-spark"/></svg></span>
+        <strong class="rail-label">Upgrade</strong>
+      </div>
+
+      <nav class="rail-nav">
+        <button class="rail-item" data-nav="home" aria-current="page">
+          <svg class="ico"><use href="#i-home"/></svg><span class="rail-label">الرئيسية</span>
+        </button>
+        <button class="rail-item" data-nav="accounting" data-next="true">
+          <svg class="ico"><use href="#i-coins"/></svg><span class="rail-label">المحاسبة والكاشير</span><span class="pip"></span>
+        </button>
+        <button class="rail-item" data-nav="psych">
+          <svg class="ico"><use href="#i-brain"/></svg><span class="rail-label">علم النفس التطبيقي</span><span class="pip"></span>
+        </button>
+        <button class="rail-item" data-nav="sales" data-locked="true">
+          <svg class="ico"><use href="#i-handshake"/></svg><span class="rail-label">البيع الميداني</span>
+        </button>
+        <button class="rail-item" data-nav="programming" data-locked="true">
+          <svg class="ico"><use href="#i-code"/></svg><span class="rail-label">البرمجة</span>
+        </button>
+      </nav>
+
+      <div class="rail-sep"></div>
+      <div class="rail-spacer"></div>
+
+      <button class="rail-item" data-action="search">
+        <svg class="ico"><use href="#i-search"/></svg><span class="rail-label">بحث · ⌘K</span>
+      </button>
+      <button class="rail-item" data-action="density">
+        <svg class="ico"><use href="#i-density"/></svg><span class="rail-label">الكثافة</span>
+      </button>
+      <button class="rail-item" data-action="theme">
+        <svg class="ico" data-theme-icon><use href="#i-moon"/></svg><span class="rail-label">المظهر</span>
+      </button>
+    </aside>
+
+    <!-- ───────────────────────── CANVAS ───────────────────────── -->
+    <main id="main" class="canvas" tabindex="-1">
+
+      <!-- ===== HOME — the motivation engine ===== -->
+      <section class="view" id="view-home" data-view="home">
+        <header class="page-head">
+          <span class="rail-tint"></span>
+          <div>
+            <p class="eyebrow">مساء الخير</p>
+            <h1>واصِل تقدّمك</h1>
+            <p class="lede">٣ بلوكات تفصلك عن رتبة «مُمارِس». نَفَسٌ واحد إضافي اليوم.</p>
+          </div>
+        </header>
+
+        <!-- continue (hero) -->
+        <div class="continue" data-domain="accounting" data-reveal>
+          <div class="ring" style="--ring-size:84px" data-ring="62">
+            <svg viewBox="0 0 64 64"><circle class="track" cx="32" cy="32" r="27" fill="none" stroke-width="6"/><circle class="bar" cx="32" cy="32" r="27" fill="none" stroke-width="6"/></svg>
+            <span class="ring-num num">62%</span>
+          </div>
+          <div class="continue-body">
+            <p class="eyebrow">أكمِل من حيث توقفت</p>
+            <h2>التسويات البنكية تحت الضغط</h2>
+            <p class="muted">المحاسبة والكاشير · البلوك ٧ من ٣٢ · ٨ دقائق متبقية</p>
+          </div>
+          <button class="btn btn-primary" data-nav="accounting">
+            <svg class="ico"><use href="#i-play"/></svg> تابِع التدريب
+          </button>
+        </div>
+
+        <!-- momentum strip -->
+        <div class="section-h"><svg class="ico"><use href="#i-flame"/></svg><h2>زخمك</h2></div>
+        <div class="momentum">
+          <div class="stat" data-reveal>
+            <div class="row between"><span class="stat-k">سلسلة الأيام</span><svg class="ico"><use href="#i-flame"/></svg></div>
+            <div class="stat-n num">12</div>
+            <div class="spark" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+          </div>
+          <div class="stat" data-reveal>
+            <div class="row between"><span class="stat-k">بلوكات هذا الأسبوع</span><svg class="ico"><use href="#i-check-circle"/></svg></div>
+            <div class="stat-n num">9</div>
+            <div class="muted" style="font-size:var(--step--1)">+3 عن الأسبوع الماضي</div>
+          </div>
+          <div class="stat" data-reveal>
+            <div class="row between"><span class="stat-k">دقائق تركيز</span><svg class="ico"><use href="#i-timer"/></svg></div>
+            <div class="stat-n num">214</div>
+            <div class="muted" style="font-size:var(--step--1)">هذا الأسبوع</div>
+          </div>
+        </div>
+
+        <!-- bento domain grid -->
+        <div class="section-h"><svg class="ico"><use href="#i-grid"/></svg><h2>مجالاتك</h2></div>
+        <div class="bento">
+          <button class="tile span-6" data-domain="accounting" data-nav="accounting" data-reveal>
+            <div class="tile-h">
+              <span class="tile-icon"><svg class="ico"><use href="#i-coins"/></svg></span>
+              <div><h3>المحاسبة والكاشير</h3><p class="muted" style="font-size:var(--step--1)">دقّة الأرقام تحت الضغط</p></div>
+              <span class="ring" style="--ring-size:52px;margin-inline-start:auto" data-ring="62"><svg viewBox="0 0 64 64"><circle class="track" cx="32" cy="32" r="27" fill="none" stroke-width="7"/><circle class="bar" cx="32" cy="32" r="27" fill="none" stroke-width="7"/></svg><span class="ring-num num">62</span></span>
+            </div>
+            <div class="tile-foot"><span class="next-label">التالي: التسويات البنكية</span><span class="num">20/32</span></div>
+          </button>
+
+          <button class="tile" data-domain="psych" data-nav="psych" data-reveal>
+            <div class="tile-h">
+              <span class="tile-icon"><svg class="ico"><use href="#i-brain"/></svg></span>
+              <h3>علم النفس</h3>
+            </div>
+            <div class="tile-foot"><span class="next-label">التالي: التحيّزات</span><span class="ring" style="--ring-size:44px" data-ring="35"><svg viewBox="0 0 64 64"><circle class="track" cx="32" cy="32" r="27" fill="none" stroke-width="8"/><circle class="bar" cx="32" cy="32" r="27" fill="none" stroke-width="8"/></svg><span class="ring-num num">35</span></span></div>
+          </button>
+
+          <button class="tile" data-domain="sales" data-reveal>
+            <div class="tile-h">
+              <span class="tile-icon"><svg class="ico"><use href="#i-handshake"/></svg></span>
+              <h3>البيع الميداني</h3>
+            </div>
+            <div class="tile-foot"><span class="muted row" style="font-size:var(--step--1)"><svg class="ico" style="width:16px;height:16px"><use href="#i-lock"/></svg> قريبًا</span></div>
+          </button>
+
+          <button class="tile span-6" data-domain="programming" data-reveal>
+            <div class="tile-h">
+              <span class="tile-icon"><svg class="ico"><use href="#i-code"/></svg></span>
+              <div><h3>البرمجة</h3><p class="muted" style="font-size:var(--step--1)">منطق وبنية وحلّ مشكلات</p></div>
+            </div>
+            <div class="tile-foot"><span class="muted row" style="font-size:var(--step--1)"><svg class="ico" style="width:16px;height:16px"><use href="#i-lock"/></svg> يُفتح بعد إتمام المحاسبة</span></div>
+          </button>
+        </div>
+
+        <!-- mastery ladder -->
+        <div class="section-h"><svg class="ico"><use href="#i-trophy"/></svg><h2>سُلّم الإتقان</h2></div>
+        <div class="ladder">
+          <div class="rung" data-here="false"><div class="rung-k">أساس</div><div class="rung-n num">20/20</div><div class="muted" style="font-size:var(--step--1)">مكتمل</div></div>
+          <div class="rung" data-here="true"><div class="rung-k">مُمارِس</div><div class="rung-n num">9/12</div><div class="muted" style="font-size:var(--step--1)">أنت هنا</div></div>
+          <div class="rung" data-here="false"><div class="rung-k">خبير</div><div class="rung-n num">0/8</div><div class="muted" style="font-size:var(--step--1)">مُقفل</div></div>
+        </div>
+      </section>
+
+      <!-- ===== DOMAIN — Accounting ===== -->
+      <section class="view" id="view-accounting" data-view="accounting" data-domain="accounting" hidden>
+        <header class="page-head">
+          <span class="rail-tint"></span>
+          <div>
+            <p class="eyebrow"><button class="btn-ghost" data-nav="home" style="padding:2px 6px">الرئيسية</button> · مجال</p>
+            <h1><svg class="ico"><use href="#i-coins"/></svg> المحاسبة والكاشير</h1>
+            <p class="lede">دقّة الأرقام، الإقفال، التسويات، واتخاذ القرار تحت الضغط.</p>
+          </div>
+          <span class="ring head-ring" data-ring="62"><svg viewBox="0 0 64 64"><circle class="track" cx="32" cy="32" r="27" fill="none" stroke-width="6"/><circle class="bar" cx="32" cy="32" r="27" fill="none" stroke-width="6"/></svg><span class="ring-num num">62%</span></span>
+        </header>
+
+        <div class="prose blocks" data-swipe>
+          <article class="block" data-block aria-roledescription="بلوك تدريبي">
+            <div class="block-h"><svg class="ico"><use href="#i-coins"/></svg><h3>ضريبة الدخل العراقية — قانون ١١٣</h3></div>
+            <div class="meta">
+              <span><svg class="ico" style="width:16px;height:16px"><use href="#i-timer"/></svg> ٣ دقائق</span>
+              <span class="stars" role="img" aria-label="صعوبة 3 من 5"><svg class="ico"><use href="#i-star"/></svg><svg class="ico"><use href="#i-star"/></svg><svg class="ico"><use href="#i-star"/></svg><svg class="ico off"><use href="#i-star-o"/></svg><svg class="ico off"><use href="#i-star-o"/></svg></span>
+            </div>
+            <div class="callout tip"><div class="callout-h"><svg class="ico"><use href="#i-bulb"/></svg> لماذا يهم</div>معرفة الصافي قبل توقيع العقد تمنحك ميزة تفاوضية حقيقية.</div>
+            <p style="margin-block:var(--space-3)">تُطبَّق الضريبة على شرائح تصاعدية. الراتب الإجمالي يُقسَّم على الشرائح، وكل شريحة لها نسبتها. الخطأ الشائع: تطبيق نسبة شريحة واحدة على كامل الراتب.</p>
+            <div class="quiz" role="group" aria-label="سؤال سريع">
+              <p><strong>إذا كان الراتب ضمن الشريحة الثالثة، فالنسبة تُطبَّق على:</strong></p>
+              <button class="opt" data-correct="true"><span class="mark"><svg class="ico"><use href="#i-check"/></svg></span> الجزء الواقع داخل تلك الشريحة فقط</button>
+              <button class="opt"><span class="mark"><svg class="ico"><use href="#i-x"/></svg></span> كامل الراتب الإجمالي</button>
+              <button class="opt"><span class="mark"><svg class="ico"><use href="#i-x"/></svg></span> الراتب ناقص التأمينات فقط</button>
+            </div>
+            <div class="row between" style="margin-block-start:var(--space-4)">
+              <button class="mastery" data-mastery data-state="not-started"><span class="dot"></span><span data-mastery-label>علّم كمُتقَن</span></button>
+              <button class="btn btn-ghost" data-bookmark><svg class="ico"><use href="#i-bookmark"/></svg> احفظ</button>
+            </div>
+          </article>
+
+          <article class="block" data-block hidden aria-roledescription="بلوك تدريبي">
+            <div class="block-h"><svg class="ico"><use href="#i-scale"/></svg><h3>التسويات البنكية تحت الضغط</h3></div>
+            <div class="meta">
+              <span><svg class="ico" style="width:16px;height:16px"><use href="#i-timer"/></svg> ٨ دقائق</span>
+              <span class="stars" role="img" aria-label="صعوبة 4 من 5"><svg class="ico"><use href="#i-star"/></svg><svg class="ico"><use href="#i-star"/></svg><svg class="ico"><use href="#i-star"/></svg><svg class="ico"><use href="#i-star"/></svg><svg class="ico off"><use href="#i-star-o"/></svg></span>
+            </div>
+            <div class="callout warn"><div class="callout-h"><svg class="ico"><use href="#i-alert"/></svg> فخّ شائع</div>إغفال الشيكات المعلّقة عند مطابقة الرصيد الدفتري بالرصيد البنكي.</div>
+            <p style="margin-block:var(--space-3)">التسوية تبدأ من الرصيدين وتنتهي عند رقم واحد مُصحَّح. أضِف الإيداعات بالطريق، اطرح الشيكات المعلّقة، عالِج رسوم البنك والأخطاء.</p>
+            <div class="row between" style="margin-block-start:var(--space-4)">
+              <button class="mastery" data-mastery data-state="progress"><span class="dot"></span><span data-mastery-label>قيد التقدّم</span></button>
+              <button class="btn btn-ghost" data-bookmark><svg class="ico"><use href="#i-bookmark"/></svg> احفظ</button>
+            </div>
+          </article>
+
+          <article class="block" data-block hidden aria-roledescription="بلوك تدريبي">
+            <div class="block-h"><svg class="ico"><use href="#i-clip"/></svg><h3>الإقفال اليومي للصندوق</h3></div>
+            <div class="meta"><span><svg class="ico" style="width:16px;height:16px"><use href="#i-timer"/></svg> ٥ دقائق</span></div>
+            <p style="margin-block:var(--space-3)">عُدّ النقد، طابِقه مع نظام المبيعات، وثّق الفروقات، وأغلِق الوردية برقم واحد قابل للتدقيق.</p>
+            <div class="row between" style="margin-block-start:var(--space-4)">
+              <button class="mastery" data-mastery data-state="not-started"><span class="dot"></span><span data-mastery-label>علّم كمُتقَن</span></button>
+              <button class="btn btn-ghost" data-bookmark><svg class="ico"><use href="#i-bookmark"/></svg> احفظ</button>
+            </div>
+          </article>
+
+          <nav class="pager" aria-label="تنقّل البلوكات">
+            <button class="btn btn-soft" data-prev><svg class="ico"><use href="#i-arrow"/></svg> السابق</button>
+            <span class="muted num" data-block-counter aria-live="polite">1 / 3</span>
+            <button class="btn btn-soft" data-next-block>التالي <svg class="ico flip"><use href="#i-arrow"/></svg></button>
+          </nav>
+        </div>
+      </section>
+
+      <!-- ===== DOMAIN — Psych ===== -->
+      <section class="view" id="view-psych" data-view="psych" data-domain="psych" hidden>
+        <header class="page-head">
+          <span class="rail-tint"></span>
+          <div>
+            <p class="eyebrow"><button class="btn-ghost" data-nav="home" style="padding:2px 6px">الرئيسية</button> · مجال</p>
+            <h1><svg class="ico"><use href="#i-brain"/></svg> علم النفس التطبيقي</h1>
+            <p class="lede">قراءة السلوك، التحيّزات المعرفية، والتأثير الأخلاقي.</p>
+          </div>
+          <span class="ring head-ring" data-ring="35"><svg viewBox="0 0 64 64"><circle class="track" cx="32" cy="32" r="27" fill="none" stroke-width="6"/><circle class="bar" cx="32" cy="32" r="27" fill="none" stroke-width="6"/></svg><span class="ring-num num">35%</span></span>
+        </header>
+
+        <div class="prose blocks" data-swipe>
+          <article class="block" data-block aria-roledescription="بلوك تدريبي">
+            <div class="block-h"><svg class="ico"><use href="#i-brain"/></svg><h3>تأثير التأطير (Framing)</h3></div>
+            <div class="meta"><span><svg class="ico" style="width:16px;height:16px"><use href="#i-timer"/></svg> ٤ دقائق</span></div>
+            <div class="callout"><div class="callout-h"><svg class="ico"><use href="#i-target"/></svg> الفكرة</div>صياغة الخيار تغيّر القرار حتى لو كان المحتوى واحدًا: «٩٠٪ نجاح» تختلف عن «١٠٪ فشل».</div>
+            <div class="row between" style="margin-block-start:var(--space-4)">
+              <button class="mastery" data-mastery data-state="not-started"><span class="dot"></span><span data-mastery-label>علّم كمُتقَن</span></button>
+              <button class="btn btn-ghost" data-bookmark><svg class="ico"><use href="#i-bookmark"/></svg> احفظ</button>
+            </div>
+          </article>
+          <nav class="pager" aria-label="تنقّل البلوكات">
+            <button class="btn btn-soft" data-prev><svg class="ico"><use href="#i-arrow"/></svg> السابق</button>
+            <span class="muted num" data-block-counter aria-live="polite">1 / 1</span>
+            <button class="btn btn-soft" data-next-block>التالي <svg class="ico flip"><use href="#i-arrow"/></svg></button>
+          </nav>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ───────────────────────── MOBILE DOCK ───────────────────────── -->
+  <nav class="dock" aria-label="التنقّل السريع">
+    <button class="dock-item" data-nav="home" aria-current="page"><svg class="ico"><use href="#i-home"/></svg> الرئيسية</button>
+    <button class="dock-item" data-nav="accounting"><svg class="ico"><use href="#i-coins"/></svg> المحاسبة</button>
+    <button class="dock-center" data-action="search" aria-label="بحث"><svg class="ico"><use href="#i-search"/></svg></button>
+    <button class="dock-item" data-nav="psych"><svg class="ico"><use href="#i-brain"/></svg> النفس</button>
+    <button class="dock-item" data-action="theme"><svg class="ico" data-theme-icon><use href="#i-moon"/></svg> المظهر</button>
+  </nav>
+
+  <script src="assets/atelier.js" defer></script>
+</body>
+</html>
