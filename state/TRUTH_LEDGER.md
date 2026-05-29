@@ -3511,3 +3511,58 @@ re-verified against the file tree at HEAD `a70a539`.
 - v4 Upg.* APIs preserved (Upg.ring is additive — nested under window.Upg, doesn't shadow legacy)
 - `archive/` — untouched
 - δ1, δ2 work intact — only `data-progress` attribute added to one focal card
+
+
+
+---
+
+## v5 TADAFFUQ — ε1 SLIDE_OVER — 2026-05-29
+
+**Branch:** `tadaffuq-ε-disclosure` · **Pillar:** ε (DISCLOSURE) · **Stage:** 1 of 3 — **opens Pillar ε**
+**Pulse:** 🪟 **GLASS_PULSE** *(2nd of category; distinct in kind from δ1)*
+**Verified at commit:** `42f1d0e`
+
+### Files shipped
+- `platform-v5/assets/css/slide-over.css` (NEW, ~265 lines) — `@layer components`: `.scrim` (the sanctioned dim layer, the ONLY `inset:0` in the file), `.slide-over` panel **anchored** to `inset-inline-end:0` with `inline-size: clamp(360px,38vw,560px)` (never `inset:0` — not a modal), direction-aware `--slide-dir` for RTL-correct off-screen translate, the GLASS leading-edge specular `::before` + `@keyframes glass-glint`, the `[data-scrolled]` header lid, command-palette + neutral-trigger + single accent CTA styles, forced-colors guard
+- `platform-v5/assets/js/slide-over.js` (NEW, ~285 lines) — classic IIFE exposing `Upg.overlay` (frozen: `open / openTemplate / close / toggle / isOpen / current` + `_meta`); history coupling (`pushState` on open, `popstate`/Back closes); focus trap + focus return; background `inert` (+ `aria-hidden` fallback); scrim/Escape/close-button dismiss; `[data-overlay-open]` / `[data-overlay-close]` / `[data-cmd]` delegation; ⌘/Ctrl+K and the dock `centre` item summon the command palette; templates cloned (zero `innerHTML`); `Upg.icons.autoPopulate` fills cloned-template icons; the GLASS scroll-lid toggles `[data-scrolled]` on body scroll
+- `platform-v5/index.html` — linked `slide-over.css`; deferred `slide-over.js`; filled `#overlay-panel` with a stable `role="dialog" aria-modal="true"` skeleton (header eyebrow+title+close, scrollable body); added `<template id="overlay-tpl-command">` (4 command rows) + `<template id="overlay-tpl-scenario">`; added a neutral `.overlay-trigger` button inside the focal card detail
+- `prompts/v5/ε1_SLIDE_OVER.md` (NEW spec, authored before execution per AUTO_PILOT §4)
+
+### Verified by grep on commit `42f1d0e`
+| metric | got | expected |
+|---|---|---|
+| `.slide-over` CSS selectors | 23 | ≥ 1 |
+| `.scrim` CSS selectors | 3 | ≥ 1 |
+| panel anchored (`inset-inline-end: 0`) | 1 | 1 |
+| panel literal `inset: 0` (forbidden modal) | 0 | 0 |
+| only `inset:0` is the scrim | true | true |
+| `@keyframes glass-glint` | 1 | 1 |
+| `[data-scrolled]` lid rules | 2 | ≥ 1 |
+| `pushState`/`popstate` in js | 3 | ≥ 2 |
+| `Upg.overlay` frozen methods | 6 (+`_meta`) | 6 |
+| `role="dialog" aria-modal="true"` | 1 | 1 |
+| `<template id="overlay-tpl…">` | 2 | 2 |
+| emoji in index.html + assets | 0 | 0 |
+| hex in slide-over.css/js | 0 | 0 |
+| actual `.innerHTML=` in js | 0 | 0 |
+| `createElementNS`/`<svg>`/`document.write` in js | 0 | 0 |
+| `!important` in ε1 css | 0 | 0 |
+| physical-direction props | 0 | 0 |
+| `v5_logical_props_audit.py` exit | 0 | 0 |
+| `node --check` slide-over.js | OK | OK |
+
+> Note: a single `grep` for the word `innerHTML` returns 1 — it is the doc comment "*no innerHTML — clone template fragments*", not a usage. Actual assignments = 0 (verified separately).
+
+### Pulse — 🪟 GLASS_PULSE
+**The Surprise:** الحافة القائدة للوحة (inline-start، المُواجِهة للكانفس) ليست حدّاً صُلباً مَرسوماً — بل خَيط ضَوء أبيض دَقيق (1px، `hsla(0 0% 100% / α)` — لا لون accent) يَلمَع لحظة وُصول اللوحة (`@keyframes glass-glint`: opacity 0 → 1 عند ٥٥٪ → يَستقِر عند 0.5) ثم يَهدَأ كأنه نَفَس ضَوئي. وفي الجُزء الثاني من النَبضة: رأس اللوحة (الـ "lid") يَكسِب hairline + ظِل خَفيف **فقط** بَينَما المحتوى يَنزلِق تحته (`[data-scrolled="true"]`)، ثم يَفقِده عند العودة للأعلى. السَطح يُقرَأ بالضوء الذي يَلمِس حافَّتَه، لا بحدٍّ مَرسوم حَولَه بالكامل.
+**Avoided:** Forbidden #5 (modal popup `position:fixed; inset:0`) — replaced by an inline-end slide-over + sanctioned scrim; also the AI-default "every drawer has a uniform hard 1px border all the way around"
+**Inspired-by:** Wild Card #22 — A Sana'a window's wooden lattice (قُمرية صنعاء): privacy without darkness — the panel focuses attention on the detail while the canvas stays faintly visible behind the scrim, its leading edge catching light like alabaster glass
+**Originality Self-Score:** 4/5 — leading-edge-only highlights + scroll-lid hairlines exist in premium drawer designs; the 4/5 comes from (1) the arrival *glint* keyed to entrance timing not just a static specular; (2) white-light discipline so the surface signal never competes with the screen's single accent (CHROMA §7); (3) RTL-correct via `--slide-dir`; (4) honest a11y posture (dialog/modal/trap/return/inert) built from line one. Not 5 because the specular-edge primitive itself is known.
+
+### Distinction from δ1 GLASS_PULSE (pivot compliance)
+δ1 = "bento as one cut glass plane" (single top-edge hairline that brightens to **cyan** on hover/focus). ε1 = "panel leading-edge **white** specular that glints on arrival + a scroll-triggered lid hairline". Different surface, different light behaviour, different trigger. Pivot rule satisfied: last three categories were GLASS(δ1) · REVEAL(δ2) · RING(δ3) — GLASS at ε1 is non-consecutive.
+
+### Sacred preserved
+- δ1/δ2/δ3 + γ + β + α work intact — slide-over is additive; only the focal card gained one neutral `.overlay-trigger` button inside its already-existing detail subtree
+- v4 Upg.* APIs preserved; `Upg.overlay` is a NEW additive namespace (does not shadow `Upg.nav` — v5 has no Upg.nav module)
+- `archive/` untouched

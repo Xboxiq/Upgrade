@@ -163,3 +163,31 @@ last_5_avg: 4.0
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-29 / δ3 — Pillar δ COMPLETE 3/3 (BENTO LIVE)
+
+
+
+
+
+## ε1 — 2026-05-29
+**Pulse Category:** 🪟 GLASS_PULSE *(2nd GLASS of v5; opens Pillar ε — DISCLOSURE)*
+**The Surprise:** لِلوحة المُنزَلِقة حافَّتان مُختَلِفتان في الطَبع. الحافة الخَلفية (inline-end) تُسنِد اللوحة إلى طَرَف الكانفس، أما الحافة القائدة (inline-start، التي تُواجِه الكانفس وراء الحِجاب) فليست خَطّاً مَرسوماً — هي **خَيط ضَوء**. عند انزلاق اللوحة إلى مَوضِعها، يَلمَع هذا الخَيط الأبيض الدَقيق (1px) لَمعَة واحِدة: من العَدَم إلى الذُروة عند ٥٥٪ من زَمن الدُخول، ثم يَستَقِر على وَهَج خافِت (opacity 0.5) كأنه نَفَس ضَوئي أَخَذَه السَطح ثم كَتَمَه. الضوء أبيض صِرف عَبر `hsla(0 0% 100% / α)` — ليس Neon Cyan ولا Electric Orange — حتى لا يُنازِع البَطاقة المِحوَرية على الـ accent الوَحيد المَسموح في الشاشة (CHROMA §٧). ثم الجُزء الثاني من النَبضة، في الرأس: الـ "lid" الزُجاجي يَبقى بِلا حدٍّ سُفلي حتى اللحظة التي يَبدَأ فيها المحتوى بالانزلاق تحته؛ عِندَها فقط يَنبُت hairline + ظِل خَفيف (`[data-scrolled="true"]`)، ويَختَفي حين يَعود القارئ إلى القِمَّة. اللوحة لا تُعلِن عن زُجاجِها بإطار؛ تَترُك الضوء يَكشِفه عند الحافة وعند الانزلاق.
+
+**Reference Avoided:** Forbidden #5 (الـ modal popup — `position: fixed; inset: 0`). كل تَفصيل في v5 كان سَيَفتَح modal مَركزياً يُحاصِر الشاشة؛ هنا لَوحة تَنزَلِق من الحافة، والكانفس يَبقى مَرئياً خَلف حِجاب نِصف شَفّاف. وكذلك الـ AI-default الأصغر: "كل drawer له إطار 1px صُلب يُحيط به من جِهاته الأربع" — هنا لا إطار مُحيط، بل ضوء يَلمِس حافَّتَين فقط.
+**Inspired-by:** Wild Card #22 — قُمرية صنعاء (A Sana'a window's wooden lattice): خصوصية بلا ظلام. القُمرية تَعزِل الغُرفة عن الخارِج لكنها لا تُطفِئها — تُرشِّح الضوء وتُبقي الإحساس بالخارِج حاضِراً. اللوحة المُنزَلِقة كذلك: تُرَكِّز الانتباه على التَفصيل بينما يَبقى الكانفس خَلفها حاضِراً تَحت الحِجاب، وحافَّتُها القائدة تَلتَقِط الضوء كَزُجاج المَرمَر في ساعة بعَينِها.
+**User-Visible:** yes — أول لَوحة جانبية في v5. تُفتَح بالضَغط على عُنصُر "المَركز" في الـ dock أو بـ ⌘/Ctrl+K (لَوحة الأوامر)، وبزِرّ "افتَح السيناريو كامِلاً في لَوحة" داخِل البَطاقة المِحوَرية المُتَوَسِّعة. اللَمعَة تُرى مَرَّة عند كل فَتح؛ الـ lid hairline يُرى عند تَمرير المحتوى الطَويل.
+**Originality Self-Score:** 4/5 — الـ leading-edge specular والـ scroll-lid hairline مَوجودان في تَصاميم drawers راقية. الذي يَرفَعه إلى 4: (١) **اللَمعَة المَربوطة بزَمن الدُخول** لا مُجَرَّد specular ثابت — الضوء حَدَث، لا زَخرَفة؛ (٢) **انضِباط الضوء الأبيض** فلا يُنازِع الـ single-accent rule؛ (٣) **RTL صَحيح** عَبر `--slide-dir` (اللوحة تَنزَلِق من الحافة الصَحيحة في الاتجاهَين)؛ (٤) **a11y من السَطر الأول**: dialog / aria-modal / focus-trap / focus-return / background-inert / history-Back. لا أَدَّعي 5 لأن primitive الـ specular-edge مَعروف؛ الأصالة في التَجميع + الـ glint-timing + الانضِباط اللوني.
+**Files touched:** platform-v5/assets/css/slide-over.css (NEW ~265) · platform-v5/assets/js/slide-over.js (NEW ~285) · platform-v5/index.html (+panel skeleton + 2 templates + trigger + wiring) · prompts/v5/ε1_SLIDE_OVER.md (NEW spec)
+**Verified at commit:** `42f1d0e`
+
+
+
+---STATS---
+total_pulses: 7
+unique_categories_used: 6
+target_categories: 9 (DOCK · MORPH · GLOW · REVEAL · RING · GLASS · SPRING · VEIL · HAPTIC)
+remaining_categories: 3 (SPRING · VEIL · HAPTIC)
+avg_self_score: 4.0
+last_5_avg: 4.0
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-29 / ε1 — Pillar ε stage 1/3 — slide-over live (GLASS #2)
