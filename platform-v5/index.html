@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="assets/css/canvas-harmonic.css" />
   <link rel="stylesheet" href="assets/css/bento.css" />
   <link rel="stylesheet" href="assets/css/bento-expand.css" />
+  <link rel="stylesheet" href="assets/css/ring.css" />
   <!-- ε1+: slide-over, sheet -->
 </head>
 <body>
@@ -41,6 +42,8 @@
         <header class="bento-card-header">
           <span class="bento-card-icon" data-icon="training.objective" aria-hidden="true"></span>
           <h2 class="bento-card-title">تَركيز اليوم</h2>
+          <!-- δ3: the screen's single accent-progress ring (RING_PULSE) -->
+          <span class="bento-card-ring" data-progress="47" data-ring-host></span>
         </header>
         <p class="bento-card-body">
           سيناريو خِدمَة العَملاء — التَعامُل مع شَكوى مُتَكَرِّرة. يَفتَح في زِن مُود عند الضَغط.
@@ -147,6 +150,7 @@
   <script src="assets/js/dock.js"  defer></script>
   <script src="assets/js/canvas-harmonic.js" defer></script>
   <script src="assets/js/bento-expand.js"    defer></script>
+  <script src="assets/js/ring.js"            defer></script>
 
 </body>
 </html>
