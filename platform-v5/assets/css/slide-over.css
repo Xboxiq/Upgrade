@@ -1,0 +1,257 @@
+/* ════════════════════════════════════════════════════════════════════════
+   TADAFFUQ v5 — ε1 — Slide-Over Panel + Scrim  (GLASS_PULSE)
+   ────────────────────────────────────────────────────────────────────────
+   SPATIAL_DOCTRINE §3.2 — the third surface type. Detail without losing
+   canvas context. The v5 replacement for the modal/drawer/secondary-page
+   (manifesto §5.5, §5.12; Forbidden #5).
+
+   The Pulse — GLASS_PULSE (leading-edge specular):
+     The panel's leading edge (inline-start, facing the canvas) is not a hard
+     border but a 1px vertical specular light-line that GLINTS brighter the
+     instant the panel arrives, then settles to a faint thread. The header is
+     a glass "lid" that gains a hairline only while content scrolls beneath it.
+     White light, never an accent hue — so it never competes for attention.
+
+   RTL-correct: anchored to inset-inline-end; direction-aware --slide-dir
+   drives the off-screen translate. Zero physical left/right.
+   ════════════════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  /* ─── The scrim — the sanctioned dim layer (SPATIAL §3.2 / §5) ─────────
+     This MAY be inset:0 — it is the dim layer, not a content popup. The
+     forbidden modal is a *content* surface at fixed inset:0; the scrim is
+     explicitly sanctioned and carries --z-scrim (below the overlay). */
+  .scrim {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-scrim);
+    background: hsla(225 30% 4% / 0.42);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration-panel) var(--ease-panel);
+  }
+  .scrim[data-open="true"] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+
+  /* ─── The slide-over panel — anchored, NEVER inset:0 ──────────────────
+     Emerges from the inline-end edge (right in LTR, left in RTL). The
+     off-screen rest position is a direction-aware translate. */
+  .slide-over {
+    --slide-dir: 1;                 /* LTR: +1 = toward inline-end (right) */
+
+    position: fixed;
+    inset-block: 0;                 /* top:0; bottom:0 — logical */
+    inset-inline-end: 0;            /* anchored to inline-end */
+    inline-size: clamp(360px, 38vw, 560px);
+    max-inline-size: 100vw;
+    z-index: var(--z-overlay);
+
+    display: flex;
+    flex-direction: column;
+    background: var(--surface-1);
+    border-inline-start: 1px solid var(--line);
+    box-shadow: var(--shadow-3);
+
+    /* hidden rest position — slid off the inline-end edge */
+    transform: translateX(calc(100% * var(--slide-dir)));
+    transition: transform var(--duration-panel) var(--ease-panel);
+    will-change: transform;
+
+    /* safe-area envelope on the flank + bottom (dock-free while open) */
+    padding-block-end: env(safe-area-inset-bottom);
+  }
+
+  /* RTL flips the slide direction so "off-screen" stays toward inline-end */
+  :root[dir="rtl"] .slide-over,
+  [dir="rtl"] .slide-over { --slide-dir: -1; }
+
+  .slide-over[data-open="true"] { transform: translateX(0); }
+
+
+  /* ─── The GLASS_PULSE — leading-edge specular light-line ──────────────
+     A 1px vertical highlight on the inline-start seam (the edge facing the
+     canvas). White light at low opacity — read the glass by its lit edge. */
+  .slide-over::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    inline-size: 1px;
+    pointer-events: none;
+    opacity: 0.5;
+    background: linear-gradient(
+      to bottom,
+      hsla(0 0% 100% / 0)    0%,
+      hsla(0 0% 100% / 0.10) 18%,
+      hsla(0 0% 100% / 0.30) 50%,
+      hsla(0 0% 100% / 0.10) 82%,
+      hsla(0 0% 100% / 0)    100%
+    );
+  }
+
+  /* The glint: brightens on arrival, then settles to the faint thread. */
+  .slide-over[data-open="true"]::before {
+    animation: glass-glint var(--duration-panel) var(--ease-panel) 1;
+  }
+  @keyframes glass-glint {
+    0%   { opacity: 0;   }
+    55%  { opacity: 1;   }
+    100% { opacity: 0.5; }
+  }
+
+
+  /* ─── Header (the glass "lid") ────────────────────────────────────────*/
+  .slide-over-header {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-5) var(--space-6) var(--space-4);
+    padding-block-start: max(var(--space-5), env(safe-area-inset-top));
+    /* the lid hairline is absent at rest; it materialises on scroll */
+    border-block-end: 1px solid transparent;
+    transition: border-color var(--duration-quick) var(--ease-snap),
+                box-shadow   var(--duration-quick) var(--ease-snap);
+  }
+  /* GLASS_PULSE part two: the lid gains a hairline + faint shadow only while
+     content scrolls beneath it. */
+  .slide-over[data-scrolled="true"] .slide-over-header {
+    border-block-end-color: var(--line);
+    box-shadow: var(--shadow-1);
+  }
+
+  .slide-over-heading { flex: 1 1 auto; min-inline-size: 0; }
+
+  .slide-over-eyebrow {
+    display: block;
+    font-size: var(--type-meta);
+    color: var(--ink-muted);
+    letter-spacing: var(--tracking-wide, 0.04em);
+    margin-block-end: var(--space-1);
+  }
+
+  .slide-over-title {
+    font-size: var(--type-h2);
+    line-height: var(--lh-snug);
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  .slide-over-close {
+    flex: 0 0 auto;
+    inline-size: 44px;               /* 44×44 tap floor (manifesto §5.20) */
+    block-size: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    color: var(--ink-muted);
+    background: transparent;
+    transition: background var(--duration-quick) var(--ease-snap),
+                color      var(--duration-quick) var(--ease-snap),
+                transform  var(--duration-snap)  var(--ease-snap);
+  }
+  .slide-over-close:hover  { background: var(--surface-2); color: var(--ink); }
+  .slide-over-close:active { transform: scale(0.92); }
+  .slide-over-close .icon  { --icon-size: var(--icon-lg); }
+
+
+  /* ─── Body (the scroll region) ────────────────────────────────────────*/
+  .slide-over-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--space-5) var(--space-6) var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+  .slide-over-body > * { max-inline-size: 64ch; }
+
+
+  /* ─── Command-palette content (the ⌘K body) ──────────────────────────*/
+  .cmdk-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  .cmdk-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    inline-size: 100%;
+    min-block-size: 44px;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    color: var(--ink);
+    text-align: start;
+    background: transparent;
+    transition: background var(--duration-quick) var(--ease-snap),
+                transform  var(--duration-snap)  var(--ease-snap);
+  }
+  .cmdk-item:hover,
+  .cmdk-item:focus-visible { background: var(--surface-2); }
+  .cmdk-item:active { transform: scale(0.985); }
+  .cmdk-item .icon  { --icon-size: var(--icon-md); color: var(--ink-muted); }
+  .cmdk-item-label  { flex: 1 1 auto; }
+  .cmdk-item-hint   {
+    font-size: var(--type-micro);
+    color: var(--ink-faint);
+    letter-spacing: var(--tracking-wide, 0.04em);
+  }
+
+  /* The one sanctioned action CTA inside the panel (CHROMA §7) */
+  .slide-over-cta {
+    align-self: flex-start;
+    min-block-size: 44px;
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-md);
+    color: var(--canvas);
+    background: var(--accent-action);
+    font-weight: var(--weight-semibold, 600);
+    transition: filter    var(--duration-quick) var(--ease-snap),
+                transform  var(--duration-snap)  var(--ease-snap);
+  }
+  .slide-over-cta:hover  { filter: brightness(1.08); }
+  .slide-over-cta:active { transform: scale(0.98); }
+
+
+  /* ─── Neutral overlay trigger (lives on the canvas; NOT an accent) ────
+     Used to summon a slide-over from in-canvas content (e.g. a bento card).
+     Deliberately uses --ink + --line, never an accent, so it does not
+     compete with the screen's single ring (accent-progress) or dock dot
+     (accent-action) — CHROMA §7. */
+  .overlay-trigger {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-block-size: 44px;
+    padding: var(--space-2) var(--space-5);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    color: var(--ink);
+    background: transparent;
+    transition: background var(--duration-quick) var(--ease-snap),
+                transform  var(--duration-snap)  var(--ease-snap);
+  }
+  .overlay-trigger:hover  { background: var(--surface-2); }
+  .overlay-trigger:active { transform: scale(0.98); }
+  .overlay-trigger .icon  { --icon-size: var(--icon-sm); color: var(--ink-muted); }
+
+
+  /* ─── Forced-colors — preserve role when OS owns the palette ──────────*/
+  @media (forced-colors: active) {
+    .slide-over { border-inline-start: 1px solid ButtonText; }
+    .slide-over[data-scrolled="true"] .slide-over-header {
+      border-block-end-color: ButtonText;
+    }
+    .slide-over::before { background: ButtonText; opacity: 1; }
+    .scrim { background: transparent; }
+  }
+}
