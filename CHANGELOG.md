@@ -109,7 +109,45 @@ Versioning is by **doctrine pack** (DEVOTIO / ÊLAN), not by SemVer.
 | γ EIGHT WORLDS | `elan-γ-eight-worlds` | merged | ✅ |
 | δ KINETIC SHELL | `elan-δ-kinetic-shell` | merged | ✅ |
 | ε CONTENT REVIVAL | `elan-ε-content-revival` | #117 merged | ✅ |
-| ζ QUALITY GATE | `elan-ζ-quality-gate` | open at ζ5 | 🚪 |
+| ζ QUALITY GATE | `elan-ζ-quality-gate` | #118 merged | ✅ |
+
+---
+
+## [v4.0.2] — Tooling — mobile-safe bundle — 2026-05-28
+
+> *«ÊLAN في ملف واحد — هذه المرّة يَعمَل في كل متصفح.»*
+
+### Changed
+- **`scripts/build_bundle.py`** rewritten to produce a **classic-IIFE bundle** (no ESM, no importmap, no `blob:` URLs, no dynamic `import()`). The previous v4.0.1 approach (dynamic importmap + blob URLs) failed on:
+  - iOS Safari < 16.4 (no importmap support at all)
+  - Android WebViews and in-app browsers (Telegram, WhatsApp, Instagram, FB)
+  - Some ad-blocker stubs of `blob:` URLs
+  - Older Edge (pre-Chromium)
+
+  The rewrite concatenates all 119 modules into one classic `<script>` block in `app.js`'s import order. The 21 ESM-with-bindings modules are leaf-only (zero cross-module bindings — verified), so `transform_esm_to_classic` strips `export`/`import` keywords and wraps the body in an IIFE. The 100 already-IIFE-wrapped helpers pass through verbatim.
+
+- **`scripts/fidelity_check.py`** updated to verify functional equivalence (byte-equivalence is impossible by design when stripping ESM keywords). Four converging proofs: (A) deterministic re-build, (B) `node --check` static syntax, (C) ÊLAN v4 marker inclusion, (D) HTML structural integrity.
+
+### Notes
+- New bundle: 4.92 MB, 119 modules (100 pass-through + 19 wrapped-by-us)
+- 17/17 ÊLAN v4 markers verified present (worlds γ2-γ9, β2/β3, δ4/δ5, ε1/ε7/ε11/ε12, ζ4)
+- HTTP serve test: 200 OK, exact bytes match
+- Service Worker registration silently skipped under `file://` (existing `location.protocol !== 'file:'` guard in `upg-production-1.js`)
+
+---
+
+## [v4.0.1] — Tooling — single-file bundle — 2026-05-28
+
+> *«ÊLAN في ملف واحد — للفحص لا للنشر.»*
+
+### Added
+- **`scripts/build_bundle.py`** — produces `Upgrade-bundle.html`, a self-contained single-file viewer of the entire platform (HTML + 30 inlined stylesheets + 120 ES modules wired through a runtime importmap of `blob:` URLs). Useful for review, archival, and offline inspection of v4 changes; not a deployment artefact.
+- **`scripts/verify_bundle.py`** — sanity-checker (style block, source-block parity, residual relative imports, structural HTML markers).
+
+### Notes
+- Bundle is ~5 MB / ~99k lines. Font files are NOT inlined (size budget); the local font stacks gracefully fall back through their declared chains.
+- Service-worker registration is silently no-op under `file://`. Open via any HTTP origin (e.g. `python -m http.server`) for full PWA + offline behaviour.
+- All 120 bundled modules pass `node --check` after specifier rewriting (`./js/foo.js` → `upg/assets/js/foo.js`); ESM semantics preserved through dynamically-injected `<script type="importmap">` + dynamic `import()`.
 
 ---
 
