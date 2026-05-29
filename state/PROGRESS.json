@@ -2763,8 +2763,12 @@
       "α1",
       "α2",
       "α3",
-      "α4"
+      "α4",
+      "δ1",
+      "δ2",
+      "δ3"
     ],
+    "stage_specs_prewritten_note": "δ1-δ3 authored ahead of execution from ATELIER_REFERENCE §3; next_stage = δ1 (pillar δ BENTO LIVE). β/γ specs also exist on disk.",
     "doctrine_files_count": 9,
     "α2_verified": {
       "sidebar_selectors_in_css": 0,
