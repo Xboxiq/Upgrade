@@ -1,0 +1,245 @@
+/* ════════════════════════════════════════════════════════════════════════
+   TADAFFUQ v5 — α3 — Token Reset
+   ────────────────────────────────────────────────────────────────────────
+   The complete CSS variable system. Eight token families:
+     1. canvas / surface / ink / accent / line / shadow / glass-tint  (colour)
+     2. space-*                                                       (spacing scale)
+     3. radius-*                                                      (corner radii)
+     4. z-*                                                           (5 elevation tiers)
+     5. duration-*                                                    (7 motion durations)
+     6. ease-*                                                        (5 motion easings)
+     7. icon-*                                                        (6 icon sizes)
+     8. canvas-pad-*                                                  (canvas padding incl. safe-area)
+
+   HSL-only colour values. No hex. No legacy --brand-*, --world-*, --ember-*.
+   Dark mode is the default; light mode is the respectful peer.
+   Forced-colors mode maps every colour token to a system keyword.
+   ════════════════════════════════════════════════════════════════════════ */
+
+
+@layer tokens {
+
+  /* ─── DEFAULT (dark mode) ───────────────────────────────────────────── */
+  :root,
+  :root[data-theme="dark"] {
+
+    /* ── 1. Colour ── */
+    /* Canvas — the deep space */
+    --canvas:           hsl(225 30%  8%);     /* near-black with blue undertone */
+
+    /* Surfaces — glass on space */
+    --surface-0:        hsl(225 28% 12%);     /* the dock, the bento base */
+    --surface-1:        hsl(225 24% 16%);     /* raised card */
+    --surface-2:        hsl(225 22% 21%);     /* hovered card / focused panel */
+
+    /* Inks — readable on Deep Space */
+    --ink:              hsl( 38 38% 96%);     /* warm-paper white */
+    --ink-muted:        hsl(225 14% 70%);
+    --ink-faint:        hsl(225 12% 50%);
+
+    /* Borders — ultra-thin */
+    --line:             hsla(0 0% 100% / 0.08);
+    --line-strong:      hsla(0 0% 100% / 0.16);
+
+    /* Accents — surgical */
+    --accent-progress:  hsl(187 100% 50%);    /* Neon Cyan */
+    --accent-action:    hsl( 15 100% 60%);    /* Electric Orange */
+
+    /* Glass tint (used in surface backgrounds with subtle translucency) */
+    --glass-tint:       hsla(225 30% 12% / 0.72);
+
+    /* Shadows — three plies, near-black with low-chroma blue */
+    --shadow-1:
+      0 1px  2px      hsla(225 30% 0% / 0.20);
+    --shadow-2:
+      0 4px  6px -1px hsla(225 30% 0% / 0.32),
+      0 2px  4px -2px hsla(225 30% 0% / 0.20);
+    --shadow-3:
+      0 10px 15px -3px hsla(225 30% 0% / 0.40),
+      0 4px   6px -4px hsla(225 30% 0% / 0.32);
+
+
+    /* ── 2. Spacing — modular 4px base ── */
+    --space-0:   0;
+    --space-1:   4px;
+    --space-2:   8px;
+    --space-3:  12px;
+    --space-4:  16px;
+    --space-5:  20px;
+    --space-6:  24px;
+    --space-8:  32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --space-20: 80px;
+
+
+    /* ── 3. Radius ── */
+    --radius-xs:    4px;
+    --radius-sm:    8px;
+    --radius-md:   12px;
+    --radius-lg:   16px;
+    --radius-xl:   24px;
+    --radius-full: 9999px;
+
+
+    /* ── 4. Z-index — five canonical tiers (SPATIAL §5) ── */
+    --z-canvas:           0;
+    --z-bento-expanded:   5;
+    --z-dock:            50;
+    --z-scrim:           80;
+    --z-overlay:        100;
+
+
+    /* ── 5. Motion — seven canonical durations (MOTION §1) ── */
+    --duration-snap:       80ms;
+    --duration-quick:     160ms;
+    --duration-emerge:    240ms;
+    --duration-morph:     360ms;
+    --duration-panel:     480ms;
+    --duration-zen:       640ms;
+    --duration-skeleton: 1200ms;
+
+
+    /* ── 6. Motion — five canonical easings (MOTION §2) ── */
+    --ease-snap:    cubic-bezier(0.4,  0,    0.2,  1);   /* Material standard */
+    --ease-emerge:  cubic-bezier(0.32, 0.72, 0,    1);   /* iOS spring */
+    --ease-panel:   cubic-bezier(0.32, 0.72, 0,    1);   /* same family — slide-overs */
+    --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);   /* overshoots — for The Bloom */
+    --ease-morph:   cubic-bezier(0.65, 0,    0.35, 1);   /* in-out — layout transitions */
+
+
+    /* ── 7. Icon sizes (ICONOGRAPHY §4) ── */
+    --icon-xs:   12px;
+    --icon-sm:   16px;
+    --icon-md:   20px;
+    --icon-lg:   24px;
+    --icon-xl:   32px;
+    --icon-2xl:  40px;
+
+
+    /* ── 8. Canvas padding — incl. safe-area envelope ── */
+    --canvas-pad-x:       max(var(--space-4), env(safe-area-inset-left));
+    --canvas-pad-top:     max(var(--space-4), env(safe-area-inset-top));
+    --canvas-pad-bottom:  calc(96px + env(safe-area-inset-bottom));
+    /* 96px reserves room for the floating dock at the bottom (γ1).
+       env() inset adds the iOS notch / Android navigation bar gap. */
+
+
+    /* ── Type system root (defaults; β1 will install full hierarchy) ── */
+    --font-arabic: "Boutros Modern Kufi VF", "Bukra VF", "IBM Plex Arabic", "Cairo", "Tajawal", system-ui, sans-serif;
+    --font-latin:  "Geist VF", "Inter VF", system-ui, -apple-system, "Segoe UI", "Helvetica Neue", sans-serif;
+    --font-mono:   "JetBrains Mono", "SFMono-Regular", "Menlo", "Consolas", monospace;
+  }
+
+
+  /* ─── LIGHT MODE ────────────────────────────────────────────────────── */
+  :root[data-theme="light"] {
+    --canvas:           hsl( 38 28% 96%);     /* Premium Oatmeal */
+    --surface-0:        hsl( 38 32% 98%);     /* paper-fresh */
+    --surface-1:        hsl(  0  0% 100%);    /* pure white card */
+    --surface-2:        hsl( 38 22% 93%);     /* hovered surface */
+
+    --ink:              hsl(225 38% 11%);     /* deep-ink */
+    --ink-muted:        hsl(225 18% 36%);
+    --ink-faint:        hsl(225 14% 55%);
+
+    --line:             hsla(225 30% 8% / 0.06);
+    --line-strong:      hsla(225 30% 8% / 0.12);
+
+    /* Darkened accents for AA contrast on light surfaces */
+    --accent-progress:  hsl(187  92% 38%);
+    --accent-action:    hsl( 15  92% 48%);
+
+    --glass-tint:       hsla(0 0% 100% / 0.72);
+
+    --shadow-1:
+      0 1px  2px      hsla(225 30% 12% / 0.05);
+    --shadow-2:
+      0 4px  6px -1px hsla(225 30% 12% / 0.10),
+      0 2px  4px -2px hsla(225 30% 12% / 0.06);
+    --shadow-3:
+      0 10px 15px -3px hsla(225 30% 12% / 0.10),
+      0 4px   6px -4px hsla(225 30% 12% / 0.10);
+  }
+
+
+  /* ─── AUTO MODE (follow OS preference) ──────────────────────────────── */
+  @media (prefers-color-scheme: light) {
+    :root[data-theme="auto"] {
+      /* same vars as light, but only when OS prefers light */
+      --canvas:           hsl( 38 28% 96%);
+      --surface-0:        hsl( 38 32% 98%);
+      --surface-1:        hsl(  0  0% 100%);
+      --surface-2:        hsl( 38 22% 93%);
+      --ink:              hsl(225 38% 11%);
+      --ink-muted:        hsl(225 18% 36%);
+      --ink-faint:        hsl(225 14% 55%);
+      --line:             hsla(225 30% 8% / 0.06);
+      --line-strong:      hsla(225 30% 8% / 0.12);
+      --accent-progress:  hsl(187  92% 38%);
+      --accent-action:    hsl( 15  92% 48%);
+      --glass-tint:       hsla(0 0% 100% / 0.72);
+      --shadow-1: 0 1px 2px hsla(225 30% 12% / 0.05);
+      --shadow-2:
+        0 4px 6px -1px hsla(225 30% 12% / 0.10),
+        0 2px 4px -2px hsla(225 30% 12% / 0.06);
+      --shadow-3:
+        0 10px 15px -3px hsla(225 30% 12% / 0.10),
+        0  4px  6px -4px hsla(225 30% 12% / 0.10);
+    }
+  }
+
+
+  /* ─── FORCED COLORS (Windows High Contrast / OS palette overrides) ──── */
+  @media (forced-colors: active) {
+    :root,
+    :root[data-theme="dark"],
+    :root[data-theme="light"],
+    :root[data-theme="auto"] {
+      --canvas:           Canvas;
+      --surface-0:        Canvas;
+      --surface-1:        Canvas;
+      --surface-2:        Canvas;
+      --ink:              CanvasText;
+      --ink-muted:        GrayText;
+      --ink-faint:        GrayText;
+      --line:             ButtonText;
+      --line-strong:      ButtonText;
+      --accent-progress:  Highlight;
+      --accent-action:    Mark;
+      --glass-tint:       Canvas;
+    }
+  }
+
+}
+
+
+/* ─── canvas + ink wired into base, now that tokens exist ───────────── */
+@layer base {
+  body {
+    background: var(--canvas);
+    color:      var(--ink);
+    font-family: var(--font-arabic);
+  }
+
+  ::selection {
+    background: hsl(from var(--accent-progress) h s l / 0.32);
+    color:      var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-progress);
+    outline-offset: 4px;
+    border-radius: var(--radius-xs);
+  }
+
+  /* skip-link, now coloured */
+  .skip-link {
+    background: var(--surface-1);
+    color:      var(--ink);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-2);
+  }
+}

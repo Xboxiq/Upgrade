@@ -1,0 +1,55 @@
+<!doctype html>
+<html dir="rtl" lang="ar" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#0B0F19" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#F7F5F1" media="(prefers-color-scheme: light)" />
+  <meta name="description" content="منصة التطوير المهني الذاتي — تَدَفُّق v5: نسخة احترافية بأُسلوب فضائي مُحَدَّث." />
+  <meta name="format-detection" content="telephone=no" />
+  <title>Upgrade — تَدَفُّق</title>
+
+  <!-- cascade order + tokens + type + canvas + dock + dock-mobile + canvas-harmonic -->
+  <link rel="stylesheet" href="assets/css/_layers.css" />
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/type.css" />
+  <link rel="stylesheet" href="assets/css/canvas.css" />
+  <link rel="stylesheet" href="assets/css/dock.css" />
+  <link rel="stylesheet" href="assets/css/dock-mobile.css" />
+  <link rel="stylesheet" href="assets/css/canvas-harmonic.css" />
+  <!-- δ1+: bento; ε1+: slide-over, sheet -->
+</head>
+<body>
+
+  <!-- a11y: skip link first focusable element -->
+  <a href="#main" class="skip-link">تَخطٍّ إلى المحتوى</a>
+
+  <!-- ─── SVG sprite mount (loaded by assets/js/icons.js into here) ─── -->
+  <div id="sprite-mount" hidden aria-hidden="true"></div>
+
+  <!-- ─── The Canvas — sovereign, edge-to-edge ─── -->
+  <main id="main" class="canvas" tabindex="-1">
+    <!-- Content lands in subsequent pillars:
+         δ → bento grid + cards + progress rings
+         ε → slide-over + bottom sheet
+         ζ → zen mode workspace
+    -->
+  </main>
+
+  <!-- ─── Dock placeholder (mounted by dock.js) ─── -->
+  <div id="dock-mount" hidden aria-hidden="true"></div>
+
+  <!-- ─── Overlay slots (slide-over + sheet land in ε1 / ε2) ─── -->
+  <div id="overlay-scrim" class="scrim" hidden aria-hidden="true"></div>
+  <aside id="overlay-panel" class="slide-over" hidden aria-hidden="true"></aside>
+  <aside id="overlay-sheet" class="sheet"      hidden aria-hidden="true"></aside>
+
+  <!-- ─── Runtime entries (classic IIFE; mobile-safe) ─── -->
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/icons.js"           defer></script>
+  <script src="assets/js/dock.js"            defer></script>
+  <script src="assets/js/canvas-harmonic.js" defer></script>
+
+</body>
+</html>
