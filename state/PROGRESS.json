@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "last_updated": "2026-05-29T00:00:00.000Z",
+  "last_updated": "2026-05-29T11:00:00.000Z",
   "pack": "v3-devotio",
   "pack_status": "all-done",
   "current": {
@@ -2775,8 +2775,11 @@
       "α2",
       "α3",
       "α4",
+      "δ1",
+      "δ2",
       "δ3"
     ],
+    "stage_specs_prewritten_note": "α1-α4 + δ1-δ3 authored ahead of execution; δ3 also has the as-shipped Damascus-pulse spec restored from main verbatim. β/γ specs also exist on disk.",
     "doctrine_files_count": 9,
     "α2_verified": {
       "sidebar_selectors_in_css": 0,
