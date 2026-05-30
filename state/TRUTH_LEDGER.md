@@ -4054,3 +4054,54 @@ components had each invented their own `:active` scale with **no release physics
 - Sequence across η: SPRING · HAPTIC · HAPTIC (preceded by …VEIL·GLOW·SPRING) — no category 3× in a row
 - Creativity Health: **100 / 100** · Forbidden Library violations: **0**
 - Sacred preserved: v4 Upg.* APIs · `archive/` · `prompts/v[1-4]/` · `platform/` (v4) untouched · single-accent §7 intact (the ring keeps the screen's one cyan)
+
+
+
+---
+
+## v5 TADAFFUQ — PILLAR θ (POLISH) — IN PROGRESS — 2026-05-30
+
+**Branch:** `tadaffuq-θ-polish` · quality gate · **0 pulses by spec**
+
+### θ1 — PERF_AUDIT — `fac16a8`
+
+Bring `platform-v5/index.html` to a Lighthouse-Mobile-Performance-≥-90-ready
+state and ship a static perf gate so regressions are caught without a browser.
+No runtime score asserted (manifesto §6 — recorded by human/CI in
+`state/LIGHTHOUSE_REPORT.md`).
+
+**Files touched (5):**
+- `platform-v5/index.html` — inline `<head>` `<script data-theme-bootstrap>` FOUC
+  guard (resolves saved `upg_theme` before first paint, mirrors `Upg.theme.current()`);
+  `theme.js` changed to `defer` (now 0 parser-blocking scripts).
+- `platform-v5/assets/css/canvas.css` (+12) — `@layer base { .match-bench {
+  content-visibility: auto; contain-intrinsic-size: auto 520px } }` — skips
+  layout/paint of the below-fold match bench until scrolled near (lower TBT,
+  CLS-safe). Behaviour unchanged.
+- `scripts/v5_perf_audit.py` (NEW) — static perf gate; FAILs on css `url()`,
+  `@import`, heavy blur ≥12px, non-deferred `<script src>`, inline `style=`, or
+  a missing FOUC bootstrap; reports link count + will-change budget.
+- `state/LIGHTHOUSE_REPORT.md` — appended v5 θ1 static-posture section +
+  deferred runtime command.
+- `prompts/v5/θ1_PERF_AUDIT.md` (NEW spec, authored before execution).
+
+### Verified by grep on commit `fac16a8`
+| metric | before | after | expected |
+|---|---|---|---|
+| non-deferred `<script src>` | 1 (theme.js) | 0 | 0 |
+| inline FOUC theme bootstrap | 0 | 1 | 1 |
+| `content-visibility` rule (offscreen) | 0 | 1 | ≥1 |
+| `scripts/v5_perf_audit.py` exit code | (absent) | 0 | 0 |
+| css `url()` external requests | 0 | 0 | 0 |
+| `@font-face` / `@import` | 0 / 0 | 0 / 0 | 0 / 0 |
+| heavy blur (≥12px) | 0 | 0 | 0 |
+| inline `style=` attributes | 0 | 0 | 0 |
+| render-blocking css `<link>` (info) | 16 | 16 | info |
+| always-on `will-change` (budget 12) | 7 | 7 | ≤12 |
+| http (index + theme.js + canvas.css + icons.svg) | — | 200×4 | 200 |
+
+### Sacred preserved
+- All Upg.* APIs untouched (theme.js logic unchanged — only the `<script>` tag
+  gained `defer`; the inline bootstrap is additive and mirrors `Upg.theme`).
+- `archive/` · `prompts/v[1-4]/` · `platform/` (v4) untouched.
+- No Pulse (θ is a verify-and-seal pillar).
