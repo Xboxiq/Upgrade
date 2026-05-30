@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
 
+/// Element-wise lerp for multi-stop gradients (dark & light variants always
+/// share the same number of stops).
+List<Color> _lerpGradient(List<Color> a, List<Color> b, double t) {
+  final int n = a.length < b.length ? a.length : b.length;
+  return <Color>[for (int i = 0; i < n; i++) Color.lerp(a[i], b[i], t)!];
+}
+
 /// ════════════════════════════════════════════════════════════════════════
-/// AppPalette — the "Aurora Tide" colour system, delivered as a ThemeExtension
+/// AppPalette — the "Cosmic Flow" colour system, delivered as a ThemeExtension
 /// so any widget reads `context.palette` and stays correct in both modes.
 ///
-/// DOCTRINE (see DESIGN.md): تَدَفُّق means *flow*. Mastery is a rising tide.
-/// Exactly TWO accent poles, each with one job — colour is never decorative:
-///   • COOL — cyan "tide"  → progress, mastery, active, identity ("you").
-///   • WARM — orange "spark" → calls-to-action, "do this now", energy.
-/// Plus neutral ink over deep space (dark) / oatmeal (light), and reserved
-/// semantics (success / warning). Two poles, used with discipline, read
-/// instantly: cool = where you stand, warm = what to do next.
+/// DOCTRINE (see DESIGN.md): تَدَفُّق means *flow*. Mastery is a luminous current
+/// streaming through deep space. Grounded in the ui-ux-pro-max skill's cosmic
+/// palettes (night-indigo + dream-violet, space-tech navy). Exactly TWO accent
+/// poles, each with one job — colour is never decorative:
+///   • FLOW — azure→indigo→violet aurora → progress, mastery, active, identity.
+///   • SPARK — fuchsia nebula → calls-to-action, "do this now", energy.
+/// Over a deep-space navy canvas (dark) / cool starlight (light), plus reserved
+/// semantics (success / warning) that never collide with the accent hues.
+/// Read instantly: the blue current = where you stand, the nebula = act now.
 /// ════════════════════════════════════════════════════════════════════════
 @immutable
 class AppPalette extends ThemeExtension<AppPalette> {
@@ -94,55 +103,56 @@ class AppPalette extends ThemeExtension<AppPalette> {
   List<Color> get progressGradient => tideGradient;
   Color get accentAction => spark;
 
-  /// Deep-space, neon-tide. The primary, dark-first identity.
+  /// Deep-space navy, indigo current. The primary, dark-first identity.
   static const AppPalette dark = AppPalette(
-    canvas: Color(0xFF0B0F19), // deep space
-    canvasSink: Color(0xFF060911),
-    surface1: Color(0xFF141A27),
-    surface2: Color(0xFF1C2436),
-    fill: Color(0x14FFFFFF), // white ~0.08
-    materialTint: Color(0xCC0C111C), // ~0.80 — frosted bars / dock
-    glassTint: Color(0xB3141A27), // ~0.70
-    ink: Color(0xFFEAF1FF),
-    inkMuted: Color(0xFF93A0B8),
-    inkFaint: Color(0xFF5A6680),
+    canvas: Color(0xFF0A0E1F), // deep space navy-indigo
+    canvasSink: Color(0xFF05070F),
+    surface1: Color(0xFF121830), // indigo-tinted panel
+    surface2: Color(0xFF1B2240),
+    fill: Color(0x0FFFFFFF), // white ~0.06
+    materialTint: Color(0xCC0C1226), // ~0.80 — frosted bars / dock
+    glassTint: Color(0xB8121830), // ~0.72
+    ink: Color(0xFFEAEEFC),
+    inkMuted: Color(0xFF9AA6C8),
+    inkFaint: Color(0xFF5C6690),
     line: Color(0x14FFFFFF), // white ~0.08 hairline
     lineStrong: Color(0x29FFFFFF), // white ~0.16
-    brand: Color(0xFF00E5FF), // neon cyan — identity / active
-    brandDeep: Color(0xFF00B8D4),
-    tide: Color(0xFF00E5FF),
-    tideGradient: <Color>[Color(0xFF67F2FF), Color(0xFF00B8D4)],
-    spark: Color(0xFFFF6B35), // electric orange — action
-    sparkDeep: Color(0xFFFF4D12),
-    sparkGradient: <Color>[Color(0xFFFF8A5B), Color(0xFFFF5117)],
-    success: Color(0xFF30D158),
-    warning: Color(0xFFFFB020),
+    brand: Color(0xFF6C8DFF), // azure-indigo — flow / identity / active
+    brandDeep: Color(0xFF4A6BF0),
+    tide: Color(0xFF6C8DFF),
+    // The flowing aurora: azure → blue → indigo-violet.
+    tideGradient: <Color>[Color(0xFF74B6FF), Color(0xFF6C8DFF), Color(0xFF9A7CFF)],
+    spark: Color(0xFFEC4DBE), // fuchsia nebula — action
+    sparkDeep: Color(0xFFD2329F),
+    sparkGradient: <Color>[Color(0xFFFF7BD9), Color(0xFFE040B0)],
+    success: Color(0xFF2FD8A4), // aurora teal-green
+    warning: Color(0xFFFBB845), // star amber
     isDark: true,
   );
 
-  /// Oatmeal daylight. Accents deepen to hold WCAG AA on a warm light canvas.
+  /// Cool starlight daylight. Accents deepen to hold WCAG AA on a light canvas.
   static const AppPalette light = AppPalette(
-    canvas: Color(0xFFF7F5F1), // oatmeal
-    canvasSink: Color(0xFFECE7DF),
+    canvas: Color(0xFFF3F5FC), // cool ice-white
+    canvasSink: Color(0xFFE5E9F6),
     surface1: Color(0xFFFFFFFF),
-    surface2: Color(0xFFFCFBF8),
+    surface2: Color(0xFFFAFBFE),
     fill: Color(0x0D000000), // black ~0.05
-    materialTint: Color(0xE6FBFAF7), // ~0.90 — frosted bars / dock
+    materialTint: Color(0xE6F6F8FE), // ~0.90 — frosted bars / dock
     glassTint: Color(0xE6FFFFFF),
-    ink: Color(0xFF16181D),
-    inkMuted: Color(0xFF5E6470),
-    inkFaint: Color(0xFF9AA0AC),
+    ink: Color(0xFF141828),
+    inkMuted: Color(0xFF565E78),
+    inkFaint: Color(0xFF9298B0),
     line: Color(0x17000000), // black ~0.09 hairline
     lineStrong: Color(0x29000000), // black ~0.16
-    brand: Color(0xFF017E91), // deep teal-cyan for AA on oatmeal
-    brandDeep: Color(0xFF015F6E),
-    tide: Color(0xFF008CA6),
-    tideGradient: <Color>[Color(0xFF19C6E6), Color(0xFF0098B5)],
-    spark: Color(0xFFD8551E), // deeper orange for AA on oatmeal
-    sparkDeep: Color(0xFFB8410F),
-    sparkGradient: <Color>[Color(0xFFFF7A45), Color(0xFFE0561F)],
-    success: Color(0xFF1FA855),
-    warning: Color(0xFFC9821A),
+    brand: Color(0xFF3D5DE0), // deep azure-indigo for AA on light
+    brandDeep: Color(0xFF2A45C8),
+    tide: Color(0xFF3D5DE0),
+    tideGradient: <Color>[Color(0xFF4F86F7), Color(0xFF5B6EF0), Color(0xFF7C5CE8)],
+    spark: Color(0xFFC42E9E), // deep fuchsia for AA on light
+    sparkDeep: Color(0xFFA81F86),
+    sparkGradient: <Color>[Color(0xFFEC4DBE), Color(0xFFC42E9E)],
+    success: Color(0xFF0E9F6E),
+    warning: Color(0xFFB8791A),
     isDark: false,
   );
 
@@ -216,16 +226,10 @@ class AppPalette extends ThemeExtension<AppPalette> {
       brand: Color.lerp(brand, other.brand, t)!,
       brandDeep: Color.lerp(brandDeep, other.brandDeep, t)!,
       tide: Color.lerp(tide, other.tide, t)!,
-      tideGradient: <Color>[
-        Color.lerp(tideGradient.first, other.tideGradient.first, t)!,
-        Color.lerp(tideGradient.last, other.tideGradient.last, t)!,
-      ],
+      tideGradient: _lerpGradient(tideGradient, other.tideGradient, t),
       spark: Color.lerp(spark, other.spark, t)!,
       sparkDeep: Color.lerp(sparkDeep, other.sparkDeep, t)!,
-      sparkGradient: <Color>[
-        Color.lerp(sparkGradient.first, other.sparkGradient.first, t)!,
-        Color.lerp(sparkGradient.last, other.sparkGradient.last, t)!,
-      ],
+      sparkGradient: _lerpGradient(sparkGradient, other.sparkGradient, t),
       success: Color.lerp(success, other.success, t)!,
       warning: Color.lerp(warning, other.warning, t)!,
       isDark: t < 0.5 ? isDark : other.isDark,

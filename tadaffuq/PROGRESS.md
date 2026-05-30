@@ -45,3 +45,23 @@ Format: `order · date · task · changes · files · verification · branch · 
 **Branch**: `feat/flutter-creative-overhaul` (PR to follow).
 
 **NEXT**: ⛔ **STOP for design approval.** Do NOT scale to other sections (Field Sales, Psychology/Negotiation, Customer Care, Programming…) until the Aurora Tide direction is approved. Open items to raise: (1) `ui-ux-pro-max` skill is not installed; (2) confirm cyan/orange identity vs. the previous violet/gold; (3) per-section interaction backlog (drag-drop voice-range drill, shared-element transitions).
+
+
+---
+
+### 003 · 2026-05-30 · Recolour → "Cosmic Flow" + install ui-ux-pro-max skill
+
+**What changed**
+- **Installed the `ui-ux-pro-max` skill** at `/projects/.kiro/skills/ui-ux-pro-max` (cloned from GitHub) and used its `search.py --design-system` + `colors.csv` as the design reference.
+- **New palette per owner request** (deep-blue / space colours, dropping cyan/orange): **"Cosmic Flow"** — deep-space navy canvas (`#0A0E1F`), an **azure→indigo→violet flow current** (`tideGradient`) for progress/identity, and a **fuchsia nebula** spark (`#EC4DBE`) for actions. Light mode is now a cool "starlight" (`#F3F5FC`) instead of oatmeal. Semantics (success teal `#2FD8A4`, warning amber) chosen to avoid hue collisions. Skill-grounded in its *night-indigo + dream-violet* / *space-tech navy* palettes.
+- **`AppPalette.lerp`** now lerps multi-stop gradients element-wise (supports the 3-stop flow current cleanly across theme transitions).
+- **`AuroraBackground`** now paints a deep-space vertical gradient base (the requested "dark-blue gradient") under the drifting indigo + fuchsia nebula blooms.
+- Updated `DESIGN.md` (art direction, colour tables, decision log, signature-visual wording).
+
+**Files**: `lib/theme/palette.dart`, `lib/widgets/aurora_background.dart`, `DESIGN.md`, `PROGRESS.md`. (No component code changes — everything reads tokens, so the recolour propagated automatically.)
+
+**Verification**: `flutter analyze` → clean · `flutter test` → 2/2 · `flutter build web --release` → ok. ✅
+
+**Branch**: `feat/flutter-creative-overhaul` (updates PR #137).
+
+**NEXT**: ⛔ Still at the PHASE 0 approval gate — confirm the "Cosmic Flow" direction, then scale section-by-section.
