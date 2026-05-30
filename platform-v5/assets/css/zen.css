@@ -149,3 +149,71 @@
     .zen-trigger { border-color: ButtonText; }
   }
 }
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   TADAFFUQ v5 — ζ2 — Zen Canvas / the drained field  (GLOW_PULSE)
+   ────────────────────────────────────────────────────────────────────────
+   ζ1 made the world recede; ζ2 defines the quality of the sustained field:
+   the hushed world is DRAINED OF COLOUR, leaving the scoped task's single
+   progress ring as the only living chroma — and that ring breathes slowly,
+   but only while the session is alive. Chroma becomes the sole signal of
+   "this is alive and waiting for you."
+
+   The Pulse — GLOW_PULSE (pivot away from VEIL; distinct from γ3's hue-nudge):
+     backdrop-filter: saturate(0.32) on the veil drains the colour of everything
+     beneath it — but NOT the scope, which paints above the veil (--z-overlay >
+     --z-scrim) and is excluded from the veil's backdrop by paint order. The
+     ring keeps its cyan and breathes (drop-shadow glow, --duration-skeleton,
+     infinite alternate). No blur (Forbidden #9): saturate() is GPU-cheap.
+     Inspired by the shadow-line of a Hagia Sophia archway at noon — the one
+     surviving light as a structural element.
+
+   Pure addition: ζ1's rules are untouched. No override keyword. No new token.
+   ════════════════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  /* ─── Drain the hushed field — only the surroundings, never the scope ────
+     saturate() with NO blur (Forbidden #9 is blur≥12px). The scope paints
+     above the veil so it is excluded from this backdrop by paint order. */
+  .zen-veil[data-open="true"] {
+    backdrop-filter: saturate(0.32);
+    -webkit-backdrop-filter: saturate(0.32);
+  }
+
+  /* ─── The workbench floats in the clearing ───────────────────────────────*/
+  :root[data-zen="active"] [data-zen-scope] {
+    box-shadow: var(--shadow-3);
+  }
+
+  /* ─── The one living colour breathes — only while the session is alive ───
+     drop-shadow glow + a faint opacity lift. Opt-in via the zen state, never
+     on first paint (MOTION §6.7). Reuses --duration-skeleton with `alternate`
+     (full breath ≈ 2.4s) so the seven canonical durations stand (MOTION §1). */
+  @keyframes zen-ring-breathe {
+    from {
+      opacity: 0.9;
+      filter: drop-shadow(0 0 1px hsl(from var(--accent-progress) h s l / 0.25));
+    }
+    to {
+      opacity: 1;
+      filter: drop-shadow(0 0 7px hsl(from var(--accent-progress) h s l / 0.55));
+    }
+  }
+  :root[data-zen="active"] [data-zen-scope] .ring-bar {
+    animation: zen-ring-breathe var(--duration-skeleton) var(--ease-morph) infinite alternate;
+    will-change: filter, opacity;
+  }
+
+
+  /* ─── Reduced motion ─────────────────────────────────────────────────────
+     The global motion-sanctuary (canvas.css) already collapses the breathe to
+     a single 0.01ms run — the ring stays a static cyan in a drained field, so
+     the meaning (one living colour) survives without motion (MOTION §4.3). */
+
+
+  /* ─── Forced colors — filters are ignored by the OS palette; the ring keeps
+     its Highlight role from ring.css. Nothing to override here. ────────────*/
+}
