@@ -1,0 +1,298 @@
+/* ════════════════════════════════════════════════════════════════════════
+   TADAFFUQ v5 — ζ1 — Zen Trigger / Focus Mode entry  (VEIL_PULSE)
+   ────────────────────────────────────────────────────────────────────────
+   The Flow Oath made literal: focus by SUBTRACTION. Entering Zen does not
+   add a modal box (Forbidden #5) or an unsolicited overlay (Forbidden #15) —
+   it recedes the world. The dock dissolves; a veil the colour of the deep
+   canvas descends over everything; the single scoped task is lifted above it
+   into a clearing.
+
+   The Pulse — VEIL_PULSE (chronic, vs ε3's acute):
+     enter → veil hushes the canvas to 0.82 (present, not gone) over the
+     slowest token --duration-zen (640ms), like a held breath; the dock melts
+     to opacity 0; the scope rises to --z-overlay. Inspired by the negative
+     space of a Hokusai wave — the work is what the brush didn't paint.
+
+   Layering (verified): main/.bento create no stacking context; .bento-card
+   does, but its z-index participates in the ROOT context. So the veil at
+   --z-scrim + the scope lifted to --z-overlay isolates exactly the scope.
+
+   RTL-correct: inline/block logical properties only. No physical left/right.
+   Load order: after bento-expand.css (so the scope-lift rule wins by source).
+   ════════════════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  /* ─── The veil — a sanctioned dim layer (like the ε1 scrim), NOT a popup ──
+     It carries no content; it only hushes the world. MAY be inset:0 because
+     it is the dim layer, not a content surface (manifesto §5.5 forbids the
+     latter only). */
+  .zen-veil {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-scrim);
+    background: var(--canvas);       /* theme-true: deep space (dark) / oatmeal (light) */
+    opacity: 0;
+    pointer-events: none;
+    /* enter on the slowest curve — a held breath (MOTION §1 --duration-zen) */
+    transition: opacity var(--duration-zen) var(--ease-emerge);
+  }
+  .zen-veil[data-open="true"] {
+    opacity: 0.82;                   /* present, just hushed — a ghost behind the clearing */
+    pointer-events: auto;            /* a click on the veil returns the world */
+  }
+
+
+  /* ─── The clearing — the single scoped task, lifted above the veil ───────
+     Specificity (0,3,0) intentionally beats .bento-card[data-expanded="true"]
+     (0,2,0) so an expanded focal card still rises correctly. */
+  :root[data-zen="active"] [data-zen-scope] {
+    position: relative;
+    z-index: var(--z-overlay);
+  }
+
+
+  /* ─── The dock dissolves — chronic, for the whole session (subtraction) ──
+     Independent of ε3's acute [data-veiled]; both only lower opacity, so they
+     never clash. The dock melts rather than blinking out. */
+  :root[data-zen="active"] .dock {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration-zen) var(--ease-emerge);
+  }
+
+
+  /* ─── The quiet return affordance — neutral, never an accent (CHROMA §7) ──
+     visibility:hidden at rest removes it from tab order until Zen holds. */
+  .zen-exit {
+    position: fixed;
+    inset-block-start: max(var(--space-4), env(safe-area-inset-top));
+    inset-inline-end:  max(var(--space-4), env(safe-area-inset-right));
+    z-index: var(--z-overlay);
+
+    inline-size: 44px;               /* 44×44 tap floor — manifesto §5.20 */
+    block-size:  44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+
+    color: var(--ink-muted);
+    background: var(--surface-1);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-2);
+
+    opacity: 0;
+    visibility: hidden;              /* unreachable to keyboard + AT while idle */
+    transform: scale(0.9);
+    pointer-events: none;
+    transition:
+      opacity    var(--duration-emerge) var(--ease-emerge),
+      transform  var(--duration-emerge) var(--ease-emerge),
+      background var(--duration-quick)  var(--ease-snap),
+      color      var(--duration-quick)  var(--ease-snap),
+      visibility 0s linear var(--duration-emerge);
+  }
+  :root[data-zen="active"] .zen-exit {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    pointer-events: auto;
+    /* arrives a beat after the veil has settled — tarteel pacing */
+    transition-delay: var(--duration-emerge);
+    transition:
+      opacity    var(--duration-emerge) var(--ease-emerge),
+      transform  var(--duration-emerge) var(--ease-emerge),
+      background var(--duration-quick)  var(--ease-snap),
+      color      var(--duration-quick)  var(--ease-snap),
+      visibility 0s linear 0s;
+  }
+  .zen-exit:hover  { background: var(--surface-2); color: var(--ink); }
+  .zen-exit:active { transform: scale(0.92); }
+  .zen-exit .icon  { --icon-size: var(--icon-md); }
+
+
+  /* ─── The trigger — a neutral in-canvas control (never an accent) ────────
+     Modelled on .overlay-trigger: --ink + --line, so it never competes with
+     the screen's single ring (accent-progress) or dock dot (accent-action). */
+  .zen-trigger {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-block-size: 44px;
+    padding: var(--space-2) var(--space-5);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    color: var(--ink);
+    background: transparent;
+    transition:
+      background var(--duration-quick) var(--ease-snap),
+      transform  var(--duration-snap)  var(--ease-snap);
+  }
+  .zen-trigger:hover  { background: var(--surface-2); }
+  .zen-trigger:active { transform: scale(0.98); }
+  .zen-trigger .icon  { --icon-size: var(--icon-sm); color: var(--ink-muted); }
+
+
+  /* ─── Reduced motion ─────────────────────────────────────────────────────
+     The global motion-sanctuary (canvas.css) collapses every transition to a
+     snap under prefers-reduced-motion. Zen inherits it: the veil still
+     descends and the dock still dissolves — instantly, state preserved
+     (MOTION §4). No per-file override needed here. */
+
+
+  /* ─── Forced colors — preserve the dim/return roles ──────────────────────*/
+  @media (forced-colors: active) {
+    .zen-veil  { background: Canvas; }
+    .zen-exit  { background: Canvas; border-color: ButtonText; color: ButtonText; }
+    .zen-trigger { border-color: ButtonText; }
+  }
+}
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   TADAFFUQ v5 — ζ2 — Zen Canvas / the drained field  (GLOW_PULSE)
+   ────────────────────────────────────────────────────────────────────────
+   ζ1 made the world recede; ζ2 defines the quality of the sustained field:
+   the hushed world is DRAINED OF COLOUR, leaving the scoped task's single
+   progress ring as the only living chroma — and that ring breathes slowly,
+   but only while the session is alive. Chroma becomes the sole signal of
+   "this is alive and waiting for you."
+
+   The Pulse — GLOW_PULSE (pivot away from VEIL; distinct from γ3's hue-nudge):
+     backdrop-filter: saturate(0.32) on the veil drains the colour of everything
+     beneath it — but NOT the scope, which paints above the veil (--z-overlay >
+     --z-scrim) and is excluded from the veil's backdrop by paint order. The
+     ring keeps its cyan and breathes (drop-shadow glow, --duration-skeleton,
+     infinite alternate). No blur (Forbidden #9): saturate() is GPU-cheap.
+     Inspired by the shadow-line of a Hagia Sophia archway at noon — the one
+     surviving light as a structural element.
+
+   Pure addition: ζ1's rules are untouched. No override keyword. No new token.
+   ════════════════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  /* ─── Drain the hushed field — only the surroundings, never the scope ────
+     saturate() with NO blur (Forbidden #9 is blur≥12px). The scope paints
+     above the veil so it is excluded from this backdrop by paint order. */
+  .zen-veil[data-open="true"] {
+    backdrop-filter: saturate(0.32);
+    -webkit-backdrop-filter: saturate(0.32);
+  }
+
+  /* ─── The workbench floats in the clearing ───────────────────────────────*/
+  :root[data-zen="active"] [data-zen-scope] {
+    box-shadow: var(--shadow-3);
+  }
+
+  /* ─── The one living colour breathes — only while the session is alive ───
+     drop-shadow glow + a faint opacity lift. Opt-in via the zen state, never
+     on first paint (MOTION §6.7). Reuses --duration-skeleton with `alternate`
+     (full breath ≈ 2.4s) so the seven canonical durations stand (MOTION §1). */
+  @keyframes zen-ring-breathe {
+    from {
+      opacity: 0.9;
+      filter: drop-shadow(0 0 1px hsl(from var(--accent-progress) h s l / 0.25));
+    }
+    to {
+      opacity: 1;
+      filter: drop-shadow(0 0 7px hsl(from var(--accent-progress) h s l / 0.55));
+    }
+  }
+  :root[data-zen="active"] [data-zen-scope] .ring-bar {
+    animation: zen-ring-breathe var(--duration-skeleton) var(--ease-morph) infinite alternate;
+    will-change: filter, opacity;
+  }
+
+
+  /* ─── Reduced motion ─────────────────────────────────────────────────────
+     The global motion-sanctuary (canvas.css) already collapses the breathe to
+     a single 0.01ms run — the ring stays a static cyan in a drained field, so
+     the meaning (one living colour) survives without motion (MOTION §4.3). */
+
+
+  /* ─── Forced colors — filters are ignored by the OS palette; the ring keeps
+     its Highlight role from ring.css. Nothing to override here. ────────────*/
+}
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   TADAFFUQ v5 — ζ3 — Zen Exit / the bloom in place  (SPRING_PULSE)
+   ────────────────────────────────────────────────────────────────────────
+   The deliberate exit, and the special case of completion. A finished session
+   does NOT fire a toast (Forbidden #2) or count a number up from 0 (Forbidden
+   #10) or rain confetti. The ring blooms in place: one spring scale + a glow
+   surge that settles; then — after a held beat — the field re-saturates and
+   the dock re-emerges slowly on tarteel time. The celebration lives on the
+   achievement, never on the page.
+
+   The Pulse — SPRING_PULSE (distinct from ε2's drag-momentum spring):
+     [data-zen-complete] stops the ζ2 breathe and plays a one-shot bloom on
+     --ease-spring (overshoot-and-settle, not a linear pop); then exit() drives
+     the dock's patient return (hold a beat, then melt back). Quick to protect
+     on enter, patient to return — closing the asymmetric cadence ε3 opened.
+     Inspired by Iznik tile radial geometry resolving at the seventh repetition:
+     the pattern is complete exactly when the ring closes.
+
+   Pure addition: ζ1/ζ2 rules untouched. No new token. No override keyword.
+   ════════════════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  /* ─── The bloom: a one-shot spring scale on the ring container (not page) ─*/
+  @keyframes zen-ring-bloom {
+    0%   { transform: scale(1);    }
+    35%  { transform: scale(1.08); }
+    100% { transform: scale(1);    }
+  }
+
+  /* ─── The glow surges once, then settles to a lit rest ───────────────────*/
+  @keyframes zen-ring-bloom-glow {
+    0%   { filter: drop-shadow(0 0  2px hsl(from var(--accent-progress) h s l / 0.40)); }
+    35%  { filter: drop-shadow(0 0 12px hsl(from var(--accent-progress) h s l / 0.80)); }
+    100% { filter: drop-shadow(0 0  5px hsl(from var(--accent-progress) h s l / 0.50)); }
+  }
+
+  /* Bloom the whole dial. No competing animation on .ring → applies cleanly. */
+  :root[data-zen="active"] [data-zen-scope][data-zen-complete] .ring {
+    animation: zen-ring-bloom var(--duration-panel) var(--ease-spring) both;
+    transform-origin: center;
+  }
+
+  /* Specificity 0,5,0 — intentionally beats the ζ2 breathe (0,4,0), so the
+     one-shot bloom-glow wins over the infinite loop during completion. */
+  :root[data-zen="active"] [data-zen-scope][data-zen-complete] .ring-bar {
+    animation: zen-ring-bloom-glow var(--duration-panel) var(--ease-emerge) both;
+  }
+
+
+  /* ─── The patient return — dock re-emerges after a tarteel beat ──────────
+     Holds dissolved for --duration-panel (the beat), then fades back over
+     --duration-zen. Only opacity is transitioned here, so the dock's base
+     transform/gap transitions (dock.css) are untouched outside this window.
+     JS removes [data-zen-exiting] once the return completes. */
+  :root[data-zen-exiting="true"] .dock {
+    pointer-events: none;
+    transition: opacity var(--duration-zen) var(--ease-emerge) var(--duration-panel);
+  }
+
+
+  /* ─── The completion affordance — only reachable while a session is held ─
+     Hidden in the normal (non-zen) card detail; appears inside the clearing. */
+  .zen-finish { display: none; }
+  :root[data-zen="active"] [data-zen-scope] .zen-finish { display: inline-flex; }
+
+
+  /* ─── Reduced motion ─────────────────────────────────────────────────────
+     The global motion-sanctuary collapses the bloom + return to a snap;
+     completion still registers (ring lit, then exit) — meaning preserved
+     without motion (MOTION §4.3). */
+
+
+  /* ─── Forced colors — drop-shadow/filter are ignored by the OS palette;
+     the ring keeps its Highlight role. Nothing to override. ────────────────*/
+}

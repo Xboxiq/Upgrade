@@ -3733,3 +3733,168 @@ SPRING(ε2) · VEIL(ε3) — VEIL is a fresh debut here.
   additive, frozen; the third surface type (slide-over/sheet) of SPATIAL §3 is now live
 - Creativity Health: **100 / 100** · Forbidden Library violations: **0**
 - Sacred preserved: 14 v4 Upg.* APIs · `archive/` · `prompts/v[1-4]/` · γ/δ files untouched
+
+
+
+---
+
+## v5 TADAFFUQ — ζ1 ZEN_TRIGGER — 2026-05-30
+
+**Branch:** `tadaffuq-ζ-flow` · **Pillar:** ζ (FLOW / ZEN MODE) · **Stage:** 1 of 3 — **opens Pillar ζ**
+**Pulse:** 🌙 **VEIL_PULSE** *(chronic focus mode — distinct in temporal axis from ε3's acute VEIL)*
+**Verified at commit:** `0b84f8c`
+
+### Files shipped
+- `platform-v5/assets/css/zen.css` (NEW, 151 lines) — `@layer components`: `.zen-veil` (the sanctioned dim layer — `position:fixed; inset:0; z-index:--z-scrim`, `background:var(--canvas)`, opacity 0 → 0.82 on `[data-open]` over `--duration-zen`); `:root[data-zen="active"] [data-zen-scope]` scope-lift to `--z-overlay` (specificity 0,3,0 — beats `.bento-card[data-expanded]` 0,2,0); chronic dock dissolve `:root[data-zen="active"] .dock`; `.zen-exit` neutral return affordance (44×44, `visibility:hidden` at rest → out of tab order, arrives a beat after the veil via `transition-delay`); `.zen-trigger` neutral in-canvas control; reduced-motion delegated to the global motion-sanctuary; forced-colors guard
+- `platform-v5/assets/js/zen.js` (NEW, 206 lines) — classic IIFE exposing `Upg.zen` (frozen: `enter / exit / toggle / active / scope` + `_meta`); `enter(scope, opts?)` resolves Element|selector, marks `[data-zen-scope]`, shows veil (reflow then `[data-open]`), sets `data-zen="active"` on `<html>`, focuses the scope, fires `upg:zen:enter`; `exit()` fades+hides veil on `transitionend` (token-aligned safety net `--duration-zen`+60ms), restores focus, fires `upg:zen:exit`; idempotent re-scope while active; `[data-zen-open]`/`[data-zen-close]`/veil-click delegation; Escape in **capture** phase (after ε1 overlay handler), guarded by `Upg.overlay.isOpen()`, `stopPropagation` to block δ2 bento-collapse; durations read from `--duration-zen` (no invented ms)
+- `platform-v5/index.html` — linked `zen.css` (after `bento-expand.css`); deferred `zen.js`; added `#zen-veil` + `#zen-exit` (`data-zen-close`, `actions.close` icon); added `.zen-trigger` (`data-zen-open="[data-card='daily-focus']"`, `training.objective` icon) inside the focal card detail
+- `prompts/v5/ζ1_ZEN_TRIGGER.md` (NEW spec, authored before execution per AUTO_PILOT §4)
+
+### Verified by grep on commit `0b84f8c`
+| metric | got | expected |
+|---|---|---|
+| zen.css + zen.js exist | 2 | 2 |
+| `Upg.zen` frozen methods | 5 (+`_meta`) | ≥ 5 |
+| `data-zen` rules in zen.css | 3 | ≥ 3 |
+| veil `inset:0` + `--z-scrim` | 1 | 1 |
+| scope lift `--z-overlay` | 2 | ≥ 1 |
+| fires `upg:zen:enter` / `:exit` | 2 | 2 |
+| `data-zen-*` hooks in index.html | 2 | ≥ 2 |
+| emoji in zen files | 0 | 0 |
+| hex in zen files | 0 | 0 |
+| `!important` in zen.css | 0 | 0 |
+| inline `<svg viewBox>` in index | 0 | 0 |
+| physical-direction props | 0 | 0 |
+| `v5_logical_props_audit.py` exit | 0 | 0 |
+| `node --check` zen.js | OK | OK |
+| http serve (index/zen.css/zen.js) | 200/200/200 | 200 |
+
+### Pulse — 🌙 VEIL_PULSE
+**The Surprise:** الدُّخول إلى التَركيز بالطَرح لا بالإضافة. لا صُندوق modal يَظهَر ليُحاصِر الشاشة — بل عالَم يَنحَسِر: الـ dock **يَذوب** (opacity → 0، حالة مُزمِنة لا آنية)، وحِجاب بلَون الكانفس العَميق نَفسِه يَهبِط على كل شيء، ولا يُرفَع فَوقَه إلا المُهِمَّة الواحِدة المَقصودة (إلى `--z-overlay`) فتَصير فُسحَة. الدُّخول مَوقوت على أبطأ مُدَّة في النِظام (`--duration-zen` ٦٤٠ms) كنَفَسٍ مَحبوس. والحِجاب يَستَقِر عند 0.82 لا عند العَتمة الكامِلة: العالَم **حاضِر، لكنه مَكتوم** — طَيف خَلف الفُسحَة.
+**Avoided:** Forbidden #5 (modal popup `position:fixed; inset:0` كَسطح محتوى) — هنا الحِجاب طبقة تَعتيم مَسموحة لا صُندوق محتوى؛ وكذلك Forbidden #15 (طبقة تَعليم/إرشاد طُفَيلية تَظهَر بلا استِدعاء). الزِن يَطرَح، لا يُضيف.
+**Inspired-by:** Wild Card #2 — the negative space of a Hokusai wave: the work is what the brush *didn't* paint. التَركيز يُكشَف بما يَنحَسِر، لا بما يُرسَم.
+**Originality Self-Score:** 4/5 — focus/zen modes are common; the 4/5 comes from (1) focus by **subtraction** — the world recedes rather than a box appearing; (2) the veil at **0.82 not total black** so the surroundings stay a present-but-hushed ghost (Hokusai negative space); (3) a verified **single-veil layering** that lifts exactly the scope above a `--z-scrim` dim layer with specificity that beats the δ2 expanded-card rule; (4) entry paced on the slowest token as a held breath, durations **read from tokens**; (5) honest a11y — focus moves to the task and returns to the trigger, the exit control is out of tab order until zen holds, Escape ordered after the overlay handler. Not 5 because focus-mode-by-dimming is a known idea; originality is in the subtraction discipline + verified clean layering.
+
+### Distinction from ε3 VEIL_PULSE (pivot compliance)
+ε3 VEIL = **acute** — a transient dock dissolve bound to one overlay open/close, returning on tarteel time. ζ1 VEIL = **chronic** — a sustained focus field held for a whole training session, entered by an explicit `Upg.zen.enter(scope)`, with a veil over the *entire* canvas (not just the dock) and a single task lifted out of it. Same category, different temporal axis (the sanctioned reuse pattern, PULSE_LIBRARY §1). **Pivot watch:** last three categories were SPRING(ε2) · VEIL(ε3) · VEIL(ζ1) — now 2× VEIL in a row, so **ζ2 MUST pivot away from VEIL** (§5.1).
+
+### Sacred preserved
+- ε3/ε2/ε1 + δ + γ + β + α work intact — zen is purely additive; the focal card gained one neutral `.zen-trigger` button inside its already-existing detail subtree
+- `Upg.choreo` (ε3) dock veil untouched — ζ1 dissolves the dock via a *separate* `:root[data-zen="active"] .dock` opacity rule; both only lower opacity, no clash, no redeclare of the base `.dock`
+- v4 Upg.* APIs preserved; `Upg.zen` is a NEW additive namespace
+- `archive/` untouched
+
+
+
+---
+
+## v5 TADAFFUQ — ζ2 ZEN_CANVAS — 2026-05-30
+
+**Branch:** `tadaffuq-ζ-flow` · **Pillar:** ζ (FLOW) · **Stage:** 2 of 3
+**Pulse:** 🌗 **GLOW_PULSE** *(pivot away from VEIL — ε3+ζ1 were 2× VEIL; distinct from γ3's hue-nudge GLOW)*
+**Verified at commit:** `ec18afb`
+
+### Files shipped
+- `platform-v5/assets/css/zen.css` (APPEND, +67 → 218 lines) — a second `@layer components` block (ζ1's rules untouched): (1) `.zen-veil[data-open="true"]` extended with `backdrop-filter: saturate(0.32)` (+`-webkit-`) — drains the chroma of everything painted *beneath* the veil, while the scope (above the veil at `--z-overlay`) is excluded by paint order; (2) `:root[data-zen="active"] [data-zen-scope]` gains `box-shadow: var(--shadow-3)` so the clearing floats; (3) `@keyframes zen-ring-breathe` (drop-shadow glow + opacity lift, two stops, relative-color `hsl(from var(--accent-progress) …)`) on `:root[data-zen="active"] [data-zen-scope] .ring-bar`, `var(--duration-skeleton)` `--ease-morph` `infinite alternate`
+- `prompts/v5/ζ2_ZEN_CANVAS.md` (NEW spec, authored before execution)
+
+### Verified by grep on commit `ec18afb`
+| metric | got | expected |
+|---|---|---|
+| desaturation on veil (`saturate` rules) | 2 | ≥ 1 |
+| `backdrop-filter: blur(N≥12px)` | 0 | 0 |
+| `@keyframes zen-ring-breathe` | 1 | 1 |
+| ring-bar breathe selector | 1 | 1 |
+| breathe anchored to `--duration-skeleton` | 1 | 1 |
+| `!important` in zen.css | 0 | 0 |
+| emoji / hex in zen.css | 0 / 0 | 0 |
+| `data-progress` hosts (single accent) | 1 | 1 |
+| physical-direction props | 0 | 0 |
+| `v5_logical_props_audit.py` exit | 0 | 0 |
+| http serve (index / zen.css) | 200 / 200 | 200 |
+
+### Pulse — 🌗 GLOW_PULSE
+**The Surprise:** في وَضع التَركيز، العالَم المَكتوم يُجَرَّد من لَونِه. `backdrop-filter: saturate(0.32)` على الحِجاب يُصَفّي اللَون من كل ما رُسِمَ تَحتَه (الكانفس المَكتوم كُلّه) — أما المُهِمَّة المَرفوعة فوق الحِجاب (`--z-overlay` > `--z-scrim`) فمُستَثناة بِترتيب الطِلاء، تَحتَفِظ بكامِل لَونِها. النَتيجة عالَم أُحادي اللَون باستِثناء واحِد: حَلقة التَقَدُّم تُبقي cyan الـ `--accent-progress` و**تَتَنَفَّس** (وَهَج `drop-shadow` بطيء، `--duration-skeleton` `infinite alternate`) ما دامَت الجَلسة حَيَّة. بلا blur (Forbidden #9): الـ `saturate()` رَخيص على الـ GPU.
+**Avoided:** Forbidden #9 (الـ `backdrop-filter: blur(N≥12px)` الثَقيل في كل مَكان) — هنا saturate بِلا blur؛ وكذلك الـ AI-default "وَضع التَركيز = أَعتِم أكثر فقط" حَيث التَجريد اللَوني هنا هو البَطَل لا مُجَرَّد عَتمة.
+**Inspired-by:** Wild Card #14 — خَطّ ظِلّ قَوس آيا صوفيا عند الظَهيرة (the shadow-line of a Hagia Sophia archway at noon): الضوء — هنا اللَون الوَحيد الناجي — كعُنصُر بِنائي يُعَرِّف الفَراغ.
+**Originality Self-Score:** 4/5 — focus-mode dimming is common; the 4/5: (1) the protagonist is **desaturation**, not darkness — a monochrome field with exactly one colour; (2) the scope is excluded from the drain by **verified paint order** (above `--z-scrim`), not a JS toggle; (3) the one surviving colour **breathes only while the session lives** — chroma as a liveness signal (CHROMA single-accent §7 taken literal: one colour on screen); (4) **no new duration token** — `--duration-skeleton` + `alternate`; (5) reduced-motion keeps the meaning statically. Not 5 because saturate-dimming is a known primitive; originality is in the single-living-colour discipline + clean paint-order exclusion.
+
+### Distinction from γ3 GLOW_PULSE (pivot compliance)
+γ3 nudged the *canvas hue* a few degrees toward the active accent (warmth follows attention). ζ2 instead **drains chroma** from the whole field so the single accent is the only colour left — opposite mechanism (subtract colour vs. add warmth), same family. **Pivot satisfied:** SPRING(ε2) · VEIL(ε3) · VEIL(ζ1) · GLOW(ζ2) — the 2× VEIL run is broken; no category 3× in a row.
+
+### Sacred preserved
+- ζ1 rules untouched (pure append); dock centring transform untouched (dissolve only)
+- ring.css untouched — ζ2 only *animates* the existing `.ring-bar` while zen holds
+- no JS change this stage; all Upg.* APIs intact; `archive/` untouched
+- single-accent invariant strengthened: `data-progress` host count stays 1
+
+
+
+---
+
+## v5 TADAFFUQ — ζ3 ZEN_EXIT — 2026-05-30
+
+**Branch:** `tadaffuq-ζ-flow` · **Pillar:** ζ (FLOW) · **Stage:** 3 of 3 — **CLOSES ζ**
+**Pulse:** ⚡ **SPRING_PULSE** *(pivot-safe: last two were VEIL·GLOW; distinct from ε2's drag-momentum spring — a one-shot completion bloom)*
+**Verified at commit:** `1cee620`
+
+### Files shipped
+- `platform-v5/assets/css/zen.css` (APPEND, +79 → 298 lines) — a third `@layer components` block: `@keyframes zen-ring-bloom` (scale 1→1.08→1) + `@keyframes zen-ring-bloom-glow` (drop-shadow 2px→12px→5px, relative-color); `:root[data-zen="active"] [data-zen-scope][data-zen-complete] .ring` → bloom on `--ease-spring`; `… .ring-bar` → bloom-glow at specificity 0,5,0 (beats the ζ2 breathe 0,4,0 so the one-shot wins over the infinite loop); `:root[data-zen-exiting="true"] .dock` → patient opacity-only re-emergence (`transition-delay: --duration-panel`, then `--duration-zen`); `.zen-finish` visibility (only inside the held clearing)
+- `platform-v5/assets/js/zen.js` (EDIT, +58 net → 255 lines) — added `complete(opts?)` (optional `Upg.ring.set` render, set `[data-zen-complete]`, fire `upg:zen:complete`, then `exit()` after `--duration-panel`); enriched `exit()` to drive `data-zen-exiting` (removed after `--duration-zen + --duration-panel`) and clear `[data-zen-complete]`; extended the **frozen** `Upg.zen` surface with `complete`; `[data-zen-finish]` delegation; reads `--duration-panel` at boot
+- `platform-v5/index.html` — added the `.zen-finish` button (`data-zen-finish="[data-ring-host]"`, `training.completed` icon) in the focal card detail
+- `prompts/v5/ζ3_ZEN_EXIT.md` (NEW spec, authored before execution)
+
+### Verified by grep on commit `1cee620`
+| metric | got | expected |
+|---|---|---|
+| bloom `@keyframes` (bloom + glow) | 2 | 2 |
+| `complete()` (fn + frozen surface + deleg) | 3 | ≥ 2 |
+| fires `upg:zen:complete` | 2 | ≥ 1 |
+| `data-zen-exiting` dock re-emerge rule | 1 | 1 |
+| bloom uses `--ease-spring` | 1 | 1 |
+| toast / counter-from-0 / confetti **components** | 0 / 0 / 0 | 0 |
+| `!important` / emoji / hex in zen files | 0 | 0 |
+| icon key `training.completed` valid | 1 | exists |
+| `data-zen-finish` hook · single-accent host | 1 · 1 | ≥1 · 1 |
+| physical-direction props · lint exit | 0 · 0 | 0 |
+| `node --check` zen.js | OK | OK |
+| http serve (index/zen.css/zen.js) | 200/200/200 | 200 |
+
+> Honesty note: the words "toast"/"confetti" appear only inside avoid-comments
+> (explaining what was *not* built); no such component ships. Verified by grep.
+
+### Pulse — ⚡ SPRING_PULSE
+**The Surprise:** الخُروج من التَركيز ليس إغلاقاً بل ازدِهاراً مُتَمَهِّلاً. `Upg.zen.complete()` يَضَع `[data-zen-complete]` على المُهِمَّة، وهذه السِمَة الواحِدة (أ) **تُوقِف** نَفَس ζ2 وتُبَدِّله بـ**ازدِهارة** واحِدة — `zen-ring-bloom` تُكَبِّر حاوية الحَلقة 1 → 1.08 → 1 على `--ease-spring` (تَجاوُز-ثُمَّ-استِقرار حَقيقي لا قَفزة خَطية)، ووَهَج `.ring-bar` **يَتَّسِع** ثم يَستَقِر على إضاءة هادِئة؛ ثم (ب) بَعد زَمَن الازدِهار يُنادي JS الـ `exit()` الذي صار يَقود أيضاً **عَودة الـ dock**: يَبقى الـ dock ذائِباً نَفَساً كامِلاً (`transition-delay: --duration-panel`) ثم يَطلُع على `--duration-zen`. سَريع لحِمايَة التَركيز عند الدُخول، **صَبور** عند العَودة — نَفس الإيقاع غَير المُتَماثِل الذي أعطاه ε3 للـ overlay، يُغلَق الآن على الحَلقة.
+**Avoided:** Forbidden #2 (الـ toast notification) — مُستَبدَل بالازدِهار في المَوضِع؛ وForbidden #10 (عَدّاد يَتَصاعَد من 0) — قيمة الحَلقة تُرسَم، والازدِهار **شَكل** لا رَقم يَعُدّ.
+**Inspired-by:** Wild Card #1 — هَندَسة بَلاط إزنيق الشُعاعية التي لا تَكتَمِل إلا عند التَكرار السابِع (Iznik tile radial geometry resolving only at the seventh repetition): النَقش يَكتَمِل بالضَبط حين تَنغَلِق الحَلقة.
+**Originality Self-Score:** 4/5 — completion feedback is common; the 4/5: (1) the celebration is **on the ring**, never a toast/confetti/page-wide flash; (2) a **single attribute** swaps an infinite breathe for a one-shot bloom via deliberate specificity (0,5,0 > 0,4,0) — no JS animation bookkeeping; (3) the **asymmetric exit** closes the ε3 cadence (quick protect / patient return) using only opacity so the dock's base transitions stay intact; (4) **no new duration token**; (5) honest a11y — `upg:zen:complete` for host announcement, focus still returns to the trigger. Not 5 because completion-bloom is a known idea; originality is in the in-place discipline + the attribute-driven breathe→bloom handoff.
+
+### Distinction from ε2 SPRING_PULSE (pivot compliance)
+ε2 SPRING was *drag physics* — a bottom-sheet rubber-band with a velocity/distance dismiss gate. ζ3 SPRING is a *completion bloom* — a one-shot overshoot-and-settle on the ring plus a patient dock return. Same easing family (`--ease-spring`), opposite trigger (user drag vs. session completion). **Pivot satisfied:** the running sequence GLASS·SPRING·VEIL·VEIL·GLOW·SPRING has no category 3× in a row.
+
+### Sacred preserved
+- ζ1/ζ2 rules untouched (pure CSS append); ring.css untouched (ζ3 only animates existing `.ring`/`.ring-bar`)
+- dock centring transform untouched — re-emergence transitions **opacity only**, inside a scoped `[data-zen-exiting]` window
+- v4 Upg.* APIs preserved; `Upg.zen` extended on its own frozen surface (additive)
+- `archive/` untouched · single-accent invariant intact (`data-progress` host count stays 1)
+
+---
+
+## v5 TADAFFUQ — PILLAR ζ (FLOW / ZEN MODE) — CLOSED — 2026-05-30
+
+**Branch:** `tadaffuq-ζ-flow` · **3/3 stages · 3 Pulses · 1 new API (`Upg.zen`)**
+
+| stage | title | files | pulse | sha |
+|---|---|---|---|---|
+| ζ1 | ZEN_TRIGGER | zen.css + zen.js (+spec) | 🌙 VEIL_PULSE (chronic) | `0b84f8c` |
+| ζ2 | ZEN_CANVAS | zen.css (append) (+spec) | 🌗 GLOW_PULSE (drained field) | `ec18afb` |
+| ζ3 | ZEN_EXIT | zen.css + zen.js + index (+spec) | ⚡ SPRING_PULSE (completion bloom) | `1cee620` |
+
+### Pillar ζ tally
+- Stages done: α1–α4 + β1–β3 + γ1–γ3 + δ1–δ3 + ε1–ε3 + ζ1–ζ3 = **19 / 24**
+- Total Pulses: **12 / 15** (DOCK · MORPH · GLOW · GLASS · REVEAL · RING · SPRING · VEIL)
+- Unique categories used: **8 / 9** — only **HAPTIC** remains (must land in η)
+- New v5 API this pillar: `Upg.zen` (enter / exit / toggle / complete / active / scope) — additive, frozen; Focus Mode by subtraction is now live
+- Categories reused *distinctly* (sanctioned, PULSE_LIBRARY §1): VEIL (chronic vs ε3 acute) · GLOW (drain vs γ3 hue-nudge) · SPRING (bloom vs ε2 drag-momentum)
+- Creativity Health: **100 / 100** · Forbidden Library violations: **0**
+- Sacred preserved: 14 v4 Upg.* APIs · `archive/` · `prompts/v[1-4]/` · ε/δ/γ files untouched
