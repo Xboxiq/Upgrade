@@ -59,8 +59,9 @@ class _CallCenterScreenState extends State<CallCenterScreen> {
       backgroundColor: p.canvas,
       body: Stack(
         children: <Widget>[
-          // The living canvas — ambient aurora behind everything.
-          const Positioned.fill(child: AuroraBackground()),
+          // The living deep-space canvas — starfield + drifting aurora
+          // filaments, with subtle parallax driven by the page scroll.
+          Positioned.fill(child: AuroraBackground(scrollable: _scroll)),
 
           LargeTitleScaffold(
             title: 'وحدة الكول سنتر',
@@ -79,7 +80,7 @@ class _CallCenterScreenState extends State<CallCenterScreen> {
                     const SizedBox(height: Space.x8),
                     _voiceHeader(p),
                     const SizedBox(height: Space.x4),
-                  ].animate(interval: 70.ms).fadeIn(duration: Motion.emerge).moveY(begin: 14, end: 0, curve: Motion.standard)),
+                  ].animate(interval: 65.ms).fadeIn(duration: Motion.emerge).moveY(begin: 18, end: 0, curve: Motion.emphasized).scaleXY(begin: 0.985, end: 1, curve: Motion.emphasized)),
                 ),
               ),
               _voiceShelf(p),
@@ -494,8 +495,9 @@ class _EmpathyCard extends StatelessWidget {
             height: 38,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: p.brand.withValues(alpha: 0.14),
+              color: p.fill,
               borderRadius: BorderRadius.circular(Radii.pill),
+              border: Border.all(color: p.line, width: 0.5),
             ),
             child: Text(step.index, style: tt.titleMedium?.copyWith(color: p.brand)),
           ),

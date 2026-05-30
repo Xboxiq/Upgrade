@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../theme/palette.dart';
 import '../theme/tokens.dart';
+import 'depth.dart';
 import 'press_scale.dart';
 
-/// A clean iOS-grade card: a grouped surface with a hairline edge and soft,
-/// restrained depth. Lifts gently on hover (web/desktop) and sinks on press.
-/// No neon, no loud borders — the content carries the screen.
+/// A grouped surface whose depth is a **rim light** (bright top edge fading to
+/// a dark contact line), not a drop shadow — a distinctive, non-iOS treatment.
+/// On hover (web/desktop) it rises a touch and the rim sharpens; it sinks on
+/// press. No neon, no loud borders — the content carries the screen.
 class SurfaceCard extends StatefulWidget {
   const SurfaceCard({
     super.key,
@@ -23,7 +25,7 @@ class SurfaceCard extends StatefulWidget {
   final EdgeInsetsGeometry padding;
   final double radius;
 
-  /// When true the card carries a faint brand wash + brand-tinted hairline.
+  /// When true the card carries a faint brand wash + brand-tinted inner edge.
   final bool accent;
   final bool interactive;
 
@@ -39,32 +41,43 @@ class _SurfaceCardState extends State<SurfaceCard> {
     final AppPalette p = context.palette;
     final bool lifted = _hover && widget.interactive && widget.onTap != null;
 
-    final Color border = widget.accent
-        ? p.brand.withValues(alpha: 0.45)
-        : (lifted ? p.lineStrong : p.line);
+    // Base surface, with a faint brand wash on accent cards.
+    final Color base = widget.accent
+        ? Color.alphaBlend(p.brand.withValues(alpha: p.isDark ? 0.10 : 0.05), p.surface1)
+        : p.surface1;
+
+    // Tonal "lit from above": a barely-there vertical gradient on the fill.
+    final Gradient innerFill = LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: <Color>[
+        Color.alphaBlend(Colors.white.withValues(alpha: p.isDark ? 0.05 : 0.0), base),
+        base,
+      ],
+    );
 
     final Widget card = AnimatedContainer(
       duration: Motion.quick,
       curve: Motion.standard,
-      transform: lifted ? Matrix4.translationValues(0, -2, 0) : Matrix4.identity(),
+      transform: lifted ? Matrix4.translationValues(0, -3, 0) : Matrix4.identity(),
       transformAlignment: Alignment.center,
-      padding: widget.padding,
+      // The rim gradient IS the border — a 1px reveal around the inner fill.
       decoration: BoxDecoration(
-        color: widget.accent
-            ? Color.alphaBlend(p.brand.withValues(alpha: p.isDark ? 0.10 : 0.05), p.surface1)
-            : p.surface1,
+        gradient: Depth.rim(p, strong: lifted),
         borderRadius: BorderRadius.circular(widget.radius),
-        border: Border.all(color: border, width: 0.5),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.black.withValues(alpha: p.isDark ? 0.32 : 0.05),
-            blurRadius: lifted ? 28 : 16,
-            offset: Offset(0, lifted ? 14 : 8),
-            spreadRadius: -12,
-          ),
-        ],
       ),
-      child: widget.child,
+      padding: const EdgeInsets.all(Depth.rimWidth),
+      child: Container(
+        padding: widget.padding,
+        decoration: BoxDecoration(
+          gradient: innerFill,
+          borderRadius: BorderRadius.circular(widget.radius - Depth.rimWidth),
+          border: widget.accent
+              ? Border.all(color: p.brand.withValues(alpha: 0.40), width: 0.6)
+              : null,
+        ),
+        child: widget.child,
+      ),
     );
 
     final Widget interactive = widget.onTap == null

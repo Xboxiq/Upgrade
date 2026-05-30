@@ -85,9 +85,13 @@ the blue current = where you stand, the nebula = what to do next.
 
 ---
 
-## 4. Shape & layout language
+## 4. Shape, depth & layout language
 
 - **Soft squircle** radii (continuous-feel), grouped insets, generous negative space.
+- **Depth = rim light, not drop shadow.** A deliberate break from the iOS soft-shadow
+  cliché: every panel's edge is a hairline that catches light along the top and fades to a
+  dark contact line at the bottom (`Depth.rim`), over tonally-lit surfaces. It reads like
+  glass lit from above in deep space — crisp, distinctive, and unmistakably *not* Cupertino.
 - **Bento** composition for dashboards/heroes: tiles of deliberate, varied weight — never a uniform grid.
 - **Floating dock** instead of an edge-to-edge tab bar: a centred, glass, pill-shaped
   navigator hovering above the canvas with margin on all sides. The dock *floats on the tide.*
@@ -100,8 +104,9 @@ the blue current = where you stand, the nebula = what to do next.
 
 - **Physical springs** (iOS feel), 60fps target, single controlled overshoot on press release.
 - **Progress fills like liquid** — the signature `TideRing` raises a wave level, it never just sweeps a stroke.
-- **Aurora drift** — an ambient, *very* slow, low-alpha background bloom. It is intentionally
-  restrained (not a light show); it represents the living ambient flow of the platform.
+- **Aurora filaments drift** — thin flowing ribbons cross the deep-space canvas as a slow,
+  ambient current (the literal "flow"), with a faint twinkling starfield and **scroll parallax**.
+  No coloured glow behind text — depth is built from craft, not soft orbs.
 - **Haptics on every meaningful press** (light impact), wired through `PressScale`.
 - **`prefers-reduced-motion` is honoured**: aurora freezes to a static gradient, count-ups
   resolve instantly, breathing stops. Comprehension never depends on motion.
@@ -113,8 +118,10 @@ the blue current = where you stand, the nebula = what to do next.
 1. **`TideRing`** — a circular vessel whose interior fills with a luminous **azure→violet wave**
    proportional to mastery. The wave crests, has surface highlight, and animates on change.
    *Meaning: your mastery is a rising current of flow.* Used for hero, featured, focus mode.
-2. **`AuroraBackground`** — a deep-space gradient base with a slow indigo + fuchsia nebula
-   bloom drifting behind the canvas. `RepaintBoundary`-isolated, reduced-motion aware. *Meaning: the ambient flow.*
+2. **`AuroraBackground`** — a deep-space gradient base + a fine twinkling **starfield** + three
+   thin **aurora filaments** (flowing ribbons that fade at their ends), with multi-layer
+   **scroll parallax**. Deliberately *not* the generic soft-orb glow — and it leaves no coloured
+   halo behind text. `RepaintBoundary`-isolated, reduced-motion aware. *Meaning: the current of flow through the void.*
 3. **`VoiceWave`** — a **live animated waveform** for the voice section. *Meaning: voice is motion.*
 
 ---

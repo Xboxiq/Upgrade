@@ -65,3 +65,61 @@ Format: `order · date · task · changes · files · verification · branch · 
 **Branch**: `feat/flutter-creative-overhaul` (updates PR #137).
 
 **NEXT**: ⛔ Still at the PHASE 0 approval gate — confirm the "Cosmic Flow" direction, then scale section-by-section.
+
+
+---
+
+### 004 · 2026-05-30 · Kill the "AI glow" — crafted backdrop + finer detail + better motion
+
+**What changed** (owner feedback: the coloured glow behind text/headings looked like a generic AI template)
+- **Removed the radial colour blooms** from `AuroraBackground` (the source of the purple/fuchsia halo behind headings). Rebuilt it as a crafted deep-space canvas: gradient base + a fine **twinkling starfield** (dark mode) + three thin **aurora filaments** (flowing gradient ribbons that fade at their ends) — far more expressive of *flow* and with **no coloured halo behind text**.
+- **Scroll parallax**: stars + each filament move at their own depth as the page scrolls (passed the `ScrollController` into the background) — reads as real space, a finer detail.
+- **Removed the coloured glow under `FilledCta`** → a clean neutral depth shadow + a hairline top highlight (lit-from-above). The gradient alone carries the brand.
+- **Finer detail on `SurfaceCard`**: a barely-there top→bottom sheen in dark mode (premium dimensionality, no glow).
+- **Better entrance motion**: staggered fade + rise + subtle scale-settle on an emphasised curve.
+
+**Files**: `lib/widgets/aurora_background.dart` (rewritten), `lib/ui/controls.dart`, `lib/widgets/surface_card.dart`, `lib/features/callcenter/callcenter_screen.dart`, `DESIGN.md`, `PROGRESS.md`.
+
+**Verification**: `flutter analyze` → clean · `flutter test` → 2/2 · `flutter build web --release` → ok. ✅
+
+**Branch**: `feat/flutter-creative-overhaul` (updates PR #137).
+
+**NEXT**: ⛔ Still at the PHASE 0 approval gate. On approval, scale section-by-section. Remaining AI-ish accents to keep an eye on: the ring glow (kept — it's meaningful on progress, not behind text) can be softened further if desired.
+
+
+---
+
+### 005 · 2026-05-30 · Kill tinted halos around icons & badges
+
+**What changed** (owner: still saw a coloured "shadow" around icons and badges)
+- The halo was the translucent **coloured fill behind icons/marks** (not a real shadow). Moved to a crafted rule: **colour lives in the glyph/text; the container is a crisp neutral chip with a hairline edge** (Linear/Vercel-style).
+- `IconBadge`: neutral `fill` + 0.5px hairline border + coloured icon (was `tint @ 0.18`).
+- `InfoPill`: neutral `fill` + hairline + coloured text/icon; the `mono` flag now actually renders JetBrains Mono.
+- Empathy index circle + floating-dock active item: neutral "raised key" (hairline) instead of a brand-tinted background; colour stays in the glyph/label.
+- Vivid colour is fully preserved where it carries meaning (glyphs, rings/tide fill, CTA gradient, eyebrows, filaments) — the UI got cleaner, not flatter.
+
+**Files**: `lib/widgets/ui_bits.dart`, `lib/ui/floating_dock.dart`, `lib/features/callcenter/callcenter_screen.dart`, `PROGRESS.md`.
+
+**Verification**: `flutter analyze` → clean · `flutter test` → 2/2 · `flutter build web --release` → ok. ✅
+
+**Branch**: `feat/flutter-creative-overhaul` (updates PR #137).
+
+**NEXT**: ⛔ PHASE 0 approval gate. Content blocks (compare cells, NoteCard) intentionally keep their soft semantic tint (green=right / amber=warn) since that colour is meaningful, not decorative — flag if you want those neutralised too.
+
+
+---
+
+### 006 · 2026-05-30 · Replace drop shadows with a distinctive "rim light" depth system
+
+**What changed** (owner: drop shadows are an iOS/Apple cliché — wanted something more distinctive)
+- **New depth language `Depth.rim`** (`lib/widgets/depth.dart`): elevation is a **rim light** — a bright hairline catching light along the top edge that fades to a dark contact line at the bottom, over tonally-lit surfaces. Reads like glass lit from above in deep space; crisp and non-iOS.
+- **Removed every `BoxShadow`** in the app (verified: none remain). Rebuilt depth with the rim wrapper on `SurfaceCard`, `GlassSurface`, `FloatingDock`, and dropped the neutral shadow under `FilledCta` (now gradient + hairline top highlight).
+- Hover on cards now sharpens the rim + rises 3px (instead of growing a shadow).
+
+**Files**: `lib/widgets/depth.dart` (new), `lib/widgets/surface_card.dart`, `lib/widgets/glass_surface.dart`, `lib/ui/floating_dock.dart`, `lib/ui/controls.dart`, `DESIGN.md`, `PROGRESS.md`.
+
+**Verification**: `flutter analyze` → clean · `flutter test` → 2/2 · `flutter build web --release` → ok. ✅
+
+**Branch**: `feat/flutter-creative-overhaul` (updates PR #137).
+
+**NEXT**: ⛔ PHASE 0 approval gate. The progress-ring luminescence (a soft glow *around the ring*, not a shadow) is kept as a deliberate signature; can be softened/removed on request.

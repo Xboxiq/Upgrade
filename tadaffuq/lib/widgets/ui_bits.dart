@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../theme/app_theme.dart';
 import '../theme/palette.dart';
 import '../theme/tokens.dart';
 
-/// A rounded, tinted squircle holding a single monochrome icon.
+/// A rounded squircle holding a single monochrome icon. The colour lives in
+/// the glyph; the container is a crisp neutral chip with a hairline edge — no
+/// coloured halo behind the icon.
 class IconBadge extends StatelessWidget {
   const IconBadge(this.icon, {super.key, this.tint, this.size = 40, this.iconSize = 21});
   final IconData icon;
@@ -19,15 +22,17 @@ class IconBadge extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: c.withValues(alpha: p.isDark ? 0.18 : 0.12),
+        color: p.fill,
         borderRadius: BorderRadius.circular(size * 0.3),
+        border: Border.all(color: p.line, width: 0.5),
       ),
       child: Icon(icon, size: iconSize, color: c),
     );
   }
 }
 
-/// A compact label pill (optionally with a leading icon).
+/// A compact label pill (optionally with a leading icon). Neutral chip,
+/// coloured text/icon — crisp, no tinted glow.
 class InfoPill extends StatelessWidget {
   const InfoPill(this.label, {super.key, this.icon, this.color, this.mono = false});
   final String label;
@@ -39,11 +44,15 @@ class InfoPill extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppPalette p = context.palette;
     final Color c = color ?? p.inkMuted;
+    final TextStyle? style = mono
+        ? AppTheme.mono(size: 11.5, weight: FontWeight.w600, color: c)
+        : Theme.of(context).textTheme.labelSmall?.copyWith(color: c);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: Space.x3, vertical: 5),
       decoration: BoxDecoration(
-        color: c.withValues(alpha: 0.12),
+        color: p.fill,
         borderRadius: BorderRadius.circular(Radii.pill),
+        border: Border.all(color: p.line, width: 0.5),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -52,7 +61,7 @@ class InfoPill extends StatelessWidget {
             Icon(icon, size: 13, color: c),
             const SizedBox(width: 5),
           ],
-          Text(label, style: Theme.of(context).textTheme.labelSmall?.copyWith(color: c)),
+          Text(label, style: style),
         ],
       ),
     );
