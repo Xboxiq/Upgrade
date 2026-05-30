@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'features/callcenter/callcenter_screen.dart';
+import 'app/app_shell.dart';
 import 'theme/app_theme.dart';
 import 'theme/theme_controller.dart';
 
@@ -38,7 +38,7 @@ class _TadaffuqAppState extends State<TadaffuqApp> {
             textDirection: TextDirection.rtl,
             child: child ?? const SizedBox.shrink(),
           ),
-          home: CallCenterScreen(
+          home: AppShell(
             isDark: _theme.isDark,
             onToggleTheme: _theme.toggle,
           ),

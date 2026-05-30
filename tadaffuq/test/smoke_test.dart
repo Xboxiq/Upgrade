@@ -10,23 +10,26 @@ void main() {
     GoogleFonts.config.allowRuntimeFetching = false;
   });
 
-  testWidgets('App boots and renders the Call Center unit', (WidgetTester tester) async {
+  // Pump the first frame, then advance past the staggered entrance animations
+  // (flutter_animate uses one-shot timers). We avoid pumpAndSettle because the
+  // ambient aurora / tide-ring tickers loop forever.
+  Future<void> boot(WidgetTester tester) async {
     await tester.pumpWidget(const TadaffuqApp());
-    await tester.pump(const Duration(milliseconds: 400));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 2));
+  }
 
-    expect(find.text('وحدة الكول سنتر'), findsWidgets);
-    expect(find.text('المهارات الأساسية'), findsOneWidget);
+  testWidgets('Platform shell boots — floating dock + home mastery ring', (WidgetTester tester) async {
+    await boot(tester);
+
+    expect(find.byType(FloatingDock), findsOneWidget);
+    expect(find.text('الرئيسية'), findsWidgets);
+    expect(find.byType(TideRing), findsWidgets);
   });
 
-  testWidgets('Aurora Tide chrome renders — floating dock + mastery tide ring', (WidgetTester tester) async {
-    await tester.pumpWidget(const TadaffuqApp());
-    await tester.pump(const Duration(milliseconds: 400));
+  testWidgets('Worlds catalogue is part of the shell', (WidgetTester tester) async {
+    await boot(tester);
 
-    // The floating dock replaces the edge-to-edge tab bar.
-    expect(find.byType(FloatingDock), findsOneWidget);
-    // The active dock item reveals its label.
-    expect(find.text('التدريب'), findsOneWidget);
-    // The signature mastery vessel is painted in the hero.
-    expect(find.byType(TideRing), findsWidgets);
+    expect(find.text('المبيعات الميدانية'), findsWidgets);
   });
 }

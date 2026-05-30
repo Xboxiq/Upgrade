@@ -8,7 +8,6 @@ import '../../theme/app_theme.dart';
 import '../../theme/palette.dart';
 import '../../theme/tokens.dart';
 import '../../ui/controls.dart';
-import '../../ui/floating_dock.dart';
 import '../../ui/groups.dart';
 import '../../ui/large_title_scaffold.dart';
 import '../../util/numerals.dart';
@@ -26,9 +25,7 @@ import 'widgets/archetype_sheet.dart';
 import 'widgets/technique_detail.dart';
 
 class CallCenterScreen extends StatefulWidget {
-  const CallCenterScreen({super.key, required this.isDark, required this.onToggleTheme});
-  final bool isDark;
-  final VoidCallback onToggleTheme;
+  const CallCenterScreen({super.key});
 
   @override
   State<CallCenterScreen> createState() => _CallCenterScreenState();
@@ -36,7 +33,6 @@ class CallCenterScreen extends StatefulWidget {
 
 class _CallCenterScreenState extends State<CallCenterScreen> {
   final ScrollController _scroll = ScrollController();
-  int _tab = 1; // "التدريب"
   int _register = 1; // empathy register: 0 = فصيح, 1 = عراقي
 
   @override
@@ -66,7 +62,15 @@ class _CallCenterScreenState extends State<CallCenterScreen> {
           LargeTitleScaffold(
             title: 'وحدة الكول سنتر',
             controller: _scroll,
-            trailing: _ThemeToggle(isDark: widget.isDark, onTap: widget.onToggleTheme),
+            leading: NavCircleButton(
+              icon: AppIcons.arrowLeft,
+              onTap: () => Navigator.of(context).maybePop(),
+            ),
+            trailing: NavCircleButton(
+              icon: AppIcons.gauge,
+              tint: p.brand,
+              onTap: () => showApIndexSheet(context),
+            ),
             slivers: <Widget>[
               SliverPadding(
                 padding: const EdgeInsets.fromLTRB(Space.x4, Space.x2, Space.x4, 0),
@@ -106,32 +110,8 @@ class _CallCenterScreenState extends State<CallCenterScreen> {
                   ]),
                 ),
               ),
-              _gap(132 + bottomInset),
+              _gap(Space.x10 + bottomInset),
             ],
-          ),
-
-          // Floating dock — navigation that hovers on the tide.
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: FloatingDock(
-              currentIndex: _tab,
-              items: const <DockItem>[
-                DockItem(icon: AppIcons.house, label: 'الرئيسية'),
-                DockItem(icon: AppIcons.flask, label: 'التدريب'),
-                DockItem(icon: AppIcons.gauge, label: 'الحاسبة'),
-                DockItem(icon: AppIcons.chartLineUp, label: 'التقدّم'),
-                DockItem(icon: AppIcons.dotsThreeOutline, label: 'المزيد'),
-              ],
-              onSelected: (int i) {
-                if (i == 2) {
-                  showApIndexSheet(context);
-                  return;
-                }
-                setState(() => _tab = i);
-              },
-            ),
           ),
         ],
       ),
@@ -697,42 +677,6 @@ class _VoiceFlipCardState extends State<_VoiceFlipCard>
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _ThemeToggle extends StatelessWidget {
-  const _ThemeToggle({required this.isDark, required this.onTap});
-  final bool isDark;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final AppPalette p = context.palette;
-    return PressScale(
-      onTap: onTap,
-      pressedScale: 0.9,
-      child: Container(
-        width: 38,
-        height: 38,
-        decoration: BoxDecoration(
-          color: p.fill,
-          borderRadius: BorderRadius.circular(Radii.pill),
-        ),
-        child: AnimatedSwitcher(
-          duration: Motion.quick,
-          transitionBuilder: (Widget child, Animation<double> a) => RotationTransition(
-            turns: Tween<double>(begin: 0.7, end: 1).animate(a),
-            child: FadeTransition(opacity: a, child: child),
-          ),
-          child: Icon(
-            isDark ? AppIcons.moon : AppIcons.sun,
-            key: ValueKey<bool>(isDark),
-            size: 20,
-            color: p.brand,
-          ),
-        ),
       ),
     );
   }

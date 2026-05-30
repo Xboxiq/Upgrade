@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../theme/app_icons.dart';
 import '../theme/app_theme.dart';
 import '../theme/palette.dart';
 import '../theme/tokens.dart';
+import 'press_scale.dart';
 
 /// A rounded squircle holding a single monochrome icon. The colour lives in
 /// the glyph; the container is a crisp neutral chip with a hairline edge — no
@@ -160,6 +162,75 @@ class NoteCard extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+
+/// A circular nav-bar action button (back / calculator / theme). Neutral chip
+/// with a hairline edge and a coloured glyph — consistent with the no-halo
+/// icon language and the rim-light depth system.
+class NavCircleButton extends StatelessWidget {
+  const NavCircleButton({super.key, required this.icon, this.onTap, this.tint});
+  final IconData icon;
+  final VoidCallback? onTap;
+  final Color? tint;
+
+  @override
+  Widget build(BuildContext context) {
+    final AppPalette p = context.palette;
+    return PressScale(
+      onTap: onTap,
+      pressedScale: 0.9,
+      child: Container(
+        width: 38,
+        height: 38,
+        decoration: BoxDecoration(
+          color: p.fill,
+          shape: BoxShape.circle,
+          border: Border.all(color: p.line, width: 0.5),
+        ),
+        child: Icon(icon, size: 19, color: tint ?? p.ink),
+      ),
+    );
+  }
+}
+
+
+/// A circular theme-toggle that cross-rotates between sun and moon.
+class ThemeToggleButton extends StatelessWidget {
+  const ThemeToggleButton({super.key, required this.isDark, required this.onTap});
+  final bool isDark;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final AppPalette p = context.palette;
+    return PressScale(
+      onTap: onTap,
+      pressedScale: 0.9,
+      child: Container(
+        width: 38,
+        height: 38,
+        decoration: BoxDecoration(
+          color: p.fill,
+          shape: BoxShape.circle,
+          border: Border.all(color: p.line, width: 0.5),
+        ),
+        child: AnimatedSwitcher(
+          duration: Motion.quick,
+          transitionBuilder: (Widget child, Animation<double> a) => RotationTransition(
+            turns: Tween<double>(begin: 0.7, end: 1).animate(a),
+            child: FadeTransition(opacity: a, child: child),
+          ),
+          child: Icon(
+            isDark ? AppIcons.moon : AppIcons.sun,
+            key: ValueKey<bool>(isDark),
+            size: 20,
+            color: p.brand,
+          ),
+        ),
       ),
     );
   }

@@ -123,3 +123,26 @@ Format: `order · date · task · changes · files · verification · branch · 
 **Branch**: `feat/flutter-creative-overhaul` (updates PR #137).
 
 **NEXT**: ⛔ PHASE 0 approval gate. The progress-ring luminescence (a soft glow *around the ring*, not a shadow) is kept as a deliberate signature; can be softened/removed on request.
+
+
+---
+
+### 007 · 2026-05-30 · PHASE 1 — from one screen to a multi-section platform
+
+**What changed** (owner: keep building, make it more distinctive, add platform-fitting features to test all at once)
+- **App shell + real navigation**: new `lib/app/app_shell.dart` — a shared deep-space backdrop + an `IndexedStack` of four sections driven by the floating dock (re-tap active tab = scroll to top). State preserved across tabs.
+- **Home dashboard** (`features/home`): time-aware greeting, overall mastery **TideRing**, momentum chips, a "continue" accent card → Call Center, your-worlds list, and a weekly **ActivityBars** chart.
+- **Worlds catalogue** (`features/worlds`): `worlds_data.dart` (5 domains — Call Center live; Field Sales / Negotiation / Customer Care / Programming seeded "coming soon"). Cards route to Call Center or show a coming-soon snackbar.
+- **Progress** (`features/progress`): headline stats, a hand-painted **RadarChart** of voice skills, weekly activity, and per-world mastery meters.
+- **More** (`features/more`): profile, theme switch, language, about + design-system credit.
+- **New signature visuals** (`widgets/charts.dart`): `ActivityBars`, `RadarChart`, `FlowMeter` — all CustomPainter, animated-in, reduced-motion aware, Cosmic-Flow themed.
+- **Call Center is now a pushed detail screen**: removed its embedded dock; added a back button (leading) + a calculator action (trailing); `LargeTitleScaffold` gained a `leading` slot. Theme toggle moved to Home/More via a reusable `ThemeToggleButton`; added `NavCircleButton`.
+- `main.dart` now launches `AppShell`.
+
+**Files**: new `app/app_shell.dart`, `features/home/home_screen.dart`, `features/worlds/{worlds_data,worlds_screen}.dart`, `features/progress/progress_screen.dart`, `features/more/more_screen.dart`, `widgets/charts.dart`; modified `main.dart`, `features/callcenter/callcenter_screen.dart`, `ui/large_title_scaffold.dart`, `widgets/ui_bits.dart`, `test/smoke_test.dart`.
+
+**Verification**: `flutter analyze` → No issues found · `flutter test` → 2/2 · `flutter build web --release` → ok. ✅
+
+**Branch**: `feat/cosmic-flow-refinements` (PR #138 — now carries refinements + the full platform).
+
+**NEXT**: Gather feedback on the new sections; candidate ideas — command palette (⌘K) search across worlds, a real Zen/Focus session flow, drag-and-drop voice drill, shared-element world→detail transition, streak calendar heatmap.

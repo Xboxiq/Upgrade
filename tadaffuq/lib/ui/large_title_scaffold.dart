@@ -13,12 +13,14 @@ class LargeTitleScaffold extends StatelessWidget {
     required this.title,
     required this.slivers,
     this.trailing,
+    this.leading,
     this.controller,
   });
 
   final String title;
   final List<Widget> slivers;
   final Widget? trailing;
+  final Widget? leading;
   final ScrollController? controller;
 
   @override
@@ -33,6 +35,7 @@ class LargeTitleScaffold extends StatelessWidget {
           delegate: _LargeTitleHeader(
             title: title,
             trailing: trailing,
+            leading: leading,
             topPad: topPad,
           ),
         ),
@@ -43,10 +46,11 @@ class LargeTitleScaffold extends StatelessWidget {
 }
 
 class _LargeTitleHeader extends SliverPersistentHeaderDelegate {
-  _LargeTitleHeader({required this.title, required this.trailing, required this.topPad});
+  _LargeTitleHeader({required this.title, required this.trailing, required this.leading, required this.topPad});
 
   final String title;
   final Widget? trailing;
+  final Widget? leading;
   final double topPad;
 
   static const double _barH = 50;
@@ -101,6 +105,15 @@ class _LargeTitleHeader extends SliverPersistentHeaderDelegate {
               child: Center(child: trailing!),
             ),
 
+          // Leading action (e.g. back) — pinned to the inline-start.
+          if (leading != null)
+            PositionedDirectional(
+              start: Space.x5,
+              top: topPad,
+              height: _barH,
+              child: Center(child: leading!),
+            ),
+
           // Large title — anchored to the bottom-start, fades/slides away.
           PositionedDirectional(
             start: Space.x5,
@@ -126,5 +139,5 @@ class _LargeTitleHeader extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(_LargeTitleHeader old) =>
-      old.title != title || old.topPad != topPad || old.trailing != trailing;
+      old.title != title || old.topPad != topPad || old.trailing != trailing || old.leading != leading;
 }
