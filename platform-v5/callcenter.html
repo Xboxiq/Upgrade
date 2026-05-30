@@ -1,0 +1,831 @@
+<!doctype html>
+<html dir="rtl" lang="ar" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#0B0F19" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#F7F5F1" media="(prefers-color-scheme: light)" />
+  <meta name="description" content="وحدة الكول سنتر — تَدَفُّق v5: تدريب احترافي على مهارات التواصل الهاتفي وخدمة العملاء بأسلوب فضائي مُحَدَّث." />
+  <meta name="format-detection" content="telephone=no" />
+  <title>وحدة الكول سنتر — تَدَفُّق</title>
+
+  <!-- θ1 PERF — FOUC guard: resolve the saved theme before first paint.
+       Mirrors Upg.theme.current()/resolveAuto(); falls back to data-theme="dark". -->
+  <script data-theme-bootstrap>
+    (function () {
+      try {
+        var raw = localStorage.getItem('upg_theme');
+        var mode = (raw === 'dark' || raw === 'light' || raw === 'auto') ? raw : 'dark';
+        if (mode === 'auto') {
+          mode = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+        }
+        document.documentElement.setAttribute('data-theme', mode);
+      } catch (e) { /* keep the hardcoded data-theme="dark" fallback */ }
+    })();
+  </script>
+
+  <!-- cascade order + tokens + type + canvas + dock + dock-mobile -->
+  <link rel="stylesheet" href="assets/css/_layers.css" />
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/type.css" />
+  <link rel="stylesheet" href="assets/css/canvas.css" />
+  <link rel="stylesheet" href="assets/css/dock.css" />
+  <link rel="stylesheet" href="assets/css/dock-mobile.css" />
+  <link rel="stylesheet" href="assets/css/canvas-harmonic.css" />
+  <link rel="stylesheet" href="assets/css/bento.css" />
+  <link rel="stylesheet" href="assets/css/bento-expand.css" />
+  <link rel="stylesheet" href="assets/css/ring.css" />
+  <link rel="stylesheet" href="assets/css/slide-over.css" />
+  <link rel="stylesheet" href="assets/css/sheet.css" />
+  <link rel="stylesheet" href="assets/css/overlay-choreo.css" />
+  <link rel="stylesheet" href="assets/css/zen.css" />
+  <link rel="stylesheet" href="assets/css/press.css" />
+  <link rel="stylesheet" href="assets/css/match.css" />
+  <!-- κ1: Call Center domain layer (loads last — only adds, never overrides) -->
+  <link rel="stylesheet" href="assets/css/domain-callcenter.css" />
+</head>
+<body data-domain="callcenter">
+
+  <!-- a11y: skip link first focusable element -->
+  <a href="#main" class="skip-link">تَخطٍّ إلى المحتوى</a>
+
+  <!-- ─── SVG sprite mount (loaded by assets/js/icons.js into here) ─── -->
+  <div id="sprite-mount" hidden aria-hidden="true"></div>
+
+  <!-- ─── The Canvas — sovereign, edge-to-edge ─── -->
+  <main id="main" class="canvas" tabindex="-1">
+
+    <!-- ════════════════ Domain header — hero + mastery ring ════════════════ -->
+    <header class="domain-header" aria-labelledby="cc-title">
+      <div class="domain-header-lead">
+        <span class="domain-header-eyebrow">
+          <span class="domain-header-eyebrow-ico" data-icon="callcenter.phone" aria-hidden="true"></span>
+          وحدة تخصصية
+        </span>
+        <h1 class="domain-header-title" id="cc-title">وحدة الكول سنتر</h1>
+        <p class="domain-header-lede">
+          تدريب متكامل على مهارات التواصل الهاتفي وخدمة العملاء — بالأساليب التي تنجح فعلاً على أرض الواقع.
+          صوتك بصمة عصبية، وكل مكالمة فرصة لتحويل موقف حادّ إلى تجربة لا تُنسى.
+        </p>
+        <ul class="domain-tiers" aria-label="مستويات الإتقان">
+          <li class="domain-tier" data-tier="foundation">
+            <span class="domain-tier-dot" aria-hidden="true"></span>
+            <span class="domain-tier-count"><b data-cc-tier="foundation">0</b> / ٤٢</span>
+            <span class="domain-tier-label">التأسيس</span>
+          </li>
+          <li class="domain-tier" data-tier="practitioner">
+            <span class="domain-tier-dot" aria-hidden="true"></span>
+            <span class="domain-tier-count"><b data-cc-tier="practitioner">0</b> / ٢٧</span>
+            <span class="domain-tier-label">الممارس</span>
+          </li>
+          <li class="domain-tier" data-tier="expert">
+            <span class="domain-tier-dot" aria-hidden="true"></span>
+            <span class="domain-tier-count"><b data-cc-tier="expert">0</b> / ٦</span>
+            <span class="domain-tier-label">الخبير</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="domain-header-aside">
+        <!-- The screen's hero ring — overall mastery (RING_PULSE) -->
+        <span class="domain-mastery-ring" id="cc-mastery-ring" data-progress="38" data-ring-host></span>
+        <span class="domain-mastery-cap">
+          <span class="domain-mastery-num"><b data-cc-mastered>26</b> / ٦٩ وحدة</span>
+          <span class="domain-mastery-sub">تقدّم الإتقان</span>
+        </span>
+      </div>
+    </header>
+
+
+    <!-- ════════════════ Bento — core board ════════════════ -->
+    <section class="bento" aria-label="لوحة الكول سنتر">
+
+      <!-- Focal — current scenario (opens Zen; expands in place) -->
+      <article class="bento-card b-4x3" data-card="cc-scenario" tabindex="0" aria-expanded="false">
+        <header class="bento-card-header">
+          <span class="bento-card-icon" data-icon="callcenter.angry" aria-hidden="true"></span>
+          <h2 class="bento-card-title">السيناريو الحالي</h2>
+          <span class="bento-card-ring" id="cc-scenario-ring" data-progress="47" data-ring-host></span>
+        </header>
+        <p class="bento-card-body">
+          شكوى مُتكرِّرة — التهدئة في ٩٠ ثانية. عميل يتصل للمرة الثالثة، صوته مرتفع، يطلب مديراً.
+          هدفك: تحويل الموقف من حادّ إلى مُتحكَّم به دون تصعيد ودون وعد لا يُمكن الوفاء به.
+        </p>
+        <p class="bento-card-meta">آخر جلسة قبل ٣ ساعات · تقنية HEAT · ٣ خطوات</p>
+
+        <div class="bento-card-detail">
+          <div class="bento-card-detail-section">
+            <h3 class="h3">الموقف</h3>
+            <p>«هذا الثالث مرة أتصل وما أحد حل مشكلتي! ما هذا الكلام؟» — العميل غاضب لأنه يشعر بفقدان السيطرة. الغضب لا يُحارَب بالمنطق، بل بالشعور بأن أحداً فهمه حقاً.</p>
+          </div>
+          <div class="bento-card-detail-section">
+            <h3 class="h3">خطوات HEAT</h3>
+            <p>استمع دون مقاطعة · تعاطَف بصراحة («أفهم إحساسك تماماً») · اعتذر عن التجربة لا عن الشركة · تصرّف بخطوة واحدة محدّدة بموعد.</p>
+          </div>
+          <div class="bento-card-detail-section">
+            <h3 class="h3">PROVE-IT</h3>
+            <p>دراسة Carnegie Mellon (2019): المحادثات التي تبدأ بصوت متوسط الـ pitch وتخفض ٢٠Hz في أول ١٠ ثوانٍ تُنتج رضا أعلى بنسبة ٣٤٪.</p>
+          </div>
+          <div class="bento-card-actions">
+            <button type="button" class="overlay-trigger" data-overlay-open="overlay-tpl-cc-scenario">
+              <span class="overlay-trigger-ico" data-icon="callcenter.dialogue" aria-hidden="true"></span>
+              افتح السيناريو كاملاً في لوحة
+            </button>
+            <button type="button" class="zen-trigger" data-zen-open="[data-card='cc-scenario']">
+              <span class="zen-trigger-ico" data-icon="training.objective" aria-hidden="true"></span>
+              ادخل وضع التركيز
+            </button>
+            <button type="button" class="zen-trigger zen-finish" data-zen-finish="#cc-scenario-ring">
+              <span class="zen-trigger-ico" data-icon="training.completed" aria-hidden="true"></span>
+              أنهِ الجلسة
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- APIndex KPI — expands to reference ranges; opens live calculator -->
+      <article class="bento-card b-2x2" data-card="cc-apindex" tabindex="0" aria-expanded="false">
+        <header class="bento-card-header">
+          <span class="bento-card-icon" data-icon="callcenter.kpi" aria-hidden="true"></span>
+          <h2 class="bento-card-title">مؤشر APIndex</h2>
+          <span class="bento-card-ring" id="cc-apindex-ring" data-progress="82" data-ring-host></span>
+        </header>
+        <p class="bento-card-body">يدمج خمسة KPIs في رقم واحد بمرجعية معيار COPC CX 6.2 — يكشف موقعك من المعيار في ثوانٍ.</p>
+        <p class="bento-card-meta">AHT · FCR · CSAT · ADH · QA</p>
+
+        <div class="bento-card-detail">
+          <div class="bento-card-detail-section">
+            <h3 class="h3">النطاقات المرجعية</h3>
+            <ul class="cc-kpi-ranges">
+              <li><span class="cc-kpi-name">AHT</span><span class="cc-kpi-ref">٤–٦ دقائق</span></li>
+              <li><span class="cc-kpi-name">FCR</span><span class="cc-kpi-ref">٧٠–٧٩٪</span></li>
+              <li><span class="cc-kpi-name">CSAT</span><span class="cc-kpi-ref">≥ ٨٥٪</span></li>
+              <li><span class="cc-kpi-name">ADH</span><span class="cc-kpi-ref">٩٢–٩٥٪</span></li>
+              <li><span class="cc-kpi-name">QA</span><span class="cc-kpi-ref">≥ ٩٠٪</span></li>
+            </ul>
+          </div>
+          <div class="bento-card-actions">
+            <button type="button" class="overlay-trigger" data-overlay-open="overlay-tpl-cc-apindex">
+              <span class="overlay-trigger-ico" data-icon="callcenter.kpi" aria-hidden="true"></span>
+              افتح الحاسبة الحيّة
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Metric — completion -->
+      <article class="bento-card b-1x1" data-card="cc-metric-progress" tabindex="0">
+        <header class="bento-card-header">
+          <span class="bento-card-icon" data-icon="training.completed" aria-hidden="true"></span>
+          <span class="bento-card-meta">الإنجاز</span>
+        </header>
+        <p class="bento-card-metric" data-cc-mastered-pct>٣٨٪</p>
+      </article>
+
+      <!-- Metric — hours this week -->
+      <article class="bento-card b-1x1" data-card="cc-metric-hours" tabindex="0">
+        <header class="bento-card-header">
+          <span class="bento-card-icon" data-icon="training.spark" aria-hidden="true"></span>
+          <span class="bento-card-meta">ساعات هذا الأسبوع</span>
+        </header>
+        <p class="bento-card-metric">٦٫٤</p>
+      </article>
+
+    </section>
+
+
+    <!-- ════════════════ The six core techniques ════════════════ -->
+    <section class="cc-section" aria-labelledby="cc-skills-title">
+      <header class="section-head">
+        <div class="section-head-lead">
+          <span class="section-eyebrow">
+            <span class="section-eyebrow-ico" data-icon="callcenter.agent" aria-hidden="true"></span>
+            المهارات الأساسية
+          </span>
+          <h2 class="section-title" id="cc-skills-title">ستّ مهارات تصنع المكالمة الاحترافية</h2>
+          <p class="section-lede">اضغط أي بطاقة لكشف السكريبت ومؤشر الجودة في مكانها — أو ادخل وضع التركيز للتمرين.</p>
+        </div>
+        <span class="section-tag">٦ مهارات · سكريبت + مؤشر جودة</span>
+      </header>
+
+      <div class="bento cc-skills" aria-label="المهارات الأساسية">
+
+        <!-- 1 — first 7 seconds -->
+        <article class="bento-card b-2x2 cc-skill" data-card="cc-006" tabindex="0" aria-expanded="false">
+          <header class="bento-card-header">
+            <span class="bento-card-icon" data-icon="callcenter.phone" aria-hidden="true"></span>
+            <h3 class="bento-card-title">فن الاستقبال — أول ٧ ثوانٍ</h3>
+            <span class="bento-card-ring ring--sm" data-progress="100" data-ring-host></span>
+          </header>
+          <p class="bento-card-body">العميل يُكوّن انطباعه في الثواني السبع الأولى — الصوت الواضح يفتح الباب، والمتعب يُغلقه قبل أن تبدأ.</p>
+          <div class="bento-card-detail">
+            <div class="bento-card-detail-section">
+              <h3 class="h3">السكريبت الاحترافي</h3>
+              <div class="script-dialog">
+                <p class="script-line"><span class="script-speaker agent"><span class="script-speaker-ico" data-icon="callcenter.agent" aria-hidden="true"></span>أنت</span><span class="script-text">«السلام عليكم، معك [اسمك] من [الشركة]، يسعدنا خدمتك — كيف أقدر أساعدك؟»</span></p>
+                <p class="script-line"><span class="script-speaker client"><span class="script-speaker-ico" data-icon="callcenter.client" aria-hidden="true"></span>العميل</span><span class="script-text">«أبغى أستفسر عن الباقات...»</span></p>
+              </div>
+            </div>
+            <div class="bento-card-detail-section">
+              <p class="cc-note cc-note--success"><span class="cc-note-ico" data-icon="states.success" aria-hidden="true"></span>مؤشر الجودة: العميل يردّ بإيجابية خلال أول ١٥ ثانية ولا يطلب إعادة التعريف.</p>
+            </div>
+            <div class="bento-card-actions">
+              <button type="button" class="zen-trigger" data-zen-open="[data-card='cc-006']">
+                <span class="zen-trigger-ico" data-icon="training.objective" aria-hidden="true"></span>تمرَّن في وضع التركيز
+              </button>
+              <button type="button" class="zen-trigger zen-finish" data-zen-finish="[data-card='cc-006'] [data-ring-host]">
+                <span class="zen-trigger-ico" data-icon="training.completed" aria-hidden="true"></span>أنهِ
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2 — angry / HEAT -->
+        <article class="bento-card b-2x2 cc-skill" data-card="cc-007" tabindex="0" aria-expanded="false">
+          <header class="bento-card-header">
+            <span class="bento-card-icon" data-icon="callcenter.angry" aria-hidden="true"></span>
+            <h3 class="bento-card-title">العميل الغاضب — تقنية HEAT</h3>
+            <span class="bento-card-ring ring--sm" data-progress="60" data-ring-host></span>
+          </header>
+          <p class="bento-card-body">الغضب لا يُحارَب بالمنطق بل بالشعور بأن أحداً فهمه. HEAT: استمع، تعاطف، اعتذر، تصرّف.</p>
+          <div class="bento-card-detail">
+            <div class="bento-card-detail-section">
+              <h3 class="h3">السكريبت الاحترافي</h3>
+              <div class="script-dialog">
+                <p class="script-line"><span class="script-speaker client"><span class="script-speaker-ico" data-icon="callcenter.client" aria-hidden="true"></span>العميل</span><span class="script-text">«هذا الثالث مرة أتصل وما أحد حل مشكلتي!»</span></p>
+                <p class="script-line"><span class="script-speaker agent"><span class="script-speaker-ico" data-icon="callcenter.agent" aria-hidden="true"></span>أنت</span><span class="script-text">«أفهم إحساسك تماماً، وآسف جداً إنك مررت بهذا. ثلاث مرات دون نتيجة شيء ما يُقبل. أنا شخصياً رح أتابع معك الحين — ممكن تحكيلي ش اللي صاير بالضبط؟»</span></p>
+              </div>
+            </div>
+            <div class="bento-card-detail-section">
+              <p class="cc-note cc-note--success"><span class="cc-note-ico" data-icon="states.success" aria-hidden="true"></span>مؤشر الجودة: خلال ٦٠ ثانية يتحوّل صوت العميل من الحدّة إلى الهدوء النسبي ويبدأ يشرح بدل ما يشتكي.</p>
+            </div>
+            <div class="bento-card-actions">
+              <button type="button" class="zen-trigger" data-zen-open="[data-card='cc-007']">
+                <span class="zen-trigger-ico" data-icon="training.objective" aria-hidden="true"></span>تمرَّن في وضع التركيز
+              </button>
+              <button type="button" class="zen-trigger zen-finish" data-zen-finish="[data-card='cc-007'] [data-ring-host]">
+                <span class="zen-trigger-ico" data-icon="training.completed" aria-hidden="true"></span>أنهِ
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3 — active listening -->
+        <article class="bento-card b-2x2 cc-skill" data-card="cc-008" tabindex="0" aria-expanded="false">
+          <header class="bento-card-header">
+            <span class="bento-card-icon" data-icon="callcenter.listen" aria-hidden="true"></span>
+            <h3 class="bento-card-title">الاستماع النشط والتلخيص</h3>
+            <span class="bento-card-ring ring--sm" data-progress="40" data-ring-host></span>
+          </header>
+          <p class="bento-card-body">الناس يريدون الشعور بأن أحداً يفهمهم. التلخيص يُثبت أنك كنت حاضراً ويقلّل الأخطاء بشكل كبير.</p>
+          <div class="bento-card-detail">
+            <div class="bento-card-detail-section">
+              <h3 class="h3">السكريبت الاحترافي</h3>
+              <div class="script-dialog">
+                <p class="script-line"><span class="script-speaker agent"><span class="script-speaker-ico" data-icon="callcenter.agent" aria-hidden="true"></span>أنت</span><span class="script-text">«خليني أتأكد إني فاهم صح: تبغى تغيير الباقة، وشرطين — تحتفظ بالأرقام، والتحويل هذا الأسبوع. صح؟»</span></p>
+                <p class="script-line"><span class="script-speaker client"><span class="script-speaker-ico" data-icon="callcenter.client" aria-hidden="true"></span>العميل</span><span class="script-text">«أيوه، بالضبط.»</span></p>
+              </div>
+            </div>
+            <div class="bento-card-detail-section">
+              <p class="cc-note cc-note--success"><span class="cc-note-ico" data-icon="states.success" aria-hidden="true"></span>مؤشر الجودة: العميل يردّ بـ«أيوه بالضبط» — جملة تعني أنك في نفس الموجة.</p>
+            </div>
+            <div class="bento-card-actions">
+              <button type="button" class="zen-trigger" data-zen-open="[data-card='cc-008']">
+                <span class="zen-trigger-ico" data-icon="training.objective" aria-hidden="true"></span>تمرَّن في وضع التركيز
+              </button>
+              <button type="button" class="zen-trigger zen-finish" data-zen-finish="[data-card='cc-008'] [data-ring-host]">
+                <span class="zen-trigger-ico" data-icon="training.completed" aria-hidden="true"></span>أنهِ
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4 — voice tone -->
+        <article class="bento-card b-2x2 cc-skill" data-card="cc-009" tabindex="0" aria-expanded="false">
+          <header class="bento-card-header">
+            <span class="bento-card-icon" data-icon="callcenter.voice" aria-hidden="true"></span>
+            <h3 class="bento-card-title">التحكم في نبرة الصوت</h3>
+            <span class="bento-card-ring ring--sm" data-progress="20" data-ring-host></span>
+          </header>
+          <p class="bento-card-body">٣٨٪ من التواصل الهاتفي يأتي من النبرة لا من الكلمات. صوتك المتعب يُرسل «أنا مو مهتم» مهما كان كلامك.</p>
+          <div class="bento-card-detail">
+            <div class="bento-card-detail-section">
+              <h3 class="h3">ثلاث تقنيات عملية</h3>
+              <p>ابتسم وأنت تتكلم — العميل يحسّ الابتسامة عبر الهاتف. خفّض نبرتك عند المعلومات المهمة لمصداقية أعمق. طابِق إيقاع العميل: هادئ مع الهادئ، أسرع قليلاً مع السريع.</p>
+            </div>
+            <div class="bento-card-detail-section">
+              <p class="cc-note cc-note--success"><span class="cc-note-ico" data-icon="states.success" aria-hidden="true"></span>مؤشر الجودة: العميل يقول «شكراً على صبرك» أو «تكلمت وياك بسهولة».</p>
+            </div>
+            <div class="bento-card-actions">
+              <button type="button" class="zen-trigger" data-zen-open="[data-card='cc-009']">
+                <span class="zen-trigger-ico" data-icon="training.objective" aria-hidden="true"></span>تمرَّن في وضع التركيز
+              </button>
+              <button type="button" class="zen-trigger zen-finish" data-zen-finish="[data-card='cc-009'] [data-ring-host]">
+                <span class="zen-trigger-ico" data-icon="training.completed" aria-hidden="true"></span>أنهِ
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5 — closing -->
+        <article class="bento-card b-2x2 cc-skill" data-card="cc-010" tabindex="0" aria-expanded="false">
+          <header class="bento-card-header">
+            <span class="bento-card-icon" data-icon="callcenter.closing" aria-hidden="true"></span>
+            <h3 class="bento-card-title">إغلاق المكالمة باحترافية</h3>
+            <span class="bento-card-ring ring--sm" data-progress="0" data-ring-host></span>
+          </header>
+          <p class="bento-card-body">آخر ما يسمعه العميل هو ما يتذكّره. الإغلاق الجيد يُلخّص، يُوثّق الخطوة القادمة، ويُرسّخ الثقة.</p>
+          <div class="bento-card-detail">
+            <div class="bento-card-detail-section">
+              <h3 class="h3">السكريبت الاحترافي</h3>
+              <div class="script-dialog">
+                <p class="script-line"><span class="script-speaker agent"><span class="script-speaker-ico" data-icon="callcenter.agent" aria-hidden="true"></span>أنت</span><span class="script-text">«خليني ألخّص اللي اتفقنا عليه: تصلك رسالة التأكيد خلال ساعة، والتقني يتصل بكرة الصبح. في شي ثاني أقدر أساعدك فيه؟»</span></p>
+              </div>
+            </div>
+            <div class="bento-card-detail-section">
+              <p class="cc-note cc-note--success"><span class="cc-note-ico" data-icon="states.success" aria-hidden="true"></span>مؤشر الجودة: لا يُعيد العميل الاتصال يسأل «وش صار؟» — ومعدل تكرار الاتصال ينخفض تحت ٥٪.</p>
+            </div>
+            <div class="bento-card-actions">
+              <button type="button" class="zen-trigger" data-zen-open="[data-card='cc-010']">
+                <span class="zen-trigger-ico" data-icon="training.objective" aria-hidden="true"></span>تمرَّن في وضع التركيز
+              </button>
+              <button type="button" class="zen-trigger zen-finish" data-zen-finish="[data-card='cc-010'] [data-ring-host]">
+                <span class="zen-trigger-ico" data-icon="training.completed" aria-hidden="true"></span>أنهِ
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6 — warm transfer -->
+        <article class="bento-card b-2x2 cc-skill" data-card="cc-011" tabindex="0" aria-expanded="false">
+          <header class="bento-card-header">
+            <span class="bento-card-icon" data-icon="callcenter.transfer" aria-hidden="true"></span>
+            <h3 class="bento-card-title">تحويل المكالمة دون إزعاج</h3>
+            <span class="bento-card-ring ring--sm" data-progress="0" data-ring-host></span>
+          </header>
+          <p class="bento-card-body">أكثر ما يُحبط العميل أن يُرمى من شخص لآخر دون ترابط. اشرح السبب، وانقل السياق بنفسك.</p>
+          <div class="bento-card-detail">
+            <div class="bento-card-detail-section">
+              <h3 class="h3">السكريبت الاحترافي</h3>
+              <div class="script-dialog">
+                <p class="script-line"><span class="script-speaker agent"><span class="script-speaker-ico" data-icon="callcenter.agent" aria-hidden="true"></span>أنت</span><span class="script-text">«طلبك يحتاج متخصص فوترة عشان يخدمك أسرع. رح أحوّلك لزميلي وأنا شخصياً رح أشرحله وضعك — ما تحتاج تكرر شي. تمانع نص دقيقة انتظار؟»</span></p>
+              </div>
+            </div>
+            <div class="bento-card-detail-section">
+              <p class="cc-note cc-note--success"><span class="cc-note-ico" data-icon="states.success" aria-hidden="true"></span>مؤشر الجودة: الزميل المُستلِم لا يحتاج يسأل العميل من البداية — ورضا التحويل يزيد عن ٨٠٪.</p>
+            </div>
+            <div class="bento-card-actions">
+              <button type="button" class="zen-trigger" data-zen-open="[data-card='cc-011']">
+                <span class="zen-trigger-ico" data-icon="training.objective" aria-hidden="true"></span>تمرَّن في وضع التركيز
+              </button>
+              <button type="button" class="zen-trigger zen-finish" data-zen-finish="[data-card='cc-011'] [data-ring-host]">
+                <span class="zen-trigger-ico" data-icon="training.completed" aria-hidden="true"></span>أنهِ
+              </button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- ════════════════ Voice Profile — 5 measurable dimensions ════════════════ -->
+    <section class="cc-section" aria-labelledby="cc-vp-title">
+      <header class="section-head">
+        <div class="section-head-lead">
+          <span class="section-eyebrow">
+            <span class="section-eyebrow-ico" data-icon="callcenter.voice" aria-hidden="true"></span>
+            Voice Psychology
+          </span>
+          <h2 class="section-title" id="cc-vp-title">بصمة الصوت — ٥ أبعاد قابلة للقياس</h2>
+          <p class="section-lede">لكل بُعد نطاق مرجعي للعربية، خطأ شائع، وتمرين تصحيحي يومي من ٥ دقائق.</p>
+        </div>
+        <span class="section-tag">٥ أبعاد · Web Audio</span>
+      </header>
+
+      <div class="vp-grid">
+
+        <article class="vp-card" data-vp="pace">
+          <header class="vp-head">
+            <span class="vp-icon" data-icon="voice.pace" aria-hidden="true"></span>
+            <div class="vp-head-text"><h3 class="vp-title">Pace · الإيقاع</h3><span class="vp-unit">WPM — كلمة/دقيقة</span></div>
+            <span class="vp-ring ring--sm" data-progress="90" data-ring-host></span>
+          </header>
+          <p class="vp-stat"><span class="vp-stat-label">النطاق المثالي</span><span class="vp-stat-value">١٤٠ – ١٦٠</span></p>
+          <p class="vp-note">Goldman-Eisler (1968) و Brennan (2014): ١٤٠–١٦٠ هي منطقة الفهم المريح؛ تحت ١٢٠ تُملّ، فوق ١٨٠ تُربك الذاكرة العاملة.</p>
+          <p class="vp-err"><span class="vp-err-ico" data-icon="states.warning" aria-hidden="true"></span>الخطأ: التسارع تحت الضغط فوق ٢٠٠ WPM لإنهاء المكالمة بسرعة.</p>
+          <p class="vp-drill"><span class="vp-drill-ico" data-icon="voice.pace" aria-hidden="true"></span>تمرين: اقرأ نصاً ١٥٠ كلمة بساعة إيقاف، هدفك ٦٠ ثانية بالضبط. كرّر ٣ مرّات.</p>
+        </article>
+
+        <article class="vp-card" data-vp="pitch">
+          <header class="vp-head">
+            <span class="vp-icon" data-icon="voice.pitch" aria-hidden="true"></span>
+            <div class="vp-head-text"><h3 class="vp-title">Pitch · طبقة الصوت</h3><span class="vp-unit">F0 Variability %</span></div>
+            <span class="vp-ring ring--sm" data-progress="55" data-ring-host></span>
+          </header>
+          <p class="vp-stat"><span class="vp-stat-label">التذبذب المطلوب</span><span class="vp-stat-value">≥ ١٥٪</span></p>
+          <p class="vp-note">Hincks (2005): السمع البشري يصنّف الصوت ثابت الطبقة كـ«غير مهتم» خلال ١٢ ثانية. تذبذب ١٥٪+ يُبقي المستمع منخرطاً.</p>
+          <p class="vp-err"><span class="vp-err-ico" data-icon="states.warning" aria-hidden="true"></span>الخطأ: فخّ الرتابة — تكرار الجملة الافتتاحية مئات المرّات يقتل التنويع الطبيعي.</p>
+          <p class="vp-drill"><span class="vp-drill-ico" data-icon="voice.pitch" aria-hidden="true"></span>تمرين: اقرأ جملة واحدة بـ٥ سياقات — مفاجأة، حزن، فرح، غضب مكتوم، فضول.</p>
+        </article>
+
+        <article class="vp-card" data-vp="volume">
+          <header class="vp-head">
+            <span class="vp-icon" data-icon="voice.volume" aria-hidden="true"></span>
+            <div class="vp-head-text"><h3 class="vp-title">Volume · مستوى الصوت</h3><span class="vp-unit">RMS Consistency dB</span></div>
+            <span class="vp-ring ring--sm" data-progress="70" data-ring-host></span>
+          </header>
+          <p class="vp-stat"><span class="vp-stat-label">الانحراف المسموح</span><span class="vp-stat-value">± ٣ dB</span></p>
+          <p class="vp-note">قمم الصوت فوق ٦dB تُفسَّر لاوعياً كعدوان، وانخفاضه المفاجئ كعدم ثقة. الاستقرار = طمأنينة.</p>
+          <p class="vp-err"><span class="vp-err-ico" data-icon="states.warning" aria-hidden="true"></span>الخطأ: ابتلاع آخر كلمتين من كل جملة — يفقد العميل ثُلث المحتوى دون أن يدري.</p>
+          <p class="vp-drill"><span class="vp-drill-ico" data-icon="voice.volume" aria-hidden="true"></span>تمرين: سجّل فقرة وارسم منحنى الصوت، هدفك خط أفقي مع تأكيدات مدروسة.</p>
+        </article>
+
+        <article class="vp-card" data-vp="tone">
+          <header class="vp-head">
+            <span class="vp-icon" data-icon="voice.tone" aria-hidden="true"></span>
+            <div class="vp-head-text"><h3 class="vp-title">Tone · النبرة</h3><span class="vp-unit">Warmth · F2/F1</span></div>
+            <span class="vp-ring ring--sm" data-progress="45" data-ring-host></span>
+          </header>
+          <p class="vp-stat"><span class="vp-stat-label">معامل الدفء</span><span class="vp-stat-value">دافئ &gt; مسطّح</span></p>
+          <p class="vp-note">Hala (2010) و Scherer (2003): نسبة Formant F2/F1 ترتبط بالإحساس بالدفء. الابتسامة الفيزيائية ترفع F2 آلياً حتى عبر الهاتف.</p>
+          <p class="vp-err"><span class="vp-err-ico" data-icon="states.warning" aria-hidden="true"></span>الخطأ: النبرة الروبوتية — حتى الكلمات الصحيحة تبدو غير صادقة بصوت مسطّح.</p>
+          <p class="vp-drill"><span class="vp-drill-ico" data-icon="voice.tone" aria-hidden="true"></span>تمرين: ضع مرآة وابتسم فعلياً قبل كل مكالمة — كيمياء الدماغ تتغيّر قبل الصوت بـ٢٠٠ ملّي ثانية.</p>
+        </article>
+
+        <article class="vp-card" data-vp="pause">
+          <header class="vp-head">
+            <span class="vp-icon" data-icon="voice.pause" aria-hidden="true"></span>
+            <div class="vp-head-text"><h3 class="vp-title">Pause · الوقفات</h3><span class="vp-unit">Strategic Silence</span></div>
+            <span class="vp-ring ring--sm" data-progress="30" data-ring-host></span>
+          </header>
+          <p class="vp-stat"><span class="vp-stat-label">المدة الفعّالة</span><span class="vp-stat-value">٠٫٤ – ٠٫٨ ث</span></p>
+          <p class="vp-note">Voss (مفاوض FBI) سمّاها «الصمت التكتيكي»: وقفة ٠٫٤–٠٫٨ ث بعد نقطة مهمة تُجبر الدماغ على المعالجة وتزيد الإقناع ٢٧٪.</p>
+          <p class="vp-err"><span class="vp-err-ico" data-icon="states.warning" aria-hidden="true"></span>الخطأ: حلقة الحشو «أه، يعني، طيب» — كل كلمة حشو تخفض السلطة المُدرَكة ٨٪.</p>
+          <p class="vp-drill"><span class="vp-drill-ico" data-icon="voice.pause" aria-hidden="true"></span>تمرين: اقرأ نصاً وعُدّ صامتاً «١-٢» بعد كل نقطة. سجّل بدون حشو وحلّل.</p>
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- ════════════════ The Empathy Loop — 4 steps, bilingual ════════════════ -->
+    <section class="cc-section" aria-labelledby="cc-el-title">
+      <header class="section-head">
+        <div class="section-head-lead">
+          <span class="section-eyebrow">
+            <span class="section-eyebrow-ico" data-icon="empathy.validate" aria-hidden="true"></span>
+            Empathy Loop
+          </span>
+          <h2 class="section-title" id="cc-el-title">دائرة التعاطف — ٤ خطوات بصياغتين</h2>
+          <p class="section-lede">كل خطوة بالعربية الفصيحة وبالعراقي المحكي — اختر الأنسب للسياق والعميل.</p>
+        </div>
+        <span class="section-tag">٤ خطوات · صياغات جاهزة</span>
+      </header>
+
+      <ol class="empathy">
+        <li class="empathy-step" data-el="1">
+          <span class="empathy-num" aria-hidden="true">١</span>
+          <div class="empathy-body">
+            <h3 class="empathy-title"><span class="empathy-title-ico" data-icon="empathy.acknowledge" aria-hidden="true"></span>Acknowledge · الإقرار</h3>
+            <p class="empathy-sub">اعترف بأن هناك مشكلة. لا تنكر، لا تبرّر، لا تقاطع.</p>
+            <div class="empathy-langs">
+              <div class="empathy-lang"><span class="empathy-lang-tag">فصيح</span><p>«أسمعك تماماً، وأفهم أن هذا مُزعج فعلاً.»</p></div>
+              <div class="empathy-lang empathy-lang--iraqi"><span class="empathy-lang-tag">عراقي</span><p>«أسمعك، وهاي فعلاً شغلة تضايق.»</p></div>
+            </div>
+          </div>
+        </li>
+        <li class="empathy-step" data-el="2">
+          <span class="empathy-num" aria-hidden="true">٢</span>
+          <div class="empathy-body">
+            <h3 class="empathy-title"><span class="empathy-title-ico" data-icon="empathy.validate" aria-hidden="true"></span>Validate · التطبيع</h3>
+            <p class="empathy-sub">شعور العميل طبيعي. أيّ شخص بمكانه سيشعر مثله.</p>
+            <div class="empathy-langs">
+              <div class="empathy-lang"><span class="empathy-lang-tag">فصيح</span><p>«من حقك تماماً أن تنزعج، أيّ أحد سيشعر بنفس الشعور.»</p></div>
+              <div class="empathy-lang empathy-lang--iraqi"><span class="empathy-lang-tag">عراقي</span><p>«من حقك تنرفز، أيّ واحد بمكانك راح يحسّ نفس الشي.»</p></div>
+            </div>
+          </div>
+        </li>
+        <li class="empathy-step" data-el="3">
+          <span class="empathy-num" aria-hidden="true">٣</span>
+          <div class="empathy-body">
+            <h3 class="empathy-title"><span class="empathy-title-ico" data-icon="empathy.refocus" aria-hidden="true"></span>Refocus · إعادة التوجيه</h3>
+            <p class="empathy-sub">حوّل الانفعال إلى عمل. الكرة في ملعبك، لا في ملعبه.</p>
+            <div class="empathy-langs">
+              <div class="empathy-lang"><span class="empathy-lang-tag">فصيح</span><p>«الأهمّ الآن أن نحلّ المشكلة، وأنا هنا لذلك.»</p></div>
+              <div class="empathy-lang empathy-lang--iraqi"><span class="empathy-lang-tag">عراقي</span><p>«المهمّ نحلّها، وأنا وياك لهالشي.»</p></div>
+            </div>
+          </div>
+        </li>
+        <li class="empathy-step" data-el="4">
+          <span class="empathy-num" aria-hidden="true">٤</span>
+          <div class="empathy-body">
+            <h3 class="empathy-title"><span class="empathy-title-ico" data-icon="empathy.action" aria-hidden="true"></span>Action · الفعل المحدّد</h3>
+            <p class="empathy-sub">خطوة محدّدة بزمن محدّد. لا «سنحاول» — بل «سأفعل قبل الساعة X».</p>
+            <div class="empathy-langs">
+              <div class="empathy-lang"><span class="empathy-lang-tag">فصيح</span><p>«سأفتح تذكرة الآن وأرسل لك الرقم خلال ٣ دقائق.»</p></div>
+              <div class="empathy-lang empathy-lang--iraqi"><span class="empathy-lang-tag">عراقي</span><p>«راح أفتح تكت هسة وأنطيك الرقم خلال ٣ دقايق.»</p></div>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+
+    <!-- ════════════════ Difficult-caller archetypes ════════════════ -->
+    <section class="cc-section" aria-labelledby="cc-arch-title">
+      <header class="section-head">
+        <div class="section-head-lead">
+          <span class="section-eyebrow">
+            <span class="section-eyebrow-ico" data-icon="callcenter.archetype" aria-hidden="true"></span>
+            Library
+          </span>
+          <h2 class="section-title" id="cc-arch-title">أنماط المتّصلين الصعبين</h2>
+          <p class="section-lede">اضغط أي نمط لكشف الجذر النفسي، الاستراتيجية، وحوار عراقي مختصر.</p>
+        </div>
+        <span class="section-tag">٤ أنماط · أمثلة عراقية</span>
+      </header>
+
+      <div class="bento cc-arch" aria-label="أنماط المتصلين">
+        <article class="bento-card b-2x2 cc-arch-card" data-card="cc-arch-screamer" tabindex="0" aria-expanded="false">
+          <header class="bento-card-header">
+            <span class="bento-card-icon" data-icon="callcenter.angry" aria-hidden="true"></span>
+            <h3 class="bento-card-title">الصارخ — Screamer</h3>
+            <span class="cc-strat-tag">LEAR</span>
+          </header>
+          <p class="bento-card-body">يرفع صوته فوراً قبل أن يشرح.</p>
+          <div class="bento-card-detail">
+            <div class="bento-card-detail-section"><h3 class="h3">الجذر النفسي</h3><p>شعور بفقدان السيطرة. الصراخ آلية دفاع لاستعادة الإحساس بالقوة.</p></div>
+            <div class="bento-card-detail-section"><h3 class="h3">الاستراتيجية · LEAR</h3><p>استمع، تعاطف، أقِرّ، ثم أعِد الصياغة (Listen, Empathize, Acknowledge, Reframe). لا ترفع صوتك أبداً، وانتظر ٣ ثوانٍ بعد الانفجار قبل الردّ.</p></div>
+            <div class="bento-card-detail-section"><p class="cc-dialog"><span class="cc-dialog-tag">عراقي</span>«أعرف هاي شغلة تجنّن، خلّيني أفهمها وياك خطوة خطوة.»</p></div>
+          </div>
+        </article>
+
+        <article class="bento-card b-2x2 cc-arch-card" data-card="cc-arch-chronic" tabindex="0" aria-expanded="false">
+          <header class="bento-card-header">
+            <span class="bento-card-icon" data-icon="callcenter.dialogue" aria-hidden="true"></span>
+            <h3 class="bento-card-title">المتشكّي المزمن</h3>
+            <span class="cc-strat-tag">Funnel</span>
+          </header>
+          <p class="bento-card-body">كل شيء عنده مشكلة.</p>
+          <div class="bento-card-detail">
+            <div class="bento-card-detail-section"><h3 class="h3">الجذر النفسي</h3><p>حاجة عميقة للاعتراف بمعاناته. لا يريد حلاً فورياً بقدر ما يريد سماعاً.</p></div>
+            <div class="bento-card-detail-section"><h3 class="h3">الاستراتيجية · Funnel</h3><p>أعطه مساحة للتنفيس، ثم وجّهه لمشكلة واحدة محدّدة: «من بين كل هذا، أيّها أزعجك أكثر؟»</p></div>
+            <div class="bento-card-detail-section"><p class="cc-dialog"><span class="cc-dialog-tag">عراقي</span>«فهمت، عندك أكثر من شي. شنو الشي الأكبر اللي مأذيك هسة؟»</p></div>
+          </div>
+        </article>
+
+        <article class="bento-card b-2x2 cc-arch-card" data-card="cc-arch-silent" tabindex="0" aria-expanded="false">
+          <header class="bento-card-header">
+            <span class="bento-card-icon" data-icon="callcenter.listen" aria-hidden="true"></span>
+            <h3 class="bento-card-title">الصامت — Silent</h3>
+            <span class="cc-strat-tag">Probe</span>
+          </header>
+          <p class="bento-card-body">يردّ بكلمة أو كلمتين، يصعب قراءة موقفه.</p>
+          <div class="bento-card-detail">
+            <div class="bento-card-detail-section"><h3 class="h3">الجذر النفسي</h3><p>إمّا انعدام ثقة، أو إرهاق، أو خوف من الحكم عليه. الصمت ليس رضا.</p></div>
+            <div class="bento-card-detail-section"><h3 class="h3">الاستراتيجية · Probe</h3><p>أسئلة مفتوحة قصيرة + صمت تكتيكي يمنحه الأمان ليتكلّم: «خذ وقتك، أنا أسمعك.»</p></div>
+            <div class="bento-card-detail-section"><p class="cc-dialog"><span class="cc-dialog-tag">عراقي</span>«ماكو استعجال، احكيلي بكيفك وأنا وياك.»</p></div>
+          </div>
+        </article>
+
+        <article class="bento-card b-2x2 cc-arch-card" data-card="cc-arch-expert" tabindex="0" aria-expanded="false">
+          <header class="bento-card-header">
+            <span class="bento-card-icon" data-icon="callcenter.archetype" aria-hidden="true"></span>
+            <h3 class="bento-card-title">العارف كلّ شيء</h3>
+            <span class="cc-strat-tag">Ally</span>
+          </header>
+          <p class="bento-card-body">يصحّح كلامك ويستعرض معرفته.</p>
+          <div class="bento-card-detail">
+            <div class="bento-card-detail-section"><h3 class="h3">الجذر النفسي</h3><p>حاجة للاحترام والتقدير. مقاومته دفاع عن صورته أمام نفسه.</p></div>
+            <div class="bento-card-detail-section"><h3 class="h3">الاستراتيجية · Ally</h3><p>اجعله حليفاً لا خصماً: أقرّ بخبرته، ثم ابنِ عليها بدل أن تصحّحها مباشرة.</p></div>
+            <div class="bento-card-detail-section"><p class="cc-dialog"><span class="cc-dialog-tag">عراقي</span>«واضح إنك متابع زين — خلّينا نبني على هاي المعلومة.»</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+
+    <!-- ════════════════ Wrong vs professional ════════════════ -->
+    <section class="cc-section" aria-labelledby="cc-cmp-title">
+      <header class="section-head">
+        <div class="section-head-lead">
+          <span class="section-eyebrow">
+            <span class="section-eyebrow-ico" data-icon="callcenter.compare" aria-hidden="true"></span>
+            Contrast
+          </span>
+          <h2 class="section-title" id="cc-cmp-title">ردود خاطئة مقابل ردود احترافية</h2>
+          <p class="section-lede">مواقف حقيقية — الفرق بين الردّ العادي والردّ الذي يُغيّر التجربة.</p>
+        </div>
+        <span class="section-tag">٥ مواقف</span>
+      </header>
+
+      <div class="cc-compare" role="table" aria-label="ردود خاطئة مقابل احترافية">
+        <div class="cc-compare-head" role="row">
+          <span role="columnheader">الموقف</span>
+          <span role="columnheader" class="cc-compare-wrong"><span class="cc-note-ico" data-icon="states.wrong" aria-hidden="true"></span>الردّ الخاطئ</span>
+          <span role="columnheader" class="cc-compare-right"><span class="cc-note-ico" data-icon="states.success" aria-hidden="true"></span>الردّ الاحترافي</span>
+        </div>
+        <div class="cc-compare-row" role="row">
+          <span role="cell" class="cc-compare-situation">العميل يسأل عن موعد التسليم</span>
+          <span role="cell" class="cc-compare-wrong">«ما أعرف، هذا يرجع للمخزن.»</span>
+          <span role="cell" class="cc-compare-right">«خليني أتحقق لك الحين وأعطيك موعداً دقيقاً — ثانية وأنا معك.»</span>
+        </div>
+        <div class="cc-compare-row" role="row">
+          <span role="cell" class="cc-compare-situation">العميل يشتكي من خدمة سابقة</span>
+          <span role="cell" class="cc-compare-wrong">«أنا ما كنت الموظف اللي خدمك.»</span>
+          <span role="cell" class="cc-compare-right">«آسف إنك مررت بهذا — خليني أصلّحه لك أنا الحين.»</span>
+        </div>
+        <div class="cc-compare-row" role="row">
+          <span role="cell" class="cc-compare-situation">طلب خارج الصلاحية</span>
+          <span role="cell" class="cc-compare-wrong">«ما يصير، هذا بروتوكول الشركة.»</span>
+          <span role="cell" class="cc-compare-right">«اللي أقدر أسوّيه لك هو X، وأضمن لك متابعته شخصياً.»</span>
+        </div>
+        <div class="cc-compare-row" role="row">
+          <span role="cell" class="cc-compare-situation">العميل يطلب الانتظار طويلاً</span>
+          <span role="cell" class="cc-compare-wrong">«انتظر شوي...» ثم صمت.</span>
+          <span role="cell" class="cc-compare-right">«أحتاج نصف دقيقة أتأكد لك — أبقى معك ولا أرجع لك باتصال؟»</span>
+        </div>
+        <div class="cc-compare-row" role="row">
+          <span role="cell" class="cc-compare-situation">خطأ من الشركة</span>
+          <span role="cell" class="cc-compare-wrong">«النظام غلط، مو أنا.»</span>
+          <span role="cell" class="cc-compare-right">«هذا خطأ من جهتنا، وأنا أتحمّل متابعته حتى يُحلّ.»</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- eta2: match-target training bench — voice dimension to target -->
+    <section class="match-bench" data-match aria-labelledby="cc-match-title">
+      <header class="match-bench-head">
+        <h2 class="match-bench-title" id="cc-match-title">طابِق بُعد الصوت بنطاقه المرجعي</h2>
+        <p class="match-bench-hint">
+          اسحب كل بُعد إلى نطاقه. باللمس: اسحب بإصبعك. باللوحة: ركّز على بُعد واضغط Enter لالتقاطه،
+          تنقّل بالأسهم (يسار = التالي)، واضغط Enter لإفلاته. الصواب يُجاب بتكّة محسوسة؛ الخطأ بصمت.
+        </p>
+      </header>
+
+      <ul class="match-pool" role="list" aria-label="أبعاد الصوت">
+        <li class="match-chip" draggable="true" tabindex="0" role="button" data-match-chip data-match-key="pause" aria-grabbed="false" aria-label="بُعد الوقفات — اسحبه إلى نطاقه">
+          <span class="match-chip-grip" data-icon="voice.pause" aria-hidden="true"></span>
+          <span class="match-chip-label">Pause · الوقفات</span>
+        </li>
+        <li class="match-chip" draggable="true" tabindex="0" role="button" data-match-chip data-match-key="pace" aria-grabbed="false" aria-label="بُعد الإيقاع — اسحبه إلى نطاقه">
+          <span class="match-chip-grip" data-icon="voice.pace" aria-hidden="true"></span>
+          <span class="match-chip-label">Pace · الإيقاع</span>
+        </li>
+        <li class="match-chip" draggable="true" tabindex="0" role="button" data-match-chip data-match-key="volume" aria-grabbed="false" aria-label="بُعد مستوى الصوت — اسحبه إلى نطاقه">
+          <span class="match-chip-grip" data-icon="voice.volume" aria-hidden="true"></span>
+          <span class="match-chip-label">Volume · المستوى</span>
+        </li>
+        <li class="match-chip" draggable="true" tabindex="0" role="button" data-match-chip data-match-key="pitch" aria-grabbed="false" aria-label="بُعد طبقة الصوت — اسحبه إلى نطاقه">
+          <span class="match-chip-grip" data-icon="voice.pitch" aria-hidden="true"></span>
+          <span class="match-chip-label">Pitch · الطبقة</span>
+        </li>
+      </ul>
+
+      <ol class="match-zones" aria-label="النطاقات المرجعية">
+        <li class="match-zone" tabindex="0" role="button" data-match-zone="pace" aria-label="١٤٠ إلى ١٦٠ كلمة بالدقيقة — ضع هنا البُعد المناسب">
+          <span class="match-zone-label">١٤٠ – ١٦٠ WPM</span>
+          <span class="match-zone-slot" data-match-slot></span>
+          <span class="match-zone-mark"><span data-icon="states.success" aria-hidden="true"></span>مُطابَق</span>
+        </li>
+        <li class="match-zone" tabindex="0" role="button" data-match-zone="pitch" aria-label="تذبذب ١٥ بالمئة أو أكثر — ضع هنا البُعد المناسب">
+          <span class="match-zone-label">≥ ١٥٪ تذبذب F0</span>
+          <span class="match-zone-slot" data-match-slot></span>
+          <span class="match-zone-mark"><span data-icon="states.success" aria-hidden="true"></span>مُطابَق</span>
+        </li>
+        <li class="match-zone" tabindex="0" role="button" data-match-zone="volume" aria-label="انحراف زائد أو ناقص ٣ ديسيبل — ضع هنا البُعد المناسب">
+          <span class="match-zone-label">± ٣ dB ثبات</span>
+          <span class="match-zone-slot" data-match-slot></span>
+          <span class="match-zone-mark"><span data-icon="states.success" aria-hidden="true"></span>مُطابَق</span>
+        </li>
+        <li class="match-zone" tabindex="0" role="button" data-match-zone="pause" aria-label="من أربعة أعشار إلى ثمانية أعشار الثانية — ضع هنا البُعد المناسب">
+          <span class="match-zone-label">٠٫٤ – ٠٫٨ ثانية</span>
+          <span class="match-zone-slot" data-match-slot></span>
+          <span class="match-zone-mark"><span data-icon="states.success" aria-hidden="true"></span>مُطابَق</span>
+        </li>
+      </ol>
+    </section>
+
+  </main>
+
+  <!-- ─── Dock placeholder (mounted by dock.js) ─── -->
+  <div id="dock-mount" hidden aria-hidden="true"></div>
+
+  <!-- ─── Overlay slots (slide-over + sheet) ─── -->
+  <div id="overlay-scrim" class="scrim" hidden aria-hidden="true"></div>
+
+  <aside id="overlay-panel" class="slide-over" hidden aria-hidden="true"
+         role="dialog" aria-modal="true" aria-labelledby="overlay-panel-title" tabindex="-1">
+    <header class="slide-over-header">
+      <div class="slide-over-heading">
+        <span class="slide-over-eyebrow" data-overlay-eyebrow hidden></span>
+        <h2 class="slide-over-title" id="overlay-panel-title" data-overlay-title></h2>
+      </div>
+      <button type="button" class="slide-over-close" data-overlay-close aria-label="إغلاق اللوحة">
+        <span class="slide-over-close-ico" data-icon="actions.close" aria-hidden="true"></span>
+      </button>
+    </header>
+    <div class="slide-over-body" data-overlay-body></div>
+  </aside>
+
+  <aside id="overlay-sheet" class="sheet" hidden aria-hidden="true"></aside>
+
+  <!-- ζ1: zen veil + return affordance -->
+  <div id="zen-veil" class="zen-veil" hidden aria-hidden="true"></div>
+  <button type="button" id="zen-exit" class="zen-exit" data-zen-close aria-label="الخروج من وضع التركيز">
+    <span class="zen-exit-ico" data-icon="actions.close" aria-hidden="true"></span>
+  </button>
+
+  <!-- ─── Overlay content templates (cloned by Upg.overlay) ─── -->
+  <template id="overlay-tpl-command" data-eyebrow="لوحة الأوامر" data-title="ماذا تُريد أن تفعل؟">
+    <nav class="cmdk-list" aria-label="الأوامر السريعة">
+      <button type="button" class="cmdk-item" data-cmd="home">
+        <span data-icon="navigation.home" aria-hidden="true"></span>
+        <span class="cmdk-item-label">الذهاب إلى الرئيسية</span>
+        <span class="cmdk-item-hint">G H</span>
+      </button>
+      <button type="button" class="cmdk-item" data-cmd="lab">
+        <span data-icon="navigation.lab" aria-hidden="true"></span>
+        <span class="cmdk-item-label">فتح التدريب</span>
+        <span class="cmdk-item-hint">G L</span>
+      </button>
+      <button type="button" class="cmdk-item" data-cmd="progress">
+        <span data-icon="navigation.progress" aria-hidden="true"></span>
+        <span class="cmdk-item-label">عرض التقدّم</span>
+        <span class="cmdk-item-hint">G P</span>
+      </button>
+      <button type="button" class="cmdk-item" data-cmd="theme">
+        <span data-icon="theme.dark" aria-hidden="true"></span>
+        <span class="cmdk-item-label">تبديل السِمة (داكن / فاتح / تلقائي)</span>
+        <span class="cmdk-item-hint">T</span>
+      </button>
+    </nav>
+  </template>
+
+  <template id="overlay-tpl-cc-scenario" data-eyebrow="سيناريو خدمة العملاء" data-title="شكوى مُتكرِّرة — التهدئة في ٩٠ ثانية">
+    <p>عميل يشتكي للمرة الثالثة من تأخير في الخدمة. يتحدّث بصوت مرتفع، يطلب مديراً. الهدف: تحويل الموقف من حادّ إلى مُتحكَّم به في أقل من ٩٠ ثانية — دون تصعيد ودون وعد لا يُمكن الوفاء به.</p>
+    <h3 class="h3">خطوات التنفيذ — HEAT</h3>
+    <div class="script-dialog">
+      <p class="script-line"><span class="script-speaker client"><span class="script-speaker-ico" data-icon="callcenter.client" aria-hidden="true"></span>العميل</span><span class="script-text">«هذا الثالث مرة أتصل وما أحد حل مشكلتي!»</span></p>
+      <p class="script-line"><span class="script-speaker agent"><span class="script-speaker-ico" data-icon="callcenter.agent" aria-hidden="true"></span>أنت</span><span class="script-text">«أفهم إحساسك تماماً، وآسف إنك مررت بهذا. ثلاث مرّات دون نتيجة شيء ما يُقبل. أنا شخصياً رح أتابع معك الحين — ممكن تحكيلي ش اللي صاير؟»</span></p>
+    </div>
+    <h3 class="h3">PROVE-IT</h3>
+    <p>دراسة Carnegie Mellon (2019): المحادثات التي تبدأ بصوت متوسط الـ pitch وتخفض ٢٠Hz في أول ١٠ ثوانٍ تُنتج رضا أعلى بنسبة ٣٤٪.</p>
+    <button type="button" class="slide-over-cta" data-cmd="lab">ابدأ هذا السيناريو</button>
+  </template>
+
+  <template id="overlay-tpl-cc-apindex" data-eyebrow="COPC CX 6.2" data-title="حاسبة مؤشر أداء العميل — APIndex">
+    <p>أدخل قِيَمك الخمس ليُحسب المؤشر المركّب ويُقارَن بالمعيار. كل القيم تبقى على جهازك — لا تُرسَل لأي خادم.</p>
+    <form class="cc-calc" data-cc-calc novalidate>
+      <label class="cc-calc-field">
+        <span class="cc-calc-label">AHT — متوسط مدة المكالمة <small>(٤–٦ دقائق)</small></span>
+        <input class="cc-calc-input" type="number" name="aht" min="0.5" max="30" step="0.1" value="5.2" inputmode="decimal" />
+      </label>
+      <label class="cc-calc-field">
+        <span class="cc-calc-label">FCR — حل من أول اتصال <small>(٧٠–٧٩٪)</small></span>
+        <input class="cc-calc-input" type="number" name="fcr" min="0" max="100" step="1" value="72" inputmode="numeric" />
+      </label>
+      <label class="cc-calc-field">
+        <span class="cc-calc-label">CSAT — رضا العميل <small>(≥ ٨٥٪)</small></span>
+        <input class="cc-calc-input" type="number" name="csat" min="0" max="100" step="1" value="84" inputmode="numeric" />
+      </label>
+      <label class="cc-calc-field">
+        <span class="cc-calc-label">ADH — التزام بالجدول <small>(٩٢–٩٥٪)</small></span>
+        <input class="cc-calc-input" type="number" name="adh" min="0" max="100" step="1" value="93" inputmode="numeric" />
+      </label>
+      <label class="cc-calc-field">
+        <span class="cc-calc-label">QA — تقييم الجودة <small>(≥ ٩٠٪)</small></span>
+        <input class="cc-calc-input" type="number" name="qa" min="0" max="100" step="1" value="88" inputmode="numeric" />
+      </label>
+    </form>
+    <div class="cc-calc-result" data-cc-calc-result aria-live="polite">
+      <span class="cc-calc-result-ring" data-cc-calc-ring data-progress="0" data-ring-host></span>
+      <div class="cc-calc-result-text">
+        <span class="cc-calc-result-band" data-cc-calc-band>—</span>
+        <span class="cc-calc-result-sub">مؤشر APIndex المركّب مقابل COPC CX 6.2</span>
+      </div>
+    </div>
+  </template>
+
+  <!-- ─── Runtime entries (classic IIFE; mobile-safe) ─── -->
+  <script src="assets/js/theme.js" defer></script>
+  <script src="assets/js/icons.js" defer></script>
+  <script src="assets/js/dock.js"  defer></script>
+  <script src="assets/js/canvas-harmonic.js" defer></script>
+  <script src="assets/js/bento-expand.js"    defer></script>
+  <script src="assets/js/ring.js"            defer></script>
+  <script src="assets/js/slide-over.js"      defer></script>
+  <script src="assets/js/sheet.js"           defer></script>
+  <script src="assets/js/overlay-choreo.js"  defer></script>
+  <script src="assets/js/zen.js"             defer></script>
+  <script src="assets/js/press.js"           defer></script>
+  <script src="assets/js/match.js"           defer></script>
+  <script src="assets/js/haptic.js"          defer></script>
+  <!-- κ1: Call Center domain wiring — consumes Upg.* only, registers nothing sacred -->
+  <script src="assets/js/domain-callcenter.js" defer></script>
+
+</body>
+</html>

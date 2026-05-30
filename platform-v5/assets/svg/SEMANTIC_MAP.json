@@ -1,7 +1,7 @@
 {
   "_meta": {
     "doctrine": "ICONOGRAPHY_DOCTRINE.md §5",
-    "rule": "code addresses icons by semantic key, never by icon-id. Swapping the underlying icon (e.g. Lucide 'home' → 'house') is a one-line edit here.",
+    "rule": "code addresses icons by semantic key, never by icon-id. Swapping the underlying icon (e.g. Lucide 'home' to 'house') is a one-line edit here.",
     "family_per_region": {
       "navigation": "lucide",
       "actions":    "lucide",
@@ -52,7 +52,8 @@
     "info":        "icon-info",
     "warning":     "icon-alert-triangle",
     "error":       "icon-alert-circle",
-    "success":     "icon-check"
+    "success":     "icon-check",
+    "wrong":       "icon-x-circle"
   },
 
   "theme": {
@@ -64,5 +65,38 @@
   "chrome": {
     "menu":        "icon-menu",
     "panel-open":  "icon-panel-right-open"
+  },
+
+  "callcenter": {
+    "phone":       "icon-phone",
+    "reception":   "icon-phone",
+    "angry":       "icon-flame",
+    "listen":      "icon-ear",
+    "voice":       "icon-mic",
+    "closing":     "icon-phone-off",
+    "transfer":    "icon-phone-forwarded",
+    "kpi":         "icon-gauge",
+    "agent":       "icon-headset",
+    "client":      "icon-user",
+    "archetype":   "icon-users",
+    "mastery":     "icon-award",
+    "dialogue":    "icon-message-circle",
+    "compare":     "icon-scale",
+    "rating":      "icon-star"
+  },
+
+  "voice": {
+    "pace":        "icon-timer",
+    "pitch":       "icon-sliders-horizontal",
+    "volume":      "icon-volume-2",
+    "tone":        "icon-thermometer",
+    "pause":       "icon-pause"
+  },
+
+  "empathy": {
+    "acknowledge": "icon-ear",
+    "validate":    "icon-heart",
+    "refocus":     "icon-compass",
+    "action":      "icon-zap"
   }
 }
