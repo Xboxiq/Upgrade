@@ -117,3 +117,19 @@
     }
   }
 }
+
+
+
+/* ─── θ1 PERF — offscreen render skipping ──────────────────────────────
+   The match bench (η2) sits below the bento fold. content-visibility:auto
+   lets the browser skip its layout/paint until it is scrolled near, which
+   lowers initial Total Blocking Time. contain-intrinsic-size reserves a
+   placeholder box so the scrollbar geometry stays stable (CLS-safe). The
+   section still renders on approach and whenever a child gains focus, so
+   keyboard and drag interaction are unaffected. */
+@layer base {
+  .match-bench {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 520px;
+  }
+}

@@ -10,6 +10,22 @@
   <meta name="format-detection" content="telephone=no" />
   <title>Upgrade — تَدَفُّق</title>
 
+  <!-- θ1 PERF — FOUC guard: resolve the saved theme before first paint so the
+       initial render uses the correct palette (lets theme.js load deferred).
+       Mirrors Upg.theme.current()/resolveAuto(); falls back to data-theme="dark". -->
+  <script data-theme-bootstrap>
+    (function () {
+      try {
+        var raw = localStorage.getItem('upg_theme');
+        var mode = (raw === 'dark' || raw === 'light' || raw === 'auto') ? raw : 'dark';
+        if (mode === 'auto') {
+          mode = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+        }
+        document.documentElement.setAttribute('data-theme', mode);
+      } catch (e) { /* keep the hardcoded data-theme="dark" fallback */ }
+    })();
+  </script>
+
   <!-- cascade order + tokens + type + canvas + dock + dock-mobile -->
   <link rel="stylesheet" href="assets/css/_layers.css" />
   <link rel="stylesheet" href="assets/css/tokens.css" />
@@ -269,7 +285,10 @@
   </template>
 
   <!-- ─── Runtime entries (classic IIFE; mobile-safe) ─── -->
-  <script src="assets/js/theme.js"></script>
+  <!-- θ1: theme.js is now deferred — first paint is handled by the inline
+       FOUC bootstrap above, so theme.js need not block (still first in defer
+       order, so window.Upg is seeded before the other modules run). -->
+  <script src="assets/js/theme.js" defer></script>
   <script src="assets/js/icons.js" defer></script>
   <script src="assets/js/dock.js"  defer></script>
   <script src="assets/js/canvas-harmonic.js" defer></script>

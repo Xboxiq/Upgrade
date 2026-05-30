@@ -175,3 +175,55 @@ npx lighthouse http://127.0.0.1:8000 \
 | SEO | ⏳ pending | — | — |
 
 — End of static audit —
+
+
+
+---
+
+# v5 TADAFFUQ — θ1 PERF_AUDIT — Static Perf Posture (`platform-v5/index.html`)
+
+> Generated for stage θ1 on 2026-05-30. **Sandbox note:** this environment
+> has `network=OPEN_INTERNET` but no headless Chrome binary is provisioned,
+> so the Lighthouse CLI is **not run here**. Per manifesto §6 (Truth Over
+> Claims) and exit criterion §8.3, the **runtime** Mobile Performance /
+> Accessibility scores must be measured by the human or CI and recorded
+> below. This section documents only the *static signals* that feed them,
+> all grep-verifiable via `scripts/v5_perf_audit.py`.
+
+## Static signals (verified by `scripts/v5_perf_audit.py`, exit 0)
+
+| signal | value | status |
+|---|---:|---|
+| css `url()` external requests | 0 | ok — no external fonts/images |
+| `@font-face` declarations | 0 | ok — system/local stacks only |
+| `@import` render-blocking chains | 0 | ok |
+| heavy `backdrop-filter: blur(N≥12px)` | 0 | ok (manifesto §5.1; max in tree = 8px) |
+| non-deferred `<script src>` | 0 | ok (all 13 modules `defer`; FOUC bootstrap inline) |
+| inline `style=` attributes (index.html) | 0 | ok |
+| FOUC theme bootstrap present | 1 | ok (first paint = correct theme, CLS-safe) |
+| render-blocking css `<link>` | 16 | info — small same-origin files, HTTP/2-friendly |
+| always-on `will-change` | 7 | ok (budget 12) |
+| `content-visibility: auto` (offscreen match-bench) | 1 | added θ1 — lowers initial TBT |
+
+## θ1 changes that improve runtime scores
+
+- **Inline `<head>` FOUC guard** resolves the saved theme before first paint
+  → removes the dark→light flash and its repaint/CLS for returning users.
+- **`theme.js` deferred** → one fewer parser-blocking script.
+- **`content-visibility: auto`** on the below-fold `.match-bench` →
+  initial layout/paint skipped until scrolled near (lower TBT), with
+  `contain-intrinsic-size` keeping scroll geometry stable.
+
+## Runtime Lighthouse — to be recorded by human/CI
+
+```
+npx lighthouse http://127.0.0.1:8000 --preset=mobile \
+  --output=html --output-path=/tmp/tadaffuq-v5-lh.html \
+  --chrome-flags='--headless --no-sandbox' \
+  --only-categories=performance,accessibility,best-practices,seo
+```
+
+| category | target | recorded score | date |
+|---|---|---|---|
+| Performance (mobile) | ≥ 90 | _pending human/CI_ | — |
+| Accessibility | ≥ 95 | _pending human/CI_ | — |
