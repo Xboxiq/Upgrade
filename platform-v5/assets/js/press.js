@@ -45,7 +45,12 @@
 
   function controlFrom(node) {
     if (!node || !node.closest) return null;
-    return node.closest(PRESS_SEL);
+    var el = node.closest(PRESS_SEL);
+    // η3 integration: the match bench (η2) owns its own tactile vocabulary
+    // (تَك on a valid drop, silence on error) — exclude it so the global press
+    // دفّن never pre-empts the bench's تَك (its chips/zones are role="button").
+    if (el && el.closest('[data-match]')) return null;
+    return el;
   }
 
   // Stamp the proportional compression on the element so the keyframe reads it.
