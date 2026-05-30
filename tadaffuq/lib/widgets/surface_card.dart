@@ -4,10 +4,9 @@ import '../theme/palette.dart';
 import '../theme/tokens.dart';
 import 'press_scale.dart';
 
-/// The workhorse elevated surface — Glass 2.0 aesthetic without per-card blur:
-/// a solid surface, a hairline top edge that brightens to neon-cyan on
-/// hover/focus, and soft multi-layered shadows. Lifts slightly on hover (web/
-/// desktop) and sinks on press.
+/// A clean iOS-grade card: a grouped surface with a hairline edge and soft,
+/// restrained depth. Lifts gently on hover (web/desktop) and sinks on press.
+/// No neon, no loud borders — the content carries the screen.
 class SurfaceCard extends StatefulWidget {
   const SurfaceCard({
     super.key,
@@ -24,7 +23,7 @@ class SurfaceCard extends StatefulWidget {
   final EdgeInsetsGeometry padding;
   final double radius;
 
-  /// When true the top edge uses the action accent (e.g. the active module).
+  /// When true the card carries a faint brand wash + brand-tinted hairline.
   final bool accent;
   final bool interactive;
 
@@ -38,34 +37,30 @@ class _SurfaceCardState extends State<SurfaceCard> {
   @override
   Widget build(BuildContext context) {
     final AppPalette p = context.palette;
-    final bool lifted = _hover && widget.interactive;
+    final bool lifted = _hover && widget.interactive && widget.onTap != null;
 
-    final Color topEdge = widget.accent
-        ? p.accentAction
-        : (lifted ? p.accentProgress : p.line);
+    final Color border = widget.accent
+        ? p.brand.withValues(alpha: 0.45)
+        : (lifted ? p.lineStrong : p.line);
 
     final Widget card = AnimatedContainer(
       duration: Motion.quick,
       curve: Motion.standard,
-      transform: lifted ? Matrix4.translationValues(0, -3, 0) : Matrix4.identity(),
+      transform: lifted ? Matrix4.translationValues(0, -2, 0) : Matrix4.identity(),
       transformAlignment: Alignment.center,
       padding: widget.padding,
       decoration: BoxDecoration(
-        color: lifted ? p.surface2 : p.surface1,
+        color: widget.accent
+            ? Color.alphaBlend(p.brand.withValues(alpha: p.isDark ? 0.10 : 0.05), p.surface1)
+            : p.surface1,
         borderRadius: BorderRadius.circular(widget.radius),
-        border: Border(top: BorderSide(color: topEdge, width: 1.4)),
+        border: Border.all(color: border, width: 0.5),
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: Colors.black.withValues(alpha: p.isDark ? 0.40 : 0.08),
-            blurRadius: lifted ? 30 : 18,
-            offset: Offset(0, lifted ? 16 : 10),
-            spreadRadius: -10,
-          ),
-          BoxShadow(
-            color: Colors.black.withValues(alpha: p.isDark ? 0.24 : 0.05),
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-            spreadRadius: -2,
+            color: Colors.black.withValues(alpha: p.isDark ? 0.32 : 0.05),
+            blurRadius: lifted ? 28 : 16,
+            offset: Offset(0, lifted ? 14 : 8),
+            spreadRadius: -12,
           ),
         ],
       ),

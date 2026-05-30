@@ -7,12 +7,12 @@ import '../theme/palette.dart';
 import '../theme/tokens.dart';
 import '../util/numerals.dart';
 
-/// A premium SVG-quality progress ring, hand-painted:
-///  • the arc fills with a neon-cyan sweep gradient and a rounded cap
-///  • the stroke MATURES — it thickens from 3→7px as progress approaches 100%
-///  • a soft outer glow lifts the arc off the surface
+/// A hand-painted progress ring with an Apple-Fitness-grade finish:
+///  • a warm gold sweep gradient with rounded caps
+///  • the stroke scales with the ring's size and matures subtly toward 100%
+///  • a soft, restrained outer glow (no neon)
 ///  • the value animates (sweeps) whenever it changes — never a static jump
-///  • in [breathing] mode the glow pulses slowly (used inside Focus/Zen)
+///  • [breathing] mode gently pulses the glow (used inside Focus mode)
 class ProgressRing extends StatefulWidget {
   const ProgressRing({
     super.key,
@@ -23,8 +23,7 @@ class ProgressRing extends StatefulWidget {
     this.breathing = false,
   });
 
-  /// 0–100.
-  final double value;
+  final double value; // 0–100
   final double size;
   final Widget? label;
   final bool showPercent;
@@ -81,14 +80,12 @@ class _ProgressRingState extends State<ProgressRing>
           return AnimatedBuilder(
             animation: _breath,
             builder: (BuildContext context, _) {
-              final double glow = widget.breathing
-                  ? 0.4 + 0.6 * _breath.value
-                  : 0.5;
+              final double glow = widget.breathing ? 0.3 + 0.6 * _breath.value : 0.35;
               return CustomPaint(
                 painter: _RingPainter(
                   progress: t,
-                  colors: p.progressGradient,
-                  track: p.lineStrong,
+                  colors: p.goldGradient,
+                  track: p.isDark ? p.lineStrong : p.fill,
                   glow: glow,
                 ),
                 child: Center(
@@ -97,7 +94,7 @@ class _ProgressRingState extends State<ProgressRing>
                           ? Text(
                               Arabic.pct(widget.value),
                               style: AppTheme.mono(
-                                size: widget.size * 0.2,
+                                size: widget.size * 0.21,
                                 weight: FontWeight.w700,
                                 color: p.ink,
                               ),
@@ -129,8 +126,9 @@ class _RingPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final Offset center = size.center(Offset.zero);
-    final double stroke = 3 + 4 * progress; // matures 3 → 7
-    final double radius = size.shortestSide / 2 - stroke / 2 - 3;
+    // Stroke scales with the ring and matures slightly toward completion.
+    final double stroke = size.shortestSide * 0.085 * (0.82 + 0.18 * progress);
+    final double radius = size.shortestSide / 2 - stroke / 2 - 2;
 
     final Paint trackPaint = Paint()
       ..style = PaintingStyle.stroke
@@ -152,14 +150,15 @@ class _RingPainter extends CustomPainter {
       transform: const GradientRotation(-math.pi / 2),
     ).createShader(rect);
 
-    // Outer glow — the arc lifts off the surface.
-    final Paint glowPaint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = stroke
-      ..strokeCap = StrokeCap.round
-      ..color = colors.first.withValues(alpha: 0.55 * glow)
-      ..maskFilter = MaskFilter.blur(BlurStyle.normal, 4 + 6 * glow);
-    canvas.drawArc(rect, start, sweep, false, glowPaint);
+    if (glow > 0) {
+      final Paint glowPaint = Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = stroke
+        ..strokeCap = StrokeCap.round
+        ..color = colors.first.withValues(alpha: 0.45 * glow)
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, 3 + 6 * glow);
+      canvas.drawArc(rect, start, sweep, false, glowPaint);
+    }
 
     final Paint arcPaint = Paint()
       ..style = PaintingStyle.stroke

@@ -2,19 +2,20 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import '../../../theme/app_icons.dart';
 
+import '../../../theme/app_icons.dart';
 import '../../../theme/palette.dart';
 import '../../../theme/tokens.dart';
+import '../../../ui/controls.dart';
 import '../../../widgets/press_scale.dart';
 import '../../../widgets/progress_ring.dart';
+import '../../../widgets/surface_card.dart';
 import '../../../widgets/ui_bits.dart';
 import '../callcenter_data.dart';
 
 /// A technique's detail surface, opened via a reveal transition. Hosts the
-/// script dialogue, the quality indicator, and — the centrepiece — a Zen /
-/// Focus mode that recedes the world by subtraction: the chrome dissolves, a
-/// veil drains the field, and only the breathing ring + objective remain.
+/// script dialogue and quality indicator, and a Zen / Focus mode that recedes
+/// the world by subtraction — leaving only the breathing ring + the objective.
 class TechniqueDetail extends StatefulWidget {
   const TechniqueDetail({super.key, required this.technique});
   final Technique technique;
@@ -25,10 +26,7 @@ class TechniqueDetail extends StatefulWidget {
 
 class _TechniqueDetailState extends State<TechniqueDetail>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _focus = AnimationController(
-    vsync: this,
-    duration: Motion.zen,
-  );
+  late final AnimationController _focus = AnimationController(vsync: this, duration: Motion.zen);
   late double _ring = widget.technique.progress;
   bool _focusOn = false;
 
@@ -49,7 +47,7 @@ class _TechniqueDetailState extends State<TechniqueDetail>
   }
 
   Future<void> _finish() async {
-    setState(() => _ring = 100); // the ring blooms to mastery in place
+    setState(() => _ring = 100);
     await Future<void>.delayed(Motion.panel);
     await _exitFocus();
   }
@@ -57,24 +55,28 @@ class _TechniqueDetailState extends State<TechniqueDetail>
   @override
   Widget build(BuildContext context) {
     final AppPalette p = context.palette;
-    final Technique tch = widget.technique;
+    final TextTheme tt = Theme.of(context).textTheme;
+    final Technique t = widget.technique;
 
     return Scaffold(
       backgroundColor: p.canvas,
       body: Stack(
         children: <Widget>[
-          // ── Base content ──
           SafeArea(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(Space.x5, Space.x4, Space.x5, Space.x16),
+              physics: const BouncingScrollPhysics(),
+              padding: const EdgeInsets.fromLTRB(Space.x4, Space.x3, Space.x4, Space.x12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  _TopBar(
-                    onClose: () => Navigator.of(context).maybePop(),
-                    label: 'مهارة تدريبية',
+                  Row(
+                    children: <Widget>[
+                      InfoPill('مهارة تدريبية', color: p.brand),
+                      const Spacer(),
+                      _circleBtn(p, AppIcons.x, () => Navigator.of(context).maybePop()),
+                    ],
                   ),
-                  const SizedBox(height: Space.x6),
+                  const SizedBox(height: Space.x5),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -82,180 +84,101 @@ class _TechniqueDetailState extends State<TechniqueDetail>
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            IconBadge(tch.icon, tint: p.accentAction, size: 52, iconSize: 26),
+                            IconBadge(t.icon, tint: p.brand, size: 52, iconSize: 26),
                             const SizedBox(height: Space.x4),
-                            Text(tch.title, style: Theme.of(context).textTheme.displayMedium),
+                            Text(t.title, style: tt.displayMedium),
                             const SizedBox(height: Space.x3),
-                            Text(tch.blurb, style: Theme.of(context).textTheme.bodyLarge),
+                            Text(t.blurb, style: tt.bodyLarge),
                           ],
                         ),
                       ),
                       const SizedBox(width: Space.x4),
-                      ProgressRing(value: _ring, size: 92),
+                      ProgressRing(value: _ring, size: 88),
                     ],
                   ),
-                  const SizedBox(height: Space.x8),
-                  Text('السكريبت الاحترافي', style: Theme.of(context).textTheme.titleLarge),
-                  const SizedBox(height: Space.x4),
-                  for (final ScriptLine line in tch.script) ...<Widget>[
-                    _ScriptBubble(line: line),
-                    const SizedBox(height: Space.x3),
-                  ],
+                  const SizedBox(height: Space.x6),
+                  Text('السكريبت الاحترافي', style: tt.titleLarge),
+                  const SizedBox(height: Space.x3),
+                  SurfaceCard(
+                    interactive: false,
+                    padding: const EdgeInsets.all(Space.x4),
+                    child: Column(
+                      children: <Widget>[
+                        for (int i = 0; i < t.script.length; i++) ...<Widget>[
+                          _scriptLine(p, t.script[i]),
+                          if (i != t.script.length - 1) const SizedBox(height: Space.x3),
+                        ],
+                      ],
+                    ),
+                  ),
                   const SizedBox(height: Space.x4),
                   NoteCard(
-                    text: 'مؤشر الجودة: ${tch.quality}',
+                    text: 'مؤشر الجودة: ${t.quality}',
                     icon: AppIcons.checkCircle,
                     kind: NoteKind.success,
                   ),
-                  const SizedBox(height: Space.x8),
-                  _FocusCta(onTap: _enterFocus),
-                ].animate(interval: 60.ms).fadeIn(duration: Motion.emerge).moveY(begin: 12, end: 0, curve: Motion.standard),
+                  const SizedBox(height: Space.x6),
+                  FilledCta(label: 'ادخل وضع التركيز', icon: AppIcons.target, onTap: _enterFocus),
+                ].animate(interval: 55.ms).fadeIn(duration: Motion.emerge).moveY(begin: 12, end: 0, curve: Motion.standard),
               ),
             ),
           ),
 
-          // ── Zen veil (drains + dims the field) ──
+          // Zen veil
           AnimatedBuilder(
             animation: _focus,
             builder: (BuildContext context, _) {
-              final double t = _focus.value;
-              if (t == 0) return const SizedBox.shrink();
+              final double v = _focus.value;
+              if (v == 0) return const SizedBox.shrink();
               return Positioned.fill(
                 child: IgnorePointer(
-                  ignoring: t < 0.5,
+                  ignoring: v < 0.5,
                   child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 9 * t, sigmaY: 9 * t),
-                    child: ColoredBox(
-                      color: p.canvasSink.withValues(alpha: 0.9 * t),
-                    ),
+                    filter: ImageFilter.blur(sigmaX: 10 * v, sigmaY: 10 * v),
+                    child: ColoredBox(color: p.canvasSink.withValues(alpha: 0.92 * v)),
                   ),
                 ),
               );
             },
           ),
 
-          // ── The clearing — only the scoped task remains ──
           if (_focusOn)
-            _FocusClearing(
-              animation: _focus,
-              title: tch.title,
-              ring: _ring,
-              onFinish: _finish,
-              onExit: _exitFocus,
-            ),
+            _FocusClearing(animation: _focus, title: t.title, ring: _ring, onFinish: _finish, onExit: _exitFocus),
         ],
       ),
     );
   }
-}
 
-class _TopBar extends StatelessWidget {
-  const _TopBar({required this.onClose, required this.label});
-  final VoidCallback onClose;
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    final AppPalette p = context.palette;
-    return Row(
-      children: <Widget>[
-        InfoPill(label, color: p.accentProgress),
-        const Spacer(),
-        PressScale(
-          onTap: onClose,
-          pressedScale: 0.9,
-          child: Container(
-            width: 44,
-            height: 44,
-            decoration: BoxDecoration(
-              color: p.surface1,
-              borderRadius: BorderRadius.circular(Radii.pill),
-              border: Border.all(color: p.line),
-            ),
-            child: Icon(AppIcons.x, size: 20, color: p.inkMuted),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _ScriptBubble extends StatelessWidget {
-  const _ScriptBubble({required this.line});
-  final ScriptLine line;
-
-  @override
-  Widget build(BuildContext context) {
-    final AppPalette p = context.palette;
-    final Color tint = line.agent ? p.accentProgress : p.inkMuted;
-    return Container(
-      padding: const EdgeInsets.all(Space.x4),
-      decoration: BoxDecoration(
-        color: p.surface1,
-        borderRadius: BorderRadius.circular(Radii.md),
-        border: Border.all(color: p.line),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Icon(line.agent ? AppIcons.headset : AppIcons.user, size: 15, color: tint),
-              const SizedBox(width: Space.x2),
-              Text(
-                line.agent ? 'أنت' : 'العميل',
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(color: tint),
-              ),
-            ],
-          ),
-          const SizedBox(height: Space.x2),
-          Text(line.text, style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: p.ink)),
-        ],
-      ),
-    );
-  }
-}
-
-class _FocusCta extends StatelessWidget {
-  const _FocusCta({required this.onTap});
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final AppPalette p = context.palette;
+  Widget _circleBtn(AppPalette p, IconData icon, VoidCallback onTap) {
     return PressScale(
       onTap: onTap,
-      pressedScale: 0.98,
+      pressedScale: 0.9,
       child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: Space.x4),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: <Color>[p.accentAction, Color.lerp(p.accentAction, p.accentProgress, 0.4)!],
-          ),
-          borderRadius: BorderRadius.circular(Radii.md),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: p.accentAction.withValues(alpha: 0.4),
-              blurRadius: 22,
-              offset: const Offset(0, 10),
-              spreadRadius: -6,
-            ),
-          ],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Icon(AppIcons.target, size: 20, color: Colors.white),
-            const SizedBox(width: Space.x2),
-            Text(
-              'ادخل وضع التركيز',
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white),
-            ),
-          ],
-        ),
+        width: 38,
+        height: 38,
+        decoration: BoxDecoration(color: p.fill, borderRadius: BorderRadius.circular(Radii.pill)),
+        child: Icon(icon, size: 19, color: p.inkMuted),
       ),
+    );
+  }
+
+  Widget _scriptLine(AppPalette p, ScriptLine line) {
+    final TextTheme tt = Theme.of(context).textTheme;
+    final Color tint = line.agent ? p.brand : p.inkMuted;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Icon(line.agent ? AppIcons.headset : AppIcons.user, size: 14, color: tint),
+            const SizedBox(width: Space.x2),
+            Text(line.agent ? 'أنت' : 'العميل', style: tt.labelSmall?.copyWith(color: tint)),
+          ],
+        ),
+        const SizedBox(height: Space.x2),
+        Text(line.text, style: tt.bodyLarge?.copyWith(color: p.ink, fontSize: 15.5)),
+      ],
     );
   }
 }
@@ -278,81 +201,54 @@ class _FocusClearing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppPalette p = context.palette;
-    final CurvedAnimation curved =
-        CurvedAnimation(parent: animation, curve: Motion.standard);
+    final TextTheme tt = Theme.of(context).textTheme;
+    final CurvedAnimation curved = CurvedAnimation(parent: animation, curve: Motion.standard);
     return Positioned.fill(
       child: SafeArea(
         child: FadeTransition(
           opacity: curved,
           child: ScaleTransition(
-            scale: Tween<double>(begin: 0.9, end: 1).animate(curved),
+            scale: Tween<double>(begin: 0.92, end: 1).animate(curved),
             child: Column(
               children: <Widget>[
                 Align(
-                  alignment: Alignment.topLeft,
+                  alignment: AlignmentDirectional.topStart,
                   child: Padding(
                     padding: const EdgeInsets.all(Space.x4),
                     child: PressScale(
                       onTap: onExit,
                       pressedScale: 0.9,
                       child: Container(
-                        width: 44,
-                        height: 44,
-                        decoration: BoxDecoration(
-                          color: p.surface1,
-                          borderRadius: BorderRadius.circular(Radii.pill),
-                          border: Border.all(color: p.line),
-                        ),
-                        child: Icon(AppIcons.x, size: 20, color: p.inkMuted),
+                        width: 38,
+                        height: 38,
+                        decoration: BoxDecoration(color: p.fill, borderRadius: BorderRadius.circular(Radii.pill)),
+                        child: Icon(AppIcons.x, size: 19, color: p.inkMuted),
                       ),
                     ),
                   ),
                 ),
                 const Spacer(),
-                Text('وضع التركيز', style: Theme.of(context).textTheme.labelMedium?.copyWith(color: p.accentProgress, letterSpacing: 1)),
+                Text('وضع التركيز', style: tt.labelMedium?.copyWith(color: p.gold, letterSpacing: 1.5)),
                 const SizedBox(height: Space.x6),
                 ProgressRing(value: ring, size: 200, breathing: ring < 100),
                 const SizedBox(height: Space.x8),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: Space.x10),
-                  child: Text(
-                    title,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: Space.x8),
+                  child: Text(title, textAlign: TextAlign.center, style: tt.headlineMedium),
                 ),
-                const SizedBox(height: Space.x4),
+                const SizedBox(height: Space.x3),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: Space.x10),
                   child: Text(
                     'تنفّس. ركّز على هدف واحد. كرّر السكريبت بصوت هادئ حتى يصبح طبيعياً.',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyMedium,
+                    style: tt.bodyMedium,
                   ),
                 ),
                 const Spacer(),
                 Padding(
                   padding: const EdgeInsets.all(Space.x6),
-                  child: PressScale(
-                    onTap: onFinish,
-                    pressedScale: 0.97,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: Space.x8, vertical: Space.x4),
-                      decoration: BoxDecoration(
-                        color: p.surface1,
-                        borderRadius: BorderRadius.circular(Radii.pill),
-                        border: Border.all(color: p.accentProgress.withValues(alpha: 0.5)),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Icon(AppIcons.checkCircle, size: 20, color: p.accentProgress),
-                          const SizedBox(width: Space.x2),
-                          Text('أنهِ الجلسة', style: Theme.of(context).textTheme.labelLarge),
-                        ],
-                      ),
-                    ),
-                  ),
+                  child: TintedButton(label: 'أنهِ الجلسة', icon: AppIcons.checkCircle, color: p.gold, onTap: onFinish),
                 ),
               ],
             ),
