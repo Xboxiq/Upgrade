@@ -275,3 +275,31 @@ last_5_avg: 4.0
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-30 / ζ1 — Pillar ζ stage 1/3 — zen trigger live (VEIL chronic) — pivot-watch: ζ2 must NOT be VEIL
+
+
+
+
+
+## ζ2 — 2026-05-30
+**Pulse Category:** 🌗 GLOW_PULSE *(11th pulse of v5; pivot away from VEIL after ε3+ζ1; distinct from γ3's hue-nudge GLOW)*
+**The Surprise:** ζ1 جَعَلَ العالَم يَنحَسِر؛ ζ2 يُحَدِّد طَبع الحَقل المُستَقِرّ: العالَم المَكتوم **يُجَرَّد من لَونِه**. `backdrop-filter: saturate(0.32)` مَوضوع على الحِجاب نَفسِه يُصَفّي اللَون من كل ما رُسِمَ تَحتَه — الكانفس المَكتوم كُلّه يَصير شِبه أُحادي اللَون — أما المُهِمَّة المَقصودة فمَرفوعة فوق الحِجاب (`--z-overlay` أعلى من `--z-scrim`)، فتُستَثنى من هذا الـ backdrop بِترتيب الطِلاء وَحدَه (لا فَرع JS، لا طَبقة ثانية) وتَحتَفِظ بكامِل ألوانِها. فلا يَبقى في الحَقل لَون حَيّ إلا واحِد: حَلقة التَقَدُّم تُبقي cyan الـ `--accent-progress`، و**تَتَنَفَّس** — وَهَج `drop-shadow` يَتَّسِع من 1px إلى 7px ويَعود، على `--duration-skeleton` بـ `infinite alternate` (نَفَس كامِل ≈ ٢٫٤ث)، فيَصير اللَون نَفسُه إشارةَ "هذه الجَلسة حَيَّة تَنتَظِرُك". وكُلّ هذا **بِلا blur** (Forbidden #9 هو blur≥12px): الـ `saturate()` تَرشيح رَخيص على الـ GPU لا يُكَلِّف إطاراً. والبِطاقة المَرفوعة تَطفو بـ `--shadow-3` فوق الحَقل المُجَرَّد كأنها العُنصُر الوَحيد الذي بَقِيَ في الضوء. هذا هو حُكم اللَون الواحِد (CHROMA §٧) مَحمولاً إلى نِهايَتِه المَنطِقية: في وَضع التَركيز لَون واحِد حَرفياً على الشاشة.
+
+**Reference Avoided:** Forbidden #9 (الـ `backdrop-filter: blur(N≥12px)` الثَقيل) — لا blur البَتَّة هنا، فَقَط `saturate` يُجَرِّد دون أن يُضَبِّب فيُبقي الحُروف والحَواف حادَّة. وكذلك الـ AI-default الأكبر: "وَضع التَركيز = أَعتِم الخَلفية أكثر"، حَيث المُفاجَأة هنا أن **التَجريد اللَوني** — لا العَتمة — هو ما يَصنَع التَركيز.
+**Inspired-by:** Wild Card #14 — خَطّ ظِلّ قَوس آيا صوفيا عند الظَهيرة (the shadow-line of a Hagia Sophia archway at noon): الضوء كعُنصُر بِنائي. عند الظَهيرة يَرسُم القَوس خَطّاً واحِداً حادّاً يُعَرِّف الفَراغ كُلَّه؛ وفي الزِن اللَون الوَحيد الناجي (cyan الحَلقة) يَلعَب الدَور نَفسَه — هو ما يُعَرِّف أين يَنظُر القارِئ في حَقلٍ جُرِّدَ من كل ما سِواه.
+**User-Visible:** yes — يُرى لَحظةَ الدُّخول في الزِن: العالَم خَلف الحِجاب يَبهَت لَونُه ويَصير رَمادياً، والحَلقة وَحدَها تَبقى زَرقاء حَيَّة تَتَنَفَّس. على سَطح المَكتب واللَمس مَعاً (الـ saturate يَعمَل على الحالتَين). مَن يُفَضِّل تَقليل الحَرَكة يَرى الحَلقة لَوناً واحِداً ثابِتاً في حَقلٍ مُجَرَّد — يَبقى المَعنى بِلا نَفَس.
+**Originality Self-Score:** 4/5 — تَعتيم وَضع التَركيز فِكرة شائِعة. الذي يَرفَعه إلى 4: (١) البَطَل **التَجريد اللَوني** لا الظَلام — حَقل أُحادي بِلَون واحِد ناجٍ؛ (٢) استِثناء المُهِمَّة من التَجريد بِـ**ترتيب طِلاء مُتَحَقَّق** (فوق `--z-scrim`) لا بِمِفتاح JS؛ (٣) اللَون الباقي **يَتَنَفَّس ما دامَت الجَلسة حَيَّة** فيَصير اللَون إشارةَ حَياة (حُكم اللَون الواحِد §٧ حَرفياً)؛ (٤) **بِلا token مُدَّة جَديد** — `--duration-skeleton` + `alternate`؛ (٥) reduced-motion يُبقي المَعنى ثابِتاً. لا أَدَّعي 5 لأن saturate-dimming primitive مَعروف؛ الأصالة في انضِباط اللَون-الحَيّ-الواحِد + نَظافة استِثناء الطِلاء.
+**Files touched:** platform-v5/assets/css/zen.css (APPEND ζ2 block, +67 → 218) · prompts/v5/ζ2_ZEN_CANVAS.md (NEW spec)
+**Verified at commit:** `ec18afb`
+
+
+
+---STATS---
+total_pulses: 11
+unique_categories_used: 8
+target_categories: 9 (DOCK · MORPH · GLOW · REVEAL · RING · GLASS · SPRING · VEIL · HAPTIC)
+remaining_categories: 1 (HAPTIC)
+avg_self_score: 4.0
+last_5_avg: 4.0
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-30 / ζ2 — Pillar ζ stage 2/3 — zen canvas live (GLOW; pivot away from VEIL satisfied) — next ζ3 SPRING closes ζ

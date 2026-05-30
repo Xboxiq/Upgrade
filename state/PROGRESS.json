@@ -2715,8 +2715,8 @@
   },
   "tadaffuq_v5": {
     "current_pillar": "ζ",
-    "current_stage": 1,
-    "current_stage_id": "ζ1",
+    "current_stage": 2,
+    "current_stage_id": "ζ2",
     "status": "in-progress",
     "branch": "tadaffuq-ζ-flow",
     "completed_stages": [
@@ -2736,11 +2736,12 @@
       "ε1",
       "ε2",
       "ε3",
-      "ζ1"
+      "ζ1",
+      "ζ2"
     ],
     "creativity_health": 100,
-    "creativity_health_note": "Pillar ζ (FLOW) opened. ζ1 ships VEIL_PULSE (chronic focus mode, vs ε3's acute). VEIL now 2-in-a-row (ε3+ζ1) — ζ2 MUST pivot away from VEIL (pivot rule §5.1). Health = 100 (base 100 + 5×8 unique-category bonus, capped; 0 pivot/forbidden/low-score penalties). HAPTIC still the only category needed for 9/9.",
-    "pulses_produced": 10,
+    "creativity_health_note": "Pillar ζ (FLOW). ζ2 ships GLOW_PULSE — pivot away from VEIL satisfied (ε3+ζ1 were 2× VEIL; ζ2 broke the run). Distinct from γ3 GLOW (hue-nudge); ζ2 drains chroma so a single accent is left glowing. Health = 100 (base 100 + 5×8 unique-category bonus, capped; 0 penalties). HAPTIC still the only category needed for 9/9 (lands in η).",
+    "pulses_produced": 11,
     "pulse_categories_used": [
       "DOCK_PULSE",
       "MORPH_PULSE",
@@ -3015,6 +3016,26 @@
       "chronic_vs_epsilon3_acute": "ζ1 VEIL is chronic (sustained focus mode held until exit); ε3 VEIL was acute (per overlay open/close)",
       "subtraction_not_addition": "no modal box added; the dock dissolves + a canvas-coloured veil hushes the world to 0.82, the scope lifted to --z-overlay"
     },
-    "next_stage": "ζ2 ZEN_CANVAS — pivot pulse, MUST NOT be VEIL (ε3+ζ1 already 2× VEIL). Plan: GLOW_PULSE — the dimmed world desaturates while the single progress ring keeps its cyan and breathes only while the session is alive; the canvas becomes a do-not-disturb field. Same branch tadaffuq-ζ-flow."
+    "ζ2_verified": {
+      "desaturation_on_veil_saturate_rules": 2,
+      "backdrop_filter_blur_ge12": 0,
+      "keyframes_zen_ring_breathe": 1,
+      "ring_bar_breathe_selector": 1,
+      "breathe_anchored_to_duration_skeleton": 1,
+      "important_in_zen_css": 0,
+      "emoji_in_zen_css": 0,
+      "hex_in_zen_css": 0,
+      "data_progress_hosts_single_accent": 1,
+      "physical_dirs": 0,
+      "logical_props_audit_exit": 0,
+      "http_serves": { "index.html": 200, "zen.css": 200 },
+      "zen_css_lines_total": 218,
+      "lines_added_this_stage": 67,
+      "pulse": "GLOW_PULSE",
+      "no_new_duration_token": "breathe reuses --duration-skeleton with `alternate` (full breath ~2.4s); the seven canonical durations stand",
+      "distinct_from_gamma3_glow": "γ3 nudged canvas hue toward the accent; ζ2 DRAINS chroma from the whole field so the single accent is left glowing",
+      "single_accent_taken_literal": "in Focus Mode exactly one chroma element remains on screen — the scope's progress ring (CHROMA §7)"
+    },
+    "next_stage": "ζ3 ZEN_EXIT — closes Pillar ζ. Plan: SPRING_PULSE — a quiet, deliberate exit on completion; a Bloom on the ring itself (a spring sub-bounce scale), NOT a page-wide celebration or a toast (Forbidden #2 toast / #10 counter / animated confetti); then the field re-saturates and the dock re-emerges on tarteel time. Same branch tadaffuq-ζ-flow. After ζ3: open PR tadaffuq-ζ-flow -> v5-tadaffuq (or main per #126/#127 precedent)."
   }
 }

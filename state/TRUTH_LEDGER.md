@@ -3783,3 +3783,47 @@ SPRING(ε2) · VEIL(ε3) — VEIL is a fresh debut here.
 - `Upg.choreo` (ε3) dock veil untouched — ζ1 dissolves the dock via a *separate* `:root[data-zen="active"] .dock` opacity rule; both only lower opacity, no clash, no redeclare of the base `.dock`
 - v4 Upg.* APIs preserved; `Upg.zen` is a NEW additive namespace
 - `archive/` untouched
+
+
+
+---
+
+## v5 TADAFFUQ — ζ2 ZEN_CANVAS — 2026-05-30
+
+**Branch:** `tadaffuq-ζ-flow` · **Pillar:** ζ (FLOW) · **Stage:** 2 of 3
+**Pulse:** 🌗 **GLOW_PULSE** *(pivot away from VEIL — ε3+ζ1 were 2× VEIL; distinct from γ3's hue-nudge GLOW)*
+**Verified at commit:** `ec18afb`
+
+### Files shipped
+- `platform-v5/assets/css/zen.css` (APPEND, +67 → 218 lines) — a second `@layer components` block (ζ1's rules untouched): (1) `.zen-veil[data-open="true"]` extended with `backdrop-filter: saturate(0.32)` (+`-webkit-`) — drains the chroma of everything painted *beneath* the veil, while the scope (above the veil at `--z-overlay`) is excluded by paint order; (2) `:root[data-zen="active"] [data-zen-scope]` gains `box-shadow: var(--shadow-3)` so the clearing floats; (3) `@keyframes zen-ring-breathe` (drop-shadow glow + opacity lift, two stops, relative-color `hsl(from var(--accent-progress) …)`) on `:root[data-zen="active"] [data-zen-scope] .ring-bar`, `var(--duration-skeleton)` `--ease-morph` `infinite alternate`
+- `prompts/v5/ζ2_ZEN_CANVAS.md` (NEW spec, authored before execution)
+
+### Verified by grep on commit `ec18afb`
+| metric | got | expected |
+|---|---|---|
+| desaturation on veil (`saturate` rules) | 2 | ≥ 1 |
+| `backdrop-filter: blur(N≥12px)` | 0 | 0 |
+| `@keyframes zen-ring-breathe` | 1 | 1 |
+| ring-bar breathe selector | 1 | 1 |
+| breathe anchored to `--duration-skeleton` | 1 | 1 |
+| `!important` in zen.css | 0 | 0 |
+| emoji / hex in zen.css | 0 / 0 | 0 |
+| `data-progress` hosts (single accent) | 1 | 1 |
+| physical-direction props | 0 | 0 |
+| `v5_logical_props_audit.py` exit | 0 | 0 |
+| http serve (index / zen.css) | 200 / 200 | 200 |
+
+### Pulse — 🌗 GLOW_PULSE
+**The Surprise:** في وَضع التَركيز، العالَم المَكتوم يُجَرَّد من لَونِه. `backdrop-filter: saturate(0.32)` على الحِجاب يُصَفّي اللَون من كل ما رُسِمَ تَحتَه (الكانفس المَكتوم كُلّه) — أما المُهِمَّة المَرفوعة فوق الحِجاب (`--z-overlay` > `--z-scrim`) فمُستَثناة بِترتيب الطِلاء، تَحتَفِظ بكامِل لَونِها. النَتيجة عالَم أُحادي اللَون باستِثناء واحِد: حَلقة التَقَدُّم تُبقي cyan الـ `--accent-progress` و**تَتَنَفَّس** (وَهَج `drop-shadow` بطيء، `--duration-skeleton` `infinite alternate`) ما دامَت الجَلسة حَيَّة. بلا blur (Forbidden #9): الـ `saturate()` رَخيص على الـ GPU.
+**Avoided:** Forbidden #9 (الـ `backdrop-filter: blur(N≥12px)` الثَقيل في كل مَكان) — هنا saturate بِلا blur؛ وكذلك الـ AI-default "وَضع التَركيز = أَعتِم أكثر فقط" حَيث التَجريد اللَوني هنا هو البَطَل لا مُجَرَّد عَتمة.
+**Inspired-by:** Wild Card #14 — خَطّ ظِلّ قَوس آيا صوفيا عند الظَهيرة (the shadow-line of a Hagia Sophia archway at noon): الضوء — هنا اللَون الوَحيد الناجي — كعُنصُر بِنائي يُعَرِّف الفَراغ.
+**Originality Self-Score:** 4/5 — focus-mode dimming is common; the 4/5: (1) the protagonist is **desaturation**, not darkness — a monochrome field with exactly one colour; (2) the scope is excluded from the drain by **verified paint order** (above `--z-scrim`), not a JS toggle; (3) the one surviving colour **breathes only while the session lives** — chroma as a liveness signal (CHROMA single-accent §7 taken literal: one colour on screen); (4) **no new duration token** — `--duration-skeleton` + `alternate`; (5) reduced-motion keeps the meaning statically. Not 5 because saturate-dimming is a known primitive; originality is in the single-living-colour discipline + clean paint-order exclusion.
+
+### Distinction from γ3 GLOW_PULSE (pivot compliance)
+γ3 nudged the *canvas hue* a few degrees toward the active accent (warmth follows attention). ζ2 instead **drains chroma** from the whole field so the single accent is the only colour left — opposite mechanism (subtract colour vs. add warmth), same family. **Pivot satisfied:** SPRING(ε2) · VEIL(ε3) · VEIL(ζ1) · GLOW(ζ2) — the 2× VEIL run is broken; no category 3× in a row.
+
+### Sacred preserved
+- ζ1 rules untouched (pure append); dock centring transform untouched (dissolve only)
+- ring.css untouched — ζ2 only *animates* the existing `.ring-bar` while zen holds
+- no JS change this stage; all Upg.* APIs intact; `archive/` untouched
+- single-accent invariant strengthened: `data-progress` host count stays 1
