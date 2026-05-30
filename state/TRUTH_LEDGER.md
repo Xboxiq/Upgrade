@@ -3733,3 +3733,53 @@ SPRING(ε2) · VEIL(ε3) — VEIL is a fresh debut here.
   additive, frozen; the third surface type (slide-over/sheet) of SPATIAL §3 is now live
 - Creativity Health: **100 / 100** · Forbidden Library violations: **0**
 - Sacred preserved: 14 v4 Upg.* APIs · `archive/` · `prompts/v[1-4]/` · γ/δ files untouched
+
+
+
+---
+
+## v5 TADAFFUQ — ζ1 ZEN_TRIGGER — 2026-05-30
+
+**Branch:** `tadaffuq-ζ-flow` · **Pillar:** ζ (FLOW / ZEN MODE) · **Stage:** 1 of 3 — **opens Pillar ζ**
+**Pulse:** 🌙 **VEIL_PULSE** *(chronic focus mode — distinct in temporal axis from ε3's acute VEIL)*
+**Verified at commit:** `0b84f8c`
+
+### Files shipped
+- `platform-v5/assets/css/zen.css` (NEW, 151 lines) — `@layer components`: `.zen-veil` (the sanctioned dim layer — `position:fixed; inset:0; z-index:--z-scrim`, `background:var(--canvas)`, opacity 0 → 0.82 on `[data-open]` over `--duration-zen`); `:root[data-zen="active"] [data-zen-scope]` scope-lift to `--z-overlay` (specificity 0,3,0 — beats `.bento-card[data-expanded]` 0,2,0); chronic dock dissolve `:root[data-zen="active"] .dock`; `.zen-exit` neutral return affordance (44×44, `visibility:hidden` at rest → out of tab order, arrives a beat after the veil via `transition-delay`); `.zen-trigger` neutral in-canvas control; reduced-motion delegated to the global motion-sanctuary; forced-colors guard
+- `platform-v5/assets/js/zen.js` (NEW, 206 lines) — classic IIFE exposing `Upg.zen` (frozen: `enter / exit / toggle / active / scope` + `_meta`); `enter(scope, opts?)` resolves Element|selector, marks `[data-zen-scope]`, shows veil (reflow then `[data-open]`), sets `data-zen="active"` on `<html>`, focuses the scope, fires `upg:zen:enter`; `exit()` fades+hides veil on `transitionend` (token-aligned safety net `--duration-zen`+60ms), restores focus, fires `upg:zen:exit`; idempotent re-scope while active; `[data-zen-open]`/`[data-zen-close]`/veil-click delegation; Escape in **capture** phase (after ε1 overlay handler), guarded by `Upg.overlay.isOpen()`, `stopPropagation` to block δ2 bento-collapse; durations read from `--duration-zen` (no invented ms)
+- `platform-v5/index.html` — linked `zen.css` (after `bento-expand.css`); deferred `zen.js`; added `#zen-veil` + `#zen-exit` (`data-zen-close`, `actions.close` icon); added `.zen-trigger` (`data-zen-open="[data-card='daily-focus']"`, `training.objective` icon) inside the focal card detail
+- `prompts/v5/ζ1_ZEN_TRIGGER.md` (NEW spec, authored before execution per AUTO_PILOT §4)
+
+### Verified by grep on commit `0b84f8c`
+| metric | got | expected |
+|---|---|---|
+| zen.css + zen.js exist | 2 | 2 |
+| `Upg.zen` frozen methods | 5 (+`_meta`) | ≥ 5 |
+| `data-zen` rules in zen.css | 3 | ≥ 3 |
+| veil `inset:0` + `--z-scrim` | 1 | 1 |
+| scope lift `--z-overlay` | 2 | ≥ 1 |
+| fires `upg:zen:enter` / `:exit` | 2 | 2 |
+| `data-zen-*` hooks in index.html | 2 | ≥ 2 |
+| emoji in zen files | 0 | 0 |
+| hex in zen files | 0 | 0 |
+| `!important` in zen.css | 0 | 0 |
+| inline `<svg viewBox>` in index | 0 | 0 |
+| physical-direction props | 0 | 0 |
+| `v5_logical_props_audit.py` exit | 0 | 0 |
+| `node --check` zen.js | OK | OK |
+| http serve (index/zen.css/zen.js) | 200/200/200 | 200 |
+
+### Pulse — 🌙 VEIL_PULSE
+**The Surprise:** الدُّخول إلى التَركيز بالطَرح لا بالإضافة. لا صُندوق modal يَظهَر ليُحاصِر الشاشة — بل عالَم يَنحَسِر: الـ dock **يَذوب** (opacity → 0، حالة مُزمِنة لا آنية)، وحِجاب بلَون الكانفس العَميق نَفسِه يَهبِط على كل شيء، ولا يُرفَع فَوقَه إلا المُهِمَّة الواحِدة المَقصودة (إلى `--z-overlay`) فتَصير فُسحَة. الدُّخول مَوقوت على أبطأ مُدَّة في النِظام (`--duration-zen` ٦٤٠ms) كنَفَسٍ مَحبوس. والحِجاب يَستَقِر عند 0.82 لا عند العَتمة الكامِلة: العالَم **حاضِر، لكنه مَكتوم** — طَيف خَلف الفُسحَة.
+**Avoided:** Forbidden #5 (modal popup `position:fixed; inset:0` كَسطح محتوى) — هنا الحِجاب طبقة تَعتيم مَسموحة لا صُندوق محتوى؛ وكذلك Forbidden #15 (طبقة تَعليم/إرشاد طُفَيلية تَظهَر بلا استِدعاء). الزِن يَطرَح، لا يُضيف.
+**Inspired-by:** Wild Card #2 — the negative space of a Hokusai wave: the work is what the brush *didn't* paint. التَركيز يُكشَف بما يَنحَسِر، لا بما يُرسَم.
+**Originality Self-Score:** 4/5 — focus/zen modes are common; the 4/5 comes from (1) focus by **subtraction** — the world recedes rather than a box appearing; (2) the veil at **0.82 not total black** so the surroundings stay a present-but-hushed ghost (Hokusai negative space); (3) a verified **single-veil layering** that lifts exactly the scope above a `--z-scrim` dim layer with specificity that beats the δ2 expanded-card rule; (4) entry paced on the slowest token as a held breath, durations **read from tokens**; (5) honest a11y — focus moves to the task and returns to the trigger, the exit control is out of tab order until zen holds, Escape ordered after the overlay handler. Not 5 because focus-mode-by-dimming is a known idea; originality is in the subtraction discipline + verified clean layering.
+
+### Distinction from ε3 VEIL_PULSE (pivot compliance)
+ε3 VEIL = **acute** — a transient dock dissolve bound to one overlay open/close, returning on tarteel time. ζ1 VEIL = **chronic** — a sustained focus field held for a whole training session, entered by an explicit `Upg.zen.enter(scope)`, with a veil over the *entire* canvas (not just the dock) and a single task lifted out of it. Same category, different temporal axis (the sanctioned reuse pattern, PULSE_LIBRARY §1). **Pivot watch:** last three categories were SPRING(ε2) · VEIL(ε3) · VEIL(ζ1) — now 2× VEIL in a row, so **ζ2 MUST pivot away from VEIL** (§5.1).
+
+### Sacred preserved
+- ε3/ε2/ε1 + δ + γ + β + α work intact — zen is purely additive; the focal card gained one neutral `.zen-trigger` button inside its already-existing detail subtree
+- `Upg.choreo` (ε3) dock veil untouched — ζ1 dissolves the dock via a *separate* `:root[data-zen="active"] .dock` opacity rule; both only lower opacity, no clash, no redeclare of the base `.dock`
+- v4 Upg.* APIs preserved; `Upg.zen` is a NEW additive namespace
+- `archive/` untouched

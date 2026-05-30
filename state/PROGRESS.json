@@ -2714,11 +2714,11 @@
     }
   },
   "tadaffuq_v5": {
-    "current_pillar": "ε",
-    "current_stage": 3,
-    "current_stage_id": "ε3",
-    "status": "pillar-ε-complete",
-    "branch": "tadaffuq-ε-disclosure",
+    "current_pillar": "ζ",
+    "current_stage": 1,
+    "current_stage_id": "ζ1",
+    "status": "in-progress",
+    "branch": "tadaffuq-ζ-flow",
     "completed_stages": [
       "α1",
       "α2",
@@ -2735,11 +2735,12 @@
       "δ3",
       "ε1",
       "ε2",
-      "ε3"
+      "ε3",
+      "ζ1"
     ],
     "creativity_health": 100,
-    "creativity_health_note": "Pillar ε (DISCLOSURE) COMPLETE 3/3. ε3 ships VEIL_PULSE — the 8th unique category (debut). Only HAPTIC remains for 9/9. Health = 100 (base 100 + 5×8 unique-category bonus, capped; 0 penalties).",
-    "pulses_produced": 9,
+    "creativity_health_note": "Pillar ζ (FLOW) opened. ζ1 ships VEIL_PULSE (chronic focus mode, vs ε3's acute). VEIL now 2-in-a-row (ε3+ζ1) — ζ2 MUST pivot away from VEIL (pivot rule §5.1). Health = 100 (base 100 + 5×8 unique-category bonus, capped; 0 pivot/forbidden/low-score penalties). HAPTIC still the only category needed for 9/9.",
+    "pulses_produced": 10,
     "pulse_categories_used": [
       "DOCK_PULSE",
       "MORPH_PULSE",
@@ -2992,6 +2993,28 @@
       "pr_base": "main",
       "pr_base_note": "follows the #126 precedent — pillar PRs target main directly; the v5-tadaffuq integration branch caused unresolvable state-file conflicts (#120–#123) and no longer exists on remote."
     },
-    "next_stage": "ζ1 ZEN_TRIGGER — VEIL_PULSE (enter Focus Mode on training-scenario start, Upg.zen.enter(scope)); new pillar ζ branch tadaffuq-ζ-flow; opens after the Pillar ε PR"
+    "ζ1_verified": {
+      "zen_files_existing": 2,
+      "upg_zen_frozen_methods": 5,
+      "data_zen_rules_in_css": 3,
+      "veil_inset0_zscrim": 1,
+      "scope_lift_zoverlay": 2,
+      "fires_upg_zen_enter_exit": 2,
+      "data_zen_hooks_in_html": 2,
+      "emoji_in_zen_files": 0,
+      "hex_in_zen_files": 0,
+      "important_in_zen_css": 0,
+      "inline_svg_viewbox_in_index": 0,
+      "physical_dirs": 0,
+      "logical_props_audit_exit": 0,
+      "node_check": "passed",
+      "http_serves": { "index.html": 200, "zen.css": 200, "zen.js": 200 },
+      "lines_total": 371,
+      "pulse": "VEIL_PULSE",
+      "veil_is_opacity_dim_not_box": true,
+      "chronic_vs_epsilon3_acute": "ζ1 VEIL is chronic (sustained focus mode held until exit); ε3 VEIL was acute (per overlay open/close)",
+      "subtraction_not_addition": "no modal box added; the dock dissolves + a canvas-coloured veil hushes the world to 0.82, the scope lifted to --z-overlay"
+    },
+    "next_stage": "ζ2 ZEN_CANVAS — pivot pulse, MUST NOT be VEIL (ε3+ζ1 already 2× VEIL). Plan: GLOW_PULSE — the dimmed world desaturates while the single progress ring keeps its cyan and breathes only while the session is alive; the canvas becomes a do-not-disturb field. Same branch tadaffuq-ζ-flow."
   }
 }
