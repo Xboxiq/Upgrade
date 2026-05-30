@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -6,15 +8,18 @@ import '../../theme/app_theme.dart';
 import '../../theme/palette.dart';
 import '../../theme/tokens.dart';
 import '../../ui/controls.dart';
+import '../../ui/floating_dock.dart';
 import '../../ui/groups.dart';
 import '../../ui/large_title_scaffold.dart';
-import '../../ui/tab_bar.dart';
 import '../../util/numerals.dart';
+import '../../widgets/aurora_background.dart';
 import '../../widgets/press_scale.dart';
 import '../../widgets/progress_ring.dart';
 import '../../widgets/surface_card.dart';
+import '../../widgets/tide_ring.dart';
 import '../../widgets/transitions.dart';
 import '../../widgets/ui_bits.dart';
+import '../../widgets/voice_wave.dart';
 import 'callcenter_data.dart';
 import 'widgets/apindex_sheet.dart';
 import 'widgets/archetype_sheet.dart';
@@ -32,6 +37,7 @@ class CallCenterScreen extends StatefulWidget {
 class _CallCenterScreenState extends State<CallCenterScreen> {
   final ScrollController _scroll = ScrollController();
   int _tab = 1; // "التدريب"
+  int _register = 1; // empathy register: 0 = فصيح, 1 = عراقي
 
   @override
   void dispose() {
@@ -53,6 +59,9 @@ class _CallCenterScreenState extends State<CallCenterScreen> {
       backgroundColor: p.canvas,
       body: Stack(
         children: <Widget>[
+          // The living canvas — ambient aurora behind everything.
+          const Positioned.fill(child: AuroraBackground()),
+
           LargeTitleScaffold(
             title: 'وحدة الكول سنتر',
             controller: _scroll,
@@ -62,13 +71,13 @@ class _CallCenterScreenState extends State<CallCenterScreen> {
                 padding: const EdgeInsets.fromLTRB(Space.x4, Space.x2, Space.x4, 0),
                 sliver: SliverList(
                   delegate: SliverChildListDelegate(<Widget>[
-                    _hero(p),
+                    const _MasteryHero(),
                     const SizedBox(height: Space.x4),
                     _featured(p),
                     const SizedBox(height: Space.x8),
                     _techniquesGroup(),
                     const SizedBox(height: Space.x8),
-                    _shelfHeader('بصمة الصوت', 'AUDIO', AppIcons.microphone, '٥ أبعاد'),
+                    _voiceHeader(p),
                     const SizedBox(height: Space.x4),
                   ].animate(interval: 70.ms).fadeIn(duration: Motion.emerge).moveY(begin: 14, end: 0, curve: Motion.standard)),
                 ),
@@ -78,10 +87,10 @@ class _CallCenterScreenState extends State<CallCenterScreen> {
                 padding: const EdgeInsets.fromLTRB(Space.x4, Space.x8, Space.x4, 0),
                 sliver: SliverList(
                   delegate: SliverChildListDelegate(<Widget>[
-                    _sectionHeader('دائرة التعاطف', 'EMPATHY', AppIcons.heart, '٤ خطوات'),
+                    _empathyHeader(p),
                     const SizedBox(height: Space.x4),
                     for (final EmpathyStep e in CallCenterData.empathy) ...<Widget>[
-                      _empathyCard(p, e),
+                      _EmpathyCard(step: e, register: _register),
                       const SizedBox(height: Space.x3),
                     ],
                     const SizedBox(height: Space.x5),
@@ -96,23 +105,23 @@ class _CallCenterScreenState extends State<CallCenterScreen> {
                   ]),
                 ),
               ),
-              _gap(120 + bottomInset),
+              _gap(132 + bottomInset),
             ],
           ),
 
-          // Frosted iOS tab bar
+          // Floating dock — navigation that hovers on the tide.
           Positioned(
             left: 0,
             right: 0,
             bottom: 0,
-            child: AppTabBar(
+            child: FloatingDock(
               currentIndex: _tab,
-              items: const <TabItem>[
-                TabItem(icon: AppIcons.house, label: 'الرئيسية'),
-                TabItem(icon: AppIcons.flask, label: 'التدريب'),
-                TabItem(icon: AppIcons.gauge, label: 'الحاسبة'),
-                TabItem(icon: AppIcons.chartLineUp, label: 'التقدّم'),
-                TabItem(icon: AppIcons.dotsThreeOutline, label: 'المزيد'),
+              items: const <DockItem>[
+                DockItem(icon: AppIcons.house, label: 'الرئيسية'),
+                DockItem(icon: AppIcons.flask, label: 'التدريب'),
+                DockItem(icon: AppIcons.gauge, label: 'الحاسبة'),
+                DockItem(icon: AppIcons.chartLineUp, label: 'التقدّم'),
+                DockItem(icon: AppIcons.dotsThreeOutline, label: 'المزيد'),
               ],
               onSelected: (int i) {
                 if (i == 2) {
@@ -123,60 +132,6 @@ class _CallCenterScreenState extends State<CallCenterScreen> {
               },
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  // ── Hero: mastery ring + tiers ──
-  Widget _hero(AppPalette p) {
-    final TextTheme tt = Theme.of(context).textTheme;
-    return SurfaceCard(
-      interactive: false,
-      padding: const EdgeInsets.all(Space.x5),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text('إتقانك', style: tt.labelMedium?.copyWith(color: p.gold)),
-                const SizedBox(height: 2),
-                Text('${Arabic.n(26)} من ${Arabic.n(69)} وحدة', style: tt.titleLarge),
-                const SizedBox(height: Space.x4),
-                Wrap(
-                  spacing: Space.x2,
-                  runSpacing: Space.x2,
-                  children: <Widget>[
-                    _tier(p, p.gold, 'التأسيس', '٢٠/٤٢'),
-                    _tier(p, p.brand, 'الممارس', '٦/٢٧'),
-                    _tier(p, p.inkFaint, 'الخبير', '٠/٦'),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(width: Space.x4),
-          const ProgressRing(value: 38, size: 104),
-        ],
-      ),
-    );
-  }
-
-  Widget _tier(AppPalette p, Color dot, String label, String count) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: Space.x3, vertical: 6),
-      decoration: BoxDecoration(
-        color: p.fill,
-        borderRadius: BorderRadius.circular(Radii.pill),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Container(width: 7, height: 7, decoration: BoxDecoration(color: dot, shape: BoxShape.circle)),
-          const SizedBox(width: 6),
-          Text('$label ', style: Theme.of(context).textTheme.labelSmall?.copyWith(color: p.inkMuted)),
-          Text(count, style: AppTheme.mono(size: 11, color: p.ink)),
         ],
       ),
     );
@@ -195,13 +150,13 @@ class _CallCenterScreenState extends State<CallCenterScreen> {
         children: <Widget>[
           Row(
             children: <Widget>[
-              IconBadge(AppIcons.target, tint: p.brand, size: 38),
+              IconBadge(AppIcons.target, tint: p.spark, size: 38),
               const SizedBox(width: Space.x3),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text('جلسة اليوم', style: tt.labelSmall?.copyWith(color: p.brand, letterSpacing: 0.8)),
+                    Text('جلسة اليوم', style: tt.labelSmall?.copyWith(color: p.spark, letterSpacing: 0.8)),
                     const SizedBox(height: 2),
                     Text('شكوى مُتكرِّرة — التهدئة في ٩٠ ثانية', style: tt.titleMedium),
                   ],
@@ -246,127 +201,67 @@ class _CallCenterScreenState extends State<CallCenterScreen> {
     );
   }
 
+  // ── Voice section header: a LIVE waveform + title ──
+  Widget _voiceHeader(AppPalette p) {
+    final TextTheme tt = Theme.of(context).textTheme;
+    return SurfaceCard(
+      interactive: false,
+      padding: const EdgeInsets.fromLTRB(Space.x5, Space.x4, Space.x5, Space.x4),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Icon(AppIcons.microphone, size: 14, color: p.brand),
+              const SizedBox(width: Space.x2),
+              Text('AUDIO', style: tt.labelSmall?.copyWith(color: p.brand, letterSpacing: 0.8)),
+              const Spacer(),
+              InfoPill('٥ أبعاد', color: p.brand),
+            ],
+          ),
+          const SizedBox(height: Space.x2),
+          Text('بصمة الصوت', style: tt.headlineMedium),
+          const SizedBox(height: Space.x3),
+          // The voice, made visible — a calm, living waveform.
+          const VoiceWave(height: 46),
+          const SizedBox(height: Space.x2),
+          Text('صوتك هو ٣٨٪ من رسالتك. اضغط أيّ بُعد لتقلبه وتكشف تمرين الخمس دقائق.',
+              style: tt.bodyMedium?.copyWith(fontSize: 13.5)),
+        ],
+      ),
+    );
+  }
+
   // ── Voice profile horizontal shelf ──
   Widget _voiceShelf(AppPalette p) {
     return SliverToBoxAdapter(
       child: SizedBox(
-        height: 232,
+        height: 244,
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           padding: const EdgeInsets.symmetric(horizontal: Space.x4),
           itemCount: CallCenterData.voice.length,
           separatorBuilder: (_, _) => const SizedBox(width: Space.x3),
-          itemBuilder: (BuildContext context, int i) => _voiceCard(p, CallCenterData.voice[i]),
+          itemBuilder: (BuildContext context, int i) =>
+              _VoiceFlipCard(dim: CallCenterData.voice[i]),
         ),
       ),
     );
   }
 
-  Widget _voiceCard(AppPalette p, VoiceDim v) {
-    final TextTheme tt = Theme.of(context).textTheme;
-    return SizedBox(
-      width: 272,
-      child: SurfaceCard(
-        interactive: true,
-        padding: const EdgeInsets.all(Space.x4 + 2),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                IconBadge(v.icon, tint: p.gold),
-                const Spacer(),
-                ProgressRing(value: v.progress, size: 38, showPercent: false),
-              ],
-            ),
-            const SizedBox(height: Space.x3),
-            Text(v.name, style: tt.titleMedium, maxLines: 1, overflow: TextOverflow.ellipsis),
-            Text(v.unit, style: AppTheme.mono(size: 11, color: p.inkFaint)),
-            const SizedBox(height: Space.x2),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.baseline,
-              textBaseline: TextBaseline.alphabetic,
-              children: <Widget>[
-                Text('المثالي ', style: tt.labelSmall),
-                Text(v.target, style: AppTheme.mono(size: 17, weight: FontWeight.w700, color: p.gold)),
-              ],
-            ),
-            const SizedBox(height: Space.x2),
-            Expanded(
-              child: Text(
-                v.science,
-                style: tt.bodyMedium?.copyWith(fontSize: 13, height: 1.45),
-                maxLines: 4,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
+  // ── Empathy section header with a register cross-fade toggle ──
+  Widget _empathyHeader(AppPalette p) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        _sectionHeader('دائرة التعاطف', 'EMPATHY', AppIcons.heart, '٤ خطوات'),
+        const SizedBox(height: Space.x4),
+        AppSegmented(
+          labels: const <String>['فصيح', 'عراقي'],
+          value: _register,
+          onChanged: (int v) => setState(() => _register = v),
         ),
-      ),
-    );
-  }
-
-  // ── Empathy step card ──
-  Widget _empathyCard(AppPalette p, EmpathyStep e) {
-    final TextTheme tt = Theme.of(context).textTheme;
-    return SurfaceCard(
-      interactive: false,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            width: 38,
-            height: 38,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: p.brand.withValues(alpha: 0.14),
-              borderRadius: BorderRadius.circular(Radii.pill),
-            ),
-            child: Text(e.index, style: tt.titleMedium?.copyWith(color: p.brand)),
-          ),
-          const SizedBox(width: Space.x4),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Icon(e.icon, size: 16, color: p.brand),
-                    const SizedBox(width: Space.x2),
-                    Flexible(child: Text(e.title, style: tt.titleMedium)),
-                  ],
-                ),
-                const SizedBox(height: Space.x1),
-                Text(e.sub, style: tt.bodyMedium?.copyWith(fontSize: 13.5)),
-                const SizedBox(height: Space.x3),
-                _lang(p, 'فصيح', e.fusha, false),
-                const SizedBox(height: Space.x2),
-                _lang(p, 'عراقي', e.iraqi, true),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _lang(AppPalette p, String tag, String text, bool iraqi) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(Space.x3),
-      decoration: BoxDecoration(
-        color: p.fill,
-        borderRadius: BorderRadius.circular(Radii.sm),
-        border: Border(right: BorderSide(color: iraqi ? p.gold : Colors.transparent, width: 2)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(tag, style: Theme.of(context).textTheme.labelSmall?.copyWith(color: p.inkFaint)),
-          const SizedBox(height: 2),
-          Text(text, style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: p.ink, fontSize: 14)),
-        ],
-      ),
+      ],
     );
   }
 
@@ -386,7 +281,7 @@ class _CallCenterScreenState extends State<CallCenterScreen> {
                 leading: IconBadge(a.icon, tint: p.brand),
                 title: a.title,
                 subtitle: a.blurb,
-                trailing: InfoPill(a.strategy, color: p.gold, mono: true),
+                trailing: InfoPill(a.strategy, color: p.spark, mono: true),
                 onTap: () => showArchetypeSheet(context, a),
               ),
           ],
@@ -433,12 +328,376 @@ class _CallCenterScreenState extends State<CallCenterScreen> {
     );
   }
 
-  // ── Section / shelf headers ──
+  // ── Section headers ──
   Widget _sectionHeader(String title, String eyebrow, IconData icon, String? tag) =>
       SectionHeader(eyebrow: eyebrow, eyebrowIcon: icon, title: title, tag: tag);
+}
 
-  Widget _shelfHeader(String title, String eyebrow, IconData icon, String? tag) =>
-      SectionHeader(eyebrow: eyebrow, eyebrowIcon: icon, title: title, tag: tag);
+// ════════════════════════════════════════════════════════════════════════
+// Mastery hero (bento) — the tide ring + a long-press tier breakdown.
+// ════════════════════════════════════════════════════════════════════════
+class _MasteryHero extends StatefulWidget {
+  const _MasteryHero();
+
+  @override
+  State<_MasteryHero> createState() => _MasteryHeroState();
+}
+
+class _MasteryHeroState extends State<_MasteryHero> {
+  bool _tiersOpen = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final AppPalette p = context.palette;
+    final TextTheme tt = Theme.of(context).textTheme;
+
+    return SurfaceCard(
+      interactive: false,
+      padding: const EdgeInsets.all(Space.x5),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text('إتقانك', style: tt.labelMedium?.copyWith(color: p.brand)),
+                    const SizedBox(height: 2),
+                    Text('${Arabic.n(26)} من ${Arabic.n(69)} وحدة', style: tt.titleLarge),
+                    const SizedBox(height: Space.x4),
+                    // Bento mini-tiles — momentum at a glance.
+                    Row(
+                      children: <Widget>[
+                        _StatTile(icon: AppIcons.fire, value: '${Arabic.n(7)} أيام', label: 'تتابع', tint: p.spark),
+                        const SizedBox(width: Space.x2),
+                        _StatTile(icon: AppIcons.chartLineUp, value: '+${Arabic.n(4)}', label: 'هذا الأسبوع', tint: p.brand),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: Space.x4),
+              Column(
+                children: <Widget>[
+                  PressScale(
+                    onLongPress: () => setState(() => _tiersOpen = !_tiersOpen),
+                    pressedScale: 0.96,
+                    child: const TideRing(value: 38, size: 108),
+                  ),
+                  const SizedBox(height: Space.x2),
+                  Text('مطوّل: المستويات', style: tt.labelSmall?.copyWith(color: p.inkFaint, fontSize: 10.5)),
+                ],
+              ),
+            ],
+          ),
+          // Progressive disclosure: tiers revealed on long-press.
+          AnimatedSize(
+            duration: Motion.panel,
+            curve: Motion.standard,
+            child: _tiersOpen
+                ? Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: Space.x4),
+                        child: Divider(height: 0.5, thickness: 0.5, color: p.line),
+                      ),
+                      Wrap(
+                        spacing: Space.x2,
+                        runSpacing: Space.x2,
+                        children: <Widget>[
+                          _tier(p, p.success, 'التأسيس', '٢٠/٤٢'),
+                          _tier(p, p.brand, 'الممارس', '٦/٢٧'),
+                          _tier(p, p.inkFaint, 'الخبير', '٠/٦'),
+                        ],
+                      ),
+                    ],
+                  ).animate().fadeIn(duration: Motion.quick)
+                : const SizedBox(width: double.infinity),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _tier(AppPalette p, Color dot, String label, String count) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: Space.x3, vertical: 6),
+      decoration: BoxDecoration(color: p.fill, borderRadius: BorderRadius.circular(Radii.pill)),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Container(width: 7, height: 7, decoration: BoxDecoration(color: dot, shape: BoxShape.circle)),
+          const SizedBox(width: 6),
+          Text('$label ', style: Theme.of(context).textTheme.labelSmall?.copyWith(color: p.inkMuted)),
+          Text(count, style: AppTheme.mono(size: 11, color: p.ink)),
+        ],
+      ),
+    );
+  }
+}
+
+class _StatTile extends StatelessWidget {
+  const _StatTile({required this.icon, required this.value, required this.label, required this.tint});
+  final IconData icon;
+  final String value;
+  final String label;
+  final Color tint;
+
+  @override
+  Widget build(BuildContext context) {
+    final AppPalette p = context.palette;
+    final TextTheme tt = Theme.of(context).textTheme;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: Space.x3, vertical: Space.x2 + 2),
+      decoration: BoxDecoration(
+        color: p.fill,
+        borderRadius: BorderRadius.circular(Radii.sm),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Icon(icon, size: 15, color: tint),
+          const SizedBox(height: 5),
+          Text(value, style: AppTheme.mono(size: 13, weight: FontWeight.w700, color: p.ink)),
+          Text(label, style: tt.labelSmall?.copyWith(color: p.inkFaint, fontSize: 10)),
+        ],
+      ),
+    );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════════
+// Empathy card — register cross-fades between فصيح ⇄ عراقي.
+// ════════════════════════════════════════════════════════════════════════
+class _EmpathyCard extends StatelessWidget {
+  const _EmpathyCard({required this.step, required this.register});
+  final EmpathyStep step;
+  final int register; // 0 = فصيح, 1 = عراقي
+
+  @override
+  Widget build(BuildContext context) {
+    final AppPalette p = context.palette;
+    final TextTheme tt = Theme.of(context).textTheme;
+    final bool iraqi = register == 1;
+    final String text = iraqi ? step.iraqi : step.fusha;
+
+    return SurfaceCard(
+      interactive: false,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            width: 38,
+            height: 38,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: p.brand.withValues(alpha: 0.14),
+              borderRadius: BorderRadius.circular(Radii.pill),
+            ),
+            child: Text(step.index, style: tt.titleMedium?.copyWith(color: p.brand)),
+          ),
+          const SizedBox(width: Space.x4),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Icon(step.icon, size: 16, color: p.brand),
+                    const SizedBox(width: Space.x2),
+                    Flexible(child: Text(step.title, style: tt.titleMedium)),
+                  ],
+                ),
+                const SizedBox(height: Space.x1),
+                Text(step.sub, style: tt.bodyMedium?.copyWith(fontSize: 13.5)),
+                const SizedBox(height: Space.x3),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(Space.x3),
+                  decoration: BoxDecoration(
+                    color: p.fill,
+                    borderRadius: BorderRadius.circular(Radii.sm),
+                    border: Border(right: BorderSide(color: iraqi ? p.spark : p.brand, width: 2)),
+                  ),
+                  child: AnimatedSwitcher(
+                    duration: Motion.quick,
+                    switchInCurve: Motion.standard,
+                    transitionBuilder: (Widget child, Animation<double> a) =>
+                        FadeTransition(opacity: a, child: child),
+                    child: Text(
+                      text,
+                      key: ValueKey<int>(register),
+                      style: tt.bodyMedium?.copyWith(color: p.ink, fontSize: 14),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════════
+// Voice dimension card — taps flip in 3D to reveal its 5-minute drill.
+// ════════════════════════════════════════════════════════════════════════
+class _VoiceFlipCard extends StatefulWidget {
+  const _VoiceFlipCard({required this.dim});
+  final VoiceDim dim;
+
+  @override
+  State<_VoiceFlipCard> createState() => _VoiceFlipCardState();
+}
+
+class _VoiceFlipCardState extends State<_VoiceFlipCard>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _c = AnimationController(vsync: this, duration: Motion.morph);
+
+  void _flip() {
+    if (_c.isAnimating) return;
+    if (_c.value == 0) {
+      _c.forward();
+    } else {
+      _c.reverse();
+    }
+  }
+
+  @override
+  void dispose() {
+    _c.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 272,
+      child: PressScale(
+        onTap: _flip,
+        pressedScale: 0.98,
+        child: AnimatedBuilder(
+          animation: _c,
+          builder: (BuildContext context, _) {
+            final double angle = Curves.easeInOut.transform(_c.value) * math.pi;
+            final bool showFront = angle <= math.pi / 2;
+            return Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.identity()
+                ..setEntry(3, 2, 0.0012)
+                ..rotateY(angle),
+              child: showFront
+                  ? _front(context)
+                  : Transform(
+                      alignment: Alignment.center,
+                      transform: Matrix4.identity()..rotateY(math.pi),
+                      child: _back(context),
+                    ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _front(BuildContext context) {
+    final AppPalette p = context.palette;
+    final TextTheme tt = Theme.of(context).textTheme;
+    final VoiceDim v = widget.dim;
+    return SurfaceCard(
+      interactive: false,
+      padding: const EdgeInsets.all(Space.x4 + 2),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              IconBadge(v.icon, tint: p.brand),
+              const Spacer(),
+              ProgressRing(value: v.progress, size: 38, showPercent: false),
+            ],
+          ),
+          const SizedBox(height: Space.x3),
+          Text(v.name, style: tt.titleMedium, maxLines: 1, overflow: TextOverflow.ellipsis),
+          Text(v.unit, style: AppTheme.mono(size: 11, color: p.inkFaint)),
+          const SizedBox(height: Space.x2),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
+            children: <Widget>[
+              Text('المثالي ', style: tt.labelSmall),
+              Text(v.target, style: AppTheme.mono(size: 17, weight: FontWeight.w700, color: p.brand)),
+            ],
+          ),
+          const SizedBox(height: Space.x2),
+          Expanded(
+            child: Text(
+              v.science,
+              style: tt.bodyMedium?.copyWith(fontSize: 13, height: 1.45),
+              maxLines: 4,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          Row(
+            children: <Widget>[
+              Icon(AppIcons.timer, size: 12, color: p.inkFaint),
+              const SizedBox(width: 4),
+              Text('اقلبني · تمرين ٥ دقائق', style: tt.labelSmall?.copyWith(color: p.inkFaint, fontSize: 10.5)),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _back(BuildContext context) {
+    final AppPalette p = context.palette;
+    final TextTheme tt = Theme.of(context).textTheme;
+    final VoiceDim v = widget.dim;
+    return SurfaceCard(
+      interactive: false,
+      accent: true,
+      padding: const EdgeInsets.all(Space.x4 + 2),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Icon(AppIcons.target, size: 16, color: p.brand),
+              const SizedBox(width: Space.x2),
+              Text('تمرين ٥ دقائق', style: tt.labelSmall?.copyWith(color: p.brand, letterSpacing: 0.6)),
+            ],
+          ),
+          const SizedBox(height: Space.x3),
+          Text(v.drill, style: tt.bodyLarge?.copyWith(color: p.ink, fontSize: 14.5, height: 1.5)),
+          const Spacer(),
+          Container(
+            padding: const EdgeInsets.all(Space.x3),
+            decoration: BoxDecoration(
+              color: p.warning.withValues(alpha: p.isDark ? 0.10 : 0.08),
+              borderRadius: BorderRadius.circular(Radii.sm),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Icon(AppIcons.warning, size: 15, color: p.warning),
+                const SizedBox(width: Space.x2),
+                Expanded(
+                  child: Text(v.mistake,
+                      style: tt.bodyMedium?.copyWith(color: p.ink, fontSize: 12.5, height: 1.4),
+                      maxLines: 3, overflow: TextOverflow.ellipsis),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class _ThemeToggle extends StatelessWidget {

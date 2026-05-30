@@ -50,17 +50,34 @@ class AppSegmented extends StatelessWidget {
   }
 }
 
-/// A filled brand call-to-action button (iOS-prominent), with a tactile press.
+/// A filled call-to-action button (iOS-prominent), with a tactile press. By
+/// default it wears the warm **spark** gradient — the "do this now" pole. Pass
+/// [tone] `CtaTone.cool` for a secondary, on-track action in the cyan tide.
+enum CtaTone { spark, cool }
+
 class FilledCta extends StatelessWidget {
-  const FilledCta({super.key, required this.label, this.icon, this.onTap, this.gradient = true});
+  const FilledCta({
+    super.key,
+    required this.label,
+    this.icon,
+    this.onTap,
+    this.tone = CtaTone.spark,
+  });
   final String label;
   final IconData? icon;
   final VoidCallback? onTap;
-  final bool gradient;
+  final CtaTone tone;
 
   @override
   Widget build(BuildContext context) {
     final AppPalette p = context.palette;
+    final bool warm = tone == CtaTone.spark;
+    final List<Color> grad = warm ? p.sparkGradient : p.tideGradient;
+    final Color glow = warm ? p.spark : p.brand;
+    final Color onColor = warm
+        ? Colors.white
+        : (p.isDark ? const Color(0xFF04141A) : Colors.white);
+
     return PressScale(
       onTap: onTap,
       pressedScale: 0.97,
@@ -68,14 +85,15 @@ class FilledCta extends StatelessWidget {
         height: 52,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          gradient: gradient
-              ? LinearGradient(colors: <Color>[p.brandDeep, p.brand], begin: Alignment.topCenter, end: Alignment.bottomCenter)
-              : null,
-          color: gradient ? null : p.brand,
+          gradient: LinearGradient(
+            colors: grad,
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
           borderRadius: BorderRadius.circular(Radii.md),
           boxShadow: <BoxShadow>[
             BoxShadow(
-              color: p.brand.withValues(alpha: 0.32),
+              color: glow.withValues(alpha: 0.34),
               blurRadius: 18,
               offset: const Offset(0, 8),
               spreadRadius: -6,
@@ -86,10 +104,10 @@ class FilledCta extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             if (icon != null) ...<Widget>[
-              Icon(icon, size: 19, color: Colors.white),
+              Icon(icon, size: 19, color: onColor),
               const SizedBox(width: Space.x2),
             ],
-            Text(label, style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white)),
+            Text(label, style: Theme.of(context).textTheme.labelLarge?.copyWith(color: onColor)),
           ],
         ),
       ),

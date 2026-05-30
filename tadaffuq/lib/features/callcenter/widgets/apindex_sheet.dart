@@ -5,7 +5,7 @@ import '../../../theme/app_theme.dart';
 import '../../../theme/palette.dart';
 import '../../../theme/tokens.dart';
 import '../../../util/numerals.dart';
-import '../../../widgets/progress_ring.dart';
+import '../../../widgets/tide_ring.dart';
 import '../../../widgets/ui_bits.dart';
 import '../callcenter_data.dart';
 
@@ -86,7 +86,7 @@ class _ApIndexSheetState extends State<_ApIndexSheet> {
               ),
               Row(
                 children: <Widget>[
-                  IconBadge(AppIcons.gauge, tint: p.gold, size: 48, iconSize: 24),
+                  IconBadge(AppIcons.gauge, tint: p.brand, size: 48, iconSize: 24),
                   const SizedBox(width: Space.x3),
                   Expanded(
                     child: Column(
@@ -109,7 +109,7 @@ class _ApIndexSheetState extends State<_ApIndexSheet> {
                 ),
                 child: Row(
                   children: <Widget>[
-                    ProgressRing(value: score, size: 92),
+                    TideRing(value: score, size: 92),
                     const SizedBox(width: Space.x5),
                     Expanded(
                       child: Column(

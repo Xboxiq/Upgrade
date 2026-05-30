@@ -47,7 +47,7 @@ class _ArchetypeSheet extends StatelessWidget {
               IconBadge(a.icon, tint: p.brand, size: 48, iconSize: 24),
               const SizedBox(width: Space.x3),
               Expanded(child: Text(a.title, style: tt.headlineMedium)),
-              InfoPill(a.strategy, color: p.gold, mono: true),
+              InfoPill(a.strategy, color: p.spark, mono: true),
             ],
           ),
           const SizedBox(height: Space.x5),
@@ -61,7 +61,7 @@ class _ArchetypeSheet extends StatelessWidget {
             decoration: BoxDecoration(
               color: p.fill,
               borderRadius: BorderRadius.circular(Radii.md),
-              border: Border(right: BorderSide(color: p.gold, width: 2)),
+              border: Border(right: BorderSide(color: p.spark, width: 2)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

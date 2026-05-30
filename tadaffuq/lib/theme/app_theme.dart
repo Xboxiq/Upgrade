@@ -4,9 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'palette.dart';
 
 /// ════════════════════════════════════════════════════════════════════════
-/// AppTheme — builds dark & light ThemeData from AppPalette, on an iOS type
-/// ramp (Large Title → Caption). Cairo carries Arabic + Latin with a clean,
-/// SF-adjacent voice; JetBrains Mono is reserved for measured values.
+/// AppTheme — builds dark & light ThemeData from the Aurora Tide [AppPalette],
+/// on an iOS type ramp (Large Title → Caption). Cairo carries Arabic + Latin
+/// with a clean, SF-adjacent voice; JetBrains Mono is reserved for measured
+/// values. Primary = cyan tide (cool pole); secondary = orange spark (warm).
 /// ════════════════════════════════════════════════════════════════════════
 abstract class AppTheme {
   static ThemeData dark() => _build(AppPalette.dark, Brightness.dark);
@@ -32,9 +33,9 @@ abstract class AppTheme {
     final ColorScheme scheme = ColorScheme(
       brightness: brightness,
       primary: p.brand,
-      onPrimary: Colors.white,
-      secondary: p.gold,
-      onSecondary: const Color(0xFF1A1206),
+      onPrimary: brightness == Brightness.dark ? const Color(0xFF04141A) : Colors.white,
+      secondary: p.spark,
+      onSecondary: Colors.white,
       tertiary: p.success,
       onTertiary: Colors.white,
       error: const Color(0xFFFF453A),
