@@ -4105,3 +4105,73 @@ No runtime score asserted (manifesto §6 — recorded by human/CI in
   gained `defer`; the inline bootstrap is additive and mirrors `Upg.theme`).
 - `archive/` · `prompts/v[1-4]/` · `platform/` (v4) untouched.
 - No Pulse (θ is a verify-and-seal pillar).
+
+
+
+### θ2 — A11Y_SEAL — `8460f56` — (the v5 seal)
+
+Confirm the accessibility posture, remove every non-sanctioned `!important`,
+purge the last emoji, and ship the forbidden-pattern seal gate that exits 0
+(exit criterion §6) plus the `[v5.0.0]` CHANGELOG entry (exit criterion §7).
+
+**Files touched (6):**
+- `platform-v5/assets/css/bento-expand.css` — removed 7 layout `!important`
+  (the 4 `[data-expanded]` span declarations across base + 3 media queries).
+  `.bento-card[data-expanded="true"]` (0,2,0) already outranks `.b-*` (0,1,0);
+  responsive narrowing resolves by source order among equal-specificity rules.
+  Behaviour identical. The 1 remaining `!important` is the sanctioned
+  reduced-motion `transition:none` collapse.
+- `platform-v5/assets/css/dock-mobile.css` — removed 1 `!important`
+  (`.dock{display:flex}`). dock-mobile.css loads after dock.css in the same
+  `@layer components`; `.dock`(0,1,0) later-source wins on its own.
+- `platform-v5/DEMOLITION_LIST.md` — replaced the 8 quoted legacy emoji glyphs
+  (line 46) with their Lucide semantic-key names → `platform-v5/` is now emoji-free.
+- `scripts/v5_forbidden_audit.py` (NEW) — the seal gate; comment-aware,
+  brace-aware (recognises reduced-motion `!important` + the `[hidden]` reset as
+  sanctioned). Exits 0.
+- `CHANGELOG.md` — `[v5.0.0] — TADAFFUQ`: all 24 stages with verified-by lines,
+  15 pulses / 9 categories, sacred-preserved + Lighthouse-deferred notes.
+- `prompts/v5/θ2_A11Y_SEAL.md` (NEW spec, authored before execution).
+
+### Verified by grep + audit on commit `8460f56`
+| metric | before | after | expected |
+|---|---|---|---|
+| emoji files under `platform-v5/` | 1 (DEMOLITION_LIST) | 0 | 0 |
+| non-sanctioned `!important` (audit) | 8 | 0 | 0 |
+| `!important` removed (bento-expand 7 + dock-mobile 1) | — | 8 | 8 |
+| hardcoded hex off-token (css+html) | 0 | 0 | 0 |
+| `<progress>` / toast / inline `<svg viewBox>` | 0 / 0 / 0 | 0 / 0 / 0 | 0 |
+| fixed-sidebar signature (§8.2) | 0 | 0 | 0 |
+| `scripts/v5_forbidden_audit.py` exit | (absent) | 0 | 0 |
+| `scripts/v5_perf_audit.py` exit (regression) | 0 | 0 | 0 |
+| `scripts/v5_logical_props_audit.py` exit | 0 | 0 | 0 |
+| CHANGELOG `[v5.0.0]` entry | 0 | 1 | 1 |
+| a11y: icons `aria-hidden` / skip-link / forced-colors blocks | 23/23 · 1 · 17 | 23/23 · 1 · 17 | preserved |
+| http (index + 2 css) | — | 200×3 | 200 |
+
+### Sacred preserved
+- v4 `Upg.*` public APIs, `archive/`, `prompts/v[1-4]/`, v4 `platform/` — untouched.
+- CSS behaviour identical (only specificity/source-order replaced `!important`;
+  bento expand span rules + dock mobile morph verified intact, HTTP 200).
+- No Pulse (θ is verify-and-seal).
+
+---
+
+## v5 TADAFFUQ — PILLAR θ (POLISH) — CLOSED — 2026-05-30 — **v5 SEALED**
+
+**Branch:** `tadaffuq-θ-polish` · **2/2 stages · 0 pulses (by spec)**
+
+| stage | title | files | sha |
+|---|---|---|---|
+| θ1 | PERF_AUDIT | index.html + canvas.css + v5_perf_audit.py + LIGHTHOUSE_REPORT + spec | `fac16a8` |
+| θ2 | A11Y_SEAL | bento-expand.css + dock-mobile.css + DEMOLITION_LIST + v5_forbidden_audit.py + CHANGELOG + spec | `8460f56` |
+
+### v5 final tally
+- Stages: **24 / 24** (α1–θ2) · Pulses: **15 / 15** · Unique categories: **9 / 9**
+  (DOCK·MORPH·GLOW·GLASS·REVEAL·RING·SPRING·VEIL·HAPTIC)
+- Forbidden Library violations: **0** (`scripts/v5_forbidden_audit.py` exit 0)
+- Creativity Health: **100 / 100**
+- Seal gates (reproducible, exit 0): `v5_forbidden_audit.py` · `v5_perf_audit.py` · `v5_logical_props_audit.py`
+- Runtime Lighthouse (Mobile Perf ≥ 90, A11y ≥ 95): **deferred to human/CI**, recorded in `state/LIGHTHOUSE_REPORT.md` (no headless Chrome in sandbox; manifesto §6 — never asserted).
+- Sacred preserved: v4 `Upg.*` APIs · `archive/` · `prompts/v[1-4]/` · `platform/` (v4).
+- Final step: PR `tadaffuq-θ-polish` → `main` (the v5 seal PR).

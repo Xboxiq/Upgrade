@@ -2715,9 +2715,9 @@
   },
   "tadaffuq_v5": {
     "current_pillar": "θ",
-    "current_stage": 1,
-    "current_stage_id": "θ1",
-    "status": "in-progress",
+    "current_stage": 2,
+    "current_stage_id": "θ2",
+    "status": "complete",
     "branch": "tadaffuq-θ-polish",
     "completed_stages": [
       "α1",
@@ -2742,8 +2742,38 @@
       "η1",
       "η2",
       "η3",
-      "θ1"
+      "θ1",
+      "θ2"
     ],
+    "θ2_verified": {
+      "emoji_under_v5": 0,
+      "non_sanctioned_important": 0,
+      "important_removed": 8,
+      "important_remaining_sanctioned": "motion-sanctuary + [hidden] reset",
+      "hex_off_token": 0,
+      "progress_bars": 0,
+      "toast_surfaces": 0,
+      "inline_svg_viewbox": 0,
+      "fixed_sidebar": 0,
+      "forbidden_audit_exit": 0,
+      "perf_audit_exit": 0,
+      "logical_props_audit_exit": 0,
+      "changelog_v5_entry": 1,
+      "a11y_icons_aria_hidden": "23/23",
+      "skip_link": 1,
+      "forced_colors_blocks": 17,
+      "http": "200x3",
+      "sha": "8460f56"
+    },
+    "v5_sealed": {
+      "stages": "24/24",
+      "pulses": "15/15",
+      "unique_categories": "9/9",
+      "forbidden_violations": 0,
+      "sacred_apis_preserved": true,
+      "lighthouse_runtime": "deferred to human/CI — recorded in state/LIGHTHOUSE_REPORT.md",
+      "note": "v5 implementation sealed; final step is PR tadaffuq-θ-polish → main + human Lighthouse recording (manifesto §8.3)"
+    },
     "θ1_verified": {
       "non_deferred_scripts": 0,
       "fouc_theme_bootstrap": 1,
@@ -2777,7 +2807,7 @@
     ],
     "remaining_pulse_categories": [],
     "forbidden_violations": 0,
-    "last_updated": "2026-05-30 θ1 — Pillar θ (POLISH) stage 1/2 — PERF_AUDIT shipped (FOUC bootstrap + theme.js deferred + content-visibility + scripts/v5_perf_audit.py exit 0); θ2 A11Y_SEAL remains to close v5",
+    "last_updated": "2026-05-30 θ2 — Pillar θ (POLISH) COMPLETE 2/2 — A11Y_SEAL. v5 TADAFFUQ implementation sealed: 24/24 stages, 15/15 pulses, 9/9 categories, 0 forbidden violations (scripts/v5_forbidden_audit.py exit 0). Final step: PR tadaffuq-θ-polish → main + human Lighthouse recording.",
     "η3_verified": {
       "haptic_file": 1,
       "upg_haptic_frozen": 1,
