@@ -202,3 +202,22 @@ Format: `order · date · task · changes · files · verification · branch · 
 **Verification**: `flutter analyze` → No issues found · `flutter test` → 2/2 · `flutter build web --release` → ok. ✅
 
 **Branch**: `feat/cosmic-flow-refinements` (PR #138).
+
+
+---
+
+### 011 · 2026-05-30 · Solar system becomes the Home centerpiece (interactive)
+
+**What changed** (owner: put the solar system on the Home screen with all sections + precise interactive touches; per-planet content deferred)
+- **Home rebuilt around the orrery**: `SystemMap` is now the Home hero — all five worlds as planets in one precise system, core = overall mastery (live % readout + rim arc).
+- **Interactive touches**: tap a planet to **select** it (haptic + halo ring + lift); **drag** to rotate the whole system; selected world drives a live **detail panel** (icon, title, tagline, progress meter, units) with an **"ادخل العالم"** CTA (locked worlds show a "قيد البناء" state). All reduced-motion aware.
+- `SystemMap` upgraded: `onSelect` + `selectedId` (highlight), horizontal-drag rotation, core overall-mastery arc + crisp centre readout.
+- Removed the separate mastery bento / continue card / worlds mini-list from Home (the system + panel supersede them); kept a slim momentum row + weekly activity.
+- **Worlds screen reverted** to its clean labelled list (orrery lives once, on Home — no duplicate controllers).
+- Deferred (next): each planet → its own dedicated content screen (shared-element transition from the planet).
+
+**Files**: `features/worlds/system_map.dart` (upgraded), `features/home/home_screen.dart` (rebuilt), `features/worlds/worlds_screen.dart` (reverted to list), `test/smoke_test.dart`.
+
+**Verification**: `flutter analyze` → No issues found · `flutter test` → 2/2 · `flutter build web --release` → ok. ✅
+
+**Branch**: `feat/cosmic-flow-refinements` (PR #138).

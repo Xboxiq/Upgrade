@@ -11,7 +11,6 @@ import '../../widgets/surface_card.dart';
 import '../../widgets/transitions.dart';
 import '../../widgets/ui_bits.dart';
 import '../callcenter/callcenter_screen.dart';
-import 'system_map.dart';
 import 'worlds_data.dart';
 
 /// The catalogue of training worlds. Call Center is live; the rest are seeded
@@ -37,33 +36,6 @@ class WorldsScreen extends StatelessWidget {
     }
   }
 
-  Widget _systemCard(BuildContext context) {
-    final TextTheme tt = Theme.of(context).textTheme;
-    final AppPalette p = context.palette;
-    return SurfaceCard(
-      interactive: false,
-      padding: const EdgeInsets.fromLTRB(Space.x4, Space.x4, Space.x4, Space.x3),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              Expanded(child: Text('نظام عوالمك', style: tt.titleMedium)),
-              InfoPill('${Arabic.n(Worlds.all.length)} عوالم', color: p.brand),
-            ],
-          ),
-          SystemMap(onOpen: (TrainingWorld w) => _open(context, w), height: 286),
-          Text(
-            'اضغط كوكباً لتدخل عالمه',
-            textAlign: TextAlign.center,
-            style: tt.labelSmall?.copyWith(color: p.inkFaint, fontSize: 11),
-          ),
-          const SizedBox(height: Space.x1),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final double bottomInset = MediaQuery.of(context).padding.bottom;
@@ -76,8 +48,6 @@ class WorldsScreen extends StatelessWidget {
           sliver: SliverList(
             delegate: SliverChildListDelegate(
               <Widget>[
-                _systemCard(context),
-                const SizedBox(height: Space.x6),
                 for (final TrainingWorld w in Worlds.all) ...<Widget>[
                   _WorldCard(world: w, onTap: () => _open(context, w)),
                   const SizedBox(height: Space.x3),

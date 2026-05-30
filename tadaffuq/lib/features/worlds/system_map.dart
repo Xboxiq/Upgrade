@@ -1,27 +1,38 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
+import '../../theme/app_theme.dart';
 import '../../theme/palette.dart';
+import '../../util/numerals.dart';
 import 'worlds_data.dart';
 
 /// ════════════════════════════════════════════════════════════════════════
-/// SystemMap — the platform's worlds rendered as a precise orrery.
+/// SystemMap — the platform's worlds rendered as a precise, interactive orrery.
 ///
-/// A luminous core (the platform) sits at the centre; each training world is a
-/// planet on its own concentric orbit, sized by the domain's scope and tide-
-/// filled by your progress. Outer orbits drift slower (a calm Keplerian feel).
-/// The live world wears a Saturn ring so it reads instantly; tapping any planet
-/// opens that world. The arrangement is deterministic (golden-angle spacing) —
-/// celestial, but ordered, never chaotic.
+/// A luminous core (overall mastery) sits at the centre; each training world is
+/// a planet on its own concentric orbit, sized by domain scope and tide-filled
+/// by progress. Outer orbits drift slower (a calm Keplerian feel); the live
+/// world wears a Saturn ring. Layout is deterministic (golden-angle spacing) —
+/// celestial, but ordered.
 ///
-/// Honours `MediaQuery.disableAnimations`: the system freezes to a clean static
-/// frame, and taps still resolve against the resting positions.
+/// Interaction (precise touches):
+///   • TAP a planet to SELECT it (haptic) — it lifts and gains a halo ring; the
+///     parent shows its detail panel.
+///   • DRAG horizontally to rotate the whole system.
+///   • Honours reduced-motion: drift freezes, taps still resolve.
 /// ════════════════════════════════════════════════════════════════════════
 class SystemMap extends StatefulWidget {
-  const SystemMap({super.key, required this.onOpen, this.height = 300});
+  const SystemMap({
+    super.key,
+    required this.onSelect,
+    this.selectedId,
+    this.height = 340,
+  });
 
-  final void Function(TrainingWorld world) onOpen;
+  final void Function(TrainingWorld world) onSelect;
+  final String? selectedId;
   final double height;
 
   @override
@@ -31,8 +42,9 @@ class SystemMap extends StatefulWidget {
 class _SystemMapState extends State<SystemMap> with SingleTickerProviderStateMixin {
   late final AnimationController _orbit = AnimationController(
     vsync: this,
-    duration: const Duration(seconds: 120),
+    duration: const Duration(seconds: 140),
   );
+  double _drag = 0;
   bool _started = false;
 
   @override
@@ -41,15 +53,14 @@ class _SystemMapState extends State<SystemMap> with SingleTickerProviderStateMix
     super.dispose();
   }
 
-  // Deterministic layout shared by the painter and the tap handler.
   List<_Body> _layout(Size size, double t) {
     final List<TrainingWorld> worlds = Worlds.all;
     final int n = worlds.length;
     final double cx = size.width / 2;
     final double cy = size.height / 2;
-    const double ratio = 0.6; // vertical squash → viewed slightly from above
-    const double margin = 30;
-    const double coreR = 22;
+    const double ratio = 0.58;
+    const double margin = 34;
+    const double coreR = 26;
     final double maxRx = math.min(size.width / 2 - margin, (size.height / 2 - margin) / ratio);
 
     int maxUnits = 1;
@@ -62,11 +73,11 @@ class _SystemMapState extends State<SystemMap> with SingleTickerProviderStateMix
       final TrainingWorld w = worlds[i];
       final double orbitRx = coreR + (maxRx - coreR) * (i + 1) / n;
       final double orbitRy = orbitRx * ratio;
-      final double speed = 0.6 / (i + 1); // outer planets slower
-      final double base = -math.pi / 2 + i * 2.39996; // golden-angle spacing
-      final double a = base + t * 2 * math.pi * speed;
+      final double speed = 0.6 / (i + 1);
+      final double base = -math.pi / 2 + i * 2.39996;
+      final double a = base + t * 2 * math.pi * speed + _drag;
       final Offset c = Offset(cx + orbitRx * math.cos(a), cy + orbitRy * math.sin(a));
-      final double pr = 7 + 9 * (w.unitsTotal / maxUnits);
+      final double pr = 8 + 9 * (w.unitsTotal / maxUnits);
       bodies.add(_Body(world: w, center: c, radius: pr, orbitRx: orbitRx, orbitRy: orbitRy));
     }
     return bodies;
@@ -81,12 +92,15 @@ class _SystemMapState extends State<SystemMap> with SingleTickerProviderStateMix
     double best = double.infinity;
     for (final _Body b in bodies) {
       final double dist = (b.center - d.localPosition).distance;
-      if (dist < b.radius + 14 && dist < best) {
+      if (dist < b.radius + 16 && dist < best) {
         best = dist;
         hit = b;
       }
     }
-    if (hit != null) widget.onOpen(hit.world);
+    if (hit != null) {
+      HapticFeedback.selectionClick();
+      widget.onSelect(hit.world);
+    }
   }
 
   @override
@@ -99,23 +113,51 @@ class _SystemMapState extends State<SystemMap> with SingleTickerProviderStateMix
     }
 
     return GestureDetector(
-      onTapUp: _handleTap,
       behavior: HitTestBehavior.opaque,
+      onTapUp: _handleTap,
+      onHorizontalDragUpdate: (DragUpdateDetails d) =>
+          setState(() => _drag += (d.primaryDelta ?? 0) * 0.01),
       child: SizedBox(
         height: widget.height,
         width: double.infinity,
-        child: RepaintBoundary(
-          child: AnimatedBuilder(
-            animation: _orbit,
-            builder: (BuildContext context, _) => CustomPaint(
-              painter: _SystemPainter(
-                layout: (Size s) => _layout(s, reduce ? 0 : _orbit.value),
-                tide: p.tideGradient,
-                ring: p.brand,
-                orbitLine: p.line,
+        child: Stack(
+          children: <Widget>[
+            Positioned.fill(
+              child: RepaintBoundary(
+                child: AnimatedBuilder(
+                  animation: _orbit,
+                  builder: (BuildContext context, _) => CustomPaint(
+                    painter: _SystemPainter(
+                      layout: (Size s) => _layout(s, reduce ? 0 : _orbit.value),
+                      pulse: reduce ? 0 : _orbit.value,
+                      selectedId: widget.selectedId,
+                      tide: p.tideGradient,
+                      ring: p.brand,
+                      orbitLine: p.line,
+                      overall: Worlds.overallProgress,
+                    ),
+                  ),
+                ),
               ),
             ),
-          ),
+            // Core readout — overall platform mastery, crisp text on the core.
+            Center(
+              child: IgnorePointer(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
+                      Arabic.pct(Worlds.overallProgress * 100),
+                      style: AppTheme.mono(size: 15, weight: FontWeight.w700, color: const Color(0xFFF1F4FF)),
+                    ),
+                    Text('إتقان عام',
+                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            color: const Color(0xFFAEB8D6), fontSize: 9)),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -140,15 +182,21 @@ class _Body {
 class _SystemPainter extends CustomPainter {
   _SystemPainter({
     required this.layout,
+    required this.pulse,
+    required this.selectedId,
     required this.tide,
     required this.ring,
     required this.orbitLine,
+    required this.overall,
   });
 
   final List<_Body> Function(Size) layout;
+  final double pulse;
+  final String? selectedId;
   final List<Color> tide;
   final Color ring;
   final Color orbitLine;
+  final double overall;
 
   static const Color _coreTop = Color(0xFF24305C);
   static const Color _coreBottom = Color(0xFF070B18);
@@ -158,24 +206,22 @@ class _SystemPainter extends CustomPainter {
     final Offset c = size.center(Offset.zero);
     final List<_Body> list = layout(size);
 
-    // 1) Orbits — faint concentric ellipses (precise, evenly stepped).
     for (final _Body b in list) {
+      final bool sel = b.world.id == selectedId;
       canvas.drawOval(
         Rect.fromCenter(center: c, width: b.orbitRx * 2, height: b.orbitRy * 2),
         Paint()
           ..style = PaintingStyle.stroke
-          ..strokeWidth = 0.6
-          ..color = orbitLine,
+          ..strokeWidth = sel ? 1.0 : 0.6
+          ..color = sel ? ring.withValues(alpha: 0.35) : orbitLine,
       );
     }
 
-    // 2) Core — the platform's luminous heart.
-    _core(canvas, c, 22);
+    _core(canvas, c, 26);
 
-    // 3) Planets — far ones first so nearer ones overlap correctly.
     final List<_Body> sorted = List<_Body>.of(list)..sort((a, b) => a.center.dy.compareTo(b.center.dy));
     for (final _Body b in sorted) {
-      _planet(canvas, b);
+      _planet(canvas, b, b.world.id == selectedId);
     }
   }
 
@@ -186,13 +232,20 @@ class _SystemPainter extends CustomPainter {
       r,
       Paint()
         ..shader = RadialGradient(
-          colors: <Color>[
-            Color.lerp(tide.first, Colors.white, 0.4)!,
-            tide.last,
-            _coreBottom,
-          ],
-          stops: const <double>[0.0, 0.55, 1.0],
+          colors: <Color>[Color.lerp(tide.first, Colors.white, 0.4)!, tide.last, _coreBottom],
+          stops: const <double>[0.0, 0.5, 1.0],
         ).createShader(rect),
+    );
+    canvas.drawArc(
+      Rect.fromCircle(center: c, radius: r + 3),
+      -math.pi / 2,
+      2 * math.pi * overall.clamp(0, 1),
+      false,
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 2
+        ..strokeCap = StrokeCap.round
+        ..shader = LinearGradient(colors: tide).createShader(rect),
     );
     canvas.drawArc(
       rect,
@@ -206,14 +259,25 @@ class _SystemPainter extends CustomPainter {
     );
   }
 
-  void _planet(Canvas canvas, _Body b) {
+  void _planet(Canvas canvas, _Body b, bool selected) {
     final Offset c = b.center;
-    final double r = b.radius;
+    final double r = b.radius * (selected ? 1.16 : 1.0);
     final bool active = b.world.available;
-    final double dim = active ? 1.0 : 0.55;
+    final double dim = active ? 1.0 : 0.5;
     final Rect rect = Rect.fromCircle(center: c, radius: r);
 
-    // Sphere base.
+    if (selected) {
+      final double halo = 6 + 2 * math.sin(pulse * 2 * math.pi);
+      canvas.drawCircle(
+        c,
+        r + halo,
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1.5
+          ..color = ring.withValues(alpha: 0.6),
+      );
+    }
+
     canvas.drawCircle(
       c,
       r,
@@ -228,7 +292,6 @@ class _SystemPainter extends CustomPainter {
         ).createShader(rect),
     );
 
-    // Progress tide fill (lower portion), clipped to the sphere.
     if (b.world.progress > 0.01) {
       canvas.save();
       canvas.clipPath(Path()..addOval(rect));
@@ -245,7 +308,6 @@ class _SystemPainter extends CustomPainter {
       canvas.restore();
     }
 
-    // Spherical shading.
     canvas.drawCircle(
       c,
       r,
@@ -262,7 +324,6 @@ class _SystemPainter extends CustomPainter {
         ).createShader(rect),
     );
 
-    // The live world wears a thin Saturn ring so it's instantly identifiable.
     if (active) {
       canvas.save();
       canvas.translate(c.dx, c.dy);
