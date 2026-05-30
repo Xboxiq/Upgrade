@@ -44,7 +44,8 @@
     "in-progress": "icon-circle-dot",
     "stack":       "icon-layers-2",
     "highlight":   "icon-sparkles",
-    "spark":       "icon-zap"
+    "spark":       "icon-zap",
+    "drag":        "icon-grip-vertical"
   },
 
   "states": {

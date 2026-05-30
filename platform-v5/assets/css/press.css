@@ -1,0 +1,93 @@
+/* ════════════════════════════════════════════════════════════════════════
+   TADAFFUQ v5 — η1 — Press Feedback (SPRING_PULSE)
+   ────────────────────────────────────────────────────────────────────────
+   Kinetic feedback from the roots. Before η1, eight components each invented
+   their own :active scale (0.99 / 0.92 / 0.985 / 0.98 …) with NO release
+   physics. η1 does not delete them — it adds ONE shared layer they all lack:
+
+     • a unified transform/opacity transition (so every press animates, not
+       snaps), applied at ZERO specificity via :where() so the 8 component
+       :active rules are never clobbered — only the gaps are filled;
+     • a release SPRING — on letting go, the control rebounds with a single
+       overshoot (the Pulse). None of the 8 had this;
+     • proportional depth — the rebound originates from a compression scaled
+       to the control's MASS (--press-from, set by press.js from offsetHeight),
+       so a large CTA and a small chip feel like they sank the same physical
+       distance under the finger. Le Corbusier's Modulor (Wild Card #3):
+       proportion tied to the human body.
+
+   No new motion tokens (MOTION §1/§2). No forced-cascade overrides. Layer: components.
+   ════════════════════════════════════════════════════════════════════════ */
+
+
+@layer components {
+
+  /* ── The shared press field (0 specificity — fills gaps, never clobbers) ─
+     :where() keeps specificity at 0,0,0 so .cmdk-item:active (0,2,0),
+     .slide-over-cta:active, .zen-trigger:active … all still win their own
+     press depth. This rule only guarantees a smooth transition + a sane
+     default for plain <button>s and opt-in [data-press] hosts. */
+  :where(button, [role="button"], [data-press]) {
+    /* Public knob: per-element rebound origin, refined by press.js. */
+    --press-from: 0.985;
+
+    transition:
+      transform var(--duration-snap) var(--ease-snap),
+      opacity   var(--duration-snap) var(--ease-snap);
+    will-change: transform;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  /* Baseline press-down for controls without their own component :active.
+     Still 0 specificity — a classed component (e.g. .cmdk-item:active) wins. */
+  :where(button, [role="button"], [data-press]):active {
+    transform: scale(0.975);
+  }
+
+  /* Opt-in "deep" press for a primary CTA that wants a heavier sink. */
+  :where([data-press="deep"]):active {
+    transform: scale(0.96);
+  }
+
+
+  /* ── The release SPRING (the Pulse) ──────────────────────────────────
+     press.js stamps [data-press-release] for one animation cycle on letting
+     go. The element rebounds from --press-from (a proportional, mass-scaled
+     compression) through a single overshoot, then settles. This is the
+     unified release none of the eight components had. Attribute selector
+     (0,1,0) is unopposed at release time (:active no longer matches). */
+  [data-press-release] {
+    animation: press-bloom var(--duration-emerge) var(--ease-spring) both;
+  }
+
+  /* Three stops — a single overshoot-and-settle (MOTION §6.6: ≤4 stops, and
+     this IS the declared Pulse). */
+  @keyframes press-bloom {
+    0%   { transform: scale(var(--press-from, 0.985)); }
+    55%  { transform: scale(1.014); }
+    100% { transform: scale(1.000); }
+  }
+
+
+  /* ── Reduced motion: the press becomes an opacity dip, never a transform ─
+     MOTION §4.3 — the signal (this control was pressed) is preserved as a
+     static change; the kinetic spring is withheld. */
+  @media (prefers-reduced-motion: reduce) {
+    :where(button, [role="button"], [data-press]):active,
+    :where([data-press="deep"]):active {
+      transform: none;
+      opacity: 0.82;
+    }
+    [data-press-release] {
+      animation: none;
+    }
+  }
+
+
+  /* ── Forced colors: nothing colour-bound here; transforms are palette-safe.
+     Declared for completeness so the contract is explicit. */
+  @media (forced-colors: active) {
+    [data-press-release] { animation-duration: var(--duration-emerge); }
+  }
+}

@@ -12,8 +12,8 @@
     viewBox="0 0 24 24"  fill="none"  stroke="currentColor"
     stroke-width="2"     stroke-linecap="round"  stroke-linejoin="round"
 
-  30 symbols across 6 semantic groups (see SEMANTIC_MAP.json):
-    navigation (5) · actions (8) · training (8) · states (4) · theme (3) · chrome (2)
+  31 symbols across 6 semantic groups (see SEMANTIC_MAP.json):
+    navigation (5) · actions (8) · training (9) · states (4) · theme (3) · chrome (2)
   ────────────────────────────────────────────────────────────────────────
 -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
@@ -143,6 +143,16 @@
 
   <symbol id="icon-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>
+  </symbol>
+
+  <!-- η2: drag handle for the match-target bench -->
+  <symbol id="icon-grip-vertical" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="9"  cy="12" r="1"/>
+    <circle cx="9"  cy="5"  r="1"/>
+    <circle cx="9"  cy="19" r="1"/>
+    <circle cx="15" cy="12" r="1"/>
+    <circle cx="15" cy="5"  r="1"/>
+    <circle cx="15" cy="19" r="1"/>
   </symbol>
 
 
