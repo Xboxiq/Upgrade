@@ -2714,11 +2714,11 @@
     }
   },
   "tadaffuq_v5": {
-    "current_pillar": "ζ",
-    "current_stage": 3,
-    "current_stage_id": "ζ3",
-    "status": "complete",
-    "branch": "tadaffuq-ζ-flow",
+    "current_pillar": "η",
+    "current_stage": 1,
+    "current_stage_id": "η1",
+    "status": "in-progress",
+    "branch": "tadaffuq-η-kinesis",
     "completed_stages": [
       "α1",
       "α2",
@@ -2738,11 +2738,12 @@
       "ε3",
       "ζ1",
       "ζ2",
-      "ζ3"
+      "ζ3",
+      "η1"
     ],
     "creativity_health": 100,
-    "creativity_health_note": "Pillar ζ (FLOW / ZEN MODE) COMPLETE 3/3. ζ3 ships SPRING_PULSE (pivot-safe: last two were VEIL·GLOW; distinct from ε2's drag-momentum spring — this is a one-shot completion bloom). Sequence GLASS·SPRING·VEIL·VEIL·GLOW·SPRING — no category 3× in a row. Health = 100 (base 100 + 5×8 unique-category bonus, capped; 0 penalties). Still only HAPTIC remains for 9/9 (lands in η — the only unused category).",
-    "pulses_produced": 12,
+    "creativity_health_note": "Pillar η (KINESIS) OPEN — interaction from the roots. η1 ships SPRING_PULSE: a global press field (:where(), zero specificity → never clobbers the 8 component :active scales) that adds the release spring + proportional (Modulor) depth none of them had, and fires upg:press for η3. Pivot note: ζ3 was SPRING, so η1 is the 2nd-consecutive SPRING — distinct in kind (continuous global press vs ζ3's one-shot completion bloom vs ε2's drag momentum) — therefore η2 MUST pivot away from SPRING (→ HAPTIC, the only unused category, securing 9/9). Sequence …VEIL·GLOW·SPRING·SPRING — no category 3× in a row. Health = 100 (base 100 + 5×8 unique-category bonus, capped; 0 penalties; self-score 4).",
+    "pulses_produced": 13,
     "pulse_categories_used": [
       "DOCK_PULSE",
       "MORPH_PULSE",
@@ -2757,7 +2758,25 @@
       "HAPTIC_PULSE"
     ],
     "forbidden_violations": 0,
-    "last_updated": "2026-05-29 ε3 — Pillar ε COMPLETE (disclosure)",
+    "last_updated": "2026-05-30 η1 — Pillar η stage 1/3 — press feedback live (SPRING; pivot-watch: η2 MUST pivot to HAPTIC)",
+    "η1_verified": {
+      "press_files": 2,
+      "press_bloom_keyframe": 1,
+      "release_uses_ease_spring": 1,
+      "where_zero_specificity_guards": 7,
+      "fires_upg_press": 2,
+      "reduced_motion_guard": 1,
+      "upg_press_frozen_surface": 1,
+      "index_wires_css_js": "1/1",
+      "important_in_eta1_files": 0,
+      "hex_in_eta1_files": 0,
+      "emoji_in_eta1_files": 0,
+      "inline_svg_in_eta1_files": 0,
+      "node_check": "ok",
+      "logical_props_audit_exit": 0,
+      "http": "200/200/200",
+      "sha": "d816240"
+    },
     "baseline_v4_chrome": {
       "classic_sidebar_topbar_drawer_hits": 1,
       "fixed_position_in_chrome_css": 1,

@@ -3898,3 +3898,51 @@ SPRING(ε2) · VEIL(ε3) — VEIL is a fresh debut here.
 - Categories reused *distinctly* (sanctioned, PULSE_LIBRARY §1): VEIL (chronic vs ε3 acute) · GLOW (drain vs γ3 hue-nudge) · SPRING (bloom vs ε2 drag-momentum)
 - Creativity Health: **100 / 100** · Forbidden Library violations: **0**
 - Sacred preserved: 14 v4 Upg.* APIs · `archive/` · `prompts/v[1-4]/` · ε/δ/γ files untouched
+
+
+
+---
+
+## v5 TADAFFUQ — η1 PRESS_FEEDBACK — 2026-05-30
+
+**Branch:** `tadaffuq-η-kinesis` · **Pulse:** ⚡ SPRING_PULSE · **sha** `d816240`
+
+Opens Pillar η (KINESIS) — interaction from the roots. The forensic seam: eight
+components had each invented their own `:active` scale with **no release physics**.
+
+### Files shipped
+- `platform-v5/assets/css/press.css` (NEW, 93 lines) — `@layer components`: a shared press field at **zero specificity** via `:where(button, [role="button"], [data-press])` (transition on `--duration-snap`/`--ease-snap` + `will-change` + `touch-action: manipulation`); a 0-spec `:active { scale(0.975) }` default (the 8 component `:active` class rules still win); `[data-press-release]` → `@keyframes press-bloom` (3 stops: `--press-from` → 1.014 → 1.000) on `--ease-spring`; `[data-press="deep"]` heavier sink; reduced-motion → `transform:none; opacity:.82` + release disabled; forced-colors note
+- `platform-v5/assets/js/press.js` (NEW, 155 lines) — classic IIFE `Upg.press` {enable,disable,enabled,_meta}; pointerdown/keydown **arm** (`--press-from` from `offsetHeight`, Modulor band [0.965..0.992]); pointerup/keyup **release** (stamp `[data-press-release]`, clear on `animationend` + safety timeout); fires `upg:press {target,kind:'tap'}`; drag-off cancels; reduced-motion withholds the spring but still fires the event
+- `platform-v5/index.html` — +2 wiring (press.css last so `:where()` stays 0-spec; press.js after zen.js)
+- `prompts/v5/η1_PRESS_FEEDBACK.md` (NEW spec, authored before execution)
+
+### Verified by grep on commit `d816240`
+| metric | got | expected |
+|---|---|---|
+| press.css + press.js exist | 2 | NEW |
+| `@keyframes press-bloom` · uses `--ease-spring` | 1 · 1 | 1 · 1 |
+| `:where(` zero-specificity guards | 7 | ≥1 (never clobber the 8 `:active`) |
+| fires `upg:press` (dispatch) · total refs | 2 · 3 | ≥1 |
+| reduced-motion guard in press.css | 1 | ≥1 |
+| `Upg.press` frozen surface | 1 | 1 |
+| index wires css · js | 1 · 1 | 1 · 1 |
+| `!important` / hex / emoji / inline-`<svg viewBox>` in η1 files | 0 / 0 / 0 / 0 | 0 |
+| physical-direction props · `v5_logical_props_audit.py` exit | 0 · 0 | 0 |
+| `node --check` press.js | OK | OK |
+| http serve (index / press.css / press.js) | 200 / 200 / 200 | 200 |
+
+> Honesty note: a single `!important` first appeared in a press.css **comment**
+> ("No !important") and was reworded so the strict grep returns 0 (Manifesto §6,
+> same discipline as α3's hex-in-comments strip). No `!important` ships.
+
+### Pulse — ⚡ SPRING_PULSE
+**The Surprise:** الضَغط يَنزِل بنِسبة كُتلَة العُنصُر لا بمِقدار ثابِت، ثم يَرتَدّ بزُنبُرك واحِد مُشتَرَك (`press-bloom` على `--ease-spring`) يَجمَع ثمانية أرقام `:active` مُتَناثِرة كانت بلا ارتِداد — مَمدوداً تَحتَها بـ `:where()` (صِفر تَخصيص، لا يُزاحِمها). `--press-from` يُقرَأ من `offsetHeight` فالكَبير يَرتَدّ من انضِغاط أعمَق (مُودُولور).
+**Avoided:** AI-default «scattered/uniform `:active` scale, no release physics» (+ MOTION §6.5 hover>4px). **Inspired-by:** Wild Card #3 — Le Corbusier's Modulor. **Score:** 4/5.
+
+### Distinction from ε2 / ζ3 SPRING (pivot compliance)
+ε2 = drag rubber-band momentum; ζ3 = one-shot completion bloom on the ring; η1 = continuous, global press + proportional release. Same `--ease-spring` family, different trigger axis. ζ3→η1 = 2nd-consecutive SPRING ⇒ **η2 must pivot to HAPTIC** (the only unused category → 9/9). Running sequence …VEIL·GLOW·SPRING·SPRING — no category 3× in a row.
+
+### Sacred preserved
+- The 8 component `:active` scales untouched (`:where()` is 0-spec — it fills gaps, never overrides); `.bento-card` excluded (δ2 owns its expand transform)
+- v4 Upg.* APIs preserved; `Upg.press` is a NEW additive frozen namespace (no prior surface touched)
+- `archive/` · `prompts/v[1-4]/` · `platform/` (v4) untouched · single-accent invariant intact
