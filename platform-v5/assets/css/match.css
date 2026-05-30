@@ -1,0 +1,197 @@
+/* ════════════════════════════════════════════════════════════════════════
+   TADAFFUQ v5 — η2 — Match-target bench (HAPTIC_PULSE — debut, 9/9)
+   ────────────────────────────────────────────────────────────────────────
+   A standalone training widget (NOT a .bento-card → no δ2 expand collision):
+   drag each maqam chip onto its call phase. Three input modalities live in
+   match.js (HTML5 DnD / pointer-touch / RTL keyboard pick-and-drop).
+
+   The Pulse is tactile, not visual: a correct drop is confirmed by a single
+   تَك; a wrong drop is met with deliberate SILENCE. So the visual layer here
+   is honest-but-quiet — correctness reads as a "locked" look + a check icon
+   in --ink, NEVER an accent. The screen's single --accent-progress stays the
+   focal ring (CHROMA §7); this bench introduces no second accent.
+
+   No new motion tokens. No accents. Logical properties only. Layer: components.
+   ════════════════════════════════════════════════════════════════════════ */
+
+
+@layer components {
+
+  .match-bench {
+    margin-block-start: var(--space-6);
+    padding: var(--space-5);
+    background: var(--surface-0);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-1);
+  }
+
+  .match-bench-head { margin-block-end: var(--space-4); }
+
+  .match-bench-title {
+    font-size: var(--type-h3);
+    font-weight: var(--weight-semibold);
+    margin-block-end: var(--space-2);
+  }
+
+  .match-bench-hint {
+    font-size: var(--type-meta);
+    color: var(--ink-muted);
+    max-inline-size: 60ch;
+  }
+
+
+  /* ── The pool of draggable maqam chips ─────────────────────────────── */
+  .match-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-block-end: var(--space-5);
+    padding: var(--space-2);
+    border-radius: var(--radius-md);
+    min-block-size: 56px;                 /* keeps the empty pool a visible target */
+  }
+
+  .match-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-block-size: 44px;                 /* tap target floor (§5.20) */
+    padding-block: var(--space-2);
+    padding-inline: var(--space-3);
+    background: var(--surface-1);
+    color: var(--ink);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-1);
+    cursor: grab;
+    touch-action: none;                   /* pointer-drag owns the gesture on touch */
+    user-select: none;
+    transition:
+      transform var(--duration-quick) var(--ease-emerge),
+      opacity   var(--duration-quick) var(--ease-snap),
+      box-shadow var(--duration-quick) var(--ease-snap);
+  }
+
+  .match-chip .icon { --icon-size: var(--icon-md); color: var(--ink-faint); }
+  .match-chip-label { font-weight: var(--weight-medium); }
+
+  .match-chip[data-grabbed="true"] {
+    cursor: grabbing;
+    box-shadow: var(--shadow-3);
+    transform: scale(1.04);
+  }
+
+  /* The chip that springs back after a wrong drop. */
+  .match-chip[data-return="true"] {
+    animation: match-return var(--duration-emerge) var(--ease-spring) both;
+  }
+
+  /* A placed (correct) chip sits locked inside its zone. */
+  .match-zone .match-chip {
+    cursor: default;
+    box-shadow: none;
+    border-color: var(--line);
+  }
+
+
+  /* ── The target zones (call phases) ────────────────────────────────── */
+  .match-zones {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--space-3);
+  }
+
+  .match-zone {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-block-size: 96px;
+    padding: var(--space-3);
+    background: var(--surface-1);
+    border: 1.5px dashed var(--line-strong);
+    border-radius: var(--radius-md);
+    transition:
+      border-color var(--duration-quick) var(--ease-snap),
+      background    var(--duration-quick) var(--ease-snap);
+  }
+
+  .match-zone-label {
+    font-size: var(--type-meta);
+    color: var(--ink-muted);
+    font-weight: var(--weight-medium);
+  }
+
+  /* Hover / drag-over / keyboard-target — a quiet, accent-free emphasis. */
+  .match-zone[data-over="true"],
+  .match-zone:focus-visible {
+    border-style: solid;
+    border-color: var(--ink-faint);
+    background: var(--surface-2);
+  }
+
+  /* Locked-correct: solid hairline + filled surface + the check icon (ink). */
+  .match-zone[data-correct="true"] {
+    border-style: solid;
+    border-color: var(--line-strong);
+    background: var(--surface-2);
+  }
+  .match-zone-mark { display: none; }
+  .match-zone[data-correct="true"] .match-zone-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--type-micro);
+    color: var(--ink);
+  }
+  .match-zone-mark .icon { --icon-size: var(--icon-sm); }
+
+  /* Rejected drop — a single shake, never a colour scold. */
+  .match-zone[data-reject="true"] {
+    animation: match-shake var(--duration-emerge) var(--ease-snap) both;
+  }
+
+
+  /* ── The touch drag ghost (pointer modality) ───────────────────────── */
+  .match-ghost {
+    position: fixed;
+    z-index: var(--z-overlay);
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    pointer-events: none;
+    opacity: 0.92;
+    box-shadow: var(--shadow-3);
+    will-change: transform;
+  }
+
+
+  /* ── Keyframes — incidental motion (the Pulse is the haptic, not these) ── */
+  @keyframes match-return {
+    0%   { transform: scale(1.06); }
+    60%  { transform: scale(0.98); }
+    100% { transform: scale(1.00); }
+  }
+  @keyframes match-shake {
+    0%, 100% { transform: translateX(0); }
+    25%      { transform: translateX(4px); }
+    75%      { transform: translateX(-4px); }
+  }
+
+
+  /* ── Reduced motion: keep the meaning (lock + check), drop the motion ── */
+  @media (prefers-reduced-motion: reduce) {
+    .match-chip,
+    .match-chip[data-return="true"],
+    .match-zone[data-reject="true"] { animation: none; transition: none; }
+    .match-chip[data-grabbed="true"] { transform: none; }
+  }
+
+
+  /* ── Forced colors: keep zone affordances legible via system tokens ── */
+  @media (forced-colors: active) {
+    .match-chip { border-color: ButtonText; }
+    .match-zone { border-color: GrayText; }
+    .match-zone[data-over="true"],
+    .match-zone[data-correct="true"] { border-color: Highlight; }
+  }
+}

@@ -31,6 +31,8 @@
   <link rel="stylesheet" href="assets/css/zen.css" />
   <!-- η1: global press feedback (loads last; :where() keeps it zero-specificity) -->
   <link rel="stylesheet" href="assets/css/press.css" />
+  <!-- η2: match-target drag-drop bench -->
+  <link rel="stylesheet" href="assets/css/match.css" />
 </head>
 <body>
 
@@ -155,6 +157,50 @@
 
     </section>
 
+    <!-- η2: match-target training bench — standalone (NOT a .bento-card → no δ2 expand) -->
+    <section class="match-bench" data-match aria-labelledby="match-title">
+      <header class="match-bench-head">
+        <h2 class="match-bench-title" id="match-title">طابِق المَقام بمَرحَلة المُكالَمة</h2>
+        <p class="match-bench-hint">
+          اسحَب كل مَقام إلى مَرحَلتِه. باللَمس: اسحَب بإصبَعِك. باللَوحة: ركِّز على مَقام واضغَط Enter لالتِقاطِه،
+          تَنَقَّل بالأسهُم (يَسار = التالي)، واضغَط Enter لإفلاتِه. الصَواب يُجاب بتَكّة مَحسوسة؛ الخَطأ بصَمت.
+        </p>
+      </header>
+
+      <ul class="match-pool" role="list" aria-label="المَقامات الصَوتية">
+        <li class="match-chip" draggable="true" tabindex="0" role="button" data-match-chip data-match-key="ajam" aria-grabbed="false" aria-label="مَقام عَجَم — اسحَبه إلى مَرحَلتِه">
+          <span class="match-chip-grip" data-icon="training.drag" aria-hidden="true"></span>
+          <span class="match-chip-label">عَجَم</span>
+        </li>
+        <li class="match-chip" draggable="true" tabindex="0" role="button" data-match-chip data-match-key="bayat" aria-grabbed="false" aria-label="مَقام بَيات — اسحَبه إلى مَرحَلتِه">
+          <span class="match-chip-grip" data-icon="training.drag" aria-hidden="true"></span>
+          <span class="match-chip-label">بَيات</span>
+        </li>
+        <li class="match-chip" draggable="true" tabindex="0" role="button" data-match-chip data-match-key="hijaz" aria-grabbed="false" aria-label="مَقام حِجاز — اسحَبه إلى مَرحَلتِه">
+          <span class="match-chip-grip" data-icon="training.drag" aria-hidden="true"></span>
+          <span class="match-chip-label">حِجاز</span>
+        </li>
+      </ul>
+
+      <ol class="match-zones" aria-label="مَراحِل المُكالَمة">
+        <li class="match-zone" tabindex="0" role="button" data-match-zone="bayat" aria-label="الافتِتاح — ضَع هنا مَقام الهُدوء">
+          <span class="match-zone-label">الافتِتاح — الهُدوء</span>
+          <span class="match-zone-slot" data-match-slot></span>
+          <span class="match-zone-mark"><span data-icon="states.success" aria-hidden="true"></span>مُطابَق</span>
+        </li>
+        <li class="match-zone" tabindex="0" role="button" data-match-zone="hijaz" aria-label="التَعاطُف — ضَع هنا مَقام التَعاطُف">
+          <span class="match-zone-label">التَعاطُف</span>
+          <span class="match-zone-slot" data-match-slot></span>
+          <span class="match-zone-mark"><span data-icon="states.success" aria-hidden="true"></span>مُطابَق</span>
+        </li>
+        <li class="match-zone" tabindex="0" role="button" data-match-zone="ajam" aria-label="الإغلاق الحازِم — ضَع هنا مَقام الحَزم">
+          <span class="match-zone-label">الإغلاق الحازِم</span>
+          <span class="match-zone-slot" data-match-slot></span>
+          <span class="match-zone-mark"><span data-icon="states.success" aria-hidden="true"></span>مُطابَق</span>
+        </li>
+      </ol>
+    </section>
+
   </main>
 
   <!-- ─── Dock placeholder (mounted by dock.js) ─── -->
@@ -234,6 +280,7 @@
   <script src="assets/js/overlay-choreo.js"  defer></script>
   <script src="assets/js/zen.js"             defer></script>
   <script src="assets/js/press.js"           defer></script>
+  <script src="assets/js/match.js"           defer></script>
 
 </body>
 </html>
