@@ -6,6 +6,65 @@ Versioning is by **doctrine pack** (DEVOTIO / ÊLAN), not by SemVer.
 
 ---
 
+## [v5.0.0] — TADAFFUQ — 2026-05-30
+
+> *«تَدَفُّق هو ما يَجري بين السكون والحَرَكة. الواجهة لا تَفصِل بين العَمل والهُدوء؛ تَسري كنَهر بين الضَفَّتَين.»*
+
+TADAFFUQ v5 demolishes the admin shell (sidebar + topbar + modals) and rebuilds
+`platform-v5/` as a sovereign, edge-to-edge **canvas** with provisional chrome:
+a floating **dock**, in-place **bento** expansion, **slide-over** / **bottom-sheet**
+disclosure, a subtractive **Zen** focus mode, and interaction **from the roots**
+(press / drag-drop / haptics). **24 stages across 8 pillars (α→θ)**, one branch per
+pillar. The γ–η stages each ship a verified **Pulse**; **15 pulses span all 9
+categories** (DOCK · MORPH · GLOW · GLASS · REVEAL · RING · SPRING · VEIL · HAPTIC).
+α/β/θ ship 0 pulses by spec (vocabulary + seal). Full per-stage grep tables live in
+`state/TRUTH_LEDGER.md`; every Pulse is logged append-only in `state/PULSE_LOG.md`.
+
+### Added — stages (verified by grep; per-stage tables in `state/TRUTH_LEDGER.md`)
+
+**α — FOUNDATION** (4 · 0 pulses) — `tabula rasa`
+- α1 TABULA_RASA · α2 EDGE_CANVAS (`@layer reset,tokens,base,components,utilities,themes,overrides`; edge-to-edge canvas; reduced-motion sanctuary) · α3 TOKEN_RESET (4 token families dark+light; 7 `--duration-*`; 5 `--ease-*`; 6 `--icon-*`) · α4 ICON_SPRITE (`icons.svg` + `SEMANTIC_MAP.json` + `Upg.icons.use()`).
+
+**β — VOICE** (3 · 0 pulses)
+- β1 TYPO_HIERARCHY (fluid `clamp()` scale, Arabic-first stack) · β2 THEME_PROVIDER (`Upg.theme` set/get/cycle/current/subscribe) · β3 LANG_SHIM (RTL contract, `scripts/v5_logical_props_audit.py` exit 0).
+
+**γ — SPATIAL** (3 · 3 pulses)
+- γ1 DOCK_DESKTOP — ⚓ DOCK_PULSE (proximity breath-reveal) · γ2 DOCK_MOBILE — 🔁 MORPH_PULSE (one node, container-morph, zero JS) · γ3 CANVAS_HARMONIC — ✨ GLOW_PULSE (≤1% route-driven hue drift) · verified `a70a539` lineage.
+
+**δ — BENTO LIVE** (3 · 3 pulses)
+- δ1 BENTO_GRID — 🪟 GLASS_PULSE (single-edge hairline plane) · δ2 BENTO_EXPAND — 🔓 REVEAL_PULSE (in-place grid-reflow + View Transitions) · δ3 BENTO_RING — ◍ RING_PULSE (stroke matures with progress; single accent) · `a70a539`.
+
+**ε — DISCLOSURE** (3 · 3 pulses)
+- ε1 SLIDE_OVER — 🪟 GLASS_PULSE (leading-edge glint) `42f1d0e` · ε2 BOTTOM_SHEET — ⚡ SPRING_PULSE (velocity+distance dismiss, rubber-band) `933e3b7` · ε3 OVERLAY_CHOREO — 🌙 VEIL_PULSE (dock dissolve, tarteel-paced return) `adce8ca`.
+
+**ζ — ZEN MODE** (3 · 3 pulses)
+- ζ1 ZEN_TRIGGER — 🌙 VEIL_PULSE (focus by subtraction) `0b84f8c` · ζ2 ZEN_CANVAS — 🌙 VEIL_PULSE (chronic veil @0.82) `ec18afb` · ζ3 ZEN_EXIT — ⚡ SPRING_PULSE (Bloom on the ring, not the page) `1cee620`.
+
+**η — KINESIS** (3 · 3 pulses) — `Upg.press` · `Upg.match` · `Upg.haptic`
+- η1 PRESS_FEEDBACK — ⚡ SPRING_PULSE (global proportional press, Modulor depth) `d816240` · η2 DRAG_DROP — 📳 HAPTIC_PULSE (valence: tap on truth, silence on error → 9/9 categories) `7469bd6` · η3 HAPTIC_PATTERNS — 📳 HAPTIC_PULSE (دفّن/تَك/مَقسوم; the completion buzz IS the maqsoom rhythm) `2418452`.
+
+**θ — POLISH** (2 · 0 pulses) — the seal
+- θ1 PERF_AUDIT `fac16a8` — inline `<head>` FOUC theme bootstrap + `theme.js` deferred (0 parser-blocking scripts) + `content-visibility:auto` on the offscreen match-bench; `scripts/v5_perf_audit.py` (exit 0). verified: non-deferred-scripts=0 · fouc-bootstrap=1 · url()=0 · blur≥12px=0.
+- θ2 A11Y_SEAL — removed all 8 non-sanctioned `!important` (bento-expand 7 + dock-mobile 1) via specificity/source-order; purged the last emoji (`DEMOLITION_LIST.md`); `scripts/v5_forbidden_audit.py` (exit 0). verified: emoji=0 · non-sanctioned-!important=0 · hex-off-token=0 · `<progress>`=0 · toast=0 · inline-`<svg viewBox>`=0 · fixed-sidebar=0.
+
+### Verified by the seal gates (reproducible — exit 0 on `tadaffuq-θ-polish`)
+```
+python3 scripts/v5_forbidden_audit.py      # 8 forbidden patterns → 0 violations
+python3 scripts/v5_perf_audit.py           # static perf signals within budget
+python3 scripts/v5_logical_props_audit.py  # RTL logical-property contract
+```
+
+### Notes
+- **Sacred preserved:** the v4 `Upg.*` public APIs, `archive/`, `prompts/v[1-4]/`,
+  and the v4 `platform/` tree are untouched. v5 lives entirely under `platform-v5/`.
+- **Single-accent rule (CHROMA §7):** one `--accent-progress` (the ring) + one
+  `--accent-action` (the dock dot) per screen.
+- **Runtime Lighthouse** (Mobile Performance ≥ 90, Accessibility ≥ 95) is measured
+  by the human/CI and recorded in `state/LIGHTHOUSE_REPORT.md` — never asserted here
+  (manifesto §6, Truth Over Claims). This environment has no headless Chrome.
+
+---
+
 ## [v4.0.0] — ÊLAN — 2026-05-28
 
 > *«ثمانية عوالم تتنفس داخل واجهة واحدة. كل صفحة لها روحها، النظام يحفظ الترابط.»*
