@@ -22,9 +22,10 @@
   @media (max-inline-size: 720px) {
 
     .dock {
-      /* Override the desktop "display: none" from dock.css */
-      display: flex !important;  /* media-query level cascade beat — the single
-                                    sanctioned override aside from motion-sanctuary */
+      /* Override the desktop "display: none" from dock.css.
+         dock-mobile.css loads after dock.css in the same @layer components;
+         .dock (0,1,0) later-source wins on its own. */
+      display: flex;
 
       /* Anchor full-width to the bottom edge */
       inset-block-end: 0;

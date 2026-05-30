@@ -36,8 +36,8 @@
 
   /* ── Expanded state — the card spans more cells ── */
   .bento-card[data-expanded="true"] {
-    grid-column: span 4 !important;     /* explicit override at media-query level */
-    grid-row:    span 3 !important;
+    grid-column: span 4;     /* (0,2,0) outranks .b-* span classes (0,1,0) — cascade wins cleanly */
+    grid-row:    span 3;
     background:  var(--surface-2);
     border-block-start-color: var(--accent-progress);
     box-shadow:  var(--shadow-3);
@@ -70,19 +70,19 @@
   /* ── Constrain expand spans on smaller viewports ── */
   @media (max-inline-size: 1080px) {
     .bento-card[data-expanded="true"] {
-      grid-column: span 3 !important;
+      grid-column: span 3;
     }
   }
   @media (max-inline-size: 720px) {
     .bento-card[data-expanded="true"] {
-      grid-column: span 2 !important;
-      grid-row: auto !important;
+      grid-column: span 2;
+      grid-row: auto;
     }
   }
   @media (max-inline-size: 480px) {
     .bento-card[data-expanded="true"] {
-      grid-column: span 1 !important;
-      grid-row: auto !important;
+      grid-column: span 1;
+      grid-row: auto;
     }
   }
 

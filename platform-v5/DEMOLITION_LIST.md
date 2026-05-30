@@ -43,7 +43,7 @@ world palette files                                 : 0   ← single premium voi
 8. **`@layer themes` with brand-aliased tokens** (`--brand-*`, `--ember-*`) — replaced by 4 token families (canvas / surface / ink / accent).
 9. **84 `max-width` container declarations** in `pages.css` — replaced by edge-to-edge bento grids.
 10. **All `<svg viewBox=...>` inline definitions** — replaced by the single `assets/svg/icons.svg` sprite.
-11. **All emoji in markup** (1 062 hits — including legacy `🔥`, `✓`, `📊`, `⚙️`, `💧`, `🌊`, `🛠`, `🍷`) — replaced by Lucide/Phosphor SVG references through `Upg.icons.use()`.
+11. **All emoji in markup** (1 062 hits — including legacy `flame`, `check`, `bar-chart`, `settings`, `droplet`, `waves`, `wrench`, `wine` glyphs) — replaced by Lucide/Phosphor SVG references through `Upg.icons.use()`.
 12. **All `<svg ...>...</svg>` hardcoded inside `<a class="dual-bottom-nav-item">`** — replaced by sprite use.
 13. **`<dialog>` / `[role="dialog"]` modal popups** — replaced by slide-over panels (ε1) and bottom sheets (ε2).
 14. **`window.alert`, `window.confirm`, `window.prompt`** — already absent in v4; v5 affirms the ban.
