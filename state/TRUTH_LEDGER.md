@@ -3994,3 +3994,63 @@ components had each invented their own `:active` scale with **no release physics
 - `.match-bench` is NOT a `.bento-card` → δ2 click-expand untouched; the 8 component `:active` scales untouched; the ring stays the screen's single `--accent-progress` (CHROMA §7)
 - v4 Upg.* APIs preserved; `Upg.match` is a NEW additive frozen namespace
 - `archive/` · `prompts/v[1-4]/` · `platform/` (v4) untouched
+
+
+
+---
+
+## v5 TADAFFUQ — η3 HAPTIC_PATTERNS — 2026-05-30
+
+**Branch:** `tadaffuq-η-kinesis` · **Pulse:** 📳 HAPTIC_PULSE (rhythmic-vocabulary axis) · **sha** `2418452` · **closes Pillar η**
+
+### Files shipped
+- `platform-v5/assets/js/haptic.js` (NEW, 125 lines) — classic IIFE `Upg.haptic` {play,patterns,enable,disable,enabled,available,_meta}; vocabulary reused from v4 δ4: `dafn [8]` / `takk [12,20,12]` / `maqsoom [8,30,8,30,14]`; gated by reduced-motion (`matchMedia`) + `navigator.vibrate` capability + `localStorage 'upg.haptic.enabled'` (default on) + 50ms debounce; `data-haptic-state` on `<html>`; listeners `upg:press → dafn`, `upg:zen:complete → maqsoom`
+- `platform-v5/assets/js/press.js` (EDIT, +5 lines) — `controlFrom()` now returns null for any control inside `[data-match]`, so the global press `dafn` never pre-empts the bench's `takk` (η1 metrics otherwise unchanged: fires `upg:press`=2, `Upg.press` frozen=1)
+- `platform-v5/index.html` — +1 wiring (`haptic.js` after `match.js`)
+- `prompts/v5/η3_HAPTIC_PATTERNS.md` (NEW spec, authored before execution)
+
+### Verified by grep on commit `2418452`
+| metric | got | expected |
+|---|---|---|
+| haptic.js exists · `Upg.haptic` frozen | 1 · 1 | NEW · 1 |
+| patterns dafn`[8]` / takk`[12,20,12]` / maqsoom`[8,30,8,30,14]` | 3 (v4 δ4 values) | 3 |
+| `navigator.vibrate` used · reduced-motion · localStorage · 50ms debounce | 4 · 1 · 1 · 1 | present |
+| listens `upg:press`→dafn · `upg:zen:complete`→maqsoom | 1 · 1 | 2 |
+| **`upg:match:resolve` listener (avoid double-fire)** | 0 | 0 |
+| press.js excludes `[data-match]` | 1 | 1 |
+| index wires haptic.js | 1 | 1 |
+| `!important` / hex / emoji / inline-`<svg viewBox>` (η3 files) | 0 / 0 / 0 / 0 | 0 |
+| `node --check` haptic.js + press.js · logical-props exit · http | OK · 0 · 200×4 | pass |
+
+### Pulse — 📳 HAPTIC_PULSE (the final pulse, 15/15)
+**The Surprise:** نَبضة الاكتِمال ليست طَنيناً عامّاً بل إيقاع المَقسوم (دُم-تَك-تَك) مُتَرجَماً إلى اهتِزاز — `maqsoom=[8,30,8,30,14]` هو هَيكَل الإيقاع الذي تُعَلِّمه الدُروس مَقاماً. ثَلاث مُفرَدات (دفّن للنَقر / تَك للصَواب / مَقسوم للإنجاز) مَربوطة بثَلاثة مَحاور بِلا تَكرار.
+**Avoided:** AI-default «one generic notification buzz for everything» (not Forbidden #19 — that's sound; haptic here is gated + opt-out + no audio). **Inspired-by:** the Maqsoom iqā' (verifiable real-world rhythm) + Wild Card #4 (muezzin call). **Score:** 4/5.
+
+### Distinction from η2 HAPTIC (category-reuse compliance)
+η2 = **valence** (truth/silence); η3 = **rhythmic vocabulary** (3 named patterns, maqsoom mirrors content). Distinct axes (PULSE_LIBRARY §1). Sequence …SPRING·SPRING·HAPTIC·HAPTIC — no category 3× in a row.
+
+### Sacred preserved
+- v4 `Upg.haptic` (platform/) untouched; the v5 `Upg.haptic` re-implements the sacred signature additively in the v5 tree
+- η1 press behaviour intact (only an exclusion added); η2 match wrong-drop SILENCE preserved (the `[data-match]` exclusion is what guarantees it)
+- `archive/` · `prompts/v[1-4]/` · `platform/` (v4) untouched
+
+---
+
+## v5 TADAFFUQ — PILLAR η (KINESIS) — CLOSED — 2026-05-30
+
+**Branch:** `tadaffuq-η-kinesis` · **3/3 stages · 3 Pulses · 3 new APIs (`Upg.press`, `Upg.match`, `Upg.haptic`)**
+
+| stage | title | files | pulse | sha |
+|---|---|---|---|---|
+| η1 | PRESS_FEEDBACK | press.css + press.js (+spec) | ⚡ SPRING_PULSE (proportional press) | `90a011c` |
+| η2 | DRAG_DROP | match.css + match.js + icons.svg + map (+spec) | 📳 HAPTIC_PULSE (valence — debut → 9/9) | `7469bd6` |
+| η3 | HAPTIC_PATTERNS | haptic.js + press.js edit (+spec) | 📳 HAPTIC_PULSE (rhythmic vocabulary) | `2418452` |
+
+### Pillar η tally
+- Stages done: α1–η3 = **22 / 24** (only θ1 PERF_AUDIT + θ2 A11Y_SEAL remain)
+- Total Pulses: **15 / 15** · Unique categories: **9 / 9** (all categories now used)
+- New v5 APIs this pillar: `Upg.press` · `Upg.match` · `Upg.haptic` — all additive, frozen
+- Interaction from the roots: a global proportional press, a three-modality match-target with confirm-on-truth / silence-on-error, and a three-word maqamat haptic vocabulary whose completion buzz IS the maqsoom rhythm
+- Sequence across η: SPRING · HAPTIC · HAPTIC (preceded by …VEIL·GLOW·SPRING) — no category 3× in a row
+- Creativity Health: **100 / 100** · Forbidden Library violations: **0**
+- Sacred preserved: v4 Upg.* APIs · `archive/` · `prompts/v[1-4]/` · `platform/` (v4) untouched · single-accent §7 intact (the ring keeps the screen's one cyan)

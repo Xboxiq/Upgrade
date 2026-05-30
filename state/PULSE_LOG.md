@@ -385,3 +385,30 @@ last_5_avg: 4.0
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-30 / η2 — Pillar η stage 2/3 — match-target drag-drop live (HAPTIC debut → 9/9 categories; η3 reuses HAPTIC on the rhythmic axis)
+
+
+
+## η3 — 2026-05-30
+**Pulse Category:** 📳 HAPTIC_PULSE *(15th and FINAL pulse of v5; closes Pillar η; rhythmic-vocabulary axis — distinct from η2's valence axis)*
+**The Surprise:** المِنصّة تُعَلِّم المُتَدَرِّب أن يَفتَح المُكالَمة بمَقام البَيات ويُغلِقها بالعَجَم — مَقامات صَوتية لها إيقاعُها. وفي η3 يَنغَلِق الخَيط: نَبضةُ الاكتِمال التي تَشعُر بها اليَد **ليست طَنيناً عامّاً** بل **إيقاع المَقسوم** نَفسُه — دُم·تَك·تَك — مُتَرجَماً إلى اهتِزاز: `مَقسوم = [8, 30, 8, 30, 14]` (نَبضة، صَمت، نَبضة، صَمت، نَبضة أطوَل) هو هَيكَل الإيقاع الذي عَلَّمَتْه الدُروس. فما يُسمَع في الدَرس مَقاماً، يُحَسّ في الإنجاز رِعشةً. والمُفرَدات ثَلاث، مُستَعارة بأمانة من v4 δ4: **دفّن** `[8]` نَقرة واحِدة ناعِمة تُؤَكِّد كل ضَغطة (مَربوطة بحَدَث `upg:press` من η1)، **تَك** `[12,20,12]` طَرقة مُزدَوَجة للإفلات الصَحيح (تُطلَق من مَوضِع نِداء η2 في match.js)، **مَقسوم** للاكتِمال (مَربوطة بـ `upg:zen:complete` من ζ3). والرَبط مُنَضبِط بِلا تَكرار: التَك لا يُربَط هنا بمُستَمِع ثانٍ لـ `upg:match:resolve` (لأن match.js يُنادي `Upg.haptic.play('takk')` مُباشَرةً)، وأُضيف إقصاء سَطر واحِد لـ `[data-match]` في press.js كي لا يَسبِق دفّنُ الضَغط العامّ تَكَّ المِنضَدة (رُقائِقها role=button) — فيَبقى **صَمتُ الخَطأ** في η2 سَليماً. وكُل هذا مَكتوم باحتِرام: لا يَعمَل تَحت `prefers-reduced-motion: reduce`، ولا حيث لا `navigator.vibrate`، ويُحفَظ الإيقاف في localStorage، وبفاصِل ٥٠ms ضِدّ النَقر المُتَتابِع. لا صَوت، لا chrome — طَبقة لَمسية صامِتة تَنطِق فَقَط حين تَلمَس.
+
+**Reference Avoided:** الـ AI-default الأكبر للهَدهَدة: «اهتِزازة إشعار واحِدة عامّة لكل شيء» (الـ notification ping) — مُستَبدَلة بمُفرَدات ثَلاث، أصغَرُها ٨ms وأكبَرُها إيقاعٌ مَوسيقيّ كامِل. وليست هذه «صَوتاً افتِراضياً» (Forbidden #19 خاصّ بالصَوت): الهَدهَدة مَكتومة، مُقَيَّدة، وقابِلة للإيقاف — ولا تُصدِر نَغمة.
+**Inspired-by:** إيقاع المَقسوم (the Maqsoom iqā') — وزن إيقاعيّ عَرَبيّ/عِراقيّ مَعروف (دُم-تَك-تَك)، artefact حَقيقيّ قابِل للتَحَقُّق لا «vibe». ويَتَردَّد فيه صَدى Wild Card #4 (نِداء المُؤَذِّن عَبر السُطوح — اللَحن نَفسُه من قِبَل مُختَلِفة، يَلتَقي الجَميع عِند لَحظة واحِدة): الاكتِمال لَحظةٌ يَلتَقي عِندَها كَدُّ الجَلسة كُلِّه في رِعشةٍ واحِدة مَوزونة.
+**User-Visible:** subtle — مَحسوسة فِعلاً على أجهِزة اللَمس الداعِمة لـ `navigator.vibrate` (أندرويد غالِباً؛ سَطح المَكتب وiOS Safari لا اهتِزاز فيهما، فالطَبقة تَصمُت بلا ضَرَر). لكنها أعمَق من مُجَرَّد رِعشة: هي إغلاقُ حَلقةٍ مَعرِفية — الإيقاع الذي تَعَلَّمتَه يَعود إليكَ في جِسمِكَ. مَن أوقَفها (`Upg.haptic.disable()`) أو يُفَضِّل تَقليل الحَرَكة لا يَفقِد أي مَعنى وَظيفيّ — التَأكيدات البَصَرية (η2) والازدِهار (ζ3) قائِمة.
+**Originality Self-Score:** 4/5 — الهَدهَدة في الواجِهات مَوجودة. الذي يَرفَعها إلى 4: (١) **النَبضة تُحاكي إيقاعاً من المُحتوى** (المَقسوم) لا طَنيناً عامّاً — هذا حَرفياً تَعريف الفِئة (PULSE_LIBRARY §1)؛ (٢) **مُفرَدات ثَلاث ذات دَلالة** مَربوطة بثَلاثة مَحاور (ضَغط/صَواب/اكتِمال) بأمانة استِعارة من v4 δ4؛ (٣) **رَبط بِلا تَكرار** عَبر إقصاء `[data-match]` بسَطر واحِد فيَبقى صَمتُ الخَطأ سَليماً؛ (٤) **احتِرام تامّ**: reduced-motion no-op + قُدرة الجِهاز + إيقاف مَحفوظ + debounce؛ (٥) **بِلا token ولا chrome ولا صَوت**. لا أدَّعي 5 لأن vibration API نَمَط مَعروف؛ الأصالة في «الاكتِمال = إيقاع المَقام» + انضِباط الرَبط.
+**Distinction (category reuse — sanctioned PULSE_LIBRARY §1):** η2 HAPTIC محورُه **الڤالِنس** (صَواب يُحَسّ / خَطأ صامِت). η3 HAPTIC محورُه **المُفرَدات الإيقاعية** (ثَلاثة أنماط مُسَمّاة، المَقسوم يُحاكي مَقام المُحتوى). محوران مُختَلِفان كما مَيَّزنا ε11/ε12 META. التَسَلسُل …VEIL·GLOW·SPRING·SPRING·HAPTIC·HAPTIC — لا فِئة ثلاثَ مَرّات مُتَتالية؛ η2·η3 = اثنتان فَقَط.
+**Files touched:** platform-v5/assets/js/haptic.js (NEW 125) · platform-v5/assets/js/press.js (EDIT +5 — [data-match] exclusion) · platform-v5/index.html (+1 wiring) · prompts/v5/η3_HAPTIC_PATTERNS.md (NEW spec)
+**Verified at commit:** `2418452`
+
+
+
+---STATS---
+total_pulses: 15
+unique_categories_used: 9
+target_categories: 9 (DOCK · MORPH · GLOW · REVEAL · RING · GLASS · SPRING · VEIL · HAPTIC)
+remaining_categories: 0 — 9/9 ACHIEVED · 15/15 pulses shipped
+avg_self_score: 4.0
+last_5_avg: 4.0
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-30 / η3 — Pillar η COMPLETE 3/3 (KINESIS) — pulse program closed: 15/15 pulses, 9/9 categories. Only θ POLISH (0 pulses) remains.
