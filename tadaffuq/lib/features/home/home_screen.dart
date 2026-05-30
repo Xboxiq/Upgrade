@@ -9,8 +9,8 @@ import '../../ui/large_title_scaffold.dart';
 import '../../util/numerals.dart';
 import '../../widgets/charts.dart';
 import '../../widgets/press_scale.dart';
+import '../../widgets/mastery_planet.dart';
 import '../../widgets/surface_card.dart';
-import '../../widgets/tide_ring.dart';
 import '../../widgets/transitions.dart';
 import '../../widgets/ui_bits.dart';
 import '../callcenter/callcenter_screen.dart';
@@ -122,7 +122,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(width: Space.x4),
-          TideRing(value: Worlds.overallProgress * 100, size: 100),
+          MasteryPlanet(value: Worlds.overallProgress * 100, size: 112),
         ],
       ),
     );

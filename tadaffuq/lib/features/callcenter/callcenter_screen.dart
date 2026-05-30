@@ -12,10 +12,10 @@ import '../../ui/groups.dart';
 import '../../ui/large_title_scaffold.dart';
 import '../../util/numerals.dart';
 import '../../widgets/aurora_background.dart';
+import '../../widgets/mastery_planet.dart';
 import '../../widgets/press_scale.dart';
 import '../../widgets/progress_ring.dart';
 import '../../widgets/surface_card.dart';
-import '../../widgets/tide_ring.dart';
 import '../../widgets/transitions.dart';
 import '../../widgets/ui_bits.dart';
 import '../../widgets/voice_wave.dart';
@@ -362,13 +362,14 @@ class _MasteryHeroState extends State<_MasteryHero> {
               const SizedBox(width: Space.x4),
               Column(
                 children: <Widget>[
-                  PressScale(
+                  MasteryPlanet(
+                    value: 38,
+                    size: 120,
                     onLongPress: () => setState(() => _tiersOpen = !_tiersOpen),
-                    pressedScale: 0.96,
-                    child: const TideRing(value: 38, size: 108),
                   ),
                   const SizedBox(height: Space.x2),
-                  Text('مطوّل: المستويات', style: tt.labelSmall?.copyWith(color: p.inkFaint, fontSize: 10.5)),
+                  Text('اسحب للتدوير · مطوّل للمستويات',
+                      style: tt.labelSmall?.copyWith(color: p.inkFaint, fontSize: 10)),
                 ],
               ),
             ],

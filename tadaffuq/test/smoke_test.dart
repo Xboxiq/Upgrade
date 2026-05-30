@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tadaffuq/main.dart';
 import 'package:tadaffuq/ui/floating_dock.dart';
-import 'package:tadaffuq/widgets/tide_ring.dart';
+import 'package:tadaffuq/widgets/mastery_planet.dart';
 
 void main() {
   setUpAll(() {
@@ -24,7 +24,7 @@ void main() {
 
     expect(find.byType(FloatingDock), findsOneWidget);
     expect(find.text('الرئيسية'), findsWidgets);
-    expect(find.byType(TideRing), findsWidgets);
+    expect(find.byType(MasteryPlanet), findsWidgets);
   });
 
   testWidgets('Worlds catalogue is part of the shell', (WidgetTester tester) async {

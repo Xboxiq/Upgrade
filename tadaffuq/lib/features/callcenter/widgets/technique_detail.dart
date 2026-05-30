@@ -7,6 +7,7 @@ import '../../../theme/app_icons.dart';
 import '../../../theme/palette.dart';
 import '../../../theme/tokens.dart';
 import '../../../ui/controls.dart';
+import '../../../widgets/mastery_planet.dart';
 import '../../../widgets/press_scale.dart';
 import '../../../widgets/surface_card.dart';
 import '../../../widgets/tide_ring.dart';
@@ -230,7 +231,7 @@ class _FocusClearing extends StatelessWidget {
                 const Spacer(),
                 Text('وضع التركيز', style: tt.labelMedium?.copyWith(color: p.brand, letterSpacing: 1.5)),
                 const SizedBox(height: Space.x6),
-                TideRing(value: ring, size: 200, breathing: ring < 100),
+                MasteryPlanet(value: ring, size: 220, breathing: ring < 100),
                 const SizedBox(height: Space.x8),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: Space.x8),

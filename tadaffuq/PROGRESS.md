@@ -146,3 +146,22 @@ Format: `order · date · task · changes · files · verification · branch · 
 **Branch**: `feat/cosmic-flow-refinements` (PR #138 — now carries refinements + the full platform).
 
 **NEXT**: Gather feedback on the new sections; candidate ideas — command palette (⌘K) search across worlds, a real Zen/Focus session flow, drag-and-drop voice drill, shared-element world→detail transition, streak calendar heatmap.
+
+
+---
+
+### 008 · 2026-05-30 · Signature visual — interactive MasteryPlanet (Saturn)
+
+**What changed** (owner idea: make the level circle a distinctive, interactive, elegant object — e.g. Saturn)
+- New `lib/widgets/mastery_planet.dart`: a deep-space **planet that fills with the cosmic tide** to your mastery level, encircled by **Saturn rings** whose rear half passes *behind* the planet (real depth), with a **moon orbiting** the ring. Spherical shading + rim-light, no glow blobs.
+- **Interactive**: drag to spin the system (moon orbits, highlight shifts), tap for a springy pulse + haptic, long-press surfaces the tier breakdown. Reduced-motion freezes orbit/wave and resolves the level instantly.
+- Wired into the three prime "level" spots: **Home hero**, **Call Center hero** (drag + long-press tiers), and **Focus/Zen mode** (large, breathing). `TideRing` kept for gauges (technique header, APIndex), `ProgressRing` for small inline rings — deliberate visual hierarchy.
+- The planet is intentionally a dark celestial body in both themes so the centre % stays legible.
+
+**Files**: new `widgets/mastery_planet.dart`; modified `features/home/home_screen.dart`, `features/callcenter/callcenter_screen.dart`, `features/callcenter/widgets/technique_detail.dart`, `test/smoke_test.dart`.
+
+**Verification**: `flutter analyze` → No issues found · `flutter test` → 2/2 · `flutter build web --release` → ok. ✅
+
+**Branch**: `feat/cosmic-flow-refinements` (PR #138).
+
+**NEXT**: Await feedback on the planet; could add a ⌘K palette, a real Zen session timer, drag-drop voice drill, or build a second full world.
