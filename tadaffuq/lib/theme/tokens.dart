@@ -21,13 +21,16 @@ abstract class Space {
   static const double x20 = 80;
 }
 
-/// Corner radii — generous, premium rounding (16–28).
+/// Corner radii — iOS continuous-style rounding.
 abstract class Radii {
   static const double xs = 8;
   static const double sm = 12;
+  static const double card = 14; // grouped list / row card
   static const double md = 16;
-  static const double lg = 20;
+  static const double group = 18; // inset grouped container
+  static const double lg = 22; // large card
   static const double xl = 28;
+  static const double sheet = 38; // bottom-sheet top corners (iOS)
   static const double pill = 999;
 }
 

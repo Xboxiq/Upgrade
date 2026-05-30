@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../theme/palette.dart';
 import '../theme/tokens.dart';
 
-/// A rounded, tinted square that holds a single monochrome icon.
+/// A rounded, tinted squircle holding a single monochrome icon.
 class IconBadge extends StatelessWidget {
-  const IconBadge(this.icon, {super.key, this.tint, this.size = 44, this.iconSize = 22});
+  const IconBadge(this.icon, {super.key, this.tint, this.size = 40, this.iconSize = 21});
   final IconData icon;
   final Color? tint;
   final double size;
@@ -19,8 +19,8 @@ class IconBadge extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: c.withValues(alpha: p.isDark ? 0.14 : 0.10),
-        borderRadius: BorderRadius.circular(Radii.sm),
+        color: c.withValues(alpha: p.isDark ? 0.18 : 0.12),
+        borderRadius: BorderRadius.circular(size * 0.3),
       ),
       child: Icon(icon, size: iconSize, color: c),
     );
@@ -40,7 +40,7 @@ class InfoPill extends StatelessWidget {
     final AppPalette p = context.palette;
     final Color c = color ?? p.inkMuted;
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: Space.x3, vertical: Space.x1 + 2),
+      padding: const EdgeInsets.symmetric(horizontal: Space.x3, vertical: 5),
       decoration: BoxDecoration(
         color: c.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(Radii.pill),
@@ -50,19 +50,16 @@ class InfoPill extends StatelessWidget {
         children: <Widget>[
           if (icon != null) ...<Widget>[
             Icon(icon, size: 13, color: c),
-            const SizedBox(width: Space.x1 + 2),
+            const SizedBox(width: 5),
           ],
-          Text(
-            label,
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(color: c),
-          ),
+          Text(label, style: Theme.of(context).textTheme.labelSmall?.copyWith(color: c)),
         ],
       ),
     );
   }
 }
 
-/// A section heading: accent eyebrow, large title, lede, optional trailing tag.
+/// A content section heading: brand eyebrow, title, lede, optional tag.
 class SectionHeader extends StatelessWidget {
   const SectionHeader({
     super.key,
@@ -93,14 +90,11 @@ class SectionHeader extends StatelessWidget {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Icon(eyebrowIcon, size: 15, color: p.accentProgress),
+                  Icon(eyebrowIcon, size: 14, color: p.brand),
                   const SizedBox(width: Space.x2),
                   Text(
-                    eyebrow,
-                    style: t.labelSmall?.copyWith(
-                      color: p.accentProgress,
-                      letterSpacing: 0.6,
-                    ),
+                    eyebrow.toUpperCase(),
+                    style: t.labelSmall?.copyWith(color: p.brand, letterSpacing: 0.8),
                   ),
                 ],
               ),
@@ -115,10 +109,7 @@ class SectionHeader extends StatelessWidget {
         ),
         if (tag != null) ...<Widget>[
           const SizedBox(width: Space.x4),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 2),
-            child: InfoPill(tag!),
-          ),
+          Padding(padding: const EdgeInsets.only(bottom: 3), child: InfoPill(tag!)),
         ],
       ],
     );
@@ -127,7 +118,7 @@ class SectionHeader extends StatelessWidget {
 
 enum NoteKind { success, warning, neutral }
 
-/// A coloured note block with a leading rail + icon (quality indicators, etc.).
+/// A soft note block with a leading rail + icon (quality indicators, etc.).
 class NoteCard extends StatelessWidget {
   const NoteCard({super.key, required this.text, required this.icon, this.kind = NoteKind.neutral});
   final String text;
@@ -138,26 +129,25 @@ class NoteCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppPalette p = context.palette;
     final Color c = switch (kind) {
-      NoteKind.success => p.accentProgress,
-      NoteKind.warning => p.accentAction,
+      NoteKind.success => p.success,
+      NoteKind.warning => p.warning,
       NoteKind.neutral => p.inkFaint,
     };
     return Container(
-      padding: const EdgeInsets.fromLTRB(Space.x3, Space.x3, Space.x4, Space.x3),
+      padding: const EdgeInsets.all(Space.x3 + 2),
       decoration: BoxDecoration(
-        color: p.isDark ? Colors.white.withValues(alpha: 0.03) : Colors.black.withValues(alpha: 0.03),
-        borderRadius: BorderRadius.circular(Radii.md),
-        border: Border(right: BorderSide(color: c, width: 3)),
+        color: c.withValues(alpha: p.isDark ? 0.10 : 0.08),
+        borderRadius: BorderRadius.circular(Radii.sm),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Icon(icon, size: 18, color: c),
+          Icon(icon, size: 17, color: c),
           const SizedBox(width: Space.x3),
           Expanded(
             child: Text(
               text,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: p.ink, height: 1.6),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: p.ink, height: 1.55),
             ),
           ),
         ],

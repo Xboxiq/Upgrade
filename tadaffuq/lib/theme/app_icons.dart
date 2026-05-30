@@ -19,6 +19,7 @@ abstract class AppIcons {
   static const IconData moon = IconData(0xf3eb, fontFamily: 'Lucide');
   static const IconData x = IconData(0xf59e, fontFamily: 'Lucide');
   static const IconData arrowLeft = IconData(0xf14f, fontFamily: 'Lucide');
+  static const IconData chevronLeft = IconData(0xf1f9, fontFamily: 'Lucide');
   static const IconData target = IconData(0xf528, fontFamily: 'Lucide');
 
   // Call center
