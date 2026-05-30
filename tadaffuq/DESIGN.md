@@ -85,9 +85,13 @@ the blue current = where you stand, the nebula = what to do next.
 
 ---
 
-## 4. Shape & layout language
+## 4. Shape, depth & layout language
 
 - **Soft squircle** radii (continuous-feel), grouped insets, generous negative space.
+- **Depth = rim light, not drop shadow.** A deliberate break from the iOS soft-shadow
+  cliché: every panel's edge is a hairline that catches light along the top and fades to a
+  dark contact line at the bottom (`Depth.rim`), over tonally-lit surfaces. It reads like
+  glass lit from above in deep space — crisp, distinctive, and unmistakably *not* Cupertino.
 - **Bento** composition for dashboards/heroes: tiles of deliberate, varied weight — never a uniform grid.
 - **Floating dock** instead of an edge-to-edge tab bar: a centred, glass, pill-shaped
   navigator hovering above the canvas with margin on all sides. The dock *floats on the tide.*

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../theme/palette.dart';
 import '../theme/tokens.dart';
+import '../widgets/depth.dart';
 import '../widgets/press_scale.dart';
 
 class DockItem {
@@ -16,9 +17,9 @@ class DockItem {
 /// FloatingDock — navigation that *floats on the tide*.
 ///
 /// Instead of an edge-to-edge tab bar, a centred glass pill hovers above the
-/// canvas with margin on every side. The active item lights with a cyan tide
-/// pill and reveals its label; idle items are quiet icons. Frosted vibrancy +
-/// a hairline + a soft lift give it real depth over the aurora.
+/// canvas with margin on every side. The active item becomes a neutral raised
+/// key that reveals its label; idle items are quiet icons. Frosted vibrancy +
+/// a rim-light edge (no drop shadow) give it crisp, distinctive depth.
 /// ════════════════════════════════════════════════════════════════════════
 class FloatingDock extends StatelessWidget {
   const FloatingDock({
@@ -44,18 +45,14 @@ class FloatingDock extends StatelessWidget {
         bottom: (bottomInset > 0 ? bottomInset : Space.x4) + Space.x1,
       ),
       child: Center(
-        child: DecoratedBox(
+        // Depth from a rim light (no drop shadow): the gradient wrapper is a
+        // 1px lit/contact edge; the frosted blur separates it from content.
+        child: Container(
           decoration: BoxDecoration(
+            gradient: Depth.rim(p, strong: true),
             borderRadius: BorderRadius.circular(Radii.pill),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: Colors.black.withValues(alpha: p.isDark ? 0.45 : 0.16),
-                blurRadius: 30,
-                offset: const Offset(0, 14),
-                spreadRadius: -10,
-              ),
-            ],
           ),
+          padding: const EdgeInsets.all(Depth.rimWidth),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(Radii.pill),
             child: BackdropFilter(
@@ -65,7 +62,6 @@ class FloatingDock extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: p.materialTint,
                   borderRadius: BorderRadius.circular(Radii.pill),
-                  border: Border.all(color: p.lineStrong, width: 0.5),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,

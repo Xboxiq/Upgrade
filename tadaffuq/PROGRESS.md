@@ -105,3 +105,21 @@ Format: `order · date · task · changes · files · verification · branch · 
 **Branch**: `feat/flutter-creative-overhaul` (updates PR #137).
 
 **NEXT**: ⛔ PHASE 0 approval gate. Content blocks (compare cells, NoteCard) intentionally keep their soft semantic tint (green=right / amber=warn) since that colour is meaningful, not decorative — flag if you want those neutralised too.
+
+
+---
+
+### 006 · 2026-05-30 · Replace drop shadows with a distinctive "rim light" depth system
+
+**What changed** (owner: drop shadows are an iOS/Apple cliché — wanted something more distinctive)
+- **New depth language `Depth.rim`** (`lib/widgets/depth.dart`): elevation is a **rim light** — a bright hairline catching light along the top edge that fades to a dark contact line at the bottom, over tonally-lit surfaces. Reads like glass lit from above in deep space; crisp and non-iOS.
+- **Removed every `BoxShadow`** in the app (verified: none remain). Rebuilt depth with the rim wrapper on `SurfaceCard`, `GlassSurface`, `FloatingDock`, and dropped the neutral shadow under `FilledCta` (now gradient + hairline top highlight).
+- Hover on cards now sharpens the rim + rises 3px (instead of growing a shadow).
+
+**Files**: `lib/widgets/depth.dart` (new), `lib/widgets/surface_card.dart`, `lib/widgets/glass_surface.dart`, `lib/ui/floating_dock.dart`, `lib/ui/controls.dart`, `DESIGN.md`, `PROGRESS.md`.
+
+**Verification**: `flutter analyze` → clean · `flutter test` → 2/2 · `flutter build web --release` → ok. ✅
+
+**Branch**: `feat/flutter-creative-overhaul` (updates PR #137).
+
+**NEXT**: ⛔ PHASE 0 approval gate. The progress-ring luminescence (a soft glow *around the ring*, not a shadow) is kept as a deliberate signature; can be softened/removed on request.

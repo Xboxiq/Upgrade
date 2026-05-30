@@ -90,19 +90,11 @@ class FilledCta extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
           borderRadius: BorderRadius.circular(Radii.md),
-          // A hairline top highlight (lit-from-above) + a neutral depth shadow.
-          // No coloured halo — the gradient itself carries the brand.
+          // Depth from the gradient + a hairline top highlight (lit-from-above);
+          // no drop shadow — consistent with the rim-light depth language.
           border: Border(
             top: BorderSide(color: Colors.white.withValues(alpha: 0.22), width: 0.6),
           ),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black.withValues(alpha: p.isDark ? 0.38 : 0.12),
-              blurRadius: 16,
-              offset: const Offset(0, 8),
-              spreadRadius: -8,
-            ),
-          ],
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

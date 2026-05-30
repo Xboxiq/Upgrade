@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 
 import '../theme/palette.dart';
 import '../theme/tokens.dart';
+import 'depth.dart';
 
-/// Glassmorphism 2.0 — a translucent surface with an ultra-thin inner border
-/// and soft, multi-layered shadows. Blur is kept moderate (12) and is opt-in,
-/// so it never becomes a GPU-killer applied everywhere.
+/// Glassmorphism 2.0 — a translucent, blurred surface whose depth comes from a
+/// **rim light** (bright top edge → dark contact line), not a drop shadow.
+/// Blur is kept moderate and opt-in, so it never becomes a GPU-killer.
 class GlassSurface extends StatelessWidget {
   const GlassSurface({
     super.key,
@@ -33,46 +34,36 @@ class GlassSurface extends StatelessWidget {
     final AppPalette p = context.palette;
     final BorderRadius br = BorderRadius.circular(radius);
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        borderRadius: br,
-        boxShadow: elevated
-            ? <BoxShadow>[
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: p.isDark ? 0.45 : 0.10),
-                  blurRadius: 24,
-                  offset: const Offset(0, 12),
-                  spreadRadius: -8,
-                ),
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: p.isDark ? 0.30 : 0.06),
-                  blurRadius: 6,
-                  offset: const Offset(0, 2),
-                  spreadRadius: -2,
-                ),
-              ]
-            : null,
-      ),
-      child: ClipRRect(
-        borderRadius: br,
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur),
-          child: Container(
-            padding: padding,
-            decoration: BoxDecoration(
-              color: p.glassTint.withValues(
-                alpha: (p.glassTint.a * tintOpacity).clamp(0.0, 1.0),
-              ),
-              borderRadius: br,
-              border: Border.all(
-                color: borderColor ?? p.line,
-                width: 1,
-              ),
+    final Widget glass = ClipRRect(
+      borderRadius: BorderRadius.circular(radius - (elevated ? Depth.rimWidth : 0)),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur),
+        child: Container(
+          padding: padding,
+          decoration: BoxDecoration(
+            color: p.glassTint.withValues(
+              alpha: (p.glassTint.a * tintOpacity).clamp(0.0, 1.0),
             ),
-            child: child,
+            // When elevated the rim wrapper draws the edge; otherwise a hairline.
+            border: elevated ? null : Border.all(color: borderColor ?? p.line, width: 1),
           ),
+          child: child,
         ),
       ),
+    );
+
+    if (!elevated) {
+      return ClipRRect(borderRadius: br, child: glass);
+    }
+
+    // Rim-light wrapper: a 1px lit/contact edge around the glass.
+    return Container(
+      decoration: BoxDecoration(
+        gradient: Depth.rim(p, strong: true),
+        borderRadius: br,
+      ),
+      padding: const EdgeInsets.all(Depth.rimWidth),
+      child: glass,
     );
   }
 }
