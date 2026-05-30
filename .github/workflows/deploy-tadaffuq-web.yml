@@ -29,6 +29,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Enables GitHub Pages automatically (no manual repo-settings step needed).
+      # Requires the `pages: write` permission already granted above.
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
