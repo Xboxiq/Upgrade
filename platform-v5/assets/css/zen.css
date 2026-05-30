@@ -217,3 +217,82 @@
   /* ─── Forced colors — filters are ignored by the OS palette; the ring keeps
      its Highlight role from ring.css. Nothing to override here. ────────────*/
 }
+
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   TADAFFUQ v5 — ζ3 — Zen Exit / the bloom in place  (SPRING_PULSE)
+   ────────────────────────────────────────────────────────────────────────
+   The deliberate exit, and the special case of completion. A finished session
+   does NOT fire a toast (Forbidden #2) or count a number up from 0 (Forbidden
+   #10) or rain confetti. The ring blooms in place: one spring scale + a glow
+   surge that settles; then — after a held beat — the field re-saturates and
+   the dock re-emerges slowly on tarteel time. The celebration lives on the
+   achievement, never on the page.
+
+   The Pulse — SPRING_PULSE (distinct from ε2's drag-momentum spring):
+     [data-zen-complete] stops the ζ2 breathe and plays a one-shot bloom on
+     --ease-spring (overshoot-and-settle, not a linear pop); then exit() drives
+     the dock's patient return (hold a beat, then melt back). Quick to protect
+     on enter, patient to return — closing the asymmetric cadence ε3 opened.
+     Inspired by Iznik tile radial geometry resolving at the seventh repetition:
+     the pattern is complete exactly when the ring closes.
+
+   Pure addition: ζ1/ζ2 rules untouched. No new token. No override keyword.
+   ════════════════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  /* ─── The bloom: a one-shot spring scale on the ring container (not page) ─*/
+  @keyframes zen-ring-bloom {
+    0%   { transform: scale(1);    }
+    35%  { transform: scale(1.08); }
+    100% { transform: scale(1);    }
+  }
+
+  /* ─── The glow surges once, then settles to a lit rest ───────────────────*/
+  @keyframes zen-ring-bloom-glow {
+    0%   { filter: drop-shadow(0 0  2px hsl(from var(--accent-progress) h s l / 0.40)); }
+    35%  { filter: drop-shadow(0 0 12px hsl(from var(--accent-progress) h s l / 0.80)); }
+    100% { filter: drop-shadow(0 0  5px hsl(from var(--accent-progress) h s l / 0.50)); }
+  }
+
+  /* Bloom the whole dial. No competing animation on .ring → applies cleanly. */
+  :root[data-zen="active"] [data-zen-scope][data-zen-complete] .ring {
+    animation: zen-ring-bloom var(--duration-panel) var(--ease-spring) both;
+    transform-origin: center;
+  }
+
+  /* Specificity 0,5,0 — intentionally beats the ζ2 breathe (0,4,0), so the
+     one-shot bloom-glow wins over the infinite loop during completion. */
+  :root[data-zen="active"] [data-zen-scope][data-zen-complete] .ring-bar {
+    animation: zen-ring-bloom-glow var(--duration-panel) var(--ease-emerge) both;
+  }
+
+
+  /* ─── The patient return — dock re-emerges after a tarteel beat ──────────
+     Holds dissolved for --duration-panel (the beat), then fades back over
+     --duration-zen. Only opacity is transitioned here, so the dock's base
+     transform/gap transitions (dock.css) are untouched outside this window.
+     JS removes [data-zen-exiting] once the return completes. */
+  :root[data-zen-exiting="true"] .dock {
+    pointer-events: none;
+    transition: opacity var(--duration-zen) var(--ease-emerge) var(--duration-panel);
+  }
+
+
+  /* ─── The completion affordance — only reachable while a session is held ─
+     Hidden in the normal (non-zen) card detail; appears inside the clearing. */
+  .zen-finish { display: none; }
+  :root[data-zen="active"] [data-zen-scope] .zen-finish { display: inline-flex; }
+
+
+  /* ─── Reduced motion ─────────────────────────────────────────────────────
+     The global motion-sanctuary collapses the bloom + return to a snap;
+     completion still registers (ring lit, then exit) — meaning preserved
+     without motion (MOTION §4.3). */
+
+
+  /* ─── Forced colors — drop-shadow/filter are ignored by the OS palette;
+     the ring keeps its Highlight role. Nothing to override. ────────────────*/
+}

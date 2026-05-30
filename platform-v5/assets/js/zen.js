@@ -33,7 +33,10 @@
   var veilEl  = null;
   var sourceEl = null;          // element to restore focus to on exit
   var ZEN_MS  = 640;            // read from --duration-zen at boot
+  var PANEL_MS = 360;           // read from --duration-panel at boot (bloom + return beat)
   var hideTimer = 0;
+  var bloomTimer = 0;
+  var exitTimer = 0;
 
 
   // ── Read a duration token (never invent ms — MOTION §1) ──────────────
@@ -103,6 +106,13 @@
     if (!ACTIVE) return false;
 
     ROOT.removeAttribute('data-zen');
+    // Drive the patient dock re-emergence (CSS keys off [data-zen-exiting]):
+    // hold dissolved a beat, then melt back. Removed once the return completes.
+    ROOT.setAttribute('data-zen-exiting', 'true');
+    if (exitTimer) clearTimeout(exitTimer);
+    exitTimer = window.setTimeout(function () {
+      ROOT.removeAttribute('data-zen-exiting');
+    }, ZEN_MS + PANEL_MS + 80);
     ACTIVE = false;
 
     if (veilEl) {
@@ -122,7 +132,11 @@
     }
 
     var prevScope = scopeEl;
-    if (scopeEl) { scopeEl.removeAttribute('data-zen-scope'); scopeEl = null; }
+    if (scopeEl) {
+      scopeEl.removeAttribute('data-zen-scope');
+      scopeEl.removeAttribute('data-zen-complete');
+      scopeEl = null;
+    }
 
     // Restore focus to the trigger.
     var t = sourceEl; sourceEl = null;
@@ -136,6 +150,29 @@
 
 
   function toggle(scope, opts) { return ACTIVE ? exit() : enter(scope, opts); }
+
+
+  // ── complete ──────────────────────────────────────────────────────────
+  // The deliberate completion: bloom the ring in place (no toast/counter/
+  // confetti), then exit on a held beat. Optionally render a final ring value
+  // first (Upg.ring.set RENDERS the value — it never counts up from 0).
+  function complete(opts) {
+    if (!ACTIVE) return false;
+    opts = opts || {};
+
+    if (opts.host && typeof opts.value === 'number' &&
+        window.Upg.ring && typeof window.Upg.ring.set === 'function') {
+      try { window.Upg.ring.set(opts.host, opts.value); } catch (_) {}
+    }
+
+    if (scopeEl) scopeEl.setAttribute('data-zen-complete', 'true');
+    fire('upg:zen:complete', scopeEl);
+
+    // After the bloom settles, leave deliberately.
+    if (bloomTimer) clearTimeout(bloomTimer);
+    bloomTimer = window.setTimeout(function () { exit(); }, PANEL_MS + 40);
+    return true;
+  }
 
 
   // ── Delegated triggers ────────────────────────────────────────────────
@@ -156,6 +193,16 @@
     var closer = t.closest('[data-zen-close]');
     if (closer) { ev.preventDefault(); exit(); return; }
 
+    // A completion trigger blooms the ring in place, then exits on a beat.
+    var finisher = t.closest('[data-zen-finish]');
+    if (finisher) {
+      ev.preventDefault();
+      var ringSel = finisher.getAttribute('data-zen-finish');
+      var host = ringSel ? document.querySelector(ringSel) : null;
+      complete(host ? { host: host, value: 100 } : {});
+      return;
+    }
+
     // A click on the veil itself returns the world.
     if (veilEl && t === veilEl) { exit(); return; }
   }
@@ -174,6 +221,7 @@
   // ── Boot ──────────────────────────────────────────────────────────────
   function boot() {
     ZEN_MS = readMs('--duration-zen', 640);
+    PANEL_MS = readMs('--duration-panel', 360);
     veilEl = document.getElementById('zen-veil');
     document.addEventListener('click', onClick, false);
     document.addEventListener('keydown', onKeyDownCapture, true);   // capture
@@ -183,16 +231,17 @@
   // ── Idempotent surface registration ─────────────────────────────────
   if (!window.Upg.zen) {
     window.Upg.zen = Object.freeze({
-      enter:  enter,
-      exit:   exit,
-      toggle: toggle,
-      active: function () { return ACTIVE; },
-      scope:  function () { return scopeEl; },
+      enter:    enter,
+      exit:     exit,
+      toggle:   toggle,
+      complete: complete,
+      active:   function () { return ACTIVE; },
+      scope:    function () { return scopeEl; },
       _meta: Object.freeze({
-        version: 'tadaffuq-v5/ζ1',
-        pulse: 'VEIL_PULSE',
+        version: 'tadaffuq-v5/ζ3',
+        pulse: 'VEIL_PULSE → GLOW_PULSE → SPRING_PULSE',
         mode: 'chronic',
-        emits: 'upg:zen:enter / upg:zen:exit'
+        emits: 'upg:zen:enter / upg:zen:exit / upg:zen:complete'
       })
     });
   }
