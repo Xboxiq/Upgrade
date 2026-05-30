@@ -13,6 +13,7 @@ import '../../ui/large_title_scaffold.dart';
 import '../../util/numerals.dart';
 import '../../widgets/aurora_background.dart';
 import '../../widgets/mastery_planet.dart';
+import '../../widgets/motion_x.dart';
 import '../../widgets/press_scale.dart';
 import '../../widgets/progress_ring.dart';
 import '../../widgets/surface_card.dart';
@@ -84,7 +85,7 @@ class _CallCenterScreenState extends State<CallCenterScreen> {
                     const SizedBox(height: Space.x8),
                     _voiceHeader(p),
                     const SizedBox(height: Space.x4),
-                  ].animate(interval: 65.ms).fadeIn(duration: Motion.emerge).moveY(begin: 18, end: 0, curve: Motion.emphasized).scaleXY(begin: 0.985, end: 1, curve: Motion.emphasized)),
+                  ].staggerIn(context, interval: const Duration(milliseconds: 65))),
                 ),
               ),
               _voiceShelf(p),
@@ -101,7 +102,7 @@ class _CallCenterScreenState extends State<CallCenterScreen> {
                     const SizedBox(height: Space.x5),
                     _archetypesGroup(),
                     const SizedBox(height: Space.x8),
-                    _sectionHeader('ردود خاطئة مقابل احترافية', 'CONTRAST', AppIcons.scales, null),
+                    _sectionHeader('ردود خاطئة مقابل احترافية', null, null, null),
                     const SizedBox(height: Space.x4),
                     for (final CompareRow r in CallCenterData.compare) ...<Widget>[
                       _compareCard(p, r),
@@ -193,15 +194,10 @@ class _CallCenterScreenState extends State<CallCenterScreen> {
         children: <Widget>[
           Row(
             children: <Widget>[
-              Icon(AppIcons.microphone, size: 14, color: p.brand),
-              const SizedBox(width: Space.x2),
-              Text('AUDIO', style: tt.labelSmall?.copyWith(color: p.brand, letterSpacing: 0.8)),
-              const Spacer(),
+              Expanded(child: Text('بصمة الصوت', style: tt.headlineMedium)),
               InfoPill('٥ أبعاد', color: p.brand),
             ],
           ),
-          const SizedBox(height: Space.x2),
-          Text('بصمة الصوت', style: tt.headlineMedium),
           const SizedBox(height: Space.x3),
           // The voice, made visible — a calm, living waveform.
           const VoiceWave(height: 46),
@@ -235,7 +231,7 @@ class _CallCenterScreenState extends State<CallCenterScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        _sectionHeader('دائرة التعاطف', 'EMPATHY', AppIcons.heart, '٤ خطوات'),
+        _sectionHeader('دائرة التعاطف', null, null, '٤ خطوات'),
         const SizedBox(height: Space.x4),
         AppSegmented(
           labels: const <String>['فصيح', 'عراقي'],
@@ -252,7 +248,7 @@ class _CallCenterScreenState extends State<CallCenterScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        _sectionHeader('أنماط المتّصلين الصعبين', 'LIBRARY', AppIcons.usersThree, '٤'),
+        _sectionHeader('أنماط المتّصلين الصعبين', null, null, '٤'),
         const SizedBox(height: Space.x4),
         InsetGroup(
           separatorInset: 68,
@@ -310,8 +306,8 @@ class _CallCenterScreenState extends State<CallCenterScreen> {
   }
 
   // ── Section headers ──
-  Widget _sectionHeader(String title, String eyebrow, IconData icon, String? tag) =>
-      SectionHeader(eyebrow: eyebrow, eyebrowIcon: icon, title: title, tag: tag);
+  Widget _sectionHeader(String title, String? eyebrow, IconData? icon, String? tag) =>
+      SectionHeader(title: title, eyebrow: eyebrow, eyebrowIcon: icon, tag: tag);
 }
 
 // ════════════════════════════════════════════════════════════════════════
@@ -503,7 +499,7 @@ class _EmpathyCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: p.fill,
                     borderRadius: BorderRadius.circular(Radii.sm),
-                    border: Border(right: BorderSide(color: iraqi ? p.spark : p.brand, width: 2)),
+                    border: Border.all(color: p.line, width: 0.5),
                   ),
                   child: AnimatedSwitcher(
                     duration: Motion.quick,

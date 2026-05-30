@@ -70,20 +70,22 @@ class InfoPill extends StatelessWidget {
   }
 }
 
-/// A content section heading: brand eyebrow, title, lede, optional tag.
+/// A content section heading: title, optional lede, optional tag, and an
+/// OPTIONAL eyebrow. Eyebrows are used sparingly (max ~1 per 3 sections) — an
+/// eyebrow above every heading is a top AI-slop tell, so it is opt-in here.
 class SectionHeader extends StatelessWidget {
   const SectionHeader({
     super.key,
-    required this.eyebrow,
-    required this.eyebrowIcon,
     required this.title,
+    this.eyebrow,
+    this.eyebrowIcon,
     this.lede,
     this.tag,
   });
 
-  final String eyebrow;
-  final IconData eyebrowIcon;
   final String title;
+  final String? eyebrow;
+  final IconData? eyebrowIcon;
   final String? lede;
   final String? tag;
 
@@ -91,6 +93,7 @@ class SectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppPalette p = context.palette;
     final TextTheme t = Theme.of(context).textTheme;
+    final bool hasEyebrow = eyebrow != null && eyebrowIcon != null;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
@@ -98,18 +101,20 @@ class SectionHeader extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Icon(eyebrowIcon, size: 14, color: p.brand),
-                  const SizedBox(width: Space.x2),
-                  Text(
-                    eyebrow.toUpperCase(),
-                    style: t.labelSmall?.copyWith(color: p.brand, letterSpacing: 0.8),
-                  ),
-                ],
-              ),
-              const SizedBox(height: Space.x2),
+              if (hasEyebrow) ...<Widget>[
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Icon(eyebrowIcon, size: 14, color: p.brand),
+                    const SizedBox(width: Space.x2),
+                    Text(
+                      eyebrow!.toUpperCase(),
+                      style: t.labelSmall?.copyWith(color: p.brand, letterSpacing: 0.8),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: Space.x2),
+              ],
               Text(title, style: t.headlineMedium),
               if (lede != null) ...<Widget>[
                 const SizedBox(height: Space.x2),

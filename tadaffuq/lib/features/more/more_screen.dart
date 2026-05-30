@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../theme/app_icons.dart';
 import '../../theme/palette.dart';
 import '../../theme/tokens.dart';
 import '../../ui/groups.dart';
 import '../../ui/large_title_scaffold.dart';
+import '../../widgets/motion_x.dart';
 import '../../widgets/surface_card.dart';
 import '../../widgets/ui_bits.dart';
 
@@ -78,7 +78,7 @@ class MoreScreen extends StatelessWidget {
                 const SizedBox(height: Space.x6),
                 _aboutCard(context),
                 SizedBox(height: 110 + bottomInset),
-              ].animate(interval: 70.ms).fadeIn(duration: Motion.emerge).moveY(begin: 16, end: 0, curve: Motion.emphasized),
+              ].staggerIn(context),
             ),
           ),
         ),

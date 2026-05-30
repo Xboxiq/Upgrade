@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../theme/app_icons.dart';
 import '../../theme/app_theme.dart';
@@ -8,6 +7,7 @@ import '../../theme/tokens.dart';
 import '../../ui/large_title_scaffold.dart';
 import '../../util/numerals.dart';
 import '../../widgets/charts.dart';
+import '../../widgets/motion_x.dart';
 import '../../widgets/press_scale.dart';
 import '../../widgets/mastery_planet.dart';
 import '../../widgets/surface_card.dart';
@@ -70,11 +70,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: Space.x5),
                 _activityCard(context),
                 SizedBox(height: 110 + bottomInset),
-              ]
-                  .animate(interval: 60.ms)
-                  .fadeIn(duration: Motion.emerge)
-                  .moveY(begin: 18, end: 0, curve: Motion.emphasized)
-                  .scaleXY(begin: 0.985, end: 1, curve: Motion.emphasized),
+              ].staggerIn(context),
             ),
           ),
         ),
@@ -201,7 +197,6 @@ class _StatChip extends StatelessWidget {
       decoration: BoxDecoration(
         color: p.fill,
         borderRadius: BorderRadius.circular(Radii.sm),
-        border: Border.all(color: p.line, width: 0.5),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

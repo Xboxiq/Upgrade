@@ -165,3 +165,23 @@ Format: `order · date · task · changes · files · verification · branch · 
 **Branch**: `feat/cosmic-flow-refinements` (PR #138).
 
 **NEXT**: Await feedback on the planet; could add a ⌘K palette, a real Zen session timer, drag-drop voice drill, or build a second full world.
+
+
+---
+
+### 009 · 2026-05-30 · Design audit vs new skills (Taste / Emil / Impeccable) + skills install
+
+**Skills installed** (Kiro-correct, cloned into `/projects/.kiro/skills/`, recognised by Kiro): `design-taste-frontend` (taste), `impeccable`, `emil-design-eng` (+ existing `ui-ux-pro-max`). Note: the canonical `npx skills add` CLI is interactive and targets Claude/Codex/OpenCode harnesses only (no Kiro option), so the git-clone-into-`.kiro/skills` method is the correct install here. These skills are web-first; their *principles* are applied to Flutter, their DOM/CSS specifics are not.
+
+**Audit findings + fixes applied (translated to Flutter):**
+- ❌→✅ **Eyebrow-on-every-section** (Taste/Impeccable #1 tell): made `SectionHeader.eyebrow` optional; dropped eyebrows on EMPATHY / LIBRARY / CONTRAST / the voice header. Now ~1 eyebrow per 3 sections (SKILLS only).
+- ❌→✅ **Side-stripe borders** (Impeccable *absolute ban*): replaced `Border(right: BorderSide(width:2))` in the empathy quote + archetype dialogue with a full hairline border.
+- ❌→✅ **Reduced-motion**: `flutter_animate` ignores `disableAnimations`, so added `widgets/motion_x.dart` → `List<Widget>.staggerIn(context)` which collapses entrances to static under reduced motion. Rolled across Home/Worlds/Progress/More/Call Center.
+- ✅ **Motion tokens (Emil)**: confirmed already strong (custom cubics, micro <300ms, exit fast). No change needed.
+- ⚠️→✅ **Nested-chip**: removed the border on the home stat chip so it reads as an inset, not a card-in-card.
+
+**Files**: `widgets/ui_bits.dart`, `widgets/motion_x.dart` (new), `features/callcenter/callcenter_screen.dart`, `features/callcenter/widgets/archetype_sheet.dart`, `features/home/home_screen.dart`, `features/worlds/worlds_screen.dart`, `features/progress/progress_screen.dart`, `features/more/more_screen.dart`.
+
+**Verification**: `flutter analyze` → No issues found · `flutter test` → 2/2 · `flutter build web --release` → ok. ✅
+
+**Branch**: `feat/cosmic-flow-refinements` (PR #138).

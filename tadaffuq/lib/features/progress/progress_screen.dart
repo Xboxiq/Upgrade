@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../theme/app_icons.dart';
 import '../../theme/app_theme.dart';
@@ -8,6 +7,7 @@ import '../../theme/tokens.dart';
 import '../../ui/large_title_scaffold.dart';
 import '../../util/numerals.dart';
 import '../../widgets/charts.dart';
+import '../../widgets/motion_x.dart';
 import '../../widgets/surface_card.dart';
 import '../worlds/worlds_data.dart';
 
@@ -107,10 +107,7 @@ class ProgressScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 110 + bottomInset),
-              ]
-                  .animate(interval: 70.ms)
-                  .fadeIn(duration: Motion.emerge)
-                  .moveY(begin: 18, end: 0, curve: Motion.emphasized),
+              ].staggerIn(context),
             ),
           ),
         ),

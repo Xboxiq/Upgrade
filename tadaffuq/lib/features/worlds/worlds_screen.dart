@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../theme/app_theme.dart';
 import '../../theme/palette.dart';
@@ -7,6 +6,7 @@ import '../../theme/tokens.dart';
 import '../../ui/large_title_scaffold.dart';
 import '../../util/numerals.dart';
 import '../../widgets/charts.dart';
+import '../../widgets/motion_x.dart';
 import '../../widgets/surface_card.dart';
 import '../../widgets/transitions.dart';
 import '../../widgets/ui_bits.dart';
@@ -53,11 +53,7 @@ class WorldsScreen extends StatelessWidget {
                   const SizedBox(height: Space.x3),
                 ],
                 SizedBox(height: 110 + bottomInset),
-              ]
-                  .animate(interval: 60.ms)
-                  .fadeIn(duration: Motion.emerge)
-                  .moveY(begin: 18, end: 0, curve: Motion.emphasized)
-                  .scaleXY(begin: 0.985, end: 1, curve: Motion.emphasized),
+              ].staggerIn(context),
             ),
           ),
         ),
