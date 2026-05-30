@@ -8,8 +8,8 @@ import '../../../theme/palette.dart';
 import '../../../theme/tokens.dart';
 import '../../../ui/controls.dart';
 import '../../../widgets/press_scale.dart';
-import '../../../widgets/progress_ring.dart';
 import '../../../widgets/surface_card.dart';
+import '../../../widgets/tide_ring.dart';
 import '../../../widgets/ui_bits.dart';
 import '../callcenter_data.dart';
 
@@ -93,7 +93,7 @@ class _TechniqueDetailState extends State<TechniqueDetail>
                         ),
                       ),
                       const SizedBox(width: Space.x4),
-                      ProgressRing(value: _ring, size: 88),
+                      TideRing(value: _ring, size: 88),
                     ],
                   ),
                   const SizedBox(height: Space.x6),
@@ -228,9 +228,9 @@ class _FocusClearing extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                Text('وضع التركيز', style: tt.labelMedium?.copyWith(color: p.gold, letterSpacing: 1.5)),
+                Text('وضع التركيز', style: tt.labelMedium?.copyWith(color: p.brand, letterSpacing: 1.5)),
                 const SizedBox(height: Space.x6),
-                ProgressRing(value: ring, size: 200, breathing: ring < 100),
+                TideRing(value: ring, size: 200, breathing: ring < 100),
                 const SizedBox(height: Space.x8),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: Space.x8),
@@ -248,7 +248,7 @@ class _FocusClearing extends StatelessWidget {
                 const Spacer(),
                 Padding(
                   padding: const EdgeInsets.all(Space.x6),
-                  child: TintedButton(label: 'أنهِ الجلسة', icon: AppIcons.checkCircle, color: p.gold, onTap: onFinish),
+                  child: TintedButton(label: 'أنهِ الجلسة', icon: AppIcons.checkCircle, color: p.brand, onTap: onFinish),
                 ),
               ],
             ),
