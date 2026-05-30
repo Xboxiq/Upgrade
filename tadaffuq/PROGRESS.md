@@ -185,3 +185,20 @@ Format: `order · date · task · changes · files · verification · branch · 
 **Verification**: `flutter analyze` → No issues found · `flutter test` → 2/2 · `flutter build web --release` → ok. ✅
 
 **Branch**: `feat/cosmic-flow-refinements` (PR #138).
+
+
+---
+
+### 010 · 2026-05-30 · Sections as planets — SystemMap orrery on the Worlds screen
+
+**What changed** (owner idea: render the sections as planets, in a professional/precise arrangement)
+- New `lib/features/worlds/system_map.dart` — a hand-painted **orrery**: a luminous core (the platform) with each training world as a **planet on its own concentric orbit**, sized by domain scope and tide-filled by progress. Outer orbits drift slower (calm Keplerian feel); the live world (Call Center) wears a **Saturn ring** to read instantly.
+- **Deterministic, precise** layout (golden-angle spacing, evenly stepped orbits) — celestial but ordered, never chaotic.
+- **Interactive**: tap any planet to open its world (locked worlds raise a named "coming soon" snackbar). Hit-testing resolves against live positions. Honours reduced-motion (freezes static, taps still work).
+- Wired as the hero of the **Worlds** screen inside a framed card ("نظام عوالمك" + tap hint); the labelled world cards remain below as the precise, guaranteed-legible list.
+
+**Files**: new `features/worlds/system_map.dart`; modified `features/worlds/worlds_screen.dart`.
+
+**Verification**: `flutter analyze` → No issues found · `flutter test` → 2/2 · `flutter build web --release` → ok. ✅
+
+**Branch**: `feat/cosmic-flow-refinements` (PR #138).
