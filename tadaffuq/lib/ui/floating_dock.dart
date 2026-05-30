@@ -104,8 +104,11 @@ class _DockButton extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 2),
       padding: EdgeInsets.symmetric(horizontal: active ? Space.x4 : Space.x3, vertical: 10),
       decoration: BoxDecoration(
-        color: active ? p.brand.withValues(alpha: p.isDark ? 0.16 : 0.12) : Colors.transparent,
+        color: active
+            ? (p.isDark ? Colors.white.withValues(alpha: 0.08) : Colors.black.withValues(alpha: 0.05))
+            : Colors.transparent,
         borderRadius: BorderRadius.circular(Radii.pill),
+        border: active ? Border.all(color: p.line, width: 0.5) : null,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

@@ -85,3 +85,23 @@ Format: `order · date · task · changes · files · verification · branch · 
 **Branch**: `feat/flutter-creative-overhaul` (updates PR #137).
 
 **NEXT**: ⛔ Still at the PHASE 0 approval gate. On approval, scale section-by-section. Remaining AI-ish accents to keep an eye on: the ring glow (kept — it's meaningful on progress, not behind text) can be softened further if desired.
+
+
+---
+
+### 005 · 2026-05-30 · Kill tinted halos around icons & badges
+
+**What changed** (owner: still saw a coloured "shadow" around icons and badges)
+- The halo was the translucent **coloured fill behind icons/marks** (not a real shadow). Moved to a crafted rule: **colour lives in the glyph/text; the container is a crisp neutral chip with a hairline edge** (Linear/Vercel-style).
+- `IconBadge`: neutral `fill` + 0.5px hairline border + coloured icon (was `tint @ 0.18`).
+- `InfoPill`: neutral `fill` + hairline + coloured text/icon; the `mono` flag now actually renders JetBrains Mono.
+- Empathy index circle + floating-dock active item: neutral "raised key" (hairline) instead of a brand-tinted background; colour stays in the glyph/label.
+- Vivid colour is fully preserved where it carries meaning (glyphs, rings/tide fill, CTA gradient, eyebrows, filaments) — the UI got cleaner, not flatter.
+
+**Files**: `lib/widgets/ui_bits.dart`, `lib/ui/floating_dock.dart`, `lib/features/callcenter/callcenter_screen.dart`, `PROGRESS.md`.
+
+**Verification**: `flutter analyze` → clean · `flutter test` → 2/2 · `flutter build web --release` → ok. ✅
+
+**Branch**: `feat/flutter-creative-overhaul` (updates PR #137).
+
+**NEXT**: ⛔ PHASE 0 approval gate. Content blocks (compare cells, NoteCard) intentionally keep their soft semantic tint (green=right / amber=warn) since that colour is meaningful, not decorative — flag if you want those neutralised too.

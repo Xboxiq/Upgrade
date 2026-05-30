@@ -495,8 +495,9 @@ class _EmpathyCard extends StatelessWidget {
             height: 38,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: p.brand.withValues(alpha: 0.14),
+              color: p.fill,
               borderRadius: BorderRadius.circular(Radii.pill),
+              border: Border.all(color: p.line, width: 0.5),
             ),
             child: Text(step.index, style: tt.titleMedium?.copyWith(color: p.brand)),
           ),
