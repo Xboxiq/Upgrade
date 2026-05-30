@@ -358,3 +358,30 @@ last_5_avg: 4.0
 forbidden_violations: 0
 creativity_health: 100
 last_updated: 2026-05-30 / η1 — Pillar η stage 1/3 — press feedback live (SPRING; pivot-watch: η2 MUST be HAPTIC for 9/9)
+
+
+
+## η2 — 2026-05-30
+**Pulse Category:** 📳 HAPTIC_PULSE *(14th pulse of v5; **the debut of the 9th and last category → 9/9**; valence axis — distinct from η3's rhythmic-vocabulary axis)*
+**The Surprise:** مَنصّة المُطابَقة تَرفُض أن تُكافِئ كل إفلات. حين تَسحَب مَقاماً صَوتياً إلى مَرحَلَتِه الصَحيحة في المُكالَمة، تَشعُر اليَد بـ**تَكّة واحِدة** (`Upg.haptic.play('takk')` عند توافُر η3، وإلا `navigator.vibrate(20)`). وحين تُخطِئ، لا عِقاب ولا اهتِزاز غاضِب ولا toast أحمَر — بل **صَمت لَمسيّ مَقصود**. غِياب الاهتِزاز نَفسُه هو الإشارة: اليَد تَتَعَلَّم أن الصَواب «له مَلمَس»، وأن الخَطأ «لا مَلمَس له». هذا انقِلاب على الـ AI-default الذي يَهُزّ على كل تَفاعُل (وأسوأ منه: يَهُزّ أقوى على الخَطأ كأنه تأنيب). والبِطاقة المُخطِئة تَرتَدّ في مَكانها والمِنطَقة تَهتَزّ مَرَّة واحِدة بَصَرياً — فيَبقى المَعنى كامِلاً لمَن لا اهتِزاز في جِهازِه أو يُفَضِّل تَقليل الحَرَكة (قُفل + علامة `states.success` بحِبر لا accent). والأداة تَعمَل بثَلاث طُرُق إدخال بِلا أي مَكتَبة: سَحب HTML5 للفأرة، وأحداث Pointer للَّمس (شَبَح يَتبَع الإصبَع + `elementFromPoint` يَكشِف المِنطَقة)، والتِقاط-بلَوحة-المَفاتيح بتَكافؤ RTL كامِل (يَسار = التالي، يَمين = السابِق، Enter يَلتَقِط ويُفلِت، Escape يُلغي). وكُل هذا **بِلا لَون accent**: الحَلقة المِحوَرية تَبقى صاحِبةَ الـ cyan الوَحيد على الشاشة (CHROMA §٧)، والمُطابَقة تُقرَأ بالقُفل والعلامة فَقَط.
+
+**Reference Avoided:** الـ AI-default الأكبر للهَدهَدة: «اهتِزاز على كل إفلات، وأقوى على الخَطأ». وForbidden #6 (toast إشعار «خَطأ») — لا إشعار يَطفو، الصَمت يَكفي. وForbidden #8 (إيموجي كإشارة تَغذية راجِعة ❌/✓) — العلامة أيقونة من الـ sprite بحِبر، لا إيموجي.
+**Inspired-by:** Wild Card #16 — إيقاع نَفَس الغَوّاص (a pearl-diver's breath rhythm — performance by silent counting): الغَوّاص يُدير أداءه كُلَّه بعَدٍّ صامِت داخِليّ، والطُفُوّ (النَجاح) يُحَسّ لا يُعلَن. كذلك المُطابَقة: التأكيد مَلمَس داخِليّ، والخَطأ صَمتٌ كصَمت الماء. ويُكمِل هذا خَطّ v4 ε2 (نَتيجة المُكالَمة الخاسِرة = صَمت، لا نَغمة فَشَل) — لكن على محور لَمسيّ بَدَل الصَوتيّ.
+**User-Visible:** subtle/yes — مَحسوس فِعلاً فَقَط على أجهِزة اللَمس التي تَدعَم `navigator.vibrate` (أندرويد غالِباً؛ iOS Safari لا يَدعَمها فيَبقى الجَواب البَصَري). على سَطح المَكتب التَغذية بَصَرية بحتة (قُفل + علامة). لكن المُفاجَأة الحَقيقية — الصَمت على الخَطأ — مَحسوسة حتى لو لم يَكُن ثَمَّةَ اهتِزاز، لأنها **قَرار تَصميميّ** يَظهَر في غِياب الـ toast والإيموجي والـ scold اللَونيّ.
+**Originality Self-Score:** 4/5 — drag-drop quiz فِكرة شائِعة جِدّاً. الذي يَرفَعها إلى 4: (١) **الصَمت كإشارة** — التأكيد على الصَواب وَحدَه، والخَطأ بِلا اهتِزاز (انقِلاب على «اهزّ على كل شيء / اهزّ أقوى على الخَطأ»)؛ (٢) **ثَلاث طُرُق إدخال بِلا مَكتَبة** مع تَكافؤ لَوحة مَفاتيح RTL حَقيقيّ (يَسار = التالي)؛ (٣) **انضِباط اللَون** — صِفر accent على الأداة فتَبقى الحَلقة صاحِبةَ الـ cyan الوَحيد (§٧)؛ (٤) المَعنى **مَحفوظ بَصَرياً** فلا يَنهار على الأجهِزة بِلا اهتِزاز ولا تَحت reduced-motion؛ (٥) **بِلا token مُدَّة جَديد** ولا `!important`. لا أدَّعي 5 لأن المُطابَقة بالسَحب نَمَط مَعروف؛ الأصالة في «صَمت الخَطأ» + انضِباط اللَون + تَكافؤ الإدخال الثُلاثي.
+**Distinction (category reuse — sanctioned PULSE_LIBRARY §1):** η2 HAPTIC محورُه **الڤالِنس** (تأكيد-على-الحَقّ / صَمت-على-الخَطأ). η3 HAPTIC سيَكون محورُه **المُفرَدات الإيقاعية** (دفّن/تَك/مَقسوم مَربوطة بالضَغط/الإفلات/الاكتِمال، والمَقسوم يُحاكي إيقاع المَقامات في المُحتوى). محوران مُختَلِفان للفِئة نَفسِها — كما مَيَّزنا ε11/ε12 META سابِقاً. التَسَلسُل …GLOW·SPRING·SPRING·HAPTIC — لا فِئة ثلاثَ مَرّات مُتَتالية؛ وη2·η3 = اثنتان HAPTIC فَقَط.
+**Files touched:** platform-v5/assets/css/match.css (NEW 196) · platform-v5/assets/js/match.js (NEW 229) · platform-v5/index.html (+match-bench region + 2 wiring) · platform-v5/assets/svg/icons.svg (+icon-grip-vertical, 30→31) · platform-v5/assets/svg/SEMANTIC_MAP.json (+training.drag) · prompts/v5/η2_DRAG_DROP.md (NEW spec)
+**Verified at commit:** `7469bd6`
+
+
+
+---STATS---
+total_pulses: 14
+unique_categories_used: 9
+target_categories: 9 (DOCK · MORPH · GLOW · REVEAL · RING · GLASS · SPRING · VEIL · HAPTIC)
+remaining_categories: 0 — ALL NINE CATEGORIES NOW USED (9/9)
+avg_self_score: 4.0
+last_5_avg: 4.0
+forbidden_violations: 0
+creativity_health: 100
+last_updated: 2026-05-30 / η2 — Pillar η stage 2/3 — match-target drag-drop live (HAPTIC debut → 9/9 categories; η3 reuses HAPTIC on the rhythmic axis)

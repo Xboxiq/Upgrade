@@ -3946,3 +3946,51 @@ components had each invented their own `:active` scale with **no release physics
 - The 8 component `:active` scales untouched (`:where()` is 0-spec — it fills gaps, never overrides); `.bento-card` excluded (δ2 owns its expand transform)
 - v4 Upg.* APIs preserved; `Upg.press` is a NEW additive frozen namespace (no prior surface touched)
 - `archive/` · `prompts/v[1-4]/` · `platform/` (v4) untouched · single-accent invariant intact
+
+
+
+---
+
+## v5 TADAFFUQ — η2 DRAG_DROP — 2026-05-30
+
+**Branch:** `tadaffuq-η-kinesis` · **Pulse:** 📳 HAPTIC_PULSE **(debut → 9/9 categories)** · **sha** `7469bd6`
+
+### Files shipped
+- `platform-v5/assets/css/match.css` (NEW, 197 lines) — `@layer components`: a standalone `.match-bench` Glass-2.0 region (NOT a `.bento-card`), `.match-pool` chips, `.match-zones` drop targets; `[data-grabbed]` lift, `[data-return]` spring-back (`match-return`), `[data-reject]` `match-shake`, `[data-over]`/`:focus-visible` quiet emphasis, `[data-correct]` locked look + `.match-zone-mark` check; `.match-ghost` touch-drag layer; reduced-motion + forced-colors guards. **Accent-free** (correctness in `--ink`, not cyan)
+- `platform-v5/assets/js/match.js` (NEW, 228 lines) — classic IIFE `Upg.match` {reset,solved,state,_meta}; three modalities: HTML5 DnD (mouse), Pointer ghost + `elementFromPoint` (touch/pen, gated `pointerType!=='mouse'`), keyboard pick-and-drop (RTL: ArrowLeft=next); `resolve()` → valid `place()`+`confirm()` (single تَك), invalid `flash()` shake + **silence**; fires `upg:match:resolve {key,zone,valid}`
+- `platform-v5/index.html` — `.match-bench` region (3 chips / 3 zones, `data-match-key`/`data-match-zone`, grip + check via `data-icon`) + 2 wiring lines
+- `platform-v5/assets/svg/icons.svg` — +`icon-grip-vertical` (Lucide), header count 30→31 / training 8→9
+- `platform-v5/assets/svg/SEMANTIC_MAP.json` — +`training.drag` → `icon-grip-vertical`
+- `prompts/v5/η2_DRAG_DROP.md` (NEW spec, authored before execution)
+
+### Verified by grep on commit `7469bd6`
+| metric | got | expected |
+|---|---|---|
+| match.css + match.js exist | 2 | NEW |
+| sprite symbols · grip icon · `training.drag` mapped | 31 · 1 · 1 | 31 · 1 · 1 |
+| `draggable="true"` chips | 3 | ≥3 |
+| pointer handlers · DnD handlers · keydown | 3 · 4 · 1 | ≥3 · ≥3 · ≥1 |
+| RTL `Left = next` · `data-match-*` hooks | 1 · 13 | ≥1 · ≥6 |
+| `Upg.match` frozen | 1 | 1 |
+| **valid→confirm() (1 site, valid branch) · invalid→0 haptic** | 1 · 0 | the Pulse |
+| actual `var(--accent` usage in match.css | 0 | 0 (ring keeps §7 cyan) |
+| reduced-motion guard | 1 | ≥1 |
+| `!important` / hex / emoji / inline-`<svg viewBox>` (η2 files) | 0 / 0 / 0 / 0 | 0 |
+| `node --check` · JSON valid · XML well-formed · logical-props exit | OK · ✓ · ✓ · 0 | pass |
+| http serve (index/match.css/match.js/icons.svg/map) | 200×5 | 200 |
+
+> Honesty note: `--accent-progress` appears 3× in match.css **comments** (explaining
+> the §7 avoidance) and 0× as a declaration (`var(--accent` = 0). The grip-icon
+> a11y posture: chips/zones carry `aria-label`; the grip `<svg>` is `aria-hidden`.
+
+### Pulse — 📳 HAPTIC_PULSE (the 9th and final category)
+**The Surprise:** الإفلات الصَحيح يُجاب بتَكّة واحِدة مَحسوسة؛ الخَطأ يُقابَل بصَمت لَمسيّ مَقصود — غِياب الاهتِزاز هو الإشارة. ثلاث طُرُق إدخال (HTML5 DnD / لَمس / لَوحة بتَكافؤ RTL، يَسار=التالي). المَعنى مَحفوظ بَصَرياً (قُفل + علامة) لمَن لا اهتِزاز لديه.
+**Avoided:** AI-default «اهزّ على كل إفلات / اهزّ أقوى على الخَطأ» + Forbidden #6 (toast) + #8 (emoji feedback). **Inspired-by:** Wild Card #16 — pearl-diver's silent counting; continues v4 ε2 (lost = silence) on a tactile axis. **Score:** 4/5.
+
+### Distinction from η3 HAPTIC (category-reuse compliance)
+η2 HAPTIC = **valence** (confirm-on-truth / silence-on-error). η3 HAPTIC = **rhythmic vocabulary** (دفّن/تَك/مَقسوم mapped to press/drop/complete; maqsoom mirrors the maqam content). Different axes, sanctioned reuse (PULSE_LIBRARY §1). Running sequence …GLOW·SPRING·SPRING·HAPTIC — no category 3× in a row; η2·η3 = only 2 consecutive HAPTIC.
+
+### Sacred preserved
+- `.match-bench` is NOT a `.bento-card` → δ2 click-expand untouched; the 8 component `:active` scales untouched; the ring stays the screen's single `--accent-progress` (CHROMA §7)
+- v4 Upg.* APIs preserved; `Upg.match` is a NEW additive frozen namespace
+- `archive/` · `prompts/v[1-4]/` · `platform/` (v4) untouched

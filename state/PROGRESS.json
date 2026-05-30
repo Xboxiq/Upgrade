@@ -2715,8 +2715,8 @@
   },
   "tadaffuq_v5": {
     "current_pillar": "η",
-    "current_stage": 1,
-    "current_stage_id": "η1",
+    "current_stage": 2,
+    "current_stage_id": "η2",
     "status": "in-progress",
     "branch": "tadaffuq-η-kinesis",
     "completed_stages": [
@@ -2739,11 +2739,12 @@
       "ζ1",
       "ζ2",
       "ζ3",
-      "η1"
+      "η1",
+      "η2"
     ],
     "creativity_health": 100,
-    "creativity_health_note": "Pillar η (KINESIS) OPEN — interaction from the roots. η1 ships SPRING_PULSE: a global press field (:where(), zero specificity → never clobbers the 8 component :active scales) that adds the release spring + proportional (Modulor) depth none of them had, and fires upg:press for η3. Pivot note: ζ3 was SPRING, so η1 is the 2nd-consecutive SPRING — distinct in kind (continuous global press vs ζ3's one-shot completion bloom vs ε2's drag momentum) — therefore η2 MUST pivot away from SPRING (→ HAPTIC, the only unused category, securing 9/9). Sequence …VEIL·GLOW·SPRING·SPRING — no category 3× in a row. Health = 100 (base 100 + 5×8 unique-category bonus, capped; 0 penalties; self-score 4).",
-    "pulses_produced": 13,
+    "creativity_health_note": "Pillar η (KINESIS) — η2 DRAG_DROP ships HAPTIC_PULSE, the DEBUT of the last unused category → 9/9 categories now reached (DOCK·MORPH·GLOW·GLASS·REVEAL·RING·SPRING·VEIL·HAPTIC). Pivot satisfied: ζ3·η1 were SPRING·SPRING, η2 pivots to HAPTIC (sequence …SPRING·SPRING·HAPTIC — no category 3× in a row). The Pulse is tactile valence: تَكّة on a correct drop, deliberate silence on a wrong one (meaning preserved visually for reduced-motion/no-vibrate). η3 will reuse HAPTIC on a DIFFERENT axis (rhythmic vocabulary دفّن/تَك/مَقسوم mapped to press/drop/complete) — sanctioned same-category reuse (PULSE_LIBRARY §1), η2·η3 = only 2 HAPTIC in a row. Health = 100 (base 100 + 5×9 unique-category bonus, capped; 0 penalties; self-score 4).",
+    "pulses_produced": 14,
     "pulse_categories_used": [
       "DOCK_PULSE",
       "MORPH_PULSE",
@@ -2752,13 +2753,39 @@
       "REVEAL_PULSE",
       "RING_PULSE",
       "SPRING_PULSE",
-      "VEIL_PULSE"
-    ],
-    "remaining_pulse_categories": [
+      "VEIL_PULSE",
       "HAPTIC_PULSE"
     ],
+    "remaining_pulse_categories": [],
     "forbidden_violations": 0,
-    "last_updated": "2026-05-30 η1 — Pillar η stage 1/3 — press feedback live (SPRING; pivot-watch: η2 MUST pivot to HAPTIC)",
+    "last_updated": "2026-05-30 η2 — Pillar η stage 2/3 — match-target drag-drop live (HAPTIC debut → 9/9 categories)",
+    "η2_verified": {
+      "match_files": 2,
+      "sprite_symbols": 31,
+      "grip_icon": 1,
+      "training_drag_mapped": 1,
+      "draggable_chips": 3,
+      "pointer_handlers": 3,
+      "dnd_handlers": 4,
+      "keydown_handler": 1,
+      "rtl_left_is_next": 1,
+      "data_match_hooks": 13,
+      "upg_match_frozen": 1,
+      "valid_drop_haptic": 1,
+      "invalid_drop_silent": 1,
+      "actual_accent_usage_in_match_css": 0,
+      "reduced_motion_guard": 1,
+      "important": 0,
+      "hex": 0,
+      "emoji": 0,
+      "inline_svg": 0,
+      "node_check": "ok",
+      "json_valid": true,
+      "xml_wellformed": true,
+      "logical_props_audit_exit": 0,
+      "http": "200x5",
+      "sha": "7469bd6"
+    },
     "η1_verified": {
       "press_files": 2,
       "press_bloom_keyframe": 1,
