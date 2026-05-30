@@ -65,3 +65,23 @@ Format: `order · date · task · changes · files · verification · branch · 
 **Branch**: `feat/flutter-creative-overhaul` (updates PR #137).
 
 **NEXT**: ⛔ Still at the PHASE 0 approval gate — confirm the "Cosmic Flow" direction, then scale section-by-section.
+
+
+---
+
+### 004 · 2026-05-30 · Kill the "AI glow" — crafted backdrop + finer detail + better motion
+
+**What changed** (owner feedback: the coloured glow behind text/headings looked like a generic AI template)
+- **Removed the radial colour blooms** from `AuroraBackground` (the source of the purple/fuchsia halo behind headings). Rebuilt it as a crafted deep-space canvas: gradient base + a fine **twinkling starfield** (dark mode) + three thin **aurora filaments** (flowing gradient ribbons that fade at their ends) — far more expressive of *flow* and with **no coloured halo behind text**.
+- **Scroll parallax**: stars + each filament move at their own depth as the page scrolls (passed the `ScrollController` into the background) — reads as real space, a finer detail.
+- **Removed the coloured glow under `FilledCta`** → a clean neutral depth shadow + a hairline top highlight (lit-from-above). The gradient alone carries the brand.
+- **Finer detail on `SurfaceCard`**: a barely-there top→bottom sheen in dark mode (premium dimensionality, no glow).
+- **Better entrance motion**: staggered fade + rise + subtle scale-settle on an emphasised curve.
+
+**Files**: `lib/widgets/aurora_background.dart` (rewritten), `lib/ui/controls.dart`, `lib/widgets/surface_card.dart`, `lib/features/callcenter/callcenter_screen.dart`, `DESIGN.md`, `PROGRESS.md`.
+
+**Verification**: `flutter analyze` → clean · `flutter test` → 2/2 · `flutter build web --release` → ok. ✅
+
+**Branch**: `feat/flutter-creative-overhaul` (updates PR #137).
+
+**NEXT**: ⛔ Still at the PHASE 0 approval gate. On approval, scale section-by-section. Remaining AI-ish accents to keep an eye on: the ring glow (kept — it's meaningful on progress, not behind text) can be softened further if desired.

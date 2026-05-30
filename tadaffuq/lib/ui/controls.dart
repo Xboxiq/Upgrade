@@ -73,7 +73,6 @@ class FilledCta extends StatelessWidget {
     final AppPalette p = context.palette;
     final bool warm = tone == CtaTone.spark;
     final List<Color> grad = warm ? p.sparkGradient : p.tideGradient;
-    final Color glow = warm ? p.spark : p.brand;
     final Color onColor = warm
         ? Colors.white
         : (p.isDark ? const Color(0xFF04141A) : Colors.white);
@@ -91,12 +90,17 @@ class FilledCta extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
           borderRadius: BorderRadius.circular(Radii.md),
+          // A hairline top highlight (lit-from-above) + a neutral depth shadow.
+          // No coloured halo — the gradient itself carries the brand.
+          border: Border(
+            top: BorderSide(color: Colors.white.withValues(alpha: 0.22), width: 0.6),
+          ),
           boxShadow: <BoxShadow>[
             BoxShadow(
-              color: glow.withValues(alpha: 0.34),
-              blurRadius: 18,
+              color: Colors.black.withValues(alpha: p.isDark ? 0.38 : 0.12),
+              blurRadius: 16,
               offset: const Offset(0, 8),
-              spreadRadius: -6,
+              spreadRadius: -8,
             ),
           ],
         ),

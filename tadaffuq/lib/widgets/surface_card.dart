@@ -43,6 +43,23 @@ class _SurfaceCardState extends State<SurfaceCard> {
         ? p.brand.withValues(alpha: 0.45)
         : (lifted ? p.lineStrong : p.line);
 
+    // Base surface, with a faint brand wash on accent cards.
+    final Color base = widget.accent
+        ? Color.alphaBlend(p.brand.withValues(alpha: p.isDark ? 0.10 : 0.05), p.surface1)
+        : p.surface1;
+    // A barely-there top-to-bottom gradient (dark mode) reads as gently lit
+    // from above — premium dimensionality with no coloured glow.
+    final Gradient? sheen = p.isDark
+        ? LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: <Color>[
+              Color.alphaBlend(Colors.white.withValues(alpha: 0.04), base),
+              base,
+            ],
+          )
+        : null;
+
     final Widget card = AnimatedContainer(
       duration: Motion.quick,
       curve: Motion.standard,
@@ -50,9 +67,8 @@ class _SurfaceCardState extends State<SurfaceCard> {
       transformAlignment: Alignment.center,
       padding: widget.padding,
       decoration: BoxDecoration(
-        color: widget.accent
-            ? Color.alphaBlend(p.brand.withValues(alpha: p.isDark ? 0.10 : 0.05), p.surface1)
-            : p.surface1,
+        color: sheen == null ? base : null,
+        gradient: sheen,
         borderRadius: BorderRadius.circular(widget.radius),
         border: Border.all(color: border, width: 0.5),
         boxShadow: <BoxShadow>[
