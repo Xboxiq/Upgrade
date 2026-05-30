@@ -1,0 +1,151 @@
+/* ════════════════════════════════════════════════════════════════════════
+   TADAFFUQ v5 — ζ1 — Zen Trigger / Focus Mode entry  (VEIL_PULSE)
+   ────────────────────────────────────────────────────────────────────────
+   The Flow Oath made literal: focus by SUBTRACTION. Entering Zen does not
+   add a modal box (Forbidden #5) or an unsolicited overlay (Forbidden #15) —
+   it recedes the world. The dock dissolves; a veil the colour of the deep
+   canvas descends over everything; the single scoped task is lifted above it
+   into a clearing.
+
+   The Pulse — VEIL_PULSE (chronic, vs ε3's acute):
+     enter → veil hushes the canvas to 0.82 (present, not gone) over the
+     slowest token --duration-zen (640ms), like a held breath; the dock melts
+     to opacity 0; the scope rises to --z-overlay. Inspired by the negative
+     space of a Hokusai wave — the work is what the brush didn't paint.
+
+   Layering (verified): main/.bento create no stacking context; .bento-card
+   does, but its z-index participates in the ROOT context. So the veil at
+   --z-scrim + the scope lifted to --z-overlay isolates exactly the scope.
+
+   RTL-correct: inline/block logical properties only. No physical left/right.
+   Load order: after bento-expand.css (so the scope-lift rule wins by source).
+   ════════════════════════════════════════════════════════════════════════ */
+
+@layer components {
+
+  /* ─── The veil — a sanctioned dim layer (like the ε1 scrim), NOT a popup ──
+     It carries no content; it only hushes the world. MAY be inset:0 because
+     it is the dim layer, not a content surface (manifesto §5.5 forbids the
+     latter only). */
+  .zen-veil {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-scrim);
+    background: var(--canvas);       /* theme-true: deep space (dark) / oatmeal (light) */
+    opacity: 0;
+    pointer-events: none;
+    /* enter on the slowest curve — a held breath (MOTION §1 --duration-zen) */
+    transition: opacity var(--duration-zen) var(--ease-emerge);
+  }
+  .zen-veil[data-open="true"] {
+    opacity: 0.82;                   /* present, just hushed — a ghost behind the clearing */
+    pointer-events: auto;            /* a click on the veil returns the world */
+  }
+
+
+  /* ─── The clearing — the single scoped task, lifted above the veil ───────
+     Specificity (0,3,0) intentionally beats .bento-card[data-expanded="true"]
+     (0,2,0) so an expanded focal card still rises correctly. */
+  :root[data-zen="active"] [data-zen-scope] {
+    position: relative;
+    z-index: var(--z-overlay);
+  }
+
+
+  /* ─── The dock dissolves — chronic, for the whole session (subtraction) ──
+     Independent of ε3's acute [data-veiled]; both only lower opacity, so they
+     never clash. The dock melts rather than blinking out. */
+  :root[data-zen="active"] .dock {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration-zen) var(--ease-emerge);
+  }
+
+
+  /* ─── The quiet return affordance — neutral, never an accent (CHROMA §7) ──
+     visibility:hidden at rest removes it from tab order until Zen holds. */
+  .zen-exit {
+    position: fixed;
+    inset-block-start: max(var(--space-4), env(safe-area-inset-top));
+    inset-inline-end:  max(var(--space-4), env(safe-area-inset-right));
+    z-index: var(--z-overlay);
+
+    inline-size: 44px;               /* 44×44 tap floor — manifesto §5.20 */
+    block-size:  44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+
+    color: var(--ink-muted);
+    background: var(--surface-1);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-2);
+
+    opacity: 0;
+    visibility: hidden;              /* unreachable to keyboard + AT while idle */
+    transform: scale(0.9);
+    pointer-events: none;
+    transition:
+      opacity    var(--duration-emerge) var(--ease-emerge),
+      transform  var(--duration-emerge) var(--ease-emerge),
+      background var(--duration-quick)  var(--ease-snap),
+      color      var(--duration-quick)  var(--ease-snap),
+      visibility 0s linear var(--duration-emerge);
+  }
+  :root[data-zen="active"] .zen-exit {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    pointer-events: auto;
+    /* arrives a beat after the veil has settled — tarteel pacing */
+    transition-delay: var(--duration-emerge);
+    transition:
+      opacity    var(--duration-emerge) var(--ease-emerge),
+      transform  var(--duration-emerge) var(--ease-emerge),
+      background var(--duration-quick)  var(--ease-snap),
+      color      var(--duration-quick)  var(--ease-snap),
+      visibility 0s linear 0s;
+  }
+  .zen-exit:hover  { background: var(--surface-2); color: var(--ink); }
+  .zen-exit:active { transform: scale(0.92); }
+  .zen-exit .icon  { --icon-size: var(--icon-md); }
+
+
+  /* ─── The trigger — a neutral in-canvas control (never an accent) ────────
+     Modelled on .overlay-trigger: --ink + --line, so it never competes with
+     the screen's single ring (accent-progress) or dock dot (accent-action). */
+  .zen-trigger {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-block-size: 44px;
+    padding: var(--space-2) var(--space-5);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    color: var(--ink);
+    background: transparent;
+    transition:
+      background var(--duration-quick) var(--ease-snap),
+      transform  var(--duration-snap)  var(--ease-snap);
+  }
+  .zen-trigger:hover  { background: var(--surface-2); }
+  .zen-trigger:active { transform: scale(0.98); }
+  .zen-trigger .icon  { --icon-size: var(--icon-sm); color: var(--ink-muted); }
+
+
+  /* ─── Reduced motion ─────────────────────────────────────────────────────
+     The global motion-sanctuary (canvas.css) collapses every transition to a
+     snap under prefers-reduced-motion. Zen inherits it: the veil still
+     descends and the dock still dissolves — instantly, state preserved
+     (MOTION §4). No per-file override needed here. */
+
+
+  /* ─── Forced colors — preserve the dim/return roles ──────────────────────*/
+  @media (forced-colors: active) {
+    .zen-veil  { background: Canvas; }
+    .zen-exit  { background: Canvas; border-color: ButtonText; color: ButtonText; }
+    .zen-trigger { border-color: ButtonText; }
+  }
+}

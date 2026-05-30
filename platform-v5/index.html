@@ -27,6 +27,8 @@
   <link rel="stylesheet" href="assets/css/sheet.css" />
   <!-- ε3: overlay ⇄ dock choreography (veil) -->
   <link rel="stylesheet" href="assets/css/overlay-choreo.css" />
+  <!-- ζ1: zen / focus mode (loads after bento-expand so the scope-lift wins) -->
+  <link rel="stylesheet" href="assets/css/zen.css" />
 </head>
 <body>
 
@@ -70,6 +72,10 @@
           <button type="button" class="overlay-trigger" data-overlay-open="overlay-tpl-scenario">
             <span class="overlay-trigger-ico" data-icon="training.scenario" aria-hidden="true"></span>
             افتَح السيناريو كامِلاً في لَوحة
+          </button>
+          <button type="button" class="zen-trigger" data-zen-open="[data-card='daily-focus']">
+            <span class="zen-trigger-ico" data-icon="training.objective" aria-hidden="true"></span>
+            ادخُل وَضع التَركيز
           </button>
         </div>
       </article>
@@ -168,6 +174,13 @@
 
   <aside id="overlay-sheet" class="sheet"      hidden aria-hidden="true"></aside>
 
+  <!-- ζ1: zen veil (the sanctioned dim layer for Focus Mode) + return affordance -->
+  <div id="zen-veil" class="zen-veil" hidden aria-hidden="true"></div>
+  <button type="button" id="zen-exit" class="zen-exit" data-zen-close
+          aria-label="الخُروج من وَضع التَركيز">
+    <span class="zen-exit-ico" data-icon="actions.close" aria-hidden="true"></span>
+  </button>
+
   <!-- ─── Overlay content templates (cloned by Upg.overlay) ─── -->
   <template id="overlay-tpl-command" data-eyebrow="لَوحة الأوامر" data-title="ماذا تُريد أن تَفعَل؟">
     <nav class="cmdk-list" aria-label="الأوامر السَريعة">
@@ -213,6 +226,7 @@
   <script src="assets/js/slide-over.js"      defer></script>
   <script src="assets/js/sheet.js"           defer></script>
   <script src="assets/js/overlay-choreo.js"  defer></script>
+  <script src="assets/js/zen.js"             defer></script>
 
 </body>
 </html>
