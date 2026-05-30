@@ -2715,9 +2715,9 @@
   },
   "tadaffuq_v5": {
     "current_pillar": "ζ",
-    "current_stage": 2,
-    "current_stage_id": "ζ2",
-    "status": "in-progress",
+    "current_stage": 3,
+    "current_stage_id": "ζ3",
+    "status": "complete",
     "branch": "tadaffuq-ζ-flow",
     "completed_stages": [
       "α1",
@@ -2737,11 +2737,12 @@
       "ε2",
       "ε3",
       "ζ1",
-      "ζ2"
+      "ζ2",
+      "ζ3"
     ],
     "creativity_health": 100,
-    "creativity_health_note": "Pillar ζ (FLOW). ζ2 ships GLOW_PULSE — pivot away from VEIL satisfied (ε3+ζ1 were 2× VEIL; ζ2 broke the run). Distinct from γ3 GLOW (hue-nudge); ζ2 drains chroma so a single accent is left glowing. Health = 100 (base 100 + 5×8 unique-category bonus, capped; 0 penalties). HAPTIC still the only category needed for 9/9 (lands in η).",
-    "pulses_produced": 11,
+    "creativity_health_note": "Pillar ζ (FLOW / ZEN MODE) COMPLETE 3/3. ζ3 ships SPRING_PULSE (pivot-safe: last two were VEIL·GLOW; distinct from ε2's drag-momentum spring — this is a one-shot completion bloom). Sequence GLASS·SPRING·VEIL·VEIL·GLOW·SPRING — no category 3× in a row. Health = 100 (base 100 + 5×8 unique-category bonus, capped; 0 penalties). Still only HAPTIC remains for 9/9 (lands in η — the only unused category).",
+    "pulses_produced": 12,
     "pulse_categories_used": [
       "DOCK_PULSE",
       "MORPH_PULSE",
@@ -2867,7 +2868,8 @@
       "β",
       "γ",
       "δ",
-      "ε"
+      "ε",
+      "ζ"
     ],
     "γ_pillar_summary": {
       "stages_done": 3,
@@ -3036,6 +3038,52 @@
       "distinct_from_gamma3_glow": "γ3 nudged canvas hue toward the accent; ζ2 DRAINS chroma from the whole field so the single accent is left glowing",
       "single_accent_taken_literal": "in Focus Mode exactly one chroma element remains on screen — the scope's progress ring (CHROMA §7)"
     },
-    "next_stage": "ζ3 ZEN_EXIT — closes Pillar ζ. Plan: SPRING_PULSE — a quiet, deliberate exit on completion; a Bloom on the ring itself (a spring sub-bounce scale), NOT a page-wide celebration or a toast (Forbidden #2 toast / #10 counter / animated confetti); then the field re-saturates and the dock re-emerges on tarteel time. Same branch tadaffuq-ζ-flow. After ζ3: open PR tadaffuq-ζ-flow -> v5-tadaffuq (or main per #126/#127 precedent)."
+    "ζ3_verified": {
+      "bloom_keyframes": 2,
+      "complete_in_js_fn_and_surface": 3,
+      "fires_upg_zen_complete": 2,
+      "data_zen_exiting_reemerge_rule": 1,
+      "bloom_uses_ease_spring": 1,
+      "toast_component": 0,
+      "counter_from_zero": 0,
+      "confetti_component": 0,
+      "toast_confetti_words_in_avoid_comments_only": true,
+      "important_in_zen_css": 0,
+      "emoji_in_zen_files": 0,
+      "hex_in_zen_files": 0,
+      "icon_key_valid_training_completed": 1,
+      "data_zen_finish_hook": 1,
+      "single_accent_host": 1,
+      "physical_dirs": 0,
+      "logical_props_audit_exit": 0,
+      "node_check": "passed",
+      "http_serves": { "index.html": 200, "zen.css": 200, "zen.js": 200 },
+      "zen_css_lines_total": 298,
+      "zen_js_lines_total": 255,
+      "lines_added_this_stage": 141,
+      "pulse": "SPRING_PULSE",
+      "no_new_duration_token": "bloom = --duration-panel; return = --duration-zen with --duration-panel delay; seven canonical durations stand",
+      "distinct_from_epsilon2_spring": "ε2 was bottom-sheet drag momentum (rubber-band + flick gate); ζ3 is a one-shot completion bloom + patient dock re-emergence",
+      "bloom_on_ring_not_page": "celebration scoped to the .ring dial (scale 1→1.08→1 spring + glow surge), never a page-wide toast/confetti"
+    },
+    "ζ_pillar_summary": {
+      "stages_done": 3,
+      "stages_total": 3,
+      "pulses": [
+        "ζ1 VEIL_PULSE (chronic)",
+        "ζ2 GLOW_PULSE (drained field)",
+        "ζ3 SPRING_PULSE (completion bloom)"
+      ],
+      "unique_categories_added_this_pillar": [],
+      "categories_reused_distinctly": ["VEIL (chronic vs ε3 acute)", "GLOW (drain vs γ3 hue-nudge)", "SPRING (bloom vs ε2 drag-momentum)"],
+      "new_v5_apis": ["Upg.zen (enter/exit/toggle/complete/active/scope)"],
+      "files_shipped": 4,
+      "lines_added_total": 553,
+      "branch": "tadaffuq-ζ-flow",
+      "forbidden_violations": 0,
+      "ready_for_pr": true,
+      "pr_base_note": "follows the #126/#127 precedent — open PR tadaffuq-ζ-flow -> main (the human merges)"
+    },
+    "next_stage": "η1 — opens Pillar η (the penultimate pillar). HAPTIC_PULSE is the ONLY remaining category for 9/9 and must land in η (η2/η3 per the INDEX plan). Create new pillar branch tadaffuq-η-<name> at the start of η. Resume by re-pasting AUTO_PILOT v5; it reads this block."
   }
 }
