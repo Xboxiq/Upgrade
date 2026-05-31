@@ -44,6 +44,7 @@ class _AuroraBackgroundState extends State<AuroraBackground>
   );
 
   late final List<_Star> _stars;
+  late final List<_Speck> _grain;
   bool _started = false;
 
   @override
@@ -61,6 +62,12 @@ class _AuroraBackgroundState extends State<AuroraBackground>
         depth: 0.3 + rnd.nextDouble() * 0.7, // parallax factor
       );
     });
+    // Static fine-grain field — adds real texture, killing the flat AI gradient.
+    final math.Random g = math.Random(19);
+    _grain = List<_Speck>.generate(
+      260,
+      (_) => _Speck(g.nextDouble(), g.nextDouble(), 0.012 + g.nextDouble() * 0.03),
+    );
   }
 
   @override
@@ -98,6 +105,7 @@ class _AuroraBackgroundState extends State<AuroraBackground>
               baseBottom: p.canvasSink,
               flow: p.tideGradient,
               stars: _stars,
+              grain: _grain,
               scroll: scroll,
               intensity: widget.intensity,
               animate: !reduceMotion,
@@ -136,6 +144,7 @@ class _SpacePainter extends CustomPainter {
     required this.baseBottom,
     required this.flow,
     required this.stars,
+    required this.grain,
     required this.scroll,
     required this.intensity,
     required this.animate,
@@ -147,6 +156,7 @@ class _SpacePainter extends CustomPainter {
   final Color baseBottom;
   final List<Color> flow;
   final List<_Star> stars;
+  final List<_Speck> grain;
   final double scroll;
   final double intensity;
   final bool animate;
@@ -188,6 +198,28 @@ class _SpacePainter extends CustomPainter {
     _filament(canvas, size, yFrac: 0.30, amp: 0.030, waves: 2.2, speed: 1.0, phase: 0.0, alpha: baseAlpha, depth: 0.5, tau: tau);
     _filament(canvas, size, yFrac: 0.54, amp: 0.045, waves: 1.7, speed: -0.7, phase: 1.6, alpha: baseAlpha * 0.85, depth: 0.85, tau: tau);
     _filament(canvas, size, yFrac: 0.76, amp: 0.038, waves: 2.6, speed: 0.55, phase: 3.1, alpha: baseAlpha * 0.7, depth: 1.2, tau: tau);
+
+    // Fine grain — static texture that kills the flat "digital gradient" look.
+    final Paint gp = Paint();
+    final Color grainColor = isDark ? Colors.white : Colors.black;
+    for (final _Speck s in grain) {
+      gp.color = grainColor.withValues(alpha: s.a * intensity);
+      canvas.drawCircle(Offset(s.x * size.width, s.y * size.height), 0.7, gp);
+    }
+
+    // Vignette — cinematic depth that draws the eye inward.
+    canvas.drawRect(
+      rect,
+      Paint()
+        ..shader = RadialGradient(
+          radius: 0.95,
+          colors: <Color>[
+            const Color(0x00000000),
+            baseBottom.withValues(alpha: isDark ? 0.55 : 0.16),
+          ],
+          stops: const <double>[0.6, 1.0],
+        ).createShader(rect),
+    );
   }
 
   void _filament(
@@ -255,4 +287,12 @@ class _SpacePainter extends CustomPainter {
       old.isDark != isDark ||
       old.intensity != intensity ||
       old.baseTop != baseTop;
+}
+
+/// A static grain speck (normalised position + alpha) for background texture.
+class _Speck {
+  const _Speck(this.x, this.y, this.a);
+  final double x;
+  final double y;
+  final double a;
 }

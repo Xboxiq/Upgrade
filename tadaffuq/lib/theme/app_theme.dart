@@ -33,9 +33,9 @@ abstract class AppTheme {
     final ColorScheme scheme = ColorScheme(
       brightness: brightness,
       primary: p.brand,
-      onPrimary: brightness == Brightness.dark ? const Color(0xFF04141A) : Colors.white,
+      onPrimary: p.onTide,
       secondary: p.spark,
-      onSecondary: Colors.white,
+      onSecondary: p.onSpark,
       tertiary: p.success,
       onTertiary: Colors.white,
       error: const Color(0xFFFF453A),

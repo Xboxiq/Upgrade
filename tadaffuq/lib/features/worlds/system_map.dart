@@ -198,8 +198,8 @@ class _SystemPainter extends CustomPainter {
   final Color orbitLine;
   final double overall;
 
-  static const Color _coreTop = Color(0xFF24305C);
-  static const Color _coreBottom = Color(0xFF070B18);
+  static const Color _coreTop = Color(0xFF223032);
+  static const Color _coreBottom = Color(0xFF070A0A);
 
   @override
   void paint(Canvas canvas, Size size) {

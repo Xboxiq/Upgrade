@@ -73,9 +73,7 @@ class FilledCta extends StatelessWidget {
     final AppPalette p = context.palette;
     final bool warm = tone == CtaTone.spark;
     final List<Color> grad = warm ? p.sparkGradient : p.tideGradient;
-    final Color onColor = warm
-        ? Colors.white
-        : (p.isDark ? const Color(0xFF04141A) : Colors.white);
+    final Color onColor = warm ? p.onSpark : p.onTide;
 
     return PressScale(
       onTap: onTap,

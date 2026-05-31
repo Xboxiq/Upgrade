@@ -221,3 +221,23 @@ Format: `order · date · task · changes · files · verification · branch · 
 **Verification**: `flutter analyze` → No issues found · `flutter test` → 2/2 · `flutter build web --release` → ok. ✅
 
 **Branch**: `feat/cosmic-flow-refinements` (PR #138).
+
+
+---
+
+### 012 · 2026-05-30 · Identity overhaul → "Tidal Aurora" (kill the AI-purple, add warmth + texture)
+
+**What changed** (owner: colours felt cold/pale/boring with repeat use; the AI touch was still dominant — push it higher with the skills' creative lens)
+- **Root cause via the skills**: our "Cosmic Flow" (azure→indigo→violet + fuchsia) was literally the **purple→blue gradient the Taste skill flags as the #1 AI tell**. Replaced it.
+- **New palette "Tidal Aurora"** (propagates everywhere via tokens): warm deep-charcoal space (`#0D1112`, not cold navy) + an **aqua→teal flow** current (`#5EEAD4→#2DD4BF→#14B8A6`) for progress/identity + an **amber-gold spark** (`#FBBF24`) for action. Light mode is **warm parchment** (`#F6F4EF`, not cold ice). Teal+gold = a warm, premium, harmonious pairing that ages well.
+- **Background texture**: added a static fine **grain** + a soft **vignette** in `AuroraBackground`, recoloured aurora/stars — kills the flat "digital gradient" AI look and adds cinematic depth.
+- **Contrast fix**: gold fills now carry **dark ink** (`onSpark`), bright teal fills carry `onTide` — `app_theme` + `FilledCta` updated. Planet cores neutralised to warm-dark (were navy-blue).
+- Everything stays cohesive (single token source); semantics kept clear of the accent hues.
+
+**Files**: `theme/palette.dart` (rewritten), `theme/app_theme.dart`, `ui/controls.dart`, `widgets/aurora_background.dart`, `widgets/mastery_planet.dart`, `features/worlds/system_map.dart`, `DESIGN.md`.
+
+**Verification**: `flutter analyze` → No issues found · `flutter test` → 2/2 · `flutter build web --release` → ok. ✅
+
+**Branch**: `feat/cosmic-flow-refinements` (PR #138).
+
+**NEXT (proposed)**: a dedicated **icon pass** — custom duotone/painted glyphs for the worlds (or import an open set via flutter_svg), since icons were also flagged for elevation.

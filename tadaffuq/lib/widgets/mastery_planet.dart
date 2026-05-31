@@ -185,8 +185,8 @@ class _PlanetPainter extends CustomPainter {
   final Color ring;
 
   // The planet is a real celestial body — dark in any UI theme.
-  static const Color _coreTop = Color(0xFF20294F);
-  static const Color _coreBottom = Color(0xFF070B18);
+  static const Color _coreTop = Color(0xFF223032);
+  static const Color _coreBottom = Color(0xFF070A0A);
 
   static const double _tilt = -0.42; // ring plane tilt
 

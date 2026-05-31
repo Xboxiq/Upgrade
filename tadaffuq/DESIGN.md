@@ -15,23 +15,23 @@ to "flow", it does not ship.
 
 ---
 
-## 1. Art direction — "Cosmic Flow"
+## 1. Art direction — "Tidal Aurora"
 
-A **deep-space navy** environment in which your progress is a luminous
-**azure→indigo→violet current** — an aurora that streams through the dark, the
-literal embodiment of تَدَفُّق (*flow*). Actions are a **fuchsia nebula** spark:
-the one burst of warm energy against the cool deep. The result is focused,
-premium, nocturnal-by-default, and unmistakably *this* product — not a generic
-Material or iOS template. Grounded in the **ui-ux-pro-max** skill's cosmic
-palettes (*night-indigo + dream-violet*, *space-tech navy*) and its OLED dark-mode style.
+A **warm deep-charcoal space** in which your progress is a luminous **aqua→teal
+current** — an aurora streaming through the dark, the literal embodiment of
+تَدَفُّق (*flow*). Actions are a warm **amber-gold spark**: golden starlight, the
+energy that pulls you to act. The result is premium, warm, and unmistakably
+*this* product. Crucially it **avoids the purple→blue gradient** the design
+skills flag as the #1 AI-slop tell — teal + gold is a classic, harmonious
+pairing that stays rich (never cold/pale) with repeated use.
 
 ### Why this over the alternatives (decision log)
 
 | Option | Summary | Verdict |
 |---|---|---|
-| **A — Cosmic Flow** *(chosen)* | Deep-space navy + azure/indigo/violet flow current + fuchsia nebula action; liquid-fill rings; floating dock; bento; live waveform. | **Recommended.** Deep-blue space identity requested by the owner; skill-grounded; a soul tied to the name (*flow through space*). |
-| B — Aurora Tide (cyan/orange) | The earlier proposal: cyan tide + electric orange. | Superseded: owner asked for deep-blue/space colours instead of cyan/orange. |
-| C — Refined iOS (status quo) | Keep graphite/violet/gold and merely polish. | Rejected: not a leap; ignores the documented identity. |
+| **A — Tidal Aurora** *(chosen)* | Warm charcoal space + aqua/teal flow + amber-gold spark; grain + vignette texture; liquid planets; orrery home. | **Recommended.** Warm, premium, cohesive; explicitly *not* AI-purple; teal+gold ages well. |
+| B — Cosmic Flow (indigo/violet/fuchsia) | The previous deep-navy + azure→indigo→violet + fuchsia. | Superseded: this is the literal purple→blue AI tell; read cold/pale/templated over time. |
+| C — Aurora Tide (cyan/orange) | The first proposal: neon cyan + electric orange. | Superseded earlier. |
 
 ---
 
@@ -39,39 +39,38 @@ palettes (*night-indigo + dream-violet*, *space-tech navy*) and its OLED dark-mo
 
 Colour is never decorative. There are exactly **two accent poles**, each with one job:
 
-- **FLOW — azure→indigo→violet current** → progress, mastery, active state, identity, "you / your data". This is the streaming *flow*.
-- **SPARK — fuchsia nebula** → primary calls-to-action, "do this now", energy.
+- **FLOW — aqua→teal current** → progress, mastery, active state, identity, "you / your data". Cool, alive.
+- **SPARK — amber-gold** → primary calls-to-action, "do this now", energy. Warm, premium.
 
-Everything else is neutral ink over deep space, plus reserved semantics (success / warning / error)
-chosen so they never collide with the accent hues. Two poles, used with discipline, read instantly:
-the blue current = where you stand, the nebula = what to do next.
+Everything else is neutral ink over warm-charcoal space, plus reserved semantics (success / warning / error)
+kept clear of both poles. Read instantly: the teal current = where you stand, the gold = what to do next.
+Gold fills always carry **dark ink** (`onSpark`); bright teal fills carry `onTide`.
 
-### Dark mode (primary — "deep space navy")
+### Dark mode (primary — "warm deep space")
 | Token | Hex | Role |
 |---|---|---|
-| `canvas` | `#0A0E1F` | deep-space navy background |
-| `canvasSink` | `#05070F` | focus veil / deeper well |
-| `surface1` | `#121830` | indigo-tinted panel |
-| `surface2` | `#1B2240` | raised panel |
-| `ink` / `inkMuted` / `inkFaint` | `#EAEEFC` / `#9AA6C8` / `#5C6690` | text ramp |
-| `brand` / `brandDeep` | `#6C8DFF` / `#4A6BF0` | azure-indigo identity / active |
-| `tideGradient` | `#74B6FF → #6C8DFF → #9A7CFF` | the flow current (azure→blue→violet) |
-| `spark` / `sparkDeep` | `#EC4DBE` / `#D2329F` | fuchsia nebula action / CTA |
-| `success` / `warning` | `#2FD8A4` / `#FBB845` | semantics (distinct from accents) |
+| `canvas` | `#0D1112` | warm charcoal-black (not navy) |
+| `canvasSink` | `#070A0A` | focus veil / vignette |
+| `surface1` / `surface2` | `#171B1C` / `#202627` | panels |
+| `ink` / `inkMuted` / `inkFaint` | `#ECEFEA` / `#99A39D` / `#5E6863` | warm text ramp |
+| `brand` / `brandDeep` | `#2DD4BF` / `#0D9488` | teal identity / active |
+| `tideGradient` | `#5EEAD4 → #2DD4BF → #14B8A6` | the flow current (aqua→teal) |
+| `spark` / `sparkDeep` | `#FBBF24` / `#F59E0B` | amber-gold action / CTA |
+| `success` / `warning` | `#34D399` / `#FB923C` | semantics |
 
-### Light mode (cool "starlight" daylight)
+### Light mode (warm parchment daylight)
 | Token | Hex | Role |
 |---|---|---|
-| `canvas` | `#F3F5FC` | cool ice-white background |
+| `canvas` | `#F6F4EF` | warm paper (not cold ice) |
 | `surface1` | `#FFFFFF` | panel |
-| `ink` / `inkMuted` / `inkFaint` | `#141828` / `#565E78` / `#9298B0` | text ramp |
-| `brand` / `brandDeep` | `#3D5DE0` / `#2A45C8` | deep azure-indigo (AA on light) |
-| `tideGradient` | `#4F86F7 → #5B6EF0 → #7C5CE8` | flow current |
-| `spark` / `sparkDeep` | `#C42E9E` / `#A81F86` | deep fuchsia action (AA on light) |
+| `ink` / `inkMuted` / `inkFaint` | `#191C1A` / `#5C615C` / `#979B95` | text ramp |
+| `brand` / `brandDeep` | `#0D9488` / `#0F766E` | deep teal (AA on warm light) |
+| `tideGradient` | `#14B8A6 → #0D9488 → #0F766E` | flow current |
+| `spark` / `sparkDeep` | `#B7791F` / `#946115` | deep amber action (AA on light) |
 
-> **Contrast rule:** large fills (ring interiors, bars) may use the bright
-> aurora colours; any accent used as *text or icons* uses the deeper light-mode
-> values to hold **WCAG AA**.
+> **Texture:** the background carries a static fine **grain** + a soft **vignette**
+> so it never reads as a flat digital gradient. **Contrast:** accents used as text/icons
+> use the deeper light-mode values to hold **WCAG AA**.
 
 ---
 
