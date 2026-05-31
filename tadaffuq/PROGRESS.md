@@ -264,3 +264,23 @@ Format: `order · date · task · changes · files · verification · branch · 
 **Branch**: `feat/cosmic-flow-refinements` (PR #138).
 
 **NEXT (proposed)**: dedicated icon pass (custom duotone / open SVG set) + per-world content screens with a shared-element transition from the planet.
+
+
+---
+
+### 014 · 2026-05-30 · Spatial Timeline — the world "Journey" screen (per-planet content)
+
+**What changed** (executes the "Organic Liquid Glass / Spatial Timeline" doctrine — reconciled with the owner's anti-glow/anti-rim taste)
+- New `lib/features/journey/world_journey_screen.dart`: a world's curriculum as a **spatial timeline** — nodes float asymmetrically in Z-space via absolute `Positioned` over a `Stack` (no column/grid), woven by hand-painted **bezier connectors** (`_ConnectorPainter`) that light up along completed segments.
+- **Glass nodes** = frost (`BackdropFilter`) + a **dark seam** + matte **grain** — NO lighter inner rim, NO white inner gradient, NO drop shadow (those are the AI tells the owner rejected). Done/current/locked states with crisp marker dots (no glow).
+- **Spring physics**: iOS `BouncingScrollPhysics`; node entrance on a spring curve (reduced-motion aware). **Haptics** on every node tap (selection / medium / light-for-locked). Connectors + background wrapped in `RepaintBoundary`.
+- Frosted floating header (back + title + units + %). Call Center stations map to real techniques → tap opens `TechniqueDetail`; other worlds show locked stations.
+- Wired: Home "ادخل العالم" → `WorldJourneyScreen` (the deferred per-planet content, now real).
+
+**Doctrine reconciliation**: the prompt's "1px lighter inner border + white inner gradient + outer drop shadow" glass recipe was deliberately replaced with frost + dark seam + grain, honouring the owner's repeated anti-AI feedback. Midnight Indigo palette kept (no purple-blue gradient, no green).
+
+**Files**: new `features/journey/world_journey_screen.dart`; modified `features/home/home_screen.dart`, `test/smoke_test.dart`.
+
+**Verification**: `flutter analyze` → No issues found · `flutter test` → 3/3 · `flutter build web --release` → ok. ✅
+
+**Branch**: `feat/cosmic-flow-refinements` (PR #138).

@@ -12,7 +12,7 @@ import '../../widgets/motion_x.dart';
 import '../../widgets/surface_card.dart';
 import '../../widgets/transitions.dart';
 import '../../widgets/ui_bits.dart';
-import '../callcenter/callcenter_screen.dart';
+import '../journey/world_journey_screen.dart';
 import '../worlds/system_map.dart';
 import '../worlds/worlds_data.dart';
 
@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _enter(TrainingWorld w) {
     if (w.available) {
-      Navigator.of(context).push(revealRoute(const CallCenterScreen()));
+      Navigator.of(context).push(revealRoute(WorldJourneyScreen(world: w)));
     }
   }
 
