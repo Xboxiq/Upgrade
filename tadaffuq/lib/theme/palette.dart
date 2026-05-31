@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 
-/// Element-wise lerp for multi-stop gradients (dark & light variants always
-/// share the same number of stops).
+/// Element-wise lerp for multi-stop gradients (dark & light share stop counts).
 List<Color> _lerpGradient(List<Color> a, List<Color> b, double t) {
   final int n = a.length < b.length ? a.length : b.length;
   return <Color>[for (int i = 0; i < n; i++) Color.lerp(a[i], b[i], t)!];
 }
 
 /// ════════════════════════════════════════════════════════════════════════
-/// AppPalette — the "Tidal Aurora" colour system (ThemeExtension).
+/// AppPalette — the "Midnight Indigo" colour system (ThemeExtension).
 ///
-/// A deliberate break from the purple→blue gradient that the design skills flag
-/// as the #1 AI-slop tell. Instead, a warm, premium, unmistakably-real duotone:
-///   • FLOW — aqua→teal current → progress, mastery, active, identity. Cool,
-///     alive, organic (the streaming tide of mastery).
-///   • SPARK — amber-gold → calls-to-action, energy, "do this now". Warm,
-///     premium (golden starlight), high-affordance.
-/// Over a WARM deep-charcoal space (not cold navy) so the UI never feels cold
-/// or pale with repeated use. Teal + gold is a classic, harmonious pairing;
-/// reserved semantics (success / warning / error) stay clear of both poles.
+/// Deep midnight blue + a deep blue-violet, used with restraint. The "AI look"
+/// is NOT the hue — it is the *execution*: glowing/lighter-coloured borders,
+/// halos and soft shadows around boxes & icons. Those are banned here. Depth is
+/// material & real: tonal surfaces + fine grain, no glow, no lighter rim.
+///
+/// Two accent poles, used sparingly:
+///   • FLOW — azure-indigo → progress, mastery, active, identity.
+///   • SPARK — blue-violet → calls-to-action, energy.
+/// Neutral ink carries most of the UI; accents are seasoning, not paint.
 /// ════════════════════════════════════════════════════════════════════════
 @immutable
 class AppPalette extends ThemeExtension<AppPalette> {
@@ -35,6 +34,7 @@ class AppPalette extends ThemeExtension<AppPalette> {
     required this.inkFaint,
     required this.line,
     required this.lineStrong,
+    required this.seam,
     required this.brand,
     required this.brandDeep,
     required this.tide,
@@ -60,86 +60,82 @@ class AppPalette extends ThemeExtension<AppPalette> {
   final Color line;
   final Color lineStrong;
 
-  /// COOL pole — aqua/teal identity / active / interactive, + a deeper companion.
+  /// A DARKER hairline (a real seam/groove between materials) — never a
+  /// lighter, glowing rim. Used only where separation truly needs an edge.
+  final Color seam;
+
   final Color brand;
   final Color brandDeep;
-
-  /// COOL pole — the progress "tide": a single value + its multi-stop fill.
   final Color tide;
   final List<Color> tideGradient;
-
-  /// WARM pole — the action "spark": amber-gold CTA colour + deeper + gradient.
   final Color spark;
   final Color sparkDeep;
   final List<Color> sparkGradient;
-
   final Color success;
   final Color warning;
-
   final bool isDark;
 
-  // ── Back-compat aliases used by older widgets ──
+  // Back-compat aliases.
   Color get gold => tide;
   List<Color> get goldGradient => tideGradient;
   Color get accentProgress => tide;
   List<Color> get progressGradient => tideGradient;
   Color get accentAction => spark;
 
-  /// Ink that reads on top of a [spark] (gold) fill — gold needs dark ink.
-  Color get onSpark => const Color(0xFF231803);
+  Color get onSpark => Colors.white;
+  Color get onTide => Colors.white;
 
-  /// Ink that reads on top of a bright [tide]/[brand] fill.
-  Color get onTide => isDark ? const Color(0xFF042420) : Colors.white;
-
-  /// Warm deep-charcoal space. The primary, dark-first identity.
+  /// Deep midnight indigo. The primary, dark-first identity.
   static const AppPalette dark = AppPalette(
-    canvas: Color(0xFF0D1112), // warm charcoal-black (not navy)
-    canvasSink: Color(0xFF070A0A),
-    surface1: Color(0xFF171B1C),
-    surface2: Color(0xFF202627),
+    canvas: Color(0xFF0B0E1A), // deep midnight blue
+    canvasSink: Color(0xFF06080E),
+    surface1: Color(0xFF141826),
+    surface2: Color(0xFF1E2335),
     fill: Color(0x0DFFFFFF), // white ~0.05
-    materialTint: Color(0xCC101516), // ~0.80 — frosted bars / dock
-    glassTint: Color(0xB8171B1C),
-    ink: Color(0xFFECEFEA), // warm off-white
-    inkMuted: Color(0xFF99A39D),
-    inkFaint: Color(0xFF5E6863),
-    line: Color(0x12FFFFFF), // white ~0.07
-    lineStrong: Color(0x24FFFFFF), // white ~0.14
-    brand: Color(0xFF2DD4BF), // teal — flow / identity / active
-    brandDeep: Color(0xFF0D9488),
-    tide: Color(0xFF2DD4BF),
-    tideGradient: <Color>[Color(0xFF5EEAD4), Color(0xFF2DD4BF), Color(0xFF14B8A6)],
-    spark: Color(0xFFFBBF24), // amber-gold — action / energy
-    sparkDeep: Color(0xFFF59E0B),
-    sparkGradient: <Color>[Color(0xFFFDE08A), Color(0xFFF59E0B)],
-    success: Color(0xFF34D399),
-    warning: Color(0xFFFB923C),
+    materialTint: Color(0xCC0E1220),
+    glassTint: Color(0xB8141826),
+    ink: Color(0xFFE8EBF4),
+    inkMuted: Color(0xFF969CB2),
+    inkFaint: Color(0xFF5C627A),
+    line: Color(0x12FFFFFF),
+    lineStrong: Color(0x22FFFFFF),
+    seam: Color(0x66000000), // dark groove
+    brand: Color(0xFF6E8BFF), // azure-indigo
+    brandDeep: Color(0xFF4F6BE8),
+    tide: Color(0xFF6E8BFF),
+    tideGradient: <Color>[Color(0xFF86A2FF), Color(0xFF6E8BFF), Color(0xFF5774EE)],
+    spark: Color(0xFF9B8CFF), // blue-violet
+    sparkDeep: Color(0xFF7B6BF0),
+    sparkGradient: <Color>[Color(0xFFB3A8FF), Color(0xFF7B6BF0)],
+    success: Color(0xFF34C98A),
+    warning: Color(0xFFEBB54A),
     isDark: true,
   );
 
-  /// Warm parchment daylight. Accents deepen to hold WCAG AA on a warm canvas.
+  /// Cool daylight. Accents deepen to hold WCAG AA.
   static const AppPalette light = AppPalette(
-    canvas: Color(0xFFF6F4EF), // warm paper (not cold ice)
-    canvasSink: Color(0xFFECE8DF),
+    canvas: Color(0xFFEEF0F6),
+    canvasSink: Color(0xFFE0E3EE),
     surface1: Color(0xFFFFFFFF),
-    surface2: Color(0xFFFBFAF5),
-    fill: Color(0x0D000000), // black ~0.05
-    materialTint: Color(0xE6FBFAF6),
+    surface2: Color(0xFFF7F8FC),
+    fill: Color(0x0D000000),
+    materialTint: Color(0xE6F4F6FB),
     glassTint: Color(0xE6FFFFFF),
-    ink: Color(0xFF191C1A),
-    inkMuted: Color(0xFF5C615C),
-    inkFaint: Color(0xFF979B95),
-    line: Color(0x14000000), // black ~0.08
-    lineStrong: Color(0x29000000),
-    brand: Color(0xFF0D9488), // deep teal for AA on light
-    brandDeep: Color(0xFF0F766E),
-    tide: Color(0xFF0D9488),
-    tideGradient: <Color>[Color(0xFF14B8A6), Color(0xFF0D9488), Color(0xFF0F766E)],
-    spark: Color(0xFFB7791F), // deep amber for AA on light
-    sparkDeep: Color(0xFF946115),
-    sparkGradient: <Color>[Color(0xFFF59E0B), Color(0xFFB7791F)],
-    success: Color(0xFF15803D),
-    warning: Color(0xFFC2410C),
+    ink: Color(0xFF14161F),
+    inkMuted: Color(0xFF585E72),
+    inkFaint: Color(0xFF9197A8),
+    line: Color(0x14000000),
+    lineStrong: Color(0x24000000),
+    seam: Color(0x1A000000),
+    brand: Color(0xFF4257C8),
+    brandDeep: Color(0xFF33429E),
+    tide: Color(0xFF4257C8),
+    tideGradient: <Color>[Color(0xFF5B72E6), Color(0xFF4257C8), Color(0xFF3A4FB8)],
+    spark: Color(0xFF6D4FD8),
+    sparkDeep: Color(0xFF563CB0),
+    sparkGradient: <Color>[Color(0xFF7C5BE8), Color(0xFF563CB0)],
+    success: Color(0xFF1E9E63),
+    warning: Color(0xFFB5781A),
     isDark: false,
   );
 
@@ -157,6 +153,7 @@ class AppPalette extends ThemeExtension<AppPalette> {
     Color? inkFaint,
     Color? line,
     Color? lineStrong,
+    Color? seam,
     Color? brand,
     Color? brandDeep,
     Color? tide,
@@ -181,6 +178,7 @@ class AppPalette extends ThemeExtension<AppPalette> {
       inkFaint: inkFaint ?? this.inkFaint,
       line: line ?? this.line,
       lineStrong: lineStrong ?? this.lineStrong,
+      seam: seam ?? this.seam,
       brand: brand ?? this.brand,
       brandDeep: brandDeep ?? this.brandDeep,
       tide: tide ?? this.tide,
@@ -210,6 +208,7 @@ class AppPalette extends ThemeExtension<AppPalette> {
       inkFaint: Color.lerp(inkFaint, other.inkFaint, t)!,
       line: Color.lerp(line, other.line, t)!,
       lineStrong: Color.lerp(lineStrong, other.lineStrong, t)!,
+      seam: Color.lerp(seam, other.seam, t)!,
       brand: Color.lerp(brand, other.brand, t)!,
       brandDeep: Color.lerp(brandDeep, other.brandDeep, t)!,
       tide: Color.lerp(tide, other.tide, t)!,
@@ -224,7 +223,6 @@ class AppPalette extends ThemeExtension<AppPalette> {
   }
 }
 
-/// Ergonomic access: `context.palette.brand`.
 extension PaletteX on BuildContext {
   AppPalette get palette =>
       Theme.of(this).extension<AppPalette>() ?? AppPalette.dark;

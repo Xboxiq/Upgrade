@@ -335,13 +335,6 @@ class _PlanetPainter extends CustomPainter {
     final double a = dim ? 0.5 : 1.0;
     canvas.drawCircle(
       at,
-      radius * 2.0,
-      Paint()
-        ..color = tide.first.withValues(alpha: 0.18 * a)
-        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4),
-    );
-    canvas.drawCircle(
-      at,
       radius,
       Paint()..color = Color.lerp(tide.first, Colors.white, 0.3)!.withValues(alpha: a),
     );

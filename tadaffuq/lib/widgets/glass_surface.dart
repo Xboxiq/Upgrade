@@ -4,11 +4,10 @@ import 'package:flutter/material.dart';
 
 import '../theme/palette.dart';
 import '../theme/tokens.dart';
-import 'depth.dart';
 
-/// Glassmorphism 2.0 — a translucent, blurred surface whose depth comes from a
-/// **rim light** (bright top edge → dark contact line), not a drop shadow.
-/// Blur is kept moderate and opt-in, so it never becomes a GPU-killer.
+/// A translucent, blurred surface. Depth comes from the frost + a tonal tint —
+/// no glowing rim, no drop shadow. An optional DARK seam (a real groove) is the
+/// only edge it ever draws.
 class GlassSurface extends StatelessWidget {
   const GlassSurface({
     super.key,
@@ -17,8 +16,7 @@ class GlassSurface extends StatelessWidget {
     this.blur = 18,
     this.padding = const EdgeInsets.all(Space.x5),
     this.tintOpacity = 1,
-    this.borderColor,
-    this.elevated = true,
+    this.seam = true,
   });
 
   final Widget child;
@@ -26,16 +24,13 @@ class GlassSurface extends StatelessWidget {
   final double blur;
   final EdgeInsetsGeometry padding;
   final double tintOpacity;
-  final Color? borderColor;
-  final bool elevated;
+  final bool seam;
 
   @override
   Widget build(BuildContext context) {
     final AppPalette p = context.palette;
-    final BorderRadius br = BorderRadius.circular(radius);
-
-    final Widget glass = ClipRRect(
-      borderRadius: BorderRadius.circular(radius - (elevated ? Depth.rimWidth : 0)),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(radius),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur),
         child: Container(
@@ -44,26 +39,12 @@ class GlassSurface extends StatelessWidget {
             color: p.glassTint.withValues(
               alpha: (p.glassTint.a * tintOpacity).clamp(0.0, 1.0),
             ),
-            // When elevated the rim wrapper draws the edge; otherwise a hairline.
-            border: elevated ? null : Border.all(color: borderColor ?? p.line, width: 1),
+            borderRadius: BorderRadius.circular(radius),
+            border: seam ? Border.all(color: p.seam, width: 0.5) : null,
           ),
           child: child,
         ),
       ),
-    );
-
-    if (!elevated) {
-      return ClipRRect(borderRadius: br, child: glass);
-    }
-
-    // Rim-light wrapper: a 1px lit/contact edge around the glass.
-    return Container(
-      decoration: BoxDecoration(
-        gradient: Depth.rim(p, strong: true),
-        borderRadius: br,
-      ),
-      padding: const EdgeInsets.all(Depth.rimWidth),
-      child: glass,
     );
   }
 }

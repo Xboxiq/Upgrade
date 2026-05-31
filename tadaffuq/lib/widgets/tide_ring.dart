@@ -231,21 +231,6 @@ class _TidePainter extends CustomPainter {
       final double sweep = 2 * math.pi * level;
       final Rect rimRect = Rect.fromCircle(center: center, radius: radius);
 
-      if (glow > 0) {
-        canvas.drawArc(
-          rimRect,
-          start,
-          sweep,
-          false,
-          Paint()
-            ..style = PaintingStyle.stroke
-            ..strokeWidth = rimStroke
-            ..strokeCap = StrokeCap.round
-            ..color = rim.withValues(alpha: 0.4 * glow)
-            ..maskFilter = MaskFilter.blur(BlurStyle.normal, 3 + 7 * glow),
-        );
-      }
-
       canvas.drawArc(
         rimRect,
         start,

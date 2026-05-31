@@ -15,58 +15,58 @@ to "flow", it does not ship.
 
 ---
 
-## 1. Art direction — "Tidal Aurora"
+## 1. Art direction — "Midnight Indigo"
 
-A **warm deep-charcoal space** in which your progress is a luminous **aqua→teal
-current** — an aurora streaming through the dark, the literal embodiment of
-تَدَفُّق (*flow*). Actions are a warm **amber-gold spark**: golden starlight, the
-energy that pulls you to act. The result is premium, warm, and unmistakably
-*this* product. Crucially it **avoids the purple→blue gradient** the design
-skills flag as the #1 AI-slop tell — teal + gold is a classic, harmonious
-pairing that stays rich (never cold/pale) with repeated use.
+A **deep midnight blue** space with a **deep blue-violet** as its second voice.
+Your progress is a calm **azure-indigo current**; actions glow a restrained
+**blue-violet**. Accents are *seasoning, not paint* — neutral ink carries most
+of the UI. The signature is not the hue but the **material**: surfaces are real
+matte panels (a tonal step + fine grain), with **no glowing/lighter-coloured
+rims, no halos, no drop shadows** — those are the true AI-slop tells, and they
+are banned. The result feels crafted, calm, and expensive.
 
 ### Why this over the alternatives (decision log)
 
 | Option | Summary | Verdict |
 |---|---|---|
-| **A — Tidal Aurora** *(chosen)* | Warm charcoal space + aqua/teal flow + amber-gold spark; grain + vignette texture; liquid planets; orrery home. | **Recommended.** Warm, premium, cohesive; explicitly *not* AI-purple; teal+gold ages well. |
-| B — Cosmic Flow (indigo/violet/fuchsia) | The previous deep-navy + azure→indigo→violet + fuchsia. | Superseded: this is the literal purple→blue AI tell; read cold/pale/templated over time. |
-| C — Aurora Tide (cyan/orange) | The first proposal: neon cyan + electric orange. | Superseded earlier. |
+| **A — Midnight Indigo** *(chosen)* | Deep midnight blue + deep blue-violet, used sparingly; realistic matte surfaces (tonal + grain), zero glow/rim/shadow. | **Recommended.** The owner's chosen hue family, executed with material craft instead of effects. |
+| B — Tidal Aurora (teal/gold) | Warm charcoal + aqua-teal + gold. | Superseded: the green/teal wasn't comfortable for the owner. |
+| C — Cosmic Flow (indigo/violet/fuchsia) | Earlier navy + azure→violet→fuchsia with glowing rims. | Superseded: the glowing/lighter rims + soft shadows read as AI. |
 
 ---
 
-## 2. Colour — a two-pole semantic system
+## 2. Colour — restrained two-pole, material depth
 
-Colour is never decorative. There are exactly **two accent poles**, each with one job:
+Two accent poles, used sparingly; everything else is neutral ink + tonal surface.
 
-- **FLOW — aqua→teal current** → progress, mastery, active state, identity, "you / your data". Cool, alive.
-- **SPARK — amber-gold** → primary calls-to-action, "do this now", energy. Warm, premium.
+- **FLOW — azure-indigo** → progress, mastery, active, identity.
+- **SPARK — blue-violet** → calls-to-action, energy.
 
-Everything else is neutral ink over warm-charcoal space, plus reserved semantics (success / warning / error)
-kept clear of both poles. Read instantly: the teal current = where you stand, the gold = what to do next.
-Gold fills always carry **dark ink** (`onSpark`); bright teal fills carry `onTide`.
+**Depth is material, never effect:** a tonal step from the canvas + a whisper of
+matte **grain**. The only edge ever drawn is a **dark seam** (a real groove),
+never a lighter, glowing rim. No halos, no drop shadows, no glow around text or icons.
 
-### Dark mode (primary — "warm deep space")
+### Dark mode (primary — "midnight indigo")
 | Token | Hex | Role |
 |---|---|---|
-| `canvas` | `#0D1112` | warm charcoal-black (not navy) |
-| `canvasSink` | `#070A0A` | focus veil / vignette |
-| `surface1` / `surface2` | `#171B1C` / `#202627` | panels |
-| `ink` / `inkMuted` / `inkFaint` | `#ECEFEA` / `#99A39D` / `#5E6863` | warm text ramp |
-| `brand` / `brandDeep` | `#2DD4BF` / `#0D9488` | teal identity / active |
-| `tideGradient` | `#5EEAD4 → #2DD4BF → #14B8A6` | the flow current (aqua→teal) |
-| `spark` / `sparkDeep` | `#FBBF24` / `#F59E0B` | amber-gold action / CTA |
-| `success` / `warning` | `#34D399` / `#FB923C` | semantics |
+| `canvas` | `#0B0E1A` | deep midnight blue |
+| `canvasSink` | `#06080E` | vignette / deeper well |
+| `surface1` / `surface2` | `#141826` / `#1E2335` | matte panels (tonal step) |
+| `ink` / `inkMuted` / `inkFaint` | `#E8EBF4` / `#969CB2` / `#5C627A` | text ramp |
+| `seam` | `#000` @ 0.40 | dark groove edge (never a lighter rim) |
+| `brand` / `brandDeep` | `#6E8BFF` / `#4F6BE8` | azure-indigo flow / active |
+| `tideGradient` | `#86A2FF → #6E8BFF → #5774EE` | progress fill (near-mono azure) |
+| `spark` / `sparkDeep` | `#9B8CFF` / `#7B6BF0` | blue-violet action |
+| `success` / `warning` | `#34C98A` / `#EBB54A` | semantics (sparse, never identity) |
 
-### Light mode (warm parchment daylight)
+### Light mode (cool daylight)
 | Token | Hex | Role |
 |---|---|---|
-| `canvas` | `#F6F4EF` | warm paper (not cold ice) |
-| `surface1` | `#FFFFFF` | panel |
-| `ink` / `inkMuted` / `inkFaint` | `#191C1A` / `#5C615C` / `#979B95` | text ramp |
-| `brand` / `brandDeep` | `#0D9488` / `#0F766E` | deep teal (AA on warm light) |
-| `tideGradient` | `#14B8A6 → #0D9488 → #0F766E` | flow current |
-| `spark` / `sparkDeep` | `#B7791F` / `#946115` | deep amber action (AA on light) |
+| `canvas` / `surface1` | `#EEF0F6` / `#FFFFFF` | panels |
+| `ink` / `inkMuted` / `inkFaint` | `#14161F` / `#585E72` / `#9197A8` | text ramp |
+| `brand` / `brandDeep` | `#4257C8` / `#33429E` | deep indigo (AA) |
+| `tideGradient` | `#5B72E6 → #4257C8 → #3A4FB8` | progress fill |
+| `spark` / `sparkDeep` | `#6D4FD8` / `#563CB0` | violet action (AA) |
 
 > **Texture:** the background carries a static fine **grain** + a soft **vignette**
 > so it never reads as a flat digital gradient. **Contrast:** accents used as text/icons

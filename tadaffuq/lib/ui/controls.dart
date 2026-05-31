@@ -88,11 +88,6 @@ class FilledCta extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
           borderRadius: BorderRadius.circular(Radii.md),
-          // Depth from the gradient + a hairline top highlight (lit-from-above);
-          // no drop shadow — consistent with the rim-light depth language.
-          border: Border(
-            top: BorderSide(color: Colors.white.withValues(alpha: 0.22), width: 0.6),
-          ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

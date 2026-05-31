@@ -61,7 +61,6 @@ class _ArchetypeSheet extends StatelessWidget {
             decoration: BoxDecoration(
               color: p.fill,
               borderRadius: BorderRadius.circular(Radii.md),
-              border: Border.all(color: p.line, width: 0.5),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

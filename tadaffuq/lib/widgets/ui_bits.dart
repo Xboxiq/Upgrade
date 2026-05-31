@@ -26,7 +26,6 @@ class IconBadge extends StatelessWidget {
       decoration: BoxDecoration(
         color: p.fill,
         borderRadius: BorderRadius.circular(size * 0.3),
-        border: Border.all(color: p.line, width: 0.5),
       ),
       child: Icon(icon, size: iconSize, color: c),
     );
@@ -54,7 +53,6 @@ class InfoPill extends StatelessWidget {
       decoration: BoxDecoration(
         color: p.fill,
         borderRadius: BorderRadius.circular(Radii.pill),
-        border: Border.all(color: p.line, width: 0.5),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -194,7 +192,6 @@ class NavCircleButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: p.fill,
           shape: BoxShape.circle,
-          border: Border.all(color: p.line, width: 0.5),
         ),
         child: Icon(icon, size: 19, color: tint ?? p.ink),
       ),
@@ -221,7 +218,6 @@ class ThemeToggleButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: p.fill,
           shape: BoxShape.circle,
-          border: Border.all(color: p.line, width: 0.5),
         ),
         child: AnimatedSwitcher(
           duration: Motion.quick,

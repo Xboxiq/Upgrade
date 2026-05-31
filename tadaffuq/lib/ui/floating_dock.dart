@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../theme/palette.dart';
 import '../theme/tokens.dart';
-import '../widgets/depth.dart';
 import '../widgets/press_scale.dart';
 
 class DockItem {
@@ -45,35 +44,29 @@ class FloatingDock extends StatelessWidget {
         bottom: (bottomInset > 0 ? bottomInset : Space.x4) + Space.x1,
       ),
       child: Center(
-        // Depth from a rim light (no drop shadow): the gradient wrapper is a
-        // 1px lit/contact edge; the frosted blur separates it from content.
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: Depth.rim(p, strong: true),
-            borderRadius: BorderRadius.circular(Radii.pill),
-          ),
-          padding: const EdgeInsets.all(Depth.rimWidth),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(Radii.pill),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 28, sigmaY: 28),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: Space.x2, vertical: Space.x2),
-                decoration: BoxDecoration(
-                  color: p.materialTint,
-                  borderRadius: BorderRadius.circular(Radii.pill),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    for (int i = 0; i < items.length; i++)
-                      PressScale(
-                        onTap: () => onSelected(i),
-                        pressedScale: 0.88,
-                        child: _DockButton(item: items[i], active: i == currentIndex),
-                      ),
-                  ],
-                ),
+        // Frosted material only — separation from a real seam (dark groove),
+        // never a glowing rim or a drop shadow.
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(Radii.pill),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 28, sigmaY: 28),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: Space.x2, vertical: Space.x2),
+              decoration: BoxDecoration(
+                color: p.materialTint,
+                borderRadius: BorderRadius.circular(Radii.pill),
+                border: Border.all(color: p.seam, width: 0.5),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  for (int i = 0; i < items.length; i++)
+                    PressScale(
+                      onTap: () => onSelected(i),
+                      pressedScale: 0.88,
+                      child: _DockButton(item: items[i], active: i == currentIndex),
+                    ),
+                ],
               ),
             ),
           ),
@@ -104,7 +97,6 @@ class _DockButton extends StatelessWidget {
             ? (p.isDark ? Colors.white.withValues(alpha: 0.08) : Colors.black.withValues(alpha: 0.05))
             : Colors.transparent,
         borderRadius: BorderRadius.circular(Radii.pill),
-        border: active ? Border.all(color: p.line, width: 0.5) : null,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

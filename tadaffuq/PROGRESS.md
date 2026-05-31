@@ -241,3 +241,26 @@ Format: `order · date · task · changes · files · verification · branch · 
 **Branch**: `feat/cosmic-flow-refinements` (PR #138).
 
 **NEXT (proposed)**: a dedicated **icon pass** — custom duotone/painted glyphs for the worlds (or import an open set via flutter_svg), since icons were also flagged for elevation.
+
+
+---
+
+### 013 · 2026-05-30 · Kill the AI tells for real — "Midnight Indigo" + material surfaces
+
+**What changed** (owner: AI feel persists — it's the *glow / lighter-coloured rims / shadows* around boxes & icons; also green isn't comfortable → want deep blue + deep blue-violet; obsess over fine detail)
+- **New palette "Midnight Indigo"**: deep midnight blue (`#0B0E1A`) + a deep **blue-violet** spark (`#9B8CFF`); azure-indigo flow (`#6E8BFF`). No green/teal. Accents used sparingly (ink carries the UI). Added a `seam` token = a DARK groove edge (never a lighter rim).
+- **Depth is now material, not effect** — removed across the app:
+  - ❌ glowing / lighter-coloured rims (the old `Depth.rim`), ❌ drop shadows, ❌ halos/glow around rings, planet moon, CTA, icons.
+  - ✅ `SurfaceCard` rebuilt: clean tonal step + a whisper of matte **grain** (`SurfaceGrain`), no border, no shadow.
+  - ✅ Lighter hairlines stripped from `IconBadge`, `InfoPill`, `NavCircleButton`, `ThemeToggleButton`, dock active key, empathy/archetype blocks, locked CTA, `FilledCta` (no top-highlight, no glow shadow).
+  - ✅ `GlassSurface` + `FloatingDock`: frost + a dark seam only.
+  - ✅ Glow (`MaskFilter`) removed from `ProgressRing`, `TideRing`, planet moon; planet cores neutral-dark.
+- Everything stays cohesive via tokens.
+
+**Files**: `theme/palette.dart` (seam + Midnight Indigo), `widgets/depth.dart` (now `SurfaceGrain`), `widgets/surface_card.dart`, `widgets/glass_surface.dart`, `ui/floating_dock.dart`, `widgets/ui_bits.dart`, `ui/controls.dart`, `widgets/progress_ring.dart`, `widgets/tide_ring.dart`, `widgets/mastery_planet.dart`, `features/.../{archetype_sheet,home_screen,callcenter_screen}.dart`, `DESIGN.md`.
+
+**Verification**: `flutter analyze` → No issues found · `flutter test` → 2/2 · `flutter build web --release` → ok. ✅
+
+**Branch**: `feat/cosmic-flow-refinements` (PR #138).
+
+**NEXT (proposed)**: dedicated icon pass (custom duotone / open SVG set) + per-world content screens with a shared-element transition from the planet.

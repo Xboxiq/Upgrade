@@ -150,16 +150,6 @@ class _RingPainter extends CustomPainter {
       transform: const GradientRotation(-math.pi / 2),
     ).createShader(rect);
 
-    if (glow > 0) {
-      final Paint glowPaint = Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = stroke
-        ..strokeCap = StrokeCap.round
-        ..color = colors.first.withValues(alpha: 0.45 * glow)
-        ..maskFilter = MaskFilter.blur(BlurStyle.normal, 3 + 6 * glow);
-      canvas.drawArc(rect, start, sweep, false, glowPaint);
-    }
-
     final Paint arcPaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = stroke

@@ -499,7 +499,6 @@ class _EmpathyCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: p.fill,
                     borderRadius: BorderRadius.circular(Radii.sm),
-                    border: Border.all(color: p.line, width: 0.5),
                   ),
                   child: AnimatedSwitcher(
                     duration: Motion.quick,

@@ -5,10 +5,10 @@ import '../theme/tokens.dart';
 import 'depth.dart';
 import 'press_scale.dart';
 
-/// A grouped surface whose depth is a **rim light** (bright top edge fading to
-/// a dark contact line), not a drop shadow — a distinctive, non-iOS treatment.
-/// On hover (web/desktop) it rises a touch and the rim sharpens; it sinks on
-/// press. No neon, no loud borders — the content carries the screen.
+/// A grouped surface defined by MATERIAL, not effects: a clean tonal step from
+/// the canvas + a whisper of matte grain. No glowing/lighter rim, no drop
+/// shadow, no halo — those read as AI. On hover it warms one tonal step and
+/// lifts a touch; on press it sinks. Accent cards take a faint brand wash.
 class SurfaceCard extends StatefulWidget {
   const SurfaceCard({
     super.key,
@@ -24,8 +24,6 @@ class SurfaceCard extends StatefulWidget {
   final VoidCallback? onTap;
   final EdgeInsetsGeometry padding;
   final double radius;
-
-  /// When true the card carries a faint brand wash + brand-tinted inner edge.
   final bool accent;
   final bool interactive;
 
@@ -41,42 +39,26 @@ class _SurfaceCardState extends State<SurfaceCard> {
     final AppPalette p = context.palette;
     final bool lifted = _hover && widget.interactive && widget.onTap != null;
 
-    // Base surface, with a faint brand wash on accent cards.
-    final Color base = widget.accent
-        ? Color.alphaBlend(p.brand.withValues(alpha: p.isDark ? 0.10 : 0.05), p.surface1)
-        : p.surface1;
-
-    // Tonal "lit from above": a barely-there vertical gradient on the fill.
-    final Gradient innerFill = LinearGradient(
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-      colors: <Color>[
-        Color.alphaBlend(Colors.white.withValues(alpha: p.isDark ? 0.05 : 0.0), base),
-        base,
-      ],
-    );
+    Color base = lifted ? p.surface2 : p.surface1;
+    if (widget.accent) {
+      base = Color.alphaBlend(p.brand.withValues(alpha: p.isDark ? 0.12 : 0.06), base);
+    }
 
     final Widget card = AnimatedContainer(
       duration: Motion.quick,
       curve: Motion.standard,
-      transform: lifted ? Matrix4.translationValues(0, -3, 0) : Matrix4.identity(),
+      transform: lifted ? Matrix4.translationValues(0, -2, 0) : Matrix4.identity(),
       transformAlignment: Alignment.center,
-      // The rim gradient IS the border — a 1px reveal around the inner fill.
       decoration: BoxDecoration(
-        gradient: Depth.rim(p, strong: lifted),
+        color: base,
         borderRadius: BorderRadius.circular(widget.radius),
       ),
-      padding: const EdgeInsets.all(Depth.rimWidth),
-      child: Container(
-        padding: widget.padding,
-        decoration: BoxDecoration(
-          gradient: innerFill,
-          borderRadius: BorderRadius.circular(widget.radius - Depth.rimWidth),
-          border: widget.accent
-              ? Border.all(color: p.brand.withValues(alpha: 0.40), width: 0.6)
-              : null,
-        ),
-        child: widget.child,
+      child: Stack(
+        children: <Widget>[
+          // Matte material grain — the realism layer (no rim, no glow).
+          SurfaceGrain(radius: widget.radius, dark: p.isDark),
+          Padding(padding: widget.padding, child: widget.child),
+        ],
       ),
     );
 
